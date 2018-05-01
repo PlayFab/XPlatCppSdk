@@ -1,8 +1,17 @@
 # XPlatCppSdk
 Cross Platform C++ SDK
 
+This SDK lets you make REST API calls to the PlayFab service. It depends on jsoncpp and curl nuget packages (installed via nuget manager in VS).
+
+This SDK is generated from our [SdkGenerator](https://github.com/PlayFab/SdkGenerator)
+
 BETA!
 
+Currently, this SDK is not yet part of our normal publish pipeline, nor does it have the full testing. (We're working on this). The features that are most in need of testing are json <-> timestamp conversions, and arbitrary input/output parameters, such as WriteEvent and Cloud Script. (These two may not be fully working yet).
+
+Also TODO, we intend to make this to be a nuget package.
+
+Once this SDK is fully tested and integrated, we may deprecate the WindowsSDK, as they have essentially the same interface, but XPlatCppSdk has more compact dependencies which should pose fewer conflicts with customer projects. This most likely won't happen until end of 2018 or later.
 
 ## 1. Overview:
 
