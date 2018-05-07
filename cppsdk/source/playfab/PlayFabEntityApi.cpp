@@ -544,6 +544,33 @@ namespace PlayFab
         }
     }
 
+    void PlayFabEntityAPI::GetProfiles(
+        GetEntityProfilesRequest& request,
+        ProcessApiCallback<GetEntityProfilesResponse> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttp& http = IPlayFabHttp::Get();
+        const auto requestJson = request.ToJson();
+        http.AddRequest("/Profile/GetProfiles", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnGetProfilesResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetEntityProfilesResponse>(callback)), errorCallback, customData);
+    }
+
+    void PlayFabEntityAPI::OnGetProfilesResult(CallRequestContainer& request)
+    {
+        GetEntityProfilesResponse outResult;
+        outResult.FromJson(request.errorWrapper.Data);
+        outResult.Request = request.errorWrapper.Request;
+
+        const auto internalPtr = request.successCallback.get();
+        if (internalPtr != nullptr)
+        {
+            const auto callback = (*static_cast<ProcessApiCallback<GetEntityProfilesResponse> *>(internalPtr));
+            callback(outResult, request.customData);
+        }
+    }
+
     void PlayFabEntityAPI::InitiateFileUploads(
         InitiateFileUploadsRequest& request,
         ProcessApiCallback<InitiateFileUploadsResponse> callback,

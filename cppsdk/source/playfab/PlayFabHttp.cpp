@@ -2,7 +2,9 @@
 
 #include <playfab/PlayFabHttp.h>
 #include <playfab/PlayFabSettings.h>
-#include <exception>
+
+// Intellisense-only includes
+#include <curl/curl.h>
 
 namespace PlayFab
 {
@@ -100,7 +102,7 @@ namespace PlayFab
         if (PlayFabSettings::threadedCallbacks)
             HandleResults(reqContainer);
 
-        PlayFabHttp& instance = reinterpret_cast<PlayFabHttp&>(Get());
+        PlayFabHttp& instance = static_cast<PlayFabHttp&>(Get());
         if (!PlayFabSettings::threadedCallbacks)
         {
             { // LOCK httpRequestMutex
@@ -220,8 +222,8 @@ namespace PlayFab
 
     size_t PlayFabHttp::Update()
     {
-        //if (PlayFabSettings::threadedCallbacks)
-        //    throw std::exception("You should not call Update() when PlayFabSettings::threadedCallbacks == true");
+        if (PlayFabSettings::threadedCallbacks)
+            throw std::runtime_error("You should not call Update() when PlayFabSettings::threadedCallbacks == true");
 
         CallRequestContainer* reqContainer;
         size_t resultCount;

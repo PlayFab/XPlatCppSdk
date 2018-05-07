@@ -2,8 +2,15 @@
 
 #ifndef DISABLE_PLAYFABCLIENT_API
 
-#include <stdafx.h>
 #include <playfab/PlayFabBaseModel.h>
+
+// Intellisense-only includes
+#ifndef _WIN32
+#include <jsoncpp/json/value.h>
+#endif
+#ifdef _WIN32
+#include <json/value.h>
+#endif
 
 namespace PlayFab
 {
@@ -1837,7 +1844,7 @@ namespace PlayFab
                 TradeId(src.TradeId)
             {}
 
-            ~AcceptTradeRequest() { }
+            ~AcceptTradeRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1906,7 +1913,7 @@ namespace PlayFab
                 TradeId(src.TradeId)
             {}
 
-            ~TradeInfo() { }
+            ~TradeInfo() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1959,7 +1966,7 @@ namespace PlayFab
                 Trade(src.Trade)
             {}
 
-            ~AcceptTradeResponse() { }
+            ~AcceptTradeResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1994,7 +2001,7 @@ namespace PlayFab
                 Platform(src.Platform)
             {}
 
-            ~AdCampaignAttributionModel() { }
+            ~AdCampaignAttributionModel() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2036,7 +2043,7 @@ namespace PlayFab
                 FriendUsername(src.FriendUsername)
             {}
 
-            ~AddFriendRequest() { }
+            ~AddFriendRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2071,7 +2078,7 @@ namespace PlayFab
                 Created(src.Created)
             {}
 
-            ~AddFriendResult() { }
+            ~AddFriendResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2103,7 +2110,7 @@ namespace PlayFab
                 UserId(src.UserId)
             {}
 
-            ~GenericServiceId() { }
+            ~GenericServiceId() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2134,7 +2141,7 @@ namespace PlayFab
                 GenericId(src.GenericId)
             {}
 
-            ~AddGenericIDRequest() { }
+            ~AddGenericIDRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2160,7 +2167,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~AddGenericIDResult() { }
+            ~AddGenericIDResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -2187,7 +2194,7 @@ namespace PlayFab
                 EmailAddress(src.EmailAddress)
             {}
 
-            ~AddOrUpdateContactEmailRequest() { }
+            ~AddOrUpdateContactEmailRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2213,7 +2220,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~AddOrUpdateContactEmailResult() { }
+            ~AddOrUpdateContactEmailResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -2243,7 +2250,7 @@ namespace PlayFab
                 SharedGroupId(src.SharedGroupId)
             {}
 
-            ~AddSharedGroupMembersRequest() { }
+            ~AddSharedGroupMembersRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2271,7 +2278,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~AddSharedGroupMembersResult() { }
+            ~AddSharedGroupMembersResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -2304,7 +2311,7 @@ namespace PlayFab
                 Username(src.Username)
             {}
 
-            ~AddUsernamePasswordRequest() { }
+            ~AddUsernamePasswordRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2337,7 +2344,7 @@ namespace PlayFab
                 Username(src.Username)
             {}
 
-            ~AddUsernamePasswordResult() { }
+            ~AddUsernamePasswordResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2369,7 +2376,7 @@ namespace PlayFab
                 VirtualCurrency(src.VirtualCurrency)
             {}
 
-            ~AddUserVirtualCurrencyRequest() { }
+            ~AddUserVirtualCurrencyRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2406,7 +2413,7 @@ namespace PlayFab
                 SendPushNotificationConfirmation(src.SendPushNotificationConfirmation)
             {}
 
-            ~AndroidDevicePushNotificationRegistrationRequest() { }
+            ~AndroidDevicePushNotificationRegistrationRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2436,7 +2443,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~AndroidDevicePushNotificationRegistrationResult() { }
+            ~AndroidDevicePushNotificationRegistrationResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -2466,7 +2473,7 @@ namespace PlayFab
                 Idfa(src.Idfa)
             {}
 
-            ~AttributeInstallRequest() { }
+            ~AttributeInstallRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2494,7 +2501,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~AttributeInstallResult() { }
+            ~AttributeInstallResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -2521,7 +2528,7 @@ namespace PlayFab
                 TradeId(src.TradeId)
             {}
 
-            ~CancelTradeRequest() { }
+            ~CancelTradeRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2550,7 +2557,7 @@ namespace PlayFab
                 Trade(src.Trade)
             {}
 
-            ~CancelTradeResponse() { }
+            ~CancelTradeResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2600,7 +2607,7 @@ namespace PlayFab
                 VirtualCurrencyPrices(src.VirtualCurrencyPrices)
             {}
 
-            ~CartItem() { }
+            ~CartItem() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2649,7 +2656,7 @@ namespace PlayFab
                 BundledVirtualCurrencies(src.BundledVirtualCurrencies)
             {}
 
-            ~CatalogItemBundleInfo() { }
+            ~CatalogItemBundleInfo() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2688,7 +2695,7 @@ namespace PlayFab
                 UsagePeriodGroup(src.UsagePeriodGroup)
             {}
 
-            ~CatalogItemConsumableInfo() { }
+            ~CatalogItemConsumableInfo() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2730,7 +2737,7 @@ namespace PlayFab
                 VirtualCurrencyContents(src.VirtualCurrencyContents)
             {}
 
-            ~CatalogItemContainerInfo() { }
+            ~CatalogItemContainerInfo() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2816,7 +2823,7 @@ namespace PlayFab
                 VirtualCurrencyPrices(src.VirtualCurrencyPrices)
             {}
 
-            ~CatalogItem() { }
+            ~CatalogItem() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2921,7 +2928,7 @@ namespace PlayFab
                 UsesIncrementedBy(src.UsesIncrementedBy)
             {}
 
-            ~ItemInstance() { }
+            ~ItemInstance() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2981,7 +2988,7 @@ namespace PlayFab
                 Inventory(src.Inventory)
             {}
 
-            ~CharacterInventory() { }
+            ~CharacterInventory() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -3030,7 +3037,7 @@ namespace PlayFab
                 StatValue(src.StatValue)
             {}
 
-            ~CharacterLeaderboardEntry() { }
+            ~CharacterLeaderboardEntry() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -3077,7 +3084,7 @@ namespace PlayFab
                 CharacterType(src.CharacterType)
             {}
 
-            ~CharacterResult() { }
+            ~CharacterResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -3110,7 +3117,7 @@ namespace PlayFab
                 Data(src.Data)
             {}
 
-            ~Container_Dictionary_String_String() { }
+            ~Container_Dictionary_String_String() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -3142,7 +3149,7 @@ namespace PlayFab
                 Includes(src.Includes)
             {}
 
-            ~CollectionFilter() { }
+            ~CollectionFilter() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -3173,7 +3180,7 @@ namespace PlayFab
                 OrderId(src.OrderId)
             {}
 
-            ~ConfirmPurchaseRequest() { }
+            ~ConfirmPurchaseRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -3208,7 +3215,7 @@ namespace PlayFab
                 PurchaseDate(src.PurchaseDate)
             {}
 
-            ~ConfirmPurchaseResult() { }
+            ~ConfirmPurchaseResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -3247,7 +3254,7 @@ namespace PlayFab
                 ItemInstanceId(src.ItemInstanceId)
             {}
 
-            ~ConsumeItemRequest() { }
+            ~ConsumeItemRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -3283,7 +3290,7 @@ namespace PlayFab
                 RemainingUses(src.RemainingUses)
             {}
 
-            ~ConsumeItemResult() { }
+            ~ConsumeItemResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -3320,7 +3327,7 @@ namespace PlayFab
                 VerificationStatus(src.VerificationStatus)
             {}
 
-            ~ContactEmailInfoModel() { }
+            ~ContactEmailInfoModel() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -3353,7 +3360,7 @@ namespace PlayFab
                 SharedGroupId(src.SharedGroupId)
             {}
 
-            ~CreateSharedGroupRequest() { }
+            ~CreateSharedGroupRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -3382,7 +3389,7 @@ namespace PlayFab
                 SharedGroupId(src.SharedGroupId)
             {}
 
-            ~CreateSharedGroupResult() { }
+            ~CreateSharedGroupResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -3423,7 +3430,7 @@ namespace PlayFab
                 TagFilter(src.TagFilter)
             {}
 
-            ~CurrentGamesRequest() { }
+            ~CurrentGamesRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -3502,7 +3509,7 @@ namespace PlayFab
                 Tags(src.Tags)
             {}
 
-            ~GameInfo() { }
+            ~GameInfo() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -3565,7 +3572,7 @@ namespace PlayFab
                 PlayerCount(src.PlayerCount)
             {}
 
-            ~CurrentGamesResult() { }
+            ~CurrentGamesResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -3598,7 +3605,7 @@ namespace PlayFab
                 Info(src.Info)
             {}
 
-            ~DeviceInfoRequest() { }
+            ~DeviceInfoRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -3624,7 +3631,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~EmptyResult() { }
+            ~EmptyResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -3657,7 +3664,7 @@ namespace PlayFab
                 TypeString(src.TypeString)
             {}
 
-            ~EntityKey() { }
+            ~EntityKey() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -3696,7 +3703,7 @@ namespace PlayFab
                 TokenExpiration(src.TokenExpiration)
             {}
 
-            ~EntityTokenResponse() { }
+            ~EntityTokenResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -3741,7 +3748,7 @@ namespace PlayFab
                 SpecificRevision(src.SpecificRevision)
             {}
 
-            ~ExecuteCloudScriptRequest() { }
+            ~ExecuteCloudScriptRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -3784,7 +3791,7 @@ namespace PlayFab
                 StackTrace(src.StackTrace)
             {}
 
-            ~ScriptExecutionError() { }
+            ~ScriptExecutionError() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -3823,7 +3830,7 @@ namespace PlayFab
                 Message(src.Message)
             {}
 
-            ~LogStatement() { }
+            ~LogStatement() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -3889,7 +3896,7 @@ namespace PlayFab
                 Revision(src.Revision)
             {}
 
-            ~ExecuteCloudScriptResult() { }
+            ~ExecuteCloudScriptResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -3943,7 +3950,7 @@ namespace PlayFab
                 PlayFabId(src.PlayFabId)
             {}
 
-            ~FacebookPlayFabIdPair() { }
+            ~FacebookPlayFabIdPair() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -3977,7 +3984,7 @@ namespace PlayFab
                 FullName(src.FullName)
             {}
 
-            ~UserFacebookInfo() { }
+            ~UserFacebookInfo() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -4008,7 +4015,7 @@ namespace PlayFab
                 GameCenterId(src.GameCenterId)
             {}
 
-            ~UserGameCenterInfo() { }
+            ~UserGameCenterInfo() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -4046,7 +4053,7 @@ namespace PlayFab
                 Username(src.Username)
             {}
 
-            ~LinkedPlatformAccountModel() { }
+            ~LinkedPlatformAccountModel() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -4093,7 +4100,7 @@ namespace PlayFab
                 Longitude(src.Longitude)
             {}
 
-            ~LocationModel() { }
+            ~LocationModel() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -4148,7 +4155,7 @@ namespace PlayFab
                 SubscriptionProvider(src.SubscriptionProvider)
             {}
 
-            ~SubscriptionModel() { }
+            ~SubscriptionModel() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -4201,7 +4208,7 @@ namespace PlayFab
                 Subscriptions(src.Subscriptions)
             {}
 
-            ~MembershipModel() { }
+            ~MembershipModel() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -4241,7 +4248,7 @@ namespace PlayFab
                 Platform(src.Platform)
             {}
 
-            ~PushNotificationRegistrationModel() { }
+            ~PushNotificationRegistrationModel() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -4278,7 +4285,7 @@ namespace PlayFab
                 Version(src.Version)
             {}
 
-            ~StatisticModel() { }
+            ~StatisticModel() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -4311,7 +4318,7 @@ namespace PlayFab
                 TagValue(src.TagValue)
             {}
 
-            ~TagModel() { }
+            ~TagModel() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -4346,7 +4353,7 @@ namespace PlayFab
                 TotalValueAsDecimal(src.TotalValueAsDecimal)
             {}
 
-            ~ValueToDateModel() { }
+            ~ValueToDateModel() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -4433,7 +4440,7 @@ namespace PlayFab
                 ValuesToDate(src.ValuesToDate)
             {}
 
-            ~PlayerProfileModel() { }
+            ~PlayerProfileModel() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -4507,7 +4514,7 @@ namespace PlayFab
                 SteamId(src.SteamId)
             {}
 
-            ~UserSteamInfo() { }
+            ~UserSteamInfo() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -4566,7 +4573,7 @@ namespace PlayFab
                 Username(src.Username)
             {}
 
-            ~FriendInfo() { }
+            ~FriendInfo() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -4614,7 +4621,7 @@ namespace PlayFab
                 PlayFabId(src.PlayFabId)
             {}
 
-            ~GameCenterPlayFabIdPair() { }
+            ~GameCenterPlayFabIdPair() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -4648,7 +4655,7 @@ namespace PlayFab
                 TitleId(src.TitleId)
             {}
 
-            ~GameServerRegionsRequest() { }
+            ~GameServerRegionsRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -4688,7 +4695,7 @@ namespace PlayFab
                 pfRegion(src.pfRegion)
             {}
 
-            ~RegionInfo() { }
+            ~RegionInfo() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -4723,7 +4730,7 @@ namespace PlayFab
                 Regions(src.Regions)
             {}
 
-            ~GameServerRegionsResult() { }
+            ~GameServerRegionsResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -4755,7 +4762,7 @@ namespace PlayFab
                 PlayFabId(src.PlayFabId)
             {}
 
-            ~GenericPlayFabIdPair() { }
+            ~GenericPlayFabIdPair() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -4795,7 +4802,7 @@ namespace PlayFab
                 Username(src.Username)
             {}
 
-            ~GetAccountInfoRequest() { }
+            ~GetAccountInfoRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -4830,7 +4837,7 @@ namespace PlayFab
                 AndroidDeviceId(src.AndroidDeviceId)
             {}
 
-            ~UserAndroidDeviceInfo() { }
+            ~UserAndroidDeviceInfo() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -4859,7 +4866,7 @@ namespace PlayFab
                 CustomId(src.CustomId)
             {}
 
-            ~UserCustomIdInfo() { }
+            ~UserCustomIdInfo() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -4897,7 +4904,7 @@ namespace PlayFab
                 GoogleLocale(src.GoogleLocale)
             {}
 
-            ~UserGoogleInfo() { }
+            ~UserGoogleInfo() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -4932,7 +4939,7 @@ namespace PlayFab
                 IosDeviceId(src.IosDeviceId)
             {}
 
-            ~UserIosDeviceInfo() { }
+            ~UserIosDeviceInfo() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -4964,7 +4971,7 @@ namespace PlayFab
                 KongregateName(src.KongregateName)
             {}
 
-            ~UserKongregateInfo() { }
+            ~UserKongregateInfo() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -4995,7 +5002,7 @@ namespace PlayFab
                 Email(src.Email)
             {}
 
-            ~UserPrivateAccountInfo() { }
+            ~UserPrivateAccountInfo() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -5027,7 +5034,7 @@ namespace PlayFab
                 PsnOnlineId(src.PsnOnlineId)
             {}
 
-            ~UserPsnInfo() { }
+            ~UserPsnInfo() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -5079,7 +5086,7 @@ namespace PlayFab
                 TitlePlayerAccount(src.TitlePlayerAccount)
             {}
 
-            ~UserTitleInfo() { }
+            ~UserTitleInfo() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -5125,7 +5132,7 @@ namespace PlayFab
                 TwitchUserName(src.TwitchUserName)
             {}
 
-            ~UserTwitchInfo() { }
+            ~UserTwitchInfo() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -5156,7 +5163,7 @@ namespace PlayFab
                 XboxUserId(src.XboxUserId)
             {}
 
-            ~UserXboxInfo() { }
+            ~UserXboxInfo() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -5230,7 +5237,7 @@ namespace PlayFab
                 XboxInfo(src.XboxInfo)
             {}
 
-            ~UserAccountInfo() { }
+            ~UserAccountInfo() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -5289,7 +5296,7 @@ namespace PlayFab
                 AccountInfo(src.AccountInfo)
             {}
 
-            ~GetAccountInfoResult() { }
+            ~GetAccountInfoResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -5318,7 +5325,7 @@ namespace PlayFab
                 CatalogVersion(src.CatalogVersion)
             {}
 
-            ~GetCatalogItemsRequest() { }
+            ~GetCatalogItemsRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -5347,7 +5354,7 @@ namespace PlayFab
                 Catalog(src.Catalog)
             {}
 
-            ~GetCatalogItemsResult() { }
+            ~GetCatalogItemsResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -5385,7 +5392,7 @@ namespace PlayFab
                 PlayFabId(src.PlayFabId)
             {}
 
-            ~GetCharacterDataRequest() { }
+            ~GetCharacterDataRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -5426,7 +5433,7 @@ namespace PlayFab
                 Value(src.Value)
             {}
 
-            ~UserDataRecord() { }
+            ~UserDataRecord() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -5465,7 +5472,7 @@ namespace PlayFab
                 DataVersion(src.DataVersion)
             {}
 
-            ~GetCharacterDataResult() { }
+            ~GetCharacterDataResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -5501,7 +5508,7 @@ namespace PlayFab
                 CharacterId(src.CharacterId)
             {}
 
-            ~GetCharacterInventoryRequest() { }
+            ~GetCharacterInventoryRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -5538,7 +5545,7 @@ namespace PlayFab
                 SecondsToRecharge(src.SecondsToRecharge)
             {}
 
-            ~VirtualCurrencyRechargeTime() { }
+            ~VirtualCurrencyRechargeTime() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -5580,7 +5587,7 @@ namespace PlayFab
                 VirtualCurrencyRechargeTimes(src.VirtualCurrencyRechargeTimes)
             {}
 
-            ~GetCharacterInventoryResult() { }
+            ~GetCharacterInventoryResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -5624,7 +5631,7 @@ namespace PlayFab
                 StatisticName(src.StatisticName)
             {}
 
-            ~GetCharacterLeaderboardRequest() { }
+            ~GetCharacterLeaderboardRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -5659,7 +5666,7 @@ namespace PlayFab
                 Leaderboard(src.Leaderboard)
             {}
 
-            ~GetCharacterLeaderboardResult() { }
+            ~GetCharacterLeaderboardResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -5688,7 +5695,7 @@ namespace PlayFab
                 CharacterId(src.CharacterId)
             {}
 
-            ~GetCharacterStatisticsRequest() { }
+            ~GetCharacterStatisticsRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -5717,7 +5724,7 @@ namespace PlayFab
                 CharacterStatistics(src.CharacterStatistics)
             {}
 
-            ~GetCharacterStatisticsResult() { }
+            ~GetCharacterStatisticsResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -5752,7 +5759,7 @@ namespace PlayFab
                 ThruCDN(src.ThruCDN)
             {}
 
-            ~GetContentDownloadUrlRequest() { }
+            ~GetContentDownloadUrlRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -5785,7 +5792,7 @@ namespace PlayFab
                 URL(src.URL)
             {}
 
-            ~GetContentDownloadUrlResult() { }
+            ~GetContentDownloadUrlResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -5859,7 +5866,7 @@ namespace PlayFab
                 ShowValuesToDate(src.ShowValuesToDate)
             {}
 
-            ~PlayerProfileViewConstraints() { }
+            ~PlayerProfileViewConstraints() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -5936,7 +5943,7 @@ namespace PlayFab
                 Version(src.Version)
             {}
 
-            ~GetFriendLeaderboardAroundPlayerRequest() { }
+            ~GetFriendLeaderboardAroundPlayerRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -5989,7 +5996,7 @@ namespace PlayFab
                 StatValue(src.StatValue)
             {}
 
-            ~PlayerLeaderboardEntry() { }
+            ~PlayerLeaderboardEntry() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -6032,7 +6039,7 @@ namespace PlayFab
                 Version(src.Version)
             {}
 
-            ~GetFriendLeaderboardAroundPlayerResult() { }
+            ~GetFriendLeaderboardAroundPlayerResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -6083,7 +6090,7 @@ namespace PlayFab
                 Version(src.Version)
             {}
 
-            ~GetFriendLeaderboardRequest() { }
+            ~GetFriendLeaderboardRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -6130,7 +6137,7 @@ namespace PlayFab
                 ProfileConstraints(src.ProfileConstraints)
             {}
 
-            ~GetFriendsListRequest() { }
+            ~GetFriendsListRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -6163,7 +6170,7 @@ namespace PlayFab
                 Friends(src.Friends)
             {}
 
-            ~GetFriendsListResult() { }
+            ~GetFriendsListResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -6201,7 +6208,7 @@ namespace PlayFab
                 StatisticName(src.StatisticName)
             {}
 
-            ~GetLeaderboardAroundCharacterRequest() { }
+            ~GetLeaderboardAroundCharacterRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -6236,7 +6243,7 @@ namespace PlayFab
                 Leaderboard(src.Leaderboard)
             {}
 
-            ~GetLeaderboardAroundCharacterResult() { }
+            ~GetLeaderboardAroundCharacterResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -6277,7 +6284,7 @@ namespace PlayFab
                 Version(src.Version)
             {}
 
-            ~GetLeaderboardAroundPlayerRequest() { }
+            ~GetLeaderboardAroundPlayerRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -6320,7 +6327,7 @@ namespace PlayFab
                 Version(src.Version)
             {}
 
-            ~GetLeaderboardAroundPlayerResult() { }
+            ~GetLeaderboardAroundPlayerResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -6356,7 +6363,7 @@ namespace PlayFab
                 StatisticName(src.StatisticName)
             {}
 
-            ~GetLeaderboardForUsersCharactersRequest() { }
+            ~GetLeaderboardForUsersCharactersRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -6387,7 +6394,7 @@ namespace PlayFab
                 Leaderboard(src.Leaderboard)
             {}
 
-            ~GetLeaderboardForUsersCharactersResult() { }
+            ~GetLeaderboardForUsersCharactersResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -6428,7 +6435,7 @@ namespace PlayFab
                 Version(src.Version)
             {}
 
-            ~GetLeaderboardRequest() { }
+            ~GetLeaderboardRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -6471,7 +6478,7 @@ namespace PlayFab
                 Version(src.Version)
             {}
 
-            ~GetLeaderboardResult() { }
+            ~GetLeaderboardResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -6504,7 +6511,7 @@ namespace PlayFab
                 TokenProvider(src.TokenProvider)
             {}
 
-            ~GetPaymentTokenRequest() { }
+            ~GetPaymentTokenRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -6536,7 +6543,7 @@ namespace PlayFab
                 ProviderToken(src.ProviderToken)
             {}
 
-            ~GetPaymentTokenResult() { }
+            ~GetPaymentTokenResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -6567,7 +6574,7 @@ namespace PlayFab
                 PhotonApplicationId(src.PhotonApplicationId)
             {}
 
-            ~GetPhotonAuthenticationTokenRequest() { }
+            ~GetPhotonAuthenticationTokenRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -6596,7 +6603,7 @@ namespace PlayFab
                 PhotonCustomAuthenticationToken(src.PhotonCustomAuthenticationToken)
             {}
 
-            ~GetPhotonAuthenticationTokenResult() { }
+            ~GetPhotonAuthenticationTokenResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -6667,7 +6674,7 @@ namespace PlayFab
                 UserReadOnlyDataKeys(src.UserReadOnlyDataKeys)
             {}
 
-            ~GetPlayerCombinedInfoRequestParams() { }
+            ~GetPlayerCombinedInfoRequestParams() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -6727,7 +6734,7 @@ namespace PlayFab
                 PlayFabId(src.PlayFabId)
             {}
 
-            ~GetPlayerCombinedInfoRequest() { }
+            ~GetPlayerCombinedInfoRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -6764,7 +6771,7 @@ namespace PlayFab
                 Version(src.Version)
             {}
 
-            ~StatisticValue() { }
+            ~StatisticValue() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -6833,7 +6840,7 @@ namespace PlayFab
                 UserVirtualCurrencyRechargeTimes(src.UserVirtualCurrencyRechargeTimes)
             {}
 
-            ~GetPlayerCombinedInfoResultPayload() { }
+            ~GetPlayerCombinedInfoResultPayload() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -6889,7 +6896,7 @@ namespace PlayFab
                 PlayFabId(src.PlayFabId)
             {}
 
-            ~GetPlayerCombinedInfoResult() { }
+            ~GetPlayerCombinedInfoResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -6923,7 +6930,7 @@ namespace PlayFab
                 ProfileConstraints(src.ProfileConstraints)
             {}
 
-            ~GetPlayerProfileRequest() { }
+            ~GetPlayerProfileRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -6954,7 +6961,7 @@ namespace PlayFab
                 PlayerProfile(src.PlayerProfile)
             {}
 
-            ~GetPlayerProfileResult() { }
+            ~GetPlayerProfileResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -6980,7 +6987,7 @@ namespace PlayFab
                 PlayFabRequestCommon()
             {}
 
-            ~GetPlayerSegmentsRequest() { }
+            ~GetPlayerSegmentsRequest() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -7013,7 +7020,7 @@ namespace PlayFab
                 Name(src.Name)
             {}
 
-            ~GetSegmentResult() { }
+            ~GetSegmentResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7046,7 +7053,7 @@ namespace PlayFab
                 Segments(src.Segments)
             {}
 
-            ~GetPlayerSegmentsResult() { }
+            ~GetPlayerSegmentsResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7078,7 +7085,7 @@ namespace PlayFab
                 Version(src.Version)
             {}
 
-            ~StatisticNameVersion() { }
+            ~StatisticNameVersion() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7112,7 +7119,7 @@ namespace PlayFab
                 StatisticNameVersions(src.StatisticNameVersions)
             {}
 
-            ~GetPlayerStatisticsRequest() { }
+            ~GetPlayerStatisticsRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7143,7 +7150,7 @@ namespace PlayFab
                 Statistics(src.Statistics)
             {}
 
-            ~GetPlayerStatisticsResult() { }
+            ~GetPlayerStatisticsResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7172,7 +7179,7 @@ namespace PlayFab
                 StatisticName(src.StatisticName)
             {}
 
-            ~GetPlayerStatisticVersionsRequest() { }
+            ~GetPlayerStatisticVersionsRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7216,7 +7223,7 @@ namespace PlayFab
                 Version(src.Version)
             {}
 
-            ~PlayerStatisticVersion() { }
+            ~PlayerStatisticVersion() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7255,7 +7262,7 @@ namespace PlayFab
                 StatisticVersions(src.StatisticVersions)
             {}
 
-            ~GetPlayerStatisticVersionsResult() { }
+            ~GetPlayerStatisticVersionsResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7287,7 +7294,7 @@ namespace PlayFab
                 PlayFabId(src.PlayFabId)
             {}
 
-            ~GetPlayerTagsRequest() { }
+            ~GetPlayerTagsRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7321,7 +7328,7 @@ namespace PlayFab
                 Tags(src.Tags)
             {}
 
-            ~GetPlayerTagsResult() { }
+            ~GetPlayerTagsResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7352,7 +7359,7 @@ namespace PlayFab
                 StatusFilter(src.StatusFilter)
             {}
 
-            ~GetPlayerTradesRequest() { }
+            ~GetPlayerTradesRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7384,7 +7391,7 @@ namespace PlayFab
                 OpenedTrades(src.OpenedTrades)
             {}
 
-            ~GetPlayerTradesResponse() { }
+            ~GetPlayerTradesResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7415,7 +7422,7 @@ namespace PlayFab
                 FacebookIDs(src.FacebookIDs)
             {}
 
-            ~GetPlayFabIDsFromFacebookIDsRequest() { }
+            ~GetPlayFabIDsFromFacebookIDsRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7444,7 +7451,7 @@ namespace PlayFab
                 Data(src.Data)
             {}
 
-            ~GetPlayFabIDsFromFacebookIDsResult() { }
+            ~GetPlayFabIDsFromFacebookIDsResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7473,7 +7480,7 @@ namespace PlayFab
                 GameCenterIDs(src.GameCenterIDs)
             {}
 
-            ~GetPlayFabIDsFromGameCenterIDsRequest() { }
+            ~GetPlayFabIDsFromGameCenterIDsRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7502,7 +7509,7 @@ namespace PlayFab
                 Data(src.Data)
             {}
 
-            ~GetPlayFabIDsFromGameCenterIDsResult() { }
+            ~GetPlayFabIDsFromGameCenterIDsResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7531,7 +7538,7 @@ namespace PlayFab
                 GenericIDs(src.GenericIDs)
             {}
 
-            ~GetPlayFabIDsFromGenericIDsRequest() { }
+            ~GetPlayFabIDsFromGenericIDsRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7560,7 +7567,7 @@ namespace PlayFab
                 Data(src.Data)
             {}
 
-            ~GetPlayFabIDsFromGenericIDsResult() { }
+            ~GetPlayFabIDsFromGenericIDsResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7589,7 +7596,7 @@ namespace PlayFab
                 GoogleIDs(src.GoogleIDs)
             {}
 
-            ~GetPlayFabIDsFromGoogleIDsRequest() { }
+            ~GetPlayFabIDsFromGoogleIDsRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7621,7 +7628,7 @@ namespace PlayFab
                 PlayFabId(src.PlayFabId)
             {}
 
-            ~GooglePlayFabIdPair() { }
+            ~GooglePlayFabIdPair() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7652,7 +7659,7 @@ namespace PlayFab
                 Data(src.Data)
             {}
 
-            ~GetPlayFabIDsFromGoogleIDsResult() { }
+            ~GetPlayFabIDsFromGoogleIDsResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7681,7 +7688,7 @@ namespace PlayFab
                 KongregateIDs(src.KongregateIDs)
             {}
 
-            ~GetPlayFabIDsFromKongregateIDsRequest() { }
+            ~GetPlayFabIDsFromKongregateIDsRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7713,7 +7720,7 @@ namespace PlayFab
                 PlayFabId(src.PlayFabId)
             {}
 
-            ~KongregatePlayFabIdPair() { }
+            ~KongregatePlayFabIdPair() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7744,7 +7751,7 @@ namespace PlayFab
                 Data(src.Data)
             {}
 
-            ~GetPlayFabIDsFromKongregateIDsResult() { }
+            ~GetPlayFabIDsFromKongregateIDsResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7773,7 +7780,7 @@ namespace PlayFab
                 SteamStringIDs(src.SteamStringIDs)
             {}
 
-            ~GetPlayFabIDsFromSteamIDsRequest() { }
+            ~GetPlayFabIDsFromSteamIDsRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7805,7 +7812,7 @@ namespace PlayFab
                 SteamStringId(src.SteamStringId)
             {}
 
-            ~SteamPlayFabIdPair() { }
+            ~SteamPlayFabIdPair() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7836,7 +7843,7 @@ namespace PlayFab
                 Data(src.Data)
             {}
 
-            ~GetPlayFabIDsFromSteamIDsResult() { }
+            ~GetPlayFabIDsFromSteamIDsResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7865,7 +7872,7 @@ namespace PlayFab
                 TwitchIds(src.TwitchIds)
             {}
 
-            ~GetPlayFabIDsFromTwitchIDsRequest() { }
+            ~GetPlayFabIDsFromTwitchIDsRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7897,7 +7904,7 @@ namespace PlayFab
                 TwitchId(src.TwitchId)
             {}
 
-            ~TwitchPlayFabIdPair() { }
+            ~TwitchPlayFabIdPair() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7928,7 +7935,7 @@ namespace PlayFab
                 Data(src.Data)
             {}
 
-            ~GetPlayFabIDsFromTwitchIDsResult() { }
+            ~GetPlayFabIDsFromTwitchIDsResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7957,7 +7964,7 @@ namespace PlayFab
                 Keys(src.Keys)
             {}
 
-            ~GetPublisherDataRequest() { }
+            ~GetPublisherDataRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -7986,7 +7993,7 @@ namespace PlayFab
                 Data(src.Data)
             {}
 
-            ~GetPublisherDataResult() { }
+            ~GetPublisherDataResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8015,7 +8022,7 @@ namespace PlayFab
                 OrderId(src.OrderId)
             {}
 
-            ~GetPurchaseRequest() { }
+            ~GetPurchaseRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8056,7 +8063,7 @@ namespace PlayFab
                 TransactionStatus(src.TransactionStatus)
             {}
 
-            ~GetPurchaseResult() { }
+            ~GetPurchaseResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8099,7 +8106,7 @@ namespace PlayFab
                 SharedGroupId(src.SharedGroupId)
             {}
 
-            ~GetSharedGroupDataRequest() { }
+            ~GetSharedGroupDataRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8141,7 +8148,7 @@ namespace PlayFab
                 Value(src.Value)
             {}
 
-            ~SharedGroupDataRecord() { }
+            ~SharedGroupDataRecord() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8179,7 +8186,7 @@ namespace PlayFab
                 Members(src.Members)
             {}
 
-            ~GetSharedGroupDataResult() { }
+            ~GetSharedGroupDataResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8213,7 +8220,7 @@ namespace PlayFab
                 StoreId(src.StoreId)
             {}
 
-            ~GetStoreItemsRequest() { }
+            ~GetStoreItemsRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8250,7 +8257,7 @@ namespace PlayFab
                 Metadata(src.Metadata)
             {}
 
-            ~StoreMarketingModel() { }
+            ~StoreMarketingModel() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8295,7 +8302,7 @@ namespace PlayFab
                 VirtualCurrencyPrices(src.VirtualCurrencyPrices)
             {}
 
-            ~StoreItem() { }
+            ~StoreItem() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8344,7 +8351,7 @@ namespace PlayFab
                 StoreId(src.StoreId)
             {}
 
-            ~GetStoreItemsResult() { }
+            ~GetStoreItemsResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8378,7 +8385,7 @@ namespace PlayFab
                 PlayFabRequestCommon()
             {}
 
-            ~GetTimeRequest() { }
+            ~GetTimeRequest() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -8405,7 +8412,7 @@ namespace PlayFab
                 Time(src.Time)
             {}
 
-            ~GetTimeResult() { }
+            ~GetTimeResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8434,7 +8441,7 @@ namespace PlayFab
                 Keys(src.Keys)
             {}
 
-            ~GetTitleDataRequest() { }
+            ~GetTitleDataRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8463,7 +8470,7 @@ namespace PlayFab
                 Data(src.Data)
             {}
 
-            ~GetTitleDataResult() { }
+            ~GetTitleDataResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8492,7 +8499,7 @@ namespace PlayFab
                 Count(src.Count)
             {}
 
-            ~GetTitleNewsRequest() { }
+            ~GetTitleNewsRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8530,7 +8537,7 @@ namespace PlayFab
                 Title(src.Title)
             {}
 
-            ~TitleNewsItem() { }
+            ~TitleNewsItem() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8565,7 +8572,7 @@ namespace PlayFab
                 News(src.News)
             {}
 
-            ~GetTitleNewsResult() { }
+            ~GetTitleNewsResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8597,7 +8604,7 @@ namespace PlayFab
                 TitleSharedSecret(src.TitleSharedSecret)
             {}
 
-            ~GetTitlePublicKeyRequest() { }
+            ~GetTitlePublicKeyRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8628,7 +8635,7 @@ namespace PlayFab
                 RSAPublicKey(src.RSAPublicKey)
             {}
 
-            ~GetTitlePublicKeyResult() { }
+            ~GetTitlePublicKeyResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8660,7 +8667,7 @@ namespace PlayFab
                 TradeId(src.TradeId)
             {}
 
-            ~GetTradeStatusRequest() { }
+            ~GetTradeStatusRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8691,7 +8698,7 @@ namespace PlayFab
                 Trade(src.Trade)
             {}
 
-            ~GetTradeStatusResponse() { }
+            ~GetTradeStatusResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8726,7 +8733,7 @@ namespace PlayFab
                 PlayFabId(src.PlayFabId)
             {}
 
-            ~GetUserDataRequest() { }
+            ~GetUserDataRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8762,7 +8769,7 @@ namespace PlayFab
                 DataVersion(src.DataVersion)
             {}
 
-            ~GetUserDataResult() { }
+            ~GetUserDataResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8790,7 +8797,7 @@ namespace PlayFab
                 PlayFabRequestCommon()
             {}
 
-            ~GetUserInventoryRequest() { }
+            ~GetUserInventoryRequest() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -8823,7 +8830,7 @@ namespace PlayFab
                 VirtualCurrencyRechargeTimes(src.VirtualCurrencyRechargeTimes)
             {}
 
-            ~GetUserInventoryResult() { }
+            ~GetUserInventoryResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8859,7 +8866,7 @@ namespace PlayFab
                 TitleId(src.TitleId)
             {}
 
-            ~GetWindowsHelloChallengeRequest() { }
+            ~GetWindowsHelloChallengeRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8890,7 +8897,7 @@ namespace PlayFab
                 Challenge(src.Challenge)
             {}
 
-            ~GetWindowsHelloChallengeResponse() { }
+            ~GetWindowsHelloChallengeResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8925,7 +8932,7 @@ namespace PlayFab
                 ItemId(src.ItemId)
             {}
 
-            ~GrantCharacterToUserRequest() { }
+            ~GrantCharacterToUserRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -8964,7 +8971,7 @@ namespace PlayFab
                 Result(src.Result)
             {}
 
-            ~GrantCharacterToUserResult() { }
+            ~GrantCharacterToUserResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -9006,7 +9013,7 @@ namespace PlayFab
                 UpgradeFromItems(src.UpgradeFromItems)
             {}
 
-            ~ItemPurchaseRequest() { }
+            ~ItemPurchaseRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -9050,7 +9057,7 @@ namespace PlayFab
                 OS(src.OS)
             {}
 
-            ~LinkAndroidDeviceIDRequest() { }
+            ~LinkAndroidDeviceIDRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -9082,7 +9089,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~LinkAndroidDeviceIDResult() { }
+            ~LinkAndroidDeviceIDResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -9112,7 +9119,7 @@ namespace PlayFab
                 ForceLink(src.ForceLink)
             {}
 
-            ~LinkCustomIDRequest() { }
+            ~LinkCustomIDRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -9140,7 +9147,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~LinkCustomIDResult() { }
+            ~LinkCustomIDResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -9170,7 +9177,7 @@ namespace PlayFab
                 ForceLink(src.ForceLink)
             {}
 
-            ~LinkFacebookAccountRequest() { }
+            ~LinkFacebookAccountRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -9198,7 +9205,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~LinkFacebookAccountResult() { }
+            ~LinkFacebookAccountResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -9228,7 +9235,7 @@ namespace PlayFab
                 GameCenterId(src.GameCenterId)
             {}
 
-            ~LinkGameCenterAccountRequest() { }
+            ~LinkGameCenterAccountRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -9256,7 +9263,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~LinkGameCenterAccountResult() { }
+            ~LinkGameCenterAccountResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -9286,7 +9293,7 @@ namespace PlayFab
                 ServerAuthCode(src.ServerAuthCode)
             {}
 
-            ~LinkGoogleAccountRequest() { }
+            ~LinkGoogleAccountRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -9314,7 +9321,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~LinkGoogleAccountResult() { }
+            ~LinkGoogleAccountResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -9350,7 +9357,7 @@ namespace PlayFab
                 OS(src.OS)
             {}
 
-            ~LinkIOSDeviceIDRequest() { }
+            ~LinkIOSDeviceIDRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -9382,7 +9389,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~LinkIOSDeviceIDResult() { }
+            ~LinkIOSDeviceIDResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -9415,7 +9422,7 @@ namespace PlayFab
                 KongregateId(src.KongregateId)
             {}
 
-            ~LinkKongregateAccountRequest() { }
+            ~LinkKongregateAccountRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -9445,7 +9452,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~LinkKongregateAccountResult() { }
+            ~LinkKongregateAccountResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -9475,7 +9482,7 @@ namespace PlayFab
                 SteamTicket(src.SteamTicket)
             {}
 
-            ~LinkSteamAccountRequest() { }
+            ~LinkSteamAccountRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -9503,7 +9510,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~LinkSteamAccountResult() { }
+            ~LinkSteamAccountResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -9533,7 +9540,7 @@ namespace PlayFab
                 ForceLink(src.ForceLink)
             {}
 
-            ~LinkTwitchAccountRequest() { }
+            ~LinkTwitchAccountRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -9561,7 +9568,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~LinkTwitchAccountResult() { }
+            ~LinkTwitchAccountResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -9597,7 +9604,7 @@ namespace PlayFab
                 UserName(src.UserName)
             {}
 
-            ~LinkWindowsHelloAccountRequest() { }
+            ~LinkWindowsHelloAccountRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -9629,7 +9636,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~LinkWindowsHelloAccountResponse() { }
+            ~LinkWindowsHelloAccountResponse() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -9656,7 +9663,7 @@ namespace PlayFab
                 PlayFabId(src.PlayFabId)
             {}
 
-            ~ListUsersCharactersRequest() { }
+            ~ListUsersCharactersRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -9685,7 +9692,7 @@ namespace PlayFab
                 Characters(src.Characters)
             {}
 
-            ~ListUsersCharactersResult() { }
+            ~ListUsersCharactersResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -9717,7 +9724,7 @@ namespace PlayFab
                 NeedsAttribution(src.NeedsAttribution)
             {}
 
-            ~UserSettings() { }
+            ~UserSettings() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -9766,7 +9773,7 @@ namespace PlayFab
                 SettingsForUser(src.SettingsForUser)
             {}
 
-            ~LoginResult() { }
+            ~LoginResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -9831,7 +9838,7 @@ namespace PlayFab
                 TitleId(src.TitleId)
             {}
 
-            ~LoginWithAndroidDeviceIDRequest() { }
+            ~LoginWithAndroidDeviceIDRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -9894,7 +9901,7 @@ namespace PlayFab
                 TitleId(src.TitleId)
             {}
 
-            ~LoginWithCustomIDRequest() { }
+            ~LoginWithCustomIDRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -9947,7 +9954,7 @@ namespace PlayFab
                 TitleId(src.TitleId)
             {}
 
-            ~LoginWithEmailAddressRequest() { }
+            ~LoginWithEmailAddressRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -10002,7 +10009,7 @@ namespace PlayFab
                 TitleId(src.TitleId)
             {}
 
-            ~LoginWithFacebookRequest() { }
+            ~LoginWithFacebookRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -10061,7 +10068,7 @@ namespace PlayFab
                 TitleId(src.TitleId)
             {}
 
-            ~LoginWithGameCenterRequest() { }
+            ~LoginWithGameCenterRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -10120,7 +10127,7 @@ namespace PlayFab
                 TitleId(src.TitleId)
             {}
 
-            ~LoginWithGoogleAccountRequest() { }
+            ~LoginWithGoogleAccountRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -10185,7 +10192,7 @@ namespace PlayFab
                 TitleId(src.TitleId)
             {}
 
-            ~LoginWithIOSDeviceIDRequest() { }
+            ~LoginWithIOSDeviceIDRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -10251,7 +10258,7 @@ namespace PlayFab
                 TitleId(src.TitleId)
             {}
 
-            ~LoginWithKongregateRequest() { }
+            ~LoginWithKongregateRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -10306,7 +10313,7 @@ namespace PlayFab
                 Username(src.Username)
             {}
 
-            ~LoginWithPlayFabRequest() { }
+            ~LoginWithPlayFabRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -10361,7 +10368,7 @@ namespace PlayFab
                 TitleId(src.TitleId)
             {}
 
-            ~LoginWithSteamRequest() { }
+            ~LoginWithSteamRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -10420,7 +10427,7 @@ namespace PlayFab
                 TitleId(src.TitleId)
             {}
 
-            ~LoginWithTwitchRequest() { }
+            ~LoginWithTwitchRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -10473,7 +10480,7 @@ namespace PlayFab
                 TitleId(src.TitleId)
             {}
 
-            ~LoginWithWindowsHelloRequest() { }
+            ~LoginWithWindowsHelloRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -10531,7 +10538,7 @@ namespace PlayFab
                 TagFilter(src.TagFilter)
             {}
 
-            ~MatchmakeRequest() { }
+            ~MatchmakeRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -10595,7 +10602,7 @@ namespace PlayFab
                 Ticket(src.Ticket)
             {}
 
-            ~MatchmakeResult() { }
+            ~MatchmakeResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -10647,7 +10654,7 @@ namespace PlayFab
                 VirtualCurrency(src.VirtualCurrency)
             {}
 
-            ~ModifyUserVirtualCurrencyResult() { }
+            ~ModifyUserVirtualCurrencyResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -10685,7 +10692,7 @@ namespace PlayFab
                 Name(src.Name)
             {}
 
-            ~NameIdentifier() { }
+            ~NameIdentifier() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -10722,7 +10729,7 @@ namespace PlayFab
                 RequestedCatalogItemIds(src.RequestedCatalogItemIds)
             {}
 
-            ~OpenTradeRequest() { }
+            ~OpenTradeRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -10755,7 +10762,7 @@ namespace PlayFab
                 Trade(src.Trade)
             {}
 
-            ~OpenTradeResponse() { }
+            ~OpenTradeResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -10793,7 +10800,7 @@ namespace PlayFab
                 ProviderTransactionId(src.ProviderTransactionId)
             {}
 
-            ~PayForPurchaseRequest() { }
+            ~PayForPurchaseRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -10855,7 +10862,7 @@ namespace PlayFab
                 VirtualCurrency(src.VirtualCurrency)
             {}
 
-            ~PayForPurchaseResult() { }
+            ~PayForPurchaseResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -10911,7 +10918,7 @@ namespace PlayFab
                 StoreCredit(src.StoreCredit)
             {}
 
-            ~PaymentOption() { }
+            ~PaymentOption() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -10961,7 +10968,7 @@ namespace PlayFab
                 VirtualCurrency(src.VirtualCurrency)
             {}
 
-            ~PurchaseItemRequest() { }
+            ~PurchaseItemRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -11000,7 +11007,7 @@ namespace PlayFab
                 Items(src.Items)
             {}
 
-            ~PurchaseItemResult() { }
+            ~PurchaseItemResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -11035,7 +11042,7 @@ namespace PlayFab
                 CouponCode(src.CouponCode)
             {}
 
-            ~RedeemCouponRequest() { }
+            ~RedeemCouponRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -11068,7 +11075,7 @@ namespace PlayFab
                 GrantedItems(src.GrantedItems)
             {}
 
-            ~RedeemCouponResult() { }
+            ~RedeemCouponResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -11103,7 +11110,7 @@ namespace PlayFab
                 SendPushNotificationConfirmation(src.SendPushNotificationConfirmation)
             {}
 
-            ~RegisterForIOSPushNotificationRequest() { }
+            ~RegisterForIOSPushNotificationRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -11133,7 +11140,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~RegisterForIOSPushNotificationResult() { }
+            ~RegisterForIOSPushNotificationResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -11187,7 +11194,7 @@ namespace PlayFab
                 Username(src.Username)
             {}
 
-            ~RegisterPlayFabUserRequest() { }
+            ~RegisterPlayFabUserRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -11222,6 +11229,7 @@ namespace PlayFab
 
         struct RegisterPlayFabUserResult : public PlayFabResultCommon
         {
+            Boxed<EntityTokenResponse> EntityToken;
             std::string PlayFabId;
             std::string SessionTicket;
             Boxed<UserSettings> SettingsForUser;
@@ -11229,6 +11237,7 @@ namespace PlayFab
 
             RegisterPlayFabUserResult() :
                 PlayFabResultCommon(),
+                EntityToken(),
                 PlayFabId(),
                 SessionTicket(),
                 SettingsForUser(),
@@ -11237,16 +11246,18 @@ namespace PlayFab
 
             RegisterPlayFabUserResult(const RegisterPlayFabUserResult& src) :
                 PlayFabResultCommon(),
+                EntityToken(src.EntityToken),
                 PlayFabId(src.PlayFabId),
                 SessionTicket(src.SessionTicket),
                 SettingsForUser(src.SettingsForUser),
                 Username(src.Username)
             {}
 
-            ~RegisterPlayFabUserResult() { }
+            ~RegisterPlayFabUserResult() = default;
 
             void FromJson(Json::Value& input) override
             {
+                FromJsonUtilO(input["EntityToken"], EntityToken);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["SessionTicket"], SessionTicket);
                 FromJsonUtilO(input["SettingsForUser"], SettingsForUser);
@@ -11256,6 +11267,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_EntityToken; ToJsonUtilO(EntityToken, each_EntityToken); output["EntityToken"] = each_EntityToken;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_SessionTicket; ToJsonUtilS(SessionTicket, each_SessionTicket); output["SessionTicket"] = each_SessionTicket;
                 Json::Value each_SettingsForUser; ToJsonUtilO(SettingsForUser, each_SettingsForUser); output["SettingsForUser"] = each_SettingsForUser;
@@ -11299,7 +11311,7 @@ namespace PlayFab
                 UserName(src.UserName)
             {}
 
-            ~RegisterWithWindowsHelloRequest() { }
+            ~RegisterWithWindowsHelloRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -11339,7 +11351,7 @@ namespace PlayFab
                 PlayFabRequestCommon()
             {}
 
-            ~RemoveContactEmailRequest() { }
+            ~RemoveContactEmailRequest() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -11363,7 +11375,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~RemoveContactEmailResult() { }
+            ~RemoveContactEmailResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -11390,7 +11402,7 @@ namespace PlayFab
                 FriendPlayFabId(src.FriendPlayFabId)
             {}
 
-            ~RemoveFriendRequest() { }
+            ~RemoveFriendRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -11416,7 +11428,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~RemoveFriendResult() { }
+            ~RemoveFriendResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -11443,7 +11455,7 @@ namespace PlayFab
                 GenericId(src.GenericId)
             {}
 
-            ~RemoveGenericIDRequest() { }
+            ~RemoveGenericIDRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -11469,7 +11481,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~RemoveGenericIDResult() { }
+            ~RemoveGenericIDResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -11499,7 +11511,7 @@ namespace PlayFab
                 SharedGroupId(src.SharedGroupId)
             {}
 
-            ~RemoveSharedGroupMembersRequest() { }
+            ~RemoveSharedGroupMembersRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -11527,7 +11539,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~RemoveSharedGroupMembersResult() { }
+            ~RemoveSharedGroupMembersResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -11557,7 +11569,7 @@ namespace PlayFab
                 ReporteeId(src.ReporteeId)
             {}
 
-            ~ReportPlayerClientRequest() { }
+            ~ReportPlayerClientRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -11588,7 +11600,7 @@ namespace PlayFab
                 SubmissionsRemaining(src.SubmissionsRemaining)
             {}
 
-            ~ReportPlayerClientResult() { }
+            ~ReportPlayerClientResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -11617,7 +11629,7 @@ namespace PlayFab
                 ReceiptData(src.ReceiptData)
             {}
 
-            ~RestoreIOSPurchasesRequest() { }
+            ~RestoreIOSPurchasesRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -11643,7 +11655,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~RestoreIOSPurchasesResult() { }
+            ~RestoreIOSPurchasesResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -11676,7 +11688,7 @@ namespace PlayFab
                 TitleId(src.TitleId)
             {}
 
-            ~SendAccountRecoveryEmailRequest() { }
+            ~SendAccountRecoveryEmailRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -11706,7 +11718,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~SendAccountRecoveryEmailResult() { }
+            ~SendAccountRecoveryEmailResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -11736,7 +11748,7 @@ namespace PlayFab
                 Tags(src.Tags)
             {}
 
-            ~SetFriendTagsRequest() { }
+            ~SetFriendTagsRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -11764,7 +11776,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~SetFriendTagsResult() { }
+            ~SetFriendTagsResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -11794,7 +11806,7 @@ namespace PlayFab
                 PlayerSecret(src.PlayerSecret)
             {}
 
-            ~SetPlayerSecretRequest() { }
+            ~SetPlayerSecretRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -11822,7 +11834,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~SetPlayerSecretResult() { }
+            ~SetPlayerSecretResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -11864,7 +11876,7 @@ namespace PlayFab
                 StatisticName(src.StatisticName)
             {}
 
-            ~StartGameRequest() { }
+            ~StartGameRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -11921,7 +11933,7 @@ namespace PlayFab
                 Ticket(src.Ticket)
             {}
 
-            ~StartGameResult() { }
+            ~StartGameResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -11968,7 +11980,7 @@ namespace PlayFab
                 StoreId(src.StoreId)
             {}
 
-            ~StartPurchaseRequest() { }
+            ~StartPurchaseRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -12010,7 +12022,7 @@ namespace PlayFab
                 VirtualCurrencyBalances(src.VirtualCurrencyBalances)
             {}
 
-            ~StartPurchaseResult() { }
+            ~StartPurchaseResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -12051,7 +12063,7 @@ namespace PlayFab
                 Version(src.Version)
             {}
 
-            ~StatisticUpdate() { }
+            ~StatisticUpdate() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -12087,7 +12099,7 @@ namespace PlayFab
                 VirtualCurrency(src.VirtualCurrency)
             {}
 
-            ~SubtractUserVirtualCurrencyRequest() { }
+            ~SubtractUserVirtualCurrencyRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -12118,7 +12130,7 @@ namespace PlayFab
                 AndroidDeviceId(src.AndroidDeviceId)
             {}
 
-            ~UnlinkAndroidDeviceIDRequest() { }
+            ~UnlinkAndroidDeviceIDRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -12144,7 +12156,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~UnlinkAndroidDeviceIDResult() { }
+            ~UnlinkAndroidDeviceIDResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -12171,7 +12183,7 @@ namespace PlayFab
                 CustomId(src.CustomId)
             {}
 
-            ~UnlinkCustomIDRequest() { }
+            ~UnlinkCustomIDRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -12197,7 +12209,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~UnlinkCustomIDResult() { }
+            ~UnlinkCustomIDResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -12221,7 +12233,7 @@ namespace PlayFab
                 PlayFabRequestCommon()
             {}
 
-            ~UnlinkFacebookAccountRequest() { }
+            ~UnlinkFacebookAccountRequest() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -12245,7 +12257,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~UnlinkFacebookAccountResult() { }
+            ~UnlinkFacebookAccountResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -12269,7 +12281,7 @@ namespace PlayFab
                 PlayFabRequestCommon()
             {}
 
-            ~UnlinkGameCenterAccountRequest() { }
+            ~UnlinkGameCenterAccountRequest() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -12293,7 +12305,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~UnlinkGameCenterAccountResult() { }
+            ~UnlinkGameCenterAccountResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -12317,7 +12329,7 @@ namespace PlayFab
                 PlayFabRequestCommon()
             {}
 
-            ~UnlinkGoogleAccountRequest() { }
+            ~UnlinkGoogleAccountRequest() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -12341,7 +12353,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~UnlinkGoogleAccountResult() { }
+            ~UnlinkGoogleAccountResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -12368,7 +12380,7 @@ namespace PlayFab
                 DeviceId(src.DeviceId)
             {}
 
-            ~UnlinkIOSDeviceIDRequest() { }
+            ~UnlinkIOSDeviceIDRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -12394,7 +12406,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~UnlinkIOSDeviceIDResult() { }
+            ~UnlinkIOSDeviceIDResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -12418,7 +12430,7 @@ namespace PlayFab
                 PlayFabRequestCommon()
             {}
 
-            ~UnlinkKongregateAccountRequest() { }
+            ~UnlinkKongregateAccountRequest() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -12442,7 +12454,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~UnlinkKongregateAccountResult() { }
+            ~UnlinkKongregateAccountResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -12466,7 +12478,7 @@ namespace PlayFab
                 PlayFabRequestCommon()
             {}
 
-            ~UnlinkSteamAccountRequest() { }
+            ~UnlinkSteamAccountRequest() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -12490,7 +12502,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~UnlinkSteamAccountResult() { }
+            ~UnlinkSteamAccountResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -12514,7 +12526,7 @@ namespace PlayFab
                 PlayFabRequestCommon()
             {}
 
-            ~UnlinkTwitchAccountRequest() { }
+            ~UnlinkTwitchAccountRequest() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -12538,7 +12550,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~UnlinkTwitchAccountResult() { }
+            ~UnlinkTwitchAccountResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -12565,7 +12577,7 @@ namespace PlayFab
                 PublicKeyHint(src.PublicKeyHint)
             {}
 
-            ~UnlinkWindowsHelloAccountRequest() { }
+            ~UnlinkWindowsHelloAccountRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -12591,7 +12603,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~UnlinkWindowsHelloAccountResponse() { }
+            ~UnlinkWindowsHelloAccountResponse() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -12627,7 +12639,7 @@ namespace PlayFab
                 KeyItemInstanceId(src.KeyItemInstanceId)
             {}
 
-            ~UnlockContainerInstanceRequest() { }
+            ~UnlockContainerInstanceRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -12668,7 +12680,7 @@ namespace PlayFab
                 ContainerItemId(src.ContainerItemId)
             {}
 
-            ~UnlockContainerItemRequest() { }
+            ~UnlockContainerItemRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -12710,7 +12722,7 @@ namespace PlayFab
                 VirtualCurrency(src.VirtualCurrency)
             {}
 
-            ~UnlockContainerItemResult() { }
+            ~UnlockContainerItemResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -12745,7 +12757,7 @@ namespace PlayFab
                 ImageUrl(src.ImageUrl)
             {}
 
-            ~UpdateAvatarUrlRequest() { }
+            ~UpdateAvatarUrlRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -12783,7 +12795,7 @@ namespace PlayFab
                 Permission(src.Permission)
             {}
 
-            ~UpdateCharacterDataRequest() { }
+            ~UpdateCharacterDataRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -12818,7 +12830,7 @@ namespace PlayFab
                 DataVersion(src.DataVersion)
             {}
 
-            ~UpdateCharacterDataResult() { }
+            ~UpdateCharacterDataResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -12850,7 +12862,7 @@ namespace PlayFab
                 CharacterStatistics(src.CharacterStatistics)
             {}
 
-            ~UpdateCharacterStatisticsRequest() { }
+            ~UpdateCharacterStatisticsRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -12878,7 +12890,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~UpdateCharacterStatisticsResult() { }
+            ~UpdateCharacterStatisticsResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -12905,7 +12917,7 @@ namespace PlayFab
                 Statistics(src.Statistics)
             {}
 
-            ~UpdatePlayerStatisticsRequest() { }
+            ~UpdatePlayerStatisticsRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -12931,7 +12943,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~UpdatePlayerStatisticsResult() { }
+            ~UpdatePlayerStatisticsResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -12967,7 +12979,7 @@ namespace PlayFab
                 SharedGroupId(src.SharedGroupId)
             {}
 
-            ~UpdateSharedGroupDataRequest() { }
+            ~UpdateSharedGroupDataRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -12999,7 +13011,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~UpdateSharedGroupDataResult() { }
+            ~UpdateSharedGroupDataResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -13032,7 +13044,7 @@ namespace PlayFab
                 Permission(src.Permission)
             {}
 
-            ~UpdateUserDataRequest() { }
+            ~UpdateUserDataRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -13065,7 +13077,7 @@ namespace PlayFab
                 DataVersion(src.DataVersion)
             {}
 
-            ~UpdateUserDataResult() { }
+            ~UpdateUserDataResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -13094,7 +13106,7 @@ namespace PlayFab
                 DisplayName(src.DisplayName)
             {}
 
-            ~UpdateUserTitleDisplayNameRequest() { }
+            ~UpdateUserTitleDisplayNameRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -13123,7 +13135,7 @@ namespace PlayFab
                 DisplayName(src.DisplayName)
             {}
 
-            ~UpdateUserTitleDisplayNameResult() { }
+            ~UpdateUserTitleDisplayNameResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -13164,7 +13176,7 @@ namespace PlayFab
                 UserId(src.UserId)
             {}
 
-            ~ValidateAmazonReceiptRequest() { }
+            ~ValidateAmazonReceiptRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -13198,7 +13210,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~ValidateAmazonReceiptResult() { }
+            ~ValidateAmazonReceiptResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -13234,7 +13246,7 @@ namespace PlayFab
                 Signature(src.Signature)
             {}
 
-            ~ValidateGooglePlayPurchaseRequest() { }
+            ~ValidateGooglePlayPurchaseRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -13266,7 +13278,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~ValidateGooglePlayPurchaseResult() { }
+            ~ValidateGooglePlayPurchaseResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -13299,7 +13311,7 @@ namespace PlayFab
                 ReceiptData(src.ReceiptData)
             {}
 
-            ~ValidateIOSReceiptRequest() { }
+            ~ValidateIOSReceiptRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -13329,7 +13341,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~ValidateIOSReceiptResult() { }
+            ~ValidateIOSReceiptResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -13365,7 +13377,7 @@ namespace PlayFab
                 Receipt(src.Receipt)
             {}
 
-            ~ValidateWindowsReceiptRequest() { }
+            ~ValidateWindowsReceiptRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -13397,7 +13409,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~ValidateWindowsReceiptResult() { }
+            ~ValidateWindowsReceiptResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -13433,7 +13445,7 @@ namespace PlayFab
                 Timestamp(src.Timestamp)
             {}
 
-            ~WriteClientCharacterEventRequest() { }
+            ~WriteClientCharacterEventRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -13474,7 +13486,7 @@ namespace PlayFab
                 Timestamp(src.Timestamp)
             {}
 
-            ~WriteClientPlayerEventRequest() { }
+            ~WriteClientPlayerEventRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -13507,7 +13519,7 @@ namespace PlayFab
                 EventId(src.EventId)
             {}
 
-            ~WriteEventResponse() { }
+            ~WriteEventResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -13542,7 +13554,7 @@ namespace PlayFab
                 Timestamp(src.Timestamp)
             {}
 
-            ~WriteTitleEventRequest() { }
+            ~WriteTitleEventRequest() = default;
 
             void FromJson(Json::Value& input) override
             {

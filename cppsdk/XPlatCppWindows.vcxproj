@@ -57,7 +57,7 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_LIB;WINDOWS_BUILD;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABENTITY_API;ENABLE_PLAYFABMATCHMAKER_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_LIB;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABENTITY_API;ENABLE_PLAYFABMATCHMAKER_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)/include;$(SolutionDir)packages\curl.7.30.0.2\build\native\include</AdditionalIncludeDirectories>
@@ -85,7 +85,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_LIB;WINDOWS_BUILD;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABENTITY_API;ENABLE_PLAYFABMATCHMAKER_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_LIB;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABENTITY_API;ENABLE_PLAYFABMATCHMAKER_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)/include;$(SolutionDir)packages\curl.7.30.0.2\build\native\include</AdditionalIncludeDirectories>
@@ -116,6 +116,7 @@
     <ClInclude Include="include\playfab\PlayFabClientDataModels.h" />
     <ClInclude Include="include\playfab\PlayFabEntityApi.h" />
     <ClInclude Include="include\playfab\PlayFabEntityDataModels.h" />
+    <ClInclude Include="include\playfab\PlayFabError.h" />
     <ClInclude Include="include\playfab\PlayFabHttp.h" />
     <ClInclude Include="include\playfab\PlayFabMatchmakerApi.h" />
     <ClInclude Include="include\playfab\PlayFabMatchmakerDataModels.h" />
@@ -123,7 +124,6 @@
     <ClInclude Include="include\playfab\PlayFabServerDataModels.h" />
     <ClInclude Include="include\playfab\PlayFabSettings.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\playfab\PlayFabAdminApi.cpp" />

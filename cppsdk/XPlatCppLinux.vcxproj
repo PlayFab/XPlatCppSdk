@@ -19,9 +19,6 @@
     <ApplicationTypeRevision>1.0</ApplicationTypeRevision>
     <TargetLinuxPlatform>Generic</TargetLinuxPlatform>
     <LinuxProjectType>{2238F9CD-F817-4ECC-BD14-2524D2669B35}</LinuxProjectType>
-    <OutputSubDir>XPlatCppLinux</OutputSubDir>
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\$(OutputSubDir)\</OutDir>
-    <ProjectName>XPlatCppLinux</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -39,9 +36,10 @@
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include;/usr/include;/home/pg/projects/XPlatCppLinux/;/home/pg/projects/XPlatCppLinux/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include;/usr/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
-      <PreprocessorDefinitions>LINUX_BUILD;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABENTITY_API;ENABLE_PLAYFABMATCHMAKER_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABENTITY_API;ENABLE_PLAYFABMATCHMAKER_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>-I $(RemoteProjectDir) -I $(RemoteProjectDir)/include %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>/usr/lib/x86_64-linux-gnu;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -53,9 +51,10 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include;/usr/include;/home/pg/projects/XPlatCppLinux/;/home/pg/projects/XPlatCppLinux/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include;/usr/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
-      <PreprocessorDefinitions>LINUX_BUILD;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABENTITY_API;ENABLE_PLAYFABMATCHMAKER_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABENTITY_API;ENABLE_PLAYFABMATCHMAKER_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>-I $(RemoteProjectDir) -I $(RemoteProjectDir)/include %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>/usr/lib/x86_64-linux-gnu;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -80,7 +79,6 @@
     <ClInclude Include="include\playfab\PlayFabServerApi.h" />
     <ClInclude Include="include\playfab\PlayFabServerDataModels.h" />
     <ClInclude Include="include\playfab\PlayFabSettings.h" />
-    <ClInclude Include="utils.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>

@@ -37,6 +37,7 @@ namespace PlayFab
         static void GetGroup(EntityModels::GetGroupRequest& request, ProcessApiCallback<EntityModels::GetGroupResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetObjects(EntityModels::GetObjectsRequest& request, ProcessApiCallback<EntityModels::GetObjectsResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetProfile(EntityModels::GetEntityProfileRequest& request, ProcessApiCallback<EntityModels::GetEntityProfileResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void GetProfiles(EntityModels::GetEntityProfilesRequest& request, ProcessApiCallback<EntityModels::GetEntityProfilesResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void InitiateFileUploads(EntityModels::InitiateFileUploadsRequest& request, ProcessApiCallback<EntityModels::InitiateFileUploadsResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void InviteToGroup(EntityModels::InviteToGroupRequest& request, ProcessApiCallback<EntityModels::InviteToGroupResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void IsMember(EntityModels::IsMemberRequest& request, ProcessApiCallback<EntityModels::IsMemberResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -80,6 +81,7 @@ namespace PlayFab
         static void OnGetGroupResult(CallRequestContainer& request);
         static void OnGetObjectsResult(CallRequestContainer& request);
         static void OnGetProfileResult(CallRequestContainer& request);
+        static void OnGetProfilesResult(CallRequestContainer& request);
         static void OnInitiateFileUploadsResult(CallRequestContainer& request);
         static void OnInviteToGroupResult(CallRequestContainer& request);
         static void OnIsMemberResult(CallRequestContainer& request);

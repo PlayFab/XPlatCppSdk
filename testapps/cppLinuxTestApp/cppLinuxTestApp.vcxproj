@@ -19,8 +19,6 @@
     <ApplicationTypeRevision>1.0</ApplicationTypeRevision>
     <TargetLinuxPlatform>Generic</TargetLinuxPlatform>
     <LinuxProjectType>{D51BCBC9-82E9-4017-911E-C93873C4EA2B}</LinuxProjectType>
-    <OutputSubDir>XPlatCppLinuxTestApp</OutputSubDir>
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\$(OutputSubDir)\</OutDir>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -51,23 +49,23 @@
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include;/usr/include;/home/pg/projects/XPlatCppLinux/;/home/pg/projects/XPlatCppLinux/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>LINUX_BUILD;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABENTITY_API;ENABLE_PLAYFABMATCHMAKER_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include;/usr/include;../XPlatCppLinux/;../XPlatCppLinux/include;$(SolutionDir)cppsdk;$(SolutionDir)cppsdk/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABENTITY_API;ENABLE_PLAYFABMATCHMAKER_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <LibraryDependencies>curl;jsoncpp;pthread;</LibraryDependencies>
-      <AdditionalDependencies>$(StlAdditionalDependencies);%(AdditionalDependencies);$(RemoteRootDir)/x64/Debug/XPlatCppLinux/libXPlatCppLinux.a;</AdditionalDependencies>
+      <AdditionalDependencies>$(StlAdditionalDependencies);%(AdditionalDependencies);$(RemoteRootDir)/XPlatCppLinux/bin/x64/Debug/libXPlatCppLinux.a;</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include;/usr/include;/home/pg/projects/XPlatCppLinux/;/home/pg/projects/XPlatCppLinux/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>LINUX_BUILD;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABENTITY_API;ENABLE_PLAYFABMATCHMAKER_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include;/usr/include;../XPlatCppLinux/;../XPlatCppLinux/include;$(SolutionDir)cppsdk;$(SolutionDir)cppsdk/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABENTITY_API;ENABLE_PLAYFABMATCHMAKER_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <LibraryDependencies>curl;jsoncpp;pthread;</LibraryDependencies>
-      <AdditionalDependencies>$(StlAdditionalDependencies);%(AdditionalDependencies);$(RemoteRootDir)/x64/Release/XPlatCppLinux/libXPlatCppLinux.a;</AdditionalDependencies>
+      <AdditionalDependencies>$(StlAdditionalDependencies);%(AdditionalDependencies);$(RemoteRootDir)/XPlatCppLinux/bin/x64/Debug/libXPlatCppLinux.a;</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

@@ -2,8 +2,15 @@
 
 #ifdef ENABLE_PLAYFABSERVER_API
 
-#include <stdafx.h>
 #include <playfab/PlayFabBaseModel.h>
+
+// Intellisense-only includes
+#ifndef _WIN32
+#include <jsoncpp/json/value.h>
+#endif
+#ifdef _WIN32
+#include <json/value.h>
+#endif
 
 namespace PlayFab
 {
@@ -59,7 +66,7 @@ namespace PlayFab
                 AuthorizationTicket(src.AuthorizationTicket)
             {}
 
-            ~AuthUserRequest() { }
+            ~AuthUserRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -91,7 +98,7 @@ namespace PlayFab
                 PlayFabId(src.PlayFabId)
             {}
 
-            ~AuthUserResponse() { }
+            ~AuthUserResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -122,7 +129,7 @@ namespace PlayFab
                 LobbyId(src.LobbyId)
             {}
 
-            ~DeregisterGameRequest() { }
+            ~DeregisterGameRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -148,7 +155,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~DeregisterGameResponse() { }
+            ~DeregisterGameResponse() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -217,7 +224,7 @@ namespace PlayFab
                 UsesIncrementedBy(src.UsesIncrementedBy)
             {}
 
-            ~ItemInstance() { }
+            ~ItemInstance() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -277,7 +284,7 @@ namespace PlayFab
                 PlayFabId(src.PlayFabId)
             {}
 
-            ~PlayerJoinedRequest() { }
+            ~PlayerJoinedRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -305,7 +312,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~PlayerJoinedResponse() { }
+            ~PlayerJoinedResponse() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -335,7 +342,7 @@ namespace PlayFab
                 PlayFabId(src.PlayFabId)
             {}
 
-            ~PlayerLeftRequest() { }
+            ~PlayerLeftRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -363,7 +370,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~PlayerLeftResponse() { }
+            ~PlayerLeftResponse() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -411,7 +418,7 @@ namespace PlayFab
                 Tags(src.Tags)
             {}
 
-            ~RegisterGameRequest() { }
+            ~RegisterGameRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -454,7 +461,7 @@ namespace PlayFab
                 LobbyId(src.LobbyId)
             {}
 
-            ~RegisterGameResponse() { }
+            ~RegisterGameResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -495,7 +502,7 @@ namespace PlayFab
                 pfRegion(src.pfRegion)
             {}
 
-            ~StartGameRequest() { }
+            ~StartGameRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -541,7 +548,7 @@ namespace PlayFab
                 ServerPort(src.ServerPort)
             {}
 
-            ~StartGameResponse() { }
+            ~StartGameResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -579,7 +586,7 @@ namespace PlayFab
                 PlayFabId(src.PlayFabId)
             {}
 
-            ~UserInfoRequest() { }
+            ~UserInfoRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -616,7 +623,7 @@ namespace PlayFab
                 SecondsToRecharge(src.SecondsToRecharge)
             {}
 
-            ~VirtualCurrencyRechargeTime() { }
+            ~VirtualCurrencyRechargeTime() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -670,7 +677,7 @@ namespace PlayFab
                 VirtualCurrencyRechargeTimes(src.VirtualCurrencyRechargeTimes)
             {}
 
-            ~UserInfoResponse() { }
+            ~UserInfoResponse() = default;
 
             void FromJson(Json::Value& input) override
             {

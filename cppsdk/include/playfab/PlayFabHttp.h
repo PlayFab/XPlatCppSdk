@@ -1,12 +1,19 @@
 #pragma once
 
-#include <stdafx.h>
-
 #include <playfab/PlayFabError.h>
 #include <functional>
 #include <memory>
 #include <thread>
 #include <mutex>
+
+// Intellisense-only includes
+#include <curl/curl.h>
+#ifndef _WIN32
+#include <jsoncpp/json/value.h>
+#endif
+#ifdef _WIN32
+#include <json/value.h>
+#endif
 
 namespace PlayFab
 {

@@ -2,8 +2,15 @@
 
 #ifdef ENABLE_PLAYFABENTITY_API
 
-#include <stdafx.h>
 #include <playfab/PlayFabBaseModel.h>
+
+// Intellisense-only includes
+#ifndef _WIN32
+#include <jsoncpp/json/value.h>
+#endif
+#ifdef _WIN32
+#include <json/value.h>
+#endif
 
 namespace PlayFab
 {
@@ -103,7 +110,7 @@ namespace PlayFab
                 TypeString(src.TypeString)
             {}
 
-            ~EntityKey() { }
+            ~EntityKey() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -142,7 +149,7 @@ namespace PlayFab
                 ProfileVersion(src.ProfileVersion)
             {}
 
-            ~AbortFileUploadsRequest() { }
+            ~AbortFileUploadsRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -178,7 +185,7 @@ namespace PlayFab
                 ProfileVersion(src.ProfileVersion)
             {}
 
-            ~AbortFileUploadsResponse() { }
+            ~AbortFileUploadsResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -212,7 +219,7 @@ namespace PlayFab
                 Group(src.Group)
             {}
 
-            ~AcceptGroupApplicationRequest() { }
+            ~AcceptGroupApplicationRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -246,7 +253,7 @@ namespace PlayFab
                 Group(src.Group)
             {}
 
-            ~AcceptGroupInvitationRequest() { }
+            ~AcceptGroupInvitationRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -283,7 +290,7 @@ namespace PlayFab
                 RoleId(src.RoleId)
             {}
 
-            ~AddMembersRequest() { }
+            ~AddMembersRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -322,7 +329,7 @@ namespace PlayFab
                 Group(src.Group)
             {}
 
-            ~ApplyToGroupRequest() { }
+            ~ApplyToGroupRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -358,7 +365,7 @@ namespace PlayFab
                 Lineage(src.Lineage)
             {}
 
-            ~EntityWithLineage() { }
+            ~EntityWithLineage() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -395,7 +402,7 @@ namespace PlayFab
                 Group(src.Group)
             {}
 
-            ~ApplyToGroupResponse() { }
+            ~ApplyToGroupResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -431,7 +438,7 @@ namespace PlayFab
                 Group(src.Group)
             {}
 
-            ~BlockEntityRequest() { }
+            ~BlockEntityRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -471,7 +478,7 @@ namespace PlayFab
                 OriginRoleId(src.OriginRoleId)
             {}
 
-            ~ChangeMemberRoleRequest() { }
+            ~ChangeMemberRoleRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -509,7 +516,7 @@ namespace PlayFab
                 GroupName(src.GroupName)
             {}
 
-            ~CreateGroupRequest() { }
+            ~CreateGroupRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -558,7 +565,7 @@ namespace PlayFab
                 Roles(src.Roles)
             {}
 
-            ~CreateGroupResponse() { }
+            ~CreateGroupResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -605,7 +612,7 @@ namespace PlayFab
                 RoleName(src.RoleName)
             {}
 
-            ~CreateGroupRoleRequest() { }
+            ~CreateGroupRoleRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -644,7 +651,7 @@ namespace PlayFab
                 RoleName(src.RoleName)
             {}
 
-            ~CreateGroupRoleResponse() { }
+            ~CreateGroupRoleResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -683,7 +690,7 @@ namespace PlayFab
                 ProfileVersion(src.ProfileVersion)
             {}
 
-            ~DeleteFilesRequest() { }
+            ~DeleteFilesRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -719,7 +726,7 @@ namespace PlayFab
                 ProfileVersion(src.ProfileVersion)
             {}
 
-            ~DeleteFilesResponse() { }
+            ~DeleteFilesResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -750,7 +757,7 @@ namespace PlayFab
                 Group(src.Group)
             {}
 
-            ~DeleteGroupRequest() { }
+            ~DeleteGroupRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -782,7 +789,7 @@ namespace PlayFab
                 RoleId(src.RoleId)
             {}
 
-            ~DeleteRoleRequest() { }
+            ~DeleteRoleRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -810,7 +817,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~EmptyResult() { }
+            ~EmptyResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -843,7 +850,7 @@ namespace PlayFab
                 ObjectName(src.ObjectName)
             {}
 
-            ~EntityDataObject() { }
+            ~EntityDataObject() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -882,7 +889,7 @@ namespace PlayFab
                 RoleName(src.RoleName)
             {}
 
-            ~EntityMemberRole() { }
+            ~EntityMemberRole() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -930,7 +937,7 @@ namespace PlayFab
                 Resource(src.Resource)
             {}
 
-            ~EntityPermissionStatement() { }
+            ~EntityPermissionStatement() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -978,7 +985,7 @@ namespace PlayFab
                 Size(src.Size)
             {}
 
-            ~EntityProfileFileMetadata() { }
+            ~EntityProfileFileMetadata() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1028,7 +1035,7 @@ namespace PlayFab
                 VersionNumber(src.VersionNumber)
             {}
 
-            ~EntityProfileBody() { }
+            ~EntityProfileBody() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1070,7 +1077,7 @@ namespace PlayFab
                 FileNames(src.FileNames)
             {}
 
-            ~FinalizeFileUploadsRequest() { }
+            ~FinalizeFileUploadsRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1113,7 +1120,7 @@ namespace PlayFab
                 Size(src.Size)
             {}
 
-            ~GetFileMetadata() { }
+            ~GetFileMetadata() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1156,7 +1163,7 @@ namespace PlayFab
                 ProfileVersion(src.ProfileVersion)
             {}
 
-            ~FinalizeFileUploadsResponse() { }
+            ~FinalizeFileUploadsResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1192,7 +1199,7 @@ namespace PlayFab
                 Entity(src.Entity)
             {}
 
-            ~GetEntityProfileRequest() { }
+            ~GetEntityProfileRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1223,7 +1230,7 @@ namespace PlayFab
                 Profile(src.Profile)
             {}
 
-            ~GetEntityProfileResponse() { }
+            ~GetEntityProfileResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1234,6 +1241,69 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_Profile; ToJsonUtilO(Profile, each_Profile); output["Profile"] = each_Profile;
+                return output;
+            }
+        };
+
+        struct GetEntityProfilesRequest : public PlayFabRequestCommon
+        {
+            Boxed<bool> DataAsObject;
+            std::list<EntityKey> Entities;
+
+            GetEntityProfilesRequest() :
+                PlayFabRequestCommon(),
+                DataAsObject(),
+                Entities()
+            {}
+
+            GetEntityProfilesRequest(const GetEntityProfilesRequest& src) :
+                PlayFabRequestCommon(),
+                DataAsObject(src.DataAsObject),
+                Entities(src.Entities)
+            {}
+
+            ~GetEntityProfilesRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilP(input["DataAsObject"], DataAsObject);
+                FromJsonUtilO(input["Entities"], Entities);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_DataAsObject; ToJsonUtilP(DataAsObject, each_DataAsObject); output["DataAsObject"] = each_DataAsObject;
+                Json::Value each_Entities; ToJsonUtilO(Entities, each_Entities); output["Entities"] = each_Entities;
+                return output;
+            }
+        };
+
+        struct GetEntityProfilesResponse : public PlayFabResultCommon
+        {
+            std::list<EntityProfileBody> Profiles;
+
+            GetEntityProfilesResponse() :
+                PlayFabResultCommon(),
+                Profiles()
+            {}
+
+            GetEntityProfilesResponse(const GetEntityProfilesResponse& src) :
+                PlayFabResultCommon(),
+                Profiles(src.Profiles)
+            {}
+
+            ~GetEntityProfilesResponse() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["Profiles"], Profiles);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Profiles; ToJsonUtilO(Profiles, each_Profiles); output["Profiles"] = each_Profiles;
                 return output;
             }
         };
@@ -1252,7 +1322,7 @@ namespace PlayFab
                 Entity(src.Entity)
             {}
 
-            ~GetEntityTokenRequest() { }
+            ~GetEntityTokenRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1287,7 +1357,7 @@ namespace PlayFab
                 TokenExpiration(src.TokenExpiration)
             {}
 
-            ~GetEntityTokenResponse() { }
+            ~GetEntityTokenResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1320,7 +1390,7 @@ namespace PlayFab
                 Entity(src.Entity)
             {}
 
-            ~GetFilesRequest() { }
+            ~GetFilesRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1355,7 +1425,7 @@ namespace PlayFab
                 ProfileVersion(src.ProfileVersion)
             {}
 
-            ~GetFilesResponse() { }
+            ~GetFilesResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1385,7 +1455,7 @@ namespace PlayFab
                 PlayFabRequestCommon()
             {}
 
-            ~GetGlobalPolicyRequest() { }
+            ~GetGlobalPolicyRequest() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -1412,7 +1482,7 @@ namespace PlayFab
                 Permissions(src.Permissions)
             {}
 
-            ~GetGlobalPolicyResponse() { }
+            ~GetGlobalPolicyResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1444,7 +1514,7 @@ namespace PlayFab
                 GroupName(src.GroupName)
             {}
 
-            ~GetGroupRequest() { }
+            ~GetGroupRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1493,7 +1563,7 @@ namespace PlayFab
                 Roles(src.Roles)
             {}
 
-            ~GetGroupResponse() { }
+            ~GetGroupResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1537,7 +1607,7 @@ namespace PlayFab
                 EscapeObject(src.EscapeObject)
             {}
 
-            ~GetObjectsRequest() { }
+            ~GetObjectsRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1574,7 +1644,7 @@ namespace PlayFab
                 ObjectName(src.ObjectName)
             {}
 
-            ~ObjectResult() { }
+            ~ObjectResult() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1613,7 +1683,7 @@ namespace PlayFab
                 ProfileVersion(src.ProfileVersion)
             {}
 
-            ~GetObjectsResponse() { }
+            ~GetObjectsResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1652,7 +1722,7 @@ namespace PlayFab
                 Group(src.Group)
             {}
 
-            ~GroupApplication() { }
+            ~GroupApplication() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1688,7 +1758,7 @@ namespace PlayFab
                 Group(src.Group)
             {}
 
-            ~GroupBlock() { }
+            ~GroupBlock() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1731,7 +1801,7 @@ namespace PlayFab
                 RoleId(src.RoleId)
             {}
 
-            ~GroupInvitation() { }
+            ~GroupInvitation() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1771,7 +1841,7 @@ namespace PlayFab
                 RoleName(src.RoleName)
             {}
 
-            ~GroupRole() { }
+            ~GroupRole() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1811,7 +1881,7 @@ namespace PlayFab
                 Roles(src.Roles)
             {}
 
-            ~GroupWithRoles() { }
+            ~GroupWithRoles() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1849,7 +1919,7 @@ namespace PlayFab
                 UploadUrl(src.UploadUrl)
             {}
 
-            ~InitiateFileUploadMetadata() { }
+            ~InitiateFileUploadMetadata() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1886,7 +1956,7 @@ namespace PlayFab
                 ProfileVersion(src.ProfileVersion)
             {}
 
-            ~InitiateFileUploadsRequest() { }
+            ~InitiateFileUploadsRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1925,7 +1995,7 @@ namespace PlayFab
                 UploadDetails(src.UploadDetails)
             {}
 
-            ~InitiateFileUploadsResponse() { }
+            ~InitiateFileUploadsResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -1967,7 +2037,7 @@ namespace PlayFab
                 RoleId(src.RoleId)
             {}
 
-            ~InviteToGroupRequest() { }
+            ~InviteToGroupRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2014,7 +2084,7 @@ namespace PlayFab
                 RoleId(src.RoleId)
             {}
 
-            ~InviteToGroupResponse() { }
+            ~InviteToGroupResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2057,7 +2127,7 @@ namespace PlayFab
                 RoleId(src.RoleId)
             {}
 
-            ~IsMemberRequest() { }
+            ~IsMemberRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2090,7 +2160,7 @@ namespace PlayFab
                 IsMember(src.IsMember)
             {}
 
-            ~IsMemberResponse() { }
+            ~IsMemberResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2119,7 +2189,7 @@ namespace PlayFab
                 Group(src.Group)
             {}
 
-            ~ListGroupApplicationsRequest() { }
+            ~ListGroupApplicationsRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2148,7 +2218,7 @@ namespace PlayFab
                 Applications(src.Applications)
             {}
 
-            ~ListGroupApplicationsResponse() { }
+            ~ListGroupApplicationsResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2177,7 +2247,7 @@ namespace PlayFab
                 Group(src.Group)
             {}
 
-            ~ListGroupBlocksRequest() { }
+            ~ListGroupBlocksRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2206,7 +2276,7 @@ namespace PlayFab
                 BlockedEntities(src.BlockedEntities)
             {}
 
-            ~ListGroupBlocksResponse() { }
+            ~ListGroupBlocksResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2235,7 +2305,7 @@ namespace PlayFab
                 Group(src.Group)
             {}
 
-            ~ListGroupInvitationsRequest() { }
+            ~ListGroupInvitationsRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2264,7 +2334,7 @@ namespace PlayFab
                 Invitations(src.Invitations)
             {}
 
-            ~ListGroupInvitationsResponse() { }
+            ~ListGroupInvitationsResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2293,7 +2363,7 @@ namespace PlayFab
                 Group(src.Group)
             {}
 
-            ~ListGroupMembersRequest() { }
+            ~ListGroupMembersRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2322,7 +2392,7 @@ namespace PlayFab
                 Members(src.Members)
             {}
 
-            ~ListGroupMembersResponse() { }
+            ~ListGroupMembersResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2351,7 +2421,7 @@ namespace PlayFab
                 Entity(src.Entity)
             {}
 
-            ~ListMembershipOpportunitiesRequest() { }
+            ~ListMembershipOpportunitiesRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2383,7 +2453,7 @@ namespace PlayFab
                 Invitations(src.Invitations)
             {}
 
-            ~ListMembershipOpportunitiesResponse() { }
+            ~ListMembershipOpportunitiesResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2414,7 +2484,7 @@ namespace PlayFab
                 Entity(src.Entity)
             {}
 
-            ~ListMembershipRequest() { }
+            ~ListMembershipRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2443,7 +2513,7 @@ namespace PlayFab
                 Groups(src.Groups)
             {}
 
-            ~ListMembershipResponse() { }
+            ~ListMembershipResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2475,7 +2545,7 @@ namespace PlayFab
                 Group(src.Group)
             {}
 
-            ~RemoveGroupApplicationRequest() { }
+            ~RemoveGroupApplicationRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2509,7 +2579,7 @@ namespace PlayFab
                 Group(src.Group)
             {}
 
-            ~RemoveGroupInvitationRequest() { }
+            ~RemoveGroupInvitationRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2546,7 +2616,7 @@ namespace PlayFab
                 RoleId(src.RoleId)
             {}
 
-            ~RemoveMembersRequest() { }
+            ~RemoveMembersRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2582,7 +2652,7 @@ namespace PlayFab
                 Statements(src.Statements)
             {}
 
-            ~SetEntityProfilePolicyRequest() { }
+            ~SetEntityProfilePolicyRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2613,7 +2683,7 @@ namespace PlayFab
                 Permissions(src.Permissions)
             {}
 
-            ~SetEntityProfilePolicyResponse() { }
+            ~SetEntityProfilePolicyResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2642,7 +2712,7 @@ namespace PlayFab
                 Permissions(src.Permissions)
             {}
 
-            ~SetGlobalPolicyRequest() { }
+            ~SetGlobalPolicyRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2668,7 +2738,7 @@ namespace PlayFab
                 PlayFabResultCommon()
             {}
 
-            ~SetGlobalPolicyResponse() { }
+            ~SetGlobalPolicyResponse() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -2704,7 +2774,7 @@ namespace PlayFab
                 ObjectName(src.ObjectName)
             {}
 
-            ~SetObject() { }
+            ~SetObject() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2745,7 +2815,7 @@ namespace PlayFab
                 SetResult(src.SetResult)
             {}
 
-            ~SetObjectInfo() { }
+            ~SetObjectInfo() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2784,7 +2854,7 @@ namespace PlayFab
                 Objects(src.Objects)
             {}
 
-            ~SetObjectsRequest() { }
+            ~SetObjectsRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2820,7 +2890,7 @@ namespace PlayFab
                 SetResults(src.SetResults)
             {}
 
-            ~SetObjectsResponse() { }
+            ~SetObjectsResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2854,7 +2924,7 @@ namespace PlayFab
                 Group(src.Group)
             {}
 
-            ~UnblockEntityRequest() { }
+            ~UnblockEntityRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2897,7 +2967,7 @@ namespace PlayFab
                 MemberRoleId(src.MemberRoleId)
             {}
 
-            ~UpdateGroupRequest() { }
+            ~UpdateGroupRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2940,7 +3010,7 @@ namespace PlayFab
                 SetResult(src.SetResult)
             {}
 
-            ~UpdateGroupResponse() { }
+            ~UpdateGroupResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -2982,7 +3052,7 @@ namespace PlayFab
                 RoleName(src.RoleName)
             {}
 
-            ~UpdateGroupRoleRequest() { }
+            ~UpdateGroupRoleRequest() = default;
 
             void FromJson(Json::Value& input) override
             {
@@ -3023,7 +3093,7 @@ namespace PlayFab
                 SetResult(src.SetResult)
             {}
 
-            ~UpdateGroupRoleResponse() { }
+            ~UpdateGroupRoleResponse() = default;
 
             void FromJson(Json::Value& input) override
             {
