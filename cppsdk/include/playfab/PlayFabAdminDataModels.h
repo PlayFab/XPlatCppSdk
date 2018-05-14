@@ -1395,7 +1395,8 @@ namespace PlayFab
             EntityTypesmaster_player_account,
             EntityTypestitle_player_account,
             EntityTypescharacter,
-            EntityTypesgroup
+            EntityTypesgroup,
+            EntityTypesservice
         };
 
         inline void ToJsonEnum(const EntityTypes input, Json::Value& output)
@@ -1405,6 +1406,7 @@ namespace PlayFab
             if (input == EntityTypestitle_player_account) output = Json::Value("title_player_account");
             if (input == EntityTypescharacter) output = Json::Value("character");
             if (input == EntityTypesgroup) output = Json::Value("group");
+            if (input == EntityTypesservice) output = Json::Value("service");
         }
         inline void FromJsonEnum(const Json::Value& input, EntityTypes& output)
         {
@@ -1415,6 +1417,7 @@ namespace PlayFab
             if (inputStr == "title_player_account") output = EntityTypestitle_player_account;
             if (inputStr == "character") output = EntityTypescharacter;
             if (inputStr == "group") output = EntityTypesgroup;
+            if (inputStr == "service") output = EntityTypesservice;
         }
 
         enum GameBuildStatus
