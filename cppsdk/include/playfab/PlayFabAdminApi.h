@@ -31,11 +31,13 @@ namespace PlayFab
         static void CreatePlayerSharedSecret(AdminModels::CreatePlayerSharedSecretRequest& request, ProcessApiCallback<AdminModels::CreatePlayerSharedSecretResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void CreatePlayerStatisticDefinition(AdminModels::CreatePlayerStatisticDefinitionRequest& request, ProcessApiCallback<AdminModels::CreatePlayerStatisticDefinitionResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeleteContent(AdminModels::DeleteContentRequest& request, ProcessApiCallback<AdminModels::BlankResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void DeleteMasterPlayerAccount(AdminModels::DeleteMasterPlayerAccountRequest& request, ProcessApiCallback<AdminModels::DeleteMasterPlayerAccountResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeletePlayer(AdminModels::DeletePlayerRequest& request, ProcessApiCallback<AdminModels::DeletePlayerResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeletePlayerSharedSecret(AdminModels::DeletePlayerSharedSecretRequest& request, ProcessApiCallback<AdminModels::DeletePlayerSharedSecretResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeleteStore(AdminModels::DeleteStoreRequest& request, ProcessApiCallback<AdminModels::DeleteStoreResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeleteTask(AdminModels::DeleteTaskRequest& request, ProcessApiCallback<AdminModels::EmptyResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeleteTitle(AdminModels::DeleteTitleRequest& request, ProcessApiCallback<AdminModels::DeleteTitleResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void ExportMasterPlayerData(AdminModels::ExportMasterPlayerDataRequest& request, ProcessApiCallback<AdminModels::ExportMasterPlayerDataResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetActionsOnPlayersInSegmentTaskInstance(AdminModels::GetTaskInstanceRequest& request, ProcessApiCallback<AdminModels::GetActionsOnPlayersInSegmentTaskInstanceResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetAllSegments(AdminModels::GetAllSegmentsRequest& request, ProcessApiCallback<AdminModels::GetAllSegmentsResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetCatalogItems(AdminModels::GetCatalogItemsRequest& request, ProcessApiCallback<AdminModels::GetCatalogItemsResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -47,6 +49,7 @@ namespace PlayFab
         static void GetDataReport(AdminModels::GetDataReportRequest& request, ProcessApiCallback<AdminModels::GetDataReportResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetMatchmakerGameInfo(AdminModels::GetMatchmakerGameInfoRequest& request, ProcessApiCallback<AdminModels::GetMatchmakerGameInfoResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetMatchmakerGameModes(AdminModels::GetMatchmakerGameModesRequest& request, ProcessApiCallback<AdminModels::GetMatchmakerGameModesResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void GetPlayedTitleList(AdminModels::GetPlayedTitleListRequest& request, ProcessApiCallback<AdminModels::GetPlayedTitleListResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetPlayerIdFromAuthToken(AdminModels::GetPlayerIdFromAuthTokenRequest& request, ProcessApiCallback<AdminModels::GetPlayerIdFromAuthTokenResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetPlayerProfile(AdminModels::GetPlayerProfileRequest& request, ProcessApiCallback<AdminModels::GetPlayerProfileResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetPlayerSegments(AdminModels::GetPlayersSegmentsRequest& request, ProcessApiCallback<AdminModels::GetPlayerSegmentsResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -139,11 +142,13 @@ namespace PlayFab
         static void OnCreatePlayerSharedSecretResult(CallRequestContainer& request);
         static void OnCreatePlayerStatisticDefinitionResult(CallRequestContainer& request);
         static void OnDeleteContentResult(CallRequestContainer& request);
+        static void OnDeleteMasterPlayerAccountResult(CallRequestContainer& request);
         static void OnDeletePlayerResult(CallRequestContainer& request);
         static void OnDeletePlayerSharedSecretResult(CallRequestContainer& request);
         static void OnDeleteStoreResult(CallRequestContainer& request);
         static void OnDeleteTaskResult(CallRequestContainer& request);
         static void OnDeleteTitleResult(CallRequestContainer& request);
+        static void OnExportMasterPlayerDataResult(CallRequestContainer& request);
         static void OnGetActionsOnPlayersInSegmentTaskInstanceResult(CallRequestContainer& request);
         static void OnGetAllSegmentsResult(CallRequestContainer& request);
         static void OnGetCatalogItemsResult(CallRequestContainer& request);
@@ -155,6 +160,7 @@ namespace PlayFab
         static void OnGetDataReportResult(CallRequestContainer& request);
         static void OnGetMatchmakerGameInfoResult(CallRequestContainer& request);
         static void OnGetMatchmakerGameModesResult(CallRequestContainer& request);
+        static void OnGetPlayedTitleListResult(CallRequestContainer& request);
         static void OnGetPlayerIdFromAuthTokenResult(CallRequestContainer& request);
         static void OnGetPlayerProfileResult(CallRequestContainer& request);
         static void OnGetPlayerSegmentsResult(CallRequestContainer& request);

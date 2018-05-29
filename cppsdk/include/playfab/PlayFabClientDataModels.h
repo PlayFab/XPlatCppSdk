@@ -4494,6 +4494,40 @@ namespace PlayFab
             }
         };
 
+        struct UserPsnInfo : public PlayFabBaseModel
+        {
+            std::string PsnAccountId;
+            std::string PsnOnlineId;
+
+            UserPsnInfo() :
+                PlayFabBaseModel(),
+                PsnAccountId(),
+                PsnOnlineId()
+            {}
+
+            UserPsnInfo(const UserPsnInfo& src) :
+                PlayFabBaseModel(),
+                PsnAccountId(src.PsnAccountId),
+                PsnOnlineId(src.PsnOnlineId)
+            {}
+
+            ~UserPsnInfo() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["PsnAccountId"], PsnAccountId);
+                FromJsonUtilS(input["PsnOnlineId"], PsnOnlineId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_PsnAccountId; ToJsonUtilS(PsnAccountId, each_PsnAccountId); output["PsnAccountId"] = each_PsnAccountId;
+                Json::Value each_PsnOnlineId; ToJsonUtilS(PsnOnlineId, each_PsnOnlineId); output["PsnOnlineId"] = each_PsnOnlineId;
+                return output;
+            }
+        };
+
         struct UserSteamInfo : public PlayFabBaseModel
         {
             Boxed<TitleActivationStatus> SteamActivationStatus;
@@ -4538,6 +4572,35 @@ namespace PlayFab
             }
         };
 
+        struct UserXboxInfo : public PlayFabBaseModel
+        {
+            std::string XboxUserId;
+
+            UserXboxInfo() :
+                PlayFabBaseModel(),
+                XboxUserId()
+            {}
+
+            UserXboxInfo(const UserXboxInfo& src) :
+                PlayFabBaseModel(),
+                XboxUserId(src.XboxUserId)
+            {}
+
+            ~UserXboxInfo() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["XboxUserId"], XboxUserId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_XboxUserId; ToJsonUtilS(XboxUserId, each_XboxUserId); output["XboxUserId"] = each_XboxUserId;
+                return output;
+            }
+        };
+
         struct FriendInfo : public PlayFabBaseModel
         {
             std::string CurrentMatchmakerLobbyId;
@@ -4545,10 +4608,12 @@ namespace PlayFab
             std::string FriendPlayFabId;
             Boxed<UserGameCenterInfo> GameCenterInfo;
             Boxed<PlayerProfileModel> Profile;
+            Boxed<UserPsnInfo> PSNInfo;
             Boxed<UserSteamInfo> SteamInfo;
             std::list<std::string> Tags;
             std::string TitleDisplayName;
             std::string Username;
+            Boxed<UserXboxInfo> XboxInfo;
 
             FriendInfo() :
                 PlayFabBaseModel(),
@@ -4557,10 +4622,12 @@ namespace PlayFab
                 FriendPlayFabId(),
                 GameCenterInfo(),
                 Profile(),
+                PSNInfo(),
                 SteamInfo(),
                 Tags(),
                 TitleDisplayName(),
-                Username()
+                Username(),
+                XboxInfo()
             {}
 
             FriendInfo(const FriendInfo& src) :
@@ -4570,10 +4637,12 @@ namespace PlayFab
                 FriendPlayFabId(src.FriendPlayFabId),
                 GameCenterInfo(src.GameCenterInfo),
                 Profile(src.Profile),
+                PSNInfo(src.PSNInfo),
                 SteamInfo(src.SteamInfo),
                 Tags(src.Tags),
                 TitleDisplayName(src.TitleDisplayName),
-                Username(src.Username)
+                Username(src.Username),
+                XboxInfo(src.XboxInfo)
             {}
 
             ~FriendInfo() = default;
@@ -4585,10 +4654,12 @@ namespace PlayFab
                 FromJsonUtilS(input["FriendPlayFabId"], FriendPlayFabId);
                 FromJsonUtilO(input["GameCenterInfo"], GameCenterInfo);
                 FromJsonUtilO(input["Profile"], Profile);
+                FromJsonUtilO(input["PSNInfo"], PSNInfo);
                 FromJsonUtilO(input["SteamInfo"], SteamInfo);
                 FromJsonUtilS(input["Tags"], Tags);
                 FromJsonUtilS(input["TitleDisplayName"], TitleDisplayName);
                 FromJsonUtilS(input["Username"], Username);
+                FromJsonUtilO(input["XboxInfo"], XboxInfo);
             }
 
             Json::Value ToJson() const override
@@ -4599,10 +4670,12 @@ namespace PlayFab
                 Json::Value each_FriendPlayFabId; ToJsonUtilS(FriendPlayFabId, each_FriendPlayFabId); output["FriendPlayFabId"] = each_FriendPlayFabId;
                 Json::Value each_GameCenterInfo; ToJsonUtilO(GameCenterInfo, each_GameCenterInfo); output["GameCenterInfo"] = each_GameCenterInfo;
                 Json::Value each_Profile; ToJsonUtilO(Profile, each_Profile); output["Profile"] = each_Profile;
+                Json::Value each_PSNInfo; ToJsonUtilO(PSNInfo, each_PSNInfo); output["PSNInfo"] = each_PSNInfo;
                 Json::Value each_SteamInfo; ToJsonUtilO(SteamInfo, each_SteamInfo); output["SteamInfo"] = each_SteamInfo;
                 Json::Value each_Tags; ToJsonUtilS(Tags, each_Tags); output["Tags"] = each_Tags;
                 Json::Value each_TitleDisplayName; ToJsonUtilS(TitleDisplayName, each_TitleDisplayName); output["TitleDisplayName"] = each_TitleDisplayName;
                 Json::Value each_Username; ToJsonUtilS(Username, each_Username); output["Username"] = each_Username;
+                Json::Value each_XboxInfo; ToJsonUtilO(XboxInfo, each_XboxInfo); output["XboxInfo"] = each_XboxInfo;
                 return output;
             }
         };
@@ -5020,40 +5093,6 @@ namespace PlayFab
             }
         };
 
-        struct UserPsnInfo : public PlayFabBaseModel
-        {
-            std::string PsnAccountId;
-            std::string PsnOnlineId;
-
-            UserPsnInfo() :
-                PlayFabBaseModel(),
-                PsnAccountId(),
-                PsnOnlineId()
-            {}
-
-            UserPsnInfo(const UserPsnInfo& src) :
-                PlayFabBaseModel(),
-                PsnAccountId(src.PsnAccountId),
-                PsnOnlineId(src.PsnOnlineId)
-            {}
-
-            ~UserPsnInfo() = default;
-
-            void FromJson(Json::Value& input) override
-            {
-                FromJsonUtilS(input["PsnAccountId"], PsnAccountId);
-                FromJsonUtilS(input["PsnOnlineId"], PsnOnlineId);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_PsnAccountId; ToJsonUtilS(PsnAccountId, each_PsnAccountId); output["PsnAccountId"] = each_PsnAccountId;
-                Json::Value each_PsnOnlineId; ToJsonUtilS(PsnOnlineId, each_PsnOnlineId); output["PsnOnlineId"] = each_PsnOnlineId;
-                return output;
-            }
-        };
-
         struct UserTitleInfo : public PlayFabBaseModel
         {
             std::string AvatarUrl;
@@ -5148,35 +5187,6 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_TwitchId; ToJsonUtilS(TwitchId, each_TwitchId); output["TwitchId"] = each_TwitchId;
                 Json::Value each_TwitchUserName; ToJsonUtilS(TwitchUserName, each_TwitchUserName); output["TwitchUserName"] = each_TwitchUserName;
-                return output;
-            }
-        };
-
-        struct UserXboxInfo : public PlayFabBaseModel
-        {
-            std::string XboxUserId;
-
-            UserXboxInfo() :
-                PlayFabBaseModel(),
-                XboxUserId()
-            {}
-
-            UserXboxInfo(const UserXboxInfo& src) :
-                PlayFabBaseModel(),
-                XboxUserId(src.XboxUserId)
-            {}
-
-            ~UserXboxInfo() = default;
-
-            void FromJson(Json::Value& input) override
-            {
-                FromJsonUtilS(input["XboxUserId"], XboxUserId);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_XboxUserId; ToJsonUtilS(XboxUserId, each_XboxUserId); output["XboxUserId"] = each_XboxUserId;
                 return output;
             }
         };
@@ -5923,6 +5933,7 @@ namespace PlayFab
             Boxed<PlayerProfileViewConstraints> ProfileConstraints;
             std::string StatisticName;
             Boxed<Int32> Version;
+            std::string XboxToken;
 
             GetFriendLeaderboardAroundPlayerRequest() :
                 PlayFabRequestCommon(),
@@ -5932,7 +5943,8 @@ namespace PlayFab
                 PlayFabId(),
                 ProfileConstraints(),
                 StatisticName(),
-                Version()
+                Version(),
+                XboxToken()
             {}
 
             GetFriendLeaderboardAroundPlayerRequest(const GetFriendLeaderboardAroundPlayerRequest& src) :
@@ -5943,7 +5955,8 @@ namespace PlayFab
                 PlayFabId(src.PlayFabId),
                 ProfileConstraints(src.ProfileConstraints),
                 StatisticName(src.StatisticName),
-                Version(src.Version)
+                Version(src.Version),
+                XboxToken(src.XboxToken)
             {}
 
             ~GetFriendLeaderboardAroundPlayerRequest() = default;
@@ -5957,6 +5970,7 @@ namespace PlayFab
                 FromJsonUtilO(input["ProfileConstraints"], ProfileConstraints);
                 FromJsonUtilS(input["StatisticName"], StatisticName);
                 FromJsonUtilP(input["Version"], Version);
+                FromJsonUtilS(input["XboxToken"], XboxToken);
             }
 
             Json::Value ToJson() const override
@@ -5969,6 +5983,7 @@ namespace PlayFab
                 Json::Value each_ProfileConstraints; ToJsonUtilO(ProfileConstraints, each_ProfileConstraints); output["ProfileConstraints"] = each_ProfileConstraints;
                 Json::Value each_StatisticName; ToJsonUtilS(StatisticName, each_StatisticName); output["StatisticName"] = each_StatisticName;
                 Json::Value each_Version; ToJsonUtilP(Version, each_Version); output["Version"] = each_Version;
+                Json::Value each_XboxToken; ToJsonUtilS(XboxToken, each_XboxToken); output["XboxToken"] = each_XboxToken;
                 return output;
             }
         };
@@ -6070,6 +6085,7 @@ namespace PlayFab
             Int32 StartPosition;
             std::string StatisticName;
             Boxed<Int32> Version;
+            std::string XboxToken;
 
             GetFriendLeaderboardRequest() :
                 PlayFabRequestCommon(),
@@ -6079,7 +6095,8 @@ namespace PlayFab
                 ProfileConstraints(),
                 StartPosition(),
                 StatisticName(),
-                Version()
+                Version(),
+                XboxToken()
             {}
 
             GetFriendLeaderboardRequest(const GetFriendLeaderboardRequest& src) :
@@ -6090,7 +6107,8 @@ namespace PlayFab
                 ProfileConstraints(src.ProfileConstraints),
                 StartPosition(src.StartPosition),
                 StatisticName(src.StatisticName),
-                Version(src.Version)
+                Version(src.Version),
+                XboxToken(src.XboxToken)
             {}
 
             ~GetFriendLeaderboardRequest() = default;
@@ -6104,6 +6122,7 @@ namespace PlayFab
                 FromJsonUtilP(input["StartPosition"], StartPosition);
                 FromJsonUtilS(input["StatisticName"], StatisticName);
                 FromJsonUtilP(input["Version"], Version);
+                FromJsonUtilS(input["XboxToken"], XboxToken);
             }
 
             Json::Value ToJson() const override
@@ -6116,6 +6135,7 @@ namespace PlayFab
                 Json::Value each_StartPosition; ToJsonUtilP(StartPosition, each_StartPosition); output["StartPosition"] = each_StartPosition;
                 Json::Value each_StatisticName; ToJsonUtilS(StatisticName, each_StatisticName); output["StatisticName"] = each_StatisticName;
                 Json::Value each_Version; ToJsonUtilP(Version, each_Version); output["Version"] = each_Version;
+                Json::Value each_XboxToken; ToJsonUtilS(XboxToken, each_XboxToken); output["XboxToken"] = each_XboxToken;
                 return output;
             }
         };
@@ -6125,19 +6145,22 @@ namespace PlayFab
             Boxed<bool> IncludeFacebookFriends;
             Boxed<bool> IncludeSteamFriends;
             Boxed<PlayerProfileViewConstraints> ProfileConstraints;
+            std::string XboxToken;
 
             GetFriendsListRequest() :
                 PlayFabRequestCommon(),
                 IncludeFacebookFriends(),
                 IncludeSteamFriends(),
-                ProfileConstraints()
+                ProfileConstraints(),
+                XboxToken()
             {}
 
             GetFriendsListRequest(const GetFriendsListRequest& src) :
                 PlayFabRequestCommon(),
                 IncludeFacebookFriends(src.IncludeFacebookFriends),
                 IncludeSteamFriends(src.IncludeSteamFriends),
-                ProfileConstraints(src.ProfileConstraints)
+                ProfileConstraints(src.ProfileConstraints),
+                XboxToken(src.XboxToken)
             {}
 
             ~GetFriendsListRequest() = default;
@@ -6147,6 +6170,7 @@ namespace PlayFab
                 FromJsonUtilP(input["IncludeFacebookFriends"], IncludeFacebookFriends);
                 FromJsonUtilP(input["IncludeSteamFriends"], IncludeSteamFriends);
                 FromJsonUtilO(input["ProfileConstraints"], ProfileConstraints);
+                FromJsonUtilS(input["XboxToken"], XboxToken);
             }
 
             Json::Value ToJson() const override
@@ -6155,6 +6179,7 @@ namespace PlayFab
                 Json::Value each_IncludeFacebookFriends; ToJsonUtilP(IncludeFacebookFriends, each_IncludeFacebookFriends); output["IncludeFacebookFriends"] = each_IncludeFacebookFriends;
                 Json::Value each_IncludeSteamFriends; ToJsonUtilP(IncludeSteamFriends, each_IncludeSteamFriends); output["IncludeSteamFriends"] = each_IncludeSteamFriends;
                 Json::Value each_ProfileConstraints; ToJsonUtilO(ProfileConstraints, each_ProfileConstraints); output["ProfileConstraints"] = each_ProfileConstraints;
+                Json::Value each_XboxToken; ToJsonUtilS(XboxToken, each_XboxToken); output["XboxToken"] = each_XboxToken;
                 return output;
             }
         };

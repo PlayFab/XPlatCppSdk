@@ -1818,7 +1818,17 @@ namespace PlayFab
             GenericErrorCodesInvalidTokenResultFromAad,
             GenericErrorCodesNoValidCertificateForAad,
             GenericErrorCodesInvalidCertificateForAad,
-            GenericErrorCodesDuplicateDropTableId
+            GenericErrorCodesDuplicateDropTableId,
+            GenericErrorCodesComputeOK,
+            GenericErrorCodesComputeAccepted,
+            GenericErrorCodesComputeNoContent,
+            GenericErrorCodesComputeBadRequest,
+            GenericErrorCodesComputeUnauthorized,
+            GenericErrorCodesComputeForbidden,
+            GenericErrorCodesComputeNotFound,
+            GenericErrorCodesComputeConflict,
+            GenericErrorCodesComputeInternalServerError,
+            GenericErrorCodesComputeServiceUnavailable
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -2192,6 +2202,16 @@ namespace PlayFab
             if (input == GenericErrorCodesNoValidCertificateForAad) output = Json::Value("NoValidCertificateForAad");
             if (input == GenericErrorCodesInvalidCertificateForAad) output = Json::Value("InvalidCertificateForAad");
             if (input == GenericErrorCodesDuplicateDropTableId) output = Json::Value("DuplicateDropTableId");
+            if (input == GenericErrorCodesComputeOK) output = Json::Value("ComputeOK");
+            if (input == GenericErrorCodesComputeAccepted) output = Json::Value("ComputeAccepted");
+            if (input == GenericErrorCodesComputeNoContent) output = Json::Value("ComputeNoContent");
+            if (input == GenericErrorCodesComputeBadRequest) output = Json::Value("ComputeBadRequest");
+            if (input == GenericErrorCodesComputeUnauthorized) output = Json::Value("ComputeUnauthorized");
+            if (input == GenericErrorCodesComputeForbidden) output = Json::Value("ComputeForbidden");
+            if (input == GenericErrorCodesComputeNotFound) output = Json::Value("ComputeNotFound");
+            if (input == GenericErrorCodesComputeConflict) output = Json::Value("ComputeConflict");
+            if (input == GenericErrorCodesComputeInternalServerError) output = Json::Value("ComputeInternalServerError");
+            if (input == GenericErrorCodesComputeServiceUnavailable) output = Json::Value("ComputeServiceUnavailable");
         }
         inline void FromJsonEnum(const Json::Value& input, GenericErrorCodes& output)
         {
@@ -2566,6 +2586,16 @@ namespace PlayFab
             if (inputStr == "NoValidCertificateForAad") output = GenericErrorCodesNoValidCertificateForAad;
             if (inputStr == "InvalidCertificateForAad") output = GenericErrorCodesInvalidCertificateForAad;
             if (inputStr == "DuplicateDropTableId") output = GenericErrorCodesDuplicateDropTableId;
+            if (inputStr == "ComputeOK") output = GenericErrorCodesComputeOK;
+            if (inputStr == "ComputeAccepted") output = GenericErrorCodesComputeAccepted;
+            if (inputStr == "ComputeNoContent") output = GenericErrorCodesComputeNoContent;
+            if (inputStr == "ComputeBadRequest") output = GenericErrorCodesComputeBadRequest;
+            if (inputStr == "ComputeUnauthorized") output = GenericErrorCodesComputeUnauthorized;
+            if (inputStr == "ComputeForbidden") output = GenericErrorCodesComputeForbidden;
+            if (inputStr == "ComputeNotFound") output = GenericErrorCodesComputeNotFound;
+            if (inputStr == "ComputeConflict") output = GenericErrorCodesComputeConflict;
+            if (inputStr == "ComputeInternalServerError") output = GenericErrorCodesComputeInternalServerError;
+            if (inputStr == "ComputeServiceUnavailable") output = GenericErrorCodesComputeServiceUnavailable;
         }
 
         enum LoginIdentityProvider
@@ -5017,6 +5047,69 @@ namespace PlayFab
             }
         };
 
+        struct DeleteMasterPlayerAccountRequest : public PlayFabRequestCommon
+        {
+            std::string PlayFabId;
+
+            DeleteMasterPlayerAccountRequest() :
+                PlayFabRequestCommon(),
+                PlayFabId()
+            {}
+
+            DeleteMasterPlayerAccountRequest(const DeleteMasterPlayerAccountRequest& src) :
+                PlayFabRequestCommon(),
+                PlayFabId(src.PlayFabId)
+            {}
+
+            ~DeleteMasterPlayerAccountRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                return output;
+            }
+        };
+
+        struct DeleteMasterPlayerAccountResult : public PlayFabResultCommon
+        {
+            std::string JobReceiptId;
+            std::list<std::string> TitleIds;
+
+            DeleteMasterPlayerAccountResult() :
+                PlayFabResultCommon(),
+                JobReceiptId(),
+                TitleIds()
+            {}
+
+            DeleteMasterPlayerAccountResult(const DeleteMasterPlayerAccountResult& src) :
+                PlayFabResultCommon(),
+                JobReceiptId(src.JobReceiptId),
+                TitleIds(src.TitleIds)
+            {}
+
+            ~DeleteMasterPlayerAccountResult() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["JobReceiptId"], JobReceiptId);
+                FromJsonUtilS(input["TitleIds"], TitleIds);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_JobReceiptId; ToJsonUtilS(JobReceiptId, each_JobReceiptId); output["JobReceiptId"] = each_JobReceiptId;
+                Json::Value each_TitleIds; ToJsonUtilS(TitleIds, each_TitleIds); output["TitleIds"] = each_TitleIds;
+                return output;
+            }
+        };
+
         struct DeletePlayerRequest : public PlayFabRequestCommon
         {
             std::string PlayFabId;
@@ -5375,6 +5468,64 @@ namespace PlayFab
                 Json::Value each_Id; ToJsonUtilS(Id, each_Id); output["Id"] = each_Id;
                 Json::Value each_Type; ToJsonUtilE(Type, each_Type); output["Type"] = each_Type;
                 Json::Value each_TypeString; ToJsonUtilS(TypeString, each_TypeString); output["TypeString"] = each_TypeString;
+                return output;
+            }
+        };
+
+        struct ExportMasterPlayerDataRequest : public PlayFabRequestCommon
+        {
+            std::string PlayFabId;
+
+            ExportMasterPlayerDataRequest() :
+                PlayFabRequestCommon(),
+                PlayFabId()
+            {}
+
+            ExportMasterPlayerDataRequest(const ExportMasterPlayerDataRequest& src) :
+                PlayFabRequestCommon(),
+                PlayFabId(src.PlayFabId)
+            {}
+
+            ~ExportMasterPlayerDataRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                return output;
+            }
+        };
+
+        struct ExportMasterPlayerDataResult : public PlayFabResultCommon
+        {
+            std::string JobReceiptId;
+
+            ExportMasterPlayerDataResult() :
+                PlayFabResultCommon(),
+                JobReceiptId()
+            {}
+
+            ExportMasterPlayerDataResult(const ExportMasterPlayerDataResult& src) :
+                PlayFabResultCommon(),
+                JobReceiptId(src.JobReceiptId)
+            {}
+
+            ~ExportMasterPlayerDataResult() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["JobReceiptId"], JobReceiptId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_JobReceiptId; ToJsonUtilS(JobReceiptId, each_JobReceiptId); output["JobReceiptId"] = each_JobReceiptId;
                 return output;
             }
         };
@@ -6138,6 +6289,64 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_GameModes; ToJsonUtilO(GameModes, each_GameModes); output["GameModes"] = each_GameModes;
+                return output;
+            }
+        };
+
+        struct GetPlayedTitleListRequest : public PlayFabRequestCommon
+        {
+            std::string PlayFabId;
+
+            GetPlayedTitleListRequest() :
+                PlayFabRequestCommon(),
+                PlayFabId()
+            {}
+
+            GetPlayedTitleListRequest(const GetPlayedTitleListRequest& src) :
+                PlayFabRequestCommon(),
+                PlayFabId(src.PlayFabId)
+            {}
+
+            ~GetPlayedTitleListRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                return output;
+            }
+        };
+
+        struct GetPlayedTitleListResult : public PlayFabResultCommon
+        {
+            std::list<std::string> TitleIds;
+
+            GetPlayedTitleListResult() :
+                PlayFabResultCommon(),
+                TitleIds()
+            {}
+
+            GetPlayedTitleListResult(const GetPlayedTitleListResult& src) :
+                PlayFabResultCommon(),
+                TitleIds(src.TitleIds)
+            {}
+
+            ~GetPlayedTitleListResult() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["TitleIds"], TitleIds);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_TitleIds; ToJsonUtilS(TitleIds, each_TitleIds); output["TitleIds"] = each_TitleIds;
                 return output;
             }
         };

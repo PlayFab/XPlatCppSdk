@@ -373,6 +373,33 @@ namespace PlayFab
         }
     }
 
+    void PlayFabAdminAPI::DeleteMasterPlayerAccount(
+        DeleteMasterPlayerAccountRequest& request,
+        ProcessApiCallback<DeleteMasterPlayerAccountResult> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttp& http = IPlayFabHttp::Get();
+        const auto requestJson = request.ToJson();
+        http.AddRequest("/Admin/DeleteMasterPlayerAccount", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnDeleteMasterPlayerAccountResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<DeleteMasterPlayerAccountResult>(callback)), errorCallback, customData);
+    }
+
+    void PlayFabAdminAPI::OnDeleteMasterPlayerAccountResult(CallRequestContainer& request)
+    {
+        DeleteMasterPlayerAccountResult outResult;
+        outResult.FromJson(request.errorWrapper.Data);
+        outResult.Request = request.errorWrapper.Request;
+
+        const auto internalPtr = request.successCallback.get();
+        if (internalPtr != nullptr)
+        {
+            const auto callback = (*static_cast<ProcessApiCallback<DeleteMasterPlayerAccountResult> *>(internalPtr));
+            callback(outResult, request.customData);
+        }
+    }
+
     void PlayFabAdminAPI::DeletePlayer(
         DeletePlayerRequest& request,
         ProcessApiCallback<DeletePlayerResult> callback,
@@ -504,6 +531,33 @@ namespace PlayFab
         if (internalPtr != nullptr)
         {
             const auto callback = (*static_cast<ProcessApiCallback<DeleteTitleResult> *>(internalPtr));
+            callback(outResult, request.customData);
+        }
+    }
+
+    void PlayFabAdminAPI::ExportMasterPlayerData(
+        ExportMasterPlayerDataRequest& request,
+        ProcessApiCallback<ExportMasterPlayerDataResult> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttp& http = IPlayFabHttp::Get();
+        const auto requestJson = request.ToJson();
+        http.AddRequest("/Admin/ExportMasterPlayerData", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnExportMasterPlayerDataResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<ExportMasterPlayerDataResult>(callback)), errorCallback, customData);
+    }
+
+    void PlayFabAdminAPI::OnExportMasterPlayerDataResult(CallRequestContainer& request)
+    {
+        ExportMasterPlayerDataResult outResult;
+        outResult.FromJson(request.errorWrapper.Data);
+        outResult.Request = request.errorWrapper.Request;
+
+        const auto internalPtr = request.successCallback.get();
+        if (internalPtr != nullptr)
+        {
+            const auto callback = (*static_cast<ProcessApiCallback<ExportMasterPlayerDataResult> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }
@@ -801,6 +855,33 @@ namespace PlayFab
         if (internalPtr != nullptr)
         {
             const auto callback = (*static_cast<ProcessApiCallback<GetMatchmakerGameModesResult> *>(internalPtr));
+            callback(outResult, request.customData);
+        }
+    }
+
+    void PlayFabAdminAPI::GetPlayedTitleList(
+        GetPlayedTitleListRequest& request,
+        ProcessApiCallback<GetPlayedTitleListResult> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttp& http = IPlayFabHttp::Get();
+        const auto requestJson = request.ToJson();
+        http.AddRequest("/Admin/GetPlayedTitleList", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnGetPlayedTitleListResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayedTitleListResult>(callback)), errorCallback, customData);
+    }
+
+    void PlayFabAdminAPI::OnGetPlayedTitleListResult(CallRequestContainer& request)
+    {
+        GetPlayedTitleListResult outResult;
+        outResult.FromJson(request.errorWrapper.Data);
+        outResult.Request = request.errorWrapper.Request;
+
+        const auto internalPtr = request.successCallback.get();
+        if (internalPtr != nullptr)
+        {
+            const auto callback = (*static_cast<ProcessApiCallback<GetPlayedTitleListResult> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }

@@ -387,6 +387,16 @@ namespace PlayFab
         PlayFabErrorNoValidCertificateForAad = 1376,
         PlayFabErrorInvalidCertificateForAad = 1377,
         PlayFabErrorDuplicateDropTableId = 1378,
+        PlayFabErrorComputeOK = 1379,
+        PlayFabErrorComputeAccepted = 1380,
+        PlayFabErrorComputeNoContent = 1381,
+        PlayFabErrorComputeBadRequest = 1382,
+        PlayFabErrorComputeUnauthorized = 1383,
+        PlayFabErrorComputeForbidden = 1384,
+        PlayFabErrorComputeNotFound = 1385,
+        PlayFabErrorComputeConflict = 1386,
+        PlayFabErrorComputeInternalServerError = 1387,
+        PlayFabErrorComputeServiceUnavailable = 1388,
     };
 
     /// <summary>
