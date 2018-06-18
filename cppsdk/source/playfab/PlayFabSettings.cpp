@@ -4,9 +4,9 @@
 
 namespace PlayFab
 {
-    const std::string PlayFabSettings::sdkVersion = "2.3.180529";
-    const std::string PlayFabSettings::buildIdentifier = "jbuild_xplatcppsdk_sdk-slave2016-1_0";
-    const std::string PlayFabSettings::versionString = "XPlatCppSdk-2.3.180529";
+    const std::string PlayFabSettings::sdkVersion = "2.4.180618";
+    const std::string PlayFabSettings::buildIdentifier = "jbuild_xplatcppsdk_sdk-slave2016-2_0";
+    const std::string PlayFabSettings::versionString = "XPlatCppSdk-2.4.180618";
 
     bool PlayFabSettings::useDevelopmentEnvironment = false;
     std::string PlayFabSettings::serverURL;

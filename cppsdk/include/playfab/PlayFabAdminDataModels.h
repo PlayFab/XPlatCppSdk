@@ -1451,6 +1451,7 @@ namespace PlayFab
         enum GenericErrorCodes
         {
             GenericErrorCodesSuccess,
+            GenericErrorCodesMatchmakingHopperIdInvalid,
             GenericErrorCodesUnkownError,
             GenericErrorCodesInvalidParams,
             GenericErrorCodesAccountNotFound,
@@ -1819,21 +1820,53 @@ namespace PlayFab
             GenericErrorCodesNoValidCertificateForAad,
             GenericErrorCodesInvalidCertificateForAad,
             GenericErrorCodesDuplicateDropTableId,
-            GenericErrorCodesComputeOK,
-            GenericErrorCodesComputeAccepted,
-            GenericErrorCodesComputeNoContent,
-            GenericErrorCodesComputeBadRequest,
-            GenericErrorCodesComputeUnauthorized,
-            GenericErrorCodesComputeForbidden,
-            GenericErrorCodesComputeNotFound,
-            GenericErrorCodesComputeConflict,
-            GenericErrorCodesComputeInternalServerError,
-            GenericErrorCodesComputeServiceUnavailable
+            GenericErrorCodesGameServerOk,
+            GenericErrorCodesGameServerAccepted,
+            GenericErrorCodesGameServerNoContent,
+            GenericErrorCodesGameServerBadRequest,
+            GenericErrorCodesGameServerUnauthorized,
+            GenericErrorCodesGameServerForbidden,
+            GenericErrorCodesGameServerNotFound,
+            GenericErrorCodesGameServerConflict,
+            GenericErrorCodesGameServerInternalServerError,
+            GenericErrorCodesGameServerServiceUnavailable,
+            GenericErrorCodesMatchmakingInvalidEntityKeyList,
+            GenericErrorCodesMatchmakingInvalidTicketCreatorProfile,
+            GenericErrorCodesMatchmakingInvalidUserAttributes,
+            GenericErrorCodesMatchmakingCreateRequestMissing,
+            GenericErrorCodesMatchmakingCreateRequestCreatorMissing,
+            GenericErrorCodesMatchmakingCreateRequestCreatorIdMissing,
+            GenericErrorCodesMatchmakingCreateRequestUserListMissing,
+            GenericErrorCodesMatchmakingCreateRequestGiveUpAfterInvalid,
+            GenericErrorCodesMatchmakingTicketIdMissing,
+            GenericErrorCodesMatchmakingMatchIdMissing,
+            GenericErrorCodesMatchmakingMatchIdIdMissing,
+            GenericErrorCodesMatchmakingHopperIdMissing,
+            GenericErrorCodesMatchmakingTitleIdMissing,
+            GenericErrorCodesMatchmakingTicketIdIdMissing,
+            GenericErrorCodesMatchmakingUserIdMissing,
+            GenericErrorCodesMatchmakingJoinRequestUserMissing,
+            GenericErrorCodesMatchmakingHopperConfigNotFound,
+            GenericErrorCodesMatchmakingMatchNotFound,
+            GenericErrorCodesMatchmakingTicketNotFound,
+            GenericErrorCodesMatchmakingCreateTicketServerIdentityInvalid,
+            GenericErrorCodesMatchmakingCreateTicketClientIdentityInvalid,
+            GenericErrorCodesMatchmakingGetTicketUserMismatch,
+            GenericErrorCodesMatchmakingJoinTicketServerIdentityInvalid,
+            GenericErrorCodesMatchmakingJoinTicketUserIdentityMismatch,
+            GenericErrorCodesMatchmakingCancelTicketServerIdentityInvalid,
+            GenericErrorCodesMatchmakingCancelTicketUserIdentityMismatch,
+            GenericErrorCodesMatchmakingGetMatchIdentityMismatch,
+            GenericErrorCodesMatchmakingUserIdentityMismatch,
+            GenericErrorCodesMatchmakingAlreadyJoinedTicket,
+            GenericErrorCodesMatchmakingTicketAlreadyCompleted,
+            GenericErrorCodesMatchmakingHopperConfigInvalid
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
         {
             if (input == GenericErrorCodesSuccess) output = Json::Value("Success");
+            if (input == GenericErrorCodesMatchmakingHopperIdInvalid) output = Json::Value("MatchmakingHopperIdInvalid");
             if (input == GenericErrorCodesUnkownError) output = Json::Value("UnkownError");
             if (input == GenericErrorCodesInvalidParams) output = Json::Value("InvalidParams");
             if (input == GenericErrorCodesAccountNotFound) output = Json::Value("AccountNotFound");
@@ -2202,22 +2235,54 @@ namespace PlayFab
             if (input == GenericErrorCodesNoValidCertificateForAad) output = Json::Value("NoValidCertificateForAad");
             if (input == GenericErrorCodesInvalidCertificateForAad) output = Json::Value("InvalidCertificateForAad");
             if (input == GenericErrorCodesDuplicateDropTableId) output = Json::Value("DuplicateDropTableId");
-            if (input == GenericErrorCodesComputeOK) output = Json::Value("ComputeOK");
-            if (input == GenericErrorCodesComputeAccepted) output = Json::Value("ComputeAccepted");
-            if (input == GenericErrorCodesComputeNoContent) output = Json::Value("ComputeNoContent");
-            if (input == GenericErrorCodesComputeBadRequest) output = Json::Value("ComputeBadRequest");
-            if (input == GenericErrorCodesComputeUnauthorized) output = Json::Value("ComputeUnauthorized");
-            if (input == GenericErrorCodesComputeForbidden) output = Json::Value("ComputeForbidden");
-            if (input == GenericErrorCodesComputeNotFound) output = Json::Value("ComputeNotFound");
-            if (input == GenericErrorCodesComputeConflict) output = Json::Value("ComputeConflict");
-            if (input == GenericErrorCodesComputeInternalServerError) output = Json::Value("ComputeInternalServerError");
-            if (input == GenericErrorCodesComputeServiceUnavailable) output = Json::Value("ComputeServiceUnavailable");
+            if (input == GenericErrorCodesGameServerOk) output = Json::Value("GameServerOk");
+            if (input == GenericErrorCodesGameServerAccepted) output = Json::Value("GameServerAccepted");
+            if (input == GenericErrorCodesGameServerNoContent) output = Json::Value("GameServerNoContent");
+            if (input == GenericErrorCodesGameServerBadRequest) output = Json::Value("GameServerBadRequest");
+            if (input == GenericErrorCodesGameServerUnauthorized) output = Json::Value("GameServerUnauthorized");
+            if (input == GenericErrorCodesGameServerForbidden) output = Json::Value("GameServerForbidden");
+            if (input == GenericErrorCodesGameServerNotFound) output = Json::Value("GameServerNotFound");
+            if (input == GenericErrorCodesGameServerConflict) output = Json::Value("GameServerConflict");
+            if (input == GenericErrorCodesGameServerInternalServerError) output = Json::Value("GameServerInternalServerError");
+            if (input == GenericErrorCodesGameServerServiceUnavailable) output = Json::Value("GameServerServiceUnavailable");
+            if (input == GenericErrorCodesMatchmakingInvalidEntityKeyList) output = Json::Value("MatchmakingInvalidEntityKeyList");
+            if (input == GenericErrorCodesMatchmakingInvalidTicketCreatorProfile) output = Json::Value("MatchmakingInvalidTicketCreatorProfile");
+            if (input == GenericErrorCodesMatchmakingInvalidUserAttributes) output = Json::Value("MatchmakingInvalidUserAttributes");
+            if (input == GenericErrorCodesMatchmakingCreateRequestMissing) output = Json::Value("MatchmakingCreateRequestMissing");
+            if (input == GenericErrorCodesMatchmakingCreateRequestCreatorMissing) output = Json::Value("MatchmakingCreateRequestCreatorMissing");
+            if (input == GenericErrorCodesMatchmakingCreateRequestCreatorIdMissing) output = Json::Value("MatchmakingCreateRequestCreatorIdMissing");
+            if (input == GenericErrorCodesMatchmakingCreateRequestUserListMissing) output = Json::Value("MatchmakingCreateRequestUserListMissing");
+            if (input == GenericErrorCodesMatchmakingCreateRequestGiveUpAfterInvalid) output = Json::Value("MatchmakingCreateRequestGiveUpAfterInvalid");
+            if (input == GenericErrorCodesMatchmakingTicketIdMissing) output = Json::Value("MatchmakingTicketIdMissing");
+            if (input == GenericErrorCodesMatchmakingMatchIdMissing) output = Json::Value("MatchmakingMatchIdMissing");
+            if (input == GenericErrorCodesMatchmakingMatchIdIdMissing) output = Json::Value("MatchmakingMatchIdIdMissing");
+            if (input == GenericErrorCodesMatchmakingHopperIdMissing) output = Json::Value("MatchmakingHopperIdMissing");
+            if (input == GenericErrorCodesMatchmakingTitleIdMissing) output = Json::Value("MatchmakingTitleIdMissing");
+            if (input == GenericErrorCodesMatchmakingTicketIdIdMissing) output = Json::Value("MatchmakingTicketIdIdMissing");
+            if (input == GenericErrorCodesMatchmakingUserIdMissing) output = Json::Value("MatchmakingUserIdMissing");
+            if (input == GenericErrorCodesMatchmakingJoinRequestUserMissing) output = Json::Value("MatchmakingJoinRequestUserMissing");
+            if (input == GenericErrorCodesMatchmakingHopperConfigNotFound) output = Json::Value("MatchmakingHopperConfigNotFound");
+            if (input == GenericErrorCodesMatchmakingMatchNotFound) output = Json::Value("MatchmakingMatchNotFound");
+            if (input == GenericErrorCodesMatchmakingTicketNotFound) output = Json::Value("MatchmakingTicketNotFound");
+            if (input == GenericErrorCodesMatchmakingCreateTicketServerIdentityInvalid) output = Json::Value("MatchmakingCreateTicketServerIdentityInvalid");
+            if (input == GenericErrorCodesMatchmakingCreateTicketClientIdentityInvalid) output = Json::Value("MatchmakingCreateTicketClientIdentityInvalid");
+            if (input == GenericErrorCodesMatchmakingGetTicketUserMismatch) output = Json::Value("MatchmakingGetTicketUserMismatch");
+            if (input == GenericErrorCodesMatchmakingJoinTicketServerIdentityInvalid) output = Json::Value("MatchmakingJoinTicketServerIdentityInvalid");
+            if (input == GenericErrorCodesMatchmakingJoinTicketUserIdentityMismatch) output = Json::Value("MatchmakingJoinTicketUserIdentityMismatch");
+            if (input == GenericErrorCodesMatchmakingCancelTicketServerIdentityInvalid) output = Json::Value("MatchmakingCancelTicketServerIdentityInvalid");
+            if (input == GenericErrorCodesMatchmakingCancelTicketUserIdentityMismatch) output = Json::Value("MatchmakingCancelTicketUserIdentityMismatch");
+            if (input == GenericErrorCodesMatchmakingGetMatchIdentityMismatch) output = Json::Value("MatchmakingGetMatchIdentityMismatch");
+            if (input == GenericErrorCodesMatchmakingUserIdentityMismatch) output = Json::Value("MatchmakingUserIdentityMismatch");
+            if (input == GenericErrorCodesMatchmakingAlreadyJoinedTicket) output = Json::Value("MatchmakingAlreadyJoinedTicket");
+            if (input == GenericErrorCodesMatchmakingTicketAlreadyCompleted) output = Json::Value("MatchmakingTicketAlreadyCompleted");
+            if (input == GenericErrorCodesMatchmakingHopperConfigInvalid) output = Json::Value("MatchmakingHopperConfigInvalid");
         }
         inline void FromJsonEnum(const Json::Value& input, GenericErrorCodes& output)
         {
             if (!input.isString()) return;
             const std::string& inputStr = input.asString();
             if (inputStr == "Success") output = GenericErrorCodesSuccess;
+            if (inputStr == "MatchmakingHopperIdInvalid") output = GenericErrorCodesMatchmakingHopperIdInvalid;
             if (inputStr == "UnkownError") output = GenericErrorCodesUnkownError;
             if (inputStr == "InvalidParams") output = GenericErrorCodesInvalidParams;
             if (inputStr == "AccountNotFound") output = GenericErrorCodesAccountNotFound;
@@ -2586,16 +2651,47 @@ namespace PlayFab
             if (inputStr == "NoValidCertificateForAad") output = GenericErrorCodesNoValidCertificateForAad;
             if (inputStr == "InvalidCertificateForAad") output = GenericErrorCodesInvalidCertificateForAad;
             if (inputStr == "DuplicateDropTableId") output = GenericErrorCodesDuplicateDropTableId;
-            if (inputStr == "ComputeOK") output = GenericErrorCodesComputeOK;
-            if (inputStr == "ComputeAccepted") output = GenericErrorCodesComputeAccepted;
-            if (inputStr == "ComputeNoContent") output = GenericErrorCodesComputeNoContent;
-            if (inputStr == "ComputeBadRequest") output = GenericErrorCodesComputeBadRequest;
-            if (inputStr == "ComputeUnauthorized") output = GenericErrorCodesComputeUnauthorized;
-            if (inputStr == "ComputeForbidden") output = GenericErrorCodesComputeForbidden;
-            if (inputStr == "ComputeNotFound") output = GenericErrorCodesComputeNotFound;
-            if (inputStr == "ComputeConflict") output = GenericErrorCodesComputeConflict;
-            if (inputStr == "ComputeInternalServerError") output = GenericErrorCodesComputeInternalServerError;
-            if (inputStr == "ComputeServiceUnavailable") output = GenericErrorCodesComputeServiceUnavailable;
+            if (inputStr == "GameServerOk") output = GenericErrorCodesGameServerOk;
+            if (inputStr == "GameServerAccepted") output = GenericErrorCodesGameServerAccepted;
+            if (inputStr == "GameServerNoContent") output = GenericErrorCodesGameServerNoContent;
+            if (inputStr == "GameServerBadRequest") output = GenericErrorCodesGameServerBadRequest;
+            if (inputStr == "GameServerUnauthorized") output = GenericErrorCodesGameServerUnauthorized;
+            if (inputStr == "GameServerForbidden") output = GenericErrorCodesGameServerForbidden;
+            if (inputStr == "GameServerNotFound") output = GenericErrorCodesGameServerNotFound;
+            if (inputStr == "GameServerConflict") output = GenericErrorCodesGameServerConflict;
+            if (inputStr == "GameServerInternalServerError") output = GenericErrorCodesGameServerInternalServerError;
+            if (inputStr == "GameServerServiceUnavailable") output = GenericErrorCodesGameServerServiceUnavailable;
+            if (inputStr == "MatchmakingInvalidEntityKeyList") output = GenericErrorCodesMatchmakingInvalidEntityKeyList;
+            if (inputStr == "MatchmakingInvalidTicketCreatorProfile") output = GenericErrorCodesMatchmakingInvalidTicketCreatorProfile;
+            if (inputStr == "MatchmakingInvalidUserAttributes") output = GenericErrorCodesMatchmakingInvalidUserAttributes;
+            if (inputStr == "MatchmakingCreateRequestMissing") output = GenericErrorCodesMatchmakingCreateRequestMissing;
+            if (inputStr == "MatchmakingCreateRequestCreatorMissing") output = GenericErrorCodesMatchmakingCreateRequestCreatorMissing;
+            if (inputStr == "MatchmakingCreateRequestCreatorIdMissing") output = GenericErrorCodesMatchmakingCreateRequestCreatorIdMissing;
+            if (inputStr == "MatchmakingCreateRequestUserListMissing") output = GenericErrorCodesMatchmakingCreateRequestUserListMissing;
+            if (inputStr == "MatchmakingCreateRequestGiveUpAfterInvalid") output = GenericErrorCodesMatchmakingCreateRequestGiveUpAfterInvalid;
+            if (inputStr == "MatchmakingTicketIdMissing") output = GenericErrorCodesMatchmakingTicketIdMissing;
+            if (inputStr == "MatchmakingMatchIdMissing") output = GenericErrorCodesMatchmakingMatchIdMissing;
+            if (inputStr == "MatchmakingMatchIdIdMissing") output = GenericErrorCodesMatchmakingMatchIdIdMissing;
+            if (inputStr == "MatchmakingHopperIdMissing") output = GenericErrorCodesMatchmakingHopperIdMissing;
+            if (inputStr == "MatchmakingTitleIdMissing") output = GenericErrorCodesMatchmakingTitleIdMissing;
+            if (inputStr == "MatchmakingTicketIdIdMissing") output = GenericErrorCodesMatchmakingTicketIdIdMissing;
+            if (inputStr == "MatchmakingUserIdMissing") output = GenericErrorCodesMatchmakingUserIdMissing;
+            if (inputStr == "MatchmakingJoinRequestUserMissing") output = GenericErrorCodesMatchmakingJoinRequestUserMissing;
+            if (inputStr == "MatchmakingHopperConfigNotFound") output = GenericErrorCodesMatchmakingHopperConfigNotFound;
+            if (inputStr == "MatchmakingMatchNotFound") output = GenericErrorCodesMatchmakingMatchNotFound;
+            if (inputStr == "MatchmakingTicketNotFound") output = GenericErrorCodesMatchmakingTicketNotFound;
+            if (inputStr == "MatchmakingCreateTicketServerIdentityInvalid") output = GenericErrorCodesMatchmakingCreateTicketServerIdentityInvalid;
+            if (inputStr == "MatchmakingCreateTicketClientIdentityInvalid") output = GenericErrorCodesMatchmakingCreateTicketClientIdentityInvalid;
+            if (inputStr == "MatchmakingGetTicketUserMismatch") output = GenericErrorCodesMatchmakingGetTicketUserMismatch;
+            if (inputStr == "MatchmakingJoinTicketServerIdentityInvalid") output = GenericErrorCodesMatchmakingJoinTicketServerIdentityInvalid;
+            if (inputStr == "MatchmakingJoinTicketUserIdentityMismatch") output = GenericErrorCodesMatchmakingJoinTicketUserIdentityMismatch;
+            if (inputStr == "MatchmakingCancelTicketServerIdentityInvalid") output = GenericErrorCodesMatchmakingCancelTicketServerIdentityInvalid;
+            if (inputStr == "MatchmakingCancelTicketUserIdentityMismatch") output = GenericErrorCodesMatchmakingCancelTicketUserIdentityMismatch;
+            if (inputStr == "MatchmakingGetMatchIdentityMismatch") output = GenericErrorCodesMatchmakingGetMatchIdentityMismatch;
+            if (inputStr == "MatchmakingUserIdentityMismatch") output = GenericErrorCodesMatchmakingUserIdentityMismatch;
+            if (inputStr == "MatchmakingAlreadyJoinedTicket") output = GenericErrorCodesMatchmakingAlreadyJoinedTicket;
+            if (inputStr == "MatchmakingTicketAlreadyCompleted") output = GenericErrorCodesMatchmakingTicketAlreadyCompleted;
+            if (inputStr == "MatchmakingHopperConfigInvalid") output = GenericErrorCodesMatchmakingHopperConfigInvalid;
         }
 
         enum LoginIdentityProvider
@@ -5339,64 +5435,6 @@ namespace PlayFab
             {}
 
             ~DeleteTitleResult() = default;
-
-            void FromJson(Json::Value&) override
-            {
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                return output;
-            }
-        };
-
-        struct DeleteUsersRequest : public PlayFabRequestCommon
-        {
-            std::list<std::string> PlayFabIds;
-            std::string TitleId;
-
-            DeleteUsersRequest() :
-                PlayFabRequestCommon(),
-                PlayFabIds(),
-                TitleId()
-            {}
-
-            DeleteUsersRequest(const DeleteUsersRequest& src) :
-                PlayFabRequestCommon(),
-                PlayFabIds(src.PlayFabIds),
-                TitleId(src.TitleId)
-            {}
-
-            ~DeleteUsersRequest() = default;
-
-            void FromJson(Json::Value& input) override
-            {
-                FromJsonUtilS(input["PlayFabIds"], PlayFabIds);
-                FromJsonUtilS(input["TitleId"], TitleId);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_PlayFabIds; ToJsonUtilS(PlayFabIds, each_PlayFabIds); output["PlayFabIds"] = each_PlayFabIds;
-                Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
-                return output;
-            }
-        };
-
-        struct DeleteUsersResult : public PlayFabResultCommon
-        {
-
-            DeleteUsersResult() :
-                PlayFabResultCommon()
-            {}
-
-            DeleteUsersResult(const DeleteUsersResult&) :
-                PlayFabResultCommon()
-            {}
-
-            ~DeleteUsersResult() = default;
 
             void FromJson(Json::Value&) override
             {

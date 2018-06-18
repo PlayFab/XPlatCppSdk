@@ -10703,40 +10703,6 @@ namespace PlayFab
             }
         };
 
-        struct NameIdentifier : public PlayFabBaseModel
-        {
-            std::string Id;
-            std::string Name;
-
-            NameIdentifier() :
-                PlayFabBaseModel(),
-                Id(),
-                Name()
-            {}
-
-            NameIdentifier(const NameIdentifier& src) :
-                PlayFabBaseModel(),
-                Id(src.Id),
-                Name(src.Name)
-            {}
-
-            ~NameIdentifier() = default;
-
-            void FromJson(Json::Value& input) override
-            {
-                FromJsonUtilS(input["Id"], Id);
-                FromJsonUtilS(input["Name"], Name);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_Id; ToJsonUtilS(Id, each_Id); output["Id"] = each_Id;
-                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
-                return output;
-            }
-        };
-
         struct OpenTradeRequest : public PlayFabRequestCommon
         {
             std::list<std::string> AllowedPlayerIds;
