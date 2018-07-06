@@ -30,6 +30,7 @@ namespace PlayFab
         static void DeleteFiles(EntityModels::DeleteFilesRequest& request, ProcessApiCallback<EntityModels::DeleteFilesResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeleteGroup(EntityModels::DeleteGroupRequest& request, ProcessApiCallback<EntityModels::EmptyResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeleteRole(EntityModels::DeleteRoleRequest& request, ProcessApiCallback<EntityModels::EmptyResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void ExecuteEntityCloudScript(EntityModels::ExecuteEntityCloudScriptRequest& request, ProcessApiCallback<EntityModels::ExecuteCloudScriptResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void FinalizeFileUploads(EntityModels::FinalizeFileUploadsRequest& request, ProcessApiCallback<EntityModels::FinalizeFileUploadsResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetEntityToken(EntityModels::GetEntityTokenRequest& request, ProcessApiCallback<EntityModels::GetEntityTokenResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetFiles(EntityModels::GetFilesRequest& request, ProcessApiCallback<EntityModels::GetFilesResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -74,6 +75,7 @@ namespace PlayFab
         static void OnDeleteFilesResult(CallRequestContainer& request);
         static void OnDeleteGroupResult(CallRequestContainer& request);
         static void OnDeleteRoleResult(CallRequestContainer& request);
+        static void OnExecuteEntityCloudScriptResult(CallRequestContainer& request);
         static void OnFinalizeFileUploadsResult(CallRequestContainer& request);
         static void OnGetEntityTokenResult(CallRequestContainer& request);
         static void OnGetFilesResult(CallRequestContainer& request);

@@ -1546,7 +1546,9 @@ namespace PlayFab
             SourceTypeBackEnd,
             SourceTypeGameClient,
             SourceTypeGameServer,
-            SourceTypePartner
+            SourceTypePartner,
+            SourceTypeCustom,
+            SourceTypeAPI
         };
 
         inline void ToJsonEnum(const SourceType input, Json::Value& output)
@@ -1556,6 +1558,8 @@ namespace PlayFab
             if (input == SourceTypeGameClient) output = Json::Value("GameClient");
             if (input == SourceTypeGameServer) output = Json::Value("GameServer");
             if (input == SourceTypePartner) output = Json::Value("Partner");
+            if (input == SourceTypeCustom) output = Json::Value("Custom");
+            if (input == SourceTypeAPI) output = Json::Value("API");
         }
         inline void FromJsonEnum(const Json::Value& input, SourceType& output)
         {
@@ -1566,6 +1570,8 @@ namespace PlayFab
             if (inputStr == "GameClient") output = SourceTypeGameClient;
             if (inputStr == "GameServer") output = SourceTypeGameServer;
             if (inputStr == "Partner") output = SourceTypePartner;
+            if (inputStr == "Custom") output = SourceTypeCustom;
+            if (inputStr == "API") output = SourceTypeAPI;
         }
 
         enum SubscriptionProviderStatus

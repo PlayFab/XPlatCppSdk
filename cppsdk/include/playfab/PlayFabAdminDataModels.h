@@ -1451,7 +1451,6 @@ namespace PlayFab
         enum GenericErrorCodes
         {
             GenericErrorCodesSuccess,
-            GenericErrorCodesMatchmakingHopperIdInvalid,
             GenericErrorCodesUnkownError,
             GenericErrorCodesInvalidParams,
             GenericErrorCodesAccountNotFound,
@@ -1830,9 +1829,11 @@ namespace PlayFab
             GenericErrorCodesGameServerConflict,
             GenericErrorCodesGameServerInternalServerError,
             GenericErrorCodesGameServerServiceUnavailable,
-            GenericErrorCodesMatchmakingInvalidEntityKeyList,
-            GenericErrorCodesMatchmakingInvalidTicketCreatorProfile,
-            GenericErrorCodesMatchmakingInvalidUserAttributes,
+            GenericErrorCodesExplicitContentDetected,
+            GenericErrorCodesPIIContentDetected,
+            GenericErrorCodesInvalidScheduledTaskParameter,
+            GenericErrorCodesMatchmakingEntityInvalid,
+            GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingCreateRequestMissing,
             GenericErrorCodesMatchmakingCreateRequestCreatorMissing,
             GenericErrorCodesMatchmakingCreateRequestCreatorIdMissing,
@@ -1844,7 +1845,7 @@ namespace PlayFab
             GenericErrorCodesMatchmakingHopperIdMissing,
             GenericErrorCodesMatchmakingTitleIdMissing,
             GenericErrorCodesMatchmakingTicketIdIdMissing,
-            GenericErrorCodesMatchmakingUserIdMissing,
+            GenericErrorCodesMatchmakingPlayerIdMissing,
             GenericErrorCodesMatchmakingJoinRequestUserMissing,
             GenericErrorCodesMatchmakingHopperConfigNotFound,
             GenericErrorCodesMatchmakingMatchNotFound,
@@ -1857,16 +1858,17 @@ namespace PlayFab
             GenericErrorCodesMatchmakingCancelTicketServerIdentityInvalid,
             GenericErrorCodesMatchmakingCancelTicketUserIdentityMismatch,
             GenericErrorCodesMatchmakingGetMatchIdentityMismatch,
-            GenericErrorCodesMatchmakingUserIdentityMismatch,
+            GenericErrorCodesMatchmakingPlayerIdentityMismatch,
             GenericErrorCodesMatchmakingAlreadyJoinedTicket,
             GenericErrorCodesMatchmakingTicketAlreadyCompleted,
-            GenericErrorCodesMatchmakingHopperConfigInvalid
+            GenericErrorCodesMatchmakingHopperIdInvalid,
+            GenericErrorCodesMatchmakingHopperConfigInvalid,
+            GenericErrorCodesMatchmakingMemberProfileInvalid
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
         {
             if (input == GenericErrorCodesSuccess) output = Json::Value("Success");
-            if (input == GenericErrorCodesMatchmakingHopperIdInvalid) output = Json::Value("MatchmakingHopperIdInvalid");
             if (input == GenericErrorCodesUnkownError) output = Json::Value("UnkownError");
             if (input == GenericErrorCodesInvalidParams) output = Json::Value("InvalidParams");
             if (input == GenericErrorCodesAccountNotFound) output = Json::Value("AccountNotFound");
@@ -2245,9 +2247,11 @@ namespace PlayFab
             if (input == GenericErrorCodesGameServerConflict) output = Json::Value("GameServerConflict");
             if (input == GenericErrorCodesGameServerInternalServerError) output = Json::Value("GameServerInternalServerError");
             if (input == GenericErrorCodesGameServerServiceUnavailable) output = Json::Value("GameServerServiceUnavailable");
-            if (input == GenericErrorCodesMatchmakingInvalidEntityKeyList) output = Json::Value("MatchmakingInvalidEntityKeyList");
-            if (input == GenericErrorCodesMatchmakingInvalidTicketCreatorProfile) output = Json::Value("MatchmakingInvalidTicketCreatorProfile");
-            if (input == GenericErrorCodesMatchmakingInvalidUserAttributes) output = Json::Value("MatchmakingInvalidUserAttributes");
+            if (input == GenericErrorCodesExplicitContentDetected) output = Json::Value("ExplicitContentDetected");
+            if (input == GenericErrorCodesPIIContentDetected) output = Json::Value("PIIContentDetected");
+            if (input == GenericErrorCodesInvalidScheduledTaskParameter) output = Json::Value("InvalidScheduledTaskParameter");
+            if (input == GenericErrorCodesMatchmakingEntityInvalid) output = Json::Value("MatchmakingEntityInvalid");
+            if (input == GenericErrorCodesMatchmakingPlayerAttributesInvalid) output = Json::Value("MatchmakingPlayerAttributesInvalid");
             if (input == GenericErrorCodesMatchmakingCreateRequestMissing) output = Json::Value("MatchmakingCreateRequestMissing");
             if (input == GenericErrorCodesMatchmakingCreateRequestCreatorMissing) output = Json::Value("MatchmakingCreateRequestCreatorMissing");
             if (input == GenericErrorCodesMatchmakingCreateRequestCreatorIdMissing) output = Json::Value("MatchmakingCreateRequestCreatorIdMissing");
@@ -2259,7 +2263,7 @@ namespace PlayFab
             if (input == GenericErrorCodesMatchmakingHopperIdMissing) output = Json::Value("MatchmakingHopperIdMissing");
             if (input == GenericErrorCodesMatchmakingTitleIdMissing) output = Json::Value("MatchmakingTitleIdMissing");
             if (input == GenericErrorCodesMatchmakingTicketIdIdMissing) output = Json::Value("MatchmakingTicketIdIdMissing");
-            if (input == GenericErrorCodesMatchmakingUserIdMissing) output = Json::Value("MatchmakingUserIdMissing");
+            if (input == GenericErrorCodesMatchmakingPlayerIdMissing) output = Json::Value("MatchmakingPlayerIdMissing");
             if (input == GenericErrorCodesMatchmakingJoinRequestUserMissing) output = Json::Value("MatchmakingJoinRequestUserMissing");
             if (input == GenericErrorCodesMatchmakingHopperConfigNotFound) output = Json::Value("MatchmakingHopperConfigNotFound");
             if (input == GenericErrorCodesMatchmakingMatchNotFound) output = Json::Value("MatchmakingMatchNotFound");
@@ -2272,17 +2276,18 @@ namespace PlayFab
             if (input == GenericErrorCodesMatchmakingCancelTicketServerIdentityInvalid) output = Json::Value("MatchmakingCancelTicketServerIdentityInvalid");
             if (input == GenericErrorCodesMatchmakingCancelTicketUserIdentityMismatch) output = Json::Value("MatchmakingCancelTicketUserIdentityMismatch");
             if (input == GenericErrorCodesMatchmakingGetMatchIdentityMismatch) output = Json::Value("MatchmakingGetMatchIdentityMismatch");
-            if (input == GenericErrorCodesMatchmakingUserIdentityMismatch) output = Json::Value("MatchmakingUserIdentityMismatch");
+            if (input == GenericErrorCodesMatchmakingPlayerIdentityMismatch) output = Json::Value("MatchmakingPlayerIdentityMismatch");
             if (input == GenericErrorCodesMatchmakingAlreadyJoinedTicket) output = Json::Value("MatchmakingAlreadyJoinedTicket");
             if (input == GenericErrorCodesMatchmakingTicketAlreadyCompleted) output = Json::Value("MatchmakingTicketAlreadyCompleted");
+            if (input == GenericErrorCodesMatchmakingHopperIdInvalid) output = Json::Value("MatchmakingHopperIdInvalid");
             if (input == GenericErrorCodesMatchmakingHopperConfigInvalid) output = Json::Value("MatchmakingHopperConfigInvalid");
+            if (input == GenericErrorCodesMatchmakingMemberProfileInvalid) output = Json::Value("MatchmakingMemberProfileInvalid");
         }
         inline void FromJsonEnum(const Json::Value& input, GenericErrorCodes& output)
         {
             if (!input.isString()) return;
             const std::string& inputStr = input.asString();
             if (inputStr == "Success") output = GenericErrorCodesSuccess;
-            if (inputStr == "MatchmakingHopperIdInvalid") output = GenericErrorCodesMatchmakingHopperIdInvalid;
             if (inputStr == "UnkownError") output = GenericErrorCodesUnkownError;
             if (inputStr == "InvalidParams") output = GenericErrorCodesInvalidParams;
             if (inputStr == "AccountNotFound") output = GenericErrorCodesAccountNotFound;
@@ -2661,9 +2666,11 @@ namespace PlayFab
             if (inputStr == "GameServerConflict") output = GenericErrorCodesGameServerConflict;
             if (inputStr == "GameServerInternalServerError") output = GenericErrorCodesGameServerInternalServerError;
             if (inputStr == "GameServerServiceUnavailable") output = GenericErrorCodesGameServerServiceUnavailable;
-            if (inputStr == "MatchmakingInvalidEntityKeyList") output = GenericErrorCodesMatchmakingInvalidEntityKeyList;
-            if (inputStr == "MatchmakingInvalidTicketCreatorProfile") output = GenericErrorCodesMatchmakingInvalidTicketCreatorProfile;
-            if (inputStr == "MatchmakingInvalidUserAttributes") output = GenericErrorCodesMatchmakingInvalidUserAttributes;
+            if (inputStr == "ExplicitContentDetected") output = GenericErrorCodesExplicitContentDetected;
+            if (inputStr == "PIIContentDetected") output = GenericErrorCodesPIIContentDetected;
+            if (inputStr == "InvalidScheduledTaskParameter") output = GenericErrorCodesInvalidScheduledTaskParameter;
+            if (inputStr == "MatchmakingEntityInvalid") output = GenericErrorCodesMatchmakingEntityInvalid;
+            if (inputStr == "MatchmakingPlayerAttributesInvalid") output = GenericErrorCodesMatchmakingPlayerAttributesInvalid;
             if (inputStr == "MatchmakingCreateRequestMissing") output = GenericErrorCodesMatchmakingCreateRequestMissing;
             if (inputStr == "MatchmakingCreateRequestCreatorMissing") output = GenericErrorCodesMatchmakingCreateRequestCreatorMissing;
             if (inputStr == "MatchmakingCreateRequestCreatorIdMissing") output = GenericErrorCodesMatchmakingCreateRequestCreatorIdMissing;
@@ -2675,7 +2682,7 @@ namespace PlayFab
             if (inputStr == "MatchmakingHopperIdMissing") output = GenericErrorCodesMatchmakingHopperIdMissing;
             if (inputStr == "MatchmakingTitleIdMissing") output = GenericErrorCodesMatchmakingTitleIdMissing;
             if (inputStr == "MatchmakingTicketIdIdMissing") output = GenericErrorCodesMatchmakingTicketIdIdMissing;
-            if (inputStr == "MatchmakingUserIdMissing") output = GenericErrorCodesMatchmakingUserIdMissing;
+            if (inputStr == "MatchmakingPlayerIdMissing") output = GenericErrorCodesMatchmakingPlayerIdMissing;
             if (inputStr == "MatchmakingJoinRequestUserMissing") output = GenericErrorCodesMatchmakingJoinRequestUserMissing;
             if (inputStr == "MatchmakingHopperConfigNotFound") output = GenericErrorCodesMatchmakingHopperConfigNotFound;
             if (inputStr == "MatchmakingMatchNotFound") output = GenericErrorCodesMatchmakingMatchNotFound;
@@ -2688,10 +2695,12 @@ namespace PlayFab
             if (inputStr == "MatchmakingCancelTicketServerIdentityInvalid") output = GenericErrorCodesMatchmakingCancelTicketServerIdentityInvalid;
             if (inputStr == "MatchmakingCancelTicketUserIdentityMismatch") output = GenericErrorCodesMatchmakingCancelTicketUserIdentityMismatch;
             if (inputStr == "MatchmakingGetMatchIdentityMismatch") output = GenericErrorCodesMatchmakingGetMatchIdentityMismatch;
-            if (inputStr == "MatchmakingUserIdentityMismatch") output = GenericErrorCodesMatchmakingUserIdentityMismatch;
+            if (inputStr == "MatchmakingPlayerIdentityMismatch") output = GenericErrorCodesMatchmakingPlayerIdentityMismatch;
             if (inputStr == "MatchmakingAlreadyJoinedTicket") output = GenericErrorCodesMatchmakingAlreadyJoinedTicket;
             if (inputStr == "MatchmakingTicketAlreadyCompleted") output = GenericErrorCodesMatchmakingTicketAlreadyCompleted;
+            if (inputStr == "MatchmakingHopperIdInvalid") output = GenericErrorCodesMatchmakingHopperIdInvalid;
             if (inputStr == "MatchmakingHopperConfigInvalid") output = GenericErrorCodesMatchmakingHopperConfigInvalid;
+            if (inputStr == "MatchmakingMemberProfileInvalid") output = GenericErrorCodesMatchmakingMemberProfileInvalid;
         }
 
         enum LoginIdentityProvider
@@ -2890,7 +2899,9 @@ namespace PlayFab
             SourceTypeBackEnd,
             SourceTypeGameClient,
             SourceTypeGameServer,
-            SourceTypePartner
+            SourceTypePartner,
+            SourceTypeCustom,
+            SourceTypeAPI
         };
 
         inline void ToJsonEnum(const SourceType input, Json::Value& output)
@@ -2900,6 +2911,8 @@ namespace PlayFab
             if (input == SourceTypeGameClient) output = Json::Value("GameClient");
             if (input == SourceTypeGameServer) output = Json::Value("GameServer");
             if (input == SourceTypePartner) output = Json::Value("Partner");
+            if (input == SourceTypeCustom) output = Json::Value("Custom");
+            if (input == SourceTypeAPI) output = Json::Value("API");
         }
         inline void FromJsonEnum(const Json::Value& input, SourceType& output)
         {
@@ -2910,6 +2923,8 @@ namespace PlayFab
             if (inputStr == "GameClient") output = SourceTypeGameClient;
             if (inputStr == "GameServer") output = SourceTypeGameServer;
             if (inputStr == "Partner") output = SourceTypePartner;
+            if (inputStr == "Custom") output = SourceTypeCustom;
+            if (inputStr == "API") output = SourceTypeAPI;
         }
 
         enum StatisticAggregationMethod
