@@ -57,6 +57,7 @@ namespace PlayFab
         static void UnblockEntity(EntityModels::UnblockEntityRequest& request, ProcessApiCallback<EntityModels::EmptyResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void UpdateGroup(EntityModels::UpdateGroupRequest& request, ProcessApiCallback<EntityModels::UpdateGroupResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void UpdateRole(EntityModels::UpdateGroupRoleRequest& request, ProcessApiCallback<EntityModels::UpdateGroupRoleResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void WriteEvents(EntityModels::WriteEventsRequest& request, ProcessApiCallback<EntityModels::WriteEventsResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
 
     private:
         PlayFabEntityAPI(); // Private constructor, static class should never have an instance
@@ -102,6 +103,7 @@ namespace PlayFab
         static void OnUnblockEntityResult(CallRequestContainer& request);
         static void OnUpdateGroupResult(CallRequestContainer& request);
         static void OnUpdateRoleResult(CallRequestContainer& request);
+        static void OnWriteEventsResult(CallRequestContainer& request);
 
     };
 }

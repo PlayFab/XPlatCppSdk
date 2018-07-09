@@ -9744,17 +9744,20 @@ namespace PlayFab
         struct UserSettings : public PlayFabBaseModel
         {
             bool GatherDeviceInfo;
+            bool GatherFocusInfo;
             bool NeedsAttribution;
 
             UserSettings() :
                 PlayFabBaseModel(),
                 GatherDeviceInfo(),
+                GatherFocusInfo(),
                 NeedsAttribution()
             {}
 
             UserSettings(const UserSettings& src) :
                 PlayFabBaseModel(),
                 GatherDeviceInfo(src.GatherDeviceInfo),
+                GatherFocusInfo(src.GatherFocusInfo),
                 NeedsAttribution(src.NeedsAttribution)
             {}
 
@@ -9763,6 +9766,7 @@ namespace PlayFab
             void FromJson(Json::Value& input) override
             {
                 FromJsonUtilP(input["GatherDeviceInfo"], GatherDeviceInfo);
+                FromJsonUtilP(input["GatherFocusInfo"], GatherFocusInfo);
                 FromJsonUtilP(input["NeedsAttribution"], NeedsAttribution);
             }
 
@@ -9770,6 +9774,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_GatherDeviceInfo; ToJsonUtilP(GatherDeviceInfo, each_GatherDeviceInfo); output["GatherDeviceInfo"] = each_GatherDeviceInfo;
+                Json::Value each_GatherFocusInfo; ToJsonUtilP(GatherFocusInfo, each_GatherFocusInfo); output["GatherFocusInfo"] = each_GatherFocusInfo;
                 Json::Value each_NeedsAttribution; ToJsonUtilP(NeedsAttribution, each_NeedsAttribution); output["NeedsAttribution"] = each_NeedsAttribution;
                 return output;
             }

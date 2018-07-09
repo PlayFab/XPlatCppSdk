@@ -1083,6 +1083,33 @@ namespace PlayFab
             callback(outResult, request.customData);
         }
     }
+
+    void PlayFabEntityAPI::WriteEvents(
+        WriteEventsRequest& request,
+        ProcessApiCallback<WriteEventsResponse> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttp& http = IPlayFabHttp::Get();
+        const auto requestJson = request.ToJson();
+        http.AddRequest("/Event/WriteEvents", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnWriteEventsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<WriteEventsResponse>(callback)), errorCallback, customData);
+    }
+
+    void PlayFabEntityAPI::OnWriteEventsResult(CallRequestContainer& request)
+    {
+        WriteEventsResponse outResult;
+        outResult.FromJson(request.errorWrapper.Data);
+        outResult.Request = request.errorWrapper.Request;
+
+        const auto internalPtr = request.successCallback.get();
+        if (internalPtr != nullptr)
+        {
+            const auto callback = (*static_cast<ProcessApiCallback<WriteEventsResponse> *>(internalPtr));
+            callback(outResult, request.customData);
+        }
+    }
 }
 
 #endif
