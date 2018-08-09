@@ -1157,6 +1157,33 @@ namespace PlayFab
         }
     }
 
+    void PlayFabClientAPI::GetPlayFabIDsFromFacebookInstantGamesIds(
+        GetPlayFabIDsFromFacebookInstantGamesIdsRequest& request,
+        ProcessApiCallback<GetPlayFabIDsFromFacebookInstantGamesIdsResult> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttp& http = IPlayFabHttp::Get();
+        const auto requestJson = request.ToJson();
+        http.AddRequest("/Client/GetPlayFabIDsFromFacebookInstantGamesIds", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetPlayFabIDsFromFacebookInstantGamesIdsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromFacebookInstantGamesIdsResult>(callback)), errorCallback, customData);
+    }
+
+    void PlayFabClientAPI::OnGetPlayFabIDsFromFacebookInstantGamesIdsResult(CallRequestContainer& request)
+    {
+        GetPlayFabIDsFromFacebookInstantGamesIdsResult outResult;
+        outResult.FromJson(request.errorWrapper.Data);
+        outResult.Request = request.errorWrapper.Request;
+
+        const auto internalPtr = request.successCallback.get();
+        if (internalPtr != nullptr)
+        {
+            const auto callback = (*static_cast<ProcessApiCallback<GetPlayFabIDsFromFacebookInstantGamesIdsResult> *>(internalPtr));
+            callback(outResult, request.customData);
+        }
+    }
+
     void PlayFabClientAPI::GetPlayFabIDsFromGameCenterIDs(
         GetPlayFabIDsFromGameCenterIDsRequest& request,
         ProcessApiCallback<GetPlayFabIDsFromGameCenterIDsResult> callback,
@@ -1261,6 +1288,33 @@ namespace PlayFab
         if (internalPtr != nullptr)
         {
             const auto callback = (*static_cast<ProcessApiCallback<GetPlayFabIDsFromKongregateIDsResult> *>(internalPtr));
+            callback(outResult, request.customData);
+        }
+    }
+
+    void PlayFabClientAPI::GetPlayFabIDsFromNintendoSwitchDeviceIds(
+        GetPlayFabIDsFromNintendoSwitchDeviceIdsRequest& request,
+        ProcessApiCallback<GetPlayFabIDsFromNintendoSwitchDeviceIdsResult> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttp& http = IPlayFabHttp::Get();
+        const auto requestJson = request.ToJson();
+        http.AddRequest("/Client/GetPlayFabIDsFromNintendoSwitchDeviceIds", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetPlayFabIDsFromNintendoSwitchDeviceIdsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromNintendoSwitchDeviceIdsResult>(callback)), errorCallback, customData);
+    }
+
+    void PlayFabClientAPI::OnGetPlayFabIDsFromNintendoSwitchDeviceIdsResult(CallRequestContainer& request)
+    {
+        GetPlayFabIDsFromNintendoSwitchDeviceIdsResult outResult;
+        outResult.FromJson(request.errorWrapper.Data);
+        outResult.Request = request.errorWrapper.Request;
+
+        const auto internalPtr = request.successCallback.get();
+        if (internalPtr != nullptr)
+        {
+            const auto callback = (*static_cast<ProcessApiCallback<GetPlayFabIDsFromNintendoSwitchDeviceIdsResult> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }
@@ -1832,6 +1886,33 @@ namespace PlayFab
         }
     }
 
+    void PlayFabClientAPI::LinkFacebookInstantGamesId(
+        LinkFacebookInstantGamesIdRequest& request,
+        ProcessApiCallback<LinkFacebookInstantGamesIdResult> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttp& http = IPlayFabHttp::Get();
+        const auto requestJson = request.ToJson();
+        http.AddRequest("/Client/LinkFacebookInstantGamesId", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnLinkFacebookInstantGamesIdResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkFacebookInstantGamesIdResult>(callback)), errorCallback, customData);
+    }
+
+    void PlayFabClientAPI::OnLinkFacebookInstantGamesIdResult(CallRequestContainer& request)
+    {
+        LinkFacebookInstantGamesIdResult outResult;
+        outResult.FromJson(request.errorWrapper.Data);
+        outResult.Request = request.errorWrapper.Request;
+
+        const auto internalPtr = request.successCallback.get();
+        if (internalPtr != nullptr)
+        {
+            const auto callback = (*static_cast<ProcessApiCallback<LinkFacebookInstantGamesIdResult> *>(internalPtr));
+            callback(outResult, request.customData);
+        }
+    }
+
     void PlayFabClientAPI::LinkGameCenterAccount(
         LinkGameCenterAccountRequest& request,
         ProcessApiCallback<LinkGameCenterAccountResult> callback,
@@ -1936,6 +2017,33 @@ namespace PlayFab
         if (internalPtr != nullptr)
         {
             const auto callback = (*static_cast<ProcessApiCallback<LinkKongregateAccountResult> *>(internalPtr));
+            callback(outResult, request.customData);
+        }
+    }
+
+    void PlayFabClientAPI::LinkNintendoSwitchDeviceId(
+        LinkNintendoSwitchDeviceIdRequest& request,
+        ProcessApiCallback<LinkNintendoSwitchDeviceIdResult> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttp& http = IPlayFabHttp::Get();
+        const auto requestJson = request.ToJson();
+        http.AddRequest("/Client/LinkNintendoSwitchDeviceId", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnLinkNintendoSwitchDeviceIdResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkNintendoSwitchDeviceIdResult>(callback)), errorCallback, customData);
+    }
+
+    void PlayFabClientAPI::OnLinkNintendoSwitchDeviceIdResult(CallRequestContainer& request)
+    {
+        LinkNintendoSwitchDeviceIdResult outResult;
+        outResult.FromJson(request.errorWrapper.Data);
+        outResult.Request = request.errorWrapper.Request;
+
+        const auto internalPtr = request.successCallback.get();
+        if (internalPtr != nullptr)
+        {
+            const auto callback = (*static_cast<ProcessApiCallback<LinkNintendoSwitchDeviceIdResult> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }
@@ -2157,6 +2265,40 @@ namespace PlayFab
         }
     }
 
+    void PlayFabClientAPI::LoginWithFacebookInstantGamesId(
+        LoginWithFacebookInstantGamesIdRequest& request,
+        ProcessApiCallback<LoginResult> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        if (PlayFabSettings::titleId.length() > 0) request.TitleId = PlayFabSettings::titleId;
+
+        IPlayFabHttp& http = IPlayFabHttp::Get();
+        const auto requestJson = request.ToJson();
+        http.AddRequest("/Client/LoginWithFacebookInstantGamesId", "", "", requestJson, OnLoginWithFacebookInstantGamesIdResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback)), errorCallback, customData);
+    }
+
+    void PlayFabClientAPI::OnLoginWithFacebookInstantGamesIdResult(CallRequestContainer& request)
+    {
+        LoginResult outResult;
+        outResult.FromJson(request.errorWrapper.Data);
+        outResult.Request = request.errorWrapper.Request;
+        if (outResult.SessionTicket.length() > 0)
+        {
+            PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
+            if (outResult.EntityToken.notNull()) PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+            MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
+        }
+
+        const auto internalPtr = request.successCallback.get();
+        if (internalPtr != nullptr)
+        {
+            const auto callback = (*static_cast<ProcessApiCallback<LoginResult> *>(internalPtr));
+            callback(outResult, request.customData);
+        }
+    }
+
     void PlayFabClientAPI::LoginWithGameCenter(
         LoginWithGameCenterRequest& request,
         ProcessApiCallback<LoginResult> callback,
@@ -2274,6 +2416,40 @@ namespace PlayFab
     }
 
     void PlayFabClientAPI::OnLoginWithKongregateResult(CallRequestContainer& request)
+    {
+        LoginResult outResult;
+        outResult.FromJson(request.errorWrapper.Data);
+        outResult.Request = request.errorWrapper.Request;
+        if (outResult.SessionTicket.length() > 0)
+        {
+            PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
+            if (outResult.EntityToken.notNull()) PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+            MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
+        }
+
+        const auto internalPtr = request.successCallback.get();
+        if (internalPtr != nullptr)
+        {
+            const auto callback = (*static_cast<ProcessApiCallback<LoginResult> *>(internalPtr));
+            callback(outResult, request.customData);
+        }
+    }
+
+    void PlayFabClientAPI::LoginWithNintendoSwitchDeviceId(
+        LoginWithNintendoSwitchDeviceIdRequest& request,
+        ProcessApiCallback<LoginResult> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        if (PlayFabSettings::titleId.length() > 0) request.TitleId = PlayFabSettings::titleId;
+
+        IPlayFabHttp& http = IPlayFabHttp::Get();
+        const auto requestJson = request.ToJson();
+        http.AddRequest("/Client/LoginWithNintendoSwitchDeviceId", "", "", requestJson, OnLoginWithNintendoSwitchDeviceIdResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback)), errorCallback, customData);
+    }
+
+    void PlayFabClientAPI::OnLoginWithNintendoSwitchDeviceIdResult(CallRequestContainer& request)
     {
         LoginResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
@@ -3090,6 +3266,33 @@ namespace PlayFab
         }
     }
 
+    void PlayFabClientAPI::UnlinkFacebookInstantGamesId(
+        UnlinkFacebookInstantGamesIdRequest& request,
+        ProcessApiCallback<UnlinkFacebookInstantGamesIdResult> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttp& http = IPlayFabHttp::Get();
+        const auto requestJson = request.ToJson();
+        http.AddRequest("/Client/UnlinkFacebookInstantGamesId", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUnlinkFacebookInstantGamesIdResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkFacebookInstantGamesIdResult>(callback)), errorCallback, customData);
+    }
+
+    void PlayFabClientAPI::OnUnlinkFacebookInstantGamesIdResult(CallRequestContainer& request)
+    {
+        UnlinkFacebookInstantGamesIdResult outResult;
+        outResult.FromJson(request.errorWrapper.Data);
+        outResult.Request = request.errorWrapper.Request;
+
+        const auto internalPtr = request.successCallback.get();
+        if (internalPtr != nullptr)
+        {
+            const auto callback = (*static_cast<ProcessApiCallback<UnlinkFacebookInstantGamesIdResult> *>(internalPtr));
+            callback(outResult, request.customData);
+        }
+    }
+
     void PlayFabClientAPI::UnlinkGameCenterAccount(
         UnlinkGameCenterAccountRequest& request,
         ProcessApiCallback<UnlinkGameCenterAccountResult> callback,
@@ -3194,6 +3397,33 @@ namespace PlayFab
         if (internalPtr != nullptr)
         {
             const auto callback = (*static_cast<ProcessApiCallback<UnlinkKongregateAccountResult> *>(internalPtr));
+            callback(outResult, request.customData);
+        }
+    }
+
+    void PlayFabClientAPI::UnlinkNintendoSwitchDeviceId(
+        UnlinkNintendoSwitchDeviceIdRequest& request,
+        ProcessApiCallback<UnlinkNintendoSwitchDeviceIdResult> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttp& http = IPlayFabHttp::Get();
+        const auto requestJson = request.ToJson();
+        http.AddRequest("/Client/UnlinkNintendoSwitchDeviceId", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUnlinkNintendoSwitchDeviceIdResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkNintendoSwitchDeviceIdResult>(callback)), errorCallback, customData);
+    }
+
+    void PlayFabClientAPI::OnUnlinkNintendoSwitchDeviceIdResult(CallRequestContainer& request)
+    {
+        UnlinkNintendoSwitchDeviceIdResult outResult;
+        outResult.FromJson(request.errorWrapper.Data);
+        outResult.Request = request.errorWrapper.Request;
+
+        const auto internalPtr = request.successCallback.get();
+        if (internalPtr != nullptr)
+        {
+            const auto callback = (*static_cast<ProcessApiCallback<UnlinkNintendoSwitchDeviceIdResult> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }

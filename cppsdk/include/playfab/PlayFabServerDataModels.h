@@ -1788,6 +1788,12 @@ namespace PlayFab
             GenericErrorCodesExplicitContentDetected,
             GenericErrorCodesPIIContentDetected,
             GenericErrorCodesInvalidScheduledTaskParameter,
+            GenericErrorCodesPerEntityEventRateLimitExceeded,
+            GenericErrorCodesTitleDefaultLanguageNotSet,
+            GenericErrorCodesEmailTemplateMissingDefaultVersion,
+            GenericErrorCodesFacebookInstantGamesIdNotLinked,
+            GenericErrorCodesInvalidFacebookInstantGamesSignature,
+            GenericErrorCodesFacebookInstantGamesAuthNotConfiguredForTitle,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingCreateRequestMissing,
@@ -1798,12 +1804,12 @@ namespace PlayFab
             GenericErrorCodesMatchmakingTicketIdMissing,
             GenericErrorCodesMatchmakingMatchIdMissing,
             GenericErrorCodesMatchmakingMatchIdIdMissing,
-            GenericErrorCodesMatchmakingHopperIdMissing,
+            GenericErrorCodesMatchmakingQueueNameMissing,
             GenericErrorCodesMatchmakingTitleIdMissing,
             GenericErrorCodesMatchmakingTicketIdIdMissing,
             GenericErrorCodesMatchmakingPlayerIdMissing,
             GenericErrorCodesMatchmakingJoinRequestUserMissing,
-            GenericErrorCodesMatchmakingHopperConfigNotFound,
+            GenericErrorCodesMatchmakingQueueConfigNotFound,
             GenericErrorCodesMatchmakingMatchNotFound,
             GenericErrorCodesMatchmakingTicketNotFound,
             GenericErrorCodesMatchmakingCreateTicketServerIdentityInvalid,
@@ -1817,9 +1823,12 @@ namespace PlayFab
             GenericErrorCodesMatchmakingPlayerIdentityMismatch,
             GenericErrorCodesMatchmakingAlreadyJoinedTicket,
             GenericErrorCodesMatchmakingTicketAlreadyCompleted,
-            GenericErrorCodesMatchmakingHopperIdInvalid,
-            GenericErrorCodesMatchmakingHopperConfigInvalid,
-            GenericErrorCodesMatchmakingMemberProfileInvalid
+            GenericErrorCodesMatchmakingQueueNameInvalid,
+            GenericErrorCodesMatchmakingQueueConfigInvalid,
+            GenericErrorCodesMatchmakingMemberProfileInvalid,
+            GenericErrorCodesWriteAttemptedDuringExport,
+            GenericErrorCodesNintendoSwitchDeviceIdNotLinked,
+            GenericErrorCodesMatchmakingNotEnabled
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -2206,6 +2215,12 @@ namespace PlayFab
             if (input == GenericErrorCodesExplicitContentDetected) output = Json::Value("ExplicitContentDetected");
             if (input == GenericErrorCodesPIIContentDetected) output = Json::Value("PIIContentDetected");
             if (input == GenericErrorCodesInvalidScheduledTaskParameter) output = Json::Value("InvalidScheduledTaskParameter");
+            if (input == GenericErrorCodesPerEntityEventRateLimitExceeded) output = Json::Value("PerEntityEventRateLimitExceeded");
+            if (input == GenericErrorCodesTitleDefaultLanguageNotSet) output = Json::Value("TitleDefaultLanguageNotSet");
+            if (input == GenericErrorCodesEmailTemplateMissingDefaultVersion) output = Json::Value("EmailTemplateMissingDefaultVersion");
+            if (input == GenericErrorCodesFacebookInstantGamesIdNotLinked) output = Json::Value("FacebookInstantGamesIdNotLinked");
+            if (input == GenericErrorCodesInvalidFacebookInstantGamesSignature) output = Json::Value("InvalidFacebookInstantGamesSignature");
+            if (input == GenericErrorCodesFacebookInstantGamesAuthNotConfiguredForTitle) output = Json::Value("FacebookInstantGamesAuthNotConfiguredForTitle");
             if (input == GenericErrorCodesMatchmakingEntityInvalid) output = Json::Value("MatchmakingEntityInvalid");
             if (input == GenericErrorCodesMatchmakingPlayerAttributesInvalid) output = Json::Value("MatchmakingPlayerAttributesInvalid");
             if (input == GenericErrorCodesMatchmakingCreateRequestMissing) output = Json::Value("MatchmakingCreateRequestMissing");
@@ -2216,12 +2231,12 @@ namespace PlayFab
             if (input == GenericErrorCodesMatchmakingTicketIdMissing) output = Json::Value("MatchmakingTicketIdMissing");
             if (input == GenericErrorCodesMatchmakingMatchIdMissing) output = Json::Value("MatchmakingMatchIdMissing");
             if (input == GenericErrorCodesMatchmakingMatchIdIdMissing) output = Json::Value("MatchmakingMatchIdIdMissing");
-            if (input == GenericErrorCodesMatchmakingHopperIdMissing) output = Json::Value("MatchmakingHopperIdMissing");
+            if (input == GenericErrorCodesMatchmakingQueueNameMissing) output = Json::Value("MatchmakingQueueNameMissing");
             if (input == GenericErrorCodesMatchmakingTitleIdMissing) output = Json::Value("MatchmakingTitleIdMissing");
             if (input == GenericErrorCodesMatchmakingTicketIdIdMissing) output = Json::Value("MatchmakingTicketIdIdMissing");
             if (input == GenericErrorCodesMatchmakingPlayerIdMissing) output = Json::Value("MatchmakingPlayerIdMissing");
             if (input == GenericErrorCodesMatchmakingJoinRequestUserMissing) output = Json::Value("MatchmakingJoinRequestUserMissing");
-            if (input == GenericErrorCodesMatchmakingHopperConfigNotFound) output = Json::Value("MatchmakingHopperConfigNotFound");
+            if (input == GenericErrorCodesMatchmakingQueueConfigNotFound) output = Json::Value("MatchmakingQueueConfigNotFound");
             if (input == GenericErrorCodesMatchmakingMatchNotFound) output = Json::Value("MatchmakingMatchNotFound");
             if (input == GenericErrorCodesMatchmakingTicketNotFound) output = Json::Value("MatchmakingTicketNotFound");
             if (input == GenericErrorCodesMatchmakingCreateTicketServerIdentityInvalid) output = Json::Value("MatchmakingCreateTicketServerIdentityInvalid");
@@ -2235,9 +2250,12 @@ namespace PlayFab
             if (input == GenericErrorCodesMatchmakingPlayerIdentityMismatch) output = Json::Value("MatchmakingPlayerIdentityMismatch");
             if (input == GenericErrorCodesMatchmakingAlreadyJoinedTicket) output = Json::Value("MatchmakingAlreadyJoinedTicket");
             if (input == GenericErrorCodesMatchmakingTicketAlreadyCompleted) output = Json::Value("MatchmakingTicketAlreadyCompleted");
-            if (input == GenericErrorCodesMatchmakingHopperIdInvalid) output = Json::Value("MatchmakingHopperIdInvalid");
-            if (input == GenericErrorCodesMatchmakingHopperConfigInvalid) output = Json::Value("MatchmakingHopperConfigInvalid");
+            if (input == GenericErrorCodesMatchmakingQueueNameInvalid) output = Json::Value("MatchmakingQueueNameInvalid");
+            if (input == GenericErrorCodesMatchmakingQueueConfigInvalid) output = Json::Value("MatchmakingQueueConfigInvalid");
             if (input == GenericErrorCodesMatchmakingMemberProfileInvalid) output = Json::Value("MatchmakingMemberProfileInvalid");
+            if (input == GenericErrorCodesWriteAttemptedDuringExport) output = Json::Value("WriteAttemptedDuringExport");
+            if (input == GenericErrorCodesNintendoSwitchDeviceIdNotLinked) output = Json::Value("NintendoSwitchDeviceIdNotLinked");
+            if (input == GenericErrorCodesMatchmakingNotEnabled) output = Json::Value("MatchmakingNotEnabled");
         }
         inline void FromJsonEnum(const Json::Value& input, GenericErrorCodes& output)
         {
@@ -2625,6 +2643,12 @@ namespace PlayFab
             if (inputStr == "ExplicitContentDetected") output = GenericErrorCodesExplicitContentDetected;
             if (inputStr == "PIIContentDetected") output = GenericErrorCodesPIIContentDetected;
             if (inputStr == "InvalidScheduledTaskParameter") output = GenericErrorCodesInvalidScheduledTaskParameter;
+            if (inputStr == "PerEntityEventRateLimitExceeded") output = GenericErrorCodesPerEntityEventRateLimitExceeded;
+            if (inputStr == "TitleDefaultLanguageNotSet") output = GenericErrorCodesTitleDefaultLanguageNotSet;
+            if (inputStr == "EmailTemplateMissingDefaultVersion") output = GenericErrorCodesEmailTemplateMissingDefaultVersion;
+            if (inputStr == "FacebookInstantGamesIdNotLinked") output = GenericErrorCodesFacebookInstantGamesIdNotLinked;
+            if (inputStr == "InvalidFacebookInstantGamesSignature") output = GenericErrorCodesInvalidFacebookInstantGamesSignature;
+            if (inputStr == "FacebookInstantGamesAuthNotConfiguredForTitle") output = GenericErrorCodesFacebookInstantGamesAuthNotConfiguredForTitle;
             if (inputStr == "MatchmakingEntityInvalid") output = GenericErrorCodesMatchmakingEntityInvalid;
             if (inputStr == "MatchmakingPlayerAttributesInvalid") output = GenericErrorCodesMatchmakingPlayerAttributesInvalid;
             if (inputStr == "MatchmakingCreateRequestMissing") output = GenericErrorCodesMatchmakingCreateRequestMissing;
@@ -2635,12 +2659,12 @@ namespace PlayFab
             if (inputStr == "MatchmakingTicketIdMissing") output = GenericErrorCodesMatchmakingTicketIdMissing;
             if (inputStr == "MatchmakingMatchIdMissing") output = GenericErrorCodesMatchmakingMatchIdMissing;
             if (inputStr == "MatchmakingMatchIdIdMissing") output = GenericErrorCodesMatchmakingMatchIdIdMissing;
-            if (inputStr == "MatchmakingHopperIdMissing") output = GenericErrorCodesMatchmakingHopperIdMissing;
+            if (inputStr == "MatchmakingQueueNameMissing") output = GenericErrorCodesMatchmakingQueueNameMissing;
             if (inputStr == "MatchmakingTitleIdMissing") output = GenericErrorCodesMatchmakingTitleIdMissing;
             if (inputStr == "MatchmakingTicketIdIdMissing") output = GenericErrorCodesMatchmakingTicketIdIdMissing;
             if (inputStr == "MatchmakingPlayerIdMissing") output = GenericErrorCodesMatchmakingPlayerIdMissing;
             if (inputStr == "MatchmakingJoinRequestUserMissing") output = GenericErrorCodesMatchmakingJoinRequestUserMissing;
-            if (inputStr == "MatchmakingHopperConfigNotFound") output = GenericErrorCodesMatchmakingHopperConfigNotFound;
+            if (inputStr == "MatchmakingQueueConfigNotFound") output = GenericErrorCodesMatchmakingQueueConfigNotFound;
             if (inputStr == "MatchmakingMatchNotFound") output = GenericErrorCodesMatchmakingMatchNotFound;
             if (inputStr == "MatchmakingTicketNotFound") output = GenericErrorCodesMatchmakingTicketNotFound;
             if (inputStr == "MatchmakingCreateTicketServerIdentityInvalid") output = GenericErrorCodesMatchmakingCreateTicketServerIdentityInvalid;
@@ -2654,9 +2678,12 @@ namespace PlayFab
             if (inputStr == "MatchmakingPlayerIdentityMismatch") output = GenericErrorCodesMatchmakingPlayerIdentityMismatch;
             if (inputStr == "MatchmakingAlreadyJoinedTicket") output = GenericErrorCodesMatchmakingAlreadyJoinedTicket;
             if (inputStr == "MatchmakingTicketAlreadyCompleted") output = GenericErrorCodesMatchmakingTicketAlreadyCompleted;
-            if (inputStr == "MatchmakingHopperIdInvalid") output = GenericErrorCodesMatchmakingHopperIdInvalid;
-            if (inputStr == "MatchmakingHopperConfigInvalid") output = GenericErrorCodesMatchmakingHopperConfigInvalid;
+            if (inputStr == "MatchmakingQueueNameInvalid") output = GenericErrorCodesMatchmakingQueueNameInvalid;
+            if (inputStr == "MatchmakingQueueConfigInvalid") output = GenericErrorCodesMatchmakingQueueConfigInvalid;
             if (inputStr == "MatchmakingMemberProfileInvalid") output = GenericErrorCodesMatchmakingMemberProfileInvalid;
+            if (inputStr == "WriteAttemptedDuringExport") output = GenericErrorCodesWriteAttemptedDuringExport;
+            if (inputStr == "NintendoSwitchDeviceIdNotLinked") output = GenericErrorCodesNintendoSwitchDeviceIdNotLinked;
+            if (inputStr == "MatchmakingNotEnabled") output = GenericErrorCodesMatchmakingNotEnabled;
         }
 
         enum LoginIdentityProvider
@@ -2674,7 +2701,11 @@ namespace PlayFab
             LoginIdentityProviderIOSDevice,
             LoginIdentityProviderAndroidDevice,
             LoginIdentityProviderTwitch,
-            LoginIdentityProviderWindowsHello
+            LoginIdentityProviderWindowsHello,
+            LoginIdentityProviderGameServer,
+            LoginIdentityProviderCustomServer,
+            LoginIdentityProviderNintendoSwitch,
+            LoginIdentityProviderFacebookInstantGames
         };
 
         inline void ToJsonEnum(const LoginIdentityProvider input, Json::Value& output)
@@ -2693,6 +2724,10 @@ namespace PlayFab
             if (input == LoginIdentityProviderAndroidDevice) output = Json::Value("AndroidDevice");
             if (input == LoginIdentityProviderTwitch) output = Json::Value("Twitch");
             if (input == LoginIdentityProviderWindowsHello) output = Json::Value("WindowsHello");
+            if (input == LoginIdentityProviderGameServer) output = Json::Value("GameServer");
+            if (input == LoginIdentityProviderCustomServer) output = Json::Value("CustomServer");
+            if (input == LoginIdentityProviderNintendoSwitch) output = Json::Value("NintendoSwitch");
+            if (input == LoginIdentityProviderFacebookInstantGames) output = Json::Value("FacebookInstantGames");
         }
         inline void FromJsonEnum(const Json::Value& input, LoginIdentityProvider& output)
         {
@@ -2712,6 +2747,10 @@ namespace PlayFab
             if (inputStr == "AndroidDevice") output = LoginIdentityProviderAndroidDevice;
             if (inputStr == "Twitch") output = LoginIdentityProviderTwitch;
             if (inputStr == "WindowsHello") output = LoginIdentityProviderWindowsHello;
+            if (inputStr == "GameServer") output = LoginIdentityProviderGameServer;
+            if (inputStr == "CustomServer") output = LoginIdentityProviderCustomServer;
+            if (inputStr == "NintendoSwitch") output = LoginIdentityProviderNintendoSwitch;
+            if (inputStr == "FacebookInstantGames") output = LoginIdentityProviderFacebookInstantGames;
         }
 
         enum PlayerConnectionState
@@ -2914,7 +2953,10 @@ namespace PlayFab
             UserOriginationXboxLive,
             UserOriginationParse,
             UserOriginationTwitch,
-            UserOriginationWindowsHello
+            UserOriginationWindowsHello,
+            UserOriginationServerCustomId,
+            UserOriginationNintendoSwitchDeviceId,
+            UserOriginationFacebookInstantGamesId
         };
 
         inline void ToJsonEnum(const UserOrigination input, Json::Value& output)
@@ -2937,6 +2979,9 @@ namespace PlayFab
             if (input == UserOriginationParse) output = Json::Value("Parse");
             if (input == UserOriginationTwitch) output = Json::Value("Twitch");
             if (input == UserOriginationWindowsHello) output = Json::Value("WindowsHello");
+            if (input == UserOriginationServerCustomId) output = Json::Value("ServerCustomId");
+            if (input == UserOriginationNintendoSwitchDeviceId) output = Json::Value("NintendoSwitchDeviceId");
+            if (input == UserOriginationFacebookInstantGamesId) output = Json::Value("FacebookInstantGamesId");
         }
         inline void FromJsonEnum(const Json::Value& input, UserOrigination& output)
         {
@@ -2960,6 +3005,9 @@ namespace PlayFab
             if (inputStr == "Parse") output = UserOriginationParse;
             if (inputStr == "Twitch") output = UserOriginationTwitch;
             if (inputStr == "WindowsHello") output = UserOriginationWindowsHello;
+            if (inputStr == "ServerCustomId") output = UserOriginationServerCustomId;
+            if (inputStr == "NintendoSwitchDeviceId") output = UserOriginationNintendoSwitchDeviceId;
+            if (inputStr == "FacebookInstantGamesId") output = UserOriginationFacebookInstantGamesId;
         }
 
         // Server Classes
@@ -5437,6 +5485,40 @@ namespace PlayFab
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_RevisionSelection; ToJsonUtilE(RevisionSelection, each_RevisionSelection); output["RevisionSelection"] = each_RevisionSelection;
                 Json::Value each_SpecificRevision; ToJsonUtilP(SpecificRevision, each_SpecificRevision); output["SpecificRevision"] = each_SpecificRevision;
+                return output;
+            }
+        };
+
+        struct FacebookInstantGamesPlayFabIdPair : public PlayFabBaseModel
+        {
+            std::string FacebookInstantGamesId;
+            std::string PlayFabId;
+
+            FacebookInstantGamesPlayFabIdPair() :
+                PlayFabBaseModel(),
+                FacebookInstantGamesId(),
+                PlayFabId()
+            {}
+
+            FacebookInstantGamesPlayFabIdPair(const FacebookInstantGamesPlayFabIdPair& src) :
+                PlayFabBaseModel(),
+                FacebookInstantGamesId(src.FacebookInstantGamesId),
+                PlayFabId(src.PlayFabId)
+            {}
+
+            ~FacebookInstantGamesPlayFabIdPair() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["FacebookInstantGamesId"], FacebookInstantGamesId);
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_FacebookInstantGamesId; ToJsonUtilS(FacebookInstantGamesId, each_FacebookInstantGamesId); output["FacebookInstantGamesId"] = each_FacebookInstantGamesId;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 return output;
             }
         };
@@ -8399,6 +8481,156 @@ namespace PlayFab
             }
         };
 
+        struct GetPlayFabIDsFromFacebookInstantGamesIdsRequest : public PlayFabRequestCommon
+        {
+            std::list<std::string> FacebookInstantGamesIds;
+
+            GetPlayFabIDsFromFacebookInstantGamesIdsRequest() :
+                PlayFabRequestCommon(),
+                FacebookInstantGamesIds()
+            {}
+
+            GetPlayFabIDsFromFacebookInstantGamesIdsRequest(const GetPlayFabIDsFromFacebookInstantGamesIdsRequest& src) :
+                PlayFabRequestCommon(),
+                FacebookInstantGamesIds(src.FacebookInstantGamesIds)
+            {}
+
+            ~GetPlayFabIDsFromFacebookInstantGamesIdsRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["FacebookInstantGamesIds"], FacebookInstantGamesIds);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_FacebookInstantGamesIds; ToJsonUtilS(FacebookInstantGamesIds, each_FacebookInstantGamesIds); output["FacebookInstantGamesIds"] = each_FacebookInstantGamesIds;
+                return output;
+            }
+        };
+
+        struct GetPlayFabIDsFromFacebookInstantGamesIdsResult : public PlayFabResultCommon
+        {
+            std::list<FacebookInstantGamesPlayFabIdPair> Data;
+
+            GetPlayFabIDsFromFacebookInstantGamesIdsResult() :
+                PlayFabResultCommon(),
+                Data()
+            {}
+
+            GetPlayFabIDsFromFacebookInstantGamesIdsResult(const GetPlayFabIDsFromFacebookInstantGamesIdsResult& src) :
+                PlayFabResultCommon(),
+                Data(src.Data)
+            {}
+
+            ~GetPlayFabIDsFromFacebookInstantGamesIdsResult() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["Data"], Data);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Data; ToJsonUtilO(Data, each_Data); output["Data"] = each_Data;
+                return output;
+            }
+        };
+
+        struct GetPlayFabIDsFromNintendoSwitchDeviceIdsRequest : public PlayFabRequestCommon
+        {
+            std::list<std::string> NintendoSwitchDeviceIds;
+
+            GetPlayFabIDsFromNintendoSwitchDeviceIdsRequest() :
+                PlayFabRequestCommon(),
+                NintendoSwitchDeviceIds()
+            {}
+
+            GetPlayFabIDsFromNintendoSwitchDeviceIdsRequest(const GetPlayFabIDsFromNintendoSwitchDeviceIdsRequest& src) :
+                PlayFabRequestCommon(),
+                NintendoSwitchDeviceIds(src.NintendoSwitchDeviceIds)
+            {}
+
+            ~GetPlayFabIDsFromNintendoSwitchDeviceIdsRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["NintendoSwitchDeviceIds"], NintendoSwitchDeviceIds);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_NintendoSwitchDeviceIds; ToJsonUtilS(NintendoSwitchDeviceIds, each_NintendoSwitchDeviceIds); output["NintendoSwitchDeviceIds"] = each_NintendoSwitchDeviceIds;
+                return output;
+            }
+        };
+
+        struct NintendoSwitchPlayFabIdPair : public PlayFabBaseModel
+        {
+            std::string NintendoSwitchDeviceId;
+            std::string PlayFabId;
+
+            NintendoSwitchPlayFabIdPair() :
+                PlayFabBaseModel(),
+                NintendoSwitchDeviceId(),
+                PlayFabId()
+            {}
+
+            NintendoSwitchPlayFabIdPair(const NintendoSwitchPlayFabIdPair& src) :
+                PlayFabBaseModel(),
+                NintendoSwitchDeviceId(src.NintendoSwitchDeviceId),
+                PlayFabId(src.PlayFabId)
+            {}
+
+            ~NintendoSwitchPlayFabIdPair() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["NintendoSwitchDeviceId"], NintendoSwitchDeviceId);
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_NintendoSwitchDeviceId; ToJsonUtilS(NintendoSwitchDeviceId, each_NintendoSwitchDeviceId); output["NintendoSwitchDeviceId"] = each_NintendoSwitchDeviceId;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                return output;
+            }
+        };
+
+        struct GetPlayFabIDsFromNintendoSwitchDeviceIdsResult : public PlayFabResultCommon
+        {
+            std::list<NintendoSwitchPlayFabIdPair> Data;
+
+            GetPlayFabIDsFromNintendoSwitchDeviceIdsResult() :
+                PlayFabResultCommon(),
+                Data()
+            {}
+
+            GetPlayFabIDsFromNintendoSwitchDeviceIdsResult(const GetPlayFabIDsFromNintendoSwitchDeviceIdsResult& src) :
+                PlayFabResultCommon(),
+                Data(src.Data)
+            {}
+
+            ~GetPlayFabIDsFromNintendoSwitchDeviceIdsResult() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["Data"], Data);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Data; ToJsonUtilO(Data, each_Data); output["Data"] = each_Data;
+                return output;
+            }
+        };
+
         struct GetPlayFabIDsFromSteamIDsRequest : public PlayFabRequestCommon
         {
             std::list<std::string> SteamStringIDs;
@@ -10463,8 +10695,10 @@ namespace PlayFab
             std::string LobbyId;
             Region pfRegion;
             std::string ServerHost;
+            std::string ServerIPV4Address;
             std::string ServerIPV6Address;
             std::string ServerPort;
+            std::string ServerPublicDNSName;
             std::map<std::string, std::string> Tags;
 
             RegisterGameRequest() :
@@ -10474,8 +10708,10 @@ namespace PlayFab
                 LobbyId(),
                 pfRegion(),
                 ServerHost(),
+                ServerIPV4Address(),
                 ServerIPV6Address(),
                 ServerPort(),
+                ServerPublicDNSName(),
                 Tags()
             {}
 
@@ -10486,8 +10722,10 @@ namespace PlayFab
                 LobbyId(src.LobbyId),
                 pfRegion(src.pfRegion),
                 ServerHost(src.ServerHost),
+                ServerIPV4Address(src.ServerIPV4Address),
                 ServerIPV6Address(src.ServerIPV6Address),
                 ServerPort(src.ServerPort),
+                ServerPublicDNSName(src.ServerPublicDNSName),
                 Tags(src.Tags)
             {}
 
@@ -10500,8 +10738,10 @@ namespace PlayFab
                 FromJsonUtilS(input["LobbyId"], LobbyId);
                 FromJsonEnum(input["pfRegion"], pfRegion);
                 FromJsonUtilS(input["ServerHost"], ServerHost);
+                FromJsonUtilS(input["ServerIPV4Address"], ServerIPV4Address);
                 FromJsonUtilS(input["ServerIPV6Address"], ServerIPV6Address);
                 FromJsonUtilS(input["ServerPort"], ServerPort);
+                FromJsonUtilS(input["ServerPublicDNSName"], ServerPublicDNSName);
                 FromJsonUtilS(input["Tags"], Tags);
             }
 
@@ -10513,8 +10753,10 @@ namespace PlayFab
                 Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
                 Json::Value each_pfRegion; ToJsonEnum(pfRegion, each_pfRegion); output["Region"] = each_pfRegion;
                 Json::Value each_ServerHost; ToJsonUtilS(ServerHost, each_ServerHost); output["ServerHost"] = each_ServerHost;
+                Json::Value each_ServerIPV4Address; ToJsonUtilS(ServerIPV4Address, each_ServerIPV4Address); output["ServerIPV4Address"] = each_ServerIPV4Address;
                 Json::Value each_ServerIPV6Address; ToJsonUtilS(ServerIPV6Address, each_ServerIPV6Address); output["ServerIPV6Address"] = each_ServerIPV6Address;
                 Json::Value each_ServerPort; ToJsonUtilS(ServerPort, each_ServerPort); output["ServerPort"] = each_ServerPort;
+                Json::Value each_ServerPublicDNSName; ToJsonUtilS(ServerPublicDNSName, each_ServerPublicDNSName); output["ServerPublicDNSName"] = each_ServerPublicDNSName;
                 Json::Value each_Tags; ToJsonUtilS(Tags, each_Tags); output["Tags"] = each_Tags;
                 return output;
             }

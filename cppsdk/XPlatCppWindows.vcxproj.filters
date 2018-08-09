@@ -32,12 +32,6 @@
     <ClInclude Include="include\playfab\PlayFabClientDataModels.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
-    <ClInclude Include="include\playfab\PlayFabEntityAPI.h">
-      <Filter>Header Files\playfab</Filter>
-    </ClInclude>
-    <ClInclude Include="include\playfab\PlayFabEntityDataModels.h">
-      <Filter>Header Files\playfab</Filter>
-    </ClInclude>
     <ClInclude Include="include\playfab\PlayFabMatchmakerAPI.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
@@ -48,6 +42,42 @@
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
     <ClInclude Include="include\playfab\PlayFabServerDataModels.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="include\playfab\PlayFabAuthenticationAPI.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="include\playfab\PlayFabAuthenticationDataModels.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="include\playfab\PlayFabCloudScriptAPI.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="include\playfab\PlayFabCloudScriptDataModels.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="include\playfab\PlayFabDataAPI.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="include\playfab\PlayFabDataDataModels.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="include\playfab\PlayFabEventsAPI.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="include\playfab\PlayFabEventsDataModels.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="include\playfab\PlayFabGroupsAPI.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="include\playfab\PlayFabGroupsDataModels.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="include\playfab\PlayFabProfilesAPI.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="include\playfab\PlayFabProfilesDataModels.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
     <ClInclude Include="include\playfab\PlayFabHttp.h">
@@ -73,13 +103,28 @@
     <ClCompile Include="source\playfab\PlayFabClientApi.cpp">
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
-    <ClCompile Include="source\playfab\PlayFabEntityApi.cpp">
-      <Filter>Source Files\playfab</Filter>
-    </ClCompile>
     <ClCompile Include="source\playfab\PlayFabMatchmakerApi.cpp">
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
     <ClCompile Include="source\playfab\PlayFabServerApi.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
+    <ClCompile Include="source\playfab\PlayFabAuthenticationApi.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
+    <ClCompile Include="source\playfab\PlayFabCloudScriptApi.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
+    <ClCompile Include="source\playfab\PlayFabDataApi.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
+    <ClCompile Include="source\playfab\PlayFabEventsApi.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
+    <ClCompile Include="source\playfab\PlayFabGroupsApi.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
+    <ClCompile Include="source\playfab\PlayFabProfilesApi.cpp">
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
     <ClCompile Include="source\playfab\PlayFabError.cpp">

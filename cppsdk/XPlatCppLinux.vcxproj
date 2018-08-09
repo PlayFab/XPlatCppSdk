@@ -73,14 +73,29 @@
     <ClInclude Include="include\playfab\PlayFabClientApi.h"/>
     <ClInclude Include="include\playfab\PlayFabClientDataModels.h"/>
 
-    <ClInclude Include="include\playfab\PlayFabEntityApi.h"/>
-    <ClInclude Include="include\playfab\PlayFabEntityDataModels.h"/>
-
     <ClInclude Include="include\playfab\PlayFabMatchmakerApi.h"/>
     <ClInclude Include="include\playfab\PlayFabMatchmakerDataModels.h"/>
 
     <ClInclude Include="include\playfab\PlayFabServerApi.h"/>
     <ClInclude Include="include\playfab\PlayFabServerDataModels.h"/>
+
+    <ClInclude Include="include\playfab\PlayFabAuthenticationApi.h"/>
+    <ClInclude Include="include\playfab\PlayFabAuthenticationDataModels.h"/>
+
+    <ClInclude Include="include\playfab\PlayFabCloudScriptApi.h"/>
+    <ClInclude Include="include\playfab\PlayFabCloudScriptDataModels.h"/>
+
+    <ClInclude Include="include\playfab\PlayFabDataApi.h"/>
+    <ClInclude Include="include\playfab\PlayFabDataDataModels.h"/>
+
+    <ClInclude Include="include\playfab\PlayFabEventsApi.h"/>
+    <ClInclude Include="include\playfab\PlayFabEventsDataModels.h"/>
+
+    <ClInclude Include="include\playfab\PlayFabGroupsApi.h"/>
+    <ClInclude Include="include\playfab\PlayFabGroupsDataModels.h"/>
+
+    <ClInclude Include="include\playfab\PlayFabProfilesApi.h"/>
+    <ClInclude Include="include\playfab\PlayFabProfilesDataModels.h"/>
 
     <ClInclude Include="include\playfab\PlayFabError.h" />
     <ClInclude Include="include\playfab\PlayFabHttp.h" />
@@ -93,11 +108,21 @@
 
     <ClInclude Include="source\playfab\PlayFabClientApi.cpp"/>
 
-    <ClInclude Include="source\playfab\PlayFabEntityApi.cpp"/>
-
     <ClInclude Include="source\playfab\PlayFabMatchmakerApi.cpp"/>
 
     <ClInclude Include="source\playfab\PlayFabServerApi.cpp"/>
+
+    <ClInclude Include="source\playfab\PlayFabAuthenticationApi.cpp"/>
+
+    <ClInclude Include="source\playfab\PlayFabCloudScriptApi.cpp"/>
+
+    <ClInclude Include="source\playfab\PlayFabDataApi.cpp"/>
+
+    <ClInclude Include="source\playfab\PlayFabEventsApi.cpp"/>
+
+    <ClInclude Include="source\playfab\PlayFabGroupsApi.cpp"/>
+
+    <ClInclude Include="source\playfab\PlayFabProfilesApi.cpp"/>
 
     <ClCompile Include="source\playfab\PlayFabError.cpp" />
     <ClCompile Include="source\playfab\PlayFabHttp.cpp" />

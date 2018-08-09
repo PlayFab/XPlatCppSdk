@@ -1102,6 +1102,60 @@ namespace PlayFab
         }
     }
 
+    void PlayFabServerAPI::GetPlayFabIDsFromFacebookInstantGamesIds(
+        GetPlayFabIDsFromFacebookInstantGamesIdsRequest& request,
+        ProcessApiCallback<GetPlayFabIDsFromFacebookInstantGamesIdsResult> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttp& http = IPlayFabHttp::Get();
+        const auto requestJson = request.ToJson();
+        http.AddRequest("/Server/GetPlayFabIDsFromFacebookInstantGamesIds", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnGetPlayFabIDsFromFacebookInstantGamesIdsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromFacebookInstantGamesIdsResult>(callback)), errorCallback, customData);
+    }
+
+    void PlayFabServerAPI::OnGetPlayFabIDsFromFacebookInstantGamesIdsResult(CallRequestContainer& request)
+    {
+        GetPlayFabIDsFromFacebookInstantGamesIdsResult outResult;
+        outResult.FromJson(request.errorWrapper.Data);
+        outResult.Request = request.errorWrapper.Request;
+
+        const auto internalPtr = request.successCallback.get();
+        if (internalPtr != nullptr)
+        {
+            const auto callback = (*static_cast<ProcessApiCallback<GetPlayFabIDsFromFacebookInstantGamesIdsResult> *>(internalPtr));
+            callback(outResult, request.customData);
+        }
+    }
+
+    void PlayFabServerAPI::GetPlayFabIDsFromNintendoSwitchDeviceIds(
+        GetPlayFabIDsFromNintendoSwitchDeviceIdsRequest& request,
+        ProcessApiCallback<GetPlayFabIDsFromNintendoSwitchDeviceIdsResult> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttp& http = IPlayFabHttp::Get();
+        const auto requestJson = request.ToJson();
+        http.AddRequest("/Server/GetPlayFabIDsFromNintendoSwitchDeviceIds", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnGetPlayFabIDsFromNintendoSwitchDeviceIdsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromNintendoSwitchDeviceIdsResult>(callback)), errorCallback, customData);
+    }
+
+    void PlayFabServerAPI::OnGetPlayFabIDsFromNintendoSwitchDeviceIdsResult(CallRequestContainer& request)
+    {
+        GetPlayFabIDsFromNintendoSwitchDeviceIdsResult outResult;
+        outResult.FromJson(request.errorWrapper.Data);
+        outResult.Request = request.errorWrapper.Request;
+
+        const auto internalPtr = request.successCallback.get();
+        if (internalPtr != nullptr)
+        {
+            const auto callback = (*static_cast<ProcessApiCallback<GetPlayFabIDsFromNintendoSwitchDeviceIdsResult> *>(internalPtr));
+            callback(outResult, request.customData);
+        }
+    }
+
     void PlayFabServerAPI::GetPlayFabIDsFromSteamIDs(
         GetPlayFabIDsFromSteamIDsRequest& request,
         ProcessApiCallback<GetPlayFabIDsFromSteamIDsResult> callback,

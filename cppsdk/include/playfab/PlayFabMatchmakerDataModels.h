@@ -383,23 +383,29 @@ namespace PlayFab
         {
             std::string GameID;
             std::string ServerHostname;
+            std::string ServerIPV4Address;
             std::string ServerIPV6Address;
             Uint32 ServerPort;
+            std::string ServerPublicDNSName;
 
             StartGameResponse() :
                 PlayFabResultCommon(),
                 GameID(),
                 ServerHostname(),
+                ServerIPV4Address(),
                 ServerIPV6Address(),
-                ServerPort()
+                ServerPort(),
+                ServerPublicDNSName()
             {}
 
             StartGameResponse(const StartGameResponse& src) :
                 PlayFabResultCommon(),
                 GameID(src.GameID),
                 ServerHostname(src.ServerHostname),
+                ServerIPV4Address(src.ServerIPV4Address),
                 ServerIPV6Address(src.ServerIPV6Address),
-                ServerPort(src.ServerPort)
+                ServerPort(src.ServerPort),
+                ServerPublicDNSName(src.ServerPublicDNSName)
             {}
 
             ~StartGameResponse() = default;
@@ -408,8 +414,10 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["GameID"], GameID);
                 FromJsonUtilS(input["ServerHostname"], ServerHostname);
+                FromJsonUtilS(input["ServerIPV4Address"], ServerIPV4Address);
                 FromJsonUtilS(input["ServerIPV6Address"], ServerIPV6Address);
                 FromJsonUtilP(input["ServerPort"], ServerPort);
+                FromJsonUtilS(input["ServerPublicDNSName"], ServerPublicDNSName);
             }
 
             Json::Value ToJson() const override
@@ -417,8 +425,10 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_GameID; ToJsonUtilS(GameID, each_GameID); output["GameID"] = each_GameID;
                 Json::Value each_ServerHostname; ToJsonUtilS(ServerHostname, each_ServerHostname); output["ServerHostname"] = each_ServerHostname;
+                Json::Value each_ServerIPV4Address; ToJsonUtilS(ServerIPV4Address, each_ServerIPV4Address); output["ServerIPV4Address"] = each_ServerIPV4Address;
                 Json::Value each_ServerIPV6Address; ToJsonUtilS(ServerIPV6Address, each_ServerIPV6Address); output["ServerIPV6Address"] = each_ServerIPV6Address;
                 Json::Value each_ServerPort; ToJsonUtilP(ServerPort, each_ServerPort); output["ServerPort"] = each_ServerPort;
+                Json::Value each_ServerPublicDNSName; ToJsonUtilS(ServerPublicDNSName, each_ServerPublicDNSName); output["ServerPublicDNSName"] = each_ServerPublicDNSName;
                 return output;
             }
         };
