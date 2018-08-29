@@ -1,6 +1,6 @@
 #include <stdafx.h>
 
-#ifdef ENABLE_PLAYFABENTITY_API
+#ifndef DISABLE_PLAYFABENTITY_API
 
 #include <playfab/PlayFabDataApi.h>
 #include <playfab/PlayFabHttp.h>

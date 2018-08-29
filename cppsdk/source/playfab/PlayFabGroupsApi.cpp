@@ -1,6 +1,6 @@
 #include <stdafx.h>
 
-#ifdef ENABLE_PLAYFABENTITY_API
+#ifndef DISABLE_PLAYFABENTITY_API
 
 #include <playfab/PlayFabGroupsApi.h>
 #include <playfab/PlayFabHttp.h>
@@ -24,7 +24,7 @@ namespace PlayFab
 
     void PlayFabGroupsAPI::AcceptGroupApplication(
         AcceptGroupApplicationRequest& request,
-        ProcessApiCallback<EmptyResult> callback,
+        ProcessApiCallback<EmptyResponse> callback,
         ErrorCallback errorCallback,
         void* customData
     )
@@ -32,26 +32,26 @@ namespace PlayFab
 
         IPlayFabHttp& http = IPlayFabHttp::Get();
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Group/AcceptGroupApplication", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnAcceptGroupApplicationResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback)), errorCallback, customData);
+        http.AddRequest("/Group/AcceptGroupApplication", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnAcceptGroupApplicationResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
     void PlayFabGroupsAPI::OnAcceptGroupApplicationResult(CallRequestContainer& request)
     {
-        EmptyResult outResult;
+        EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
 
         const auto internalPtr = request.successCallback.get();
         if (internalPtr != nullptr)
         {
-            const auto callback = (*static_cast<ProcessApiCallback<EmptyResult> *>(internalPtr));
+            const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }
 
     void PlayFabGroupsAPI::AcceptGroupInvitation(
         AcceptGroupInvitationRequest& request,
-        ProcessApiCallback<EmptyResult> callback,
+        ProcessApiCallback<EmptyResponse> callback,
         ErrorCallback errorCallback,
         void* customData
     )
@@ -59,26 +59,26 @@ namespace PlayFab
 
         IPlayFabHttp& http = IPlayFabHttp::Get();
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Group/AcceptGroupInvitation", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnAcceptGroupInvitationResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback)), errorCallback, customData);
+        http.AddRequest("/Group/AcceptGroupInvitation", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnAcceptGroupInvitationResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
     void PlayFabGroupsAPI::OnAcceptGroupInvitationResult(CallRequestContainer& request)
     {
-        EmptyResult outResult;
+        EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
 
         const auto internalPtr = request.successCallback.get();
         if (internalPtr != nullptr)
         {
-            const auto callback = (*static_cast<ProcessApiCallback<EmptyResult> *>(internalPtr));
+            const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }
 
     void PlayFabGroupsAPI::AddMembers(
         AddMembersRequest& request,
-        ProcessApiCallback<EmptyResult> callback,
+        ProcessApiCallback<EmptyResponse> callback,
         ErrorCallback errorCallback,
         void* customData
     )
@@ -86,19 +86,19 @@ namespace PlayFab
 
         IPlayFabHttp& http = IPlayFabHttp::Get();
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Group/AddMembers", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnAddMembersResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback)), errorCallback, customData);
+        http.AddRequest("/Group/AddMembers", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnAddMembersResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
     void PlayFabGroupsAPI::OnAddMembersResult(CallRequestContainer& request)
     {
-        EmptyResult outResult;
+        EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
 
         const auto internalPtr = request.successCallback.get();
         if (internalPtr != nullptr)
         {
-            const auto callback = (*static_cast<ProcessApiCallback<EmptyResult> *>(internalPtr));
+            const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }
@@ -132,7 +132,7 @@ namespace PlayFab
 
     void PlayFabGroupsAPI::BlockEntity(
         BlockEntityRequest& request,
-        ProcessApiCallback<EmptyResult> callback,
+        ProcessApiCallback<EmptyResponse> callback,
         ErrorCallback errorCallback,
         void* customData
     )
@@ -140,26 +140,26 @@ namespace PlayFab
 
         IPlayFabHttp& http = IPlayFabHttp::Get();
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Group/BlockEntity", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnBlockEntityResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback)), errorCallback, customData);
+        http.AddRequest("/Group/BlockEntity", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnBlockEntityResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
     void PlayFabGroupsAPI::OnBlockEntityResult(CallRequestContainer& request)
     {
-        EmptyResult outResult;
+        EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
 
         const auto internalPtr = request.successCallback.get();
         if (internalPtr != nullptr)
         {
-            const auto callback = (*static_cast<ProcessApiCallback<EmptyResult> *>(internalPtr));
+            const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }
 
     void PlayFabGroupsAPI::ChangeMemberRole(
         ChangeMemberRoleRequest& request,
-        ProcessApiCallback<EmptyResult> callback,
+        ProcessApiCallback<EmptyResponse> callback,
         ErrorCallback errorCallback,
         void* customData
     )
@@ -167,19 +167,19 @@ namespace PlayFab
 
         IPlayFabHttp& http = IPlayFabHttp::Get();
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Group/ChangeMemberRole", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnChangeMemberRoleResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback)), errorCallback, customData);
+        http.AddRequest("/Group/ChangeMemberRole", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnChangeMemberRoleResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
     void PlayFabGroupsAPI::OnChangeMemberRoleResult(CallRequestContainer& request)
     {
-        EmptyResult outResult;
+        EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
 
         const auto internalPtr = request.successCallback.get();
         if (internalPtr != nullptr)
         {
-            const auto callback = (*static_cast<ProcessApiCallback<EmptyResult> *>(internalPtr));
+            const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }
@@ -240,7 +240,7 @@ namespace PlayFab
 
     void PlayFabGroupsAPI::DeleteGroup(
         DeleteGroupRequest& request,
-        ProcessApiCallback<EmptyResult> callback,
+        ProcessApiCallback<EmptyResponse> callback,
         ErrorCallback errorCallback,
         void* customData
     )
@@ -248,26 +248,26 @@ namespace PlayFab
 
         IPlayFabHttp& http = IPlayFabHttp::Get();
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Group/DeleteGroup", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnDeleteGroupResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback)), errorCallback, customData);
+        http.AddRequest("/Group/DeleteGroup", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnDeleteGroupResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
     void PlayFabGroupsAPI::OnDeleteGroupResult(CallRequestContainer& request)
     {
-        EmptyResult outResult;
+        EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
 
         const auto internalPtr = request.successCallback.get();
         if (internalPtr != nullptr)
         {
-            const auto callback = (*static_cast<ProcessApiCallback<EmptyResult> *>(internalPtr));
+            const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }
 
     void PlayFabGroupsAPI::DeleteRole(
         DeleteRoleRequest& request,
-        ProcessApiCallback<EmptyResult> callback,
+        ProcessApiCallback<EmptyResponse> callback,
         ErrorCallback errorCallback,
         void* customData
     )
@@ -275,19 +275,19 @@ namespace PlayFab
 
         IPlayFabHttp& http = IPlayFabHttp::Get();
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Group/DeleteRole", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnDeleteRoleResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback)), errorCallback, customData);
+        http.AddRequest("/Group/DeleteRole", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnDeleteRoleResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
     void PlayFabGroupsAPI::OnDeleteRoleResult(CallRequestContainer& request)
     {
-        EmptyResult outResult;
+        EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
 
         const auto internalPtr = request.successCallback.get();
         if (internalPtr != nullptr)
         {
-            const auto callback = (*static_cast<ProcessApiCallback<EmptyResult> *>(internalPtr));
+            const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }
@@ -537,7 +537,7 @@ namespace PlayFab
 
     void PlayFabGroupsAPI::RemoveGroupApplication(
         RemoveGroupApplicationRequest& request,
-        ProcessApiCallback<EmptyResult> callback,
+        ProcessApiCallback<EmptyResponse> callback,
         ErrorCallback errorCallback,
         void* customData
     )
@@ -545,26 +545,26 @@ namespace PlayFab
 
         IPlayFabHttp& http = IPlayFabHttp::Get();
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Group/RemoveGroupApplication", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnRemoveGroupApplicationResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback)), errorCallback, customData);
+        http.AddRequest("/Group/RemoveGroupApplication", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnRemoveGroupApplicationResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
     void PlayFabGroupsAPI::OnRemoveGroupApplicationResult(CallRequestContainer& request)
     {
-        EmptyResult outResult;
+        EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
 
         const auto internalPtr = request.successCallback.get();
         if (internalPtr != nullptr)
         {
-            const auto callback = (*static_cast<ProcessApiCallback<EmptyResult> *>(internalPtr));
+            const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }
 
     void PlayFabGroupsAPI::RemoveGroupInvitation(
         RemoveGroupInvitationRequest& request,
-        ProcessApiCallback<EmptyResult> callback,
+        ProcessApiCallback<EmptyResponse> callback,
         ErrorCallback errorCallback,
         void* customData
     )
@@ -572,26 +572,26 @@ namespace PlayFab
 
         IPlayFabHttp& http = IPlayFabHttp::Get();
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Group/RemoveGroupInvitation", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnRemoveGroupInvitationResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback)), errorCallback, customData);
+        http.AddRequest("/Group/RemoveGroupInvitation", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnRemoveGroupInvitationResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
     void PlayFabGroupsAPI::OnRemoveGroupInvitationResult(CallRequestContainer& request)
     {
-        EmptyResult outResult;
+        EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
 
         const auto internalPtr = request.successCallback.get();
         if (internalPtr != nullptr)
         {
-            const auto callback = (*static_cast<ProcessApiCallback<EmptyResult> *>(internalPtr));
+            const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }
 
     void PlayFabGroupsAPI::RemoveMembers(
         RemoveMembersRequest& request,
-        ProcessApiCallback<EmptyResult> callback,
+        ProcessApiCallback<EmptyResponse> callback,
         ErrorCallback errorCallback,
         void* customData
     )
@@ -599,26 +599,26 @@ namespace PlayFab
 
         IPlayFabHttp& http = IPlayFabHttp::Get();
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Group/RemoveMembers", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnRemoveMembersResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback)), errorCallback, customData);
+        http.AddRequest("/Group/RemoveMembers", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnRemoveMembersResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
     void PlayFabGroupsAPI::OnRemoveMembersResult(CallRequestContainer& request)
     {
-        EmptyResult outResult;
+        EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
 
         const auto internalPtr = request.successCallback.get();
         if (internalPtr != nullptr)
         {
-            const auto callback = (*static_cast<ProcessApiCallback<EmptyResult> *>(internalPtr));
+            const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }
 
     void PlayFabGroupsAPI::UnblockEntity(
         UnblockEntityRequest& request,
-        ProcessApiCallback<EmptyResult> callback,
+        ProcessApiCallback<EmptyResponse> callback,
         ErrorCallback errorCallback,
         void* customData
     )
@@ -626,19 +626,19 @@ namespace PlayFab
 
         IPlayFabHttp& http = IPlayFabHttp::Get();
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Group/UnblockEntity", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnUnblockEntityResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback)), errorCallback, customData);
+        http.AddRequest("/Group/UnblockEntity", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnUnblockEntityResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
     void PlayFabGroupsAPI::OnUnblockEntityResult(CallRequestContainer& request)
     {
-        EmptyResult outResult;
+        EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
 
         const auto internalPtr = request.successCallback.get();
         if (internalPtr != nullptr)
         {
-            const auto callback = (*static_cast<ProcessApiCallback<EmptyResult> *>(internalPtr));
+            const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }

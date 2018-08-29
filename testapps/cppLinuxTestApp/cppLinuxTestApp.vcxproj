@@ -50,7 +50,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include;/usr/include;../XPlatCppLinux/;../XPlatCppLinux/include;$(SolutionDir)cppsdk;$(SolutionDir)cppsdk/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABENTITY_API;ENABLE_PLAYFABMATCHMAKER_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <LibraryDependencies>curl;jsoncpp;pthread;</LibraryDependencies>
@@ -61,7 +61,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include;/usr/include;../XPlatCppLinux/;../XPlatCppLinux/include;$(SolutionDir)cppsdk;$(SolutionDir)cppsdk/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABENTITY_API;ENABLE_PLAYFABMATCHMAKER_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <LibraryDependencies>curl;jsoncpp;pthread;</LibraryDependencies>

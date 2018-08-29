@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef ENABLE_PLAYFABENTITY_API
+#ifndef DISABLE_PLAYFABENTITY_API
 
 #include <playfab/PlayFabBaseModel.h>
 
@@ -34,37 +34,6 @@ namespace PlayFab
             const std::string& inputStr = input.asString();
             if (inputStr == "Allow") output = EffectTypeAllow;
             if (inputStr == "Deny") output = EffectTypeDeny;
-        }
-
-        enum EntityTypes
-        {
-            EntityTypestitle,
-            EntityTypesmaster_player_account,
-            EntityTypestitle_player_account,
-            EntityTypescharacter,
-            EntityTypesgroup,
-            EntityTypesservice
-        };
-
-        inline void ToJsonEnum(const EntityTypes input, Json::Value& output)
-        {
-            if (input == EntityTypestitle) output = Json::Value("title");
-            if (input == EntityTypesmaster_player_account) output = Json::Value("master_player_account");
-            if (input == EntityTypestitle_player_account) output = Json::Value("title_player_account");
-            if (input == EntityTypescharacter) output = Json::Value("character");
-            if (input == EntityTypesgroup) output = Json::Value("group");
-            if (input == EntityTypesservice) output = Json::Value("service");
-        }
-        inline void FromJsonEnum(const Json::Value& input, EntityTypes& output)
-        {
-            if (!input.isString()) return;
-            const std::string& inputStr = input.asString();
-            if (inputStr == "title") output = EntityTypestitle;
-            if (inputStr == "master_player_account") output = EntityTypesmaster_player_account;
-            if (inputStr == "title_player_account") output = EntityTypestitle_player_account;
-            if (inputStr == "character") output = EntityTypescharacter;
-            if (inputStr == "group") output = EntityTypesgroup;
-            if (inputStr == "service") output = EntityTypesservice;
         }
 
         enum OperationTypes
@@ -135,21 +104,18 @@ namespace PlayFab
         struct EntityKey : public PlayFabBaseModel
         {
             std::string Id;
-            Boxed<EntityTypes> Type;
-            std::string TypeString;
+            std::string Type;
 
             EntityKey() :
                 PlayFabBaseModel(),
                 Id(),
-                Type(),
-                TypeString()
+                Type()
             {}
 
             EntityKey(const EntityKey& src) :
                 PlayFabBaseModel(),
                 Id(src.Id),
-                Type(src.Type),
-                TypeString(src.TypeString)
+                Type(src.Type)
             {}
 
             ~EntityKey() = default;
@@ -157,16 +123,14 @@ namespace PlayFab
             void FromJson(Json::Value& input) override
             {
                 FromJsonUtilS(input["Id"], Id);
-                FromJsonUtilE(input["Type"], Type);
-                FromJsonUtilS(input["TypeString"], TypeString);
+                FromJsonUtilS(input["Type"], Type);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
                 Json::Value each_Id; ToJsonUtilS(Id, each_Id); output["Id"] = each_Id;
-                Json::Value each_Type; ToJsonUtilE(Type, each_Type); output["Type"] = each_Type;
-                Json::Value each_TypeString; ToJsonUtilS(TypeString, each_TypeString); output["TypeString"] = each_TypeString;
+                Json::Value each_Type; ToJsonUtilS(Type, each_Type); output["Type"] = each_Type;
                 return output;
             }
         };

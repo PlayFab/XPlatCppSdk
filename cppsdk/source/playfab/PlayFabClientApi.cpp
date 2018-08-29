@@ -347,6 +347,33 @@ namespace PlayFab
         }
     }
 
+    void PlayFabClientAPI::ConsumeXboxEntitlements(
+        ConsumeXboxEntitlementsRequest& request,
+        ProcessApiCallback<ConsumeXboxEntitlementsResult> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttp& http = IPlayFabHttp::Get();
+        const auto requestJson = request.ToJson();
+        http.AddRequest("/Client/ConsumeXboxEntitlements", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnConsumeXboxEntitlementsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<ConsumeXboxEntitlementsResult>(callback)), errorCallback, customData);
+    }
+
+    void PlayFabClientAPI::OnConsumeXboxEntitlementsResult(CallRequestContainer& request)
+    {
+        ConsumeXboxEntitlementsResult outResult;
+        outResult.FromJson(request.errorWrapper.Data);
+        outResult.Request = request.errorWrapper.Request;
+
+        const auto internalPtr = request.successCallback.get();
+        if (internalPtr != nullptr)
+        {
+            const auto callback = (*static_cast<ProcessApiCallback<ConsumeXboxEntitlementsResult> *>(internalPtr));
+            callback(outResult, request.customData);
+        }
+    }
+
     void PlayFabClientAPI::CreateSharedGroup(
         CreateSharedGroupRequest& request,
         ProcessApiCallback<CreateSharedGroupResult> callback,
@@ -2129,6 +2156,33 @@ namespace PlayFab
         }
     }
 
+    void PlayFabClientAPI::LinkXboxAccount(
+        LinkXboxAccountRequest& request,
+        ProcessApiCallback<LinkXboxAccountResult> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttp& http = IPlayFabHttp::Get();
+        const auto requestJson = request.ToJson();
+        http.AddRequest("/Client/LinkXboxAccount", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnLinkXboxAccountResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkXboxAccountResult>(callback)), errorCallback, customData);
+    }
+
+    void PlayFabClientAPI::OnLinkXboxAccountResult(CallRequestContainer& request)
+    {
+        LinkXboxAccountResult outResult;
+        outResult.FromJson(request.errorWrapper.Data);
+        outResult.Request = request.errorWrapper.Request;
+
+        const auto internalPtr = request.successCallback.get();
+        if (internalPtr != nullptr)
+        {
+            const auto callback = (*static_cast<ProcessApiCallback<LinkXboxAccountResult> *>(internalPtr));
+            callback(outResult, request.customData);
+        }
+    }
+
     void PlayFabClientAPI::LoginWithAndroidDeviceID(
         LoginWithAndroidDeviceIDRequest& request,
         ProcessApiCallback<LoginResult> callback,
@@ -2605,6 +2659,40 @@ namespace PlayFab
         }
     }
 
+    void PlayFabClientAPI::LoginWithXbox(
+        LoginWithXboxRequest& request,
+        ProcessApiCallback<LoginResult> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        if (PlayFabSettings::titleId.length() > 0) request.TitleId = PlayFabSettings::titleId;
+
+        IPlayFabHttp& http = IPlayFabHttp::Get();
+        const auto requestJson = request.ToJson();
+        http.AddRequest("/Client/LoginWithXbox", "", "", requestJson, OnLoginWithXboxResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback)), errorCallback, customData);
+    }
+
+    void PlayFabClientAPI::OnLoginWithXboxResult(CallRequestContainer& request)
+    {
+        LoginResult outResult;
+        outResult.FromJson(request.errorWrapper.Data);
+        outResult.Request = request.errorWrapper.Request;
+        if (outResult.SessionTicket.length() > 0)
+        {
+            PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
+            if (outResult.EntityToken.notNull()) PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+            MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
+        }
+
+        const auto internalPtr = request.successCallback.get();
+        if (internalPtr != nullptr)
+        {
+            const auto callback = (*static_cast<ProcessApiCallback<LoginResult> *>(internalPtr));
+            callback(outResult, request.customData);
+        }
+    }
+
     void PlayFabClientAPI::Matchmake(
         MatchmakeRequest& request,
         ProcessApiCallback<MatchmakeResult> callback,
@@ -2944,7 +3032,7 @@ namespace PlayFab
 
     void PlayFabClientAPI::ReportDeviceInfo(
         DeviceInfoRequest& request,
-        ProcessApiCallback<EmptyResult> callback,
+        ProcessApiCallback<EmptyResponse> callback,
         ErrorCallback errorCallback,
         void* customData
     )
@@ -2952,19 +3040,19 @@ namespace PlayFab
 
         IPlayFabHttp& http = IPlayFabHttp::Get();
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Client/ReportDeviceInfo", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnReportDeviceInfoResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback)), errorCallback, customData);
+        http.AddRequest("/Client/ReportDeviceInfo", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnReportDeviceInfoResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
     void PlayFabClientAPI::OnReportDeviceInfoResult(CallRequestContainer& request)
     {
-        EmptyResult outResult;
+        EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
 
         const auto internalPtr = request.successCallback.get();
         if (internalPtr != nullptr)
         {
-            const auto callback = (*static_cast<ProcessApiCallback<EmptyResult> *>(internalPtr));
+            const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }
@@ -3509,6 +3597,33 @@ namespace PlayFab
         }
     }
 
+    void PlayFabClientAPI::UnlinkXboxAccount(
+        UnlinkXboxAccountRequest& request,
+        ProcessApiCallback<UnlinkXboxAccountResult> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttp& http = IPlayFabHttp::Get();
+        const auto requestJson = request.ToJson();
+        http.AddRequest("/Client/UnlinkXboxAccount", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUnlinkXboxAccountResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkXboxAccountResult>(callback)), errorCallback, customData);
+    }
+
+    void PlayFabClientAPI::OnUnlinkXboxAccountResult(CallRequestContainer& request)
+    {
+        UnlinkXboxAccountResult outResult;
+        outResult.FromJson(request.errorWrapper.Data);
+        outResult.Request = request.errorWrapper.Request;
+
+        const auto internalPtr = request.successCallback.get();
+        if (internalPtr != nullptr)
+        {
+            const auto callback = (*static_cast<ProcessApiCallback<UnlinkXboxAccountResult> *>(internalPtr));
+            callback(outResult, request.customData);
+        }
+    }
+
     void PlayFabClientAPI::UnlockContainerInstance(
         UnlockContainerInstanceRequest& request,
         ProcessApiCallback<UnlockContainerItemResult> callback,
@@ -3565,7 +3680,7 @@ namespace PlayFab
 
     void PlayFabClientAPI::UpdateAvatarUrl(
         UpdateAvatarUrlRequest& request,
-        ProcessApiCallback<EmptyResult> callback,
+        ProcessApiCallback<EmptyResponse> callback,
         ErrorCallback errorCallback,
         void* customData
     )
@@ -3573,19 +3688,19 @@ namespace PlayFab
 
         IPlayFabHttp& http = IPlayFabHttp::Get();
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Client/UpdateAvatarUrl", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUpdateAvatarUrlResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback)), errorCallback, customData);
+        http.AddRequest("/Client/UpdateAvatarUrl", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUpdateAvatarUrlResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
     void PlayFabClientAPI::OnUpdateAvatarUrlResult(CallRequestContainer& request)
     {
-        EmptyResult outResult;
+        EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
 
         const auto internalPtr = request.successCallback.get();
         if (internalPtr != nullptr)
         {
-            const auto callback = (*static_cast<ProcessApiCallback<EmptyResult> *>(internalPtr));
+            const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }

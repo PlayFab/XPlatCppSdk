@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef ENABLE_PLAYFABENTITY_API
+#ifndef DISABLE_PLAYFABENTITY_API
 
 #include <playfab/PlayFabHttp.h>
 #include <playfab/PlayFabEventsDataModels.h>

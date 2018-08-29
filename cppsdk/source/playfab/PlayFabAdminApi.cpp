@@ -24,7 +24,7 @@ namespace PlayFab
 
     void PlayFabAdminAPI::AbortTaskInstance(
         AbortTaskInstanceRequest& request,
-        ProcessApiCallback<EmptyResult> callback,
+        ProcessApiCallback<EmptyResponse> callback,
         ErrorCallback errorCallback,
         void* customData
     )
@@ -32,19 +32,19 @@ namespace PlayFab
 
         IPlayFabHttp& http = IPlayFabHttp::Get();
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Admin/AbortTaskInstance", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnAbortTaskInstanceResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback)), errorCallback, customData);
+        http.AddRequest("/Admin/AbortTaskInstance", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnAbortTaskInstanceResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
     void PlayFabAdminAPI::OnAbortTaskInstanceResult(CallRequestContainer& request)
     {
-        EmptyResult outResult;
+        EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
 
         const auto internalPtr = request.successCallback.get();
         if (internalPtr != nullptr)
         {
-            const auto callback = (*static_cast<ProcessApiCallback<EmptyResult> *>(internalPtr));
+            const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }
@@ -483,7 +483,7 @@ namespace PlayFab
 
     void PlayFabAdminAPI::DeleteTask(
         DeleteTaskRequest& request,
-        ProcessApiCallback<EmptyResult> callback,
+        ProcessApiCallback<EmptyResponse> callback,
         ErrorCallback errorCallback,
         void* customData
     )
@@ -491,19 +491,19 @@ namespace PlayFab
 
         IPlayFabHttp& http = IPlayFabHttp::Get();
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Admin/DeleteTask", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnDeleteTaskResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback)), errorCallback, customData);
+        http.AddRequest("/Admin/DeleteTask", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnDeleteTaskResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
     void PlayFabAdminAPI::OnDeleteTaskResult(CallRequestContainer& request)
     {
-        EmptyResult outResult;
+        EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
 
         const auto internalPtr = request.successCallback.get();
         if (internalPtr != nullptr)
         {
-            const auto callback = (*static_cast<ProcessApiCallback<EmptyResult> *>(internalPtr));
+            const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }
@@ -2643,7 +2643,7 @@ namespace PlayFab
 
     void PlayFabAdminAPI::UpdateTask(
         UpdateTaskRequest& request,
-        ProcessApiCallback<EmptyResult> callback,
+        ProcessApiCallback<EmptyResponse> callback,
         ErrorCallback errorCallback,
         void* customData
     )
@@ -2651,19 +2651,19 @@ namespace PlayFab
 
         IPlayFabHttp& http = IPlayFabHttp::Get();
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Admin/UpdateTask", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnUpdateTaskResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback)), errorCallback, customData);
+        http.AddRequest("/Admin/UpdateTask", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnUpdateTaskResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
     void PlayFabAdminAPI::OnUpdateTaskResult(CallRequestContainer& request)
     {
-        EmptyResult outResult;
+        EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
 
         const auto internalPtr = request.successCallback.get();
         if (internalPtr != nullptr)
         {
-            const auto callback = (*static_cast<ProcessApiCallback<EmptyResult> *>(internalPtr));
+            const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }

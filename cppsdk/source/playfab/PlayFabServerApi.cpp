@@ -51,7 +51,7 @@ namespace PlayFab
 
     void PlayFabServerAPI::AddFriend(
         AddFriendRequest& request,
-        ProcessApiCallback<EmptyResult> callback,
+        ProcessApiCallback<EmptyResponse> callback,
         ErrorCallback errorCallback,
         void* customData
     )
@@ -59,19 +59,19 @@ namespace PlayFab
 
         IPlayFabHttp& http = IPlayFabHttp::Get();
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Server/AddFriend", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnAddFriendResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback)), errorCallback, customData);
+        http.AddRequest("/Server/AddFriend", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnAddFriendResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
     void PlayFabServerAPI::OnAddFriendResult(CallRequestContainer& request)
     {
-        EmptyResult outResult;
+        EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
 
         const auto internalPtr = request.successCallback.get();
         if (internalPtr != nullptr)
         {
-            const auto callback = (*static_cast<ProcessApiCallback<EmptyResult> *>(internalPtr));
+            const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }
@@ -321,7 +321,7 @@ namespace PlayFab
 
     void PlayFabServerAPI::DeleteSharedGroup(
         DeleteSharedGroupRequest& request,
-        ProcessApiCallback<EmptyResult> callback,
+        ProcessApiCallback<EmptyResponse> callback,
         ErrorCallback errorCallback,
         void* customData
     )
@@ -329,19 +329,19 @@ namespace PlayFab
 
         IPlayFabHttp& http = IPlayFabHttp::Get();
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Server/DeleteSharedGroup", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnDeleteSharedGroupResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback)), errorCallback, customData);
+        http.AddRequest("/Server/DeleteSharedGroup", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnDeleteSharedGroupResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
     void PlayFabServerAPI::OnDeleteSharedGroupResult(CallRequestContainer& request)
     {
-        EmptyResult outResult;
+        EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
 
         const auto internalPtr = request.successCallback.get();
         if (internalPtr != nullptr)
         {
-            const auto callback = (*static_cast<ProcessApiCallback<EmptyResult> *>(internalPtr));
+            const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }
@@ -1968,7 +1968,7 @@ namespace PlayFab
 
     void PlayFabServerAPI::RemoveFriend(
         RemoveFriendRequest& request,
-        ProcessApiCallback<EmptyResult> callback,
+        ProcessApiCallback<EmptyResponse> callback,
         ErrorCallback errorCallback,
         void* customData
     )
@@ -1976,19 +1976,19 @@ namespace PlayFab
 
         IPlayFabHttp& http = IPlayFabHttp::Get();
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Server/RemoveFriend", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnRemoveFriendResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback)), errorCallback, customData);
+        http.AddRequest("/Server/RemoveFriend", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnRemoveFriendResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
     void PlayFabServerAPI::OnRemoveFriendResult(CallRequestContainer& request)
     {
-        EmptyResult outResult;
+        EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
 
         const auto internalPtr = request.successCallback.get();
         if (internalPtr != nullptr)
         {
-            const auto callback = (*static_cast<ProcessApiCallback<EmptyResult> *>(internalPtr));
+            const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }
@@ -2265,7 +2265,7 @@ namespace PlayFab
 
     void PlayFabServerAPI::SetFriendTags(
         SetFriendTagsRequest& request,
-        ProcessApiCallback<EmptyResult> callback,
+        ProcessApiCallback<EmptyResponse> callback,
         ErrorCallback errorCallback,
         void* customData
     )
@@ -2273,19 +2273,19 @@ namespace PlayFab
 
         IPlayFabHttp& http = IPlayFabHttp::Get();
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Server/SetFriendTags", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnSetFriendTagsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback)), errorCallback, customData);
+        http.AddRequest("/Server/SetFriendTags", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnSetFriendTagsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
     void PlayFabServerAPI::OnSetFriendTagsResult(CallRequestContainer& request)
     {
-        EmptyResult outResult;
+        EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
 
         const auto internalPtr = request.successCallback.get();
         if (internalPtr != nullptr)
         {
-            const auto callback = (*static_cast<ProcessApiCallback<EmptyResult> *>(internalPtr));
+            const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }
@@ -2589,7 +2589,7 @@ namespace PlayFab
 
     void PlayFabServerAPI::UpdateAvatarUrl(
         UpdateAvatarUrlRequest& request,
-        ProcessApiCallback<EmptyResult> callback,
+        ProcessApiCallback<EmptyResponse> callback,
         ErrorCallback errorCallback,
         void* customData
     )
@@ -2597,19 +2597,19 @@ namespace PlayFab
 
         IPlayFabHttp& http = IPlayFabHttp::Get();
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Server/UpdateAvatarUrl", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnUpdateAvatarUrlResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback)), errorCallback, customData);
+        http.AddRequest("/Server/UpdateAvatarUrl", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnUpdateAvatarUrlResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
     void PlayFabServerAPI::OnUpdateAvatarUrlResult(CallRequestContainer& request)
     {
-        EmptyResult outResult;
+        EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
 
         const auto internalPtr = request.successCallback.get();
         if (internalPtr != nullptr)
         {
-            const auto callback = (*static_cast<ProcessApiCallback<EmptyResult> *>(internalPtr));
+            const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }
@@ -2859,7 +2859,7 @@ namespace PlayFab
 
     void PlayFabServerAPI::UpdateUserInventoryItemCustomData(
         UpdateUserInventoryItemDataRequest& request,
-        ProcessApiCallback<EmptyResult> callback,
+        ProcessApiCallback<EmptyResponse> callback,
         ErrorCallback errorCallback,
         void* customData
     )
@@ -2867,19 +2867,19 @@ namespace PlayFab
 
         IPlayFabHttp& http = IPlayFabHttp::Get();
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Server/UpdateUserInventoryItemCustomData", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnUpdateUserInventoryItemCustomDataResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback)), errorCallback, customData);
+        http.AddRequest("/Server/UpdateUserInventoryItemCustomData", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnUpdateUserInventoryItemCustomDataResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
     void PlayFabServerAPI::OnUpdateUserInventoryItemCustomDataResult(CallRequestContainer& request)
     {
-        EmptyResult outResult;
+        EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
 
         const auto internalPtr = request.successCallback.get();
         if (internalPtr != nullptr)
         {
-            const auto callback = (*static_cast<ProcessApiCallback<EmptyResult> *>(internalPtr));
+            const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
             callback(outResult, request.customData);
         }
     }

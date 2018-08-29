@@ -57,7 +57,7 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;WIN32;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABENTITY_API;ENABLE_PLAYFABMATCHMAKER_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;WIN32;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)cppsdk/include;$(SolutionDir)cppsdk</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>cppWindowsTestAppPch.h</PrecompiledHeaderFile>
@@ -66,7 +66,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/Zc:__cplusplus /bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -80,7 +80,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CONSOLE;WIN32;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABENTITY_API;ENABLE_PLAYFABMATCHMAKER_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CONSOLE;WIN32;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)cppsdk/include;$(SolutionDir)cppsdk</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>cppWindowsTestAppPch.h</PrecompiledHeaderFile>
@@ -89,7 +89,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/Zc:__cplusplus /bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

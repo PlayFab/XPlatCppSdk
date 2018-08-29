@@ -38,7 +38,7 @@
     <ClCompile>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include;/usr/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
-      <PreprocessorDefinitions>ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABENTITY_API;ENABLE_PLAYFABMATCHMAKER_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>-I $(RemoteProjectDir) -I $(RemoteProjectDir)/include %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
@@ -53,7 +53,7 @@
     <ClCompile>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include;/usr/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
-      <PreprocessorDefinitions>ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABENTITY_API;ENABLE_PLAYFABMATCHMAKER_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>-I $(RemoteProjectDir) -I $(RemoteProjectDir)/include %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
