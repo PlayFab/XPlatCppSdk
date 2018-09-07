@@ -140,6 +140,9 @@
     <ClInclude Include="include\playfab\PlayFabGroupsApi.h" />
     <ClInclude Include="include\playfab\PlayFabGroupsDataModels.h" />
 
+    <ClInclude Include="include\playfab\PlayFabLocalizationApi.h" />
+    <ClInclude Include="include\playfab\PlayFabLocalizationDataModels.h" />
+
     <ClInclude Include="include\playfab\PlayFabProfilesApi.h" />
     <ClInclude Include="include\playfab\PlayFabProfilesDataModels.h" />
 
@@ -167,6 +170,8 @@
     <ClCompile Include="source\playfab\PlayFabEventsApi.cpp" />
 
     <ClCompile Include="source\playfab\PlayFabGroupsApi.cpp" />
+
+    <ClCompile Include="source\playfab\PlayFabLocalizationApi.cpp" />
 
     <ClCompile Include="source\playfab\PlayFabProfilesApi.cpp" />
 

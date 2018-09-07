@@ -74,6 +74,12 @@
     <ClInclude Include="include\playfab\PlayFabGroupsDataModels.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
+    <ClInclude Include="include\playfab\PlayFabLocalizationAPI.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="include\playfab\PlayFabLocalizationDataModels.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
     <ClInclude Include="include\playfab\PlayFabProfilesAPI.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
@@ -122,6 +128,9 @@
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
     <ClCompile Include="source\playfab\PlayFabGroupsApi.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
+    <ClCompile Include="source\playfab\PlayFabLocalizationApi.cpp">
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
     <ClCompile Include="source\playfab\PlayFabProfilesApi.cpp">
