@@ -35,8 +35,9 @@ namespace PlayFab
         http.AddRequest("/File/AbortFileUploads", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnAbortFileUploadsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<AbortFileUploadsResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabDataAPI::OnAbortFileUploadsResult(CallRequestContainer& request)
+    void PlayFabDataAPI::OnAbortFileUploadsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         AbortFileUploadsResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -62,8 +63,9 @@ namespace PlayFab
         http.AddRequest("/File/DeleteFiles", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnDeleteFilesResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<DeleteFilesResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabDataAPI::OnDeleteFilesResult(CallRequestContainer& request)
+    void PlayFabDataAPI::OnDeleteFilesResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         DeleteFilesResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -89,8 +91,9 @@ namespace PlayFab
         http.AddRequest("/File/FinalizeFileUploads", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnFinalizeFileUploadsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<FinalizeFileUploadsResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabDataAPI::OnFinalizeFileUploadsResult(CallRequestContainer& request)
+    void PlayFabDataAPI::OnFinalizeFileUploadsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         FinalizeFileUploadsResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -116,8 +119,9 @@ namespace PlayFab
         http.AddRequest("/File/GetFiles", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnGetFilesResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetFilesResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabDataAPI::OnGetFilesResult(CallRequestContainer& request)
+    void PlayFabDataAPI::OnGetFilesResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetFilesResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -143,8 +147,9 @@ namespace PlayFab
         http.AddRequest("/Object/GetObjects", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnGetObjectsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetObjectsResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabDataAPI::OnGetObjectsResult(CallRequestContainer& request)
+    void PlayFabDataAPI::OnGetObjectsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetObjectsResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -170,8 +175,9 @@ namespace PlayFab
         http.AddRequest("/File/InitiateFileUploads", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnInitiateFileUploadsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<InitiateFileUploadsResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabDataAPI::OnInitiateFileUploadsResult(CallRequestContainer& request)
+    void PlayFabDataAPI::OnInitiateFileUploadsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         InitiateFileUploadsResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -197,8 +203,9 @@ namespace PlayFab
         http.AddRequest("/Object/SetObjects", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnSetObjectsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<SetObjectsResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabDataAPI::OnSetObjectsResult(CallRequestContainer& request)
+    void PlayFabDataAPI::OnSetObjectsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         SetObjectsResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;

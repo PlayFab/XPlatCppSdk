@@ -43,8 +43,9 @@ namespace PlayFab
         http.AddRequest("/Authentication/GetEntityToken", authKey, authValue, requestJson, OnGetEntityTokenResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetEntityTokenResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabAuthenticationAPI::OnGetEntityTokenResult(CallRequestContainer& request)
+    void PlayFabAuthenticationAPI::OnGetEntityTokenResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetEntityTokenResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;

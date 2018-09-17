@@ -17,6 +17,44 @@ namespace PlayFab
     namespace AdminModels
     {
         // Admin Enums
+        enum AttributeNotSpecifiedBehavior
+        {
+            AttributeNotSpecifiedBehaviorUseDefault,
+            AttributeNotSpecifiedBehaviorMatchAny
+        };
+
+        inline void ToJsonEnum(const AttributeNotSpecifiedBehavior input, Json::Value& output)
+        {
+            if (input == AttributeNotSpecifiedBehaviorUseDefault) output = Json::Value("UseDefault");
+            if (input == AttributeNotSpecifiedBehaviorMatchAny) output = Json::Value("MatchAny");
+        }
+        inline void FromJsonEnum(const Json::Value& input, AttributeNotSpecifiedBehavior& output)
+        {
+            if (!input.isString()) return;
+            const std::string& inputStr = input.asString();
+            if (inputStr == "UseDefault") output = AttributeNotSpecifiedBehaviorUseDefault;
+            if (inputStr == "MatchAny") output = AttributeNotSpecifiedBehaviorMatchAny;
+        }
+
+        enum AttributeSource
+        {
+            AttributeSourceUser,
+            AttributeSourcePlayerEntity
+        };
+
+        inline void ToJsonEnum(const AttributeSource input, Json::Value& output)
+        {
+            if (input == AttributeSourceUser) output = Json::Value("User");
+            if (input == AttributeSourcePlayerEntity) output = Json::Value("PlayerEntity");
+        }
+        inline void FromJsonEnum(const Json::Value& input, AttributeSource& output)
+        {
+            if (!input.isString()) return;
+            const std::string& inputStr = input.asString();
+            if (inputStr == "User") output = AttributeSourceUser;
+            if (inputStr == "PlayerEntity") output = AttributeSourcePlayerEntity;
+        }
+
         enum AuthTokenType
         {
             AuthTokenTypeEmail
@@ -2883,6 +2921,34 @@ namespace PlayFab
             const std::string& inputStr = input.asString();
             if (inputStr == "ItemId") output = ResultTableNodeTypeItemId;
             if (inputStr == "TableId") output = ResultTableNodeTypeTableId;
+        }
+
+        enum RuleType
+        {
+            RuleTypeUnknown,
+            RuleTypeDifferenceRule,
+            RuleTypeStringEqualityRule,
+            RuleTypeMatchTotalRule,
+            RuleTypeSetIntersectionRule
+        };
+
+        inline void ToJsonEnum(const RuleType input, Json::Value& output)
+        {
+            if (input == RuleTypeUnknown) output = Json::Value("Unknown");
+            if (input == RuleTypeDifferenceRule) output = Json::Value("DifferenceRule");
+            if (input == RuleTypeStringEqualityRule) output = Json::Value("StringEqualityRule");
+            if (input == RuleTypeMatchTotalRule) output = Json::Value("MatchTotalRule");
+            if (input == RuleTypeSetIntersectionRule) output = Json::Value("SetIntersectionRule");
+        }
+        inline void FromJsonEnum(const Json::Value& input, RuleType& output)
+        {
+            if (!input.isString()) return;
+            const std::string& inputStr = input.asString();
+            if (inputStr == "Unknown") output = RuleTypeUnknown;
+            if (inputStr == "DifferenceRule") output = RuleTypeDifferenceRule;
+            if (inputStr == "StringEqualityRule") output = RuleTypeStringEqualityRule;
+            if (inputStr == "MatchTotalRule") output = RuleTypeMatchTotalRule;
+            if (inputStr == "SetIntersectionRule") output = RuleTypeSetIntersectionRule;
         }
 
         enum ScheduledTaskType
@@ -6379,6 +6445,196 @@ namespace PlayFab
             }
         };
 
+        struct GetMatchmakingQueueRequest : public PlayFabRequestCommon
+        {
+            std::string QueueName;
+
+            GetMatchmakingQueueRequest() :
+                PlayFabRequestCommon(),
+                QueueName()
+            {}
+
+            GetMatchmakingQueueRequest(const GetMatchmakingQueueRequest& src) :
+                PlayFabRequestCommon(),
+                QueueName(src.QueueName)
+            {}
+
+            ~GetMatchmakingQueueRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["QueueName"], QueueName);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
+                return output;
+            }
+        };
+
+        struct QueueRuleAttribute : public PlayFabBaseModel
+        {
+            std::string Path;
+            AttributeSource Source;
+
+            QueueRuleAttribute() :
+                PlayFabBaseModel(),
+                Path(),
+                Source()
+            {}
+
+            QueueRuleAttribute(const QueueRuleAttribute& src) :
+                PlayFabBaseModel(),
+                Path(src.Path),
+                Source(src.Source)
+            {}
+
+            ~QueueRuleAttribute() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["Path"], Path);
+                FromJsonEnum(input["Source"], Source);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Path; ToJsonUtilS(Path, each_Path); output["Path"] = each_Path;
+                Json::Value each_Source; ToJsonEnum(Source, each_Source); output["Source"] = each_Source;
+                return output;
+            }
+        };
+
+        struct MatchmakingQueueRule : public PlayFabBaseModel
+        {
+            QueueRuleAttribute Attribute;
+            Boxed<AttributeNotSpecifiedBehavior> pfAttributeNotSpecifiedBehavior;
+            std::string Name;
+            Boxed<Uint32> SecondsUntilOptional;
+            RuleType Type;
+            double Weight;
+
+            MatchmakingQueueRule() :
+                PlayFabBaseModel(),
+                Attribute(),
+                pfAttributeNotSpecifiedBehavior(),
+                Name(),
+                SecondsUntilOptional(),
+                Type(),
+                Weight()
+            {}
+
+            MatchmakingQueueRule(const MatchmakingQueueRule& src) :
+                PlayFabBaseModel(),
+                Attribute(src.Attribute),
+                pfAttributeNotSpecifiedBehavior(src.pfAttributeNotSpecifiedBehavior),
+                Name(src.Name),
+                SecondsUntilOptional(src.SecondsUntilOptional),
+                Type(src.Type),
+                Weight(src.Weight)
+            {}
+
+            ~MatchmakingQueueRule() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["Attribute"], Attribute);
+                FromJsonUtilE(input["pfAttributeNotSpecifiedBehavior"], pfAttributeNotSpecifiedBehavior);
+                FromJsonUtilS(input["Name"], Name);
+                FromJsonUtilP(input["SecondsUntilOptional"], SecondsUntilOptional);
+                FromJsonEnum(input["Type"], Type);
+                FromJsonUtilP(input["Weight"], Weight);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Attribute; ToJsonUtilO(Attribute, each_Attribute); output["Attribute"] = each_Attribute;
+                Json::Value each_pfAttributeNotSpecifiedBehavior; ToJsonUtilE(pfAttributeNotSpecifiedBehavior, each_pfAttributeNotSpecifiedBehavior); output["AttributeNotSpecifiedBehavior"] = each_pfAttributeNotSpecifiedBehavior;
+                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
+                Json::Value each_SecondsUntilOptional; ToJsonUtilP(SecondsUntilOptional, each_SecondsUntilOptional); output["SecondsUntilOptional"] = each_SecondsUntilOptional;
+                Json::Value each_Type; ToJsonEnum(Type, each_Type); output["Type"] = each_Type;
+                Json::Value each_Weight; ToJsonUtilP(Weight, each_Weight); output["Weight"] = each_Weight;
+                return output;
+            }
+        };
+
+        struct MatchmakingQueueConfig : public PlayFabBaseModel
+        {
+            Uint32 MaxMatchSize;
+            Uint32 MinMatchSize;
+            std::string Name;
+            std::list<MatchmakingQueueRule> Rules;
+
+            MatchmakingQueueConfig() :
+                PlayFabBaseModel(),
+                MaxMatchSize(),
+                MinMatchSize(),
+                Name(),
+                Rules()
+            {}
+
+            MatchmakingQueueConfig(const MatchmakingQueueConfig& src) :
+                PlayFabBaseModel(),
+                MaxMatchSize(src.MaxMatchSize),
+                MinMatchSize(src.MinMatchSize),
+                Name(src.Name),
+                Rules(src.Rules)
+            {}
+
+            ~MatchmakingQueueConfig() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilP(input["MaxMatchSize"], MaxMatchSize);
+                FromJsonUtilP(input["MinMatchSize"], MinMatchSize);
+                FromJsonUtilS(input["Name"], Name);
+                FromJsonUtilO(input["Rules"], Rules);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_MaxMatchSize; ToJsonUtilP(MaxMatchSize, each_MaxMatchSize); output["MaxMatchSize"] = each_MaxMatchSize;
+                Json::Value each_MinMatchSize; ToJsonUtilP(MinMatchSize, each_MinMatchSize); output["MinMatchSize"] = each_MinMatchSize;
+                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
+                Json::Value each_Rules; ToJsonUtilO(Rules, each_Rules); output["Rules"] = each_Rules;
+                return output;
+            }
+        };
+
+        struct GetMatchmakingQueueResult : public PlayFabResultCommon
+        {
+            Boxed<MatchmakingQueueConfig> MatchmakingQueue;
+
+            GetMatchmakingQueueResult() :
+                PlayFabResultCommon(),
+                MatchmakingQueue()
+            {}
+
+            GetMatchmakingQueueResult(const GetMatchmakingQueueResult& src) :
+                PlayFabResultCommon(),
+                MatchmakingQueue(src.MatchmakingQueue)
+            {}
+
+            ~GetMatchmakingQueueResult() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["MatchmakingQueue"], MatchmakingQueue);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_MatchmakingQueue; ToJsonUtilO(MatchmakingQueue, each_MatchmakingQueue); output["MatchmakingQueue"] = each_MatchmakingQueue;
+                return output;
+            }
+        };
+
         struct GetPlayedTitleListRequest : public PlayFabRequestCommon
         {
             std::string PlayFabId;
@@ -9684,6 +9940,59 @@ namespace PlayFab
             }
         };
 
+        struct ListMatchmakingQueuesRequest : public PlayFabRequestCommon
+        {
+
+            ListMatchmakingQueuesRequest() :
+                PlayFabRequestCommon()
+            {}
+
+            ListMatchmakingQueuesRequest(const ListMatchmakingQueuesRequest&) :
+                PlayFabRequestCommon()
+            {}
+
+            ~ListMatchmakingQueuesRequest() = default;
+
+            void FromJson(Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
+        struct ListMatchmakingQueuesResult : public PlayFabResultCommon
+        {
+            std::list<MatchmakingQueueConfig> MatchMakingQueues;
+
+            ListMatchmakingQueuesResult() :
+                PlayFabResultCommon(),
+                MatchMakingQueues()
+            {}
+
+            ListMatchmakingQueuesResult(const ListMatchmakingQueuesResult& src) :
+                PlayFabResultCommon(),
+                MatchMakingQueues(src.MatchMakingQueues)
+            {}
+
+            ~ListMatchmakingQueuesResult() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["MatchMakingQueues"], MatchMakingQueues);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_MatchMakingQueues; ToJsonUtilO(MatchMakingQueues, each_MatchMakingQueues); output["MatchMakingQueues"] = each_MatchMakingQueues;
+                return output;
+            }
+        };
+
         struct ListVirtualCurrencyTypesRequest : public PlayFabRequestCommon
         {
 
@@ -10869,6 +11178,59 @@ namespace PlayFab
             }
         };
 
+        struct RemoveMatchmakingQueueRequest : public PlayFabRequestCommon
+        {
+            std::string QueueName;
+
+            RemoveMatchmakingQueueRequest() :
+                PlayFabRequestCommon(),
+                QueueName()
+            {}
+
+            RemoveMatchmakingQueueRequest(const RemoveMatchmakingQueueRequest& src) :
+                PlayFabRequestCommon(),
+                QueueName(src.QueueName)
+            {}
+
+            ~RemoveMatchmakingQueueRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["QueueName"], QueueName);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
+                return output;
+            }
+        };
+
+        struct RemoveMatchmakingQueueResult : public PlayFabResultCommon
+        {
+
+            RemoveMatchmakingQueueResult() :
+                PlayFabResultCommon()
+            {}
+
+            RemoveMatchmakingQueueResult(const RemoveMatchmakingQueueResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~RemoveMatchmakingQueueResult() = default;
+
+            void FromJson(Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
         struct RemovePlayerTagRequest : public PlayFabRequestCommon
         {
             std::string PlayFabId;
@@ -11665,6 +12027,59 @@ namespace PlayFab
             {}
 
             ~SendAccountRecoveryEmailResult() = default;
+
+            void FromJson(Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
+        struct SetMatchmakingQueueRequest : public PlayFabRequestCommon
+        {
+            Boxed<MatchmakingQueueConfig> MatchmakingQueue;
+
+            SetMatchmakingQueueRequest() :
+                PlayFabRequestCommon(),
+                MatchmakingQueue()
+            {}
+
+            SetMatchmakingQueueRequest(const SetMatchmakingQueueRequest& src) :
+                PlayFabRequestCommon(),
+                MatchmakingQueue(src.MatchmakingQueue)
+            {}
+
+            ~SetMatchmakingQueueRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["MatchmakingQueue"], MatchmakingQueue);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_MatchmakingQueue; ToJsonUtilO(MatchmakingQueue, each_MatchmakingQueue); output["MatchmakingQueue"] = each_MatchmakingQueue;
+                return output;
+            }
+        };
+
+        struct SetMatchmakingQueueResult : public PlayFabResultCommon
+        {
+
+            SetMatchmakingQueueResult() :
+                PlayFabResultCommon()
+            {}
+
+            SetMatchmakingQueueResult(const SetMatchmakingQueueResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~SetMatchmakingQueueResult() = default;
 
             void FromJson(Json::Value&) override
             {

@@ -35,8 +35,9 @@ namespace PlayFab
         http.AddRequest("/Matchmaker/AuthUser", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnAuthUserResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<AuthUserResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabMatchmakerAPI::OnAuthUserResult(CallRequestContainer& request)
+    void PlayFabMatchmakerAPI::OnAuthUserResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         AuthUserResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -62,8 +63,9 @@ namespace PlayFab
         http.AddRequest("/Matchmaker/PlayerJoined", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnPlayerJoinedResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<PlayerJoinedResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabMatchmakerAPI::OnPlayerJoinedResult(CallRequestContainer& request)
+    void PlayFabMatchmakerAPI::OnPlayerJoinedResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         PlayerJoinedResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -89,8 +91,9 @@ namespace PlayFab
         http.AddRequest("/Matchmaker/PlayerLeft", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnPlayerLeftResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<PlayerLeftResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabMatchmakerAPI::OnPlayerLeftResult(CallRequestContainer& request)
+    void PlayFabMatchmakerAPI::OnPlayerLeftResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         PlayerLeftResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -116,8 +119,9 @@ namespace PlayFab
         http.AddRequest("/Matchmaker/StartGame", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnStartGameResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<StartGameResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabMatchmakerAPI::OnStartGameResult(CallRequestContainer& request)
+    void PlayFabMatchmakerAPI::OnStartGameResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         StartGameResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -143,8 +147,9 @@ namespace PlayFab
         http.AddRequest("/Matchmaker/UserInfo", "X-SecretKey", PlayFabSettings::developerSecretKey, requestJson, OnUserInfoResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UserInfoResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabMatchmakerAPI::OnUserInfoResult(CallRequestContainer& request)
+    void PlayFabMatchmakerAPI::OnUserInfoResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         UserInfoResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;

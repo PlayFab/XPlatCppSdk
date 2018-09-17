@@ -5167,6 +5167,59 @@ namespace PlayFab
             }
         };
 
+        struct DeletePlayerRequest : public PlayFabRequestCommon
+        {
+            std::string PlayFabId;
+
+            DeletePlayerRequest() :
+                PlayFabRequestCommon(),
+                PlayFabId()
+            {}
+
+            DeletePlayerRequest(const DeletePlayerRequest& src) :
+                PlayFabRequestCommon(),
+                PlayFabId(src.PlayFabId)
+            {}
+
+            ~DeletePlayerRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                return output;
+            }
+        };
+
+        struct DeletePlayerResult : public PlayFabResultCommon
+        {
+
+            DeletePlayerResult() :
+                PlayFabResultCommon()
+            {}
+
+            DeletePlayerResult(const DeletePlayerResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~DeletePlayerResult() = default;
+
+            void FromJson(Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
         struct DeleteSharedGroupRequest : public PlayFabRequestCommon
         {
             std::string SharedGroupId;

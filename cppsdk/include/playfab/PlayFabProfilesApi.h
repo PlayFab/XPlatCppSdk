@@ -2,6 +2,7 @@
 
 #ifndef DISABLE_PLAYFABENTITY_API
 
+#include <playfab/PlayFabCallRequestContainer.h>
 #include <playfab/PlayFabHttp.h>
 #include <playfab/PlayFabProfilesDataModels.h>
 
@@ -30,12 +31,12 @@ namespace PlayFab
         PlayFabProfilesAPI(const PlayFabProfilesAPI& other); // Private copy-constructor, static class should never have an instance
 
         // ------------ Generated result handlers
-        static void OnGetGlobalPolicyResult(CallRequestContainer& request);
-        static void OnGetProfileResult(CallRequestContainer& request);
-        static void OnGetProfilesResult(CallRequestContainer& request);
-        static void OnSetGlobalPolicyResult(CallRequestContainer& request);
-        static void OnSetProfileLanguageResult(CallRequestContainer& request);
-        static void OnSetProfilePolicyResult(CallRequestContainer& request);
+        static void OnGetGlobalPolicyResult(CallRequestContainerBase& request);
+        static void OnGetProfileResult(CallRequestContainerBase& request);
+        static void OnGetProfilesResult(CallRequestContainerBase& request);
+        static void OnSetGlobalPolicyResult(CallRequestContainerBase& request);
+        static void OnSetProfileLanguageResult(CallRequestContainerBase& request);
+        static void OnSetProfilePolicyResult(CallRequestContainerBase& request);
 
     };
 }

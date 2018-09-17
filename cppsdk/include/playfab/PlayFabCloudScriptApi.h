@@ -2,6 +2,7 @@
 
 #ifndef DISABLE_PLAYFABENTITY_API
 
+#include <playfab/PlayFabCallRequestContainer.h>
 #include <playfab/PlayFabHttp.h>
 #include <playfab/PlayFabCloudScriptDataModels.h>
 
@@ -25,7 +26,7 @@ namespace PlayFab
         PlayFabCloudScriptAPI(const PlayFabCloudScriptAPI& other); // Private copy-constructor, static class should never have an instance
 
         // ------------ Generated result handlers
-        static void OnExecuteEntityCloudScriptResult(CallRequestContainer& request);
+        static void OnExecuteEntityCloudScriptResult(CallRequestContainerBase& request);
 
     };
 }

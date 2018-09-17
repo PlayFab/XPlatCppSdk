@@ -35,8 +35,9 @@ namespace PlayFab
         http.AddRequest("/Locale/GetLanguageList", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnGetLanguageListResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetLanguageListResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabLocalizationAPI::OnGetLanguageListResult(CallRequestContainer& request)
+    void PlayFabLocalizationAPI::OnGetLanguageListResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetLanguageListResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;

@@ -35,8 +35,9 @@ namespace PlayFab
         http.AddRequest("/Profile/GetGlobalPolicy", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnGetGlobalPolicyResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetGlobalPolicyResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabProfilesAPI::OnGetGlobalPolicyResult(CallRequestContainer& request)
+    void PlayFabProfilesAPI::OnGetGlobalPolicyResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetGlobalPolicyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -62,8 +63,9 @@ namespace PlayFab
         http.AddRequest("/Profile/GetProfile", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnGetProfileResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetEntityProfileResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabProfilesAPI::OnGetProfileResult(CallRequestContainer& request)
+    void PlayFabProfilesAPI::OnGetProfileResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetEntityProfileResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -89,8 +91,9 @@ namespace PlayFab
         http.AddRequest("/Profile/GetProfiles", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnGetProfilesResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetEntityProfilesResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabProfilesAPI::OnGetProfilesResult(CallRequestContainer& request)
+    void PlayFabProfilesAPI::OnGetProfilesResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetEntityProfilesResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -116,8 +119,9 @@ namespace PlayFab
         http.AddRequest("/Profile/SetGlobalPolicy", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnSetGlobalPolicyResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<SetGlobalPolicyResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabProfilesAPI::OnSetGlobalPolicyResult(CallRequestContainer& request)
+    void PlayFabProfilesAPI::OnSetGlobalPolicyResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         SetGlobalPolicyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -143,8 +147,9 @@ namespace PlayFab
         http.AddRequest("/Profile/SetProfileLanguage", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnSetProfileLanguageResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<SetProfileLanguageResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabProfilesAPI::OnSetProfileLanguageResult(CallRequestContainer& request)
+    void PlayFabProfilesAPI::OnSetProfileLanguageResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         SetProfileLanguageResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -170,8 +175,9 @@ namespace PlayFab
         http.AddRequest("/Profile/SetProfilePolicy", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnSetProfilePolicyResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<SetEntityProfilePolicyResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabProfilesAPI::OnSetProfilePolicyResult(CallRequestContainer& request)
+    void PlayFabProfilesAPI::OnSetProfilePolicyResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         SetEntityProfilePolicyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;

@@ -35,8 +35,9 @@ namespace PlayFab
         http.AddRequest("/CloudScript/ExecuteEntityCloudScript", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnExecuteEntityCloudScriptResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<ExecuteCloudScriptResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabCloudScriptAPI::OnExecuteEntityCloudScriptResult(CallRequestContainer& request)
+    void PlayFabCloudScriptAPI::OnExecuteEntityCloudScriptResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         ExecuteCloudScriptResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;

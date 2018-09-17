@@ -35,8 +35,9 @@ namespace PlayFab
         http.AddRequest("/Event/WriteEvents", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnWriteEventsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<WriteEventsResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabEventsAPI::OnWriteEventsResult(CallRequestContainer& request)
+    void PlayFabEventsAPI::OnWriteEventsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         WriteEventsResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;

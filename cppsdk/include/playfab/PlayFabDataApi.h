@@ -2,6 +2,7 @@
 
 #ifndef DISABLE_PLAYFABENTITY_API
 
+#include <playfab/PlayFabCallRequestContainer.h>
 #include <playfab/PlayFabHttp.h>
 #include <playfab/PlayFabDataDataModels.h>
 
@@ -31,13 +32,13 @@ namespace PlayFab
         PlayFabDataAPI(const PlayFabDataAPI& other); // Private copy-constructor, static class should never have an instance
 
         // ------------ Generated result handlers
-        static void OnAbortFileUploadsResult(CallRequestContainer& request);
-        static void OnDeleteFilesResult(CallRequestContainer& request);
-        static void OnFinalizeFileUploadsResult(CallRequestContainer& request);
-        static void OnGetFilesResult(CallRequestContainer& request);
-        static void OnGetObjectsResult(CallRequestContainer& request);
-        static void OnInitiateFileUploadsResult(CallRequestContainer& request);
-        static void OnSetObjectsResult(CallRequestContainer& request);
+        static void OnAbortFileUploadsResult(CallRequestContainerBase& request);
+        static void OnDeleteFilesResult(CallRequestContainerBase& request);
+        static void OnFinalizeFileUploadsResult(CallRequestContainerBase& request);
+        static void OnGetFilesResult(CallRequestContainerBase& request);
+        static void OnGetObjectsResult(CallRequestContainerBase& request);
+        static void OnInitiateFileUploadsResult(CallRequestContainerBase& request);
+        static void OnSetObjectsResult(CallRequestContainerBase& request);
 
     };
 }

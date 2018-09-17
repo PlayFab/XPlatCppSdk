@@ -2,6 +2,7 @@
 
 #ifndef DISABLE_PLAYFABENTITY_API
 
+#include <playfab/PlayFabCallRequestContainer.h>
 #include <playfab/PlayFabHttp.h>
 #include <playfab/PlayFabGroupsDataModels.h>
 
@@ -49,31 +50,31 @@ namespace PlayFab
         PlayFabGroupsAPI(const PlayFabGroupsAPI& other); // Private copy-constructor, static class should never have an instance
 
         // ------------ Generated result handlers
-        static void OnAcceptGroupApplicationResult(CallRequestContainer& request);
-        static void OnAcceptGroupInvitationResult(CallRequestContainer& request);
-        static void OnAddMembersResult(CallRequestContainer& request);
-        static void OnApplyToGroupResult(CallRequestContainer& request);
-        static void OnBlockEntityResult(CallRequestContainer& request);
-        static void OnChangeMemberRoleResult(CallRequestContainer& request);
-        static void OnCreateGroupResult(CallRequestContainer& request);
-        static void OnCreateRoleResult(CallRequestContainer& request);
-        static void OnDeleteGroupResult(CallRequestContainer& request);
-        static void OnDeleteRoleResult(CallRequestContainer& request);
-        static void OnGetGroupResult(CallRequestContainer& request);
-        static void OnInviteToGroupResult(CallRequestContainer& request);
-        static void OnIsMemberResult(CallRequestContainer& request);
-        static void OnListGroupApplicationsResult(CallRequestContainer& request);
-        static void OnListGroupBlocksResult(CallRequestContainer& request);
-        static void OnListGroupInvitationsResult(CallRequestContainer& request);
-        static void OnListGroupMembersResult(CallRequestContainer& request);
-        static void OnListMembershipResult(CallRequestContainer& request);
-        static void OnListMembershipOpportunitiesResult(CallRequestContainer& request);
-        static void OnRemoveGroupApplicationResult(CallRequestContainer& request);
-        static void OnRemoveGroupInvitationResult(CallRequestContainer& request);
-        static void OnRemoveMembersResult(CallRequestContainer& request);
-        static void OnUnblockEntityResult(CallRequestContainer& request);
-        static void OnUpdateGroupResult(CallRequestContainer& request);
-        static void OnUpdateRoleResult(CallRequestContainer& request);
+        static void OnAcceptGroupApplicationResult(CallRequestContainerBase& request);
+        static void OnAcceptGroupInvitationResult(CallRequestContainerBase& request);
+        static void OnAddMembersResult(CallRequestContainerBase& request);
+        static void OnApplyToGroupResult(CallRequestContainerBase& request);
+        static void OnBlockEntityResult(CallRequestContainerBase& request);
+        static void OnChangeMemberRoleResult(CallRequestContainerBase& request);
+        static void OnCreateGroupResult(CallRequestContainerBase& request);
+        static void OnCreateRoleResult(CallRequestContainerBase& request);
+        static void OnDeleteGroupResult(CallRequestContainerBase& request);
+        static void OnDeleteRoleResult(CallRequestContainerBase& request);
+        static void OnGetGroupResult(CallRequestContainerBase& request);
+        static void OnInviteToGroupResult(CallRequestContainerBase& request);
+        static void OnIsMemberResult(CallRequestContainerBase& request);
+        static void OnListGroupApplicationsResult(CallRequestContainerBase& request);
+        static void OnListGroupBlocksResult(CallRequestContainerBase& request);
+        static void OnListGroupInvitationsResult(CallRequestContainerBase& request);
+        static void OnListGroupMembersResult(CallRequestContainerBase& request);
+        static void OnListMembershipResult(CallRequestContainerBase& request);
+        static void OnListMembershipOpportunitiesResult(CallRequestContainerBase& request);
+        static void OnRemoveGroupApplicationResult(CallRequestContainerBase& request);
+        static void OnRemoveGroupInvitationResult(CallRequestContainerBase& request);
+        static void OnRemoveMembersResult(CallRequestContainerBase& request);
+        static void OnUnblockEntityResult(CallRequestContainerBase& request);
+        static void OnUpdateGroupResult(CallRequestContainerBase& request);
+        static void OnUpdateRoleResult(CallRequestContainerBase& request);
 
     };
 }

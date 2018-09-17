@@ -2,6 +2,7 @@
 
 #ifndef DISABLE_PLAYFABENTITY_API
 
+#include <playfab/PlayFabCallRequestContainer.h>
 #include <playfab/PlayFabHttp.h>
 #include <playfab/PlayFabLocalizationDataModels.h>
 
@@ -25,7 +26,7 @@ namespace PlayFab
         PlayFabLocalizationAPI(const PlayFabLocalizationAPI& other); // Private copy-constructor, static class should never have an instance
 
         // ------------ Generated result handlers
-        static void OnGetLanguageListResult(CallRequestContainer& request);
+        static void OnGetLanguageListResult(CallRequestContainerBase& request);
 
     };
 }

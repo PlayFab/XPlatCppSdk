@@ -35,8 +35,9 @@ namespace PlayFab
         http.AddRequest("/Group/AcceptGroupApplication", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnAcceptGroupApplicationResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabGroupsAPI::OnAcceptGroupApplicationResult(CallRequestContainer& request)
+    void PlayFabGroupsAPI::OnAcceptGroupApplicationResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -62,8 +63,9 @@ namespace PlayFab
         http.AddRequest("/Group/AcceptGroupInvitation", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnAcceptGroupInvitationResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabGroupsAPI::OnAcceptGroupInvitationResult(CallRequestContainer& request)
+    void PlayFabGroupsAPI::OnAcceptGroupInvitationResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -89,8 +91,9 @@ namespace PlayFab
         http.AddRequest("/Group/AddMembers", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnAddMembersResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabGroupsAPI::OnAddMembersResult(CallRequestContainer& request)
+    void PlayFabGroupsAPI::OnAddMembersResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -116,8 +119,9 @@ namespace PlayFab
         http.AddRequest("/Group/ApplyToGroup", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnApplyToGroupResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<ApplyToGroupResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabGroupsAPI::OnApplyToGroupResult(CallRequestContainer& request)
+    void PlayFabGroupsAPI::OnApplyToGroupResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         ApplyToGroupResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -143,8 +147,9 @@ namespace PlayFab
         http.AddRequest("/Group/BlockEntity", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnBlockEntityResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabGroupsAPI::OnBlockEntityResult(CallRequestContainer& request)
+    void PlayFabGroupsAPI::OnBlockEntityResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -170,8 +175,9 @@ namespace PlayFab
         http.AddRequest("/Group/ChangeMemberRole", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnChangeMemberRoleResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabGroupsAPI::OnChangeMemberRoleResult(CallRequestContainer& request)
+    void PlayFabGroupsAPI::OnChangeMemberRoleResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -197,8 +203,9 @@ namespace PlayFab
         http.AddRequest("/Group/CreateGroup", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnCreateGroupResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateGroupResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabGroupsAPI::OnCreateGroupResult(CallRequestContainer& request)
+    void PlayFabGroupsAPI::OnCreateGroupResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         CreateGroupResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -224,8 +231,9 @@ namespace PlayFab
         http.AddRequest("/Group/CreateRole", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnCreateRoleResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateGroupRoleResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabGroupsAPI::OnCreateRoleResult(CallRequestContainer& request)
+    void PlayFabGroupsAPI::OnCreateRoleResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         CreateGroupRoleResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -251,8 +259,9 @@ namespace PlayFab
         http.AddRequest("/Group/DeleteGroup", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnDeleteGroupResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabGroupsAPI::OnDeleteGroupResult(CallRequestContainer& request)
+    void PlayFabGroupsAPI::OnDeleteGroupResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -278,8 +287,9 @@ namespace PlayFab
         http.AddRequest("/Group/DeleteRole", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnDeleteRoleResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabGroupsAPI::OnDeleteRoleResult(CallRequestContainer& request)
+    void PlayFabGroupsAPI::OnDeleteRoleResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -305,8 +315,9 @@ namespace PlayFab
         http.AddRequest("/Group/GetGroup", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnGetGroupResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetGroupResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabGroupsAPI::OnGetGroupResult(CallRequestContainer& request)
+    void PlayFabGroupsAPI::OnGetGroupResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetGroupResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -332,8 +343,9 @@ namespace PlayFab
         http.AddRequest("/Group/InviteToGroup", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnInviteToGroupResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<InviteToGroupResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabGroupsAPI::OnInviteToGroupResult(CallRequestContainer& request)
+    void PlayFabGroupsAPI::OnInviteToGroupResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         InviteToGroupResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -359,8 +371,9 @@ namespace PlayFab
         http.AddRequest("/Group/IsMember", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnIsMemberResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<IsMemberResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabGroupsAPI::OnIsMemberResult(CallRequestContainer& request)
+    void PlayFabGroupsAPI::OnIsMemberResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         IsMemberResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -386,8 +399,9 @@ namespace PlayFab
         http.AddRequest("/Group/ListGroupApplications", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnListGroupApplicationsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<ListGroupApplicationsResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabGroupsAPI::OnListGroupApplicationsResult(CallRequestContainer& request)
+    void PlayFabGroupsAPI::OnListGroupApplicationsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         ListGroupApplicationsResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -413,8 +427,9 @@ namespace PlayFab
         http.AddRequest("/Group/ListGroupBlocks", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnListGroupBlocksResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<ListGroupBlocksResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabGroupsAPI::OnListGroupBlocksResult(CallRequestContainer& request)
+    void PlayFabGroupsAPI::OnListGroupBlocksResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         ListGroupBlocksResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -440,8 +455,9 @@ namespace PlayFab
         http.AddRequest("/Group/ListGroupInvitations", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnListGroupInvitationsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<ListGroupInvitationsResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabGroupsAPI::OnListGroupInvitationsResult(CallRequestContainer& request)
+    void PlayFabGroupsAPI::OnListGroupInvitationsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         ListGroupInvitationsResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -467,8 +483,9 @@ namespace PlayFab
         http.AddRequest("/Group/ListGroupMembers", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnListGroupMembersResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<ListGroupMembersResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabGroupsAPI::OnListGroupMembersResult(CallRequestContainer& request)
+    void PlayFabGroupsAPI::OnListGroupMembersResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         ListGroupMembersResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -494,8 +511,9 @@ namespace PlayFab
         http.AddRequest("/Group/ListMembership", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnListMembershipResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<ListMembershipResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabGroupsAPI::OnListMembershipResult(CallRequestContainer& request)
+    void PlayFabGroupsAPI::OnListMembershipResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         ListMembershipResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -521,8 +539,9 @@ namespace PlayFab
         http.AddRequest("/Group/ListMembershipOpportunities", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnListMembershipOpportunitiesResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<ListMembershipOpportunitiesResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabGroupsAPI::OnListMembershipOpportunitiesResult(CallRequestContainer& request)
+    void PlayFabGroupsAPI::OnListMembershipOpportunitiesResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         ListMembershipOpportunitiesResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -548,8 +567,9 @@ namespace PlayFab
         http.AddRequest("/Group/RemoveGroupApplication", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnRemoveGroupApplicationResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabGroupsAPI::OnRemoveGroupApplicationResult(CallRequestContainer& request)
+    void PlayFabGroupsAPI::OnRemoveGroupApplicationResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -575,8 +595,9 @@ namespace PlayFab
         http.AddRequest("/Group/RemoveGroupInvitation", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnRemoveGroupInvitationResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabGroupsAPI::OnRemoveGroupInvitationResult(CallRequestContainer& request)
+    void PlayFabGroupsAPI::OnRemoveGroupInvitationResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -602,8 +623,9 @@ namespace PlayFab
         http.AddRequest("/Group/RemoveMembers", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnRemoveMembersResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabGroupsAPI::OnRemoveMembersResult(CallRequestContainer& request)
+    void PlayFabGroupsAPI::OnRemoveMembersResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -629,8 +651,9 @@ namespace PlayFab
         http.AddRequest("/Group/UnblockEntity", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnUnblockEntityResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabGroupsAPI::OnUnblockEntityResult(CallRequestContainer& request)
+    void PlayFabGroupsAPI::OnUnblockEntityResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -656,8 +679,9 @@ namespace PlayFab
         http.AddRequest("/Group/UpdateGroup", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnUpdateGroupResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateGroupResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabGroupsAPI::OnUpdateGroupResult(CallRequestContainer& request)
+    void PlayFabGroupsAPI::OnUpdateGroupResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         UpdateGroupResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -683,8 +707,9 @@ namespace PlayFab
         http.AddRequest("/Group/UpdateRole", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnUpdateRoleResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateGroupRoleResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabGroupsAPI::OnUpdateRoleResult(CallRequestContainer& request)
+    void PlayFabGroupsAPI::OnUpdateRoleResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         UpdateGroupRoleResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;

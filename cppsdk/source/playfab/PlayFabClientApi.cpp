@@ -35,8 +35,9 @@ namespace PlayFab
         http.AddRequest("/Client/AcceptTrade", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnAcceptTradeResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<AcceptTradeResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnAcceptTradeResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnAcceptTradeResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         AcceptTradeResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -62,8 +63,9 @@ namespace PlayFab
         http.AddRequest("/Client/AddFriend", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnAddFriendResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<AddFriendResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnAddFriendResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnAddFriendResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         AddFriendResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -89,8 +91,9 @@ namespace PlayFab
         http.AddRequest("/Client/AddGenericID", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnAddGenericIDResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<AddGenericIDResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnAddGenericIDResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnAddGenericIDResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         AddGenericIDResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -116,8 +119,9 @@ namespace PlayFab
         http.AddRequest("/Client/AddOrUpdateContactEmail", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnAddOrUpdateContactEmailResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<AddOrUpdateContactEmailResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnAddOrUpdateContactEmailResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnAddOrUpdateContactEmailResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         AddOrUpdateContactEmailResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -143,8 +147,9 @@ namespace PlayFab
         http.AddRequest("/Client/AddSharedGroupMembers", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnAddSharedGroupMembersResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<AddSharedGroupMembersResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnAddSharedGroupMembersResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnAddSharedGroupMembersResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         AddSharedGroupMembersResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -170,8 +175,9 @@ namespace PlayFab
         http.AddRequest("/Client/AddUsernamePassword", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnAddUsernamePasswordResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<AddUsernamePasswordResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnAddUsernamePasswordResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnAddUsernamePasswordResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         AddUsernamePasswordResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -197,8 +203,9 @@ namespace PlayFab
         http.AddRequest("/Client/AddUserVirtualCurrency", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnAddUserVirtualCurrencyResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<ModifyUserVirtualCurrencyResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnAddUserVirtualCurrencyResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnAddUserVirtualCurrencyResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         ModifyUserVirtualCurrencyResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -224,8 +231,9 @@ namespace PlayFab
         http.AddRequest("/Client/AndroidDevicePushNotificationRegistration", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnAndroidDevicePushNotificationRegistrationResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<AndroidDevicePushNotificationRegistrationResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnAndroidDevicePushNotificationRegistrationResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnAndroidDevicePushNotificationRegistrationResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         AndroidDevicePushNotificationRegistrationResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -251,8 +259,9 @@ namespace PlayFab
         http.AddRequest("/Client/AttributeInstall", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnAttributeInstallResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<AttributeInstallResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnAttributeInstallResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnAttributeInstallResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         AttributeInstallResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -279,8 +288,9 @@ namespace PlayFab
         http.AddRequest("/Client/CancelTrade", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnCancelTradeResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<CancelTradeResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnCancelTradeResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnCancelTradeResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         CancelTradeResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -306,8 +316,9 @@ namespace PlayFab
         http.AddRequest("/Client/ConfirmPurchase", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnConfirmPurchaseResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<ConfirmPurchaseResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnConfirmPurchaseResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnConfirmPurchaseResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         ConfirmPurchaseResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -333,8 +344,9 @@ namespace PlayFab
         http.AddRequest("/Client/ConsumeItem", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnConsumeItemResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<ConsumeItemResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnConsumeItemResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnConsumeItemResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         ConsumeItemResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -360,8 +372,9 @@ namespace PlayFab
         http.AddRequest("/Client/ConsumeXboxEntitlements", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnConsumeXboxEntitlementsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<ConsumeXboxEntitlementsResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnConsumeXboxEntitlementsResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnConsumeXboxEntitlementsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         ConsumeXboxEntitlementsResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -387,8 +400,9 @@ namespace PlayFab
         http.AddRequest("/Client/CreateSharedGroup", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnCreateSharedGroupResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateSharedGroupResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnCreateSharedGroupResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnCreateSharedGroupResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         CreateSharedGroupResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -414,8 +428,9 @@ namespace PlayFab
         http.AddRequest("/Client/ExecuteCloudScript", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnExecuteCloudScriptResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<ExecuteCloudScriptResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnExecuteCloudScriptResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnExecuteCloudScriptResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         ExecuteCloudScriptResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -441,8 +456,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetAccountInfo", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetAccountInfoResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetAccountInfoResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetAccountInfoResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetAccountInfoResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetAccountInfoResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -468,8 +484,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetAllUsersCharacters", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetAllUsersCharactersResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<ListUsersCharactersResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetAllUsersCharactersResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetAllUsersCharactersResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         ListUsersCharactersResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -495,8 +512,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetCatalogItems", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetCatalogItemsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCatalogItemsResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetCatalogItemsResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetCatalogItemsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetCatalogItemsResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -522,8 +540,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetCharacterData", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetCharacterDataResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCharacterDataResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetCharacterDataResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetCharacterDataResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetCharacterDataResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -549,8 +568,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetCharacterInventory", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetCharacterInventoryResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCharacterInventoryResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetCharacterInventoryResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetCharacterInventoryResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetCharacterInventoryResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -576,8 +596,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetCharacterLeaderboard", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetCharacterLeaderboardResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCharacterLeaderboardResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetCharacterLeaderboardResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetCharacterLeaderboardResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetCharacterLeaderboardResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -603,8 +624,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetCharacterReadOnlyData", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetCharacterReadOnlyDataResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCharacterDataResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetCharacterReadOnlyDataResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetCharacterReadOnlyDataResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetCharacterDataResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -630,8 +652,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetCharacterStatistics", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetCharacterStatisticsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCharacterStatisticsResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetCharacterStatisticsResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetCharacterStatisticsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetCharacterStatisticsResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -657,8 +680,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetContentDownloadUrl", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetContentDownloadUrlResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetContentDownloadUrlResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetContentDownloadUrlResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetContentDownloadUrlResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetContentDownloadUrlResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -684,8 +708,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetCurrentGames", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetCurrentGamesResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<CurrentGamesResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetCurrentGamesResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetCurrentGamesResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         CurrentGamesResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -711,8 +736,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetFriendLeaderboard", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetFriendLeaderboardResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetLeaderboardResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetFriendLeaderboardResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetFriendLeaderboardResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetLeaderboardResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -738,8 +764,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetFriendLeaderboardAroundPlayer", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetFriendLeaderboardAroundPlayerResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetFriendLeaderboardAroundPlayerResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetFriendLeaderboardAroundPlayerResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetFriendLeaderboardAroundPlayerResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetFriendLeaderboardAroundPlayerResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -765,8 +792,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetFriendsList", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetFriendsListResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetFriendsListResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetFriendsListResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetFriendsListResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetFriendsListResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -792,8 +820,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetGameServerRegions", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetGameServerRegionsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GameServerRegionsResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetGameServerRegionsResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetGameServerRegionsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GameServerRegionsResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -819,8 +848,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetLeaderboard", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetLeaderboardResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetLeaderboardResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetLeaderboardResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetLeaderboardResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetLeaderboardResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -846,8 +876,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetLeaderboardAroundCharacter", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetLeaderboardAroundCharacterResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetLeaderboardAroundCharacterResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetLeaderboardAroundCharacterResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetLeaderboardAroundCharacterResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetLeaderboardAroundCharacterResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -873,8 +904,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetLeaderboardAroundPlayer", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetLeaderboardAroundPlayerResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetLeaderboardAroundPlayerResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetLeaderboardAroundPlayerResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetLeaderboardAroundPlayerResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetLeaderboardAroundPlayerResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -900,8 +932,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetLeaderboardForUserCharacters", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetLeaderboardForUserCharactersResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetLeaderboardForUsersCharactersResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetLeaderboardForUserCharactersResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetLeaderboardForUserCharactersResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetLeaderboardForUsersCharactersResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -927,8 +960,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetPaymentToken", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetPaymentTokenResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPaymentTokenResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetPaymentTokenResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetPaymentTokenResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetPaymentTokenResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -954,8 +988,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetPhotonAuthenticationToken", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetPhotonAuthenticationTokenResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPhotonAuthenticationTokenResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetPhotonAuthenticationTokenResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetPhotonAuthenticationTokenResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetPhotonAuthenticationTokenResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -981,8 +1016,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetPlayerCombinedInfo", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetPlayerCombinedInfoResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerCombinedInfoResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetPlayerCombinedInfoResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetPlayerCombinedInfoResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetPlayerCombinedInfoResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1008,8 +1044,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetPlayerProfile", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetPlayerProfileResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerProfileResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetPlayerProfileResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetPlayerProfileResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetPlayerProfileResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1035,8 +1072,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetPlayerSegments", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetPlayerSegmentsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerSegmentsResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetPlayerSegmentsResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetPlayerSegmentsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetPlayerSegmentsResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1062,8 +1100,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetPlayerStatistics", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetPlayerStatisticsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerStatisticsResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetPlayerStatisticsResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetPlayerStatisticsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetPlayerStatisticsResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1089,8 +1128,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetPlayerStatisticVersions", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetPlayerStatisticVersionsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerStatisticVersionsResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetPlayerStatisticVersionsResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetPlayerStatisticVersionsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetPlayerStatisticVersionsResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1116,8 +1156,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetPlayerTags", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetPlayerTagsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerTagsResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetPlayerTagsResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetPlayerTagsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetPlayerTagsResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1143,8 +1184,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetPlayerTrades", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetPlayerTradesResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerTradesResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetPlayerTradesResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetPlayerTradesResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetPlayerTradesResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1170,8 +1212,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetPlayFabIDsFromFacebookIDs", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetPlayFabIDsFromFacebookIDsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromFacebookIDsResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetPlayFabIDsFromFacebookIDsResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetPlayFabIDsFromFacebookIDsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetPlayFabIDsFromFacebookIDsResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1197,8 +1240,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetPlayFabIDsFromFacebookInstantGamesIds", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetPlayFabIDsFromFacebookInstantGamesIdsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromFacebookInstantGamesIdsResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetPlayFabIDsFromFacebookInstantGamesIdsResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetPlayFabIDsFromFacebookInstantGamesIdsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetPlayFabIDsFromFacebookInstantGamesIdsResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1224,8 +1268,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetPlayFabIDsFromGameCenterIDs", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetPlayFabIDsFromGameCenterIDsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromGameCenterIDsResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetPlayFabIDsFromGameCenterIDsResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetPlayFabIDsFromGameCenterIDsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetPlayFabIDsFromGameCenterIDsResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1251,8 +1296,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetPlayFabIDsFromGenericIDs", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetPlayFabIDsFromGenericIDsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromGenericIDsResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetPlayFabIDsFromGenericIDsResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetPlayFabIDsFromGenericIDsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetPlayFabIDsFromGenericIDsResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1278,8 +1324,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetPlayFabIDsFromGoogleIDs", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetPlayFabIDsFromGoogleIDsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromGoogleIDsResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetPlayFabIDsFromGoogleIDsResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetPlayFabIDsFromGoogleIDsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetPlayFabIDsFromGoogleIDsResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1305,8 +1352,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetPlayFabIDsFromKongregateIDs", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetPlayFabIDsFromKongregateIDsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromKongregateIDsResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetPlayFabIDsFromKongregateIDsResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetPlayFabIDsFromKongregateIDsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetPlayFabIDsFromKongregateIDsResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1332,8 +1380,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetPlayFabIDsFromNintendoSwitchDeviceIds", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetPlayFabIDsFromNintendoSwitchDeviceIdsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromNintendoSwitchDeviceIdsResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetPlayFabIDsFromNintendoSwitchDeviceIdsResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetPlayFabIDsFromNintendoSwitchDeviceIdsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetPlayFabIDsFromNintendoSwitchDeviceIdsResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1359,8 +1408,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetPlayFabIDsFromSteamIDs", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetPlayFabIDsFromSteamIDsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromSteamIDsResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetPlayFabIDsFromSteamIDsResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetPlayFabIDsFromSteamIDsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetPlayFabIDsFromSteamIDsResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1386,8 +1436,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetPlayFabIDsFromTwitchIDs", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetPlayFabIDsFromTwitchIDsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromTwitchIDsResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetPlayFabIDsFromTwitchIDsResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetPlayFabIDsFromTwitchIDsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetPlayFabIDsFromTwitchIDsResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1413,8 +1464,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetPublisherData", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetPublisherDataResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPublisherDataResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetPublisherDataResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetPublisherDataResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetPublisherDataResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1440,8 +1492,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetPurchase", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetPurchaseResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPurchaseResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetPurchaseResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetPurchaseResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetPurchaseResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1467,8 +1520,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetSharedGroupData", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetSharedGroupDataResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetSharedGroupDataResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetSharedGroupDataResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetSharedGroupDataResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetSharedGroupDataResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1494,8 +1548,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetStoreItems", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetStoreItemsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetStoreItemsResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetStoreItemsResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetStoreItemsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetStoreItemsResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1521,8 +1576,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetTime", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetTimeResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTimeResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetTimeResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetTimeResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetTimeResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1548,8 +1604,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetTitleData", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetTitleDataResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTitleDataResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetTitleDataResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetTitleDataResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetTitleDataResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1575,8 +1632,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetTitleNews", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetTitleNewsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTitleNewsResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetTitleNewsResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetTitleNewsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetTitleNewsResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1602,8 +1660,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetTitlePublicKey", "", "", requestJson, OnGetTitlePublicKeyResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTitlePublicKeyResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetTitlePublicKeyResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetTitlePublicKeyResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetTitlePublicKeyResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1629,8 +1688,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetTradeStatus", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetTradeStatusResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTradeStatusResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetTradeStatusResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetTradeStatusResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetTradeStatusResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1656,8 +1716,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetUserData", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetUserDataResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetUserDataResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetUserDataResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetUserDataResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1683,8 +1744,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetUserInventory", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetUserInventoryResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserInventoryResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetUserInventoryResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetUserInventoryResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetUserInventoryResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1710,8 +1772,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetUserPublisherData", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetUserPublisherDataResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetUserPublisherDataResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetUserPublisherDataResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetUserDataResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1737,8 +1800,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetUserPublisherReadOnlyData", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetUserPublisherReadOnlyDataResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetUserPublisherReadOnlyDataResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetUserPublisherReadOnlyDataResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetUserDataResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1764,8 +1828,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetUserReadOnlyData", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGetUserReadOnlyDataResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetUserReadOnlyDataResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetUserReadOnlyDataResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetUserDataResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1791,8 +1856,9 @@ namespace PlayFab
         http.AddRequest("/Client/GetWindowsHelloChallenge", "", "", requestJson, OnGetWindowsHelloChallengeResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetWindowsHelloChallengeResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGetWindowsHelloChallengeResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGetWindowsHelloChallengeResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GetWindowsHelloChallengeResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1818,8 +1884,9 @@ namespace PlayFab
         http.AddRequest("/Client/GrantCharacterToUser", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnGrantCharacterToUserResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GrantCharacterToUserResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnGrantCharacterToUserResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnGrantCharacterToUserResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         GrantCharacterToUserResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1845,8 +1912,9 @@ namespace PlayFab
         http.AddRequest("/Client/LinkAndroidDeviceID", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnLinkAndroidDeviceIDResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkAndroidDeviceIDResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLinkAndroidDeviceIDResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLinkAndroidDeviceIDResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LinkAndroidDeviceIDResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1872,8 +1940,9 @@ namespace PlayFab
         http.AddRequest("/Client/LinkCustomID", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnLinkCustomIDResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkCustomIDResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLinkCustomIDResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLinkCustomIDResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LinkCustomIDResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1899,8 +1968,9 @@ namespace PlayFab
         http.AddRequest("/Client/LinkFacebookAccount", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnLinkFacebookAccountResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkFacebookAccountResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLinkFacebookAccountResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLinkFacebookAccountResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LinkFacebookAccountResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1926,8 +1996,9 @@ namespace PlayFab
         http.AddRequest("/Client/LinkFacebookInstantGamesId", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnLinkFacebookInstantGamesIdResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkFacebookInstantGamesIdResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLinkFacebookInstantGamesIdResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLinkFacebookInstantGamesIdResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LinkFacebookInstantGamesIdResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1953,8 +2024,9 @@ namespace PlayFab
         http.AddRequest("/Client/LinkGameCenterAccount", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnLinkGameCenterAccountResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkGameCenterAccountResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLinkGameCenterAccountResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLinkGameCenterAccountResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LinkGameCenterAccountResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -1980,8 +2052,9 @@ namespace PlayFab
         http.AddRequest("/Client/LinkGoogleAccount", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnLinkGoogleAccountResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkGoogleAccountResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLinkGoogleAccountResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLinkGoogleAccountResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LinkGoogleAccountResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2007,8 +2080,9 @@ namespace PlayFab
         http.AddRequest("/Client/LinkIOSDeviceID", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnLinkIOSDeviceIDResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkIOSDeviceIDResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLinkIOSDeviceIDResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLinkIOSDeviceIDResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LinkIOSDeviceIDResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2034,8 +2108,9 @@ namespace PlayFab
         http.AddRequest("/Client/LinkKongregate", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnLinkKongregateResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkKongregateAccountResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLinkKongregateResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLinkKongregateResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LinkKongregateAccountResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2061,8 +2136,9 @@ namespace PlayFab
         http.AddRequest("/Client/LinkNintendoSwitchDeviceId", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnLinkNintendoSwitchDeviceIdResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkNintendoSwitchDeviceIdResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLinkNintendoSwitchDeviceIdResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLinkNintendoSwitchDeviceIdResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LinkNintendoSwitchDeviceIdResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2088,8 +2164,9 @@ namespace PlayFab
         http.AddRequest("/Client/LinkSteamAccount", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnLinkSteamAccountResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkSteamAccountResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLinkSteamAccountResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLinkSteamAccountResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LinkSteamAccountResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2115,8 +2192,9 @@ namespace PlayFab
         http.AddRequest("/Client/LinkTwitch", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnLinkTwitchResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkTwitchAccountResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLinkTwitchResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLinkTwitchResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LinkTwitchAccountResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2142,8 +2220,9 @@ namespace PlayFab
         http.AddRequest("/Client/LinkWindowsHello", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnLinkWindowsHelloResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkWindowsHelloAccountResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLinkWindowsHelloResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLinkWindowsHelloResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LinkWindowsHelloAccountResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2169,8 +2248,9 @@ namespace PlayFab
         http.AddRequest("/Client/LinkXboxAccount", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnLinkXboxAccountResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkXboxAccountResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLinkXboxAccountResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLinkXboxAccountResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LinkXboxAccountResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2197,8 +2277,9 @@ namespace PlayFab
         http.AddRequest("/Client/LoginWithAndroidDeviceID", "", "", requestJson, OnLoginWithAndroidDeviceIDResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLoginWithAndroidDeviceIDResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLoginWithAndroidDeviceIDResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LoginResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2231,8 +2312,9 @@ namespace PlayFab
         http.AddRequest("/Client/LoginWithCustomID", "", "", requestJson, OnLoginWithCustomIDResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLoginWithCustomIDResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLoginWithCustomIDResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LoginResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2265,8 +2347,9 @@ namespace PlayFab
         http.AddRequest("/Client/LoginWithEmailAddress", "", "", requestJson, OnLoginWithEmailAddressResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLoginWithEmailAddressResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLoginWithEmailAddressResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LoginResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2299,8 +2382,9 @@ namespace PlayFab
         http.AddRequest("/Client/LoginWithFacebook", "", "", requestJson, OnLoginWithFacebookResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLoginWithFacebookResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLoginWithFacebookResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LoginResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2333,8 +2417,9 @@ namespace PlayFab
         http.AddRequest("/Client/LoginWithFacebookInstantGamesId", "", "", requestJson, OnLoginWithFacebookInstantGamesIdResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLoginWithFacebookInstantGamesIdResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLoginWithFacebookInstantGamesIdResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LoginResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2367,8 +2452,9 @@ namespace PlayFab
         http.AddRequest("/Client/LoginWithGameCenter", "", "", requestJson, OnLoginWithGameCenterResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLoginWithGameCenterResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLoginWithGameCenterResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LoginResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2401,8 +2487,9 @@ namespace PlayFab
         http.AddRequest("/Client/LoginWithGoogleAccount", "", "", requestJson, OnLoginWithGoogleAccountResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLoginWithGoogleAccountResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLoginWithGoogleAccountResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LoginResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2435,8 +2522,9 @@ namespace PlayFab
         http.AddRequest("/Client/LoginWithIOSDeviceID", "", "", requestJson, OnLoginWithIOSDeviceIDResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLoginWithIOSDeviceIDResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLoginWithIOSDeviceIDResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LoginResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2469,8 +2557,9 @@ namespace PlayFab
         http.AddRequest("/Client/LoginWithKongregate", "", "", requestJson, OnLoginWithKongregateResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLoginWithKongregateResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLoginWithKongregateResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LoginResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2503,8 +2592,9 @@ namespace PlayFab
         http.AddRequest("/Client/LoginWithNintendoSwitchDeviceId", "", "", requestJson, OnLoginWithNintendoSwitchDeviceIdResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLoginWithNintendoSwitchDeviceIdResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLoginWithNintendoSwitchDeviceIdResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LoginResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2537,8 +2627,9 @@ namespace PlayFab
         http.AddRequest("/Client/LoginWithPlayFab", "", "", requestJson, OnLoginWithPlayFabResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLoginWithPlayFabResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLoginWithPlayFabResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LoginResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2571,8 +2662,9 @@ namespace PlayFab
         http.AddRequest("/Client/LoginWithSteam", "", "", requestJson, OnLoginWithSteamResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLoginWithSteamResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLoginWithSteamResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LoginResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2605,8 +2697,9 @@ namespace PlayFab
         http.AddRequest("/Client/LoginWithTwitch", "", "", requestJson, OnLoginWithTwitchResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLoginWithTwitchResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLoginWithTwitchResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LoginResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2639,8 +2732,9 @@ namespace PlayFab
         http.AddRequest("/Client/LoginWithWindowsHello", "", "", requestJson, OnLoginWithWindowsHelloResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLoginWithWindowsHelloResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLoginWithWindowsHelloResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LoginResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2673,8 +2767,9 @@ namespace PlayFab
         http.AddRequest("/Client/LoginWithXbox", "", "", requestJson, OnLoginWithXboxResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnLoginWithXboxResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnLoginWithXboxResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LoginResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2706,8 +2801,9 @@ namespace PlayFab
         http.AddRequest("/Client/Matchmake", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnMatchmakeResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<MatchmakeResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnMatchmakeResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnMatchmakeResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         MatchmakeResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2733,8 +2829,9 @@ namespace PlayFab
         http.AddRequest("/Client/OpenTrade", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnOpenTradeResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<OpenTradeResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnOpenTradeResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnOpenTradeResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         OpenTradeResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2760,8 +2857,9 @@ namespace PlayFab
         http.AddRequest("/Client/PayForPurchase", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnPayForPurchaseResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<PayForPurchaseResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnPayForPurchaseResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnPayForPurchaseResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         PayForPurchaseResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2787,8 +2885,9 @@ namespace PlayFab
         http.AddRequest("/Client/PurchaseItem", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnPurchaseItemResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<PurchaseItemResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnPurchaseItemResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnPurchaseItemResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         PurchaseItemResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2814,8 +2913,9 @@ namespace PlayFab
         http.AddRequest("/Client/RedeemCoupon", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnRedeemCouponResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<RedeemCouponResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnRedeemCouponResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnRedeemCouponResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         RedeemCouponResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2841,8 +2941,9 @@ namespace PlayFab
         http.AddRequest("/Client/RegisterForIOSPushNotification", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnRegisterForIOSPushNotificationResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<RegisterForIOSPushNotificationResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnRegisterForIOSPushNotificationResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnRegisterForIOSPushNotificationResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         RegisterForIOSPushNotificationResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2869,8 +2970,9 @@ namespace PlayFab
         http.AddRequest("/Client/RegisterPlayFabUser", "", "", requestJson, OnRegisterPlayFabUserResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<RegisterPlayFabUserResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnRegisterPlayFabUserResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnRegisterPlayFabUserResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         RegisterPlayFabUserResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2902,8 +3004,9 @@ namespace PlayFab
         http.AddRequest("/Client/RegisterWithWindowsHello", "", "", requestJson, OnRegisterWithWindowsHelloResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnRegisterWithWindowsHelloResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnRegisterWithWindowsHelloResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         LoginResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2935,8 +3038,9 @@ namespace PlayFab
         http.AddRequest("/Client/RemoveContactEmail", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnRemoveContactEmailResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<RemoveContactEmailResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnRemoveContactEmailResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnRemoveContactEmailResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         RemoveContactEmailResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2962,8 +3066,9 @@ namespace PlayFab
         http.AddRequest("/Client/RemoveFriend", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnRemoveFriendResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<RemoveFriendResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnRemoveFriendResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnRemoveFriendResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         RemoveFriendResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -2989,8 +3094,9 @@ namespace PlayFab
         http.AddRequest("/Client/RemoveGenericID", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnRemoveGenericIDResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<RemoveGenericIDResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnRemoveGenericIDResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnRemoveGenericIDResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         RemoveGenericIDResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3016,8 +3122,9 @@ namespace PlayFab
         http.AddRequest("/Client/RemoveSharedGroupMembers", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnRemoveSharedGroupMembersResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<RemoveSharedGroupMembersResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnRemoveSharedGroupMembersResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnRemoveSharedGroupMembersResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         RemoveSharedGroupMembersResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3043,8 +3150,9 @@ namespace PlayFab
         http.AddRequest("/Client/ReportDeviceInfo", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnReportDeviceInfoResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnReportDeviceInfoResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnReportDeviceInfoResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3070,8 +3178,9 @@ namespace PlayFab
         http.AddRequest("/Client/ReportPlayer", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnReportPlayerResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<ReportPlayerClientResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnReportPlayerResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnReportPlayerResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         ReportPlayerClientResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3097,8 +3206,9 @@ namespace PlayFab
         http.AddRequest("/Client/RestoreIOSPurchases", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnRestoreIOSPurchasesResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<RestoreIOSPurchasesResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnRestoreIOSPurchasesResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnRestoreIOSPurchasesResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         RestoreIOSPurchasesResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3124,8 +3234,9 @@ namespace PlayFab
         http.AddRequest("/Client/SendAccountRecoveryEmail", "", "", requestJson, OnSendAccountRecoveryEmailResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<SendAccountRecoveryEmailResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnSendAccountRecoveryEmailResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnSendAccountRecoveryEmailResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         SendAccountRecoveryEmailResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3151,8 +3262,9 @@ namespace PlayFab
         http.AddRequest("/Client/SetFriendTags", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnSetFriendTagsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<SetFriendTagsResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnSetFriendTagsResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnSetFriendTagsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         SetFriendTagsResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3178,8 +3290,9 @@ namespace PlayFab
         http.AddRequest("/Client/SetPlayerSecret", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnSetPlayerSecretResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<SetPlayerSecretResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnSetPlayerSecretResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnSetPlayerSecretResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         SetPlayerSecretResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3205,8 +3318,9 @@ namespace PlayFab
         http.AddRequest("/Client/StartGame", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnStartGameResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<StartGameResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnStartGameResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnStartGameResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         StartGameResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3232,8 +3346,9 @@ namespace PlayFab
         http.AddRequest("/Client/StartPurchase", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnStartPurchaseResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<StartPurchaseResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnStartPurchaseResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnStartPurchaseResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         StartPurchaseResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3259,8 +3374,9 @@ namespace PlayFab
         http.AddRequest("/Client/SubtractUserVirtualCurrency", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnSubtractUserVirtualCurrencyResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<ModifyUserVirtualCurrencyResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnSubtractUserVirtualCurrencyResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnSubtractUserVirtualCurrencyResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         ModifyUserVirtualCurrencyResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3286,8 +3402,9 @@ namespace PlayFab
         http.AddRequest("/Client/UnlinkAndroidDeviceID", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUnlinkAndroidDeviceIDResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkAndroidDeviceIDResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnUnlinkAndroidDeviceIDResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnUnlinkAndroidDeviceIDResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         UnlinkAndroidDeviceIDResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3313,8 +3430,9 @@ namespace PlayFab
         http.AddRequest("/Client/UnlinkCustomID", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUnlinkCustomIDResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkCustomIDResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnUnlinkCustomIDResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnUnlinkCustomIDResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         UnlinkCustomIDResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3340,8 +3458,9 @@ namespace PlayFab
         http.AddRequest("/Client/UnlinkFacebookAccount", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUnlinkFacebookAccountResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkFacebookAccountResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnUnlinkFacebookAccountResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnUnlinkFacebookAccountResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         UnlinkFacebookAccountResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3367,8 +3486,9 @@ namespace PlayFab
         http.AddRequest("/Client/UnlinkFacebookInstantGamesId", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUnlinkFacebookInstantGamesIdResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkFacebookInstantGamesIdResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnUnlinkFacebookInstantGamesIdResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnUnlinkFacebookInstantGamesIdResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         UnlinkFacebookInstantGamesIdResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3394,8 +3514,9 @@ namespace PlayFab
         http.AddRequest("/Client/UnlinkGameCenterAccount", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUnlinkGameCenterAccountResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkGameCenterAccountResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnUnlinkGameCenterAccountResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnUnlinkGameCenterAccountResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         UnlinkGameCenterAccountResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3421,8 +3542,9 @@ namespace PlayFab
         http.AddRequest("/Client/UnlinkGoogleAccount", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUnlinkGoogleAccountResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkGoogleAccountResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnUnlinkGoogleAccountResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnUnlinkGoogleAccountResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         UnlinkGoogleAccountResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3448,8 +3570,9 @@ namespace PlayFab
         http.AddRequest("/Client/UnlinkIOSDeviceID", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUnlinkIOSDeviceIDResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkIOSDeviceIDResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnUnlinkIOSDeviceIDResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnUnlinkIOSDeviceIDResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         UnlinkIOSDeviceIDResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3475,8 +3598,9 @@ namespace PlayFab
         http.AddRequest("/Client/UnlinkKongregate", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUnlinkKongregateResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkKongregateAccountResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnUnlinkKongregateResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnUnlinkKongregateResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         UnlinkKongregateAccountResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3502,8 +3626,9 @@ namespace PlayFab
         http.AddRequest("/Client/UnlinkNintendoSwitchDeviceId", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUnlinkNintendoSwitchDeviceIdResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkNintendoSwitchDeviceIdResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnUnlinkNintendoSwitchDeviceIdResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnUnlinkNintendoSwitchDeviceIdResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         UnlinkNintendoSwitchDeviceIdResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3529,8 +3654,9 @@ namespace PlayFab
         http.AddRequest("/Client/UnlinkSteamAccount", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUnlinkSteamAccountResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkSteamAccountResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnUnlinkSteamAccountResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnUnlinkSteamAccountResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         UnlinkSteamAccountResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3556,8 +3682,9 @@ namespace PlayFab
         http.AddRequest("/Client/UnlinkTwitch", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUnlinkTwitchResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkTwitchAccountResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnUnlinkTwitchResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnUnlinkTwitchResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         UnlinkTwitchAccountResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3583,8 +3710,9 @@ namespace PlayFab
         http.AddRequest("/Client/UnlinkWindowsHello", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUnlinkWindowsHelloResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkWindowsHelloAccountResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnUnlinkWindowsHelloResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnUnlinkWindowsHelloResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         UnlinkWindowsHelloAccountResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3610,8 +3738,9 @@ namespace PlayFab
         http.AddRequest("/Client/UnlinkXboxAccount", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUnlinkXboxAccountResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkXboxAccountResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnUnlinkXboxAccountResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnUnlinkXboxAccountResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         UnlinkXboxAccountResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3637,8 +3766,9 @@ namespace PlayFab
         http.AddRequest("/Client/UnlockContainerInstance", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUnlockContainerInstanceResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlockContainerItemResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnUnlockContainerInstanceResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnUnlockContainerInstanceResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         UnlockContainerItemResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3664,8 +3794,9 @@ namespace PlayFab
         http.AddRequest("/Client/UnlockContainerItem", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUnlockContainerItemResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlockContainerItemResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnUnlockContainerItemResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnUnlockContainerItemResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         UnlockContainerItemResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3691,8 +3822,9 @@ namespace PlayFab
         http.AddRequest("/Client/UpdateAvatarUrl", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUpdateAvatarUrlResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnUpdateAvatarUrlResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnUpdateAvatarUrlResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         EmptyResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3718,8 +3850,9 @@ namespace PlayFab
         http.AddRequest("/Client/UpdateCharacterData", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUpdateCharacterDataResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateCharacterDataResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnUpdateCharacterDataResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnUpdateCharacterDataResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         UpdateCharacterDataResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3745,8 +3878,9 @@ namespace PlayFab
         http.AddRequest("/Client/UpdateCharacterStatistics", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUpdateCharacterStatisticsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateCharacterStatisticsResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnUpdateCharacterStatisticsResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnUpdateCharacterStatisticsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         UpdateCharacterStatisticsResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3772,8 +3906,9 @@ namespace PlayFab
         http.AddRequest("/Client/UpdatePlayerStatistics", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUpdatePlayerStatisticsResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdatePlayerStatisticsResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnUpdatePlayerStatisticsResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnUpdatePlayerStatisticsResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         UpdatePlayerStatisticsResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3799,8 +3934,9 @@ namespace PlayFab
         http.AddRequest("/Client/UpdateSharedGroupData", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUpdateSharedGroupDataResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateSharedGroupDataResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnUpdateSharedGroupDataResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnUpdateSharedGroupDataResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         UpdateSharedGroupDataResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3826,8 +3962,9 @@ namespace PlayFab
         http.AddRequest("/Client/UpdateUserData", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUpdateUserDataResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnUpdateUserDataResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnUpdateUserDataResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         UpdateUserDataResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3853,8 +3990,9 @@ namespace PlayFab
         http.AddRequest("/Client/UpdateUserPublisherData", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUpdateUserPublisherDataResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnUpdateUserPublisherDataResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnUpdateUserPublisherDataResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         UpdateUserDataResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3880,8 +4018,9 @@ namespace PlayFab
         http.AddRequest("/Client/UpdateUserTitleDisplayName", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnUpdateUserTitleDisplayNameResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserTitleDisplayNameResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnUpdateUserTitleDisplayNameResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnUpdateUserTitleDisplayNameResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         UpdateUserTitleDisplayNameResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3907,8 +4046,9 @@ namespace PlayFab
         http.AddRequest("/Client/ValidateAmazonIAPReceipt", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnValidateAmazonIAPReceiptResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<ValidateAmazonReceiptResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnValidateAmazonIAPReceiptResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnValidateAmazonIAPReceiptResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         ValidateAmazonReceiptResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3934,8 +4074,9 @@ namespace PlayFab
         http.AddRequest("/Client/ValidateGooglePlayPurchase", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnValidateGooglePlayPurchaseResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<ValidateGooglePlayPurchaseResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnValidateGooglePlayPurchaseResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnValidateGooglePlayPurchaseResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         ValidateGooglePlayPurchaseResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3961,8 +4102,9 @@ namespace PlayFab
         http.AddRequest("/Client/ValidateIOSReceipt", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnValidateIOSReceiptResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<ValidateIOSReceiptResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnValidateIOSReceiptResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnValidateIOSReceiptResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         ValidateIOSReceiptResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -3988,8 +4130,9 @@ namespace PlayFab
         http.AddRequest("/Client/ValidateWindowsStoreReceipt", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnValidateWindowsStoreReceiptResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<ValidateWindowsReceiptResult>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnValidateWindowsStoreReceiptResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnValidateWindowsStoreReceiptResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         ValidateWindowsReceiptResult outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -4015,8 +4158,9 @@ namespace PlayFab
         http.AddRequest("/Client/WriteCharacterEvent", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnWriteCharacterEventResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<WriteEventResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnWriteCharacterEventResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnWriteCharacterEventResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         WriteEventResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -4042,8 +4186,9 @@ namespace PlayFab
         http.AddRequest("/Client/WritePlayerEvent", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnWritePlayerEventResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<WriteEventResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnWritePlayerEventResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnWritePlayerEventResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         WriteEventResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;
@@ -4069,8 +4214,9 @@ namespace PlayFab
         http.AddRequest("/Client/WriteTitleEvent", "X-Authorization", PlayFabSettings::clientSessionTicket, requestJson, OnWriteTitleEventResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<WriteEventResponse>(callback)), errorCallback, customData);
     }
 
-    void PlayFabClientAPI::OnWriteTitleEventResult(CallRequestContainer& request)
+    void PlayFabClientAPI::OnWriteTitleEventResult(CallRequestContainerBase& pRequest)
     {
+        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
         WriteEventResponse outResult;
         outResult.FromJson(request.errorWrapper.Data);
         outResult.Request = request.errorWrapper.Request;

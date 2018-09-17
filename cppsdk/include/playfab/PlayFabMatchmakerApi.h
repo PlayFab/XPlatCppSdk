@@ -2,6 +2,7 @@
 
 #ifdef ENABLE_PLAYFABSERVER_API
 
+#include <playfab/PlayFabCallRequestContainer.h>
 #include <playfab/PlayFabHttp.h>
 #include <playfab/PlayFabMatchmakerDataModels.h>
 
@@ -29,11 +30,11 @@ namespace PlayFab
         PlayFabMatchmakerAPI(const PlayFabMatchmakerAPI& other); // Private copy-constructor, static class should never have an instance
 
         // ------------ Generated result handlers
-        static void OnAuthUserResult(CallRequestContainer& request);
-        static void OnPlayerJoinedResult(CallRequestContainer& request);
-        static void OnPlayerLeftResult(CallRequestContainer& request);
-        static void OnStartGameResult(CallRequestContainer& request);
-        static void OnUserInfoResult(CallRequestContainer& request);
+        static void OnAuthUserResult(CallRequestContainerBase& request);
+        static void OnPlayerJoinedResult(CallRequestContainerBase& request);
+        static void OnPlayerLeftResult(CallRequestContainerBase& request);
+        static void OnStartGameResult(CallRequestContainerBase& request);
+        static void OnUserInfoResult(CallRequestContainerBase& request);
 
     };
 }
