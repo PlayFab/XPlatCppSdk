@@ -5249,15 +5249,18 @@ namespace PlayFab
 
         struct DeleteMasterPlayerAccountRequest : public PlayFabRequestCommon
         {
+            std::string MetaData;
             std::string PlayFabId;
 
             DeleteMasterPlayerAccountRequest() :
                 PlayFabRequestCommon(),
+                MetaData(),
                 PlayFabId()
             {}
 
             DeleteMasterPlayerAccountRequest(const DeleteMasterPlayerAccountRequest& src) :
                 PlayFabRequestCommon(),
+                MetaData(src.MetaData),
                 PlayFabId(src.PlayFabId)
             {}
 
@@ -5265,12 +5268,14 @@ namespace PlayFab
 
             void FromJson(Json::Value& input) override
             {
+                FromJsonUtilS(input["MetaData"], MetaData);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_MetaData; ToJsonUtilS(MetaData, each_MetaData); output["MetaData"] = each_MetaData;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 return output;
             }
