@@ -26,8 +26,9 @@ namespace PlayFab
         PlayFabLocalizationAPI(const PlayFabLocalizationAPI& other); // Private copy-constructor, static class should never have an instance
 
         // ------------ Generated result handlers
-        static void OnGetLanguageListResult(CallRequestContainerBase& request);
+        static void OnGetLanguageListResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
 
+        static bool ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container);
     };
 }
 

@@ -50,32 +50,33 @@ namespace PlayFab
         PlayFabGroupsAPI(const PlayFabGroupsAPI& other); // Private copy-constructor, static class should never have an instance
 
         // ------------ Generated result handlers
-        static void OnAcceptGroupApplicationResult(CallRequestContainerBase& request);
-        static void OnAcceptGroupInvitationResult(CallRequestContainerBase& request);
-        static void OnAddMembersResult(CallRequestContainerBase& request);
-        static void OnApplyToGroupResult(CallRequestContainerBase& request);
-        static void OnBlockEntityResult(CallRequestContainerBase& request);
-        static void OnChangeMemberRoleResult(CallRequestContainerBase& request);
-        static void OnCreateGroupResult(CallRequestContainerBase& request);
-        static void OnCreateRoleResult(CallRequestContainerBase& request);
-        static void OnDeleteGroupResult(CallRequestContainerBase& request);
-        static void OnDeleteRoleResult(CallRequestContainerBase& request);
-        static void OnGetGroupResult(CallRequestContainerBase& request);
-        static void OnInviteToGroupResult(CallRequestContainerBase& request);
-        static void OnIsMemberResult(CallRequestContainerBase& request);
-        static void OnListGroupApplicationsResult(CallRequestContainerBase& request);
-        static void OnListGroupBlocksResult(CallRequestContainerBase& request);
-        static void OnListGroupInvitationsResult(CallRequestContainerBase& request);
-        static void OnListGroupMembersResult(CallRequestContainerBase& request);
-        static void OnListMembershipResult(CallRequestContainerBase& request);
-        static void OnListMembershipOpportunitiesResult(CallRequestContainerBase& request);
-        static void OnRemoveGroupApplicationResult(CallRequestContainerBase& request);
-        static void OnRemoveGroupInvitationResult(CallRequestContainerBase& request);
-        static void OnRemoveMembersResult(CallRequestContainerBase& request);
-        static void OnUnblockEntityResult(CallRequestContainerBase& request);
-        static void OnUpdateGroupResult(CallRequestContainerBase& request);
-        static void OnUpdateRoleResult(CallRequestContainerBase& request);
+        static void OnAcceptGroupApplicationResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnAcceptGroupInvitationResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnAddMembersResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnApplyToGroupResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnBlockEntityResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnChangeMemberRoleResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnCreateGroupResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnCreateRoleResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnDeleteGroupResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnDeleteRoleResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnGetGroupResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnInviteToGroupResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnIsMemberResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnListGroupApplicationsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnListGroupBlocksResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnListGroupInvitationsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnListGroupMembersResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnListMembershipResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnListMembershipOpportunitiesResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnRemoveGroupApplicationResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnRemoveGroupInvitationResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnRemoveMembersResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnUnblockEntityResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnUpdateGroupResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnUpdateRoleResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
 
+        static bool ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container);
     };
 }
 

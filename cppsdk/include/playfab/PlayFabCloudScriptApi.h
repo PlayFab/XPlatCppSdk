@@ -26,8 +26,9 @@ namespace PlayFab
         PlayFabCloudScriptAPI(const PlayFabCloudScriptAPI& other); // Private copy-constructor, static class should never have an instance
 
         // ------------ Generated result handlers
-        static void OnExecuteEntityCloudScriptResult(CallRequestContainerBase& request);
+        static void OnExecuteEntityCloudScriptResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
 
+        static bool ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container);
     };
 }
 

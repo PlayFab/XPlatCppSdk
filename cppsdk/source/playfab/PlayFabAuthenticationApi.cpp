@@ -5,6 +5,9 @@
 #include <playfab/PlayFabAuthenticationApi.h>
 #include <playfab/PlayFabHttp.h>
 #include <playfab/PlayFabSettings.h>
+#include <playfab/PlayFabError.h>
+
+#pragma warning (disable: 4100) // formal parameters are part of a public interface
 
 namespace PlayFab
 {
@@ -38,24 +41,65 @@ namespace PlayFab
             authKey = "X-SecretKey"; authValue = PlayFabSettings::developerSecretKey;
         }
 
-        IPlayFabHttp& http = IPlayFabHttp::Get();
+        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Authentication/GetEntityToken", authKey, authValue, requestJson, OnGetEntityTokenResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetEntityTokenResponse>(callback)), errorCallback, customData);
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace(authKey, authValue);
+
+        CallRequestContainer* reqContainer = new CallRequestContainer(
+            "/Authentication/GetEntityToken",
+            headers,
+            jsonAsString,
+            OnGetEntityTokenResult,
+            customData);
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetEntityTokenResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(*reqContainer);
     }
 
-    void PlayFabAuthenticationAPI::OnGetEntityTokenResult(CallRequestContainerBase& pRequest)
+    void PlayFabAuthenticationAPI::OnGetEntityTokenResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
     {
-        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
-        GetEntityTokenResponse outResult;
-        outResult.FromJson(request.errorWrapper.Data);
-        outResult.Request = request.errorWrapper.Request;
-        if (outResult.EntityToken.length() > 0) PlayFabSettings::entityToken = outResult.EntityToken;
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
 
-        const auto internalPtr = request.successCallback.get();
-        if (internalPtr != nullptr)
+        GetEntityTokenResponse outResult;
+        if (ValidateResult(outResult, container))
         {
-            const auto callback = (*static_cast<ProcessApiCallback<GetEntityTokenResponse> *>(internalPtr));
-            callback(outResult, request.customData);
+            if (outResult.EntityToken.length() > 0)            {
+                PlayFabSettings::entityToken = outResult.EntityToken; 
+            }
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<GetEntityTokenResponse> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+
+        delete &container;
+    }
+
+    bool PlayFabAuthenticationAPI::ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container)
+    {
+        if (container.errorWrapper.HttpCode == 200)
+        {
+            resultCommon.FromJson(container.errorWrapper.Data);
+            resultCommon.Request = container.errorWrapper.Request;
+            return true;
+        }
+        else // Process the error case
+        {
+            if (PlayFabSettings::globalErrorHandler != nullptr)
+                PlayFabSettings::globalErrorHandler(container.errorWrapper, container.GetCustomData());
+            if (container.errorCallback != nullptr)
+                container.errorCallback(container.errorWrapper, container.GetCustomData());
+            return false;
         }
     }
 }

@@ -5,7 +5,7 @@
 
 namespace PlayFab
 {
-    PlayFabPluginManager& PlayFabPluginManager::instance()
+    PlayFabPluginManager& PlayFabPluginManager::GetInstance()
     {
         static PlayFabPluginManager instance;
         return instance;
@@ -13,7 +13,7 @@ namespace PlayFab
 
     void PlayFabPluginManager::SetPlugin(IPlayFabPlugin& plugin, const PlayFabPluginContract& contract, const std::string& instanceName)
     {
-        instance().SetPluginInternal(plugin, contract, instanceName);
+        GetInstance().SetPluginInternal(plugin, contract, instanceName);
     }
 
     IPlayFabPlugin& PlayFabPluginManager::GetPluginInternal(const PlayFabPluginContract& contract, const std::string& instanceName)
@@ -68,7 +68,7 @@ namespace PlayFab
 
     IPlayFabPlugin* PlayFabPluginManager::CreatePlayFabTransportPlugin()
     {
-        // TODO: this should make a real HttpPlugin, not an interface
-        return new IPlayFabHttpPlugin;
+        IPlayFabHttp& http = IPlayFabHttp::Get();
+        return &http;
     }
 }

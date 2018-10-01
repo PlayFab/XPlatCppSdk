@@ -32,14 +32,15 @@ namespace PlayFab
         PlayFabDataAPI(const PlayFabDataAPI& other); // Private copy-constructor, static class should never have an instance
 
         // ------------ Generated result handlers
-        static void OnAbortFileUploadsResult(CallRequestContainerBase& request);
-        static void OnDeleteFilesResult(CallRequestContainerBase& request);
-        static void OnFinalizeFileUploadsResult(CallRequestContainerBase& request);
-        static void OnGetFilesResult(CallRequestContainerBase& request);
-        static void OnGetObjectsResult(CallRequestContainerBase& request);
-        static void OnInitiateFileUploadsResult(CallRequestContainerBase& request);
-        static void OnSetObjectsResult(CallRequestContainerBase& request);
+        static void OnAbortFileUploadsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnDeleteFilesResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnFinalizeFileUploadsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnGetFilesResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnGetObjectsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnInitiateFileUploadsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnSetObjectsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
 
+        static bool ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container);
     };
 }
 

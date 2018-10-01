@@ -5,6 +5,9 @@
 #include <playfab/PlayFabProfilesApi.h>
 #include <playfab/PlayFabHttp.h>
 #include <playfab/PlayFabSettings.h>
+#include <playfab/PlayFabError.h>
+
+#pragma warning (disable: 4100) // formal parameters are part of a public interface
 
 namespace PlayFab
 {
@@ -30,24 +33,45 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttp& http = IPlayFabHttp::Get();
+        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Profile/GetGlobalPolicy", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnGetGlobalPolicyResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetGlobalPolicyResponse>(callback)), errorCallback, customData);
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+
+        CallRequestContainer* reqContainer = new CallRequestContainer(
+            "/Profile/GetGlobalPolicy",
+            headers,
+            jsonAsString,
+            OnGetGlobalPolicyResult,
+            customData);
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetGlobalPolicyResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(*reqContainer);
     }
 
-    void PlayFabProfilesAPI::OnGetGlobalPolicyResult(CallRequestContainerBase& pRequest)
+    void PlayFabProfilesAPI::OnGetGlobalPolicyResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
     {
-        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
-        GetGlobalPolicyResponse outResult;
-        outResult.FromJson(request.errorWrapper.Data);
-        outResult.Request = request.errorWrapper.Request;
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
 
-        const auto internalPtr = request.successCallback.get();
-        if (internalPtr != nullptr)
+        GetGlobalPolicyResponse outResult;
+        if (ValidateResult(outResult, container))
         {
-            const auto callback = (*static_cast<ProcessApiCallback<GetGlobalPolicyResponse> *>(internalPtr));
-            callback(outResult, request.customData);
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<GetGlobalPolicyResponse> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
         }
+
+        delete &container;
     }
 
     void PlayFabProfilesAPI::GetProfile(
@@ -58,24 +82,45 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttp& http = IPlayFabHttp::Get();
+        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Profile/GetProfile", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnGetProfileResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetEntityProfileResponse>(callback)), errorCallback, customData);
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+
+        CallRequestContainer* reqContainer = new CallRequestContainer(
+            "/Profile/GetProfile",
+            headers,
+            jsonAsString,
+            OnGetProfileResult,
+            customData);
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetEntityProfileResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(*reqContainer);
     }
 
-    void PlayFabProfilesAPI::OnGetProfileResult(CallRequestContainerBase& pRequest)
+    void PlayFabProfilesAPI::OnGetProfileResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
     {
-        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
-        GetEntityProfileResponse outResult;
-        outResult.FromJson(request.errorWrapper.Data);
-        outResult.Request = request.errorWrapper.Request;
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
 
-        const auto internalPtr = request.successCallback.get();
-        if (internalPtr != nullptr)
+        GetEntityProfileResponse outResult;
+        if (ValidateResult(outResult, container))
         {
-            const auto callback = (*static_cast<ProcessApiCallback<GetEntityProfileResponse> *>(internalPtr));
-            callback(outResult, request.customData);
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<GetEntityProfileResponse> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
         }
+
+        delete &container;
     }
 
     void PlayFabProfilesAPI::GetProfiles(
@@ -86,24 +131,45 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttp& http = IPlayFabHttp::Get();
+        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Profile/GetProfiles", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnGetProfilesResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<GetEntityProfilesResponse>(callback)), errorCallback, customData);
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+
+        CallRequestContainer* reqContainer = new CallRequestContainer(
+            "/Profile/GetProfiles",
+            headers,
+            jsonAsString,
+            OnGetProfilesResult,
+            customData);
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetEntityProfilesResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(*reqContainer);
     }
 
-    void PlayFabProfilesAPI::OnGetProfilesResult(CallRequestContainerBase& pRequest)
+    void PlayFabProfilesAPI::OnGetProfilesResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
     {
-        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
-        GetEntityProfilesResponse outResult;
-        outResult.FromJson(request.errorWrapper.Data);
-        outResult.Request = request.errorWrapper.Request;
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
 
-        const auto internalPtr = request.successCallback.get();
-        if (internalPtr != nullptr)
+        GetEntityProfilesResponse outResult;
+        if (ValidateResult(outResult, container))
         {
-            const auto callback = (*static_cast<ProcessApiCallback<GetEntityProfilesResponse> *>(internalPtr));
-            callback(outResult, request.customData);
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<GetEntityProfilesResponse> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
         }
+
+        delete &container;
     }
 
     void PlayFabProfilesAPI::SetGlobalPolicy(
@@ -114,24 +180,45 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttp& http = IPlayFabHttp::Get();
+        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Profile/SetGlobalPolicy", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnSetGlobalPolicyResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<SetGlobalPolicyResponse>(callback)), errorCallback, customData);
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+
+        CallRequestContainer* reqContainer = new CallRequestContainer(
+            "/Profile/SetGlobalPolicy",
+            headers,
+            jsonAsString,
+            OnSetGlobalPolicyResult,
+            customData);
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetGlobalPolicyResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(*reqContainer);
     }
 
-    void PlayFabProfilesAPI::OnSetGlobalPolicyResult(CallRequestContainerBase& pRequest)
+    void PlayFabProfilesAPI::OnSetGlobalPolicyResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
     {
-        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
-        SetGlobalPolicyResponse outResult;
-        outResult.FromJson(request.errorWrapper.Data);
-        outResult.Request = request.errorWrapper.Request;
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
 
-        const auto internalPtr = request.successCallback.get();
-        if (internalPtr != nullptr)
+        SetGlobalPolicyResponse outResult;
+        if (ValidateResult(outResult, container))
         {
-            const auto callback = (*static_cast<ProcessApiCallback<SetGlobalPolicyResponse> *>(internalPtr));
-            callback(outResult, request.customData);
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<SetGlobalPolicyResponse> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
         }
+
+        delete &container;
     }
 
     void PlayFabProfilesAPI::SetProfileLanguage(
@@ -142,24 +229,45 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttp& http = IPlayFabHttp::Get();
+        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Profile/SetProfileLanguage", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnSetProfileLanguageResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<SetProfileLanguageResponse>(callback)), errorCallback, customData);
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+
+        CallRequestContainer* reqContainer = new CallRequestContainer(
+            "/Profile/SetProfileLanguage",
+            headers,
+            jsonAsString,
+            OnSetProfileLanguageResult,
+            customData);
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetProfileLanguageResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(*reqContainer);
     }
 
-    void PlayFabProfilesAPI::OnSetProfileLanguageResult(CallRequestContainerBase& pRequest)
+    void PlayFabProfilesAPI::OnSetProfileLanguageResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
     {
-        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
-        SetProfileLanguageResponse outResult;
-        outResult.FromJson(request.errorWrapper.Data);
-        outResult.Request = request.errorWrapper.Request;
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
 
-        const auto internalPtr = request.successCallback.get();
-        if (internalPtr != nullptr)
+        SetProfileLanguageResponse outResult;
+        if (ValidateResult(outResult, container))
         {
-            const auto callback = (*static_cast<ProcessApiCallback<SetProfileLanguageResponse> *>(internalPtr));
-            callback(outResult, request.customData);
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<SetProfileLanguageResponse> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
         }
+
+        delete &container;
     }
 
     void PlayFabProfilesAPI::SetProfilePolicy(
@@ -170,23 +278,62 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttp& http = IPlayFabHttp::Get();
+        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-        http.AddRequest("/Profile/SetProfilePolicy", "X-EntityToken", PlayFabSettings::entityToken, requestJson, OnSetProfilePolicyResult, SharedVoidPointer((callback == nullptr) ? nullptr : new ProcessApiCallback<SetEntityProfilePolicyResponse>(callback)), errorCallback, customData);
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+
+        CallRequestContainer* reqContainer = new CallRequestContainer(
+            "/Profile/SetProfilePolicy",
+            headers,
+            jsonAsString,
+            OnSetProfilePolicyResult,
+            customData);
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetEntityProfilePolicyResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(*reqContainer);
     }
 
-    void PlayFabProfilesAPI::OnSetProfilePolicyResult(CallRequestContainerBase& pRequest)
+    void PlayFabProfilesAPI::OnSetProfilePolicyResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
     {
-        CallRequestContainer request = static_cast<CallRequestContainer&>(pRequest);
-        SetEntityProfilePolicyResponse outResult;
-        outResult.FromJson(request.errorWrapper.Data);
-        outResult.Request = request.errorWrapper.Request;
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
 
-        const auto internalPtr = request.successCallback.get();
-        if (internalPtr != nullptr)
+        SetEntityProfilePolicyResponse outResult;
+        if (ValidateResult(outResult, container))
         {
-            const auto callback = (*static_cast<ProcessApiCallback<SetEntityProfilePolicyResponse> *>(internalPtr));
-            callback(outResult, request.customData);
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<SetEntityProfilePolicyResponse> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+
+        delete &container;
+    }
+
+    bool PlayFabProfilesAPI::ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container)
+    {
+        if (container.errorWrapper.HttpCode == 200)
+        {
+            resultCommon.FromJson(container.errorWrapper.Data);
+            resultCommon.Request = container.errorWrapper.Request;
+            return true;
+        }
+        else // Process the error case
+        {
+            if (PlayFabSettings::globalErrorHandler != nullptr)
+                PlayFabSettings::globalErrorHandler(container.errorWrapper, container.GetCustomData());
+            if (container.errorCallback != nullptr)
+                container.errorCallback(container.errorWrapper, container.GetCustomData());
+            return false;
         }
     }
 }

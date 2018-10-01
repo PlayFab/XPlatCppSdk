@@ -27,10 +27,16 @@ namespace PlayFab
 
     /// <summary>
     /// Interface of any transport SDK plugin.
+    /// All functions execute asynchronously
     /// </summary>
     class IPlayFabHttpPlugin : public IPlayFabPlugin
     {
-        virtual void AddRequest(std::string url, std::unordered_map<std::string, std::string> headers, SharedVoidPointer callback, ErrorCallback errorCallback = nullptr, void* extrabuffer = nullptr);
+    public:
+        /// <summary>
+        /// starts the process of making a post request.
+        /// A user is expected to supply their own CallRequestContainerBase
+        /// </summary>
+        virtual void MakePostRequest(const CallRequestContainerBase&) = 0;
     };
 
     /// <summary>
@@ -46,7 +52,7 @@ namespace PlayFab
     class PlayFabPluginManager
     {
     public:
-        static PlayFabPluginManager& instance(); // The singleton instance of plugin manager
+        static PlayFabPluginManager& GetInstance(); // The singleton instance of plugin manager
 
         // Prevent copy/move construction
         PlayFabPluginManager(const PlayFabPluginManager&) = delete;
@@ -61,7 +67,7 @@ namespace PlayFab
         template <typename T>
         static T& GetPlugin(const PlayFabPluginContract& contract, const std::string& instanceName = "")
         {
-            return (T&)(instance().GetPluginInternal(contract, instanceName));
+            return (T&)(GetInstance().GetPluginInternal(contract, instanceName));
         }
 
         // Sets a custom plugin.

@@ -98,6 +98,9 @@
     <ClInclude Include="include\playfab\PlayFabError.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
+    <ClInclude Include="include\playfab\PlayFabCallRequestContainerBase.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
     <ClInclude Include="include\playfab\PlayFabCallRequestContainer.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
@@ -149,6 +152,9 @@
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
     <ClCompile Include="source\playfab\PlayFabSettings.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
+    <ClCompile Include="source\playfab\PlayFabCallRequestContainerBase.cpp">
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
     <ClCompile Include="source\playfab\PlayFabCallRequestContainer.cpp">
