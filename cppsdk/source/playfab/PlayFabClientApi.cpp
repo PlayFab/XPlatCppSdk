@@ -6,6 +6,7 @@
 #include <playfab/PlayFabHttp.h>
 #include <playfab/PlayFabSettings.h>
 #include <playfab/PlayFabError.h>
+#include <playfab/PlayFabPluginManager.h>
 
 #pragma warning (disable: 4100) // formal parameters are part of a public interface
 
@@ -4012,10 +4013,28 @@ namespace PlayFab
         void* customData
     )
     {
+        // Global SDK initialization needs to be called somewhere first.
+        // Among other things, it will create endpoints and start their worker threads.
+        IPlayFabEndpointPlugin& playFabEndpoint = PlayFabPluginManager::GetPlugin<IPlayFabEndpointPlugin>(PlayFabPluginContract::PlayFab_Endpoint);
+        IPlayFabEndpointPlugin& oneDSEndpoint = PlayFabPluginManager::GetPlugin<IPlayFabEndpointPlugin>(PlayFabPluginContract::PlayFab_Endpoint, "OneDS");
+        playFabEndpoint.Initialize();
+        oneDSEndpoint.Initialize();
+        //playFabEndpoint.WorkerThread(); // start as a thread
+        //oneDSEndpoint.WorkerThread(); // start as a thread
+
+        // Event validation and safety-modification (pre-queue)
         if (PlayFabSettings::titleId.length() > 0)
         {
             request.TitleId = PlayFabSettings::titleId;
         }
+
+        // Event router (thread-safe)
+        // (it routes an event to queues and puts it there)
+
+        // At this point the API method will exit;
+        // All the code below will be running on dispatcher/endpoint thread(s):
+
+        playFabEndpoint.ProcessEventQueue();
 
         IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();

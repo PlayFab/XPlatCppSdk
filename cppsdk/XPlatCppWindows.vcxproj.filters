@@ -107,6 +107,12 @@
     <ClInclude Include="include\playfab\PlayFabPluginManager.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
+    <ClInclude Include="include\playfab\PlayFabEndpoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\playfab\OneDSEndpoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -162,6 +168,12 @@
     </ClCompile>
     <ClCompile Include="source\playfab\PlayFabPluginManager.cpp">
       <Filter>Source Files\playfab</Filter>
+    </ClCompile>
+    <ClCompile Include="source\playfab\PlayFabEndpoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\playfab\OneDSEndpoint.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

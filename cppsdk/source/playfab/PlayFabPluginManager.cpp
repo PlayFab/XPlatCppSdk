@@ -2,6 +2,8 @@
 
 #include <playfab/PlayFabPluginManager.h>
 #include <playfab/PlayFabHttp.h>
+#include <playfab/PlayFabEndpoint.h>
+#include <playfab/OneDSEndpoint.h>
 
 namespace PlayFab
 {
@@ -31,6 +33,16 @@ namespace PlayFab
                 break;
             case PlayFabPluginContract::PlayFab_Transport:
                 pluginPtr = CreatePlayFabTransportPlugin();
+                break;
+            case PlayFabPluginContract::PlayFab_Endpoint:
+                if (instanceName == "OneDS")
+                {
+                    pluginPtr = CreateOneDSEndpointPlugin();
+                }
+                else
+                {
+                    pluginPtr = CreatePlayFabEndpointPlugin();
+                }
                 break;
             default:
                 throw std::runtime_error("This contract is not supported");
@@ -70,5 +82,17 @@ namespace PlayFab
     {
         IPlayFabHttp& http = IPlayFabHttp::Get();
         return &http;
+    }
+
+    IPlayFabPlugin* PlayFabPluginManager::CreatePlayFabEndpointPlugin()
+    {
+        IPlayFabEndpointPlugin* endpoint = new PlayFabEndpoint();
+        return endpoint;
+    }
+
+    IPlayFabPlugin* PlayFabPluginManager::CreateOneDSEndpointPlugin()
+    {
+        IPlayFabEndpointPlugin* endpoint = new OneDSEndpoint();
+        return endpoint;
     }
 }

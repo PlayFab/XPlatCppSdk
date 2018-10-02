@@ -15,7 +15,8 @@ namespace PlayFab
     enum class PlayFabPluginContract
     {
         PlayFab_Serializer,
-        PlayFab_Transport
+        PlayFab_Transport,
+        PlayFab_Endpoint
     };
 
     /// <summary>
@@ -44,6 +45,26 @@ namespace PlayFab
     /// </summary>
     class IPlayFabSerializerPlugin : public IPlayFabPlugin
     {
+    };
+
+    /// <summary>
+    /// Interface of any HTTP endpoint SDK plugin.
+    /// An HTTP endpoint is a class that that contains and manages specifics of a particular event ingestion service:
+    /// authentication, special headers, payload or data size limitations, batching, retry policies, call frequency throttling, etc.
+    /// The idea behind this plugin model is to allow PlayFab API to "doublepump" or "selectively pump" events to different, independent ingestion services
+    /// from the same client app.
+    /// </summary>
+    class IPlayFabEndpointPlugin : public IPlayFabPlugin
+    {
+    public:
+        // Perform any initialization if needed before starting endpoint's worker thread
+        virtual void Initialize() = 0;
+
+        // The procedure of endpoint's worker thread
+        virtual void WorkerThread() = 0;
+
+        // Pick and process one or more events from the top of the queue
+        virtual void ProcessEventQueue() = 0;
     };
 
     /// <summary>
@@ -79,6 +100,8 @@ namespace PlayFab
 
         IPlayFabPlugin* CreatePlayFabSerializerPlugin();
         IPlayFabPlugin* CreatePlayFabTransportPlugin();
+        IPlayFabPlugin* CreatePlayFabEndpointPlugin();
+        IPlayFabPlugin* CreateOneDSEndpointPlugin();
 
         // Private constructor and destructor
         PlayFabPluginManager() = default;
