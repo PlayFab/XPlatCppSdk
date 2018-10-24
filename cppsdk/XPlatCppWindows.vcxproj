@@ -112,40 +112,31 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\playfab\PlayFabBaseModel.h" />
-
     <ClInclude Include="include\playfab\PlayFabAdminApi.h" />
     <ClInclude Include="include\playfab\PlayFabAdminDataModels.h" />
-
     <ClInclude Include="include\playfab\PlayFabClientApi.h" />
     <ClInclude Include="include\playfab\PlayFabClientDataModels.h" />
-
+    <ClInclude Include="include\playfab\PlayFabEvent.h" />
+    <ClInclude Include="include\playfab\PlayFabEventApi.h" />
+    <ClInclude Include="include\playfab\PlayFabEventRouter.h" />
     <ClInclude Include="include\playfab\PlayFabMatchmakerApi.h" />
     <ClInclude Include="include\playfab\PlayFabMatchmakerDataModels.h" />
-
     <ClInclude Include="include\playfab\PlayFabServerApi.h" />
     <ClInclude Include="include\playfab\PlayFabServerDataModels.h" />
-
     <ClInclude Include="include\playfab\PlayFabAuthenticationApi.h" />
     <ClInclude Include="include\playfab\PlayFabAuthenticationDataModels.h" />
-
     <ClInclude Include="include\playfab\PlayFabCloudScriptApi.h" />
     <ClInclude Include="include\playfab\PlayFabCloudScriptDataModels.h" />
-
     <ClInclude Include="include\playfab\PlayFabDataApi.h" />
     <ClInclude Include="include\playfab\PlayFabDataDataModels.h" />
-
     <ClInclude Include="include\playfab\PlayFabEventsApi.h" />
     <ClInclude Include="include\playfab\PlayFabEventsDataModels.h" />
-
     <ClInclude Include="include\playfab\PlayFabGroupsApi.h" />
     <ClInclude Include="include\playfab\PlayFabGroupsDataModels.h" />
-
     <ClInclude Include="include\playfab\PlayFabLocalizationApi.h" />
     <ClInclude Include="include\playfab\PlayFabLocalizationDataModels.h" />
-
     <ClInclude Include="include\playfab\PlayFabProfilesApi.h" />
     <ClInclude Include="include\playfab\PlayFabProfilesDataModels.h" />
-
     <ClInclude Include="include\playfab\PlayFabError.h" />
     <ClInclude Include="include\playfab\PlayFabHttp.h" />
     <ClInclude Include="include\playfab\PlayFabSettings.h" />
@@ -155,29 +146,20 @@
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-
     <ClCompile Include="source\playfab\PlayFabAdminApi.cpp" />
-
     <ClCompile Include="source\playfab\PlayFabClientApi.cpp" />
-
+    <ClCompile Include="source\playfab\PlayFabEvent.cpp" />
+    <ClCompile Include="source\playfab\PlayFabEventApi.cpp" />
+    <ClCompile Include="source\playfab\PlayFabEventRouter.cpp" />
     <ClCompile Include="source\playfab\PlayFabMatchmakerApi.cpp" />
-
     <ClCompile Include="source\playfab\PlayFabServerApi.cpp" />
-
     <ClCompile Include="source\playfab\PlayFabAuthenticationApi.cpp" />
-
     <ClCompile Include="source\playfab\PlayFabCloudScriptApi.cpp" />
-
     <ClCompile Include="source\playfab\PlayFabDataApi.cpp" />
-
     <ClCompile Include="source\playfab\PlayFabEventsApi.cpp" />
-
     <ClCompile Include="source\playfab\PlayFabGroupsApi.cpp" />
-
     <ClCompile Include="source\playfab\PlayFabLocalizationApi.cpp" />
-
     <ClCompile Include="source\playfab\PlayFabProfilesApi.cpp" />
-
     <ClCompile Include="source\playfab\PlayFabError.cpp" />
     <ClCompile Include="source\playfab\PlayFabHttp.cpp" />
     <ClCompile Include="source\playfab\PlayFabSettings.cpp" />
