@@ -5,19 +5,25 @@
 #include <playfab/PlayFabError.h>
 #include <playfab/PlayFabEventsDataModels.h>
 
+// This file contains declaration of base interfaces for any custom playstream events
+// as well as PlayFab-specific implementations
+
 namespace PlayFab
 {
-    enum struct PlayFabEventServerProcessingType
+    /// <summary>
+    /// The enumeration of all possible "types" of events
+    /// </summary>
+    enum class PlayFabEventType
     {
-        Default,
-        Lightweight,
-        Heavyweight
+        Default, // Default type (e.g. the one set by global configuration)
+        Lightweight, // Event is meant to bypass processing on the PlayFab server side and be sent instead directly to One Collector (1DS).
+        Heavyweight // Event is meant to be sent to the PlayFab server.
     };
 
     /// <summary>
     /// Interface for any event
     /// </summary>
-    struct IPlayFabEvent
+    class IPlayFabEvent
     {
     public:
         virtual ~IPlayFabEvent() {}
@@ -26,24 +32,24 @@ namespace PlayFab
     /// <summary>
     /// PlayFab-specific implementation of an event
     /// </summary>
-    struct PlayFabEvent : public IPlayFabEvent
+    class PlayFabEvent : public IPlayFabEvent
     {
     public:
-        void SetName(const std::string& eventName);
-        void SetProperty(const std::string& name, const std::string& value);
-        void SetProperty(const std::string& name, const bool value);
-        void SetProperty(const std::string& name, const int8_t value);
-        void SetProperty(const std::string& name, const int16_t value);
-        void SetProperty(const std::string& name, const int32_t value);
-        void SetProperty(const std::string& name, const int64_t value);
-        void SetProperty(const std::string& name, const uint8_t value);
-        void SetProperty(const std::string& name, const uint16_t value);
-        void SetProperty(const std::string& name, const uint32_t value);
-        void SetProperty(const std::string& name, const uint64_t value);
-        void SetProperty(const std::string& name, const double value);
+        void SetName(const std::string& eventName); // Sets the event name
+        void SetProperty(const std::string& name, const std::string& value); // Sets a value of a string property by name
+        void SetProperty(const std::string& name, const bool value); // Sets a value of a bool property by name
+        void SetProperty(const std::string& name, const int8_t value); // Sets a value of a int8_t property by name
+        void SetProperty(const std::string& name, const int16_t value); // Sets a value of a int16_t property by name
+        void SetProperty(const std::string& name, const int32_t value); // Sets a value of a int32_t property by name
+        void SetProperty(const std::string& name, const int64_t value); // Sets a value of a int64_t property by name
+        void SetProperty(const std::string& name, const uint8_t value); // Sets a value of a uint8_t property by name
+        void SetProperty(const std::string& name, const uint16_t value); // Sets a value of a uint16_t property by name
+        void SetProperty(const std::string& name, const uint32_t value); // Sets a value of a uint32_t property by name
+        void SetProperty(const std::string& name, const uint64_t value); // Sets a value of a uint64_t property by name
+        void SetProperty(const std::string& name, const double value); // Sets a value of a double property by name
 
     public:
-        PlayFabEventServerProcessingType serverProcessingType;
+        PlayFabEventType serverProcessingType;
     private:
         EventsModels::EventContents eventContents;
     };
@@ -51,7 +57,7 @@ namespace PlayFab
     /// <summary>
     /// Interface for any emit event request
     /// </summary>
-    struct IPlayFabEmitEventRequest
+    class IPlayFabEmitEventRequest
     {
     public:
         virtual ~IPlayFabEmitEventRequest() {}
@@ -60,7 +66,7 @@ namespace PlayFab
     /// <summary>
     /// Interface for any emit event response
     /// </summary>
-    struct IPlayFabEmitEventResponse
+    class IPlayFabEmitEventResponse
     {
     public:
         virtual ~IPlayFabEmitEventResponse() {}
@@ -73,21 +79,21 @@ namespace PlayFab
     /// <summary>
     /// PlayFab-specific implementation of an emit event request
     /// </summary>
-    struct PlayFabEmitEventRequest : public IPlayFabEmitEventRequest
+    class PlayFabEmitEventRequest : public IPlayFabEmitEventRequest
     {
     public:
-        std::shared_ptr<const PlayFabEvent> event;
-        PlayFabEmitEventCallback callback;
+        std::shared_ptr<const PlayFabEvent> event; // a pointer to the user's event object itself
+        PlayFabEmitEventCallback callback; // user's callback function to return the final result of emit event operation after event is completely sent out or any error occurred
     };
 
     /// <summary>
     /// PlayFab-specific implementation of an emit event response
     /// </summary>
-    struct PlayFabEmitEventResponse : public IPlayFabEmitEventResponse
+    class PlayFabEmitEventResponse : public IPlayFabEmitEventResponse
     {
     public:
-        std::shared_ptr<const PlayFabError> playFabError;
-        std::shared_ptr<const EventsModels::WriteEventsResponse> writeEventsResponse;
+        std::shared_ptr<const PlayFabError> playFabError; // error information and/or operation result
+        std::shared_ptr<const EventsModels::WriteEventsResponse> writeEventsResponse; // additional data with the outcome of the operation
     };
 }
 

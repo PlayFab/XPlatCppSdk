@@ -11,7 +11,7 @@ namespace PlayFab
     {
     }
 
-    void PlayFabEventAPI::EmitEvent(std::unique_ptr<const IPlayFabEvent> event, PlayFabEmitEventCallback callback) const
+    void PlayFabEventAPI::EmitEvent(std::unique_ptr<const IPlayFabEvent> event, const PlayFabEmitEventCallback callback) const
     {
         auto eventRequest = std::make_shared<PlayFabEmitEventRequest>();
         std::shared_ptr<const IPlayFabEvent> sharedGenericEvent = std::move(event);

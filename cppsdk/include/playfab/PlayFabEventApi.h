@@ -8,12 +8,19 @@
 namespace PlayFab
 {
     /// <summary>
-    /// Main interface for PlayFab Sdk, specifically all Lightweight/Heavyweight Event APIs
+    /// Main interface for PlayFab Sdk, specifically all Lightweight/Heavyweight Event APIs.
+    /// This class contains public methods of playstream event API for single events.
     /// </summary>
     class PlayFabEventAPI
     {
     public:
-        PlayFabEventAPI();
+        PlayFabEventAPI(); // Default constructor
+
+        /// <summary>
+        /// Emits a single event.
+        /// - event is a pointer to user's playstream event.
+        /// - callback is a pointer to user's function to receive a notification about the outcome of the operation when the event is sent out or any error occurred.
+        /// </summary>
         void EmitEvent(std::unique_ptr<const IPlayFabEvent> event, const PlayFabEmitEventCallback callback) const;
 
     private:
