@@ -107,11 +107,20 @@
     <ClInclude Include="include\playfab\PlayFabPluginManager.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
+    <ClInclude Include="include\playfab\PlayFabEvent.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="include\playfab\PlayFabEventApi.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="include\playfab\PlayFabEventRouter.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
+    </ClCompile>  
     <ClCompile Include="source\playfab\PlayFabAdminApi.cpp">
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
@@ -161,6 +170,15 @@
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
     <ClCompile Include="source\playfab\PlayFabPluginManager.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
+    <ClCompile Include="source\playfab\PlayFabEvent.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
+    <ClCompile Include="source\playfab\PlayFabEventApi.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
+    <ClCompile Include="source\playfab\PlayFabEventRouter.cpp">
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
   </ItemGroup>
