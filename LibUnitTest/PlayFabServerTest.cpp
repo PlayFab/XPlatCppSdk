@@ -113,7 +113,7 @@ namespace UnittestRunner
             testMessageReturn = "API_Call_Failed for: ";
             testMessageReturn += error.UrlPath;
             testMessageReturn += "\n";
-            testMessageReturn += error.GenerateReport();
+            testMessageReturn += error.GenerateErrorReport();
             testMessageReturn += "\n";
             testMessageReturn += error.Request.toStyledString();
         }
@@ -139,7 +139,7 @@ namespace UnittestRunner
             if (result.FunctionResult.isNull())
                 testMessageReturn = "Cloud Decode Failure";
             else if (!result.Error.isNull())
-                testMessageReturn = result.Error.mValue.Message;
+                testMessageReturn = result.Error->Message;
             else
                 testMessageReturn = result.FunctionResult["messageValue"].asString();
         }
