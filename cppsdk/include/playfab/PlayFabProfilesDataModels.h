@@ -135,6 +135,60 @@ namespace PlayFab
             }
         };
 
+        struct EntityLineage : public PlayFabBaseModel
+        {
+            std::string CharacterId;
+            std::string GroupId;
+            std::string MasterPlayerAccountId;
+            std::string NamespaceId;
+            std::string TitleId;
+            std::string TitlePlayerAccountId;
+
+            EntityLineage() :
+                PlayFabBaseModel(),
+                CharacterId(),
+                GroupId(),
+                MasterPlayerAccountId(),
+                NamespaceId(),
+                TitleId(),
+                TitlePlayerAccountId()
+            {}
+
+            EntityLineage(const EntityLineage& src) :
+                PlayFabBaseModel(),
+                CharacterId(src.CharacterId),
+                GroupId(src.GroupId),
+                MasterPlayerAccountId(src.MasterPlayerAccountId),
+                NamespaceId(src.NamespaceId),
+                TitleId(src.TitleId),
+                TitlePlayerAccountId(src.TitlePlayerAccountId)
+            {}
+
+            ~EntityLineage() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["CharacterId"], CharacterId);
+                FromJsonUtilS(input["GroupId"], GroupId);
+                FromJsonUtilS(input["MasterPlayerAccountId"], MasterPlayerAccountId);
+                FromJsonUtilS(input["NamespaceId"], NamespaceId);
+                FromJsonUtilS(input["TitleId"], TitleId);
+                FromJsonUtilS(input["TitlePlayerAccountId"], TitlePlayerAccountId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CharacterId; ToJsonUtilS(CharacterId, each_CharacterId); output["CharacterId"] = each_CharacterId;
+                Json::Value each_GroupId; ToJsonUtilS(GroupId, each_GroupId); output["GroupId"] = each_GroupId;
+                Json::Value each_MasterPlayerAccountId; ToJsonUtilS(MasterPlayerAccountId, each_MasterPlayerAccountId); output["MasterPlayerAccountId"] = each_MasterPlayerAccountId;
+                Json::Value each_NamespaceId; ToJsonUtilS(NamespaceId, each_NamespaceId); output["NamespaceId"] = each_NamespaceId;
+                Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
+                Json::Value each_TitlePlayerAccountId; ToJsonUtilS(TitlePlayerAccountId, each_TitlePlayerAccountId); output["TitlePlayerAccountId"] = each_TitlePlayerAccountId;
+                return output;
+            }
+        };
+
         struct EntityPermissionStatement : public PlayFabBaseModel
         {
             std::string Action;
@@ -238,7 +292,9 @@ namespace PlayFab
             Boxed<EntityKey> Entity;
             std::string EntityChain;
             std::map<std::string, EntityProfileFileMetadata> Files;
+            std::string FriendlyName;
             std::string Language;
+            Boxed<EntityLineage> Lineage;
             std::map<std::string, EntityDataObject> Objects;
             std::list<EntityPermissionStatement> Permissions;
             Int32 VersionNumber;
@@ -248,7 +304,9 @@ namespace PlayFab
                 Entity(),
                 EntityChain(),
                 Files(),
+                FriendlyName(),
                 Language(),
+                Lineage(),
                 Objects(),
                 Permissions(),
                 VersionNumber()
@@ -259,7 +317,9 @@ namespace PlayFab
                 Entity(src.Entity),
                 EntityChain(src.EntityChain),
                 Files(src.Files),
+                FriendlyName(src.FriendlyName),
                 Language(src.Language),
+                Lineage(src.Lineage),
                 Objects(src.Objects),
                 Permissions(src.Permissions),
                 VersionNumber(src.VersionNumber)
@@ -272,7 +332,9 @@ namespace PlayFab
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilS(input["EntityChain"], EntityChain);
                 FromJsonUtilO(input["Files"], Files);
+                FromJsonUtilS(input["FriendlyName"], FriendlyName);
                 FromJsonUtilS(input["Language"], Language);
+                FromJsonUtilO(input["Lineage"], Lineage);
                 FromJsonUtilO(input["Objects"], Objects);
                 FromJsonUtilO(input["Permissions"], Permissions);
                 FromJsonUtilP(input["VersionNumber"], VersionNumber);
@@ -284,7 +346,9 @@ namespace PlayFab
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
                 Json::Value each_EntityChain; ToJsonUtilS(EntityChain, each_EntityChain); output["EntityChain"] = each_EntityChain;
                 Json::Value each_Files; ToJsonUtilO(Files, each_Files); output["Files"] = each_Files;
+                Json::Value each_FriendlyName; ToJsonUtilS(FriendlyName, each_FriendlyName); output["FriendlyName"] = each_FriendlyName;
                 Json::Value each_Language; ToJsonUtilS(Language, each_Language); output["Language"] = each_Language;
+                Json::Value each_Lineage; ToJsonUtilO(Lineage, each_Lineage); output["Lineage"] = each_Lineage;
                 Json::Value each_Objects; ToJsonUtilO(Objects, each_Objects); output["Objects"] = each_Objects;
                 Json::Value each_Permissions; ToJsonUtilO(Permissions, each_Permissions); output["Permissions"] = each_Permissions;
                 Json::Value each_VersionNumber; ToJsonUtilP(VersionNumber, each_VersionNumber); output["VersionNumber"] = each_VersionNumber;
@@ -295,7 +359,7 @@ namespace PlayFab
         struct GetEntityProfileRequest : public PlayFabRequestCommon
         {
             Boxed<bool> DataAsObject;
-            EntityKey Entity;
+            Boxed<EntityKey> Entity;
 
             GetEntityProfileRequest() :
                 PlayFabRequestCommon(),

@@ -1807,6 +1807,11 @@ namespace PlayFab
             GenericErrorCodesFacebookInstantGamesIdNotLinked,
             GenericErrorCodesInvalidFacebookInstantGamesSignature,
             GenericErrorCodesFacebookInstantGamesAuthNotConfiguredForTitle,
+            GenericErrorCodesEntityProfileConstraintValidationFailed,
+            GenericErrorCodesPlayInsightsIngestionKeyPending,
+            GenericErrorCodesPlayInsightsIngestionKeyNotFound,
+            GenericErrorCodesStatisticTagRequired,
+            GenericErrorCodesStatisticTagInvalid,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingCreateRequestMissing,
@@ -1841,7 +1846,9 @@ namespace PlayFab
             GenericErrorCodesMatchmakingMemberProfileInvalid,
             GenericErrorCodesWriteAttemptedDuringExport,
             GenericErrorCodesNintendoSwitchDeviceIdNotLinked,
-            GenericErrorCodesMatchmakingNotEnabled
+            GenericErrorCodesMatchmakingNotEnabled,
+            GenericErrorCodesMatchmakingGetStatisticsIdentityInvalid,
+            GenericErrorCodesMatchmakingStatisticsIdMissing
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -2234,6 +2241,11 @@ namespace PlayFab
             if (input == GenericErrorCodesFacebookInstantGamesIdNotLinked) output = Json::Value("FacebookInstantGamesIdNotLinked");
             if (input == GenericErrorCodesInvalidFacebookInstantGamesSignature) output = Json::Value("InvalidFacebookInstantGamesSignature");
             if (input == GenericErrorCodesFacebookInstantGamesAuthNotConfiguredForTitle) output = Json::Value("FacebookInstantGamesAuthNotConfiguredForTitle");
+            if (input == GenericErrorCodesEntityProfileConstraintValidationFailed) output = Json::Value("EntityProfileConstraintValidationFailed");
+            if (input == GenericErrorCodesPlayInsightsIngestionKeyPending) output = Json::Value("PlayInsightsIngestionKeyPending");
+            if (input == GenericErrorCodesPlayInsightsIngestionKeyNotFound) output = Json::Value("PlayInsightsIngestionKeyNotFound");
+            if (input == GenericErrorCodesStatisticTagRequired) output = Json::Value("StatisticTagRequired");
+            if (input == GenericErrorCodesStatisticTagInvalid) output = Json::Value("StatisticTagInvalid");
             if (input == GenericErrorCodesMatchmakingEntityInvalid) output = Json::Value("MatchmakingEntityInvalid");
             if (input == GenericErrorCodesMatchmakingPlayerAttributesInvalid) output = Json::Value("MatchmakingPlayerAttributesInvalid");
             if (input == GenericErrorCodesMatchmakingCreateRequestMissing) output = Json::Value("MatchmakingCreateRequestMissing");
@@ -2269,6 +2281,8 @@ namespace PlayFab
             if (input == GenericErrorCodesWriteAttemptedDuringExport) output = Json::Value("WriteAttemptedDuringExport");
             if (input == GenericErrorCodesNintendoSwitchDeviceIdNotLinked) output = Json::Value("NintendoSwitchDeviceIdNotLinked");
             if (input == GenericErrorCodesMatchmakingNotEnabled) output = Json::Value("MatchmakingNotEnabled");
+            if (input == GenericErrorCodesMatchmakingGetStatisticsIdentityInvalid) output = Json::Value("MatchmakingGetStatisticsIdentityInvalid");
+            if (input == GenericErrorCodesMatchmakingStatisticsIdMissing) output = Json::Value("MatchmakingStatisticsIdMissing");
         }
         inline void FromJsonEnum(const Json::Value& input, GenericErrorCodes& output)
         {
@@ -2662,6 +2676,11 @@ namespace PlayFab
             if (inputStr == "FacebookInstantGamesIdNotLinked") output = GenericErrorCodesFacebookInstantGamesIdNotLinked;
             if (inputStr == "InvalidFacebookInstantGamesSignature") output = GenericErrorCodesInvalidFacebookInstantGamesSignature;
             if (inputStr == "FacebookInstantGamesAuthNotConfiguredForTitle") output = GenericErrorCodesFacebookInstantGamesAuthNotConfiguredForTitle;
+            if (inputStr == "EntityProfileConstraintValidationFailed") output = GenericErrorCodesEntityProfileConstraintValidationFailed;
+            if (inputStr == "PlayInsightsIngestionKeyPending") output = GenericErrorCodesPlayInsightsIngestionKeyPending;
+            if (inputStr == "PlayInsightsIngestionKeyNotFound") output = GenericErrorCodesPlayInsightsIngestionKeyNotFound;
+            if (inputStr == "StatisticTagRequired") output = GenericErrorCodesStatisticTagRequired;
+            if (inputStr == "StatisticTagInvalid") output = GenericErrorCodesStatisticTagInvalid;
             if (inputStr == "MatchmakingEntityInvalid") output = GenericErrorCodesMatchmakingEntityInvalid;
             if (inputStr == "MatchmakingPlayerAttributesInvalid") output = GenericErrorCodesMatchmakingPlayerAttributesInvalid;
             if (inputStr == "MatchmakingCreateRequestMissing") output = GenericErrorCodesMatchmakingCreateRequestMissing;
@@ -2697,6 +2716,8 @@ namespace PlayFab
             if (inputStr == "WriteAttemptedDuringExport") output = GenericErrorCodesWriteAttemptedDuringExport;
             if (inputStr == "NintendoSwitchDeviceIdNotLinked") output = GenericErrorCodesNintendoSwitchDeviceIdNotLinked;
             if (inputStr == "MatchmakingNotEnabled") output = GenericErrorCodesMatchmakingNotEnabled;
+            if (inputStr == "MatchmakingGetStatisticsIdentityInvalid") output = GenericErrorCodesMatchmakingGetStatisticsIdentityInvalid;
+            if (inputStr == "MatchmakingStatisticsIdMissing") output = GenericErrorCodesMatchmakingStatisticsIdMissing;
         }
 
         enum LoginIdentityProvider
@@ -6245,7 +6266,6 @@ namespace PlayFab
             std::string Mode;
             std::list<std::string> Players;
             Boxed<Region> pfRegion;
-            std::string ServerAddress;
             std::string ServerIPV4Address;
             std::string ServerIPV6Address;
             Uint32 ServerPort;
@@ -6261,7 +6281,6 @@ namespace PlayFab
                 Mode(),
                 Players(),
                 pfRegion(),
-                ServerAddress(),
                 ServerIPV4Address(),
                 ServerIPV6Address(),
                 ServerPort(),
@@ -6278,7 +6297,6 @@ namespace PlayFab
                 Mode(src.Mode),
                 Players(src.Players),
                 pfRegion(src.pfRegion),
-                ServerAddress(src.ServerAddress),
                 ServerIPV4Address(src.ServerIPV4Address),
                 ServerIPV6Address(src.ServerIPV6Address),
                 ServerPort(src.ServerPort),
@@ -6297,7 +6315,6 @@ namespace PlayFab
                 FromJsonUtilS(input["Mode"], Mode);
                 FromJsonUtilS(input["Players"], Players);
                 FromJsonUtilE(input["pfRegion"], pfRegion);
-                FromJsonUtilS(input["ServerAddress"], ServerAddress);
                 FromJsonUtilS(input["ServerIPV4Address"], ServerIPV4Address);
                 FromJsonUtilS(input["ServerIPV6Address"], ServerIPV6Address);
                 FromJsonUtilP(input["ServerPort"], ServerPort);
@@ -6315,7 +6332,6 @@ namespace PlayFab
                 Json::Value each_Mode; ToJsonUtilS(Mode, each_Mode); output["Mode"] = each_Mode;
                 Json::Value each_Players; ToJsonUtilS(Players, each_Players); output["Players"] = each_Players;
                 Json::Value each_pfRegion; ToJsonUtilE(pfRegion, each_pfRegion); output["Region"] = each_pfRegion;
-                Json::Value each_ServerAddress; ToJsonUtilS(ServerAddress, each_ServerAddress); output["ServerAddress"] = each_ServerAddress;
                 Json::Value each_ServerIPV4Address; ToJsonUtilS(ServerIPV4Address, each_ServerIPV4Address); output["ServerIPV4Address"] = each_ServerIPV4Address;
                 Json::Value each_ServerIPV6Address; ToJsonUtilS(ServerIPV6Address, each_ServerIPV6Address); output["ServerIPV6Address"] = each_ServerIPV6Address;
                 Json::Value each_ServerPort; ToJsonUtilP(ServerPort, each_ServerPort); output["ServerPort"] = each_ServerPort;

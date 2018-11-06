@@ -41,7 +41,7 @@ namespace PlayFab
             authKey = "X-SecretKey"; authValue = PlayFabSettings::developerSecretKey;
         }
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;

@@ -33,7 +33,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -82,7 +82,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -131,7 +131,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -180,7 +180,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -229,7 +229,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -278,7 +278,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -327,7 +327,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -376,7 +376,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -425,7 +425,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -474,7 +474,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -523,7 +523,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -572,7 +572,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -621,7 +621,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -662,55 +662,6 @@ namespace PlayFab
         delete &container;
     }
 
-    void PlayFabServerAPI::DeleteUsers(
-        DeleteUsersRequest& request,
-        ProcessApiCallback<DeleteUsersResult> callback,
-        ErrorCallback errorCallback,
-        void* customData
-    )
-    {
-
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
-
-        std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
-
-        CallRequestContainer* reqContainer = new CallRequestContainer(
-            "/Server/DeleteUsers",
-            headers,
-            jsonAsString,
-            OnDeleteUsersResult,
-            customData);
-
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeleteUsersResult>(callback));
-        reqContainer->errorCallback = errorCallback;
-
-        http.MakePostRequest(*reqContainer);
-    }
-
-    void PlayFabServerAPI::OnDeleteUsersResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
-    {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
-
-        DeleteUsersResult outResult;
-        if (ValidateResult(outResult, container))
-        {
-
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
-            {
-                const auto callback = (*static_cast<ProcessApiCallback<DeleteUsersResult> *>(internalPtr));
-                callback(outResult, container.GetCustomData());
-            }
-        }
-
-        delete &container;
-    }
-
     void PlayFabServerAPI::DeregisterGame(
         DeregisterGameRequest& request,
         ProcessApiCallback<DeregisterGameResponse> callback,
@@ -719,7 +670,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -768,7 +719,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -817,7 +768,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -866,7 +817,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -915,7 +866,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -964,7 +915,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -1013,7 +964,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -1062,7 +1013,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -1111,7 +1062,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -1160,7 +1111,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -1209,7 +1160,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -1258,7 +1209,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -1307,7 +1258,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -1356,7 +1307,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -1405,7 +1356,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -1454,7 +1405,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -1503,7 +1454,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -1552,7 +1503,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -1601,7 +1552,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -1650,7 +1601,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -1699,7 +1650,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -1748,7 +1699,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -1797,7 +1748,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -1846,7 +1797,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -1895,7 +1846,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -1944,7 +1895,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -1993,7 +1944,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -2042,7 +1993,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -2091,7 +2042,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -2140,7 +2091,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -2181,6 +2132,55 @@ namespace PlayFab
         delete &container;
     }
 
+    void PlayFabServerAPI::GetPlayFabIDsFromXboxLiveIDs(
+        GetPlayFabIDsFromXboxLiveIDsRequest& request,
+        ProcessApiCallback<GetPlayFabIDsFromXboxLiveIDsResult> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const auto requestJson = request.ToJson();
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+
+        CallRequestContainer* reqContainer = new CallRequestContainer(
+            "/Server/GetPlayFabIDsFromXboxLiveIDs",
+            headers,
+            jsonAsString,
+            OnGetPlayFabIDsFromXboxLiveIDsResult,
+            customData);
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromXboxLiveIDsResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(*reqContainer);
+    }
+
+    void PlayFabServerAPI::OnGetPlayFabIDsFromXboxLiveIDsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+
+        GetPlayFabIDsFromXboxLiveIDsResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<GetPlayFabIDsFromXboxLiveIDsResult> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+
+        delete &container;
+    }
+
     void PlayFabServerAPI::GetPublisherData(
         GetPublisherDataRequest& request,
         ProcessApiCallback<GetPublisherDataResult> callback,
@@ -2189,7 +2189,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -2238,7 +2238,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -2279,6 +2279,55 @@ namespace PlayFab
         delete &container;
     }
 
+    void PlayFabServerAPI::GetServerCustomIDsFromPlayFabIDs(
+        GetServerCustomIDsFromPlayFabIDsRequest& request,
+        ProcessApiCallback<GetServerCustomIDsFromPlayFabIDsResult> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const auto requestJson = request.ToJson();
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+
+        CallRequestContainer* reqContainer = new CallRequestContainer(
+            "/Server/GetServerCustomIDsFromPlayFabIDs",
+            headers,
+            jsonAsString,
+            OnGetServerCustomIDsFromPlayFabIDsResult,
+            customData);
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetServerCustomIDsFromPlayFabIDsResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(*reqContainer);
+    }
+
+    void PlayFabServerAPI::OnGetServerCustomIDsFromPlayFabIDsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+
+        GetServerCustomIDsFromPlayFabIDsResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<GetServerCustomIDsFromPlayFabIDsResult> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+
+        delete &container;
+    }
+
     void PlayFabServerAPI::GetSharedGroupData(
         GetSharedGroupDataRequest& request,
         ProcessApiCallback<GetSharedGroupDataResult> callback,
@@ -2287,7 +2336,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -2336,7 +2385,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -2385,7 +2434,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -2434,7 +2483,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -2483,7 +2532,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -2532,7 +2581,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -2581,7 +2630,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -2630,7 +2679,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -2679,7 +2728,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -2728,7 +2777,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -2777,7 +2826,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -2826,7 +2875,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -2875,7 +2924,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -2924,7 +2973,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -2973,7 +3022,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -3022,7 +3071,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -3071,7 +3120,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -3120,7 +3169,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -3161,6 +3210,153 @@ namespace PlayFab
         delete &container;
     }
 
+    void PlayFabServerAPI::LinkXboxAccount(
+        LinkXboxAccountRequest& request,
+        ProcessApiCallback<LinkXboxAccountResult> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const auto requestJson = request.ToJson();
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+
+        CallRequestContainer* reqContainer = new CallRequestContainer(
+            "/Server/LinkXboxAccount",
+            headers,
+            jsonAsString,
+            OnLinkXboxAccountResult,
+            customData);
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkXboxAccountResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(*reqContainer);
+    }
+
+    void PlayFabServerAPI::OnLinkXboxAccountResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+
+        LinkXboxAccountResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<LinkXboxAccountResult> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+
+        delete &container;
+    }
+
+    void PlayFabServerAPI::LoginWithServerCustomId(
+        LoginWithServerCustomIdRequest& request,
+        ProcessApiCallback<ServerLoginResult> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const auto requestJson = request.ToJson();
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+
+        CallRequestContainer* reqContainer = new CallRequestContainer(
+            "/Server/LoginWithServerCustomId",
+            headers,
+            jsonAsString,
+            OnLoginWithServerCustomIdResult,
+            customData);
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ServerLoginResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(*reqContainer);
+    }
+
+    void PlayFabServerAPI::OnLoginWithServerCustomIdResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+
+        ServerLoginResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<ServerLoginResult> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+
+        delete &container;
+    }
+
+    void PlayFabServerAPI::LoginWithXbox(
+        LoginWithXboxRequest& request,
+        ProcessApiCallback<ServerLoginResult> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const auto requestJson = request.ToJson();
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+
+        CallRequestContainer* reqContainer = new CallRequestContainer(
+            "/Server/LoginWithXbox",
+            headers,
+            jsonAsString,
+            OnLoginWithXboxResult,
+            customData);
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ServerLoginResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(*reqContainer);
+    }
+
+    void PlayFabServerAPI::OnLoginWithXboxResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+
+        ServerLoginResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<ServerLoginResult> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+
+        delete &container;
+    }
+
     void PlayFabServerAPI::ModifyItemUses(
         ModifyItemUsesRequest& request,
         ProcessApiCallback<ModifyItemUsesResult> callback,
@@ -3169,7 +3365,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -3218,7 +3414,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -3267,7 +3463,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -3316,7 +3512,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -3365,7 +3561,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -3414,7 +3610,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -3463,7 +3659,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -3512,7 +3708,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -3561,7 +3757,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -3610,7 +3806,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -3659,7 +3855,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -3708,7 +3904,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -3757,7 +3953,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -3806,7 +4002,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -3855,7 +4051,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -3904,7 +4100,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -3953,7 +4149,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -4002,7 +4198,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -4051,7 +4247,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -4100,7 +4296,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -4149,7 +4345,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -4198,7 +4394,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -4247,7 +4443,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -4296,7 +4492,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -4345,7 +4541,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -4394,7 +4590,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -4443,7 +4639,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -4492,7 +4688,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -4541,7 +4737,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -4590,7 +4786,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -4631,6 +4827,55 @@ namespace PlayFab
         delete &container;
     }
 
+    void PlayFabServerAPI::UnlinkXboxAccount(
+        UnlinkXboxAccountRequest& request,
+        ProcessApiCallback<UnlinkXboxAccountResult> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const auto requestJson = request.ToJson();
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+
+        CallRequestContainer* reqContainer = new CallRequestContainer(
+            "/Server/UnlinkXboxAccount",
+            headers,
+            jsonAsString,
+            OnUnlinkXboxAccountResult,
+            customData);
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkXboxAccountResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(*reqContainer);
+    }
+
+    void PlayFabServerAPI::OnUnlinkXboxAccountResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+
+        UnlinkXboxAccountResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<UnlinkXboxAccountResult> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+
+        delete &container;
+    }
+
     void PlayFabServerAPI::UnlockContainerInstance(
         UnlockContainerInstanceRequest& request,
         ProcessApiCallback<UnlockContainerItemResult> callback,
@@ -4639,7 +4884,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -4688,7 +4933,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -4737,7 +4982,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -4786,7 +5031,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -4835,7 +5080,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -4884,7 +5129,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -4933,7 +5178,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -4982,7 +5227,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -5031,7 +5276,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -5080,7 +5325,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -5129,7 +5374,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -5178,7 +5423,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -5227,7 +5472,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -5276,7 +5521,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -5325,7 +5570,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -5374,7 +5619,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -5423,7 +5668,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -5472,7 +5717,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -5521,7 +5766,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;
@@ -5570,7 +5815,7 @@ namespace PlayFab
     )
     {
 
-        IPlayFabHttpPlugin& http = PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
 
         Json::FastWriter writer;

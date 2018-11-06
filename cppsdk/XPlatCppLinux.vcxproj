@@ -97,6 +97,9 @@
     <ClInclude Include="include\playfab\PlayFabLocalizationApi.h"/>
     <ClInclude Include="include\playfab\PlayFabLocalizationDataModels.h"/>
 
+    <ClInclude Include="include\playfab\PlayFabMultiplayerApi.h"/>
+    <ClInclude Include="include\playfab\PlayFabMultiplayerDataModels.h"/>
+
     <ClInclude Include="include\playfab\PlayFabProfilesApi.h"/>
     <ClInclude Include="include\playfab\PlayFabProfilesDataModels.h"/>
 
@@ -106,6 +109,13 @@
     <ClInclude Include="include\playfab\PlayFabCallRequestContainer.h" />
     <ClInclude Include="include\playfab\PlayFabCallRequestContainerBase.h" />
     <ClInclude Include="include\playfab\PlayFabPluginManager.h" />
+    <ClInclude Include="include\playfab\QoS\DataCenterResult.h" />
+    <ClInclude Include="include\playfab\QoS\PingResult.h" />
+    <ClInclude Include="include\playfab\QoS\PlayFabQoSApi.h" />
+    <ClInclude Include="include\playfab\QoS\QoS.h" />
+    <ClInclude Include="include\playfab\QoS\QoSResult.h" />
+    <ClInclude Include="include\playfab\QoS\QoSSocket.h" />
+    <ClInclude Include="include\playfab\QoS\XPlatSocket.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +140,8 @@
 
     <ClInclude Include="source\playfab\PlayFabLocalizationApi.cpp"/>
 
+    <ClInclude Include="source\playfab\PlayFabMultiplayerApi.cpp"/>
+
     <ClInclude Include="source\playfab\PlayFabProfilesApi.cpp"/>
 
     <ClCompile Include="source\playfab\PlayFabError.cpp" />
@@ -138,6 +150,11 @@
     <ClCompile Include="source\playfab\PlayFabCallRequestContainer.cpp" />
     <ClCompile Include="source\playfab\PlayFabCallRequestContainerBase.cpp" />
     <ClCompile Include="source\playfab\PlayFabPluginManager.cpp" />
+    <ClCompile Include="source\playfab\QoS\DataCenterResult.cpp" />
+    <ClCompile Include="source\playfab\QoS\PlayFabQoSApi.cpp" />
+    <ClCompile Include="source\playfab\QoS\QoSResult.cpp" />
+    <ClCompile Include="source\playfab\QoS\QoSSocket.cpp" />
+    <ClCompile Include="source\playfab\QoS\XPlatSocket.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>

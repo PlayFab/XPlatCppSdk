@@ -54,7 +54,7 @@ namespace PlayFab
 
         struct EventContents : public PlayFabBaseModel
         {
-            EntityKey Entity;
+            Boxed<EntityKey> Entity;
             std::string EventNamespace;
             std::string Name;
             std::string OriginalId;

@@ -3533,7 +3533,6 @@ namespace PlayFab
             std::list<std::string> PlayerUserIds;
             Boxed<Region> pfRegion;
             Uint32 RunTime;
-            std::string ServerHostname;
             std::string ServerIPV4Address;
             std::string ServerIPV6Address;
             Boxed<Int32> ServerPort;
@@ -3553,7 +3552,6 @@ namespace PlayFab
                 PlayerUserIds(),
                 pfRegion(),
                 RunTime(),
-                ServerHostname(),
                 ServerIPV4Address(),
                 ServerIPV6Address(),
                 ServerPort(),
@@ -3574,7 +3572,6 @@ namespace PlayFab
                 PlayerUserIds(src.PlayerUserIds),
                 pfRegion(src.pfRegion),
                 RunTime(src.RunTime),
-                ServerHostname(src.ServerHostname),
                 ServerIPV4Address(src.ServerIPV4Address),
                 ServerIPV6Address(src.ServerIPV6Address),
                 ServerPort(src.ServerPort),
@@ -3597,7 +3594,6 @@ namespace PlayFab
                 FromJsonUtilS(input["PlayerUserIds"], PlayerUserIds);
                 FromJsonUtilE(input["pfRegion"], pfRegion);
                 FromJsonUtilP(input["RunTime"], RunTime);
-                FromJsonUtilS(input["ServerHostname"], ServerHostname);
                 FromJsonUtilS(input["ServerIPV4Address"], ServerIPV4Address);
                 FromJsonUtilS(input["ServerIPV6Address"], ServerIPV6Address);
                 FromJsonUtilP(input["ServerPort"], ServerPort);
@@ -3619,7 +3615,6 @@ namespace PlayFab
                 Json::Value each_PlayerUserIds; ToJsonUtilS(PlayerUserIds, each_PlayerUserIds); output["PlayerUserIds"] = each_PlayerUserIds;
                 Json::Value each_pfRegion; ToJsonUtilE(pfRegion, each_pfRegion); output["Region"] = each_pfRegion;
                 Json::Value each_RunTime; ToJsonUtilP(RunTime, each_RunTime); output["RunTime"] = each_RunTime;
-                Json::Value each_ServerHostname; ToJsonUtilS(ServerHostname, each_ServerHostname); output["ServerHostname"] = each_ServerHostname;
                 Json::Value each_ServerIPV4Address; ToJsonUtilS(ServerIPV4Address, each_ServerIPV4Address); output["ServerIPV4Address"] = each_ServerIPV4Address;
                 Json::Value each_ServerIPV6Address; ToJsonUtilS(ServerIPV6Address, each_ServerIPV6Address); output["ServerIPV6Address"] = each_ServerIPV6Address;
                 Json::Value each_ServerPort; ToJsonUtilP(ServerPort, each_ServerPort); output["ServerPort"] = each_ServerPort;
@@ -3710,6 +3705,30 @@ namespace PlayFab
             {}
 
             ~EmptyResponse() = default;
+
+            void FromJson(Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
+        struct EmptyResult : public PlayFabResultCommon
+        {
+
+            EmptyResult() :
+                PlayFabResultCommon()
+            {}
+
+            EmptyResult(const EmptyResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~EmptyResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -8383,6 +8402,103 @@ namespace PlayFab
             }
         };
 
+        struct GetPlayFabIDsFromXboxLiveIDsRequest : public PlayFabRequestCommon
+        {
+            std::string Sandbox;
+            std::list<std::string> XboxLiveAccountIDs;
+
+            GetPlayFabIDsFromXboxLiveIDsRequest() :
+                PlayFabRequestCommon(),
+                Sandbox(),
+                XboxLiveAccountIDs()
+            {}
+
+            GetPlayFabIDsFromXboxLiveIDsRequest(const GetPlayFabIDsFromXboxLiveIDsRequest& src) :
+                PlayFabRequestCommon(),
+                Sandbox(src.Sandbox),
+                XboxLiveAccountIDs(src.XboxLiveAccountIDs)
+            {}
+
+            ~GetPlayFabIDsFromXboxLiveIDsRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["Sandbox"], Sandbox);
+                FromJsonUtilS(input["XboxLiveAccountIDs"], XboxLiveAccountIDs);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Sandbox; ToJsonUtilS(Sandbox, each_Sandbox); output["Sandbox"] = each_Sandbox;
+                Json::Value each_XboxLiveAccountIDs; ToJsonUtilS(XboxLiveAccountIDs, each_XboxLiveAccountIDs); output["XboxLiveAccountIDs"] = each_XboxLiveAccountIDs;
+                return output;
+            }
+        };
+
+        struct XboxLiveAccountPlayFabIdPair : public PlayFabBaseModel
+        {
+            std::string PlayFabId;
+            std::string XboxLiveAccountId;
+
+            XboxLiveAccountPlayFabIdPair() :
+                PlayFabBaseModel(),
+                PlayFabId(),
+                XboxLiveAccountId()
+            {}
+
+            XboxLiveAccountPlayFabIdPair(const XboxLiveAccountPlayFabIdPair& src) :
+                PlayFabBaseModel(),
+                PlayFabId(src.PlayFabId),
+                XboxLiveAccountId(src.XboxLiveAccountId)
+            {}
+
+            ~XboxLiveAccountPlayFabIdPair() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+                FromJsonUtilS(input["XboxLiveAccountId"], XboxLiveAccountId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                Json::Value each_XboxLiveAccountId; ToJsonUtilS(XboxLiveAccountId, each_XboxLiveAccountId); output["XboxLiveAccountId"] = each_XboxLiveAccountId;
+                return output;
+            }
+        };
+
+        struct GetPlayFabIDsFromXboxLiveIDsResult : public PlayFabResultCommon
+        {
+            std::list<XboxLiveAccountPlayFabIdPair> Data;
+
+            GetPlayFabIDsFromXboxLiveIDsResult() :
+                PlayFabResultCommon(),
+                Data()
+            {}
+
+            GetPlayFabIDsFromXboxLiveIDsResult(const GetPlayFabIDsFromXboxLiveIDsResult& src) :
+                PlayFabResultCommon(),
+                Data(src.Data)
+            {}
+
+            ~GetPlayFabIDsFromXboxLiveIDsResult() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["Data"], Data);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Data; ToJsonUtilO(Data, each_Data); output["Data"] = each_Data;
+                return output;
+            }
+        };
+
         struct GetPublisherDataRequest : public PlayFabRequestCommon
         {
             std::list<std::string> Keys;
@@ -10014,6 +10130,45 @@ namespace PlayFab
             }
         };
 
+        struct LinkOpenIdConnectRequest : public PlayFabRequestCommon
+        {
+            std::string ConnectionId;
+            Boxed<bool> ForceLink;
+            std::string IdToken;
+
+            LinkOpenIdConnectRequest() :
+                PlayFabRequestCommon(),
+                ConnectionId(),
+                ForceLink(),
+                IdToken()
+            {}
+
+            LinkOpenIdConnectRequest(const LinkOpenIdConnectRequest& src) :
+                PlayFabRequestCommon(),
+                ConnectionId(src.ConnectionId),
+                ForceLink(src.ForceLink),
+                IdToken(src.IdToken)
+            {}
+
+            ~LinkOpenIdConnectRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["ConnectionId"], ConnectionId);
+                FromJsonUtilP(input["ForceLink"], ForceLink);
+                FromJsonUtilS(input["IdToken"], IdToken);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ConnectionId; ToJsonUtilS(ConnectionId, each_ConnectionId); output["ConnectionId"] = each_ConnectionId;
+                Json::Value each_ForceLink; ToJsonUtilP(ForceLink, each_ForceLink); output["ForceLink"] = each_ForceLink;
+                Json::Value each_IdToken; ToJsonUtilS(IdToken, each_IdToken); output["IdToken"] = each_IdToken;
+                return output;
+            }
+        };
+
         struct LinkSteamAccountRequest : public PlayFabRequestCommon
         {
             Boxed<bool> ForceLink;
@@ -11017,6 +11172,70 @@ namespace PlayFab
             }
         };
 
+        struct LoginWithOpenIdConnectRequest : public PlayFabRequestCommon
+        {
+            std::string ConnectionId;
+            Boxed<bool> CreateAccount;
+            std::string EncryptedRequest;
+            std::string IdToken;
+            Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
+            Boxed<bool> LoginTitlePlayerAccountEntity;
+            std::string PlayerSecret;
+            std::string TitleId;
+
+            LoginWithOpenIdConnectRequest() :
+                PlayFabRequestCommon(),
+                ConnectionId(),
+                CreateAccount(),
+                EncryptedRequest(),
+                IdToken(),
+                InfoRequestParameters(),
+                LoginTitlePlayerAccountEntity(),
+                PlayerSecret(),
+                TitleId()
+            {}
+
+            LoginWithOpenIdConnectRequest(const LoginWithOpenIdConnectRequest& src) :
+                PlayFabRequestCommon(),
+                ConnectionId(src.ConnectionId),
+                CreateAccount(src.CreateAccount),
+                EncryptedRequest(src.EncryptedRequest),
+                IdToken(src.IdToken),
+                InfoRequestParameters(src.InfoRequestParameters),
+                LoginTitlePlayerAccountEntity(src.LoginTitlePlayerAccountEntity),
+                PlayerSecret(src.PlayerSecret),
+                TitleId(src.TitleId)
+            {}
+
+            ~LoginWithOpenIdConnectRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["ConnectionId"], ConnectionId);
+                FromJsonUtilP(input["CreateAccount"], CreateAccount);
+                FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
+                FromJsonUtilS(input["IdToken"], IdToken);
+                FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
+                FromJsonUtilP(input["LoginTitlePlayerAccountEntity"], LoginTitlePlayerAccountEntity);
+                FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
+                FromJsonUtilS(input["TitleId"], TitleId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ConnectionId; ToJsonUtilS(ConnectionId, each_ConnectionId); output["ConnectionId"] = each_ConnectionId;
+                Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
+                Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
+                Json::Value each_IdToken; ToJsonUtilS(IdToken, each_IdToken); output["IdToken"] = each_IdToken;
+                Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
+                Json::Value each_LoginTitlePlayerAccountEntity; ToJsonUtilP(LoginTitlePlayerAccountEntity, each_LoginTitlePlayerAccountEntity); output["LoginTitlePlayerAccountEntity"] = each_LoginTitlePlayerAccountEntity;
+                Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
+                Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
+                return output;
+            }
+        };
+
         struct LoginWithPlayFabRequest : public PlayFabRequestCommon
         {
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
@@ -11361,7 +11580,6 @@ namespace PlayFab
             std::string Expires;
             std::string LobbyID;
             Boxed<Int32> PollWaitTimeMS;
-            std::string ServerHostname;
             std::string ServerIPV4Address;
             std::string ServerIPV6Address;
             Boxed<Int32> ServerPort;
@@ -11374,7 +11592,6 @@ namespace PlayFab
                 Expires(),
                 LobbyID(),
                 PollWaitTimeMS(),
-                ServerHostname(),
                 ServerIPV4Address(),
                 ServerIPV6Address(),
                 ServerPort(),
@@ -11388,7 +11605,6 @@ namespace PlayFab
                 Expires(src.Expires),
                 LobbyID(src.LobbyID),
                 PollWaitTimeMS(src.PollWaitTimeMS),
-                ServerHostname(src.ServerHostname),
                 ServerIPV4Address(src.ServerIPV4Address),
                 ServerIPV6Address(src.ServerIPV6Address),
                 ServerPort(src.ServerPort),
@@ -11404,7 +11620,6 @@ namespace PlayFab
                 FromJsonUtilS(input["Expires"], Expires);
                 FromJsonUtilS(input["LobbyID"], LobbyID);
                 FromJsonUtilP(input["PollWaitTimeMS"], PollWaitTimeMS);
-                FromJsonUtilS(input["ServerHostname"], ServerHostname);
                 FromJsonUtilS(input["ServerIPV4Address"], ServerIPV4Address);
                 FromJsonUtilS(input["ServerIPV6Address"], ServerIPV6Address);
                 FromJsonUtilP(input["ServerPort"], ServerPort);
@@ -11419,7 +11634,6 @@ namespace PlayFab
                 Json::Value each_Expires; ToJsonUtilS(Expires, each_Expires); output["Expires"] = each_Expires;
                 Json::Value each_LobbyID; ToJsonUtilS(LobbyID, each_LobbyID); output["LobbyID"] = each_LobbyID;
                 Json::Value each_PollWaitTimeMS; ToJsonUtilP(PollWaitTimeMS, each_PollWaitTimeMS); output["PollWaitTimeMS"] = each_PollWaitTimeMS;
-                Json::Value each_ServerHostname; ToJsonUtilS(ServerHostname, each_ServerHostname); output["ServerHostname"] = each_ServerHostname;
                 Json::Value each_ServerIPV4Address; ToJsonUtilS(ServerIPV4Address, each_ServerIPV4Address); output["ServerIPV4Address"] = each_ServerIPV4Address;
                 Json::Value each_ServerIPV6Address; ToJsonUtilS(ServerIPV6Address, each_ServerIPV6Address); output["ServerIPV6Address"] = each_ServerIPV6Address;
                 Json::Value each_ServerPort; ToJsonUtilP(ServerPort, each_ServerPort); output["ServerPort"] = each_ServerPort;
@@ -12671,7 +12885,6 @@ namespace PlayFab
             std::string Expires;
             std::string LobbyID;
             std::string Password;
-            std::string ServerHostname;
             std::string ServerIPV4Address;
             std::string ServerIPV6Address;
             Boxed<Int32> ServerPort;
@@ -12683,7 +12896,6 @@ namespace PlayFab
                 Expires(),
                 LobbyID(),
                 Password(),
-                ServerHostname(),
                 ServerIPV4Address(),
                 ServerIPV6Address(),
                 ServerPort(),
@@ -12696,7 +12908,6 @@ namespace PlayFab
                 Expires(src.Expires),
                 LobbyID(src.LobbyID),
                 Password(src.Password),
-                ServerHostname(src.ServerHostname),
                 ServerIPV4Address(src.ServerIPV4Address),
                 ServerIPV6Address(src.ServerIPV6Address),
                 ServerPort(src.ServerPort),
@@ -12711,7 +12922,6 @@ namespace PlayFab
                 FromJsonUtilS(input["Expires"], Expires);
                 FromJsonUtilS(input["LobbyID"], LobbyID);
                 FromJsonUtilS(input["Password"], Password);
-                FromJsonUtilS(input["ServerHostname"], ServerHostname);
                 FromJsonUtilS(input["ServerIPV4Address"], ServerIPV4Address);
                 FromJsonUtilS(input["ServerIPV6Address"], ServerIPV6Address);
                 FromJsonUtilP(input["ServerPort"], ServerPort);
@@ -12725,7 +12935,6 @@ namespace PlayFab
                 Json::Value each_Expires; ToJsonUtilS(Expires, each_Expires); output["Expires"] = each_Expires;
                 Json::Value each_LobbyID; ToJsonUtilS(LobbyID, each_LobbyID); output["LobbyID"] = each_LobbyID;
                 Json::Value each_Password; ToJsonUtilS(Password, each_Password); output["Password"] = each_Password;
-                Json::Value each_ServerHostname; ToJsonUtilS(ServerHostname, each_ServerHostname); output["ServerHostname"] = each_ServerHostname;
                 Json::Value each_ServerIPV4Address; ToJsonUtilS(ServerIPV4Address, each_ServerIPV4Address); output["ServerIPV4Address"] = each_ServerIPV4Address;
                 Json::Value each_ServerIPV6Address; ToJsonUtilS(ServerIPV6Address, each_ServerIPV6Address); output["ServerIPV6Address"] = each_ServerIPV6Address;
                 Json::Value each_ServerPort; ToJsonUtilP(ServerPort, each_ServerPort); output["ServerPort"] = each_ServerPort;
@@ -12887,6 +13096,35 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_Amount; ToJsonUtilP(Amount, each_Amount); output["Amount"] = each_Amount;
                 Json::Value each_VirtualCurrency; ToJsonUtilS(VirtualCurrency, each_VirtualCurrency); output["VirtualCurrency"] = each_VirtualCurrency;
+                return output;
+            }
+        };
+
+        struct UninkOpenIdConnectRequest : public PlayFabRequestCommon
+        {
+            std::string ConnectionId;
+
+            UninkOpenIdConnectRequest() :
+                PlayFabRequestCommon(),
+                ConnectionId()
+            {}
+
+            UninkOpenIdConnectRequest(const UninkOpenIdConnectRequest& src) :
+                PlayFabRequestCommon(),
+                ConnectionId(src.ConnectionId)
+            {}
+
+            ~UninkOpenIdConnectRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["ConnectionId"], ConnectionId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ConnectionId; ToJsonUtilS(ConnectionId, each_ConnectionId); output["ConnectionId"] = each_ConnectionId;
                 return output;
             }
         };
