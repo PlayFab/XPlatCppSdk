@@ -96,7 +96,7 @@ namespace PlayFab
             {
                 // Calculate the latency
                 int latency = (it->second.pingCount == 0) ? INT32_MAX : it->second.latencyMs / it->second.pingCount;
-                result.dataCenterResults.push_back(move(DataCenterResult(dataCenterMap[it->first], latency, it->second.errorCode)));
+                result.dataCenterResults.push_back(move(DataCenterResult(it->first, dataCenterMap[it->first], latency, it->second.errorCode)));
             }
 
             return result;
@@ -112,6 +112,7 @@ namespace PlayFab
             {
                 Json::Value dcResult;
                 
+                dcResult["AzureRegion"] = Json::Value(result.dataCenterResults[i].region);
                 dcResult["DataCenterName"] = Json::Value(result.dataCenterResults[i].dataCenterName.c_str());
                 dcResult["LatencyMs"] = Json::Value(result.dataCenterResults[i].latencyMs);
                 dcResult["ErrorCode"] = Json::Value(result.dataCenterResults[i].lastErrorCode);
