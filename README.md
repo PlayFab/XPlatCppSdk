@@ -1,4 +1,7 @@
 # XPlatCppSdk
+
+**SECURITY ISSUE WARNING: We have found security vulnerabilities in version 2.x of the XPlatCppSdk. We are working to resolve this issue immediately. Version 2.x should be abandoned as soon as possible, and replaced with version 3.x as soon as it's released.**
+
 Cross Platform C++ SDK
 
 This SDK lets you make REST API calls to the PlayFab service. It depends on jsoncpp and curl nuget packages (installed via nuget manager in VS).
