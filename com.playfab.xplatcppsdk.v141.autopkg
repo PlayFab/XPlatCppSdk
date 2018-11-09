@@ -24,13 +24,6 @@ nuget {
         tags: { PlayFab, Baas, Paas, JSON, REST, HTTP, SSL, API, cloud, liveops, game, gamedev, native };
     };
 
-    dependencies {
-        packages : {
-            jsoncpp-vc140-static-32_64/1.8.0;
-            curl/7.30.0.2;
-        };
-    }
-
     files {
         nestedInclude: {
             #destination = ${d_include}\playfab;
