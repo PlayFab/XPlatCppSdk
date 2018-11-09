@@ -1,15 +1,22 @@
 # XPlatCppSdk
 Cross Platform C++ SDK
 
-This SDK lets you make REST API calls to the PlayFab service. It depends on jsoncpp and curl nuget packages (installed via nuget manager in VS).
+**SECURITY ISSUE WARNING: We have found security vulnerabilities in version 2.x of the XPlatCppSdk. We are working to resolve this issue immediately. Version 2.x should be abandoned as soon as possible, and replaced with version 3.x as soon as it's released.** 
 
+DUE TO OUTDATED NATURE OF NUGET DEPENDENCIES WE HAD TO TEMPORARILY REMOVE THEM.
+WHILE WE ARE WORKING ON A BETTER SOLUTUTION WE ARE KINDLY ASKING OUR CUSTOMERS TO BUILD REQUIRED FLAVORS OF JSONCPP AND CURL LIBRARIES THEMSELVES, FOR EXAMPLE USING PUBLIC GIT SOURCES:
+
+https://github.com/curl/curl
+https://github.com/openssl/openssl
+https://github.com/libssh2/libssh2
+https://github.com/open-source-parsers/jsoncpp
+
+This SDK lets you make REST API calls to the PlayFab service. It depends on jsoncpp and curl.
 This SDK is generated from our [SdkGenerator](https://github.com/PlayFab/SdkGenerator)
 
 BETA!
 
 Currently, this SDK is not yet part of our normal publish pipeline, nor does it have the full testing. (We're working on this). The features that are most in need of testing are json <-> timestamp conversions, and arbitrary input/output parameters, such as WriteEvent and Cloud Script. (These two may not be fully working yet).
-
-Also TODO, we intend to make this to be a nuget package.
 
 Once this SDK is fully tested and integrated, we may deprecate the WindowsSDK, as they have essentially the same interface, but XPlatCppSdk has more compact dependencies which should pose fewer conflicts with customer projects. This most likely won't happen until end of 2018 or later.
 
@@ -37,10 +44,7 @@ Almost all other syntax and generated code should be nearly identical.
 
 Currently this project is a combined SDK and Example.
 
-A new project will need to include the JsonCpp and curl/libcurl nuget libraries, copy paste the playfab code.
-
-It is a high priority to make this project a proper nuget package soon, with dependencies properly defined.
-
+A new project will need to include the JsonCpp and curl/libcurl libraries, copy paste the playfab code.
 
 ## 4. Troubleshooting:
 
