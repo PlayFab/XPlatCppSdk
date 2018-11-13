@@ -15,7 +15,6 @@ exit /B %ERRORLEVEL%
 ) else (
 echo zlib build succeeded.
 )
-pause
 
 rem - copy headers and binaries to deps
 xcopy "*.h" "../deps/include/" /R /F /Y /H
@@ -29,14 +28,13 @@ popd
 
 echo --- Building openssl ---
 pushd "external/openssl-build"
-rem nmake
+nmake
 if /I "%ERRORLEVEL%" neq "0" (
 echo openssl build failed!
 exit /B %ERRORLEVEL%
 ) else (
 echo openssl build succeeded.
 )
-pause
 
 rem - copy headers and binaries to deps
 xcopy "../openssl/include/openssl/*.*" "../deps/include/openssl/" /E /R /F /Y /H
@@ -47,17 +45,16 @@ popd
 
 echo --- Building curl ---
 pushd "external/curl"
-rem call buildconf.bat
+call buildconf.bat
 if /I "%ERRORLEVEL%" neq "0" (
 echo curl build config failed!
 exit /B %ERRORLEVEL%
 ) else (
 echo curl build config succeeded.
 )
-pause
 
 pushd "winbuild"
-rem nmake /f Makefile.vc mode=static VC=15 WITH_SSL=static WITH_ZLIB=static MACHINE=x64
+nmake /f Makefile.vc mode=static VC=15 WITH_SSL=static WITH_ZLIB=static MACHINE=x64
 if /I "%ERRORLEVEL%" neq "0" (
 echo curl build failed!
 exit /B %ERRORLEVEL%
@@ -65,7 +62,6 @@ exit /B %ERRORLEVEL%
 echo curl build succeeded.
 )
 popd
-pause
 
 rem - copy headers and binaries to deps
 set curlBuildDir=builds/libcurl-vc15-x64-release-static-ssl-static-zlib-static-ipv6-sspi/
@@ -74,25 +70,19 @@ xcopy "%curlBuildDir%lib/libcurl_a.lib" "../deps/lib/" /R /F /Y /H
 popd
 
 echo --- Building jsoncpp ---
-pushd "external/jsoncpp"
-
-nmake /f win32/Makefile.msc
+pushd "external/jsoncpp-build"
+msbuild.exe lib_json.sln /nologo /t:Build /p:Configuration="Release" /p:Platform=x64
 if /I "%ERRORLEVEL%" neq "0" (
-echo zlip build failed!
+echo jsoncpp build failed!
 exit /B %ERRORLEVEL%
 ) else (
-echo zlib build succeeded.
+echo jsoncpp build succeeded.
 )
-pause
 
 rem - copy headers and binaries to deps
-xcopy "*.h" "../deps/include/" /R /F /Y /H
-xcopy "zlib.lib" "../deps/lib/" /R /F /Y /H
-xcopy "zlib.pdb" "../deps/lib/" /R /F /Y /H
-xcopy "zdll.lib" "../deps/lib/" /R /F /Y /H
-xcopy "zdll.exp" "../deps/lib/" /R /F /Y /H
-xcopy "zlib1.dll" "../deps/lib/" /R /F /Y /H
-xcopy "zlib1.pdb" "../deps/lib/" /R /F /Y /H
+xcopy "../jsoncpp/include/json/*.*" "../deps/include/json/" /E /R /F /Y /H
+xcopy "x64/Release/lib_json.lib" "../deps/lib/" /R /F /Y /H
+xcopy "x64/Release/lib_json.pdb" "../deps/lib/" /R /F /Y /H
 popd
 
 popd
