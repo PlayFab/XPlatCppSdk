@@ -98,7 +98,7 @@ Build process:
 * Navigate to the root of curl repo. Run:
     * `buildconf.bat`
 * Open 64-bit Native command line prompt for VS 2017 (x64 Native Tools Command Prompt for VS 2017). Navigate to the winbuild subdirectory in the root of curl repo. Run:
-    * `nmake /f Makefile.vc mode=<dll or static> VC=15 WITH_SSL=<dll or static> [WITH_ZLIB=<dll or static>] MACHINE=x64`
+    * `nmake /f Makefile.vc mode=<dll or static> VC=15 WITH_SSL=<dll or static> WITH_ZLIB=<dll or static> MACHINE=x64`
         * (it builds with `/MD` option by default (recommended). If static linking with CRT is required for some reason then add `RTLIBCFG=static` parameter to `nmake` command)
         * (build process will take several minutes)
 * The output will be in the `/builds` subdirectory in the root of curl repo.
