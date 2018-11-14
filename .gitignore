@@ -288,3 +288,9 @@ __pycache__/
 *.xsd.cs
 
 desktop.ini
+
+# Generated/built dependencies
+external/deps/
+external/openssl-build/*.lib
+external/openssl-build/crypto/*.h
+external/openssl-build/crypto/*.asm
