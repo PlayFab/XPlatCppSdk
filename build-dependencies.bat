@@ -28,6 +28,79 @@ popd
 
 echo --- Building openssl ---
 pushd "external/openssl-build"
+rem - create a directory tree necessary for openssl build
+rem - (typically created by running "perl Configure" but we are pre-baking that step
+rem - for a convenience of "static" makefile that allows to modify build settings)
+mkdir apps
+mkdir crypto
+mkdir crypto\aes
+mkdir crypto\asn1
+mkdir crypto\async
+mkdir crypto\async\arch
+mkdir crypto\bf
+mkdir crypto\bio
+mkdir crypto\blake2
+mkdir crypto\bn
+mkdir crypto\buffer
+mkdir crypto\camellia
+mkdir crypto\cast
+mkdir crypto\chacha
+mkdir crypto\cmac
+mkdir crypto\cms
+mkdir crypto\comp
+mkdir crypto\conf
+mkdir crypto\ct
+mkdir crypto\des
+mkdir crypto\dh
+mkdir crypto\dsa
+mkdir crypto\dso
+mkdir crypto\ec
+mkdir crypto\engine
+mkdir crypto\err
+mkdir crypto\evp
+mkdir crypto\hmac
+mkdir crypto\idea
+mkdir crypto\include
+mkdir crypto\include\internal
+mkdir crypto\kdf
+mkdir crypto\lhash
+mkdir crypto\md4
+mkdir crypto\md5
+mkdir crypto\mdc2
+mkdir crypto\modes
+mkdir crypto\objects
+mkdir crypto\ocsp
+mkdir crypto\pem
+mkdir crypto\pkcs7
+mkdir crypto\pkcs12
+mkdir crypto\poly1305
+mkdir crypto\rand
+mkdir crypto\rc2
+mkdir crypto\rc4
+mkdir crypto\ripemd
+mkdir crypto\rsa
+mkdir crypto\seed
+mkdir crypto\sha
+mkdir crypto\srp
+mkdir crypto\stack
+mkdir crypto\ts
+mkdir crypto\txt_db
+mkdir crypto\ui
+mkdir crypto\whrlpool
+mkdir crypto\x509
+mkdir crypto\x509v3
+mkdir engines
+mkdir fuzz
+mkdir include
+mkdir include\openssl
+mkdir ms
+mkdir ssl
+mkdir ssl\record
+mkdir ssl\statem
+mkdir test
+mkdir tools
+mkdir util
+
 nmake
 if /I "%ERRORLEVEL%" neq "0" (
 echo openssl build failed!
