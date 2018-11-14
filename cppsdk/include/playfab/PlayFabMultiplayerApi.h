@@ -33,6 +33,7 @@ namespace PlayFab
         static void GetMultiplayerServerDetails(MultiplayerModels::GetMultiplayerServerDetailsRequest& request, ProcessApiCallback<MultiplayerModels::GetMultiplayerServerDetailsResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetRemoteLoginEndpoint(MultiplayerModels::GetRemoteLoginEndpointRequest& request, ProcessApiCallback<MultiplayerModels::GetRemoteLoginEndpointResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetTitleEnabledForMultiplayerServersStatus(MultiplayerModels::GetTitleEnabledForMultiplayerServersStatusRequest& request, ProcessApiCallback<MultiplayerModels::GetTitleEnabledForMultiplayerServersStatusResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void ListArchivedMultiplayerServers(MultiplayerModels::ListMultiplayerServersRequest& request, ProcessApiCallback<MultiplayerModels::ListMultiplayerServersResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void ListAssetSummaries(MultiplayerModels::ListAssetSummariesRequest& request, ProcessApiCallback<MultiplayerModels::ListAssetSummariesResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void ListBuildSummaries(MultiplayerModels::ListBuildSummariesRequest& request, ProcessApiCallback<MultiplayerModels::ListBuildSummariesResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void ListCertificateSummaries(MultiplayerModels::ListCertificateSummariesRequest& request, ProcessApiCallback<MultiplayerModels::ListCertificateSummariesResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -66,6 +67,7 @@ namespace PlayFab
         static void OnGetMultiplayerServerDetailsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
         static void OnGetRemoteLoginEndpointResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
         static void OnGetTitleEnabledForMultiplayerServersStatusResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnListArchivedMultiplayerServersResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
         static void OnListAssetSummariesResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
         static void OnListBuildSummariesResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
         static void OnListCertificateSummariesResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);

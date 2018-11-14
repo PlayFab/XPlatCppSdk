@@ -77,42 +77,54 @@ namespace PlayFab
 
         enum AzureVmSize
         {
-            AzureVmSizeStandard_A1,
-            AzureVmSizeStandard_A2,
-            AzureVmSizeStandard_A3,
-            AzureVmSizeStandard_A4,
             AzureVmSizeStandard_D1_v2,
             AzureVmSizeStandard_D2_v2,
             AzureVmSizeStandard_D3_v2,
             AzureVmSizeStandard_D4_v2,
-            AzureVmSizeStandard_D5_v2
+            AzureVmSizeStandard_D5_v2,
+            AzureVmSizeStandard_A1_v2,
+            AzureVmSizeStandard_A2_v2,
+            AzureVmSizeStandard_A4_v2,
+            AzureVmSizeStandard_A8_v2,
+            AzureVmSizeStandard_A1,
+            AzureVmSizeStandard_A2,
+            AzureVmSizeStandard_A3,
+            AzureVmSizeStandard_A4
         };
 
         inline void ToJsonEnum(const AzureVmSize input, Json::Value& output)
         {
-            if (input == AzureVmSizeStandard_A1) output = Json::Value("Standard_A1");
-            if (input == AzureVmSizeStandard_A2) output = Json::Value("Standard_A2");
-            if (input == AzureVmSizeStandard_A3) output = Json::Value("Standard_A3");
-            if (input == AzureVmSizeStandard_A4) output = Json::Value("Standard_A4");
             if (input == AzureVmSizeStandard_D1_v2) output = Json::Value("Standard_D1_v2");
             if (input == AzureVmSizeStandard_D2_v2) output = Json::Value("Standard_D2_v2");
             if (input == AzureVmSizeStandard_D3_v2) output = Json::Value("Standard_D3_v2");
             if (input == AzureVmSizeStandard_D4_v2) output = Json::Value("Standard_D4_v2");
             if (input == AzureVmSizeStandard_D5_v2) output = Json::Value("Standard_D5_v2");
+            if (input == AzureVmSizeStandard_A1_v2) output = Json::Value("Standard_A1_v2");
+            if (input == AzureVmSizeStandard_A2_v2) output = Json::Value("Standard_A2_v2");
+            if (input == AzureVmSizeStandard_A4_v2) output = Json::Value("Standard_A4_v2");
+            if (input == AzureVmSizeStandard_A8_v2) output = Json::Value("Standard_A8_v2");
+            if (input == AzureVmSizeStandard_A1) output = Json::Value("Standard_A1");
+            if (input == AzureVmSizeStandard_A2) output = Json::Value("Standard_A2");
+            if (input == AzureVmSizeStandard_A3) output = Json::Value("Standard_A3");
+            if (input == AzureVmSizeStandard_A4) output = Json::Value("Standard_A4");
         }
         inline void FromJsonEnum(const Json::Value& input, AzureVmSize& output)
         {
             if (!input.isString()) return;
             const std::string& inputStr = input.asString();
-            if (inputStr == "Standard_A1") output = AzureVmSizeStandard_A1;
-            if (inputStr == "Standard_A2") output = AzureVmSizeStandard_A2;
-            if (inputStr == "Standard_A3") output = AzureVmSizeStandard_A3;
-            if (inputStr == "Standard_A4") output = AzureVmSizeStandard_A4;
             if (inputStr == "Standard_D1_v2") output = AzureVmSizeStandard_D1_v2;
             if (inputStr == "Standard_D2_v2") output = AzureVmSizeStandard_D2_v2;
             if (inputStr == "Standard_D3_v2") output = AzureVmSizeStandard_D3_v2;
             if (inputStr == "Standard_D4_v2") output = AzureVmSizeStandard_D4_v2;
             if (inputStr == "Standard_D5_v2") output = AzureVmSizeStandard_D5_v2;
+            if (inputStr == "Standard_A1_v2") output = AzureVmSizeStandard_A1_v2;
+            if (inputStr == "Standard_A2_v2") output = AzureVmSizeStandard_A2_v2;
+            if (inputStr == "Standard_A4_v2") output = AzureVmSizeStandard_A4_v2;
+            if (inputStr == "Standard_A8_v2") output = AzureVmSizeStandard_A8_v2;
+            if (inputStr == "Standard_A1") output = AzureVmSizeStandard_A1;
+            if (inputStr == "Standard_A2") output = AzureVmSizeStandard_A2;
+            if (inputStr == "Standard_A3") output = AzureVmSizeStandard_A3;
+            if (inputStr == "Standard_A4") output = AzureVmSizeStandard_A4;
         }
 
         enum ContainerFlavor
