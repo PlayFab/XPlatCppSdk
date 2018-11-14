@@ -15,6 +15,10 @@ git submodule update --init --recursive
 #### Windows platform:
 The file `build-dependencies.bat` in the root of SDK repo simplifies the process of building dependencies from source. It is based on instructions provided by the authors of third-party libraries and it uses command line utilities like `nmake`. It must be run from a specific Visual Studio's development environment command prompt: `x64 Native Tools Command Prompt for VS 2017` (installed with any edition of Visual Studio 2017). The operation may take several minutes but it needs to run only once.
 
+Important! Building OpenSSL dependency from source requires specific tools installed:
+* Perl 5 (http://www.activestate.com/ActivePerl, 5.26.1.2601 was used). Make sure it adds to system PATH.
+* NASM (Netwide Assembler) (https://www.nasm.us/pub/nasm/releasebuilds/2.14/win64/, Win64 version 2.14 was used). Save installer on a local disk first and run it as Administrator (i.e. with elevated prompt). Make sure to add the location of NASM binaries to system PATH (manually)
+
 Please refer to [DEPENDENCIES.md](DEPENDENCIES.MD) for more details or if you need to customize/change the process of building dependencies.
 
 #### Other platforms:

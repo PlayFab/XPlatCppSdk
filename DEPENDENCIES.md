@@ -75,7 +75,7 @@ CURL
 
 Output:
 * `libcurl_a.lib`
-* Note: (you may need to add also `normaliz.lib` to your linker (when using a static curl library))
+* Note: you may need to add also `normaliz.lib` to your linker (when using a static curl library)
 
 Original build info/pointers:
 * https://github.com/curl/curl/tree/master/winbuild
@@ -102,3 +102,25 @@ Build process:
         * (it builds with `/MD` option by default (recommended). If static linking with CRT is required for some reason then add `RTLIBCFG=static` parameter to `nmake` command)
         * (build process will take several minutes)
 * The output will be in the `/builds` subdirectory in the root of curl repo.
+
+----
+JSONCPP
+
+Output:
+* `lib_json.lib`
+
+Original build info/pointers:
+* https://github.com/open-source-parsers/jsoncpp/blob/master/README.md
+* https://github.com/open-source-parsers/jsoncpp/tree/master/makefiles/msvc2010
+
+Build dependencies:
+* VS 2017
+* MSBuild
+
+Build process:
+* Sync https://github.com/open-source-parsers/jsoncpp
+* Open 64-bit Native command line prompt for VS 2017 (x64 Native Tools Command Prompt for VS 2017). Navigate to /makefiles/msvc2010/. Run:
+    * `msbuild.exe jsoncpp.sln /nologo /t:Build /p:Configuration="Release" /p:Platform=x64`
+        * (jsoncpp.sln is outdated. Consider converting/updating it for a newer version of VS or crafting your own VS project in a similar way. An example is in `/external/jsoncpp-build/` directory of XPlat C++ SDK repo)
+        * (build process will take several seconds)
+* The output will be within the location of VS solution.
