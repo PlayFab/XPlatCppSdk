@@ -1808,10 +1808,11 @@ namespace PlayFab
             GenericErrorCodesInvalidFacebookInstantGamesSignature,
             GenericErrorCodesFacebookInstantGamesAuthNotConfiguredForTitle,
             GenericErrorCodesEntityProfileConstraintValidationFailed,
-            GenericErrorCodesPlayInsightsIngestionKeyPending,
-            GenericErrorCodesPlayInsightsIngestionKeyNotFound,
+            GenericErrorCodesTelemetryIngestionKeyPending,
+            GenericErrorCodesTelemetryIngestionKeyNotFound,
             GenericErrorCodesStatisticTagRequired,
             GenericErrorCodesStatisticTagInvalid,
+            GenericErrorCodesDataIntegrityError,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingCreateRequestMissing,
@@ -1848,7 +1849,8 @@ namespace PlayFab
             GenericErrorCodesNintendoSwitchDeviceIdNotLinked,
             GenericErrorCodesMatchmakingNotEnabled,
             GenericErrorCodesMatchmakingGetStatisticsIdentityInvalid,
-            GenericErrorCodesMatchmakingStatisticsIdMissing
+            GenericErrorCodesMatchmakingStatisticsIdMissing,
+            GenericErrorCodesCannotEnableMultiplayerServersForTitle
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -2242,10 +2244,11 @@ namespace PlayFab
             if (input == GenericErrorCodesInvalidFacebookInstantGamesSignature) output = Json::Value("InvalidFacebookInstantGamesSignature");
             if (input == GenericErrorCodesFacebookInstantGamesAuthNotConfiguredForTitle) output = Json::Value("FacebookInstantGamesAuthNotConfiguredForTitle");
             if (input == GenericErrorCodesEntityProfileConstraintValidationFailed) output = Json::Value("EntityProfileConstraintValidationFailed");
-            if (input == GenericErrorCodesPlayInsightsIngestionKeyPending) output = Json::Value("PlayInsightsIngestionKeyPending");
-            if (input == GenericErrorCodesPlayInsightsIngestionKeyNotFound) output = Json::Value("PlayInsightsIngestionKeyNotFound");
+            if (input == GenericErrorCodesTelemetryIngestionKeyPending) output = Json::Value("TelemetryIngestionKeyPending");
+            if (input == GenericErrorCodesTelemetryIngestionKeyNotFound) output = Json::Value("TelemetryIngestionKeyNotFound");
             if (input == GenericErrorCodesStatisticTagRequired) output = Json::Value("StatisticTagRequired");
             if (input == GenericErrorCodesStatisticTagInvalid) output = Json::Value("StatisticTagInvalid");
+            if (input == GenericErrorCodesDataIntegrityError) output = Json::Value("DataIntegrityError");
             if (input == GenericErrorCodesMatchmakingEntityInvalid) output = Json::Value("MatchmakingEntityInvalid");
             if (input == GenericErrorCodesMatchmakingPlayerAttributesInvalid) output = Json::Value("MatchmakingPlayerAttributesInvalid");
             if (input == GenericErrorCodesMatchmakingCreateRequestMissing) output = Json::Value("MatchmakingCreateRequestMissing");
@@ -2283,6 +2286,7 @@ namespace PlayFab
             if (input == GenericErrorCodesMatchmakingNotEnabled) output = Json::Value("MatchmakingNotEnabled");
             if (input == GenericErrorCodesMatchmakingGetStatisticsIdentityInvalid) output = Json::Value("MatchmakingGetStatisticsIdentityInvalid");
             if (input == GenericErrorCodesMatchmakingStatisticsIdMissing) output = Json::Value("MatchmakingStatisticsIdMissing");
+            if (input == GenericErrorCodesCannotEnableMultiplayerServersForTitle) output = Json::Value("CannotEnableMultiplayerServersForTitle");
         }
         inline void FromJsonEnum(const Json::Value& input, GenericErrorCodes& output)
         {
@@ -2677,10 +2681,11 @@ namespace PlayFab
             if (inputStr == "InvalidFacebookInstantGamesSignature") output = GenericErrorCodesInvalidFacebookInstantGamesSignature;
             if (inputStr == "FacebookInstantGamesAuthNotConfiguredForTitle") output = GenericErrorCodesFacebookInstantGamesAuthNotConfiguredForTitle;
             if (inputStr == "EntityProfileConstraintValidationFailed") output = GenericErrorCodesEntityProfileConstraintValidationFailed;
-            if (inputStr == "PlayInsightsIngestionKeyPending") output = GenericErrorCodesPlayInsightsIngestionKeyPending;
-            if (inputStr == "PlayInsightsIngestionKeyNotFound") output = GenericErrorCodesPlayInsightsIngestionKeyNotFound;
+            if (inputStr == "TelemetryIngestionKeyPending") output = GenericErrorCodesTelemetryIngestionKeyPending;
+            if (inputStr == "TelemetryIngestionKeyNotFound") output = GenericErrorCodesTelemetryIngestionKeyNotFound;
             if (inputStr == "StatisticTagRequired") output = GenericErrorCodesStatisticTagRequired;
             if (inputStr == "StatisticTagInvalid") output = GenericErrorCodesStatisticTagInvalid;
+            if (inputStr == "DataIntegrityError") output = GenericErrorCodesDataIntegrityError;
             if (inputStr == "MatchmakingEntityInvalid") output = GenericErrorCodesMatchmakingEntityInvalid;
             if (inputStr == "MatchmakingPlayerAttributesInvalid") output = GenericErrorCodesMatchmakingPlayerAttributesInvalid;
             if (inputStr == "MatchmakingCreateRequestMissing") output = GenericErrorCodesMatchmakingCreateRequestMissing;
@@ -2718,6 +2723,7 @@ namespace PlayFab
             if (inputStr == "MatchmakingNotEnabled") output = GenericErrorCodesMatchmakingNotEnabled;
             if (inputStr == "MatchmakingGetStatisticsIdentityInvalid") output = GenericErrorCodesMatchmakingGetStatisticsIdentityInvalid;
             if (inputStr == "MatchmakingStatisticsIdMissing") output = GenericErrorCodesMatchmakingStatisticsIdMissing;
+            if (inputStr == "CannotEnableMultiplayerServersForTitle") output = GenericErrorCodesCannotEnableMultiplayerServersForTitle;
         }
 
         enum LoginIdentityProvider

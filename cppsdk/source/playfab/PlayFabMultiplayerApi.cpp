@@ -711,6 +711,55 @@ namespace PlayFab
         delete &container;
     }
 
+    void PlayFabMultiplayerAPI::ListArchivedMultiplayerServers(
+        ListMultiplayerServersRequest& request,
+        ProcessApiCallback<ListMultiplayerServersResponse> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const auto requestJson = request.ToJson();
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+
+        CallRequestContainer* reqContainer = new CallRequestContainer(
+            "/MultiplayerServer/ListArchivedMultiplayerServers",
+            headers,
+            jsonAsString,
+            OnListArchivedMultiplayerServersResult,
+            customData);
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListMultiplayerServersResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(*reqContainer);
+    }
+
+    void PlayFabMultiplayerAPI::OnListArchivedMultiplayerServersResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+
+        ListMultiplayerServersResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<ListMultiplayerServersResponse> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+
+        delete &container;
+    }
+
     void PlayFabMultiplayerAPI::ListAssetSummaries(
         ListAssetSummariesRequest& request,
         ProcessApiCallback<ListAssetSummariesResponse> callback,

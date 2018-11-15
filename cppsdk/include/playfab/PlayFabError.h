@@ -407,10 +407,11 @@ namespace PlayFab
         PlayFabErrorInvalidFacebookInstantGamesSignature = 1396,
         PlayFabErrorFacebookInstantGamesAuthNotConfiguredForTitle = 1397,
         PlayFabErrorEntityProfileConstraintValidationFailed = 1398,
-        PlayFabErrorPlayInsightsIngestionKeyPending = 1399,
-        PlayFabErrorPlayInsightsIngestionKeyNotFound = 1400,
+        PlayFabErrorTelemetryIngestionKeyPending = 1399,
+        PlayFabErrorTelemetryIngestionKeyNotFound = 1400,
         PlayFabErrorStatisticTagRequired = 1401,
         PlayFabErrorStatisticTagInvalid = 1402,
+        PlayFabErrorDataIntegrityError = 1403,
         PlayFabErrorMatchmakingEntityInvalid = 2001,
         PlayFabErrorMatchmakingPlayerAttributesInvalid = 2002,
         PlayFabErrorMatchmakingCreateRequestMissing = 2003,
@@ -448,6 +449,7 @@ namespace PlayFab
         PlayFabErrorMatchmakingNotEnabled = 2035,
         PlayFabErrorMatchmakingGetStatisticsIdentityInvalid = 2036,
         PlayFabErrorMatchmakingStatisticsIdMissing = 2037,
+        PlayFabErrorCannotEnableMultiplayerServersForTitle = 2038,
     };
 
     /// <summary>

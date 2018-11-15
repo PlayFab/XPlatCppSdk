@@ -288,3 +288,18 @@ __pycache__/
 *.xsd.cs
 
 desktop.ini
+
+# Generated/built dependencies
+external/deps/
+external/deps-release/
+external/deps-debug/
+
+external/openssl-build-release/**/*
+!external/openssl-build-release/configdata.pm
+!external/openssl-build-release/makefile
+!external/openssl-build-release/readme.txt
+
+external/openssl-build-debug/**/*
+!external/openssl-build-debug/configdata.pm
+!external/openssl-build-debug/makefile
+!external/openssl-build-debug/readme.txt
