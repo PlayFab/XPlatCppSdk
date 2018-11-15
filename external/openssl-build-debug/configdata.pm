@@ -43,9 +43,9 @@ our %config = (
   openssl_sys_defines => [ "OPENSSL_SYS_WIN64A" ],
   openssl_thread_defines => [ "OPENSSL_THREADS" ],
   openssldir => "",
-  options => "--debug enable-zlib --with-zlib-include=../deps-debug/include/ --with-zlib-lib=../deps-debug/lib/zlib.lib no-asan no-crypto-mdebug no-crypto-mdebug-backtrace no-dynamic-engine no-ec_nistp_64_gcc_128 no-egd no-fuzz-afl no-fuzz-libfuzzer no-heartbeats no-md2 no-msan no-rc5 no-sctp no-shared no-ssl-trace no-ssl3 no-ssl3-method no-ubsan no-unit-test no-weak-ssl-ciphers no-zlib-dynamic",
+  options => "--debug enable-zlib --with-zlib-include=../deps/include/ --with-zlib-lib=../deps/lib/zlib.lib no-asan no-crypto-mdebug no-crypto-mdebug-backtrace no-dynamic-engine no-ec_nistp_64_gcc_128 no-egd no-fuzz-afl no-fuzz-libfuzzer no-heartbeats no-md2 no-msan no-rc5 no-sctp no-shared no-ssl-trace no-ssl3 no-ssl3-method no-ubsan no-unit-test no-weak-ssl-ciphers no-zlib-dynamic",
   perl => "C:\\Perl64\\bin\\perl.exe",
-  perlargv => [ "VC-WIN64A", "--debug", "no-shared", "zlib", "--with-zlib-include=../deps-debug/include/", "--with-zlib-lib=../deps-debug/lib/zlib.lib" ],
+  perlargv => [ "VC-WIN64A", "--debug", "no-shared", "zlib", "--with-zlib-include=../deps/include/", "--with-zlib-lib=../deps/lib/zlib.lib" ],
   prefix => "",
   processor => "",
   rc4_int => "unsigned int",
@@ -101,7 +101,7 @@ our %target = (
   dso_scheme => "WIN32",
   ec_asm_src => "ecp_nistz256.c ecp_nistz256-x86_64.s",
   ec_obj => "ecp_nistz256.o ecp_nistz256-x86_64.o",
-  ex_libs => "../deps-debug/lib/zlib.lib ws2_32.lib gdi32.lib advapi32.lib crypt32.lib user32.lib",
+  ex_libs => "../deps/lib/zlib.lib ws2_32.lib gdi32.lib advapi32.lib crypt32.lib user32.lib",
   exe_extension => "",
   ld => "link",
   lflags => "/nologo /debug",
@@ -280,8 +280,8 @@ our %disabled = (
 );
 
 our %withargs = (
-  zlib_include => "../deps-debug/include/",
-  zlib_lib => "../deps-debug/lib/zlib.lib",
+  zlib_include => "../deps/include/",
+  zlib_lib => "../deps/lib/zlib.lib",
 );
 
 our %unified_info = (

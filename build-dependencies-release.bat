@@ -8,8 +8,8 @@ pushd "%~dp0"
 set deps=../deps/
 
 echo --- Cleaning up deps ---
-rmdir "external/deps/" /s
-rmdir "external/deps-release/" /s
+rmdir "external/deps/" /s /q
+rmdir "external/deps-release/" /s /q
 
 echo --- Building zlib ---
 pushd "external/zlib"
