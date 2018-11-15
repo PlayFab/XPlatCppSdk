@@ -291,7 +291,15 @@ desktop.ini
 
 # Generated/built dependencies
 external/deps/
-external/openssl-build/
-!external/openssl-build/configdata.pm
-!external/openssl-build/makefile
-!external/openssl-build/readme.txt
+external/deps-release/
+external/deps-debug/
+
+external/openssl-build-release/**/*
+!external/openssl-build-release/configdata.pm
+!external/openssl-build-release/makefile
+!external/openssl-build-release/readme.txt
+
+external/openssl-build-debug/**/*
+!external/openssl-build-debug/configdata.pm
+!external/openssl-build-debug/makefile
+!external/openssl-build-debug/readme.txt
