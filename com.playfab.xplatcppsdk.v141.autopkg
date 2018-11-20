@@ -8,7 +8,7 @@ configurations {
 nuget {
     nuspec {
         id = "com.playfab.xplatcppsdk.v141";
-        version : 2.15.181105;
+        version : 2.16.181114;
         title: "PlayFab Cross Platform C++ Sdk for Visual Studio 2017";
         summary: "PlayFab is the unified backend platform for games and everything you need to build and operate your game, all in one place, so you can focus on creating and delivering a great player experience.";
         authors: "PlayFab";
@@ -18,24 +18,65 @@ nuget {
         iconUrl: "https://playfab.com/assets/img/playfab-mark.png";
         requireLicenseAcceptance: false;
         description: "Authentication, in-game commerce, player data, title data, inventory, characters, statistics, leaderboards, analytics and reporting, friends, multiplayer, matchmaking, tournaments, cloud script, trading, real-time event handling, player management, live ops, and server hosting for all major platforms/devices and games of any scale. This sdk gives your game the ability log into PlayFab and access cloud data and services.";
-        releaseNotes: "https://api.playfab.com/releaseNotes/#181105";
+        releaseNotes: "https://api.playfab.com/releaseNotes/#181114";
         copyright: "Copyright 2018";
         language: "C++";
         tags: { PlayFab, Baas, Paas, JSON, REST, HTTP, SSL, API, cloud, liveops, game, gamedev, native };
     };
 
     files {
+        docs: {
+            "external\deps-*\**\*"
+        };
+
+        [release]
+        include: {
+            "external\deps-release\include\**\*.h"
+        };
+
+        [debug]
+        include: {
+            "external\deps-debug\include\**\*.h"
+        };
+
         nestedInclude: {
             #destination = ${d_include}\playfab;
-            "cppsdk\include\playfab\*.h"
+            "cppsdk\include\playfab\**\*.h"
         };
 
         [x64,v141,release] {
-            lib:     { cppsdk\x64\Release\XPlatCppWindows\XPlatCppWindows.lib; }
+            lib: {
+                x64\Release\XPlatCppWindows\XPlatCppWindows.lib; 
+                external\deps-release\lib\libcurl_a.lib;
+                external\deps-release\lib\libssl.lib;
+                external\deps-release\lib\libcrypto.lib;
+                external\deps-release\lib\zlib.lib;
+                external\deps-release\lib\lib_json.lib;
+            }
         };
+
         [x64,v141,debug] {
-            lib:     { cppsdk\x64\Debug\XPlatCppWindows\XPlatCppWindows.lib; }
-            symbols: { cppsdk\x64\Debug\XPlatCppWindows\XPlatCppWindows.pdb; }
+            lib: {
+                x64\Debug\XPlatCppWindows\XPlatCppWindows.lib;
+                external\deps-debug\lib\libcurl_a_debug.lib;
+                external\deps-debug\lib\libssl.lib;
+                external\deps-debug\lib\libcrypto.lib;
+                external\deps-debug\lib\zlib.lib;
+                external\deps-debug\lib\lib_json.lib;
+            }
+            symbols: {
+                x64\Debug\XPlatCppWindows\XPlatCppWindows.pdb;
+                external\deps-debug\lib\lib_json.pdb;
+                external\deps-debug\lib\zlib.pdb;
+            }
         };
     };
+
+    targets {
+        Defines += CURL_STATICLIB;
+        Libraries += ws2_32.lib;
+        Libraries += wldap32.lib;
+        Libraries += crypt32.lib;
+        Libraries += normaliz.lib;
+    }
 }

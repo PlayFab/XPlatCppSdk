@@ -205,9 +205,6 @@
     <ClCompile Include="source\playfab\QoS\PlayFabQoSApi.cpp">
       <Filter>Source Files\playfab\QoS</Filter>
     </ClCompile>
-    <ClCompile Include="source\playfab\QoS\QoSResult.cpp">
-      <Filter>Source Files\playfab\QoS</Filter>
-    </ClCompile>
     <ClCompile Include="source\playfab\QoS\QoSSocket.cpp">
       <Filter>Source Files\playfab\QoS</Filter>
     </ClCompile>
