@@ -31,12 +31,12 @@ namespace PlayFab
         PlayFabProfilesAPI(const PlayFabProfilesAPI& other); // Private copy-constructor, static class should never have an instance
 
         // ------------ Generated result handlers
-        static void OnGetGlobalPolicyResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
-        static void OnGetProfileResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
-        static void OnGetProfilesResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
-        static void OnSetGlobalPolicyResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
-        static void OnSetProfileLanguageResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
-        static void OnSetProfilePolicyResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnGetGlobalPolicyResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
+        static void OnGetProfileResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
+        static void OnGetProfilesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
+        static void OnSetGlobalPolicyResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
+        static void OnSetProfileLanguageResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
+        static void OnSetProfilePolicyResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
 
         static bool ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container);
     };

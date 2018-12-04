@@ -15,7 +15,8 @@ namespace PlayFab
 
     size_t PlayFabClientAPI::Update()
     {
-        return PlayFabHttp::Get().Update();
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        return http.Update();
     }
 
     void PlayFabClientAPI::ForgetAllCredentials()
@@ -42,22 +43,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/AcceptTrade",
             headers,
             jsonAsString,
             OnAcceptTradeResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AcceptTradeResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnAcceptTradeResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnAcceptTradeResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         AcceptTradeResponse outResult;
         if (ValidateResult(outResult, container))
@@ -70,8 +71,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::AddFriend(
@@ -91,22 +90,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/AddFriend",
             headers,
             jsonAsString,
             OnAddFriendResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AddFriendResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnAddFriendResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnAddFriendResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         AddFriendResult outResult;
         if (ValidateResult(outResult, container))
@@ -119,8 +118,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::AddGenericID(
@@ -140,22 +137,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/AddGenericID",
             headers,
             jsonAsString,
             OnAddGenericIDResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AddGenericIDResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnAddGenericIDResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnAddGenericIDResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         AddGenericIDResult outResult;
         if (ValidateResult(outResult, container))
@@ -168,8 +165,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::AddOrUpdateContactEmail(
@@ -189,22 +184,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/AddOrUpdateContactEmail",
             headers,
             jsonAsString,
             OnAddOrUpdateContactEmailResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AddOrUpdateContactEmailResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnAddOrUpdateContactEmailResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnAddOrUpdateContactEmailResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         AddOrUpdateContactEmailResult outResult;
         if (ValidateResult(outResult, container))
@@ -217,8 +212,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::AddSharedGroupMembers(
@@ -238,22 +231,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/AddSharedGroupMembers",
             headers,
             jsonAsString,
             OnAddSharedGroupMembersResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AddSharedGroupMembersResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnAddSharedGroupMembersResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnAddSharedGroupMembersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         AddSharedGroupMembersResult outResult;
         if (ValidateResult(outResult, container))
@@ -266,8 +259,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::AddUsernamePassword(
@@ -287,22 +278,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/AddUsernamePassword",
             headers,
             jsonAsString,
             OnAddUsernamePasswordResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AddUsernamePasswordResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnAddUsernamePasswordResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnAddUsernamePasswordResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         AddUsernamePasswordResult outResult;
         if (ValidateResult(outResult, container))
@@ -315,8 +306,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::AddUserVirtualCurrency(
@@ -336,22 +325,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/AddUserVirtualCurrency",
             headers,
             jsonAsString,
             OnAddUserVirtualCurrencyResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ModifyUserVirtualCurrencyResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnAddUserVirtualCurrencyResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnAddUserVirtualCurrencyResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ModifyUserVirtualCurrencyResult outResult;
         if (ValidateResult(outResult, container))
@@ -364,8 +353,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::AndroidDevicePushNotificationRegistration(
@@ -385,22 +372,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/AndroidDevicePushNotificationRegistration",
             headers,
             jsonAsString,
             OnAndroidDevicePushNotificationRegistrationResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AndroidDevicePushNotificationRegistrationResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnAndroidDevicePushNotificationRegistrationResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnAndroidDevicePushNotificationRegistrationResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         AndroidDevicePushNotificationRegistrationResult outResult;
         if (ValidateResult(outResult, container))
@@ -413,8 +400,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::AttributeInstall(
@@ -434,22 +419,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/AttributeInstall",
             headers,
             jsonAsString,
             OnAttributeInstallResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AttributeInstallResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnAttributeInstallResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnAttributeInstallResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         AttributeInstallResult outResult;
         if (ValidateResult(outResult, container))
@@ -463,8 +448,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::CancelTrade(
@@ -484,22 +467,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/CancelTrade",
             headers,
             jsonAsString,
             OnCancelTradeResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CancelTradeResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnCancelTradeResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnCancelTradeResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         CancelTradeResponse outResult;
         if (ValidateResult(outResult, container))
@@ -512,8 +495,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::ConfirmPurchase(
@@ -533,22 +514,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/ConfirmPurchase",
             headers,
             jsonAsString,
             OnConfirmPurchaseResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ConfirmPurchaseResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnConfirmPurchaseResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnConfirmPurchaseResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ConfirmPurchaseResult outResult;
         if (ValidateResult(outResult, container))
@@ -561,8 +542,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::ConsumeItem(
@@ -582,22 +561,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/ConsumeItem",
             headers,
             jsonAsString,
             OnConsumeItemResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ConsumeItemResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnConsumeItemResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnConsumeItemResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ConsumeItemResult outResult;
         if (ValidateResult(outResult, container))
@@ -610,8 +589,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::ConsumeXboxEntitlements(
@@ -631,22 +608,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/ConsumeXboxEntitlements",
             headers,
             jsonAsString,
             OnConsumeXboxEntitlementsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ConsumeXboxEntitlementsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnConsumeXboxEntitlementsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnConsumeXboxEntitlementsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ConsumeXboxEntitlementsResult outResult;
         if (ValidateResult(outResult, container))
@@ -659,8 +636,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::CreateSharedGroup(
@@ -680,22 +655,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/CreateSharedGroup",
             headers,
             jsonAsString,
             OnCreateSharedGroupResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateSharedGroupResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnCreateSharedGroupResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnCreateSharedGroupResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         CreateSharedGroupResult outResult;
         if (ValidateResult(outResult, container))
@@ -708,8 +683,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::ExecuteCloudScript(
@@ -729,22 +702,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/ExecuteCloudScript",
             headers,
             jsonAsString,
             OnExecuteCloudScriptResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ExecuteCloudScriptResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnExecuteCloudScriptResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnExecuteCloudScriptResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ExecuteCloudScriptResult outResult;
         if (ValidateResult(outResult, container))
@@ -757,8 +730,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetAccountInfo(
@@ -778,22 +749,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetAccountInfo",
             headers,
             jsonAsString,
             OnGetAccountInfoResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetAccountInfoResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetAccountInfoResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetAccountInfoResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetAccountInfoResult outResult;
         if (ValidateResult(outResult, container))
@@ -806,8 +777,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetAllUsersCharacters(
@@ -827,22 +796,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetAllUsersCharacters",
             headers,
             jsonAsString,
             OnGetAllUsersCharactersResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListUsersCharactersResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetAllUsersCharactersResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetAllUsersCharactersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ListUsersCharactersResult outResult;
         if (ValidateResult(outResult, container))
@@ -855,8 +824,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetCatalogItems(
@@ -876,22 +843,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetCatalogItems",
             headers,
             jsonAsString,
             OnGetCatalogItemsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCatalogItemsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetCatalogItemsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetCatalogItemsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetCatalogItemsResult outResult;
         if (ValidateResult(outResult, container))
@@ -904,8 +871,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetCharacterData(
@@ -925,22 +890,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetCharacterData",
             headers,
             jsonAsString,
             OnGetCharacterDataResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCharacterDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetCharacterDataResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetCharacterDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetCharacterDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -953,8 +918,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetCharacterInventory(
@@ -974,22 +937,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetCharacterInventory",
             headers,
             jsonAsString,
             OnGetCharacterInventoryResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCharacterInventoryResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetCharacterInventoryResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetCharacterInventoryResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetCharacterInventoryResult outResult;
         if (ValidateResult(outResult, container))
@@ -1002,8 +965,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetCharacterLeaderboard(
@@ -1023,22 +984,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetCharacterLeaderboard",
             headers,
             jsonAsString,
             OnGetCharacterLeaderboardResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCharacterLeaderboardResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetCharacterLeaderboardResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetCharacterLeaderboardResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetCharacterLeaderboardResult outResult;
         if (ValidateResult(outResult, container))
@@ -1051,8 +1012,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetCharacterReadOnlyData(
@@ -1072,22 +1031,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetCharacterReadOnlyData",
             headers,
             jsonAsString,
             OnGetCharacterReadOnlyDataResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCharacterDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetCharacterReadOnlyDataResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetCharacterReadOnlyDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetCharacterDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -1100,8 +1059,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetCharacterStatistics(
@@ -1121,22 +1078,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetCharacterStatistics",
             headers,
             jsonAsString,
             OnGetCharacterStatisticsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCharacterStatisticsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetCharacterStatisticsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetCharacterStatisticsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetCharacterStatisticsResult outResult;
         if (ValidateResult(outResult, container))
@@ -1149,8 +1106,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetContentDownloadUrl(
@@ -1170,22 +1125,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetContentDownloadUrl",
             headers,
             jsonAsString,
             OnGetContentDownloadUrlResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetContentDownloadUrlResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetContentDownloadUrlResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetContentDownloadUrlResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetContentDownloadUrlResult outResult;
         if (ValidateResult(outResult, container))
@@ -1198,8 +1153,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetCurrentGames(
@@ -1219,22 +1172,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetCurrentGames",
             headers,
             jsonAsString,
             OnGetCurrentGamesResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CurrentGamesResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetCurrentGamesResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetCurrentGamesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         CurrentGamesResult outResult;
         if (ValidateResult(outResult, container))
@@ -1247,8 +1200,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetFriendLeaderboard(
@@ -1268,22 +1219,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetFriendLeaderboard",
             headers,
             jsonAsString,
             OnGetFriendLeaderboardResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetLeaderboardResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetFriendLeaderboardResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetFriendLeaderboardResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetLeaderboardResult outResult;
         if (ValidateResult(outResult, container))
@@ -1296,8 +1247,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetFriendLeaderboardAroundPlayer(
@@ -1317,22 +1266,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetFriendLeaderboardAroundPlayer",
             headers,
             jsonAsString,
             OnGetFriendLeaderboardAroundPlayerResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetFriendLeaderboardAroundPlayerResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetFriendLeaderboardAroundPlayerResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetFriendLeaderboardAroundPlayerResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetFriendLeaderboardAroundPlayerResult outResult;
         if (ValidateResult(outResult, container))
@@ -1345,8 +1294,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetFriendsList(
@@ -1366,22 +1313,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetFriendsList",
             headers,
             jsonAsString,
             OnGetFriendsListResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetFriendsListResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetFriendsListResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetFriendsListResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetFriendsListResult outResult;
         if (ValidateResult(outResult, container))
@@ -1394,8 +1341,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetGameServerRegions(
@@ -1415,22 +1360,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetGameServerRegions",
             headers,
             jsonAsString,
             OnGetGameServerRegionsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GameServerRegionsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetGameServerRegionsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetGameServerRegionsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GameServerRegionsResult outResult;
         if (ValidateResult(outResult, container))
@@ -1443,8 +1388,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetLeaderboard(
@@ -1464,22 +1407,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetLeaderboard",
             headers,
             jsonAsString,
             OnGetLeaderboardResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetLeaderboardResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetLeaderboardResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetLeaderboardResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetLeaderboardResult outResult;
         if (ValidateResult(outResult, container))
@@ -1492,8 +1435,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetLeaderboardAroundCharacter(
@@ -1513,22 +1454,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetLeaderboardAroundCharacter",
             headers,
             jsonAsString,
             OnGetLeaderboardAroundCharacterResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetLeaderboardAroundCharacterResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetLeaderboardAroundCharacterResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetLeaderboardAroundCharacterResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetLeaderboardAroundCharacterResult outResult;
         if (ValidateResult(outResult, container))
@@ -1541,8 +1482,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetLeaderboardAroundPlayer(
@@ -1562,22 +1501,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetLeaderboardAroundPlayer",
             headers,
             jsonAsString,
             OnGetLeaderboardAroundPlayerResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetLeaderboardAroundPlayerResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetLeaderboardAroundPlayerResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetLeaderboardAroundPlayerResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetLeaderboardAroundPlayerResult outResult;
         if (ValidateResult(outResult, container))
@@ -1590,8 +1529,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetLeaderboardForUserCharacters(
@@ -1611,22 +1548,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetLeaderboardForUserCharacters",
             headers,
             jsonAsString,
             OnGetLeaderboardForUserCharactersResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetLeaderboardForUsersCharactersResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetLeaderboardForUserCharactersResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetLeaderboardForUserCharactersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetLeaderboardForUsersCharactersResult outResult;
         if (ValidateResult(outResult, container))
@@ -1639,8 +1576,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetPaymentToken(
@@ -1660,22 +1595,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPaymentToken",
             headers,
             jsonAsString,
             OnGetPaymentTokenResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPaymentTokenResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetPaymentTokenResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetPaymentTokenResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetPaymentTokenResult outResult;
         if (ValidateResult(outResult, container))
@@ -1688,8 +1623,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetPhotonAuthenticationToken(
@@ -1709,22 +1642,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPhotonAuthenticationToken",
             headers,
             jsonAsString,
             OnGetPhotonAuthenticationTokenResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPhotonAuthenticationTokenResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetPhotonAuthenticationTokenResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetPhotonAuthenticationTokenResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetPhotonAuthenticationTokenResult outResult;
         if (ValidateResult(outResult, container))
@@ -1737,8 +1670,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetPlayerCombinedInfo(
@@ -1758,22 +1689,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayerCombinedInfo",
             headers,
             jsonAsString,
             OnGetPlayerCombinedInfoResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerCombinedInfoResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetPlayerCombinedInfoResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetPlayerCombinedInfoResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetPlayerCombinedInfoResult outResult;
         if (ValidateResult(outResult, container))
@@ -1786,8 +1717,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetPlayerProfile(
@@ -1807,22 +1736,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayerProfile",
             headers,
             jsonAsString,
             OnGetPlayerProfileResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerProfileResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetPlayerProfileResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetPlayerProfileResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetPlayerProfileResult outResult;
         if (ValidateResult(outResult, container))
@@ -1835,8 +1764,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetPlayerSegments(
@@ -1856,22 +1783,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayerSegments",
             headers,
             jsonAsString,
             OnGetPlayerSegmentsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerSegmentsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetPlayerSegmentsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetPlayerSegmentsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetPlayerSegmentsResult outResult;
         if (ValidateResult(outResult, container))
@@ -1884,8 +1811,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetPlayerStatistics(
@@ -1905,22 +1830,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayerStatistics",
             headers,
             jsonAsString,
             OnGetPlayerStatisticsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerStatisticsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetPlayerStatisticsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetPlayerStatisticsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetPlayerStatisticsResult outResult;
         if (ValidateResult(outResult, container))
@@ -1933,8 +1858,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetPlayerStatisticVersions(
@@ -1954,22 +1877,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayerStatisticVersions",
             headers,
             jsonAsString,
             OnGetPlayerStatisticVersionsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerStatisticVersionsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetPlayerStatisticVersionsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetPlayerStatisticVersionsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetPlayerStatisticVersionsResult outResult;
         if (ValidateResult(outResult, container))
@@ -1982,8 +1905,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetPlayerTags(
@@ -2003,22 +1924,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayerTags",
             headers,
             jsonAsString,
             OnGetPlayerTagsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerTagsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetPlayerTagsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetPlayerTagsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetPlayerTagsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2031,8 +1952,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetPlayerTrades(
@@ -2052,22 +1971,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayerTrades",
             headers,
             jsonAsString,
             OnGetPlayerTradesResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerTradesResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetPlayerTradesResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetPlayerTradesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetPlayerTradesResponse outResult;
         if (ValidateResult(outResult, container))
@@ -2080,8 +1999,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetPlayFabIDsFromFacebookIDs(
@@ -2101,22 +2018,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayFabIDsFromFacebookIDs",
             headers,
             jsonAsString,
             OnGetPlayFabIDsFromFacebookIDsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromFacebookIDsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetPlayFabIDsFromFacebookIDsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetPlayFabIDsFromFacebookIDsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetPlayFabIDsFromFacebookIDsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2129,8 +2046,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetPlayFabIDsFromFacebookInstantGamesIds(
@@ -2150,22 +2065,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayFabIDsFromFacebookInstantGamesIds",
             headers,
             jsonAsString,
             OnGetPlayFabIDsFromFacebookInstantGamesIdsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromFacebookInstantGamesIdsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetPlayFabIDsFromFacebookInstantGamesIdsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetPlayFabIDsFromFacebookInstantGamesIdsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetPlayFabIDsFromFacebookInstantGamesIdsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2178,8 +2093,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetPlayFabIDsFromGameCenterIDs(
@@ -2199,22 +2112,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayFabIDsFromGameCenterIDs",
             headers,
             jsonAsString,
             OnGetPlayFabIDsFromGameCenterIDsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromGameCenterIDsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetPlayFabIDsFromGameCenterIDsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetPlayFabIDsFromGameCenterIDsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetPlayFabIDsFromGameCenterIDsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2227,8 +2140,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetPlayFabIDsFromGenericIDs(
@@ -2248,22 +2159,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayFabIDsFromGenericIDs",
             headers,
             jsonAsString,
             OnGetPlayFabIDsFromGenericIDsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromGenericIDsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetPlayFabIDsFromGenericIDsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetPlayFabIDsFromGenericIDsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetPlayFabIDsFromGenericIDsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2276,8 +2187,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetPlayFabIDsFromGoogleIDs(
@@ -2297,22 +2206,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayFabIDsFromGoogleIDs",
             headers,
             jsonAsString,
             OnGetPlayFabIDsFromGoogleIDsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromGoogleIDsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetPlayFabIDsFromGoogleIDsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetPlayFabIDsFromGoogleIDsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetPlayFabIDsFromGoogleIDsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2325,8 +2234,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetPlayFabIDsFromKongregateIDs(
@@ -2346,22 +2253,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayFabIDsFromKongregateIDs",
             headers,
             jsonAsString,
             OnGetPlayFabIDsFromKongregateIDsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromKongregateIDsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetPlayFabIDsFromKongregateIDsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetPlayFabIDsFromKongregateIDsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetPlayFabIDsFromKongregateIDsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2374,8 +2281,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetPlayFabIDsFromNintendoSwitchDeviceIds(
@@ -2395,22 +2300,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayFabIDsFromNintendoSwitchDeviceIds",
             headers,
             jsonAsString,
             OnGetPlayFabIDsFromNintendoSwitchDeviceIdsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromNintendoSwitchDeviceIdsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetPlayFabIDsFromNintendoSwitchDeviceIdsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetPlayFabIDsFromNintendoSwitchDeviceIdsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetPlayFabIDsFromNintendoSwitchDeviceIdsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2423,8 +2328,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetPlayFabIDsFromSteamIDs(
@@ -2444,22 +2347,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayFabIDsFromSteamIDs",
             headers,
             jsonAsString,
             OnGetPlayFabIDsFromSteamIDsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromSteamIDsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetPlayFabIDsFromSteamIDsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetPlayFabIDsFromSteamIDsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetPlayFabIDsFromSteamIDsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2472,8 +2375,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetPlayFabIDsFromTwitchIDs(
@@ -2493,22 +2394,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayFabIDsFromTwitchIDs",
             headers,
             jsonAsString,
             OnGetPlayFabIDsFromTwitchIDsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromTwitchIDsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetPlayFabIDsFromTwitchIDsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetPlayFabIDsFromTwitchIDsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetPlayFabIDsFromTwitchIDsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2521,8 +2422,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetPlayFabIDsFromXboxLiveIDs(
@@ -2542,22 +2441,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayFabIDsFromXboxLiveIDs",
             headers,
             jsonAsString,
             OnGetPlayFabIDsFromXboxLiveIDsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromXboxLiveIDsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetPlayFabIDsFromXboxLiveIDsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetPlayFabIDsFromXboxLiveIDsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetPlayFabIDsFromXboxLiveIDsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2570,8 +2469,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetPublisherData(
@@ -2591,22 +2488,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPublisherData",
             headers,
             jsonAsString,
             OnGetPublisherDataResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPublisherDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetPublisherDataResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetPublisherDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetPublisherDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -2619,8 +2516,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetPurchase(
@@ -2640,22 +2535,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPurchase",
             headers,
             jsonAsString,
             OnGetPurchaseResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPurchaseResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetPurchaseResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetPurchaseResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetPurchaseResult outResult;
         if (ValidateResult(outResult, container))
@@ -2668,8 +2563,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetSharedGroupData(
@@ -2689,22 +2582,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetSharedGroupData",
             headers,
             jsonAsString,
             OnGetSharedGroupDataResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetSharedGroupDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetSharedGroupDataResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetSharedGroupDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetSharedGroupDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -2717,8 +2610,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetStoreItems(
@@ -2738,22 +2629,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetStoreItems",
             headers,
             jsonAsString,
             OnGetStoreItemsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetStoreItemsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetStoreItemsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetStoreItemsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetStoreItemsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2766,8 +2657,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetTime(
@@ -2787,22 +2676,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetTime",
             headers,
             jsonAsString,
             OnGetTimeResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTimeResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetTimeResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetTimeResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetTimeResult outResult;
         if (ValidateResult(outResult, container))
@@ -2815,8 +2704,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetTitleData(
@@ -2836,22 +2723,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetTitleData",
             headers,
             jsonAsString,
             OnGetTitleDataResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTitleDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetTitleDataResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetTitleDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetTitleDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -2864,8 +2751,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetTitleNews(
@@ -2885,22 +2770,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetTitleNews",
             headers,
             jsonAsString,
             OnGetTitleNewsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTitleNewsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetTitleNewsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetTitleNewsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetTitleNewsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2913,8 +2798,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetTitlePublicKey(
@@ -2934,22 +2817,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("", "");
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetTitlePublicKey",
             headers,
             jsonAsString,
             OnGetTitlePublicKeyResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTitlePublicKeyResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetTitlePublicKeyResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetTitlePublicKeyResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetTitlePublicKeyResult outResult;
         if (ValidateResult(outResult, container))
@@ -2962,8 +2845,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetTradeStatus(
@@ -2983,22 +2864,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetTradeStatus",
             headers,
             jsonAsString,
             OnGetTradeStatusResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTradeStatusResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetTradeStatusResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetTradeStatusResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetTradeStatusResponse outResult;
         if (ValidateResult(outResult, container))
@@ -3011,8 +2892,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetUserData(
@@ -3032,22 +2911,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetUserData",
             headers,
             jsonAsString,
             OnGetUserDataResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetUserDataResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetUserDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetUserDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -3060,8 +2939,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetUserInventory(
@@ -3081,22 +2958,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetUserInventory",
             headers,
             jsonAsString,
             OnGetUserInventoryResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserInventoryResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetUserInventoryResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetUserInventoryResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetUserInventoryResult outResult;
         if (ValidateResult(outResult, container))
@@ -3109,8 +2986,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetUserPublisherData(
@@ -3130,22 +3005,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetUserPublisherData",
             headers,
             jsonAsString,
             OnGetUserPublisherDataResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetUserPublisherDataResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetUserPublisherDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetUserDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -3158,8 +3033,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetUserPublisherReadOnlyData(
@@ -3179,22 +3052,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetUserPublisherReadOnlyData",
             headers,
             jsonAsString,
             OnGetUserPublisherReadOnlyDataResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetUserPublisherReadOnlyDataResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetUserPublisherReadOnlyDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetUserDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -3207,8 +3080,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetUserReadOnlyData(
@@ -3228,22 +3099,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetUserReadOnlyData",
             headers,
             jsonAsString,
             OnGetUserReadOnlyDataResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetUserReadOnlyDataResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetUserReadOnlyDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetUserDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -3256,8 +3127,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GetWindowsHelloChallenge(
@@ -3277,22 +3146,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("", "");
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetWindowsHelloChallenge",
             headers,
             jsonAsString,
             OnGetWindowsHelloChallengeResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetWindowsHelloChallengeResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGetWindowsHelloChallengeResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGetWindowsHelloChallengeResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetWindowsHelloChallengeResponse outResult;
         if (ValidateResult(outResult, container))
@@ -3305,8 +3174,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::GrantCharacterToUser(
@@ -3326,22 +3193,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GrantCharacterToUser",
             headers,
             jsonAsString,
             OnGrantCharacterToUserResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GrantCharacterToUserResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnGrantCharacterToUserResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnGrantCharacterToUserResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GrantCharacterToUserResult outResult;
         if (ValidateResult(outResult, container))
@@ -3354,8 +3221,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LinkAndroidDeviceID(
@@ -3375,22 +3240,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkAndroidDeviceID",
             headers,
             jsonAsString,
             OnLinkAndroidDeviceIDResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkAndroidDeviceIDResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLinkAndroidDeviceIDResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLinkAndroidDeviceIDResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LinkAndroidDeviceIDResult outResult;
         if (ValidateResult(outResult, container))
@@ -3403,8 +3268,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LinkCustomID(
@@ -3424,22 +3287,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkCustomID",
             headers,
             jsonAsString,
             OnLinkCustomIDResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkCustomIDResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLinkCustomIDResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLinkCustomIDResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LinkCustomIDResult outResult;
         if (ValidateResult(outResult, container))
@@ -3452,8 +3315,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LinkFacebookAccount(
@@ -3473,22 +3334,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkFacebookAccount",
             headers,
             jsonAsString,
             OnLinkFacebookAccountResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkFacebookAccountResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLinkFacebookAccountResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLinkFacebookAccountResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LinkFacebookAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -3501,8 +3362,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LinkFacebookInstantGamesId(
@@ -3522,22 +3381,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkFacebookInstantGamesId",
             headers,
             jsonAsString,
             OnLinkFacebookInstantGamesIdResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkFacebookInstantGamesIdResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLinkFacebookInstantGamesIdResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLinkFacebookInstantGamesIdResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LinkFacebookInstantGamesIdResult outResult;
         if (ValidateResult(outResult, container))
@@ -3550,8 +3409,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LinkGameCenterAccount(
@@ -3571,22 +3428,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkGameCenterAccount",
             headers,
             jsonAsString,
             OnLinkGameCenterAccountResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkGameCenterAccountResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLinkGameCenterAccountResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLinkGameCenterAccountResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LinkGameCenterAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -3599,8 +3456,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LinkGoogleAccount(
@@ -3620,22 +3475,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkGoogleAccount",
             headers,
             jsonAsString,
             OnLinkGoogleAccountResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkGoogleAccountResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLinkGoogleAccountResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLinkGoogleAccountResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LinkGoogleAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -3648,8 +3503,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LinkIOSDeviceID(
@@ -3669,22 +3522,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkIOSDeviceID",
             headers,
             jsonAsString,
             OnLinkIOSDeviceIDResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkIOSDeviceIDResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLinkIOSDeviceIDResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLinkIOSDeviceIDResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LinkIOSDeviceIDResult outResult;
         if (ValidateResult(outResult, container))
@@ -3697,8 +3550,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LinkKongregate(
@@ -3718,22 +3569,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkKongregate",
             headers,
             jsonAsString,
             OnLinkKongregateResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkKongregateAccountResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLinkKongregateResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLinkKongregateResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LinkKongregateAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -3746,8 +3597,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LinkNintendoSwitchDeviceId(
@@ -3767,22 +3616,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkNintendoSwitchDeviceId",
             headers,
             jsonAsString,
             OnLinkNintendoSwitchDeviceIdResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkNintendoSwitchDeviceIdResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLinkNintendoSwitchDeviceIdResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLinkNintendoSwitchDeviceIdResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LinkNintendoSwitchDeviceIdResult outResult;
         if (ValidateResult(outResult, container))
@@ -3795,8 +3644,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LinkOpenIdConnect(
@@ -3816,22 +3663,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkOpenIdConnect",
             headers,
             jsonAsString,
             OnLinkOpenIdConnectResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLinkOpenIdConnectResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLinkOpenIdConnectResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         EmptyResult outResult;
         if (ValidateResult(outResult, container))
@@ -3844,8 +3691,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LinkSteamAccount(
@@ -3865,22 +3710,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkSteamAccount",
             headers,
             jsonAsString,
             OnLinkSteamAccountResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkSteamAccountResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLinkSteamAccountResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLinkSteamAccountResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LinkSteamAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -3893,8 +3738,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LinkTwitch(
@@ -3914,22 +3757,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkTwitch",
             headers,
             jsonAsString,
             OnLinkTwitchResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkTwitchAccountResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLinkTwitchResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLinkTwitchResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LinkTwitchAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -3942,8 +3785,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LinkWindowsHello(
@@ -3963,22 +3804,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkWindowsHello",
             headers,
             jsonAsString,
             OnLinkWindowsHelloResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkWindowsHelloAccountResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLinkWindowsHelloResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLinkWindowsHelloResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LinkWindowsHelloAccountResponse outResult;
         if (ValidateResult(outResult, container))
@@ -3991,8 +3832,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LinkXboxAccount(
@@ -4012,22 +3851,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkXboxAccount",
             headers,
             jsonAsString,
             OnLinkXboxAccountResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkXboxAccountResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLinkXboxAccountResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLinkXboxAccountResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LinkXboxAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -4040,8 +3879,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LoginWithAndroidDeviceID(
@@ -4065,22 +3902,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("", "");
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LoginWithAndroidDeviceID",
             headers,
             jsonAsString,
             OnLoginWithAndroidDeviceIDResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLoginWithAndroidDeviceIDResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLoginWithAndroidDeviceIDResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4099,8 +3936,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LoginWithCustomID(
@@ -4124,22 +3959,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("", "");
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LoginWithCustomID",
             headers,
             jsonAsString,
             OnLoginWithCustomIDResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLoginWithCustomIDResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLoginWithCustomIDResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4158,8 +3993,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LoginWithEmailAddress(
@@ -4183,22 +4016,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("", "");
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LoginWithEmailAddress",
             headers,
             jsonAsString,
             OnLoginWithEmailAddressResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLoginWithEmailAddressResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLoginWithEmailAddressResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4217,8 +4050,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LoginWithFacebook(
@@ -4242,22 +4073,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("", "");
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LoginWithFacebook",
             headers,
             jsonAsString,
             OnLoginWithFacebookResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLoginWithFacebookResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLoginWithFacebookResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4276,8 +4107,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LoginWithFacebookInstantGamesId(
@@ -4301,22 +4130,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("", "");
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LoginWithFacebookInstantGamesId",
             headers,
             jsonAsString,
             OnLoginWithFacebookInstantGamesIdResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLoginWithFacebookInstantGamesIdResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLoginWithFacebookInstantGamesIdResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4335,8 +4164,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LoginWithGameCenter(
@@ -4360,22 +4187,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("", "");
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LoginWithGameCenter",
             headers,
             jsonAsString,
             OnLoginWithGameCenterResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLoginWithGameCenterResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLoginWithGameCenterResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4394,8 +4221,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LoginWithGoogleAccount(
@@ -4419,22 +4244,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("", "");
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LoginWithGoogleAccount",
             headers,
             jsonAsString,
             OnLoginWithGoogleAccountResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLoginWithGoogleAccountResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLoginWithGoogleAccountResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4453,8 +4278,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LoginWithIOSDeviceID(
@@ -4478,22 +4301,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("", "");
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LoginWithIOSDeviceID",
             headers,
             jsonAsString,
             OnLoginWithIOSDeviceIDResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLoginWithIOSDeviceIDResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLoginWithIOSDeviceIDResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4512,8 +4335,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LoginWithKongregate(
@@ -4537,22 +4358,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("", "");
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LoginWithKongregate",
             headers,
             jsonAsString,
             OnLoginWithKongregateResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLoginWithKongregateResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLoginWithKongregateResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4571,8 +4392,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LoginWithNintendoSwitchDeviceId(
@@ -4596,22 +4415,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("", "");
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LoginWithNintendoSwitchDeviceId",
             headers,
             jsonAsString,
             OnLoginWithNintendoSwitchDeviceIdResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLoginWithNintendoSwitchDeviceIdResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLoginWithNintendoSwitchDeviceIdResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4630,8 +4449,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LoginWithOpenIdConnect(
@@ -4655,22 +4472,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("", "");
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LoginWithOpenIdConnect",
             headers,
             jsonAsString,
             OnLoginWithOpenIdConnectResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLoginWithOpenIdConnectResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLoginWithOpenIdConnectResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4689,8 +4506,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LoginWithPlayFab(
@@ -4714,22 +4529,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("", "");
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LoginWithPlayFab",
             headers,
             jsonAsString,
             OnLoginWithPlayFabResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLoginWithPlayFabResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLoginWithPlayFabResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4748,8 +4563,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LoginWithSteam(
@@ -4773,22 +4586,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("", "");
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LoginWithSteam",
             headers,
             jsonAsString,
             OnLoginWithSteamResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLoginWithSteamResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLoginWithSteamResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4807,8 +4620,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LoginWithTwitch(
@@ -4832,22 +4643,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("", "");
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LoginWithTwitch",
             headers,
             jsonAsString,
             OnLoginWithTwitchResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLoginWithTwitchResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLoginWithTwitchResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4866,8 +4677,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LoginWithWindowsHello(
@@ -4891,22 +4700,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("", "");
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LoginWithWindowsHello",
             headers,
             jsonAsString,
             OnLoginWithWindowsHelloResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLoginWithWindowsHelloResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLoginWithWindowsHelloResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4925,8 +4734,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::LoginWithXbox(
@@ -4950,22 +4757,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("", "");
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LoginWithXbox",
             headers,
             jsonAsString,
             OnLoginWithXboxResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLoginWithXboxResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnLoginWithXboxResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4984,8 +4791,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::Matchmake(
@@ -5005,22 +4810,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/Matchmake",
             headers,
             jsonAsString,
             OnMatchmakeResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<MatchmakeResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnMatchmakeResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnMatchmakeResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         MatchmakeResult outResult;
         if (ValidateResult(outResult, container))
@@ -5033,8 +4838,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::OpenTrade(
@@ -5054,22 +4857,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/OpenTrade",
             headers,
             jsonAsString,
             OnOpenTradeResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<OpenTradeResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnOpenTradeResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnOpenTradeResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         OpenTradeResponse outResult;
         if (ValidateResult(outResult, container))
@@ -5082,8 +4885,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::PayForPurchase(
@@ -5103,22 +4904,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/PayForPurchase",
             headers,
             jsonAsString,
             OnPayForPurchaseResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<PayForPurchaseResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnPayForPurchaseResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnPayForPurchaseResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         PayForPurchaseResult outResult;
         if (ValidateResult(outResult, container))
@@ -5131,8 +4932,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::PurchaseItem(
@@ -5152,22 +4951,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/PurchaseItem",
             headers,
             jsonAsString,
             OnPurchaseItemResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<PurchaseItemResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnPurchaseItemResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnPurchaseItemResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         PurchaseItemResult outResult;
         if (ValidateResult(outResult, container))
@@ -5180,8 +4979,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::RedeemCoupon(
@@ -5201,22 +4998,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/RedeemCoupon",
             headers,
             jsonAsString,
             OnRedeemCouponResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RedeemCouponResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnRedeemCouponResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnRedeemCouponResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         RedeemCouponResult outResult;
         if (ValidateResult(outResult, container))
@@ -5229,8 +5026,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::RegisterForIOSPushNotification(
@@ -5250,22 +5045,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/RegisterForIOSPushNotification",
             headers,
             jsonAsString,
             OnRegisterForIOSPushNotificationResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RegisterForIOSPushNotificationResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnRegisterForIOSPushNotificationResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnRegisterForIOSPushNotificationResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         RegisterForIOSPushNotificationResult outResult;
         if (ValidateResult(outResult, container))
@@ -5278,8 +5073,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::RegisterPlayFabUser(
@@ -5303,22 +5096,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("", "");
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/RegisterPlayFabUser",
             headers,
             jsonAsString,
             OnRegisterPlayFabUserResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RegisterPlayFabUserResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnRegisterPlayFabUserResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnRegisterPlayFabUserResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         RegisterPlayFabUserResult outResult;
         if (ValidateResult(outResult, container))
@@ -5336,8 +5129,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::RegisterWithWindowsHello(
@@ -5361,22 +5152,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("", "");
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/RegisterWithWindowsHello",
             headers,
             jsonAsString,
             OnRegisterWithWindowsHelloResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnRegisterWithWindowsHelloResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnRegisterWithWindowsHelloResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -5395,8 +5186,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::RemoveContactEmail(
@@ -5416,22 +5205,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/RemoveContactEmail",
             headers,
             jsonAsString,
             OnRemoveContactEmailResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RemoveContactEmailResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnRemoveContactEmailResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnRemoveContactEmailResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         RemoveContactEmailResult outResult;
         if (ValidateResult(outResult, container))
@@ -5444,8 +5233,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::RemoveFriend(
@@ -5465,22 +5252,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/RemoveFriend",
             headers,
             jsonAsString,
             OnRemoveFriendResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RemoveFriendResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnRemoveFriendResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnRemoveFriendResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         RemoveFriendResult outResult;
         if (ValidateResult(outResult, container))
@@ -5493,8 +5280,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::RemoveGenericID(
@@ -5514,22 +5299,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/RemoveGenericID",
             headers,
             jsonAsString,
             OnRemoveGenericIDResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RemoveGenericIDResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnRemoveGenericIDResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnRemoveGenericIDResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         RemoveGenericIDResult outResult;
         if (ValidateResult(outResult, container))
@@ -5542,8 +5327,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::RemoveSharedGroupMembers(
@@ -5563,22 +5346,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/RemoveSharedGroupMembers",
             headers,
             jsonAsString,
             OnRemoveSharedGroupMembersResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RemoveSharedGroupMembersResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnRemoveSharedGroupMembersResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnRemoveSharedGroupMembersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         RemoveSharedGroupMembersResult outResult;
         if (ValidateResult(outResult, container))
@@ -5591,8 +5374,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::ReportDeviceInfo(
@@ -5612,22 +5393,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/ReportDeviceInfo",
             headers,
             jsonAsString,
             OnReportDeviceInfoResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnReportDeviceInfoResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnReportDeviceInfoResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -5640,8 +5421,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::ReportPlayer(
@@ -5661,22 +5440,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/ReportPlayer",
             headers,
             jsonAsString,
             OnReportPlayerResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ReportPlayerClientResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnReportPlayerResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnReportPlayerResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ReportPlayerClientResult outResult;
         if (ValidateResult(outResult, container))
@@ -5689,8 +5468,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::RestoreIOSPurchases(
@@ -5710,22 +5487,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/RestoreIOSPurchases",
             headers,
             jsonAsString,
             OnRestoreIOSPurchasesResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RestoreIOSPurchasesResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnRestoreIOSPurchasesResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnRestoreIOSPurchasesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         RestoreIOSPurchasesResult outResult;
         if (ValidateResult(outResult, container))
@@ -5738,8 +5515,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::SendAccountRecoveryEmail(
@@ -5759,22 +5534,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("", "");
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/SendAccountRecoveryEmail",
             headers,
             jsonAsString,
             OnSendAccountRecoveryEmailResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SendAccountRecoveryEmailResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnSendAccountRecoveryEmailResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnSendAccountRecoveryEmailResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         SendAccountRecoveryEmailResult outResult;
         if (ValidateResult(outResult, container))
@@ -5787,8 +5562,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::SetFriendTags(
@@ -5808,22 +5581,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/SetFriendTags",
             headers,
             jsonAsString,
             OnSetFriendTagsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetFriendTagsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnSetFriendTagsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnSetFriendTagsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         SetFriendTagsResult outResult;
         if (ValidateResult(outResult, container))
@@ -5836,8 +5609,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::SetPlayerSecret(
@@ -5857,22 +5628,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/SetPlayerSecret",
             headers,
             jsonAsString,
             OnSetPlayerSecretResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetPlayerSecretResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnSetPlayerSecretResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnSetPlayerSecretResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         SetPlayerSecretResult outResult;
         if (ValidateResult(outResult, container))
@@ -5885,8 +5656,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::StartGame(
@@ -5906,22 +5675,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/StartGame",
             headers,
             jsonAsString,
             OnStartGameResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<StartGameResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnStartGameResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnStartGameResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         StartGameResult outResult;
         if (ValidateResult(outResult, container))
@@ -5934,8 +5703,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::StartPurchase(
@@ -5955,22 +5722,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/StartPurchase",
             headers,
             jsonAsString,
             OnStartPurchaseResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<StartPurchaseResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnStartPurchaseResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnStartPurchaseResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         StartPurchaseResult outResult;
         if (ValidateResult(outResult, container))
@@ -5983,8 +5750,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::SubtractUserVirtualCurrency(
@@ -6004,22 +5769,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/SubtractUserVirtualCurrency",
             headers,
             jsonAsString,
             OnSubtractUserVirtualCurrencyResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ModifyUserVirtualCurrencyResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnSubtractUserVirtualCurrencyResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnSubtractUserVirtualCurrencyResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ModifyUserVirtualCurrencyResult outResult;
         if (ValidateResult(outResult, container))
@@ -6032,8 +5797,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::UnlinkAndroidDeviceID(
@@ -6053,22 +5816,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkAndroidDeviceID",
             headers,
             jsonAsString,
             OnUnlinkAndroidDeviceIDResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkAndroidDeviceIDResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnUnlinkAndroidDeviceIDResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnUnlinkAndroidDeviceIDResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         UnlinkAndroidDeviceIDResult outResult;
         if (ValidateResult(outResult, container))
@@ -6081,8 +5844,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::UnlinkCustomID(
@@ -6102,22 +5863,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkCustomID",
             headers,
             jsonAsString,
             OnUnlinkCustomIDResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkCustomIDResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnUnlinkCustomIDResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnUnlinkCustomIDResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         UnlinkCustomIDResult outResult;
         if (ValidateResult(outResult, container))
@@ -6130,8 +5891,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::UnlinkFacebookAccount(
@@ -6151,22 +5910,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkFacebookAccount",
             headers,
             jsonAsString,
             OnUnlinkFacebookAccountResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkFacebookAccountResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnUnlinkFacebookAccountResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnUnlinkFacebookAccountResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         UnlinkFacebookAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -6179,8 +5938,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::UnlinkFacebookInstantGamesId(
@@ -6200,22 +5957,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkFacebookInstantGamesId",
             headers,
             jsonAsString,
             OnUnlinkFacebookInstantGamesIdResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkFacebookInstantGamesIdResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnUnlinkFacebookInstantGamesIdResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnUnlinkFacebookInstantGamesIdResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         UnlinkFacebookInstantGamesIdResult outResult;
         if (ValidateResult(outResult, container))
@@ -6228,8 +5985,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::UnlinkGameCenterAccount(
@@ -6249,22 +6004,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkGameCenterAccount",
             headers,
             jsonAsString,
             OnUnlinkGameCenterAccountResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkGameCenterAccountResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnUnlinkGameCenterAccountResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnUnlinkGameCenterAccountResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         UnlinkGameCenterAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -6277,8 +6032,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::UnlinkGoogleAccount(
@@ -6298,22 +6051,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkGoogleAccount",
             headers,
             jsonAsString,
             OnUnlinkGoogleAccountResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkGoogleAccountResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnUnlinkGoogleAccountResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnUnlinkGoogleAccountResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         UnlinkGoogleAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -6326,8 +6079,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::UnlinkIOSDeviceID(
@@ -6347,22 +6098,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkIOSDeviceID",
             headers,
             jsonAsString,
             OnUnlinkIOSDeviceIDResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkIOSDeviceIDResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnUnlinkIOSDeviceIDResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnUnlinkIOSDeviceIDResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         UnlinkIOSDeviceIDResult outResult;
         if (ValidateResult(outResult, container))
@@ -6375,8 +6126,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::UnlinkKongregate(
@@ -6396,22 +6145,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkKongregate",
             headers,
             jsonAsString,
             OnUnlinkKongregateResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkKongregateAccountResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnUnlinkKongregateResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnUnlinkKongregateResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         UnlinkKongregateAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -6424,8 +6173,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::UnlinkNintendoSwitchDeviceId(
@@ -6445,22 +6192,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkNintendoSwitchDeviceId",
             headers,
             jsonAsString,
             OnUnlinkNintendoSwitchDeviceIdResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkNintendoSwitchDeviceIdResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnUnlinkNintendoSwitchDeviceIdResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnUnlinkNintendoSwitchDeviceIdResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         UnlinkNintendoSwitchDeviceIdResult outResult;
         if (ValidateResult(outResult, container))
@@ -6473,8 +6220,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::UnlinkOpenIdConnect(
@@ -6494,22 +6239,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkOpenIdConnect",
             headers,
             jsonAsString,
             OnUnlinkOpenIdConnectResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnUnlinkOpenIdConnectResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnUnlinkOpenIdConnectResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -6522,8 +6267,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::UnlinkSteamAccount(
@@ -6543,22 +6286,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkSteamAccount",
             headers,
             jsonAsString,
             OnUnlinkSteamAccountResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkSteamAccountResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnUnlinkSteamAccountResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnUnlinkSteamAccountResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         UnlinkSteamAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -6571,8 +6314,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::UnlinkTwitch(
@@ -6592,22 +6333,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkTwitch",
             headers,
             jsonAsString,
             OnUnlinkTwitchResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkTwitchAccountResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnUnlinkTwitchResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnUnlinkTwitchResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         UnlinkTwitchAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -6620,8 +6361,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::UnlinkWindowsHello(
@@ -6641,22 +6380,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkWindowsHello",
             headers,
             jsonAsString,
             OnUnlinkWindowsHelloResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkWindowsHelloAccountResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnUnlinkWindowsHelloResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnUnlinkWindowsHelloResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         UnlinkWindowsHelloAccountResponse outResult;
         if (ValidateResult(outResult, container))
@@ -6669,8 +6408,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::UnlinkXboxAccount(
@@ -6690,22 +6427,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkXboxAccount",
             headers,
             jsonAsString,
             OnUnlinkXboxAccountResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkXboxAccountResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnUnlinkXboxAccountResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnUnlinkXboxAccountResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         UnlinkXboxAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -6718,8 +6455,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::UnlockContainerInstance(
@@ -6739,22 +6474,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlockContainerInstance",
             headers,
             jsonAsString,
             OnUnlockContainerInstanceResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlockContainerItemResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnUnlockContainerInstanceResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnUnlockContainerInstanceResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         UnlockContainerItemResult outResult;
         if (ValidateResult(outResult, container))
@@ -6767,8 +6502,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::UnlockContainerItem(
@@ -6788,22 +6521,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlockContainerItem",
             headers,
             jsonAsString,
             OnUnlockContainerItemResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlockContainerItemResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnUnlockContainerItemResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnUnlockContainerItemResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         UnlockContainerItemResult outResult;
         if (ValidateResult(outResult, container))
@@ -6816,8 +6549,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::UpdateAvatarUrl(
@@ -6837,22 +6568,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UpdateAvatarUrl",
             headers,
             jsonAsString,
             OnUpdateAvatarUrlResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnUpdateAvatarUrlResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnUpdateAvatarUrlResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -6865,8 +6596,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::UpdateCharacterData(
@@ -6886,22 +6615,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UpdateCharacterData",
             headers,
             jsonAsString,
             OnUpdateCharacterDataResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateCharacterDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnUpdateCharacterDataResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnUpdateCharacterDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         UpdateCharacterDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -6914,8 +6643,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::UpdateCharacterStatistics(
@@ -6935,22 +6662,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UpdateCharacterStatistics",
             headers,
             jsonAsString,
             OnUpdateCharacterStatisticsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateCharacterStatisticsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnUpdateCharacterStatisticsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnUpdateCharacterStatisticsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         UpdateCharacterStatisticsResult outResult;
         if (ValidateResult(outResult, container))
@@ -6963,8 +6690,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::UpdatePlayerStatistics(
@@ -6984,22 +6709,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UpdatePlayerStatistics",
             headers,
             jsonAsString,
             OnUpdatePlayerStatisticsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdatePlayerStatisticsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnUpdatePlayerStatisticsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnUpdatePlayerStatisticsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         UpdatePlayerStatisticsResult outResult;
         if (ValidateResult(outResult, container))
@@ -7012,8 +6737,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::UpdateSharedGroupData(
@@ -7033,22 +6756,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UpdateSharedGroupData",
             headers,
             jsonAsString,
             OnUpdateSharedGroupDataResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateSharedGroupDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnUpdateSharedGroupDataResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnUpdateSharedGroupDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         UpdateSharedGroupDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -7061,8 +6784,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::UpdateUserData(
@@ -7082,22 +6803,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UpdateUserData",
             headers,
             jsonAsString,
             OnUpdateUserDataResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnUpdateUserDataResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnUpdateUserDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         UpdateUserDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -7110,8 +6831,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::UpdateUserPublisherData(
@@ -7131,22 +6850,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UpdateUserPublisherData",
             headers,
             jsonAsString,
             OnUpdateUserPublisherDataResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnUpdateUserPublisherDataResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnUpdateUserPublisherDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         UpdateUserDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -7159,8 +6878,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::UpdateUserTitleDisplayName(
@@ -7180,22 +6897,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UpdateUserTitleDisplayName",
             headers,
             jsonAsString,
             OnUpdateUserTitleDisplayNameResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserTitleDisplayNameResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnUpdateUserTitleDisplayNameResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnUpdateUserTitleDisplayNameResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         UpdateUserTitleDisplayNameResult outResult;
         if (ValidateResult(outResult, container))
@@ -7208,8 +6925,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::ValidateAmazonIAPReceipt(
@@ -7229,22 +6944,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/ValidateAmazonIAPReceipt",
             headers,
             jsonAsString,
             OnValidateAmazonIAPReceiptResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ValidateAmazonReceiptResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnValidateAmazonIAPReceiptResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnValidateAmazonIAPReceiptResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ValidateAmazonReceiptResult outResult;
         if (ValidateResult(outResult, container))
@@ -7257,8 +6972,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::ValidateGooglePlayPurchase(
@@ -7278,22 +6991,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/ValidateGooglePlayPurchase",
             headers,
             jsonAsString,
             OnValidateGooglePlayPurchaseResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ValidateGooglePlayPurchaseResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnValidateGooglePlayPurchaseResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnValidateGooglePlayPurchaseResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ValidateGooglePlayPurchaseResult outResult;
         if (ValidateResult(outResult, container))
@@ -7306,8 +7019,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::ValidateIOSReceipt(
@@ -7327,22 +7038,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/ValidateIOSReceipt",
             headers,
             jsonAsString,
             OnValidateIOSReceiptResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ValidateIOSReceiptResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnValidateIOSReceiptResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnValidateIOSReceiptResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ValidateIOSReceiptResult outResult;
         if (ValidateResult(outResult, container))
@@ -7355,8 +7066,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::ValidateWindowsStoreReceipt(
@@ -7376,22 +7085,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/ValidateWindowsStoreReceipt",
             headers,
             jsonAsString,
             OnValidateWindowsStoreReceiptResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ValidateWindowsReceiptResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnValidateWindowsStoreReceiptResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnValidateWindowsStoreReceiptResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ValidateWindowsReceiptResult outResult;
         if (ValidateResult(outResult, container))
@@ -7404,8 +7113,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::WriteCharacterEvent(
@@ -7425,22 +7132,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/WriteCharacterEvent",
             headers,
             jsonAsString,
             OnWriteCharacterEventResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<WriteEventResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnWriteCharacterEventResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnWriteCharacterEventResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         WriteEventResponse outResult;
         if (ValidateResult(outResult, container))
@@ -7453,8 +7160,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::WritePlayerEvent(
@@ -7474,22 +7179,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/WritePlayerEvent",
             headers,
             jsonAsString,
             OnWritePlayerEventResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<WriteEventResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnWritePlayerEventResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnWritePlayerEventResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         WriteEventResponse outResult;
         if (ValidateResult(outResult, container))
@@ -7502,8 +7207,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabClientAPI::WriteTitleEvent(
@@ -7523,22 +7226,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/WriteTitleEvent",
             headers,
             jsonAsString,
             OnWriteTitleEventResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<WriteEventResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnWriteTitleEventResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabClientAPI::OnWriteTitleEventResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         WriteEventResponse outResult;
         if (ValidateResult(outResult, container))
@@ -7551,8 +7254,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     // Private PlayFabClientAPI specific

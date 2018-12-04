@@ -30,11 +30,11 @@ namespace PlayFab
         PlayFabMatchmakerAPI(const PlayFabMatchmakerAPI& other); // Private copy-constructor, static class should never have an instance
 
         // ------------ Generated result handlers
-        static void OnAuthUserResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
-        static void OnPlayerJoinedResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
-        static void OnPlayerLeftResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
-        static void OnStartGameResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
-        static void OnUserInfoResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnAuthUserResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
+        static void OnPlayerJoinedResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
+        static void OnPlayerLeftResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
+        static void OnStartGameResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
+        static void OnUserInfoResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
 
         static bool ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container);
     };

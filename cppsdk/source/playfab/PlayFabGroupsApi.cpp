@@ -15,7 +15,8 @@ namespace PlayFab
 
     size_t PlayFabGroupsAPI::Update()
     {
-        return PlayFabHttp::Get().Update();
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        return http.Update();
     }
 
     void PlayFabGroupsAPI::ForgetAllCredentials()
@@ -42,22 +43,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/AcceptGroupApplication",
             headers,
             jsonAsString,
             OnAcceptGroupApplicationResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabGroupsAPI::OnAcceptGroupApplicationResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabGroupsAPI::OnAcceptGroupApplicationResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -70,8 +71,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabGroupsAPI::AcceptGroupInvitation(
@@ -91,22 +90,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/AcceptGroupInvitation",
             headers,
             jsonAsString,
             OnAcceptGroupInvitationResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabGroupsAPI::OnAcceptGroupInvitationResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabGroupsAPI::OnAcceptGroupInvitationResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -119,8 +118,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabGroupsAPI::AddMembers(
@@ -140,22 +137,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/AddMembers",
             headers,
             jsonAsString,
             OnAddMembersResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabGroupsAPI::OnAddMembersResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabGroupsAPI::OnAddMembersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -168,8 +165,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabGroupsAPI::ApplyToGroup(
@@ -189,22 +184,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/ApplyToGroup",
             headers,
             jsonAsString,
             OnApplyToGroupResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ApplyToGroupResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabGroupsAPI::OnApplyToGroupResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabGroupsAPI::OnApplyToGroupResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ApplyToGroupResponse outResult;
         if (ValidateResult(outResult, container))
@@ -217,8 +212,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabGroupsAPI::BlockEntity(
@@ -238,22 +231,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/BlockEntity",
             headers,
             jsonAsString,
             OnBlockEntityResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabGroupsAPI::OnBlockEntityResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabGroupsAPI::OnBlockEntityResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -266,8 +259,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabGroupsAPI::ChangeMemberRole(
@@ -287,22 +278,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/ChangeMemberRole",
             headers,
             jsonAsString,
             OnChangeMemberRoleResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabGroupsAPI::OnChangeMemberRoleResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabGroupsAPI::OnChangeMemberRoleResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -315,8 +306,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabGroupsAPI::CreateGroup(
@@ -336,22 +325,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/CreateGroup",
             headers,
             jsonAsString,
             OnCreateGroupResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateGroupResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabGroupsAPI::OnCreateGroupResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabGroupsAPI::OnCreateGroupResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         CreateGroupResponse outResult;
         if (ValidateResult(outResult, container))
@@ -364,8 +353,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabGroupsAPI::CreateRole(
@@ -385,22 +372,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/CreateRole",
             headers,
             jsonAsString,
             OnCreateRoleResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateGroupRoleResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabGroupsAPI::OnCreateRoleResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabGroupsAPI::OnCreateRoleResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         CreateGroupRoleResponse outResult;
         if (ValidateResult(outResult, container))
@@ -413,8 +400,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabGroupsAPI::DeleteGroup(
@@ -434,22 +419,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/DeleteGroup",
             headers,
             jsonAsString,
             OnDeleteGroupResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabGroupsAPI::OnDeleteGroupResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabGroupsAPI::OnDeleteGroupResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -462,8 +447,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabGroupsAPI::DeleteRole(
@@ -483,22 +466,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/DeleteRole",
             headers,
             jsonAsString,
             OnDeleteRoleResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabGroupsAPI::OnDeleteRoleResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabGroupsAPI::OnDeleteRoleResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -511,8 +494,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabGroupsAPI::GetGroup(
@@ -532,22 +513,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/GetGroup",
             headers,
             jsonAsString,
             OnGetGroupResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetGroupResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabGroupsAPI::OnGetGroupResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabGroupsAPI::OnGetGroupResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetGroupResponse outResult;
         if (ValidateResult(outResult, container))
@@ -560,8 +541,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabGroupsAPI::InviteToGroup(
@@ -581,22 +560,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/InviteToGroup",
             headers,
             jsonAsString,
             OnInviteToGroupResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<InviteToGroupResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabGroupsAPI::OnInviteToGroupResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabGroupsAPI::OnInviteToGroupResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         InviteToGroupResponse outResult;
         if (ValidateResult(outResult, container))
@@ -609,8 +588,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabGroupsAPI::IsMember(
@@ -630,22 +607,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/IsMember",
             headers,
             jsonAsString,
             OnIsMemberResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<IsMemberResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabGroupsAPI::OnIsMemberResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabGroupsAPI::OnIsMemberResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         IsMemberResponse outResult;
         if (ValidateResult(outResult, container))
@@ -658,8 +635,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabGroupsAPI::ListGroupApplications(
@@ -679,22 +654,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/ListGroupApplications",
             headers,
             jsonAsString,
             OnListGroupApplicationsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListGroupApplicationsResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabGroupsAPI::OnListGroupApplicationsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabGroupsAPI::OnListGroupApplicationsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ListGroupApplicationsResponse outResult;
         if (ValidateResult(outResult, container))
@@ -707,8 +682,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabGroupsAPI::ListGroupBlocks(
@@ -728,22 +701,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/ListGroupBlocks",
             headers,
             jsonAsString,
             OnListGroupBlocksResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListGroupBlocksResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabGroupsAPI::OnListGroupBlocksResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabGroupsAPI::OnListGroupBlocksResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ListGroupBlocksResponse outResult;
         if (ValidateResult(outResult, container))
@@ -756,8 +729,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabGroupsAPI::ListGroupInvitations(
@@ -777,22 +748,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/ListGroupInvitations",
             headers,
             jsonAsString,
             OnListGroupInvitationsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListGroupInvitationsResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabGroupsAPI::OnListGroupInvitationsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabGroupsAPI::OnListGroupInvitationsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ListGroupInvitationsResponse outResult;
         if (ValidateResult(outResult, container))
@@ -805,8 +776,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabGroupsAPI::ListGroupMembers(
@@ -826,22 +795,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/ListGroupMembers",
             headers,
             jsonAsString,
             OnListGroupMembersResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListGroupMembersResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabGroupsAPI::OnListGroupMembersResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabGroupsAPI::OnListGroupMembersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ListGroupMembersResponse outResult;
         if (ValidateResult(outResult, container))
@@ -854,8 +823,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabGroupsAPI::ListMembership(
@@ -875,22 +842,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/ListMembership",
             headers,
             jsonAsString,
             OnListMembershipResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListMembershipResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabGroupsAPI::OnListMembershipResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabGroupsAPI::OnListMembershipResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ListMembershipResponse outResult;
         if (ValidateResult(outResult, container))
@@ -903,8 +870,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabGroupsAPI::ListMembershipOpportunities(
@@ -924,22 +889,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/ListMembershipOpportunities",
             headers,
             jsonAsString,
             OnListMembershipOpportunitiesResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListMembershipOpportunitiesResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabGroupsAPI::OnListMembershipOpportunitiesResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabGroupsAPI::OnListMembershipOpportunitiesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ListMembershipOpportunitiesResponse outResult;
         if (ValidateResult(outResult, container))
@@ -952,8 +917,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabGroupsAPI::RemoveGroupApplication(
@@ -973,22 +936,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/RemoveGroupApplication",
             headers,
             jsonAsString,
             OnRemoveGroupApplicationResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabGroupsAPI::OnRemoveGroupApplicationResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabGroupsAPI::OnRemoveGroupApplicationResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -1001,8 +964,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabGroupsAPI::RemoveGroupInvitation(
@@ -1022,22 +983,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/RemoveGroupInvitation",
             headers,
             jsonAsString,
             OnRemoveGroupInvitationResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabGroupsAPI::OnRemoveGroupInvitationResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabGroupsAPI::OnRemoveGroupInvitationResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -1050,8 +1011,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabGroupsAPI::RemoveMembers(
@@ -1071,22 +1030,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/RemoveMembers",
             headers,
             jsonAsString,
             OnRemoveMembersResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabGroupsAPI::OnRemoveMembersResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabGroupsAPI::OnRemoveMembersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -1099,8 +1058,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabGroupsAPI::UnblockEntity(
@@ -1120,22 +1077,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/UnblockEntity",
             headers,
             jsonAsString,
             OnUnblockEntityResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabGroupsAPI::OnUnblockEntityResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabGroupsAPI::OnUnblockEntityResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -1148,8 +1105,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabGroupsAPI::UpdateGroup(
@@ -1169,22 +1124,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/UpdateGroup",
             headers,
             jsonAsString,
             OnUpdateGroupResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateGroupResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabGroupsAPI::OnUpdateGroupResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabGroupsAPI::OnUpdateGroupResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         UpdateGroupResponse outResult;
         if (ValidateResult(outResult, container))
@@ -1197,8 +1152,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabGroupsAPI::UpdateRole(
@@ -1218,22 +1171,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/UpdateRole",
             headers,
             jsonAsString,
             OnUpdateRoleResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateGroupRoleResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabGroupsAPI::OnUpdateRoleResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabGroupsAPI::OnUpdateRoleResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         UpdateGroupRoleResponse outResult;
         if (ValidateResult(outResult, container))
@@ -1246,8 +1199,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     bool PlayFabGroupsAPI::ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container)

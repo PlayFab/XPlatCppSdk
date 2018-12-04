@@ -32,13 +32,13 @@ namespace PlayFab
         PlayFabDataAPI(const PlayFabDataAPI& other); // Private copy-constructor, static class should never have an instance
 
         // ------------ Generated result handlers
-        static void OnAbortFileUploadsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
-        static void OnDeleteFilesResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
-        static void OnFinalizeFileUploadsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
-        static void OnGetFilesResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
-        static void OnGetObjectsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
-        static void OnInitiateFileUploadsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
-        static void OnSetObjectsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer);
+        static void OnAbortFileUploadsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
+        static void OnDeleteFilesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
+        static void OnFinalizeFileUploadsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
+        static void OnGetFilesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
+        static void OnGetObjectsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
+        static void OnInitiateFileUploadsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
+        static void OnSetObjectsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
 
         static bool ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container);
     };

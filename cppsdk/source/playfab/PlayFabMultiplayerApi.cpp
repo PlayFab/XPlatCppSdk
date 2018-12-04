@@ -15,7 +15,8 @@ namespace PlayFab
 
     size_t PlayFabMultiplayerAPI::Update()
     {
-        return PlayFabHttp::Get().Update();
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        return http.Update();
     }
 
     void PlayFabMultiplayerAPI::ForgetAllCredentials()
@@ -42,22 +43,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/CreateBuildWithCustomContainer",
             headers,
             jsonAsString,
             OnCreateBuildWithCustomContainerResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateBuildWithCustomContainerResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnCreateBuildWithCustomContainerResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnCreateBuildWithCustomContainerResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         CreateBuildWithCustomContainerResponse outResult;
         if (ValidateResult(outResult, container))
@@ -70,8 +71,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::CreateBuildWithManagedContainer(
@@ -91,22 +90,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/CreateBuildWithManagedContainer",
             headers,
             jsonAsString,
             OnCreateBuildWithManagedContainerResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateBuildWithManagedContainerResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnCreateBuildWithManagedContainerResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnCreateBuildWithManagedContainerResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         CreateBuildWithManagedContainerResponse outResult;
         if (ValidateResult(outResult, container))
@@ -119,8 +118,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::CreateRemoteUser(
@@ -140,22 +137,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/CreateRemoteUser",
             headers,
             jsonAsString,
             OnCreateRemoteUserResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateRemoteUserResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnCreateRemoteUserResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnCreateRemoteUserResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         CreateRemoteUserResponse outResult;
         if (ValidateResult(outResult, container))
@@ -168,8 +165,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::DeleteAsset(
@@ -189,22 +184,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/DeleteAsset",
             headers,
             jsonAsString,
             OnDeleteAssetResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnDeleteAssetResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnDeleteAssetResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -217,8 +212,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::DeleteBuild(
@@ -238,22 +231,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/DeleteBuild",
             headers,
             jsonAsString,
             OnDeleteBuildResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnDeleteBuildResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnDeleteBuildResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -266,8 +259,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::DeleteCertificate(
@@ -287,22 +278,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/DeleteCertificate",
             headers,
             jsonAsString,
             OnDeleteCertificateResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnDeleteCertificateResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnDeleteCertificateResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -315,8 +306,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::DeleteRemoteUser(
@@ -336,22 +325,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/DeleteRemoteUser",
             headers,
             jsonAsString,
             OnDeleteRemoteUserResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnDeleteRemoteUserResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnDeleteRemoteUserResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -364,8 +353,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::EnableMultiplayerServersForTitle(
@@ -385,22 +372,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/EnableMultiplayerServersForTitle",
             headers,
             jsonAsString,
             OnEnableMultiplayerServersForTitleResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EnableMultiplayerServersForTitleResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnEnableMultiplayerServersForTitleResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnEnableMultiplayerServersForTitleResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         EnableMultiplayerServersForTitleResponse outResult;
         if (ValidateResult(outResult, container))
@@ -413,8 +400,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::GetAssetUploadUrl(
@@ -434,22 +419,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/GetAssetUploadUrl",
             headers,
             jsonAsString,
             OnGetAssetUploadUrlResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetAssetUploadUrlResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnGetAssetUploadUrlResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnGetAssetUploadUrlResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetAssetUploadUrlResponse outResult;
         if (ValidateResult(outResult, container))
@@ -462,8 +447,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::GetBuild(
@@ -483,22 +466,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/GetBuild",
             headers,
             jsonAsString,
             OnGetBuildResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetBuildResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnGetBuildResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnGetBuildResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetBuildResponse outResult;
         if (ValidateResult(outResult, container))
@@ -511,8 +494,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::GetContainerRegistryCredentials(
@@ -532,22 +513,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/GetContainerRegistryCredentials",
             headers,
             jsonAsString,
             OnGetContainerRegistryCredentialsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetContainerRegistryCredentialsResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnGetContainerRegistryCredentialsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnGetContainerRegistryCredentialsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetContainerRegistryCredentialsResponse outResult;
         if (ValidateResult(outResult, container))
@@ -560,8 +541,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::GetMultiplayerServerDetails(
@@ -581,22 +560,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/GetMultiplayerServerDetails",
             headers,
             jsonAsString,
             OnGetMultiplayerServerDetailsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetMultiplayerServerDetailsResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnGetMultiplayerServerDetailsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnGetMultiplayerServerDetailsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetMultiplayerServerDetailsResponse outResult;
         if (ValidateResult(outResult, container))
@@ -609,8 +588,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::GetRemoteLoginEndpoint(
@@ -630,22 +607,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/GetRemoteLoginEndpoint",
             headers,
             jsonAsString,
             OnGetRemoteLoginEndpointResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetRemoteLoginEndpointResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnGetRemoteLoginEndpointResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnGetRemoteLoginEndpointResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetRemoteLoginEndpointResponse outResult;
         if (ValidateResult(outResult, container))
@@ -658,8 +635,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::GetTitleEnabledForMultiplayerServersStatus(
@@ -679,22 +654,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/GetTitleEnabledForMultiplayerServersStatus",
             headers,
             jsonAsString,
             OnGetTitleEnabledForMultiplayerServersStatusResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTitleEnabledForMultiplayerServersStatusResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnGetTitleEnabledForMultiplayerServersStatusResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnGetTitleEnabledForMultiplayerServersStatusResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         GetTitleEnabledForMultiplayerServersStatusResponse outResult;
         if (ValidateResult(outResult, container))
@@ -707,8 +682,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::ListArchivedMultiplayerServers(
@@ -728,22 +701,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/ListArchivedMultiplayerServers",
             headers,
             jsonAsString,
             OnListArchivedMultiplayerServersResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListMultiplayerServersResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnListArchivedMultiplayerServersResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnListArchivedMultiplayerServersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ListMultiplayerServersResponse outResult;
         if (ValidateResult(outResult, container))
@@ -756,8 +729,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::ListAssetSummaries(
@@ -777,22 +748,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/ListAssetSummaries",
             headers,
             jsonAsString,
             OnListAssetSummariesResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListAssetSummariesResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnListAssetSummariesResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnListAssetSummariesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ListAssetSummariesResponse outResult;
         if (ValidateResult(outResult, container))
@@ -805,8 +776,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::ListBuildSummaries(
@@ -826,22 +795,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/ListBuildSummaries",
             headers,
             jsonAsString,
             OnListBuildSummariesResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListBuildSummariesResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnListBuildSummariesResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnListBuildSummariesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ListBuildSummariesResponse outResult;
         if (ValidateResult(outResult, container))
@@ -854,8 +823,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::ListCertificateSummaries(
@@ -875,22 +842,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/ListCertificateSummaries",
             headers,
             jsonAsString,
             OnListCertificateSummariesResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListCertificateSummariesResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnListCertificateSummariesResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnListCertificateSummariesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ListCertificateSummariesResponse outResult;
         if (ValidateResult(outResult, container))
@@ -903,8 +870,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::ListContainerImages(
@@ -924,22 +889,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/ListContainerImages",
             headers,
             jsonAsString,
             OnListContainerImagesResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListContainerImagesResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnListContainerImagesResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnListContainerImagesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ListContainerImagesResponse outResult;
         if (ValidateResult(outResult, container))
@@ -952,8 +917,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::ListContainerImageTags(
@@ -973,22 +936,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/ListContainerImageTags",
             headers,
             jsonAsString,
             OnListContainerImageTagsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListContainerImageTagsResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnListContainerImageTagsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnListContainerImageTagsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ListContainerImageTagsResponse outResult;
         if (ValidateResult(outResult, container))
@@ -1001,8 +964,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::ListMultiplayerServers(
@@ -1022,22 +983,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/ListMultiplayerServers",
             headers,
             jsonAsString,
             OnListMultiplayerServersResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListMultiplayerServersResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnListMultiplayerServersResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnListMultiplayerServersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ListMultiplayerServersResponse outResult;
         if (ValidateResult(outResult, container))
@@ -1050,8 +1011,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::ListQosServers(
@@ -1071,22 +1030,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("", "");
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/ListQosServers",
             headers,
             jsonAsString,
             OnListQosServersResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListQosServersResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnListQosServersResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnListQosServersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ListQosServersResponse outResult;
         if (ValidateResult(outResult, container))
@@ -1099,8 +1058,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::ListVirtualMachineSummaries(
@@ -1120,22 +1077,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/ListVirtualMachineSummaries",
             headers,
             jsonAsString,
             OnListVirtualMachineSummariesResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListVirtualMachineSummariesResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnListVirtualMachineSummariesResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnListVirtualMachineSummariesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ListVirtualMachineSummariesResponse outResult;
         if (ValidateResult(outResult, container))
@@ -1148,8 +1105,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::RequestMultiplayerServer(
@@ -1169,22 +1124,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/RequestMultiplayerServer",
             headers,
             jsonAsString,
             OnRequestMultiplayerServerResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RequestMultiplayerServerResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnRequestMultiplayerServerResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnRequestMultiplayerServerResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         RequestMultiplayerServerResponse outResult;
         if (ValidateResult(outResult, container))
@@ -1197,8 +1152,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::RolloverContainerRegistryCredentials(
@@ -1218,22 +1171,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/RolloverContainerRegistryCredentials",
             headers,
             jsonAsString,
             OnRolloverContainerRegistryCredentialsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RolloverContainerRegistryCredentialsResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnRolloverContainerRegistryCredentialsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnRolloverContainerRegistryCredentialsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         RolloverContainerRegistryCredentialsResponse outResult;
         if (ValidateResult(outResult, container))
@@ -1246,8 +1199,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::ShutdownMultiplayerServer(
@@ -1267,22 +1218,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/ShutdownMultiplayerServer",
             headers,
             jsonAsString,
             OnShutdownMultiplayerServerResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnShutdownMultiplayerServerResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnShutdownMultiplayerServerResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -1295,8 +1246,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::UpdateBuildRegions(
@@ -1316,22 +1265,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/UpdateBuildRegions",
             headers,
             jsonAsString,
             OnUpdateBuildRegionsResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnUpdateBuildRegionsResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnUpdateBuildRegionsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -1344,8 +1293,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMultiplayerAPI::UploadCertificate(
@@ -1365,22 +1312,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/UploadCertificate",
             headers,
             jsonAsString,
             OnUploadCertificateResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMultiplayerAPI::OnUploadCertificateResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMultiplayerAPI::OnUploadCertificateResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -1393,8 +1340,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     bool PlayFabMultiplayerAPI::ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container)

@@ -15,7 +15,8 @@ namespace PlayFab
 
     size_t PlayFabCloudScriptAPI::Update()
     {
-        return PlayFabHttp::Get().Update();
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        return http.Update();
     }
 
     void PlayFabCloudScriptAPI::ForgetAllCredentials()
@@ -42,22 +43,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/CloudScript/ExecuteEntityCloudScript",
             headers,
             jsonAsString,
             OnExecuteEntityCloudScriptResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ExecuteCloudScriptResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabCloudScriptAPI::OnExecuteEntityCloudScriptResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabCloudScriptAPI::OnExecuteEntityCloudScriptResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         ExecuteCloudScriptResult outResult;
         if (ValidateResult(outResult, container))
@@ -70,8 +71,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     bool PlayFabCloudScriptAPI::ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container)

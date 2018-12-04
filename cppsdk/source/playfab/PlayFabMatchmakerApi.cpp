@@ -15,7 +15,8 @@ namespace PlayFab
 
     size_t PlayFabMatchmakerAPI::Update()
     {
-        return PlayFabHttp::Get().Update();
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        return http.Update();
     }
 
     void PlayFabMatchmakerAPI::ForgetAllCredentials()
@@ -42,22 +43,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Matchmaker/AuthUser",
             headers,
             jsonAsString,
             OnAuthUserResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AuthUserResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMatchmakerAPI::OnAuthUserResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMatchmakerAPI::OnAuthUserResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         AuthUserResponse outResult;
         if (ValidateResult(outResult, container))
@@ -70,8 +71,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMatchmakerAPI::PlayerJoined(
@@ -91,22 +90,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Matchmaker/PlayerJoined",
             headers,
             jsonAsString,
             OnPlayerJoinedResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<PlayerJoinedResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMatchmakerAPI::OnPlayerJoinedResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMatchmakerAPI::OnPlayerJoinedResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         PlayerJoinedResponse outResult;
         if (ValidateResult(outResult, container))
@@ -119,8 +118,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMatchmakerAPI::PlayerLeft(
@@ -140,22 +137,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Matchmaker/PlayerLeft",
             headers,
             jsonAsString,
             OnPlayerLeftResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<PlayerLeftResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMatchmakerAPI::OnPlayerLeftResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMatchmakerAPI::OnPlayerLeftResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         PlayerLeftResponse outResult;
         if (ValidateResult(outResult, container))
@@ -168,8 +165,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMatchmakerAPI::StartGame(
@@ -189,22 +184,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Matchmaker/StartGame",
             headers,
             jsonAsString,
             OnStartGameResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<StartGameResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMatchmakerAPI::OnStartGameResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMatchmakerAPI::OnStartGameResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         StartGameResponse outResult;
         if (ValidateResult(outResult, container))
@@ -217,8 +212,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     void PlayFabMatchmakerAPI::UserInfo(
@@ -238,22 +231,22 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
 
-        CallRequestContainer* reqContainer = new CallRequestContainer(
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Matchmaker/UserInfo",
             headers,
             jsonAsString,
             OnUserInfoResult,
-            customData);
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UserInfoResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(*reqContainer);
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabMatchmakerAPI::OnUserInfoResult(int httpCode, std::string result, CallRequestContainerBase& reqContainer)
+    void PlayFabMatchmakerAPI::OnUserInfoResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
     {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(reqContainer);
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
         UserInfoResponse outResult;
         if (ValidateResult(outResult, container))
@@ -266,8 +259,6 @@ namespace PlayFab
                 callback(outResult, container.GetCustomData());
             }
         }
-
-        delete &container;
     }
 
     bool PlayFabMatchmakerAPI::ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container)
