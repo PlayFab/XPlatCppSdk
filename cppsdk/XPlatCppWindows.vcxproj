@@ -61,7 +61,7 @@
       <PreprocessorDefinitions>_DEBUG;_LIB;CURL_STATICLIB;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)/../external/deps-debug/include;$(ProjectDir)/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)/../external/deps-debug/include;$(ProjectDir)/../external/aria/lib/include/public;$(ProjectDir)/../external/aria/lib;$(ProjectDir)/../external/aria/bondlite/include/bond_lite;$(ProjectDir)/../external/aria/bondlite/generated;$(ProjectDir)/include</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MinimalRebuild>false</MinimalRebuild>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -89,7 +89,7 @@
       <PreprocessorDefinitions>_LIB;CURL_STATICLIB;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)/../external/deps-release/include;$(ProjectDir)/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)/../external/deps-release/include;$(ProjectDir)/../external/aria/lib/include/public;$(ProjectDir)/../external/aria/lib;$(ProjectDir)/../external/aria/bondlite/include/bond_lite;$(ProjectDir)/../external/aria/bondlite/generated;$(ProjectDir)/include</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MinimalRebuild>false</MinimalRebuild>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -110,6 +110,8 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\playfab\OneDSHttpPlugin.h" />
+    <ClInclude Include="include\playfab\OneDSEventsApi.h" />
     <ClInclude Include="include\playfab\PlayFabBaseModel.h" />
 
     <ClInclude Include="include\playfab\PlayFabAdminApi.h" />
@@ -158,6 +160,8 @@
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\playfab\OneDSHttpPlugin.cpp" />
+    <ClCompile Include="source\playfab\OneDSEventsApi.cpp" />
 
     <ClCompile Include="source\playfab\PlayFabAdminApi.cpp" />
     <ClCompile Include="source\playfab\PlayFabClientApi.cpp" />

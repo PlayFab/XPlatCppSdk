@@ -65,6 +65,8 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\playfab\OneDSHttpPlugin.h" />
+    <ClInclude Include="include\playfab\OneDSEventsApi.h" />
     <ClInclude Include="include\playfab\PlayFabBaseModel.h" />
 
     <ClInclude Include="include\playfab\PlayFabAdminApi.h"/>
@@ -125,6 +127,8 @@
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\playfab\OneDSHttpPlugin.cpp" />
+    <ClCompile Include="source\playfab\OneDSEventsApi.cpp" />
 
     <ClInclude Include="source\playfab\PlayFabAdminApi.cpp"/>
 
