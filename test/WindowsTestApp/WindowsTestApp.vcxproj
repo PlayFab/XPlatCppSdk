@@ -14,8 +14,8 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{3E4DF9A7-08A4-4188-9C86-B60605F3710B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>cppWindowsTestApp</RootNamespace>
-    <ProjectName>cppWindowsTestApp</ProjectName>
+    <RootNamespace>WindowsTestApp</RootNamespace>
+    <ProjectName>WindowsTestApp</ProjectName>
     <OutputSubDir>XPlatCppWindowsTestApp</OutputSubDir>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\$(OutputSubDir)\</OutDir>
   </PropertyGroup>
@@ -61,7 +61,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;WIN32;CURL_STATICLIB;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)external\deps-debug\include;$(SolutionDir)cppsdk/include;$(SolutionDir)cppsdk</AdditionalIncludeDirectories>
-      <PrecompiledHeaderFile>cppWindowsTestAppPch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>WindowsTestAppPch.h</PrecompiledHeaderFile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <TreatWarningAsError>true</TreatWarningAsError>
       <MinimalRebuild>false</MinimalRebuild>
@@ -85,7 +85,7 @@
       <PreprocessorDefinitions>_CONSOLE;WIN32;CURL_STATICLIB;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)external\deps-release\include;$(SolutionDir)cppsdk/include;$(SolutionDir)cppsdk</AdditionalIncludeDirectories>
-      <PrecompiledHeaderFile>cppWindowsTestAppPch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>WindowsTestAppPch.h</PrecompiledHeaderFile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <TreatWarningAsError>true</TreatWarningAsError>
       <MinimalRebuild>false</MinimalRebuild>
@@ -102,16 +102,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="cppWindowsTestAppPch.h" />
+    <ClInclude Include="WindowsTestAppPch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cppWindowsTestApp.cpp" />
-    <ClCompile Include="cppWindowsTestAppPch.cpp">
+    <ClCompile Include="WindowsTestApp.cpp" />
+    <ClCompile Include="WindowsTestAppPch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\cppsdk\XPlatCppWindows.vcxproj">
+    <ProjectReference Include="$(SolutionDir)\code\XPlatCppWindows.vcxproj">
       <Project>{92f6ec5f-b66c-4572-a74d-79329aff3129}</Project>
     </ProjectReference>
   </ItemGroup>
