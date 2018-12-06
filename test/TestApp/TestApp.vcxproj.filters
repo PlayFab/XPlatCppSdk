@@ -15,15 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="WindowsTestAppPch.h">
+    <ClInclude Include="TestAppPch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="WindowsTestApp.cpp">
+    <ClCompile Include="TestApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WindowsTestAppPch.cpp">
+    <ClCompile Include="TestAppPch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

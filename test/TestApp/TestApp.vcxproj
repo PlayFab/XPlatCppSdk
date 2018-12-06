@@ -14,9 +14,9 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{3E4DF9A7-08A4-4188-9C86-B60605F3710B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>WindowsTestApp</RootNamespace>
-    <ProjectName>WindowsTestApp</ProjectName>
-    <OutputSubDir>XPlatCppWindowsTestApp</OutputSubDir>
+    <RootNamespace>TestApp</RootNamespace>
+    <ProjectName>TestApp</ProjectName>
+    <OutputSubDir>TestApp</OutputSubDir>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\$(OutputSubDir)\</OutDir>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -60,8 +60,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;WIN32;CURL_STATICLIB;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)external\deps-debug\include;$(SolutionDir)cppsdk/include;$(SolutionDir)cppsdk</AdditionalIncludeDirectories>
-      <PrecompiledHeaderFile>WindowsTestAppPch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir)external\deps-debug\include;$(SolutionDir)code/include;$(SolutionDir)code</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>TestAppPch.h</PrecompiledHeaderFile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <TreatWarningAsError>true</TreatWarningAsError>
       <MinimalRebuild>false</MinimalRebuild>
@@ -84,8 +84,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CONSOLE;WIN32;CURL_STATICLIB;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)external\deps-release\include;$(SolutionDir)cppsdk/include;$(SolutionDir)cppsdk</AdditionalIncludeDirectories>
-      <PrecompiledHeaderFile>WindowsTestAppPch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir)external\deps-release\include;$(SolutionDir)code/include;$(SolutionDir)code</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>TestAppPch.h</PrecompiledHeaderFile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <TreatWarningAsError>true</TreatWarningAsError>
       <MinimalRebuild>false</MinimalRebuild>
@@ -102,16 +102,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="WindowsTestAppPch.h" />
+    <ClInclude Include="TestAppPch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="WindowsTestApp.cpp" />
-    <ClCompile Include="WindowsTestAppPch.cpp">
+    <ClCompile Include="TestApp.cpp" />
+    <ClCompile Include="TestAppPch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="$(SolutionDir)\code\XPlatCppWindows.vcxproj">
+    <ProjectReference Include="$(SolutionDir)build\Windows\XPlatCppWindows.vcxproj">
       <Project>{92f6ec5f-b66c-4572-a74d-79329aff3129}</Project>
     </ProjectReference>
   </ItemGroup>

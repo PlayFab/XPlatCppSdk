@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LinuxTestApp", "test\LinuxTestApp\LinuxTestApp.vcxproj", "{521C0810-6512-47EE-9142-92445DC35912}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XPlatCppWindows", "build\Windows\XPlatCppWindows.vcxproj", "{92F6EC5F-B66C-4572-A74D-79329AFF3129}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XPlatCppWindows", "code\XPlatCppWindows.vcxproj", "{92F6EC5F-B66C-4572-A74D-79329AFF3129}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WindowsTestApp", "test\WindowsTestApp\WindowsTestApp.vcxproj", "{3E4DF9A7-08A4-4188-9C86-B60605F3710B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestApp", "test\TestApp\TestApp.vcxproj", "{3E4DF9A7-08A4-4188-9C86-B60605F3710B}"
 	ProjectSection(ProjectDependencies) = postProject
 		{92F6EC5F-B66C-4572-A74D-79329AFF3129} = {92F6EC5F-B66C-4572-A74D-79329AFF3129}
 	EndProjectSection

@@ -303,3 +303,8 @@ external/openssl-build-debug/**/*
 !external/openssl-build-debug/configdata.pm
 !external/openssl-build-debug/makefile
 !external/openssl-build-debug/readme.txt
+
+# Linux Build
+
+build/Linux/*.o
+build/Linux/XPlatCppLinux
