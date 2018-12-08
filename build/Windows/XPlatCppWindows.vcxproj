@@ -10,6 +10,7 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <Import Project="SetDirectoryPaths.props" />
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{92F6EC5F-B66C-4572-A74D-79329AFF3129}</ProjectGuid>
@@ -18,6 +19,7 @@
     <OutputSubDir>XPlatCppWindows</OutputSubDir>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\$(OutputSubDir)\</OutDir>
     <ProjectName>XPlatCppWindows</ProjectName>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -37,7 +39,7 @@
   </ImportGroup>
   <ImportGroup Label="Shared">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
@@ -47,10 +49,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(IncludePath)</IncludePath>
+    <IntDir>$(Platform)\$(Configuration)\$(ProjectName)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(IncludePath)</IncludePath>
+    <IntDir>$(Platform)\$(Configuration)\$(ProjectName)</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -61,7 +65,7 @@
       <PreprocessorDefinitions>_DEBUG;_LIB;CURL_STATICLIB;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)code;$(SolutionDir)external/deps-debug/include;$(SolutionDir)external/aria/lib/include/public;$(SolutionDir)external/aria/lib;$(SolutionDir)external/aria/bondlite/include/bond_lite;$(SolutionDir)external/aria/bondlite/generated;$(SolutionDir)code/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SdkSourceDir);$(ExternalDir)/deps-debug/include;$(ExternalDir)/aria/lib/include/public;$(ExternalDir)/aria/lib;$(ExternalDir)/aria/bondlite/include/bond_lite;$(ExternalDir)/aria/bondlite/generated;$(SdkSourceDir)/include</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MinimalRebuild>false</MinimalRebuild>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -89,7 +93,7 @@
       <PreprocessorDefinitions>_LIB;CURL_STATICLIB;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)code;$(SolutionDir)external/deps-release/include;$(SolutionDir)external/aria/lib/include/public;$(SolutionDir)external/aria/lib;$(SolutionDir)external/aria/bondlite/include/bond_lite;$(SolutionDir)external/aria/bondlite/generated;$(SolutionDir)code/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SdkSourceDir);$(ExternalDir)/deps-release/include;$(ExternalDir)/aria/lib/include/public;$(ExternalDir)/aria/lib;$(ExternalDir)/aria/bondlite/include/bond_lite;$(ExternalDir)/aria/bondlite/generated;$(SdkSourceDir)/include</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MinimalRebuild>false</MinimalRebuild>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -110,94 +114,89 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="$(SolutionDir)code\include\playfab\OneDSHttpPlugin.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\OneDSEventsApi.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabBaseModel.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabAdminApi.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabAdminDataModels.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabClientApi.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabClientDataModels.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabMatchmakerApi.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabMatchmakerDataModels.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabServerApi.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabServerDataModels.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabAuthenticationApi.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabAuthenticationDataModels.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabCloudScriptApi.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabCloudScriptDataModels.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabDataApi.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabDataDataModels.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabEventsApi.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabEventsDataModels.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabGroupsApi.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabGroupsDataModels.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabLocalizationApi.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabLocalizationDataModels.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabMultiplayerApi.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabMultiplayerDataModels.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabProfilesApi.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabProfilesDataModels.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabEvent.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabEventApi.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabEventBuffer.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabEventPipeline.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabEventRouter.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabError.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabHttp.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabSettings.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabCallRequestContainer.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabCallRequestContainerBase.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabPluginManager.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\PlayFabSpinLock.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\QoS\DataCenterResult.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\QoS\PingResult.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\QoS\PlayFabQoSApi.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\QoS\QoS.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\QoS\QoSResult.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\QoS\QoSSocket.h" />
-    <ClInclude Include="$(SolutionDir)code\include\playfab\QoS\XPlatSocket.h" />
-    <ClInclude Include="$(SolutionDir)code\stdafx.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\OneDSHttpPlugin.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\OneDSEventsApi.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabBaseModel.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabAdminApi.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabAdminDataModels.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabClientApi.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabClientDataModels.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabMatchmakerApi.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabMatchmakerDataModels.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabServerApi.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabServerDataModels.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabAuthenticationApi.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabAuthenticationDataModels.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabCloudScriptApi.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabCloudScriptDataModels.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabDataApi.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabDataDataModels.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEventsApi.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEventsDataModels.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabGroupsApi.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabGroupsDataModels.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabLocalizationApi.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabLocalizationDataModels.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabMultiplayerApi.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabMultiplayerDataModels.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabProfilesApi.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabProfilesDataModels.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEvent.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEventApi.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEventBuffer.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEventPipeline.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEventRouter.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabError.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabHttp.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabSettings.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabCallRequestContainer.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabCallRequestContainerBase.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabPluginManager.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabSpinLock.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\QoS\DataCenterResult.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\QoS\PingResult.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\QoS\PlayFabQoSApi.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\QoS\QoS.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\QoS\QoSResult.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\QoS\QoSSocket.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\QoS\XPlatSocket.h" />
+    <ClInclude Include="$(SdkSourceDir)\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(SolutionDir)code\source\playfab\OneDSHttpPlugin.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\OneDSEventsApi.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\PlayFabAdminApi.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\PlayFabClientApi.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\PlayFabMatchmakerApi.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\PlayFabServerApi.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\PlayFabAuthenticationApi.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\PlayFabCloudScriptApi.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\PlayFabDataApi.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\PlayFabEventsApi.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\PlayFabGroupsApi.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\PlayFabLocalizationApi.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\PlayFabMultiplayerApi.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\PlayFabProfilesApi.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\PlayFabEvent.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\PlayFabEventApi.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\PlayFabEventBuffer.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\PlayFabEventPipeline.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\PlayFabEventRouter.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\PlayFabError.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\PlayFabHttp.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\PlayFabSettings.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\PlayFabCallRequestContainerBase.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\PlayFabCallRequestContainer.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\PlayFabPluginManager.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\PlayFabSpinLock.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\QoS\DataCenterResult.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\QoS\PlayFabQoSApi.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\QoS\QoSSocket.cpp" />
-    <ClCompile Include="$(SolutionDir)code\source\playfab\QoS\XPlatSocket.cpp" />
-    <ClCompile Include="$(SolutionDir)code\stdafx.cpp">
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\OneDSHttpPlugin.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\OneDSEventsApi.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabAdminApi.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabClientApi.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabMatchmakerApi.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabServerApi.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabAuthenticationApi.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabCloudScriptApi.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabDataApi.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabEventsApi.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabGroupsApi.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabLocalizationApi.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabMultiplayerApi.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabProfilesApi.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabEvent.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabEventApi.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabEventBuffer.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabEventPipeline.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabEventRouter.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabError.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabHttp.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabSettings.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabCallRequestContainerBase.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabCallRequestContainer.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabPluginManager.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabSpinLock.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\QoS\DataCenterResult.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\QoS\PlayFabQoSApi.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\QoS\QoSSocket.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\QoS\XPlatSocket.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="configWindows.json">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
