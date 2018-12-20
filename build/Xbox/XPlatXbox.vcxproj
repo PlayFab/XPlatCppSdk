@@ -198,8 +198,7 @@
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabMultiplayerDataModels.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabProfilesApi.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabProfilesDataModels.h" />
-    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabTelemetryEventsApi.h" />
-    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabTelemetryEventsDataModels.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\OneDSEventsDataModels.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEvent.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEventApi.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEventBuffer.h" />
@@ -241,7 +240,6 @@
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabLocalizationApi.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabMultiplayerApi.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabProfilesApi.cpp" />
-    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabTelemetryEventsApi.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabEvent.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabEventApi.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabEventBuffer.cpp" />

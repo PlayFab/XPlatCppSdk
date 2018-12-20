@@ -10504,7 +10504,6 @@ namespace PlayFab
         {
             Boxed<bool> CreateAccount;
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
-            Boxed<bool> LoginTitlePlayerAccountEntity;
             std::string PlayerSecret;
             std::string ServerCustomId;
 
@@ -10512,7 +10511,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 CreateAccount(),
                 InfoRequestParameters(),
-                LoginTitlePlayerAccountEntity(),
                 PlayerSecret(),
                 ServerCustomId()
             {}
@@ -10521,7 +10519,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 CreateAccount(src.CreateAccount),
                 InfoRequestParameters(src.InfoRequestParameters),
-                LoginTitlePlayerAccountEntity(src.LoginTitlePlayerAccountEntity),
                 PlayerSecret(src.PlayerSecret),
                 ServerCustomId(src.ServerCustomId)
             {}
@@ -10532,7 +10529,6 @@ namespace PlayFab
             {
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
-                FromJsonUtilP(input["LoginTitlePlayerAccountEntity"], LoginTitlePlayerAccountEntity);
                 FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
                 FromJsonUtilS(input["ServerCustomId"], ServerCustomId);
             }
@@ -10542,7 +10538,6 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
-                Json::Value each_LoginTitlePlayerAccountEntity; ToJsonUtilP(LoginTitlePlayerAccountEntity, each_LoginTitlePlayerAccountEntity); output["LoginTitlePlayerAccountEntity"] = each_LoginTitlePlayerAccountEntity;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
                 Json::Value each_ServerCustomId; ToJsonUtilS(ServerCustomId, each_ServerCustomId); output["ServerCustomId"] = each_ServerCustomId;
                 return output;
@@ -10553,14 +10548,12 @@ namespace PlayFab
         {
             Boxed<bool> CreateAccount;
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
-            Boxed<bool> LoginTitlePlayerAccountEntity;
             std::string XboxToken;
 
             LoginWithXboxRequest() :
                 PlayFabRequestCommon(),
                 CreateAccount(),
                 InfoRequestParameters(),
-                LoginTitlePlayerAccountEntity(),
                 XboxToken()
             {}
 
@@ -10568,7 +10561,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 CreateAccount(src.CreateAccount),
                 InfoRequestParameters(src.InfoRequestParameters),
-                LoginTitlePlayerAccountEntity(src.LoginTitlePlayerAccountEntity),
                 XboxToken(src.XboxToken)
             {}
 
@@ -10578,7 +10570,6 @@ namespace PlayFab
             {
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
-                FromJsonUtilP(input["LoginTitlePlayerAccountEntity"], LoginTitlePlayerAccountEntity);
                 FromJsonUtilS(input["XboxToken"], XboxToken);
             }
 
@@ -10587,7 +10578,6 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
-                Json::Value each_LoginTitlePlayerAccountEntity; ToJsonUtilP(LoginTitlePlayerAccountEntity, each_LoginTitlePlayerAccountEntity); output["LoginTitlePlayerAccountEntity"] = each_LoginTitlePlayerAccountEntity;
                 Json::Value each_XboxToken; ToJsonUtilS(XboxToken, each_XboxToken); output["XboxToken"] = each_XboxToken;
                 return output;
             }

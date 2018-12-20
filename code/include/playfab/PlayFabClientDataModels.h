@@ -10795,7 +10795,6 @@ namespace PlayFab
             Boxed<bool> CreateAccount;
             std::string EncryptedRequest;
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
-            Boxed<bool> LoginTitlePlayerAccountEntity;
             std::string OS;
             std::string PlayerSecret;
             std::string TitleId;
@@ -10807,7 +10806,6 @@ namespace PlayFab
                 CreateAccount(),
                 EncryptedRequest(),
                 InfoRequestParameters(),
-                LoginTitlePlayerAccountEntity(),
                 OS(),
                 PlayerSecret(),
                 TitleId()
@@ -10820,7 +10818,6 @@ namespace PlayFab
                 CreateAccount(src.CreateAccount),
                 EncryptedRequest(src.EncryptedRequest),
                 InfoRequestParameters(src.InfoRequestParameters),
-                LoginTitlePlayerAccountEntity(src.LoginTitlePlayerAccountEntity),
                 OS(src.OS),
                 PlayerSecret(src.PlayerSecret),
                 TitleId(src.TitleId)
@@ -10835,7 +10832,6 @@ namespace PlayFab
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
-                FromJsonUtilP(input["LoginTitlePlayerAccountEntity"], LoginTitlePlayerAccountEntity);
                 FromJsonUtilS(input["OS"], OS);
                 FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
                 FromJsonUtilS(input["TitleId"], TitleId);
@@ -10849,7 +10845,6 @@ namespace PlayFab
                 Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
                 Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
-                Json::Value each_LoginTitlePlayerAccountEntity; ToJsonUtilP(LoginTitlePlayerAccountEntity, each_LoginTitlePlayerAccountEntity); output["LoginTitlePlayerAccountEntity"] = each_LoginTitlePlayerAccountEntity;
                 Json::Value each_OS; ToJsonUtilS(OS, each_OS); output["OS"] = each_OS;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
@@ -10863,7 +10858,6 @@ namespace PlayFab
             std::string CustomId;
             std::string EncryptedRequest;
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
-            Boxed<bool> LoginTitlePlayerAccountEntity;
             std::string PlayerSecret;
             std::string TitleId;
 
@@ -10873,7 +10867,6 @@ namespace PlayFab
                 CustomId(),
                 EncryptedRequest(),
                 InfoRequestParameters(),
-                LoginTitlePlayerAccountEntity(),
                 PlayerSecret(),
                 TitleId()
             {}
@@ -10884,7 +10877,6 @@ namespace PlayFab
                 CustomId(src.CustomId),
                 EncryptedRequest(src.EncryptedRequest),
                 InfoRequestParameters(src.InfoRequestParameters),
-                LoginTitlePlayerAccountEntity(src.LoginTitlePlayerAccountEntity),
                 PlayerSecret(src.PlayerSecret),
                 TitleId(src.TitleId)
             {}
@@ -10897,7 +10889,6 @@ namespace PlayFab
                 FromJsonUtilS(input["CustomId"], CustomId);
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
-                FromJsonUtilP(input["LoginTitlePlayerAccountEntity"], LoginTitlePlayerAccountEntity);
                 FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
                 FromJsonUtilS(input["TitleId"], TitleId);
             }
@@ -10909,7 +10900,6 @@ namespace PlayFab
                 Json::Value each_CustomId; ToJsonUtilS(CustomId, each_CustomId); output["CustomId"] = each_CustomId;
                 Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
-                Json::Value each_LoginTitlePlayerAccountEntity; ToJsonUtilP(LoginTitlePlayerAccountEntity, each_LoginTitlePlayerAccountEntity); output["LoginTitlePlayerAccountEntity"] = each_LoginTitlePlayerAccountEntity;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 return output;
@@ -10920,7 +10910,6 @@ namespace PlayFab
         {
             std::string Email;
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
-            Boxed<bool> LoginTitlePlayerAccountEntity;
             std::string Password;
             std::string TitleId;
 
@@ -10928,7 +10917,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 Email(),
                 InfoRequestParameters(),
-                LoginTitlePlayerAccountEntity(),
                 Password(),
                 TitleId()
             {}
@@ -10937,7 +10925,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 Email(src.Email),
                 InfoRequestParameters(src.InfoRequestParameters),
-                LoginTitlePlayerAccountEntity(src.LoginTitlePlayerAccountEntity),
                 Password(src.Password),
                 TitleId(src.TitleId)
             {}
@@ -10948,7 +10935,6 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["Email"], Email);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
-                FromJsonUtilP(input["LoginTitlePlayerAccountEntity"], LoginTitlePlayerAccountEntity);
                 FromJsonUtilS(input["Password"], Password);
                 FromJsonUtilS(input["TitleId"], TitleId);
             }
@@ -10958,7 +10944,6 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_Email; ToJsonUtilS(Email, each_Email); output["Email"] = each_Email;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
-                Json::Value each_LoginTitlePlayerAccountEntity; ToJsonUtilP(LoginTitlePlayerAccountEntity, each_LoginTitlePlayerAccountEntity); output["LoginTitlePlayerAccountEntity"] = each_LoginTitlePlayerAccountEntity;
                 Json::Value each_Password; ToJsonUtilS(Password, each_Password); output["Password"] = each_Password;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 return output;
@@ -10971,7 +10956,6 @@ namespace PlayFab
             std::string EncryptedRequest;
             std::string FacebookInstantGamesSignature;
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
-            Boxed<bool> LoginTitlePlayerAccountEntity;
             std::string PlayerSecret;
             std::string TitleId;
 
@@ -10981,7 +10965,6 @@ namespace PlayFab
                 EncryptedRequest(),
                 FacebookInstantGamesSignature(),
                 InfoRequestParameters(),
-                LoginTitlePlayerAccountEntity(),
                 PlayerSecret(),
                 TitleId()
             {}
@@ -10992,7 +10975,6 @@ namespace PlayFab
                 EncryptedRequest(src.EncryptedRequest),
                 FacebookInstantGamesSignature(src.FacebookInstantGamesSignature),
                 InfoRequestParameters(src.InfoRequestParameters),
-                LoginTitlePlayerAccountEntity(src.LoginTitlePlayerAccountEntity),
                 PlayerSecret(src.PlayerSecret),
                 TitleId(src.TitleId)
             {}
@@ -11005,7 +10987,6 @@ namespace PlayFab
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
                 FromJsonUtilS(input["FacebookInstantGamesSignature"], FacebookInstantGamesSignature);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
-                FromJsonUtilP(input["LoginTitlePlayerAccountEntity"], LoginTitlePlayerAccountEntity);
                 FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
                 FromJsonUtilS(input["TitleId"], TitleId);
             }
@@ -11017,7 +10998,6 @@ namespace PlayFab
                 Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
                 Json::Value each_FacebookInstantGamesSignature; ToJsonUtilS(FacebookInstantGamesSignature, each_FacebookInstantGamesSignature); output["FacebookInstantGamesSignature"] = each_FacebookInstantGamesSignature;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
-                Json::Value each_LoginTitlePlayerAccountEntity; ToJsonUtilP(LoginTitlePlayerAccountEntity, each_LoginTitlePlayerAccountEntity); output["LoginTitlePlayerAccountEntity"] = each_LoginTitlePlayerAccountEntity;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 return output;
@@ -11030,7 +11010,6 @@ namespace PlayFab
             Boxed<bool> CreateAccount;
             std::string EncryptedRequest;
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
-            Boxed<bool> LoginTitlePlayerAccountEntity;
             std::string PlayerSecret;
             std::string TitleId;
 
@@ -11040,7 +11019,6 @@ namespace PlayFab
                 CreateAccount(),
                 EncryptedRequest(),
                 InfoRequestParameters(),
-                LoginTitlePlayerAccountEntity(),
                 PlayerSecret(),
                 TitleId()
             {}
@@ -11051,7 +11029,6 @@ namespace PlayFab
                 CreateAccount(src.CreateAccount),
                 EncryptedRequest(src.EncryptedRequest),
                 InfoRequestParameters(src.InfoRequestParameters),
-                LoginTitlePlayerAccountEntity(src.LoginTitlePlayerAccountEntity),
                 PlayerSecret(src.PlayerSecret),
                 TitleId(src.TitleId)
             {}
@@ -11064,7 +11041,6 @@ namespace PlayFab
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
-                FromJsonUtilP(input["LoginTitlePlayerAccountEntity"], LoginTitlePlayerAccountEntity);
                 FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
                 FromJsonUtilS(input["TitleId"], TitleId);
             }
@@ -11076,7 +11052,6 @@ namespace PlayFab
                 Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
                 Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
-                Json::Value each_LoginTitlePlayerAccountEntity; ToJsonUtilP(LoginTitlePlayerAccountEntity, each_LoginTitlePlayerAccountEntity); output["LoginTitlePlayerAccountEntity"] = each_LoginTitlePlayerAccountEntity;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 return output;
@@ -11088,7 +11063,6 @@ namespace PlayFab
             Boxed<bool> CreateAccount;
             std::string EncryptedRequest;
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
-            Boxed<bool> LoginTitlePlayerAccountEntity;
             std::string PlayerId;
             std::string PlayerSecret;
             std::string TitleId;
@@ -11098,7 +11072,6 @@ namespace PlayFab
                 CreateAccount(),
                 EncryptedRequest(),
                 InfoRequestParameters(),
-                LoginTitlePlayerAccountEntity(),
                 PlayerId(),
                 PlayerSecret(),
                 TitleId()
@@ -11109,7 +11082,6 @@ namespace PlayFab
                 CreateAccount(src.CreateAccount),
                 EncryptedRequest(src.EncryptedRequest),
                 InfoRequestParameters(src.InfoRequestParameters),
-                LoginTitlePlayerAccountEntity(src.LoginTitlePlayerAccountEntity),
                 PlayerId(src.PlayerId),
                 PlayerSecret(src.PlayerSecret),
                 TitleId(src.TitleId)
@@ -11122,7 +11094,6 @@ namespace PlayFab
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
-                FromJsonUtilP(input["LoginTitlePlayerAccountEntity"], LoginTitlePlayerAccountEntity);
                 FromJsonUtilS(input["PlayerId"], PlayerId);
                 FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
                 FromJsonUtilS(input["TitleId"], TitleId);
@@ -11134,7 +11105,6 @@ namespace PlayFab
                 Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
                 Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
-                Json::Value each_LoginTitlePlayerAccountEntity; ToJsonUtilP(LoginTitlePlayerAccountEntity, each_LoginTitlePlayerAccountEntity); output["LoginTitlePlayerAccountEntity"] = each_LoginTitlePlayerAccountEntity;
                 Json::Value each_PlayerId; ToJsonUtilS(PlayerId, each_PlayerId); output["PlayerId"] = each_PlayerId;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
@@ -11147,7 +11117,6 @@ namespace PlayFab
             Boxed<bool> CreateAccount;
             std::string EncryptedRequest;
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
-            Boxed<bool> LoginTitlePlayerAccountEntity;
             std::string PlayerSecret;
             std::string ServerAuthCode;
             std::string TitleId;
@@ -11157,7 +11126,6 @@ namespace PlayFab
                 CreateAccount(),
                 EncryptedRequest(),
                 InfoRequestParameters(),
-                LoginTitlePlayerAccountEntity(),
                 PlayerSecret(),
                 ServerAuthCode(),
                 TitleId()
@@ -11168,7 +11136,6 @@ namespace PlayFab
                 CreateAccount(src.CreateAccount),
                 EncryptedRequest(src.EncryptedRequest),
                 InfoRequestParameters(src.InfoRequestParameters),
-                LoginTitlePlayerAccountEntity(src.LoginTitlePlayerAccountEntity),
                 PlayerSecret(src.PlayerSecret),
                 ServerAuthCode(src.ServerAuthCode),
                 TitleId(src.TitleId)
@@ -11181,7 +11148,6 @@ namespace PlayFab
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
-                FromJsonUtilP(input["LoginTitlePlayerAccountEntity"], LoginTitlePlayerAccountEntity);
                 FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
                 FromJsonUtilS(input["ServerAuthCode"], ServerAuthCode);
                 FromJsonUtilS(input["TitleId"], TitleId);
@@ -11193,7 +11159,6 @@ namespace PlayFab
                 Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
                 Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
-                Json::Value each_LoginTitlePlayerAccountEntity; ToJsonUtilP(LoginTitlePlayerAccountEntity, each_LoginTitlePlayerAccountEntity); output["LoginTitlePlayerAccountEntity"] = each_LoginTitlePlayerAccountEntity;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
                 Json::Value each_ServerAuthCode; ToJsonUtilS(ServerAuthCode, each_ServerAuthCode); output["ServerAuthCode"] = each_ServerAuthCode;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
@@ -11208,7 +11173,6 @@ namespace PlayFab
             std::string DeviceModel;
             std::string EncryptedRequest;
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
-            Boxed<bool> LoginTitlePlayerAccountEntity;
             std::string OS;
             std::string PlayerSecret;
             std::string TitleId;
@@ -11220,7 +11184,6 @@ namespace PlayFab
                 DeviceModel(),
                 EncryptedRequest(),
                 InfoRequestParameters(),
-                LoginTitlePlayerAccountEntity(),
                 OS(),
                 PlayerSecret(),
                 TitleId()
@@ -11233,7 +11196,6 @@ namespace PlayFab
                 DeviceModel(src.DeviceModel),
                 EncryptedRequest(src.EncryptedRequest),
                 InfoRequestParameters(src.InfoRequestParameters),
-                LoginTitlePlayerAccountEntity(src.LoginTitlePlayerAccountEntity),
                 OS(src.OS),
                 PlayerSecret(src.PlayerSecret),
                 TitleId(src.TitleId)
@@ -11248,7 +11210,6 @@ namespace PlayFab
                 FromJsonUtilS(input["DeviceModel"], DeviceModel);
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
-                FromJsonUtilP(input["LoginTitlePlayerAccountEntity"], LoginTitlePlayerAccountEntity);
                 FromJsonUtilS(input["OS"], OS);
                 FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
                 FromJsonUtilS(input["TitleId"], TitleId);
@@ -11262,7 +11223,6 @@ namespace PlayFab
                 Json::Value each_DeviceModel; ToJsonUtilS(DeviceModel, each_DeviceModel); output["DeviceModel"] = each_DeviceModel;
                 Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
-                Json::Value each_LoginTitlePlayerAccountEntity; ToJsonUtilP(LoginTitlePlayerAccountEntity, each_LoginTitlePlayerAccountEntity); output["LoginTitlePlayerAccountEntity"] = each_LoginTitlePlayerAccountEntity;
                 Json::Value each_OS; ToJsonUtilS(OS, each_OS); output["OS"] = each_OS;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
@@ -11277,7 +11237,6 @@ namespace PlayFab
             std::string EncryptedRequest;
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
             std::string KongregateId;
-            Boxed<bool> LoginTitlePlayerAccountEntity;
             std::string PlayerSecret;
             std::string TitleId;
 
@@ -11288,7 +11247,6 @@ namespace PlayFab
                 EncryptedRequest(),
                 InfoRequestParameters(),
                 KongregateId(),
-                LoginTitlePlayerAccountEntity(),
                 PlayerSecret(),
                 TitleId()
             {}
@@ -11300,7 +11258,6 @@ namespace PlayFab
                 EncryptedRequest(src.EncryptedRequest),
                 InfoRequestParameters(src.InfoRequestParameters),
                 KongregateId(src.KongregateId),
-                LoginTitlePlayerAccountEntity(src.LoginTitlePlayerAccountEntity),
                 PlayerSecret(src.PlayerSecret),
                 TitleId(src.TitleId)
             {}
@@ -11314,7 +11271,6 @@ namespace PlayFab
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
                 FromJsonUtilS(input["KongregateId"], KongregateId);
-                FromJsonUtilP(input["LoginTitlePlayerAccountEntity"], LoginTitlePlayerAccountEntity);
                 FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
                 FromJsonUtilS(input["TitleId"], TitleId);
             }
@@ -11327,7 +11283,6 @@ namespace PlayFab
                 Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
                 Json::Value each_KongregateId; ToJsonUtilS(KongregateId, each_KongregateId); output["KongregateId"] = each_KongregateId;
-                Json::Value each_LoginTitlePlayerAccountEntity; ToJsonUtilP(LoginTitlePlayerAccountEntity, each_LoginTitlePlayerAccountEntity); output["LoginTitlePlayerAccountEntity"] = each_LoginTitlePlayerAccountEntity;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 return output;
@@ -11339,7 +11294,6 @@ namespace PlayFab
             Boxed<bool> CreateAccount;
             std::string EncryptedRequest;
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
-            Boxed<bool> LoginTitlePlayerAccountEntity;
             std::string NintendoSwitchDeviceId;
             std::string PlayerSecret;
             std::string TitleId;
@@ -11349,7 +11303,6 @@ namespace PlayFab
                 CreateAccount(),
                 EncryptedRequest(),
                 InfoRequestParameters(),
-                LoginTitlePlayerAccountEntity(),
                 NintendoSwitchDeviceId(),
                 PlayerSecret(),
                 TitleId()
@@ -11360,7 +11313,6 @@ namespace PlayFab
                 CreateAccount(src.CreateAccount),
                 EncryptedRequest(src.EncryptedRequest),
                 InfoRequestParameters(src.InfoRequestParameters),
-                LoginTitlePlayerAccountEntity(src.LoginTitlePlayerAccountEntity),
                 NintendoSwitchDeviceId(src.NintendoSwitchDeviceId),
                 PlayerSecret(src.PlayerSecret),
                 TitleId(src.TitleId)
@@ -11373,7 +11325,6 @@ namespace PlayFab
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
-                FromJsonUtilP(input["LoginTitlePlayerAccountEntity"], LoginTitlePlayerAccountEntity);
                 FromJsonUtilS(input["NintendoSwitchDeviceId"], NintendoSwitchDeviceId);
                 FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
                 FromJsonUtilS(input["TitleId"], TitleId);
@@ -11385,7 +11336,6 @@ namespace PlayFab
                 Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
                 Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
-                Json::Value each_LoginTitlePlayerAccountEntity; ToJsonUtilP(LoginTitlePlayerAccountEntity, each_LoginTitlePlayerAccountEntity); output["LoginTitlePlayerAccountEntity"] = each_LoginTitlePlayerAccountEntity;
                 Json::Value each_NintendoSwitchDeviceId; ToJsonUtilS(NintendoSwitchDeviceId, each_NintendoSwitchDeviceId); output["NintendoSwitchDeviceId"] = each_NintendoSwitchDeviceId;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
@@ -11400,7 +11350,6 @@ namespace PlayFab
             std::string EncryptedRequest;
             std::string IdToken;
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
-            Boxed<bool> LoginTitlePlayerAccountEntity;
             std::string PlayerSecret;
             std::string TitleId;
 
@@ -11411,7 +11360,6 @@ namespace PlayFab
                 EncryptedRequest(),
                 IdToken(),
                 InfoRequestParameters(),
-                LoginTitlePlayerAccountEntity(),
                 PlayerSecret(),
                 TitleId()
             {}
@@ -11423,7 +11371,6 @@ namespace PlayFab
                 EncryptedRequest(src.EncryptedRequest),
                 IdToken(src.IdToken),
                 InfoRequestParameters(src.InfoRequestParameters),
-                LoginTitlePlayerAccountEntity(src.LoginTitlePlayerAccountEntity),
                 PlayerSecret(src.PlayerSecret),
                 TitleId(src.TitleId)
             {}
@@ -11437,7 +11384,6 @@ namespace PlayFab
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
                 FromJsonUtilS(input["IdToken"], IdToken);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
-                FromJsonUtilP(input["LoginTitlePlayerAccountEntity"], LoginTitlePlayerAccountEntity);
                 FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
                 FromJsonUtilS(input["TitleId"], TitleId);
             }
@@ -11450,7 +11396,6 @@ namespace PlayFab
                 Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
                 Json::Value each_IdToken; ToJsonUtilS(IdToken, each_IdToken); output["IdToken"] = each_IdToken;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
-                Json::Value each_LoginTitlePlayerAccountEntity; ToJsonUtilP(LoginTitlePlayerAccountEntity, each_LoginTitlePlayerAccountEntity); output["LoginTitlePlayerAccountEntity"] = each_LoginTitlePlayerAccountEntity;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 return output;
@@ -11460,7 +11405,6 @@ namespace PlayFab
         struct LoginWithPlayFabRequest : public PlayFabRequestCommon
         {
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
-            Boxed<bool> LoginTitlePlayerAccountEntity;
             std::string Password;
             std::string TitleId;
             std::string Username;
@@ -11468,7 +11412,6 @@ namespace PlayFab
             LoginWithPlayFabRequest() :
                 PlayFabRequestCommon(),
                 InfoRequestParameters(),
-                LoginTitlePlayerAccountEntity(),
                 Password(),
                 TitleId(),
                 Username()
@@ -11477,7 +11420,6 @@ namespace PlayFab
             LoginWithPlayFabRequest(const LoginWithPlayFabRequest& src) :
                 PlayFabRequestCommon(),
                 InfoRequestParameters(src.InfoRequestParameters),
-                LoginTitlePlayerAccountEntity(src.LoginTitlePlayerAccountEntity),
                 Password(src.Password),
                 TitleId(src.TitleId),
                 Username(src.Username)
@@ -11488,7 +11430,6 @@ namespace PlayFab
             void FromJson(Json::Value& input) override
             {
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
-                FromJsonUtilP(input["LoginTitlePlayerAccountEntity"], LoginTitlePlayerAccountEntity);
                 FromJsonUtilS(input["Password"], Password);
                 FromJsonUtilS(input["TitleId"], TitleId);
                 FromJsonUtilS(input["Username"], Username);
@@ -11498,7 +11439,6 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
-                Json::Value each_LoginTitlePlayerAccountEntity; ToJsonUtilP(LoginTitlePlayerAccountEntity, each_LoginTitlePlayerAccountEntity); output["LoginTitlePlayerAccountEntity"] = each_LoginTitlePlayerAccountEntity;
                 Json::Value each_Password; ToJsonUtilS(Password, each_Password); output["Password"] = each_Password;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 Json::Value each_Username; ToJsonUtilS(Username, each_Username); output["Username"] = each_Username;
@@ -11513,7 +11453,6 @@ namespace PlayFab
             std::string EncryptedRequest;
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
             Boxed<Int32> IssuerId;
-            Boxed<bool> LoginTitlePlayerAccountEntity;
             std::string PlayerSecret;
             std::string RedirectUri;
             std::string TitleId;
@@ -11525,7 +11464,6 @@ namespace PlayFab
                 EncryptedRequest(),
                 InfoRequestParameters(),
                 IssuerId(),
-                LoginTitlePlayerAccountEntity(),
                 PlayerSecret(),
                 RedirectUri(),
                 TitleId()
@@ -11538,7 +11476,6 @@ namespace PlayFab
                 EncryptedRequest(src.EncryptedRequest),
                 InfoRequestParameters(src.InfoRequestParameters),
                 IssuerId(src.IssuerId),
-                LoginTitlePlayerAccountEntity(src.LoginTitlePlayerAccountEntity),
                 PlayerSecret(src.PlayerSecret),
                 RedirectUri(src.RedirectUri),
                 TitleId(src.TitleId)
@@ -11553,7 +11490,6 @@ namespace PlayFab
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
                 FromJsonUtilP(input["IssuerId"], IssuerId);
-                FromJsonUtilP(input["LoginTitlePlayerAccountEntity"], LoginTitlePlayerAccountEntity);
                 FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
                 FromJsonUtilS(input["RedirectUri"], RedirectUri);
                 FromJsonUtilS(input["TitleId"], TitleId);
@@ -11567,7 +11503,6 @@ namespace PlayFab
                 Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
                 Json::Value each_IssuerId; ToJsonUtilP(IssuerId, each_IssuerId); output["IssuerId"] = each_IssuerId;
-                Json::Value each_LoginTitlePlayerAccountEntity; ToJsonUtilP(LoginTitlePlayerAccountEntity, each_LoginTitlePlayerAccountEntity); output["LoginTitlePlayerAccountEntity"] = each_LoginTitlePlayerAccountEntity;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
                 Json::Value each_RedirectUri; ToJsonUtilS(RedirectUri, each_RedirectUri); output["RedirectUri"] = each_RedirectUri;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
@@ -11580,7 +11515,6 @@ namespace PlayFab
             Boxed<bool> CreateAccount;
             std::string EncryptedRequest;
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
-            Boxed<bool> LoginTitlePlayerAccountEntity;
             std::string PlayerSecret;
             std::string SteamTicket;
             std::string TitleId;
@@ -11590,7 +11524,6 @@ namespace PlayFab
                 CreateAccount(),
                 EncryptedRequest(),
                 InfoRequestParameters(),
-                LoginTitlePlayerAccountEntity(),
                 PlayerSecret(),
                 SteamTicket(),
                 TitleId()
@@ -11601,7 +11534,6 @@ namespace PlayFab
                 CreateAccount(src.CreateAccount),
                 EncryptedRequest(src.EncryptedRequest),
                 InfoRequestParameters(src.InfoRequestParameters),
-                LoginTitlePlayerAccountEntity(src.LoginTitlePlayerAccountEntity),
                 PlayerSecret(src.PlayerSecret),
                 SteamTicket(src.SteamTicket),
                 TitleId(src.TitleId)
@@ -11614,7 +11546,6 @@ namespace PlayFab
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
-                FromJsonUtilP(input["LoginTitlePlayerAccountEntity"], LoginTitlePlayerAccountEntity);
                 FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
                 FromJsonUtilS(input["SteamTicket"], SteamTicket);
                 FromJsonUtilS(input["TitleId"], TitleId);
@@ -11626,7 +11557,6 @@ namespace PlayFab
                 Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
                 Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
-                Json::Value each_LoginTitlePlayerAccountEntity; ToJsonUtilP(LoginTitlePlayerAccountEntity, each_LoginTitlePlayerAccountEntity); output["LoginTitlePlayerAccountEntity"] = each_LoginTitlePlayerAccountEntity;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
                 Json::Value each_SteamTicket; ToJsonUtilS(SteamTicket, each_SteamTicket); output["SteamTicket"] = each_SteamTicket;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
@@ -11640,7 +11570,6 @@ namespace PlayFab
             Boxed<bool> CreateAccount;
             std::string EncryptedRequest;
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
-            Boxed<bool> LoginTitlePlayerAccountEntity;
             std::string PlayerSecret;
             std::string TitleId;
 
@@ -11650,7 +11579,6 @@ namespace PlayFab
                 CreateAccount(),
                 EncryptedRequest(),
                 InfoRequestParameters(),
-                LoginTitlePlayerAccountEntity(),
                 PlayerSecret(),
                 TitleId()
             {}
@@ -11661,7 +11589,6 @@ namespace PlayFab
                 CreateAccount(src.CreateAccount),
                 EncryptedRequest(src.EncryptedRequest),
                 InfoRequestParameters(src.InfoRequestParameters),
-                LoginTitlePlayerAccountEntity(src.LoginTitlePlayerAccountEntity),
                 PlayerSecret(src.PlayerSecret),
                 TitleId(src.TitleId)
             {}
@@ -11674,7 +11601,6 @@ namespace PlayFab
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
-                FromJsonUtilP(input["LoginTitlePlayerAccountEntity"], LoginTitlePlayerAccountEntity);
                 FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
                 FromJsonUtilS(input["TitleId"], TitleId);
             }
@@ -11686,7 +11612,6 @@ namespace PlayFab
                 Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
                 Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
-                Json::Value each_LoginTitlePlayerAccountEntity; ToJsonUtilP(LoginTitlePlayerAccountEntity, each_LoginTitlePlayerAccountEntity); output["LoginTitlePlayerAccountEntity"] = each_LoginTitlePlayerAccountEntity;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 return output;
@@ -11697,7 +11622,6 @@ namespace PlayFab
         {
             std::string ChallengeSignature;
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
-            Boxed<bool> LoginTitlePlayerAccountEntity;
             std::string PublicKeyHint;
             std::string TitleId;
 
@@ -11705,7 +11629,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 ChallengeSignature(),
                 InfoRequestParameters(),
-                LoginTitlePlayerAccountEntity(),
                 PublicKeyHint(),
                 TitleId()
             {}
@@ -11714,7 +11637,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 ChallengeSignature(src.ChallengeSignature),
                 InfoRequestParameters(src.InfoRequestParameters),
-                LoginTitlePlayerAccountEntity(src.LoginTitlePlayerAccountEntity),
                 PublicKeyHint(src.PublicKeyHint),
                 TitleId(src.TitleId)
             {}
@@ -11725,7 +11647,6 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["ChallengeSignature"], ChallengeSignature);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
-                FromJsonUtilP(input["LoginTitlePlayerAccountEntity"], LoginTitlePlayerAccountEntity);
                 FromJsonUtilS(input["PublicKeyHint"], PublicKeyHint);
                 FromJsonUtilS(input["TitleId"], TitleId);
             }
@@ -11735,7 +11656,6 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_ChallengeSignature; ToJsonUtilS(ChallengeSignature, each_ChallengeSignature); output["ChallengeSignature"] = each_ChallengeSignature;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
-                Json::Value each_LoginTitlePlayerAccountEntity; ToJsonUtilP(LoginTitlePlayerAccountEntity, each_LoginTitlePlayerAccountEntity); output["LoginTitlePlayerAccountEntity"] = each_LoginTitlePlayerAccountEntity;
                 Json::Value each_PublicKeyHint; ToJsonUtilS(PublicKeyHint, each_PublicKeyHint); output["PublicKeyHint"] = each_PublicKeyHint;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 return output;
@@ -11747,7 +11667,6 @@ namespace PlayFab
             Boxed<bool> CreateAccount;
             std::string EncryptedRequest;
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
-            Boxed<bool> LoginTitlePlayerAccountEntity;
             std::string PlayerSecret;
             std::string TitleId;
             std::string XboxToken;
@@ -11757,7 +11676,6 @@ namespace PlayFab
                 CreateAccount(),
                 EncryptedRequest(),
                 InfoRequestParameters(),
-                LoginTitlePlayerAccountEntity(),
                 PlayerSecret(),
                 TitleId(),
                 XboxToken()
@@ -11768,7 +11686,6 @@ namespace PlayFab
                 CreateAccount(src.CreateAccount),
                 EncryptedRequest(src.EncryptedRequest),
                 InfoRequestParameters(src.InfoRequestParameters),
-                LoginTitlePlayerAccountEntity(src.LoginTitlePlayerAccountEntity),
                 PlayerSecret(src.PlayerSecret),
                 TitleId(src.TitleId),
                 XboxToken(src.XboxToken)
@@ -11781,7 +11698,6 @@ namespace PlayFab
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
-                FromJsonUtilP(input["LoginTitlePlayerAccountEntity"], LoginTitlePlayerAccountEntity);
                 FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
                 FromJsonUtilS(input["TitleId"], TitleId);
                 FromJsonUtilS(input["XboxToken"], XboxToken);
@@ -11793,7 +11709,6 @@ namespace PlayFab
                 Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
                 Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
-                Json::Value each_LoginTitlePlayerAccountEntity; ToJsonUtilP(LoginTitlePlayerAccountEntity, each_LoginTitlePlayerAccountEntity); output["LoginTitlePlayerAccountEntity"] = each_LoginTitlePlayerAccountEntity;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 Json::Value each_XboxToken; ToJsonUtilS(XboxToken, each_XboxToken); output["XboxToken"] = each_XboxToken;
@@ -12467,7 +12382,6 @@ namespace PlayFab
             std::string Email;
             std::string EncryptedRequest;
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
-            Boxed<bool> LoginTitlePlayerAccountEntity;
             std::string Password;
             std::string PlayerSecret;
             Boxed<bool> RequireBothUsernameAndEmail;
@@ -12480,7 +12394,6 @@ namespace PlayFab
                 Email(),
                 EncryptedRequest(),
                 InfoRequestParameters(),
-                LoginTitlePlayerAccountEntity(),
                 Password(),
                 PlayerSecret(),
                 RequireBothUsernameAndEmail(),
@@ -12494,7 +12407,6 @@ namespace PlayFab
                 Email(src.Email),
                 EncryptedRequest(src.EncryptedRequest),
                 InfoRequestParameters(src.InfoRequestParameters),
-                LoginTitlePlayerAccountEntity(src.LoginTitlePlayerAccountEntity),
                 Password(src.Password),
                 PlayerSecret(src.PlayerSecret),
                 RequireBothUsernameAndEmail(src.RequireBothUsernameAndEmail),
@@ -12510,7 +12422,6 @@ namespace PlayFab
                 FromJsonUtilS(input["Email"], Email);
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
-                FromJsonUtilP(input["LoginTitlePlayerAccountEntity"], LoginTitlePlayerAccountEntity);
                 FromJsonUtilS(input["Password"], Password);
                 FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
                 FromJsonUtilP(input["RequireBothUsernameAndEmail"], RequireBothUsernameAndEmail);
@@ -12525,7 +12436,6 @@ namespace PlayFab
                 Json::Value each_Email; ToJsonUtilS(Email, each_Email); output["Email"] = each_Email;
                 Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
-                Json::Value each_LoginTitlePlayerAccountEntity; ToJsonUtilP(LoginTitlePlayerAccountEntity, each_LoginTitlePlayerAccountEntity); output["LoginTitlePlayerAccountEntity"] = each_LoginTitlePlayerAccountEntity;
                 Json::Value each_Password; ToJsonUtilS(Password, each_Password); output["Password"] = each_Password;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
                 Json::Value each_RequireBothUsernameAndEmail; ToJsonUtilP(RequireBothUsernameAndEmail, each_RequireBothUsernameAndEmail); output["RequireBothUsernameAndEmail"] = each_RequireBothUsernameAndEmail;
@@ -12589,7 +12499,6 @@ namespace PlayFab
             std::string DeviceName;
             std::string EncryptedRequest;
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
-            Boxed<bool> LoginTitlePlayerAccountEntity;
             std::string PlayerSecret;
             std::string PublicKey;
             std::string TitleId;
@@ -12600,7 +12509,6 @@ namespace PlayFab
                 DeviceName(),
                 EncryptedRequest(),
                 InfoRequestParameters(),
-                LoginTitlePlayerAccountEntity(),
                 PlayerSecret(),
                 PublicKey(),
                 TitleId(),
@@ -12612,7 +12520,6 @@ namespace PlayFab
                 DeviceName(src.DeviceName),
                 EncryptedRequest(src.EncryptedRequest),
                 InfoRequestParameters(src.InfoRequestParameters),
-                LoginTitlePlayerAccountEntity(src.LoginTitlePlayerAccountEntity),
                 PlayerSecret(src.PlayerSecret),
                 PublicKey(src.PublicKey),
                 TitleId(src.TitleId),
@@ -12626,7 +12533,6 @@ namespace PlayFab
                 FromJsonUtilS(input["DeviceName"], DeviceName);
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
-                FromJsonUtilP(input["LoginTitlePlayerAccountEntity"], LoginTitlePlayerAccountEntity);
                 FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
                 FromJsonUtilS(input["PublicKey"], PublicKey);
                 FromJsonUtilS(input["TitleId"], TitleId);
@@ -12639,7 +12545,6 @@ namespace PlayFab
                 Json::Value each_DeviceName; ToJsonUtilS(DeviceName, each_DeviceName); output["DeviceName"] = each_DeviceName;
                 Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
-                Json::Value each_LoginTitlePlayerAccountEntity; ToJsonUtilP(LoginTitlePlayerAccountEntity, each_LoginTitlePlayerAccountEntity); output["LoginTitlePlayerAccountEntity"] = each_LoginTitlePlayerAccountEntity;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
                 Json::Value each_PublicKey; ToJsonUtilS(PublicKey, each_PublicKey); output["PublicKey"] = each_PublicKey;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
