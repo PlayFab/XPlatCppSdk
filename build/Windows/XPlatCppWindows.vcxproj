@@ -61,10 +61,10 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_LIB;CURL_STATICLIB;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_LIB;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SdkSourceDir);$(ExternalDir)/deps-$(Configuration)/include;$(ExternalDir)/aria/lib/include/public;$(ExternalDir)/aria/lib;$(ExternalDir)/aria/bondlite/include/bond_lite;$(ExternalDir)/aria/bondlite/generated;$(SdkSourceDir)/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SdkSourceDir);$(ExternalDir)/jsoncpp/include;$(ExternalDir)/aria/lib/include/public;$(ExternalDir)/aria/lib;$(ExternalDir)/aria/bondlite/include/bond_lite;$(ExternalDir)/aria/bondlite/generated;$(SdkSourceDir)/include</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MinimalRebuild>false</MinimalRebuild>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -79,8 +79,7 @@
     <ProjectReference />
     <ProjectReference />
     <Lib>
-      <AdditionalDependencies>ws2_32.lib;lib_json.lib;zlib.lib;libssl.lib;libcrypto.lib;wldap32.lib;crypt32.lib;normaliz.lib;libcurl_a_debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ExternalDir)\deps-$(Configuration)\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ws2_32.lib;winhttp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -88,10 +87,10 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_LIB;CURL_STATICLIB;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_LIB;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SdkSourceDir);$(ExternalDir)/deps-$(Configuration)/include;$(ExternalDir)/aria/lib/include/public;$(ExternalDir)/aria/lib;$(ExternalDir)/aria/bondlite/include/bond_lite;$(ExternalDir)/aria/bondlite/generated;$(SdkSourceDir)/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SdkSourceDir);$(ExternalDir)/jsoncpp/include;$(ExternalDir)/aria/lib/include/public;$(ExternalDir)/aria/lib;$(ExternalDir)/aria/bondlite/include/bond_lite;$(ExternalDir)/aria/bondlite/generated;$(SdkSourceDir)/include</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MinimalRebuild>false</MinimalRebuild>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -106,12 +105,12 @@
     <ProjectReference />
     <ProjectReference />
     <Lib>
-      <AdditionalDependencies>ws2_32.lib;lib_json.lib;zlib.lib;libssl.lib;libcrypto.lib;wldap32.lib;crypt32.lib;normaliz.lib;libcurl_a.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ExternalDir)\deps-$(Configuration)\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ws2_32.lib;winhttp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="$(SdkSourceDir)\include\playfab\OneDSHttpPlugin.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabPlatformMacros.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\OneDSWinHttpPlugin.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\OneDSEventsApi.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\OneDSEventPipeline.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabBaseModel.h" />
@@ -147,7 +146,7 @@
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEventPipeline.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEventRouter.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabError.h" />
-    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabHttp.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabWinHttpPlugin.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabSettings.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabCallRequestContainer.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabCallRequestContainerBase.h" />
@@ -165,7 +164,7 @@
     <ClInclude Include="$(SdkSourceDir)\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(SdkSourceDir)\source\playfab\OneDSHttpPlugin.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\OneDSWinHttpPlugin.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\OneDSEventsApi.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\OneDSEventPipeline.cpp" />
 
@@ -187,7 +186,7 @@
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabEventPipeline.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabEventRouter.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabError.cpp" />
-    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabHttp.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabWinHttpPlugin.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabSettings.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabCallRequestContainerBase.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabCallRequestContainer.cpp" />
@@ -202,6 +201,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\external\jsoncpp-build\lib_json.vcxproj">
+      <Project>{1e6c2c1c-6453-4129-ae3f-0ee8e6599c89}</Project>
+    </ProjectReference>
+  </ItemGroup>  
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

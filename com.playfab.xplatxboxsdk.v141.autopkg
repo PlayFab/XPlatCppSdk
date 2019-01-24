@@ -3,13 +3,23 @@ configurations {
         key : "PlatformToolset";
         choices: { v141 };
     };
+
+    Platform {
+        key : "Platform";
+        choices: { Durango };
+    };
+
+    Configuration {
+        key : "Configuration";
+        choices: { Release, Debug, Profile };
+    };
 }
 
 nuget {
     nuspec {
-        id = "com.playfab.xplatcppsdk.v141";
+        id = "com.playfab.xplatxboxsdk.v141";
         version : 3.3.190123;
-        title: "PlayFab Cross Platform C++ Sdk for Visual Studio 2017";
+        title: "PlayFab Xbox Platform C++ Sdk for Visual Studio 2017";
         summary: "PlayFab is the unified backend platform for games and everything you need to build and operate your game, all in one place, so you can focus on creating and delivering a great player experience.";
         authors: "PlayFab";
         owners: "PlayFab";
@@ -21,11 +31,22 @@ nuget {
         releaseNotes: "https://api.playfab.com/releaseNotes/#190123";
         copyright: "Copyright 2019";
         language: "C++";
-        tags: { PlayFab, Baas, Paas, JSON, REST, HTTP, SSL, API, cloud, liveops, game, gamedev, native };
+        tags: { PlayFab, Baas, Paas, JSON, REST, HTTP, SSL, API, cloud, liveops, game, gamedev, native, xbox };
     };
 
     files {
-        include: {
+        include1: {
+            #destination = ${d_include}Release\json;
+            "external\jsoncpp\include\**\*.h"
+        };
+
+        include2: {
+            #destination = ${d_include}Debug\json;
+            "external\jsoncpp\include\**\*.h"
+        };
+        
+        include3: {
+            #destination = ${d_include}Profile\json;
             "external\jsoncpp\include\**\*.h"
         };
 
@@ -34,26 +55,32 @@ nuget {
             "code\include\playfab\**\*.h"
         };
 
-        [x64,v141,release] {
+        [Durango,v141,release] {
             lib: {
-                build\Windows\x64\Release\XPlatCppWindows\XPlatCppWindows.lib; 
+                build\Xbox\Durango\Release\XPlatXbox.lib; 
             }
         };
 
-        [x64,v141,debug] {
+        [Durango,v141,debug] {
             lib: {
-                build\Windows\x64\Debug\XPlatCppWindows\XPlatCppWindows.lib;
+                build\Xbox\Durango\Debug\XPlatXbox.lib;
             }
         };
 
+        [Durango,v141,profile] {
+            lib: {
+                build\Xbox\Durango\Profile\XPlatXbox.lib;
+            }
+        };
+        
         other: {
             #destination: ${d_lib};
-            build\Windows\x64\Debug\XPlatCppWindows\XPlatCppWindows.pdb
+            build\Xbox\Durango\Debug\XPlatXbox.pdb;
+            build\Xbox\Durango\Profile\XPlatXbox.pri;
         };
     };
 
     targets {
         Libraries += ws2_32.lib;
-        Libraries += winhttp.lib;
     }
 }

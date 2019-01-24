@@ -1823,6 +1823,7 @@ namespace PlayFab
             GenericErrorCodesPushNotificationTemplateMissingDefaultVersion,
             GenericErrorCodesPushNotificationTemplateInvalidSyntax,
             GenericErrorCodesPushNotificationTemplateNoCustomPayloadForV1,
+            GenericErrorCodesNoLeaderboardForStatistic,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingCreateRequestMissing,
@@ -2276,6 +2277,7 @@ namespace PlayFab
             if (input == GenericErrorCodesPushNotificationTemplateMissingDefaultVersion) output = Json::Value("PushNotificationTemplateMissingDefaultVersion");
             if (input == GenericErrorCodesPushNotificationTemplateInvalidSyntax) output = Json::Value("PushNotificationTemplateInvalidSyntax");
             if (input == GenericErrorCodesPushNotificationTemplateNoCustomPayloadForV1) output = Json::Value("PushNotificationTemplateNoCustomPayloadForV1");
+            if (input == GenericErrorCodesNoLeaderboardForStatistic) output = Json::Value("NoLeaderboardForStatistic");
             if (input == GenericErrorCodesMatchmakingEntityInvalid) output = Json::Value("MatchmakingEntityInvalid");
             if (input == GenericErrorCodesMatchmakingPlayerAttributesInvalid) output = Json::Value("MatchmakingPlayerAttributesInvalid");
             if (input == GenericErrorCodesMatchmakingCreateRequestMissing) output = Json::Value("MatchmakingCreateRequestMissing");
@@ -2730,6 +2732,7 @@ namespace PlayFab
             if (inputStr == "PushNotificationTemplateMissingDefaultVersion") output = GenericErrorCodesPushNotificationTemplateMissingDefaultVersion;
             if (inputStr == "PushNotificationTemplateInvalidSyntax") output = GenericErrorCodesPushNotificationTemplateInvalidSyntax;
             if (inputStr == "PushNotificationTemplateNoCustomPayloadForV1") output = GenericErrorCodesPushNotificationTemplateNoCustomPayloadForV1;
+            if (inputStr == "NoLeaderboardForStatistic") output = GenericErrorCodesNoLeaderboardForStatistic;
             if (inputStr == "MatchmakingEntityInvalid") output = GenericErrorCodesMatchmakingEntityInvalid;
             if (inputStr == "MatchmakingPlayerAttributesInvalid") output = GenericErrorCodesMatchmakingPlayerAttributesInvalid;
             if (inputStr == "MatchmakingCreateRequestMissing") output = GenericErrorCodesMatchmakingCreateRequestMissing;

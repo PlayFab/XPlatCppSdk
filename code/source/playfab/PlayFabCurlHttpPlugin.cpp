@@ -1,20 +1,21 @@
 #include <stdafx.h>
 
-#include <playfab/PlayFabIXHR2HttpPlugin.h>
+#include <playfab/PlayFabCurlHttpPlugin.h>
 #include <playfab/PlayFabSettings.h>
+#include <curl/curl.h>
 
 #include <stdexcept>
 
 namespace PlayFab
 {
-    PlayFabIXHR2HttpPlugin::PlayFabIXHR2HttpPlugin()
+    PlayFabCurlHttpPlugin::PlayFabCurlHttpPlugin()
     {
         activeRequestCount = 0;
         threadRunning = true;
-        workerThread = std::thread(&PlayFabIXHR2HttpPlugin::WorkerThread, this);
+        workerThread = std::thread(&PlayFabCurlHttpPlugin::WorkerThread, this);
     };
 
-    PlayFabIXHR2HttpPlugin::~PlayFabIXHR2HttpPlugin()
+    PlayFabCurlHttpPlugin::~PlayFabCurlHttpPlugin()
     {
         threadRunning = false;
         try
@@ -26,7 +27,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabIXHR2HttpPlugin::WorkerThread()
+    void PlayFabCurlHttpPlugin::WorkerThread()
     {
         size_t queueSize;
 
@@ -63,7 +64,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabIXHR2HttpPlugin::HandleCallback(std::unique_ptr<CallRequestContainer> requestContainer)
+    void PlayFabCurlHttpPlugin::HandleCallback(std::unique_ptr<CallRequestContainer> requestContainer)
     {
         CallRequestContainer& reqContainer = *requestContainer;
         reqContainer.finished = true;
@@ -81,7 +82,15 @@ namespace PlayFab
         }
     }
 
-    void PlayFabIXHR2HttpPlugin::MakePostRequest(std::unique_ptr<CallRequestContainerBase> requestContainer)
+    size_t PlayFabCurlHttpPlugin::CurlReceiveData(char* buffer, size_t blockSize, size_t blockCount, void* userData)
+    {
+        CallRequestContainer* reqContainer = reinterpret_cast<CallRequestContainer*>(userData);
+        reqContainer->responseString.append(buffer, blockSize * blockCount);
+
+        return (blockSize * blockCount);
+    }
+
+    void PlayFabCurlHttpPlugin::MakePostRequest(std::unique_ptr<CallRequestContainerBase> requestContainer)
     {
         { // LOCK httpRequestMutex
             std::unique_lock<std::mutex> lock(httpRequestMutex);
@@ -90,96 +99,59 @@ namespace PlayFab
         } // UNLOCK httpRequestMutex
     }
 
-    void PlayFabIXHR2HttpPlugin::SetupRequestHeaders(const CallRequestContainer& reqContainer, std::vector< HttpHeaderInfo>& headers)
-    {
-        // Header 1
-        HttpHeaderInfo contentHeader;
-        contentHeader.wstrHeaderName = L"Content-Type";
-        contentHeader.wstrHeaderValue = L"application/json;charset=utf-8";
-        headers.push_back(std::move(contentHeader));
-
-        // Header 2
-        HttpHeaderInfo acceptHeader;
-        acceptHeader.wstrHeaderName = L"Accept";
-        acceptHeader.wstrHeaderValue = L"application/json";
-        headers.push_back(std::move(acceptHeader));
-
-        // Header 3
-        HttpHeaderInfo playFabSdkHeader;
-        playFabSdkHeader.wstrHeaderName = L"X-PlayFabSDK";
-        playFabSdkHeader.wstrHeaderValue = std::wstring(PlayFabSettings::versionString.begin(), PlayFabSettings::versionString.end());
-        headers.push_back(std::move(playFabSdkHeader));
-
-        // Header 4
-        HttpHeaderInfo reportErrorAsSuccessHeader;
-        reportErrorAsSuccessHeader.wstrHeaderName = L"X-ReportErrorAsSuccess";
-        reportErrorAsSuccessHeader.wstrHeaderValue = L"true";
-        headers.push_back(std::move(reportErrorAsSuccessHeader));
-
-        auto reqHeaders = reqContainer.GetHeaders();
-
-        if (reqHeaders.size() > 0)
-        {
-            for (auto const &obj : reqHeaders)
-            {
-                if (obj.first.length() != 0 && obj.second.length() != 0) // no empty keys or values in headers
-                {
-                    HttpHeaderInfo hInfo;
-                    hInfo.wstrHeaderName = std::wstring(obj.first.begin(), obj.first.end());
-                    hInfo.wstrHeaderValue = std::wstring(obj.second.begin(), obj.second.end());
-                    headers.push_back(std::move(hInfo));
-                }
-            }
-        }
-    }
-
-    void PlayFabIXHR2HttpPlugin::ExecuteRequest(std::unique_ptr<CallRequestContainer> requestContainer)
+    void PlayFabCurlHttpPlugin::ExecuteRequest(std::unique_ptr<CallRequestContainer> requestContainer)
     {
         CallRequestContainer& reqContainer = *requestContainer;
 
-        // Create request
-        HttpRequest postEventRequest;
-        
-        // Setup headers
-        std::vector<HttpHeaderInfo> headers;
-        SetupRequestHeaders(reqContainer, headers);
+        // Set up curl handle
+        CURL* curlHandle = curl_easy_init();
+        curl_easy_reset(curlHandle);
+        curl_easy_setopt(curlHandle, CURLOPT_NOSIGNAL, true);
+        curl_easy_setopt(curlHandle, CURLOPT_URL, PlayFabSettings::GetUrl(reqContainer.GetUrl(), PlayFabSettings::requestGetParams).c_str());
 
-        // Setup url
-        std::string urlString = PlayFabSettings::GetUrl(reqContainer.GetUrl(), PlayFabSettings::requestGetParams);
-        std::wstring url(urlString.begin(), urlString.end());
-        
-        // Setup payload
-        std::string payload = reqContainer.GetRequestBody();
+        // Set up headers
+        curl_slist* curlHttpHeaders = nullptr;
+        curlHttpHeaders = curl_slist_append(curlHttpHeaders, "Accept: application/json");
+        curlHttpHeaders = curl_slist_append(curlHttpHeaders, "Content-Type: application/json; charset=utf-8");
+        curlHttpHeaders = curl_slist_append(curlHttpHeaders, ("X-PlayFabSDK: " + PlayFabSettings::versionString).c_str());
+        curlHttpHeaders = curl_slist_append(curlHttpHeaders, "X-ReportErrorAsSuccess: true");
 
-        // Send post request
-        postEventRequest.Open(
-            L"POST",
-            url,
-            headers,
-            payload);
+        auto headers = reqContainer.GetHeaders();
 
-        // Wait for the request to complete
-        postEventRequest.WaitForFinish();
-
-        const HRESULT res = postEventRequest.GetResult();
-        const DWORD status = postEventRequest.GetStatus();
-        auto response = postEventRequest.GetData();
-        reqContainer.responseString = std::string(response.begin(), response.end());
-
-        // 401 is a special case where the status does not bubble up and we have to parse it from the HRESULT
-        if (status == 401)
+        if (headers.size() > 0)
         {
-            reqContainer.errorWrapper.HttpCode = 401;
-            reqContainer.errorWrapper.HttpStatus = "Access denied";
-
-            reqContainer.errorWrapper.ErrorCode = PlayFabErrorConnectionRefused;
-            reqContainer.errorWrapper.ErrorName = "Access denied";
-            reqContainer.errorWrapper.ErrorMessage = "Failed to contact server, error: " + std::to_string(res);
-            HandleCallback(std::move(requestContainer));
+            for (auto const &obj : headers)
+            {
+                if (obj.first.length() != 0 && obj.second.length() != 0) // no empty keys or values in headers
+                {
+                    std::string header = obj.first + ": " + obj.second;
+                    curlHttpHeaders = curl_slist_append(curlHttpHeaders, header.c_str());
+                }
+            }
         }
-        else if (FAILED(res))
+
+        curl_easy_setopt(curlHandle, CURLOPT_HTTPHEADER, curlHttpHeaders);
+
+        // Set up post & payload
+        std::string payload = reqContainer.GetRequestBody();
+        curl_easy_setopt(curlHandle, CURLOPT_POST, nullptr);
+        curl_easy_setopt(curlHandle, CURLOPT_POSTFIELDS, payload.c_str());
+
+        // Process result
+        // TODO: CURLOPT_ERRORBUFFER ?
+        curl_easy_setopt(curlHandle, CURLOPT_TIMEOUT_MS, 10000L);
+        curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &reqContainer);
+        curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, CurlReceiveData);
+
+        // Send
+        curl_easy_setopt(curlHandle, CURLOPT_SSL_VERIFYPEER, false); // TODO: Replace this with a ca-bundle ref???
+        const auto res = curl_easy_perform(curlHandle);
+        long curlHttpResponseCode = 0;
+        curl_easy_getinfo(curlHandle, CURLINFO_RESPONSE_CODE, &curlHttpResponseCode);
+
+        if (res != CURLE_OK)
         {
-            reqContainer.errorWrapper.HttpCode = status;
+            reqContainer.errorWrapper.HttpCode = curlHttpResponseCode != 0 ? curlHttpResponseCode : 408;
             reqContainer.errorWrapper.HttpStatus = "Failed to contact server";
             reqContainer.errorWrapper.ErrorCode = PlayFabErrorConnectionTimeout;
             reqContainer.errorWrapper.ErrorName = "Failed to contact server";
@@ -204,7 +176,7 @@ namespace PlayFab
             }
             else
             {
-                reqContainer.errorWrapper.HttpCode = status;
+                reqContainer.errorWrapper.HttpCode = curlHttpResponseCode != 0 ? curlHttpResponseCode : 408;
                 reqContainer.errorWrapper.HttpStatus = reqContainer.responseString;
                 reqContainer.errorWrapper.ErrorCode = PlayFabErrorConnectionTimeout;
                 reqContainer.errorWrapper.ErrorName = "Failed to parse PlayFab response";
@@ -213,9 +185,12 @@ namespace PlayFab
 
             HandleCallback(std::move(requestContainer));
         }
+
+        curl_easy_reset(curlHandle);
+        curlHttpHeaders = nullptr;
     }
 
-    void PlayFabIXHR2HttpPlugin::HandleResults(std::unique_ptr<CallRequestContainer> requestContainer)
+    void PlayFabCurlHttpPlugin::HandleResults(std::unique_ptr<CallRequestContainer> requestContainer)
     {
         CallRequestContainer& reqContainer = *requestContainer;
         auto callback = reqContainer.GetCallback();
@@ -228,7 +203,7 @@ namespace PlayFab
         }
     }
 
-    size_t PlayFabIXHR2HttpPlugin::Update()
+    size_t PlayFabCurlHttpPlugin::Update()
     {
         if (PlayFabSettings::threadedCallbacks)
         {

@@ -3,7 +3,6 @@
 #ifdef ENABLE_PLAYFABSERVER_API
 
 #include <playfab/PlayFabCallRequestContainer.h>
-#include <playfab/PlayFabHttp.h>
 #include <playfab/PlayFabMatchmakerDataModels.h>
 
 namespace PlayFab

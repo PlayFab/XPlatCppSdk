@@ -3,7 +3,6 @@
 #ifdef ENABLE_PLAYFABADMIN_API
 
 #include <playfab/PlayFabCallRequestContainer.h>
-#include <playfab/PlayFabHttp.h>
 #include <playfab/PlayFabAdminDataModels.h>
 
 namespace PlayFab

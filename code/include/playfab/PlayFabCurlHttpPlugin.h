@@ -10,28 +10,27 @@
 #include <mutex>
 #include <atomic>
 
-#include <json/value.h>
-#include <playfab/PlayFabIXHR2HttpRequest.h>
+#include <playfab/PlayFabJsonHeaders.h>
 
 namespace PlayFab
 {
     /// <summary>
-    /// PlayFabIXHR2HttpPlugin is the default https implementation for xbox to interact with PlayFab services using IXHR2 API.
+    /// PlayFabCurlHttpPlugin is an https implementation to interact with PlayFab services using curl.
     /// </summary>
-    class PlayFabIXHR2HttpPlugin : public IPlayFabHttpPlugin
+    class PlayFabCurlHttpPlugin : public IPlayFabHttpPlugin
     {
     public:
-        PlayFabIXHR2HttpPlugin();
-        PlayFabIXHR2HttpPlugin(const PlayFabIXHR2HttpPlugin& other) = delete;
-        PlayFabIXHR2HttpPlugin(PlayFabIXHR2HttpPlugin&& other) = delete;
-        PlayFabIXHR2HttpPlugin& operator=(PlayFabIXHR2HttpPlugin&& other) = delete;
-        virtual ~PlayFabIXHR2HttpPlugin();
+        PlayFabCurlHttpPlugin();
+        PlayFabCurlHttpPlugin(const PlayFabCurlHttpPlugin& other) = delete;
+        PlayFabCurlHttpPlugin(PlayFabCurlHttpPlugin&& other) = delete;
+        PlayFabCurlHttpPlugin& operator=(PlayFabCurlHttpPlugin&& other) = delete;
+        virtual ~PlayFabCurlHttpPlugin();
 
         virtual void MakePostRequest(std::unique_ptr<CallRequestContainerBase> requestContainer) override;
         virtual size_t Update() override;
 
     protected:
-        void SetupRequestHeaders(const CallRequestContainer& reqContainer, std::vector<HttpHeaderInfo>& headers);
+        static size_t CurlReceiveData(char* buffer, size_t blockSize, size_t blockCount, void* userData);
         virtual void ExecuteRequest(std::unique_ptr<CallRequestContainer> requestContainer);
         void WorkerThread();
         void HandleCallback(std::unique_ptr<CallRequestContainer> requestContainer);

@@ -26,7 +26,9 @@ namespace PlayFab
             AzureRegionSouthCentralUs,
             AzureRegionSoutheastAsia,
             AzureRegionWestEurope,
-            AzureRegionWestUs
+            AzureRegionWestUs,
+            AzureRegionChinaEast2,
+            AzureRegionChinaNorth2
         };
 
         inline void ToJsonEnum(const AzureRegion input, Json::Value& output)
@@ -46,6 +48,8 @@ namespace PlayFab
             if (input == AzureRegionSoutheastAsia) output = Json::Value("SoutheastAsia");
             if (input == AzureRegionWestEurope) output = Json::Value("WestEurope");
             if (input == AzureRegionWestUs) output = Json::Value("WestUs");
+            if (input == AzureRegionChinaEast2) output = Json::Value("ChinaEast2");
+            if (input == AzureRegionChinaNorth2) output = Json::Value("ChinaNorth2");
         }
         inline void FromJsonEnum(const Json::Value& input, AzureRegion& output)
         {
@@ -66,6 +70,8 @@ namespace PlayFab
             if (inputStr == "SoutheastAsia") output = AzureRegionSoutheastAsia;
             if (inputStr == "WestEurope") output = AzureRegionWestEurope;
             if (inputStr == "WestUs") output = AzureRegionWestUs;
+            if (inputStr == "ChinaEast2") output = AzureRegionChinaEast2;
+            if (inputStr == "ChinaNorth2") output = AzureRegionChinaNorth2;
         }
 
         enum AzureVmSize
@@ -313,8 +319,53 @@ namespace PlayFab
             }
         };
 
+        struct CurrentServerStats : public PlayFabBaseModel
+        {
+            Int32 Active;
+            Int32 Propping;
+            Int32 StandingBy;
+            Int32 Total;
+
+            CurrentServerStats() :
+                PlayFabBaseModel(),
+                Active(),
+                Propping(),
+                StandingBy(),
+                Total()
+            {}
+
+            CurrentServerStats(const CurrentServerStats& src) :
+                PlayFabBaseModel(),
+                Active(src.Active),
+                Propping(src.Propping),
+                StandingBy(src.StandingBy),
+                Total(src.Total)
+            {}
+
+            ~CurrentServerStats() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilP(input["Active"], Active);
+                FromJsonUtilP(input["Propping"], Propping);
+                FromJsonUtilP(input["StandingBy"], StandingBy);
+                FromJsonUtilP(input["Total"], Total);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Active; ToJsonUtilP(Active, each_Active); output["Active"] = each_Active;
+                Json::Value each_Propping; ToJsonUtilP(Propping, each_Propping); output["Propping"] = each_Propping;
+                Json::Value each_StandingBy; ToJsonUtilP(StandingBy, each_StandingBy); output["StandingBy"] = each_StandingBy;
+                Json::Value each_Total; ToJsonUtilP(Total, each_Total); output["Total"] = each_Total;
+                return output;
+            }
+        };
+
         struct BuildRegion : public PlayFabBaseModel
         {
+            Boxed<CurrentServerStats> pfCurrentServerStats;
             Int32 MaxServers;
             Boxed<AzureRegion> Region;
             Int32 StandbyServers;
@@ -322,6 +373,7 @@ namespace PlayFab
 
             BuildRegion() :
                 PlayFabBaseModel(),
+                pfCurrentServerStats(),
                 MaxServers(),
                 Region(),
                 StandbyServers(),
@@ -330,6 +382,7 @@ namespace PlayFab
 
             BuildRegion(const BuildRegion& src) :
                 PlayFabBaseModel(),
+                pfCurrentServerStats(src.pfCurrentServerStats),
                 MaxServers(src.MaxServers),
                 Region(src.Region),
                 StandbyServers(src.StandbyServers),
@@ -340,6 +393,7 @@ namespace PlayFab
 
             void FromJson(Json::Value& input) override
             {
+                FromJsonUtilO(input["pfCurrentServerStats"], pfCurrentServerStats);
                 FromJsonUtilP(input["MaxServers"], MaxServers);
                 FromJsonUtilE(input["Region"], Region);
                 FromJsonUtilP(input["StandbyServers"], StandbyServers);
@@ -349,6 +403,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_pfCurrentServerStats; ToJsonUtilO(pfCurrentServerStats, each_pfCurrentServerStats); output["CurrentServerStats"] = each_pfCurrentServerStats;
                 Json::Value each_MaxServers; ToJsonUtilP(MaxServers, each_MaxServers); output["MaxServers"] = each_MaxServers;
                 Json::Value each_Region; ToJsonUtilE(Region, each_Region); output["Region"] = each_Region;
                 Json::Value each_StandbyServers; ToJsonUtilP(StandbyServers, each_StandbyServers); output["StandbyServers"] = each_StandbyServers;
