@@ -35,10 +35,19 @@
     <ClInclude Include="$(SdkSourceDir)\include\playfab\OneDSEventPipeline.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabAuthenticationContext.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabApiSettings.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabBaseModel.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabAdminAPI.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabAdminInstanceAPI.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabAdminDataModels.h">
@@ -47,10 +56,16 @@
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabClientAPI.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabClientInstanceAPI.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabClientDataModels.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabMatchmakerAPI.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabMatchmakerInstanceAPI.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabMatchmakerDataModels.h">
@@ -59,10 +74,16 @@
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabServerAPI.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabServerInstanceAPI.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabServerDataModels.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabAuthenticationAPI.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabAuthenticationInstanceAPI.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabAuthenticationDataModels.h">
@@ -71,10 +92,16 @@
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabCloudScriptAPI.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabCloudScriptInstanceAPI.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabCloudScriptDataModels.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabDataAPI.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabDataInstanceAPI.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabDataDataModels.h">
@@ -83,10 +110,16 @@
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEventsAPI.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEventsInstanceAPI.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEventsDataModels.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabGroupsAPI.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabGroupsInstanceAPI.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabGroupsDataModels.h">
@@ -95,16 +128,25 @@
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabLocalizationAPI.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabLocalizationInstanceAPI.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabLocalizationDataModels.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabMultiplayerAPI.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabMultiplayerInstanceAPI.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabMultiplayerDataModels.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabProfilesAPI.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabProfilesInstanceAPI.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabProfilesDataModels.h">
@@ -190,43 +232,85 @@
     <ClCompile Include="$(SdkSourceDir)\source\playfab\OneDSEventPipeline.cpp">
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabAuthenticationContext.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabApiSettings.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
     <ClCompile Include="$(SdkSourceDir)\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabAdminApi.cpp">
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabAdminInstanceAPI.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabClientApi.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabClientInstanceAPI.cpp">
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabMatchmakerApi.cpp">
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabMatchmakerInstanceAPI.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabServerApi.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabServerInstanceAPI.cpp">
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabAuthenticationApi.cpp">
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabAuthenticationInstanceAPI.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabCloudScriptApi.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabCloudScriptInstanceAPI.cpp">
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabDataApi.cpp">
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabDataInstanceAPI.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabEventsApi.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabEventsInstanceAPI.cpp">
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabGroupsApi.cpp">
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabGroupsInstanceAPI.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabLocalizationApi.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabLocalizationInstanceAPI.cpp">
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabMultiplayerApi.cpp">
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabMultiplayerInstanceAPI.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabProfilesApi.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabProfilesInstanceAPI.cpp">
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabError.cpp">

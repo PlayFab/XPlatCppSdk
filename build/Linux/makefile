@@ -21,23 +21,37 @@ LINK_TARGET = XPlatCppLinux
 
 # Here is a Make Macro that uses the backslash to extend to multiple lines.
 OBJS = stdafx.o \
+	PlayFabAuthenticationContext.o \
+	PlayFabApiSettings.o \
 	PlayFabAdminApi.o \
+	PlayFabAdminInstanceApi.o \
+	PlayFabClientApi.o \
+	PlayFabClientInstanceApi.o \
+	PlayFabMatchmakerApi.o \
+	PlayFabMatchmakerInstanceApi.o \
+	PlayFabServerApi.o \
+	PlayFabServerInstanceApi.o \
 	PlayFabAuthenticationApi.o \
+	PlayFabAuthenticationInstanceApi.o \
+	PlayFabCloudScriptApi.o \
+	PlayFabCloudScriptInstanceApi.o \
+	PlayFabDataApi.o \
+	PlayFabDataInstanceApi.o \
+	PlayFabEventsApi.o \
+	PlayFabEventsInstanceApi.o \
+	PlayFabGroupsApi.o \
+	PlayFabGroupsInstanceApi.o \
+	PlayFabLocalizationApi.o \
+	PlayFabLocalizationInstanceApi.o \
+	PlayFabMultiplayerApi.o \
+	PlayFabMultiplayerInstanceApi.o \
+	PlayFabProfilesApi.o \
+	PlayFabProfilesInstanceApi.o \
 	PlayFabCallRequestContainer.o \
 	PlayFabCallRequestContainerBase.o \
-	PlayFabClientApi.o \
-	PlayFabCloudScriptApi.o \
-	PlayFabDataApi.o \
 	PlayFabError.o \
-	PlayFabEventsApi.o \
-	PlayFabGroupsApi.o \
 	PlayFabCurlHttpPlugin.o \
-	PlayFabLocalizationApi.o \
-	PlayFabMatchmakerApi.o \
-	PlayFabMultiplayerApi.o \
 	PlayFabPluginManager.o \
-	PlayFabProfilesApi.o \
-	PlayFabServerApi.o \
 	PlayFabSettings.o \
 	PlayFabEvent.o \
 	PlayFabEventApi.o \

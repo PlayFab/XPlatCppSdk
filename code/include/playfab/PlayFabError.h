@@ -423,6 +423,12 @@ namespace PlayFab
         PlayFabErrorPushNotificationTemplateInvalidSyntax = 1419,
         PlayFabErrorPushNotificationTemplateNoCustomPayloadForV1 = 1420,
         PlayFabErrorNoLeaderboardForStatistic = 1421,
+        PlayFabErrorTitleNewsMissingDefaultLanguage = 1422,
+        PlayFabErrorTitleNewsNotFound = 1423,
+        PlayFabErrorTitleNewsDuplicateLanguage = 1424,
+        PlayFabErrorTitleNewsMissingTitleOrBody = 1425,
+        PlayFabErrorTitleNewsInvalidLanguage = 1426,
+        PlayFabErrorEmailRecipientBlacklisted = 1427,
         PlayFabErrorMatchmakingEntityInvalid = 2001,
         PlayFabErrorMatchmakingPlayerAttributesInvalid = 2002,
         PlayFabErrorMatchmakingCreateRequestMissing = 2003,
@@ -461,6 +467,9 @@ namespace PlayFab
         PlayFabErrorMatchmakingGetStatisticsIdentityInvalid = 2036,
         PlayFabErrorMatchmakingStatisticsIdMissing = 2037,
         PlayFabErrorCannotEnableMultiplayerServersForTitle = 2038,
+        PlayFabErrorTitleConfigNotFound = 3001,
+        PlayFabErrorTitleConfigUpdateConflict = 3002,
+        PlayFabErrorTitleConfigSerializationError = 3003,
     };
 
     /// <summary>

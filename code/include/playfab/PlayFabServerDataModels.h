@@ -1780,6 +1780,12 @@ namespace PlayFab
             GenericErrorCodesPushNotificationTemplateInvalidSyntax,
             GenericErrorCodesPushNotificationTemplateNoCustomPayloadForV1,
             GenericErrorCodesNoLeaderboardForStatistic,
+            GenericErrorCodesTitleNewsMissingDefaultLanguage,
+            GenericErrorCodesTitleNewsNotFound,
+            GenericErrorCodesTitleNewsDuplicateLanguage,
+            GenericErrorCodesTitleNewsMissingTitleOrBody,
+            GenericErrorCodesTitleNewsInvalidLanguage,
+            GenericErrorCodesEmailRecipientBlacklisted,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingCreateRequestMissing,
@@ -1817,7 +1823,10 @@ namespace PlayFab
             GenericErrorCodesMatchmakingNotEnabled,
             GenericErrorCodesMatchmakingGetStatisticsIdentityInvalid,
             GenericErrorCodesMatchmakingStatisticsIdMissing,
-            GenericErrorCodesCannotEnableMultiplayerServersForTitle
+            GenericErrorCodesCannotEnableMultiplayerServersForTitle,
+            GenericErrorCodesTitleConfigNotFound,
+            GenericErrorCodesTitleConfigUpdateConflict,
+            GenericErrorCodesTitleConfigSerializationError
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -2234,6 +2243,12 @@ namespace PlayFab
             if (input == GenericErrorCodesPushNotificationTemplateInvalidSyntax) output = Json::Value("PushNotificationTemplateInvalidSyntax");
             if (input == GenericErrorCodesPushNotificationTemplateNoCustomPayloadForV1) output = Json::Value("PushNotificationTemplateNoCustomPayloadForV1");
             if (input == GenericErrorCodesNoLeaderboardForStatistic) output = Json::Value("NoLeaderboardForStatistic");
+            if (input == GenericErrorCodesTitleNewsMissingDefaultLanguage) output = Json::Value("TitleNewsMissingDefaultLanguage");
+            if (input == GenericErrorCodesTitleNewsNotFound) output = Json::Value("TitleNewsNotFound");
+            if (input == GenericErrorCodesTitleNewsDuplicateLanguage) output = Json::Value("TitleNewsDuplicateLanguage");
+            if (input == GenericErrorCodesTitleNewsMissingTitleOrBody) output = Json::Value("TitleNewsMissingTitleOrBody");
+            if (input == GenericErrorCodesTitleNewsInvalidLanguage) output = Json::Value("TitleNewsInvalidLanguage");
+            if (input == GenericErrorCodesEmailRecipientBlacklisted) output = Json::Value("EmailRecipientBlacklisted");
             if (input == GenericErrorCodesMatchmakingEntityInvalid) output = Json::Value("MatchmakingEntityInvalid");
             if (input == GenericErrorCodesMatchmakingPlayerAttributesInvalid) output = Json::Value("MatchmakingPlayerAttributesInvalid");
             if (input == GenericErrorCodesMatchmakingCreateRequestMissing) output = Json::Value("MatchmakingCreateRequestMissing");
@@ -2272,6 +2287,9 @@ namespace PlayFab
             if (input == GenericErrorCodesMatchmakingGetStatisticsIdentityInvalid) output = Json::Value("MatchmakingGetStatisticsIdentityInvalid");
             if (input == GenericErrorCodesMatchmakingStatisticsIdMissing) output = Json::Value("MatchmakingStatisticsIdMissing");
             if (input == GenericErrorCodesCannotEnableMultiplayerServersForTitle) output = Json::Value("CannotEnableMultiplayerServersForTitle");
+            if (input == GenericErrorCodesTitleConfigNotFound) output = Json::Value("TitleConfigNotFound");
+            if (input == GenericErrorCodesTitleConfigUpdateConflict) output = Json::Value("TitleConfigUpdateConflict");
+            if (input == GenericErrorCodesTitleConfigSerializationError) output = Json::Value("TitleConfigSerializationError");
         }
         inline void FromJsonEnum(const Json::Value& input, GenericErrorCodes& output)
         {
@@ -2689,6 +2707,12 @@ namespace PlayFab
             if (inputStr == "PushNotificationTemplateInvalidSyntax") output = GenericErrorCodesPushNotificationTemplateInvalidSyntax;
             if (inputStr == "PushNotificationTemplateNoCustomPayloadForV1") output = GenericErrorCodesPushNotificationTemplateNoCustomPayloadForV1;
             if (inputStr == "NoLeaderboardForStatistic") output = GenericErrorCodesNoLeaderboardForStatistic;
+            if (inputStr == "TitleNewsMissingDefaultLanguage") output = GenericErrorCodesTitleNewsMissingDefaultLanguage;
+            if (inputStr == "TitleNewsNotFound") output = GenericErrorCodesTitleNewsNotFound;
+            if (inputStr == "TitleNewsDuplicateLanguage") output = GenericErrorCodesTitleNewsDuplicateLanguage;
+            if (inputStr == "TitleNewsMissingTitleOrBody") output = GenericErrorCodesTitleNewsMissingTitleOrBody;
+            if (inputStr == "TitleNewsInvalidLanguage") output = GenericErrorCodesTitleNewsInvalidLanguage;
+            if (inputStr == "EmailRecipientBlacklisted") output = GenericErrorCodesEmailRecipientBlacklisted;
             if (inputStr == "MatchmakingEntityInvalid") output = GenericErrorCodesMatchmakingEntityInvalid;
             if (inputStr == "MatchmakingPlayerAttributesInvalid") output = GenericErrorCodesMatchmakingPlayerAttributesInvalid;
             if (inputStr == "MatchmakingCreateRequestMissing") output = GenericErrorCodesMatchmakingCreateRequestMissing;
@@ -2727,6 +2751,9 @@ namespace PlayFab
             if (inputStr == "MatchmakingGetStatisticsIdentityInvalid") output = GenericErrorCodesMatchmakingGetStatisticsIdentityInvalid;
             if (inputStr == "MatchmakingStatisticsIdMissing") output = GenericErrorCodesMatchmakingStatisticsIdMissing;
             if (inputStr == "CannotEnableMultiplayerServersForTitle") output = GenericErrorCodesCannotEnableMultiplayerServersForTitle;
+            if (inputStr == "TitleConfigNotFound") output = GenericErrorCodesTitleConfigNotFound;
+            if (inputStr == "TitleConfigUpdateConflict") output = GenericErrorCodesTitleConfigUpdateConflict;
+            if (inputStr == "TitleConfigSerializationError") output = GenericErrorCodesTitleConfigSerializationError;
         }
 
         enum LoginIdentityProvider
@@ -8855,6 +8882,103 @@ namespace PlayFab
             }
         };
 
+        struct GetPlayFabIDsFromPSNAccountIDsRequest : public PlayFabRequestCommon
+        {
+            Boxed<Int32> IssuerId;
+            std::list<std::string> PSNAccountIDs;
+
+            GetPlayFabIDsFromPSNAccountIDsRequest() :
+                PlayFabRequestCommon(),
+                IssuerId(),
+                PSNAccountIDs()
+            {}
+
+            GetPlayFabIDsFromPSNAccountIDsRequest(const GetPlayFabIDsFromPSNAccountIDsRequest& src) :
+                PlayFabRequestCommon(),
+                IssuerId(src.IssuerId),
+                PSNAccountIDs(src.PSNAccountIDs)
+            {}
+
+            ~GetPlayFabIDsFromPSNAccountIDsRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilP(input["IssuerId"], IssuerId);
+                FromJsonUtilS(input["PSNAccountIDs"], PSNAccountIDs);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_IssuerId; ToJsonUtilP(IssuerId, each_IssuerId); output["IssuerId"] = each_IssuerId;
+                Json::Value each_PSNAccountIDs; ToJsonUtilS(PSNAccountIDs, each_PSNAccountIDs); output["PSNAccountIDs"] = each_PSNAccountIDs;
+                return output;
+            }
+        };
+
+        struct PSNAccountPlayFabIdPair : public PlayFabBaseModel
+        {
+            std::string PlayFabId;
+            std::string PSNAccountId;
+
+            PSNAccountPlayFabIdPair() :
+                PlayFabBaseModel(),
+                PlayFabId(),
+                PSNAccountId()
+            {}
+
+            PSNAccountPlayFabIdPair(const PSNAccountPlayFabIdPair& src) :
+                PlayFabBaseModel(),
+                PlayFabId(src.PlayFabId),
+                PSNAccountId(src.PSNAccountId)
+            {}
+
+            ~PSNAccountPlayFabIdPair() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+                FromJsonUtilS(input["PSNAccountId"], PSNAccountId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                Json::Value each_PSNAccountId; ToJsonUtilS(PSNAccountId, each_PSNAccountId); output["PSNAccountId"] = each_PSNAccountId;
+                return output;
+            }
+        };
+
+        struct GetPlayFabIDsFromPSNAccountIDsResult : public PlayFabResultCommon
+        {
+            std::list<PSNAccountPlayFabIdPair> Data;
+
+            GetPlayFabIDsFromPSNAccountIDsResult() :
+                PlayFabResultCommon(),
+                Data()
+            {}
+
+            GetPlayFabIDsFromPSNAccountIDsResult(const GetPlayFabIDsFromPSNAccountIDsResult& src) :
+                PlayFabResultCommon(),
+                Data(src.Data)
+            {}
+
+            ~GetPlayFabIDsFromPSNAccountIDsResult() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["Data"], Data);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Data; ToJsonUtilO(Data, each_Data); output["Data"] = each_Data;
+                return output;
+            }
+        };
+
         struct GetPlayFabIDsFromSteamIDsRequest : public PlayFabRequestCommon
         {
             std::list<std::string> SteamStringIDs;
@@ -12111,7 +12235,7 @@ namespace PlayFab
             }
         };
 
-        struct ServerLoginResult : public PlayFabResultCommon
+        struct ServerLoginResult : public PlayFabLoginResultCommon
         {
             Boxed<EntityTokenResponse> EntityToken;
             Boxed<GetPlayerCombinedInfoResultPayload> InfoResultPayload;
@@ -12122,7 +12246,7 @@ namespace PlayFab
             Boxed<UserSettings> SettingsForUser;
 
             ServerLoginResult() :
-                PlayFabResultCommon(),
+                PlayFabLoginResultCommon(),
                 EntityToken(),
                 InfoResultPayload(),
                 LastLoginTime(),
@@ -12133,7 +12257,7 @@ namespace PlayFab
             {}
 
             ServerLoginResult(const ServerLoginResult& src) :
-                PlayFabResultCommon(),
+                PlayFabLoginResultCommon(),
                 EntityToken(src.EntityToken),
                 InfoResultPayload(src.InfoResultPayload),
                 LastLoginTime(src.LastLoginTime),

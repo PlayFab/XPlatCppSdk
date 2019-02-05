@@ -6,6 +6,7 @@
 #include <playfab/PlayFabPluginManager.h>
 #include <playfab/PlayFabSettings.h>
 #include <playfab/PlayFabError.h>
+#include <memory>
 
 #pragma warning (disable: 4100) // formal parameters are part of a public interface
 
@@ -41,7 +42,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/AddCharacterVirtualCurrency",
@@ -88,7 +89,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/AddFriend",
@@ -135,7 +136,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/AddPlayerTag",
@@ -182,7 +183,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/AddSharedGroupMembers",
@@ -229,7 +230,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/AddUserVirtualCurrency",
@@ -276,7 +277,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/AuthenticateSessionTicket",
@@ -323,7 +324,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/AwardSteamAchievement",
@@ -370,7 +371,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/BanUsers",
@@ -417,7 +418,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/ConsumeItem",
@@ -464,7 +465,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/CreateSharedGroup",
@@ -511,7 +512,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/DeleteCharacterFromUser",
@@ -558,7 +559,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/DeletePlayer",
@@ -605,7 +606,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/DeleteSharedGroup",
@@ -652,7 +653,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/DeregisterGame",
@@ -699,7 +700,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/EvaluateRandomResultTable",
@@ -746,7 +747,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/ExecuteCloudScript",
@@ -793,7 +794,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetAllSegments",
@@ -840,7 +841,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetAllUsersCharacters",
@@ -887,7 +888,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetCatalogItems",
@@ -934,7 +935,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetCharacterData",
@@ -981,7 +982,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetCharacterInternalData",
@@ -1028,7 +1029,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetCharacterInventory",
@@ -1075,7 +1076,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetCharacterLeaderboard",
@@ -1122,7 +1123,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetCharacterReadOnlyData",
@@ -1169,7 +1170,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetCharacterStatistics",
@@ -1216,7 +1217,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetContentDownloadUrl",
@@ -1263,7 +1264,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetFriendLeaderboard",
@@ -1310,7 +1311,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetFriendsList",
@@ -1357,7 +1358,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetLeaderboard",
@@ -1404,7 +1405,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetLeaderboardAroundCharacter",
@@ -1451,7 +1452,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetLeaderboardAroundUser",
@@ -1498,7 +1499,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetLeaderboardForUserCharacters",
@@ -1545,7 +1546,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetPlayerCombinedInfo",
@@ -1592,7 +1593,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetPlayerProfile",
@@ -1639,7 +1640,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetPlayerSegments",
@@ -1686,7 +1687,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetPlayersInSegment",
@@ -1733,7 +1734,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetPlayerStatistics",
@@ -1780,7 +1781,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetPlayerStatisticVersions",
@@ -1827,7 +1828,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetPlayerTags",
@@ -1874,7 +1875,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetPlayFabIDsFromFacebookIDs",
@@ -1921,7 +1922,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetPlayFabIDsFromFacebookInstantGamesIds",
@@ -1968,7 +1969,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetPlayFabIDsFromNintendoSwitchDeviceIds",
@@ -2000,6 +2001,53 @@ namespace PlayFab
         }
     }
 
+    void PlayFabServerAPI::GetPlayFabIDsFromPSNAccountIDs(
+        GetPlayFabIDsFromPSNAccountIDsRequest& request,
+        ProcessApiCallback<GetPlayFabIDsFromPSNAccountIDsResult> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const auto requestJson = request.ToJson();
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Server/GetPlayFabIDsFromPSNAccountIDs",
+            headers,
+            jsonAsString,
+            OnGetPlayFabIDsFromPSNAccountIDsResult,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromPSNAccountIDsResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabServerAPI::OnGetPlayFabIDsFromPSNAccountIDsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+
+        GetPlayFabIDsFromPSNAccountIDsResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<GetPlayFabIDsFromPSNAccountIDsResult> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
     void PlayFabServerAPI::GetPlayFabIDsFromSteamIDs(
         GetPlayFabIDsFromSteamIDsRequest& request,
         ProcessApiCallback<GetPlayFabIDsFromSteamIDsResult> callback,
@@ -2015,7 +2063,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetPlayFabIDsFromSteamIDs",
@@ -2062,7 +2110,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetPlayFabIDsFromXboxLiveIDs",
@@ -2109,7 +2157,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetPublisherData",
@@ -2156,7 +2204,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetRandomResultTables",
@@ -2203,7 +2251,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetServerCustomIDsFromPlayFabIDs",
@@ -2250,7 +2298,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetSharedGroupData",
@@ -2297,7 +2345,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetTime",
@@ -2344,7 +2392,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetTitleData",
@@ -2391,7 +2439,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetTitleInternalData",
@@ -2438,7 +2486,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetTitleNews",
@@ -2485,7 +2533,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetUserAccountInfo",
@@ -2532,7 +2580,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetUserBans",
@@ -2579,7 +2627,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetUserData",
@@ -2626,7 +2674,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetUserInternalData",
@@ -2673,7 +2721,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetUserInventory",
@@ -2720,7 +2768,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetUserPublisherData",
@@ -2767,7 +2815,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetUserPublisherInternalData",
@@ -2814,7 +2862,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetUserPublisherReadOnlyData",
@@ -2861,7 +2909,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GetUserReadOnlyData",
@@ -2908,7 +2956,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GrantCharacterToUser",
@@ -2955,7 +3003,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GrantItemsToCharacter",
@@ -3002,7 +3050,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GrantItemsToUser",
@@ -3049,7 +3097,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/GrantItemsToUsers",
@@ -3096,7 +3144,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/LinkXboxAccount",
@@ -3143,7 +3191,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/LoginWithServerCustomId",
@@ -3190,7 +3238,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/LoginWithXbox",
@@ -3237,7 +3285,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/ModifyItemUses",
@@ -3284,7 +3332,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/MoveItemToCharacterFromCharacter",
@@ -3331,7 +3379,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/MoveItemToCharacterFromUser",
@@ -3378,7 +3426,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/MoveItemToUserFromCharacter",
@@ -3425,7 +3473,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/NotifyMatchmakerPlayerLeft",
@@ -3472,7 +3520,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/RedeemCoupon",
@@ -3519,7 +3567,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/RedeemMatchmakerTicket",
@@ -3566,7 +3614,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/RefreshGameServerInstanceHeartbeat",
@@ -3613,7 +3661,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/RegisterGame",
@@ -3660,7 +3708,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/RemoveFriend",
@@ -3707,7 +3755,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/RemovePlayerTag",
@@ -3754,7 +3802,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/RemoveSharedGroupMembers",
@@ -3801,7 +3849,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/ReportPlayer",
@@ -3848,7 +3896,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/RevokeAllBansForUser",
@@ -3895,7 +3943,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/RevokeBans",
@@ -3942,7 +3990,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/RevokeInventoryItem",
@@ -3989,7 +4037,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/RevokeInventoryItems",
@@ -4036,7 +4084,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/SendCustomAccountRecoveryEmail",
@@ -4083,7 +4131,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/SendEmailFromTemplate",
@@ -4130,7 +4178,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/SendPushNotification",
@@ -4177,7 +4225,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/SetFriendTags",
@@ -4224,7 +4272,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/SetGameServerInstanceData",
@@ -4271,7 +4319,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/SetGameServerInstanceState",
@@ -4318,7 +4366,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/SetGameServerInstanceTags",
@@ -4365,7 +4413,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/SetPlayerSecret",
@@ -4412,7 +4460,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/SetPublisherData",
@@ -4459,7 +4507,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/SetTitleData",
@@ -4506,7 +4554,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/SetTitleInternalData",
@@ -4553,7 +4601,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/SubtractCharacterVirtualCurrency",
@@ -4600,7 +4648,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/SubtractUserVirtualCurrency",
@@ -4647,7 +4695,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/UnlinkXboxAccount",
@@ -4694,7 +4742,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/UnlockContainerInstance",
@@ -4741,7 +4789,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/UnlockContainerItem",
@@ -4788,7 +4836,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/UpdateAvatarUrl",
@@ -4835,7 +4883,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/UpdateBans",
@@ -4882,7 +4930,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/UpdateCharacterData",
@@ -4929,7 +4977,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/UpdateCharacterInternalData",
@@ -4976,7 +5024,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/UpdateCharacterReadOnlyData",
@@ -5023,7 +5071,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/UpdateCharacterStatistics",
@@ -5070,7 +5118,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/UpdatePlayerStatistics",
@@ -5117,7 +5165,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/UpdateSharedGroupData",
@@ -5164,7 +5212,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/UpdateUserData",
@@ -5211,7 +5259,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/UpdateUserInternalData",
@@ -5258,7 +5306,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/UpdateUserInventoryItemCustomData",
@@ -5305,7 +5353,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/UpdateUserPublisherData",
@@ -5352,7 +5400,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/UpdateUserPublisherInternalData",
@@ -5399,7 +5447,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/UpdateUserPublisherReadOnlyData",
@@ -5446,7 +5494,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/UpdateUserReadOnlyData",
@@ -5493,7 +5541,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/WriteCharacterEvent",
@@ -5540,7 +5588,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/WritePlayerEvent",
@@ -5587,7 +5635,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Server/WriteTitleEvent",

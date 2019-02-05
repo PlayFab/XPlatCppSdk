@@ -6,6 +6,7 @@
 #include <playfab/PlayFabPluginManager.h>
 #include <playfab/PlayFabSettings.h>
 #include <playfab/PlayFabError.h>
+#include <memory>
 
 #pragma warning (disable: 4100) // formal parameters are part of a public interface
 
@@ -41,7 +42,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Matchmaker/AuthUser",
@@ -88,7 +89,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Matchmaker/PlayerJoined",
@@ -135,7 +136,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Matchmaker/PlayerLeft",
@@ -182,7 +183,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Matchmaker/StartGame",
@@ -229,7 +230,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", PlayFabSettings::developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Matchmaker/UserInfo",

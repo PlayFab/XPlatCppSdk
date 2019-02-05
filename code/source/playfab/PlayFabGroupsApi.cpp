@@ -6,6 +6,7 @@
 #include <playfab/PlayFabPluginManager.h>
 #include <playfab/PlayFabSettings.h>
 #include <playfab/PlayFabError.h>
+#include <memory>
 
 #pragma warning (disable: 4100) // formal parameters are part of a public interface
 
@@ -41,7 +42,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/AcceptGroupApplication",
@@ -88,7 +89,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/AcceptGroupInvitation",
@@ -135,7 +136,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/AddMembers",
@@ -182,7 +183,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/ApplyToGroup",
@@ -229,7 +230,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/BlockEntity",
@@ -276,7 +277,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/ChangeMemberRole",
@@ -323,7 +324,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/CreateGroup",
@@ -370,7 +371,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/CreateRole",
@@ -417,7 +418,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/DeleteGroup",
@@ -464,7 +465,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/DeleteRole",
@@ -511,7 +512,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/GetGroup",
@@ -558,7 +559,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/InviteToGroup",
@@ -605,7 +606,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/IsMember",
@@ -652,7 +653,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/ListGroupApplications",
@@ -699,7 +700,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/ListGroupBlocks",
@@ -746,7 +747,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/ListGroupInvitations",
@@ -793,7 +794,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/ListGroupMembers",
@@ -840,7 +841,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/ListMembership",
@@ -887,7 +888,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/ListMembershipOpportunities",
@@ -934,7 +935,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/RemoveGroupApplication",
@@ -981,7 +982,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/RemoveGroupInvitation",
@@ -1028,7 +1029,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/RemoveMembers",
@@ -1075,7 +1076,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/UnblockEntity",
@@ -1122,7 +1123,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/UpdateGroup",
@@ -1169,7 +1170,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", PlayFabSettings::entityToken);
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Group/UpdateRole",

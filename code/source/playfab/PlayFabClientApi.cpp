@@ -6,6 +6,7 @@
 #include <playfab/PlayFabPluginManager.h>
 #include <playfab/PlayFabSettings.h>
 #include <playfab/PlayFabError.h>
+#include <memory>
 
 #pragma warning (disable: 4100) // formal parameters are part of a public interface
 
@@ -41,7 +42,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/AcceptTrade",
@@ -88,7 +89,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/AddFriend",
@@ -135,7 +136,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/AddGenericID",
@@ -182,7 +183,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/AddOrUpdateContactEmail",
@@ -229,7 +230,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/AddSharedGroupMembers",
@@ -276,7 +277,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/AddUsernamePassword",
@@ -323,7 +324,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/AddUserVirtualCurrency",
@@ -370,7 +371,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/AndroidDevicePushNotificationRegistration",
@@ -417,7 +418,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/AttributeInstall",
@@ -465,7 +466,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/CancelTrade",
@@ -512,7 +513,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/ConfirmPurchase",
@@ -559,7 +560,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/ConsumeItem",
@@ -606,7 +607,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/ConsumePSNEntitlements",
@@ -653,7 +654,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/ConsumeXboxEntitlements",
@@ -700,7 +701,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/CreateSharedGroup",
@@ -747,7 +748,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/ExecuteCloudScript",
@@ -794,7 +795,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetAccountInfo",
@@ -841,7 +842,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetAllUsersCharacters",
@@ -888,7 +889,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetCatalogItems",
@@ -935,7 +936,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetCharacterData",
@@ -982,7 +983,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetCharacterInventory",
@@ -1029,7 +1030,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetCharacterLeaderboard",
@@ -1076,7 +1077,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetCharacterReadOnlyData",
@@ -1123,7 +1124,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetCharacterStatistics",
@@ -1170,7 +1171,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetContentDownloadUrl",
@@ -1217,7 +1218,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetCurrentGames",
@@ -1264,7 +1265,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetFriendLeaderboard",
@@ -1311,7 +1312,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetFriendLeaderboardAroundPlayer",
@@ -1358,7 +1359,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetFriendsList",
@@ -1405,7 +1406,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetGameServerRegions",
@@ -1452,7 +1453,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetLeaderboard",
@@ -1499,7 +1500,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetLeaderboardAroundCharacter",
@@ -1546,7 +1547,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetLeaderboardAroundPlayer",
@@ -1593,7 +1594,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetLeaderboardForUserCharacters",
@@ -1640,7 +1641,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPaymentToken",
@@ -1687,7 +1688,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPhotonAuthenticationToken",
@@ -1734,7 +1735,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayerCombinedInfo",
@@ -1781,7 +1782,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayerProfile",
@@ -1828,7 +1829,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayerSegments",
@@ -1875,7 +1876,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayerStatistics",
@@ -1922,7 +1923,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayerStatisticVersions",
@@ -1969,7 +1970,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayerTags",
@@ -2016,7 +2017,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayerTrades",
@@ -2063,7 +2064,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayFabIDsFromFacebookIDs",
@@ -2110,7 +2111,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayFabIDsFromFacebookInstantGamesIds",
@@ -2157,7 +2158,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayFabIDsFromGameCenterIDs",
@@ -2204,7 +2205,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayFabIDsFromGenericIDs",
@@ -2251,7 +2252,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayFabIDsFromGoogleIDs",
@@ -2298,7 +2299,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayFabIDsFromKongregateIDs",
@@ -2345,7 +2346,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayFabIDsFromNintendoSwitchDeviceIds",
@@ -2392,7 +2393,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayFabIDsFromPSNAccountIDs",
@@ -2439,7 +2440,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayFabIDsFromSteamIDs",
@@ -2486,7 +2487,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayFabIDsFromTwitchIDs",
@@ -2533,7 +2534,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPlayFabIDsFromXboxLiveIDs",
@@ -2580,7 +2581,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPublisherData",
@@ -2627,7 +2628,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetPurchase",
@@ -2674,7 +2675,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetSharedGroupData",
@@ -2721,7 +2722,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetStoreItems",
@@ -2768,7 +2769,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetTime",
@@ -2815,7 +2816,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetTitleData",
@@ -2862,7 +2863,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetTitleNews",
@@ -2956,7 +2957,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetTradeStatus",
@@ -3003,7 +3004,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetUserData",
@@ -3050,7 +3051,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetUserInventory",
@@ -3097,7 +3098,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetUserPublisherData",
@@ -3144,7 +3145,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetUserPublisherReadOnlyData",
@@ -3191,7 +3192,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GetUserReadOnlyData",
@@ -3285,7 +3286,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/GrantCharacterToUser",
@@ -3332,7 +3333,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkAndroidDeviceID",
@@ -3379,7 +3380,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkCustomID",
@@ -3426,7 +3427,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkFacebookAccount",
@@ -3473,7 +3474,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkFacebookInstantGamesId",
@@ -3520,7 +3521,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkGameCenterAccount",
@@ -3567,7 +3568,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkGoogleAccount",
@@ -3614,7 +3615,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkIOSDeviceID",
@@ -3661,7 +3662,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkKongregate",
@@ -3708,7 +3709,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkNintendoSwitchDeviceId",
@@ -3755,7 +3756,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkOpenIdConnect",
@@ -3802,7 +3803,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkPSNAccount",
@@ -3849,7 +3850,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkSteamAccount",
@@ -3896,7 +3897,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkTwitch",
@@ -3943,7 +3944,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkWindowsHello",
@@ -3990,7 +3991,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/LinkXboxAccount",
@@ -4065,8 +4066,13 @@ namespace PlayFab
         {
             if (outResult.SessionTicket.length() > 0)
             {
+                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
                 PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                if (outResult.EntityToken.notNull()) {
+                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                }
                 MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
             }
 
@@ -4122,8 +4128,13 @@ namespace PlayFab
         {
             if (outResult.SessionTicket.length() > 0)
             {
+                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
                 PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                if (outResult.EntityToken.notNull()) {
+                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                }
                 MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
             }
 
@@ -4179,8 +4190,13 @@ namespace PlayFab
         {
             if (outResult.SessionTicket.length() > 0)
             {
+                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
                 PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                if (outResult.EntityToken.notNull()) {
+                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                }
                 MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
             }
 
@@ -4236,8 +4252,13 @@ namespace PlayFab
         {
             if (outResult.SessionTicket.length() > 0)
             {
+                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
                 PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                if (outResult.EntityToken.notNull()) {
+                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                }
                 MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
             }
 
@@ -4293,8 +4314,13 @@ namespace PlayFab
         {
             if (outResult.SessionTicket.length() > 0)
             {
+                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
                 PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                if (outResult.EntityToken.notNull()) {
+                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                }
                 MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
             }
 
@@ -4350,8 +4376,13 @@ namespace PlayFab
         {
             if (outResult.SessionTicket.length() > 0)
             {
+                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
                 PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                if (outResult.EntityToken.notNull()) {
+                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                }
                 MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
             }
 
@@ -4407,8 +4438,13 @@ namespace PlayFab
         {
             if (outResult.SessionTicket.length() > 0)
             {
+                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
                 PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                if (outResult.EntityToken.notNull()) {
+                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                }
                 MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
             }
 
@@ -4464,8 +4500,13 @@ namespace PlayFab
         {
             if (outResult.SessionTicket.length() > 0)
             {
+                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
                 PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                if (outResult.EntityToken.notNull()) {
+                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                }
                 MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
             }
 
@@ -4521,8 +4562,13 @@ namespace PlayFab
         {
             if (outResult.SessionTicket.length() > 0)
             {
+                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
                 PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                if (outResult.EntityToken.notNull()) {
+                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                }
                 MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
             }
 
@@ -4578,8 +4624,13 @@ namespace PlayFab
         {
             if (outResult.SessionTicket.length() > 0)
             {
+                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
                 PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                if (outResult.EntityToken.notNull()) {
+                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                }
                 MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
             }
 
@@ -4635,8 +4686,13 @@ namespace PlayFab
         {
             if (outResult.SessionTicket.length() > 0)
             {
+                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
                 PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                if (outResult.EntityToken.notNull()) {
+                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                }
                 MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
             }
 
@@ -4692,8 +4748,13 @@ namespace PlayFab
         {
             if (outResult.SessionTicket.length() > 0)
             {
+                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
                 PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                if (outResult.EntityToken.notNull()) {
+                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                }
                 MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
             }
 
@@ -4749,8 +4810,13 @@ namespace PlayFab
         {
             if (outResult.SessionTicket.length() > 0)
             {
+                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
                 PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                if (outResult.EntityToken.notNull()) {
+                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                }
                 MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
             }
 
@@ -4806,8 +4872,13 @@ namespace PlayFab
         {
             if (outResult.SessionTicket.length() > 0)
             {
+                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
                 PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                if (outResult.EntityToken.notNull()) {
+                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                }
                 MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
             }
 
@@ -4863,8 +4934,13 @@ namespace PlayFab
         {
             if (outResult.SessionTicket.length() > 0)
             {
+                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
                 PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                if (outResult.EntityToken.notNull()) {
+                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                }
                 MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
             }
 
@@ -4920,8 +4996,13 @@ namespace PlayFab
         {
             if (outResult.SessionTicket.length() > 0)
             {
+                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
                 PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                if (outResult.EntityToken.notNull()) {
+                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                }
                 MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
             }
 
@@ -4977,8 +5058,13 @@ namespace PlayFab
         {
             if (outResult.SessionTicket.length() > 0)
             {
+                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
                 PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                if (outResult.EntityToken.notNull()) {
+                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                }
                 MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
             }
 
@@ -5006,7 +5092,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/Matchmake",
@@ -5053,7 +5139,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/OpenTrade",
@@ -5100,7 +5186,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/PayForPurchase",
@@ -5147,7 +5233,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/PurchaseItem",
@@ -5194,7 +5280,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/RedeemCoupon",
@@ -5241,7 +5327,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/RefreshPSNAuthToken",
@@ -5288,7 +5374,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/RegisterForIOSPushNotification",
@@ -5419,8 +5505,13 @@ namespace PlayFab
         {
             if (outResult.SessionTicket.length() > 0)
             {
+                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
                 PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                if (outResult.EntityToken.notNull()) {
+                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                }
                 MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
             }
 
@@ -5448,7 +5539,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/RemoveContactEmail",
@@ -5495,7 +5586,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/RemoveFriend",
@@ -5542,7 +5633,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/RemoveGenericID",
@@ -5589,7 +5680,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/RemoveSharedGroupMembers",
@@ -5636,7 +5727,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/ReportDeviceInfo",
@@ -5683,7 +5774,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/ReportPlayer",
@@ -5730,7 +5821,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/RestoreIOSPurchases",
@@ -5824,7 +5915,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/SetFriendTags",
@@ -5871,7 +5962,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/SetPlayerSecret",
@@ -5918,7 +6009,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/StartGame",
@@ -5965,7 +6056,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/StartPurchase",
@@ -6012,7 +6103,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/SubtractUserVirtualCurrency",
@@ -6059,7 +6150,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkAndroidDeviceID",
@@ -6106,7 +6197,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkCustomID",
@@ -6153,7 +6244,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkFacebookAccount",
@@ -6200,7 +6291,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkFacebookInstantGamesId",
@@ -6247,7 +6338,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkGameCenterAccount",
@@ -6294,7 +6385,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkGoogleAccount",
@@ -6341,7 +6432,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkIOSDeviceID",
@@ -6388,7 +6479,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkKongregate",
@@ -6435,7 +6526,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkNintendoSwitchDeviceId",
@@ -6482,7 +6573,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkOpenIdConnect",
@@ -6529,7 +6620,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkPSNAccount",
@@ -6576,7 +6667,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkSteamAccount",
@@ -6623,7 +6714,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkTwitch",
@@ -6670,7 +6761,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkWindowsHello",
@@ -6717,7 +6808,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlinkXboxAccount",
@@ -6764,7 +6855,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlockContainerInstance",
@@ -6811,7 +6902,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UnlockContainerItem",
@@ -6858,7 +6949,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UpdateAvatarUrl",
@@ -6905,7 +6996,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UpdateCharacterData",
@@ -6952,7 +7043,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UpdateCharacterStatistics",
@@ -6999,7 +7090,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UpdatePlayerStatistics",
@@ -7046,7 +7137,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UpdateSharedGroupData",
@@ -7093,7 +7184,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UpdateUserData",
@@ -7140,7 +7231,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UpdateUserPublisherData",
@@ -7187,7 +7278,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/UpdateUserTitleDisplayName",
@@ -7234,7 +7325,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/ValidateAmazonIAPReceipt",
@@ -7281,7 +7372,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/ValidateGooglePlayPurchase",
@@ -7328,7 +7419,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/ValidateIOSReceipt",
@@ -7375,7 +7466,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/ValidateWindowsStoreReceipt",
@@ -7422,7 +7513,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/WriteCharacterEvent",
@@ -7469,7 +7560,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/WritePlayerEvent",
@@ -7516,7 +7607,7 @@ namespace PlayFab
         std::string jsonAsString = writer.write(requestJson);
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", PlayFabSettings::clientSessionTicket);
+        headers.emplace("X-Authorization", request.authenticationContext == nullptr ? PlayFabSettings::clientSessionTicket : request.authenticationContext->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Client/WriteTitleEvent",

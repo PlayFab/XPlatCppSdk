@@ -10729,7 +10729,7 @@ namespace PlayFab
             }
         };
 
-        struct LoginResult : public PlayFabResultCommon
+        struct LoginResult : public PlayFabLoginResultCommon
         {
             Boxed<EntityTokenResponse> EntityToken;
             Boxed<GetPlayerCombinedInfoResultPayload> InfoResultPayload;
@@ -10740,7 +10740,7 @@ namespace PlayFab
             Boxed<UserSettings> SettingsForUser;
 
             LoginResult() :
-                PlayFabResultCommon(),
+                PlayFabLoginResultCommon(),
                 EntityToken(),
                 InfoResultPayload(),
                 LastLoginTime(),
@@ -10751,7 +10751,7 @@ namespace PlayFab
             {}
 
             LoginResult(const LoginResult& src) :
-                PlayFabResultCommon(),
+                PlayFabLoginResultCommon(),
                 EntityToken(src.EntityToken),
                 InfoResultPayload(src.InfoResultPayload),
                 LastLoginTime(src.LastLoginTime),

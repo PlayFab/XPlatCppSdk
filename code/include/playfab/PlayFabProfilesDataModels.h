@@ -282,10 +282,10 @@ namespace PlayFab
 
         struct EntityProfileBody : public PlayFabBaseModel
         {
+            std::string DisplayName;
             Boxed<EntityKey> Entity;
             std::string EntityChain;
             std::map<std::string, EntityProfileFileMetadata> Files;
-            std::string FriendlyName;
             std::string Language;
             Boxed<EntityLineage> Lineage;
             std::map<std::string, EntityDataObject> Objects;
@@ -294,10 +294,10 @@ namespace PlayFab
 
             EntityProfileBody() :
                 PlayFabBaseModel(),
+                DisplayName(),
                 Entity(),
                 EntityChain(),
                 Files(),
-                FriendlyName(),
                 Language(),
                 Lineage(),
                 Objects(),
@@ -307,10 +307,10 @@ namespace PlayFab
 
             EntityProfileBody(const EntityProfileBody& src) :
                 PlayFabBaseModel(),
+                DisplayName(src.DisplayName),
                 Entity(src.Entity),
                 EntityChain(src.EntityChain),
                 Files(src.Files),
-                FriendlyName(src.FriendlyName),
                 Language(src.Language),
                 Lineage(src.Lineage),
                 Objects(src.Objects),
@@ -322,10 +322,10 @@ namespace PlayFab
 
             void FromJson(Json::Value& input) override
             {
+                FromJsonUtilS(input["DisplayName"], DisplayName);
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilS(input["EntityChain"], EntityChain);
                 FromJsonUtilO(input["Files"], Files);
-                FromJsonUtilS(input["FriendlyName"], FriendlyName);
                 FromJsonUtilS(input["Language"], Language);
                 FromJsonUtilO(input["Lineage"], Lineage);
                 FromJsonUtilO(input["Objects"], Objects);
@@ -336,10 +336,10 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_DisplayName; ToJsonUtilS(DisplayName, each_DisplayName); output["DisplayName"] = each_DisplayName;
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
                 Json::Value each_EntityChain; ToJsonUtilS(EntityChain, each_EntityChain); output["EntityChain"] = each_EntityChain;
                 Json::Value each_Files; ToJsonUtilO(Files, each_Files); output["Files"] = each_Files;
-                Json::Value each_FriendlyName; ToJsonUtilS(FriendlyName, each_FriendlyName); output["FriendlyName"] = each_FriendlyName;
                 Json::Value each_Language; ToJsonUtilS(Language, each_Language); output["Language"] = each_Language;
                 Json::Value each_Lineage; ToJsonUtilO(Lineage, each_Lineage); output["Lineage"] = each_Lineage;
                 Json::Value each_Objects; ToJsonUtilO(Objects, each_Objects); output["Objects"] = each_Objects;

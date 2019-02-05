@@ -6,6 +6,7 @@
 #include <playfab/PlayFabPluginManager.h>
 #include <playfab/PlayFabSettings.h>
 #include <playfab/PlayFabError.h>
+#include <memory>
 
 #pragma warning (disable: 4100) // formal parameters are part of a public interface
 
@@ -34,12 +35,27 @@ namespace PlayFab
     )
     {
         std::string authKey, authValue;
-        if (PlayFabSettings::entityToken.length() > 0) {
-            authKey = "X-EntityToken"; authValue = PlayFabSettings::entityToken;
-        } else if (PlayFabSettings::clientSessionTicket.length() > 0) {
-            authKey = "X-Authorization"; authValue = PlayFabSettings::clientSessionTicket;
-        } else if (PlayFabSettings::developerSecretKey.length() > 0) {
-            authKey = "X-SecretKey"; authValue = PlayFabSettings::developerSecretKey;
+        if (request.authenticationContext != nullptr) {
+            if (request.authenticationContext->entityToken.length() > 0) {
+                authKey = "X-EntityToken"; authValue = request.authenticationContext->entityToken;
+            }
+            else if (request.authenticationContext->clientSessionTicket.length() > 0) {
+                authKey = "X-Authorization"; authValue = request.authenticationContext->clientSessionTicket;
+            }
+            else if (request.authenticationContext->developerSecretKey.length() > 0) {
+                authKey = "X-SecretKey"; authValue = request.authenticationContext->developerSecretKey;
+            }
+        }
+        else {
+            if (PlayFabSettings::entityToken.length() > 0) {
+                authKey = "X-EntityToken"; authValue = PlayFabSettings::entityToken;
+            }
+            else if (PlayFabSettings::clientSessionTicket.length() > 0) {
+                authKey = "X-Authorization"; authValue = PlayFabSettings::clientSessionTicket;
+            }
+            else if (PlayFabSettings::developerSecretKey.length() > 0) {
+                authKey = "X-SecretKey"; authValue = PlayFabSettings::developerSecretKey;
+            }
         }
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);

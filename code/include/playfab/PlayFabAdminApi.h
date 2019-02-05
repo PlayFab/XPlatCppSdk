@@ -19,6 +19,7 @@ namespace PlayFab
 
         // ------------ Generated API calls
         static void AbortTaskInstance(AdminModels::AbortTaskInstanceRequest& request, ProcessApiCallback<AdminModels::EmptyResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void AddLocalizedNews(AdminModels::AddLocalizedNewsRequest& request, ProcessApiCallback<AdminModels::AddLocalizedNewsResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void AddNews(AdminModels::AddNewsRequest& request, ProcessApiCallback<AdminModels::AddNewsResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void AddPlayerTag(AdminModels::AddPlayerTagRequest& request, ProcessApiCallback<AdminModels::AddPlayerTagResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void AddServerBuild(AdminModels::AddServerBuildRequest& request, ProcessApiCallback<AdminModels::AddServerBuildResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -130,6 +131,7 @@ namespace PlayFab
 
         // ------------ Generated result handlers
         static void OnAbortTaskInstanceResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
+        static void OnAddLocalizedNewsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
         static void OnAddNewsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
         static void OnAddPlayerTagResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
         static void OnAddServerBuildResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
