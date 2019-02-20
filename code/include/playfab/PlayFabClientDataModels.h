@@ -9982,17 +9982,29 @@ namespace PlayFab
         {
             Boxed<bool> ForceLink;
             std::string GameCenterId;
+            std::string PublicKeyUrl;
+            std::string Salt;
+            std::string Signature;
+            std::string Timestamp;
 
             LinkGameCenterAccountRequest() :
                 PlayFabRequestCommon(),
                 ForceLink(),
-                GameCenterId()
+                GameCenterId(),
+                PublicKeyUrl(),
+                Salt(),
+                Signature(),
+                Timestamp()
             {}
 
             LinkGameCenterAccountRequest(const LinkGameCenterAccountRequest& src) :
                 PlayFabRequestCommon(),
                 ForceLink(src.ForceLink),
-                GameCenterId(src.GameCenterId)
+                GameCenterId(src.GameCenterId),
+                PublicKeyUrl(src.PublicKeyUrl),
+                Salt(src.Salt),
+                Signature(src.Signature),
+                Timestamp(src.Timestamp)
             {}
 
             ~LinkGameCenterAccountRequest() = default;
@@ -10001,6 +10013,10 @@ namespace PlayFab
             {
                 FromJsonUtilP(input["ForceLink"], ForceLink);
                 FromJsonUtilS(input["GameCenterId"], GameCenterId);
+                FromJsonUtilS(input["PublicKeyUrl"], PublicKeyUrl);
+                FromJsonUtilS(input["Salt"], Salt);
+                FromJsonUtilS(input["Signature"], Signature);
+                FromJsonUtilS(input["Timestamp"], Timestamp);
             }
 
             Json::Value ToJson() const override
@@ -10008,6 +10024,10 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_ForceLink; ToJsonUtilP(ForceLink, each_ForceLink); output["ForceLink"] = each_ForceLink;
                 Json::Value each_GameCenterId; ToJsonUtilS(GameCenterId, each_GameCenterId); output["GameCenterId"] = each_GameCenterId;
+                Json::Value each_PublicKeyUrl; ToJsonUtilS(PublicKeyUrl, each_PublicKeyUrl); output["PublicKeyUrl"] = each_PublicKeyUrl;
+                Json::Value each_Salt; ToJsonUtilS(Salt, each_Salt); output["Salt"] = each_Salt;
+                Json::Value each_Signature; ToJsonUtilS(Signature, each_Signature); output["Signature"] = each_Signature;
+                Json::Value each_Timestamp; ToJsonUtilS(Timestamp, each_Timestamp); output["Timestamp"] = each_Timestamp;
                 return output;
             }
         };
@@ -11065,6 +11085,10 @@ namespace PlayFab
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
             std::string PlayerId;
             std::string PlayerSecret;
+            std::string PublicKeyUrl;
+            std::string Salt;
+            std::string Signature;
+            std::string Timestamp;
             std::string TitleId;
 
             LoginWithGameCenterRequest() :
@@ -11074,6 +11098,10 @@ namespace PlayFab
                 InfoRequestParameters(),
                 PlayerId(),
                 PlayerSecret(),
+                PublicKeyUrl(),
+                Salt(),
+                Signature(),
+                Timestamp(),
                 TitleId()
             {}
 
@@ -11084,6 +11112,10 @@ namespace PlayFab
                 InfoRequestParameters(src.InfoRequestParameters),
                 PlayerId(src.PlayerId),
                 PlayerSecret(src.PlayerSecret),
+                PublicKeyUrl(src.PublicKeyUrl),
+                Salt(src.Salt),
+                Signature(src.Signature),
+                Timestamp(src.Timestamp),
                 TitleId(src.TitleId)
             {}
 
@@ -11096,6 +11128,10 @@ namespace PlayFab
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
                 FromJsonUtilS(input["PlayerId"], PlayerId);
                 FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
+                FromJsonUtilS(input["PublicKeyUrl"], PublicKeyUrl);
+                FromJsonUtilS(input["Salt"], Salt);
+                FromJsonUtilS(input["Signature"], Signature);
+                FromJsonUtilS(input["Timestamp"], Timestamp);
                 FromJsonUtilS(input["TitleId"], TitleId);
             }
 
@@ -11107,6 +11143,10 @@ namespace PlayFab
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
                 Json::Value each_PlayerId; ToJsonUtilS(PlayerId, each_PlayerId); output["PlayerId"] = each_PlayerId;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
+                Json::Value each_PublicKeyUrl; ToJsonUtilS(PublicKeyUrl, each_PublicKeyUrl); output["PublicKeyUrl"] = each_PublicKeyUrl;
+                Json::Value each_Salt; ToJsonUtilS(Salt, each_Salt); output["Salt"] = each_Salt;
+                Json::Value each_Signature; ToJsonUtilS(Signature, each_Signature); output["Signature"] = each_Signature;
+                Json::Value each_Timestamp; ToJsonUtilS(Timestamp, each_Timestamp); output["Timestamp"] = each_Timestamp;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 return output;
             }
