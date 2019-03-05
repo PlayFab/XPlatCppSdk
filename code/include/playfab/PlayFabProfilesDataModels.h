@@ -282,6 +282,7 @@ namespace PlayFab
 
         struct EntityProfileBody : public PlayFabBaseModel
         {
+            time_t Created;
             std::string DisplayName;
             Boxed<EntityKey> Entity;
             std::string EntityChain;
@@ -294,6 +295,7 @@ namespace PlayFab
 
             EntityProfileBody() :
                 PlayFabBaseModel(),
+                Created(),
                 DisplayName(),
                 Entity(),
                 EntityChain(),
@@ -307,6 +309,7 @@ namespace PlayFab
 
             EntityProfileBody(const EntityProfileBody& src) :
                 PlayFabBaseModel(),
+                Created(src.Created),
                 DisplayName(src.DisplayName),
                 Entity(src.Entity),
                 EntityChain(src.EntityChain),
@@ -322,6 +325,7 @@ namespace PlayFab
 
             void FromJson(Json::Value& input) override
             {
+                FromJsonUtilT(input["Created"], Created);
                 FromJsonUtilS(input["DisplayName"], DisplayName);
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilS(input["EntityChain"], EntityChain);
@@ -336,6 +340,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_Created; ToJsonUtilT(Created, each_Created); output["Created"] = each_Created;
                 Json::Value each_DisplayName; ToJsonUtilS(DisplayName, each_DisplayName); output["DisplayName"] = each_DisplayName;
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
                 Json::Value each_EntityChain; ToJsonUtilS(EntityChain, each_EntityChain); output["EntityChain"] = each_EntityChain;

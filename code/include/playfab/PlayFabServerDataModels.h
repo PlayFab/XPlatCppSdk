@@ -1788,6 +1788,21 @@ namespace PlayFab
             GenericErrorCodesEmailRecipientBlacklisted,
             GenericErrorCodesInvalidGameCenterAuthRequest,
             GenericErrorCodesGameCenterAuthenticationFailed,
+            GenericErrorCodesCannotEnablePartiesForTitle,
+            GenericErrorCodesPartyError,
+            GenericErrorCodesPartyRequests,
+            GenericErrorCodesPartyNoContent,
+            GenericErrorCodesPartyBadRequest,
+            GenericErrorCodesPartyUnauthorized,
+            GenericErrorCodesPartyForbidden,
+            GenericErrorCodesPartyNotFound,
+            GenericErrorCodesPartyConflict,
+            GenericErrorCodesPartyInternalServerError,
+            GenericErrorCodesPartyUnavailable,
+            GenericErrorCodesPartyTooManyRequests,
+            GenericErrorCodesPushNotificationTemplateMissingName,
+            GenericErrorCodesCannotEnableMultiplayerServersForTitle,
+            GenericErrorCodesWriteAttemptedDuringExport,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingCreateTicketRequestMissing,
@@ -1820,12 +1835,10 @@ namespace PlayFab
             GenericErrorCodesMatchmakingClientTimeout,
             GenericErrorCodesMatchmakingQueueConfigInvalid,
             GenericErrorCodesMatchmakingMemberProfileInvalid,
-            GenericErrorCodesWriteAttemptedDuringExport,
             GenericErrorCodesNintendoSwitchDeviceIdNotLinked,
             GenericErrorCodesMatchmakingNotEnabled,
             GenericErrorCodesMatchmakingGetStatisticsIdentityInvalid,
             GenericErrorCodesMatchmakingBucketOwnerNotFound,
-            GenericErrorCodesCannotEnableMultiplayerServersForTitle,
             GenericErrorCodesMatchmakingCancelAllTicketsUnauthorized,
             GenericErrorCodesMatchmakingListTicketsUnauthorized,
             GenericErrorCodesMatchmakingPlayerAttributesTooLarge,
@@ -1839,18 +1852,8 @@ namespace PlayFab
             GenericErrorCodesMatchmakingLatencyMeasurementMissing,
             GenericErrorCodesMatchmakingStatisticsNotFound,
             GenericErrorCodesMatchmakingPlayerHasNotJoinedTicket,
-            GenericErrorCodesCannotEnablePartiesForTitle,
-            GenericErrorCodesPartyError,
-            GenericErrorCodesPartyRequests,
-            GenericErrorCodesPartyNoContent,
-            GenericErrorCodesPartyBadRequest,
-            GenericErrorCodesPartyUnauthorized,
-            GenericErrorCodesPartyForbidden,
-            GenericErrorCodesPartyNotFound,
-            GenericErrorCodesPartyConflict,
-            GenericErrorCodesPartyInternalServerError,
-            GenericErrorCodesPartyUnavailable,
-            GenericErrorCodesPartyTooManyRequests,
+            GenericErrorCodesMatchmakingRateLimitExceeded,
+            GenericErrorCodesMatchmakingTicketMembershipLimitExceeded,
             GenericErrorCodesTitleConfigNotFound,
             GenericErrorCodesTitleConfigUpdateConflict,
             GenericErrorCodesTitleConfigSerializationError,
@@ -2292,6 +2295,21 @@ namespace PlayFab
             if (input == GenericErrorCodesEmailRecipientBlacklisted) output = Json::Value("EmailRecipientBlacklisted");
             if (input == GenericErrorCodesInvalidGameCenterAuthRequest) output = Json::Value("InvalidGameCenterAuthRequest");
             if (input == GenericErrorCodesGameCenterAuthenticationFailed) output = Json::Value("GameCenterAuthenticationFailed");
+            if (input == GenericErrorCodesCannotEnablePartiesForTitle) output = Json::Value("CannotEnablePartiesForTitle");
+            if (input == GenericErrorCodesPartyError) output = Json::Value("PartyError");
+            if (input == GenericErrorCodesPartyRequests) output = Json::Value("PartyRequests");
+            if (input == GenericErrorCodesPartyNoContent) output = Json::Value("PartyNoContent");
+            if (input == GenericErrorCodesPartyBadRequest) output = Json::Value("PartyBadRequest");
+            if (input == GenericErrorCodesPartyUnauthorized) output = Json::Value("PartyUnauthorized");
+            if (input == GenericErrorCodesPartyForbidden) output = Json::Value("PartyForbidden");
+            if (input == GenericErrorCodesPartyNotFound) output = Json::Value("PartyNotFound");
+            if (input == GenericErrorCodesPartyConflict) output = Json::Value("PartyConflict");
+            if (input == GenericErrorCodesPartyInternalServerError) output = Json::Value("PartyInternalServerError");
+            if (input == GenericErrorCodesPartyUnavailable) output = Json::Value("PartyUnavailable");
+            if (input == GenericErrorCodesPartyTooManyRequests) output = Json::Value("PartyTooManyRequests");
+            if (input == GenericErrorCodesPushNotificationTemplateMissingName) output = Json::Value("PushNotificationTemplateMissingName");
+            if (input == GenericErrorCodesCannotEnableMultiplayerServersForTitle) output = Json::Value("CannotEnableMultiplayerServersForTitle");
+            if (input == GenericErrorCodesWriteAttemptedDuringExport) output = Json::Value("WriteAttemptedDuringExport");
             if (input == GenericErrorCodesMatchmakingEntityInvalid) output = Json::Value("MatchmakingEntityInvalid");
             if (input == GenericErrorCodesMatchmakingPlayerAttributesInvalid) output = Json::Value("MatchmakingPlayerAttributesInvalid");
             if (input == GenericErrorCodesMatchmakingCreateTicketRequestMissing) output = Json::Value("MatchmakingCreateTicketRequestMissing");
@@ -2324,12 +2342,10 @@ namespace PlayFab
             if (input == GenericErrorCodesMatchmakingClientTimeout) output = Json::Value("MatchmakingClientTimeout");
             if (input == GenericErrorCodesMatchmakingQueueConfigInvalid) output = Json::Value("MatchmakingQueueConfigInvalid");
             if (input == GenericErrorCodesMatchmakingMemberProfileInvalid) output = Json::Value("MatchmakingMemberProfileInvalid");
-            if (input == GenericErrorCodesWriteAttemptedDuringExport) output = Json::Value("WriteAttemptedDuringExport");
             if (input == GenericErrorCodesNintendoSwitchDeviceIdNotLinked) output = Json::Value("NintendoSwitchDeviceIdNotLinked");
             if (input == GenericErrorCodesMatchmakingNotEnabled) output = Json::Value("MatchmakingNotEnabled");
             if (input == GenericErrorCodesMatchmakingGetStatisticsIdentityInvalid) output = Json::Value("MatchmakingGetStatisticsIdentityInvalid");
             if (input == GenericErrorCodesMatchmakingBucketOwnerNotFound) output = Json::Value("MatchmakingBucketOwnerNotFound");
-            if (input == GenericErrorCodesCannotEnableMultiplayerServersForTitle) output = Json::Value("CannotEnableMultiplayerServersForTitle");
             if (input == GenericErrorCodesMatchmakingCancelAllTicketsUnauthorized) output = Json::Value("MatchmakingCancelAllTicketsUnauthorized");
             if (input == GenericErrorCodesMatchmakingListTicketsUnauthorized) output = Json::Value("MatchmakingListTicketsUnauthorized");
             if (input == GenericErrorCodesMatchmakingPlayerAttributesTooLarge) output = Json::Value("MatchmakingPlayerAttributesTooLarge");
@@ -2343,18 +2359,8 @@ namespace PlayFab
             if (input == GenericErrorCodesMatchmakingLatencyMeasurementMissing) output = Json::Value("MatchmakingLatencyMeasurementMissing");
             if (input == GenericErrorCodesMatchmakingStatisticsNotFound) output = Json::Value("MatchmakingStatisticsNotFound");
             if (input == GenericErrorCodesMatchmakingPlayerHasNotJoinedTicket) output = Json::Value("MatchmakingPlayerHasNotJoinedTicket");
-            if (input == GenericErrorCodesCannotEnablePartiesForTitle) output = Json::Value("CannotEnablePartiesForTitle");
-            if (input == GenericErrorCodesPartyError) output = Json::Value("PartyError");
-            if (input == GenericErrorCodesPartyRequests) output = Json::Value("PartyRequests");
-            if (input == GenericErrorCodesPartyNoContent) output = Json::Value("PartyNoContent");
-            if (input == GenericErrorCodesPartyBadRequest) output = Json::Value("PartyBadRequest");
-            if (input == GenericErrorCodesPartyUnauthorized) output = Json::Value("PartyUnauthorized");
-            if (input == GenericErrorCodesPartyForbidden) output = Json::Value("PartyForbidden");
-            if (input == GenericErrorCodesPartyNotFound) output = Json::Value("PartyNotFound");
-            if (input == GenericErrorCodesPartyConflict) output = Json::Value("PartyConflict");
-            if (input == GenericErrorCodesPartyInternalServerError) output = Json::Value("PartyInternalServerError");
-            if (input == GenericErrorCodesPartyUnavailable) output = Json::Value("PartyUnavailable");
-            if (input == GenericErrorCodesPartyTooManyRequests) output = Json::Value("PartyTooManyRequests");
+            if (input == GenericErrorCodesMatchmakingRateLimitExceeded) output = Json::Value("MatchmakingRateLimitExceeded");
+            if (input == GenericErrorCodesMatchmakingTicketMembershipLimitExceeded) output = Json::Value("MatchmakingTicketMembershipLimitExceeded");
             if (input == GenericErrorCodesTitleConfigNotFound) output = Json::Value("TitleConfigNotFound");
             if (input == GenericErrorCodesTitleConfigUpdateConflict) output = Json::Value("TitleConfigUpdateConflict");
             if (input == GenericErrorCodesTitleConfigSerializationError) output = Json::Value("TitleConfigSerializationError");
@@ -2797,6 +2803,21 @@ namespace PlayFab
             if (inputStr == "EmailRecipientBlacklisted") output = GenericErrorCodesEmailRecipientBlacklisted;
             if (inputStr == "InvalidGameCenterAuthRequest") output = GenericErrorCodesInvalidGameCenterAuthRequest;
             if (inputStr == "GameCenterAuthenticationFailed") output = GenericErrorCodesGameCenterAuthenticationFailed;
+            if (inputStr == "CannotEnablePartiesForTitle") output = GenericErrorCodesCannotEnablePartiesForTitle;
+            if (inputStr == "PartyError") output = GenericErrorCodesPartyError;
+            if (inputStr == "PartyRequests") output = GenericErrorCodesPartyRequests;
+            if (inputStr == "PartyNoContent") output = GenericErrorCodesPartyNoContent;
+            if (inputStr == "PartyBadRequest") output = GenericErrorCodesPartyBadRequest;
+            if (inputStr == "PartyUnauthorized") output = GenericErrorCodesPartyUnauthorized;
+            if (inputStr == "PartyForbidden") output = GenericErrorCodesPartyForbidden;
+            if (inputStr == "PartyNotFound") output = GenericErrorCodesPartyNotFound;
+            if (inputStr == "PartyConflict") output = GenericErrorCodesPartyConflict;
+            if (inputStr == "PartyInternalServerError") output = GenericErrorCodesPartyInternalServerError;
+            if (inputStr == "PartyUnavailable") output = GenericErrorCodesPartyUnavailable;
+            if (inputStr == "PartyTooManyRequests") output = GenericErrorCodesPartyTooManyRequests;
+            if (inputStr == "PushNotificationTemplateMissingName") output = GenericErrorCodesPushNotificationTemplateMissingName;
+            if (inputStr == "CannotEnableMultiplayerServersForTitle") output = GenericErrorCodesCannotEnableMultiplayerServersForTitle;
+            if (inputStr == "WriteAttemptedDuringExport") output = GenericErrorCodesWriteAttemptedDuringExport;
             if (inputStr == "MatchmakingEntityInvalid") output = GenericErrorCodesMatchmakingEntityInvalid;
             if (inputStr == "MatchmakingPlayerAttributesInvalid") output = GenericErrorCodesMatchmakingPlayerAttributesInvalid;
             if (inputStr == "MatchmakingCreateTicketRequestMissing") output = GenericErrorCodesMatchmakingCreateTicketRequestMissing;
@@ -2829,12 +2850,10 @@ namespace PlayFab
             if (inputStr == "MatchmakingClientTimeout") output = GenericErrorCodesMatchmakingClientTimeout;
             if (inputStr == "MatchmakingQueueConfigInvalid") output = GenericErrorCodesMatchmakingQueueConfigInvalid;
             if (inputStr == "MatchmakingMemberProfileInvalid") output = GenericErrorCodesMatchmakingMemberProfileInvalid;
-            if (inputStr == "WriteAttemptedDuringExport") output = GenericErrorCodesWriteAttemptedDuringExport;
             if (inputStr == "NintendoSwitchDeviceIdNotLinked") output = GenericErrorCodesNintendoSwitchDeviceIdNotLinked;
             if (inputStr == "MatchmakingNotEnabled") output = GenericErrorCodesMatchmakingNotEnabled;
             if (inputStr == "MatchmakingGetStatisticsIdentityInvalid") output = GenericErrorCodesMatchmakingGetStatisticsIdentityInvalid;
             if (inputStr == "MatchmakingBucketOwnerNotFound") output = GenericErrorCodesMatchmakingBucketOwnerNotFound;
-            if (inputStr == "CannotEnableMultiplayerServersForTitle") output = GenericErrorCodesCannotEnableMultiplayerServersForTitle;
             if (inputStr == "MatchmakingCancelAllTicketsUnauthorized") output = GenericErrorCodesMatchmakingCancelAllTicketsUnauthorized;
             if (inputStr == "MatchmakingListTicketsUnauthorized") output = GenericErrorCodesMatchmakingListTicketsUnauthorized;
             if (inputStr == "MatchmakingPlayerAttributesTooLarge") output = GenericErrorCodesMatchmakingPlayerAttributesTooLarge;
@@ -2848,18 +2867,8 @@ namespace PlayFab
             if (inputStr == "MatchmakingLatencyMeasurementMissing") output = GenericErrorCodesMatchmakingLatencyMeasurementMissing;
             if (inputStr == "MatchmakingStatisticsNotFound") output = GenericErrorCodesMatchmakingStatisticsNotFound;
             if (inputStr == "MatchmakingPlayerHasNotJoinedTicket") output = GenericErrorCodesMatchmakingPlayerHasNotJoinedTicket;
-            if (inputStr == "CannotEnablePartiesForTitle") output = GenericErrorCodesCannotEnablePartiesForTitle;
-            if (inputStr == "PartyError") output = GenericErrorCodesPartyError;
-            if (inputStr == "PartyRequests") output = GenericErrorCodesPartyRequests;
-            if (inputStr == "PartyNoContent") output = GenericErrorCodesPartyNoContent;
-            if (inputStr == "PartyBadRequest") output = GenericErrorCodesPartyBadRequest;
-            if (inputStr == "PartyUnauthorized") output = GenericErrorCodesPartyUnauthorized;
-            if (inputStr == "PartyForbidden") output = GenericErrorCodesPartyForbidden;
-            if (inputStr == "PartyNotFound") output = GenericErrorCodesPartyNotFound;
-            if (inputStr == "PartyConflict") output = GenericErrorCodesPartyConflict;
-            if (inputStr == "PartyInternalServerError") output = GenericErrorCodesPartyInternalServerError;
-            if (inputStr == "PartyUnavailable") output = GenericErrorCodesPartyUnavailable;
-            if (inputStr == "PartyTooManyRequests") output = GenericErrorCodesPartyTooManyRequests;
+            if (inputStr == "MatchmakingRateLimitExceeded") output = GenericErrorCodesMatchmakingRateLimitExceeded;
+            if (inputStr == "MatchmakingTicketMembershipLimitExceeded") output = GenericErrorCodesMatchmakingTicketMembershipLimitExceeded;
             if (inputStr == "TitleConfigNotFound") output = GenericErrorCodesTitleConfigNotFound;
             if (inputStr == "TitleConfigUpdateConflict") output = GenericErrorCodesTitleConfigUpdateConflict;
             if (inputStr == "TitleConfigSerializationError") output = GenericErrorCodesTitleConfigSerializationError;

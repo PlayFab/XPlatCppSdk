@@ -1832,6 +1832,21 @@ namespace PlayFab
             GenericErrorCodesEmailRecipientBlacklisted,
             GenericErrorCodesInvalidGameCenterAuthRequest,
             GenericErrorCodesGameCenterAuthenticationFailed,
+            GenericErrorCodesCannotEnablePartiesForTitle,
+            GenericErrorCodesPartyError,
+            GenericErrorCodesPartyRequests,
+            GenericErrorCodesPartyNoContent,
+            GenericErrorCodesPartyBadRequest,
+            GenericErrorCodesPartyUnauthorized,
+            GenericErrorCodesPartyForbidden,
+            GenericErrorCodesPartyNotFound,
+            GenericErrorCodesPartyConflict,
+            GenericErrorCodesPartyInternalServerError,
+            GenericErrorCodesPartyUnavailable,
+            GenericErrorCodesPartyTooManyRequests,
+            GenericErrorCodesPushNotificationTemplateMissingName,
+            GenericErrorCodesCannotEnableMultiplayerServersForTitle,
+            GenericErrorCodesWriteAttemptedDuringExport,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingCreateTicketRequestMissing,
@@ -1864,12 +1879,10 @@ namespace PlayFab
             GenericErrorCodesMatchmakingClientTimeout,
             GenericErrorCodesMatchmakingQueueConfigInvalid,
             GenericErrorCodesMatchmakingMemberProfileInvalid,
-            GenericErrorCodesWriteAttemptedDuringExport,
             GenericErrorCodesNintendoSwitchDeviceIdNotLinked,
             GenericErrorCodesMatchmakingNotEnabled,
             GenericErrorCodesMatchmakingGetStatisticsIdentityInvalid,
             GenericErrorCodesMatchmakingBucketOwnerNotFound,
-            GenericErrorCodesCannotEnableMultiplayerServersForTitle,
             GenericErrorCodesMatchmakingCancelAllTicketsUnauthorized,
             GenericErrorCodesMatchmakingListTicketsUnauthorized,
             GenericErrorCodesMatchmakingPlayerAttributesTooLarge,
@@ -1883,18 +1896,8 @@ namespace PlayFab
             GenericErrorCodesMatchmakingLatencyMeasurementMissing,
             GenericErrorCodesMatchmakingStatisticsNotFound,
             GenericErrorCodesMatchmakingPlayerHasNotJoinedTicket,
-            GenericErrorCodesCannotEnablePartiesForTitle,
-            GenericErrorCodesPartyError,
-            GenericErrorCodesPartyRequests,
-            GenericErrorCodesPartyNoContent,
-            GenericErrorCodesPartyBadRequest,
-            GenericErrorCodesPartyUnauthorized,
-            GenericErrorCodesPartyForbidden,
-            GenericErrorCodesPartyNotFound,
-            GenericErrorCodesPartyConflict,
-            GenericErrorCodesPartyInternalServerError,
-            GenericErrorCodesPartyUnavailable,
-            GenericErrorCodesPartyTooManyRequests,
+            GenericErrorCodesMatchmakingRateLimitExceeded,
+            GenericErrorCodesMatchmakingTicketMembershipLimitExceeded,
             GenericErrorCodesTitleConfigNotFound,
             GenericErrorCodesTitleConfigUpdateConflict,
             GenericErrorCodesTitleConfigSerializationError,
@@ -2336,6 +2339,21 @@ namespace PlayFab
             if (input == GenericErrorCodesEmailRecipientBlacklisted) output = Json::Value("EmailRecipientBlacklisted");
             if (input == GenericErrorCodesInvalidGameCenterAuthRequest) output = Json::Value("InvalidGameCenterAuthRequest");
             if (input == GenericErrorCodesGameCenterAuthenticationFailed) output = Json::Value("GameCenterAuthenticationFailed");
+            if (input == GenericErrorCodesCannotEnablePartiesForTitle) output = Json::Value("CannotEnablePartiesForTitle");
+            if (input == GenericErrorCodesPartyError) output = Json::Value("PartyError");
+            if (input == GenericErrorCodesPartyRequests) output = Json::Value("PartyRequests");
+            if (input == GenericErrorCodesPartyNoContent) output = Json::Value("PartyNoContent");
+            if (input == GenericErrorCodesPartyBadRequest) output = Json::Value("PartyBadRequest");
+            if (input == GenericErrorCodesPartyUnauthorized) output = Json::Value("PartyUnauthorized");
+            if (input == GenericErrorCodesPartyForbidden) output = Json::Value("PartyForbidden");
+            if (input == GenericErrorCodesPartyNotFound) output = Json::Value("PartyNotFound");
+            if (input == GenericErrorCodesPartyConflict) output = Json::Value("PartyConflict");
+            if (input == GenericErrorCodesPartyInternalServerError) output = Json::Value("PartyInternalServerError");
+            if (input == GenericErrorCodesPartyUnavailable) output = Json::Value("PartyUnavailable");
+            if (input == GenericErrorCodesPartyTooManyRequests) output = Json::Value("PartyTooManyRequests");
+            if (input == GenericErrorCodesPushNotificationTemplateMissingName) output = Json::Value("PushNotificationTemplateMissingName");
+            if (input == GenericErrorCodesCannotEnableMultiplayerServersForTitle) output = Json::Value("CannotEnableMultiplayerServersForTitle");
+            if (input == GenericErrorCodesWriteAttemptedDuringExport) output = Json::Value("WriteAttemptedDuringExport");
             if (input == GenericErrorCodesMatchmakingEntityInvalid) output = Json::Value("MatchmakingEntityInvalid");
             if (input == GenericErrorCodesMatchmakingPlayerAttributesInvalid) output = Json::Value("MatchmakingPlayerAttributesInvalid");
             if (input == GenericErrorCodesMatchmakingCreateTicketRequestMissing) output = Json::Value("MatchmakingCreateTicketRequestMissing");
@@ -2368,12 +2386,10 @@ namespace PlayFab
             if (input == GenericErrorCodesMatchmakingClientTimeout) output = Json::Value("MatchmakingClientTimeout");
             if (input == GenericErrorCodesMatchmakingQueueConfigInvalid) output = Json::Value("MatchmakingQueueConfigInvalid");
             if (input == GenericErrorCodesMatchmakingMemberProfileInvalid) output = Json::Value("MatchmakingMemberProfileInvalid");
-            if (input == GenericErrorCodesWriteAttemptedDuringExport) output = Json::Value("WriteAttemptedDuringExport");
             if (input == GenericErrorCodesNintendoSwitchDeviceIdNotLinked) output = Json::Value("NintendoSwitchDeviceIdNotLinked");
             if (input == GenericErrorCodesMatchmakingNotEnabled) output = Json::Value("MatchmakingNotEnabled");
             if (input == GenericErrorCodesMatchmakingGetStatisticsIdentityInvalid) output = Json::Value("MatchmakingGetStatisticsIdentityInvalid");
             if (input == GenericErrorCodesMatchmakingBucketOwnerNotFound) output = Json::Value("MatchmakingBucketOwnerNotFound");
-            if (input == GenericErrorCodesCannotEnableMultiplayerServersForTitle) output = Json::Value("CannotEnableMultiplayerServersForTitle");
             if (input == GenericErrorCodesMatchmakingCancelAllTicketsUnauthorized) output = Json::Value("MatchmakingCancelAllTicketsUnauthorized");
             if (input == GenericErrorCodesMatchmakingListTicketsUnauthorized) output = Json::Value("MatchmakingListTicketsUnauthorized");
             if (input == GenericErrorCodesMatchmakingPlayerAttributesTooLarge) output = Json::Value("MatchmakingPlayerAttributesTooLarge");
@@ -2387,18 +2403,8 @@ namespace PlayFab
             if (input == GenericErrorCodesMatchmakingLatencyMeasurementMissing) output = Json::Value("MatchmakingLatencyMeasurementMissing");
             if (input == GenericErrorCodesMatchmakingStatisticsNotFound) output = Json::Value("MatchmakingStatisticsNotFound");
             if (input == GenericErrorCodesMatchmakingPlayerHasNotJoinedTicket) output = Json::Value("MatchmakingPlayerHasNotJoinedTicket");
-            if (input == GenericErrorCodesCannotEnablePartiesForTitle) output = Json::Value("CannotEnablePartiesForTitle");
-            if (input == GenericErrorCodesPartyError) output = Json::Value("PartyError");
-            if (input == GenericErrorCodesPartyRequests) output = Json::Value("PartyRequests");
-            if (input == GenericErrorCodesPartyNoContent) output = Json::Value("PartyNoContent");
-            if (input == GenericErrorCodesPartyBadRequest) output = Json::Value("PartyBadRequest");
-            if (input == GenericErrorCodesPartyUnauthorized) output = Json::Value("PartyUnauthorized");
-            if (input == GenericErrorCodesPartyForbidden) output = Json::Value("PartyForbidden");
-            if (input == GenericErrorCodesPartyNotFound) output = Json::Value("PartyNotFound");
-            if (input == GenericErrorCodesPartyConflict) output = Json::Value("PartyConflict");
-            if (input == GenericErrorCodesPartyInternalServerError) output = Json::Value("PartyInternalServerError");
-            if (input == GenericErrorCodesPartyUnavailable) output = Json::Value("PartyUnavailable");
-            if (input == GenericErrorCodesPartyTooManyRequests) output = Json::Value("PartyTooManyRequests");
+            if (input == GenericErrorCodesMatchmakingRateLimitExceeded) output = Json::Value("MatchmakingRateLimitExceeded");
+            if (input == GenericErrorCodesMatchmakingTicketMembershipLimitExceeded) output = Json::Value("MatchmakingTicketMembershipLimitExceeded");
             if (input == GenericErrorCodesTitleConfigNotFound) output = Json::Value("TitleConfigNotFound");
             if (input == GenericErrorCodesTitleConfigUpdateConflict) output = Json::Value("TitleConfigUpdateConflict");
             if (input == GenericErrorCodesTitleConfigSerializationError) output = Json::Value("TitleConfigSerializationError");
@@ -2841,6 +2847,21 @@ namespace PlayFab
             if (inputStr == "EmailRecipientBlacklisted") output = GenericErrorCodesEmailRecipientBlacklisted;
             if (inputStr == "InvalidGameCenterAuthRequest") output = GenericErrorCodesInvalidGameCenterAuthRequest;
             if (inputStr == "GameCenterAuthenticationFailed") output = GenericErrorCodesGameCenterAuthenticationFailed;
+            if (inputStr == "CannotEnablePartiesForTitle") output = GenericErrorCodesCannotEnablePartiesForTitle;
+            if (inputStr == "PartyError") output = GenericErrorCodesPartyError;
+            if (inputStr == "PartyRequests") output = GenericErrorCodesPartyRequests;
+            if (inputStr == "PartyNoContent") output = GenericErrorCodesPartyNoContent;
+            if (inputStr == "PartyBadRequest") output = GenericErrorCodesPartyBadRequest;
+            if (inputStr == "PartyUnauthorized") output = GenericErrorCodesPartyUnauthorized;
+            if (inputStr == "PartyForbidden") output = GenericErrorCodesPartyForbidden;
+            if (inputStr == "PartyNotFound") output = GenericErrorCodesPartyNotFound;
+            if (inputStr == "PartyConflict") output = GenericErrorCodesPartyConflict;
+            if (inputStr == "PartyInternalServerError") output = GenericErrorCodesPartyInternalServerError;
+            if (inputStr == "PartyUnavailable") output = GenericErrorCodesPartyUnavailable;
+            if (inputStr == "PartyTooManyRequests") output = GenericErrorCodesPartyTooManyRequests;
+            if (inputStr == "PushNotificationTemplateMissingName") output = GenericErrorCodesPushNotificationTemplateMissingName;
+            if (inputStr == "CannotEnableMultiplayerServersForTitle") output = GenericErrorCodesCannotEnableMultiplayerServersForTitle;
+            if (inputStr == "WriteAttemptedDuringExport") output = GenericErrorCodesWriteAttemptedDuringExport;
             if (inputStr == "MatchmakingEntityInvalid") output = GenericErrorCodesMatchmakingEntityInvalid;
             if (inputStr == "MatchmakingPlayerAttributesInvalid") output = GenericErrorCodesMatchmakingPlayerAttributesInvalid;
             if (inputStr == "MatchmakingCreateTicketRequestMissing") output = GenericErrorCodesMatchmakingCreateTicketRequestMissing;
@@ -2873,12 +2894,10 @@ namespace PlayFab
             if (inputStr == "MatchmakingClientTimeout") output = GenericErrorCodesMatchmakingClientTimeout;
             if (inputStr == "MatchmakingQueueConfigInvalid") output = GenericErrorCodesMatchmakingQueueConfigInvalid;
             if (inputStr == "MatchmakingMemberProfileInvalid") output = GenericErrorCodesMatchmakingMemberProfileInvalid;
-            if (inputStr == "WriteAttemptedDuringExport") output = GenericErrorCodesWriteAttemptedDuringExport;
             if (inputStr == "NintendoSwitchDeviceIdNotLinked") output = GenericErrorCodesNintendoSwitchDeviceIdNotLinked;
             if (inputStr == "MatchmakingNotEnabled") output = GenericErrorCodesMatchmakingNotEnabled;
             if (inputStr == "MatchmakingGetStatisticsIdentityInvalid") output = GenericErrorCodesMatchmakingGetStatisticsIdentityInvalid;
             if (inputStr == "MatchmakingBucketOwnerNotFound") output = GenericErrorCodesMatchmakingBucketOwnerNotFound;
-            if (inputStr == "CannotEnableMultiplayerServersForTitle") output = GenericErrorCodesCannotEnableMultiplayerServersForTitle;
             if (inputStr == "MatchmakingCancelAllTicketsUnauthorized") output = GenericErrorCodesMatchmakingCancelAllTicketsUnauthorized;
             if (inputStr == "MatchmakingListTicketsUnauthorized") output = GenericErrorCodesMatchmakingListTicketsUnauthorized;
             if (inputStr == "MatchmakingPlayerAttributesTooLarge") output = GenericErrorCodesMatchmakingPlayerAttributesTooLarge;
@@ -2892,18 +2911,8 @@ namespace PlayFab
             if (inputStr == "MatchmakingLatencyMeasurementMissing") output = GenericErrorCodesMatchmakingLatencyMeasurementMissing;
             if (inputStr == "MatchmakingStatisticsNotFound") output = GenericErrorCodesMatchmakingStatisticsNotFound;
             if (inputStr == "MatchmakingPlayerHasNotJoinedTicket") output = GenericErrorCodesMatchmakingPlayerHasNotJoinedTicket;
-            if (inputStr == "CannotEnablePartiesForTitle") output = GenericErrorCodesCannotEnablePartiesForTitle;
-            if (inputStr == "PartyError") output = GenericErrorCodesPartyError;
-            if (inputStr == "PartyRequests") output = GenericErrorCodesPartyRequests;
-            if (inputStr == "PartyNoContent") output = GenericErrorCodesPartyNoContent;
-            if (inputStr == "PartyBadRequest") output = GenericErrorCodesPartyBadRequest;
-            if (inputStr == "PartyUnauthorized") output = GenericErrorCodesPartyUnauthorized;
-            if (inputStr == "PartyForbidden") output = GenericErrorCodesPartyForbidden;
-            if (inputStr == "PartyNotFound") output = GenericErrorCodesPartyNotFound;
-            if (inputStr == "PartyConflict") output = GenericErrorCodesPartyConflict;
-            if (inputStr == "PartyInternalServerError") output = GenericErrorCodesPartyInternalServerError;
-            if (inputStr == "PartyUnavailable") output = GenericErrorCodesPartyUnavailable;
-            if (inputStr == "PartyTooManyRequests") output = GenericErrorCodesPartyTooManyRequests;
+            if (inputStr == "MatchmakingRateLimitExceeded") output = GenericErrorCodesMatchmakingRateLimitExceeded;
+            if (inputStr == "MatchmakingTicketMembershipLimitExceeded") output = GenericErrorCodesMatchmakingTicketMembershipLimitExceeded;
             if (inputStr == "TitleConfigNotFound") output = GenericErrorCodesTitleConfigNotFound;
             if (inputStr == "TitleConfigUpdateConflict") output = GenericErrorCodesTitleConfigUpdateConflict;
             if (inputStr == "TitleConfigSerializationError") output = GenericErrorCodesTitleConfigSerializationError;
@@ -5245,6 +5254,99 @@ namespace PlayFab
             }
         };
 
+        struct OpenIdIssuerInformation : public PlayFabBaseModel
+        {
+            std::string AuthorizationUrl;
+            std::string Issuer;
+            Json::Value JsonWebKeySet;
+            std::string TokenUrl;
+
+            OpenIdIssuerInformation() :
+                PlayFabBaseModel(),
+                AuthorizationUrl(),
+                Issuer(),
+                JsonWebKeySet(),
+                TokenUrl()
+            {}
+
+            OpenIdIssuerInformation(const OpenIdIssuerInformation& src) :
+                PlayFabBaseModel(),
+                AuthorizationUrl(src.AuthorizationUrl),
+                Issuer(src.Issuer),
+                JsonWebKeySet(src.JsonWebKeySet),
+                TokenUrl(src.TokenUrl)
+            {}
+
+            ~OpenIdIssuerInformation() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["AuthorizationUrl"], AuthorizationUrl);
+                FromJsonUtilS(input["Issuer"], Issuer);
+                JsonWebKeySet = input["JsonWebKeySet"];
+                FromJsonUtilS(input["TokenUrl"], TokenUrl);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_AuthorizationUrl; ToJsonUtilS(AuthorizationUrl, each_AuthorizationUrl); output["AuthorizationUrl"] = each_AuthorizationUrl;
+                Json::Value each_Issuer; ToJsonUtilS(Issuer, each_Issuer); output["Issuer"] = each_Issuer;
+                output["JsonWebKeySet"] = JsonWebKeySet;
+                Json::Value each_TokenUrl; ToJsonUtilS(TokenUrl, each_TokenUrl); output["TokenUrl"] = each_TokenUrl;
+                return output;
+            }
+        };
+
+        struct CreateOpenIdConnectionRequest : public PlayFabRequestCommon
+        {
+            std::string ClientId;
+            std::string ClientSecret;
+            std::string ConnectionId;
+            std::string IssuerDiscoveryUrl;
+            Boxed<OpenIdIssuerInformation> IssuerInformation;
+
+            CreateOpenIdConnectionRequest() :
+                PlayFabRequestCommon(),
+                ClientId(),
+                ClientSecret(),
+                ConnectionId(),
+                IssuerDiscoveryUrl(),
+                IssuerInformation()
+            {}
+
+            CreateOpenIdConnectionRequest(const CreateOpenIdConnectionRequest& src) :
+                PlayFabRequestCommon(),
+                ClientId(src.ClientId),
+                ClientSecret(src.ClientSecret),
+                ConnectionId(src.ConnectionId),
+                IssuerDiscoveryUrl(src.IssuerDiscoveryUrl),
+                IssuerInformation(src.IssuerInformation)
+            {}
+
+            ~CreateOpenIdConnectionRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["ClientId"], ClientId);
+                FromJsonUtilS(input["ClientSecret"], ClientSecret);
+                FromJsonUtilS(input["ConnectionId"], ConnectionId);
+                FromJsonUtilS(input["IssuerDiscoveryUrl"], IssuerDiscoveryUrl);
+                FromJsonUtilO(input["IssuerInformation"], IssuerInformation);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ClientId; ToJsonUtilS(ClientId, each_ClientId); output["ClientId"] = each_ClientId;
+                Json::Value each_ClientSecret; ToJsonUtilS(ClientSecret, each_ClientSecret); output["ClientSecret"] = each_ClientSecret;
+                Json::Value each_ConnectionId; ToJsonUtilS(ConnectionId, each_ConnectionId); output["ConnectionId"] = each_ConnectionId;
+                Json::Value each_IssuerDiscoveryUrl; ToJsonUtilS(IssuerDiscoveryUrl, each_IssuerDiscoveryUrl); output["IssuerDiscoveryUrl"] = each_IssuerDiscoveryUrl;
+                Json::Value each_IssuerInformation; ToJsonUtilO(IssuerInformation, each_IssuerInformation); output["IssuerInformation"] = each_IssuerInformation;
+                return output;
+            }
+        };
+
         struct CreatePlayerSharedSecretRequest : public PlayFabRequestCommon
         {
             std::string FriendlyName;
@@ -5537,6 +5639,35 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_JobReceiptId; ToJsonUtilS(JobReceiptId, each_JobReceiptId); output["JobReceiptId"] = each_JobReceiptId;
                 Json::Value each_TitleIds; ToJsonUtilS(TitleIds, each_TitleIds); output["TitleIds"] = each_TitleIds;
+                return output;
+            }
+        };
+
+        struct DeleteOpenIdConnectionRequest : public PlayFabRequestCommon
+        {
+            std::string ConnectionId;
+
+            DeleteOpenIdConnectionRequest() :
+                PlayFabRequestCommon(),
+                ConnectionId()
+            {}
+
+            DeleteOpenIdConnectionRequest(const DeleteOpenIdConnectionRequest& src) :
+                PlayFabRequestCommon(),
+                ConnectionId(src.ConnectionId)
+            {}
+
+            ~DeleteOpenIdConnectionRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["ConnectionId"], ConnectionId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ConnectionId; ToJsonUtilS(ConnectionId, each_ConnectionId); output["ConnectionId"] = each_ConnectionId;
                 return output;
             }
         };
@@ -9976,6 +10107,108 @@ namespace PlayFab
             }
         };
 
+        struct ListOpenIdConnectionRequest : public PlayFabRequestCommon
+        {
+
+            ListOpenIdConnectionRequest() :
+                PlayFabRequestCommon()
+            {}
+
+            ListOpenIdConnectionRequest(const ListOpenIdConnectionRequest&) :
+                PlayFabRequestCommon()
+            {}
+
+            ~ListOpenIdConnectionRequest() = default;
+
+            void FromJson(Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
+        struct OpenIdConnection : public PlayFabBaseModel
+        {
+            std::string ClientId;
+            std::string ClientSecret;
+            std::string ConnectionId;
+            bool DiscoverConfiguration;
+            Boxed<OpenIdIssuerInformation> IssuerInformation;
+
+            OpenIdConnection() :
+                PlayFabBaseModel(),
+                ClientId(),
+                ClientSecret(),
+                ConnectionId(),
+                DiscoverConfiguration(),
+                IssuerInformation()
+            {}
+
+            OpenIdConnection(const OpenIdConnection& src) :
+                PlayFabBaseModel(),
+                ClientId(src.ClientId),
+                ClientSecret(src.ClientSecret),
+                ConnectionId(src.ConnectionId),
+                DiscoverConfiguration(src.DiscoverConfiguration),
+                IssuerInformation(src.IssuerInformation)
+            {}
+
+            ~OpenIdConnection() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["ClientId"], ClientId);
+                FromJsonUtilS(input["ClientSecret"], ClientSecret);
+                FromJsonUtilS(input["ConnectionId"], ConnectionId);
+                FromJsonUtilP(input["DiscoverConfiguration"], DiscoverConfiguration);
+                FromJsonUtilO(input["IssuerInformation"], IssuerInformation);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ClientId; ToJsonUtilS(ClientId, each_ClientId); output["ClientId"] = each_ClientId;
+                Json::Value each_ClientSecret; ToJsonUtilS(ClientSecret, each_ClientSecret); output["ClientSecret"] = each_ClientSecret;
+                Json::Value each_ConnectionId; ToJsonUtilS(ConnectionId, each_ConnectionId); output["ConnectionId"] = each_ConnectionId;
+                Json::Value each_DiscoverConfiguration; ToJsonUtilP(DiscoverConfiguration, each_DiscoverConfiguration); output["DiscoverConfiguration"] = each_DiscoverConfiguration;
+                Json::Value each_IssuerInformation; ToJsonUtilO(IssuerInformation, each_IssuerInformation); output["IssuerInformation"] = each_IssuerInformation;
+                return output;
+            }
+        };
+
+        struct ListOpenIdConnectionResponse : public PlayFabResultCommon
+        {
+            std::list<OpenIdConnection> Connections;
+
+            ListOpenIdConnectionResponse() :
+                PlayFabResultCommon(),
+                Connections()
+            {}
+
+            ListOpenIdConnectionResponse(const ListOpenIdConnectionResponse& src) :
+                PlayFabResultCommon(),
+                Connections(src.Connections)
+            {}
+
+            ~ListOpenIdConnectionResponse() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["Connections"], Connections);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Connections; ToJsonUtilO(Connections, each_Connections); output["Connections"] = each_Connections;
+                return output;
+            }
+        };
+
         struct ListVirtualCurrencyTypesRequest : public PlayFabRequestCommon
         {
 
@@ -12567,6 +12800,55 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_Revision; ToJsonUtilP(Revision, each_Revision); output["Revision"] = each_Revision;
                 Json::Value each_Version; ToJsonUtilP(Version, each_Version); output["Version"] = each_Version;
+                return output;
+            }
+        };
+
+        struct UpdateOpenIdConnectionRequest : public PlayFabRequestCommon
+        {
+            std::string ClientId;
+            std::string ClientSecret;
+            std::string ConnectionId;
+            std::string IssuerDiscoveryUrl;
+            Boxed<OpenIdIssuerInformation> IssuerInformation;
+
+            UpdateOpenIdConnectionRequest() :
+                PlayFabRequestCommon(),
+                ClientId(),
+                ClientSecret(),
+                ConnectionId(),
+                IssuerDiscoveryUrl(),
+                IssuerInformation()
+            {}
+
+            UpdateOpenIdConnectionRequest(const UpdateOpenIdConnectionRequest& src) :
+                PlayFabRequestCommon(),
+                ClientId(src.ClientId),
+                ClientSecret(src.ClientSecret),
+                ConnectionId(src.ConnectionId),
+                IssuerDiscoveryUrl(src.IssuerDiscoveryUrl),
+                IssuerInformation(src.IssuerInformation)
+            {}
+
+            ~UpdateOpenIdConnectionRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["ClientId"], ClientId);
+                FromJsonUtilS(input["ClientSecret"], ClientSecret);
+                FromJsonUtilS(input["ConnectionId"], ConnectionId);
+                FromJsonUtilS(input["IssuerDiscoveryUrl"], IssuerDiscoveryUrl);
+                FromJsonUtilO(input["IssuerInformation"], IssuerInformation);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ClientId; ToJsonUtilS(ClientId, each_ClientId); output["ClientId"] = each_ClientId;
+                Json::Value each_ClientSecret; ToJsonUtilS(ClientSecret, each_ClientSecret); output["ClientSecret"] = each_ClientSecret;
+                Json::Value each_ConnectionId; ToJsonUtilS(ConnectionId, each_ConnectionId); output["ConnectionId"] = each_ConnectionId;
+                Json::Value each_IssuerDiscoveryUrl; ToJsonUtilS(IssuerDiscoveryUrl, each_IssuerDiscoveryUrl); output["IssuerDiscoveryUrl"] = each_IssuerDiscoveryUrl;
+                Json::Value each_IssuerInformation; ToJsonUtilO(IssuerInformation, each_IssuerInformation); output["IssuerInformation"] = each_IssuerInformation;
                 return output;
             }
         };

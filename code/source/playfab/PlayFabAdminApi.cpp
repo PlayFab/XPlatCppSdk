@@ -544,6 +544,53 @@ namespace PlayFab
         }
     }
 
+    void PlayFabAdminAPI::CreateOpenIdConnection(
+        CreateOpenIdConnectionRequest& request,
+        ProcessApiCallback<EmptyResponse> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const auto requestJson = request.ToJson();
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Admin/CreateOpenIdConnection",
+            headers,
+            jsonAsString,
+            OnCreateOpenIdConnectionResult,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabAdminAPI::OnCreateOpenIdConnectionResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+
+        EmptyResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
     void PlayFabAdminAPI::CreatePlayerSharedSecret(
         CreatePlayerSharedSecretRequest& request,
         ProcessApiCallback<CreatePlayerSharedSecretResult> callback,
@@ -727,6 +774,53 @@ namespace PlayFab
             if (internalPtr != nullptr)
             {
                 const auto callback = (*static_cast<ProcessApiCallback<DeleteMasterPlayerAccountResult> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabAdminAPI::DeleteOpenIdConnection(
+        DeleteOpenIdConnectionRequest& request,
+        ProcessApiCallback<EmptyResponse> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const auto requestJson = request.ToJson();
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Admin/DeleteOpenIdConnection",
+            headers,
+            jsonAsString,
+            OnDeleteOpenIdConnectionResult,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabAdminAPI::OnDeleteOpenIdConnectionResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+
+        EmptyResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -2988,6 +3082,53 @@ namespace PlayFab
         }
     }
 
+    void PlayFabAdminAPI::ListOpenIdConnection(
+        ListOpenIdConnectionRequest& request,
+        ProcessApiCallback<ListOpenIdConnectionResponse> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const auto requestJson = request.ToJson();
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Admin/ListOpenIdConnection",
+            headers,
+            jsonAsString,
+            OnListOpenIdConnectionResult,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListOpenIdConnectionResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabAdminAPI::OnListOpenIdConnectionResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+
+        ListOpenIdConnectionResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<ListOpenIdConnectionResponse> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
     void PlayFabAdminAPI::ListServerBuilds(
         ListBuildsRequest& request,
         ProcessApiCallback<ListBuildsResult> callback,
@@ -4393,6 +4534,53 @@ namespace PlayFab
             if (internalPtr != nullptr)
             {
                 const auto callback = (*static_cast<ProcessApiCallback<UpdateCloudScriptResult> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabAdminAPI::UpdateOpenIdConnection(
+        UpdateOpenIdConnectionRequest& request,
+        ProcessApiCallback<EmptyResponse> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const auto requestJson = request.ToJson();
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Admin/UpdateOpenIdConnection",
+            headers,
+            jsonAsString,
+            OnUpdateOpenIdConnectionResult,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabAdminAPI::OnUpdateOpenIdConnectionResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+
+        EmptyResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
                 callback(outResult, container.GetCustomData());
             }
         }
