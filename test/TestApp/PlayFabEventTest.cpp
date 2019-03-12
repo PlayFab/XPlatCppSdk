@@ -27,7 +27,7 @@ namespace PlayFabUnit
         if (result.lastErrorCode == 0)
             testContext.Pass();
         else
-            testContext.Fail("Error Code: " + result.lastErrorCode);
+            testContext.Fail("Error Code:" + std::to_string(result.lastErrorCode));
     }
 
     /// EVENTS API

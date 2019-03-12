@@ -1759,8 +1759,7 @@ namespace PlayFab
             GenericErrorCodesEntityProfileConstraintValidationFailed,
             GenericErrorCodesTelemetryIngestionKeyPending,
             GenericErrorCodesTelemetryIngestionKeyNotFound,
-            GenericErrorCodesStatisticTagRequired,
-            GenericErrorCodesStatisticTagInvalid,
+            GenericErrorCodesStatisticChildNameInvalid,
             GenericErrorCodesDataIntegrityError,
             GenericErrorCodesVirtualCurrencyCannotBeSetToOlderVersion,
             GenericErrorCodesVirtualCurrencyMustBeWithinIntegerRange,
@@ -1803,57 +1802,25 @@ namespace PlayFab
             GenericErrorCodesPushNotificationTemplateMissingName,
             GenericErrorCodesCannotEnableMultiplayerServersForTitle,
             GenericErrorCodesWriteAttemptedDuringExport,
+            GenericErrorCodesMultiplayerServerTitleQuotaCoresExceeded,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
-            GenericErrorCodesMatchmakingCreateTicketRequestMissing,
-            GenericErrorCodesMatchmakingCreateTicketCreatorMissing,
-            GenericErrorCodesMatchmakingCreateTicketCreatorIdMissing,
-            GenericErrorCodesMatchmakingCreateTicketMemberListMissing,
-            GenericErrorCodesMatchmakingCreateTicketGiveUpAfterInvalid,
-            GenericErrorCodesMatchmakingTicketIdMissing,
-            GenericErrorCodesMatchmakingMatchIdMissing,
-            GenericErrorCodesMatchmakingMatchIdIdMissing,
-            GenericErrorCodesMatchmakingQueueNameMissing,
-            GenericErrorCodesMatchmakingTitleIdMissing,
-            GenericErrorCodesMatchmakingTicketIdIdMissing,
-            GenericErrorCodesMatchmakingPlayerIdMissing,
-            GenericErrorCodesMatchmakingJoinTicketPlayerMissing,
-            GenericErrorCodesMatchmakingQueueConfigNotFound,
+            GenericErrorCodesMatchmakingQueueNotFound,
             GenericErrorCodesMatchmakingMatchNotFound,
             GenericErrorCodesMatchmakingTicketNotFound,
-            GenericErrorCodesMatchmakingCreateTicketServerIdentityInvalid,
-            GenericErrorCodesMatchmakingCreateTicketClientIdentityInvalid,
-            GenericErrorCodesMatchmakingGetTicketPlayerMismatch,
-            GenericErrorCodesMatchmakingJoinTicketServerIdentityInvalid,
-            GenericErrorCodesMatchmakingJoinTicketPlayerIdentityMismatch,
-            GenericErrorCodesMatchmakingCancelTicketServerIdentityInvalid,
-            GenericErrorCodesMatchmakingCancelTicketPlayerIdentityMismatch,
-            GenericErrorCodesMatchmakingGetMatchIdentityMismatch,
-            GenericErrorCodesMatchmakingPlayerIdentityMismatch,
             GenericErrorCodesMatchmakingAlreadyJoinedTicket,
             GenericErrorCodesMatchmakingTicketAlreadyCompleted,
-            GenericErrorCodesMatchmakingClientTimeout,
             GenericErrorCodesMatchmakingQueueConfigInvalid,
             GenericErrorCodesMatchmakingMemberProfileInvalid,
             GenericErrorCodesNintendoSwitchDeviceIdNotLinked,
             GenericErrorCodesMatchmakingNotEnabled,
-            GenericErrorCodesMatchmakingGetStatisticsIdentityInvalid,
-            GenericErrorCodesMatchmakingBucketOwnerNotFound,
-            GenericErrorCodesMatchmakingCancelAllTicketsUnauthorized,
-            GenericErrorCodesMatchmakingListTicketsUnauthorized,
             GenericErrorCodesMatchmakingPlayerAttributesTooLarge,
             GenericErrorCodesMatchmakingNumberOfPlayersInTicketTooLarge,
-            GenericErrorCodesMatchmakingMatchTotalAttributeIsNegative,
-            GenericErrorCodesMatchmakingAttributeTypeInvalid,
-            GenericErrorCodesMatchmakingMatchTotalAttributeTooLarge,
-            GenericErrorCodesMatchmakingMatchTotalAttributeSumTooLarge,
-            GenericErrorCodesMatchmakingTicketUnmatchable,
-            GenericErrorCodesMatchmakingCommonRegionMissing,
-            GenericErrorCodesMatchmakingLatencyMeasurementMissing,
-            GenericErrorCodesMatchmakingStatisticsNotFound,
+            GenericErrorCodesMatchmakingAttributeInvalid,
             GenericErrorCodesMatchmakingPlayerHasNotJoinedTicket,
             GenericErrorCodesMatchmakingRateLimitExceeded,
             GenericErrorCodesMatchmakingTicketMembershipLimitExceeded,
+            GenericErrorCodesMatchmakingUnauthorized,
             GenericErrorCodesTitleConfigNotFound,
             GenericErrorCodesTitleConfigUpdateConflict,
             GenericErrorCodesTitleConfigSerializationError,
@@ -1870,7 +1837,14 @@ namespace PlayFab
             GenericErrorCodesCatalogConfigTooManyContentTypes,
             GenericErrorCodesCatalogConfigContentTypeTooLong,
             GenericErrorCodesCatalogConfigTooManyTags,
-            GenericErrorCodesCatalogConfigTagTooLong
+            GenericErrorCodesCatalogConfigTagTooLong,
+            GenericErrorCodesExportInvalidStatusUpdate,
+            GenericErrorCodesExportInvalidPrefix,
+            GenericErrorCodesExportBlobContainerDoesNotExist,
+            GenericErrorCodesExportEventNameNotFound,
+            GenericErrorCodesExportExportTitleIdNotFound,
+            GenericErrorCodesExportCouldNotUpdate,
+            GenericErrorCodesExportInvalidStorageType
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -2266,8 +2240,7 @@ namespace PlayFab
             if (input == GenericErrorCodesEntityProfileConstraintValidationFailed) output = Json::Value("EntityProfileConstraintValidationFailed");
             if (input == GenericErrorCodesTelemetryIngestionKeyPending) output = Json::Value("TelemetryIngestionKeyPending");
             if (input == GenericErrorCodesTelemetryIngestionKeyNotFound) output = Json::Value("TelemetryIngestionKeyNotFound");
-            if (input == GenericErrorCodesStatisticTagRequired) output = Json::Value("StatisticTagRequired");
-            if (input == GenericErrorCodesStatisticTagInvalid) output = Json::Value("StatisticTagInvalid");
+            if (input == GenericErrorCodesStatisticChildNameInvalid) output = Json::Value("StatisticChildNameInvalid");
             if (input == GenericErrorCodesDataIntegrityError) output = Json::Value("DataIntegrityError");
             if (input == GenericErrorCodesVirtualCurrencyCannotBeSetToOlderVersion) output = Json::Value("VirtualCurrencyCannotBeSetToOlderVersion");
             if (input == GenericErrorCodesVirtualCurrencyMustBeWithinIntegerRange) output = Json::Value("VirtualCurrencyMustBeWithinIntegerRange");
@@ -2310,57 +2283,25 @@ namespace PlayFab
             if (input == GenericErrorCodesPushNotificationTemplateMissingName) output = Json::Value("PushNotificationTemplateMissingName");
             if (input == GenericErrorCodesCannotEnableMultiplayerServersForTitle) output = Json::Value("CannotEnableMultiplayerServersForTitle");
             if (input == GenericErrorCodesWriteAttemptedDuringExport) output = Json::Value("WriteAttemptedDuringExport");
+            if (input == GenericErrorCodesMultiplayerServerTitleQuotaCoresExceeded) output = Json::Value("MultiplayerServerTitleQuotaCoresExceeded");
             if (input == GenericErrorCodesMatchmakingEntityInvalid) output = Json::Value("MatchmakingEntityInvalid");
             if (input == GenericErrorCodesMatchmakingPlayerAttributesInvalid) output = Json::Value("MatchmakingPlayerAttributesInvalid");
-            if (input == GenericErrorCodesMatchmakingCreateTicketRequestMissing) output = Json::Value("MatchmakingCreateTicketRequestMissing");
-            if (input == GenericErrorCodesMatchmakingCreateTicketCreatorMissing) output = Json::Value("MatchmakingCreateTicketCreatorMissing");
-            if (input == GenericErrorCodesMatchmakingCreateTicketCreatorIdMissing) output = Json::Value("MatchmakingCreateTicketCreatorIdMissing");
-            if (input == GenericErrorCodesMatchmakingCreateTicketMemberListMissing) output = Json::Value("MatchmakingCreateTicketMemberListMissing");
-            if (input == GenericErrorCodesMatchmakingCreateTicketGiveUpAfterInvalid) output = Json::Value("MatchmakingCreateTicketGiveUpAfterInvalid");
-            if (input == GenericErrorCodesMatchmakingTicketIdMissing) output = Json::Value("MatchmakingTicketIdMissing");
-            if (input == GenericErrorCodesMatchmakingMatchIdMissing) output = Json::Value("MatchmakingMatchIdMissing");
-            if (input == GenericErrorCodesMatchmakingMatchIdIdMissing) output = Json::Value("MatchmakingMatchIdIdMissing");
-            if (input == GenericErrorCodesMatchmakingQueueNameMissing) output = Json::Value("MatchmakingQueueNameMissing");
-            if (input == GenericErrorCodesMatchmakingTitleIdMissing) output = Json::Value("MatchmakingTitleIdMissing");
-            if (input == GenericErrorCodesMatchmakingTicketIdIdMissing) output = Json::Value("MatchmakingTicketIdIdMissing");
-            if (input == GenericErrorCodesMatchmakingPlayerIdMissing) output = Json::Value("MatchmakingPlayerIdMissing");
-            if (input == GenericErrorCodesMatchmakingJoinTicketPlayerMissing) output = Json::Value("MatchmakingJoinTicketPlayerMissing");
-            if (input == GenericErrorCodesMatchmakingQueueConfigNotFound) output = Json::Value("MatchmakingQueueConfigNotFound");
+            if (input == GenericErrorCodesMatchmakingQueueNotFound) output = Json::Value("MatchmakingQueueNotFound");
             if (input == GenericErrorCodesMatchmakingMatchNotFound) output = Json::Value("MatchmakingMatchNotFound");
             if (input == GenericErrorCodesMatchmakingTicketNotFound) output = Json::Value("MatchmakingTicketNotFound");
-            if (input == GenericErrorCodesMatchmakingCreateTicketServerIdentityInvalid) output = Json::Value("MatchmakingCreateTicketServerIdentityInvalid");
-            if (input == GenericErrorCodesMatchmakingCreateTicketClientIdentityInvalid) output = Json::Value("MatchmakingCreateTicketClientIdentityInvalid");
-            if (input == GenericErrorCodesMatchmakingGetTicketPlayerMismatch) output = Json::Value("MatchmakingGetTicketPlayerMismatch");
-            if (input == GenericErrorCodesMatchmakingJoinTicketServerIdentityInvalid) output = Json::Value("MatchmakingJoinTicketServerIdentityInvalid");
-            if (input == GenericErrorCodesMatchmakingJoinTicketPlayerIdentityMismatch) output = Json::Value("MatchmakingJoinTicketPlayerIdentityMismatch");
-            if (input == GenericErrorCodesMatchmakingCancelTicketServerIdentityInvalid) output = Json::Value("MatchmakingCancelTicketServerIdentityInvalid");
-            if (input == GenericErrorCodesMatchmakingCancelTicketPlayerIdentityMismatch) output = Json::Value("MatchmakingCancelTicketPlayerIdentityMismatch");
-            if (input == GenericErrorCodesMatchmakingGetMatchIdentityMismatch) output = Json::Value("MatchmakingGetMatchIdentityMismatch");
-            if (input == GenericErrorCodesMatchmakingPlayerIdentityMismatch) output = Json::Value("MatchmakingPlayerIdentityMismatch");
             if (input == GenericErrorCodesMatchmakingAlreadyJoinedTicket) output = Json::Value("MatchmakingAlreadyJoinedTicket");
             if (input == GenericErrorCodesMatchmakingTicketAlreadyCompleted) output = Json::Value("MatchmakingTicketAlreadyCompleted");
-            if (input == GenericErrorCodesMatchmakingClientTimeout) output = Json::Value("MatchmakingClientTimeout");
             if (input == GenericErrorCodesMatchmakingQueueConfigInvalid) output = Json::Value("MatchmakingQueueConfigInvalid");
             if (input == GenericErrorCodesMatchmakingMemberProfileInvalid) output = Json::Value("MatchmakingMemberProfileInvalid");
             if (input == GenericErrorCodesNintendoSwitchDeviceIdNotLinked) output = Json::Value("NintendoSwitchDeviceIdNotLinked");
             if (input == GenericErrorCodesMatchmakingNotEnabled) output = Json::Value("MatchmakingNotEnabled");
-            if (input == GenericErrorCodesMatchmakingGetStatisticsIdentityInvalid) output = Json::Value("MatchmakingGetStatisticsIdentityInvalid");
-            if (input == GenericErrorCodesMatchmakingBucketOwnerNotFound) output = Json::Value("MatchmakingBucketOwnerNotFound");
-            if (input == GenericErrorCodesMatchmakingCancelAllTicketsUnauthorized) output = Json::Value("MatchmakingCancelAllTicketsUnauthorized");
-            if (input == GenericErrorCodesMatchmakingListTicketsUnauthorized) output = Json::Value("MatchmakingListTicketsUnauthorized");
             if (input == GenericErrorCodesMatchmakingPlayerAttributesTooLarge) output = Json::Value("MatchmakingPlayerAttributesTooLarge");
             if (input == GenericErrorCodesMatchmakingNumberOfPlayersInTicketTooLarge) output = Json::Value("MatchmakingNumberOfPlayersInTicketTooLarge");
-            if (input == GenericErrorCodesMatchmakingMatchTotalAttributeIsNegative) output = Json::Value("MatchmakingMatchTotalAttributeIsNegative");
-            if (input == GenericErrorCodesMatchmakingAttributeTypeInvalid) output = Json::Value("MatchmakingAttributeTypeInvalid");
-            if (input == GenericErrorCodesMatchmakingMatchTotalAttributeTooLarge) output = Json::Value("MatchmakingMatchTotalAttributeTooLarge");
-            if (input == GenericErrorCodesMatchmakingMatchTotalAttributeSumTooLarge) output = Json::Value("MatchmakingMatchTotalAttributeSumTooLarge");
-            if (input == GenericErrorCodesMatchmakingTicketUnmatchable) output = Json::Value("MatchmakingTicketUnmatchable");
-            if (input == GenericErrorCodesMatchmakingCommonRegionMissing) output = Json::Value("MatchmakingCommonRegionMissing");
-            if (input == GenericErrorCodesMatchmakingLatencyMeasurementMissing) output = Json::Value("MatchmakingLatencyMeasurementMissing");
-            if (input == GenericErrorCodesMatchmakingStatisticsNotFound) output = Json::Value("MatchmakingStatisticsNotFound");
+            if (input == GenericErrorCodesMatchmakingAttributeInvalid) output = Json::Value("MatchmakingAttributeInvalid");
             if (input == GenericErrorCodesMatchmakingPlayerHasNotJoinedTicket) output = Json::Value("MatchmakingPlayerHasNotJoinedTicket");
             if (input == GenericErrorCodesMatchmakingRateLimitExceeded) output = Json::Value("MatchmakingRateLimitExceeded");
             if (input == GenericErrorCodesMatchmakingTicketMembershipLimitExceeded) output = Json::Value("MatchmakingTicketMembershipLimitExceeded");
+            if (input == GenericErrorCodesMatchmakingUnauthorized) output = Json::Value("MatchmakingUnauthorized");
             if (input == GenericErrorCodesTitleConfigNotFound) output = Json::Value("TitleConfigNotFound");
             if (input == GenericErrorCodesTitleConfigUpdateConflict) output = Json::Value("TitleConfigUpdateConflict");
             if (input == GenericErrorCodesTitleConfigSerializationError) output = Json::Value("TitleConfigSerializationError");
@@ -2378,6 +2319,13 @@ namespace PlayFab
             if (input == GenericErrorCodesCatalogConfigContentTypeTooLong) output = Json::Value("CatalogConfigContentTypeTooLong");
             if (input == GenericErrorCodesCatalogConfigTooManyTags) output = Json::Value("CatalogConfigTooManyTags");
             if (input == GenericErrorCodesCatalogConfigTagTooLong) output = Json::Value("CatalogConfigTagTooLong");
+            if (input == GenericErrorCodesExportInvalidStatusUpdate) output = Json::Value("ExportInvalidStatusUpdate");
+            if (input == GenericErrorCodesExportInvalidPrefix) output = Json::Value("ExportInvalidPrefix");
+            if (input == GenericErrorCodesExportBlobContainerDoesNotExist) output = Json::Value("ExportBlobContainerDoesNotExist");
+            if (input == GenericErrorCodesExportEventNameNotFound) output = Json::Value("ExportEventNameNotFound");
+            if (input == GenericErrorCodesExportExportTitleIdNotFound) output = Json::Value("ExportExportTitleIdNotFound");
+            if (input == GenericErrorCodesExportCouldNotUpdate) output = Json::Value("ExportCouldNotUpdate");
+            if (input == GenericErrorCodesExportInvalidStorageType) output = Json::Value("ExportInvalidStorageType");
         }
         inline void FromJsonEnum(const Json::Value& input, GenericErrorCodes& output)
         {
@@ -2774,8 +2722,7 @@ namespace PlayFab
             if (inputStr == "EntityProfileConstraintValidationFailed") output = GenericErrorCodesEntityProfileConstraintValidationFailed;
             if (inputStr == "TelemetryIngestionKeyPending") output = GenericErrorCodesTelemetryIngestionKeyPending;
             if (inputStr == "TelemetryIngestionKeyNotFound") output = GenericErrorCodesTelemetryIngestionKeyNotFound;
-            if (inputStr == "StatisticTagRequired") output = GenericErrorCodesStatisticTagRequired;
-            if (inputStr == "StatisticTagInvalid") output = GenericErrorCodesStatisticTagInvalid;
+            if (inputStr == "StatisticChildNameInvalid") output = GenericErrorCodesStatisticChildNameInvalid;
             if (inputStr == "DataIntegrityError") output = GenericErrorCodesDataIntegrityError;
             if (inputStr == "VirtualCurrencyCannotBeSetToOlderVersion") output = GenericErrorCodesVirtualCurrencyCannotBeSetToOlderVersion;
             if (inputStr == "VirtualCurrencyMustBeWithinIntegerRange") output = GenericErrorCodesVirtualCurrencyMustBeWithinIntegerRange;
@@ -2818,57 +2765,25 @@ namespace PlayFab
             if (inputStr == "PushNotificationTemplateMissingName") output = GenericErrorCodesPushNotificationTemplateMissingName;
             if (inputStr == "CannotEnableMultiplayerServersForTitle") output = GenericErrorCodesCannotEnableMultiplayerServersForTitle;
             if (inputStr == "WriteAttemptedDuringExport") output = GenericErrorCodesWriteAttemptedDuringExport;
+            if (inputStr == "MultiplayerServerTitleQuotaCoresExceeded") output = GenericErrorCodesMultiplayerServerTitleQuotaCoresExceeded;
             if (inputStr == "MatchmakingEntityInvalid") output = GenericErrorCodesMatchmakingEntityInvalid;
             if (inputStr == "MatchmakingPlayerAttributesInvalid") output = GenericErrorCodesMatchmakingPlayerAttributesInvalid;
-            if (inputStr == "MatchmakingCreateTicketRequestMissing") output = GenericErrorCodesMatchmakingCreateTicketRequestMissing;
-            if (inputStr == "MatchmakingCreateTicketCreatorMissing") output = GenericErrorCodesMatchmakingCreateTicketCreatorMissing;
-            if (inputStr == "MatchmakingCreateTicketCreatorIdMissing") output = GenericErrorCodesMatchmakingCreateTicketCreatorIdMissing;
-            if (inputStr == "MatchmakingCreateTicketMemberListMissing") output = GenericErrorCodesMatchmakingCreateTicketMemberListMissing;
-            if (inputStr == "MatchmakingCreateTicketGiveUpAfterInvalid") output = GenericErrorCodesMatchmakingCreateTicketGiveUpAfterInvalid;
-            if (inputStr == "MatchmakingTicketIdMissing") output = GenericErrorCodesMatchmakingTicketIdMissing;
-            if (inputStr == "MatchmakingMatchIdMissing") output = GenericErrorCodesMatchmakingMatchIdMissing;
-            if (inputStr == "MatchmakingMatchIdIdMissing") output = GenericErrorCodesMatchmakingMatchIdIdMissing;
-            if (inputStr == "MatchmakingQueueNameMissing") output = GenericErrorCodesMatchmakingQueueNameMissing;
-            if (inputStr == "MatchmakingTitleIdMissing") output = GenericErrorCodesMatchmakingTitleIdMissing;
-            if (inputStr == "MatchmakingTicketIdIdMissing") output = GenericErrorCodesMatchmakingTicketIdIdMissing;
-            if (inputStr == "MatchmakingPlayerIdMissing") output = GenericErrorCodesMatchmakingPlayerIdMissing;
-            if (inputStr == "MatchmakingJoinTicketPlayerMissing") output = GenericErrorCodesMatchmakingJoinTicketPlayerMissing;
-            if (inputStr == "MatchmakingQueueConfigNotFound") output = GenericErrorCodesMatchmakingQueueConfigNotFound;
+            if (inputStr == "MatchmakingQueueNotFound") output = GenericErrorCodesMatchmakingQueueNotFound;
             if (inputStr == "MatchmakingMatchNotFound") output = GenericErrorCodesMatchmakingMatchNotFound;
             if (inputStr == "MatchmakingTicketNotFound") output = GenericErrorCodesMatchmakingTicketNotFound;
-            if (inputStr == "MatchmakingCreateTicketServerIdentityInvalid") output = GenericErrorCodesMatchmakingCreateTicketServerIdentityInvalid;
-            if (inputStr == "MatchmakingCreateTicketClientIdentityInvalid") output = GenericErrorCodesMatchmakingCreateTicketClientIdentityInvalid;
-            if (inputStr == "MatchmakingGetTicketPlayerMismatch") output = GenericErrorCodesMatchmakingGetTicketPlayerMismatch;
-            if (inputStr == "MatchmakingJoinTicketServerIdentityInvalid") output = GenericErrorCodesMatchmakingJoinTicketServerIdentityInvalid;
-            if (inputStr == "MatchmakingJoinTicketPlayerIdentityMismatch") output = GenericErrorCodesMatchmakingJoinTicketPlayerIdentityMismatch;
-            if (inputStr == "MatchmakingCancelTicketServerIdentityInvalid") output = GenericErrorCodesMatchmakingCancelTicketServerIdentityInvalid;
-            if (inputStr == "MatchmakingCancelTicketPlayerIdentityMismatch") output = GenericErrorCodesMatchmakingCancelTicketPlayerIdentityMismatch;
-            if (inputStr == "MatchmakingGetMatchIdentityMismatch") output = GenericErrorCodesMatchmakingGetMatchIdentityMismatch;
-            if (inputStr == "MatchmakingPlayerIdentityMismatch") output = GenericErrorCodesMatchmakingPlayerIdentityMismatch;
             if (inputStr == "MatchmakingAlreadyJoinedTicket") output = GenericErrorCodesMatchmakingAlreadyJoinedTicket;
             if (inputStr == "MatchmakingTicketAlreadyCompleted") output = GenericErrorCodesMatchmakingTicketAlreadyCompleted;
-            if (inputStr == "MatchmakingClientTimeout") output = GenericErrorCodesMatchmakingClientTimeout;
             if (inputStr == "MatchmakingQueueConfigInvalid") output = GenericErrorCodesMatchmakingQueueConfigInvalid;
             if (inputStr == "MatchmakingMemberProfileInvalid") output = GenericErrorCodesMatchmakingMemberProfileInvalid;
             if (inputStr == "NintendoSwitchDeviceIdNotLinked") output = GenericErrorCodesNintendoSwitchDeviceIdNotLinked;
             if (inputStr == "MatchmakingNotEnabled") output = GenericErrorCodesMatchmakingNotEnabled;
-            if (inputStr == "MatchmakingGetStatisticsIdentityInvalid") output = GenericErrorCodesMatchmakingGetStatisticsIdentityInvalid;
-            if (inputStr == "MatchmakingBucketOwnerNotFound") output = GenericErrorCodesMatchmakingBucketOwnerNotFound;
-            if (inputStr == "MatchmakingCancelAllTicketsUnauthorized") output = GenericErrorCodesMatchmakingCancelAllTicketsUnauthorized;
-            if (inputStr == "MatchmakingListTicketsUnauthorized") output = GenericErrorCodesMatchmakingListTicketsUnauthorized;
             if (inputStr == "MatchmakingPlayerAttributesTooLarge") output = GenericErrorCodesMatchmakingPlayerAttributesTooLarge;
             if (inputStr == "MatchmakingNumberOfPlayersInTicketTooLarge") output = GenericErrorCodesMatchmakingNumberOfPlayersInTicketTooLarge;
-            if (inputStr == "MatchmakingMatchTotalAttributeIsNegative") output = GenericErrorCodesMatchmakingMatchTotalAttributeIsNegative;
-            if (inputStr == "MatchmakingAttributeTypeInvalid") output = GenericErrorCodesMatchmakingAttributeTypeInvalid;
-            if (inputStr == "MatchmakingMatchTotalAttributeTooLarge") output = GenericErrorCodesMatchmakingMatchTotalAttributeTooLarge;
-            if (inputStr == "MatchmakingMatchTotalAttributeSumTooLarge") output = GenericErrorCodesMatchmakingMatchTotalAttributeSumTooLarge;
-            if (inputStr == "MatchmakingTicketUnmatchable") output = GenericErrorCodesMatchmakingTicketUnmatchable;
-            if (inputStr == "MatchmakingCommonRegionMissing") output = GenericErrorCodesMatchmakingCommonRegionMissing;
-            if (inputStr == "MatchmakingLatencyMeasurementMissing") output = GenericErrorCodesMatchmakingLatencyMeasurementMissing;
-            if (inputStr == "MatchmakingStatisticsNotFound") output = GenericErrorCodesMatchmakingStatisticsNotFound;
+            if (inputStr == "MatchmakingAttributeInvalid") output = GenericErrorCodesMatchmakingAttributeInvalid;
             if (inputStr == "MatchmakingPlayerHasNotJoinedTicket") output = GenericErrorCodesMatchmakingPlayerHasNotJoinedTicket;
             if (inputStr == "MatchmakingRateLimitExceeded") output = GenericErrorCodesMatchmakingRateLimitExceeded;
             if (inputStr == "MatchmakingTicketMembershipLimitExceeded") output = GenericErrorCodesMatchmakingTicketMembershipLimitExceeded;
+            if (inputStr == "MatchmakingUnauthorized") output = GenericErrorCodesMatchmakingUnauthorized;
             if (inputStr == "TitleConfigNotFound") output = GenericErrorCodesTitleConfigNotFound;
             if (inputStr == "TitleConfigUpdateConflict") output = GenericErrorCodesTitleConfigUpdateConflict;
             if (inputStr == "TitleConfigSerializationError") output = GenericErrorCodesTitleConfigSerializationError;
@@ -2886,6 +2801,13 @@ namespace PlayFab
             if (inputStr == "CatalogConfigContentTypeTooLong") output = GenericErrorCodesCatalogConfigContentTypeTooLong;
             if (inputStr == "CatalogConfigTooManyTags") output = GenericErrorCodesCatalogConfigTooManyTags;
             if (inputStr == "CatalogConfigTagTooLong") output = GenericErrorCodesCatalogConfigTagTooLong;
+            if (inputStr == "ExportInvalidStatusUpdate") output = GenericErrorCodesExportInvalidStatusUpdate;
+            if (inputStr == "ExportInvalidPrefix") output = GenericErrorCodesExportInvalidPrefix;
+            if (inputStr == "ExportBlobContainerDoesNotExist") output = GenericErrorCodesExportBlobContainerDoesNotExist;
+            if (inputStr == "ExportEventNameNotFound") output = GenericErrorCodesExportEventNameNotFound;
+            if (inputStr == "ExportExportTitleIdNotFound") output = GenericErrorCodesExportExportTitleIdNotFound;
+            if (inputStr == "ExportCouldNotUpdate") output = GenericErrorCodesExportCouldNotUpdate;
+            if (inputStr == "ExportInvalidStorageType") output = GenericErrorCodesExportInvalidStorageType;
         }
 
         enum LoginIdentityProvider

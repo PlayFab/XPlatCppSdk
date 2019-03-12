@@ -153,6 +153,28 @@ namespace PlayFab
             if (inputStr == "Standard_A4") output = AzureVmSizeStandard_A4;
         }
 
+        enum CancellationReason
+        {
+            CancellationReasonRequested,
+            CancellationReasonInternal,
+            CancellationReasonTimeout
+        };
+
+        inline void ToJsonEnum(const CancellationReason input, Json::Value& output)
+        {
+            if (input == CancellationReasonRequested) output = Json::Value("Requested");
+            if (input == CancellationReasonInternal) output = Json::Value("Internal");
+            if (input == CancellationReasonTimeout) output = Json::Value("Timeout");
+        }
+        inline void FromJsonEnum(const Json::Value& input, CancellationReason& output)
+        {
+            if (!input.isString()) return;
+            const std::string& inputStr = input.asString();
+            if (inputStr == "Requested") output = CancellationReasonRequested;
+            if (inputStr == "Internal") output = CancellationReasonInternal;
+            if (inputStr == "Timeout") output = CancellationReasonTimeout;
+        }
+
         enum ContainerFlavor
         {
             ContainerFlavorManagedWindowsServerCore,
@@ -192,6 +214,46 @@ namespace PlayFab
             const std::string& inputStr = input.asString();
             if (inputStr == "TCP") output = ProtocolTypeTCP;
             if (inputStr == "UDP") output = ProtocolTypeUDP;
+        }
+
+        enum RuleType
+        {
+            RuleTypeUnknown,
+            RuleTypeDifferenceRule,
+            RuleTypeStringEqualityRule,
+            RuleTypeMatchTotalRule,
+            RuleTypeSetIntersectionRule,
+            RuleTypeTeamSizeBalanceRule,
+            RuleTypeRegionSelectionRule,
+            RuleTypeTeamDifferenceRule,
+            RuleTypeTeamTicketSizeSimilarityRule
+        };
+
+        inline void ToJsonEnum(const RuleType input, Json::Value& output)
+        {
+            if (input == RuleTypeUnknown) output = Json::Value("Unknown");
+            if (input == RuleTypeDifferenceRule) output = Json::Value("DifferenceRule");
+            if (input == RuleTypeStringEqualityRule) output = Json::Value("StringEqualityRule");
+            if (input == RuleTypeMatchTotalRule) output = Json::Value("MatchTotalRule");
+            if (input == RuleTypeSetIntersectionRule) output = Json::Value("SetIntersectionRule");
+            if (input == RuleTypeTeamSizeBalanceRule) output = Json::Value("TeamSizeBalanceRule");
+            if (input == RuleTypeRegionSelectionRule) output = Json::Value("RegionSelectionRule");
+            if (input == RuleTypeTeamDifferenceRule) output = Json::Value("TeamDifferenceRule");
+            if (input == RuleTypeTeamTicketSizeSimilarityRule) output = Json::Value("TeamTicketSizeSimilarityRule");
+        }
+        inline void FromJsonEnum(const Json::Value& input, RuleType& output)
+        {
+            if (!input.isString()) return;
+            const std::string& inputStr = input.asString();
+            if (inputStr == "Unknown") output = RuleTypeUnknown;
+            if (inputStr == "DifferenceRule") output = RuleTypeDifferenceRule;
+            if (inputStr == "StringEqualityRule") output = RuleTypeStringEqualityRule;
+            if (inputStr == "MatchTotalRule") output = RuleTypeMatchTotalRule;
+            if (inputStr == "SetIntersectionRule") output = RuleTypeSetIntersectionRule;
+            if (inputStr == "TeamSizeBalanceRule") output = RuleTypeTeamSizeBalanceRule;
+            if (inputStr == "RegionSelectionRule") output = RuleTypeRegionSelectionRule;
+            if (inputStr == "TeamDifferenceRule") output = RuleTypeTeamDifferenceRule;
+            if (inputStr == "TeamTicketSizeSimilarityRule") output = RuleTypeTeamTicketSizeSimilarityRule;
         }
 
         enum TitleMultiplayerServerEnabledStatus
@@ -491,6 +553,156 @@ namespace PlayFab
                 Json::Value each_BuildName; ToJsonUtilS(BuildName, each_BuildName); output["BuildName"] = each_BuildName;
                 Json::Value each_CreationTime; ToJsonUtilT(CreationTime, each_CreationTime); output["CreationTime"] = each_CreationTime;
                 Json::Value each_Metadata; ToJsonUtilS(Metadata, each_Metadata); output["Metadata"] = each_Metadata;
+                return output;
+            }
+        };
+
+        struct EntityKey : public PlayFabBaseModel
+        {
+            std::string Id;
+            std::string Type;
+
+            EntityKey() :
+                PlayFabBaseModel(),
+                Id(),
+                Type()
+            {}
+
+            EntityKey(const EntityKey& src) :
+                PlayFabBaseModel(),
+                Id(src.Id),
+                Type(src.Type)
+            {}
+
+            ~EntityKey() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["Id"], Id);
+                FromJsonUtilS(input["Type"], Type);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Id; ToJsonUtilS(Id, each_Id); output["Id"] = each_Id;
+                Json::Value each_Type; ToJsonUtilS(Type, each_Type); output["Type"] = each_Type;
+                return output;
+            }
+        };
+
+        struct CancelAllMatchmakingTicketsForPlayerRequest : public PlayFabRequestCommon
+        {
+            Boxed<EntityKey> Entity;
+            std::string QueueName;
+
+            CancelAllMatchmakingTicketsForPlayerRequest() :
+                PlayFabRequestCommon(),
+                Entity(),
+                QueueName()
+            {}
+
+            CancelAllMatchmakingTicketsForPlayerRequest(const CancelAllMatchmakingTicketsForPlayerRequest& src) :
+                PlayFabRequestCommon(),
+                Entity(src.Entity),
+                QueueName(src.QueueName)
+            {}
+
+            ~CancelAllMatchmakingTicketsForPlayerRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["Entity"], Entity);
+                FromJsonUtilS(input["QueueName"], QueueName);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
+                return output;
+            }
+        };
+
+        struct CancelAllMatchmakingTicketsForPlayerResult : public PlayFabResultCommon
+        {
+
+            CancelAllMatchmakingTicketsForPlayerResult() :
+                PlayFabResultCommon()
+            {}
+
+            CancelAllMatchmakingTicketsForPlayerResult(const CancelAllMatchmakingTicketsForPlayerResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~CancelAllMatchmakingTicketsForPlayerResult() = default;
+
+            void FromJson(Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
+        struct CancelMatchmakingTicketRequest : public PlayFabRequestCommon
+        {
+            std::string QueueName;
+            std::string TicketId;
+
+            CancelMatchmakingTicketRequest() :
+                PlayFabRequestCommon(),
+                QueueName(),
+                TicketId()
+            {}
+
+            CancelMatchmakingTicketRequest(const CancelMatchmakingTicketRequest& src) :
+                PlayFabRequestCommon(),
+                QueueName(src.QueueName),
+                TicketId(src.TicketId)
+            {}
+
+            ~CancelMatchmakingTicketRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["QueueName"], QueueName);
+                FromJsonUtilS(input["TicketId"], TicketId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
+                Json::Value each_TicketId; ToJsonUtilS(TicketId, each_TicketId); output["TicketId"] = each_TicketId;
+                return output;
+            }
+        };
+
+        struct CancelMatchmakingTicketResult : public PlayFabResultCommon
+        {
+
+            CancelMatchmakingTicketResult() :
+                PlayFabResultCommon()
+            {}
+
+            CancelMatchmakingTicketResult(const CancelMatchmakingTicketResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~CancelMatchmakingTicketResult() = default;
+
+            void FromJson(Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
                 return output;
             }
         };
@@ -1069,6 +1281,147 @@ namespace PlayFab
             }
         };
 
+        struct MatchmakingPlayerAttributes : public PlayFabBaseModel
+        {
+            Json::Value DataObject;
+            std::string EscapedDataObject;
+
+            MatchmakingPlayerAttributes() :
+                PlayFabBaseModel(),
+                DataObject(),
+                EscapedDataObject()
+            {}
+
+            MatchmakingPlayerAttributes(const MatchmakingPlayerAttributes& src) :
+                PlayFabBaseModel(),
+                DataObject(src.DataObject),
+                EscapedDataObject(src.EscapedDataObject)
+            {}
+
+            ~MatchmakingPlayerAttributes() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                DataObject = input["DataObject"];
+                FromJsonUtilS(input["EscapedDataObject"], EscapedDataObject);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                output["DataObject"] = DataObject;
+                Json::Value each_EscapedDataObject; ToJsonUtilS(EscapedDataObject, each_EscapedDataObject); output["EscapedDataObject"] = each_EscapedDataObject;
+                return output;
+            }
+        };
+
+        struct MatchmakingPlayer : public PlayFabBaseModel
+        {
+            Boxed<MatchmakingPlayerAttributes> Attributes;
+            EntityKey Entity;
+
+            MatchmakingPlayer() :
+                PlayFabBaseModel(),
+                Attributes(),
+                Entity()
+            {}
+
+            MatchmakingPlayer(const MatchmakingPlayer& src) :
+                PlayFabBaseModel(),
+                Attributes(src.Attributes),
+                Entity(src.Entity)
+            {}
+
+            ~MatchmakingPlayer() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["Attributes"], Attributes);
+                FromJsonUtilO(input["Entity"], Entity);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Attributes; ToJsonUtilO(Attributes, each_Attributes); output["Attributes"] = each_Attributes;
+                Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                return output;
+            }
+        };
+
+        struct CreateMatchmakingTicketRequest : public PlayFabRequestCommon
+        {
+            MatchmakingPlayer Creator;
+            Int32 GiveUpAfterSeconds;
+            std::list<EntityKey> MembersToMatchWith;
+            std::string QueueName;
+
+            CreateMatchmakingTicketRequest() :
+                PlayFabRequestCommon(),
+                Creator(),
+                GiveUpAfterSeconds(),
+                MembersToMatchWith(),
+                QueueName()
+            {}
+
+            CreateMatchmakingTicketRequest(const CreateMatchmakingTicketRequest& src) :
+                PlayFabRequestCommon(),
+                Creator(src.Creator),
+                GiveUpAfterSeconds(src.GiveUpAfterSeconds),
+                MembersToMatchWith(src.MembersToMatchWith),
+                QueueName(src.QueueName)
+            {}
+
+            ~CreateMatchmakingTicketRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["Creator"], Creator);
+                FromJsonUtilP(input["GiveUpAfterSeconds"], GiveUpAfterSeconds);
+                FromJsonUtilO(input["MembersToMatchWith"], MembersToMatchWith);
+                FromJsonUtilS(input["QueueName"], QueueName);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Creator; ToJsonUtilO(Creator, each_Creator); output["Creator"] = each_Creator;
+                Json::Value each_GiveUpAfterSeconds; ToJsonUtilP(GiveUpAfterSeconds, each_GiveUpAfterSeconds); output["GiveUpAfterSeconds"] = each_GiveUpAfterSeconds;
+                Json::Value each_MembersToMatchWith; ToJsonUtilO(MembersToMatchWith, each_MembersToMatchWith); output["MembersToMatchWith"] = each_MembersToMatchWith;
+                Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
+                return output;
+            }
+        };
+
+        struct CreateMatchmakingTicketResult : public PlayFabResultCommon
+        {
+            std::string TicketId;
+
+            CreateMatchmakingTicketResult() :
+                PlayFabResultCommon(),
+                TicketId()
+            {}
+
+            CreateMatchmakingTicketResult(const CreateMatchmakingTicketResult& src) :
+                PlayFabResultCommon(),
+                TicketId(src.TicketId)
+            {}
+
+            ~CreateMatchmakingTicketResult() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["TicketId"], TicketId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_TicketId; ToJsonUtilS(TicketId, each_TicketId); output["TicketId"] = each_TicketId;
+                return output;
+            }
+        };
+
         struct CreateRemoteUserRequest : public PlayFabRequestCommon
         {
             std::string BuildId;
@@ -1153,6 +1506,45 @@ namespace PlayFab
                 Json::Value each_ExpirationTime; ToJsonUtilT(ExpirationTime, each_ExpirationTime); output["ExpirationTime"] = each_ExpirationTime;
                 Json::Value each_Password; ToJsonUtilS(Password, each_Password); output["Password"] = each_Password;
                 Json::Value each_Username; ToJsonUtilS(Username, each_Username); output["Username"] = each_Username;
+                return output;
+            }
+        };
+
+        struct CreateServerMatchmakingTicketRequest : public PlayFabRequestCommon
+        {
+            Int32 GiveUpAfterSeconds;
+            std::list<MatchmakingPlayer> Members;
+            std::string QueueName;
+
+            CreateServerMatchmakingTicketRequest() :
+                PlayFabRequestCommon(),
+                GiveUpAfterSeconds(),
+                Members(),
+                QueueName()
+            {}
+
+            CreateServerMatchmakingTicketRequest(const CreateServerMatchmakingTicketRequest& src) :
+                PlayFabRequestCommon(),
+                GiveUpAfterSeconds(src.GiveUpAfterSeconds),
+                Members(src.Members),
+                QueueName(src.QueueName)
+            {}
+
+            ~CreateServerMatchmakingTicketRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilP(input["GiveUpAfterSeconds"], GiveUpAfterSeconds);
+                FromJsonUtilO(input["Members"], Members);
+                FromJsonUtilS(input["QueueName"], QueueName);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_GiveUpAfterSeconds; ToJsonUtilP(GiveUpAfterSeconds, each_GiveUpAfterSeconds); output["GiveUpAfterSeconds"] = each_GiveUpAfterSeconds;
+                Json::Value each_Members; ToJsonUtilO(Members, each_Members); output["Members"] = each_Members;
+                Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
                 return output;
             }
         };
@@ -1619,6 +2011,514 @@ namespace PlayFab
             }
         };
 
+        struct GetMatchmakingQueueRequest : public PlayFabRequestCommon
+        {
+            std::string QueueName;
+
+            GetMatchmakingQueueRequest() :
+                PlayFabRequestCommon(),
+                QueueName()
+            {}
+
+            GetMatchmakingQueueRequest(const GetMatchmakingQueueRequest& src) :
+                PlayFabRequestCommon(),
+                QueueName(src.QueueName)
+            {}
+
+            ~GetMatchmakingQueueRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["QueueName"], QueueName);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
+                return output;
+            }
+        };
+
+        struct MatchmakingQueueRule : public PlayFabBaseModel
+        {
+            std::string Name;
+            Boxed<Uint32> SecondsUntilOptional;
+            RuleType Type;
+
+            MatchmakingQueueRule() :
+                PlayFabBaseModel(),
+                Name(),
+                SecondsUntilOptional(),
+                Type()
+            {}
+
+            MatchmakingQueueRule(const MatchmakingQueueRule& src) :
+                PlayFabBaseModel(),
+                Name(src.Name),
+                SecondsUntilOptional(src.SecondsUntilOptional),
+                Type(src.Type)
+            {}
+
+            ~MatchmakingQueueRule() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["Name"], Name);
+                FromJsonUtilP(input["SecondsUntilOptional"], SecondsUntilOptional);
+                FromJsonEnum(input["Type"], Type);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
+                Json::Value each_SecondsUntilOptional; ToJsonUtilP(SecondsUntilOptional, each_SecondsUntilOptional); output["SecondsUntilOptional"] = each_SecondsUntilOptional;
+                Json::Value each_Type; ToJsonEnum(Type, each_Type); output["Type"] = each_Type;
+                return output;
+            }
+        };
+
+        struct StatisticsVisibilityToPlayers : public PlayFabBaseModel
+        {
+            bool ShowNumberOfPlayersMatching;
+            bool ShowTimeToMatch;
+
+            StatisticsVisibilityToPlayers() :
+                PlayFabBaseModel(),
+                ShowNumberOfPlayersMatching(),
+                ShowTimeToMatch()
+            {}
+
+            StatisticsVisibilityToPlayers(const StatisticsVisibilityToPlayers& src) :
+                PlayFabBaseModel(),
+                ShowNumberOfPlayersMatching(src.ShowNumberOfPlayersMatching),
+                ShowTimeToMatch(src.ShowTimeToMatch)
+            {}
+
+            ~StatisticsVisibilityToPlayers() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilP(input["ShowNumberOfPlayersMatching"], ShowNumberOfPlayersMatching);
+                FromJsonUtilP(input["ShowTimeToMatch"], ShowTimeToMatch);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ShowNumberOfPlayersMatching; ToJsonUtilP(ShowNumberOfPlayersMatching, each_ShowNumberOfPlayersMatching); output["ShowNumberOfPlayersMatching"] = each_ShowNumberOfPlayersMatching;
+                Json::Value each_ShowTimeToMatch; ToJsonUtilP(ShowTimeToMatch, each_ShowTimeToMatch); output["ShowTimeToMatch"] = each_ShowTimeToMatch;
+                return output;
+            }
+        };
+
+        struct MatchmakingQueueTeam : public PlayFabBaseModel
+        {
+            Uint32 MaxTeamSize;
+            Uint32 MinTeamSize;
+            std::string Name;
+
+            MatchmakingQueueTeam() :
+                PlayFabBaseModel(),
+                MaxTeamSize(),
+                MinTeamSize(),
+                Name()
+            {}
+
+            MatchmakingQueueTeam(const MatchmakingQueueTeam& src) :
+                PlayFabBaseModel(),
+                MaxTeamSize(src.MaxTeamSize),
+                MinTeamSize(src.MinTeamSize),
+                Name(src.Name)
+            {}
+
+            ~MatchmakingQueueTeam() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilP(input["MaxTeamSize"], MaxTeamSize);
+                FromJsonUtilP(input["MinTeamSize"], MinTeamSize);
+                FromJsonUtilS(input["Name"], Name);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_MaxTeamSize; ToJsonUtilP(MaxTeamSize, each_MaxTeamSize); output["MaxTeamSize"] = each_MaxTeamSize;
+                Json::Value each_MinTeamSize; ToJsonUtilP(MinTeamSize, each_MinTeamSize); output["MinTeamSize"] = each_MinTeamSize;
+                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
+                return output;
+            }
+        };
+
+        struct MatchmakingQueueConfig : public PlayFabBaseModel
+        {
+            std::string BuildId;
+            Uint32 MaxMatchSize;
+            Uint32 MinMatchSize;
+            std::string Name;
+            std::list<MatchmakingQueueRule> Rules;
+            bool ServerAllocationEnabled;
+            Boxed<StatisticsVisibilityToPlayers> pfStatisticsVisibilityToPlayers;
+            std::list<MatchmakingQueueTeam> Teams;
+
+            MatchmakingQueueConfig() :
+                PlayFabBaseModel(),
+                BuildId(),
+                MaxMatchSize(),
+                MinMatchSize(),
+                Name(),
+                Rules(),
+                ServerAllocationEnabled(),
+                pfStatisticsVisibilityToPlayers(),
+                Teams()
+            {}
+
+            MatchmakingQueueConfig(const MatchmakingQueueConfig& src) :
+                PlayFabBaseModel(),
+                BuildId(src.BuildId),
+                MaxMatchSize(src.MaxMatchSize),
+                MinMatchSize(src.MinMatchSize),
+                Name(src.Name),
+                Rules(src.Rules),
+                ServerAllocationEnabled(src.ServerAllocationEnabled),
+                pfStatisticsVisibilityToPlayers(src.pfStatisticsVisibilityToPlayers),
+                Teams(src.Teams)
+            {}
+
+            ~MatchmakingQueueConfig() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["BuildId"], BuildId);
+                FromJsonUtilP(input["MaxMatchSize"], MaxMatchSize);
+                FromJsonUtilP(input["MinMatchSize"], MinMatchSize);
+                FromJsonUtilS(input["Name"], Name);
+                FromJsonUtilO(input["Rules"], Rules);
+                FromJsonUtilP(input["ServerAllocationEnabled"], ServerAllocationEnabled);
+                FromJsonUtilO(input["pfStatisticsVisibilityToPlayers"], pfStatisticsVisibilityToPlayers);
+                FromJsonUtilO(input["Teams"], Teams);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
+                Json::Value each_MaxMatchSize; ToJsonUtilP(MaxMatchSize, each_MaxMatchSize); output["MaxMatchSize"] = each_MaxMatchSize;
+                Json::Value each_MinMatchSize; ToJsonUtilP(MinMatchSize, each_MinMatchSize); output["MinMatchSize"] = each_MinMatchSize;
+                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
+                Json::Value each_Rules; ToJsonUtilO(Rules, each_Rules); output["Rules"] = each_Rules;
+                Json::Value each_ServerAllocationEnabled; ToJsonUtilP(ServerAllocationEnabled, each_ServerAllocationEnabled); output["ServerAllocationEnabled"] = each_ServerAllocationEnabled;
+                Json::Value each_pfStatisticsVisibilityToPlayers; ToJsonUtilO(pfStatisticsVisibilityToPlayers, each_pfStatisticsVisibilityToPlayers); output["StatisticsVisibilityToPlayers"] = each_pfStatisticsVisibilityToPlayers;
+                Json::Value each_Teams; ToJsonUtilO(Teams, each_Teams); output["Teams"] = each_Teams;
+                return output;
+            }
+        };
+
+        struct GetMatchmakingQueueResult : public PlayFabResultCommon
+        {
+            Boxed<MatchmakingQueueConfig> MatchmakingQueue;
+
+            GetMatchmakingQueueResult() :
+                PlayFabResultCommon(),
+                MatchmakingQueue()
+            {}
+
+            GetMatchmakingQueueResult(const GetMatchmakingQueueResult& src) :
+                PlayFabResultCommon(),
+                MatchmakingQueue(src.MatchmakingQueue)
+            {}
+
+            ~GetMatchmakingQueueResult() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["MatchmakingQueue"], MatchmakingQueue);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_MatchmakingQueue; ToJsonUtilO(MatchmakingQueue, each_MatchmakingQueue); output["MatchmakingQueue"] = each_MatchmakingQueue;
+                return output;
+            }
+        };
+
+        struct GetMatchmakingTicketRequest : public PlayFabRequestCommon
+        {
+            bool EscapeObject;
+            std::string QueueName;
+            std::string TicketId;
+
+            GetMatchmakingTicketRequest() :
+                PlayFabRequestCommon(),
+                EscapeObject(),
+                QueueName(),
+                TicketId()
+            {}
+
+            GetMatchmakingTicketRequest(const GetMatchmakingTicketRequest& src) :
+                PlayFabRequestCommon(),
+                EscapeObject(src.EscapeObject),
+                QueueName(src.QueueName),
+                TicketId(src.TicketId)
+            {}
+
+            ~GetMatchmakingTicketRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilP(input["EscapeObject"], EscapeObject);
+                FromJsonUtilS(input["QueueName"], QueueName);
+                FromJsonUtilS(input["TicketId"], TicketId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_EscapeObject; ToJsonUtilP(EscapeObject, each_EscapeObject); output["EscapeObject"] = each_EscapeObject;
+                Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
+                Json::Value each_TicketId; ToJsonUtilS(TicketId, each_TicketId); output["TicketId"] = each_TicketId;
+                return output;
+            }
+        };
+
+        struct GetMatchmakingTicketResult : public PlayFabResultCommon
+        {
+            Boxed<CancellationReason> pfCancellationReason;
+            time_t Created;
+            EntityKey Creator;
+            Int32 GiveUpAfterSeconds;
+            std::string MatchId;
+            std::list<MatchmakingPlayer> Members;
+            std::list<EntityKey> MembersToMatchWith;
+            std::string QueueName;
+            std::string Status;
+            std::string TicketId;
+
+            GetMatchmakingTicketResult() :
+                PlayFabResultCommon(),
+                pfCancellationReason(),
+                Created(),
+                Creator(),
+                GiveUpAfterSeconds(),
+                MatchId(),
+                Members(),
+                MembersToMatchWith(),
+                QueueName(),
+                Status(),
+                TicketId()
+            {}
+
+            GetMatchmakingTicketResult(const GetMatchmakingTicketResult& src) :
+                PlayFabResultCommon(),
+                pfCancellationReason(src.pfCancellationReason),
+                Created(src.Created),
+                Creator(src.Creator),
+                GiveUpAfterSeconds(src.GiveUpAfterSeconds),
+                MatchId(src.MatchId),
+                Members(src.Members),
+                MembersToMatchWith(src.MembersToMatchWith),
+                QueueName(src.QueueName),
+                Status(src.Status),
+                TicketId(src.TicketId)
+            {}
+
+            ~GetMatchmakingTicketResult() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilE(input["pfCancellationReason"], pfCancellationReason);
+                FromJsonUtilT(input["Created"], Created);
+                FromJsonUtilO(input["Creator"], Creator);
+                FromJsonUtilP(input["GiveUpAfterSeconds"], GiveUpAfterSeconds);
+                FromJsonUtilS(input["MatchId"], MatchId);
+                FromJsonUtilO(input["Members"], Members);
+                FromJsonUtilO(input["MembersToMatchWith"], MembersToMatchWith);
+                FromJsonUtilS(input["QueueName"], QueueName);
+                FromJsonUtilS(input["Status"], Status);
+                FromJsonUtilS(input["TicketId"], TicketId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_pfCancellationReason; ToJsonUtilE(pfCancellationReason, each_pfCancellationReason); output["CancellationReason"] = each_pfCancellationReason;
+                Json::Value each_Created; ToJsonUtilT(Created, each_Created); output["Created"] = each_Created;
+                Json::Value each_Creator; ToJsonUtilO(Creator, each_Creator); output["Creator"] = each_Creator;
+                Json::Value each_GiveUpAfterSeconds; ToJsonUtilP(GiveUpAfterSeconds, each_GiveUpAfterSeconds); output["GiveUpAfterSeconds"] = each_GiveUpAfterSeconds;
+                Json::Value each_MatchId; ToJsonUtilS(MatchId, each_MatchId); output["MatchId"] = each_MatchId;
+                Json::Value each_Members; ToJsonUtilO(Members, each_Members); output["Members"] = each_Members;
+                Json::Value each_MembersToMatchWith; ToJsonUtilO(MembersToMatchWith, each_MembersToMatchWith); output["MembersToMatchWith"] = each_MembersToMatchWith;
+                Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
+                Json::Value each_Status; ToJsonUtilS(Status, each_Status); output["Status"] = each_Status;
+                Json::Value each_TicketId; ToJsonUtilS(TicketId, each_TicketId); output["TicketId"] = each_TicketId;
+                return output;
+            }
+        };
+
+        struct GetMatchRequest : public PlayFabRequestCommon
+        {
+            bool EscapeObject;
+            std::string MatchId;
+            std::string QueueName;
+            bool ReturnMemberAttributes;
+
+            GetMatchRequest() :
+                PlayFabRequestCommon(),
+                EscapeObject(),
+                MatchId(),
+                QueueName(),
+                ReturnMemberAttributes()
+            {}
+
+            GetMatchRequest(const GetMatchRequest& src) :
+                PlayFabRequestCommon(),
+                EscapeObject(src.EscapeObject),
+                MatchId(src.MatchId),
+                QueueName(src.QueueName),
+                ReturnMemberAttributes(src.ReturnMemberAttributes)
+            {}
+
+            ~GetMatchRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilP(input["EscapeObject"], EscapeObject);
+                FromJsonUtilS(input["MatchId"], MatchId);
+                FromJsonUtilS(input["QueueName"], QueueName);
+                FromJsonUtilP(input["ReturnMemberAttributes"], ReturnMemberAttributes);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_EscapeObject; ToJsonUtilP(EscapeObject, each_EscapeObject); output["EscapeObject"] = each_EscapeObject;
+                Json::Value each_MatchId; ToJsonUtilS(MatchId, each_MatchId); output["MatchId"] = each_MatchId;
+                Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
+                Json::Value each_ReturnMemberAttributes; ToJsonUtilP(ReturnMemberAttributes, each_ReturnMemberAttributes); output["ReturnMemberAttributes"] = each_ReturnMemberAttributes;
+                return output;
+            }
+        };
+
+        struct MatchmakingPlayerWithTeamAssignment : public PlayFabBaseModel
+        {
+            Boxed<MatchmakingPlayerAttributes> Attributes;
+            EntityKey Entity;
+            std::string TeamId;
+
+            MatchmakingPlayerWithTeamAssignment() :
+                PlayFabBaseModel(),
+                Attributes(),
+                Entity(),
+                TeamId()
+            {}
+
+            MatchmakingPlayerWithTeamAssignment(const MatchmakingPlayerWithTeamAssignment& src) :
+                PlayFabBaseModel(),
+                Attributes(src.Attributes),
+                Entity(src.Entity),
+                TeamId(src.TeamId)
+            {}
+
+            ~MatchmakingPlayerWithTeamAssignment() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["Attributes"], Attributes);
+                FromJsonUtilO(input["Entity"], Entity);
+                FromJsonUtilS(input["TeamId"], TeamId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Attributes; ToJsonUtilO(Attributes, each_Attributes); output["Attributes"] = each_Attributes;
+                Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                Json::Value each_TeamId; ToJsonUtilS(TeamId, each_TeamId); output["TeamId"] = each_TeamId;
+                return output;
+            }
+        };
+
+        struct ServerDetails : public PlayFabBaseModel
+        {
+            std::string IPV4Address;
+            std::list<Port> Ports;
+
+            ServerDetails() :
+                PlayFabBaseModel(),
+                IPV4Address(),
+                Ports()
+            {}
+
+            ServerDetails(const ServerDetails& src) :
+                PlayFabBaseModel(),
+                IPV4Address(src.IPV4Address),
+                Ports(src.Ports)
+            {}
+
+            ~ServerDetails() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["IPV4Address"], IPV4Address);
+                FromJsonUtilO(input["Ports"], Ports);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_IPV4Address; ToJsonUtilS(IPV4Address, each_IPV4Address); output["IPV4Address"] = each_IPV4Address;
+                Json::Value each_Ports; ToJsonUtilO(Ports, each_Ports); output["Ports"] = each_Ports;
+                return output;
+            }
+        };
+
+        struct GetMatchResult : public PlayFabResultCommon
+        {
+            std::string MatchId;
+            std::list<MatchmakingPlayerWithTeamAssignment> Members;
+            std::list<std::string> RegionPreferences;
+            Boxed<ServerDetails> pfServerDetails;
+
+            GetMatchResult() :
+                PlayFabResultCommon(),
+                MatchId(),
+                Members(),
+                RegionPreferences(),
+                pfServerDetails()
+            {}
+
+            GetMatchResult(const GetMatchResult& src) :
+                PlayFabResultCommon(),
+                MatchId(src.MatchId),
+                Members(src.Members),
+                RegionPreferences(src.RegionPreferences),
+                pfServerDetails(src.pfServerDetails)
+            {}
+
+            ~GetMatchResult() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["MatchId"], MatchId);
+                FromJsonUtilO(input["Members"], Members);
+                FromJsonUtilS(input["RegionPreferences"], RegionPreferences);
+                FromJsonUtilO(input["pfServerDetails"], pfServerDetails);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_MatchId; ToJsonUtilS(MatchId, each_MatchId); output["MatchId"] = each_MatchId;
+                Json::Value each_Members; ToJsonUtilO(Members, each_Members); output["Members"] = each_Members;
+                Json::Value each_RegionPreferences; ToJsonUtilS(RegionPreferences, each_RegionPreferences); output["RegionPreferences"] = each_RegionPreferences;
+                Json::Value each_pfServerDetails; ToJsonUtilO(pfServerDetails, each_pfServerDetails); output["ServerDetails"] = each_pfServerDetails;
+                return output;
+            }
+        };
+
         struct GetMultiplayerServerDetailsRequest : public PlayFabRequestCommon
         {
             std::string BuildId;
@@ -1728,6 +2628,113 @@ namespace PlayFab
                 Json::Value each_SessionId; ToJsonUtilS(SessionId, each_SessionId); output["SessionId"] = each_SessionId;
                 Json::Value each_State; ToJsonUtilS(State, each_State); output["State"] = each_State;
                 Json::Value each_VmId; ToJsonUtilS(VmId, each_VmId); output["VmId"] = each_VmId;
+                return output;
+            }
+        };
+
+        struct GetQueueStatisticsRequest : public PlayFabRequestCommon
+        {
+            std::string QueueName;
+
+            GetQueueStatisticsRequest() :
+                PlayFabRequestCommon(),
+                QueueName()
+            {}
+
+            GetQueueStatisticsRequest(const GetQueueStatisticsRequest& src) :
+                PlayFabRequestCommon(),
+                QueueName(src.QueueName)
+            {}
+
+            ~GetQueueStatisticsRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["QueueName"], QueueName);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
+                return output;
+            }
+        };
+
+        struct Statistics : public PlayFabBaseModel
+        {
+            double Average;
+            double Percentile50;
+            double Percentile90;
+            double Percentile99;
+
+            Statistics() :
+                PlayFabBaseModel(),
+                Average(),
+                Percentile50(),
+                Percentile90(),
+                Percentile99()
+            {}
+
+            Statistics(const Statistics& src) :
+                PlayFabBaseModel(),
+                Average(src.Average),
+                Percentile50(src.Percentile50),
+                Percentile90(src.Percentile90),
+                Percentile99(src.Percentile99)
+            {}
+
+            ~Statistics() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilP(input["Average"], Average);
+                FromJsonUtilP(input["Percentile50"], Percentile50);
+                FromJsonUtilP(input["Percentile90"], Percentile90);
+                FromJsonUtilP(input["Percentile99"], Percentile99);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Average; ToJsonUtilP(Average, each_Average); output["Average"] = each_Average;
+                Json::Value each_Percentile50; ToJsonUtilP(Percentile50, each_Percentile50); output["Percentile50"] = each_Percentile50;
+                Json::Value each_Percentile90; ToJsonUtilP(Percentile90, each_Percentile90); output["Percentile90"] = each_Percentile90;
+                Json::Value each_Percentile99; ToJsonUtilP(Percentile99, each_Percentile99); output["Percentile99"] = each_Percentile99;
+                return output;
+            }
+        };
+
+        struct GetQueueStatisticsResult : public PlayFabResultCommon
+        {
+            Boxed<Uint32> NumberOfPlayersMatching;
+            Boxed<Statistics> TimeToMatchStatisticsInSeconds;
+
+            GetQueueStatisticsResult() :
+                PlayFabResultCommon(),
+                NumberOfPlayersMatching(),
+                TimeToMatchStatisticsInSeconds()
+            {}
+
+            GetQueueStatisticsResult(const GetQueueStatisticsResult& src) :
+                PlayFabResultCommon(),
+                NumberOfPlayersMatching(src.NumberOfPlayersMatching),
+                TimeToMatchStatisticsInSeconds(src.TimeToMatchStatisticsInSeconds)
+            {}
+
+            ~GetQueueStatisticsResult() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilP(input["NumberOfPlayersMatching"], NumberOfPlayersMatching);
+                FromJsonUtilO(input["TimeToMatchStatisticsInSeconds"], TimeToMatchStatisticsInSeconds);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_NumberOfPlayersMatching; ToJsonUtilP(NumberOfPlayersMatching, each_NumberOfPlayersMatching); output["NumberOfPlayersMatching"] = each_NumberOfPlayersMatching;
+                Json::Value each_TimeToMatchStatisticsInSeconds; ToJsonUtilO(TimeToMatchStatisticsInSeconds, each_TimeToMatchStatisticsInSeconds); output["TimeToMatchStatisticsInSeconds"] = each_TimeToMatchStatisticsInSeconds;
                 return output;
             }
         };
@@ -1854,6 +2861,69 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_Status; ToJsonUtilE(Status, each_Status); output["Status"] = each_Status;
+                return output;
+            }
+        };
+
+        struct JoinMatchmakingTicketRequest : public PlayFabRequestCommon
+        {
+            MatchmakingPlayer Member;
+            std::string QueueName;
+            std::string TicketId;
+
+            JoinMatchmakingTicketRequest() :
+                PlayFabRequestCommon(),
+                Member(),
+                QueueName(),
+                TicketId()
+            {}
+
+            JoinMatchmakingTicketRequest(const JoinMatchmakingTicketRequest& src) :
+                PlayFabRequestCommon(),
+                Member(src.Member),
+                QueueName(src.QueueName),
+                TicketId(src.TicketId)
+            {}
+
+            ~JoinMatchmakingTicketRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["Member"], Member);
+                FromJsonUtilS(input["QueueName"], QueueName);
+                FromJsonUtilS(input["TicketId"], TicketId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Member; ToJsonUtilO(Member, each_Member); output["Member"] = each_Member;
+                Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
+                Json::Value each_TicketId; ToJsonUtilS(TicketId, each_TicketId); output["TicketId"] = each_TicketId;
+                return output;
+            }
+        };
+
+        struct JoinMatchmakingTicketResult : public PlayFabResultCommon
+        {
+
+            JoinMatchmakingTicketResult() :
+                PlayFabResultCommon()
+            {}
+
+            JoinMatchmakingTicketResult(const JoinMatchmakingTicketResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~JoinMatchmakingTicketResult() = default;
+
+            void FromJson(Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
                 return output;
             }
         };
@@ -2204,6 +3274,122 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_Tags; ToJsonUtilS(Tags, each_Tags); output["Tags"] = each_Tags;
+                return output;
+            }
+        };
+
+        struct ListMatchmakingQueuesRequest : public PlayFabRequestCommon
+        {
+
+            ListMatchmakingQueuesRequest() :
+                PlayFabRequestCommon()
+            {}
+
+            ListMatchmakingQueuesRequest(const ListMatchmakingQueuesRequest&) :
+                PlayFabRequestCommon()
+            {}
+
+            ~ListMatchmakingQueuesRequest() = default;
+
+            void FromJson(Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
+        struct ListMatchmakingQueuesResult : public PlayFabResultCommon
+        {
+            std::list<MatchmakingQueueConfig> MatchMakingQueues;
+
+            ListMatchmakingQueuesResult() :
+                PlayFabResultCommon(),
+                MatchMakingQueues()
+            {}
+
+            ListMatchmakingQueuesResult(const ListMatchmakingQueuesResult& src) :
+                PlayFabResultCommon(),
+                MatchMakingQueues(src.MatchMakingQueues)
+            {}
+
+            ~ListMatchmakingQueuesResult() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["MatchMakingQueues"], MatchMakingQueues);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_MatchMakingQueues; ToJsonUtilO(MatchMakingQueues, each_MatchMakingQueues); output["MatchMakingQueues"] = each_MatchMakingQueues;
+                return output;
+            }
+        };
+
+        struct ListMatchmakingTicketsForPlayerRequest : public PlayFabRequestCommon
+        {
+            Boxed<EntityKey> Entity;
+            std::string QueueName;
+
+            ListMatchmakingTicketsForPlayerRequest() :
+                PlayFabRequestCommon(),
+                Entity(),
+                QueueName()
+            {}
+
+            ListMatchmakingTicketsForPlayerRequest(const ListMatchmakingTicketsForPlayerRequest& src) :
+                PlayFabRequestCommon(),
+                Entity(src.Entity),
+                QueueName(src.QueueName)
+            {}
+
+            ~ListMatchmakingTicketsForPlayerRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["Entity"], Entity);
+                FromJsonUtilS(input["QueueName"], QueueName);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
+                return output;
+            }
+        };
+
+        struct ListMatchmakingTicketsForPlayerResult : public PlayFabResultCommon
+        {
+            std::list<std::string> TicketIds;
+
+            ListMatchmakingTicketsForPlayerResult() :
+                PlayFabResultCommon(),
+                TicketIds()
+            {}
+
+            ListMatchmakingTicketsForPlayerResult(const ListMatchmakingTicketsForPlayerResult& src) :
+                PlayFabResultCommon(),
+                TicketIds(src.TicketIds)
+            {}
+
+            ~ListMatchmakingTicketsForPlayerResult() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["TicketIds"], TicketIds);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_TicketIds; ToJsonUtilS(TicketIds, each_TicketIds); output["TicketIds"] = each_TicketIds;
                 return output;
             }
         };
@@ -2569,6 +3755,59 @@ namespace PlayFab
             }
         };
 
+        struct RemoveMatchmakingQueueRequest : public PlayFabRequestCommon
+        {
+            std::string QueueName;
+
+            RemoveMatchmakingQueueRequest() :
+                PlayFabRequestCommon(),
+                QueueName()
+            {}
+
+            RemoveMatchmakingQueueRequest(const RemoveMatchmakingQueueRequest& src) :
+                PlayFabRequestCommon(),
+                QueueName(src.QueueName)
+            {}
+
+            ~RemoveMatchmakingQueueRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["QueueName"], QueueName);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
+                return output;
+            }
+        };
+
+        struct RemoveMatchmakingQueueResult : public PlayFabResultCommon
+        {
+
+            RemoveMatchmakingQueueResult() :
+                PlayFabResultCommon()
+            {}
+
+            RemoveMatchmakingQueueResult(const RemoveMatchmakingQueueResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~RemoveMatchmakingQueueResult() = default;
+
+            void FromJson(Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
         struct RequestMultiplayerServerRequest : public PlayFabRequestCommon
         {
             std::string BuildId;
@@ -2751,6 +3990,59 @@ namespace PlayFab
                 Json::Value each_DnsName; ToJsonUtilS(DnsName, each_DnsName); output["DnsName"] = each_DnsName;
                 Json::Value each_Password; ToJsonUtilS(Password, each_Password); output["Password"] = each_Password;
                 Json::Value each_Username; ToJsonUtilS(Username, each_Username); output["Username"] = each_Username;
+                return output;
+            }
+        };
+
+        struct SetMatchmakingQueueRequest : public PlayFabRequestCommon
+        {
+            Boxed<MatchmakingQueueConfig> MatchmakingQueue;
+
+            SetMatchmakingQueueRequest() :
+                PlayFabRequestCommon(),
+                MatchmakingQueue()
+            {}
+
+            SetMatchmakingQueueRequest(const SetMatchmakingQueueRequest& src) :
+                PlayFabRequestCommon(),
+                MatchmakingQueue(src.MatchmakingQueue)
+            {}
+
+            ~SetMatchmakingQueueRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["MatchmakingQueue"], MatchmakingQueue);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_MatchmakingQueue; ToJsonUtilO(MatchmakingQueue, each_MatchmakingQueue); output["MatchmakingQueue"] = each_MatchmakingQueue;
+                return output;
+            }
+        };
+
+        struct SetMatchmakingQueueResult : public PlayFabResultCommon
+        {
+
+            SetMatchmakingQueueResult() :
+                PlayFabResultCommon()
+            {}
+
+            SetMatchmakingQueueResult(const SetMatchmakingQueueResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~SetMatchmakingQueueResult() = default;
+
+            void FromJson(Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
                 return output;
             }
         };

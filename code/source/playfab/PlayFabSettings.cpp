@@ -4,9 +4,9 @@
 
 namespace PlayFab
 {
-    const std::string PlayFabSettings::sdkVersion = "3.6.190304";
-    const std::string PlayFabSettings::buildIdentifier = "jbuild_xplatcppsdk__sdk-genericslave-3_0";
-    const std::string PlayFabSettings::versionString = "XPlatCppSdk-3.6.190304";
+    const std::string PlayFabSettings::sdkVersion = "3.7.190312";
+    const std::string PlayFabSettings::buildIdentifier = "jbuild_xplatcppsdk__sdk-genericslave-2_1";
+    const std::string PlayFabSettings::versionString = "XPlatCppSdk-3.7.190312";
     const std::string PlayFabSettings::verticalName = "";
 
     const std::map<std::string, std::string> PlayFabSettings::requestGetParams = {
