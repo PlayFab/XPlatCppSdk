@@ -331,3 +331,10 @@ build/Xbox/TestXboxApp/[Rr]elease
 
 # Test title data
 **/*testTitleData*
+
+# macOS litter
+.DS_Store
+
+## Xcode 9 and above User settings.
+xcuserdata/
+
