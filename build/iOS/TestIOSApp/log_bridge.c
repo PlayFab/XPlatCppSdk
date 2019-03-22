@@ -10,18 +10,13 @@ static struct _LogOutputCallbackInfo {
     LogOutputContext context;
 } s_callbackInfo = {};
 
-void
-SetLogOutputCallback(
-    LogOutputCallback callback,
-    LogOutputContext context
-    )
+void SetLogOutputCallback(LogOutputCallback callback, LogOutputContext context)
 {
     s_callbackInfo.callback = callback;
     s_callbackInfo.context = context;
 }
 
-void
-ResetLogOutputCallback(void)
+void ResetLogOutputCallback(void)
 {
     s_callbackInfo.callback = NULL;
     s_callbackInfo.context = NULL;

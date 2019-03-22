@@ -5,20 +5,14 @@
 
 typedef void* LogOutputContext;
 
-typedef void (*LogOutputCallback)(
-    const char *message,
-    LogOutputContext context
-    );
+typedef void (*LogOutputCallback)(const char *message, LogOutputContext context);
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif // __cplusplus
 
-void SetLogOutputCallback(
-    LogOutputCallback callback,
-    LogOutputContext context
-    );
+void SetLogOutputCallback(LogOutputCallback callback, LogOutputContext context);
 
 void ResetLogOutputCallback(void);
 

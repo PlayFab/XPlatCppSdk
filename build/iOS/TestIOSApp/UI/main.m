@@ -1,10 +1,4 @@
-//
-//  main.m
-//  TestIOSApp
-//
-//  Created by Raymond Cha on 3/19/19.
-//  Copyright © 2019 Microsoft. All rights reserved.
-//
+// Copyright (C) Microsoft Corporation. All rights reserved.
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
