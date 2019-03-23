@@ -13,7 +13,11 @@
 #define PLAYFAB_PLATFORM_XBOX
 #endif // _DURANGO
 
-#ifdef __linux__
+#ifdef __ANDROID__
+#define PLAYFAB_PLATFORM_ANDROID
+#endif
+
+#if defined(__linux__) && !defined(__ANDROID__)
 #define PLAYFAB_PLATFORM_LINUX
 #endif // __linux__
 

@@ -6,7 +6,7 @@
 
 #include <playfab/PlayFabPlatformMacros.h>
 
-#if defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX)
+#if defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX) || defined(PLAYFAB_PLATFORM_ANDROID)
 #include <json/json.h>
 #include <json/reader.h>
 #include <json/value.h>
