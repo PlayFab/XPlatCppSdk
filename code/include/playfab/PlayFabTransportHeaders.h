@@ -20,3 +20,8 @@
 #include <playfab/PlayFabCurlHttpPlugin.h>
 #include <playfab/OneDSCurlHttpPlugin.h>
 #endif // PLAYFAB_PLATFORM_LINUX
+
+#ifdef PLAYFAB_PLATFORM_ANDROID
+#include <playfab/PlayFabAndroidHttpPlugin.h>
+#include <playfab/OneDSAndroidHttpPlugin.h>
+#endif // PLAYFAB_PLATFORM_ANDROID
