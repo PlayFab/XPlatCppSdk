@@ -1,4 +1,4 @@
-package com.microsoft.android;
+package com.microsoft.xplatcppsdk;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

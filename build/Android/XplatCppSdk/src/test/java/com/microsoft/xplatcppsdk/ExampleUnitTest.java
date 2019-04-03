@@ -1,4 +1,4 @@
-package com.microsoft.android;
+package com.microsoft.xplatcppsdk;
 
 import org.junit.Test;
 
