@@ -13,20 +13,20 @@ namespace PlayFab
         return std::string(ONEDS_SERVICE_URL);
     }
 
-    void OneDSAndroidHttpPlugin::SetPredefinedHeaders(RequestTask& requestTask, void* urlRequest)
+    void OneDSAndroidHttpPlugin::SetPredefinedHeaders(RequestTask& requestTask)
     {
         OneDSCallRequestContainer& requestContainer = requestTask.OneDSRequestContainer();
 
-        SetHeader(requestTask, urlRequest, "Accept", "*/*");
-        SetHeader(requestTask, urlRequest, "Client-Id", "NO_AUTH");
-        SetHeader(requestTask, urlRequest, "Content-Type", "application/bond-compact-binary");
-        SetHeader(requestTask, urlRequest, "Expect", "100-continue");
-        SetHeader(requestTask, urlRequest, "SDK-Version", "EVT-PlayFab-XPlat-C++-No-3.0.275.1");
+        SetHeader(requestTask, "Accept", "*/*");
+        SetHeader(requestTask, "Client-Id", "NO_AUTH");
+        SetHeader(requestTask, "Content-Type", "application/bond-compact-binary");
+        SetHeader(requestTask, "Expect", "100-continue");
+        SetHeader(requestTask, "SDK-Version", "EVT-PlayFab-XPlat-C++-No-3.0.275.1");
         int64_t now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-        SetHeader(requestTask, urlRequest, "Upload-Time", std::to_string(now).c_str());
-        SetHeader(requestTask, urlRequest, "Content-Length: ", std::to_string(requestContainer.requestBinaryBody.size()).c_str());
-        SetHeader(requestTask, urlRequest, "Connection", "Keep-Alive");
-        SetHeader(requestTask, urlRequest, "Cache-Control", "no-cache");
+        SetHeader(requestTask, "Upload-Time", std::to_string(now).c_str());
+        SetHeader(requestTask, "Content-Length: ", std::to_string(requestContainer.requestBinaryBody.size()).c_str());
+        SetHeader(requestTask, "Connection", "Keep-Alive");
+        SetHeader(requestTask, "Cache-Control", "no-cache");
     }
 
     bool OneDSAndroidHttpPlugin::GetBinaryPayload(RequestTask& requestTask, void*& payload, size_t& payloadSize) const

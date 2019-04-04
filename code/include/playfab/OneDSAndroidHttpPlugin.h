@@ -23,7 +23,7 @@ namespace PlayFab
 
     protected:
         virtual std::string GetUrl(RequestTask& requestTask) const override;
-        virtual void SetPredefinedHeaders(RequestTask& requestTask, void* urlRequest) override;
+        virtual void SetPredefinedHeaders(RequestTask& requestTask) override;
         virtual bool GetBinaryPayload(RequestTask& requestTask, void*& payload, size_t& payloadSize) const override;
         virtual void ProcessResponse(RequestTask& requestTask, const int httpCode) override;
     };

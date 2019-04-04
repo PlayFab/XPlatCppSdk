@@ -28,12 +28,13 @@ namespace PlayFab
 
         void WorkerThreadEntry();
         void WorkerThread(void* jniEnv);
-        void ExecuteRequest(RequestTask& requestTask);
-        void CheckResponse(RequestTask& requestTask);
+        bool ExecuteRequest(RequestTask& requestTask);
+        bool CheckResponse(RequestTask& requestTask);
+        void SetResponceAsBadRequest(RequestTask& requestTask);
 
         virtual std::string GetUrl(RequestTask& requestTask) const;
-        virtual void SetPredefinedHeaders(RequestTask& requestTask, void* urlRequest);
-        virtual void SetHeader(RequestTask& requestTask, void* urlRequest, const char* name, const char* value);
+        virtual void SetPredefinedHeaders(RequestTask& requestTask);
+        virtual void SetHeader(RequestTask& requestTask, const char* name, const char* value);
         virtual bool GetBinaryPayload(RequestTask& requestTask, void*& payload, size_t& payloadSize) const;
         virtual void ProcessResponse(RequestTask& requestTask, const int httpCode);
         virtual void HandleResults(RequestTask& requestTask);

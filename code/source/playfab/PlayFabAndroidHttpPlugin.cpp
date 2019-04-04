@@ -343,7 +343,7 @@ namespace PlayFab
         else
         {
             JNIEnv* jniEnv = nullptr;
-            jvm->AttachCurrentThread(&jniEnv, NULL);
+            jvm->AttachCurrentThread(&jniEnv, nullptr);
 
             WorkerThread(static_cast<void*>(jniEnv));
 
@@ -377,13 +377,23 @@ namespace PlayFab
             } // UNLOCK httpRequestMutex
             switch (state) {
                 case RequestTask::Pending: {
-                    ExecuteRequest(*(this->requestingTask));
-                    this->requestingTask->state = RequestTask::Requesting;
+                    if (ExecuteRequest(*(this->requestingTask)))
+                    {
+                        this->requestingTask->state = RequestTask::Requesting;
+                    }
+                    else
+                    {
+                        SetResponceAsBadRequest(*(this->requestingTask));
+                        this->requestingTask->state = RequestTask::Finished;
+                    }
                     break;
                 }
                 case RequestTask::Requesting: {
-                    CheckResponse(*(this->requestingTask));
-
+                    if (CheckResponse(*(this->requestingTask)) == false)
+                    {
+                        SetResponceAsBadRequest(*(this->requestingTask));
+                        this->requestingTask->state = RequestTask::Finished;
+                    }
                     std::this_thread::yield();
                     break;
                 }
@@ -405,7 +415,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabAndroidHttpPlugin::ExecuteRequest(RequestTask& requestTask)
+    bool PlayFabAndroidHttpPlugin::ExecuteRequest(RequestTask& requestTask)
     {
         CallRequestContainer& requestContainer = requestTask.RequestContainer();
 
@@ -413,52 +423,70 @@ namespace PlayFab
         assert(jniEnv);
         if (jniEnv == nullptr)
         {
-            return ;
+            return false;
         }
 
         jobject httpRequestObject = requestTask.impl->GetHttpRequestObject();
         assert(httpRequestObject);
         if (httpRequestObject == nullptr)
         {
-            return ;
+            return false;
+        }
+
+        // Call setMethod
+        {
+            jmethodID methodId = jniEnv->GetMethodID(GetHelper().GetHttpRequestClass(), "setMethod", "(Ljava/lang/String;)V");
+            assert(methodId);
+            if (methodId == nullptr)
+            {
+                return false;
+            }
+
+            jstring urlJstr = jniEnv->NewStringUTF("POST");
+            if (urlJstr == nullptr)
+            {
+                return false;
+            }
+            jniEnv->CallVoidMethod(httpRequestObject, methodId, urlJstr);
+            jniEnv->DeleteLocalRef(urlJstr);
         }
 
         // Call SetUrl
         {
             auto requestUrl = GetUrl(requestTask);
 
-            jmethodID methodId = jniEnv->GetMethodID(GetHelper().GetHttpRequestClass(), "setUrl", "(Ljava/lang/String;)V");
+            jmethodID methodId = jniEnv->GetMethodID(GetHelper().GetHttpRequestClass(), "setUrl", "(Ljava/lang/String;)Z");
             assert(methodId);
             if (methodId == nullptr)
             {
-                return ;
+                return false;
             }
 
             jstring urlJstr = jniEnv->NewStringUTF(requestUrl.c_str());
             if (urlJstr == nullptr)
             {
-                return ;
+                return false;
             }
             jboolean result = jniEnv->CallBooleanMethod(httpRequestObject, methodId, urlJstr);
             jniEnv->DeleteLocalRef(urlJstr);
-            if (result == false)
+            if (result == JNI_FALSE)
             {
-                return ;
+                return false;
             }
         }
 
         // Call SetPredefinedHeaders
-        SetPredefinedHeaders(requestTask, (void*)httpRequestObject);
+        SetPredefinedHeaders(requestTask);
 
         // Call SetHeader
         auto headers = requestContainer.GetHeaders();
-        if (headers.size() > 0)
+        if (!headers.empty())
         {
             for (auto const &obj : headers)
             {
                 if (obj.first.length() != 0 && obj.second.length() != 0) // no empty keys or values in headers
                 {
-                    SetHeader(requestTask, (void*)httpRequestObject, obj.first.c_str(), obj.second.c_str());
+                    SetHeader(requestTask, obj.first.c_str(), obj.second.c_str());
                 }
             }
         }
@@ -471,11 +499,11 @@ namespace PlayFab
             assert(methodId);
             if (methodId == nullptr)
             {
-                return ;
+                return false;
             }
 
             size_t payloadSize = 0;
-            void* payload = NULL;
+            void* payload = nullptr;
             jbyteArray bodyArray = nullptr;
 
             if (!GetBinaryPayload(requestTask, payload, payloadSize))
@@ -486,7 +514,7 @@ namespace PlayFab
 
                 if (payloadSize > 0)
                 {
-                    bodyArray = jniEnv->NewByteArray(payloadSize);
+                    bodyArray = jniEnv->NewByteArray(static_cast<jsize>(payloadSize));
                     void *tempPrimitive = jniEnv->GetPrimitiveArrayCritical(bodyArray, 0);
                     memcpy(tempPrimitive, requestBody.c_str(), payloadSize);
                     jniEnv->ReleasePrimitiveArrayCritical(bodyArray, tempPrimitive, 0);
@@ -496,43 +524,40 @@ namespace PlayFab
             {
                 if (payloadSize > 0)
                 {
-                    bodyArray = jniEnv->NewByteArray(payloadSize);
+                    bodyArray = jniEnv->NewByteArray(static_cast<jsize>(payloadSize));
                     void *tempPrimitive = jniEnv->GetPrimitiveArrayCritical(bodyArray, 0);
                     memcpy(tempPrimitive, payload, payloadSize);
                     jniEnv->ReleasePrimitiveArrayCritical(bodyArray, tempPrimitive, 0);
                 }
             }
 
-            jboolean result = jniEnv->CallBooleanMethod(httpRequestObject, methodId, bodyArray);
+            jniEnv->CallVoidMethod(httpRequestObject, methodId, bodyArray);
             if (bodyArray != nullptr)
             {
                 jniEnv->DeleteLocalRef(bodyArray);
-            }
-            if (result == false)
-            {
-                return ;
             }
         }
 
         // Call SendRequest
         {
-            jmethodID methodId = jniEnv->GetMethodID(GetHelper().GetHttpRequestClass(), "sendRequest", "()V");
+            jmethodID methodId = jniEnv->GetMethodID(GetHelper().GetHttpRequestClass(), "sendRequest", "()Z");
             assert(methodId);
             if (methodId == nullptr)
             {
-                return ;
+                return false;
             }
 
             jboolean result = jniEnv->CallBooleanMethod(httpRequestObject, methodId);
-            if (result == false)
+            if(result == JNI_FALSE)
             {
-                return ;
+                return false;
             }
         }
 
+        return true;
     }
 
-    void PlayFabAndroidHttpPlugin::CheckResponse(RequestTask& requestTask)
+    bool PlayFabAndroidHttpPlugin::CheckResponse(RequestTask& requestTask)
     {
         CallRequestContainer& requestContainer = this->requestingTask->RequestContainer();
 
@@ -540,34 +565,29 @@ namespace PlayFab
         assert(jniEnv);
         if (jniEnv == nullptr)
         {
-            return ;
+            return false;
         }
 
         jobject httpRequestObject = requestTask.impl->GetHttpRequestObject();
         assert(httpRequestObject);
         if (httpRequestObject == nullptr)
         {
-            return ;
+            return false;
         }
 
         jmethodID methodId = jniEnv->GetMethodID(GetHelper().GetHttpRequestClass(), "isRequestCompleted", "()Z");
         assert(methodId);
         if (methodId == nullptr)
         {
-            return ;
+            return false;
         }
 
         jboolean result = jniEnv->CallBooleanMethod(httpRequestObject, methodId);
-        assert(result);
-        if (methodId == nullptr)
-        {
-            return ;
-        }
-        if (result ==  true)
+        if (result ==  JNI_TRUE)
         {
             jint httpCode = 0;
             {
-                jmethodID methodId = jniEnv->GetMethodID(GetHelper().GetHttpRequestClass(), "getResponseHttpCode", "()I");
+                methodId = jniEnv->GetMethodID(GetHelper().GetHttpRequestClass(), "getResponseHttpCode", "()I");
                 assert(methodId);
                 if (methodId)
                 {
@@ -575,18 +595,18 @@ namespace PlayFab
                 }
             }
             {
-                jmethodID methodId = jniEnv->GetMethodID(GetHelper().GetHttpRequestClass(), "getResponseHttpBody", "()[B");
+                methodId = jniEnv->GetMethodID(GetHelper().GetHttpRequestClass(), "getResponseHttpBody", "()[B");
                 assert(methodId);
                 if (methodId)
                 {
-                    jbyteArray responseBody = (jbyteArray)jniEnv->CallObjectMethod(httpRequestObject, methodId);
+                    auto responseBody = (jbyteArray)jniEnv->CallObjectMethod(httpRequestObject, methodId);
 
                     if (responseBody != nullptr)
                     {
                         int bodySize = jniEnv->GetArrayLength(responseBody);
                         if (bodySize > 0)
                         {
-                            std::vector<uint8_t> bodyBuffer(bodySize);
+                            std::vector<uint8_t> bodyBuffer(static_cast<size_t>(bodySize));
                             jniEnv->GetByteArrayRegion(responseBody, 0, bodySize, reinterpret_cast<jbyte*>(bodyBuffer.data()));
 
                             std::string body(reinterpret_cast<const char* >(bodyBuffer.data()), bodyBuffer.size());
@@ -604,7 +624,16 @@ namespace PlayFab
                 requestTask.state = RequestTask::Finished;
             } // UNLOCK httpRequestMutex
         }
+
+        return true;
     }
+
+    void PlayFabAndroidHttpPlugin::SetResponceAsBadRequest(RequestTask& requestTask)
+    {
+        CallRequestContainer& requestContainer = this->requestingTask->RequestContainer();
+        ProcessResponse(*(this->requestingTask), 400); // 400 Bad Request
+    }
+
 
     std::string PlayFabAndroidHttpPlugin::GetUrl(RequestTask& requestTask) const
     {
@@ -612,14 +641,15 @@ namespace PlayFab
         return PlayFabSettings::GetUrl(requestContainer.GetUrl(), PlayFabSettings::requestGetParams);
     }
 
-    void PlayFabAndroidHttpPlugin::SetPredefinedHeaders(RequestTask& requestTask, void* urlRequest)
+    void PlayFabAndroidHttpPlugin::SetPredefinedHeaders(RequestTask& requestTask)
     {
-        SetHeader(requestTask, urlRequest, "Accept", "application/json");
-        SetHeader(requestTask, urlRequest, "X-PlayFabSDK", std::string(PlayFabSettings::versionString.begin(), PlayFabSettings::versionString.end()).c_str());
-        SetHeader(requestTask, urlRequest, "X-ReportErrorAsSuccess", "true");
+        SetHeader(requestTask, "Accept", "application/json");
+        SetHeader(requestTask, "Content-Type", "application/json; charset=utf-8");
+        SetHeader(requestTask, "X-PlayFabSDK", std::string(PlayFabSettings::versionString.begin(), PlayFabSettings::versionString.end()).c_str());
+        SetHeader(requestTask, "X-ReportErrorAsSuccess", "true");
     }
 
-    void PlayFabAndroidHttpPlugin::SetHeader(RequestTask& requestTask, void* urlRequest, const char* name, const char* value)
+    void PlayFabAndroidHttpPlugin::SetHeader(RequestTask& requestTask, const char* name, const char* value)
     {
         CallRequestContainer& requestContainer = requestTask.RequestContainer();
 
@@ -656,8 +686,7 @@ namespace PlayFab
             return ;
         }
 
-        jboolean result = jniEnv->CallBooleanMethod(httpRequestObject, methodId, nameJstr, valueJstr);
-
+        jniEnv->CallVoidMethod(httpRequestObject, methodId, nameJstr, valueJstr);
 
         jniEnv->DeleteLocalRef(nameJstr);
         jniEnv->DeleteLocalRef(valueJstr);
