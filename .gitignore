@@ -343,3 +343,4 @@ CMakeCache.txt
 /build/Android/.idea/
 /build/Android/XplatCppSdk/build/
 /build/Android/local.properties
+*.a

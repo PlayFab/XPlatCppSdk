@@ -1,5 +1,11 @@
 cmake_minimum_required(VERSION 3.4.1)
 
+# Set code repository root
+set(CODE_REPOSIORY_ROOT ${PROJECT_SOURCE_DIR}/..)
+# Set final libraries output folder
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${CODE_REPOSIORY_ROOT}/libs/XplatCppSdk/${ANDROID_ABI})
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${CODE_REPOSIORY_ROOT}/libs/XplatCppSdk/${ANDROID_ABI})
+
 include_directories(
         ../../../code
         ../../../code/source
@@ -27,7 +33,7 @@ add_compile_options(
 )
 
 add_library(XplatCppSdk
-        STATIC
+        SHARED
         ${SOURCES}
         "../../../code/stdafx.cpp"
         "../../../code/stdafx.h"
