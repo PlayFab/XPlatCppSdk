@@ -4713,13 +4713,15 @@ namespace PlayFab
             std::string SteamCountry;
             Boxed<Currency> SteamCurrency;
             std::string SteamId;
+            std::string SteamName;
 
             UserSteamInfo() :
                 PlayFabBaseModel(),
                 SteamActivationStatus(),
                 SteamCountry(),
                 SteamCurrency(),
-                SteamId()
+                SteamId(),
+                SteamName()
             {}
 
             UserSteamInfo(const UserSteamInfo& src) :
@@ -4727,7 +4729,8 @@ namespace PlayFab
                 SteamActivationStatus(src.SteamActivationStatus),
                 SteamCountry(src.SteamCountry),
                 SteamCurrency(src.SteamCurrency),
-                SteamId(src.SteamId)
+                SteamId(src.SteamId),
+                SteamName(src.SteamName)
             {}
 
             ~UserSteamInfo() = default;
@@ -4738,6 +4741,7 @@ namespace PlayFab
                 FromJsonUtilS(input["SteamCountry"], SteamCountry);
                 FromJsonUtilE(input["SteamCurrency"], SteamCurrency);
                 FromJsonUtilS(input["SteamId"], SteamId);
+                FromJsonUtilS(input["SteamName"], SteamName);
             }
 
             Json::Value ToJson() const override
@@ -4747,6 +4751,7 @@ namespace PlayFab
                 Json::Value each_SteamCountry; ToJsonUtilS(SteamCountry, each_SteamCountry); output["SteamCountry"] = each_SteamCountry;
                 Json::Value each_SteamCurrency; ToJsonUtilE(SteamCurrency, each_SteamCurrency); output["SteamCurrency"] = each_SteamCurrency;
                 Json::Value each_SteamId; ToJsonUtilS(SteamId, each_SteamId); output["SteamId"] = each_SteamId;
+                Json::Value each_SteamName; ToJsonUtilS(SteamName, each_SteamName); output["SteamName"] = each_SteamName;
                 return output;
             }
         };
@@ -4782,7 +4787,6 @@ namespace PlayFab
 
         struct FriendInfo : public PlayFabBaseModel
         {
-            std::string CurrentMatchmakerLobbyId;
             Boxed<UserFacebookInfo> FacebookInfo;
             std::string FriendPlayFabId;
             Boxed<UserGameCenterInfo> GameCenterInfo;
@@ -4796,7 +4800,6 @@ namespace PlayFab
 
             FriendInfo() :
                 PlayFabBaseModel(),
-                CurrentMatchmakerLobbyId(),
                 FacebookInfo(),
                 FriendPlayFabId(),
                 GameCenterInfo(),
@@ -4811,7 +4814,6 @@ namespace PlayFab
 
             FriendInfo(const FriendInfo& src) :
                 PlayFabBaseModel(),
-                CurrentMatchmakerLobbyId(src.CurrentMatchmakerLobbyId),
                 FacebookInfo(src.FacebookInfo),
                 FriendPlayFabId(src.FriendPlayFabId),
                 GameCenterInfo(src.GameCenterInfo),
@@ -4828,7 +4830,6 @@ namespace PlayFab
 
             void FromJson(Json::Value& input) override
             {
-                FromJsonUtilS(input["CurrentMatchmakerLobbyId"], CurrentMatchmakerLobbyId);
                 FromJsonUtilO(input["FacebookInfo"], FacebookInfo);
                 FromJsonUtilS(input["FriendPlayFabId"], FriendPlayFabId);
                 FromJsonUtilO(input["GameCenterInfo"], GameCenterInfo);
@@ -4844,7 +4845,6 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                Json::Value each_CurrentMatchmakerLobbyId; ToJsonUtilS(CurrentMatchmakerLobbyId, each_CurrentMatchmakerLobbyId); output["CurrentMatchmakerLobbyId"] = each_CurrentMatchmakerLobbyId;
                 Json::Value each_FacebookInfo; ToJsonUtilO(FacebookInfo, each_FacebookInfo); output["FacebookInfo"] = each_FacebookInfo;
                 Json::Value each_FriendPlayFabId; ToJsonUtilS(FriendPlayFabId, each_FriendPlayFabId); output["FriendPlayFabId"] = each_FriendPlayFabId;
                 Json::Value each_GameCenterInfo; ToJsonUtilO(GameCenterInfo, each_GameCenterInfo); output["GameCenterInfo"] = each_GameCenterInfo;
@@ -5171,13 +5171,15 @@ namespace PlayFab
             std::string GoogleGender;
             std::string GoogleId;
             std::string GoogleLocale;
+            std::string GoogleName;
 
             UserGoogleInfo() :
                 PlayFabBaseModel(),
                 GoogleEmail(),
                 GoogleGender(),
                 GoogleId(),
-                GoogleLocale()
+                GoogleLocale(),
+                GoogleName()
             {}
 
             UserGoogleInfo(const UserGoogleInfo& src) :
@@ -5185,7 +5187,8 @@ namespace PlayFab
                 GoogleEmail(src.GoogleEmail),
                 GoogleGender(src.GoogleGender),
                 GoogleId(src.GoogleId),
-                GoogleLocale(src.GoogleLocale)
+                GoogleLocale(src.GoogleLocale),
+                GoogleName(src.GoogleName)
             {}
 
             ~UserGoogleInfo() = default;
@@ -5196,6 +5199,7 @@ namespace PlayFab
                 FromJsonUtilS(input["GoogleGender"], GoogleGender);
                 FromJsonUtilS(input["GoogleId"], GoogleId);
                 FromJsonUtilS(input["GoogleLocale"], GoogleLocale);
+                FromJsonUtilS(input["GoogleName"], GoogleName);
             }
 
             Json::Value ToJson() const override
@@ -5205,6 +5209,7 @@ namespace PlayFab
                 Json::Value each_GoogleGender; ToJsonUtilS(GoogleGender, each_GoogleGender); output["GoogleGender"] = each_GoogleGender;
                 Json::Value each_GoogleId; ToJsonUtilS(GoogleId, each_GoogleId); output["GoogleId"] = each_GoogleId;
                 Json::Value each_GoogleLocale; ToJsonUtilS(GoogleLocale, each_GoogleLocale); output["GoogleLocale"] = each_GoogleLocale;
+                Json::Value each_GoogleName; ToJsonUtilS(GoogleName, each_GoogleName); output["GoogleName"] = each_GoogleName;
                 return output;
             }
         };

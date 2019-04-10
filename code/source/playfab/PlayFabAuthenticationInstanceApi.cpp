@@ -147,7 +147,7 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
             if (outResult.EntityToken.length() > 0)            {
-                this->GetOrCreateAuthenticationContext()->entityToken = outResult.EntityToken; 
+                this->GetOrCreateAuthenticationContext()->entityToken = outResult.EntityToken;
             }
 
             const auto internalPtr = container.successCallback.get();

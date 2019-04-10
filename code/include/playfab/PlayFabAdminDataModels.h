@@ -1847,6 +1847,7 @@ namespace PlayFab
             GenericErrorCodesCannotEnableMultiplayerServersForTitle,
             GenericErrorCodesWriteAttemptedDuringExport,
             GenericErrorCodesMultiplayerServerTitleQuotaCoresExceeded,
+            GenericErrorCodesAutomationRuleNotFound,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -1865,6 +1866,7 @@ namespace PlayFab
             GenericErrorCodesMatchmakingRateLimitExceeded,
             GenericErrorCodesMatchmakingTicketMembershipLimitExceeded,
             GenericErrorCodesMatchmakingUnauthorized,
+            GenericErrorCodesMatchmakingQueueLimitExceeded,
             GenericErrorCodesTitleConfigNotFound,
             GenericErrorCodesTitleConfigUpdateConflict,
             GenericErrorCodesTitleConfigSerializationError,
@@ -1882,13 +1884,27 @@ namespace PlayFab
             GenericErrorCodesCatalogConfigContentTypeTooLong,
             GenericErrorCodesCatalogConfigTooManyTags,
             GenericErrorCodesCatalogConfigTagTooLong,
+            GenericErrorCodesCatalogConfigInvalidDeepLinkObject,
+            GenericErrorCodesCatalogConfigInvalidDeepLinkPlatform,
+            GenericErrorCodesCatalogConfigInvalidDeepLinkFormat,
+            GenericErrorCodesCatalogConfigInvalidDisplayPropertyObject,
+            GenericErrorCodesCatalogConfigInvalidDisplayPropertyName,
+            GenericErrorCodesCatalogConfigInvalidDisplayPropertyType,
+            GenericErrorCodesCatalogConfigDisplayPropertyMappingLimit,
             GenericErrorCodesExportInvalidStatusUpdate,
             GenericErrorCodesExportInvalidPrefix,
             GenericErrorCodesExportBlobContainerDoesNotExist,
             GenericErrorCodesExportEventNameNotFound,
             GenericErrorCodesExportExportTitleIdNotFound,
             GenericErrorCodesExportCouldNotUpdate,
-            GenericErrorCodesExportInvalidStorageType
+            GenericErrorCodesExportInvalidStorageType,
+            GenericErrorCodesExportAmazonBucketDoesNotExist,
+            GenericErrorCodesExportInvalidBlobStorage,
+            GenericErrorCodesExportKustoException,
+            GenericErrorCodesExportKustoExceptionNew_SomeResources,
+            GenericErrorCodesExportKustoExceptionEdit,
+            GenericErrorCodesExportKustoConnectionFailed,
+            GenericErrorCodesExportUnknownError
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -2328,6 +2344,7 @@ namespace PlayFab
             if (input == GenericErrorCodesCannotEnableMultiplayerServersForTitle) output = Json::Value("CannotEnableMultiplayerServersForTitle");
             if (input == GenericErrorCodesWriteAttemptedDuringExport) output = Json::Value("WriteAttemptedDuringExport");
             if (input == GenericErrorCodesMultiplayerServerTitleQuotaCoresExceeded) output = Json::Value("MultiplayerServerTitleQuotaCoresExceeded");
+            if (input == GenericErrorCodesAutomationRuleNotFound) output = Json::Value("AutomationRuleNotFound");
             if (input == GenericErrorCodesMatchmakingEntityInvalid) output = Json::Value("MatchmakingEntityInvalid");
             if (input == GenericErrorCodesMatchmakingPlayerAttributesInvalid) output = Json::Value("MatchmakingPlayerAttributesInvalid");
             if (input == GenericErrorCodesMatchmakingQueueNotFound) output = Json::Value("MatchmakingQueueNotFound");
@@ -2346,6 +2363,7 @@ namespace PlayFab
             if (input == GenericErrorCodesMatchmakingRateLimitExceeded) output = Json::Value("MatchmakingRateLimitExceeded");
             if (input == GenericErrorCodesMatchmakingTicketMembershipLimitExceeded) output = Json::Value("MatchmakingTicketMembershipLimitExceeded");
             if (input == GenericErrorCodesMatchmakingUnauthorized) output = Json::Value("MatchmakingUnauthorized");
+            if (input == GenericErrorCodesMatchmakingQueueLimitExceeded) output = Json::Value("MatchmakingQueueLimitExceeded");
             if (input == GenericErrorCodesTitleConfigNotFound) output = Json::Value("TitleConfigNotFound");
             if (input == GenericErrorCodesTitleConfigUpdateConflict) output = Json::Value("TitleConfigUpdateConflict");
             if (input == GenericErrorCodesTitleConfigSerializationError) output = Json::Value("TitleConfigSerializationError");
@@ -2363,6 +2381,13 @@ namespace PlayFab
             if (input == GenericErrorCodesCatalogConfigContentTypeTooLong) output = Json::Value("CatalogConfigContentTypeTooLong");
             if (input == GenericErrorCodesCatalogConfigTooManyTags) output = Json::Value("CatalogConfigTooManyTags");
             if (input == GenericErrorCodesCatalogConfigTagTooLong) output = Json::Value("CatalogConfigTagTooLong");
+            if (input == GenericErrorCodesCatalogConfigInvalidDeepLinkObject) output = Json::Value("CatalogConfigInvalidDeepLinkObject");
+            if (input == GenericErrorCodesCatalogConfigInvalidDeepLinkPlatform) output = Json::Value("CatalogConfigInvalidDeepLinkPlatform");
+            if (input == GenericErrorCodesCatalogConfigInvalidDeepLinkFormat) output = Json::Value("CatalogConfigInvalidDeepLinkFormat");
+            if (input == GenericErrorCodesCatalogConfigInvalidDisplayPropertyObject) output = Json::Value("CatalogConfigInvalidDisplayPropertyObject");
+            if (input == GenericErrorCodesCatalogConfigInvalidDisplayPropertyName) output = Json::Value("CatalogConfigInvalidDisplayPropertyName");
+            if (input == GenericErrorCodesCatalogConfigInvalidDisplayPropertyType) output = Json::Value("CatalogConfigInvalidDisplayPropertyType");
+            if (input == GenericErrorCodesCatalogConfigDisplayPropertyMappingLimit) output = Json::Value("CatalogConfigDisplayPropertyMappingLimit");
             if (input == GenericErrorCodesExportInvalidStatusUpdate) output = Json::Value("ExportInvalidStatusUpdate");
             if (input == GenericErrorCodesExportInvalidPrefix) output = Json::Value("ExportInvalidPrefix");
             if (input == GenericErrorCodesExportBlobContainerDoesNotExist) output = Json::Value("ExportBlobContainerDoesNotExist");
@@ -2370,6 +2395,13 @@ namespace PlayFab
             if (input == GenericErrorCodesExportExportTitleIdNotFound) output = Json::Value("ExportExportTitleIdNotFound");
             if (input == GenericErrorCodesExportCouldNotUpdate) output = Json::Value("ExportCouldNotUpdate");
             if (input == GenericErrorCodesExportInvalidStorageType) output = Json::Value("ExportInvalidStorageType");
+            if (input == GenericErrorCodesExportAmazonBucketDoesNotExist) output = Json::Value("ExportAmazonBucketDoesNotExist");
+            if (input == GenericErrorCodesExportInvalidBlobStorage) output = Json::Value("ExportInvalidBlobStorage");
+            if (input == GenericErrorCodesExportKustoException) output = Json::Value("ExportKustoException");
+            if (input == GenericErrorCodesExportKustoExceptionNew_SomeResources) output = Json::Value("ExportKustoExceptionNew_SomeResources");
+            if (input == GenericErrorCodesExportKustoExceptionEdit) output = Json::Value("ExportKustoExceptionEdit");
+            if (input == GenericErrorCodesExportKustoConnectionFailed) output = Json::Value("ExportKustoConnectionFailed");
+            if (input == GenericErrorCodesExportUnknownError) output = Json::Value("ExportUnknownError");
         }
         inline void FromJsonEnum(const Json::Value& input, GenericErrorCodes& output)
         {
@@ -2810,6 +2842,7 @@ namespace PlayFab
             if (inputStr == "CannotEnableMultiplayerServersForTitle") output = GenericErrorCodesCannotEnableMultiplayerServersForTitle;
             if (inputStr == "WriteAttemptedDuringExport") output = GenericErrorCodesWriteAttemptedDuringExport;
             if (inputStr == "MultiplayerServerTitleQuotaCoresExceeded") output = GenericErrorCodesMultiplayerServerTitleQuotaCoresExceeded;
+            if (inputStr == "AutomationRuleNotFound") output = GenericErrorCodesAutomationRuleNotFound;
             if (inputStr == "MatchmakingEntityInvalid") output = GenericErrorCodesMatchmakingEntityInvalid;
             if (inputStr == "MatchmakingPlayerAttributesInvalid") output = GenericErrorCodesMatchmakingPlayerAttributesInvalid;
             if (inputStr == "MatchmakingQueueNotFound") output = GenericErrorCodesMatchmakingQueueNotFound;
@@ -2828,6 +2861,7 @@ namespace PlayFab
             if (inputStr == "MatchmakingRateLimitExceeded") output = GenericErrorCodesMatchmakingRateLimitExceeded;
             if (inputStr == "MatchmakingTicketMembershipLimitExceeded") output = GenericErrorCodesMatchmakingTicketMembershipLimitExceeded;
             if (inputStr == "MatchmakingUnauthorized") output = GenericErrorCodesMatchmakingUnauthorized;
+            if (inputStr == "MatchmakingQueueLimitExceeded") output = GenericErrorCodesMatchmakingQueueLimitExceeded;
             if (inputStr == "TitleConfigNotFound") output = GenericErrorCodesTitleConfigNotFound;
             if (inputStr == "TitleConfigUpdateConflict") output = GenericErrorCodesTitleConfigUpdateConflict;
             if (inputStr == "TitleConfigSerializationError") output = GenericErrorCodesTitleConfigSerializationError;
@@ -2845,6 +2879,13 @@ namespace PlayFab
             if (inputStr == "CatalogConfigContentTypeTooLong") output = GenericErrorCodesCatalogConfigContentTypeTooLong;
             if (inputStr == "CatalogConfigTooManyTags") output = GenericErrorCodesCatalogConfigTooManyTags;
             if (inputStr == "CatalogConfigTagTooLong") output = GenericErrorCodesCatalogConfigTagTooLong;
+            if (inputStr == "CatalogConfigInvalidDeepLinkObject") output = GenericErrorCodesCatalogConfigInvalidDeepLinkObject;
+            if (inputStr == "CatalogConfigInvalidDeepLinkPlatform") output = GenericErrorCodesCatalogConfigInvalidDeepLinkPlatform;
+            if (inputStr == "CatalogConfigInvalidDeepLinkFormat") output = GenericErrorCodesCatalogConfigInvalidDeepLinkFormat;
+            if (inputStr == "CatalogConfigInvalidDisplayPropertyObject") output = GenericErrorCodesCatalogConfigInvalidDisplayPropertyObject;
+            if (inputStr == "CatalogConfigInvalidDisplayPropertyName") output = GenericErrorCodesCatalogConfigInvalidDisplayPropertyName;
+            if (inputStr == "CatalogConfigInvalidDisplayPropertyType") output = GenericErrorCodesCatalogConfigInvalidDisplayPropertyType;
+            if (inputStr == "CatalogConfigDisplayPropertyMappingLimit") output = GenericErrorCodesCatalogConfigDisplayPropertyMappingLimit;
             if (inputStr == "ExportInvalidStatusUpdate") output = GenericErrorCodesExportInvalidStatusUpdate;
             if (inputStr == "ExportInvalidPrefix") output = GenericErrorCodesExportInvalidPrefix;
             if (inputStr == "ExportBlobContainerDoesNotExist") output = GenericErrorCodesExportBlobContainerDoesNotExist;
@@ -2852,6 +2893,13 @@ namespace PlayFab
             if (inputStr == "ExportExportTitleIdNotFound") output = GenericErrorCodesExportExportTitleIdNotFound;
             if (inputStr == "ExportCouldNotUpdate") output = GenericErrorCodesExportCouldNotUpdate;
             if (inputStr == "ExportInvalidStorageType") output = GenericErrorCodesExportInvalidStorageType;
+            if (inputStr == "ExportAmazonBucketDoesNotExist") output = GenericErrorCodesExportAmazonBucketDoesNotExist;
+            if (inputStr == "ExportInvalidBlobStorage") output = GenericErrorCodesExportInvalidBlobStorage;
+            if (inputStr == "ExportKustoException") output = GenericErrorCodesExportKustoException;
+            if (inputStr == "ExportKustoExceptionNew_SomeResources") output = GenericErrorCodesExportKustoExceptionNew_SomeResources;
+            if (inputStr == "ExportKustoExceptionEdit") output = GenericErrorCodesExportKustoExceptionEdit;
+            if (inputStr == "ExportKustoConnectionFailed") output = GenericErrorCodesExportKustoConnectionFailed;
+            if (inputStr == "ExportUnknownError") output = GenericErrorCodesExportUnknownError;
         }
 
         enum LoginIdentityProvider
@@ -10384,13 +10432,15 @@ namespace PlayFab
             std::string GoogleGender;
             std::string GoogleId;
             std::string GoogleLocale;
+            std::string GoogleName;
 
             UserGoogleInfo() :
                 PlayFabBaseModel(),
                 GoogleEmail(),
                 GoogleGender(),
                 GoogleId(),
-                GoogleLocale()
+                GoogleLocale(),
+                GoogleName()
             {}
 
             UserGoogleInfo(const UserGoogleInfo& src) :
@@ -10398,7 +10448,8 @@ namespace PlayFab
                 GoogleEmail(src.GoogleEmail),
                 GoogleGender(src.GoogleGender),
                 GoogleId(src.GoogleId),
-                GoogleLocale(src.GoogleLocale)
+                GoogleLocale(src.GoogleLocale),
+                GoogleName(src.GoogleName)
             {}
 
             ~UserGoogleInfo() = default;
@@ -10409,6 +10460,7 @@ namespace PlayFab
                 FromJsonUtilS(input["GoogleGender"], GoogleGender);
                 FromJsonUtilS(input["GoogleId"], GoogleId);
                 FromJsonUtilS(input["GoogleLocale"], GoogleLocale);
+                FromJsonUtilS(input["GoogleName"], GoogleName);
             }
 
             Json::Value ToJson() const override
@@ -10418,6 +10470,7 @@ namespace PlayFab
                 Json::Value each_GoogleGender; ToJsonUtilS(GoogleGender, each_GoogleGender); output["GoogleGender"] = each_GoogleGender;
                 Json::Value each_GoogleId; ToJsonUtilS(GoogleId, each_GoogleId); output["GoogleId"] = each_GoogleId;
                 Json::Value each_GoogleLocale; ToJsonUtilS(GoogleLocale, each_GoogleLocale); output["GoogleLocale"] = each_GoogleLocale;
+                Json::Value each_GoogleName; ToJsonUtilS(GoogleName, each_GoogleName); output["GoogleName"] = each_GoogleName;
                 return output;
             }
         };
@@ -10622,13 +10675,15 @@ namespace PlayFab
             std::string SteamCountry;
             Boxed<Currency> SteamCurrency;
             std::string SteamId;
+            std::string SteamName;
 
             UserSteamInfo() :
                 PlayFabBaseModel(),
                 SteamActivationStatus(),
                 SteamCountry(),
                 SteamCurrency(),
-                SteamId()
+                SteamId(),
+                SteamName()
             {}
 
             UserSteamInfo(const UserSteamInfo& src) :
@@ -10636,7 +10691,8 @@ namespace PlayFab
                 SteamActivationStatus(src.SteamActivationStatus),
                 SteamCountry(src.SteamCountry),
                 SteamCurrency(src.SteamCurrency),
-                SteamId(src.SteamId)
+                SteamId(src.SteamId),
+                SteamName(src.SteamName)
             {}
 
             ~UserSteamInfo() = default;
@@ -10647,6 +10703,7 @@ namespace PlayFab
                 FromJsonUtilS(input["SteamCountry"], SteamCountry);
                 FromJsonUtilE(input["SteamCurrency"], SteamCurrency);
                 FromJsonUtilS(input["SteamId"], SteamId);
+                FromJsonUtilS(input["SteamName"], SteamName);
             }
 
             Json::Value ToJson() const override
@@ -10656,6 +10713,7 @@ namespace PlayFab
                 Json::Value each_SteamCountry; ToJsonUtilS(SteamCountry, each_SteamCountry); output["SteamCountry"] = each_SteamCountry;
                 Json::Value each_SteamCurrency; ToJsonUtilE(SteamCurrency, each_SteamCurrency); output["SteamCurrency"] = each_SteamCurrency;
                 Json::Value each_SteamId; ToJsonUtilS(SteamId, each_SteamId); output["SteamId"] = each_SteamId;
+                Json::Value each_SteamName; ToJsonUtilS(SteamName, each_SteamName); output["SteamName"] = each_SteamName;
                 return output;
             }
         };

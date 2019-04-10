@@ -88,7 +88,7 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
             if (outResult.EntityToken.length() > 0)            {
-                PlayFabSettings::entityToken = outResult.EntityToken; 
+                PlayFabSettings::entityToken = outResult.EntityToken;
             }
 
             const auto internalPtr = container.successCallback.get();
