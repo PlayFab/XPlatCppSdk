@@ -1848,6 +1848,9 @@ namespace PlayFab
             GenericErrorCodesWriteAttemptedDuringExport,
             GenericErrorCodesMultiplayerServerTitleQuotaCoresExceeded,
             GenericErrorCodesAutomationRuleNotFound,
+            GenericErrorCodesEntityAPIKeyLimitExceeded,
+            GenericErrorCodesEntityAPIKeyNotFound,
+            GenericErrorCodesEntityAPIKeyOrSecretInvalid,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -1879,18 +1882,7 @@ namespace PlayFab
             GenericErrorCodesCatalogItemIdInvalid,
             GenericErrorCodesCatalogSearchParameterInvalid,
             GenericErrorCodesCatalogFeatureDisabled,
-            GenericErrorCodesCatalogConfigMissing,
-            GenericErrorCodesCatalogConfigTooManyContentTypes,
-            GenericErrorCodesCatalogConfigContentTypeTooLong,
-            GenericErrorCodesCatalogConfigTooManyTags,
-            GenericErrorCodesCatalogConfigTagTooLong,
-            GenericErrorCodesCatalogConfigInvalidDeepLinkObject,
-            GenericErrorCodesCatalogConfigInvalidDeepLinkPlatform,
-            GenericErrorCodesCatalogConfigInvalidDeepLinkFormat,
-            GenericErrorCodesCatalogConfigInvalidDisplayPropertyObject,
-            GenericErrorCodesCatalogConfigInvalidDisplayPropertyName,
-            GenericErrorCodesCatalogConfigInvalidDisplayPropertyType,
-            GenericErrorCodesCatalogConfigDisplayPropertyMappingLimit,
+            GenericErrorCodesCatalogConfigInvalid,
             GenericErrorCodesExportInvalidStatusUpdate,
             GenericErrorCodesExportInvalidPrefix,
             GenericErrorCodesExportBlobContainerDoesNotExist,
@@ -1904,7 +1896,10 @@ namespace PlayFab
             GenericErrorCodesExportKustoExceptionNew_SomeResources,
             GenericErrorCodesExportKustoExceptionEdit,
             GenericErrorCodesExportKustoConnectionFailed,
-            GenericErrorCodesExportUnknownError
+            GenericErrorCodesExportUnknownError,
+            GenericErrorCodesExportCantEditPendingExport,
+            GenericErrorCodesExportLimitExports,
+            GenericErrorCodesExportLimitEvents
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -2345,6 +2340,9 @@ namespace PlayFab
             if (input == GenericErrorCodesWriteAttemptedDuringExport) output = Json::Value("WriteAttemptedDuringExport");
             if (input == GenericErrorCodesMultiplayerServerTitleQuotaCoresExceeded) output = Json::Value("MultiplayerServerTitleQuotaCoresExceeded");
             if (input == GenericErrorCodesAutomationRuleNotFound) output = Json::Value("AutomationRuleNotFound");
+            if (input == GenericErrorCodesEntityAPIKeyLimitExceeded) output = Json::Value("EntityAPIKeyLimitExceeded");
+            if (input == GenericErrorCodesEntityAPIKeyNotFound) output = Json::Value("EntityAPIKeyNotFound");
+            if (input == GenericErrorCodesEntityAPIKeyOrSecretInvalid) output = Json::Value("EntityAPIKeyOrSecretInvalid");
             if (input == GenericErrorCodesMatchmakingEntityInvalid) output = Json::Value("MatchmakingEntityInvalid");
             if (input == GenericErrorCodesMatchmakingPlayerAttributesInvalid) output = Json::Value("MatchmakingPlayerAttributesInvalid");
             if (input == GenericErrorCodesMatchmakingQueueNotFound) output = Json::Value("MatchmakingQueueNotFound");
@@ -2376,18 +2374,7 @@ namespace PlayFab
             if (input == GenericErrorCodesCatalogItemIdInvalid) output = Json::Value("CatalogItemIdInvalid");
             if (input == GenericErrorCodesCatalogSearchParameterInvalid) output = Json::Value("CatalogSearchParameterInvalid");
             if (input == GenericErrorCodesCatalogFeatureDisabled) output = Json::Value("CatalogFeatureDisabled");
-            if (input == GenericErrorCodesCatalogConfigMissing) output = Json::Value("CatalogConfigMissing");
-            if (input == GenericErrorCodesCatalogConfigTooManyContentTypes) output = Json::Value("CatalogConfigTooManyContentTypes");
-            if (input == GenericErrorCodesCatalogConfigContentTypeTooLong) output = Json::Value("CatalogConfigContentTypeTooLong");
-            if (input == GenericErrorCodesCatalogConfigTooManyTags) output = Json::Value("CatalogConfigTooManyTags");
-            if (input == GenericErrorCodesCatalogConfigTagTooLong) output = Json::Value("CatalogConfigTagTooLong");
-            if (input == GenericErrorCodesCatalogConfigInvalidDeepLinkObject) output = Json::Value("CatalogConfigInvalidDeepLinkObject");
-            if (input == GenericErrorCodesCatalogConfigInvalidDeepLinkPlatform) output = Json::Value("CatalogConfigInvalidDeepLinkPlatform");
-            if (input == GenericErrorCodesCatalogConfigInvalidDeepLinkFormat) output = Json::Value("CatalogConfigInvalidDeepLinkFormat");
-            if (input == GenericErrorCodesCatalogConfigInvalidDisplayPropertyObject) output = Json::Value("CatalogConfigInvalidDisplayPropertyObject");
-            if (input == GenericErrorCodesCatalogConfigInvalidDisplayPropertyName) output = Json::Value("CatalogConfigInvalidDisplayPropertyName");
-            if (input == GenericErrorCodesCatalogConfigInvalidDisplayPropertyType) output = Json::Value("CatalogConfigInvalidDisplayPropertyType");
-            if (input == GenericErrorCodesCatalogConfigDisplayPropertyMappingLimit) output = Json::Value("CatalogConfigDisplayPropertyMappingLimit");
+            if (input == GenericErrorCodesCatalogConfigInvalid) output = Json::Value("CatalogConfigInvalid");
             if (input == GenericErrorCodesExportInvalidStatusUpdate) output = Json::Value("ExportInvalidStatusUpdate");
             if (input == GenericErrorCodesExportInvalidPrefix) output = Json::Value("ExportInvalidPrefix");
             if (input == GenericErrorCodesExportBlobContainerDoesNotExist) output = Json::Value("ExportBlobContainerDoesNotExist");
@@ -2402,6 +2389,9 @@ namespace PlayFab
             if (input == GenericErrorCodesExportKustoExceptionEdit) output = Json::Value("ExportKustoExceptionEdit");
             if (input == GenericErrorCodesExportKustoConnectionFailed) output = Json::Value("ExportKustoConnectionFailed");
             if (input == GenericErrorCodesExportUnknownError) output = Json::Value("ExportUnknownError");
+            if (input == GenericErrorCodesExportCantEditPendingExport) output = Json::Value("ExportCantEditPendingExport");
+            if (input == GenericErrorCodesExportLimitExports) output = Json::Value("ExportLimitExports");
+            if (input == GenericErrorCodesExportLimitEvents) output = Json::Value("ExportLimitEvents");
         }
         inline void FromJsonEnum(const Json::Value& input, GenericErrorCodes& output)
         {
@@ -2843,6 +2833,9 @@ namespace PlayFab
             if (inputStr == "WriteAttemptedDuringExport") output = GenericErrorCodesWriteAttemptedDuringExport;
             if (inputStr == "MultiplayerServerTitleQuotaCoresExceeded") output = GenericErrorCodesMultiplayerServerTitleQuotaCoresExceeded;
             if (inputStr == "AutomationRuleNotFound") output = GenericErrorCodesAutomationRuleNotFound;
+            if (inputStr == "EntityAPIKeyLimitExceeded") output = GenericErrorCodesEntityAPIKeyLimitExceeded;
+            if (inputStr == "EntityAPIKeyNotFound") output = GenericErrorCodesEntityAPIKeyNotFound;
+            if (inputStr == "EntityAPIKeyOrSecretInvalid") output = GenericErrorCodesEntityAPIKeyOrSecretInvalid;
             if (inputStr == "MatchmakingEntityInvalid") output = GenericErrorCodesMatchmakingEntityInvalid;
             if (inputStr == "MatchmakingPlayerAttributesInvalid") output = GenericErrorCodesMatchmakingPlayerAttributesInvalid;
             if (inputStr == "MatchmakingQueueNotFound") output = GenericErrorCodesMatchmakingQueueNotFound;
@@ -2874,18 +2867,7 @@ namespace PlayFab
             if (inputStr == "CatalogItemIdInvalid") output = GenericErrorCodesCatalogItemIdInvalid;
             if (inputStr == "CatalogSearchParameterInvalid") output = GenericErrorCodesCatalogSearchParameterInvalid;
             if (inputStr == "CatalogFeatureDisabled") output = GenericErrorCodesCatalogFeatureDisabled;
-            if (inputStr == "CatalogConfigMissing") output = GenericErrorCodesCatalogConfigMissing;
-            if (inputStr == "CatalogConfigTooManyContentTypes") output = GenericErrorCodesCatalogConfigTooManyContentTypes;
-            if (inputStr == "CatalogConfigContentTypeTooLong") output = GenericErrorCodesCatalogConfigContentTypeTooLong;
-            if (inputStr == "CatalogConfigTooManyTags") output = GenericErrorCodesCatalogConfigTooManyTags;
-            if (inputStr == "CatalogConfigTagTooLong") output = GenericErrorCodesCatalogConfigTagTooLong;
-            if (inputStr == "CatalogConfigInvalidDeepLinkObject") output = GenericErrorCodesCatalogConfigInvalidDeepLinkObject;
-            if (inputStr == "CatalogConfigInvalidDeepLinkPlatform") output = GenericErrorCodesCatalogConfigInvalidDeepLinkPlatform;
-            if (inputStr == "CatalogConfigInvalidDeepLinkFormat") output = GenericErrorCodesCatalogConfigInvalidDeepLinkFormat;
-            if (inputStr == "CatalogConfigInvalidDisplayPropertyObject") output = GenericErrorCodesCatalogConfigInvalidDisplayPropertyObject;
-            if (inputStr == "CatalogConfigInvalidDisplayPropertyName") output = GenericErrorCodesCatalogConfigInvalidDisplayPropertyName;
-            if (inputStr == "CatalogConfigInvalidDisplayPropertyType") output = GenericErrorCodesCatalogConfigInvalidDisplayPropertyType;
-            if (inputStr == "CatalogConfigDisplayPropertyMappingLimit") output = GenericErrorCodesCatalogConfigDisplayPropertyMappingLimit;
+            if (inputStr == "CatalogConfigInvalid") output = GenericErrorCodesCatalogConfigInvalid;
             if (inputStr == "ExportInvalidStatusUpdate") output = GenericErrorCodesExportInvalidStatusUpdate;
             if (inputStr == "ExportInvalidPrefix") output = GenericErrorCodesExportInvalidPrefix;
             if (inputStr == "ExportBlobContainerDoesNotExist") output = GenericErrorCodesExportBlobContainerDoesNotExist;
@@ -2900,6 +2882,9 @@ namespace PlayFab
             if (inputStr == "ExportKustoExceptionEdit") output = GenericErrorCodesExportKustoExceptionEdit;
             if (inputStr == "ExportKustoConnectionFailed") output = GenericErrorCodesExportKustoConnectionFailed;
             if (inputStr == "ExportUnknownError") output = GenericErrorCodesExportUnknownError;
+            if (inputStr == "ExportCantEditPendingExport") output = GenericErrorCodesExportCantEditPendingExport;
+            if (inputStr == "ExportLimitExports") output = GenericErrorCodesExportLimitExports;
+            if (inputStr == "ExportLimitEvents") output = GenericErrorCodesExportLimitEvents;
         }
 
         enum LoginIdentityProvider

@@ -519,13 +519,15 @@ namespace PlayFab
             std::string BuildName;
             Boxed<time_t> CreationTime;
             std::map<std::string, std::string> Metadata;
+            std::list<BuildRegion> RegionConfigurations;
 
             BuildSummary() :
                 PlayFabBaseModel(),
                 BuildId(),
                 BuildName(),
                 CreationTime(),
-                Metadata()
+                Metadata(),
+                RegionConfigurations()
             {}
 
             BuildSummary(const BuildSummary& src) :
@@ -533,7 +535,8 @@ namespace PlayFab
                 BuildId(src.BuildId),
                 BuildName(src.BuildName),
                 CreationTime(src.CreationTime),
-                Metadata(src.Metadata)
+                Metadata(src.Metadata),
+                RegionConfigurations(src.RegionConfigurations)
             {}
 
             ~BuildSummary() = default;
@@ -544,6 +547,7 @@ namespace PlayFab
                 FromJsonUtilS(input["BuildName"], BuildName);
                 FromJsonUtilT(input["CreationTime"], CreationTime);
                 FromJsonUtilS(input["Metadata"], Metadata);
+                FromJsonUtilO(input["RegionConfigurations"], RegionConfigurations);
             }
 
             Json::Value ToJson() const override
@@ -553,6 +557,7 @@ namespace PlayFab
                 Json::Value each_BuildName; ToJsonUtilS(BuildName, each_BuildName); output["BuildName"] = each_BuildName;
                 Json::Value each_CreationTime; ToJsonUtilT(CreationTime, each_CreationTime); output["CreationTime"] = each_CreationTime;
                 Json::Value each_Metadata; ToJsonUtilS(Metadata, each_Metadata); output["Metadata"] = each_Metadata;
+                Json::Value each_RegionConfigurations; ToJsonUtilO(RegionConfigurations, each_RegionConfigurations); output["RegionConfigurations"] = each_RegionConfigurations;
                 return output;
             }
         };
