@@ -75,7 +75,7 @@ namespace PlayFab
             headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
 
             auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-                "/Event/WriteEvents",
+                "/Event/WriteTelemetryEvents",
                 headers,
                 jsonAsString,
                 OnWriteEventsResult,
@@ -197,7 +197,7 @@ namespace PlayFab
             PlayFab::EventsModels::EventContents eventContents;
 
             eventContents.Name = "qos_result";
-            eventContents.EventNamespace = "custom.qos";
+            eventContents.EventNamespace = "playfab.servers";
             eventContents.Payload = value;
             request.Events.push_back(eventContents);
 
