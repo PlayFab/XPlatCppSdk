@@ -116,7 +116,6 @@
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabAuthenticationContext.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabApiSettings.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabBaseModel.h" />
-
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabAdminApi.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabAdminInstanceApi.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabAdminDataModels.h" />
@@ -168,7 +167,7 @@
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabSpinLock.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabTransportHeaders.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabJsonHeaders.h" />
-    <ClInclude Include="$(SdkSourceDir)\include\playfab\QoS\DataCenterResult.h" />
+    <ClInclude Include="..\..\code\include\playfab\QoS\RegionResult.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\QoS\PingResult.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\QoS\PlayFabQoSApi.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\QoS\QoS.h" />
@@ -183,7 +182,6 @@
     <ClCompile Include="$(SdkSourceDir)\source\playfab\OneDSEventPipeline.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabAuthenticationContext.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabApiSettings.cpp" />
-
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabAdminApi.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabAdminInstanceApi.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabClientApi.cpp" />
@@ -220,7 +218,7 @@
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabCallRequestContainer.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabPluginManager.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabSpinLock.cpp" />
-    <ClCompile Include="$(SdkSourceDir)\source\playfab\QoS\DataCenterResult.cpp" />
+    <ClCompile Include="..\..\code\source\playfab\QoS\RegionResult.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\QoS\PlayFabQoSApi.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\QoS\QoSSocket.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\QoS\XPlatSocket.cpp" />
@@ -233,7 +231,7 @@
     <ProjectReference Include="..\..\external\jsoncpp-build\lib_json.vcxproj">
       <Project>{1e6c2c1c-6453-4129-ae3f-0ee8e6599c89}</Project>
     </ProjectReference>
-  </ItemGroup>  
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
