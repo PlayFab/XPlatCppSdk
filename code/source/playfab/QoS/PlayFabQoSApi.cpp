@@ -96,7 +96,7 @@ namespace PlayFab
         {
             QoSResult result(move(GetResult(numThreads, timeoutMs)));
 
-            if (result.errorCode != 0)
+            if (result.errorCode != QoSErrorCode::Success)
             {
                 return result;
             }
@@ -112,7 +112,7 @@ namespace PlayFab
             if (!PlayFabClientAPI::IsClientLoggedIn())
             {
                 LOG_QOS("Client is not logged in" << endl);
-                result.errorCode = -1;
+                result.errorCode = QoSErrorCode::NotLoggedIn;
                 return result;
             }
 
@@ -128,9 +128,9 @@ namespace PlayFab
             }
 
             size_t serverCount = regionMap.size(); // call thunderhead to get a list of all the data centers
-            if (serverCount < 0)
+            if (serverCount <= 0)
             {
-                result.errorCode = -2;
+                result.errorCode = QoSErrorCode::FailedToRetrieveServerList;
                 return result;
             }
 
