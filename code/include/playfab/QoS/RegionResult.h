@@ -10,7 +10,7 @@ namespace PlayFab
         /// <summary>
         /// The result of pinging a datacenter.
         /// </summary>
-        class RegionResult
+        struct RegionResult
         {
         public:
             RegionResult(PlayFab::MultiplayerModels::AzureRegion region, int latencyMs, int errorCode);

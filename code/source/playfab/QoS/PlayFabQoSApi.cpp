@@ -48,7 +48,6 @@ namespace PlayFab
             WriteEventsResponse outResult;
             if (ValidateResult(outResult, container))
             {
-
                 const auto internalPtr = container.successCallback.get();
                 if (internalPtr != nullptr)
                 {

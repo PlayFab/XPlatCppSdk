@@ -44,16 +44,16 @@ namespace PlayFabUnit
         // Add PlayFab API tests.
         PlayFabApiTest pfApiTest;
         pfApiTest.SetTitleInfo(testInputs);
-        //testRunner.Add(pfApiTest);
+        testRunner.Add(pfApiTest);
 
         PlayFabEventTest pfEventTest;
         testRunner.Add(pfEventTest);
 
         PlayFabTestMultiUserStatic pfMultiUserStaticTest;
-        //testRunner.Add(pfMultiUserStaticTest);
+        testRunner.Add(pfMultiUserStaticTest);
 
         PlayFabTestMultiUserInstance pfMultiUserInstanceTest;
-        //testRunner.Add(pfMultiUserInstanceTest);
+        testRunner.Add(pfMultiUserInstanceTest);
 
         // Run the tests (blocks until all tests have finished).
         testRunner.Run();
