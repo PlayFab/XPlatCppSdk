@@ -779,53 +779,6 @@ namespace PlayFab
         }
     }
 
-    void PlayFabMultiplayerAPI::GetMatchmakingQueue(
-        GetMatchmakingQueueRequest& request,
-        ProcessApiCallback<GetMatchmakingQueueResult> callback,
-        ErrorCallback errorCallback,
-        void* customData
-    )
-    {
-
-        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
-
-        std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
-
-        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Match/GetMatchmakingQueue",
-            headers,
-            jsonAsString,
-            OnGetMatchmakingQueueResult,
-            customData));
-
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetMatchmakingQueueResult>(callback));
-        reqContainer->errorCallback = errorCallback;
-
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
-    }
-
-    void PlayFabMultiplayerAPI::OnGetMatchmakingQueueResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
-    {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
-
-        GetMatchmakingQueueResult outResult;
-        if (ValidateResult(outResult, container))
-        {
-
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
-            {
-                const auto callback = (*static_cast<ProcessApiCallback<GetMatchmakingQueueResult> *>(internalPtr));
-                callback(outResult, container.GetCustomData());
-            }
-        }
-    }
-
     void PlayFabMultiplayerAPI::GetMatchmakingTicket(
         GetMatchmakingTicketRequest& request,
         ProcessApiCallback<GetMatchmakingTicketResult> callback,
@@ -1056,6 +1009,53 @@ namespace PlayFab
             if (internalPtr != nullptr)
             {
                 const auto callback = (*static_cast<ProcessApiCallback<GetTitleEnabledForMultiplayerServersStatusResponse> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabMultiplayerAPI::GetTitleMultiplayerServersQuotas(
+        GetTitleMultiplayerServersQuotasRequest& request,
+        ProcessApiCallback<GetTitleMultiplayerServersQuotasResponse> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const auto requestJson = request.ToJson();
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/MultiplayerServer/GetTitleMultiplayerServersQuotas",
+            headers,
+            jsonAsString,
+            OnGetTitleMultiplayerServersQuotasResult,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTitleMultiplayerServersQuotasResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabMultiplayerAPI::OnGetTitleMultiplayerServersQuotasResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+
+        GetTitleMultiplayerServersQuotasResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<GetTitleMultiplayerServersQuotasResponse> *>(internalPtr));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -1390,53 +1390,6 @@ namespace PlayFab
         }
     }
 
-    void PlayFabMultiplayerAPI::ListMatchmakingQueues(
-        ListMatchmakingQueuesRequest& request,
-        ProcessApiCallback<ListMatchmakingQueuesResult> callback,
-        ErrorCallback errorCallback,
-        void* customData
-    )
-    {
-
-        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
-
-        std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
-
-        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Match/ListMatchmakingQueues",
-            headers,
-            jsonAsString,
-            OnListMatchmakingQueuesResult,
-            customData));
-
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListMatchmakingQueuesResult>(callback));
-        reqContainer->errorCallback = errorCallback;
-
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
-    }
-
-    void PlayFabMultiplayerAPI::OnListMatchmakingQueuesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
-    {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
-
-        ListMatchmakingQueuesResult outResult;
-        if (ValidateResult(outResult, container))
-        {
-
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
-            {
-                const auto callback = (*static_cast<ProcessApiCallback<ListMatchmakingQueuesResult> *>(internalPtr));
-                callback(outResult, container.GetCustomData());
-            }
-        }
-    }
-
     void PlayFabMultiplayerAPI::ListMatchmakingTicketsForPlayer(
         ListMatchmakingTicketsForPlayerRequest& request,
         ProcessApiCallback<ListMatchmakingTicketsForPlayerResult> callback,
@@ -1625,53 +1578,6 @@ namespace PlayFab
         }
     }
 
-    void PlayFabMultiplayerAPI::RemoveMatchmakingQueue(
-        RemoveMatchmakingQueueRequest& request,
-        ProcessApiCallback<RemoveMatchmakingQueueResult> callback,
-        ErrorCallback errorCallback,
-        void* customData
-    )
-    {
-
-        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
-
-        std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
-
-        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Match/RemoveMatchmakingQueue",
-            headers,
-            jsonAsString,
-            OnRemoveMatchmakingQueueResult,
-            customData));
-
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RemoveMatchmakingQueueResult>(callback));
-        reqContainer->errorCallback = errorCallback;
-
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
-    }
-
-    void PlayFabMultiplayerAPI::OnRemoveMatchmakingQueueResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
-    {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
-
-        RemoveMatchmakingQueueResult outResult;
-        if (ValidateResult(outResult, container))
-        {
-
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
-            {
-                const auto callback = (*static_cast<ProcessApiCallback<RemoveMatchmakingQueueResult> *>(internalPtr));
-                callback(outResult, container.GetCustomData());
-            }
-        }
-    }
-
     void PlayFabMultiplayerAPI::RequestMultiplayerServer(
         RequestMultiplayerServerRequest& request,
         ProcessApiCallback<RequestMultiplayerServerResponse> callback,
@@ -1761,53 +1667,6 @@ namespace PlayFab
             if (internalPtr != nullptr)
             {
                 const auto callback = (*static_cast<ProcessApiCallback<RolloverContainerRegistryCredentialsResponse> *>(internalPtr));
-                callback(outResult, container.GetCustomData());
-            }
-        }
-    }
-
-    void PlayFabMultiplayerAPI::SetMatchmakingQueue(
-        SetMatchmakingQueueRequest& request,
-        ProcessApiCallback<SetMatchmakingQueueResult> callback,
-        ErrorCallback errorCallback,
-        void* customData
-    )
-    {
-
-        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
-
-        std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
-
-        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Match/SetMatchmakingQueue",
-            headers,
-            jsonAsString,
-            OnSetMatchmakingQueueResult,
-            customData));
-
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetMatchmakingQueueResult>(callback));
-        reqContainer->errorCallback = errorCallback;
-
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
-    }
-
-    void PlayFabMultiplayerAPI::OnSetMatchmakingQueueResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
-    {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
-
-        SetMatchmakingQueueResult outResult;
-        if (ValidateResult(outResult, container))
-        {
-
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
-            {
-                const auto callback = (*static_cast<ProcessApiCallback<SetMatchmakingQueueResult> *>(internalPtr));
                 callback(outResult, container.GetCustomData());
             }
         }

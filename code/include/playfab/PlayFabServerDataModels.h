@@ -1804,6 +1804,30 @@ namespace PlayFab
             GenericErrorCodesWriteAttemptedDuringExport,
             GenericErrorCodesMultiplayerServerTitleQuotaCoresExceeded,
             GenericErrorCodesAutomationRuleNotFound,
+            GenericErrorCodesEntityAPIKeyLimitExceeded,
+            GenericErrorCodesEntityAPIKeyNotFound,
+            GenericErrorCodesEntityAPIKeyOrSecretInvalid,
+            GenericErrorCodesEconomyServiceUnavailable,
+            GenericErrorCodesEconomyServiceInternalError,
+            GenericErrorCodesKustoProxyQueryRateLimitExceeded,
+            GenericErrorCodesEntityAPIKeyCreationDisabledForEntity,
+            GenericErrorCodesStudioCreationRateLimited,
+            GenericErrorCodesStudioCreationInProgress,
+            GenericErrorCodesDuplicateStudioName,
+            GenericErrorCodesStudioNotFound,
+            GenericErrorCodesStudioDeletionInProgress,
+            GenericErrorCodesStudioDeactivated,
+            GenericErrorCodesTitleCreationRateLimited,
+            GenericErrorCodesTitleCreationInProgress,
+            GenericErrorCodesDuplicateTitleName,
+            GenericErrorCodesTitleNotFound,
+            GenericErrorCodesTitleDeletionInProgress,
+            GenericErrorCodesTitleDeactivated,
+            GenericErrorCodesTitleAlreadyActivated,
+            GenericErrorCodesCloudScriptAzureFunctionsExecutionTimeLimitExceeded,
+            GenericErrorCodesCloudScriptAzureFunctionsArgumentSizeExceeded,
+            GenericErrorCodesCloudScriptAzureFunctionsReturnSizeExceeded,
+            GenericErrorCodesCloudScriptAzureFunctionsHTTPRequestError,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -1823,6 +1847,8 @@ namespace PlayFab
             GenericErrorCodesMatchmakingTicketMembershipLimitExceeded,
             GenericErrorCodesMatchmakingUnauthorized,
             GenericErrorCodesMatchmakingQueueLimitExceeded,
+            GenericErrorCodesMatchmakingRequestTypeMismatch,
+            GenericErrorCodesMatchmakingBadRequest,
             GenericErrorCodesTitleConfigNotFound,
             GenericErrorCodesTitleConfigUpdateConflict,
             GenericErrorCodesTitleConfigSerializationError,
@@ -1835,18 +1861,8 @@ namespace PlayFab
             GenericErrorCodesCatalogItemIdInvalid,
             GenericErrorCodesCatalogSearchParameterInvalid,
             GenericErrorCodesCatalogFeatureDisabled,
-            GenericErrorCodesCatalogConfigMissing,
-            GenericErrorCodesCatalogConfigTooManyContentTypes,
-            GenericErrorCodesCatalogConfigContentTypeTooLong,
-            GenericErrorCodesCatalogConfigTooManyTags,
-            GenericErrorCodesCatalogConfigTagTooLong,
-            GenericErrorCodesCatalogConfigInvalidDeepLinkObject,
-            GenericErrorCodesCatalogConfigInvalidDeepLinkPlatform,
-            GenericErrorCodesCatalogConfigInvalidDeepLinkFormat,
-            GenericErrorCodesCatalogConfigInvalidDisplayPropertyObject,
-            GenericErrorCodesCatalogConfigInvalidDisplayPropertyName,
-            GenericErrorCodesCatalogConfigInvalidDisplayPropertyType,
-            GenericErrorCodesCatalogConfigDisplayPropertyMappingLimit,
+            GenericErrorCodesCatalogConfigInvalid,
+            GenericErrorCodesCatalogUnauthorized,
             GenericErrorCodesExportInvalidStatusUpdate,
             GenericErrorCodesExportInvalidPrefix,
             GenericErrorCodesExportBlobContainerDoesNotExist,
@@ -1857,10 +1873,13 @@ namespace PlayFab
             GenericErrorCodesExportAmazonBucketDoesNotExist,
             GenericErrorCodesExportInvalidBlobStorage,
             GenericErrorCodesExportKustoException,
-            GenericErrorCodesExportKustoExceptionNew_SomeResources,
+            GenericErrorCodesExportKustoExceptionPartialErrorOnNewExport,
             GenericErrorCodesExportKustoExceptionEdit,
             GenericErrorCodesExportKustoConnectionFailed,
-            GenericErrorCodesExportUnknownError
+            GenericErrorCodesExportUnknownError,
+            GenericErrorCodesExportCantEditPendingExport,
+            GenericErrorCodesExportLimitExports,
+            GenericErrorCodesExportLimitEvents
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -2301,6 +2320,30 @@ namespace PlayFab
             if (input == GenericErrorCodesWriteAttemptedDuringExport) output = Json::Value("WriteAttemptedDuringExport");
             if (input == GenericErrorCodesMultiplayerServerTitleQuotaCoresExceeded) output = Json::Value("MultiplayerServerTitleQuotaCoresExceeded");
             if (input == GenericErrorCodesAutomationRuleNotFound) output = Json::Value("AutomationRuleNotFound");
+            if (input == GenericErrorCodesEntityAPIKeyLimitExceeded) output = Json::Value("EntityAPIKeyLimitExceeded");
+            if (input == GenericErrorCodesEntityAPIKeyNotFound) output = Json::Value("EntityAPIKeyNotFound");
+            if (input == GenericErrorCodesEntityAPIKeyOrSecretInvalid) output = Json::Value("EntityAPIKeyOrSecretInvalid");
+            if (input == GenericErrorCodesEconomyServiceUnavailable) output = Json::Value("EconomyServiceUnavailable");
+            if (input == GenericErrorCodesEconomyServiceInternalError) output = Json::Value("EconomyServiceInternalError");
+            if (input == GenericErrorCodesKustoProxyQueryRateLimitExceeded) output = Json::Value("KustoProxyQueryRateLimitExceeded");
+            if (input == GenericErrorCodesEntityAPIKeyCreationDisabledForEntity) output = Json::Value("EntityAPIKeyCreationDisabledForEntity");
+            if (input == GenericErrorCodesStudioCreationRateLimited) output = Json::Value("StudioCreationRateLimited");
+            if (input == GenericErrorCodesStudioCreationInProgress) output = Json::Value("StudioCreationInProgress");
+            if (input == GenericErrorCodesDuplicateStudioName) output = Json::Value("DuplicateStudioName");
+            if (input == GenericErrorCodesStudioNotFound) output = Json::Value("StudioNotFound");
+            if (input == GenericErrorCodesStudioDeletionInProgress) output = Json::Value("StudioDeletionInProgress");
+            if (input == GenericErrorCodesStudioDeactivated) output = Json::Value("StudioDeactivated");
+            if (input == GenericErrorCodesTitleCreationRateLimited) output = Json::Value("TitleCreationRateLimited");
+            if (input == GenericErrorCodesTitleCreationInProgress) output = Json::Value("TitleCreationInProgress");
+            if (input == GenericErrorCodesDuplicateTitleName) output = Json::Value("DuplicateTitleName");
+            if (input == GenericErrorCodesTitleNotFound) output = Json::Value("TitleNotFound");
+            if (input == GenericErrorCodesTitleDeletionInProgress) output = Json::Value("TitleDeletionInProgress");
+            if (input == GenericErrorCodesTitleDeactivated) output = Json::Value("TitleDeactivated");
+            if (input == GenericErrorCodesTitleAlreadyActivated) output = Json::Value("TitleAlreadyActivated");
+            if (input == GenericErrorCodesCloudScriptAzureFunctionsExecutionTimeLimitExceeded) output = Json::Value("CloudScriptAzureFunctionsExecutionTimeLimitExceeded");
+            if (input == GenericErrorCodesCloudScriptAzureFunctionsArgumentSizeExceeded) output = Json::Value("CloudScriptAzureFunctionsArgumentSizeExceeded");
+            if (input == GenericErrorCodesCloudScriptAzureFunctionsReturnSizeExceeded) output = Json::Value("CloudScriptAzureFunctionsReturnSizeExceeded");
+            if (input == GenericErrorCodesCloudScriptAzureFunctionsHTTPRequestError) output = Json::Value("CloudScriptAzureFunctionsHTTPRequestError");
             if (input == GenericErrorCodesMatchmakingEntityInvalid) output = Json::Value("MatchmakingEntityInvalid");
             if (input == GenericErrorCodesMatchmakingPlayerAttributesInvalid) output = Json::Value("MatchmakingPlayerAttributesInvalid");
             if (input == GenericErrorCodesMatchmakingQueueNotFound) output = Json::Value("MatchmakingQueueNotFound");
@@ -2320,6 +2363,8 @@ namespace PlayFab
             if (input == GenericErrorCodesMatchmakingTicketMembershipLimitExceeded) output = Json::Value("MatchmakingTicketMembershipLimitExceeded");
             if (input == GenericErrorCodesMatchmakingUnauthorized) output = Json::Value("MatchmakingUnauthorized");
             if (input == GenericErrorCodesMatchmakingQueueLimitExceeded) output = Json::Value("MatchmakingQueueLimitExceeded");
+            if (input == GenericErrorCodesMatchmakingRequestTypeMismatch) output = Json::Value("MatchmakingRequestTypeMismatch");
+            if (input == GenericErrorCodesMatchmakingBadRequest) output = Json::Value("MatchmakingBadRequest");
             if (input == GenericErrorCodesTitleConfigNotFound) output = Json::Value("TitleConfigNotFound");
             if (input == GenericErrorCodesTitleConfigUpdateConflict) output = Json::Value("TitleConfigUpdateConflict");
             if (input == GenericErrorCodesTitleConfigSerializationError) output = Json::Value("TitleConfigSerializationError");
@@ -2332,18 +2377,8 @@ namespace PlayFab
             if (input == GenericErrorCodesCatalogItemIdInvalid) output = Json::Value("CatalogItemIdInvalid");
             if (input == GenericErrorCodesCatalogSearchParameterInvalid) output = Json::Value("CatalogSearchParameterInvalid");
             if (input == GenericErrorCodesCatalogFeatureDisabled) output = Json::Value("CatalogFeatureDisabled");
-            if (input == GenericErrorCodesCatalogConfigMissing) output = Json::Value("CatalogConfigMissing");
-            if (input == GenericErrorCodesCatalogConfigTooManyContentTypes) output = Json::Value("CatalogConfigTooManyContentTypes");
-            if (input == GenericErrorCodesCatalogConfigContentTypeTooLong) output = Json::Value("CatalogConfigContentTypeTooLong");
-            if (input == GenericErrorCodesCatalogConfigTooManyTags) output = Json::Value("CatalogConfigTooManyTags");
-            if (input == GenericErrorCodesCatalogConfigTagTooLong) output = Json::Value("CatalogConfigTagTooLong");
-            if (input == GenericErrorCodesCatalogConfigInvalidDeepLinkObject) output = Json::Value("CatalogConfigInvalidDeepLinkObject");
-            if (input == GenericErrorCodesCatalogConfigInvalidDeepLinkPlatform) output = Json::Value("CatalogConfigInvalidDeepLinkPlatform");
-            if (input == GenericErrorCodesCatalogConfigInvalidDeepLinkFormat) output = Json::Value("CatalogConfigInvalidDeepLinkFormat");
-            if (input == GenericErrorCodesCatalogConfigInvalidDisplayPropertyObject) output = Json::Value("CatalogConfigInvalidDisplayPropertyObject");
-            if (input == GenericErrorCodesCatalogConfigInvalidDisplayPropertyName) output = Json::Value("CatalogConfigInvalidDisplayPropertyName");
-            if (input == GenericErrorCodesCatalogConfigInvalidDisplayPropertyType) output = Json::Value("CatalogConfigInvalidDisplayPropertyType");
-            if (input == GenericErrorCodesCatalogConfigDisplayPropertyMappingLimit) output = Json::Value("CatalogConfigDisplayPropertyMappingLimit");
+            if (input == GenericErrorCodesCatalogConfigInvalid) output = Json::Value("CatalogConfigInvalid");
+            if (input == GenericErrorCodesCatalogUnauthorized) output = Json::Value("CatalogUnauthorized");
             if (input == GenericErrorCodesExportInvalidStatusUpdate) output = Json::Value("ExportInvalidStatusUpdate");
             if (input == GenericErrorCodesExportInvalidPrefix) output = Json::Value("ExportInvalidPrefix");
             if (input == GenericErrorCodesExportBlobContainerDoesNotExist) output = Json::Value("ExportBlobContainerDoesNotExist");
@@ -2354,10 +2389,13 @@ namespace PlayFab
             if (input == GenericErrorCodesExportAmazonBucketDoesNotExist) output = Json::Value("ExportAmazonBucketDoesNotExist");
             if (input == GenericErrorCodesExportInvalidBlobStorage) output = Json::Value("ExportInvalidBlobStorage");
             if (input == GenericErrorCodesExportKustoException) output = Json::Value("ExportKustoException");
-            if (input == GenericErrorCodesExportKustoExceptionNew_SomeResources) output = Json::Value("ExportKustoExceptionNew_SomeResources");
+            if (input == GenericErrorCodesExportKustoExceptionPartialErrorOnNewExport) output = Json::Value("ExportKustoExceptionPartialErrorOnNewExport");
             if (input == GenericErrorCodesExportKustoExceptionEdit) output = Json::Value("ExportKustoExceptionEdit");
             if (input == GenericErrorCodesExportKustoConnectionFailed) output = Json::Value("ExportKustoConnectionFailed");
             if (input == GenericErrorCodesExportUnknownError) output = Json::Value("ExportUnknownError");
+            if (input == GenericErrorCodesExportCantEditPendingExport) output = Json::Value("ExportCantEditPendingExport");
+            if (input == GenericErrorCodesExportLimitExports) output = Json::Value("ExportLimitExports");
+            if (input == GenericErrorCodesExportLimitEvents) output = Json::Value("ExportLimitEvents");
         }
         inline void FromJsonEnum(const Json::Value& input, GenericErrorCodes& output)
         {
@@ -2799,6 +2837,30 @@ namespace PlayFab
             if (inputStr == "WriteAttemptedDuringExport") output = GenericErrorCodesWriteAttemptedDuringExport;
             if (inputStr == "MultiplayerServerTitleQuotaCoresExceeded") output = GenericErrorCodesMultiplayerServerTitleQuotaCoresExceeded;
             if (inputStr == "AutomationRuleNotFound") output = GenericErrorCodesAutomationRuleNotFound;
+            if (inputStr == "EntityAPIKeyLimitExceeded") output = GenericErrorCodesEntityAPIKeyLimitExceeded;
+            if (inputStr == "EntityAPIKeyNotFound") output = GenericErrorCodesEntityAPIKeyNotFound;
+            if (inputStr == "EntityAPIKeyOrSecretInvalid") output = GenericErrorCodesEntityAPIKeyOrSecretInvalid;
+            if (inputStr == "EconomyServiceUnavailable") output = GenericErrorCodesEconomyServiceUnavailable;
+            if (inputStr == "EconomyServiceInternalError") output = GenericErrorCodesEconomyServiceInternalError;
+            if (inputStr == "KustoProxyQueryRateLimitExceeded") output = GenericErrorCodesKustoProxyQueryRateLimitExceeded;
+            if (inputStr == "EntityAPIKeyCreationDisabledForEntity") output = GenericErrorCodesEntityAPIKeyCreationDisabledForEntity;
+            if (inputStr == "StudioCreationRateLimited") output = GenericErrorCodesStudioCreationRateLimited;
+            if (inputStr == "StudioCreationInProgress") output = GenericErrorCodesStudioCreationInProgress;
+            if (inputStr == "DuplicateStudioName") output = GenericErrorCodesDuplicateStudioName;
+            if (inputStr == "StudioNotFound") output = GenericErrorCodesStudioNotFound;
+            if (inputStr == "StudioDeletionInProgress") output = GenericErrorCodesStudioDeletionInProgress;
+            if (inputStr == "StudioDeactivated") output = GenericErrorCodesStudioDeactivated;
+            if (inputStr == "TitleCreationRateLimited") output = GenericErrorCodesTitleCreationRateLimited;
+            if (inputStr == "TitleCreationInProgress") output = GenericErrorCodesTitleCreationInProgress;
+            if (inputStr == "DuplicateTitleName") output = GenericErrorCodesDuplicateTitleName;
+            if (inputStr == "TitleNotFound") output = GenericErrorCodesTitleNotFound;
+            if (inputStr == "TitleDeletionInProgress") output = GenericErrorCodesTitleDeletionInProgress;
+            if (inputStr == "TitleDeactivated") output = GenericErrorCodesTitleDeactivated;
+            if (inputStr == "TitleAlreadyActivated") output = GenericErrorCodesTitleAlreadyActivated;
+            if (inputStr == "CloudScriptAzureFunctionsExecutionTimeLimitExceeded") output = GenericErrorCodesCloudScriptAzureFunctionsExecutionTimeLimitExceeded;
+            if (inputStr == "CloudScriptAzureFunctionsArgumentSizeExceeded") output = GenericErrorCodesCloudScriptAzureFunctionsArgumentSizeExceeded;
+            if (inputStr == "CloudScriptAzureFunctionsReturnSizeExceeded") output = GenericErrorCodesCloudScriptAzureFunctionsReturnSizeExceeded;
+            if (inputStr == "CloudScriptAzureFunctionsHTTPRequestError") output = GenericErrorCodesCloudScriptAzureFunctionsHTTPRequestError;
             if (inputStr == "MatchmakingEntityInvalid") output = GenericErrorCodesMatchmakingEntityInvalid;
             if (inputStr == "MatchmakingPlayerAttributesInvalid") output = GenericErrorCodesMatchmakingPlayerAttributesInvalid;
             if (inputStr == "MatchmakingQueueNotFound") output = GenericErrorCodesMatchmakingQueueNotFound;
@@ -2818,6 +2880,8 @@ namespace PlayFab
             if (inputStr == "MatchmakingTicketMembershipLimitExceeded") output = GenericErrorCodesMatchmakingTicketMembershipLimitExceeded;
             if (inputStr == "MatchmakingUnauthorized") output = GenericErrorCodesMatchmakingUnauthorized;
             if (inputStr == "MatchmakingQueueLimitExceeded") output = GenericErrorCodesMatchmakingQueueLimitExceeded;
+            if (inputStr == "MatchmakingRequestTypeMismatch") output = GenericErrorCodesMatchmakingRequestTypeMismatch;
+            if (inputStr == "MatchmakingBadRequest") output = GenericErrorCodesMatchmakingBadRequest;
             if (inputStr == "TitleConfigNotFound") output = GenericErrorCodesTitleConfigNotFound;
             if (inputStr == "TitleConfigUpdateConflict") output = GenericErrorCodesTitleConfigUpdateConflict;
             if (inputStr == "TitleConfigSerializationError") output = GenericErrorCodesTitleConfigSerializationError;
@@ -2830,18 +2894,8 @@ namespace PlayFab
             if (inputStr == "CatalogItemIdInvalid") output = GenericErrorCodesCatalogItemIdInvalid;
             if (inputStr == "CatalogSearchParameterInvalid") output = GenericErrorCodesCatalogSearchParameterInvalid;
             if (inputStr == "CatalogFeatureDisabled") output = GenericErrorCodesCatalogFeatureDisabled;
-            if (inputStr == "CatalogConfigMissing") output = GenericErrorCodesCatalogConfigMissing;
-            if (inputStr == "CatalogConfigTooManyContentTypes") output = GenericErrorCodesCatalogConfigTooManyContentTypes;
-            if (inputStr == "CatalogConfigContentTypeTooLong") output = GenericErrorCodesCatalogConfigContentTypeTooLong;
-            if (inputStr == "CatalogConfigTooManyTags") output = GenericErrorCodesCatalogConfigTooManyTags;
-            if (inputStr == "CatalogConfigTagTooLong") output = GenericErrorCodesCatalogConfigTagTooLong;
-            if (inputStr == "CatalogConfigInvalidDeepLinkObject") output = GenericErrorCodesCatalogConfigInvalidDeepLinkObject;
-            if (inputStr == "CatalogConfigInvalidDeepLinkPlatform") output = GenericErrorCodesCatalogConfigInvalidDeepLinkPlatform;
-            if (inputStr == "CatalogConfigInvalidDeepLinkFormat") output = GenericErrorCodesCatalogConfigInvalidDeepLinkFormat;
-            if (inputStr == "CatalogConfigInvalidDisplayPropertyObject") output = GenericErrorCodesCatalogConfigInvalidDisplayPropertyObject;
-            if (inputStr == "CatalogConfigInvalidDisplayPropertyName") output = GenericErrorCodesCatalogConfigInvalidDisplayPropertyName;
-            if (inputStr == "CatalogConfigInvalidDisplayPropertyType") output = GenericErrorCodesCatalogConfigInvalidDisplayPropertyType;
-            if (inputStr == "CatalogConfigDisplayPropertyMappingLimit") output = GenericErrorCodesCatalogConfigDisplayPropertyMappingLimit;
+            if (inputStr == "CatalogConfigInvalid") output = GenericErrorCodesCatalogConfigInvalid;
+            if (inputStr == "CatalogUnauthorized") output = GenericErrorCodesCatalogUnauthorized;
             if (inputStr == "ExportInvalidStatusUpdate") output = GenericErrorCodesExportInvalidStatusUpdate;
             if (inputStr == "ExportInvalidPrefix") output = GenericErrorCodesExportInvalidPrefix;
             if (inputStr == "ExportBlobContainerDoesNotExist") output = GenericErrorCodesExportBlobContainerDoesNotExist;
@@ -2852,10 +2906,13 @@ namespace PlayFab
             if (inputStr == "ExportAmazonBucketDoesNotExist") output = GenericErrorCodesExportAmazonBucketDoesNotExist;
             if (inputStr == "ExportInvalidBlobStorage") output = GenericErrorCodesExportInvalidBlobStorage;
             if (inputStr == "ExportKustoException") output = GenericErrorCodesExportKustoException;
-            if (inputStr == "ExportKustoExceptionNew_SomeResources") output = GenericErrorCodesExportKustoExceptionNew_SomeResources;
+            if (inputStr == "ExportKustoExceptionPartialErrorOnNewExport") output = GenericErrorCodesExportKustoExceptionPartialErrorOnNewExport;
             if (inputStr == "ExportKustoExceptionEdit") output = GenericErrorCodesExportKustoExceptionEdit;
             if (inputStr == "ExportKustoConnectionFailed") output = GenericErrorCodesExportKustoConnectionFailed;
             if (inputStr == "ExportUnknownError") output = GenericErrorCodesExportUnknownError;
+            if (inputStr == "ExportCantEditPendingExport") output = GenericErrorCodesExportCantEditPendingExport;
+            if (inputStr == "ExportLimitExports") output = GenericErrorCodesExportLimitExports;
+            if (inputStr == "ExportLimitEvents") output = GenericErrorCodesExportLimitEvents;
         }
 
         enum LoginIdentityProvider
@@ -3355,6 +3412,74 @@ namespace PlayFab
                 Json::Value each_FriendPlayFabId; ToJsonUtilS(FriendPlayFabId, each_FriendPlayFabId); output["FriendPlayFabId"] = each_FriendPlayFabId;
                 Json::Value each_FriendTitleDisplayName; ToJsonUtilS(FriendTitleDisplayName, each_FriendTitleDisplayName); output["FriendTitleDisplayName"] = each_FriendTitleDisplayName;
                 Json::Value each_FriendUsername; ToJsonUtilS(FriendUsername, each_FriendUsername); output["FriendUsername"] = each_FriendUsername;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                return output;
+            }
+        };
+
+        struct GenericServiceId : public PlayFabBaseModel
+        {
+            std::string ServiceName;
+            std::string UserId;
+
+            GenericServiceId() :
+                PlayFabBaseModel(),
+                ServiceName(),
+                UserId()
+            {}
+
+            GenericServiceId(const GenericServiceId& src) :
+                PlayFabBaseModel(),
+                ServiceName(src.ServiceName),
+                UserId(src.UserId)
+            {}
+
+            ~GenericServiceId() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["ServiceName"], ServiceName);
+                FromJsonUtilS(input["UserId"], UserId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ServiceName; ToJsonUtilS(ServiceName, each_ServiceName); output["ServiceName"] = each_ServiceName;
+                Json::Value each_UserId; ToJsonUtilS(UserId, each_UserId); output["UserId"] = each_UserId;
+                return output;
+            }
+        };
+
+        struct AddGenericIDRequest : public PlayFabRequestCommon
+        {
+            GenericServiceId GenericId;
+            std::string PlayFabId;
+
+            AddGenericIDRequest() :
+                PlayFabRequestCommon(),
+                GenericId(),
+                PlayFabId()
+            {}
+
+            AddGenericIDRequest(const AddGenericIDRequest& src) :
+                PlayFabRequestCommon(),
+                GenericId(src.GenericId),
+                PlayFabId(src.PlayFabId)
+            {}
+
+            ~AddGenericIDRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["GenericId"], GenericId);
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_GenericId; ToJsonUtilO(GenericId, each_GenericId); output["GenericId"] = each_GenericId;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 return output;
             }
@@ -5433,6 +5558,59 @@ namespace PlayFab
             }
         };
 
+        struct DeletePushNotificationTemplateRequest : public PlayFabRequestCommon
+        {
+            std::string PushNotificationTemplateId;
+
+            DeletePushNotificationTemplateRequest() :
+                PlayFabRequestCommon(),
+                PushNotificationTemplateId()
+            {}
+
+            DeletePushNotificationTemplateRequest(const DeletePushNotificationTemplateRequest& src) :
+                PlayFabRequestCommon(),
+                PushNotificationTemplateId(src.PushNotificationTemplateId)
+            {}
+
+            ~DeletePushNotificationTemplateRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["PushNotificationTemplateId"], PushNotificationTemplateId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_PushNotificationTemplateId; ToJsonUtilS(PushNotificationTemplateId, each_PushNotificationTemplateId); output["PushNotificationTemplateId"] = each_PushNotificationTemplateId;
+                return output;
+            }
+        };
+
+        struct DeletePushNotificationTemplateResult : public PlayFabResultCommon
+        {
+
+            DeletePushNotificationTemplateResult() :
+                PlayFabResultCommon()
+            {}
+
+            DeletePushNotificationTemplateResult(const DeletePushNotificationTemplateResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~DeletePushNotificationTemplateResult() = default;
+
+            void FromJson(Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
         struct DeleteSharedGroupRequest : public PlayFabRequestCommon
         {
             std::string SharedGroupId;
@@ -5527,6 +5705,30 @@ namespace PlayFab
             {}
 
             ~EmptyResponse() = default;
+
+            void FromJson(Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
+        struct EmptyResult : public PlayFabResultCommon
+        {
+
+            EmptyResult() :
+                PlayFabResultCommon()
+            {}
+
+            EmptyResult(const EmptyResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~EmptyResult() = default;
 
             void FromJson(Json::Value&) override
             {
@@ -6456,6 +6658,40 @@ namespace PlayFab
                 Json::Value each_TitleDisplayName; ToJsonUtilS(TitleDisplayName, each_TitleDisplayName); output["TitleDisplayName"] = each_TitleDisplayName;
                 Json::Value each_Username; ToJsonUtilS(Username, each_Username); output["Username"] = each_Username;
                 Json::Value each_XboxInfo; ToJsonUtilO(XboxInfo, each_XboxInfo); output["XboxInfo"] = each_XboxInfo;
+                return output;
+            }
+        };
+
+        struct GenericPlayFabIdPair : public PlayFabBaseModel
+        {
+            Boxed<GenericServiceId> GenericId;
+            std::string PlayFabId;
+
+            GenericPlayFabIdPair() :
+                PlayFabBaseModel(),
+                GenericId(),
+                PlayFabId()
+            {}
+
+            GenericPlayFabIdPair(const GenericPlayFabIdPair& src) :
+                PlayFabBaseModel(),
+                GenericId(src.GenericId),
+                PlayFabId(src.PlayFabId)
+            {}
+
+            ~GenericPlayFabIdPair() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["GenericId"], GenericId);
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_GenericId; ToJsonUtilO(GenericId, each_GenericId); output["GenericId"] = each_GenericId;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 return output;
             }
         };
@@ -8897,6 +9133,64 @@ namespace PlayFab
             }
         };
 
+        struct GetPlayFabIDsFromGenericIDsRequest : public PlayFabRequestCommon
+        {
+            std::list<GenericServiceId> GenericIDs;
+
+            GetPlayFabIDsFromGenericIDsRequest() :
+                PlayFabRequestCommon(),
+                GenericIDs()
+            {}
+
+            GetPlayFabIDsFromGenericIDsRequest(const GetPlayFabIDsFromGenericIDsRequest& src) :
+                PlayFabRequestCommon(),
+                GenericIDs(src.GenericIDs)
+            {}
+
+            ~GetPlayFabIDsFromGenericIDsRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["GenericIDs"], GenericIDs);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_GenericIDs; ToJsonUtilO(GenericIDs, each_GenericIDs); output["GenericIDs"] = each_GenericIDs;
+                return output;
+            }
+        };
+
+        struct GetPlayFabIDsFromGenericIDsResult : public PlayFabResultCommon
+        {
+            std::list<GenericPlayFabIdPair> Data;
+
+            GetPlayFabIDsFromGenericIDsResult() :
+                PlayFabResultCommon(),
+                Data()
+            {}
+
+            GetPlayFabIDsFromGenericIDsResult(const GetPlayFabIDsFromGenericIDsResult& src) :
+                PlayFabResultCommon(),
+                Data(src.Data)
+            {}
+
+            ~GetPlayFabIDsFromGenericIDsResult() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["Data"], Data);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Data; ToJsonUtilO(Data, each_Data); output["Data"] = each_Data;
+                return output;
+            }
+        };
+
         struct GetPlayFabIDsFromNintendoSwitchDeviceIdsRequest : public PlayFabRequestCommon
         {
             std::list<std::string> NintendoSwitchDeviceIds;
@@ -10613,6 +10907,69 @@ namespace PlayFab
             }
         };
 
+        struct LinkServerCustomIdRequest : public PlayFabRequestCommon
+        {
+            Boxed<bool> ForceLink;
+            std::string PlayFabId;
+            std::string ServerCustomId;
+
+            LinkServerCustomIdRequest() :
+                PlayFabRequestCommon(),
+                ForceLink(),
+                PlayFabId(),
+                ServerCustomId()
+            {}
+
+            LinkServerCustomIdRequest(const LinkServerCustomIdRequest& src) :
+                PlayFabRequestCommon(),
+                ForceLink(src.ForceLink),
+                PlayFabId(src.PlayFabId),
+                ServerCustomId(src.ServerCustomId)
+            {}
+
+            ~LinkServerCustomIdRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilP(input["ForceLink"], ForceLink);
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+                FromJsonUtilS(input["ServerCustomId"], ServerCustomId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ForceLink; ToJsonUtilP(ForceLink, each_ForceLink); output["ForceLink"] = each_ForceLink;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                Json::Value each_ServerCustomId; ToJsonUtilS(ServerCustomId, each_ServerCustomId); output["ServerCustomId"] = each_ServerCustomId;
+                return output;
+            }
+        };
+
+        struct LinkServerCustomIdResult : public PlayFabResultCommon
+        {
+
+            LinkServerCustomIdResult() :
+                PlayFabResultCommon()
+            {}
+
+            LinkServerCustomIdResult(const LinkServerCustomIdResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~LinkServerCustomIdResult() = default;
+
+            void FromJson(Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
         struct LinkXboxAccountRequest : public PlayFabRequestCommon
         {
             Boxed<bool> ForceLink;
@@ -10730,6 +11087,40 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_Characters; ToJsonUtilO(Characters, each_Characters); output["Characters"] = each_Characters;
+                return output;
+            }
+        };
+
+        struct LocalizedPushNotificationProperties : public PlayFabBaseModel
+        {
+            std::string Message;
+            std::string Subject;
+
+            LocalizedPushNotificationProperties() :
+                PlayFabBaseModel(),
+                Message(),
+                Subject()
+            {}
+
+            LocalizedPushNotificationProperties(const LocalizedPushNotificationProperties& src) :
+                PlayFabBaseModel(),
+                Message(src.Message),
+                Subject(src.Subject)
+            {}
+
+            ~LocalizedPushNotificationProperties() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["Message"], Message);
+                FromJsonUtilS(input["Subject"], Subject);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Message; ToJsonUtilS(Message, each_Message); output["Message"] = each_Message;
+                Json::Value each_Subject; ToJsonUtilS(Subject, each_Subject); output["Subject"] = each_Subject;
                 return output;
             }
         };
@@ -11610,6 +12001,40 @@ namespace PlayFab
             }
         };
 
+        struct RemoveGenericIDRequest : public PlayFabRequestCommon
+        {
+            GenericServiceId GenericId;
+            std::string PlayFabId;
+
+            RemoveGenericIDRequest() :
+                PlayFabRequestCommon(),
+                GenericId(),
+                PlayFabId()
+            {}
+
+            RemoveGenericIDRequest(const RemoveGenericIDRequest& src) :
+                PlayFabRequestCommon(),
+                GenericId(src.GenericId),
+                PlayFabId(src.PlayFabId)
+            {}
+
+            ~RemoveGenericIDRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["GenericId"], GenericId);
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_GenericId; ToJsonUtilO(GenericId, each_GenericId); output["GenericId"] = each_GenericId;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                return output;
+            }
+        };
+
         struct RemovePlayerTagRequest : public PlayFabRequestCommon
         {
             std::string PlayFabId;
@@ -12104,6 +12529,84 @@ namespace PlayFab
             }
         };
 
+        struct SavePushNotificationTemplateRequest : public PlayFabRequestCommon
+        {
+            std::string AndroidPayload;
+            std::string Id;
+            std::string IOSPayload;
+            std::map<std::string, LocalizedPushNotificationProperties> LocalizedPushNotificationTemplates;
+            std::string Name;
+
+            SavePushNotificationTemplateRequest() :
+                PlayFabRequestCommon(),
+                AndroidPayload(),
+                Id(),
+                IOSPayload(),
+                LocalizedPushNotificationTemplates(),
+                Name()
+            {}
+
+            SavePushNotificationTemplateRequest(const SavePushNotificationTemplateRequest& src) :
+                PlayFabRequestCommon(),
+                AndroidPayload(src.AndroidPayload),
+                Id(src.Id),
+                IOSPayload(src.IOSPayload),
+                LocalizedPushNotificationTemplates(src.LocalizedPushNotificationTemplates),
+                Name(src.Name)
+            {}
+
+            ~SavePushNotificationTemplateRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["AndroidPayload"], AndroidPayload);
+                FromJsonUtilS(input["Id"], Id);
+                FromJsonUtilS(input["IOSPayload"], IOSPayload);
+                FromJsonUtilO(input["LocalizedPushNotificationTemplates"], LocalizedPushNotificationTemplates);
+                FromJsonUtilS(input["Name"], Name);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_AndroidPayload; ToJsonUtilS(AndroidPayload, each_AndroidPayload); output["AndroidPayload"] = each_AndroidPayload;
+                Json::Value each_Id; ToJsonUtilS(Id, each_Id); output["Id"] = each_Id;
+                Json::Value each_IOSPayload; ToJsonUtilS(IOSPayload, each_IOSPayload); output["IOSPayload"] = each_IOSPayload;
+                Json::Value each_LocalizedPushNotificationTemplates; ToJsonUtilO(LocalizedPushNotificationTemplates, each_LocalizedPushNotificationTemplates); output["LocalizedPushNotificationTemplates"] = each_LocalizedPushNotificationTemplates;
+                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
+                return output;
+            }
+        };
+
+        struct SavePushNotificationTemplateResult : public PlayFabResultCommon
+        {
+            std::string PushNotificationTemplateId;
+
+            SavePushNotificationTemplateResult() :
+                PlayFabResultCommon(),
+                PushNotificationTemplateId()
+            {}
+
+            SavePushNotificationTemplateResult(const SavePushNotificationTemplateResult& src) :
+                PlayFabResultCommon(),
+                PushNotificationTemplateId(src.PushNotificationTemplateId)
+            {}
+
+            ~SavePushNotificationTemplateResult() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["PushNotificationTemplateId"], PushNotificationTemplateId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_PushNotificationTemplateId; ToJsonUtilS(PushNotificationTemplateId, each_PushNotificationTemplateId); output["PushNotificationTemplateId"] = each_PushNotificationTemplateId;
+                return output;
+            }
+        };
+
         struct SendCustomAccountRecoveryEmailRequest : public PlayFabRequestCommon
         {
             std::string Email;
@@ -12221,6 +12724,40 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                return output;
+            }
+        };
+
+        struct SendPushNotificationFromTemplateRequest : public PlayFabRequestCommon
+        {
+            std::string PushNotificationTemplateId;
+            std::string Recipient;
+
+            SendPushNotificationFromTemplateRequest() :
+                PlayFabRequestCommon(),
+                PushNotificationTemplateId(),
+                Recipient()
+            {}
+
+            SendPushNotificationFromTemplateRequest(const SendPushNotificationFromTemplateRequest& src) :
+                PlayFabRequestCommon(),
+                PushNotificationTemplateId(src.PushNotificationTemplateId),
+                Recipient(src.Recipient)
+            {}
+
+            ~SendPushNotificationFromTemplateRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["PushNotificationTemplateId"], PushNotificationTemplateId);
+                FromJsonUtilS(input["Recipient"], Recipient);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_PushNotificationTemplateId; ToJsonUtilS(PushNotificationTemplateId, each_PushNotificationTemplateId); output["PushNotificationTemplateId"] = each_PushNotificationTemplateId;
+                Json::Value each_Recipient; ToJsonUtilS(Recipient, each_Recipient); output["Recipient"] = each_Recipient;
                 return output;
             }
         };
@@ -12906,6 +13443,64 @@ namespace PlayFab
                 Json::Value each_Amount; ToJsonUtilP(Amount, each_Amount); output["Amount"] = each_Amount;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_VirtualCurrency; ToJsonUtilS(VirtualCurrency, each_VirtualCurrency); output["VirtualCurrency"] = each_VirtualCurrency;
+                return output;
+            }
+        };
+
+        struct UnlinkServerCustomIdRequest : public PlayFabRequestCommon
+        {
+            std::string PlayFabId;
+            std::string ServerCustomId;
+
+            UnlinkServerCustomIdRequest() :
+                PlayFabRequestCommon(),
+                PlayFabId(),
+                ServerCustomId()
+            {}
+
+            UnlinkServerCustomIdRequest(const UnlinkServerCustomIdRequest& src) :
+                PlayFabRequestCommon(),
+                PlayFabId(src.PlayFabId),
+                ServerCustomId(src.ServerCustomId)
+            {}
+
+            ~UnlinkServerCustomIdRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+                FromJsonUtilS(input["ServerCustomId"], ServerCustomId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                Json::Value each_ServerCustomId; ToJsonUtilS(ServerCustomId, each_ServerCustomId); output["ServerCustomId"] = each_ServerCustomId;
+                return output;
+            }
+        };
+
+        struct UnlinkServerCustomIdResult : public PlayFabResultCommon
+        {
+
+            UnlinkServerCustomIdResult() :
+                PlayFabResultCommon()
+            {}
+
+            UnlinkServerCustomIdResult(const UnlinkServerCustomIdResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~UnlinkServerCustomIdResult() = default;
+
+            void FromJson(Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
                 return output;
             }
         };

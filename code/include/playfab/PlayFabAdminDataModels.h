@@ -1851,6 +1851,27 @@ namespace PlayFab
             GenericErrorCodesEntityAPIKeyLimitExceeded,
             GenericErrorCodesEntityAPIKeyNotFound,
             GenericErrorCodesEntityAPIKeyOrSecretInvalid,
+            GenericErrorCodesEconomyServiceUnavailable,
+            GenericErrorCodesEconomyServiceInternalError,
+            GenericErrorCodesKustoProxyQueryRateLimitExceeded,
+            GenericErrorCodesEntityAPIKeyCreationDisabledForEntity,
+            GenericErrorCodesStudioCreationRateLimited,
+            GenericErrorCodesStudioCreationInProgress,
+            GenericErrorCodesDuplicateStudioName,
+            GenericErrorCodesStudioNotFound,
+            GenericErrorCodesStudioDeletionInProgress,
+            GenericErrorCodesStudioDeactivated,
+            GenericErrorCodesTitleCreationRateLimited,
+            GenericErrorCodesTitleCreationInProgress,
+            GenericErrorCodesDuplicateTitleName,
+            GenericErrorCodesTitleNotFound,
+            GenericErrorCodesTitleDeletionInProgress,
+            GenericErrorCodesTitleDeactivated,
+            GenericErrorCodesTitleAlreadyActivated,
+            GenericErrorCodesCloudScriptAzureFunctionsExecutionTimeLimitExceeded,
+            GenericErrorCodesCloudScriptAzureFunctionsArgumentSizeExceeded,
+            GenericErrorCodesCloudScriptAzureFunctionsReturnSizeExceeded,
+            GenericErrorCodesCloudScriptAzureFunctionsHTTPRequestError,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -1870,6 +1891,8 @@ namespace PlayFab
             GenericErrorCodesMatchmakingTicketMembershipLimitExceeded,
             GenericErrorCodesMatchmakingUnauthorized,
             GenericErrorCodesMatchmakingQueueLimitExceeded,
+            GenericErrorCodesMatchmakingRequestTypeMismatch,
+            GenericErrorCodesMatchmakingBadRequest,
             GenericErrorCodesTitleConfigNotFound,
             GenericErrorCodesTitleConfigUpdateConflict,
             GenericErrorCodesTitleConfigSerializationError,
@@ -1883,6 +1906,7 @@ namespace PlayFab
             GenericErrorCodesCatalogSearchParameterInvalid,
             GenericErrorCodesCatalogFeatureDisabled,
             GenericErrorCodesCatalogConfigInvalid,
+            GenericErrorCodesCatalogUnauthorized,
             GenericErrorCodesExportInvalidStatusUpdate,
             GenericErrorCodesExportInvalidPrefix,
             GenericErrorCodesExportBlobContainerDoesNotExist,
@@ -1893,7 +1917,7 @@ namespace PlayFab
             GenericErrorCodesExportAmazonBucketDoesNotExist,
             GenericErrorCodesExportInvalidBlobStorage,
             GenericErrorCodesExportKustoException,
-            GenericErrorCodesExportKustoExceptionNew_SomeResources,
+            GenericErrorCodesExportKustoExceptionPartialErrorOnNewExport,
             GenericErrorCodesExportKustoExceptionEdit,
             GenericErrorCodesExportKustoConnectionFailed,
             GenericErrorCodesExportUnknownError,
@@ -2343,6 +2367,27 @@ namespace PlayFab
             if (input == GenericErrorCodesEntityAPIKeyLimitExceeded) output = Json::Value("EntityAPIKeyLimitExceeded");
             if (input == GenericErrorCodesEntityAPIKeyNotFound) output = Json::Value("EntityAPIKeyNotFound");
             if (input == GenericErrorCodesEntityAPIKeyOrSecretInvalid) output = Json::Value("EntityAPIKeyOrSecretInvalid");
+            if (input == GenericErrorCodesEconomyServiceUnavailable) output = Json::Value("EconomyServiceUnavailable");
+            if (input == GenericErrorCodesEconomyServiceInternalError) output = Json::Value("EconomyServiceInternalError");
+            if (input == GenericErrorCodesKustoProxyQueryRateLimitExceeded) output = Json::Value("KustoProxyQueryRateLimitExceeded");
+            if (input == GenericErrorCodesEntityAPIKeyCreationDisabledForEntity) output = Json::Value("EntityAPIKeyCreationDisabledForEntity");
+            if (input == GenericErrorCodesStudioCreationRateLimited) output = Json::Value("StudioCreationRateLimited");
+            if (input == GenericErrorCodesStudioCreationInProgress) output = Json::Value("StudioCreationInProgress");
+            if (input == GenericErrorCodesDuplicateStudioName) output = Json::Value("DuplicateStudioName");
+            if (input == GenericErrorCodesStudioNotFound) output = Json::Value("StudioNotFound");
+            if (input == GenericErrorCodesStudioDeletionInProgress) output = Json::Value("StudioDeletionInProgress");
+            if (input == GenericErrorCodesStudioDeactivated) output = Json::Value("StudioDeactivated");
+            if (input == GenericErrorCodesTitleCreationRateLimited) output = Json::Value("TitleCreationRateLimited");
+            if (input == GenericErrorCodesTitleCreationInProgress) output = Json::Value("TitleCreationInProgress");
+            if (input == GenericErrorCodesDuplicateTitleName) output = Json::Value("DuplicateTitleName");
+            if (input == GenericErrorCodesTitleNotFound) output = Json::Value("TitleNotFound");
+            if (input == GenericErrorCodesTitleDeletionInProgress) output = Json::Value("TitleDeletionInProgress");
+            if (input == GenericErrorCodesTitleDeactivated) output = Json::Value("TitleDeactivated");
+            if (input == GenericErrorCodesTitleAlreadyActivated) output = Json::Value("TitleAlreadyActivated");
+            if (input == GenericErrorCodesCloudScriptAzureFunctionsExecutionTimeLimitExceeded) output = Json::Value("CloudScriptAzureFunctionsExecutionTimeLimitExceeded");
+            if (input == GenericErrorCodesCloudScriptAzureFunctionsArgumentSizeExceeded) output = Json::Value("CloudScriptAzureFunctionsArgumentSizeExceeded");
+            if (input == GenericErrorCodesCloudScriptAzureFunctionsReturnSizeExceeded) output = Json::Value("CloudScriptAzureFunctionsReturnSizeExceeded");
+            if (input == GenericErrorCodesCloudScriptAzureFunctionsHTTPRequestError) output = Json::Value("CloudScriptAzureFunctionsHTTPRequestError");
             if (input == GenericErrorCodesMatchmakingEntityInvalid) output = Json::Value("MatchmakingEntityInvalid");
             if (input == GenericErrorCodesMatchmakingPlayerAttributesInvalid) output = Json::Value("MatchmakingPlayerAttributesInvalid");
             if (input == GenericErrorCodesMatchmakingQueueNotFound) output = Json::Value("MatchmakingQueueNotFound");
@@ -2362,6 +2407,8 @@ namespace PlayFab
             if (input == GenericErrorCodesMatchmakingTicketMembershipLimitExceeded) output = Json::Value("MatchmakingTicketMembershipLimitExceeded");
             if (input == GenericErrorCodesMatchmakingUnauthorized) output = Json::Value("MatchmakingUnauthorized");
             if (input == GenericErrorCodesMatchmakingQueueLimitExceeded) output = Json::Value("MatchmakingQueueLimitExceeded");
+            if (input == GenericErrorCodesMatchmakingRequestTypeMismatch) output = Json::Value("MatchmakingRequestTypeMismatch");
+            if (input == GenericErrorCodesMatchmakingBadRequest) output = Json::Value("MatchmakingBadRequest");
             if (input == GenericErrorCodesTitleConfigNotFound) output = Json::Value("TitleConfigNotFound");
             if (input == GenericErrorCodesTitleConfigUpdateConflict) output = Json::Value("TitleConfigUpdateConflict");
             if (input == GenericErrorCodesTitleConfigSerializationError) output = Json::Value("TitleConfigSerializationError");
@@ -2375,6 +2422,7 @@ namespace PlayFab
             if (input == GenericErrorCodesCatalogSearchParameterInvalid) output = Json::Value("CatalogSearchParameterInvalid");
             if (input == GenericErrorCodesCatalogFeatureDisabled) output = Json::Value("CatalogFeatureDisabled");
             if (input == GenericErrorCodesCatalogConfigInvalid) output = Json::Value("CatalogConfigInvalid");
+            if (input == GenericErrorCodesCatalogUnauthorized) output = Json::Value("CatalogUnauthorized");
             if (input == GenericErrorCodesExportInvalidStatusUpdate) output = Json::Value("ExportInvalidStatusUpdate");
             if (input == GenericErrorCodesExportInvalidPrefix) output = Json::Value("ExportInvalidPrefix");
             if (input == GenericErrorCodesExportBlobContainerDoesNotExist) output = Json::Value("ExportBlobContainerDoesNotExist");
@@ -2385,7 +2433,7 @@ namespace PlayFab
             if (input == GenericErrorCodesExportAmazonBucketDoesNotExist) output = Json::Value("ExportAmazonBucketDoesNotExist");
             if (input == GenericErrorCodesExportInvalidBlobStorage) output = Json::Value("ExportInvalidBlobStorage");
             if (input == GenericErrorCodesExportKustoException) output = Json::Value("ExportKustoException");
-            if (input == GenericErrorCodesExportKustoExceptionNew_SomeResources) output = Json::Value("ExportKustoExceptionNew_SomeResources");
+            if (input == GenericErrorCodesExportKustoExceptionPartialErrorOnNewExport) output = Json::Value("ExportKustoExceptionPartialErrorOnNewExport");
             if (input == GenericErrorCodesExportKustoExceptionEdit) output = Json::Value("ExportKustoExceptionEdit");
             if (input == GenericErrorCodesExportKustoConnectionFailed) output = Json::Value("ExportKustoConnectionFailed");
             if (input == GenericErrorCodesExportUnknownError) output = Json::Value("ExportUnknownError");
@@ -2836,6 +2884,27 @@ namespace PlayFab
             if (inputStr == "EntityAPIKeyLimitExceeded") output = GenericErrorCodesEntityAPIKeyLimitExceeded;
             if (inputStr == "EntityAPIKeyNotFound") output = GenericErrorCodesEntityAPIKeyNotFound;
             if (inputStr == "EntityAPIKeyOrSecretInvalid") output = GenericErrorCodesEntityAPIKeyOrSecretInvalid;
+            if (inputStr == "EconomyServiceUnavailable") output = GenericErrorCodesEconomyServiceUnavailable;
+            if (inputStr == "EconomyServiceInternalError") output = GenericErrorCodesEconomyServiceInternalError;
+            if (inputStr == "KustoProxyQueryRateLimitExceeded") output = GenericErrorCodesKustoProxyQueryRateLimitExceeded;
+            if (inputStr == "EntityAPIKeyCreationDisabledForEntity") output = GenericErrorCodesEntityAPIKeyCreationDisabledForEntity;
+            if (inputStr == "StudioCreationRateLimited") output = GenericErrorCodesStudioCreationRateLimited;
+            if (inputStr == "StudioCreationInProgress") output = GenericErrorCodesStudioCreationInProgress;
+            if (inputStr == "DuplicateStudioName") output = GenericErrorCodesDuplicateStudioName;
+            if (inputStr == "StudioNotFound") output = GenericErrorCodesStudioNotFound;
+            if (inputStr == "StudioDeletionInProgress") output = GenericErrorCodesStudioDeletionInProgress;
+            if (inputStr == "StudioDeactivated") output = GenericErrorCodesStudioDeactivated;
+            if (inputStr == "TitleCreationRateLimited") output = GenericErrorCodesTitleCreationRateLimited;
+            if (inputStr == "TitleCreationInProgress") output = GenericErrorCodesTitleCreationInProgress;
+            if (inputStr == "DuplicateTitleName") output = GenericErrorCodesDuplicateTitleName;
+            if (inputStr == "TitleNotFound") output = GenericErrorCodesTitleNotFound;
+            if (inputStr == "TitleDeletionInProgress") output = GenericErrorCodesTitleDeletionInProgress;
+            if (inputStr == "TitleDeactivated") output = GenericErrorCodesTitleDeactivated;
+            if (inputStr == "TitleAlreadyActivated") output = GenericErrorCodesTitleAlreadyActivated;
+            if (inputStr == "CloudScriptAzureFunctionsExecutionTimeLimitExceeded") output = GenericErrorCodesCloudScriptAzureFunctionsExecutionTimeLimitExceeded;
+            if (inputStr == "CloudScriptAzureFunctionsArgumentSizeExceeded") output = GenericErrorCodesCloudScriptAzureFunctionsArgumentSizeExceeded;
+            if (inputStr == "CloudScriptAzureFunctionsReturnSizeExceeded") output = GenericErrorCodesCloudScriptAzureFunctionsReturnSizeExceeded;
+            if (inputStr == "CloudScriptAzureFunctionsHTTPRequestError") output = GenericErrorCodesCloudScriptAzureFunctionsHTTPRequestError;
             if (inputStr == "MatchmakingEntityInvalid") output = GenericErrorCodesMatchmakingEntityInvalid;
             if (inputStr == "MatchmakingPlayerAttributesInvalid") output = GenericErrorCodesMatchmakingPlayerAttributesInvalid;
             if (inputStr == "MatchmakingQueueNotFound") output = GenericErrorCodesMatchmakingQueueNotFound;
@@ -2855,6 +2924,8 @@ namespace PlayFab
             if (inputStr == "MatchmakingTicketMembershipLimitExceeded") output = GenericErrorCodesMatchmakingTicketMembershipLimitExceeded;
             if (inputStr == "MatchmakingUnauthorized") output = GenericErrorCodesMatchmakingUnauthorized;
             if (inputStr == "MatchmakingQueueLimitExceeded") output = GenericErrorCodesMatchmakingQueueLimitExceeded;
+            if (inputStr == "MatchmakingRequestTypeMismatch") output = GenericErrorCodesMatchmakingRequestTypeMismatch;
+            if (inputStr == "MatchmakingBadRequest") output = GenericErrorCodesMatchmakingBadRequest;
             if (inputStr == "TitleConfigNotFound") output = GenericErrorCodesTitleConfigNotFound;
             if (inputStr == "TitleConfigUpdateConflict") output = GenericErrorCodesTitleConfigUpdateConflict;
             if (inputStr == "TitleConfigSerializationError") output = GenericErrorCodesTitleConfigSerializationError;
@@ -2868,6 +2939,7 @@ namespace PlayFab
             if (inputStr == "CatalogSearchParameterInvalid") output = GenericErrorCodesCatalogSearchParameterInvalid;
             if (inputStr == "CatalogFeatureDisabled") output = GenericErrorCodesCatalogFeatureDisabled;
             if (inputStr == "CatalogConfigInvalid") output = GenericErrorCodesCatalogConfigInvalid;
+            if (inputStr == "CatalogUnauthorized") output = GenericErrorCodesCatalogUnauthorized;
             if (inputStr == "ExportInvalidStatusUpdate") output = GenericErrorCodesExportInvalidStatusUpdate;
             if (inputStr == "ExportInvalidPrefix") output = GenericErrorCodesExportInvalidPrefix;
             if (inputStr == "ExportBlobContainerDoesNotExist") output = GenericErrorCodesExportBlobContainerDoesNotExist;
@@ -2878,7 +2950,7 @@ namespace PlayFab
             if (inputStr == "ExportAmazonBucketDoesNotExist") output = GenericErrorCodesExportAmazonBucketDoesNotExist;
             if (inputStr == "ExportInvalidBlobStorage") output = GenericErrorCodesExportInvalidBlobStorage;
             if (inputStr == "ExportKustoException") output = GenericErrorCodesExportKustoException;
-            if (inputStr == "ExportKustoExceptionNew_SomeResources") output = GenericErrorCodesExportKustoExceptionNew_SomeResources;
+            if (inputStr == "ExportKustoExceptionPartialErrorOnNewExport") output = GenericErrorCodesExportKustoExceptionPartialErrorOnNewExport;
             if (inputStr == "ExportKustoExceptionEdit") output = GenericErrorCodesExportKustoExceptionEdit;
             if (inputStr == "ExportKustoConnectionFailed") output = GenericErrorCodesExportKustoConnectionFailed;
             if (inputStr == "ExportUnknownError") output = GenericErrorCodesExportUnknownError;

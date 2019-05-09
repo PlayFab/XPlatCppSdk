@@ -74,6 +74,34 @@ namespace PlayFab
             if (inputStr == "ChinaNorth2") output = AzureRegionChinaNorth2;
         }
 
+        enum AzureVmFamily
+        {
+            AzureVmFamilyA,
+            AzureVmFamilyAv2,
+            AzureVmFamilyDv2,
+            AzureVmFamilyF,
+            AzureVmFamilyFsv2
+        };
+
+        inline void ToJsonEnum(const AzureVmFamily input, Json::Value& output)
+        {
+            if (input == AzureVmFamilyA) output = Json::Value("A");
+            if (input == AzureVmFamilyAv2) output = Json::Value("Av2");
+            if (input == AzureVmFamilyDv2) output = Json::Value("Dv2");
+            if (input == AzureVmFamilyF) output = Json::Value("F");
+            if (input == AzureVmFamilyFsv2) output = Json::Value("Fsv2");
+        }
+        inline void FromJsonEnum(const Json::Value& input, AzureVmFamily& output)
+        {
+            if (!input.isString()) return;
+            const std::string& inputStr = input.asString();
+            if (inputStr == "A") output = AzureVmFamilyA;
+            if (inputStr == "Av2") output = AzureVmFamilyAv2;
+            if (inputStr == "Dv2") output = AzureVmFamilyDv2;
+            if (inputStr == "F") output = AzureVmFamilyF;
+            if (inputStr == "Fsv2") output = AzureVmFamilyFsv2;
+        }
+
         enum AzureVmSize
         {
             AzureVmSizeStandard_D1_v2,
@@ -214,46 +242,6 @@ namespace PlayFab
             const std::string& inputStr = input.asString();
             if (inputStr == "TCP") output = ProtocolTypeTCP;
             if (inputStr == "UDP") output = ProtocolTypeUDP;
-        }
-
-        enum RuleType
-        {
-            RuleTypeUnknown,
-            RuleTypeDifferenceRule,
-            RuleTypeStringEqualityRule,
-            RuleTypeMatchTotalRule,
-            RuleTypeSetIntersectionRule,
-            RuleTypeTeamSizeBalanceRule,
-            RuleTypeRegionSelectionRule,
-            RuleTypeTeamDifferenceRule,
-            RuleTypeTeamTicketSizeSimilarityRule
-        };
-
-        inline void ToJsonEnum(const RuleType input, Json::Value& output)
-        {
-            if (input == RuleTypeUnknown) output = Json::Value("Unknown");
-            if (input == RuleTypeDifferenceRule) output = Json::Value("DifferenceRule");
-            if (input == RuleTypeStringEqualityRule) output = Json::Value("StringEqualityRule");
-            if (input == RuleTypeMatchTotalRule) output = Json::Value("MatchTotalRule");
-            if (input == RuleTypeSetIntersectionRule) output = Json::Value("SetIntersectionRule");
-            if (input == RuleTypeTeamSizeBalanceRule) output = Json::Value("TeamSizeBalanceRule");
-            if (input == RuleTypeRegionSelectionRule) output = Json::Value("RegionSelectionRule");
-            if (input == RuleTypeTeamDifferenceRule) output = Json::Value("TeamDifferenceRule");
-            if (input == RuleTypeTeamTicketSizeSimilarityRule) output = Json::Value("TeamTicketSizeSimilarityRule");
-        }
-        inline void FromJsonEnum(const Json::Value& input, RuleType& output)
-        {
-            if (!input.isString()) return;
-            const std::string& inputStr = input.asString();
-            if (inputStr == "Unknown") output = RuleTypeUnknown;
-            if (inputStr == "DifferenceRule") output = RuleTypeDifferenceRule;
-            if (inputStr == "StringEqualityRule") output = RuleTypeStringEqualityRule;
-            if (inputStr == "MatchTotalRule") output = RuleTypeMatchTotalRule;
-            if (inputStr == "SetIntersectionRule") output = RuleTypeSetIntersectionRule;
-            if (inputStr == "TeamSizeBalanceRule") output = RuleTypeTeamSizeBalanceRule;
-            if (inputStr == "RegionSelectionRule") output = RuleTypeRegionSelectionRule;
-            if (inputStr == "TeamDifferenceRule") output = RuleTypeTeamDifferenceRule;
-            if (inputStr == "TeamTicketSizeSimilarityRule") output = RuleTypeTeamTicketSizeSimilarityRule;
         }
 
         enum TitleMultiplayerServerEnabledStatus
@@ -848,6 +836,50 @@ namespace PlayFab
             }
         };
 
+        struct CoreCapacity : public PlayFabBaseModel
+        {
+            Int32 Available;
+            Boxed<AzureRegion> Region;
+            Int32 Total;
+            Boxed<AzureVmFamily> VmFamily;
+
+            CoreCapacity() :
+                PlayFabBaseModel(),
+                Available(),
+                Region(),
+                Total(),
+                VmFamily()
+            {}
+
+            CoreCapacity(const CoreCapacity& src) :
+                PlayFabBaseModel(),
+                Available(src.Available),
+                Region(src.Region),
+                Total(src.Total),
+                VmFamily(src.VmFamily)
+            {}
+
+            ~CoreCapacity() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilP(input["Available"], Available);
+                FromJsonUtilE(input["Region"], Region);
+                FromJsonUtilP(input["Total"], Total);
+                FromJsonUtilE(input["VmFamily"], VmFamily);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Available; ToJsonUtilP(Available, each_Available); output["Available"] = each_Available;
+                Json::Value each_Region; ToJsonUtilE(Region, each_Region); output["Region"] = each_Region;
+                Json::Value each_Total; ToJsonUtilP(Total, each_Total); output["Total"] = each_Total;
+                Json::Value each_VmFamily; ToJsonUtilE(VmFamily, each_VmFamily); output["VmFamily"] = each_VmFamily;
+                return output;
+            }
+        };
+
         struct GameCertificateReferenceParams : public PlayFabBaseModel
         {
             std::string GsdkAlias;
@@ -925,6 +957,7 @@ namespace PlayFab
         {
             std::string BuildName;
             Boxed<ContainerFlavor> pfContainerFlavor;
+            Boxed<ContainerImageReference> pfContainerImageReference;
             std::string ContainerRepositoryName;
             std::string ContainerRunCommand;
             std::string ContainerTag;
@@ -940,6 +973,7 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 BuildName(),
                 pfContainerFlavor(),
+                pfContainerImageReference(),
                 ContainerRepositoryName(),
                 ContainerRunCommand(),
                 ContainerTag(),
@@ -956,6 +990,7 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 BuildName(src.BuildName),
                 pfContainerFlavor(src.pfContainerFlavor),
+                pfContainerImageReference(src.pfContainerImageReference),
                 ContainerRepositoryName(src.ContainerRepositoryName),
                 ContainerRunCommand(src.ContainerRunCommand),
                 ContainerTag(src.ContainerTag),
@@ -974,6 +1009,7 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["BuildName"], BuildName);
                 FromJsonUtilE(input["pfContainerFlavor"], pfContainerFlavor);
+                FromJsonUtilO(input["pfContainerImageReference"], pfContainerImageReference);
                 FromJsonUtilS(input["ContainerRepositoryName"], ContainerRepositoryName);
                 FromJsonUtilS(input["ContainerRunCommand"], ContainerRunCommand);
                 FromJsonUtilS(input["ContainerTag"], ContainerTag);
@@ -991,6 +1027,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_BuildName; ToJsonUtilS(BuildName, each_BuildName); output["BuildName"] = each_BuildName;
                 Json::Value each_pfContainerFlavor; ToJsonUtilE(pfContainerFlavor, each_pfContainerFlavor); output["ContainerFlavor"] = each_pfContainerFlavor;
+                Json::Value each_pfContainerImageReference; ToJsonUtilO(pfContainerImageReference, each_pfContainerImageReference); output["ContainerImageReference"] = each_pfContainerImageReference;
                 Json::Value each_ContainerRepositoryName; ToJsonUtilS(ContainerRepositoryName, each_ContainerRepositoryName); output["ContainerRepositoryName"] = each_ContainerRepositoryName;
                 Json::Value each_ContainerRunCommand; ToJsonUtilS(ContainerRunCommand, each_ContainerRunCommand); output["ContainerRunCommand"] = each_ContainerRunCommand;
                 Json::Value each_ContainerTag; ToJsonUtilS(ContainerTag, each_ContainerTag); output["ContainerTag"] = each_ContainerTag;
@@ -2016,240 +2053,6 @@ namespace PlayFab
             }
         };
 
-        struct GetMatchmakingQueueRequest : public PlayFabRequestCommon
-        {
-            std::string QueueName;
-
-            GetMatchmakingQueueRequest() :
-                PlayFabRequestCommon(),
-                QueueName()
-            {}
-
-            GetMatchmakingQueueRequest(const GetMatchmakingQueueRequest& src) :
-                PlayFabRequestCommon(),
-                QueueName(src.QueueName)
-            {}
-
-            ~GetMatchmakingQueueRequest() = default;
-
-            void FromJson(Json::Value& input) override
-            {
-                FromJsonUtilS(input["QueueName"], QueueName);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
-                return output;
-            }
-        };
-
-        struct MatchmakingQueueRule : public PlayFabBaseModel
-        {
-            std::string Name;
-            Boxed<Uint32> SecondsUntilOptional;
-            RuleType Type;
-
-            MatchmakingQueueRule() :
-                PlayFabBaseModel(),
-                Name(),
-                SecondsUntilOptional(),
-                Type()
-            {}
-
-            MatchmakingQueueRule(const MatchmakingQueueRule& src) :
-                PlayFabBaseModel(),
-                Name(src.Name),
-                SecondsUntilOptional(src.SecondsUntilOptional),
-                Type(src.Type)
-            {}
-
-            ~MatchmakingQueueRule() = default;
-
-            void FromJson(Json::Value& input) override
-            {
-                FromJsonUtilS(input["Name"], Name);
-                FromJsonUtilP(input["SecondsUntilOptional"], SecondsUntilOptional);
-                FromJsonEnum(input["Type"], Type);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
-                Json::Value each_SecondsUntilOptional; ToJsonUtilP(SecondsUntilOptional, each_SecondsUntilOptional); output["SecondsUntilOptional"] = each_SecondsUntilOptional;
-                Json::Value each_Type; ToJsonEnum(Type, each_Type); output["Type"] = each_Type;
-                return output;
-            }
-        };
-
-        struct StatisticsVisibilityToPlayers : public PlayFabBaseModel
-        {
-            bool ShowNumberOfPlayersMatching;
-            bool ShowTimeToMatch;
-
-            StatisticsVisibilityToPlayers() :
-                PlayFabBaseModel(),
-                ShowNumberOfPlayersMatching(),
-                ShowTimeToMatch()
-            {}
-
-            StatisticsVisibilityToPlayers(const StatisticsVisibilityToPlayers& src) :
-                PlayFabBaseModel(),
-                ShowNumberOfPlayersMatching(src.ShowNumberOfPlayersMatching),
-                ShowTimeToMatch(src.ShowTimeToMatch)
-            {}
-
-            ~StatisticsVisibilityToPlayers() = default;
-
-            void FromJson(Json::Value& input) override
-            {
-                FromJsonUtilP(input["ShowNumberOfPlayersMatching"], ShowNumberOfPlayersMatching);
-                FromJsonUtilP(input["ShowTimeToMatch"], ShowTimeToMatch);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_ShowNumberOfPlayersMatching; ToJsonUtilP(ShowNumberOfPlayersMatching, each_ShowNumberOfPlayersMatching); output["ShowNumberOfPlayersMatching"] = each_ShowNumberOfPlayersMatching;
-                Json::Value each_ShowTimeToMatch; ToJsonUtilP(ShowTimeToMatch, each_ShowTimeToMatch); output["ShowTimeToMatch"] = each_ShowTimeToMatch;
-                return output;
-            }
-        };
-
-        struct MatchmakingQueueTeam : public PlayFabBaseModel
-        {
-            Uint32 MaxTeamSize;
-            Uint32 MinTeamSize;
-            std::string Name;
-
-            MatchmakingQueueTeam() :
-                PlayFabBaseModel(),
-                MaxTeamSize(),
-                MinTeamSize(),
-                Name()
-            {}
-
-            MatchmakingQueueTeam(const MatchmakingQueueTeam& src) :
-                PlayFabBaseModel(),
-                MaxTeamSize(src.MaxTeamSize),
-                MinTeamSize(src.MinTeamSize),
-                Name(src.Name)
-            {}
-
-            ~MatchmakingQueueTeam() = default;
-
-            void FromJson(Json::Value& input) override
-            {
-                FromJsonUtilP(input["MaxTeamSize"], MaxTeamSize);
-                FromJsonUtilP(input["MinTeamSize"], MinTeamSize);
-                FromJsonUtilS(input["Name"], Name);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_MaxTeamSize; ToJsonUtilP(MaxTeamSize, each_MaxTeamSize); output["MaxTeamSize"] = each_MaxTeamSize;
-                Json::Value each_MinTeamSize; ToJsonUtilP(MinTeamSize, each_MinTeamSize); output["MinTeamSize"] = each_MinTeamSize;
-                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
-                return output;
-            }
-        };
-
-        struct MatchmakingQueueConfig : public PlayFabBaseModel
-        {
-            std::string BuildId;
-            Uint32 MaxMatchSize;
-            Uint32 MinMatchSize;
-            std::string Name;
-            std::list<MatchmakingQueueRule> Rules;
-            bool ServerAllocationEnabled;
-            Boxed<StatisticsVisibilityToPlayers> pfStatisticsVisibilityToPlayers;
-            std::list<MatchmakingQueueTeam> Teams;
-
-            MatchmakingQueueConfig() :
-                PlayFabBaseModel(),
-                BuildId(),
-                MaxMatchSize(),
-                MinMatchSize(),
-                Name(),
-                Rules(),
-                ServerAllocationEnabled(),
-                pfStatisticsVisibilityToPlayers(),
-                Teams()
-            {}
-
-            MatchmakingQueueConfig(const MatchmakingQueueConfig& src) :
-                PlayFabBaseModel(),
-                BuildId(src.BuildId),
-                MaxMatchSize(src.MaxMatchSize),
-                MinMatchSize(src.MinMatchSize),
-                Name(src.Name),
-                Rules(src.Rules),
-                ServerAllocationEnabled(src.ServerAllocationEnabled),
-                pfStatisticsVisibilityToPlayers(src.pfStatisticsVisibilityToPlayers),
-                Teams(src.Teams)
-            {}
-
-            ~MatchmakingQueueConfig() = default;
-
-            void FromJson(Json::Value& input) override
-            {
-                FromJsonUtilS(input["BuildId"], BuildId);
-                FromJsonUtilP(input["MaxMatchSize"], MaxMatchSize);
-                FromJsonUtilP(input["MinMatchSize"], MinMatchSize);
-                FromJsonUtilS(input["Name"], Name);
-                FromJsonUtilO(input["Rules"], Rules);
-                FromJsonUtilP(input["ServerAllocationEnabled"], ServerAllocationEnabled);
-                FromJsonUtilO(input["pfStatisticsVisibilityToPlayers"], pfStatisticsVisibilityToPlayers);
-                FromJsonUtilO(input["Teams"], Teams);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
-                Json::Value each_MaxMatchSize; ToJsonUtilP(MaxMatchSize, each_MaxMatchSize); output["MaxMatchSize"] = each_MaxMatchSize;
-                Json::Value each_MinMatchSize; ToJsonUtilP(MinMatchSize, each_MinMatchSize); output["MinMatchSize"] = each_MinMatchSize;
-                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
-                Json::Value each_Rules; ToJsonUtilO(Rules, each_Rules); output["Rules"] = each_Rules;
-                Json::Value each_ServerAllocationEnabled; ToJsonUtilP(ServerAllocationEnabled, each_ServerAllocationEnabled); output["ServerAllocationEnabled"] = each_ServerAllocationEnabled;
-                Json::Value each_pfStatisticsVisibilityToPlayers; ToJsonUtilO(pfStatisticsVisibilityToPlayers, each_pfStatisticsVisibilityToPlayers); output["StatisticsVisibilityToPlayers"] = each_pfStatisticsVisibilityToPlayers;
-                Json::Value each_Teams; ToJsonUtilO(Teams, each_Teams); output["Teams"] = each_Teams;
-                return output;
-            }
-        };
-
-        struct GetMatchmakingQueueResult : public PlayFabResultCommon
-        {
-            Boxed<MatchmakingQueueConfig> MatchmakingQueue;
-
-            GetMatchmakingQueueResult() :
-                PlayFabResultCommon(),
-                MatchmakingQueue()
-            {}
-
-            GetMatchmakingQueueResult(const GetMatchmakingQueueResult& src) :
-                PlayFabResultCommon(),
-                MatchmakingQueue(src.MatchmakingQueue)
-            {}
-
-            ~GetMatchmakingQueueResult() = default;
-
-            void FromJson(Json::Value& input) override
-            {
-                FromJsonUtilO(input["MatchmakingQueue"], MatchmakingQueue);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_MatchmakingQueue; ToJsonUtilO(MatchmakingQueue, each_MatchmakingQueue); output["MatchmakingQueue"] = each_MatchmakingQueue;
-                return output;
-            }
-        };
-
         struct GetMatchmakingTicketRequest : public PlayFabRequestCommon
         {
             bool EscapeObject;
@@ -2450,17 +2253,20 @@ namespace PlayFab
         {
             std::string IPV4Address;
             std::list<Port> Ports;
+            std::string Region;
 
             ServerDetails() :
                 PlayFabBaseModel(),
                 IPV4Address(),
-                Ports()
+                Ports(),
+                Region()
             {}
 
             ServerDetails(const ServerDetails& src) :
                 PlayFabBaseModel(),
                 IPV4Address(src.IPV4Address),
-                Ports(src.Ports)
+                Ports(src.Ports),
+                Region(src.Region)
             {}
 
             ~ServerDetails() = default;
@@ -2469,6 +2275,7 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["IPV4Address"], IPV4Address);
                 FromJsonUtilO(input["Ports"], Ports);
+                FromJsonUtilS(input["Region"], Region);
             }
 
             Json::Value ToJson() const override
@@ -2476,6 +2283,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_IPV4Address; ToJsonUtilS(IPV4Address, each_IPV4Address); output["IPV4Address"] = each_IPV4Address;
                 Json::Value each_Ports; ToJsonUtilO(Ports, each_Ports); output["Ports"] = each_Ports;
+                Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
                 return output;
             }
         };
@@ -2866,6 +2674,88 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_Status; ToJsonUtilE(Status, each_Status); output["Status"] = each_Status;
+                return output;
+            }
+        };
+
+        struct GetTitleMultiplayerServersQuotasRequest : public PlayFabRequestCommon
+        {
+
+            GetTitleMultiplayerServersQuotasRequest() :
+                PlayFabRequestCommon()
+            {}
+
+            GetTitleMultiplayerServersQuotasRequest(const GetTitleMultiplayerServersQuotasRequest&) :
+                PlayFabRequestCommon()
+            {}
+
+            ~GetTitleMultiplayerServersQuotasRequest() = default;
+
+            void FromJson(Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
+        struct TitleMultiplayerServersQuotas : public PlayFabBaseModel
+        {
+            std::list<CoreCapacity> CoreCapacities;
+
+            TitleMultiplayerServersQuotas() :
+                PlayFabBaseModel(),
+                CoreCapacities()
+            {}
+
+            TitleMultiplayerServersQuotas(const TitleMultiplayerServersQuotas& src) :
+                PlayFabBaseModel(),
+                CoreCapacities(src.CoreCapacities)
+            {}
+
+            ~TitleMultiplayerServersQuotas() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["CoreCapacities"], CoreCapacities);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CoreCapacities; ToJsonUtilO(CoreCapacities, each_CoreCapacities); output["CoreCapacities"] = each_CoreCapacities;
+                return output;
+            }
+        };
+
+        struct GetTitleMultiplayerServersQuotasResponse : public PlayFabResultCommon
+        {
+            Boxed<TitleMultiplayerServersQuotas> Quotas;
+
+            GetTitleMultiplayerServersQuotasResponse() :
+                PlayFabResultCommon(),
+                Quotas()
+            {}
+
+            GetTitleMultiplayerServersQuotasResponse(const GetTitleMultiplayerServersQuotasResponse& src) :
+                PlayFabResultCommon(),
+                Quotas(src.Quotas)
+            {}
+
+            ~GetTitleMultiplayerServersQuotasResponse() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["Quotas"], Quotas);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Quotas; ToJsonUtilO(Quotas, each_Quotas); output["Quotas"] = each_Quotas;
                 return output;
             }
         };
@@ -3279,59 +3169,6 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_Tags; ToJsonUtilS(Tags, each_Tags); output["Tags"] = each_Tags;
-                return output;
-            }
-        };
-
-        struct ListMatchmakingQueuesRequest : public PlayFabRequestCommon
-        {
-
-            ListMatchmakingQueuesRequest() :
-                PlayFabRequestCommon()
-            {}
-
-            ListMatchmakingQueuesRequest(const ListMatchmakingQueuesRequest&) :
-                PlayFabRequestCommon()
-            {}
-
-            ~ListMatchmakingQueuesRequest() = default;
-
-            void FromJson(Json::Value&) override
-            {
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                return output;
-            }
-        };
-
-        struct ListMatchmakingQueuesResult : public PlayFabResultCommon
-        {
-            std::list<MatchmakingQueueConfig> MatchMakingQueues;
-
-            ListMatchmakingQueuesResult() :
-                PlayFabResultCommon(),
-                MatchMakingQueues()
-            {}
-
-            ListMatchmakingQueuesResult(const ListMatchmakingQueuesResult& src) :
-                PlayFabResultCommon(),
-                MatchMakingQueues(src.MatchMakingQueues)
-            {}
-
-            ~ListMatchmakingQueuesResult() = default;
-
-            void FromJson(Json::Value& input) override
-            {
-                FromJsonUtilO(input["MatchMakingQueues"], MatchMakingQueues);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_MatchMakingQueues; ToJsonUtilO(MatchMakingQueues, each_MatchMakingQueues); output["MatchMakingQueues"] = each_MatchMakingQueues;
                 return output;
             }
         };
@@ -3760,59 +3597,6 @@ namespace PlayFab
             }
         };
 
-        struct RemoveMatchmakingQueueRequest : public PlayFabRequestCommon
-        {
-            std::string QueueName;
-
-            RemoveMatchmakingQueueRequest() :
-                PlayFabRequestCommon(),
-                QueueName()
-            {}
-
-            RemoveMatchmakingQueueRequest(const RemoveMatchmakingQueueRequest& src) :
-                PlayFabRequestCommon(),
-                QueueName(src.QueueName)
-            {}
-
-            ~RemoveMatchmakingQueueRequest() = default;
-
-            void FromJson(Json::Value& input) override
-            {
-                FromJsonUtilS(input["QueueName"], QueueName);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
-                return output;
-            }
-        };
-
-        struct RemoveMatchmakingQueueResult : public PlayFabResultCommon
-        {
-
-            RemoveMatchmakingQueueResult() :
-                PlayFabResultCommon()
-            {}
-
-            RemoveMatchmakingQueueResult(const RemoveMatchmakingQueueResult&) :
-                PlayFabResultCommon()
-            {}
-
-            ~RemoveMatchmakingQueueResult() = default;
-
-            void FromJson(Json::Value&) override
-            {
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                return output;
-            }
-        };
-
         struct RequestMultiplayerServerRequest : public PlayFabRequestCommon
         {
             std::string BuildId;
@@ -3995,59 +3779,6 @@ namespace PlayFab
                 Json::Value each_DnsName; ToJsonUtilS(DnsName, each_DnsName); output["DnsName"] = each_DnsName;
                 Json::Value each_Password; ToJsonUtilS(Password, each_Password); output["Password"] = each_Password;
                 Json::Value each_Username; ToJsonUtilS(Username, each_Username); output["Username"] = each_Username;
-                return output;
-            }
-        };
-
-        struct SetMatchmakingQueueRequest : public PlayFabRequestCommon
-        {
-            Boxed<MatchmakingQueueConfig> MatchmakingQueue;
-
-            SetMatchmakingQueueRequest() :
-                PlayFabRequestCommon(),
-                MatchmakingQueue()
-            {}
-
-            SetMatchmakingQueueRequest(const SetMatchmakingQueueRequest& src) :
-                PlayFabRequestCommon(),
-                MatchmakingQueue(src.MatchmakingQueue)
-            {}
-
-            ~SetMatchmakingQueueRequest() = default;
-
-            void FromJson(Json::Value& input) override
-            {
-                FromJsonUtilO(input["MatchmakingQueue"], MatchmakingQueue);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_MatchmakingQueue; ToJsonUtilO(MatchmakingQueue, each_MatchmakingQueue); output["MatchmakingQueue"] = each_MatchmakingQueue;
-                return output;
-            }
-        };
-
-        struct SetMatchmakingQueueResult : public PlayFabResultCommon
-        {
-
-            SetMatchmakingQueueResult() :
-                PlayFabResultCommon()
-            {}
-
-            SetMatchmakingQueueResult(const SetMatchmakingQueueResult&) :
-                PlayFabResultCommon()
-            {}
-
-            ~SetMatchmakingQueueResult() = default;
-
-            void FromJson(Json::Value&) override
-            {
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
                 return output;
             }
         };
