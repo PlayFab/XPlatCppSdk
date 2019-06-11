@@ -54,7 +54,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetGlobalPolicyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabProfilesAPI::OnGetGlobalPolicyResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -101,7 +104,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetEntityProfileResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabProfilesAPI::OnGetProfileResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -148,7 +154,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetEntityProfilesResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabProfilesAPI::OnGetProfilesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -195,7 +204,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetGlobalPolicyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabProfilesAPI::OnSetGlobalPolicyResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -242,7 +254,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetProfileLanguageResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabProfilesAPI::OnSetProfileLanguageResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -289,7 +304,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetEntityProfilePolicyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabProfilesAPI::OnSetProfilePolicyResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)

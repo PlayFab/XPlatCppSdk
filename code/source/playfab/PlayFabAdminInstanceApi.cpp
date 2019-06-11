@@ -98,6 +98,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -112,7 +113,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnAbortTaskInstanceResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -146,6 +150,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -160,7 +165,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AddLocalizedNewsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnAddLocalizedNewsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -194,6 +202,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -208,7 +217,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AddNewsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnAddNewsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -242,6 +254,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -256,7 +269,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AddPlayerTagResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnAddPlayerTagResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -290,6 +306,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -304,7 +321,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AddServerBuildResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnAddServerBuildResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -338,6 +358,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -352,7 +373,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ModifyUserVirtualCurrencyResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnAddUserVirtualCurrencyResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -386,6 +410,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -400,7 +425,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<BlankResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnAddVirtualCurrencyTypesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -434,6 +462,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -448,7 +477,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<BanUsersResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnBanUsersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -482,6 +514,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -496,7 +529,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CheckLimitedEditionItemAvailabilityResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnCheckLimitedEditionItemAvailabilityResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -530,6 +566,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -544,7 +581,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateTaskResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnCreateActionsOnPlayersInSegmentTaskResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -578,6 +618,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -592,7 +633,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateTaskResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnCreateCloudScriptTaskResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -626,6 +670,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -640,7 +685,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnCreateOpenIdConnectionResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -674,6 +722,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -688,7 +737,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreatePlayerSharedSecretResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnCreatePlayerSharedSecretResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -722,6 +774,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -736,7 +789,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreatePlayerStatisticDefinitionResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnCreatePlayerStatisticDefinitionResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -770,6 +826,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -784,7 +841,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<BlankResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnDeleteContentResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -818,6 +878,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -832,7 +893,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeleteMasterPlayerAccountResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnDeleteMasterPlayerAccountResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -866,6 +930,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -880,7 +945,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnDeleteOpenIdConnectionResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -914,6 +982,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -928,7 +997,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeletePlayerResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnDeletePlayerResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -962,6 +1034,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -976,7 +1049,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeletePlayerSharedSecretResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnDeletePlayerSharedSecretResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1010,6 +1086,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -1024,7 +1101,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeleteStoreResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnDeleteStoreResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1058,6 +1138,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -1072,7 +1153,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnDeleteTaskResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1106,6 +1190,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -1120,7 +1205,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeleteTitleResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnDeleteTitleResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1154,6 +1242,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -1168,7 +1257,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ExportMasterPlayerDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnExportMasterPlayerDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1202,6 +1294,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -1216,7 +1309,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetActionsOnPlayersInSegmentTaskInstanceResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetActionsOnPlayersInSegmentTaskInstanceResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1250,6 +1346,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -1264,7 +1361,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetAllSegmentsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetAllSegmentsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1298,6 +1398,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -1312,7 +1413,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCatalogItemsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetCatalogItemsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1346,6 +1450,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -1360,7 +1465,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCloudScriptRevisionResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetCloudScriptRevisionResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1394,6 +1502,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -1408,7 +1517,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCloudScriptTaskInstanceResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetCloudScriptTaskInstanceResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1442,6 +1554,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -1456,7 +1569,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCloudScriptVersionsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetCloudScriptVersionsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1490,6 +1606,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -1504,7 +1621,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetContentListResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetContentListResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1538,6 +1658,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -1552,7 +1673,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetContentUploadUrlResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetContentUploadUrlResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1586,6 +1710,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -1600,7 +1725,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetDataReportResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetDataReportResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1634,6 +1762,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -1648,7 +1777,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetMatchmakerGameInfoResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetMatchmakerGameInfoResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1682,6 +1814,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -1696,7 +1829,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetMatchmakerGameModesResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetMatchmakerGameModesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1730,6 +1866,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -1744,7 +1881,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayedTitleListResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetPlayedTitleListResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1778,6 +1918,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -1792,7 +1933,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerIdFromAuthTokenResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetPlayerIdFromAuthTokenResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1826,6 +1970,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -1840,7 +1985,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerProfileResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetPlayerProfileResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1874,6 +2022,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -1888,7 +2037,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerSegmentsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetPlayerSegmentsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1922,6 +2074,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -1936,7 +2089,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerSharedSecretsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetPlayerSharedSecretsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1970,6 +2126,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -1984,7 +2141,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayersInSegmentResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetPlayersInSegmentResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2018,6 +2178,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -2032,7 +2193,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerStatisticDefinitionsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetPlayerStatisticDefinitionsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2066,6 +2230,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -2080,7 +2245,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerStatisticVersionsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetPlayerStatisticVersionsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2114,6 +2282,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -2128,7 +2297,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerTagsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetPlayerTagsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2162,6 +2334,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -2176,7 +2349,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPolicyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetPolicyResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2210,6 +2386,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -2224,7 +2401,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPublisherDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetPublisherDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2258,6 +2438,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -2272,7 +2453,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetRandomResultTablesResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetRandomResultTablesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2306,6 +2490,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -2320,7 +2505,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetServerBuildInfoResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetServerBuildInfoResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2354,6 +2542,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -2368,7 +2557,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetServerBuildUploadURLResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetServerBuildUploadUrlResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2402,6 +2594,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -2416,7 +2609,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetStoreItemsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetStoreItemsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2450,6 +2646,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -2464,7 +2661,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTaskInstancesResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetTaskInstancesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2498,6 +2698,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -2512,7 +2713,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTasksResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetTasksResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2546,6 +2750,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -2560,7 +2765,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTitleDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetTitleDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2594,6 +2802,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -2608,7 +2817,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTitleDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetTitleInternalDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2642,6 +2854,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -2656,7 +2869,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LookupUserAccountInfoResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetUserAccountInfoResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2690,6 +2906,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -2704,7 +2921,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserBansResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetUserBansResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2738,6 +2958,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -2752,7 +2973,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetUserDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2786,6 +3010,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -2800,7 +3025,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetUserInternalDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2834,6 +3062,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -2848,7 +3077,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserInventoryResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetUserInventoryResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2882,6 +3114,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -2896,7 +3129,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetUserPublisherDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2930,6 +3166,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -2944,7 +3181,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetUserPublisherInternalDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2978,6 +3218,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -2992,7 +3233,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetUserPublisherReadOnlyDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3026,6 +3270,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -3040,7 +3285,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGetUserReadOnlyDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3074,6 +3322,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -3088,7 +3337,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GrantItemsToUsersResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnGrantItemsToUsersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3122,6 +3374,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -3136,7 +3389,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<IncrementLimitedEditionItemAvailabilityResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnIncrementLimitedEditionItemAvailabilityResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3170,6 +3426,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -3184,7 +3441,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<IncrementPlayerStatisticVersionResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnIncrementPlayerStatisticVersionResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3218,6 +3478,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -3232,7 +3493,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListOpenIdConnectionResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnListOpenIdConnectionResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3266,6 +3530,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -3280,7 +3545,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListBuildsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnListServerBuildsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3314,6 +3582,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -3328,7 +3597,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListVirtualCurrencyTypesResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnListVirtualCurrencyTypesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3362,6 +3634,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -3376,7 +3649,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ModifyMatchmakerGameModesResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnModifyMatchmakerGameModesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3410,6 +3686,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -3424,7 +3701,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ModifyServerBuildResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnModifyServerBuildResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3458,6 +3738,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -3472,7 +3753,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RefundPurchaseResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnRefundPurchaseResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3506,6 +3790,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -3520,7 +3805,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RemovePlayerTagResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnRemovePlayerTagResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3554,6 +3842,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -3568,7 +3857,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RemoveServerBuildResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnRemoveServerBuildResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3602,6 +3894,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -3616,7 +3909,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<BlankResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnRemoveVirtualCurrencyTypesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3650,6 +3946,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -3664,7 +3961,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ResetCharacterStatisticsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnResetCharacterStatisticsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3698,6 +3998,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -3712,7 +4013,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ResetPasswordResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnResetPasswordResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3746,6 +4050,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -3760,7 +4065,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ResetUserStatisticsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnResetUserStatisticsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3794,6 +4102,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -3808,7 +4117,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ResolvePurchaseDisputeResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnResolvePurchaseDisputeResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3842,6 +4154,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -3856,7 +4169,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RevokeAllBansForUserResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnRevokeAllBansForUserResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3890,6 +4206,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -3904,7 +4221,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RevokeBansResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnRevokeBansResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3938,6 +4258,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -3952,7 +4273,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RevokeInventoryResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnRevokeInventoryItemResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3986,6 +4310,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -4000,7 +4325,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RevokeInventoryItemsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnRevokeInventoryItemsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4034,6 +4362,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -4048,7 +4377,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RunTaskResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnRunTaskResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4082,6 +4414,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -4096,7 +4429,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SendAccountRecoveryEmailResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnSendAccountRecoveryEmailResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4130,6 +4466,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -4144,7 +4481,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateCatalogItemsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnSetCatalogItemsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4178,6 +4518,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -4192,7 +4533,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetPlayerSecretResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnSetPlayerSecretResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4226,6 +4570,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -4240,7 +4585,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetPublishedRevisionResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnSetPublishedRevisionResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4274,6 +4622,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -4288,7 +4637,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetPublisherDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnSetPublisherDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4322,6 +4674,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -4336,7 +4689,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateStoreItemsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnSetStoreItemsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4370,6 +4726,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -4384,7 +4741,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetTitleDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnSetTitleDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4418,6 +4778,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -4432,7 +4793,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetTitleDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnSetTitleInternalDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4466,6 +4830,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -4480,7 +4845,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetupPushNotificationResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnSetupPushNotificationResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4514,6 +4882,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -4528,7 +4897,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ModifyUserVirtualCurrencyResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnSubtractUserVirtualCurrencyResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4562,6 +4934,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -4576,7 +4949,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateBansResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnUpdateBansResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4610,6 +4986,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -4624,7 +5001,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateCatalogItemsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnUpdateCatalogItemsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4658,6 +5038,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -4672,7 +5053,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateCloudScriptResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnUpdateCloudScriptResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4706,6 +5090,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -4720,7 +5105,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnUpdateOpenIdConnectionResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4754,6 +5142,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -4768,7 +5157,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdatePlayerSharedSecretResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnUpdatePlayerSharedSecretResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4802,6 +5194,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -4816,7 +5209,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdatePlayerStatisticDefinitionResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnUpdatePlayerStatisticDefinitionResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4850,6 +5246,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -4864,7 +5261,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdatePolicyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnUpdatePolicyResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4898,6 +5298,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -4912,7 +5313,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateRandomResultTablesResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnUpdateRandomResultTablesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4946,6 +5350,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -4960,7 +5365,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateStoreItemsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnUpdateStoreItemsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4994,6 +5402,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -5008,7 +5417,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnUpdateTaskResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5042,6 +5454,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -5056,7 +5469,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnUpdateUserDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5090,6 +5506,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -5104,7 +5521,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnUpdateUserInternalDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5138,6 +5558,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -5152,7 +5573,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnUpdateUserPublisherDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5186,6 +5610,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -5200,7 +5625,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnUpdateUserPublisherInternalDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5234,6 +5662,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -5248,7 +5677,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnUpdateUserPublisherReadOnlyDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5282,6 +5714,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -5296,7 +5729,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnUpdateUserReadOnlyDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5330,6 +5766,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->developerSecretKey : request.authenticationContext->developerSecretKey);
 
@@ -5344,7 +5781,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserTitleDisplayNameResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAdminInstanceAPI::OnUpdateUserTitleDisplayNameResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)

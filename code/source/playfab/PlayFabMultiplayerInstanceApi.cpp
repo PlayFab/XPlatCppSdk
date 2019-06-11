@@ -98,6 +98,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -112,7 +113,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CancelAllMatchmakingTicketsForPlayerResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnCancelAllMatchmakingTicketsForPlayerResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -146,6 +150,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -160,7 +165,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CancelMatchmakingTicketResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnCancelMatchmakingTicketResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -194,6 +202,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -208,7 +217,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateBuildWithCustomContainerResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnCreateBuildWithCustomContainerResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -242,6 +254,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -256,7 +269,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateBuildWithManagedContainerResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnCreateBuildWithManagedContainerResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -290,6 +306,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -304,7 +321,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateMatchmakingTicketResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnCreateMatchmakingTicketResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -338,6 +358,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -352,7 +373,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateRemoteUserResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnCreateRemoteUserResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -386,6 +410,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -400,7 +425,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateMatchmakingTicketResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnCreateServerMatchmakingTicketResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -434,6 +462,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -448,7 +477,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnDeleteAssetResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -482,6 +514,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -496,7 +529,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnDeleteBuildResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -530,6 +566,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -544,7 +581,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnDeleteCertificateResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -578,6 +618,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -592,7 +633,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnDeleteRemoteUserResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -626,6 +670,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -640,7 +685,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EnableMultiplayerServersForTitleResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnEnableMultiplayerServersForTitleResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -674,6 +722,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -688,7 +737,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetAssetUploadUrlResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnGetAssetUploadUrlResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -722,6 +774,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -736,7 +789,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetBuildResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnGetBuildResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -770,6 +826,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -784,7 +841,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetContainerRegistryCredentialsResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnGetContainerRegistryCredentialsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -818,6 +878,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -832,7 +893,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetMatchResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnGetMatchResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -866,6 +930,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -880,7 +945,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetMatchmakingTicketResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnGetMatchmakingTicketResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -914,6 +982,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -928,7 +997,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetMultiplayerServerDetailsResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnGetMultiplayerServerDetailsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -962,6 +1034,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -976,7 +1049,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetQueueStatisticsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnGetQueueStatisticsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1010,6 +1086,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -1024,7 +1101,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetRemoteLoginEndpointResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnGetRemoteLoginEndpointResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1058,6 +1138,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -1072,7 +1153,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTitleEnabledForMultiplayerServersStatusResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnGetTitleEnabledForMultiplayerServersStatusResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1106,6 +1190,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -1120,7 +1205,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTitleMultiplayerServersQuotasResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnGetTitleMultiplayerServersQuotasResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1154,6 +1242,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -1168,7 +1257,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<JoinMatchmakingTicketResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnJoinMatchmakingTicketResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1202,6 +1294,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -1216,7 +1309,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListMultiplayerServersResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnListArchivedMultiplayerServersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1250,6 +1346,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -1264,7 +1361,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListAssetSummariesResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnListAssetSummariesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1298,6 +1398,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -1312,7 +1413,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListBuildSummariesResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnListBuildSummariesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1346,6 +1450,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -1360,7 +1465,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListCertificateSummariesResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnListCertificateSummariesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1394,6 +1502,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -1408,7 +1517,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListContainerImagesResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnListContainerImagesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1442,6 +1554,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -1456,7 +1569,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListContainerImageTagsResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnListContainerImageTagsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1490,6 +1606,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -1504,7 +1621,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListMatchmakingTicketsForPlayerResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnListMatchmakingTicketsForPlayerResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1538,6 +1658,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -1552,7 +1673,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListMultiplayerServersResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnListMultiplayerServersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1586,6 +1710,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("", "");
 
@@ -1600,7 +1725,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListQosServersResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("None", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnListQosServersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1634,6 +1762,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -1648,7 +1777,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListVirtualMachineSummariesResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnListVirtualMachineSummariesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1682,6 +1814,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -1696,7 +1829,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RequestMultiplayerServerResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnRequestMultiplayerServerResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1730,6 +1866,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -1744,7 +1881,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RolloverContainerRegistryCredentialsResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnRolloverContainerRegistryCredentialsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1778,6 +1918,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -1792,7 +1933,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnShutdownMultiplayerServerResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1826,6 +1970,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -1840,7 +1985,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnUpdateBuildRegionsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1874,6 +2022,7 @@ namespace PlayFab
         Json::FastWriter writer;
         std::string jsonAsString = writer.write(requestJson);
 
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
 
@@ -1888,7 +2037,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabMultiplayerInstanceAPI::OnUploadCertificateResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)

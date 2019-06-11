@@ -54,7 +54,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ModifyCharacterVirtualCurrencyResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnAddCharacterVirtualCurrencyResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -101,7 +104,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnAddFriendResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -148,7 +154,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnAddGenericIDResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -195,7 +204,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AddPlayerTagResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnAddPlayerTagResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -242,7 +254,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AddSharedGroupMembersResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnAddSharedGroupMembersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -289,7 +304,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ModifyUserVirtualCurrencyResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnAddUserVirtualCurrencyResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -336,7 +354,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AuthenticateSessionTicketResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnAuthenticateSessionTicketResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -383,7 +404,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AwardSteamAchievementResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnAwardSteamAchievementResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -430,7 +454,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<BanUsersResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnBanUsersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -477,7 +504,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ConsumeItemResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnConsumeItemResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -524,7 +554,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateSharedGroupResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnCreateSharedGroupResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -571,7 +604,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeleteCharacterFromUserResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnDeleteCharacterFromUserResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -618,7 +654,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeletePlayerResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnDeletePlayerResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -665,7 +704,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeletePushNotificationTemplateResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnDeletePushNotificationTemplateResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -712,7 +754,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnDeleteSharedGroupResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -759,7 +804,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeregisterGameResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnDeregisterGameResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -806,7 +854,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EvaluateRandomResultTableResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnEvaluateRandomResultTableResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -853,7 +904,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ExecuteCloudScriptResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnExecuteCloudScriptResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -900,7 +954,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetAllSegmentsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetAllSegmentsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -947,7 +1004,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListUsersCharactersResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetAllUsersCharactersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -994,7 +1054,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCatalogItemsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetCatalogItemsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1041,7 +1104,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCharacterDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetCharacterDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1088,7 +1154,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCharacterDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetCharacterInternalDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1135,7 +1204,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCharacterInventoryResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetCharacterInventoryResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1182,7 +1254,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCharacterLeaderboardResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetCharacterLeaderboardResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1229,7 +1304,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCharacterDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetCharacterReadOnlyDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1276,7 +1354,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCharacterStatisticsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetCharacterStatisticsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1323,7 +1404,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetContentDownloadUrlResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetContentDownloadUrlResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1370,7 +1454,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetLeaderboardResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetFriendLeaderboardResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1417,7 +1504,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetFriendsListResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetFriendsListResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1464,7 +1554,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetLeaderboardResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetLeaderboardResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1511,7 +1604,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetLeaderboardAroundCharacterResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetLeaderboardAroundCharacterResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1558,7 +1654,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetLeaderboardAroundUserResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetLeaderboardAroundUserResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1605,7 +1704,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetLeaderboardForUsersCharactersResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetLeaderboardForUserCharactersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1652,7 +1754,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerCombinedInfoResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetPlayerCombinedInfoResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1699,7 +1804,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerProfileResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetPlayerProfileResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1746,7 +1854,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerSegmentsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetPlayerSegmentsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1793,7 +1904,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayersInSegmentResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetPlayersInSegmentResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1840,7 +1954,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerStatisticsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetPlayerStatisticsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1887,7 +2004,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerStatisticVersionsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetPlayerStatisticVersionsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1934,7 +2054,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerTagsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetPlayerTagsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -1981,7 +2104,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromFacebookIDsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetPlayFabIDsFromFacebookIDsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2028,7 +2154,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromFacebookInstantGamesIdsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetPlayFabIDsFromFacebookInstantGamesIdsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2075,7 +2204,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromGenericIDsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetPlayFabIDsFromGenericIDsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2122,7 +2254,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromNintendoSwitchDeviceIdsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetPlayFabIDsFromNintendoSwitchDeviceIdsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2169,7 +2304,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromPSNAccountIDsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetPlayFabIDsFromPSNAccountIDsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2216,7 +2354,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromSteamIDsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetPlayFabIDsFromSteamIDsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2263,7 +2404,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromXboxLiveIDsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetPlayFabIDsFromXboxLiveIDsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2310,7 +2454,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPublisherDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetPublisherDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2357,7 +2504,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetRandomResultTablesResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetRandomResultTablesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2404,7 +2554,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetServerCustomIDsFromPlayFabIDsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetServerCustomIDsFromPlayFabIDsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2451,7 +2604,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetSharedGroupDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetSharedGroupDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2498,7 +2654,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTimeResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetTimeResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2545,7 +2704,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTitleDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetTitleDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2592,7 +2754,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTitleDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetTitleInternalDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2639,7 +2804,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTitleNewsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetTitleNewsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2686,7 +2854,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserAccountInfoResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetUserAccountInfoResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2733,7 +2904,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserBansResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetUserBansResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2780,7 +2954,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetUserDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2827,7 +3004,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetUserInternalDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2874,7 +3054,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserInventoryResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetUserInventoryResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2921,7 +3104,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetUserPublisherDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -2968,7 +3154,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetUserPublisherInternalDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3015,7 +3204,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetUserPublisherReadOnlyDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3062,7 +3254,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGetUserReadOnlyDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3109,7 +3304,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GrantCharacterToUserResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGrantCharacterToUserResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3156,7 +3354,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GrantItemsToCharacterResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGrantItemsToCharacterResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3203,7 +3404,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GrantItemsToUserResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGrantItemsToUserResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3250,7 +3454,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GrantItemsToUsersResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnGrantItemsToUsersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3297,7 +3504,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkServerCustomIdResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnLinkServerCustomIdResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3344,7 +3554,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkXboxAccountResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnLinkXboxAccountResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3391,7 +3604,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ServerLoginResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnLoginWithServerCustomIdResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3438,7 +3654,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ServerLoginResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnLoginWithXboxResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3485,7 +3704,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ModifyItemUsesResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnModifyItemUsesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3532,7 +3754,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<MoveItemToCharacterFromCharacterResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnMoveItemToCharacterFromCharacterResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3579,7 +3804,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<MoveItemToCharacterFromUserResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnMoveItemToCharacterFromUserResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3626,7 +3854,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<MoveItemToUserFromCharacterResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnMoveItemToUserFromCharacterResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3673,7 +3904,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<NotifyMatchmakerPlayerLeftResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnNotifyMatchmakerPlayerLeftResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3720,7 +3954,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RedeemCouponResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnRedeemCouponResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3767,7 +4004,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RedeemMatchmakerTicketResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnRedeemMatchmakerTicketResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3814,7 +4054,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RefreshGameServerInstanceHeartbeatResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnRefreshGameServerInstanceHeartbeatResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3861,7 +4104,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RegisterGameResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnRegisterGameResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3908,7 +4154,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnRemoveFriendResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -3955,7 +4204,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnRemoveGenericIDResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4002,7 +4254,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RemovePlayerTagResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnRemovePlayerTagResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4049,7 +4304,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RemoveSharedGroupMembersResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnRemoveSharedGroupMembersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4096,7 +4354,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ReportPlayerServerResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnReportPlayerResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4143,7 +4404,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RevokeAllBansForUserResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnRevokeAllBansForUserResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4190,7 +4454,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RevokeBansResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnRevokeBansResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4237,7 +4504,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RevokeInventoryResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnRevokeInventoryItemResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4284,7 +4554,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RevokeInventoryItemsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnRevokeInventoryItemsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4331,7 +4604,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SavePushNotificationTemplateResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnSavePushNotificationTemplateResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4378,7 +4654,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SendCustomAccountRecoveryEmailResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnSendCustomAccountRecoveryEmailResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4425,7 +4704,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SendEmailFromTemplateResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnSendEmailFromTemplateResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4472,7 +4754,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SendPushNotificationResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnSendPushNotificationResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4519,7 +4804,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SendPushNotificationResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnSendPushNotificationFromTemplateResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4566,7 +4854,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnSetFriendTagsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4613,7 +4904,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetGameServerInstanceDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnSetGameServerInstanceDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4660,7 +4954,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetGameServerInstanceStateResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnSetGameServerInstanceStateResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4707,7 +5004,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetGameServerInstanceTagsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnSetGameServerInstanceTagsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4754,7 +5054,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetPlayerSecretResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnSetPlayerSecretResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4801,7 +5104,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetPublisherDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnSetPublisherDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4848,7 +5154,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetTitleDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnSetTitleDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4895,7 +5204,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetTitleDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnSetTitleInternalDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4942,7 +5254,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ModifyCharacterVirtualCurrencyResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnSubtractCharacterVirtualCurrencyResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -4989,7 +5304,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ModifyUserVirtualCurrencyResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnSubtractUserVirtualCurrencyResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5036,7 +5354,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkServerCustomIdResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnUnlinkServerCustomIdResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5083,7 +5404,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkXboxAccountResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnUnlinkXboxAccountResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5130,7 +5454,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlockContainerItemResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnUnlockContainerInstanceResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5177,7 +5504,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlockContainerItemResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnUnlockContainerItemResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5224,7 +5554,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnUpdateAvatarUrlResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5271,7 +5604,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateBansResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnUpdateBansResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5318,7 +5654,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateCharacterDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnUpdateCharacterDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5365,7 +5704,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateCharacterDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnUpdateCharacterInternalDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5412,7 +5754,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateCharacterDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnUpdateCharacterReadOnlyDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5459,7 +5804,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateCharacterStatisticsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnUpdateCharacterStatisticsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5506,7 +5854,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdatePlayerStatisticsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnUpdatePlayerStatisticsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5553,7 +5904,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateSharedGroupDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnUpdateSharedGroupDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5600,7 +5954,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnUpdateUserDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5647,7 +6004,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnUpdateUserInternalDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5694,7 +6054,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnUpdateUserInventoryItemCustomDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5741,7 +6104,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnUpdateUserPublisherDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5788,7 +6154,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnUpdateUserPublisherInternalDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5835,7 +6204,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnUpdateUserPublisherReadOnlyDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5882,7 +6254,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnUpdateUserReadOnlyDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5929,7 +6304,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<WriteEventResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnWriteCharacterEventResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -5976,7 +6354,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<WriteEventResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnWritePlayerEventResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -6023,7 +6404,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<WriteEventResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabServerAPI::OnWriteTitleEventResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)

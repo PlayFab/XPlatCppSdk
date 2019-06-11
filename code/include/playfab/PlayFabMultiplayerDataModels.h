@@ -28,7 +28,8 @@ namespace PlayFab
             AzureRegionWestEurope,
             AzureRegionWestUs,
             AzureRegionChinaEast2,
-            AzureRegionChinaNorth2
+            AzureRegionChinaNorth2,
+            AzureRegionSouthAfricaNorth
         };
 
         inline void ToJsonEnum(const AzureRegion input, Json::Value& output)
@@ -50,6 +51,7 @@ namespace PlayFab
             if (input == AzureRegionWestUs) output = Json::Value("WestUs");
             if (input == AzureRegionChinaEast2) output = Json::Value("ChinaEast2");
             if (input == AzureRegionChinaNorth2) output = Json::Value("ChinaNorth2");
+            if (input == AzureRegionSouthAfricaNorth) output = Json::Value("SouthAfricaNorth");
         }
         inline void FromJsonEnum(const Json::Value& input, AzureRegion& output)
         {
@@ -72,6 +74,7 @@ namespace PlayFab
             if (inputStr == "WestUs") output = AzureRegionWestUs;
             if (inputStr == "ChinaEast2") output = AzureRegionChinaEast2;
             if (inputStr == "ChinaNorth2") output = AzureRegionChinaNorth2;
+            if (inputStr == "SouthAfricaNorth") output = AzureRegionSouthAfricaNorth;
         }
 
         enum AzureVmFamily
@@ -185,7 +188,8 @@ namespace PlayFab
         {
             CancellationReasonRequested,
             CancellationReasonInternal,
-            CancellationReasonTimeout
+            CancellationReasonTimeout,
+            CancellationReasonServerAllocationFailed
         };
 
         inline void ToJsonEnum(const CancellationReason input, Json::Value& output)
@@ -193,6 +197,7 @@ namespace PlayFab
             if (input == CancellationReasonRequested) output = Json::Value("Requested");
             if (input == CancellationReasonInternal) output = Json::Value("Internal");
             if (input == CancellationReasonTimeout) output = Json::Value("Timeout");
+            if (input == CancellationReasonServerAllocationFailed) output = Json::Value("ServerAllocationFailed");
         }
         inline void FromJsonEnum(const Json::Value& input, CancellationReason& output)
         {
@@ -201,6 +206,7 @@ namespace PlayFab
             if (inputStr == "Requested") output = CancellationReasonRequested;
             if (inputStr == "Internal") output = CancellationReasonInternal;
             if (inputStr == "Timeout") output = CancellationReasonTimeout;
+            if (inputStr == "ServerAllocationFailed") output = CancellationReasonServerAllocationFailed;
         }
 
         enum ContainerFlavor

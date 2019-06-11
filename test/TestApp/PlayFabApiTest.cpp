@@ -38,6 +38,42 @@ namespace PlayFabUnit
     }
 
     /// CLIENT API
+    /// Try to deliberately cause a client-side validation error
+    void PlayFabApiTest::InvalidSettings(TestContext& testContext)
+    {
+        LoginWithCustomIDRequest request;
+        request.CustomId = PlayFabSettings::buildIdentifier;
+        request.CreateAccount = true;
+
+        // store current (valid) title id
+        auto validTitleId = PlayFabSettings::titleId;
+
+        // set invalid title id
+        PlayFabSettings::titleId = "";
+
+        PlayFabClientAPI::LoginWithCustomID(request,
+            [&validTitleId](const LoginResult&, void* customData)
+            {
+                PlayFabSettings::titleId = validTitleId;
+                TestContext* testContext = reinterpret_cast<TestContext*>(customData);
+                testContext->Fail("Expected API call to fail on the client side");
+            },
+            [&validTitleId](const PlayFabError& error, void* customData)
+            {
+                PlayFabSettings::titleId = validTitleId;
+                TestContext* testContext = reinterpret_cast<TestContext*>(customData);
+                if (error.HttpCode == 0
+                    && error.HttpStatus == "Client-side validation failure"
+                    && error.ErrorCode == PlayFabErrorCode::PlayFabErrorInvalidParams
+                    && error.ErrorName == error.HttpStatus)
+                    testContext->Pass();
+                else
+                    testContext->Fail("Returned error is different from expected");
+            },
+            &testContext);
+    }
+
+    /// CLIENT API
     /// Try to deliberately log in with an inappropriate password,
     ///   and verify that the error displays as expected.
     void PlayFabApiTest::InvalidLogin(TestContext& testContext)
@@ -190,11 +226,11 @@ namespace PlayFabUnit
         // itoa is not avaialable in android
         char buffer[16];
         std::string temp;
-#if defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID)
+#if defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID) || defined(PLAYFAB_PLATFORM_LINUX)
         sprintf(buffer, "%d", testMessageInt);
-#else // PLAYFAB_PLATFORM_IOS || PLAYFAB_PLATFORM_ANDROID
+#else // PLAYFAB_PLATFORM_IOS || PLAYFAB_PLATFORM_ANDROID || PLAYFAB_PLATFORM_LINUX
         sprintf_s(buffer, "%d", testMessageInt);
-#endif // PLAYFAB_PLATFORM_IOS || PLAYFAB_PLATFORM_ANDROID
+#endif // PLAYFAB_PLATFORM_IOS || PLAYFAB_PLATFORM_ANDROID || PLAYFAB_PLATFORM_LINUX
         temp.append(buffer);
 
         updateRequest.Data[TEST_DATA_KEY] = temp;
@@ -219,12 +255,13 @@ namespace PlayFabUnit
 
         time_t now = time(nullptr);
         struct tm timeinfo;
-#if defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID)
+#if defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID) || defined(PLAYFAB_PLATFORM_LINUX)
         timeinfo = *gmtime(&now);
-#else // PLAYFAB_PLATFORM_IOS || PLAYFAB_PLATFORM_ANDROID
+        now = timegm(&timeinfo);
+#else // PLAYFAB_PLATFORM_IOS || PLAYFAB_PLATFORM_ANDROID || PLAYFAB_PLATFORM_LINUX
         gmtime_s(&timeinfo, &now);
-#endif // PLAYFAB_PLATFORM_IOS || PLAYFAB_PLATFORM_ANDROID
-        now = mktime(&timeinfo);
+        now = _mkgmtime(&timeinfo);
+#endif // PLAYFAB_PLATFORM_IOS || PLAYFAB_PLATFORM_ANDROID || PLAYFAB_PLATFORM_LINUX
         time_t minTime = now - (60 * 5);
         time_t maxTime = now + (60 * 5);
 
@@ -599,6 +636,7 @@ namespace PlayFabUnit
 
     void PlayFabApiTest::AddTests()
     {
+        AddTest("InvalidSettings", &PlayFabApiTest::InvalidSettings);
         AddTest("InvalidLogin", &PlayFabApiTest::InvalidLogin);
         AddTest("InvalidLoginLambda", &PlayFabApiTest::InvalidLoginLambda);
         AddTest("InvalidRegistration", &PlayFabApiTest::InvalidRegistration);

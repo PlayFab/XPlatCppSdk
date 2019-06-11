@@ -2,11 +2,13 @@
 
 #include <playfab/PlayFabSettings.h>
 
+#pragma warning (disable: 4100) // formal parameters are part of a public interface
+
 namespace PlayFab
 {
-    const std::string PlayFabSettings::sdkVersion = "3.10.190509";
-    const std::string PlayFabSettings::buildIdentifier = "jbuild_xplatcppsdk__sdk-genericslave-1_0";
-    const std::string PlayFabSettings::versionString = "XPlatCppSdk-3.10.190509";
+    const std::string PlayFabSettings::sdkVersion = "3.12.190610";
+    const std::string PlayFabSettings::buildIdentifier = "jbuild_xplatcppsdk__sdk-genericslave-3_0";
+    const std::string PlayFabSettings::versionString = "XPlatCppSdk-3.12.190610";
     const std::string PlayFabSettings::verticalName = "";
 
     const std::map<std::string, std::string> PlayFabSettings::requestGetParams = {
@@ -77,5 +79,29 @@ namespace PlayFab
         }
         
         return fullUrl;
+    }
+
+    bool PlayFabSettings::ValidateSettings(const std::string& apiAuth, const std::shared_ptr<PlayFabAuthenticationContext> authenticationContext, const std::shared_ptr<PlayFabApiSettings> apiSettings, CallRequestContainer& container)
+    {
+        bool valid = true;
+        if (PlayFabSettings::titleId.empty())
+        {
+            container.errorWrapper.HttpCode = 0;
+            container.errorWrapper.HttpStatus = "Client-side validation failure";
+            container.errorWrapper.ErrorCode = PlayFabErrorCode::PlayFabErrorInvalidParams;
+            container.errorWrapper.ErrorName = container.errorWrapper.HttpStatus;
+            container.errorWrapper.ErrorMessage = "PlayFabSettings::titleId has not been set properly. It must not be empty.";
+            valid = false;
+        }
+
+        if (valid)
+            return true;
+
+        if (PlayFabSettings::globalErrorHandler != nullptr)
+            PlayFabSettings::globalErrorHandler(container.errorWrapper, container.GetCustomData());
+        if (container.errorCallback != nullptr)
+            container.errorCallback(container.errorWrapper, container.GetCustomData());
+
+        return false;
     }
 }

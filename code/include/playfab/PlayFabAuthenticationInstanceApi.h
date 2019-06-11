@@ -39,9 +39,11 @@ namespace PlayFab
 
         // ------------ Generated API calls
         void GetEntityToken(AuthenticationModels::GetEntityTokenRequest& request, ProcessApiCallback<AuthenticationModels::GetEntityTokenResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void ValidateEntityToken(AuthenticationModels::ValidateEntityTokenRequest& request, ProcessApiCallback<AuthenticationModels::ValidateEntityTokenResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
 
         // ------------ Generated result handlers
         void OnGetEntityTokenResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
+        void OnValidateEntityTokenResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
         bool ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container);
     private:
         std::shared_ptr<PlayFabAuthenticationContext> GetOrCreateAuthenticationContext();

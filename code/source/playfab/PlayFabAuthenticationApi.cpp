@@ -42,9 +42,11 @@ namespace PlayFab
             else if (request.authenticationContext->clientSessionTicket.length() > 0) {
                 authKey = "X-Authorization"; authValue = request.authenticationContext->clientSessionTicket;
             }
+    #if defined(ENABLE_PLAYFABSERVER_API) || defined(ENABLE_PLAYFABADMIN_API)
             else if (request.authenticationContext->developerSecretKey.length() > 0) {
                 authKey = "X-SecretKey"; authValue = request.authenticationContext->developerSecretKey;
             }
+    #endif
         }
         else {
             if (PlayFabSettings::entityToken.length() > 0) {
@@ -53,9 +55,11 @@ namespace PlayFab
             else if (PlayFabSettings::clientSessionTicket.length() > 0) {
                 authKey = "X-Authorization"; authValue = PlayFabSettings::clientSessionTicket;
             }
+    #if defined(ENABLE_PLAYFABSERVER_API) || defined(ENABLE_PLAYFABADMIN_API)
             else if (PlayFabSettings::developerSecretKey.length() > 0) {
                 authKey = "X-SecretKey"; authValue = PlayFabSettings::developerSecretKey;
             }
+    #endif
         }
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
@@ -77,7 +81,10 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetEntityTokenResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        if (PlayFabSettings::ValidateSettings("None", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
     }
 
     void PlayFabAuthenticationAPI::OnGetEntityTokenResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
@@ -95,6 +102,56 @@ namespace PlayFab
             if (internalPtr != nullptr)
             {
                 const auto callback = (*static_cast<ProcessApiCallback<GetEntityTokenResponse> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabAuthenticationAPI::ValidateEntityToken(
+        ValidateEntityTokenRequest& request,
+        ProcessApiCallback<ValidateEntityTokenResponse> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const auto requestJson = request.ToJson();
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Authentication/ValidateEntityToken",
+            headers,
+            jsonAsString,
+            OnValidateEntityTokenResult,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ValidateEntityTokenResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        if (PlayFabSettings::ValidateSettings("EntityToken", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
+    }
+
+    void PlayFabAuthenticationAPI::OnValidateEntityTokenResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+
+        ValidateEntityTokenResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<ValidateEntityTokenResponse> *>(internalPtr));
                 callback(outResult, container.GetCustomData());
             }
         }

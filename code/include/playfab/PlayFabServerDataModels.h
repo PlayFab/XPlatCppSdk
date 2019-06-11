@@ -1809,21 +1809,22 @@ namespace PlayFab
             GenericErrorCodesEntityAPIKeyOrSecretInvalid,
             GenericErrorCodesEconomyServiceUnavailable,
             GenericErrorCodesEconomyServiceInternalError,
-            GenericErrorCodesKustoProxyQueryRateLimitExceeded,
+            GenericErrorCodesQueryRateLimitExceeded,
             GenericErrorCodesEntityAPIKeyCreationDisabledForEntity,
             GenericErrorCodesStudioCreationRateLimited,
             GenericErrorCodesStudioCreationInProgress,
             GenericErrorCodesDuplicateStudioName,
             GenericErrorCodesStudioNotFound,
-            GenericErrorCodesStudioDeletionInProgress,
+            GenericErrorCodesStudioDeleted,
             GenericErrorCodesStudioDeactivated,
+            GenericErrorCodesStudioActivated,
             GenericErrorCodesTitleCreationRateLimited,
             GenericErrorCodesTitleCreationInProgress,
             GenericErrorCodesDuplicateTitleName,
-            GenericErrorCodesTitleNotFound,
-            GenericErrorCodesTitleDeletionInProgress,
+            GenericErrorCodesTitleActivationRateLimited,
+            GenericErrorCodesTitleActivationInProgress,
             GenericErrorCodesTitleDeactivated,
-            GenericErrorCodesTitleAlreadyActivated,
+            GenericErrorCodesTitleActivated,
             GenericErrorCodesCloudScriptAzureFunctionsExecutionTimeLimitExceeded,
             GenericErrorCodesCloudScriptAzureFunctionsArgumentSizeExceeded,
             GenericErrorCodesCloudScriptAzureFunctionsReturnSizeExceeded,
@@ -1863,6 +1864,7 @@ namespace PlayFab
             GenericErrorCodesCatalogFeatureDisabled,
             GenericErrorCodesCatalogConfigInvalid,
             GenericErrorCodesCatalogUnauthorized,
+            GenericErrorCodesCatalogItemTypeInvalid,
             GenericErrorCodesExportInvalidStatusUpdate,
             GenericErrorCodesExportInvalidPrefix,
             GenericErrorCodesExportBlobContainerDoesNotExist,
@@ -2325,21 +2327,22 @@ namespace PlayFab
             if (input == GenericErrorCodesEntityAPIKeyOrSecretInvalid) output = Json::Value("EntityAPIKeyOrSecretInvalid");
             if (input == GenericErrorCodesEconomyServiceUnavailable) output = Json::Value("EconomyServiceUnavailable");
             if (input == GenericErrorCodesEconomyServiceInternalError) output = Json::Value("EconomyServiceInternalError");
-            if (input == GenericErrorCodesKustoProxyQueryRateLimitExceeded) output = Json::Value("KustoProxyQueryRateLimitExceeded");
+            if (input == GenericErrorCodesQueryRateLimitExceeded) output = Json::Value("QueryRateLimitExceeded");
             if (input == GenericErrorCodesEntityAPIKeyCreationDisabledForEntity) output = Json::Value("EntityAPIKeyCreationDisabledForEntity");
             if (input == GenericErrorCodesStudioCreationRateLimited) output = Json::Value("StudioCreationRateLimited");
             if (input == GenericErrorCodesStudioCreationInProgress) output = Json::Value("StudioCreationInProgress");
             if (input == GenericErrorCodesDuplicateStudioName) output = Json::Value("DuplicateStudioName");
             if (input == GenericErrorCodesStudioNotFound) output = Json::Value("StudioNotFound");
-            if (input == GenericErrorCodesStudioDeletionInProgress) output = Json::Value("StudioDeletionInProgress");
+            if (input == GenericErrorCodesStudioDeleted) output = Json::Value("StudioDeleted");
             if (input == GenericErrorCodesStudioDeactivated) output = Json::Value("StudioDeactivated");
+            if (input == GenericErrorCodesStudioActivated) output = Json::Value("StudioActivated");
             if (input == GenericErrorCodesTitleCreationRateLimited) output = Json::Value("TitleCreationRateLimited");
             if (input == GenericErrorCodesTitleCreationInProgress) output = Json::Value("TitleCreationInProgress");
             if (input == GenericErrorCodesDuplicateTitleName) output = Json::Value("DuplicateTitleName");
-            if (input == GenericErrorCodesTitleNotFound) output = Json::Value("TitleNotFound");
-            if (input == GenericErrorCodesTitleDeletionInProgress) output = Json::Value("TitleDeletionInProgress");
+            if (input == GenericErrorCodesTitleActivationRateLimited) output = Json::Value("TitleActivationRateLimited");
+            if (input == GenericErrorCodesTitleActivationInProgress) output = Json::Value("TitleActivationInProgress");
             if (input == GenericErrorCodesTitleDeactivated) output = Json::Value("TitleDeactivated");
-            if (input == GenericErrorCodesTitleAlreadyActivated) output = Json::Value("TitleAlreadyActivated");
+            if (input == GenericErrorCodesTitleActivated) output = Json::Value("TitleActivated");
             if (input == GenericErrorCodesCloudScriptAzureFunctionsExecutionTimeLimitExceeded) output = Json::Value("CloudScriptAzureFunctionsExecutionTimeLimitExceeded");
             if (input == GenericErrorCodesCloudScriptAzureFunctionsArgumentSizeExceeded) output = Json::Value("CloudScriptAzureFunctionsArgumentSizeExceeded");
             if (input == GenericErrorCodesCloudScriptAzureFunctionsReturnSizeExceeded) output = Json::Value("CloudScriptAzureFunctionsReturnSizeExceeded");
@@ -2379,6 +2382,7 @@ namespace PlayFab
             if (input == GenericErrorCodesCatalogFeatureDisabled) output = Json::Value("CatalogFeatureDisabled");
             if (input == GenericErrorCodesCatalogConfigInvalid) output = Json::Value("CatalogConfigInvalid");
             if (input == GenericErrorCodesCatalogUnauthorized) output = Json::Value("CatalogUnauthorized");
+            if (input == GenericErrorCodesCatalogItemTypeInvalid) output = Json::Value("CatalogItemTypeInvalid");
             if (input == GenericErrorCodesExportInvalidStatusUpdate) output = Json::Value("ExportInvalidStatusUpdate");
             if (input == GenericErrorCodesExportInvalidPrefix) output = Json::Value("ExportInvalidPrefix");
             if (input == GenericErrorCodesExportBlobContainerDoesNotExist) output = Json::Value("ExportBlobContainerDoesNotExist");
@@ -2842,21 +2846,22 @@ namespace PlayFab
             if (inputStr == "EntityAPIKeyOrSecretInvalid") output = GenericErrorCodesEntityAPIKeyOrSecretInvalid;
             if (inputStr == "EconomyServiceUnavailable") output = GenericErrorCodesEconomyServiceUnavailable;
             if (inputStr == "EconomyServiceInternalError") output = GenericErrorCodesEconomyServiceInternalError;
-            if (inputStr == "KustoProxyQueryRateLimitExceeded") output = GenericErrorCodesKustoProxyQueryRateLimitExceeded;
+            if (inputStr == "QueryRateLimitExceeded") output = GenericErrorCodesQueryRateLimitExceeded;
             if (inputStr == "EntityAPIKeyCreationDisabledForEntity") output = GenericErrorCodesEntityAPIKeyCreationDisabledForEntity;
             if (inputStr == "StudioCreationRateLimited") output = GenericErrorCodesStudioCreationRateLimited;
             if (inputStr == "StudioCreationInProgress") output = GenericErrorCodesStudioCreationInProgress;
             if (inputStr == "DuplicateStudioName") output = GenericErrorCodesDuplicateStudioName;
             if (inputStr == "StudioNotFound") output = GenericErrorCodesStudioNotFound;
-            if (inputStr == "StudioDeletionInProgress") output = GenericErrorCodesStudioDeletionInProgress;
+            if (inputStr == "StudioDeleted") output = GenericErrorCodesStudioDeleted;
             if (inputStr == "StudioDeactivated") output = GenericErrorCodesStudioDeactivated;
+            if (inputStr == "StudioActivated") output = GenericErrorCodesStudioActivated;
             if (inputStr == "TitleCreationRateLimited") output = GenericErrorCodesTitleCreationRateLimited;
             if (inputStr == "TitleCreationInProgress") output = GenericErrorCodesTitleCreationInProgress;
             if (inputStr == "DuplicateTitleName") output = GenericErrorCodesDuplicateTitleName;
-            if (inputStr == "TitleNotFound") output = GenericErrorCodesTitleNotFound;
-            if (inputStr == "TitleDeletionInProgress") output = GenericErrorCodesTitleDeletionInProgress;
+            if (inputStr == "TitleActivationRateLimited") output = GenericErrorCodesTitleActivationRateLimited;
+            if (inputStr == "TitleActivationInProgress") output = GenericErrorCodesTitleActivationInProgress;
             if (inputStr == "TitleDeactivated") output = GenericErrorCodesTitleDeactivated;
-            if (inputStr == "TitleAlreadyActivated") output = GenericErrorCodesTitleAlreadyActivated;
+            if (inputStr == "TitleActivated") output = GenericErrorCodesTitleActivated;
             if (inputStr == "CloudScriptAzureFunctionsExecutionTimeLimitExceeded") output = GenericErrorCodesCloudScriptAzureFunctionsExecutionTimeLimitExceeded;
             if (inputStr == "CloudScriptAzureFunctionsArgumentSizeExceeded") output = GenericErrorCodesCloudScriptAzureFunctionsArgumentSizeExceeded;
             if (inputStr == "CloudScriptAzureFunctionsReturnSizeExceeded") output = GenericErrorCodesCloudScriptAzureFunctionsReturnSizeExceeded;
@@ -2896,6 +2901,7 @@ namespace PlayFab
             if (inputStr == "CatalogFeatureDisabled") output = GenericErrorCodesCatalogFeatureDisabled;
             if (inputStr == "CatalogConfigInvalid") output = GenericErrorCodesCatalogConfigInvalid;
             if (inputStr == "CatalogUnauthorized") output = GenericErrorCodesCatalogUnauthorized;
+            if (inputStr == "CatalogItemTypeInvalid") output = GenericErrorCodesCatalogItemTypeInvalid;
             if (inputStr == "ExportInvalidStatusUpdate") output = GenericErrorCodesExportInvalidStatusUpdate;
             if (inputStr == "ExportInvalidPrefix") output = GenericErrorCodesExportInvalidPrefix;
             if (inputStr == "ExportBlobContainerDoesNotExist") output = GenericErrorCodesExportBlobContainerDoesNotExist;

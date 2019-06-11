@@ -19,6 +19,7 @@ namespace PlayFab
 
         // ------------ Generated API calls
         static void GetEntityToken(AuthenticationModels::GetEntityTokenRequest& request, ProcessApiCallback<AuthenticationModels::GetEntityTokenResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void ValidateEntityToken(AuthenticationModels::ValidateEntityTokenRequest& request, ProcessApiCallback<AuthenticationModels::ValidateEntityTokenResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
 
     private:
         PlayFabAuthenticationAPI(); // Private constructor, static class should never have an instance
@@ -26,6 +27,7 @@ namespace PlayFab
 
         // ------------ Generated result handlers
         static void OnGetEntityTokenResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
+        static void OnValidateEntityTokenResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
 
         static bool ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container);
     };
