@@ -24,7 +24,7 @@ namespace PlayFab
     typedef unsigned __int64 Uint64;
     typedef unsigned __int32 Uint32;
     typedef unsigned __int16 Uint16;
-#elif defined(PLAYFAB_PLATFORM_LINUX) || defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID)
+#elif defined(PLAYFAB_PLATFORM_LINUX) || defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID) || defined(PLAYFAB_PLATFORM_PLAYSTATION)
     typedef int64_t Int64;
     typedef int32_t Int32;
     typedef int16_t Int16;
@@ -100,7 +100,7 @@ namespace PlayFab
         tm timeInfo;
 #if defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX)
         gmtime_s(&timeInfo, &input);
-#elif defined(PLAYFAB_PLATFORM_LINUX) || defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID)
+#elif defined(PLAYFAB_PLATFORM_LINUX) || defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID) || defined(PLAYFAB_PLATFORM_PLAYSTATION)
         timeInfo = *gmtime(&input);
 #endif
         char buff[40];
@@ -114,11 +114,13 @@ namespace PlayFab
         tm timeStruct = {};
         std::istringstream iss(timeStr);
         iss >> std::get_time(&timeStruct, "%Y-%m-%dT%T");
-#if defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID) || defined(PLAYFAB_PLATFORM_LINUX)
+#if defined(PLAYFAB_PLATFORM_PLAYSTATION)
+        // Issue 32699
+#elif defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID) || defined(PLAYFAB_PLATFORM_LINUX)
         output = timegm(&timeStruct);
-#else // PLAYFAB_PLATFORM_IOS || PLAYFAB_PLATFORM_ANDROID || PLAYFAB_PLATFORM_LINUX
+#else
         output = _mkgmtime(&timeStruct);
-#endif // PLAYFAB_PLATFORM_IOS || PLAYFAB_PLATFORM_ANDROID || PLAYFAB_PLATFORM_LINUX
+#endif
     }
     inline void ToJsonUtilT(const Boxed<time_t>& input, Json::Value& output)
     {

@@ -2,8 +2,8 @@
 
 #pragma once
 
-#include <memory>
 #include <string>
+#include <memory>
 #include "TestDataTypes.h"
 
 namespace PlayFab

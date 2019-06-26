@@ -2,6 +2,7 @@
 
 #pragma once
 
+#ifndef PLAYFAB_PLATFORM_PLAYSTATION // Issue 32699
 #include "TestCase.h"
 
 namespace PlayFab
@@ -49,3 +50,5 @@ namespace PlayFabUnit
             void ClassTearDown() override;
     };
 }
+
+#endif

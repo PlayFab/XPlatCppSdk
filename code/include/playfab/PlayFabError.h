@@ -525,6 +525,8 @@ namespace PlayFab
         PlayFabErrorExportCantEditPendingExport = 5014,
         PlayFabErrorExportLimitExports = 5015,
         PlayFabErrorExportLimitEvents = 5016,
+        PlayFabErrorTitleNotEnabledForParty = 6000,
+        PlayFabErrorPartyVersionNotFound = 6001,
     };
 
     /// <summary>

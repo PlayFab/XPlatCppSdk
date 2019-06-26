@@ -1,5 +1,6 @@
 #include <stdafx.h>
 
+#ifndef PLAYFAB_PLATFORM_PLAYSTATION // Issue 32699
 #ifdef ENABLE_PLAYFABSERVER_API
 
 #include <playfab/PlayFabMatchmakerInstanceApi.h>
@@ -364,3 +365,6 @@ namespace PlayFab
 }
 
 #endif
+#endif
+
+#pragma warning (enable: 4100) // formal parameters are part of a public interface

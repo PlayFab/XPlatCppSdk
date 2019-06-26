@@ -1881,7 +1881,9 @@ namespace PlayFab
             GenericErrorCodesExportUnknownError,
             GenericErrorCodesExportCantEditPendingExport,
             GenericErrorCodesExportLimitExports,
-            GenericErrorCodesExportLimitEvents
+            GenericErrorCodesExportLimitEvents,
+            GenericErrorCodesTitleNotEnabledForParty,
+            GenericErrorCodesPartyVersionNotFound
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -2400,6 +2402,8 @@ namespace PlayFab
             if (input == GenericErrorCodesExportCantEditPendingExport) output = Json::Value("ExportCantEditPendingExport");
             if (input == GenericErrorCodesExportLimitExports) output = Json::Value("ExportLimitExports");
             if (input == GenericErrorCodesExportLimitEvents) output = Json::Value("ExportLimitEvents");
+            if (input == GenericErrorCodesTitleNotEnabledForParty) output = Json::Value("TitleNotEnabledForParty");
+            if (input == GenericErrorCodesPartyVersionNotFound) output = Json::Value("PartyVersionNotFound");
         }
         inline void FromJsonEnum(const Json::Value& input, GenericErrorCodes& output)
         {
@@ -2919,6 +2923,8 @@ namespace PlayFab
             if (inputStr == "ExportCantEditPendingExport") output = GenericErrorCodesExportCantEditPendingExport;
             if (inputStr == "ExportLimitExports") output = GenericErrorCodesExportLimitExports;
             if (inputStr == "ExportLimitEvents") output = GenericErrorCodesExportLimitEvents;
+            if (inputStr == "TitleNotEnabledForParty") output = GenericErrorCodesTitleNotEnabledForParty;
+            if (inputStr == "PartyVersionNotFound") output = GenericErrorCodesPartyVersionNotFound;
         }
 
         enum LoginIdentityProvider

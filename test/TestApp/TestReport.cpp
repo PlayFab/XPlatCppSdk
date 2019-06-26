@@ -48,6 +48,11 @@ namespace PlayFabUnit
     {
         internalReport.name = className;
         internalReport.timeStamp = TestTimeNow();
+        internalReport.tests = 0;
+        internalReport.failures = 0;
+        internalReport.errors = 0;
+        internalReport.skipped = 0;
+        internalReport.passed = 0;
     }
 
     void TestReport::TestStarted()

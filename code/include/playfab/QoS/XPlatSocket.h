@@ -10,7 +10,9 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#if !defined (PLAYFAB_PLATFORM_PLAYSTATION)
 #include <netdb.h>
+#endif
 constexpr int SOCKET_ERROR = -1;
 constexpr int WSAEWOULDBLOCK = 10035;
 #endif

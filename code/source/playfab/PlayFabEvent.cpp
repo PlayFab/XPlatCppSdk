@@ -3,6 +3,7 @@
 #ifndef DISABLE_PLAYFABENTITY_API
 
 #include <playfab/PlayFabEvent.h>
+#include <playfab/PlayFabPlatformMacros.h>
 
 namespace PlayFab
 {
@@ -48,7 +49,9 @@ namespace PlayFab
 
     void PlayFabEvent::SetProperty(const std::string& name, const int64_t value)
     {
-#if defined(PLAYFAB_PLATFORM_ANDROID)
+#ifdef PLAYFAB_PLATFORM_PLAYSTATION
+        this->eventContents.Payload[name] = value;
+#elif defined(PLAYFAB_PLATFORM_ANDROID)
         this->eventContents.Payload[name] = (Int64)value;
 #else // PLAYFAB_PLATFORM_ANDROID
         this->eventContents.Payload[name] = (long long int)value;
@@ -72,7 +75,9 @@ namespace PlayFab
 
     void PlayFabEvent::SetProperty(const std::string& name, const uint64_t value)
     {
-#if defined(PLAYFAB_PLATFORM_ANDROID)
+#ifdef PLAYFAB_PLATFORM_PLAYSTATION
+        this->eventContents.Payload[name] = value;
+#elif defined(PLAYFAB_PLATFORM_ANDROID)
         this->eventContents.Payload[name] = (Uint64)value;
 #else // PLAYFAB_PLATFORM_ANDROID
         this->eventContents.Payload[name] = (long long unsigned int)value;

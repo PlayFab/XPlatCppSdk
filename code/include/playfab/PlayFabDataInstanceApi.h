@@ -8,6 +8,7 @@
 #include <playfab/PlayFabDataDataModels.h>
 #include <memory>
 
+#ifndef PLAYFAB_PLATFORM_PLAYSTATION // Issue 32699
 namespace PlayFab
 {
     /// <summary>
@@ -60,4 +61,5 @@ namespace PlayFab
     };
 }
 
+#endif
 #endif

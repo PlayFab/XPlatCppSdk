@@ -1297,3 +1297,5 @@ namespace PlayFab
 }
 
 #endif
+
+#pragma warning (enable: 4100) // formal parameters are part of a public interface

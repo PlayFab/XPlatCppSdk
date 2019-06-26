@@ -9,8 +9,10 @@
 #include <playfab/PlayFabClientDataModels.h>
 #include <playfab/PlayFabDataDataModels.h>
 #include <playfab/PlayFabDataAPI.h>
+#include <playfab/PlayFabPlatformMacros.h>
 #include "PlayFabApiTest.h"
 #include "TestContext.h"
+
 
 using namespace PlayFab;
 using namespace ClientModels;
@@ -226,11 +228,11 @@ namespace PlayFabUnit
         // itoa is not avaialable in android
         char buffer[16];
         std::string temp;
-#if defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID) || defined(PLAYFAB_PLATFORM_LINUX)
+#if defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID) || defined(PLAYFAB_PLATFORM_LINUX) || defined(PLAYFAB_PLATFORM_PLAYSTATION)
         sprintf(buffer, "%d", testMessageInt);
-#else // PLAYFAB_PLATFORM_IOS || PLAYFAB_PLATFORM_ANDROID || PLAYFAB_PLATFORM_LINUX
+#else
         sprintf_s(buffer, "%d", testMessageInt);
-#endif // PLAYFAB_PLATFORM_IOS || PLAYFAB_PLATFORM_ANDROID || PLAYFAB_PLATFORM_LINUX
+#endif
         temp.append(buffer);
 
         updateRequest.Data[TEST_DATA_KEY] = temp;
@@ -253,6 +255,7 @@ namespace PlayFabUnit
         int actualDataValue = (it == result.Data.end()) ? -1 : atoi(it->second.Value.c_str());
         testMessageTime = (it == result.Data.end()) ? 0 : it->second.LastUpdated;
 
+#if !defined(PLAYFAB_PLATFORM_PLAYSTATION)
         time_t now = time(nullptr);
         struct tm timeinfo;
 #if defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID) || defined(PLAYFAB_PLATFORM_LINUX)
@@ -264,14 +267,17 @@ namespace PlayFabUnit
 #endif // PLAYFAB_PLATFORM_IOS || PLAYFAB_PLATFORM_ANDROID || PLAYFAB_PLATFORM_LINUX
         time_t minTime = now - (60 * 5);
         time_t maxTime = now + (60 * 5);
+#endif
 
         TestContext* testContext = reinterpret_cast<TestContext*>(customData);
         if (it == result.Data.end())
             testContext->Fail("Expected user data not found.");
         else if (testMessageInt != actualDataValue)
             testContext->Fail("User data not updated as expected.");
+#if !defined(PLAYFAB_PLATFORM_PLAYSTATION) // Issue 32699
         else if (!(minTime <= testMessageTime && testMessageTime <= maxTime))
             testContext->Fail("DateTime not parsed correctly..");
+#endif
         else
             testContext->Pass();
     }
@@ -362,7 +368,7 @@ namespace PlayFabUnit
         TestContext* testContext = reinterpret_cast<TestContext*>(customData);
         testContext->Pass();
     }
-    
+
     /// CLIENT API
     /// Test that leaderboard results can be requested
     /// Parameter types tested: List of contained-classes

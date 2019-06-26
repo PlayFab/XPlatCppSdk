@@ -1,6 +1,9 @@
 // Copyright (C) Microsoft Corporation. All rights reserved.
 
 #include "TestAppPch.h"
+
+#ifndef PLAYFAB_PLATFORM_PLAYSTATION // Issue 32699
+
 #include <playfab/PlayFabClientInstanceApi.h>
 #include <playfab/PlayFabSettings.h>
 #include "TestContext.h"
@@ -125,3 +128,5 @@ namespace PlayFabUnit
         multiUser2ClientApi = nullptr;
     }
 }
+
+#endif  // PLAYFAB_PLATFORM_PLAYSTATION

@@ -4,11 +4,11 @@
 #include <android/log.h>
 #include <string>
 #include <fstream>
+#include <sstream>
+#include <memory>
 
 #include "TestAppPch.h"
 #include "TestApp.h"
-
-//#define USE_EXTERNAL_JSON_FILE
 
 #ifdef USE_EXTERNAL_JSON_FILE
 #warning "Replace below file name(except ext) with yours, and DO NOT SHARE IT."
@@ -22,24 +22,39 @@ static const char* c_userEmail = "YOUR_EMAIL";
 
 static JNIEnv* s_jniEnv = nullptr;
 static jobject s_jobject = nullptr;
+static std::string cachedTitleData;
 
 namespace PlayFabUnit
 {
-    bool TestApp::LoadTitleDataJson(std::shared_ptr<char*>& testDataJson, size_t& testDataJsonLen)
-    {
-#ifdef USE_EXTERNAL_JSON_FILE
-        // TODO: MSFT 21256721: Need to implement to load test file from asset file.
-#else // USE_EXTERNAL_JSON_FILE
-        static const char* jsonTestTitleData = "{\n"
-            "    \"titleId\": \"%s\",\n"
-            "    \"developerSecretKey\": \"%s\",\n"
-            "    \"userEmail\": \"%s\"\n"
-        "}";
-        testDataJson = std::make_shared<char*>(new char[1024]);
-        snprintf(*testDataJson, 1024, jsonTestTitleData, c_titleId, c_developerSecretKey, c_userEmail);
-        testDataJsonLen = strlen(*testDataJson);
-#endif // USE_EXTERNAL_JSON_FILE
+    bool allocCharBufferFromString(const std::string& str, std::shared_ptr<char*>& strPtr, size_t& strLen) {
+        if(str.empty()) {
+            return false;
+        }
+
+        strPtr = std::make_shared<char*>(new char[str.size() + 1]);
+        str.copy(*strPtr, str.size());
+        (*strPtr)[str.size()] = '\0';
+        strLen = str.size();
+
         return true;
+    }
+
+    bool TestApp::LoadTitleDataJson(std::shared_ptr<char*>& testDataJsonPtr, size_t& testDataJsonLen)
+    {
+        if(cachedTitleData.empty() == false) {
+            return allocCharBufferFromString(cachedTitleData, testDataJsonPtr, testDataJsonLen);
+        }
+
+        std::stringstream jsonBuilder;
+        jsonBuilder << "{";
+        jsonBuilder << R"(    "titleId": ")" << c_titleId << R"(",)";
+        jsonBuilder << R"(    "developerSecretKey": ")" << c_developerSecretKey << R"(",)";
+        jsonBuilder << R"(    "userEmail": ")" << c_userEmail << R"(")";
+        jsonBuilder << "}";
+
+        cachedTitleData = jsonBuilder.str();
+
+        return allocCharBufferFromString(cachedTitleData, testDataJsonPtr, testDataJsonLen);
     }
 
     void TestApp::LogPut(const char* message)
@@ -69,7 +84,7 @@ namespace PlayFabUnit
 }
 
 extern "C" JNIEXPORT jint JNICALL
-Java_com_microsoft_xplatcppsdk_unittest_MainActivity_RunUnitTest(
+Java_com_playfab_service_MainActivity_RunUnitTest(
         JNIEnv* env,
         jobject jobj)
 {
@@ -80,4 +95,23 @@ Java_com_microsoft_xplatcppsdk_unittest_MainActivity_RunUnitTest(
 
     int result = testApp.Main();
     return (jint)result;
+}
+
+extern "C" JNIEXPORT jint JNICALL
+Java_com_playfab_service_MainActivity_SetTitleData(
+        JNIEnv *env,
+        jobject jobj,
+        jstring value) {
+
+    s_jniEnv = env;
+    s_jobject = jobj;
+
+    const char* utf_string;
+    jboolean isCopy;
+    utf_string = env->GetStringUTFChars(value, &isCopy);;
+    cachedTitleData = utf_string;
+    if(isCopy) {
+        env->ReleaseStringUTFChars(value, utf_string);
+    }
+    return 0;
 }

@@ -1,5 +1,6 @@
 #include <stdafx.h>
 
+#ifndef PLAYFAB_PLATFORM_PLAYSTATION // Issue 32699
 #ifdef ENABLE_PLAYFABADMIN_API
 
 #include <playfab/PlayFabAdminInstanceApi.h>
@@ -5824,3 +5825,6 @@ namespace PlayFab
 }
 
 #endif
+#endif
+
+#pragma warning (enable: 4100) // formal parameters are part of a public interface

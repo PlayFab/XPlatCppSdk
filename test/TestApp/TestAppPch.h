@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <playfab/PlayFabPlatformMacros.h>
+
 #if defined (_XBOX_ONE)
 
 // Use the C++ standard templated min/max
