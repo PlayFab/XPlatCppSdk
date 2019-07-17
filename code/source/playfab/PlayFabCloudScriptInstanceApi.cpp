@@ -1,6 +1,5 @@
 #include <stdafx.h>
 
-#ifndef PLAYFAB_PLATFORM_PLAYSTATION // Issue 32699
 #ifndef DISABLE_PLAYFABENTITY_API
 
 #include <playfab/PlayFabCloudScriptInstanceApi.h>
@@ -120,7 +119,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabCloudScriptInstanceAPI::OnExecuteEntityCloudScriptResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabCloudScriptInstanceAPI::OnExecuteEntityCloudScriptResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -157,6 +156,5 @@ namespace PlayFab
 }
 
 #endif
-#endif
 
-#pragma warning (enable: 4100) // formal parameters are part of a public interface
+#pragma warning (default: 4100) // formal parameters are part of a public interface

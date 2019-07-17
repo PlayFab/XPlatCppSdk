@@ -360,7 +360,7 @@ namespace PlayFab
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void OneDSEventsAPI::OnGetTelemetryIngestionConfigResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void OneDSEventsAPI::OnGetTelemetryIngestionConfigResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -434,7 +434,7 @@ namespace PlayFab
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void OneDSEventsAPI::OnWriteTelemetryEventsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void OneDSEventsAPI::OnWriteTelemetryEventsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 

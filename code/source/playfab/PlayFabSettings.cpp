@@ -7,7 +7,7 @@
 namespace PlayFab
 {
     const std::string PlayFabSettings::sdkVersion = "3.11.190520";
-    const std::string PlayFabSettings::buildIdentifier = "jbuild_xplatcppsdk__sdk-genericslave-3_1";
+    const std::string PlayFabSettings::buildIdentifier = "jbuild_xplatcppsdk__sdk-genericslave-3_0";
     const std::string PlayFabSettings::versionString = "XPlatCppSdk-3.11.190520";
     const std::string PlayFabSettings::verticalName = "";
 
@@ -106,4 +106,4 @@ namespace PlayFab
     }
 }
 
-#pragma warning (enable: 4100) // formal parameters are part of a public interface
+#pragma warning (default: 4100) // formal parameters are part of a public interface

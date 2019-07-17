@@ -8,7 +8,6 @@
 #include <playfab/PlayFabMultiplayerDataModels.h>
 #include <memory>
 
-#ifndef PLAYFAB_PLATFORM_PLAYSTATION // Issue 32699
 namespace PlayFab
 {
     /// <summary>
@@ -79,49 +78,48 @@ namespace PlayFab
         void UploadCertificate(MultiplayerModels::UploadCertificateRequest& request, ProcessApiCallback<MultiplayerModels::EmptyResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
 
         // ------------ Generated result handlers
-        void OnCancelAllMatchmakingTicketsForPlayerResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnCancelMatchmakingTicketResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnCreateBuildWithCustomContainerResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnCreateBuildWithManagedContainerResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnCreateMatchmakingTicketResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnCreateRemoteUserResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnCreateServerMatchmakingTicketResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnDeleteAssetResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnDeleteBuildResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnDeleteCertificateResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnDeleteRemoteUserResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnEnableMultiplayerServersForTitleResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnGetAssetUploadUrlResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnGetBuildResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnGetContainerRegistryCredentialsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnGetMatchResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnGetMatchmakingTicketResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnGetMultiplayerServerDetailsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnGetQueueStatisticsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnGetRemoteLoginEndpointResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnGetTitleEnabledForMultiplayerServersStatusResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnGetTitleMultiplayerServersQuotasResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnJoinMatchmakingTicketResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnListArchivedMultiplayerServersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnListAssetSummariesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnListBuildSummariesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnListCertificateSummariesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnListContainerImagesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnListContainerImageTagsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnListMatchmakingTicketsForPlayerResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnListMultiplayerServersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnListQosServersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnListVirtualMachineSummariesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnRequestMultiplayerServerResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnRolloverContainerRegistryCredentialsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnShutdownMultiplayerServerResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnUpdateBuildRegionsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnUploadCertificateResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
+        void OnCancelAllMatchmakingTicketsForPlayerResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnCancelMatchmakingTicketResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnCreateBuildWithCustomContainerResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnCreateBuildWithManagedContainerResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnCreateMatchmakingTicketResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnCreateRemoteUserResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnCreateServerMatchmakingTicketResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnDeleteAssetResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnDeleteBuildResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnDeleteCertificateResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnDeleteRemoteUserResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnEnableMultiplayerServersForTitleResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnGetAssetUploadUrlResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnGetBuildResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnGetContainerRegistryCredentialsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnGetMatchResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnGetMatchmakingTicketResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnGetMultiplayerServerDetailsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnGetQueueStatisticsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnGetRemoteLoginEndpointResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnGetTitleEnabledForMultiplayerServersStatusResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnGetTitleMultiplayerServersQuotasResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnJoinMatchmakingTicketResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnListArchivedMultiplayerServersResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnListAssetSummariesResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnListBuildSummariesResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnListCertificateSummariesResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnListContainerImagesResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnListContainerImageTagsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnListMatchmakingTicketsForPlayerResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnListMultiplayerServersResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnListQosServersResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnListVirtualMachineSummariesResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnRequestMultiplayerServerResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnRolloverContainerRegistryCredentialsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnShutdownMultiplayerServerResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnUpdateBuildRegionsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnUploadCertificateResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         bool ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container);
     private:
         std::shared_ptr<PlayFabAuthenticationContext> GetOrCreateAuthenticationContext();
     };
 }
 
-#endif
 #endif

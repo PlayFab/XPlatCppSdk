@@ -1,6 +1,5 @@
 #include <stdafx.h>
 
-#ifndef PLAYFAB_PLATFORM_PLAYSTATION // Issue 32699
 #ifdef ENABLE_PLAYFABSERVER_API
 
 #include <playfab/PlayFabServerInstanceApi.h>
@@ -120,7 +119,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnAddCharacterVirtualCurrencyResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnAddCharacterVirtualCurrencyResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -172,7 +171,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnAddFriendResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnAddFriendResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -224,7 +223,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnAddGenericIDResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnAddGenericIDResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -276,7 +275,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnAddPlayerTagResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnAddPlayerTagResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -328,7 +327,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnAddSharedGroupMembersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnAddSharedGroupMembersResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -380,7 +379,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnAddUserVirtualCurrencyResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnAddUserVirtualCurrencyResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -432,7 +431,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnAuthenticateSessionTicketResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnAuthenticateSessionTicketResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -484,7 +483,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnAwardSteamAchievementResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnAwardSteamAchievementResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -536,7 +535,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnBanUsersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnBanUsersResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -588,7 +587,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnConsumeItemResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnConsumeItemResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -640,7 +639,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnCreateSharedGroupResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnCreateSharedGroupResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -692,7 +691,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnDeleteCharacterFromUserResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnDeleteCharacterFromUserResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -744,7 +743,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnDeletePlayerResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnDeletePlayerResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -796,7 +795,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnDeletePushNotificationTemplateResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnDeletePushNotificationTemplateResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -848,7 +847,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnDeleteSharedGroupResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnDeleteSharedGroupResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -900,7 +899,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnDeregisterGameResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnDeregisterGameResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -952,7 +951,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnEvaluateRandomResultTableResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnEvaluateRandomResultTableResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1004,7 +1003,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnExecuteCloudScriptResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnExecuteCloudScriptResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1056,7 +1055,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetAllSegmentsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetAllSegmentsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1108,7 +1107,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetAllUsersCharactersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetAllUsersCharactersResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1160,7 +1159,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetCatalogItemsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetCatalogItemsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1212,7 +1211,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetCharacterDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetCharacterDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1264,7 +1263,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetCharacterInternalDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetCharacterInternalDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1316,7 +1315,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetCharacterInventoryResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetCharacterInventoryResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1368,7 +1367,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetCharacterLeaderboardResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetCharacterLeaderboardResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1420,7 +1419,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetCharacterReadOnlyDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetCharacterReadOnlyDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1472,7 +1471,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetCharacterStatisticsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetCharacterStatisticsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1524,7 +1523,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetContentDownloadUrlResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetContentDownloadUrlResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1576,7 +1575,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetFriendLeaderboardResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetFriendLeaderboardResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1628,7 +1627,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetFriendsListResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetFriendsListResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1680,7 +1679,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetLeaderboardResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetLeaderboardResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1732,7 +1731,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetLeaderboardAroundCharacterResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetLeaderboardAroundCharacterResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1784,7 +1783,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetLeaderboardAroundUserResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetLeaderboardAroundUserResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1836,7 +1835,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetLeaderboardForUserCharactersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetLeaderboardForUserCharactersResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1888,7 +1887,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetPlayerCombinedInfoResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetPlayerCombinedInfoResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1940,7 +1939,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetPlayerProfileResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetPlayerProfileResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1992,7 +1991,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetPlayerSegmentsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetPlayerSegmentsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2044,7 +2043,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetPlayersInSegmentResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetPlayersInSegmentResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2096,7 +2095,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetPlayerStatisticsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetPlayerStatisticsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2148,7 +2147,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetPlayerStatisticVersionsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetPlayerStatisticVersionsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2200,7 +2199,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetPlayerTagsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetPlayerTagsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2252,7 +2251,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetPlayFabIDsFromFacebookIDsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetPlayFabIDsFromFacebookIDsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2304,7 +2303,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetPlayFabIDsFromFacebookInstantGamesIdsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetPlayFabIDsFromFacebookInstantGamesIdsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2356,7 +2355,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetPlayFabIDsFromGenericIDsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetPlayFabIDsFromGenericIDsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2408,7 +2407,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetPlayFabIDsFromNintendoSwitchDeviceIdsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetPlayFabIDsFromNintendoSwitchDeviceIdsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2460,7 +2459,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetPlayFabIDsFromPSNAccountIDsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetPlayFabIDsFromPSNAccountIDsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2512,7 +2511,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetPlayFabIDsFromSteamIDsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetPlayFabIDsFromSteamIDsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2564,7 +2563,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetPlayFabIDsFromXboxLiveIDsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetPlayFabIDsFromXboxLiveIDsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2616,7 +2615,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetPublisherDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetPublisherDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2668,7 +2667,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetRandomResultTablesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetRandomResultTablesResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2720,7 +2719,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetServerCustomIDsFromPlayFabIDsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetServerCustomIDsFromPlayFabIDsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2772,7 +2771,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetSharedGroupDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetSharedGroupDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2824,7 +2823,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetTimeResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetTimeResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2876,7 +2875,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetTitleDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetTitleDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2928,7 +2927,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetTitleInternalDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetTitleInternalDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2980,7 +2979,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetTitleNewsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetTitleNewsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3032,7 +3031,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetUserAccountInfoResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetUserAccountInfoResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3084,7 +3083,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetUserBansResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetUserBansResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3136,7 +3135,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetUserDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetUserDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3188,7 +3187,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetUserInternalDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetUserInternalDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3240,7 +3239,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetUserInventoryResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetUserInventoryResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3292,7 +3291,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetUserPublisherDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetUserPublisherDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3344,7 +3343,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetUserPublisherInternalDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetUserPublisherInternalDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3396,7 +3395,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetUserPublisherReadOnlyDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetUserPublisherReadOnlyDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3448,7 +3447,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGetUserReadOnlyDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGetUserReadOnlyDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3500,7 +3499,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGrantCharacterToUserResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGrantCharacterToUserResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3552,7 +3551,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGrantItemsToCharacterResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGrantItemsToCharacterResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3604,7 +3603,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGrantItemsToUserResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGrantItemsToUserResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3656,7 +3655,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnGrantItemsToUsersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnGrantItemsToUsersResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3708,7 +3707,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnLinkServerCustomIdResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnLinkServerCustomIdResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3760,7 +3759,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnLinkXboxAccountResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnLinkXboxAccountResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3812,7 +3811,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnLoginWithServerCustomIdResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnLoginWithServerCustomIdResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3864,7 +3863,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnLoginWithXboxResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnLoginWithXboxResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3916,7 +3915,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnModifyItemUsesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnModifyItemUsesResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3968,7 +3967,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnMoveItemToCharacterFromCharacterResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnMoveItemToCharacterFromCharacterResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4020,7 +4019,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnMoveItemToCharacterFromUserResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnMoveItemToCharacterFromUserResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4072,7 +4071,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnMoveItemToUserFromCharacterResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnMoveItemToUserFromCharacterResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4124,7 +4123,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnNotifyMatchmakerPlayerLeftResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnNotifyMatchmakerPlayerLeftResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4176,7 +4175,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnRedeemCouponResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnRedeemCouponResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4228,7 +4227,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnRedeemMatchmakerTicketResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnRedeemMatchmakerTicketResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4280,7 +4279,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnRefreshGameServerInstanceHeartbeatResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnRefreshGameServerInstanceHeartbeatResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4332,7 +4331,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnRegisterGameResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnRegisterGameResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4384,7 +4383,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnRemoveFriendResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnRemoveFriendResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4436,7 +4435,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnRemoveGenericIDResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnRemoveGenericIDResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4488,7 +4487,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnRemovePlayerTagResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnRemovePlayerTagResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4540,7 +4539,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnRemoveSharedGroupMembersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnRemoveSharedGroupMembersResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4592,7 +4591,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnReportPlayerResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnReportPlayerResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4644,7 +4643,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnRevokeAllBansForUserResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnRevokeAllBansForUserResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4696,7 +4695,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnRevokeBansResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnRevokeBansResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4748,7 +4747,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnRevokeInventoryItemResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnRevokeInventoryItemResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4800,7 +4799,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnRevokeInventoryItemsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnRevokeInventoryItemsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4852,7 +4851,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnSavePushNotificationTemplateResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnSavePushNotificationTemplateResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4904,7 +4903,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnSendCustomAccountRecoveryEmailResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnSendCustomAccountRecoveryEmailResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4956,7 +4955,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnSendEmailFromTemplateResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnSendEmailFromTemplateResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5008,7 +5007,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnSendPushNotificationResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnSendPushNotificationResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5060,7 +5059,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnSendPushNotificationFromTemplateResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnSendPushNotificationFromTemplateResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5112,7 +5111,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnSetFriendTagsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnSetFriendTagsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5164,7 +5163,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnSetGameServerInstanceDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnSetGameServerInstanceDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5216,7 +5215,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnSetGameServerInstanceStateResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnSetGameServerInstanceStateResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5268,7 +5267,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnSetGameServerInstanceTagsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnSetGameServerInstanceTagsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5320,7 +5319,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnSetPlayerSecretResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnSetPlayerSecretResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5372,7 +5371,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnSetPublisherDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnSetPublisherDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5424,7 +5423,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnSetTitleDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnSetTitleDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5476,7 +5475,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnSetTitleInternalDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnSetTitleInternalDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5528,7 +5527,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnSubtractCharacterVirtualCurrencyResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnSubtractCharacterVirtualCurrencyResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5580,7 +5579,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnSubtractUserVirtualCurrencyResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnSubtractUserVirtualCurrencyResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5632,7 +5631,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnUnlinkServerCustomIdResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnUnlinkServerCustomIdResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5684,7 +5683,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnUnlinkXboxAccountResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnUnlinkXboxAccountResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5736,7 +5735,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnUnlockContainerInstanceResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnUnlockContainerInstanceResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5788,7 +5787,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnUnlockContainerItemResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnUnlockContainerItemResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5840,7 +5839,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnUpdateAvatarUrlResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnUpdateAvatarUrlResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5892,7 +5891,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnUpdateBansResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnUpdateBansResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5944,7 +5943,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnUpdateCharacterDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnUpdateCharacterDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5996,7 +5995,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnUpdateCharacterInternalDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnUpdateCharacterInternalDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6048,7 +6047,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnUpdateCharacterReadOnlyDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnUpdateCharacterReadOnlyDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6100,7 +6099,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnUpdateCharacterStatisticsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnUpdateCharacterStatisticsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6152,7 +6151,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnUpdatePlayerStatisticsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnUpdatePlayerStatisticsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6204,7 +6203,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnUpdateSharedGroupDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnUpdateSharedGroupDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6256,7 +6255,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnUpdateUserDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnUpdateUserDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6308,7 +6307,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnUpdateUserInternalDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnUpdateUserInternalDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6360,7 +6359,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnUpdateUserInventoryItemCustomDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnUpdateUserInventoryItemCustomDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6412,7 +6411,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnUpdateUserPublisherDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnUpdateUserPublisherDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6464,7 +6463,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnUpdateUserPublisherInternalDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnUpdateUserPublisherInternalDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6516,7 +6515,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnUpdateUserPublisherReadOnlyDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnUpdateUserPublisherReadOnlyDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6568,7 +6567,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnUpdateUserReadOnlyDataResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnUpdateUserReadOnlyDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6620,7 +6619,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnWriteCharacterEventResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnWriteCharacterEventResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6672,7 +6671,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnWritePlayerEventResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnWritePlayerEventResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6724,7 +6723,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabServerInstanceAPI::OnWriteTitleEventResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerInstanceAPI::OnWriteTitleEventResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6761,6 +6760,5 @@ namespace PlayFab
 }
 
 #endif
-#endif
 
-#pragma warning (enable: 4100) // formal parameters are part of a public interface
+#pragma warning (default: 4100) // formal parameters are part of a public interface

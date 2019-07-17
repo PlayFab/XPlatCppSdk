@@ -60,7 +60,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabGroupsAPI::OnAcceptGroupApplicationResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabGroupsAPI::OnAcceptGroupApplicationResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -110,7 +110,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabGroupsAPI::OnAcceptGroupInvitationResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabGroupsAPI::OnAcceptGroupInvitationResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -160,7 +160,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabGroupsAPI::OnAddMembersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabGroupsAPI::OnAddMembersResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -210,7 +210,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabGroupsAPI::OnApplyToGroupResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabGroupsAPI::OnApplyToGroupResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -260,7 +260,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabGroupsAPI::OnBlockEntityResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabGroupsAPI::OnBlockEntityResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -310,7 +310,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabGroupsAPI::OnChangeMemberRoleResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabGroupsAPI::OnChangeMemberRoleResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -360,7 +360,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabGroupsAPI::OnCreateGroupResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabGroupsAPI::OnCreateGroupResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -410,7 +410,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabGroupsAPI::OnCreateRoleResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabGroupsAPI::OnCreateRoleResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -460,7 +460,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabGroupsAPI::OnDeleteGroupResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabGroupsAPI::OnDeleteGroupResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -510,7 +510,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabGroupsAPI::OnDeleteRoleResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabGroupsAPI::OnDeleteRoleResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -560,7 +560,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabGroupsAPI::OnGetGroupResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabGroupsAPI::OnGetGroupResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -610,7 +610,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabGroupsAPI::OnInviteToGroupResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabGroupsAPI::OnInviteToGroupResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -660,7 +660,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabGroupsAPI::OnIsMemberResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabGroupsAPI::OnIsMemberResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -710,7 +710,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabGroupsAPI::OnListGroupApplicationsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabGroupsAPI::OnListGroupApplicationsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -760,7 +760,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabGroupsAPI::OnListGroupBlocksResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabGroupsAPI::OnListGroupBlocksResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -810,7 +810,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabGroupsAPI::OnListGroupInvitationsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabGroupsAPI::OnListGroupInvitationsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -860,7 +860,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabGroupsAPI::OnListGroupMembersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabGroupsAPI::OnListGroupMembersResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -910,7 +910,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabGroupsAPI::OnListMembershipResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabGroupsAPI::OnListMembershipResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -960,7 +960,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabGroupsAPI::OnListMembershipOpportunitiesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabGroupsAPI::OnListMembershipOpportunitiesResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1010,7 +1010,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabGroupsAPI::OnRemoveGroupApplicationResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabGroupsAPI::OnRemoveGroupApplicationResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1060,7 +1060,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabGroupsAPI::OnRemoveGroupInvitationResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabGroupsAPI::OnRemoveGroupInvitationResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1110,7 +1110,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabGroupsAPI::OnRemoveMembersResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabGroupsAPI::OnRemoveMembersResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1160,7 +1160,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabGroupsAPI::OnUnblockEntityResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabGroupsAPI::OnUnblockEntityResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1210,7 +1210,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabGroupsAPI::OnUpdateGroupResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabGroupsAPI::OnUpdateGroupResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1260,7 +1260,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabGroupsAPI::OnUpdateRoleResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabGroupsAPI::OnUpdateRoleResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1298,4 +1298,4 @@ namespace PlayFab
 
 #endif
 
-#pragma warning (enable: 4100) // formal parameters are part of a public interface
+#pragma warning (default: 4100) // formal parameters are part of a public interface

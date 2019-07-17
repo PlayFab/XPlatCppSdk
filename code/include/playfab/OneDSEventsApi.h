@@ -39,8 +39,8 @@ namespace PlayFab
         void WriteTelemetryEvents(EventsModels::WriteEventsRequest& request, ProcessApiCallback<EventsModels::OneDSWriteEventsResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
 
     private:
-        static void OnGetTelemetryIngestionConfigResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        static void OnWriteTelemetryEventsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
+        static void OnGetTelemetryIngestionConfigResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        static void OnWriteTelemetryEventsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         static bool ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container);
 
     private:

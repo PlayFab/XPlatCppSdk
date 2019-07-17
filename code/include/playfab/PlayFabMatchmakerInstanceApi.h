@@ -8,7 +8,6 @@
 #include <playfab/PlayFabMatchmakerDataModels.h>
 #include <memory>
 
-#ifndef PLAYFAB_PLATFORM_PLAYSTATION // Issue 32699
 namespace PlayFab
 {
     /// <summary>
@@ -46,16 +45,15 @@ namespace PlayFab
         void UserInfo(MatchmakerModels::UserInfoRequest& request, ProcessApiCallback<MatchmakerModels::UserInfoResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
 
         // ------------ Generated result handlers
-        void OnAuthUserResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnPlayerJoinedResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnPlayerLeftResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnStartGameResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
-        void OnUserInfoResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
+        void OnAuthUserResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnPlayerJoinedResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnPlayerLeftResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnStartGameResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnUserInfoResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         bool ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container);
     private:
         std::shared_ptr<PlayFabAuthenticationContext> GetOrCreateAuthenticationContext();
     };
 }
 
-#endif
 #endif

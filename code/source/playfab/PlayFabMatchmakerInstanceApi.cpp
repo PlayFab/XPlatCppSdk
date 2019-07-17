@@ -1,6 +1,5 @@
 #include <stdafx.h>
 
-#ifndef PLAYFAB_PLATFORM_PLAYSTATION // Issue 32699
 #ifdef ENABLE_PLAYFABSERVER_API
 
 #include <playfab/PlayFabMatchmakerInstanceApi.h>
@@ -120,7 +119,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabMatchmakerInstanceAPI::OnAuthUserResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabMatchmakerInstanceAPI::OnAuthUserResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -172,7 +171,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabMatchmakerInstanceAPI::OnPlayerJoinedResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabMatchmakerInstanceAPI::OnPlayerJoinedResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -224,7 +223,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabMatchmakerInstanceAPI::OnPlayerLeftResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabMatchmakerInstanceAPI::OnPlayerLeftResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -276,7 +275,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabMatchmakerInstanceAPI::OnStartGameResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabMatchmakerInstanceAPI::OnStartGameResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -328,7 +327,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabMatchmakerInstanceAPI::OnUserInfoResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabMatchmakerInstanceAPI::OnUserInfoResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -365,6 +364,5 @@ namespace PlayFab
 }
 
 #endif
-#endif
 
-#pragma warning (enable: 4100) // formal parameters are part of a public interface
+#pragma warning (default: 4100) // formal parameters are part of a public interface

@@ -82,7 +82,7 @@ namespace PlayFab
             // Calculate the total time
             chrono::milliseconds totalMilliseconds = chrono::duration_cast<chrono::milliseconds>(end - begin);
 
-            result.latencyMs = totalMilliseconds.count();
+            result.latencyMs = static_cast<int>(totalMilliseconds.count());
 
             return result;
         }

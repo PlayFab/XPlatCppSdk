@@ -188,8 +188,7 @@ namespace PlayFab
         {
             CancellationReasonRequested,
             CancellationReasonInternal,
-            CancellationReasonTimeout,
-            CancellationReasonServerAllocationFailed
+            CancellationReasonTimeout
         };
 
         inline void ToJsonEnum(const CancellationReason input, Json::Value& output)
@@ -197,7 +196,6 @@ namespace PlayFab
             if (input == CancellationReasonRequested) output = Json::Value("Requested");
             if (input == CancellationReasonInternal) output = Json::Value("Internal");
             if (input == CancellationReasonTimeout) output = Json::Value("Timeout");
-            if (input == CancellationReasonServerAllocationFailed) output = Json::Value("ServerAllocationFailed");
         }
         inline void FromJsonEnum(const Json::Value& input, CancellationReason& output)
         {
@@ -206,7 +204,6 @@ namespace PlayFab
             if (inputStr == "Requested") output = CancellationReasonRequested;
             if (inputStr == "Internal") output = CancellationReasonInternal;
             if (inputStr == "Timeout") output = CancellationReasonTimeout;
-            if (inputStr == "ServerAllocationFailed") output = CancellationReasonServerAllocationFailed;
         }
 
         enum ContainerFlavor
@@ -964,9 +961,7 @@ namespace PlayFab
             std::string BuildName;
             Boxed<ContainerFlavor> pfContainerFlavor;
             Boxed<ContainerImageReference> pfContainerImageReference;
-            std::string ContainerRepositoryName;
             std::string ContainerRunCommand;
-            std::string ContainerTag;
             std::list<AssetReferenceParams> GameAssetReferences;
             std::list<GameCertificateReferenceParams> GameCertificateReferences;
             std::map<std::string, std::string> Metadata;
@@ -980,9 +975,7 @@ namespace PlayFab
                 BuildName(),
                 pfContainerFlavor(),
                 pfContainerImageReference(),
-                ContainerRepositoryName(),
                 ContainerRunCommand(),
-                ContainerTag(),
                 GameAssetReferences(),
                 GameCertificateReferences(),
                 Metadata(),
@@ -997,9 +990,7 @@ namespace PlayFab
                 BuildName(src.BuildName),
                 pfContainerFlavor(src.pfContainerFlavor),
                 pfContainerImageReference(src.pfContainerImageReference),
-                ContainerRepositoryName(src.ContainerRepositoryName),
                 ContainerRunCommand(src.ContainerRunCommand),
-                ContainerTag(src.ContainerTag),
                 GameAssetReferences(src.GameAssetReferences),
                 GameCertificateReferences(src.GameCertificateReferences),
                 Metadata(src.Metadata),
@@ -1016,9 +1007,7 @@ namespace PlayFab
                 FromJsonUtilS(input["BuildName"], BuildName);
                 FromJsonUtilE(input["pfContainerFlavor"], pfContainerFlavor);
                 FromJsonUtilO(input["pfContainerImageReference"], pfContainerImageReference);
-                FromJsonUtilS(input["ContainerRepositoryName"], ContainerRepositoryName);
                 FromJsonUtilS(input["ContainerRunCommand"], ContainerRunCommand);
-                FromJsonUtilS(input["ContainerTag"], ContainerTag);
                 FromJsonUtilO(input["GameAssetReferences"], GameAssetReferences);
                 FromJsonUtilO(input["GameCertificateReferences"], GameCertificateReferences);
                 FromJsonUtilS(input["Metadata"], Metadata);
@@ -1034,9 +1023,7 @@ namespace PlayFab
                 Json::Value each_BuildName; ToJsonUtilS(BuildName, each_BuildName); output["BuildName"] = each_BuildName;
                 Json::Value each_pfContainerFlavor; ToJsonUtilE(pfContainerFlavor, each_pfContainerFlavor); output["ContainerFlavor"] = each_pfContainerFlavor;
                 Json::Value each_pfContainerImageReference; ToJsonUtilO(pfContainerImageReference, each_pfContainerImageReference); output["ContainerImageReference"] = each_pfContainerImageReference;
-                Json::Value each_ContainerRepositoryName; ToJsonUtilS(ContainerRepositoryName, each_ContainerRepositoryName); output["ContainerRepositoryName"] = each_ContainerRepositoryName;
                 Json::Value each_ContainerRunCommand; ToJsonUtilS(ContainerRunCommand, each_ContainerRunCommand); output["ContainerRunCommand"] = each_ContainerRunCommand;
-                Json::Value each_ContainerTag; ToJsonUtilS(ContainerTag, each_ContainerTag); output["ContainerTag"] = each_ContainerTag;
                 Json::Value each_GameAssetReferences; ToJsonUtilO(GameAssetReferences, each_GameAssetReferences); output["GameAssetReferences"] = each_GameAssetReferences;
                 Json::Value each_GameCertificateReferences; ToJsonUtilO(GameCertificateReferences, each_GameCertificateReferences); output["GameCertificateReferences"] = each_GameCertificateReferences;
                 Json::Value each_Metadata; ToJsonUtilS(Metadata, each_Metadata); output["Metadata"] = each_Metadata;
@@ -2101,6 +2088,7 @@ namespace PlayFab
         struct GetMatchmakingTicketResult : public PlayFabResultCommon
         {
             Boxed<CancellationReason> pfCancellationReason;
+            std::string CancellationReasonString;
             time_t Created;
             EntityKey Creator;
             Int32 GiveUpAfterSeconds;
@@ -2114,6 +2102,7 @@ namespace PlayFab
             GetMatchmakingTicketResult() :
                 PlayFabResultCommon(),
                 pfCancellationReason(),
+                CancellationReasonString(),
                 Created(),
                 Creator(),
                 GiveUpAfterSeconds(),
@@ -2128,6 +2117,7 @@ namespace PlayFab
             GetMatchmakingTicketResult(const GetMatchmakingTicketResult& src) :
                 PlayFabResultCommon(),
                 pfCancellationReason(src.pfCancellationReason),
+                CancellationReasonString(src.CancellationReasonString),
                 Created(src.Created),
                 Creator(src.Creator),
                 GiveUpAfterSeconds(src.GiveUpAfterSeconds),
@@ -2144,6 +2134,7 @@ namespace PlayFab
             void FromJson(Json::Value& input) override
             {
                 FromJsonUtilE(input["pfCancellationReason"], pfCancellationReason);
+                FromJsonUtilS(input["CancellationReasonString"], CancellationReasonString);
                 FromJsonUtilT(input["Created"], Created);
                 FromJsonUtilO(input["Creator"], Creator);
                 FromJsonUtilP(input["GiveUpAfterSeconds"], GiveUpAfterSeconds);
@@ -2159,6 +2150,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_pfCancellationReason; ToJsonUtilE(pfCancellationReason, each_pfCancellationReason); output["CancellationReason"] = each_pfCancellationReason;
+                Json::Value each_CancellationReasonString; ToJsonUtilS(CancellationReasonString, each_CancellationReasonString); output["CancellationReasonString"] = each_CancellationReasonString;
                 Json::Value each_Created; ToJsonUtilT(Created, each_Created); output["Created"] = each_Created;
                 Json::Value each_Creator; ToJsonUtilO(Creator, each_Creator); output["Creator"] = each_Creator;
                 Json::Value each_GiveUpAfterSeconds; ToJsonUtilP(GiveUpAfterSeconds, each_GiveUpAfterSeconds); output["GiveUpAfterSeconds"] = each_GiveUpAfterSeconds;

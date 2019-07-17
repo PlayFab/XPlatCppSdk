@@ -56,7 +56,7 @@ namespace PlayFab
 #endif
 
             // create socket
-            if ((s = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == SOCKET_ERROR)
+            if ((s = static_cast<int>(socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP))) == SOCKET_ERROR)
             {
 #if defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX)
                 errorCode = WSAGetLastError();
@@ -140,7 +140,7 @@ namespace PlayFab
                 return -1;
             }
 
-            siOther.sin_port = htons(port);
+            siOther.sin_port = htons(static_cast<u_short>(port));
             return 0;
         }
 
@@ -152,7 +152,7 @@ namespace PlayFab
                 return -1;
             }
 
-            return sendto(s, message, strlen(message), 0, (struct sockaddr *) &siOther, slen);
+            return sendto(s, message, static_cast<int>(strlen(message)), 0, (struct sockaddr *) &siOther, slen);
         }
 
         int XPlatSocket::ReceiveReply(char* buf, const int& buflen)

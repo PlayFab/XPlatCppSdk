@@ -1,6 +1,5 @@
 #include <stdafx.h>
 
-#ifndef PLAYFAB_PLATFORM_PLAYSTATION // Issue 32699
 #ifndef DISABLE_PLAYFABENTITY_API
 
 #include <playfab/PlayFabProfilesInstanceApi.h>
@@ -120,7 +119,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabProfilesInstanceAPI::OnGetGlobalPolicyResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabProfilesInstanceAPI::OnGetGlobalPolicyResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -172,7 +171,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabProfilesInstanceAPI::OnGetProfileResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabProfilesInstanceAPI::OnGetProfileResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -224,7 +223,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabProfilesInstanceAPI::OnGetProfilesResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabProfilesInstanceAPI::OnGetProfilesResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -236,6 +235,58 @@ namespace PlayFab
             if (internalPtr != nullptr)
             {
                 const auto callback = (*static_cast<ProcessApiCallback<GetEntityProfilesResponse> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabProfilesInstanceAPI::GetTitlePlayersFromMasterPlayerAccountIds(
+        GetTitlePlayersFromMasterPlayerAccountIdsRequest& request,
+        ProcessApiCallback<GetTitlePlayersFromMasterPlayerAccountIdsResponse> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const auto requestJson = request.ToJson();
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Profile/GetTitlePlayersFromMasterPlayerAccountIds",
+            headers,
+            jsonAsString,
+            std::bind(&PlayFabProfilesInstanceAPI::OnGetTitlePlayersFromMasterPlayerAccountIdsResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            customData,
+            this->settings));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTitlePlayersFromMasterPlayerAccountIdsResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        if (PlayFabSettings::ValidateSettings("EntityToken", authenticationContext, this->settings, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
+    }
+
+    void PlayFabProfilesInstanceAPI::OnGetTitlePlayersFromMasterPlayerAccountIdsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+
+        GetTitlePlayersFromMasterPlayerAccountIdsResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<GetTitlePlayersFromMasterPlayerAccountIdsResponse> *>(internalPtr));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -276,7 +327,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabProfilesInstanceAPI::OnSetGlobalPolicyResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabProfilesInstanceAPI::OnSetGlobalPolicyResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -328,7 +379,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabProfilesInstanceAPI::OnSetProfileLanguageResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabProfilesInstanceAPI::OnSetProfileLanguageResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -380,7 +431,7 @@ namespace PlayFab
         }
     }
 
-    void PlayFabProfilesInstanceAPI::OnSetProfilePolicyResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabProfilesInstanceAPI::OnSetProfilePolicyResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -417,6 +468,5 @@ namespace PlayFab
 }
 
 #endif
-#endif
 
-#pragma warning (enable: 4100) // formal parameters are part of a public interface
+#pragma warning (default: 4100) // formal parameters are part of a public interface

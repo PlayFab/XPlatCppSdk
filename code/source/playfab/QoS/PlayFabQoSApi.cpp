@@ -41,7 +41,7 @@ namespace PlayFab
             }
         }
 
-        void OnWriteEventsResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer)
+        void OnWriteEventsResult(int, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
         {
             CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -135,7 +135,7 @@ namespace PlayFab
 
             // get a list of region pings that need to be done
             result.regionResults.reserve(serverCount);
-            vector<AzureRegion> pings = move(GetPingList(serverCount));
+            vector<AzureRegion> pings = move(GetPingList(static_cast<unsigned int>(serverCount)));
 
             // initialize accumulated results with empty (zeroed) ping results
             unordered_map<AzureRegion, PingResult> accumulatedPingResults;
@@ -148,7 +148,7 @@ namespace PlayFab
 
             // If no sockets were initialised, return as we cant do anything. The errorCode must already be set at this point
             // Update the numThreads as well since if we have n sockets, we can only use n threads
-            if ((numThreads = sockets.size()) == 0)
+            if ((numThreads = static_cast<unsigned int>(sockets.size())) == 0)
             {
                 LOG_QOS("No socket could be created. " << std::endl);
                 return result;
@@ -203,12 +203,12 @@ namespace PlayFab
             WriteTelemetryEvents(request, WriteEventsSuccessCallBack, WriteEventsFailureCallBack);
         }
 
-        void PlayFabQoSApi::WriteEventsSuccessCallBack(const WriteEventsResponse& result, void*)
+        void PlayFabQoSApi::WriteEventsSuccessCallBack(const WriteEventsResponse&, void*)
         {
             LOG_QOS("QoSResult successfully sent to PlayFab");
         }
 
-        void PlayFabQoSApi::WriteEventsFailureCallBack(const PlayFabError& error, void*)
+        void PlayFabQoSApi::WriteEventsFailureCallBack(const PlayFabError&, void*)
         {
             LOG_QOS("Failed to QoSResult sent to PlayFab");
         }
@@ -240,7 +240,7 @@ namespace PlayFab
             api->listQosServersCompleted = true;
         }
 
-        void PlayFabQoSApi::ListQosServersFailureCallBack(const PlayFabError& error, void* customData)
+        void PlayFabQoSApi::ListQosServersFailureCallBack(const PlayFabError&, void* customData)
         {
             // Custom data received is a pointer to our api object
             PlayFabQoSApi* api = reinterpret_cast<PlayFabQoSApi*>(customData);
@@ -286,7 +286,7 @@ namespace PlayFab
             sockets.reserve(numThreads);
 
             // Setup sockets based on the number of threads
-            for (int i = 0; i < numThreads; ++i)
+            for (unsigned int i = 0; i < numThreads; ++i)
             {
                 shared_ptr<QoSSocket> socket = shared_ptr<QoSSocket>(new QoSSocket());
 
@@ -315,13 +315,13 @@ namespace PlayFab
         void PlayFabQoSApi::PingServers(vector<AzureRegion>& pings, vector<future<PingResult>>& asyncPingResults, std::vector<std::shared_ptr<QoSSocket>>& sockets, unordered_map<AzureRegion, PingResult>& accumulatedPingResults, unsigned int timeoutMs)
         {
             int pingItr = 0;
-            unsigned int numThreads = asyncPingResults.size();
+            size_t numThreads = asyncPingResults.size();
             size_t numPings = pings.size();
             vector<AzureRegion> pingedServers(numThreads); // remember the server for which a ping is started
             while (pingItr < numPings)
             {
                 // Iterate over all the threads and servers that need to be pinged
-                for (int i = 0; i < numThreads && pingItr < numPings; ++i)
+                for (size_t i = 0; i < numThreads && pingItr < numPings; ++i)
                 {
                     if (asyncPingResults[i].valid()) // the very first ping result might be a fake future
                     {
@@ -373,7 +373,7 @@ namespace PlayFab
             }
 
             // Accumulate final results
-            for (int i = 0; i < numThreads; ++i)
+            for (size_t i = 0; i < numThreads; ++i)
             {
                 // If the result is valid and available 
                 if (asyncPingResults[i].valid())
@@ -399,7 +399,7 @@ namespace PlayFab
                 return;
             }
 
-            if (result.latencyMs <= timeoutMs)
+            if (static_cast<unsigned int>(result.latencyMs) <= timeoutMs)
             {
                 accumulatedPingResults[region].latencyMs += result.latencyMs;
                 ++accumulatedPingResults[region].pingCount;

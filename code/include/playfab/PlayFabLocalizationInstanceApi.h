@@ -8,7 +8,6 @@
 #include <playfab/PlayFabLocalizationDataModels.h>
 #include <memory>
 
-#ifndef PLAYFAB_PLATFORM_PLAYSTATION // Issue 32699
 namespace PlayFab
 {
     /// <summary>
@@ -42,12 +41,11 @@ namespace PlayFab
         void GetLanguageList(LocalizationModels::GetLanguageListRequest& request, ProcessApiCallback<LocalizationModels::GetLanguageListResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
 
         // ------------ Generated result handlers
-        void OnGetLanguageListResult(int httpCode, std::string result, std::unique_ptr<CallRequestContainerBase> reqContainer);
+        void OnGetLanguageListResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         bool ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container);
     private:
         std::shared_ptr<PlayFabAuthenticationContext> GetOrCreateAuthenticationContext();
     };
 }
 
-#endif
 #endif

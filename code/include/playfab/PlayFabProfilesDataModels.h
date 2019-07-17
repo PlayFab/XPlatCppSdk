@@ -377,6 +377,7 @@ namespace PlayFab
             std::string EntityChain;
             std::map<std::string, EntityProfileFileMetadata> Files;
             std::string Language;
+            std::string LeaderboardMetadata;
             Boxed<EntityLineage> Lineage;
             std::map<std::string, EntityDataObject> Objects;
             std::list<EntityPermissionStatement> Permissions;
@@ -392,6 +393,7 @@ namespace PlayFab
                 EntityChain(),
                 Files(),
                 Language(),
+                LeaderboardMetadata(),
                 Lineage(),
                 Objects(),
                 Permissions(),
@@ -408,6 +410,7 @@ namespace PlayFab
                 EntityChain(src.EntityChain),
                 Files(src.Files),
                 Language(src.Language),
+                LeaderboardMetadata(src.LeaderboardMetadata),
                 Lineage(src.Lineage),
                 Objects(src.Objects),
                 Permissions(src.Permissions),
@@ -426,6 +429,7 @@ namespace PlayFab
                 FromJsonUtilS(input["EntityChain"], EntityChain);
                 FromJsonUtilO(input["Files"], Files);
                 FromJsonUtilS(input["Language"], Language);
+                FromJsonUtilS(input["LeaderboardMetadata"], LeaderboardMetadata);
                 FromJsonUtilO(input["Lineage"], Lineage);
                 FromJsonUtilO(input["Objects"], Objects);
                 FromJsonUtilO(input["Permissions"], Permissions);
@@ -443,6 +447,7 @@ namespace PlayFab
                 Json::Value each_EntityChain; ToJsonUtilS(EntityChain, each_EntityChain); output["EntityChain"] = each_EntityChain;
                 Json::Value each_Files; ToJsonUtilO(Files, each_Files); output["Files"] = each_Files;
                 Json::Value each_Language; ToJsonUtilS(Language, each_Language); output["Language"] = each_Language;
+                Json::Value each_LeaderboardMetadata; ToJsonUtilS(LeaderboardMetadata, each_LeaderboardMetadata); output["LeaderboardMetadata"] = each_LeaderboardMetadata;
                 Json::Value each_Lineage; ToJsonUtilO(Lineage, each_Lineage); output["Lineage"] = each_Lineage;
                 Json::Value each_Objects; ToJsonUtilO(Objects, each_Objects); output["Objects"] = each_Objects;
                 Json::Value each_Permissions; ToJsonUtilO(Permissions, each_Permissions); output["Permissions"] = each_Permissions;
@@ -631,6 +636,69 @@ namespace PlayFab
             }
         };
 
+        struct GetTitlePlayersFromMasterPlayerAccountIdsRequest : public PlayFabRequestCommon
+        {
+            std::list<std::string> MasterPlayerAccountIds;
+            std::string TitleId;
+
+            GetTitlePlayersFromMasterPlayerAccountIdsRequest() :
+                PlayFabRequestCommon(),
+                MasterPlayerAccountIds(),
+                TitleId()
+            {}
+
+            GetTitlePlayersFromMasterPlayerAccountIdsRequest(const GetTitlePlayersFromMasterPlayerAccountIdsRequest& src) :
+                PlayFabRequestCommon(),
+                MasterPlayerAccountIds(src.MasterPlayerAccountIds),
+                TitleId(src.TitleId)
+            {}
+
+            ~GetTitlePlayersFromMasterPlayerAccountIdsRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["MasterPlayerAccountIds"], MasterPlayerAccountIds);
+                FromJsonUtilS(input["TitleId"], TitleId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_MasterPlayerAccountIds; ToJsonUtilS(MasterPlayerAccountIds, each_MasterPlayerAccountIds); output["MasterPlayerAccountIds"] = each_MasterPlayerAccountIds;
+                Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
+                return output;
+            }
+        };
+
+        struct GetTitlePlayersFromMasterPlayerAccountIdsResponse : public PlayFabResultCommon
+        {
+            std::map<std::string, EntityKey> TitlePlayerAccounts;
+
+            GetTitlePlayersFromMasterPlayerAccountIdsResponse() :
+                PlayFabResultCommon(),
+                TitlePlayerAccounts()
+            {}
+
+            GetTitlePlayersFromMasterPlayerAccountIdsResponse(const GetTitlePlayersFromMasterPlayerAccountIdsResponse& src) :
+                PlayFabResultCommon(),
+                TitlePlayerAccounts(src.TitlePlayerAccounts)
+            {}
+
+            ~GetTitlePlayersFromMasterPlayerAccountIdsResponse() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["TitlePlayerAccounts"], TitlePlayerAccounts);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_TitlePlayerAccounts; ToJsonUtilO(TitlePlayerAccounts, each_TitlePlayerAccounts); output["TitlePlayerAccounts"] = each_TitlePlayerAccounts;
+                return output;
+            }
+        };
+
         struct SetEntityProfilePolicyRequest : public PlayFabRequestCommon
         {
             EntityKey Entity;
@@ -750,7 +818,7 @@ namespace PlayFab
         struct SetProfileLanguageRequest : public PlayFabRequestCommon
         {
             Boxed<EntityKey> Entity;
-            Int32 ExpectedVersion;
+            Boxed<Int32> ExpectedVersion;
             std::string Language;
 
             SetProfileLanguageRequest() :

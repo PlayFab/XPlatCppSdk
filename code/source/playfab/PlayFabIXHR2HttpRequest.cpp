@@ -424,7 +424,7 @@ HRESULT HttpRequest::Open(const std::wstring& verb, const std::wstring& url, con
     {
         // Create and open a new runtime class
         m_requestStream = Make<RequestStream>();
-        m_requestStream->Open(data.c_str(), data.length());
+        m_requestStream->Open(data.c_str(), static_cast<ULONG>(data.length()));
 
         hr = m_pXHR->Send(m_requestStream.Get(),        // body message as an ISequentialStream*
             m_requestStream->Size());    // count of bytes in the stream.

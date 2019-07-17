@@ -115,7 +115,7 @@ namespace PlayFab
         std::istringstream iss(timeStr);
         iss >> std::get_time(&timeStruct, "%Y-%m-%dT%T");
 #if defined(PLAYFAB_PLATFORM_PLAYSTATION)
-        // Issue 32699
+        output = mktime(&timeStruct);
 #elif defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID) || defined(PLAYFAB_PLATFORM_LINUX)
         output = timegm(&timeStruct);
 #else
@@ -511,7 +511,7 @@ namespace PlayFab
             int index = 0;
             for (auto iter = input.begin(); iter != input.end(); ++iter)
             {
-                FromJsonUtilP(*iter, eachOutput);
+                ToJsonUtilP(*iter, eachOutput);
                 output[index++] = eachOutput;
             }
         }

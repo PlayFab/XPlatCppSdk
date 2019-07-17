@@ -1855,6 +1855,7 @@ namespace PlayFab
             GenericErrorCodesEconomyServiceInternalError,
             GenericErrorCodesQueryRateLimitExceeded,
             GenericErrorCodesEntityAPIKeyCreationDisabledForEntity,
+            GenericErrorCodesForbiddenByEntityPolicy,
             GenericErrorCodesStudioCreationRateLimited,
             GenericErrorCodesStudioCreationInProgress,
             GenericErrorCodesDuplicateStudioName,
@@ -1873,6 +1874,14 @@ namespace PlayFab
             GenericErrorCodesCloudScriptAzureFunctionsArgumentSizeExceeded,
             GenericErrorCodesCloudScriptAzureFunctionsReturnSizeExceeded,
             GenericErrorCodesCloudScriptAzureFunctionsHTTPRequestError,
+            GenericErrorCodesVirtualCurrencyBetaGetError,
+            GenericErrorCodesVirtualCurrencyBetaCreateError,
+            GenericErrorCodesVirtualCurrencyBetaInitialDepositSaveError,
+            GenericErrorCodesVirtualCurrencyBetaSaveError,
+            GenericErrorCodesVirtualCurrencyBetaDeleteError,
+            GenericErrorCodesVirtualCurrencyBetaRestoreError,
+            GenericErrorCodesVirtualCurrencyBetaSaveConflict,
+            GenericErrorCodesVirtualCurrencyBetaUpdateError,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -1912,22 +1921,30 @@ namespace PlayFab
             GenericErrorCodesExportInvalidStatusUpdate,
             GenericErrorCodesExportInvalidPrefix,
             GenericErrorCodesExportBlobContainerDoesNotExist,
-            GenericErrorCodesExportEventNameNotFound,
-            GenericErrorCodesExportExportTitleIdNotFound,
+            GenericErrorCodesExportNotFound,
             GenericErrorCodesExportCouldNotUpdate,
             GenericErrorCodesExportInvalidStorageType,
             GenericErrorCodesExportAmazonBucketDoesNotExist,
             GenericErrorCodesExportInvalidBlobStorage,
             GenericErrorCodesExportKustoException,
-            GenericErrorCodesExportKustoExceptionPartialErrorOnNewExport,
-            GenericErrorCodesExportKustoExceptionEdit,
             GenericErrorCodesExportKustoConnectionFailed,
             GenericErrorCodesExportUnknownError,
             GenericErrorCodesExportCantEditPendingExport,
             GenericErrorCodesExportLimitExports,
             GenericErrorCodesExportLimitEvents,
             GenericErrorCodesTitleNotEnabledForParty,
-            GenericErrorCodesPartyVersionNotFound
+            GenericErrorCodesPartyVersionNotFound,
+            GenericErrorCodesMultiplayerServerBuildReferencedByMatchmakingQueue,
+            GenericErrorCodesExperimentationExperimentStopped,
+            GenericErrorCodesExperimentationExperimentRunning,
+            GenericErrorCodesExperimentationExperimentNotFound,
+            GenericErrorCodesExperimentationExperimentNeverStarted,
+            GenericErrorCodesExperimentationExperimentDeleted,
+            GenericErrorCodesExperimentationClientTimeout,
+            GenericErrorCodesExperimentationExceededVariantNameLength,
+            GenericErrorCodesExperimentationExceededMaxVariantLength,
+            GenericErrorCodesExperimentInvalidId,
+            GenericErrorCodesSnapshotNotFound
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -2375,6 +2392,7 @@ namespace PlayFab
             if (input == GenericErrorCodesEconomyServiceInternalError) output = Json::Value("EconomyServiceInternalError");
             if (input == GenericErrorCodesQueryRateLimitExceeded) output = Json::Value("QueryRateLimitExceeded");
             if (input == GenericErrorCodesEntityAPIKeyCreationDisabledForEntity) output = Json::Value("EntityAPIKeyCreationDisabledForEntity");
+            if (input == GenericErrorCodesForbiddenByEntityPolicy) output = Json::Value("ForbiddenByEntityPolicy");
             if (input == GenericErrorCodesStudioCreationRateLimited) output = Json::Value("StudioCreationRateLimited");
             if (input == GenericErrorCodesStudioCreationInProgress) output = Json::Value("StudioCreationInProgress");
             if (input == GenericErrorCodesDuplicateStudioName) output = Json::Value("DuplicateStudioName");
@@ -2393,6 +2411,14 @@ namespace PlayFab
             if (input == GenericErrorCodesCloudScriptAzureFunctionsArgumentSizeExceeded) output = Json::Value("CloudScriptAzureFunctionsArgumentSizeExceeded");
             if (input == GenericErrorCodesCloudScriptAzureFunctionsReturnSizeExceeded) output = Json::Value("CloudScriptAzureFunctionsReturnSizeExceeded");
             if (input == GenericErrorCodesCloudScriptAzureFunctionsHTTPRequestError) output = Json::Value("CloudScriptAzureFunctionsHTTPRequestError");
+            if (input == GenericErrorCodesVirtualCurrencyBetaGetError) output = Json::Value("VirtualCurrencyBetaGetError");
+            if (input == GenericErrorCodesVirtualCurrencyBetaCreateError) output = Json::Value("VirtualCurrencyBetaCreateError");
+            if (input == GenericErrorCodesVirtualCurrencyBetaInitialDepositSaveError) output = Json::Value("VirtualCurrencyBetaInitialDepositSaveError");
+            if (input == GenericErrorCodesVirtualCurrencyBetaSaveError) output = Json::Value("VirtualCurrencyBetaSaveError");
+            if (input == GenericErrorCodesVirtualCurrencyBetaDeleteError) output = Json::Value("VirtualCurrencyBetaDeleteError");
+            if (input == GenericErrorCodesVirtualCurrencyBetaRestoreError) output = Json::Value("VirtualCurrencyBetaRestoreError");
+            if (input == GenericErrorCodesVirtualCurrencyBetaSaveConflict) output = Json::Value("VirtualCurrencyBetaSaveConflict");
+            if (input == GenericErrorCodesVirtualCurrencyBetaUpdateError) output = Json::Value("VirtualCurrencyBetaUpdateError");
             if (input == GenericErrorCodesMatchmakingEntityInvalid) output = Json::Value("MatchmakingEntityInvalid");
             if (input == GenericErrorCodesMatchmakingPlayerAttributesInvalid) output = Json::Value("MatchmakingPlayerAttributesInvalid");
             if (input == GenericErrorCodesMatchmakingQueueNotFound) output = Json::Value("MatchmakingQueueNotFound");
@@ -2432,15 +2458,12 @@ namespace PlayFab
             if (input == GenericErrorCodesExportInvalidStatusUpdate) output = Json::Value("ExportInvalidStatusUpdate");
             if (input == GenericErrorCodesExportInvalidPrefix) output = Json::Value("ExportInvalidPrefix");
             if (input == GenericErrorCodesExportBlobContainerDoesNotExist) output = Json::Value("ExportBlobContainerDoesNotExist");
-            if (input == GenericErrorCodesExportEventNameNotFound) output = Json::Value("ExportEventNameNotFound");
-            if (input == GenericErrorCodesExportExportTitleIdNotFound) output = Json::Value("ExportExportTitleIdNotFound");
+            if (input == GenericErrorCodesExportNotFound) output = Json::Value("ExportNotFound");
             if (input == GenericErrorCodesExportCouldNotUpdate) output = Json::Value("ExportCouldNotUpdate");
             if (input == GenericErrorCodesExportInvalidStorageType) output = Json::Value("ExportInvalidStorageType");
             if (input == GenericErrorCodesExportAmazonBucketDoesNotExist) output = Json::Value("ExportAmazonBucketDoesNotExist");
             if (input == GenericErrorCodesExportInvalidBlobStorage) output = Json::Value("ExportInvalidBlobStorage");
             if (input == GenericErrorCodesExportKustoException) output = Json::Value("ExportKustoException");
-            if (input == GenericErrorCodesExportKustoExceptionPartialErrorOnNewExport) output = Json::Value("ExportKustoExceptionPartialErrorOnNewExport");
-            if (input == GenericErrorCodesExportKustoExceptionEdit) output = Json::Value("ExportKustoExceptionEdit");
             if (input == GenericErrorCodesExportKustoConnectionFailed) output = Json::Value("ExportKustoConnectionFailed");
             if (input == GenericErrorCodesExportUnknownError) output = Json::Value("ExportUnknownError");
             if (input == GenericErrorCodesExportCantEditPendingExport) output = Json::Value("ExportCantEditPendingExport");
@@ -2448,6 +2471,17 @@ namespace PlayFab
             if (input == GenericErrorCodesExportLimitEvents) output = Json::Value("ExportLimitEvents");
             if (input == GenericErrorCodesTitleNotEnabledForParty) output = Json::Value("TitleNotEnabledForParty");
             if (input == GenericErrorCodesPartyVersionNotFound) output = Json::Value("PartyVersionNotFound");
+            if (input == GenericErrorCodesMultiplayerServerBuildReferencedByMatchmakingQueue) output = Json::Value("MultiplayerServerBuildReferencedByMatchmakingQueue");
+            if (input == GenericErrorCodesExperimentationExperimentStopped) output = Json::Value("ExperimentationExperimentStopped");
+            if (input == GenericErrorCodesExperimentationExperimentRunning) output = Json::Value("ExperimentationExperimentRunning");
+            if (input == GenericErrorCodesExperimentationExperimentNotFound) output = Json::Value("ExperimentationExperimentNotFound");
+            if (input == GenericErrorCodesExperimentationExperimentNeverStarted) output = Json::Value("ExperimentationExperimentNeverStarted");
+            if (input == GenericErrorCodesExperimentationExperimentDeleted) output = Json::Value("ExperimentationExperimentDeleted");
+            if (input == GenericErrorCodesExperimentationClientTimeout) output = Json::Value("ExperimentationClientTimeout");
+            if (input == GenericErrorCodesExperimentationExceededVariantNameLength) output = Json::Value("ExperimentationExceededVariantNameLength");
+            if (input == GenericErrorCodesExperimentationExceededMaxVariantLength) output = Json::Value("ExperimentationExceededMaxVariantLength");
+            if (input == GenericErrorCodesExperimentInvalidId) output = Json::Value("ExperimentInvalidId");
+            if (input == GenericErrorCodesSnapshotNotFound) output = Json::Value("SnapshotNotFound");
         }
         inline void FromJsonEnum(const Json::Value& input, GenericErrorCodes& output)
         {
@@ -2896,6 +2930,7 @@ namespace PlayFab
             if (inputStr == "EconomyServiceInternalError") output = GenericErrorCodesEconomyServiceInternalError;
             if (inputStr == "QueryRateLimitExceeded") output = GenericErrorCodesQueryRateLimitExceeded;
             if (inputStr == "EntityAPIKeyCreationDisabledForEntity") output = GenericErrorCodesEntityAPIKeyCreationDisabledForEntity;
+            if (inputStr == "ForbiddenByEntityPolicy") output = GenericErrorCodesForbiddenByEntityPolicy;
             if (inputStr == "StudioCreationRateLimited") output = GenericErrorCodesStudioCreationRateLimited;
             if (inputStr == "StudioCreationInProgress") output = GenericErrorCodesStudioCreationInProgress;
             if (inputStr == "DuplicateStudioName") output = GenericErrorCodesDuplicateStudioName;
@@ -2914,6 +2949,14 @@ namespace PlayFab
             if (inputStr == "CloudScriptAzureFunctionsArgumentSizeExceeded") output = GenericErrorCodesCloudScriptAzureFunctionsArgumentSizeExceeded;
             if (inputStr == "CloudScriptAzureFunctionsReturnSizeExceeded") output = GenericErrorCodesCloudScriptAzureFunctionsReturnSizeExceeded;
             if (inputStr == "CloudScriptAzureFunctionsHTTPRequestError") output = GenericErrorCodesCloudScriptAzureFunctionsHTTPRequestError;
+            if (inputStr == "VirtualCurrencyBetaGetError") output = GenericErrorCodesVirtualCurrencyBetaGetError;
+            if (inputStr == "VirtualCurrencyBetaCreateError") output = GenericErrorCodesVirtualCurrencyBetaCreateError;
+            if (inputStr == "VirtualCurrencyBetaInitialDepositSaveError") output = GenericErrorCodesVirtualCurrencyBetaInitialDepositSaveError;
+            if (inputStr == "VirtualCurrencyBetaSaveError") output = GenericErrorCodesVirtualCurrencyBetaSaveError;
+            if (inputStr == "VirtualCurrencyBetaDeleteError") output = GenericErrorCodesVirtualCurrencyBetaDeleteError;
+            if (inputStr == "VirtualCurrencyBetaRestoreError") output = GenericErrorCodesVirtualCurrencyBetaRestoreError;
+            if (inputStr == "VirtualCurrencyBetaSaveConflict") output = GenericErrorCodesVirtualCurrencyBetaSaveConflict;
+            if (inputStr == "VirtualCurrencyBetaUpdateError") output = GenericErrorCodesVirtualCurrencyBetaUpdateError;
             if (inputStr == "MatchmakingEntityInvalid") output = GenericErrorCodesMatchmakingEntityInvalid;
             if (inputStr == "MatchmakingPlayerAttributesInvalid") output = GenericErrorCodesMatchmakingPlayerAttributesInvalid;
             if (inputStr == "MatchmakingQueueNotFound") output = GenericErrorCodesMatchmakingQueueNotFound;
@@ -2953,15 +2996,12 @@ namespace PlayFab
             if (inputStr == "ExportInvalidStatusUpdate") output = GenericErrorCodesExportInvalidStatusUpdate;
             if (inputStr == "ExportInvalidPrefix") output = GenericErrorCodesExportInvalidPrefix;
             if (inputStr == "ExportBlobContainerDoesNotExist") output = GenericErrorCodesExportBlobContainerDoesNotExist;
-            if (inputStr == "ExportEventNameNotFound") output = GenericErrorCodesExportEventNameNotFound;
-            if (inputStr == "ExportExportTitleIdNotFound") output = GenericErrorCodesExportExportTitleIdNotFound;
+            if (inputStr == "ExportNotFound") output = GenericErrorCodesExportNotFound;
             if (inputStr == "ExportCouldNotUpdate") output = GenericErrorCodesExportCouldNotUpdate;
             if (inputStr == "ExportInvalidStorageType") output = GenericErrorCodesExportInvalidStorageType;
             if (inputStr == "ExportAmazonBucketDoesNotExist") output = GenericErrorCodesExportAmazonBucketDoesNotExist;
             if (inputStr == "ExportInvalidBlobStorage") output = GenericErrorCodesExportInvalidBlobStorage;
             if (inputStr == "ExportKustoException") output = GenericErrorCodesExportKustoException;
-            if (inputStr == "ExportKustoExceptionPartialErrorOnNewExport") output = GenericErrorCodesExportKustoExceptionPartialErrorOnNewExport;
-            if (inputStr == "ExportKustoExceptionEdit") output = GenericErrorCodesExportKustoExceptionEdit;
             if (inputStr == "ExportKustoConnectionFailed") output = GenericErrorCodesExportKustoConnectionFailed;
             if (inputStr == "ExportUnknownError") output = GenericErrorCodesExportUnknownError;
             if (inputStr == "ExportCantEditPendingExport") output = GenericErrorCodesExportCantEditPendingExport;
@@ -2969,6 +3009,17 @@ namespace PlayFab
             if (inputStr == "ExportLimitEvents") output = GenericErrorCodesExportLimitEvents;
             if (inputStr == "TitleNotEnabledForParty") output = GenericErrorCodesTitleNotEnabledForParty;
             if (inputStr == "PartyVersionNotFound") output = GenericErrorCodesPartyVersionNotFound;
+            if (inputStr == "MultiplayerServerBuildReferencedByMatchmakingQueue") output = GenericErrorCodesMultiplayerServerBuildReferencedByMatchmakingQueue;
+            if (inputStr == "ExperimentationExperimentStopped") output = GenericErrorCodesExperimentationExperimentStopped;
+            if (inputStr == "ExperimentationExperimentRunning") output = GenericErrorCodesExperimentationExperimentRunning;
+            if (inputStr == "ExperimentationExperimentNotFound") output = GenericErrorCodesExperimentationExperimentNotFound;
+            if (inputStr == "ExperimentationExperimentNeverStarted") output = GenericErrorCodesExperimentationExperimentNeverStarted;
+            if (inputStr == "ExperimentationExperimentDeleted") output = GenericErrorCodesExperimentationExperimentDeleted;
+            if (inputStr == "ExperimentationClientTimeout") output = GenericErrorCodesExperimentationClientTimeout;
+            if (inputStr == "ExperimentationExceededVariantNameLength") output = GenericErrorCodesExperimentationExceededVariantNameLength;
+            if (inputStr == "ExperimentationExceededMaxVariantLength") output = GenericErrorCodesExperimentationExceededMaxVariantLength;
+            if (inputStr == "ExperimentInvalidId") output = GenericErrorCodesExperimentInvalidId;
+            if (inputStr == "SnapshotNotFound") output = GenericErrorCodesSnapshotNotFound;
         }
 
         enum LoginIdentityProvider
