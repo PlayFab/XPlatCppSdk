@@ -3560,7 +3560,7 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["BuildVersion"], BuildVersion);
                 FromJsonUtilS(input["GameMode"], GameMode);
-                FromJsonUtilE(input["pfRegion"], pfRegion);
+                FromJsonUtilE(input["Region"], pfRegion);
                 FromJsonUtilS(input["StatisticName"], StatisticName);
                 FromJsonUtilO(input["TagFilter"], TagFilter);
             }
@@ -3648,7 +3648,7 @@ namespace PlayFab
                 FromJsonUtilS(input["LobbyID"], LobbyID);
                 FromJsonUtilP(input["MaxPlayers"], MaxPlayers);
                 FromJsonUtilS(input["PlayerUserIds"], PlayerUserIds);
-                FromJsonUtilE(input["pfRegion"], pfRegion);
+                FromJsonUtilE(input["Region"], pfRegion);
                 FromJsonUtilP(input["RunTime"], RunTime);
                 FromJsonUtilS(input["ServerIPV4Address"], ServerIPV4Address);
                 FromJsonUtilS(input["ServerIPV6Address"], ServerIPV6Address);
@@ -4287,8 +4287,8 @@ namespace PlayFab
             void FromJson(Json::Value& input) override
             {
                 FromJsonUtilS(input["City"], City);
-                FromJsonUtilE(input["pfContinentCode"], pfContinentCode);
-                FromJsonUtilE(input["pfCountryCode"], pfCountryCode);
+                FromJsonUtilE(input["ContinentCode"], pfContinentCode);
+                FromJsonUtilE(input["CountryCode"], pfCountryCode);
                 FromJsonUtilP(input["Latitude"], Latitude);
                 FromJsonUtilP(input["Longitude"], Longitude);
             }
@@ -4957,7 +4957,7 @@ namespace PlayFab
                 FromJsonUtilP(input["Available"], Available);
                 FromJsonUtilS(input["Name"], Name);
                 FromJsonUtilS(input["PingUrl"], PingUrl);
-                FromJsonUtilE(input["pfRegion"], pfRegion);
+                FromJsonUtilE(input["Region"], pfRegion);
             }
 
             Json::Value ToJson() const override
@@ -11804,7 +11804,7 @@ namespace PlayFab
                 FromJsonUtilS(input["CharacterId"], CharacterId);
                 FromJsonUtilS(input["GameMode"], GameMode);
                 FromJsonUtilS(input["LobbyId"], LobbyId);
-                FromJsonUtilE(input["pfRegion"], pfRegion);
+                FromJsonUtilE(input["Region"], pfRegion);
                 FromJsonUtilP(input["StartNewIfNoneFound"], StartNewIfNoneFound);
                 FromJsonUtilS(input["StatisticName"], StatisticName);
                 FromJsonUtilO(input["TagFilter"], TagFilter);
@@ -13142,7 +13142,7 @@ namespace PlayFab
                 FromJsonUtilS(input["CharacterId"], CharacterId);
                 FromJsonUtilS(input["CustomCommandLineData"], CustomCommandLineData);
                 FromJsonUtilS(input["GameMode"], GameMode);
-                FromJsonEnum(input["pfRegion"], pfRegion);
+                FromJsonEnum(input["Region"], pfRegion);
                 FromJsonUtilS(input["StatisticName"], StatisticName);
             }
 

@@ -357,7 +357,7 @@ namespace PlayFab
                 FromJsonUtilS(input["CustomCommandLineData"], CustomCommandLineData);
                 FromJsonUtilS(input["ExternalMatchmakerEventEndpoint"], ExternalMatchmakerEventEndpoint);
                 FromJsonUtilS(input["GameMode"], GameMode);
-                FromJsonEnum(input["pfRegion"], pfRegion);
+                FromJsonEnum(input["Region"], pfRegion);
             }
 
             Json::Value ToJson() const override

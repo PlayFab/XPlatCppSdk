@@ -446,7 +446,7 @@ namespace PlayFab
 
             void FromJson(Json::Value& input) override
             {
-                FromJsonUtilO(input["pfCurrentServerStats"], pfCurrentServerStats);
+                FromJsonUtilO(input["CurrentServerStats"], pfCurrentServerStats);
                 FromJsonUtilP(input["MaxServers"], MaxServers);
                 FromJsonUtilE(input["Region"], Region);
                 FromJsonUtilP(input["StandbyServers"], StandbyServers);
@@ -1005,8 +1005,8 @@ namespace PlayFab
             void FromJson(Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildName"], BuildName);
-                FromJsonUtilE(input["pfContainerFlavor"], pfContainerFlavor);
-                FromJsonUtilO(input["pfContainerImageReference"], pfContainerImageReference);
+                FromJsonUtilE(input["ContainerFlavor"], pfContainerFlavor);
+                FromJsonUtilO(input["ContainerImageReference"], pfContainerImageReference);
                 FromJsonUtilS(input["ContainerRunCommand"], ContainerRunCommand);
                 FromJsonUtilO(input["GameAssetReferences"], GameAssetReferences);
                 FromJsonUtilO(input["GameCertificateReferences"], GameCertificateReferences);
@@ -1125,7 +1125,7 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["BuildId"], BuildId);
                 FromJsonUtilS(input["BuildName"], BuildName);
-                FromJsonUtilE(input["pfContainerFlavor"], pfContainerFlavor);
+                FromJsonUtilE(input["ContainerFlavor"], pfContainerFlavor);
                 FromJsonUtilS(input["ContainerRunCommand"], ContainerRunCommand);
                 FromJsonUtilT(input["CreationTime"], CreationTime);
                 FromJsonUtilO(input["CustomGameContainerImage"], CustomGameContainerImage);
@@ -1204,7 +1204,7 @@ namespace PlayFab
             void FromJson(Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildName"], BuildName);
-                FromJsonUtilE(input["pfContainerFlavor"], pfContainerFlavor);
+                FromJsonUtilE(input["ContainerFlavor"], pfContainerFlavor);
                 FromJsonUtilO(input["GameAssetReferences"], GameAssetReferences);
                 FromJsonUtilO(input["GameCertificateReferences"], GameCertificateReferences);
                 FromJsonUtilS(input["Metadata"], Metadata);
@@ -1285,7 +1285,7 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["BuildId"], BuildId);
                 FromJsonUtilS(input["BuildName"], BuildName);
-                FromJsonUtilE(input["pfContainerFlavor"], pfContainerFlavor);
+                FromJsonUtilE(input["ContainerFlavor"], pfContainerFlavor);
                 FromJsonUtilT(input["CreationTime"], CreationTime);
                 FromJsonUtilO(input["GameAssetReferences"], GameAssetReferences);
                 FromJsonUtilO(input["GameCertificateReferences"], GameCertificateReferences);
@@ -1947,7 +1947,7 @@ namespace PlayFab
                 FromJsonUtilS(input["BuildId"], BuildId);
                 FromJsonUtilS(input["BuildName"], BuildName);
                 FromJsonUtilS(input["BuildStatus"], BuildStatus);
-                FromJsonUtilE(input["pfContainerFlavor"], pfContainerFlavor);
+                FromJsonUtilE(input["ContainerFlavor"], pfContainerFlavor);
                 FromJsonUtilS(input["ContainerRunCommand"], ContainerRunCommand);
                 FromJsonUtilT(input["CreationTime"], CreationTime);
                 FromJsonUtilO(input["CustomGameContainerImage"], CustomGameContainerImage);
@@ -2133,7 +2133,7 @@ namespace PlayFab
 
             void FromJson(Json::Value& input) override
             {
-                FromJsonUtilE(input["pfCancellationReason"], pfCancellationReason);
+                FromJsonUtilE(input["CancellationReason"], pfCancellationReason);
                 FromJsonUtilS(input["CancellationReasonString"], CancellationReasonString);
                 FromJsonUtilT(input["Created"], Created);
                 FromJsonUtilO(input["Creator"], Creator);
@@ -2316,7 +2316,7 @@ namespace PlayFab
                 FromJsonUtilS(input["MatchId"], MatchId);
                 FromJsonUtilO(input["Members"], Members);
                 FromJsonUtilS(input["RegionPreferences"], RegionPreferences);
-                FromJsonUtilO(input["pfServerDetails"], pfServerDetails);
+                FromJsonUtilO(input["ServerDetails"], pfServerDetails);
             }
 
             Json::Value ToJson() const override

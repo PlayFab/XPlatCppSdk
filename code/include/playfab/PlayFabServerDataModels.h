@@ -6265,8 +6265,8 @@ namespace PlayFab
             void FromJson(Json::Value& input) override
             {
                 FromJsonUtilS(input["City"], City);
-                FromJsonUtilE(input["pfContinentCode"], pfContinentCode);
-                FromJsonUtilE(input["pfCountryCode"], pfCountryCode);
+                FromJsonUtilE(input["ContinentCode"], pfContinentCode);
+                FromJsonUtilE(input["CountryCode"], pfCountryCode);
                 FromJsonUtilP(input["Latitude"], Latitude);
                 FromJsonUtilP(input["Longitude"], Longitude);
             }
@@ -8505,8 +8505,8 @@ namespace PlayFab
             void FromJson(Json::Value& input) override
             {
                 FromJsonUtilS(input["City"], City);
-                FromJsonEnum(input["pfContinentCode"], pfContinentCode);
-                FromJsonEnum(input["pfCountryCode"], pfCountryCode);
+                FromJsonEnum(input["ContinentCode"], pfContinentCode);
+                FromJsonEnum(input["CountryCode"], pfCountryCode);
                 FromJsonUtilP(input["Latitude"], Latitude);
                 FromJsonUtilP(input["Longitude"], Longitude);
             }
@@ -11977,7 +11977,7 @@ namespace PlayFab
                 FromJsonUtilS(input["Build"], Build);
                 FromJsonUtilS(input["GameMode"], GameMode);
                 FromJsonUtilS(input["LobbyId"], LobbyId);
-                FromJsonEnum(input["pfRegion"], pfRegion);
+                FromJsonEnum(input["Region"], pfRegion);
                 FromJsonUtilS(input["ServerIPV4Address"], ServerIPV4Address);
                 FromJsonUtilS(input["ServerIPV6Address"], ServerIPV6Address);
                 FromJsonUtilS(input["ServerPort"], ServerPort);
