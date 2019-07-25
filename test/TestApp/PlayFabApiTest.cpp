@@ -5,10 +5,10 @@
 #include <playfab/PlayFabClientApi.h>
 #include <playfab/PlayFabSettings.h>
 #include <playfab/PlayFabAuthenticationDataModels.h>
-#include <playfab/PlayFabAuthenticationAPI.h>
+#include <playfab/PlayFabAuthenticationApi.h>
 #include <playfab/PlayFabClientDataModels.h>
 #include <playfab/PlayFabDataDataModels.h>
-#include <playfab/PlayFabDataAPI.h>
+#include <playfab/PlayFabDataApi.h>
 #include <playfab/PlayFabPlatformMacros.h>
 #include "PlayFabApiTest.h"
 #include "TestContext.h"
