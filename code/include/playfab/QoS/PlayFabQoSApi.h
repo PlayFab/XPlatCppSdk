@@ -24,12 +24,12 @@ namespace PlayFab
             QoSResult GetQoSResult(unsigned int numThreads, unsigned int timeoutMs = DEFAULT_TIMEOUT_MS);
 
         private:
-            std::vector<PlayFab::MultiplayerModels::AzureRegion> GetPingList(unsigned int serverCount);
-            void InitializeAccumulatedPingResults(std::unordered_map<PlayFab::MultiplayerModels::AzureRegion, PingResult>& accumulatedPingResults);
+            std::vector<std::string> GetPingList(unsigned int serverCount);
+            void InitializeAccumulatedPingResults(std::unordered_map<std::string, PingResult>& accumulatedPingResults);
             int SetupSockets(std::vector<std::shared_ptr<QoSSocket>>& sockets, unsigned int numThreads, unsigned int timeoutMs);
             void InitializeAsyncPingResults(std::vector<std::future<PingResult>>& asyncPingResults);
-            void PingServers(std::vector<PlayFab::MultiplayerModels::AzureRegion>& pings, std::vector<std::future<PingResult>>& asyncPingResults, std::vector<std::shared_ptr<QoSSocket>>& sockets, std::unordered_map<PlayFab::MultiplayerModels::AzureRegion, PingResult>& accumulatedPingResults, unsigned int timeoutMs);
-            void UpdateAccumulatedPingResult(PingResult& result, PlayFab::MultiplayerModels::AzureRegion region, std::unordered_map<PlayFab::MultiplayerModels::AzureRegion, PingResult>& accumulatedPingResults, unsigned int timeoutMs);
+            void PingServers(std::vector<std::string>& pings, std::vector<std::future<PingResult>>& asyncPingResults, std::vector<std::shared_ptr<QoSSocket>>& sockets, std::unordered_map<std::string, PingResult>& accumulatedPingResults, unsigned int timeoutMs);
+            void UpdateAccumulatedPingResult(PingResult& result, std::string region, std::unordered_map<std::string, PingResult>& accumulatedPingResults, unsigned int timeoutMs);
             QoSResult GetResult(unsigned int numThreads, unsigned int timeoutMs);
 
             void PingThunderheadForServerList();
@@ -46,7 +46,7 @@ namespace PlayFab
             const int numOfPingIterations = NUM_OF_PING_ITERATIONS; // Number of pings to do to each server, to calculate an average latency.
             const std::chrono::milliseconds threadWaitTimespan = std::chrono::milliseconds(THREAD_WAIT_MS);
 
-            std::unordered_map<PlayFab::MultiplayerModels::AzureRegion, std::string> regionMap;
+            std::unordered_map<std::string, std::string> regionMap;
             bool listQosServersCompleted;
         };
     }

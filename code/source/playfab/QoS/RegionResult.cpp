@@ -8,7 +8,7 @@ namespace PlayFab
 {
     namespace QoS
     {
-        RegionResult::RegionResult(PlayFab::MultiplayerModels::AzureRegion region, int latencyMs, int errorCode) :
+        RegionResult::RegionResult(std::string region, int latencyMs, int errorCode) :
             region(region), latencyMs(latencyMs), errorCode(errorCode)
         {
         }
