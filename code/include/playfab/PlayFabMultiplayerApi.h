@@ -49,6 +49,7 @@ namespace PlayFab
         static void ListContainerImageTags(MultiplayerModels::ListContainerImageTagsRequest& request, ProcessApiCallback<MultiplayerModels::ListContainerImageTagsResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void ListMatchmakingTicketsForPlayer(MultiplayerModels::ListMatchmakingTicketsForPlayerRequest& request, ProcessApiCallback<MultiplayerModels::ListMatchmakingTicketsForPlayerResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void ListMultiplayerServers(MultiplayerModels::ListMultiplayerServersRequest& request, ProcessApiCallback<MultiplayerModels::ListMultiplayerServersResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void ListPartyQosServers(MultiplayerModels::ListPartyQosServersRequest& request, ProcessApiCallback<MultiplayerModels::ListPartyQosServersResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void ListQosServers(MultiplayerModels::ListQosServersRequest& request, ProcessApiCallback<MultiplayerModels::ListQosServersResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void ListVirtualMachineSummaries(MultiplayerModels::ListVirtualMachineSummariesRequest& request, ProcessApiCallback<MultiplayerModels::ListVirtualMachineSummariesResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void RequestMultiplayerServer(MultiplayerModels::RequestMultiplayerServerRequest& request, ProcessApiCallback<MultiplayerModels::RequestMultiplayerServerResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -93,6 +94,7 @@ namespace PlayFab
         static void OnListContainerImageTagsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         static void OnListMatchmakingTicketsForPlayerResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         static void OnListMultiplayerServersResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        static void OnListPartyQosServersResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         static void OnListQosServersResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         static void OnListVirtualMachineSummariesResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         static void OnRequestMultiplayerServerResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);

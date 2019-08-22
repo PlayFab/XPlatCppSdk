@@ -135,10 +135,10 @@ namespace PlayFab
 
             // get a list of region pings that need to be done
             result.regionResults.reserve(serverCount);
-            vector<AzureRegion> pings = move(GetPingList(static_cast<unsigned int>(serverCount)));
+            vector<std::string> pings = move(GetPingList(static_cast<unsigned int>(serverCount)));
 
             // initialize accumulated results with empty (zeroed) ping results
-            unordered_map<AzureRegion, PingResult> accumulatedPingResults;
+            unordered_map<std::string, PingResult> accumulatedPingResults;
             accumulatedPingResults.reserve(regionMap.size());
             InitializeAccumulatedPingResults(accumulatedPingResults);
 
@@ -146,7 +146,7 @@ namespace PlayFab
             vector<shared_ptr<QoSSocket>> sockets;
             result.errorCode = SetupSockets(sockets, numThreads, timeoutMs);
 
-            // If no sockets were initialised, return as we cant do anything. The errorCode must already be set at this point
+            // If no sockets were initialized, return as we cant do anything. The errorCode must already be set at this point
             // Update the numThreads as well since if we have n sockets, we can only use n threads
             if ((numThreads = static_cast<unsigned int>(sockets.size())) == 0)
             {
@@ -250,15 +250,15 @@ namespace PlayFab
             api->listQosServersCompleted = true;
         }
 
-        vector<AzureRegion> PlayFabQoSApi::GetPingList(unsigned int serverCount)
+        vector<std::string> PlayFabQoSApi::GetPingList(unsigned int serverCount)
         {
-            vector<PlayFab::MultiplayerModels::AzureRegion> pingList;
+            vector<std::string> pingList;
             pingList.reserve(numOfPingIterations * serverCount);
 
             // Round Robin
             for (int i = 0; i < numOfPingIterations; ++i)
             {
-                for (unordered_map<AzureRegion, string>::iterator it = regionMap.begin();
+                for (unordered_map<std::string, string>::iterator it = regionMap.begin();
                     it != regionMap.end();
                     ++it)
                 {
@@ -269,7 +269,7 @@ namespace PlayFab
             return pingList;
         }
 
-        void PlayFabQoSApi::InitializeAccumulatedPingResults(unordered_map<AzureRegion, PingResult>& accumulatedPingResults)
+        void PlayFabQoSApi::InitializeAccumulatedPingResults(unordered_map<std::string, PingResult>& accumulatedPingResults)
         {
             for (auto it = regionMap.begin();
                 it != regionMap.end();
@@ -312,12 +312,12 @@ namespace PlayFab
             }
         }
 
-        void PlayFabQoSApi::PingServers(vector<AzureRegion>& pings, vector<future<PingResult>>& asyncPingResults, std::vector<std::shared_ptr<QoSSocket>>& sockets, unordered_map<AzureRegion, PingResult>& accumulatedPingResults, unsigned int timeoutMs)
+        void PlayFabQoSApi::PingServers(vector<std::string>& pings, vector<future<PingResult>>& asyncPingResults, std::vector<std::shared_ptr<QoSSocket>>& sockets, unordered_map<std::string, PingResult>& accumulatedPingResults, unsigned int timeoutMs)
         {
             int pingItr = 0;
             size_t numThreads = asyncPingResults.size();
             size_t numPings = pings.size();
-            vector<AzureRegion> pingedServers(numThreads); // remember the server for which a ping is started
+            vector<std::string> pingedServers(numThreads); // remember the server for which a ping is started
             while (pingItr < numPings)
             {
                 // Iterate over all the threads and servers that need to be pinged
@@ -391,7 +391,7 @@ namespace PlayFab
         }
 
         // Add the new ping result to the unordered map.
-        void PlayFabQoSApi::UpdateAccumulatedPingResult(PingResult& result, AzureRegion region, std::unordered_map<AzureRegion, PingResult>& accumulatedPingResults, unsigned int timeoutMs)
+        void PlayFabQoSApi::UpdateAccumulatedPingResult(PingResult& result, std::string region, std::unordered_map<std::string, PingResult>& accumulatedPingResults, unsigned int timeoutMs)
         {
             if (result.errorCode != 0)
             {

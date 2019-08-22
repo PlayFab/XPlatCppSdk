@@ -170,9 +170,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabPlatformMacros.h" />
-    <ClInclude Include="$(SdkSourceDir)\include\playfab\OneDSIXHR2Plugin.h" />
-    <ClInclude Include="$(SdkSourceDir)\include\playfab\OneDSEventsApi.h" />
-    <ClInclude Include="$(SdkSourceDir)\include\playfab\OneDSEventPipeline.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabAuthenticationContext.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabApiSettings.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabBaseModel.h" />
@@ -213,7 +210,6 @@
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabProfilesApi.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabProfilesInstanceApi.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabProfilesDataModels.h" />
-    <ClInclude Include="$(SdkSourceDir)\include\playfab\OneDSEventsDataModels.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEvent.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEventApi.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEventBuffer.h" />
@@ -239,9 +235,6 @@
     <ClInclude Include="$(SdkSourceDir)\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(SdkSourceDir)\source\playfab\OneDSIXHR2Plugin.cpp" />
-    <ClCompile Include="$(SdkSourceDir)\source\playfab\OneDSEventsApi.cpp" />
-    <ClCompile Include="$(SdkSourceDir)\source\playfab\OneDSEventPipeline.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabAuthenticationContext.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabApiSettings.cpp" />
 

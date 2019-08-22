@@ -35,8 +35,6 @@
 		5A3F0A3F22418B2B00AC0816 /* PlayFabAuthenticationInstanceApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A0D22418B2800AC0816 /* PlayFabAuthenticationInstanceApi.cpp */; };
 		5A3F0A4022418B2B00AC0816 /* PlayFabGroupsApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A0E22418B2800AC0816 /* PlayFabGroupsApi.cpp */; };
 		5A3F0A4222418B2B00AC0816 /* PlayFabMatchmakerApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A1022418B2900AC0816 /* PlayFabMatchmakerApi.cpp */; };
-		5A3F0A4322418B2B00AC0816 /* OneDSEventPipeline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A1122418B2900AC0816 /* OneDSEventPipeline.cpp */; };
-		5A3F0A4422418B2B00AC0816 /* OneDSEventsApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A1222418B2900AC0816 /* OneDSEventsApi.cpp */; };
 		5A3F0A4522418B2B00AC0816 /* PlayFabEventsInstanceApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A1322418B2900AC0816 /* PlayFabEventsInstanceApi.cpp */; };
 		5A3F0A4622418B2B00AC0816 /* PlayFabError.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A1422418B2900AC0816 /* PlayFabError.cpp */; };
 		5A3F0A4722418B2B00AC0816 /* PlayFabSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A1522418B2900AC0816 /* PlayFabSettings.cpp */; };
@@ -51,7 +49,6 @@
 		5A3F0A5322418B2B00AC0816 /* PlayFabApiSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A2122418B2B00AC0816 /* PlayFabApiSettings.cpp */; };
 		5A3F0A5422418B2B00AC0816 /* PlayFabAdminApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A2222418B2B00AC0816 /* PlayFabAdminApi.cpp */; };
 		5A3F0A592241950F00AC0816 /* PlayFabIOSHttpPlugin.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A572241950F00AC0816 /* PlayFabIOSHttpPlugin.mm */; };
-		5A3F0A5A2241950F00AC0816 /* OneDSIOSHttpPlugin.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A582241950F00AC0816 /* OneDSIOSHttpPlugin.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -76,7 +73,6 @@
 		5A3F09AF22418B1400AC0816 /* RegionResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegionResult.h; sourceTree = "<group>"; };
 		5A3F09B022418B1400AC0816 /* QoSSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QoSSocket.h; sourceTree = "<group>"; };
 		5A3F09B122418B1400AC0816 /* QoS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QoS.h; sourceTree = "<group>"; };
-		5A3F09B222418B1400AC0816 /* OneDSEventsApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OneDSEventsApi.h; path = ../../../code/include/playfab/OneDSEventsApi.h; sourceTree = "<group>"; };
 		5A3F09B422418B1500AC0816 /* PlayFabAdminApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayFabAdminApi.h; path = ../../../code/include/playfab/PlayFabAdminApi.h; sourceTree = "<group>"; };
 		5A3F09B522418B1500AC0816 /* PlayFabLocalizationInstanceApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayFabLocalizationInstanceApi.h; path = ../../../code/include/playfab/PlayFabLocalizationInstanceApi.h; sourceTree = "<group>"; };
 		5A3F09B622418B1500AC0816 /* PlayFabEventPipeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayFabEventPipeline.h; path = ../../../code/include/playfab/PlayFabEventPipeline.h; sourceTree = "<group>"; };
@@ -95,13 +91,11 @@
 		5A3F09C522418B1600AC0816 /* PlayFabPluginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayFabPluginManager.h; path = ../../../code/include/playfab/PlayFabPluginManager.h; sourceTree = "<group>"; };
 		5A3F09C622418B1600AC0816 /* PlayFabAuthenticationInstanceApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayFabAuthenticationInstanceApi.h; path = ../../../code/include/playfab/PlayFabAuthenticationInstanceApi.h; sourceTree = "<group>"; };
 		5A3F09C722418B1600AC0816 /* PlayFabAuthenticationApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayFabAuthenticationApi.h; path = ../../../code/include/playfab/PlayFabAuthenticationApi.h; sourceTree = "<group>"; };
-		5A3F09C822418B1600AC0816 /* OneDSEventsDataModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OneDSEventsDataModels.h; path = ../../../code/include/playfab/OneDSEventsDataModels.h; sourceTree = "<group>"; };
 		5A3F09C922418B1600AC0816 /* PlayFabAdminInstanceApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayFabAdminInstanceApi.h; path = ../../../code/include/playfab/PlayFabAdminInstanceApi.h; sourceTree = "<group>"; };
 		5A3F09CA22418B1600AC0816 /* PlayFabClientInstanceApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayFabClientInstanceApi.h; path = ../../../code/include/playfab/PlayFabClientInstanceApi.h; sourceTree = "<group>"; };
 		5A3F09CB22418B1600AC0816 /* PlayFabGroupsApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayFabGroupsApi.h; path = ../../../code/include/playfab/PlayFabGroupsApi.h; sourceTree = "<group>"; };
 		5A3F09CC22418B1600AC0816 /* PlayFabCloudScriptDataModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayFabCloudScriptDataModels.h; path = ../../../code/include/playfab/PlayFabCloudScriptDataModels.h; sourceTree = "<group>"; };
 		5A3F09CD22418B1600AC0816 /* PlayFabTransportHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayFabTransportHeaders.h; path = ../../../code/include/playfab/PlayFabTransportHeaders.h; sourceTree = "<group>"; };
-		5A3F09CE22418B1600AC0816 /* OneDSEventPipeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OneDSEventPipeline.h; path = ../../../code/include/playfab/OneDSEventPipeline.h; sourceTree = "<group>"; };
 		5A3F09CF22418B1600AC0816 /* PlayFabLocalizationApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayFabLocalizationApi.h; path = ../../../code/include/playfab/PlayFabLocalizationApi.h; sourceTree = "<group>"; };
 		5A3F09D022418B1600AC0816 /* PlayFabGroupsInstanceApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayFabGroupsInstanceApi.h; path = ../../../code/include/playfab/PlayFabGroupsInstanceApi.h; sourceTree = "<group>"; };
 		5A3F09D122418B1700AC0816 /* PlayFabClientDataModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayFabClientDataModels.h; path = ../../../code/include/playfab/PlayFabClientDataModels.h; sourceTree = "<group>"; };
@@ -159,8 +153,6 @@
 		5A3F0A0D22418B2800AC0816 /* PlayFabAuthenticationInstanceApi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlayFabAuthenticationInstanceApi.cpp; path = ../../../code/source/playfab/PlayFabAuthenticationInstanceApi.cpp; sourceTree = "<group>"; };
 		5A3F0A0E22418B2800AC0816 /* PlayFabGroupsApi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlayFabGroupsApi.cpp; path = ../../../code/source/playfab/PlayFabGroupsApi.cpp; sourceTree = "<group>"; };
 		5A3F0A1022418B2900AC0816 /* PlayFabMatchmakerApi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlayFabMatchmakerApi.cpp; path = ../../../code/source/playfab/PlayFabMatchmakerApi.cpp; sourceTree = "<group>"; };
-		5A3F0A1122418B2900AC0816 /* OneDSEventPipeline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OneDSEventPipeline.cpp; path = ../../../code/source/playfab/OneDSEventPipeline.cpp; sourceTree = "<group>"; };
-		5A3F0A1222418B2900AC0816 /* OneDSEventsApi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OneDSEventsApi.cpp; path = ../../../code/source/playfab/OneDSEventsApi.cpp; sourceTree = "<group>"; };
 		5A3F0A1322418B2900AC0816 /* PlayFabEventsInstanceApi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlayFabEventsInstanceApi.cpp; path = ../../../code/source/playfab/PlayFabEventsInstanceApi.cpp; sourceTree = "<group>"; };
 		5A3F0A1422418B2900AC0816 /* PlayFabError.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlayFabError.cpp; path = ../../../code/source/playfab/PlayFabError.cpp; sourceTree = "<group>"; };
 		5A3F0A1522418B2900AC0816 /* PlayFabSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlayFabSettings.cpp; path = ../../../code/source/playfab/PlayFabSettings.cpp; sourceTree = "<group>"; };
@@ -174,10 +166,8 @@
 		5A3F0A2022418B2B00AC0816 /* PlayFabEventBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlayFabEventBuffer.cpp; path = ../../../code/source/playfab/PlayFabEventBuffer.cpp; sourceTree = "<group>"; };
 		5A3F0A2122418B2B00AC0816 /* PlayFabApiSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlayFabApiSettings.cpp; path = ../../../code/source/playfab/PlayFabApiSettings.cpp; sourceTree = "<group>"; };
 		5A3F0A2222418B2B00AC0816 /* PlayFabAdminApi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlayFabAdminApi.cpp; path = ../../../code/source/playfab/PlayFabAdminApi.cpp; sourceTree = "<group>"; };
-		5A3F0A552241924600AC0816 /* OneDSIOSHttpPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OneDSIOSHttpPlugin.h; path = ../../../code/include/playfab/OneDSIOSHttpPlugin.h; sourceTree = "<group>"; };
 		5A3F0A562241924600AC0816 /* PlayFabIOSHttpPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayFabIOSHttpPlugin.h; path = ../../../code/include/playfab/PlayFabIOSHttpPlugin.h; sourceTree = "<group>"; };
 		5A3F0A572241950F00AC0816 /* PlayFabIOSHttpPlugin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PlayFabIOSHttpPlugin.mm; path = ../../../code/source/playfab/PlayFabIOSHttpPlugin.mm; sourceTree = "<group>"; };
-		5A3F0A582241950F00AC0816 /* OneDSIOSHttpPlugin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = OneDSIOSHttpPlugin.mm; path = ../../../code/source/playfab/OneDSIOSHttpPlugin.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,11 +201,7 @@
 		5A3F095E22418AA000AC0816 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				5A3F0A552241924600AC0816 /* OneDSIOSHttpPlugin.h */,
 				5A3F0A562241924600AC0816 /* PlayFabIOSHttpPlugin.h */,
-				5A3F09CE22418B1600AC0816 /* OneDSEventPipeline.h */,
-				5A3F09B222418B1400AC0816 /* OneDSEventsApi.h */,
-				5A3F09C822418B1600AC0816 /* OneDSEventsDataModels.h */,
 				5A3F09B422418B1500AC0816 /* PlayFabAdminApi.h */,
 				5A3F09ED22418B1800AC0816 /* PlayFabAdminDataModels.h */,
 				5A3F09C922418B1600AC0816 /* PlayFabAdminInstanceApi.h */,
@@ -277,10 +263,7 @@
 		5A3F095F22418ABC00AC0816 /* source */ = {
 			isa = PBXGroup;
 			children = (
-				5A3F0A582241950F00AC0816 /* OneDSIOSHttpPlugin.mm */,
 				5A3F0A572241950F00AC0816 /* PlayFabIOSHttpPlugin.mm */,
-				5A3F0A1122418B2900AC0816 /* OneDSEventPipeline.cpp */,
-				5A3F0A1222418B2900AC0816 /* OneDSEventsApi.cpp */,
 				5A3F0A2222418B2B00AC0816 /* PlayFabAdminApi.cpp */,
 				5A3F0A0022418B2800AC0816 /* PlayFabAdminInstanceApi.cpp */,
 				5A3F0A2122418B2B00AC0816 /* PlayFabApiSettings.cpp */,
@@ -408,7 +391,6 @@
 			files = (
 				5A3F0A2522418B2B00AC0816 /* PlayFabClientInstanceApi.cpp in Sources */,
 				5A3F0A3022418B2B00AC0816 /* PlayFabEvent.cpp in Sources */,
-				5A3F0A4422418B2B00AC0816 /* OneDSEventsApi.cpp in Sources */,
 				5A3F0A3E22418B2B00AC0816 /* PlayFabCloudScriptApi.cpp in Sources */,
 				5A3F0A4022418B2B00AC0816 /* PlayFabGroupsApi.cpp in Sources */,
 				5A3F0A3922418B2B00AC0816 /* PlayFabQoSApi.cpp in Sources */,
@@ -441,11 +423,9 @@
 				5A3F0A2C22418B2B00AC0816 /* PlayFabServerApi.cpp in Sources */,
 				5A3F0A3522418B2B00AC0816 /* PlayFabLocalizationInstanceApi.cpp in Sources */,
 				5A3F0A2A22418B2B00AC0816 /* PlayFabSpinLock.cpp in Sources */,
-				5A3F0A4322418B2B00AC0816 /* OneDSEventPipeline.cpp in Sources */,
 				5A3F0A3D22418B2B00AC0816 /* PlayFabClientApi.cpp in Sources */,
 				5A3F0A4D22418B2B00AC0816 /* PlayFabEventsApi.cpp in Sources */,
 				5A3F0A3622418B2B00AC0816 /* PlayFabLocalizationApi.cpp in Sources */,
-				5A3F0A5A2241950F00AC0816 /* OneDSIOSHttpPlugin.mm in Sources */,
 				5A3F0A2622418B2B00AC0816 /* PlayFabDataInstanceApi.cpp in Sources */,
 				5A3F0A3722418B2B00AC0816 /* PlayFabCloudScriptInstanceApi.cpp in Sources */,
 				5A3F0A4722418B2B00AC0816 /* PlayFabSettings.cpp in Sources */,

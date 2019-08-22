@@ -30,22 +30,4 @@ namespace PlayFab
         std::shared_ptr<void> successCallback;
         ErrorCallback errorCallback;
     };
-
-#ifndef DISABLE_ONEDS_API
-    class OneDSCallRequestContainer : public CallRequestContainer
-    {
-    public:
-        OneDSCallRequestContainer(const std::unordered_map<std::string, std::string>& headers,
-            std::vector<uint8_t> requestBody,
-            CallRequestContainerCallback callback,
-            void* customData = nullptr,
-            std::shared_ptr<PlayFabApiSettings> apiSettings = nullptr):
-            CallRequestContainer("", headers, "", callback, customData, apiSettings),
-            requestBinaryBody(std::move(requestBody))
-        {
-        }
-
-        std::vector<uint8_t> requestBinaryBody;
-    };
-#endif
 }

@@ -12251,6 +12251,50 @@ namespace PlayFab
             }
         };
 
+        struct PurchaseReceiptFulfillment : public PlayFabBaseModel
+        {
+            std::list<ItemInstance> FulfilledItems;
+            std::string RecordedPriceSource;
+            std::string RecordedTransactionCurrency;
+            Boxed<Uint32> RecordedTransactionTotal;
+
+            PurchaseReceiptFulfillment() :
+                PlayFabBaseModel(),
+                FulfilledItems(),
+                RecordedPriceSource(),
+                RecordedTransactionCurrency(),
+                RecordedTransactionTotal()
+            {}
+
+            PurchaseReceiptFulfillment(const PurchaseReceiptFulfillment& src) :
+                PlayFabBaseModel(),
+                FulfilledItems(src.FulfilledItems),
+                RecordedPriceSource(src.RecordedPriceSource),
+                RecordedTransactionCurrency(src.RecordedTransactionCurrency),
+                RecordedTransactionTotal(src.RecordedTransactionTotal)
+            {}
+
+            ~PurchaseReceiptFulfillment() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilO(input["FulfilledItems"], FulfilledItems);
+                FromJsonUtilS(input["RecordedPriceSource"], RecordedPriceSource);
+                FromJsonUtilS(input["RecordedTransactionCurrency"], RecordedTransactionCurrency);
+                FromJsonUtilP(input["RecordedTransactionTotal"], RecordedTransactionTotal);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_FulfilledItems; ToJsonUtilO(FulfilledItems, each_FulfilledItems); output["FulfilledItems"] = each_FulfilledItems;
+                Json::Value each_RecordedPriceSource; ToJsonUtilS(RecordedPriceSource, each_RecordedPriceSource); output["RecordedPriceSource"] = each_RecordedPriceSource;
+                Json::Value each_RecordedTransactionCurrency; ToJsonUtilS(RecordedTransactionCurrency, each_RecordedTransactionCurrency); output["RecordedTransactionCurrency"] = each_RecordedTransactionCurrency;
+                Json::Value each_RecordedTransactionTotal; ToJsonUtilP(RecordedTransactionTotal, each_RecordedTransactionTotal); output["RecordedTransactionTotal"] = each_RecordedTransactionTotal;
+                return output;
+            }
+        };
+
         struct RedeemCouponRequest : public PlayFabRequestCommon
         {
             std::string CatalogVersion;
@@ -12875,15 +12919,18 @@ namespace PlayFab
 
         struct RestoreIOSPurchasesRequest : public PlayFabRequestCommon
         {
+            std::string CatalogVersion;
             std::string ReceiptData;
 
             RestoreIOSPurchasesRequest() :
                 PlayFabRequestCommon(),
+                CatalogVersion(),
                 ReceiptData()
             {}
 
             RestoreIOSPurchasesRequest(const RestoreIOSPurchasesRequest& src) :
                 PlayFabRequestCommon(),
+                CatalogVersion(src.CatalogVersion),
                 ReceiptData(src.ReceiptData)
             {}
 
@@ -12891,12 +12938,14 @@ namespace PlayFab
 
             void FromJson(Json::Value& input) override
             {
+                FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
                 FromJsonUtilS(input["ReceiptData"], ReceiptData);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CatalogVersion; ToJsonUtilS(CatalogVersion, each_CatalogVersion); output["CatalogVersion"] = each_CatalogVersion;
                 Json::Value each_ReceiptData; ToJsonUtilS(ReceiptData, each_ReceiptData); output["ReceiptData"] = each_ReceiptData;
                 return output;
             }
@@ -12904,24 +12953,29 @@ namespace PlayFab
 
         struct RestoreIOSPurchasesResult : public PlayFabResultCommon
         {
+            std::list<PurchaseReceiptFulfillment> Fulfillments;
 
             RestoreIOSPurchasesResult() :
-                PlayFabResultCommon()
+                PlayFabResultCommon(),
+                Fulfillments()
             {}
 
-            RestoreIOSPurchasesResult(const RestoreIOSPurchasesResult&) :
-                PlayFabResultCommon()
+            RestoreIOSPurchasesResult(const RestoreIOSPurchasesResult& src) :
+                PlayFabResultCommon(),
+                Fulfillments(src.Fulfillments)
             {}
 
             ~RestoreIOSPurchasesResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(Json::Value& input) override
             {
+                FromJsonUtilO(input["Fulfillments"], Fulfillments);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_Fulfillments; ToJsonUtilO(Fulfillments, each_Fulfillments); output["Fulfillments"] = each_Fulfillments;
                 return output;
             }
         };
@@ -14700,30 +14754,36 @@ namespace PlayFab
 
         struct ValidateAmazonReceiptResult : public PlayFabResultCommon
         {
+            std::list<PurchaseReceiptFulfillment> Fulfillments;
 
             ValidateAmazonReceiptResult() :
-                PlayFabResultCommon()
+                PlayFabResultCommon(),
+                Fulfillments()
             {}
 
-            ValidateAmazonReceiptResult(const ValidateAmazonReceiptResult&) :
-                PlayFabResultCommon()
+            ValidateAmazonReceiptResult(const ValidateAmazonReceiptResult& src) :
+                PlayFabResultCommon(),
+                Fulfillments(src.Fulfillments)
             {}
 
             ~ValidateAmazonReceiptResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(Json::Value& input) override
             {
+                FromJsonUtilO(input["Fulfillments"], Fulfillments);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_Fulfillments; ToJsonUtilO(Fulfillments, each_Fulfillments); output["Fulfillments"] = each_Fulfillments;
                 return output;
             }
         };
 
         struct ValidateGooglePlayPurchaseRequest : public PlayFabRequestCommon
         {
+            std::string CatalogVersion;
             std::string CurrencyCode;
             Boxed<Uint32> PurchasePrice;
             std::string ReceiptJson;
@@ -14731,6 +14791,7 @@ namespace PlayFab
 
             ValidateGooglePlayPurchaseRequest() :
                 PlayFabRequestCommon(),
+                CatalogVersion(),
                 CurrencyCode(),
                 PurchasePrice(),
                 ReceiptJson(),
@@ -14739,6 +14800,7 @@ namespace PlayFab
 
             ValidateGooglePlayPurchaseRequest(const ValidateGooglePlayPurchaseRequest& src) :
                 PlayFabRequestCommon(),
+                CatalogVersion(src.CatalogVersion),
                 CurrencyCode(src.CurrencyCode),
                 PurchasePrice(src.PurchasePrice),
                 ReceiptJson(src.ReceiptJson),
@@ -14749,6 +14811,7 @@ namespace PlayFab
 
             void FromJson(Json::Value& input) override
             {
+                FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
                 FromJsonUtilS(input["CurrencyCode"], CurrencyCode);
                 FromJsonUtilP(input["PurchasePrice"], PurchasePrice);
                 FromJsonUtilS(input["ReceiptJson"], ReceiptJson);
@@ -14758,6 +14821,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CatalogVersion; ToJsonUtilS(CatalogVersion, each_CatalogVersion); output["CatalogVersion"] = each_CatalogVersion;
                 Json::Value each_CurrencyCode; ToJsonUtilS(CurrencyCode, each_CurrencyCode); output["CurrencyCode"] = each_CurrencyCode;
                 Json::Value each_PurchasePrice; ToJsonUtilP(PurchasePrice, each_PurchasePrice); output["PurchasePrice"] = each_PurchasePrice;
                 Json::Value each_ReceiptJson; ToJsonUtilS(ReceiptJson, each_ReceiptJson); output["ReceiptJson"] = each_ReceiptJson;
@@ -14768,36 +14832,43 @@ namespace PlayFab
 
         struct ValidateGooglePlayPurchaseResult : public PlayFabResultCommon
         {
+            std::list<PurchaseReceiptFulfillment> Fulfillments;
 
             ValidateGooglePlayPurchaseResult() :
-                PlayFabResultCommon()
+                PlayFabResultCommon(),
+                Fulfillments()
             {}
 
-            ValidateGooglePlayPurchaseResult(const ValidateGooglePlayPurchaseResult&) :
-                PlayFabResultCommon()
+            ValidateGooglePlayPurchaseResult(const ValidateGooglePlayPurchaseResult& src) :
+                PlayFabResultCommon(),
+                Fulfillments(src.Fulfillments)
             {}
 
             ~ValidateGooglePlayPurchaseResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(Json::Value& input) override
             {
+                FromJsonUtilO(input["Fulfillments"], Fulfillments);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_Fulfillments; ToJsonUtilO(Fulfillments, each_Fulfillments); output["Fulfillments"] = each_Fulfillments;
                 return output;
             }
         };
 
         struct ValidateIOSReceiptRequest : public PlayFabRequestCommon
         {
+            std::string CatalogVersion;
             std::string CurrencyCode;
             Int32 PurchasePrice;
             std::string ReceiptData;
 
             ValidateIOSReceiptRequest() :
                 PlayFabRequestCommon(),
+                CatalogVersion(),
                 CurrencyCode(),
                 PurchasePrice(),
                 ReceiptData()
@@ -14805,6 +14876,7 @@ namespace PlayFab
 
             ValidateIOSReceiptRequest(const ValidateIOSReceiptRequest& src) :
                 PlayFabRequestCommon(),
+                CatalogVersion(src.CatalogVersion),
                 CurrencyCode(src.CurrencyCode),
                 PurchasePrice(src.PurchasePrice),
                 ReceiptData(src.ReceiptData)
@@ -14814,6 +14886,7 @@ namespace PlayFab
 
             void FromJson(Json::Value& input) override
             {
+                FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
                 FromJsonUtilS(input["CurrencyCode"], CurrencyCode);
                 FromJsonUtilP(input["PurchasePrice"], PurchasePrice);
                 FromJsonUtilS(input["ReceiptData"], ReceiptData);
@@ -14822,6 +14895,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CatalogVersion; ToJsonUtilS(CatalogVersion, each_CatalogVersion); output["CatalogVersion"] = each_CatalogVersion;
                 Json::Value each_CurrencyCode; ToJsonUtilS(CurrencyCode, each_CurrencyCode); output["CurrencyCode"] = each_CurrencyCode;
                 Json::Value each_PurchasePrice; ToJsonUtilP(PurchasePrice, each_PurchasePrice); output["PurchasePrice"] = each_PurchasePrice;
                 Json::Value each_ReceiptData; ToJsonUtilS(ReceiptData, each_ReceiptData); output["ReceiptData"] = each_ReceiptData;
@@ -14831,24 +14905,29 @@ namespace PlayFab
 
         struct ValidateIOSReceiptResult : public PlayFabResultCommon
         {
+            std::list<PurchaseReceiptFulfillment> Fulfillments;
 
             ValidateIOSReceiptResult() :
-                PlayFabResultCommon()
+                PlayFabResultCommon(),
+                Fulfillments()
             {}
 
-            ValidateIOSReceiptResult(const ValidateIOSReceiptResult&) :
-                PlayFabResultCommon()
+            ValidateIOSReceiptResult(const ValidateIOSReceiptResult& src) :
+                PlayFabResultCommon(),
+                Fulfillments(src.Fulfillments)
             {}
 
             ~ValidateIOSReceiptResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(Json::Value& input) override
             {
+                FromJsonUtilO(input["Fulfillments"], Fulfillments);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_Fulfillments; ToJsonUtilO(Fulfillments, each_Fulfillments); output["Fulfillments"] = each_Fulfillments;
                 return output;
             }
         };
@@ -14899,24 +14978,29 @@ namespace PlayFab
 
         struct ValidateWindowsReceiptResult : public PlayFabResultCommon
         {
+            std::list<PurchaseReceiptFulfillment> Fulfillments;
 
             ValidateWindowsReceiptResult() :
-                PlayFabResultCommon()
+                PlayFabResultCommon(),
+                Fulfillments()
             {}
 
-            ValidateWindowsReceiptResult(const ValidateWindowsReceiptResult&) :
-                PlayFabResultCommon()
+            ValidateWindowsReceiptResult(const ValidateWindowsReceiptResult& src) :
+                PlayFabResultCommon(),
+                Fulfillments(src.Fulfillments)
             {}
 
             ~ValidateWindowsReceiptResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(Json::Value& input) override
             {
+                FromJsonUtilO(input["Fulfillments"], Fulfillments);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_Fulfillments; ToJsonUtilO(Fulfillments, each_Fulfillments); output["Fulfillments"] = each_Fulfillments;
                 return output;
             }
         };

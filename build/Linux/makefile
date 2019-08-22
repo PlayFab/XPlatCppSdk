@@ -59,9 +59,6 @@ OBJS = stdafx.o \
 	PlayFabEventPipeline.o \
 	PlayFabEventRouter.o \
 	PlayFabSpinLock.o \
-	OneDSCurlHttpPlugin.o \
-	OneDSEventsApi.o \
-	OneDSEventPipeline.o \
 	RegionResult.o \
 	PlayFabQoSApi.o \
 	QoSSocket.o \

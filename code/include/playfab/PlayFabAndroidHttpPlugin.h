@@ -58,12 +58,6 @@ namespace PlayFab
             {
                 return *dynamic_cast<CallRequestContainer*>(requestContainer.get());
             }
-#ifndef DISABLE_ONEDS_API
-            OneDSCallRequestContainer& OneDSRequestContainer()
-            {
-                return *dynamic_cast<OneDSCallRequestContainer*>(requestContainer.get());
-            }
-#endif
             std::atomic<State> state;
             std::unique_ptr<CallRequestContainerBase> requestContainer;
             std::unique_ptr<PlayFabAndroidHttpPlugin::RequestImpl> impl;

@@ -12,6 +12,12 @@
 
 namespace PlayFab
 {
+    enum class PlayFabEventPipelineType
+    {
+        PlayFabPlayStream,
+        PlayFabTelemetry,
+    };
+
     /// <summary>
     /// Settings for any event pipeline
     /// </summary>
@@ -19,6 +25,7 @@ namespace PlayFab
     {
     public:
         PlayFabEventPipelineSettings();
+        PlayFabEventPipelineSettings(PlayFabEventPipelineType emitType);
         virtual ~PlayFabEventPipelineSettings() {};
 
         size_t bufferSize; // The minimal size of buffer, in bytes. The actually allocated size will be a power of 2 that is equal or greater than this value.
@@ -28,6 +35,7 @@ namespace PlayFab
         size_t maximalNumberOfBatchesInFlight; // The maximal number of batches currently "in flight" (sent to a transport plugin).
         int64_t readBufferWaitTime; // The wait time between attempts to read events from buffer when it is empty, in milliseconds.
         std::shared_ptr<PlayFabAuthenticationContext> authenticationContext; // The optional PlayFab authentication context that can be used with static PlayFab events API
+        PlayFabEventPipelineType emitType; // whether we call WriteEvent or WriteTelemetryEvent through PlayFab
     };
 
     /// <summary>

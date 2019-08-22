@@ -172,7 +172,7 @@ namespace PlayFabUnit
         eventApi = std::make_shared<PlayFabEventAPI*>(new PlayFabEventAPI()); // create Event API instance
 
         // adjust some pipeline settings
-        auto pipeline = std::dynamic_pointer_cast<PlayFab::PlayFabEventPipeline>((*eventApi)->GetEventRouter()->GetPipelines().at(PlayFab::EventPipelineKey::PlayFab)); // get PF pipeline
+        auto pipeline = std::dynamic_pointer_cast<PlayFab::PlayFabEventPipeline>((*eventApi)->GetEventRouter()->GetPipelines().at(PlayFab::EventPipelineKey::PlayFabPlayStream)); // get PF pipeline
         auto settings = pipeline->GetSettings(); // get pipeline's settings
         settings->maximalBatchWaitTime = 4; // incomplete batch expiration in seconds
         settings->maximalNumberOfItemsInBatch = 4; // number of events in a batch
@@ -182,7 +182,7 @@ namespace PlayFabUnit
     }
 
     /// EVENTS API
-    /// OneDS lightweight events (emitted individually
+    /// non-PlayStream lightweight events (emitted individually
     ///   and processed in a background thread using event pipeline (router, batching, etc))
     void PlayFabEventTest::LightweightEvents(TestContext& testContext)
     {
@@ -192,67 +192,13 @@ namespace PlayFabUnit
         eventApi = std::make_shared<PlayFabEventAPI*>(new PlayFabEventAPI()); // create Event API instance
 
         // adjust some pipeline settings
-        auto pipeline = std::dynamic_pointer_cast<PlayFab::PlayFabEventPipeline>((*eventApi)->GetEventRouter()->GetPipelines().at(PlayFab::EventPipelineKey::OneDS)); // get OneDS pipeline
+        auto pipeline = std::dynamic_pointer_cast<PlayFab::PlayFabEventPipeline>((*eventApi)->GetEventRouter()->GetPipelines().at(PlayFab::EventPipelineKey::PlayFabTelemetry)); // get non-playstream pipeline
         auto settings = pipeline->GetSettings(); // get pipeline's settings
         settings->maximalBatchWaitTime = 2; // incomplete batch expiration in seconds
         settings->maximalNumberOfItemsInBatch = 3; // number of events in a batch
         settings->maximalNumberOfBatchesInFlight = 10; // maximal number of batches processed simultaneously by a transport plugin before taking next events from the buffer
 
         EmitEvents(PlayFab::PlayFabEventType::Lightweight);
-    }
-
-    /// EVENTS API
-    /// OneDS Events API (lightweight events sent as a whole batch)
-    void PlayFabEventTest::OneDSEventsApi(TestContext& testContext)
-    {
-        TelemetryIngestionConfigRequest configRequest;
-
-        PlayFab::OneDSEventsAPI::GetTelemetryIngestionConfig(configRequest,
-            Callback(&PlayFabEventTest::OnGetTelemetryIngestionConfig),
-            Callback(&PlayFabEventTest::OnGetTelemetryIngestionConfigFail),
-            &testContext);
-    }
-    void PlayFabEventTest::OnGetTelemetryIngestionConfig(const TelemetryIngestionConfigResponse& result, void* customData)
-    {
-        // create OneDS Events API instance
-        PlayFab::OneDSEventsAPI api;
-        api.SetCredentials("o:" + result.TenantId,
-            result.IngestionKey,
-            result.TelemetryJwtToken,
-            result.TelemetryJwtHeaderKey,
-            result.TelemetryJwtHeaderPrefix);
-
-        // Prepare a batch of events
-        PlayFab::EventsModels::WriteEventsRequest req;
-        for (int j = 0; j < 5; j++)
-        {
-            for (int i = 0; i < 2; i++)
-            {
-                req.Events.push_back(CreateEventContents("event_AA_", i));
-                req.Events.push_back(CreateEventContents("event_BB_", i));
-            }
-        }
-
-        // Send the batch
-        api.WriteTelemetryEvents(req,
-            Callback(&PlayFabEventTest::OnOneDSWriteTelemetryEvents),
-            Callback(&PlayFabEventTest::OnOneDSWriteTelemetryEventsFail),
-            customData);
-    }
-    void PlayFabEventTest::OnGetTelemetryIngestionConfigFail(const PlayFabError& error, void* customData)
-    {
-        TestContext* testContext = reinterpret_cast<TestContext*>(customData);
-        testContext->Fail("GetTelemetryIngestionConfig Failed : " + error.GenerateErrorReport());
-    }
-    void PlayFabEventTest::OnOneDSWriteTelemetryEvents(const WriteEventsResponse&, void* customData)
-    {
-        TestContext* testContext = reinterpret_cast<TestContext*>(customData);
-        testContext->Pass();
-    }
-    void PlayFabEventTest::OnOneDSWriteTelemetryEventsFail(const PlayFabError& error, void* customData)
-    {
-        TestContext* testContext = reinterpret_cast<TestContext*>(customData);
-        testContext->Fail("OneDS WriteTelemetryEvents Failed : " + error.GenerateErrorReport());
     }
 
     void PlayFabEventTest::AddTests()
@@ -264,7 +210,6 @@ namespace PlayFabUnit
         AddTest("EventsApi", &PlayFabEventTest::EventsApi);
         AddTest("HeavyweightEvents", &PlayFabEventTest::HeavyweightEvents);
         AddTest("LightweightEvents", &PlayFabEventTest::LightweightEvents);
-        AddTest("OneDSEventsApi", &PlayFabEventTest::OneDSEventsApi);
     }
 
     void PlayFabEventTest::ClassSetUp()

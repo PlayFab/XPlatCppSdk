@@ -420,7 +420,7 @@ namespace PlayFab
         {
             Boxed<CurrentServerStats> pfCurrentServerStats;
             Int32 MaxServers;
-            Boxed<AzureRegion> Region;
+            std::string Region;
             Int32 StandbyServers;
             std::string Status;
 
@@ -448,7 +448,7 @@ namespace PlayFab
             {
                 FromJsonUtilO(input["CurrentServerStats"], pfCurrentServerStats);
                 FromJsonUtilP(input["MaxServers"], MaxServers);
-                FromJsonUtilE(input["Region"], Region);
+                FromJsonUtilS(input["Region"], Region);
                 FromJsonUtilP(input["StandbyServers"], StandbyServers);
                 FromJsonUtilS(input["Status"], Status);
             }
@@ -458,7 +458,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_pfCurrentServerStats; ToJsonUtilO(pfCurrentServerStats, each_pfCurrentServerStats); output["CurrentServerStats"] = each_pfCurrentServerStats;
                 Json::Value each_MaxServers; ToJsonUtilP(MaxServers, each_MaxServers); output["MaxServers"] = each_MaxServers;
-                Json::Value each_Region; ToJsonUtilE(Region, each_Region); output["Region"] = each_Region;
+                Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
                 Json::Value each_StandbyServers; ToJsonUtilP(StandbyServers, each_StandbyServers); output["StandbyServers"] = each_StandbyServers;
                 Json::Value each_Status; ToJsonUtilS(Status, each_Status); output["Status"] = each_Status;
                 return output;
@@ -468,7 +468,7 @@ namespace PlayFab
         struct BuildRegionParams : public PlayFabBaseModel
         {
             Int32 MaxServers;
-            AzureRegion Region;
+            std::string Region;
             Int32 StandbyServers;
 
             BuildRegionParams() :
@@ -490,7 +490,7 @@ namespace PlayFab
             void FromJson(Json::Value& input) override
             {
                 FromJsonUtilP(input["MaxServers"], MaxServers);
-                FromJsonEnum(input["Region"], Region);
+                FromJsonUtilS(input["Region"], Region);
                 FromJsonUtilP(input["StandbyServers"], StandbyServers);
             }
 
@@ -498,7 +498,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_MaxServers; ToJsonUtilP(MaxServers, each_MaxServers); output["MaxServers"] = each_MaxServers;
-                Json::Value each_Region; ToJsonEnum(Region, each_Region); output["Region"] = each_Region;
+                Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
                 Json::Value each_StandbyServers; ToJsonUtilP(StandbyServers, each_StandbyServers); output["StandbyServers"] = each_StandbyServers;
                 return output;
             }
@@ -842,7 +842,7 @@ namespace PlayFab
         struct CoreCapacity : public PlayFabBaseModel
         {
             Int32 Available;
-            Boxed<AzureRegion> Region;
+            std::string Region;
             Int32 Total;
             Boxed<AzureVmFamily> VmFamily;
 
@@ -867,7 +867,7 @@ namespace PlayFab
             void FromJson(Json::Value& input) override
             {
                 FromJsonUtilP(input["Available"], Available);
-                FromJsonUtilE(input["Region"], Region);
+                FromJsonUtilS(input["Region"], Region);
                 FromJsonUtilP(input["Total"], Total);
                 FromJsonUtilE(input["VmFamily"], VmFamily);
             }
@@ -876,7 +876,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_Available; ToJsonUtilP(Available, each_Available); output["Available"] = each_Available;
-                Json::Value each_Region; ToJsonUtilE(Region, each_Region); output["Region"] = each_Region;
+                Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
                 Json::Value each_Total; ToJsonUtilP(Total, each_Total); output["Total"] = each_Total;
                 Json::Value each_VmFamily; ToJsonUtilE(VmFamily, each_VmFamily); output["VmFamily"] = each_VmFamily;
                 return output;
@@ -1461,7 +1461,7 @@ namespace PlayFab
         {
             std::string BuildId;
             Boxed<time_t> ExpirationTime;
-            AzureRegion Region;
+            std::string Region;
             std::string Username;
             std::string VmId;
 
@@ -1489,7 +1489,7 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["BuildId"], BuildId);
                 FromJsonUtilT(input["ExpirationTime"], ExpirationTime);
-                FromJsonEnum(input["Region"], Region);
+                FromJsonUtilS(input["Region"], Region);
                 FromJsonUtilS(input["Username"], Username);
                 FromJsonUtilS(input["VmId"], VmId);
             }
@@ -1499,7 +1499,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
                 Json::Value each_ExpirationTime; ToJsonUtilT(ExpirationTime, each_ExpirationTime); output["ExpirationTime"] = each_ExpirationTime;
-                Json::Value each_Region; ToJsonEnum(Region, each_Region); output["Region"] = each_Region;
+                Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
                 Json::Value each_Username; ToJsonUtilS(Username, each_Username); output["Username"] = each_Username;
                 Json::Value each_VmId; ToJsonUtilS(VmId, each_VmId); output["VmId"] = each_VmId;
                 return output;
@@ -1674,7 +1674,7 @@ namespace PlayFab
         struct DeleteRemoteUserRequest : public PlayFabRequestCommon
         {
             std::string BuildId;
-            AzureRegion Region;
+            std::string Region;
             std::string Username;
             std::string VmId;
 
@@ -1699,7 +1699,7 @@ namespace PlayFab
             void FromJson(Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildId"], BuildId);
-                FromJsonEnum(input["Region"], Region);
+                FromJsonUtilS(input["Region"], Region);
                 FromJsonUtilS(input["Username"], Username);
                 FromJsonUtilS(input["VmId"], VmId);
             }
@@ -1708,7 +1708,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
-                Json::Value each_Region; ToJsonEnum(Region, each_Region); output["Region"] = each_Region;
+                Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
                 Json::Value each_Username; ToJsonUtilS(Username, each_Username); output["Username"] = each_Username;
                 Json::Value each_VmId; ToJsonUtilS(VmId, each_VmId); output["VmId"] = each_VmId;
                 return output;
@@ -2333,7 +2333,7 @@ namespace PlayFab
         struct GetMultiplayerServerDetailsRequest : public PlayFabRequestCommon
         {
             std::string BuildId;
-            AzureRegion Region;
+            std::string Region;
             std::string SessionId;
 
             GetMultiplayerServerDetailsRequest() :
@@ -2355,7 +2355,7 @@ namespace PlayFab
             void FromJson(Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildId"], BuildId);
-                FromJsonEnum(input["Region"], Region);
+                FromJsonUtilS(input["Region"], Region);
                 FromJsonUtilS(input["SessionId"], SessionId);
             }
 
@@ -2363,7 +2363,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
-                Json::Value each_Region; ToJsonEnum(Region, each_Region); output["Region"] = each_Region;
+                Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
                 Json::Value each_SessionId; ToJsonUtilS(SessionId, each_SessionId); output["SessionId"] = each_SessionId;
                 return output;
             }
@@ -2376,7 +2376,7 @@ namespace PlayFab
             std::string IPV4Address;
             Boxed<time_t> LastStateTransitionTime;
             std::list<Port> Ports;
-            Boxed<AzureRegion> Region;
+            std::string Region;
             std::string ServerId;
             std::string SessionId;
             std::string State;
@@ -2419,7 +2419,7 @@ namespace PlayFab
                 FromJsonUtilS(input["IPV4Address"], IPV4Address);
                 FromJsonUtilT(input["LastStateTransitionTime"], LastStateTransitionTime);
                 FromJsonUtilO(input["Ports"], Ports);
-                FromJsonUtilE(input["Region"], Region);
+                FromJsonUtilS(input["Region"], Region);
                 FromJsonUtilS(input["ServerId"], ServerId);
                 FromJsonUtilS(input["SessionId"], SessionId);
                 FromJsonUtilS(input["State"], State);
@@ -2434,7 +2434,7 @@ namespace PlayFab
                 Json::Value each_IPV4Address; ToJsonUtilS(IPV4Address, each_IPV4Address); output["IPV4Address"] = each_IPV4Address;
                 Json::Value each_LastStateTransitionTime; ToJsonUtilT(LastStateTransitionTime, each_LastStateTransitionTime); output["LastStateTransitionTime"] = each_LastStateTransitionTime;
                 Json::Value each_Ports; ToJsonUtilO(Ports, each_Ports); output["Ports"] = each_Ports;
-                Json::Value each_Region; ToJsonUtilE(Region, each_Region); output["Region"] = each_Region;
+                Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
                 Json::Value each_ServerId; ToJsonUtilS(ServerId, each_ServerId); output["ServerId"] = each_ServerId;
                 Json::Value each_SessionId; ToJsonUtilS(SessionId, each_SessionId); output["SessionId"] = each_SessionId;
                 Json::Value each_State; ToJsonUtilS(State, each_State); output["State"] = each_State;
@@ -2553,7 +2553,7 @@ namespace PlayFab
         struct GetRemoteLoginEndpointRequest : public PlayFabRequestCommon
         {
             std::string BuildId;
-            AzureRegion Region;
+            std::string Region;
             std::string VmId;
 
             GetRemoteLoginEndpointRequest() :
@@ -2575,7 +2575,7 @@ namespace PlayFab
             void FromJson(Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildId"], BuildId);
-                FromJsonEnum(input["Region"], Region);
+                FromJsonUtilS(input["Region"], Region);
                 FromJsonUtilS(input["VmId"], VmId);
             }
 
@@ -2583,7 +2583,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
-                Json::Value each_Region; ToJsonEnum(Region, each_Region); output["Region"] = each_Region;
+                Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
                 Json::Value each_VmId; ToJsonUtilS(VmId, each_VmId); output["VmId"] = each_VmId;
                 return output;
             }
@@ -3238,7 +3238,7 @@ namespace PlayFab
         {
             std::string BuildId;
             Boxed<Int32> PageSize;
-            AzureRegion Region;
+            std::string Region;
             std::string SkipToken;
 
             ListMultiplayerServersRequest() :
@@ -3263,7 +3263,7 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["BuildId"], BuildId);
                 FromJsonUtilP(input["PageSize"], PageSize);
-                FromJsonEnum(input["Region"], Region);
+                FromJsonUtilS(input["Region"], Region);
                 FromJsonUtilS(input["SkipToken"], SkipToken);
             }
 
@@ -3272,7 +3272,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
                 Json::Value each_PageSize; ToJsonUtilP(PageSize, each_PageSize); output["PageSize"] = each_PageSize;
-                Json::Value each_Region; ToJsonEnum(Region, each_Region); output["Region"] = each_Region;
+                Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
                 Json::Value each_SkipToken; ToJsonUtilS(SkipToken, each_SkipToken); output["SkipToken"] = each_SkipToken;
                 return output;
             }
@@ -3282,7 +3282,7 @@ namespace PlayFab
         {
             std::list<ConnectedPlayer> ConnectedPlayers;
             Boxed<time_t> LastStateTransitionTime;
-            Boxed<AzureRegion> Region;
+            std::string Region;
             std::string ServerId;
             std::string SessionId;
             std::string State;
@@ -3316,7 +3316,7 @@ namespace PlayFab
             {
                 FromJsonUtilO(input["ConnectedPlayers"], ConnectedPlayers);
                 FromJsonUtilT(input["LastStateTransitionTime"], LastStateTransitionTime);
-                FromJsonUtilE(input["Region"], Region);
+                FromJsonUtilS(input["Region"], Region);
                 FromJsonUtilS(input["ServerId"], ServerId);
                 FromJsonUtilS(input["SessionId"], SessionId);
                 FromJsonUtilS(input["State"], State);
@@ -3328,7 +3328,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_ConnectedPlayers; ToJsonUtilO(ConnectedPlayers, each_ConnectedPlayers); output["ConnectedPlayers"] = each_ConnectedPlayers;
                 Json::Value each_LastStateTransitionTime; ToJsonUtilT(LastStateTransitionTime, each_LastStateTransitionTime); output["LastStateTransitionTime"] = each_LastStateTransitionTime;
-                Json::Value each_Region; ToJsonUtilE(Region, each_Region); output["Region"] = each_Region;
+                Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
                 Json::Value each_ServerId; ToJsonUtilS(ServerId, each_ServerId); output["ServerId"] = each_ServerId;
                 Json::Value each_SessionId; ToJsonUtilS(SessionId, each_SessionId); output["SessionId"] = each_SessionId;
                 Json::Value each_State; ToJsonUtilS(State, each_State); output["State"] = each_State;
@@ -3376,6 +3376,108 @@ namespace PlayFab
             }
         };
 
+        struct ListPartyQosServersRequest : public PlayFabRequestCommon
+        {
+            std::string Version;
+
+            ListPartyQosServersRequest() :
+                PlayFabRequestCommon(),
+                Version()
+            {}
+
+            ListPartyQosServersRequest(const ListPartyQosServersRequest& src) :
+                PlayFabRequestCommon(),
+                Version(src.Version)
+            {}
+
+            ~ListPartyQosServersRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["Version"], Version);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Version; ToJsonUtilS(Version, each_Version); output["Version"] = each_Version;
+                return output;
+            }
+        };
+
+        struct QosServer : public PlayFabBaseModel
+        {
+            std::string Region;
+            std::string ServerUrl;
+
+            QosServer() :
+                PlayFabBaseModel(),
+                Region(),
+                ServerUrl()
+            {}
+
+            QosServer(const QosServer& src) :
+                PlayFabBaseModel(),
+                Region(src.Region),
+                ServerUrl(src.ServerUrl)
+            {}
+
+            ~QosServer() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["Region"], Region);
+                FromJsonUtilS(input["ServerUrl"], ServerUrl);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
+                Json::Value each_ServerUrl; ToJsonUtilS(ServerUrl, each_ServerUrl); output["ServerUrl"] = each_ServerUrl;
+                return output;
+            }
+        };
+
+        struct ListPartyQosServersResponse : public PlayFabResultCommon
+        {
+            Int32 PageSize;
+            std::list<QosServer> QosServers;
+            std::string SkipToken;
+
+            ListPartyQosServersResponse() :
+                PlayFabResultCommon(),
+                PageSize(),
+                QosServers(),
+                SkipToken()
+            {}
+
+            ListPartyQosServersResponse(const ListPartyQosServersResponse& src) :
+                PlayFabResultCommon(),
+                PageSize(src.PageSize),
+                QosServers(src.QosServers),
+                SkipToken(src.SkipToken)
+            {}
+
+            ~ListPartyQosServersResponse() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilP(input["PageSize"], PageSize);
+                FromJsonUtilO(input["QosServers"], QosServers);
+                FromJsonUtilS(input["SkipToken"], SkipToken);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_PageSize; ToJsonUtilP(PageSize, each_PageSize); output["PageSize"] = each_PageSize;
+                Json::Value each_QosServers; ToJsonUtilO(QosServers, each_QosServers); output["QosServers"] = each_QosServers;
+                Json::Value each_SkipToken; ToJsonUtilS(SkipToken, each_SkipToken); output["SkipToken"] = each_SkipToken;
+                return output;
+            }
+        };
+
         struct ListQosServersRequest : public PlayFabRequestCommon
         {
 
@@ -3396,40 +3498,6 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                return output;
-            }
-        };
-
-        struct QosServer : public PlayFabBaseModel
-        {
-            Boxed<AzureRegion> Region;
-            std::string ServerUrl;
-
-            QosServer() :
-                PlayFabBaseModel(),
-                Region(),
-                ServerUrl()
-            {}
-
-            QosServer(const QosServer& src) :
-                PlayFabBaseModel(),
-                Region(src.Region),
-                ServerUrl(src.ServerUrl)
-            {}
-
-            ~QosServer() = default;
-
-            void FromJson(Json::Value& input) override
-            {
-                FromJsonUtilE(input["Region"], Region);
-                FromJsonUtilS(input["ServerUrl"], ServerUrl);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_Region; ToJsonUtilE(Region, each_Region); output["Region"] = each_Region;
-                Json::Value each_ServerUrl; ToJsonUtilS(ServerUrl, each_ServerUrl); output["ServerUrl"] = each_ServerUrl;
                 return output;
             }
         };
@@ -3477,7 +3545,7 @@ namespace PlayFab
         {
             std::string BuildId;
             Boxed<Int32> PageSize;
-            AzureRegion Region;
+            std::string Region;
             std::string SkipToken;
 
             ListVirtualMachineSummariesRequest() :
@@ -3502,7 +3570,7 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["BuildId"], BuildId);
                 FromJsonUtilP(input["PageSize"], PageSize);
-                FromJsonEnum(input["Region"], Region);
+                FromJsonUtilS(input["Region"], Region);
                 FromJsonUtilS(input["SkipToken"], SkipToken);
             }
 
@@ -3511,7 +3579,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
                 Json::Value each_PageSize; ToJsonUtilP(PageSize, each_PageSize); output["PageSize"] = each_PageSize;
-                Json::Value each_Region; ToJsonEnum(Region, each_Region); output["Region"] = each_Region;
+                Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
                 Json::Value each_SkipToken; ToJsonUtilS(SkipToken, each_SkipToken); output["SkipToken"] = each_SkipToken;
                 return output;
             }
@@ -3599,7 +3667,7 @@ namespace PlayFab
         {
             std::string BuildId;
             std::list<std::string> InitialPlayers;
-            std::list<AzureRegion> PreferredRegions;
+            std::list<std::string> PreferredRegions;
             std::string SessionCookie;
             std::string SessionId;
 
@@ -3627,7 +3695,7 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["BuildId"], BuildId);
                 FromJsonUtilS(input["InitialPlayers"], InitialPlayers);
-                FromJsonUtilE(input["PreferredRegions"], PreferredRegions);
+                FromJsonUtilS(input["PreferredRegions"], PreferredRegions);
                 FromJsonUtilS(input["SessionCookie"], SessionCookie);
                 FromJsonUtilS(input["SessionId"], SessionId);
             }
@@ -3637,7 +3705,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
                 Json::Value each_InitialPlayers; ToJsonUtilS(InitialPlayers, each_InitialPlayers); output["InitialPlayers"] = each_InitialPlayers;
-                Json::Value each_PreferredRegions; ToJsonUtilE(PreferredRegions, each_PreferredRegions); output["PreferredRegions"] = each_PreferredRegions;
+                Json::Value each_PreferredRegions; ToJsonUtilS(PreferredRegions, each_PreferredRegions); output["PreferredRegions"] = each_PreferredRegions;
                 Json::Value each_SessionCookie; ToJsonUtilS(SessionCookie, each_SessionCookie); output["SessionCookie"] = each_SessionCookie;
                 Json::Value each_SessionId; ToJsonUtilS(SessionId, each_SessionId); output["SessionId"] = each_SessionId;
                 return output;
@@ -3651,7 +3719,7 @@ namespace PlayFab
             std::string IPV4Address;
             Boxed<time_t> LastStateTransitionTime;
             std::list<Port> Ports;
-            Boxed<AzureRegion> Region;
+            std::string Region;
             std::string ServerId;
             std::string SessionId;
             std::string State;
@@ -3694,7 +3762,7 @@ namespace PlayFab
                 FromJsonUtilS(input["IPV4Address"], IPV4Address);
                 FromJsonUtilT(input["LastStateTransitionTime"], LastStateTransitionTime);
                 FromJsonUtilO(input["Ports"], Ports);
-                FromJsonUtilE(input["Region"], Region);
+                FromJsonUtilS(input["Region"], Region);
                 FromJsonUtilS(input["ServerId"], ServerId);
                 FromJsonUtilS(input["SessionId"], SessionId);
                 FromJsonUtilS(input["State"], State);
@@ -3709,7 +3777,7 @@ namespace PlayFab
                 Json::Value each_IPV4Address; ToJsonUtilS(IPV4Address, each_IPV4Address); output["IPV4Address"] = each_IPV4Address;
                 Json::Value each_LastStateTransitionTime; ToJsonUtilT(LastStateTransitionTime, each_LastStateTransitionTime); output["LastStateTransitionTime"] = each_LastStateTransitionTime;
                 Json::Value each_Ports; ToJsonUtilO(Ports, each_Ports); output["Ports"] = each_Ports;
-                Json::Value each_Region; ToJsonUtilE(Region, each_Region); output["Region"] = each_Region;
+                Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
                 Json::Value each_ServerId; ToJsonUtilS(ServerId, each_ServerId); output["ServerId"] = each_ServerId;
                 Json::Value each_SessionId; ToJsonUtilS(SessionId, each_SessionId); output["SessionId"] = each_SessionId;
                 Json::Value each_State; ToJsonUtilS(State, each_State); output["State"] = each_State;
@@ -3784,7 +3852,7 @@ namespace PlayFab
         struct ShutdownMultiplayerServerRequest : public PlayFabRequestCommon
         {
             std::string BuildId;
-            AzureRegion Region;
+            std::string Region;
             std::string SessionId;
 
             ShutdownMultiplayerServerRequest() :
@@ -3806,7 +3874,7 @@ namespace PlayFab
             void FromJson(Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildId"], BuildId);
-                FromJsonEnum(input["Region"], Region);
+                FromJsonUtilS(input["Region"], Region);
                 FromJsonUtilS(input["SessionId"], SessionId);
             }
 
@@ -3814,7 +3882,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
-                Json::Value each_Region; ToJsonEnum(Region, each_Region); output["Region"] = each_Region;
+                Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
                 Json::Value each_SessionId; ToJsonUtilS(SessionId, each_SessionId); output["SessionId"] = each_SessionId;
                 return output;
             }

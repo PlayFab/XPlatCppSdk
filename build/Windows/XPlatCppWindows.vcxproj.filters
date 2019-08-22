@@ -26,15 +26,6 @@
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabPlatformMacros.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
-    <ClInclude Include="$(SdkSourceDir)\include\playfab\OneDSWinHttpPlugin.h">
-      <Filter>Header Files\playfab</Filter>
-    </ClInclude>
-    <ClInclude Include="$(SdkSourceDir)\include\playfab\OneDSEventsApi.h">
-      <Filter>Header Files\playfab</Filter>
-    </ClInclude>
-    <ClInclude Include="$(SdkSourceDir)\include\playfab\OneDSEventPipeline.h">
-      <Filter>Header Files\playfab</Filter>
-    </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabAuthenticationContext.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
@@ -173,9 +164,6 @@
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabPluginManager.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
-    <ClInclude Include="$(SdkSourceDir)\include\playfab\OneDSEventsDataModels.h">
-      <Filter>Header Files\playfab</Filter>
-    </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEvent.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
@@ -223,15 +211,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(SdkSourceDir)\source\playfab\OneDSWinHttpPlugin.cpp">
-      <Filter>Source Files\playfab</Filter>
-    </ClCompile>
-    <ClCompile Include="$(SdkSourceDir)\source\playfab\OneDSEventsApi.cpp">
-      <Filter>Source Files\playfab</Filter>
-    </ClCompile>
-    <ClCompile Include="$(SdkSourceDir)\source\playfab\OneDSEventPipeline.cpp">
-      <Filter>Source Files\playfab</Filter>
-    </ClCompile>
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabAuthenticationContext.cpp">
       <Filter>Source Files\playfab</Filter>
     </ClCompile>

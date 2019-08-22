@@ -40,17 +40,9 @@ namespace PlayFabUnit
             void HeavyweightEvents(TestContext& testContext);
 
             /// EVENTS API
-            /// OneDS lightweight events (emitted individually
+            /// Non-PlayStream, lightweight events (emitted individually
             ///   and processed in a background thread using event pipeline (router, batching, etc))
             void LightweightEvents(TestContext& testContext);
-
-            /// EVENTS API
-            /// OneDS Events API (lightweight events sent as a whole batch)
-            void OneDSEventsApi(TestContext& testContext);
-            void OnGetTelemetryIngestionConfig(const PlayFab::EventsModels::TelemetryIngestionConfigResponse& result, void* customData);
-            void OnGetTelemetryIngestionConfigFail(const PlayFab::PlayFabError& error, void* customData);
-            void OnOneDSWriteTelemetryEvents(const PlayFab::EventsModels::WriteEventsResponse&, void* customData);
-            void OnOneDSWriteTelemetryEventsFail(const PlayFab::PlayFabError& error, void* customData);
 
             // State
             bool loggedIn;

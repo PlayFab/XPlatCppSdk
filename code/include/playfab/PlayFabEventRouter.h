@@ -4,7 +4,6 @@
 
 #include <playfab/PlayFabEvent.h>
 #include <playfab/PlayFabEventPipeline.h>
-#include <playfab/OneDSEventPipeline.h>
 
 namespace PlayFab
 {
@@ -13,8 +12,8 @@ namespace PlayFab
     /// </summary>
     enum class EventPipelineKey
     {
-        PlayFab, // PlayFab event pipeline
-        OneDS // OneDS (One Collector) event pipeline
+        PlayFabPlayStream, // PlayFab (PlayStream) event pipeline
+        PlayFabTelemetry // PlayFab event pipeline, bypasses PlayStream
     };
 
     /// <summary>

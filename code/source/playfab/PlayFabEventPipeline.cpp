@@ -8,13 +8,31 @@
 
 namespace PlayFab
 {
+    static const int defaultBufferSize = 256;
+    static const int defaultMaxItemsInBatch = 5;
+    static const int defaultMaxBatchWaitTimeInSeconds = 3;
+    static const int defaultMaxBatchesInFlight = 16;
+    static const int defaultReadBufferWaitTimeInMs = 10;
+
     PlayFabEventPipelineSettings::PlayFabEventPipelineSettings() :
-        bufferSize(256),
-        maximalNumberOfItemsInBatch(5),
-        maximalBatchWaitTime(3),
-        maximalNumberOfBatchesInFlight(16),
-        readBufferWaitTime(10),
-        authenticationContext(nullptr)
+        bufferSize(defaultBufferSize),
+        maximalNumberOfItemsInBatch(defaultMaxItemsInBatch),
+        maximalBatchWaitTime(defaultMaxBatchWaitTimeInSeconds),
+        maximalNumberOfBatchesInFlight(defaultMaxBatchesInFlight),
+        readBufferWaitTime(defaultReadBufferWaitTimeInMs),
+        authenticationContext(nullptr),
+        emitType(PlayFabEventPipelineType::PlayFabPlayStream)
+    {
+    }
+
+    PlayFabEventPipelineSettings::PlayFabEventPipelineSettings(PlayFabEventPipelineType type) :
+        bufferSize(defaultBufferSize),
+        maximalNumberOfItemsInBatch(defaultMaxItemsInBatch),
+        maximalBatchWaitTime(defaultMaxBatchWaitTimeInSeconds),
+        maximalNumberOfBatchesInFlight(defaultMaxBatchesInFlight),
+        readBufferWaitTime(defaultReadBufferWaitTimeInMs),
+        authenticationContext(nullptr),
+        emitType(type)
     {
     }
 
@@ -217,13 +235,24 @@ namespace PlayFab
 
         this->batch.clear(); // batch vector will be reused
         this->batch.reserve(this->settings->maximalNumberOfItemsInBatch);
-
-        // call Events API to send the batch
-        PlayFabEventsAPI::WriteEvents(
-            batchReq,
-            std::bind(&PlayFabEventPipeline::WriteEventsApiCallback, this, std::placeholders::_1, std::placeholders::_2),
-            std::bind(&PlayFabEventPipeline::WriteEventsApiErrorCallback, this, std::placeholders::_1, std::placeholders::_2),
-            customData);
+        if(this->settings->emitType == PlayFabEventPipelineType::PlayFabPlayStream)
+        {
+            // call Events API to send the batch
+            PlayFabEventsAPI::WriteEvents(
+                batchReq,
+                std::bind(&PlayFabEventPipeline::WriteEventsApiCallback, this, std::placeholders::_1, std::placeholders::_2),
+                std::bind(&PlayFabEventPipeline::WriteEventsApiErrorCallback, this, std::placeholders::_1, std::placeholders::_2),
+                customData);
+        }
+        else
+        {
+            // call Events API to send the batch, bypassing Playstream
+            PlayFabEventsAPI::WriteTelemetryEvents(
+                batchReq,
+                std::bind(&PlayFabEventPipeline::WriteEventsApiCallback, this, std::placeholders::_1, std::placeholders::_2),
+                std::bind(&PlayFabEventPipeline::WriteEventsApiErrorCallback, this, std::placeholders::_1, std::placeholders::_2),
+                customData);
+        }
     }
 
     void PlayFabEventPipeline::WriteEventsApiCallback(const EventsModels::WriteEventsResponse& result, void* customData)

@@ -28,8 +28,6 @@ add_library( # Sets the name of the library.
 
              # Provides a relative path to your source file(s).
              ../../../code/stdafx.cpp
-             ../../../code/source/playfab/OneDSEventPipeline.cpp
-             ../../../code/source/playfab/OneDSEventsApi.cpp
              ../../../code/source/playfab/PlayFabAdminApi.cpp
              ../../../code/source/playfab/PlayFabAdminInstanceApi.cpp
              ../../../code/source/playfab/PlayFabApiSettings.cpp
@@ -68,7 +66,6 @@ add_library( # Sets the name of the library.
              ../../../code/source/playfab/PlayFabSettings.cpp
              ../../../code/source/playfab/PlayFabSpinLock.cpp
              ../../../code/source/playfab/PlayFabAndroidHttpPlugin.cpp
-             ../../../code/source/playfab/OneDSAndroidHttpPlugin.cpp
 #             ../../../code/source/playfab/QoS/RegionResult.cpp
 #             ../../../code/source/playfab/QoS/PlayFabQoSApi.cpp
 #             ../../../code/source/playfab/QoS/QoSSocket.cpp

@@ -39,10 +39,7 @@ namespace PlayFab
                 pluginPtr = CreatePlayFabSerializerPlugin();
                 break;
             case PlayFabPluginContract::PlayFab_Transport:
-                if (instanceName == PlayFab::PLUGIN_TRANSPORT_ONEDS)
-                    pluginPtr = CreateOneDSTransportPlugin();
-                else
-                    pluginPtr = CreatePlayFabTransportPlugin();
+                pluginPtr = CreatePlayFabTransportPlugin();
                 break;
             default:
                 throw std::runtime_error("This contract is not supported");
@@ -92,23 +89,6 @@ namespace PlayFab
         return std::make_shared<PlayFabPS4HttpPlugin>();
 #else
         return std::make_shared<PlayFabCurlHttpPlugin>();
-#endif // PLAYFAB_PLATFORM_XBOX
-    }
-
-    std::shared_ptr<IPlayFabPlugin> PlayFabPluginManager::CreateOneDSTransportPlugin()
-    {
-#ifdef PLAYFAB_PLATFORM_XBOX
-        return std::make_shared<OneDSIXHR2Plugin>();
-#elif defined(PLAYFAB_PLATFORM_WINDOWS)
-        return std::make_shared<OneDSWinHttpPlugin>();
-#elif defined(PLAYFAB_PLATFORM_IOS)
-        return std::make_shared<OneDSIOSHttpPlugin>();
-#elif defined(PLAYFAB_PLATFORM_ANDROID)
-        return std::make_shared<OneDSAndroidHttpPlugin>();
-#elif defined(PLAYFAB_PLATFORM_PLAYSTATION)
-        return std::make_shared<OneDSPS4HttpPlugin>();
-#else
-        return std::make_shared<OneDSCurlHttpPlugin>();
 #endif // PLAYFAB_PLATFORM_XBOX
     }
 
