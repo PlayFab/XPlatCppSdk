@@ -1856,6 +1856,7 @@ namespace PlayFab
             GenericErrorCodesQueryRateLimitExceeded,
             GenericErrorCodesEntityAPIKeyCreationDisabledForEntity,
             GenericErrorCodesForbiddenByEntityPolicy,
+            GenericErrorCodesUpdateInventoryRateLimitExceeded,
             GenericErrorCodesStudioCreationRateLimited,
             GenericErrorCodesStudioCreationInProgress,
             GenericErrorCodesDuplicateStudioName,
@@ -2393,6 +2394,7 @@ namespace PlayFab
             if (input == GenericErrorCodesQueryRateLimitExceeded) output = Json::Value("QueryRateLimitExceeded");
             if (input == GenericErrorCodesEntityAPIKeyCreationDisabledForEntity) output = Json::Value("EntityAPIKeyCreationDisabledForEntity");
             if (input == GenericErrorCodesForbiddenByEntityPolicy) output = Json::Value("ForbiddenByEntityPolicy");
+            if (input == GenericErrorCodesUpdateInventoryRateLimitExceeded) output = Json::Value("UpdateInventoryRateLimitExceeded");
             if (input == GenericErrorCodesStudioCreationRateLimited) output = Json::Value("StudioCreationRateLimited");
             if (input == GenericErrorCodesStudioCreationInProgress) output = Json::Value("StudioCreationInProgress");
             if (input == GenericErrorCodesDuplicateStudioName) output = Json::Value("DuplicateStudioName");
@@ -2931,6 +2933,7 @@ namespace PlayFab
             if (inputStr == "QueryRateLimitExceeded") output = GenericErrorCodesQueryRateLimitExceeded;
             if (inputStr == "EntityAPIKeyCreationDisabledForEntity") output = GenericErrorCodesEntityAPIKeyCreationDisabledForEntity;
             if (inputStr == "ForbiddenByEntityPolicy") output = GenericErrorCodesForbiddenByEntityPolicy;
+            if (inputStr == "UpdateInventoryRateLimitExceeded") output = GenericErrorCodesUpdateInventoryRateLimitExceeded;
             if (inputStr == "StudioCreationRateLimited") output = GenericErrorCodesStudioCreationRateLimited;
             if (inputStr == "StudioCreationInProgress") output = GenericErrorCodesStudioCreationInProgress;
             if (inputStr == "DuplicateStudioName") output = GenericErrorCodesDuplicateStudioName;

@@ -1812,6 +1812,7 @@ namespace PlayFab
             GenericErrorCodesQueryRateLimitExceeded,
             GenericErrorCodesEntityAPIKeyCreationDisabledForEntity,
             GenericErrorCodesForbiddenByEntityPolicy,
+            GenericErrorCodesUpdateInventoryRateLimitExceeded,
             GenericErrorCodesStudioCreationRateLimited,
             GenericErrorCodesStudioCreationInProgress,
             GenericErrorCodesDuplicateStudioName,
@@ -2349,6 +2350,7 @@ namespace PlayFab
             if (input == GenericErrorCodesQueryRateLimitExceeded) output = Json::Value("QueryRateLimitExceeded");
             if (input == GenericErrorCodesEntityAPIKeyCreationDisabledForEntity) output = Json::Value("EntityAPIKeyCreationDisabledForEntity");
             if (input == GenericErrorCodesForbiddenByEntityPolicy) output = Json::Value("ForbiddenByEntityPolicy");
+            if (input == GenericErrorCodesUpdateInventoryRateLimitExceeded) output = Json::Value("UpdateInventoryRateLimitExceeded");
             if (input == GenericErrorCodesStudioCreationRateLimited) output = Json::Value("StudioCreationRateLimited");
             if (input == GenericErrorCodesStudioCreationInProgress) output = Json::Value("StudioCreationInProgress");
             if (input == GenericErrorCodesDuplicateStudioName) output = Json::Value("DuplicateStudioName");
@@ -2887,6 +2889,7 @@ namespace PlayFab
             if (inputStr == "QueryRateLimitExceeded") output = GenericErrorCodesQueryRateLimitExceeded;
             if (inputStr == "EntityAPIKeyCreationDisabledForEntity") output = GenericErrorCodesEntityAPIKeyCreationDisabledForEntity;
             if (inputStr == "ForbiddenByEntityPolicy") output = GenericErrorCodesForbiddenByEntityPolicy;
+            if (inputStr == "UpdateInventoryRateLimitExceeded") output = GenericErrorCodesUpdateInventoryRateLimitExceeded;
             if (inputStr == "StudioCreationRateLimited") output = GenericErrorCodesStudioCreationRateLimited;
             if (inputStr == "StudioCreationInProgress") output = GenericErrorCodesStudioCreationInProgress;
             if (inputStr == "DuplicateStudioName") output = GenericErrorCodesDuplicateStudioName;
@@ -3143,6 +3146,40 @@ namespace PlayFab
             const std::string& inputStr = input.asString();
             if (inputStr == "ItemId") output = ResultTableNodeTypeItemId;
             if (inputStr == "TableId") output = ResultTableNodeTypeTableId;
+        }
+
+        enum SourceType
+        {
+            SourceTypeAdmin,
+            SourceTypeBackEnd,
+            SourceTypeGameClient,
+            SourceTypeGameServer,
+            SourceTypePartner,
+            SourceTypeCustom,
+            SourceTypeAPI
+        };
+
+        inline void ToJsonEnum(const SourceType input, Json::Value& output)
+        {
+            if (input == SourceTypeAdmin) output = Json::Value("Admin");
+            if (input == SourceTypeBackEnd) output = Json::Value("BackEnd");
+            if (input == SourceTypeGameClient) output = Json::Value("GameClient");
+            if (input == SourceTypeGameServer) output = Json::Value("GameServer");
+            if (input == SourceTypePartner) output = Json::Value("Partner");
+            if (input == SourceTypeCustom) output = Json::Value("Custom");
+            if (input == SourceTypeAPI) output = Json::Value("API");
+        }
+        inline void FromJsonEnum(const Json::Value& input, SourceType& output)
+        {
+            if (!input.isString()) return;
+            const std::string& inputStr = input.asString();
+            if (inputStr == "Admin") output = SourceTypeAdmin;
+            if (inputStr == "BackEnd") output = SourceTypeBackEnd;
+            if (inputStr == "GameClient") output = SourceTypeGameClient;
+            if (inputStr == "GameServer") output = SourceTypeGameServer;
+            if (inputStr == "Partner") output = SourceTypePartner;
+            if (inputStr == "Custom") output = SourceTypeCustom;
+            if (inputStr == "API") output = SourceTypeAPI;
         }
 
         enum SubscriptionProviderStatus
@@ -10040,6 +10077,182 @@ namespace PlayFab
             }
         };
 
+        struct StoreMarketingModel : public PlayFabBaseModel
+        {
+            std::string Description;
+            std::string DisplayName;
+            Json::Value Metadata;
+
+            StoreMarketingModel() :
+                PlayFabBaseModel(),
+                Description(),
+                DisplayName(),
+                Metadata()
+            {}
+
+            StoreMarketingModel(const StoreMarketingModel& src) :
+                PlayFabBaseModel(),
+                Description(src.Description),
+                DisplayName(src.DisplayName),
+                Metadata(src.Metadata)
+            {}
+
+            ~StoreMarketingModel() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["Description"], Description);
+                FromJsonUtilS(input["DisplayName"], DisplayName);
+                Metadata = input["Metadata"];
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Description; ToJsonUtilS(Description, each_Description); output["Description"] = each_Description;
+                Json::Value each_DisplayName; ToJsonUtilS(DisplayName, each_DisplayName); output["DisplayName"] = each_DisplayName;
+                output["Metadata"] = Metadata;
+                return output;
+            }
+        };
+
+        struct StoreItem : public PlayFabBaseModel
+        {
+            Json::Value CustomData;
+            Boxed<Uint32> DisplayPosition;
+            std::string ItemId;
+            std::map<std::string, Uint32> RealCurrencyPrices;
+            std::map<std::string, Uint32> VirtualCurrencyPrices;
+
+            StoreItem() :
+                PlayFabBaseModel(),
+                CustomData(),
+                DisplayPosition(),
+                ItemId(),
+                RealCurrencyPrices(),
+                VirtualCurrencyPrices()
+            {}
+
+            StoreItem(const StoreItem& src) :
+                PlayFabBaseModel(),
+                CustomData(src.CustomData),
+                DisplayPosition(src.DisplayPosition),
+                ItemId(src.ItemId),
+                RealCurrencyPrices(src.RealCurrencyPrices),
+                VirtualCurrencyPrices(src.VirtualCurrencyPrices)
+            {}
+
+            ~StoreItem() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                CustomData = input["CustomData"];
+                FromJsonUtilP(input["DisplayPosition"], DisplayPosition);
+                FromJsonUtilS(input["ItemId"], ItemId);
+                FromJsonUtilP(input["RealCurrencyPrices"], RealCurrencyPrices);
+                FromJsonUtilP(input["VirtualCurrencyPrices"], VirtualCurrencyPrices);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                output["CustomData"] = CustomData;
+                Json::Value each_DisplayPosition; ToJsonUtilP(DisplayPosition, each_DisplayPosition); output["DisplayPosition"] = each_DisplayPosition;
+                Json::Value each_ItemId; ToJsonUtilS(ItemId, each_ItemId); output["ItemId"] = each_ItemId;
+                Json::Value each_RealCurrencyPrices; ToJsonUtilP(RealCurrencyPrices, each_RealCurrencyPrices); output["RealCurrencyPrices"] = each_RealCurrencyPrices;
+                Json::Value each_VirtualCurrencyPrices; ToJsonUtilP(VirtualCurrencyPrices, each_VirtualCurrencyPrices); output["VirtualCurrencyPrices"] = each_VirtualCurrencyPrices;
+                return output;
+            }
+        };
+
+        struct GetStoreItemsResult : public PlayFabResultCommon
+        {
+            std::string CatalogVersion;
+            Boxed<StoreMarketingModel> MarketingData;
+            Boxed<SourceType> Source;
+            std::list<StoreItem> Store;
+            std::string StoreId;
+
+            GetStoreItemsResult() :
+                PlayFabResultCommon(),
+                CatalogVersion(),
+                MarketingData(),
+                Source(),
+                Store(),
+                StoreId()
+            {}
+
+            GetStoreItemsResult(const GetStoreItemsResult& src) :
+                PlayFabResultCommon(),
+                CatalogVersion(src.CatalogVersion),
+                MarketingData(src.MarketingData),
+                Source(src.Source),
+                Store(src.Store),
+                StoreId(src.StoreId)
+            {}
+
+            ~GetStoreItemsResult() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
+                FromJsonUtilO(input["MarketingData"], MarketingData);
+                FromJsonUtilE(input["Source"], Source);
+                FromJsonUtilO(input["Store"], Store);
+                FromJsonUtilS(input["StoreId"], StoreId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CatalogVersion; ToJsonUtilS(CatalogVersion, each_CatalogVersion); output["CatalogVersion"] = each_CatalogVersion;
+                Json::Value each_MarketingData; ToJsonUtilO(MarketingData, each_MarketingData); output["MarketingData"] = each_MarketingData;
+                Json::Value each_Source; ToJsonUtilE(Source, each_Source); output["Source"] = each_Source;
+                Json::Value each_Store; ToJsonUtilO(Store, each_Store); output["Store"] = each_Store;
+                Json::Value each_StoreId; ToJsonUtilS(StoreId, each_StoreId); output["StoreId"] = each_StoreId;
+                return output;
+            }
+        };
+
+        struct GetStoreItemsServerRequest : public PlayFabRequestCommon
+        {
+            std::string CatalogVersion;
+            std::string PlayFabId;
+            std::string StoreId;
+
+            GetStoreItemsServerRequest() :
+                PlayFabRequestCommon(),
+                CatalogVersion(),
+                PlayFabId(),
+                StoreId()
+            {}
+
+            GetStoreItemsServerRequest(const GetStoreItemsServerRequest& src) :
+                PlayFabRequestCommon(),
+                CatalogVersion(src.CatalogVersion),
+                PlayFabId(src.PlayFabId),
+                StoreId(src.StoreId)
+            {}
+
+            ~GetStoreItemsServerRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+                FromJsonUtilS(input["StoreId"], StoreId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CatalogVersion; ToJsonUtilS(CatalogVersion, each_CatalogVersion); output["CatalogVersion"] = each_CatalogVersion;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                Json::Value each_StoreId; ToJsonUtilS(StoreId, each_StoreId); output["StoreId"] = each_StoreId;
+                return output;
+            }
+        };
+
         struct GetTimeRequest : public PlayFabRequestCommon
         {
 
@@ -11228,6 +11441,50 @@ namespace PlayFab
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
                 Json::Value each_ServerCustomId; ToJsonUtilS(ServerCustomId, each_ServerCustomId); output["ServerCustomId"] = each_ServerCustomId;
+                return output;
+            }
+        };
+
+        struct LoginWithXboxIdRequest : public PlayFabRequestCommon
+        {
+            Boxed<bool> CreateAccount;
+            Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
+            std::string Sandbox;
+            std::string XboxId;
+
+            LoginWithXboxIdRequest() :
+                PlayFabRequestCommon(),
+                CreateAccount(),
+                InfoRequestParameters(),
+                Sandbox(),
+                XboxId()
+            {}
+
+            LoginWithXboxIdRequest(const LoginWithXboxIdRequest& src) :
+                PlayFabRequestCommon(),
+                CreateAccount(src.CreateAccount),
+                InfoRequestParameters(src.InfoRequestParameters),
+                Sandbox(src.Sandbox),
+                XboxId(src.XboxId)
+            {}
+
+            ~LoginWithXboxIdRequest() = default;
+
+            void FromJson(Json::Value& input) override
+            {
+                FromJsonUtilP(input["CreateAccount"], CreateAccount);
+                FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
+                FromJsonUtilS(input["Sandbox"], Sandbox);
+                FromJsonUtilS(input["XboxId"], XboxId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
+                Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
+                Json::Value each_Sandbox; ToJsonUtilS(Sandbox, each_Sandbox); output["Sandbox"] = each_Sandbox;
+                Json::Value each_XboxId; ToJsonUtilS(XboxId, each_XboxId); output["XboxId"] = each_XboxId;
                 return output;
             }
         };

@@ -61,9 +61,13 @@ namespace PlayFab
             // If we logged, will return true, else will return false.
             bool LogErrorIfNotInitialized();
 
+            // returns error based on current platform
+            unsigned int platformSpecificError();
+
         private:
             bool initialized;
             struct sockaddr_in siOther;
+            struct timeval timeOutVal;
 
 #if defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX)
             int s, slen;
