@@ -1,0 +1,6 @@
+{
+    "default": {
+        "templateFolder": "XPlatCoreTemplate",
+        "versionKey": "xplatcppsdk"
+    }
+}
