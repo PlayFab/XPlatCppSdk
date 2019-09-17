@@ -1883,6 +1883,13 @@ namespace PlayFab
             GenericErrorCodesVirtualCurrencyBetaRestoreError,
             GenericErrorCodesVirtualCurrencyBetaSaveConflict,
             GenericErrorCodesVirtualCurrencyBetaUpdateError,
+            GenericErrorCodesInsightsManagementDatabaseNotFound,
+            GenericErrorCodesInsightsManagementOperationNotFound,
+            GenericErrorCodesInsightsManagementErrorPendingOperationExists,
+            GenericErrorCodesInsightsManagementSetPerformanceLevelInvalidParameter,
+            GenericErrorCodesInsightsManagementSetStorageRetentionInvalidParameter,
+            GenericErrorCodesInsightsManagementGetStorageUsageInvalidParameter,
+            GenericErrorCodesInsightsManagementGetOperationStatusInvalidParameter,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -1945,6 +1952,7 @@ namespace PlayFab
             GenericErrorCodesExperimentationExceededVariantNameLength,
             GenericErrorCodesExperimentationExceededMaxVariantLength,
             GenericErrorCodesExperimentInvalidId,
+            GenericErrorCodesMaxActionDepthExceeded,
             GenericErrorCodesSnapshotNotFound
         };
 
@@ -2421,6 +2429,13 @@ namespace PlayFab
             if (input == GenericErrorCodesVirtualCurrencyBetaRestoreError) output = Json::Value("VirtualCurrencyBetaRestoreError");
             if (input == GenericErrorCodesVirtualCurrencyBetaSaveConflict) output = Json::Value("VirtualCurrencyBetaSaveConflict");
             if (input == GenericErrorCodesVirtualCurrencyBetaUpdateError) output = Json::Value("VirtualCurrencyBetaUpdateError");
+            if (input == GenericErrorCodesInsightsManagementDatabaseNotFound) output = Json::Value("InsightsManagementDatabaseNotFound");
+            if (input == GenericErrorCodesInsightsManagementOperationNotFound) output = Json::Value("InsightsManagementOperationNotFound");
+            if (input == GenericErrorCodesInsightsManagementErrorPendingOperationExists) output = Json::Value("InsightsManagementErrorPendingOperationExists");
+            if (input == GenericErrorCodesInsightsManagementSetPerformanceLevelInvalidParameter) output = Json::Value("InsightsManagementSetPerformanceLevelInvalidParameter");
+            if (input == GenericErrorCodesInsightsManagementSetStorageRetentionInvalidParameter) output = Json::Value("InsightsManagementSetStorageRetentionInvalidParameter");
+            if (input == GenericErrorCodesInsightsManagementGetStorageUsageInvalidParameter) output = Json::Value("InsightsManagementGetStorageUsageInvalidParameter");
+            if (input == GenericErrorCodesInsightsManagementGetOperationStatusInvalidParameter) output = Json::Value("InsightsManagementGetOperationStatusInvalidParameter");
             if (input == GenericErrorCodesMatchmakingEntityInvalid) output = Json::Value("MatchmakingEntityInvalid");
             if (input == GenericErrorCodesMatchmakingPlayerAttributesInvalid) output = Json::Value("MatchmakingPlayerAttributesInvalid");
             if (input == GenericErrorCodesMatchmakingQueueNotFound) output = Json::Value("MatchmakingQueueNotFound");
@@ -2483,6 +2498,7 @@ namespace PlayFab
             if (input == GenericErrorCodesExperimentationExceededVariantNameLength) output = Json::Value("ExperimentationExceededVariantNameLength");
             if (input == GenericErrorCodesExperimentationExceededMaxVariantLength) output = Json::Value("ExperimentationExceededMaxVariantLength");
             if (input == GenericErrorCodesExperimentInvalidId) output = Json::Value("ExperimentInvalidId");
+            if (input == GenericErrorCodesMaxActionDepthExceeded) output = Json::Value("MaxActionDepthExceeded");
             if (input == GenericErrorCodesSnapshotNotFound) output = Json::Value("SnapshotNotFound");
         }
         inline void FromJsonEnum(const Json::Value& input, GenericErrorCodes& output)
@@ -2960,6 +2976,13 @@ namespace PlayFab
             if (inputStr == "VirtualCurrencyBetaRestoreError") output = GenericErrorCodesVirtualCurrencyBetaRestoreError;
             if (inputStr == "VirtualCurrencyBetaSaveConflict") output = GenericErrorCodesVirtualCurrencyBetaSaveConflict;
             if (inputStr == "VirtualCurrencyBetaUpdateError") output = GenericErrorCodesVirtualCurrencyBetaUpdateError;
+            if (inputStr == "InsightsManagementDatabaseNotFound") output = GenericErrorCodesInsightsManagementDatabaseNotFound;
+            if (inputStr == "InsightsManagementOperationNotFound") output = GenericErrorCodesInsightsManagementOperationNotFound;
+            if (inputStr == "InsightsManagementErrorPendingOperationExists") output = GenericErrorCodesInsightsManagementErrorPendingOperationExists;
+            if (inputStr == "InsightsManagementSetPerformanceLevelInvalidParameter") output = GenericErrorCodesInsightsManagementSetPerformanceLevelInvalidParameter;
+            if (inputStr == "InsightsManagementSetStorageRetentionInvalidParameter") output = GenericErrorCodesInsightsManagementSetStorageRetentionInvalidParameter;
+            if (inputStr == "InsightsManagementGetStorageUsageInvalidParameter") output = GenericErrorCodesInsightsManagementGetStorageUsageInvalidParameter;
+            if (inputStr == "InsightsManagementGetOperationStatusInvalidParameter") output = GenericErrorCodesInsightsManagementGetOperationStatusInvalidParameter;
             if (inputStr == "MatchmakingEntityInvalid") output = GenericErrorCodesMatchmakingEntityInvalid;
             if (inputStr == "MatchmakingPlayerAttributesInvalid") output = GenericErrorCodesMatchmakingPlayerAttributesInvalid;
             if (inputStr == "MatchmakingQueueNotFound") output = GenericErrorCodesMatchmakingQueueNotFound;
@@ -3022,6 +3045,7 @@ namespace PlayFab
             if (inputStr == "ExperimentationExceededVariantNameLength") output = GenericErrorCodesExperimentationExceededVariantNameLength;
             if (inputStr == "ExperimentationExceededMaxVariantLength") output = GenericErrorCodesExperimentationExceededMaxVariantLength;
             if (inputStr == "ExperimentInvalidId") output = GenericErrorCodesExperimentInvalidId;
+            if (inputStr == "MaxActionDepthExceeded") output = GenericErrorCodesMaxActionDepthExceeded;
             if (inputStr == "SnapshotNotFound") output = GenericErrorCodesSnapshotNotFound;
         }
 
@@ -7315,6 +7339,7 @@ namespace PlayFab
             time_t MembershipExpiration;
             std::string MembershipId;
             Boxed<time_t> OverrideExpiration;
+            Boxed<bool> OverrideIsSet;
             std::list<SubscriptionModel> Subscriptions;
 
             MembershipModel() :
@@ -7323,6 +7348,7 @@ namespace PlayFab
                 MembershipExpiration(),
                 MembershipId(),
                 OverrideExpiration(),
+                OverrideIsSet(),
                 Subscriptions()
             {}
 
@@ -7332,6 +7358,7 @@ namespace PlayFab
                 MembershipExpiration(src.MembershipExpiration),
                 MembershipId(src.MembershipId),
                 OverrideExpiration(src.OverrideExpiration),
+                OverrideIsSet(src.OverrideIsSet),
                 Subscriptions(src.Subscriptions)
             {}
 
@@ -7343,6 +7370,7 @@ namespace PlayFab
                 FromJsonUtilT(input["MembershipExpiration"], MembershipExpiration);
                 FromJsonUtilS(input["MembershipId"], MembershipId);
                 FromJsonUtilT(input["OverrideExpiration"], OverrideExpiration);
+                FromJsonUtilP(input["OverrideIsSet"], OverrideIsSet);
                 FromJsonUtilO(input["Subscriptions"], Subscriptions);
             }
 
@@ -7353,6 +7381,7 @@ namespace PlayFab
                 Json::Value each_MembershipExpiration; ToJsonUtilT(MembershipExpiration, each_MembershipExpiration); output["MembershipExpiration"] = each_MembershipExpiration;
                 Json::Value each_MembershipId; ToJsonUtilS(MembershipId, each_MembershipId); output["MembershipId"] = each_MembershipId;
                 Json::Value each_OverrideExpiration; ToJsonUtilT(OverrideExpiration, each_OverrideExpiration); output["OverrideExpiration"] = each_OverrideExpiration;
+                Json::Value each_OverrideIsSet; ToJsonUtilP(OverrideIsSet, each_OverrideIsSet); output["OverrideIsSet"] = each_OverrideIsSet;
                 Json::Value each_Subscriptions; ToJsonUtilO(Subscriptions, each_Subscriptions); output["Subscriptions"] = each_Subscriptions;
                 return output;
             }

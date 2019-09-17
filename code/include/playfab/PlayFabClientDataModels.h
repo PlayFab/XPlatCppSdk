@@ -4370,6 +4370,7 @@ namespace PlayFab
             time_t MembershipExpiration;
             std::string MembershipId;
             Boxed<time_t> OverrideExpiration;
+            Boxed<bool> OverrideIsSet;
             std::list<SubscriptionModel> Subscriptions;
 
             MembershipModel() :
@@ -4378,6 +4379,7 @@ namespace PlayFab
                 MembershipExpiration(),
                 MembershipId(),
                 OverrideExpiration(),
+                OverrideIsSet(),
                 Subscriptions()
             {}
 
@@ -4387,6 +4389,7 @@ namespace PlayFab
                 MembershipExpiration(src.MembershipExpiration),
                 MembershipId(src.MembershipId),
                 OverrideExpiration(src.OverrideExpiration),
+                OverrideIsSet(src.OverrideIsSet),
                 Subscriptions(src.Subscriptions)
             {}
 
@@ -4398,6 +4401,7 @@ namespace PlayFab
                 FromJsonUtilT(input["MembershipExpiration"], MembershipExpiration);
                 FromJsonUtilS(input["MembershipId"], MembershipId);
                 FromJsonUtilT(input["OverrideExpiration"], OverrideExpiration);
+                FromJsonUtilP(input["OverrideIsSet"], OverrideIsSet);
                 FromJsonUtilO(input["Subscriptions"], Subscriptions);
             }
 
@@ -4408,6 +4412,7 @@ namespace PlayFab
                 Json::Value each_MembershipExpiration; ToJsonUtilT(MembershipExpiration, each_MembershipExpiration); output["MembershipExpiration"] = each_MembershipExpiration;
                 Json::Value each_MembershipId; ToJsonUtilS(MembershipId, each_MembershipId); output["MembershipId"] = each_MembershipId;
                 Json::Value each_OverrideExpiration; ToJsonUtilT(OverrideExpiration, each_OverrideExpiration); output["OverrideExpiration"] = each_OverrideExpiration;
+                Json::Value each_OverrideIsSet; ToJsonUtilP(OverrideIsSet, each_OverrideIsSet); output["OverrideIsSet"] = each_OverrideIsSet;
                 Json::Value each_Subscriptions; ToJsonUtilO(Subscriptions, each_Subscriptions); output["Subscriptions"] = each_Subscriptions;
                 return output;
             }
@@ -6267,6 +6272,7 @@ namespace PlayFab
             std::string PlayFabId;
             Boxed<PlayerProfileViewConstraints> ProfileConstraints;
             std::string StatisticName;
+            Boxed<bool> UseSpecificVersion;
             Boxed<Int32> Version;
             std::string XboxToken;
 
@@ -6278,6 +6284,7 @@ namespace PlayFab
                 PlayFabId(),
                 ProfileConstraints(),
                 StatisticName(),
+                UseSpecificVersion(),
                 Version(),
                 XboxToken()
             {}
@@ -6290,6 +6297,7 @@ namespace PlayFab
                 PlayFabId(src.PlayFabId),
                 ProfileConstraints(src.ProfileConstraints),
                 StatisticName(src.StatisticName),
+                UseSpecificVersion(src.UseSpecificVersion),
                 Version(src.Version),
                 XboxToken(src.XboxToken)
             {}
@@ -6304,6 +6312,7 @@ namespace PlayFab
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilO(input["ProfileConstraints"], ProfileConstraints);
                 FromJsonUtilS(input["StatisticName"], StatisticName);
+                FromJsonUtilP(input["UseSpecificVersion"], UseSpecificVersion);
                 FromJsonUtilP(input["Version"], Version);
                 FromJsonUtilS(input["XboxToken"], XboxToken);
             }
@@ -6317,6 +6326,7 @@ namespace PlayFab
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_ProfileConstraints; ToJsonUtilO(ProfileConstraints, each_ProfileConstraints); output["ProfileConstraints"] = each_ProfileConstraints;
                 Json::Value each_StatisticName; ToJsonUtilS(StatisticName, each_StatisticName); output["StatisticName"] = each_StatisticName;
+                Json::Value each_UseSpecificVersion; ToJsonUtilP(UseSpecificVersion, each_UseSpecificVersion); output["UseSpecificVersion"] = each_UseSpecificVersion;
                 Json::Value each_Version; ToJsonUtilP(Version, each_Version); output["Version"] = each_Version;
                 Json::Value each_XboxToken; ToJsonUtilS(XboxToken, each_XboxToken); output["XboxToken"] = each_XboxToken;
                 return output;
@@ -6419,6 +6429,7 @@ namespace PlayFab
             Boxed<PlayerProfileViewConstraints> ProfileConstraints;
             Int32 StartPosition;
             std::string StatisticName;
+            Boxed<bool> UseSpecificVersion;
             Boxed<Int32> Version;
             std::string XboxToken;
 
@@ -6430,6 +6441,7 @@ namespace PlayFab
                 ProfileConstraints(),
                 StartPosition(),
                 StatisticName(),
+                UseSpecificVersion(),
                 Version(),
                 XboxToken()
             {}
@@ -6442,6 +6454,7 @@ namespace PlayFab
                 ProfileConstraints(src.ProfileConstraints),
                 StartPosition(src.StartPosition),
                 StatisticName(src.StatisticName),
+                UseSpecificVersion(src.UseSpecificVersion),
                 Version(src.Version),
                 XboxToken(src.XboxToken)
             {}
@@ -6456,6 +6469,7 @@ namespace PlayFab
                 FromJsonUtilO(input["ProfileConstraints"], ProfileConstraints);
                 FromJsonUtilP(input["StartPosition"], StartPosition);
                 FromJsonUtilS(input["StatisticName"], StatisticName);
+                FromJsonUtilP(input["UseSpecificVersion"], UseSpecificVersion);
                 FromJsonUtilP(input["Version"], Version);
                 FromJsonUtilS(input["XboxToken"], XboxToken);
             }
@@ -6469,6 +6483,7 @@ namespace PlayFab
                 Json::Value each_ProfileConstraints; ToJsonUtilO(ProfileConstraints, each_ProfileConstraints); output["ProfileConstraints"] = each_ProfileConstraints;
                 Json::Value each_StartPosition; ToJsonUtilP(StartPosition, each_StartPosition); output["StartPosition"] = each_StartPosition;
                 Json::Value each_StatisticName; ToJsonUtilS(StatisticName, each_StatisticName); output["StatisticName"] = each_StatisticName;
+                Json::Value each_UseSpecificVersion; ToJsonUtilP(UseSpecificVersion, each_UseSpecificVersion); output["UseSpecificVersion"] = each_UseSpecificVersion;
                 Json::Value each_Version; ToJsonUtilP(Version, each_Version); output["Version"] = each_Version;
                 Json::Value each_XboxToken; ToJsonUtilS(XboxToken, each_XboxToken); output["XboxToken"] = each_XboxToken;
                 return output;
@@ -6627,6 +6642,7 @@ namespace PlayFab
             std::string PlayFabId;
             Boxed<PlayerProfileViewConstraints> ProfileConstraints;
             std::string StatisticName;
+            Boxed<bool> UseSpecificVersion;
             Boxed<Int32> Version;
 
             GetLeaderboardAroundPlayerRequest() :
@@ -6635,6 +6651,7 @@ namespace PlayFab
                 PlayFabId(),
                 ProfileConstraints(),
                 StatisticName(),
+                UseSpecificVersion(),
                 Version()
             {}
 
@@ -6644,6 +6661,7 @@ namespace PlayFab
                 PlayFabId(src.PlayFabId),
                 ProfileConstraints(src.ProfileConstraints),
                 StatisticName(src.StatisticName),
+                UseSpecificVersion(src.UseSpecificVersion),
                 Version(src.Version)
             {}
 
@@ -6655,6 +6673,7 @@ namespace PlayFab
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilO(input["ProfileConstraints"], ProfileConstraints);
                 FromJsonUtilS(input["StatisticName"], StatisticName);
+                FromJsonUtilP(input["UseSpecificVersion"], UseSpecificVersion);
                 FromJsonUtilP(input["Version"], Version);
             }
 
@@ -6665,6 +6684,7 @@ namespace PlayFab
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_ProfileConstraints; ToJsonUtilO(ProfileConstraints, each_ProfileConstraints); output["ProfileConstraints"] = each_ProfileConstraints;
                 Json::Value each_StatisticName; ToJsonUtilS(StatisticName, each_StatisticName); output["StatisticName"] = each_StatisticName;
+                Json::Value each_UseSpecificVersion; ToJsonUtilP(UseSpecificVersion, each_UseSpecificVersion); output["UseSpecificVersion"] = each_UseSpecificVersion;
                 Json::Value each_Version; ToJsonUtilP(Version, each_Version); output["Version"] = each_Version;
                 return output;
             }
@@ -6778,6 +6798,7 @@ namespace PlayFab
             Boxed<PlayerProfileViewConstraints> ProfileConstraints;
             Int32 StartPosition;
             std::string StatisticName;
+            Boxed<bool> UseSpecificVersion;
             Boxed<Int32> Version;
 
             GetLeaderboardRequest() :
@@ -6786,6 +6807,7 @@ namespace PlayFab
                 ProfileConstraints(),
                 StartPosition(),
                 StatisticName(),
+                UseSpecificVersion(),
                 Version()
             {}
 
@@ -6795,6 +6817,7 @@ namespace PlayFab
                 ProfileConstraints(src.ProfileConstraints),
                 StartPosition(src.StartPosition),
                 StatisticName(src.StatisticName),
+                UseSpecificVersion(src.UseSpecificVersion),
                 Version(src.Version)
             {}
 
@@ -6806,6 +6829,7 @@ namespace PlayFab
                 FromJsonUtilO(input["ProfileConstraints"], ProfileConstraints);
                 FromJsonUtilP(input["StartPosition"], StartPosition);
                 FromJsonUtilS(input["StatisticName"], StatisticName);
+                FromJsonUtilP(input["UseSpecificVersion"], UseSpecificVersion);
                 FromJsonUtilP(input["Version"], Version);
             }
 
@@ -6816,6 +6840,7 @@ namespace PlayFab
                 Json::Value each_ProfileConstraints; ToJsonUtilO(ProfileConstraints, each_ProfileConstraints); output["ProfileConstraints"] = each_ProfileConstraints;
                 Json::Value each_StartPosition; ToJsonUtilP(StartPosition, each_StartPosition); output["StartPosition"] = each_StartPosition;
                 Json::Value each_StatisticName; ToJsonUtilS(StatisticName, each_StatisticName); output["StatisticName"] = each_StatisticName;
+                Json::Value each_UseSpecificVersion; ToJsonUtilP(UseSpecificVersion, each_UseSpecificVersion); output["UseSpecificVersion"] = each_UseSpecificVersion;
                 Json::Value each_Version; ToJsonUtilP(Version, each_Version); output["Version"] = each_Version;
                 return output;
             }

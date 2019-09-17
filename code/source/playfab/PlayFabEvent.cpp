@@ -22,6 +22,16 @@ namespace PlayFab
         return this->eventContents.Name;
     }
 
+    void PlayFabEvent::SetNamespace(const std::string& eventNamespace)
+    {
+        this->eventContents.EventNamespace = eventNamespace;
+    }
+
+    void PlayFabEvent::SetEntity(const EventsModels::EntityKey& entity)
+    {
+        this->eventContents.Entity = entity;
+    }
+
     void PlayFabEvent::SetProperty(const std::string& name, const std::string& value)
     {
         this->eventContents.Payload[name] = value;

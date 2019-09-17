@@ -23,6 +23,15 @@ nuget {
         language: "C++";
         tags: { PlayFab, Baas, Paas, JSON, REST, HTTP, SSL, API, cloud, liveops, game, gamedev, native };
     };
+    
+    dependencies {
+        // This node defines any outside items which may be needed to consume this package.
+        packages : {
+            // This is a list of other NuGet packages required to use this package.
+            // Each item follows the format "<pkg_name>/<version>"
+            com.playfab.xplatcppsdkJSON.v141/1.1.8
+        };
+    }
 
     files {
         include: {
