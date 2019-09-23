@@ -18,6 +18,10 @@ git submodule update --init --recursive
 This source code of SDK itself is generated from our [SdkGenerator](https://github.com/PlayFab/SdkGenerator).
 
 ---
+## Before Building the SDK from downloading from GitHub as a .zip
+Please run set-gitmodules.bat before attempting to build the SDK. We rely on a particular commit of jsoncpp that this file will direct you to. 
+
+---
 ## Building SDK
 Locate build projects for a required platform in directory tree:
 ```
@@ -39,6 +43,7 @@ The build projects are created for a build tool that is popular or commonly used
 
 * IDE or a build tool specific to platform (Visual Studio 2017 for Windows, Xbox)
 * Users should be very familiar with the topics covered in our [getting started guide](https://api.playfab.com/docs/general-getting-started).
+* When we built this for windows we used platform toolset v141 in the project files. If you have a different toolset installed on your dev box it is safe to update this to later versions of the platform toolsets, feel free to re-target the projects as you see fit your projects needs.
 
 ### 2. Installation & Configuration Instructions:
 
