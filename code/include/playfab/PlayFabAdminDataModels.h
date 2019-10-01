@@ -7339,7 +7339,6 @@ namespace PlayFab
             time_t MembershipExpiration;
             std::string MembershipId;
             Boxed<time_t> OverrideExpiration;
-            Boxed<bool> OverrideIsSet;
             std::list<SubscriptionModel> Subscriptions;
 
             MembershipModel() :
@@ -7348,7 +7347,6 @@ namespace PlayFab
                 MembershipExpiration(),
                 MembershipId(),
                 OverrideExpiration(),
-                OverrideIsSet(),
                 Subscriptions()
             {}
 
@@ -7358,7 +7356,6 @@ namespace PlayFab
                 MembershipExpiration(src.MembershipExpiration),
                 MembershipId(src.MembershipId),
                 OverrideExpiration(src.OverrideExpiration),
-                OverrideIsSet(src.OverrideIsSet),
                 Subscriptions(src.Subscriptions)
             {}
 
@@ -7370,7 +7367,6 @@ namespace PlayFab
                 FromJsonUtilT(input["MembershipExpiration"], MembershipExpiration);
                 FromJsonUtilS(input["MembershipId"], MembershipId);
                 FromJsonUtilT(input["OverrideExpiration"], OverrideExpiration);
-                FromJsonUtilP(input["OverrideIsSet"], OverrideIsSet);
                 FromJsonUtilO(input["Subscriptions"], Subscriptions);
             }
 
@@ -7381,7 +7377,6 @@ namespace PlayFab
                 Json::Value each_MembershipExpiration; ToJsonUtilT(MembershipExpiration, each_MembershipExpiration); output["MembershipExpiration"] = each_MembershipExpiration;
                 Json::Value each_MembershipId; ToJsonUtilS(MembershipId, each_MembershipId); output["MembershipId"] = each_MembershipId;
                 Json::Value each_OverrideExpiration; ToJsonUtilT(OverrideExpiration, each_OverrideExpiration); output["OverrideExpiration"] = each_OverrideExpiration;
-                Json::Value each_OverrideIsSet; ToJsonUtilP(OverrideIsSet, each_OverrideIsSet); output["OverrideIsSet"] = each_OverrideIsSet;
                 Json::Value each_Subscriptions; ToJsonUtilO(Subscriptions, each_Subscriptions); output["Subscriptions"] = each_Subscriptions;
                 return output;
             }
