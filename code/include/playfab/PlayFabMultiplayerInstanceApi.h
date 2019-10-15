@@ -40,6 +40,7 @@ namespace PlayFab
         // ------------ Generated API calls
         void CancelAllMatchmakingTicketsForPlayer(MultiplayerModels::CancelAllMatchmakingTicketsForPlayerRequest& request, ProcessApiCallback<MultiplayerModels::CancelAllMatchmakingTicketsForPlayerResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void CancelMatchmakingTicket(MultiplayerModels::CancelMatchmakingTicketRequest& request, ProcessApiCallback<MultiplayerModels::CancelMatchmakingTicketResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void CreateBuildAlias(MultiplayerModels::CreateBuildAliasRequest& request, ProcessApiCallback<MultiplayerModels::BuildAliasDetailsResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void CreateBuildWithCustomContainer(MultiplayerModels::CreateBuildWithCustomContainerRequest& request, ProcessApiCallback<MultiplayerModels::CreateBuildWithCustomContainerResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void CreateBuildWithManagedContainer(MultiplayerModels::CreateBuildWithManagedContainerRequest& request, ProcessApiCallback<MultiplayerModels::CreateBuildWithManagedContainerResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void CreateMatchmakingTicket(MultiplayerModels::CreateMatchmakingTicketRequest& request, ProcessApiCallback<MultiplayerModels::CreateMatchmakingTicketResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -47,11 +48,13 @@ namespace PlayFab
         void CreateServerMatchmakingTicket(MultiplayerModels::CreateServerMatchmakingTicketRequest& request, ProcessApiCallback<MultiplayerModels::CreateMatchmakingTicketResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void DeleteAsset(MultiplayerModels::DeleteAssetRequest& request, ProcessApiCallback<MultiplayerModels::EmptyResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void DeleteBuild(MultiplayerModels::DeleteBuildRequest& request, ProcessApiCallback<MultiplayerModels::EmptyResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void DeleteBuildAlias(MultiplayerModels::DeleteBuildAliasRequest& request, ProcessApiCallback<MultiplayerModels::EmptyResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void DeleteCertificate(MultiplayerModels::DeleteCertificateRequest& request, ProcessApiCallback<MultiplayerModels::EmptyResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void DeleteRemoteUser(MultiplayerModels::DeleteRemoteUserRequest& request, ProcessApiCallback<MultiplayerModels::EmptyResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void EnableMultiplayerServersForTitle(MultiplayerModels::EnableMultiplayerServersForTitleRequest& request, ProcessApiCallback<MultiplayerModels::EnableMultiplayerServersForTitleResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void GetAssetUploadUrl(MultiplayerModels::GetAssetUploadUrlRequest& request, ProcessApiCallback<MultiplayerModels::GetAssetUploadUrlResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void GetBuild(MultiplayerModels::GetBuildRequest& request, ProcessApiCallback<MultiplayerModels::GetBuildResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void GetBuildAlias(MultiplayerModels::GetBuildAliasRequest& request, ProcessApiCallback<MultiplayerModels::BuildAliasDetailsResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void GetContainerRegistryCredentials(MultiplayerModels::GetContainerRegistryCredentialsRequest& request, ProcessApiCallback<MultiplayerModels::GetContainerRegistryCredentialsResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void GetMatch(MultiplayerModels::GetMatchRequest& request, ProcessApiCallback<MultiplayerModels::GetMatchResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void GetMatchmakingTicket(MultiplayerModels::GetMatchmakingTicketRequest& request, ProcessApiCallback<MultiplayerModels::GetMatchmakingTicketResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -63,6 +66,7 @@ namespace PlayFab
         void JoinMatchmakingTicket(MultiplayerModels::JoinMatchmakingTicketRequest& request, ProcessApiCallback<MultiplayerModels::JoinMatchmakingTicketResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void ListArchivedMultiplayerServers(MultiplayerModels::ListMultiplayerServersRequest& request, ProcessApiCallback<MultiplayerModels::ListMultiplayerServersResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void ListAssetSummaries(MultiplayerModels::ListAssetSummariesRequest& request, ProcessApiCallback<MultiplayerModels::ListAssetSummariesResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void ListBuildAliases(MultiplayerModels::MultiplayerEmptyRequest& request, ProcessApiCallback<MultiplayerModels::ListBuildAliasesForTitleResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void ListBuildSummaries(MultiplayerModels::ListBuildSummariesRequest& request, ProcessApiCallback<MultiplayerModels::ListBuildSummariesResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void ListCertificateSummaries(MultiplayerModels::ListCertificateSummariesRequest& request, ProcessApiCallback<MultiplayerModels::ListCertificateSummariesResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void ListContainerImages(MultiplayerModels::ListContainerImagesRequest& request, ProcessApiCallback<MultiplayerModels::ListContainerImagesResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -76,12 +80,14 @@ namespace PlayFab
         void RequestMultiplayerServer(MultiplayerModels::RequestMultiplayerServerRequest& request, ProcessApiCallback<MultiplayerModels::RequestMultiplayerServerResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void RolloverContainerRegistryCredentials(MultiplayerModels::RolloverContainerRegistryCredentialsRequest& request, ProcessApiCallback<MultiplayerModels::RolloverContainerRegistryCredentialsResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void ShutdownMultiplayerServer(MultiplayerModels::ShutdownMultiplayerServerRequest& request, ProcessApiCallback<MultiplayerModels::EmptyResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void UpdateBuildAlias(MultiplayerModels::UpdateBuildAliasRequest& request, ProcessApiCallback<MultiplayerModels::BuildAliasDetailsResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UpdateBuildRegions(MultiplayerModels::UpdateBuildRegionsRequest& request, ProcessApiCallback<MultiplayerModels::EmptyResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UploadCertificate(MultiplayerModels::UploadCertificateRequest& request, ProcessApiCallback<MultiplayerModels::EmptyResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
 
         // ------------ Generated result handlers
         void OnCancelAllMatchmakingTicketsForPlayerResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         void OnCancelMatchmakingTicketResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnCreateBuildAliasResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         void OnCreateBuildWithCustomContainerResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         void OnCreateBuildWithManagedContainerResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         void OnCreateMatchmakingTicketResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
@@ -89,11 +95,13 @@ namespace PlayFab
         void OnCreateServerMatchmakingTicketResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         void OnDeleteAssetResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         void OnDeleteBuildResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnDeleteBuildAliasResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         void OnDeleteCertificateResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         void OnDeleteRemoteUserResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         void OnEnableMultiplayerServersForTitleResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         void OnGetAssetUploadUrlResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         void OnGetBuildResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnGetBuildAliasResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         void OnGetContainerRegistryCredentialsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         void OnGetMatchResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         void OnGetMatchmakingTicketResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
@@ -105,6 +113,7 @@ namespace PlayFab
         void OnJoinMatchmakingTicketResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         void OnListArchivedMultiplayerServersResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         void OnListAssetSummariesResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnListBuildAliasesResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         void OnListBuildSummariesResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         void OnListCertificateSummariesResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         void OnListContainerImagesResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
@@ -118,6 +127,7 @@ namespace PlayFab
         void OnRequestMultiplayerServerResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         void OnRolloverContainerRegistryCredentialsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         void OnShutdownMultiplayerServerResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        void OnUpdateBuildAliasResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         void OnUpdateBuildRegionsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         void OnUploadCertificateResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
         bool ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container);

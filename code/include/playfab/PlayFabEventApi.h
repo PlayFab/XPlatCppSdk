@@ -23,6 +23,8 @@ namespace PlayFab
         /// - callback is a pointer to user's function to receive a notification about the outcome of the operation when the event is sent out or any error occurred.
         /// </summary>
         void EmitEvent(std::unique_ptr<const IPlayFabEvent> event, const PlayFabEmitEventCallback callback) const;
+        
+        void EmitEvent(std::unique_ptr<const IPlayFabEvent> event, std::function<void(std::shared_ptr<const IPlayFabEvent>, std::shared_ptr<const IPlayFabEmitEventResponse>)> callback) const;
 
     private:
         std::shared_ptr<IPlayFabEventRouter> eventRouter;

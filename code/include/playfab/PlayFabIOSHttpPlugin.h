@@ -43,10 +43,10 @@ namespace PlayFab
 
             bool Initialize(std::unique_ptr<CallRequestContainerBase>& requestContainer);
             
-            enum State:int
+            enum class State:int
             {
                 None = 0,
-                Pending = RequestTask::None,
+                Pending = (int)RequestTask::State::None,
                 Requesting,
                 Finished
             };

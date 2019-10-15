@@ -86,6 +86,11 @@ namespace PlayFabUnit
     int PlayFabEventTest::eventFailCount;
     std::string PlayFabEventTest::eventFailLog;
 
+    void PlayFabEventTest::NonStaticEmitEventCallback(std::shared_ptr<const PlayFab::IPlayFabEvent> event, std::shared_ptr<const PlayFab::IPlayFabEmitEventResponse> response)
+    {
+        (*eventTestContext)->Pass("Private member called back!");
+    }
+    
     void PlayFabEventTest::EmitEventCallback(std::shared_ptr<const PlayFab::IPlayFabEvent> event, std::shared_ptr<const PlayFab::IPlayFabEmitEventResponse> response)
     {
         auto pfEvent = std::dynamic_pointer_cast<const PlayFab::PlayFabEvent>(event);
@@ -101,7 +106,7 @@ namespace PlayFabUnit
                     "in the batch #" + std::to_string(pfResponse->batchNumber) + " "
                     "of " + std::to_string(pfResponse->batch->size()) + " events. "
                     "HTTP code: " + std::to_string(pfResponse->playFabError->HttpCode) +
-                    ", app error code: " + std::to_string(pfResponse->playFabError->ErrorCode) + "\n";
+                    ", app error code: " + std::to_string(static_cast<int>(pfResponse->playFabError->ErrorCode)) + "\n";
 
                 // Keep track of the highest batch number.
                 eventBatchMax = (pfResponse->batchNumber > eventBatchMax) ? pfResponse->batchNumber : eventBatchMax;
@@ -114,7 +119,7 @@ namespace PlayFabUnit
                     "in the batch #" + std::to_string(pfResponse->batchNumber) + " "
                     "of " + std::to_string(pfResponse->batch->size()) + " events. "
                     "HTTP code: " + std::to_string(pfResponse->playFabError->HttpCode) +
-                    ", app error code: " + std::to_string(pfResponse->playFabError->ErrorCode) +
+                    ", app error code: " + std::to_string(static_cast<int>(pfResponse->playFabError->ErrorCode)) +
                     ", HTTP status: " + pfResponse->playFabError->HttpStatus +
                     ", Message: " + pfResponse->playFabError->ErrorMessage +
                     "\n";
@@ -137,27 +142,16 @@ namespace PlayFabUnit
                 (*eventTestContext)->Pass();
         }
     }
-    void PlayFabEventTest::EmitEvents(PlayFab::PlayFabEventType eventType)
+
+    void PlayFabEventTest::EmitEvents(PlayFab::PlayFabEventType eventType, int maxBatchWaitTime, int maxItemsInBatch, int maxBatchesInFlight)
     {
+        std::shared_ptr<PlayFabEventAPI*> api = SetupEventTest(maxBatchWaitTime, maxItemsInBatch, maxBatchesInFlight);
         // Emit several events quickly.
         // They will be batched up according to pipeline's settings
         for (int i = 0; i < eventEmitCount; i++)
         {
-            auto event = std::unique_ptr<PlayFab::PlayFabEvent>(new PlayFab::PlayFabEvent());
-
-            // user can specify whether it's 
-            // - lightweight (goes to 1DS), 
-            // - heavyweight (goes to PlayFab's WriteEvents), 
-            // - or anything else
-            event->eventType = eventType;
-            std::stringstream name;
-            name << "event_" << i;
-            event->SetName(name.str());
-            event->SetProperty("prop_A", 123);
-            event->SetProperty("prop_B", "hello, world!");
-            event->SetProperty("prop_C", true);
-
-            (*eventApi)->EmitEvent(std::move(event), EmitEventCallback);
+            auto event = MakeEvent(i, eventType);
+            (*api)->EmitEvent(std::move(event), EmitEventCallback);
         }
     }
 
@@ -168,17 +162,11 @@ namespace PlayFabUnit
     {
         eventTestContext = std::make_shared<TestContext*>(&testContext);
 
-        // test custom event API (it uses event pipeline (router, batching, etc))
-        eventApi = std::make_shared<PlayFabEventAPI*>(new PlayFabEventAPI()); // create Event API instance
+        int maxBatchWaitTime = 4;
+        int maxItemsInBatch = 4;
+        int maxBatchesInFlight = 3;
 
-        // adjust some pipeline settings
-        auto pipeline = std::dynamic_pointer_cast<PlayFab::PlayFabEventPipeline>((*eventApi)->GetEventRouter()->GetPipelines().at(PlayFab::EventPipelineKey::PlayFabPlayStream)); // get PF pipeline
-        auto settings = pipeline->GetSettings(); // get pipeline's settings
-        settings->maximalBatchWaitTime = 4; // incomplete batch expiration in seconds
-        settings->maximalNumberOfItemsInBatch = 4; // number of events in a batch
-        settings->maximalNumberOfBatchesInFlight = 3; // maximal number of batches processed simultaneously by a transport plugin before taking next events from the buffer
-
-        EmitEvents(PlayFab::PlayFabEventType::Heavyweight);
+        EmitEvents(PlayFab::PlayFabEventType::Heavyweight, maxBatchWaitTime, maxItemsInBatch, maxBatchesInFlight);
     }
 
     /// EVENTS API
@@ -188,17 +176,29 @@ namespace PlayFabUnit
     {
         eventTestContext = std::make_shared<TestContext*>(&testContext);
 
-        // test custom event API (it uses event pipeline (router, batching, etc))
-        eventApi = std::make_shared<PlayFabEventAPI*>(new PlayFabEventAPI()); // create Event API instance
-
-        // adjust some pipeline settings
-        auto pipeline = std::dynamic_pointer_cast<PlayFab::PlayFabEventPipeline>((*eventApi)->GetEventRouter()->GetPipelines().at(PlayFab::EventPipelineKey::PlayFabTelemetry)); // get non-playstream pipeline
-        auto settings = pipeline->GetSettings(); // get pipeline's settings
-        settings->maximalBatchWaitTime = 2; // incomplete batch expiration in seconds
-        settings->maximalNumberOfItemsInBatch = 3; // number of events in a batch
-        settings->maximalNumberOfBatchesInFlight = 10; // maximal number of batches processed simultaneously by a transport plugin before taking next events from the buffer
-
         EmitEvents(PlayFab::PlayFabEventType::Lightweight);
+    }
+
+    void PlayFabEventTest::LambdaCallbackTest(TestContext& testContext)
+    {
+        eventTestContext = std::make_shared<TestContext*>(&testContext);
+
+        std::shared_ptr<PlayFabEventAPI*> api = SetupEventTest();
+
+        (*api)->EmitEvent(MakeEvent(0, PlayFabEventType::Default),
+            [&testContext]
+            (std::shared_ptr<const IPlayFabEvent>, std::shared_ptr<const IPlayFabEmitEventResponse>)
+            { if(testContext.activeState != TestActiveState::COMPLETE){ testContext.Pass("Lambda Function Callback Succeeded.");}});
+    }
+
+    void PlayFabEventTest::PrivateMemberCallbackTest(TestContext& testContext)
+    {
+        eventTestContext = std::make_shared<TestContext*>(&testContext);
+
+        std::shared_ptr<PlayFabEventAPI*> api = SetupEventTest();
+
+        (*api)->EmitEvent(MakeEvent(0, PlayFabEventType::Default),
+        std::bind(&PlayFabEventTest::NonStaticEmitEventCallback, this, std::placeholders::_1, std::placeholders::_2));
     }
 
     void PlayFabEventTest::AddTests()
@@ -210,6 +210,8 @@ namespace PlayFabUnit
         AddTest("EventsApi", &PlayFabEventTest::EventsApi);
         AddTest("HeavyweightEvents", &PlayFabEventTest::HeavyweightEvents);
         AddTest("LightweightEvents", &PlayFabEventTest::LightweightEvents);
+        AddTest("LambdaCallback", &PlayFabEventTest::LambdaCallbackTest);
+        AddTest("PrivateMemberCallback", &PlayFabEventTest::PrivateMemberCallbackTest);
     }
 
     void PlayFabEventTest::ClassSetUp()
@@ -271,5 +273,37 @@ namespace PlayFabUnit
     {
         // Clean up any PlayFab state for next TestCase.
         PlayFabSettings::ForgetAllCredentials();
+    }
+
+    std::shared_ptr<PlayFabEventAPI*> PlayFabEventTest::SetupEventTest(int maxBatchWaitTime, int maxItemsInBatch, int maxBatchesInFlight)
+    {
+        // test custom event API (it uses event pipeline (router, batching, etc))
+        std::shared_ptr<PlayFabEventAPI*> api = std::make_shared<PlayFabEventAPI*>(new PlayFabEventAPI()); // create Event API instance
+
+        // adjust some pipeline settings
+        auto pipeline = std::dynamic_pointer_cast<PlayFab::PlayFabEventPipeline>((*api)->GetEventRouter()->GetPipelines().at(PlayFab::EventPipelineKey::PlayFabTelemetry)); // get non-playstream pipeline
+        auto settings = pipeline->GetSettings(); // get pipeline's settings
+        settings->maximalBatchWaitTime = maxBatchWaitTime; // incomplete batch expiration in seconds
+        settings->maximalNumberOfItemsInBatch = maxItemsInBatch; // number of events in a batch
+        settings->maximalNumberOfBatchesInFlight = maxBatchesInFlight; // maximal number of batches processed simultaneously by a transport plugin before taking next events from the buffer
+        return api;
+    }
+
+    std::unique_ptr<PlayFab::PlayFabEvent> PlayFabEventTest::MakeEvent(int i, PlayFab::PlayFabEventType eventType)
+    {
+        auto event = std::unique_ptr<PlayFab::PlayFabEvent>(new PlayFab::PlayFabEvent());
+
+        // user can specify whether it's 
+        // - lightweight (goes to 1DS), 
+        // - heavyweight (goes to PlayFab's WriteEvents), 
+        // - or anything else
+        event->eventType = eventType;
+        std::stringstream name;
+        name << "event_" << i;
+        event->SetName(name.str());
+        event->SetProperty("prop_A", 123);
+        event->SetProperty("prop_B", "hello, world!");
+        event->SetProperty("prop_C", true);
+        return event;
     }
 }

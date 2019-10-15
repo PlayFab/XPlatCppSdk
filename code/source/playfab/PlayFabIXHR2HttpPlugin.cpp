@@ -174,8 +174,11 @@ namespace PlayFab
 
         const HRESULT res = postEventRequest.GetResult();
         const DWORD status = postEventRequest.GetStatus();
-        auto response = postEventRequest.GetData();
+        const auto& response = postEventRequest.GetData();
+        const auto& responseRequestId = postEventRequest.GetResponseRequestId();
+
         reqContainer.responseString = std::string(response.begin(), response.end());
+        reqContainer.errorWrapper.RequestId = std::string(responseRequestId.begin(), responseRequestId.end());
 
         // 401 is a special case where the status does not bubble up and we have to parse it from the HRESULT
         if (status == 401)

@@ -151,7 +151,7 @@ namespace PlayFab
                 return -1;
             }
 
-            return sendto(s, message, static_cast<int>(strlen(message)), 0, (struct sockaddr *) &siOther, slen);
+            return static_cast<int>(sendto(s, message, static_cast<int>(strlen(message)), 0, (struct sockaddr *) &siOther, slen));
         }
 
         int XPlatSocket::ReceiveReply(char* buf, const int& buflen)
@@ -178,7 +178,7 @@ namespace PlayFab
                 {
                     return platformSpecificError();
                 }
-                return recvResult;
+                return static_cast<int>(recvResult);
             }
             else if (selectResult < 0)
             {

@@ -10,7 +10,7 @@ namespace PlayFab
     namespace AuthenticationModels
     {
         // Authentication Enums
-        enum LoginIdentityProvider
+        enum class LoginIdentityProvider
         {
             LoginIdentityProviderUnknown,
             LoginIdentityProviderPlayFab,
@@ -35,49 +35,49 @@ namespace PlayFab
 
         inline void ToJsonEnum(const LoginIdentityProvider input, Json::Value& output)
         {
-            if (input == LoginIdentityProviderUnknown) output = Json::Value("Unknown");
-            if (input == LoginIdentityProviderPlayFab) output = Json::Value("PlayFab");
-            if (input == LoginIdentityProviderCustom) output = Json::Value("Custom");
-            if (input == LoginIdentityProviderGameCenter) output = Json::Value("GameCenter");
-            if (input == LoginIdentityProviderGooglePlay) output = Json::Value("GooglePlay");
-            if (input == LoginIdentityProviderSteam) output = Json::Value("Steam");
-            if (input == LoginIdentityProviderXBoxLive) output = Json::Value("XBoxLive");
-            if (input == LoginIdentityProviderPSN) output = Json::Value("PSN");
-            if (input == LoginIdentityProviderKongregate) output = Json::Value("Kongregate");
-            if (input == LoginIdentityProviderFacebook) output = Json::Value("Facebook");
-            if (input == LoginIdentityProviderIOSDevice) output = Json::Value("IOSDevice");
-            if (input == LoginIdentityProviderAndroidDevice) output = Json::Value("AndroidDevice");
-            if (input == LoginIdentityProviderTwitch) output = Json::Value("Twitch");
-            if (input == LoginIdentityProviderWindowsHello) output = Json::Value("WindowsHello");
-            if (input == LoginIdentityProviderGameServer) output = Json::Value("GameServer");
-            if (input == LoginIdentityProviderCustomServer) output = Json::Value("CustomServer");
-            if (input == LoginIdentityProviderNintendoSwitch) output = Json::Value("NintendoSwitch");
-            if (input == LoginIdentityProviderFacebookInstantGames) output = Json::Value("FacebookInstantGames");
-            if (input == LoginIdentityProviderOpenIdConnect) output = Json::Value("OpenIdConnect");
+            if (input == LoginIdentityProvider::LoginIdentityProviderUnknown) output = Json::Value("Unknown");
+            if (input == LoginIdentityProvider::LoginIdentityProviderPlayFab) output = Json::Value("PlayFab");
+            if (input == LoginIdentityProvider::LoginIdentityProviderCustom) output = Json::Value("Custom");
+            if (input == LoginIdentityProvider::LoginIdentityProviderGameCenter) output = Json::Value("GameCenter");
+            if (input == LoginIdentityProvider::LoginIdentityProviderGooglePlay) output = Json::Value("GooglePlay");
+            if (input == LoginIdentityProvider::LoginIdentityProviderSteam) output = Json::Value("Steam");
+            if (input == LoginIdentityProvider::LoginIdentityProviderXBoxLive) output = Json::Value("XBoxLive");
+            if (input == LoginIdentityProvider::LoginIdentityProviderPSN) output = Json::Value("PSN");
+            if (input == LoginIdentityProvider::LoginIdentityProviderKongregate) output = Json::Value("Kongregate");
+            if (input == LoginIdentityProvider::LoginIdentityProviderFacebook) output = Json::Value("Facebook");
+            if (input == LoginIdentityProvider::LoginIdentityProviderIOSDevice) output = Json::Value("IOSDevice");
+            if (input == LoginIdentityProvider::LoginIdentityProviderAndroidDevice) output = Json::Value("AndroidDevice");
+            if (input == LoginIdentityProvider::LoginIdentityProviderTwitch) output = Json::Value("Twitch");
+            if (input == LoginIdentityProvider::LoginIdentityProviderWindowsHello) output = Json::Value("WindowsHello");
+            if (input == LoginIdentityProvider::LoginIdentityProviderGameServer) output = Json::Value("GameServer");
+            if (input == LoginIdentityProvider::LoginIdentityProviderCustomServer) output = Json::Value("CustomServer");
+            if (input == LoginIdentityProvider::LoginIdentityProviderNintendoSwitch) output = Json::Value("NintendoSwitch");
+            if (input == LoginIdentityProvider::LoginIdentityProviderFacebookInstantGames) output = Json::Value("FacebookInstantGames");
+            if (input == LoginIdentityProvider::LoginIdentityProviderOpenIdConnect) output = Json::Value("OpenIdConnect");
         }
         inline void FromJsonEnum(const Json::Value& input, LoginIdentityProvider& output)
         {
             if (!input.isString()) return;
             const std::string& inputStr = input.asString();
-            if (inputStr == "Unknown") output = LoginIdentityProviderUnknown;
-            if (inputStr == "PlayFab") output = LoginIdentityProviderPlayFab;
-            if (inputStr == "Custom") output = LoginIdentityProviderCustom;
-            if (inputStr == "GameCenter") output = LoginIdentityProviderGameCenter;
-            if (inputStr == "GooglePlay") output = LoginIdentityProviderGooglePlay;
-            if (inputStr == "Steam") output = LoginIdentityProviderSteam;
-            if (inputStr == "XBoxLive") output = LoginIdentityProviderXBoxLive;
-            if (inputStr == "PSN") output = LoginIdentityProviderPSN;
-            if (inputStr == "Kongregate") output = LoginIdentityProviderKongregate;
-            if (inputStr == "Facebook") output = LoginIdentityProviderFacebook;
-            if (inputStr == "IOSDevice") output = LoginIdentityProviderIOSDevice;
-            if (inputStr == "AndroidDevice") output = LoginIdentityProviderAndroidDevice;
-            if (inputStr == "Twitch") output = LoginIdentityProviderTwitch;
-            if (inputStr == "WindowsHello") output = LoginIdentityProviderWindowsHello;
-            if (inputStr == "GameServer") output = LoginIdentityProviderGameServer;
-            if (inputStr == "CustomServer") output = LoginIdentityProviderCustomServer;
-            if (inputStr == "NintendoSwitch") output = LoginIdentityProviderNintendoSwitch;
-            if (inputStr == "FacebookInstantGames") output = LoginIdentityProviderFacebookInstantGames;
-            if (inputStr == "OpenIdConnect") output = LoginIdentityProviderOpenIdConnect;
+            if (inputStr == "Unknown") output = LoginIdentityProvider::LoginIdentityProviderUnknown;
+            if (inputStr == "PlayFab") output = LoginIdentityProvider::LoginIdentityProviderPlayFab;
+            if (inputStr == "Custom") output = LoginIdentityProvider::LoginIdentityProviderCustom;
+            if (inputStr == "GameCenter") output = LoginIdentityProvider::LoginIdentityProviderGameCenter;
+            if (inputStr == "GooglePlay") output = LoginIdentityProvider::LoginIdentityProviderGooglePlay;
+            if (inputStr == "Steam") output = LoginIdentityProvider::LoginIdentityProviderSteam;
+            if (inputStr == "XBoxLive") output = LoginIdentityProvider::LoginIdentityProviderXBoxLive;
+            if (inputStr == "PSN") output = LoginIdentityProvider::LoginIdentityProviderPSN;
+            if (inputStr == "Kongregate") output = LoginIdentityProvider::LoginIdentityProviderKongregate;
+            if (inputStr == "Facebook") output = LoginIdentityProvider::LoginIdentityProviderFacebook;
+            if (inputStr == "IOSDevice") output = LoginIdentityProvider::LoginIdentityProviderIOSDevice;
+            if (inputStr == "AndroidDevice") output = LoginIdentityProvider::LoginIdentityProviderAndroidDevice;
+            if (inputStr == "Twitch") output = LoginIdentityProvider::LoginIdentityProviderTwitch;
+            if (inputStr == "WindowsHello") output = LoginIdentityProvider::LoginIdentityProviderWindowsHello;
+            if (inputStr == "GameServer") output = LoginIdentityProvider::LoginIdentityProviderGameServer;
+            if (inputStr == "CustomServer") output = LoginIdentityProvider::LoginIdentityProviderCustomServer;
+            if (inputStr == "NintendoSwitch") output = LoginIdentityProvider::LoginIdentityProviderNintendoSwitch;
+            if (inputStr == "FacebookInstantGames") output = LoginIdentityProvider::LoginIdentityProviderFacebookInstantGames;
+            if (inputStr == "OpenIdConnect") output = LoginIdentityProvider::LoginIdentityProviderOpenIdConnect;
         }
 
         // Authentication Classes

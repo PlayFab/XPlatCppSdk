@@ -10,7 +10,7 @@ namespace PlayFab
     namespace ProfilesModels
     {
         // Profiles Enums
-        enum EffectType
+        enum class EffectType
         {
             EffectTypeAllow,
             EffectTypeDeny
@@ -18,18 +18,18 @@ namespace PlayFab
 
         inline void ToJsonEnum(const EffectType input, Json::Value& output)
         {
-            if (input == EffectTypeAllow) output = Json::Value("Allow");
-            if (input == EffectTypeDeny) output = Json::Value("Deny");
+            if (input == EffectType::EffectTypeAllow) output = Json::Value("Allow");
+            if (input == EffectType::EffectTypeDeny) output = Json::Value("Deny");
         }
         inline void FromJsonEnum(const Json::Value& input, EffectType& output)
         {
             if (!input.isString()) return;
             const std::string& inputStr = input.asString();
-            if (inputStr == "Allow") output = EffectTypeAllow;
-            if (inputStr == "Deny") output = EffectTypeDeny;
+            if (inputStr == "Allow") output = EffectType::EffectTypeAllow;
+            if (inputStr == "Deny") output = EffectType::EffectTypeDeny;
         }
 
-        enum OperationTypes
+        enum class OperationTypes
         {
             OperationTypesCreated,
             OperationTypesUpdated,
@@ -39,19 +39,19 @@ namespace PlayFab
 
         inline void ToJsonEnum(const OperationTypes input, Json::Value& output)
         {
-            if (input == OperationTypesCreated) output = Json::Value("Created");
-            if (input == OperationTypesUpdated) output = Json::Value("Updated");
-            if (input == OperationTypesDeleted) output = Json::Value("Deleted");
-            if (input == OperationTypesNone) output = Json::Value("None");
+            if (input == OperationTypes::OperationTypesCreated) output = Json::Value("Created");
+            if (input == OperationTypes::OperationTypesUpdated) output = Json::Value("Updated");
+            if (input == OperationTypes::OperationTypesDeleted) output = Json::Value("Deleted");
+            if (input == OperationTypes::OperationTypesNone) output = Json::Value("None");
         }
         inline void FromJsonEnum(const Json::Value& input, OperationTypes& output)
         {
             if (!input.isString()) return;
             const std::string& inputStr = input.asString();
-            if (inputStr == "Created") output = OperationTypesCreated;
-            if (inputStr == "Updated") output = OperationTypesUpdated;
-            if (inputStr == "Deleted") output = OperationTypesDeleted;
-            if (inputStr == "None") output = OperationTypesNone;
+            if (inputStr == "Created") output = OperationTypes::OperationTypesCreated;
+            if (inputStr == "Updated") output = OperationTypes::OperationTypesUpdated;
+            if (inputStr == "Deleted") output = OperationTypes::OperationTypesDeleted;
+            if (inputStr == "None") output = OperationTypes::OperationTypesNone;
         }
 
         // Profiles Classes
@@ -375,6 +375,7 @@ namespace PlayFab
             std::string DisplayName;
             Boxed<EntityKey> Entity;
             std::string EntityChain;
+            std::list<std::string> ExperimentVariants;
             std::map<std::string, EntityProfileFileMetadata> Files;
             std::string Language;
             std::string LeaderboardMetadata;
@@ -391,6 +392,7 @@ namespace PlayFab
                 DisplayName(),
                 Entity(),
                 EntityChain(),
+                ExperimentVariants(),
                 Files(),
                 Language(),
                 LeaderboardMetadata(),
@@ -408,6 +410,7 @@ namespace PlayFab
                 DisplayName(src.DisplayName),
                 Entity(src.Entity),
                 EntityChain(src.EntityChain),
+                ExperimentVariants(src.ExperimentVariants),
                 Files(src.Files),
                 Language(src.Language),
                 LeaderboardMetadata(src.LeaderboardMetadata),
@@ -427,6 +430,7 @@ namespace PlayFab
                 FromJsonUtilS(input["DisplayName"], DisplayName);
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilS(input["EntityChain"], EntityChain);
+                FromJsonUtilS(input["ExperimentVariants"], ExperimentVariants);
                 FromJsonUtilO(input["Files"], Files);
                 FromJsonUtilS(input["Language"], Language);
                 FromJsonUtilS(input["LeaderboardMetadata"], LeaderboardMetadata);
@@ -445,6 +449,7 @@ namespace PlayFab
                 Json::Value each_DisplayName; ToJsonUtilS(DisplayName, each_DisplayName); output["DisplayName"] = each_DisplayName;
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
                 Json::Value each_EntityChain; ToJsonUtilS(EntityChain, each_EntityChain); output["EntityChain"] = each_EntityChain;
+                Json::Value each_ExperimentVariants; ToJsonUtilS(ExperimentVariants, each_ExperimentVariants); output["ExperimentVariants"] = each_ExperimentVariants;
                 Json::Value each_Files; ToJsonUtilO(Files, each_Files); output["Files"] = each_Files;
                 Json::Value each_Language; ToJsonUtilS(Language, each_Language); output["Language"] = each_Language;
                 Json::Value each_LeaderboardMetadata; ToJsonUtilS(LeaderboardMetadata, each_LeaderboardMetadata); output["LeaderboardMetadata"] = each_LeaderboardMetadata;

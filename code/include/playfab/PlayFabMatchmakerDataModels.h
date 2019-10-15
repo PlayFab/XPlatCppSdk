@@ -10,7 +10,7 @@ namespace PlayFab
     namespace MatchmakerModels
     {
         // Matchmaker Enums
-        enum Region
+        enum class Region
         {
             RegionUSCentral,
             RegionUSEast,
@@ -23,25 +23,25 @@ namespace PlayFab
 
         inline void ToJsonEnum(const Region input, Json::Value& output)
         {
-            if (input == RegionUSCentral) output = Json::Value("USCentral");
-            if (input == RegionUSEast) output = Json::Value("USEast");
-            if (input == RegionEUWest) output = Json::Value("EUWest");
-            if (input == RegionSingapore) output = Json::Value("Singapore");
-            if (input == RegionJapan) output = Json::Value("Japan");
-            if (input == RegionBrazil) output = Json::Value("Brazil");
-            if (input == RegionAustralia) output = Json::Value("Australia");
+            if (input == Region::RegionUSCentral) output = Json::Value("USCentral");
+            if (input == Region::RegionUSEast) output = Json::Value("USEast");
+            if (input == Region::RegionEUWest) output = Json::Value("EUWest");
+            if (input == Region::RegionSingapore) output = Json::Value("Singapore");
+            if (input == Region::RegionJapan) output = Json::Value("Japan");
+            if (input == Region::RegionBrazil) output = Json::Value("Brazil");
+            if (input == Region::RegionAustralia) output = Json::Value("Australia");
         }
         inline void FromJsonEnum(const Json::Value& input, Region& output)
         {
             if (!input.isString()) return;
             const std::string& inputStr = input.asString();
-            if (inputStr == "USCentral") output = RegionUSCentral;
-            if (inputStr == "USEast") output = RegionUSEast;
-            if (inputStr == "EUWest") output = RegionEUWest;
-            if (inputStr == "Singapore") output = RegionSingapore;
-            if (inputStr == "Japan") output = RegionJapan;
-            if (inputStr == "Brazil") output = RegionBrazil;
-            if (inputStr == "Australia") output = RegionAustralia;
+            if (inputStr == "USCentral") output = Region::RegionUSCentral;
+            if (inputStr == "USEast") output = Region::RegionUSEast;
+            if (inputStr == "EUWest") output = Region::RegionEUWest;
+            if (inputStr == "Singapore") output = Region::RegionSingapore;
+            if (inputStr == "Japan") output = Region::RegionJapan;
+            if (inputStr == "Brazil") output = Region::RegionBrazil;
+            if (inputStr == "Australia") output = Region::RegionAustralia;
         }
 
         // Matchmaker Classes

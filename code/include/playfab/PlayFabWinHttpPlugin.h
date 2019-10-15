@@ -30,7 +30,7 @@ namespace PlayFab
         virtual std::string GetUrl(CallRequestContainer& requestContainer) const;
         virtual void SetPredefinedHeaders(CallRequestContainer& requestContainer, HINTERNET hRequest);
         virtual bool GetBinaryPayload(CallRequestContainer& requestContainer, LPVOID& payload, DWORD& payloadSize) const;
-        virtual void ProcessResponse(CallRequestContainer& requestContainer, const int httpCode);
+        virtual void ProcessResponse(CallRequestContainer& requestContainer, const int httpCode, std::string&& requestId);
         void WorkerThread();
         void HandleCallback(std::unique_ptr<CallRequestContainer> requestContainer);
         void HandleResults(std::unique_ptr<CallRequestContainer> requestContainer);

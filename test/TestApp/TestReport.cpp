@@ -81,6 +81,12 @@ namespace PlayFabUnit
             case TestFinishState::PASSED: internalReport.passed += 1; break;
             case TestFinishState::FAILED: internalReport.failures += 1; break;
             case TestFinishState::SKIPPED: internalReport.skipped += 1; break;
+            case TestFinishState::PENDING:
+                break;
+            case TestFinishState::TIMEDOUT: 
+                break;
+            default:
+                break;
         }
 
         // Update overall runtime.

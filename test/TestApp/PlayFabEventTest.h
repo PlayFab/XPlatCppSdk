@@ -44,6 +44,9 @@ namespace PlayFabUnit
             ///   and processed in a background thread using event pipeline (router, batching, etc))
             void LightweightEvents(TestContext& testContext);
 
+            void LambdaCallbackTest(TestContext& testContext);
+            void PrivateMemberCallbackTest(TestContext& testContext);
+
             // State
             bool loggedIn;
             std::shared_ptr<PlayFab::PlayFabEventAPI*> eventApi;
@@ -55,13 +58,17 @@ namespace PlayFabUnit
             static std::string eventFailLog;
 
             // Utility
-            void EmitEvents(PlayFab::PlayFabEventType eventType);
+            void EmitEvents(PlayFab::PlayFabEventType eventType, int maxBatchWaitTime=2, int maxItemsInBatch=3, int maxBatchesInFlight=10);
             static void EmitEventCallback(std::shared_ptr<const PlayFab::IPlayFabEvent> event, std::shared_ptr<const PlayFab::IPlayFabEmitEventResponse> response);
+            void NonStaticEmitEventCallback(std::shared_ptr<const PlayFab::IPlayFabEvent> event, std::shared_ptr<const PlayFab::IPlayFabEmitEventResponse> response);
 
             template<typename T> std::function<void(const T&, void*)> Callback(void(PlayFabEventTest::*func)(const T&, void*))
             {
                 return std::bind(func, this, std::placeholders::_1, std::placeholders::_2);
             }
+
+            std::shared_ptr<PlayFab::PlayFabEventAPI*> SetupEventTest(int maxBatchWaitTime=2, int maxItemSinBatch=3, int maxBatchesInFlight=10);
+            std::unique_ptr<PlayFab::PlayFabEvent> MakeEvent(int i, PlayFab::PlayFabEventType eventType);
 
         protected:
             void AddTests() override;

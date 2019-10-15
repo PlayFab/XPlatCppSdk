@@ -25,7 +25,7 @@ namespace PlayFab
         constexpr int NUM_OF_PING_ITERATIONS = 3;
 
         // These are possible error code for QoSResult.errorCode
-        enum QoSErrorCode
+        enum class QoSErrorCode
         {
             Success = 0,
             NotLoggedIn = 1,

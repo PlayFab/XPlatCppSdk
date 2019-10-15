@@ -127,6 +127,56 @@ namespace PlayFab
         }
     }
 
+    void PlayFabMultiplayerAPI::CreateBuildAlias(
+        CreateBuildAliasRequest& request,
+        ProcessApiCallback<BuildAliasDetailsResponse> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const auto requestJson = request.ToJson();
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/MultiplayerServer/CreateBuildAlias",
+            headers,
+            jsonAsString,
+            OnCreateBuildAliasResult,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<BuildAliasDetailsResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        if (PlayFabSettings::ValidateSettings("EntityToken", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
+    }
+
+    void PlayFabMultiplayerAPI::OnCreateBuildAliasResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+
+        BuildAliasDetailsResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<BuildAliasDetailsResponse> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
     void PlayFabMultiplayerAPI::CreateBuildWithCustomContainer(
         CreateBuildWithCustomContainerRequest& request,
         ProcessApiCallback<CreateBuildWithCustomContainerResponse> callback,
@@ -477,6 +527,56 @@ namespace PlayFab
         }
     }
 
+    void PlayFabMultiplayerAPI::DeleteBuildAlias(
+        DeleteBuildAliasRequest& request,
+        ProcessApiCallback<EmptyResponse> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const auto requestJson = request.ToJson();
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/MultiplayerServer/DeleteBuildAlias",
+            headers,
+            jsonAsString,
+            OnDeleteBuildAliasResult,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        if (PlayFabSettings::ValidateSettings("EntityToken", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
+    }
+
+    void PlayFabMultiplayerAPI::OnDeleteBuildAliasResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+
+        EmptyResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
     void PlayFabMultiplayerAPI::DeleteCertificate(
         DeleteCertificateRequest& request,
         ProcessApiCallback<EmptyResponse> callback,
@@ -722,6 +822,56 @@ namespace PlayFab
             if (internalPtr != nullptr)
             {
                 const auto callback = (*static_cast<ProcessApiCallback<GetBuildResponse> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabMultiplayerAPI::GetBuildAlias(
+        GetBuildAliasRequest& request,
+        ProcessApiCallback<BuildAliasDetailsResponse> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const auto requestJson = request.ToJson();
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/MultiplayerServer/GetBuildAlias",
+            headers,
+            jsonAsString,
+            OnGetBuildAliasResult,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<BuildAliasDetailsResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        if (PlayFabSettings::ValidateSettings("EntityToken", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
+    }
+
+    void PlayFabMultiplayerAPI::OnGetBuildAliasResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+
+        BuildAliasDetailsResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<BuildAliasDetailsResponse> *>(internalPtr));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -1272,6 +1422,56 @@ namespace PlayFab
             if (internalPtr != nullptr)
             {
                 const auto callback = (*static_cast<ProcessApiCallback<ListAssetSummariesResponse> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabMultiplayerAPI::ListBuildAliases(
+        MultiplayerEmptyRequest& request,
+        ProcessApiCallback<ListBuildAliasesForTitleResponse> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const auto requestJson = request.ToJson();
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/MultiplayerServer/ListBuildAliases",
+            headers,
+            jsonAsString,
+            OnListBuildAliasesResult,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListBuildAliasesForTitleResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        if (PlayFabSettings::ValidateSettings("EntityToken", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
+    }
+
+    void PlayFabMultiplayerAPI::OnListBuildAliasesResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+
+        ListBuildAliasesForTitleResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<ListBuildAliasesForTitleResponse> *>(internalPtr));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -1922,6 +2122,56 @@ namespace PlayFab
             if (internalPtr != nullptr)
             {
                 const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabMultiplayerAPI::UpdateBuildAlias(
+        UpdateBuildAliasRequest& request,
+        ProcessApiCallback<BuildAliasDetailsResponse> callback,
+        ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const auto requestJson = request.ToJson();
+
+        Json::FastWriter writer;
+        std::string jsonAsString = writer.write(requestJson);
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/MultiplayerServer/UpdateBuildAlias",
+            headers,
+            jsonAsString,
+            OnUpdateBuildAliasResult,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<BuildAliasDetailsResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        if (PlayFabSettings::ValidateSettings("EntityToken", request.authenticationContext, nullptr, *reqContainer))
+        {
+            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+        }
+    }
+
+    void PlayFabMultiplayerAPI::OnUpdateBuildAliasResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+
+        BuildAliasDetailsResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+
+            const auto internalPtr = container.successCallback.get();
+            if (internalPtr != nullptr)
+            {
+                const auto callback = (*static_cast<ProcessApiCallback<BuildAliasDetailsResponse> *>(internalPtr));
                 callback(outResult, container.GetCustomData());
             }
         }

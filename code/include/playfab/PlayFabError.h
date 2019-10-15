@@ -5,7 +5,7 @@
 
 namespace PlayFab
 {
-    enum PlayFabErrorCode
+    enum  class PlayFabErrorCode
     {
         PlayFabErrorHostnameNotFound = 1,
         PlayFabErrorConnectionTimeout,
@@ -568,6 +568,7 @@ namespace PlayFab
         std::string ErrorMessage;
         Json::Value ErrorDetails;
         Json::Value Data;
+        std::string RequestId;
         // Non-serialized fields
         std::string UrlPath;
         Json::Value Request;

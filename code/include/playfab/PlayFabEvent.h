@@ -101,6 +101,7 @@ namespace PlayFab
     public:
         std::shared_ptr<const PlayFabEvent> event; // a pointer to the user's event object itself
         PlayFabEmitEventCallback callback; // user's callback function to return the final result of emit event operation after event is completely sent out or any error occurred
+        std::function<void(std::shared_ptr<const IPlayFabEvent>, std::shared_ptr<const IPlayFabEmitEventResponse>)> stdCallback; // same as EventCallback but can be used with member variables if needed.
     };
 
     /// <summary>

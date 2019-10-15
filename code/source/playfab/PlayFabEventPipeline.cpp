@@ -111,7 +111,7 @@ namespace PlayFab
             playFabEmitEventResponse->emitEventResult = emitResult;
 
             // call an emit event callback
-            playFabEmitRequest->callback(playFabEmitRequest->event, std::move(playFabEmitEventResponse));
+            CallbackRequest(playFabEmitRequest, std::move(playFabEmitEventResponse));
         }
         catch (...)
         {
@@ -284,7 +284,7 @@ namespace PlayFab
                     playFabEmitEventResponse->batchNumber = reinterpret_cast<size_t>(customData);
 
                     // call an emit event callback
-                    playFabEmitRequest->callback(playFabEmitRequest->event, std::move(playFabEmitEventResponse));
+                    CallbackRequest(playFabEmitRequest, std::move(playFabEmitEventResponse));
                 }
 
                 // remove the batch from tracking map
@@ -322,7 +322,7 @@ namespace PlayFab
                     playFabEmitEventResponse->batchNumber = reinterpret_cast<size_t>(customData);
 
                     // call an emit event callback
-                    playFabEmitRequest->callback(playFabEmitRequest->event, std::move(playFabEmitEventResponse));
+                    CallbackRequest(playFabEmitRequest, std::move(playFabEmitEventResponse));
                 }
 
                 // remove the batch from tracking map
@@ -332,6 +332,21 @@ namespace PlayFab
         catch (...)
         {
             LOG_PIPELINE("An exception was caught in PlayFabEventPipeline::WriteEventsApiErrorCallback method");
+        }
+    }
+
+    void PlayFabEventPipeline::CallbackRequest(std::shared_ptr<const IPlayFabEmitEventRequest> request, std::shared_ptr<const IPlayFabEmitEventResponse> response)
+    {
+        const auto& playFabEmitRequest = std::dynamic_pointer_cast<const PlayFabEmitEventRequest>(request);
+
+        if(playFabEmitRequest->callback != nullptr)
+        {
+            playFabEmitRequest->callback(playFabEmitRequest->event, std::move(response));
+        }
+
+        if(playFabEmitRequest->stdCallback != nullptr)
+        {
+            playFabEmitRequest->stdCallback(playFabEmitRequest->event, std::move(response));
         }
     }
 }

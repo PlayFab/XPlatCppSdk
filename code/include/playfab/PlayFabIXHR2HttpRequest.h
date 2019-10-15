@@ -62,6 +62,7 @@ namespace PlayFab
         const BOOL      WaitForFinish();
         const std::wstring& GetHeaders()  const { return m_headers; };
         const std::wstring& GetData()     const { return m_data; };
+        const std::wstring& GetResponseRequestId()  const { return m_responseRequestId; };
         HRESULT   GetHR()           const { return m_hr; };
         DWORD     GetHTTPStatus()   const { return m_httpStatus; };
 
@@ -76,6 +77,7 @@ namespace PlayFab
         DWORD        m_httpStatus;
         std::wstring m_headers;
         std::wstring m_data;
+        std::wstring m_responseRequestId;
     };
 
     // ----------------------------------------------------------------------------
@@ -149,6 +151,7 @@ namespace PlayFab
 
         const std::wstring& GetHeaders() { return m_pHttpCallback->GetHeaders(); }
         const std::wstring& GetData() { return m_pHttpCallback->GetData(); }
+        const std::wstring& GetResponseRequestId() { return m_pHttpCallback->GetResponseRequestId(); }
 
     private:
         HRESULT CreateRequest(const std::wstring& verb, const std::wstring& url);

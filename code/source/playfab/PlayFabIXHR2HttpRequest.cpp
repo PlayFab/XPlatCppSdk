@@ -114,6 +114,17 @@ IFACEMETHODIMP HttpCallback::OnHeadersAvailable(IXMLHTTPRequest2 *pXHR, DWORD dw
         hr = S_OK;
     }
 
+    if (SUCCEEDED(hr))
+    {
+        wchar_t* responseRequestId;
+        hr = pXHR->GetResponseHeader(L"X-RequestId", &responseRequestId);
+        if (SUCCEEDED(hr))
+        {
+            m_responseRequestId = responseRequestId;
+            ::CoTaskMemFree(responseRequestId);
+        }
+    }
+
     // The header string that was passed in needs to be deleted here.
     if (headers != nullptr)
     {
@@ -424,7 +435,7 @@ HRESULT HttpRequest::Open(const std::wstring& verb, const std::wstring& url, con
     {
         // Create and open a new runtime class
         m_requestStream = Make<RequestStream>();
-        m_requestStream->Open(data.c_str(), static_cast<ULONG>(data.length()));
+        m_requestStream->Open(data.c_str(), static_cast<uint32_t>(data.length()));
 
         hr = m_pXHR->Send(m_requestStream.Get(),        // body message as an ISequentialStream*
             m_requestStream->Size());    // count of bytes in the stream.
@@ -516,7 +527,7 @@ HRESULT HttpRequest::Open(const std::wstring& verb, const std::wstring& url, con
     {
         // Create and open a new runtime class
         m_requestStream = Make<RequestStream>();
-        m_requestStream->Open(reinterpret_cast<const char*>(data), datalength);
+        m_requestStream->Open(reinterpret_cast<const char*>(data), static_cast<uint32_t>(datalength));
 
         hr = m_pXHR->Send(m_requestStream.Get(),        // body message as an ISequentialStream*
             m_requestStream->Size());    // count of bytes in the stream.

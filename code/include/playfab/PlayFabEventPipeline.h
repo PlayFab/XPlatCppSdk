@@ -76,6 +76,7 @@ namespace PlayFab
         void WorkerThread();        
         void WriteEventsApiCallback(const EventsModels::WriteEventsResponse& result, void* customData);
         void WriteEventsApiErrorCallback(const PlayFabError& error, void* customData);
+        void CallbackRequest(std::shared_ptr<const IPlayFabEmitEventRequest> request, std::shared_ptr<const IPlayFabEmitEventResponse> response);
 
     protected:
         // PlayFab's public Events API (e.g. WriteEvents method) allows to pass only a pointer to some custom object (void* customData) that will be relayed back to its callbacks. 

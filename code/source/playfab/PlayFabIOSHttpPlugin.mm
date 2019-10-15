@@ -33,7 +33,7 @@ namespace PlayFab
     };
 
     PlayFabIOSHttpPlugin::RequestTask::RequestTask() :
-        state(RequestTask::None),
+        state(RequestTask::State::None),
         impl(nullptr),
         requestContainer(nullptr)
     {
@@ -108,7 +108,7 @@ namespace PlayFab
         if(requestTask != nullptr)
         { // LOCK httpRequestMutex
             std::unique_lock<std::mutex> lock(httpRequestMutex);
-            requestTask->state = RequestTask::Pending;
+            requestTask->state = RequestTask::State::Pending;
             pendingRequests.push_back(std::move(requestTask));
             if(workerThread == nullptr)
             {
@@ -176,18 +176,18 @@ namespace PlayFab
             } // UNLOCK httpRequestMutex
             switch (state)
             {
-                case RequestTask::Pending:
+                case RequestTask::State::Pending:
                 {
                     ExecuteRequest(*(this->requestingTask));
-                    this->requestingTask->state = RequestTask::Requesting;
+                    this->requestingTask->state = RequestTask::State::Requesting;
                     break;
                 }
-                case RequestTask::Requesting:
+                case RequestTask::State::Requesting:
                 {
                     std::this_thread::yield();
                     break;
                 }
-                case RequestTask::Finished:
+                case RequestTask::State::Finished:
                 {
                     if (PlayFabSettings::threadedCallbacks)
                     {
@@ -262,7 +262,7 @@ namespace PlayFab
                                                                        ProcessResponse(*request, static_cast<const int>(httpResponse.statusCode));
                                                                        { // LOCK httpRequestMutex
                                                                            lock->lock();
-                                                                           request->state = RequestTask::Finished;
+                                                                           request->state = RequestTask::State::Finished;
                                                                            lock->unlock();
                                                                        } // UNLOCK httpRequestMutex
                                                                    }];

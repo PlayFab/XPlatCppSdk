@@ -203,7 +203,7 @@ namespace PlayFab
     };
 
     PlayFabAndroidHttpPlugin::RequestTask::RequestTask() :
-        state(RequestTask::None),
+        state(RequestTask::State::None),
         impl(nullptr),
         requestContainer(nullptr)
     {
@@ -261,7 +261,7 @@ namespace PlayFab
         if(requestTask != nullptr)
         { // LOCK httpRequestMutex
             std::unique_lock<std::mutex> lock(httpRequestMutex);
-            requestTask->state = RequestTask::Pending;
+            requestTask->state = RequestTask::State::Pending;
             pendingRequests.push_back(std::move(requestTask));
             if(workerThread == nullptr)
             {
@@ -352,30 +352,30 @@ namespace PlayFab
                 state = this->requestingTask->state;
             } // UNLOCK httpRequestMutex
             switch (state) {
-                case RequestTask::Pending:
+                case RequestTask::State::Pending:
                 {
                     if (ExecuteRequest(*(this->requestingTask)))
                     {
-                        this->requestingTask->state = RequestTask::Requesting;
+                        this->requestingTask->state = RequestTask::State::Requesting;
                     }
                     else
                     {
                         SetResponseAsBadRequest(*(this->requestingTask));
-                        this->requestingTask->state = RequestTask::Finished;
+                        this->requestingTask->state = RequestTask::State::Finished;
                     }
                     break;
                 }
-                case RequestTask::Requesting:
+                case RequestTask::State::Requesting:
                 {
                     if (CheckResponse(*(this->requestingTask)) == false)
                     {
                         SetResponseAsBadRequest(*(this->requestingTask));
-                        this->requestingTask->state = RequestTask::Finished;
+                        this->requestingTask->state = RequestTask::State::Finished;
                     }
                     std::this_thread::yield();
                     break;
                 }
-                case RequestTask::Finished:
+                case RequestTask::State::Finished:
                 {
                     if (PlayFabSettings::threadedCallbacks)
                     {
@@ -583,7 +583,7 @@ namespace PlayFab
 
             { // LOCK httpRequestMutex
                 std::unique_lock<std::mutex> lock(httpRequestMutex);
-                requestTask.state = RequestTask::Finished;
+                requestTask.state = RequestTask::State::Finished;
             } // UNLOCK httpRequestMutex
         }
 

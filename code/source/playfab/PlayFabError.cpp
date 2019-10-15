@@ -25,7 +25,7 @@ namespace PlayFab
         // This is not expected to be used, but implemented for completeness
         Json::Value output;
         output["code"] = Json::Value(HttpCode);
-        output["errorCode"] = Json::Value(ErrorCode);
+        output["errorCode"] = Json::Value(static_cast<int>(ErrorCode));
         output["status"] = Json::Value(HttpStatus);
         output["error"] = Json::Value(ErrorName);
         output["errorMessage"] = Json::Value(ErrorMessage);

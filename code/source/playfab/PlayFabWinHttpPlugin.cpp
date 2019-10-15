@@ -156,7 +156,13 @@ namespace PlayFab
 
             // Use WinHttpOpen to obtain a session handle
             hSession = WinHttpOpen(L"PlayFab Agent",
+#ifdef PLAYFAB_WIN7
+                // WINHTTP_ACCESS_TYPE_DEFAULT_PROXY is deprecated on Windows 8.1 and newer
                 WINHTTP_ACCESS_TYPE_DEFAULT_PROXY,
+#else
+                // WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY is supported in Windows 8.1 and newer
+                WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY,
+#endif // PLAYFAB_WIN7
                 WINHTTP_NO_PROXY_NAME,
                 WINHTTP_NO_PROXY_BYPASS, 0);
             if (!hSession)
@@ -277,9 +283,56 @@ namespace PlayFab
 
                                     } while (dwSize > 0);
 
+                                    std::string requestId;
                                     if (bResults)
                                     {
-                                        ProcessResponse(reqContainer, dwStatusCode);
+                                        constexpr wchar_t requestIdHeaderName[] = L"X-RequestId";
+
+                                        DWORD wideRequestIdByteCount;
+                                        bResults = WinHttpQueryHeaders(
+                                            hRequest,
+                                            WINHTTP_QUERY_CUSTOM,
+                                            requestIdHeaderName,
+                                            WINHTTP_NO_OUTPUT_BUFFER,
+                                            &wideRequestIdByteCount,
+                                            WINHTTP_NO_HEADER_INDEX);
+
+                                        std::unique_ptr<wchar_t[]> wideRequestIdBuffer;
+                                        DWORD queryError = GetLastError();
+                                        if (queryError == ERROR_INSUFFICIENT_BUFFER)
+                                        {
+                                            // WinHttpQueryHeaders excludes the null terminator from the length
+                                            DWORD wideRequestIdLength = wideRequestIdByteCount / sizeof(wideRequestIdBuffer[0]);
+                                            wideRequestIdBuffer = std::make_unique<wchar_t[]>(wideRequestIdLength + 1);
+                                            bResults = WinHttpQueryHeaders(
+                                                hRequest,
+                                                WINHTTP_QUERY_CUSTOM,
+                                                requestIdHeaderName,
+                                                wideRequestIdBuffer.get(),
+                                                &wideRequestIdByteCount,
+                                                WINHTTP_NO_HEADER_INDEX);
+                                            if (bResults)
+                                            {
+                                                requestId = std::string(wideRequestIdBuffer.get(), wideRequestIdBuffer.get() + wideRequestIdLength);
+                                            }
+                                            else
+                                            {
+                                                SetErrorInfo(
+                                                    reqContainer,
+                                                    "Error querying for X-RequestId response header: " + std::to_string(GetLastError()));
+                                            }
+                                        }
+                                        else
+                                        {
+                                            SetErrorInfo(
+                                                reqContainer,
+                                                "Error querying for X-RequestId response header size: " + std::to_string(queryError));
+                                        }
+                                    }
+
+                                    if (bResults)
+                                    {
+                                        ProcessResponse(reqContainer, dwStatusCode, std::move(requestId));
                                     }
                                 } // WinHttpQueryHeaders
                             } // WinHttpReceiveResponse
@@ -315,7 +368,7 @@ namespace PlayFab
         return false;
     }
 
-    void PlayFabWinHttpPlugin::ProcessResponse(CallRequestContainer& reqContainer, const int httpCode)
+    void PlayFabWinHttpPlugin::ProcessResponse(CallRequestContainer& reqContainer, const int httpCode, std::string&& requestId)
     {
         Json::CharReaderBuilder jsonReaderFactory;
         std::unique_ptr<Json::CharReader> jsonReader(jsonReaderFactory.newCharReader());
@@ -341,6 +394,8 @@ namespace PlayFab
             reqContainer.errorWrapper.ErrorName = "Failed to parse PlayFab response";
             reqContainer.errorWrapper.ErrorMessage = jsonParseErrors;
         }
+
+        reqContainer.errorWrapper.RequestId = std::move(requestId);
     }
 
     void PlayFabWinHttpPlugin::SetErrorInfo(CallRequestContainer& requestContainer, const std::string& errorMessage, const int httpCode) const

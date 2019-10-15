@@ -93,9 +93,9 @@ namespace PlayFab
 
         QoSResult PlayFabQoSApi::GetQoSResult(unsigned int numThreads, unsigned int timeoutMs)
         {
-            QoSResult result(move(GetResult(numThreads, timeoutMs)));
+            QoSResult result(GetResult(numThreads, timeoutMs));
 
-            if (result.errorCode != QoSErrorCode::Success)
+            if (result.errorCode != static_cast<int>(QoSErrorCode::Success))
             {
                 return result;
             }
@@ -111,7 +111,7 @@ namespace PlayFab
             if (!PlayFabClientAPI::IsClientLoggedIn())
             {
                 LOG_QOS("Client is not logged in" << endl);
-                result.errorCode = QoSErrorCode::NotLoggedIn;
+                result.errorCode = static_cast<int>(QoSErrorCode::NotLoggedIn);
                 return result;
             }
 
@@ -129,13 +129,13 @@ namespace PlayFab
             size_t serverCount = regionMap.size(); // call thunderhead to get a list of all the data centers
             if (serverCount <= 0)
             {
-                result.errorCode = QoSErrorCode::FailedToRetrieveServerList;
+                result.errorCode = static_cast<int>(QoSErrorCode::FailedToRetrieveServerList);
                 return result;
             }
 
             // get a list of region pings that need to be done
             result.regionResults.reserve(serverCount);
-            vector<std::string> pings = move(GetPingList(static_cast<unsigned int>(serverCount)));
+            vector<std::string> pings = GetPingList(static_cast<unsigned int>(serverCount));
 
             // initialize accumulated results with empty (zeroed) ping results
             unordered_map<std::string, PingResult> accumulatedPingResults;
@@ -166,7 +166,7 @@ namespace PlayFab
             {
                 // Calculate the latency
                 int latency = (it->second.pingCount == 0) ? INT32_MAX : it->second.latencyMs / it->second.pingCount;
-                result.regionResults.push_back(move(RegionResult(it->first, latency, it->second.errorCode)));
+                result.regionResults.push_back(RegionResult(it->first, latency, it->second.errorCode));
             }
 
             std::sort(result.regionResults.begin(), result.regionResults.end(), [](const RegionResult& first, const RegionResult& second) -> bool {return first.latencyMs < second.latencyMs; });
@@ -308,7 +308,7 @@ namespace PlayFab
         {
             for (int i = 0; i < asyncPingResults.size(); ++i)
             {
-                asyncPingResults[i] = move(future<PingResult>()); // create a fake future
+                asyncPingResults[i] = future<PingResult>(); // create a fake future
             }
         }
 
