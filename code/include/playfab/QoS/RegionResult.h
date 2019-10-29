@@ -13,7 +13,7 @@ namespace PlayFab
         struct RegionResult
         {
         public:
-            RegionResult(std::string region, int latencyMs, int errorCode);
+            RegionResult(const std::string& region, int latencyMs, int errorCode);
             RegionResult() = delete;
 
             // The datacenter region

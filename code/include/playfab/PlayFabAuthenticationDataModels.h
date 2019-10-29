@@ -100,7 +100,7 @@ namespace PlayFab
 
             ~EntityKey() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Id"], Id);
                 FromJsonUtilS(input["Type"], Type);
@@ -146,7 +146,7 @@ namespace PlayFab
 
             ~EntityLineage() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CharacterId"], CharacterId);
                 FromJsonUtilS(input["GroupId"], GroupId);
@@ -185,7 +185,7 @@ namespace PlayFab
 
             ~GetEntityTokenRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Entity"], Entity);
             }
@@ -220,7 +220,7 @@ namespace PlayFab
 
             ~GetEntityTokenResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilS(input["EntityToken"], EntityToken);
@@ -253,7 +253,7 @@ namespace PlayFab
 
             ~ValidateEntityTokenRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["EntityToken"], EntityToken);
             }
@@ -288,7 +288,7 @@ namespace PlayFab
 
             ~ValidateEntityTokenResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilE(input["IdentityProvider"], IdentityProvider);

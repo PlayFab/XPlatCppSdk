@@ -1844,7 +1844,7 @@ namespace PlayFab
 
             ~AcceptTradeRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AcceptedInventoryInstanceIds"], AcceptedInventoryInstanceIds);
                 FromJsonUtilS(input["OfferingPlayerId"], OfferingPlayerId);
@@ -1913,7 +1913,7 @@ namespace PlayFab
 
             ~TradeInfo() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AcceptedInventoryInstanceIds"], AcceptedInventoryInstanceIds);
                 FromJsonUtilS(input["AcceptedPlayerId"], AcceptedPlayerId);
@@ -1966,7 +1966,7 @@ namespace PlayFab
 
             ~AcceptTradeResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Trade"], Trade);
             }
@@ -2001,7 +2001,7 @@ namespace PlayFab
 
             ~AdCampaignAttributionModel() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilT(input["AttributedAt"], AttributedAt);
                 FromJsonUtilS(input["CampaignId"], CampaignId);
@@ -2043,7 +2043,7 @@ namespace PlayFab
 
             ~AddFriendRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["FriendEmail"], FriendEmail);
                 FromJsonUtilS(input["FriendPlayFabId"], FriendPlayFabId);
@@ -2078,7 +2078,7 @@ namespace PlayFab
 
             ~AddFriendResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["Created"], Created);
             }
@@ -2110,7 +2110,7 @@ namespace PlayFab
 
             ~GenericServiceId() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["ServiceName"], ServiceName);
                 FromJsonUtilS(input["UserId"], UserId);
@@ -2141,7 +2141,7 @@ namespace PlayFab
 
             ~AddGenericIDRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["GenericId"], GenericId);
             }
@@ -2167,7 +2167,7 @@ namespace PlayFab
 
             ~AddGenericIDResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -2194,7 +2194,7 @@ namespace PlayFab
 
             ~AddOrUpdateContactEmailRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["EmailAddress"], EmailAddress);
             }
@@ -2220,7 +2220,7 @@ namespace PlayFab
 
             ~AddOrUpdateContactEmailResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -2250,7 +2250,7 @@ namespace PlayFab
 
             ~AddSharedGroupMembersRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["PlayFabIds"], PlayFabIds);
                 FromJsonUtilS(input["SharedGroupId"], SharedGroupId);
@@ -2278,7 +2278,7 @@ namespace PlayFab
 
             ~AddSharedGroupMembersResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -2311,7 +2311,7 @@ namespace PlayFab
 
             ~AddUsernamePasswordRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Email"], Email);
                 FromJsonUtilS(input["Password"], Password);
@@ -2344,7 +2344,7 @@ namespace PlayFab
 
             ~AddUsernamePasswordResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Username"], Username);
             }
@@ -2376,7 +2376,7 @@ namespace PlayFab
 
             ~AddUserVirtualCurrencyRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["Amount"], Amount);
                 FromJsonUtilS(input["VirtualCurrency"], VirtualCurrency);
@@ -2413,7 +2413,7 @@ namespace PlayFab
 
             ~AndroidDevicePushNotificationRegistrationRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["ConfirmationMessage"], ConfirmationMessage);
                 FromJsonUtilS(input["DeviceToken"], DeviceToken);
@@ -2443,7 +2443,7 @@ namespace PlayFab
 
             ~AndroidDevicePushNotificationRegistrationResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -2473,7 +2473,7 @@ namespace PlayFab
 
             ~AttributeInstallRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Adid"], Adid);
                 FromJsonUtilS(input["Idfa"], Idfa);
@@ -2501,7 +2501,7 @@ namespace PlayFab
 
             ~AttributeInstallResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -2528,7 +2528,7 @@ namespace PlayFab
 
             ~CancelTradeRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["TradeId"], TradeId);
             }
@@ -2557,7 +2557,7 @@ namespace PlayFab
 
             ~CancelTradeResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Trade"], Trade);
             }
@@ -2607,7 +2607,7 @@ namespace PlayFab
 
             ~CartItem() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Description"], Description);
                 FromJsonUtilS(input["DisplayName"], DisplayName);
@@ -2656,7 +2656,7 @@ namespace PlayFab
 
             ~CatalogItemBundleInfo() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["BundledItems"], BundledItems);
                 FromJsonUtilS(input["BundledResultTables"], BundledResultTables);
@@ -2695,7 +2695,7 @@ namespace PlayFab
 
             ~CatalogItemConsumableInfo() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["UsageCount"], UsageCount);
                 FromJsonUtilP(input["UsagePeriod"], UsagePeriod);
@@ -2737,7 +2737,7 @@ namespace PlayFab
 
             ~CatalogItemContainerInfo() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["ItemContents"], ItemContents);
                 FromJsonUtilS(input["KeyItemId"], KeyItemId);
@@ -2823,7 +2823,7 @@ namespace PlayFab
 
             ~CatalogItem() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Bundle"], Bundle);
                 FromJsonUtilP(input["CanBecomeCharacter"], CanBecomeCharacter);
@@ -2928,7 +2928,7 @@ namespace PlayFab
 
             ~ItemInstance() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Annotation"], Annotation);
                 FromJsonUtilS(input["BundleContents"], BundleContents);
@@ -2988,7 +2988,7 @@ namespace PlayFab
 
             ~CharacterInventory() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CharacterId"], CharacterId);
                 FromJsonUtilO(input["Inventory"], Inventory);
@@ -3037,7 +3037,7 @@ namespace PlayFab
 
             ~CharacterLeaderboardEntry() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CharacterId"], CharacterId);
                 FromJsonUtilS(input["CharacterName"], CharacterName);
@@ -3084,7 +3084,7 @@ namespace PlayFab
 
             ~CharacterResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CharacterId"], CharacterId);
                 FromJsonUtilS(input["CharacterName"], CharacterName);
@@ -3117,7 +3117,7 @@ namespace PlayFab
 
             ~Container_Dictionary_String_String() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Data"], Data);
             }
@@ -3149,7 +3149,7 @@ namespace PlayFab
 
             ~CollectionFilter() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Excludes"], Excludes);
                 FromJsonUtilO(input["Includes"], Includes);
@@ -3180,7 +3180,7 @@ namespace PlayFab
 
             ~ConfirmPurchaseRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["OrderId"], OrderId);
             }
@@ -3215,7 +3215,7 @@ namespace PlayFab
 
             ~ConfirmPurchaseResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Items"], Items);
                 FromJsonUtilS(input["OrderId"], OrderId);
@@ -3254,7 +3254,7 @@ namespace PlayFab
 
             ~ConsumeItemRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CharacterId"], CharacterId);
                 FromJsonUtilP(input["ConsumeCount"], ConsumeCount);
@@ -3290,7 +3290,7 @@ namespace PlayFab
 
             ~ConsumeItemResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["ItemInstanceId"], ItemInstanceId);
                 FromJsonUtilP(input["RemainingUses"], RemainingUses);
@@ -3324,7 +3324,7 @@ namespace PlayFab
 
             ~ConsumePSNEntitlementsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
                 FromJsonUtilP(input["ServiceLabel"], ServiceLabel);
@@ -3355,7 +3355,7 @@ namespace PlayFab
 
             ~ConsumePSNEntitlementsResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["ItemsGranted"], ItemsGranted);
             }
@@ -3387,7 +3387,7 @@ namespace PlayFab
 
             ~ConsumeXboxEntitlementsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
                 FromJsonUtilS(input["XboxToken"], XboxToken);
@@ -3418,7 +3418,7 @@ namespace PlayFab
 
             ~ConsumeXboxEntitlementsResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Items"], Items);
             }
@@ -3453,7 +3453,7 @@ namespace PlayFab
 
             ~ContactEmailInfoModel() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["EmailAddress"], EmailAddress);
                 FromJsonUtilS(input["Name"], Name);
@@ -3486,7 +3486,7 @@ namespace PlayFab
 
             ~CreateSharedGroupRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["SharedGroupId"], SharedGroupId);
             }
@@ -3515,7 +3515,7 @@ namespace PlayFab
 
             ~CreateSharedGroupResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["SharedGroupId"], SharedGroupId);
             }
@@ -3556,7 +3556,7 @@ namespace PlayFab
 
             ~CurrentGamesRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildVersion"], BuildVersion);
                 FromJsonUtilS(input["GameMode"], GameMode);
@@ -3638,7 +3638,7 @@ namespace PlayFab
 
             ~GameInfo() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildVersion"], BuildVersion);
                 FromJsonUtilS(input["GameMode"], GameMode);
@@ -3703,7 +3703,7 @@ namespace PlayFab
 
             ~CurrentGamesResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["GameCount"], GameCount);
                 FromJsonUtilO(input["Games"], Games);
@@ -3736,7 +3736,7 @@ namespace PlayFab
 
             ~DeviceInfoRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 Info = input["Info"];
             }
@@ -3762,7 +3762,7 @@ namespace PlayFab
 
             ~EmptyResponse() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -3786,7 +3786,7 @@ namespace PlayFab
 
             ~EmptyResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -3816,7 +3816,7 @@ namespace PlayFab
 
             ~EntityKey() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Id"], Id);
                 FromJsonUtilS(input["Type"], Type);
@@ -3853,7 +3853,7 @@ namespace PlayFab
 
             ~EntityTokenResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilS(input["EntityToken"], EntityToken);
@@ -3898,7 +3898,7 @@ namespace PlayFab
 
             ~ExecuteCloudScriptRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["FunctionName"], FunctionName);
                 FunctionParameter = input["FunctionParameter"];
@@ -3941,7 +3941,7 @@ namespace PlayFab
 
             ~ScriptExecutionError() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Error"], Error);
                 FromJsonUtilS(input["Message"], Message);
@@ -3980,7 +3980,7 @@ namespace PlayFab
 
             ~LogStatement() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 Data = input["Data"];
                 FromJsonUtilS(input["Level"], Level);
@@ -4046,7 +4046,7 @@ namespace PlayFab
 
             ~ExecuteCloudScriptResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["APIRequestsIssued"], APIRequestsIssued);
                 FromJsonUtilO(input["Error"], Error);
@@ -4100,7 +4100,7 @@ namespace PlayFab
 
             ~FacebookInstantGamesPlayFabIdPair() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["FacebookInstantGamesId"], FacebookInstantGamesId);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
@@ -4134,7 +4134,7 @@ namespace PlayFab
 
             ~FacebookPlayFabIdPair() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["FacebookId"], FacebookId);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
@@ -4168,7 +4168,7 @@ namespace PlayFab
 
             ~UserFacebookInfo() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["FacebookId"], FacebookId);
                 FromJsonUtilS(input["FullName"], FullName);
@@ -4199,7 +4199,7 @@ namespace PlayFab
 
             ~UserGameCenterInfo() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["GameCenterId"], GameCenterId);
             }
@@ -4237,7 +4237,7 @@ namespace PlayFab
 
             ~LinkedPlatformAccountModel() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Email"], Email);
                 FromJsonUtilE(input["Platform"], Platform);
@@ -4284,7 +4284,7 @@ namespace PlayFab
 
             ~LocationModel() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["City"], City);
                 FromJsonUtilE(input["ContinentCode"], pfContinentCode);
@@ -4339,7 +4339,7 @@ namespace PlayFab
 
             ~SubscriptionModel() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilT(input["Expiration"], Expiration);
                 FromJsonUtilT(input["InitialSubscriptionTime"], InitialSubscriptionTime);
@@ -4392,7 +4392,7 @@ namespace PlayFab
 
             ~MembershipModel() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["IsActive"], IsActive);
                 FromJsonUtilT(input["MembershipExpiration"], MembershipExpiration);
@@ -4432,7 +4432,7 @@ namespace PlayFab
 
             ~PushNotificationRegistrationModel() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["NotificationEndpointARN"], NotificationEndpointARN);
                 FromJsonUtilE(input["Platform"], Platform);
@@ -4469,7 +4469,7 @@ namespace PlayFab
 
             ~StatisticModel() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Name"], Name);
                 FromJsonUtilP(input["Value"], Value);
@@ -4502,7 +4502,7 @@ namespace PlayFab
 
             ~TagModel() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["TagValue"], TagValue);
             }
@@ -4537,7 +4537,7 @@ namespace PlayFab
 
             ~ValueToDateModel() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Currency"], Currency);
                 FromJsonUtilP(input["TotalValue"], TotalValue);
@@ -4562,6 +4562,7 @@ namespace PlayFab
             std::list<ContactEmailInfoModel> ContactEmailAddresses;
             Boxed<time_t> Created;
             std::string DisplayName;
+            std::list<std::string> ExperimentVariants;
             Boxed<time_t> LastLogin;
             std::list<LinkedPlatformAccountModel> LinkedAccounts;
             std::list<LocationModel> Locations;
@@ -4584,6 +4585,7 @@ namespace PlayFab
                 ContactEmailAddresses(),
                 Created(),
                 DisplayName(),
+                ExperimentVariants(),
                 LastLogin(),
                 LinkedAccounts(),
                 Locations(),
@@ -4607,6 +4609,7 @@ namespace PlayFab
                 ContactEmailAddresses(src.ContactEmailAddresses),
                 Created(src.Created),
                 DisplayName(src.DisplayName),
+                ExperimentVariants(src.ExperimentVariants),
                 LastLogin(src.LastLogin),
                 LinkedAccounts(src.LinkedAccounts),
                 Locations(src.Locations),
@@ -4624,7 +4627,7 @@ namespace PlayFab
 
             ~PlayerProfileModel() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["AdCampaignAttributions"], AdCampaignAttributions);
                 FromJsonUtilS(input["AvatarUrl"], AvatarUrl);
@@ -4632,6 +4635,7 @@ namespace PlayFab
                 FromJsonUtilO(input["ContactEmailAddresses"], ContactEmailAddresses);
                 FromJsonUtilT(input["Created"], Created);
                 FromJsonUtilS(input["DisplayName"], DisplayName);
+                FromJsonUtilS(input["ExperimentVariants"], ExperimentVariants);
                 FromJsonUtilT(input["LastLogin"], LastLogin);
                 FromJsonUtilO(input["LinkedAccounts"], LinkedAccounts);
                 FromJsonUtilO(input["Locations"], Locations);
@@ -4656,6 +4660,7 @@ namespace PlayFab
                 Json::Value each_ContactEmailAddresses; ToJsonUtilO(ContactEmailAddresses, each_ContactEmailAddresses); output["ContactEmailAddresses"] = each_ContactEmailAddresses;
                 Json::Value each_Created; ToJsonUtilT(Created, each_Created); output["Created"] = each_Created;
                 Json::Value each_DisplayName; ToJsonUtilS(DisplayName, each_DisplayName); output["DisplayName"] = each_DisplayName;
+                Json::Value each_ExperimentVariants; ToJsonUtilS(ExperimentVariants, each_ExperimentVariants); output["ExperimentVariants"] = each_ExperimentVariants;
                 Json::Value each_LastLogin; ToJsonUtilT(LastLogin, each_LastLogin); output["LastLogin"] = each_LastLogin;
                 Json::Value each_LinkedAccounts; ToJsonUtilO(LinkedAccounts, each_LinkedAccounts); output["LinkedAccounts"] = each_LinkedAccounts;
                 Json::Value each_Locations; ToJsonUtilO(Locations, each_Locations); output["Locations"] = each_Locations;
@@ -4692,7 +4697,7 @@ namespace PlayFab
 
             ~UserPsnInfo() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["PsnAccountId"], PsnAccountId);
                 FromJsonUtilS(input["PsnOnlineId"], PsnOnlineId);
@@ -4735,7 +4740,7 @@ namespace PlayFab
 
             ~UserSteamInfo() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilE(input["SteamActivationStatus"], SteamActivationStatus);
                 FromJsonUtilS(input["SteamCountry"], SteamCountry);
@@ -4772,7 +4777,7 @@ namespace PlayFab
 
             ~UserXboxInfo() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["XboxUserId"], XboxUserId);
             }
@@ -4828,7 +4833,7 @@ namespace PlayFab
 
             ~FriendInfo() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["FacebookInfo"], FacebookInfo);
                 FromJsonUtilS(input["FriendPlayFabId"], FriendPlayFabId);
@@ -4878,7 +4883,7 @@ namespace PlayFab
 
             ~GameCenterPlayFabIdPair() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["GameCenterId"], GameCenterId);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
@@ -4912,7 +4917,7 @@ namespace PlayFab
 
             ~GameServerRegionsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildVersion"], BuildVersion);
                 FromJsonUtilS(input["TitleId"], TitleId);
@@ -4952,7 +4957,7 @@ namespace PlayFab
 
             ~RegionInfo() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["Available"], Available);
                 FromJsonUtilS(input["Name"], Name);
@@ -4987,7 +4992,7 @@ namespace PlayFab
 
             ~GameServerRegionsResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Regions"], Regions);
             }
@@ -5019,7 +5024,7 @@ namespace PlayFab
 
             ~GenericPlayFabIdPair() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["GenericId"], GenericId);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
@@ -5059,7 +5064,7 @@ namespace PlayFab
 
             ~GetAccountInfoRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Email"], Email);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
@@ -5094,7 +5099,7 @@ namespace PlayFab
 
             ~UserAndroidDeviceInfo() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AndroidDeviceId"], AndroidDeviceId);
             }
@@ -5123,7 +5128,7 @@ namespace PlayFab
 
             ~UserCustomIdInfo() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CustomId"], CustomId);
             }
@@ -5152,7 +5157,7 @@ namespace PlayFab
 
             ~UserFacebookInstantGamesIdInfo() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["FacebookInstantGamesId"], FacebookInstantGamesId);
             }
@@ -5193,7 +5198,7 @@ namespace PlayFab
 
             ~UserGoogleInfo() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["GoogleEmail"], GoogleEmail);
                 FromJsonUtilS(input["GoogleGender"], GoogleGender);
@@ -5230,7 +5235,7 @@ namespace PlayFab
 
             ~UserIosDeviceInfo() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["IosDeviceId"], IosDeviceId);
             }
@@ -5262,7 +5267,7 @@ namespace PlayFab
 
             ~UserKongregateInfo() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["KongregateId"], KongregateId);
                 FromJsonUtilS(input["KongregateName"], KongregateName);
@@ -5293,7 +5298,7 @@ namespace PlayFab
 
             ~UserNintendoSwitchDeviceIdInfo() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["NintendoSwitchDeviceId"], NintendoSwitchDeviceId);
             }
@@ -5328,7 +5333,7 @@ namespace PlayFab
 
             ~UserOpenIdInfo() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["ConnectionId"], ConnectionId);
                 FromJsonUtilS(input["Issuer"], Issuer);
@@ -5361,7 +5366,7 @@ namespace PlayFab
 
             ~UserPrivateAccountInfo() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Email"], Email);
             }
@@ -5411,7 +5416,7 @@ namespace PlayFab
 
             ~UserTitleInfo() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AvatarUrl"], AvatarUrl);
                 FromJsonUtilT(input["Created"], Created);
@@ -5457,7 +5462,7 @@ namespace PlayFab
 
             ~UserTwitchInfo() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["TwitchId"], TwitchId);
                 FromJsonUtilS(input["TwitchUserName"], TwitchUserName);
@@ -5491,7 +5496,7 @@ namespace PlayFab
 
             ~UserWindowsHelloInfo() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["WindowsHelloDeviceName"], WindowsHelloDeviceName);
                 FromJsonUtilS(input["WindowsHelloPublicKeyHash"], WindowsHelloPublicKeyHash);
@@ -5579,7 +5584,7 @@ namespace PlayFab
 
             ~UserAccountInfo() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["AndroidDeviceInfo"], AndroidDeviceInfo);
                 FromJsonUtilT(input["Created"], Created);
@@ -5646,7 +5651,7 @@ namespace PlayFab
 
             ~GetAccountInfoResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["AccountInfo"], AccountInfo);
             }
@@ -5675,7 +5680,7 @@ namespace PlayFab
 
             ~GetCatalogItemsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
             }
@@ -5704,7 +5709,7 @@ namespace PlayFab
 
             ~GetCatalogItemsResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Catalog"], Catalog);
             }
@@ -5742,7 +5747,7 @@ namespace PlayFab
 
             ~GetCharacterDataRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CharacterId"], CharacterId);
                 FromJsonUtilP(input["IfChangedFromDataVersion"], IfChangedFromDataVersion);
@@ -5783,7 +5788,7 @@ namespace PlayFab
 
             ~UserDataRecord() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilT(input["LastUpdated"], LastUpdated);
                 FromJsonUtilE(input["Permission"], Permission);
@@ -5822,7 +5827,7 @@ namespace PlayFab
 
             ~GetCharacterDataResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CharacterId"], CharacterId);
                 FromJsonUtilO(input["Data"], Data);
@@ -5858,7 +5863,7 @@ namespace PlayFab
 
             ~GetCharacterInventoryRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
                 FromJsonUtilS(input["CharacterId"], CharacterId);
@@ -5895,7 +5900,7 @@ namespace PlayFab
 
             ~VirtualCurrencyRechargeTime() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["RechargeMax"], RechargeMax);
                 FromJsonUtilT(input["RechargeTime"], RechargeTime);
@@ -5937,7 +5942,7 @@ namespace PlayFab
 
             ~GetCharacterInventoryResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CharacterId"], CharacterId);
                 FromJsonUtilO(input["Inventory"], Inventory);
@@ -5981,7 +5986,7 @@ namespace PlayFab
 
             ~GetCharacterLeaderboardRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CharacterType"], CharacterType);
                 FromJsonUtilP(input["MaxResultsCount"], MaxResultsCount);
@@ -6016,7 +6021,7 @@ namespace PlayFab
 
             ~GetCharacterLeaderboardResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Leaderboard"], Leaderboard);
             }
@@ -6045,7 +6050,7 @@ namespace PlayFab
 
             ~GetCharacterStatisticsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CharacterId"], CharacterId);
             }
@@ -6074,7 +6079,7 @@ namespace PlayFab
 
             ~GetCharacterStatisticsResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["CharacterStatistics"], CharacterStatistics);
             }
@@ -6109,7 +6114,7 @@ namespace PlayFab
 
             ~GetContentDownloadUrlRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["HttpMethod"], HttpMethod);
                 FromJsonUtilS(input["Key"], Key);
@@ -6142,7 +6147,7 @@ namespace PlayFab
 
             ~GetContentDownloadUrlResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["URL"], URL);
             }
@@ -6163,6 +6168,7 @@ namespace PlayFab
             bool ShowContactEmailAddresses;
             bool ShowCreated;
             bool ShowDisplayName;
+            bool ShowExperimentVariants;
             bool ShowLastLogin;
             bool ShowLinkedAccounts;
             bool ShowLocations;
@@ -6182,6 +6188,7 @@ namespace PlayFab
                 ShowContactEmailAddresses(),
                 ShowCreated(),
                 ShowDisplayName(),
+                ShowExperimentVariants(),
                 ShowLastLogin(),
                 ShowLinkedAccounts(),
                 ShowLocations(),
@@ -6202,6 +6209,7 @@ namespace PlayFab
                 ShowContactEmailAddresses(src.ShowContactEmailAddresses),
                 ShowCreated(src.ShowCreated),
                 ShowDisplayName(src.ShowDisplayName),
+                ShowExperimentVariants(src.ShowExperimentVariants),
                 ShowLastLogin(src.ShowLastLogin),
                 ShowLinkedAccounts(src.ShowLinkedAccounts),
                 ShowLocations(src.ShowLocations),
@@ -6216,7 +6224,7 @@ namespace PlayFab
 
             ~PlayerProfileViewConstraints() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["ShowAvatarUrl"], ShowAvatarUrl);
                 FromJsonUtilP(input["ShowBannedUntil"], ShowBannedUntil);
@@ -6224,6 +6232,7 @@ namespace PlayFab
                 FromJsonUtilP(input["ShowContactEmailAddresses"], ShowContactEmailAddresses);
                 FromJsonUtilP(input["ShowCreated"], ShowCreated);
                 FromJsonUtilP(input["ShowDisplayName"], ShowDisplayName);
+                FromJsonUtilP(input["ShowExperimentVariants"], ShowExperimentVariants);
                 FromJsonUtilP(input["ShowLastLogin"], ShowLastLogin);
                 FromJsonUtilP(input["ShowLinkedAccounts"], ShowLinkedAccounts);
                 FromJsonUtilP(input["ShowLocations"], ShowLocations);
@@ -6245,6 +6254,7 @@ namespace PlayFab
                 Json::Value each_ShowContactEmailAddresses; ToJsonUtilP(ShowContactEmailAddresses, each_ShowContactEmailAddresses); output["ShowContactEmailAddresses"] = each_ShowContactEmailAddresses;
                 Json::Value each_ShowCreated; ToJsonUtilP(ShowCreated, each_ShowCreated); output["ShowCreated"] = each_ShowCreated;
                 Json::Value each_ShowDisplayName; ToJsonUtilP(ShowDisplayName, each_ShowDisplayName); output["ShowDisplayName"] = each_ShowDisplayName;
+                Json::Value each_ShowExperimentVariants; ToJsonUtilP(ShowExperimentVariants, each_ShowExperimentVariants); output["ShowExperimentVariants"] = each_ShowExperimentVariants;
                 Json::Value each_ShowLastLogin; ToJsonUtilP(ShowLastLogin, each_ShowLastLogin); output["ShowLastLogin"] = each_ShowLastLogin;
                 Json::Value each_ShowLinkedAccounts; ToJsonUtilP(ShowLinkedAccounts, each_ShowLinkedAccounts); output["ShowLinkedAccounts"] = each_ShowLinkedAccounts;
                 Json::Value each_ShowLocations; ToJsonUtilP(ShowLocations, each_ShowLocations); output["ShowLocations"] = each_ShowLocations;
@@ -6296,7 +6306,7 @@ namespace PlayFab
 
             ~GetFriendLeaderboardAroundPlayerRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["IncludeFacebookFriends"], IncludeFacebookFriends);
                 FromJsonUtilP(input["IncludeSteamFriends"], IncludeSteamFriends);
@@ -6351,7 +6361,7 @@ namespace PlayFab
 
             ~PlayerLeaderboardEntry() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["DisplayName"], DisplayName);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
@@ -6394,7 +6404,7 @@ namespace PlayFab
 
             ~GetFriendLeaderboardAroundPlayerResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Leaderboard"], Leaderboard);
                 FromJsonUtilT(input["NextReset"], NextReset);
@@ -6448,7 +6458,7 @@ namespace PlayFab
 
             ~GetFriendLeaderboardRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["IncludeFacebookFriends"], IncludeFacebookFriends);
                 FromJsonUtilP(input["IncludeSteamFriends"], IncludeSteamFriends);
@@ -6500,7 +6510,7 @@ namespace PlayFab
 
             ~GetFriendsListRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["IncludeFacebookFriends"], IncludeFacebookFriends);
                 FromJsonUtilP(input["IncludeSteamFriends"], IncludeSteamFriends);
@@ -6535,7 +6545,7 @@ namespace PlayFab
 
             ~GetFriendsListResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Friends"], Friends);
             }
@@ -6573,7 +6583,7 @@ namespace PlayFab
 
             ~GetLeaderboardAroundCharacterRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CharacterId"], CharacterId);
                 FromJsonUtilS(input["CharacterType"], CharacterType);
@@ -6608,7 +6618,7 @@ namespace PlayFab
 
             ~GetLeaderboardAroundCharacterResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Leaderboard"], Leaderboard);
             }
@@ -6649,7 +6659,7 @@ namespace PlayFab
 
             ~GetLeaderboardAroundPlayerRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["MaxResultsCount"], MaxResultsCount);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
@@ -6692,7 +6702,7 @@ namespace PlayFab
 
             ~GetLeaderboardAroundPlayerResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Leaderboard"], Leaderboard);
                 FromJsonUtilT(input["NextReset"], NextReset);
@@ -6728,7 +6738,7 @@ namespace PlayFab
 
             ~GetLeaderboardForUsersCharactersRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["MaxResultsCount"], MaxResultsCount);
                 FromJsonUtilS(input["StatisticName"], StatisticName);
@@ -6759,7 +6769,7 @@ namespace PlayFab
 
             ~GetLeaderboardForUsersCharactersResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Leaderboard"], Leaderboard);
             }
@@ -6800,7 +6810,7 @@ namespace PlayFab
 
             ~GetLeaderboardRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["MaxResultsCount"], MaxResultsCount);
                 FromJsonUtilO(input["ProfileConstraints"], ProfileConstraints);
@@ -6843,7 +6853,7 @@ namespace PlayFab
 
             ~GetLeaderboardResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Leaderboard"], Leaderboard);
                 FromJsonUtilT(input["NextReset"], NextReset);
@@ -6876,7 +6886,7 @@ namespace PlayFab
 
             ~GetPaymentTokenRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["TokenProvider"], TokenProvider);
             }
@@ -6908,7 +6918,7 @@ namespace PlayFab
 
             ~GetPaymentTokenResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["OrderId"], OrderId);
                 FromJsonUtilS(input["ProviderToken"], ProviderToken);
@@ -6939,7 +6949,7 @@ namespace PlayFab
 
             ~GetPhotonAuthenticationTokenRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["PhotonApplicationId"], PhotonApplicationId);
             }
@@ -6968,7 +6978,7 @@ namespace PlayFab
 
             ~GetPhotonAuthenticationTokenResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["PhotonCustomAuthenticationToken"], PhotonCustomAuthenticationToken);
             }
@@ -7039,7 +7049,7 @@ namespace PlayFab
 
             ~GetPlayerCombinedInfoRequestParams() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["GetCharacterInventories"], GetCharacterInventories);
                 FromJsonUtilP(input["GetCharacterList"], GetCharacterList);
@@ -7099,7 +7109,7 @@ namespace PlayFab
 
             ~GetPlayerCombinedInfoRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
@@ -7136,7 +7146,7 @@ namespace PlayFab
 
             ~StatisticValue() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["StatisticName"], StatisticName);
                 FromJsonUtilP(input["Value"], Value);
@@ -7205,7 +7215,7 @@ namespace PlayFab
 
             ~GetPlayerCombinedInfoResultPayload() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["AccountInfo"], AccountInfo);
                 FromJsonUtilO(input["CharacterInventories"], CharacterInventories);
@@ -7261,7 +7271,7 @@ namespace PlayFab
 
             ~GetPlayerCombinedInfoResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["InfoResultPayload"], InfoResultPayload);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
@@ -7295,7 +7305,7 @@ namespace PlayFab
 
             ~GetPlayerProfileRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilO(input["ProfileConstraints"], ProfileConstraints);
@@ -7326,7 +7336,7 @@ namespace PlayFab
 
             ~GetPlayerProfileResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["PlayerProfile"], PlayerProfile);
             }
@@ -7352,7 +7362,7 @@ namespace PlayFab
 
             ~GetPlayerSegmentsRequest() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -7385,7 +7395,7 @@ namespace PlayFab
 
             ~GetSegmentResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["ABTestParent"], ABTestParent);
                 FromJsonUtilS(input["Id"], Id);
@@ -7418,7 +7428,7 @@ namespace PlayFab
 
             ~GetPlayerSegmentsResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Segments"], Segments);
             }
@@ -7450,7 +7460,7 @@ namespace PlayFab
 
             ~StatisticNameVersion() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["StatisticName"], StatisticName);
                 FromJsonUtilP(input["Version"], Version);
@@ -7484,7 +7494,7 @@ namespace PlayFab
 
             ~GetPlayerStatisticsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["StatisticNames"], StatisticNames);
                 FromJsonUtilO(input["StatisticNameVersions"], StatisticNameVersions);
@@ -7515,7 +7525,7 @@ namespace PlayFab
 
             ~GetPlayerStatisticsResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Statistics"], Statistics);
             }
@@ -7544,7 +7554,7 @@ namespace PlayFab
 
             ~GetPlayerStatisticVersionsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["StatisticName"], StatisticName);
             }
@@ -7588,7 +7598,7 @@ namespace PlayFab
 
             ~PlayerStatisticVersion() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilT(input["ActivationTime"], ActivationTime);
                 FromJsonUtilT(input["DeactivationTime"], DeactivationTime);
@@ -7627,7 +7637,7 @@ namespace PlayFab
 
             ~GetPlayerStatisticVersionsResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["StatisticVersions"], StatisticVersions);
             }
@@ -7659,7 +7669,7 @@ namespace PlayFab
 
             ~GetPlayerTagsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Namespace"], Namespace);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
@@ -7693,7 +7703,7 @@ namespace PlayFab
 
             ~GetPlayerTagsResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["Tags"], Tags);
@@ -7724,7 +7734,7 @@ namespace PlayFab
 
             ~GetPlayerTradesRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilE(input["StatusFilter"], StatusFilter);
             }
@@ -7756,7 +7766,7 @@ namespace PlayFab
 
             ~GetPlayerTradesResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["AcceptedTrades"], AcceptedTrades);
                 FromJsonUtilO(input["OpenedTrades"], OpenedTrades);
@@ -7787,7 +7797,7 @@ namespace PlayFab
 
             ~GetPlayFabIDsFromFacebookIDsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["FacebookIDs"], FacebookIDs);
             }
@@ -7816,7 +7826,7 @@ namespace PlayFab
 
             ~GetPlayFabIDsFromFacebookIDsResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Data"], Data);
             }
@@ -7845,7 +7855,7 @@ namespace PlayFab
 
             ~GetPlayFabIDsFromFacebookInstantGamesIdsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["FacebookInstantGamesIds"], FacebookInstantGamesIds);
             }
@@ -7874,7 +7884,7 @@ namespace PlayFab
 
             ~GetPlayFabIDsFromFacebookInstantGamesIdsResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Data"], Data);
             }
@@ -7903,7 +7913,7 @@ namespace PlayFab
 
             ~GetPlayFabIDsFromGameCenterIDsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["GameCenterIDs"], GameCenterIDs);
             }
@@ -7932,7 +7942,7 @@ namespace PlayFab
 
             ~GetPlayFabIDsFromGameCenterIDsResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Data"], Data);
             }
@@ -7961,7 +7971,7 @@ namespace PlayFab
 
             ~GetPlayFabIDsFromGenericIDsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["GenericIDs"], GenericIDs);
             }
@@ -7990,7 +8000,7 @@ namespace PlayFab
 
             ~GetPlayFabIDsFromGenericIDsResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Data"], Data);
             }
@@ -8019,7 +8029,7 @@ namespace PlayFab
 
             ~GetPlayFabIDsFromGoogleIDsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["GoogleIDs"], GoogleIDs);
             }
@@ -8051,7 +8061,7 @@ namespace PlayFab
 
             ~GooglePlayFabIdPair() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["GoogleId"], GoogleId);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
@@ -8082,7 +8092,7 @@ namespace PlayFab
 
             ~GetPlayFabIDsFromGoogleIDsResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Data"], Data);
             }
@@ -8111,7 +8121,7 @@ namespace PlayFab
 
             ~GetPlayFabIDsFromKongregateIDsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["KongregateIDs"], KongregateIDs);
             }
@@ -8143,7 +8153,7 @@ namespace PlayFab
 
             ~KongregatePlayFabIdPair() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["KongregateId"], KongregateId);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
@@ -8174,7 +8184,7 @@ namespace PlayFab
 
             ~GetPlayFabIDsFromKongregateIDsResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Data"], Data);
             }
@@ -8203,7 +8213,7 @@ namespace PlayFab
 
             ~GetPlayFabIDsFromNintendoSwitchDeviceIdsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["NintendoSwitchDeviceIds"], NintendoSwitchDeviceIds);
             }
@@ -8235,7 +8245,7 @@ namespace PlayFab
 
             ~NintendoSwitchPlayFabIdPair() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["NintendoSwitchDeviceId"], NintendoSwitchDeviceId);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
@@ -8266,7 +8276,7 @@ namespace PlayFab
 
             ~GetPlayFabIDsFromNintendoSwitchDeviceIdsResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Data"], Data);
             }
@@ -8298,7 +8308,7 @@ namespace PlayFab
 
             ~GetPlayFabIDsFromPSNAccountIDsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["IssuerId"], IssuerId);
                 FromJsonUtilS(input["PSNAccountIDs"], PSNAccountIDs);
@@ -8332,7 +8342,7 @@ namespace PlayFab
 
             ~PSNAccountPlayFabIdPair() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["PSNAccountId"], PSNAccountId);
@@ -8363,7 +8373,7 @@ namespace PlayFab
 
             ~GetPlayFabIDsFromPSNAccountIDsResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Data"], Data);
             }
@@ -8392,7 +8402,7 @@ namespace PlayFab
 
             ~GetPlayFabIDsFromSteamIDsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["SteamStringIDs"], SteamStringIDs);
             }
@@ -8424,7 +8434,7 @@ namespace PlayFab
 
             ~SteamPlayFabIdPair() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["SteamStringId"], SteamStringId);
@@ -8455,7 +8465,7 @@ namespace PlayFab
 
             ~GetPlayFabIDsFromSteamIDsResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Data"], Data);
             }
@@ -8484,7 +8494,7 @@ namespace PlayFab
 
             ~GetPlayFabIDsFromTwitchIDsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["TwitchIds"], TwitchIds);
             }
@@ -8516,7 +8526,7 @@ namespace PlayFab
 
             ~TwitchPlayFabIdPair() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["TwitchId"], TwitchId);
@@ -8547,7 +8557,7 @@ namespace PlayFab
 
             ~GetPlayFabIDsFromTwitchIDsResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Data"], Data);
             }
@@ -8579,7 +8589,7 @@ namespace PlayFab
 
             ~GetPlayFabIDsFromXboxLiveIDsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Sandbox"], Sandbox);
                 FromJsonUtilS(input["XboxLiveAccountIDs"], XboxLiveAccountIDs);
@@ -8613,7 +8623,7 @@ namespace PlayFab
 
             ~XboxLiveAccountPlayFabIdPair() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["XboxLiveAccountId"], XboxLiveAccountId);
@@ -8644,7 +8654,7 @@ namespace PlayFab
 
             ~GetPlayFabIDsFromXboxLiveIDsResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Data"], Data);
             }
@@ -8673,7 +8683,7 @@ namespace PlayFab
 
             ~GetPublisherDataRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Keys"], Keys);
             }
@@ -8702,7 +8712,7 @@ namespace PlayFab
 
             ~GetPublisherDataResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Data"], Data);
             }
@@ -8731,7 +8741,7 @@ namespace PlayFab
 
             ~GetPurchaseRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["OrderId"], OrderId);
             }
@@ -8772,7 +8782,7 @@ namespace PlayFab
 
             ~GetPurchaseResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["OrderId"], OrderId);
                 FromJsonUtilS(input["PaymentProvider"], PaymentProvider);
@@ -8815,7 +8825,7 @@ namespace PlayFab
 
             ~GetSharedGroupDataRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["GetMembers"], GetMembers);
                 FromJsonUtilS(input["Keys"], Keys);
@@ -8857,7 +8867,7 @@ namespace PlayFab
 
             ~SharedGroupDataRecord() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilT(input["LastUpdated"], LastUpdated);
                 FromJsonUtilS(input["LastUpdatedBy"], LastUpdatedBy);
@@ -8895,7 +8905,7 @@ namespace PlayFab
 
             ~GetSharedGroupDataResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Data"], Data);
                 FromJsonUtilS(input["Members"], Members);
@@ -8929,7 +8939,7 @@ namespace PlayFab
 
             ~GetStoreItemsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
                 FromJsonUtilS(input["StoreId"], StoreId);
@@ -8966,7 +8976,7 @@ namespace PlayFab
 
             ~StoreMarketingModel() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Description"], Description);
                 FromJsonUtilS(input["DisplayName"], DisplayName);
@@ -9011,7 +9021,7 @@ namespace PlayFab
 
             ~StoreItem() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 CustomData = input["CustomData"];
                 FromJsonUtilP(input["DisplayPosition"], DisplayPosition);
@@ -9060,7 +9070,7 @@ namespace PlayFab
 
             ~GetStoreItemsResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
                 FromJsonUtilO(input["MarketingData"], MarketingData);
@@ -9094,7 +9104,7 @@ namespace PlayFab
 
             ~GetTimeRequest() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -9121,7 +9131,7 @@ namespace PlayFab
 
             ~GetTimeResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilT(input["Time"], Time);
             }
@@ -9150,7 +9160,7 @@ namespace PlayFab
 
             ~GetTitleDataRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Keys"], Keys);
             }
@@ -9179,7 +9189,7 @@ namespace PlayFab
 
             ~GetTitleDataResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Data"], Data);
             }
@@ -9208,7 +9218,7 @@ namespace PlayFab
 
             ~GetTitleNewsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["Count"], Count);
             }
@@ -9246,7 +9256,7 @@ namespace PlayFab
 
             ~TitleNewsItem() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Body"], Body);
                 FromJsonUtilS(input["NewsId"], NewsId);
@@ -9281,7 +9291,7 @@ namespace PlayFab
 
             ~GetTitleNewsResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["News"], News);
             }
@@ -9313,7 +9323,7 @@ namespace PlayFab
 
             ~GetTitlePublicKeyRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["TitleId"], TitleId);
                 FromJsonUtilS(input["TitleSharedSecret"], TitleSharedSecret);
@@ -9344,7 +9354,7 @@ namespace PlayFab
 
             ~GetTitlePublicKeyResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["RSAPublicKey"], RSAPublicKey);
             }
@@ -9376,7 +9386,7 @@ namespace PlayFab
 
             ~GetTradeStatusRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["OfferingPlayerId"], OfferingPlayerId);
                 FromJsonUtilS(input["TradeId"], TradeId);
@@ -9407,7 +9417,7 @@ namespace PlayFab
 
             ~GetTradeStatusResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Trade"], Trade);
             }
@@ -9442,7 +9452,7 @@ namespace PlayFab
 
             ~GetUserDataRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["IfChangedFromDataVersion"], IfChangedFromDataVersion);
                 FromJsonUtilS(input["Keys"], Keys);
@@ -9478,7 +9488,7 @@ namespace PlayFab
 
             ~GetUserDataResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Data"], Data);
                 FromJsonUtilP(input["DataVersion"], DataVersion);
@@ -9506,7 +9516,7 @@ namespace PlayFab
 
             ~GetUserInventoryRequest() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -9539,7 +9549,7 @@ namespace PlayFab
 
             ~GetUserInventoryResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Inventory"], Inventory);
                 FromJsonUtilP(input["VirtualCurrency"], VirtualCurrency);
@@ -9575,7 +9585,7 @@ namespace PlayFab
 
             ~GetWindowsHelloChallengeRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["PublicKeyHint"], PublicKeyHint);
                 FromJsonUtilS(input["TitleId"], TitleId);
@@ -9606,7 +9616,7 @@ namespace PlayFab
 
             ~GetWindowsHelloChallengeResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Challenge"], Challenge);
             }
@@ -9641,7 +9651,7 @@ namespace PlayFab
 
             ~GrantCharacterToUserRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
                 FromJsonUtilS(input["CharacterName"], CharacterName);
@@ -9680,7 +9690,7 @@ namespace PlayFab
 
             ~GrantCharacterToUserResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CharacterId"], CharacterId);
                 FromJsonUtilS(input["CharacterType"], CharacterType);
@@ -9722,7 +9732,7 @@ namespace PlayFab
 
             ~ItemPurchaseRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Annotation"], Annotation);
                 FromJsonUtilS(input["ItemId"], ItemId);
@@ -9766,7 +9776,7 @@ namespace PlayFab
 
             ~LinkAndroidDeviceIDRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AndroidDevice"], AndroidDevice);
                 FromJsonUtilS(input["AndroidDeviceId"], AndroidDeviceId);
@@ -9798,7 +9808,7 @@ namespace PlayFab
 
             ~LinkAndroidDeviceIDResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -9828,7 +9838,7 @@ namespace PlayFab
 
             ~LinkCustomIDRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CustomId"], CustomId);
                 FromJsonUtilP(input["ForceLink"], ForceLink);
@@ -9856,7 +9866,7 @@ namespace PlayFab
 
             ~LinkCustomIDResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -9886,7 +9896,7 @@ namespace PlayFab
 
             ~LinkFacebookAccountRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AccessToken"], AccessToken);
                 FromJsonUtilP(input["ForceLink"], ForceLink);
@@ -9914,7 +9924,7 @@ namespace PlayFab
 
             ~LinkFacebookAccountResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -9944,7 +9954,7 @@ namespace PlayFab
 
             ~LinkFacebookInstantGamesIdRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["FacebookInstantGamesSignature"], FacebookInstantGamesSignature);
                 FromJsonUtilP(input["ForceLink"], ForceLink);
@@ -9972,7 +9982,7 @@ namespace PlayFab
 
             ~LinkFacebookInstantGamesIdResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -10014,7 +10024,7 @@ namespace PlayFab
 
             ~LinkGameCenterAccountRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["ForceLink"], ForceLink);
                 FromJsonUtilS(input["GameCenterId"], GameCenterId);
@@ -10050,7 +10060,7 @@ namespace PlayFab
 
             ~LinkGameCenterAccountResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -10080,7 +10090,7 @@ namespace PlayFab
 
             ~LinkGoogleAccountRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["ForceLink"], ForceLink);
                 FromJsonUtilS(input["ServerAuthCode"], ServerAuthCode);
@@ -10108,7 +10118,7 @@ namespace PlayFab
 
             ~LinkGoogleAccountResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -10144,7 +10154,7 @@ namespace PlayFab
 
             ~LinkIOSDeviceIDRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["DeviceId"], DeviceId);
                 FromJsonUtilS(input["DeviceModel"], DeviceModel);
@@ -10176,7 +10186,7 @@ namespace PlayFab
 
             ~LinkIOSDeviceIDResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -10209,7 +10219,7 @@ namespace PlayFab
 
             ~LinkKongregateAccountRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AuthTicket"], AuthTicket);
                 FromJsonUtilP(input["ForceLink"], ForceLink);
@@ -10239,7 +10249,7 @@ namespace PlayFab
 
             ~LinkKongregateAccountResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -10269,7 +10279,7 @@ namespace PlayFab
 
             ~LinkNintendoSwitchDeviceIdRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["ForceLink"], ForceLink);
                 FromJsonUtilS(input["NintendoSwitchDeviceId"], NintendoSwitchDeviceId);
@@ -10297,7 +10307,7 @@ namespace PlayFab
 
             ~LinkNintendoSwitchDeviceIdResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -10330,7 +10340,7 @@ namespace PlayFab
 
             ~LinkOpenIdConnectRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["ConnectionId"], ConnectionId);
                 FromJsonUtilP(input["ForceLink"], ForceLink);
@@ -10372,7 +10382,7 @@ namespace PlayFab
 
             ~LinkPSNAccountRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AuthCode"], AuthCode);
                 FromJsonUtilP(input["ForceLink"], ForceLink);
@@ -10404,7 +10414,7 @@ namespace PlayFab
 
             ~LinkPSNAccountResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -10434,7 +10444,7 @@ namespace PlayFab
 
             ~LinkSteamAccountRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["ForceLink"], ForceLink);
                 FromJsonUtilS(input["SteamTicket"], SteamTicket);
@@ -10462,7 +10472,7 @@ namespace PlayFab
 
             ~LinkSteamAccountResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -10492,7 +10502,7 @@ namespace PlayFab
 
             ~LinkTwitchAccountRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AccessToken"], AccessToken);
                 FromJsonUtilP(input["ForceLink"], ForceLink);
@@ -10520,7 +10530,7 @@ namespace PlayFab
 
             ~LinkTwitchAccountResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -10556,7 +10566,7 @@ namespace PlayFab
 
             ~LinkWindowsHelloAccountRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["DeviceName"], DeviceName);
                 FromJsonUtilP(input["ForceLink"], ForceLink);
@@ -10588,7 +10598,7 @@ namespace PlayFab
 
             ~LinkWindowsHelloAccountResponse() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -10618,7 +10628,7 @@ namespace PlayFab
 
             ~LinkXboxAccountRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["ForceLink"], ForceLink);
                 FromJsonUtilS(input["XboxToken"], XboxToken);
@@ -10646,7 +10656,7 @@ namespace PlayFab
 
             ~LinkXboxAccountResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -10673,7 +10683,7 @@ namespace PlayFab
 
             ~ListUsersCharactersRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
             }
@@ -10702,7 +10712,7 @@ namespace PlayFab
 
             ~ListUsersCharactersResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Characters"], Characters);
             }
@@ -10737,7 +10747,7 @@ namespace PlayFab
 
             ~UserSettings() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["GatherDeviceInfo"], GatherDeviceInfo);
                 FromJsonUtilP(input["GatherFocusInfo"], GatherFocusInfo);
@@ -10754,6 +10764,74 @@ namespace PlayFab
             }
         };
 
+        struct Variable : public PlayFabBaseModel
+        {
+            std::string Name;
+            std::string Value;
+
+            Variable() :
+                PlayFabBaseModel(),
+                Name(),
+                Value()
+            {}
+
+            Variable(const Variable& src) :
+                PlayFabBaseModel(),
+                Name(src.Name),
+                Value(src.Value)
+            {}
+
+            ~Variable() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["Name"], Name);
+                FromJsonUtilS(input["Value"], Value);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
+                Json::Value each_Value; ToJsonUtilS(Value, each_Value); output["Value"] = each_Value;
+                return output;
+            }
+        };
+
+        struct TreatmentAssignment : public PlayFabBaseModel
+        {
+            std::list<Variable> Variables;
+            std::list<std::string> Variants;
+
+            TreatmentAssignment() :
+                PlayFabBaseModel(),
+                Variables(),
+                Variants()
+            {}
+
+            TreatmentAssignment(const TreatmentAssignment& src) :
+                PlayFabBaseModel(),
+                Variables(src.Variables),
+                Variants(src.Variants)
+            {}
+
+            ~TreatmentAssignment() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["Variables"], Variables);
+                FromJsonUtilS(input["Variants"], Variants);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Variables; ToJsonUtilO(Variables, each_Variables); output["Variables"] = each_Variables;
+                Json::Value each_Variants; ToJsonUtilS(Variants, each_Variants); output["Variants"] = each_Variants;
+                return output;
+            }
+        };
+
         struct LoginResult : public PlayFabLoginResultCommon
         {
             Boxed<EntityTokenResponse> EntityToken;
@@ -10763,6 +10841,7 @@ namespace PlayFab
             std::string PlayFabId;
             std::string SessionTicket;
             Boxed<UserSettings> SettingsForUser;
+            Boxed<TreatmentAssignment> pfTreatmentAssignment;
 
             LoginResult() :
                 PlayFabLoginResultCommon(),
@@ -10772,7 +10851,8 @@ namespace PlayFab
                 NewlyCreated(),
                 PlayFabId(),
                 SessionTicket(),
-                SettingsForUser()
+                SettingsForUser(),
+                pfTreatmentAssignment()
             {}
 
             LoginResult(const LoginResult& src) :
@@ -10783,12 +10863,13 @@ namespace PlayFab
                 NewlyCreated(src.NewlyCreated),
                 PlayFabId(src.PlayFabId),
                 SessionTicket(src.SessionTicket),
-                SettingsForUser(src.SettingsForUser)
+                SettingsForUser(src.SettingsForUser),
+                pfTreatmentAssignment(src.pfTreatmentAssignment)
             {}
 
             ~LoginResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["EntityToken"], EntityToken);
                 FromJsonUtilO(input["InfoResultPayload"], InfoResultPayload);
@@ -10797,6 +10878,7 @@ namespace PlayFab
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["SessionTicket"], SessionTicket);
                 FromJsonUtilO(input["SettingsForUser"], SettingsForUser);
+                FromJsonUtilO(input["TreatmentAssignment"], pfTreatmentAssignment);
             }
 
             Json::Value ToJson() const override
@@ -10809,6 +10891,7 @@ namespace PlayFab
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_SessionTicket; ToJsonUtilS(SessionTicket, each_SessionTicket); output["SessionTicket"] = each_SessionTicket;
                 Json::Value each_SettingsForUser; ToJsonUtilO(SettingsForUser, each_SettingsForUser); output["SettingsForUser"] = each_SettingsForUser;
+                Json::Value each_pfTreatmentAssignment; ToJsonUtilO(pfTreatmentAssignment, each_pfTreatmentAssignment); output["TreatmentAssignment"] = each_pfTreatmentAssignment;
                 return output;
             }
         };
@@ -10850,7 +10933,7 @@ namespace PlayFab
 
             ~LoginWithAndroidDeviceIDRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AndroidDevice"], AndroidDevice);
                 FromJsonUtilS(input["AndroidDeviceId"], AndroidDeviceId);
@@ -10908,7 +10991,7 @@ namespace PlayFab
 
             ~LoginWithCustomIDRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
                 FromJsonUtilS(input["CustomId"], CustomId);
@@ -10956,7 +11039,7 @@ namespace PlayFab
 
             ~LoginWithEmailAddressRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Email"], Email);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
@@ -11006,7 +11089,7 @@ namespace PlayFab
 
             ~LoginWithFacebookInstantGamesIdRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
@@ -11060,7 +11143,7 @@ namespace PlayFab
 
             ~LoginWithFacebookRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AccessToken"], AccessToken);
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
@@ -11126,7 +11209,7 @@ namespace PlayFab
 
             ~LoginWithGameCenterRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
@@ -11188,7 +11271,7 @@ namespace PlayFab
 
             ~LoginWithGoogleAccountRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
@@ -11248,7 +11331,7 @@ namespace PlayFab
 
             ~LoginWithIOSDeviceIDRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
                 FromJsonUtilS(input["DeviceId"], DeviceId);
@@ -11309,7 +11392,7 @@ namespace PlayFab
 
             ~LoginWithKongregateRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AuthTicket"], AuthTicket);
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
@@ -11365,7 +11448,7 @@ namespace PlayFab
 
             ~LoginWithNintendoSwitchDeviceIdRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
@@ -11422,7 +11505,7 @@ namespace PlayFab
 
             ~LoginWithOpenIdConnectRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["ConnectionId"], ConnectionId);
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
@@ -11472,7 +11555,7 @@ namespace PlayFab
 
             ~LoginWithPlayFabRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
                 FromJsonUtilS(input["Password"], Password);
@@ -11528,7 +11611,7 @@ namespace PlayFab
 
             ~LoginWithPSNRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AuthCode"], AuthCode);
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
@@ -11586,7 +11669,7 @@ namespace PlayFab
 
             ~LoginWithSteamRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
@@ -11640,7 +11723,7 @@ namespace PlayFab
 
             ~LoginWithTwitchRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AccessToken"], AccessToken);
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
@@ -11688,7 +11771,7 @@ namespace PlayFab
 
             ~LoginWithWindowsHelloRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["ChallengeSignature"], ChallengeSignature);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
@@ -11738,7 +11821,7 @@ namespace PlayFab
 
             ~LoginWithXboxRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
@@ -11798,7 +11881,7 @@ namespace PlayFab
 
             ~MatchmakeRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildVersion"], BuildVersion);
                 FromJsonUtilS(input["CharacterId"], CharacterId);
@@ -11865,7 +11948,7 @@ namespace PlayFab
 
             ~MatchmakeResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Expires"], Expires);
                 FromJsonUtilS(input["LobbyID"], LobbyID);
@@ -11919,7 +12002,7 @@ namespace PlayFab
 
             ~ModifyUserVirtualCurrencyResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["Balance"], Balance);
                 FromJsonUtilP(input["BalanceChange"], BalanceChange);
@@ -11960,7 +12043,7 @@ namespace PlayFab
 
             ~OpenTradeRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AllowedPlayerIds"], AllowedPlayerIds);
                 FromJsonUtilS(input["OfferedInventoryInstanceIds"], OfferedInventoryInstanceIds);
@@ -11993,7 +12076,7 @@ namespace PlayFab
 
             ~OpenTradeResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Trade"], Trade);
             }
@@ -12031,7 +12114,7 @@ namespace PlayFab
 
             ~PayForPurchaseRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Currency"], Currency);
                 FromJsonUtilS(input["OrderId"], OrderId);
@@ -12093,7 +12176,7 @@ namespace PlayFab
 
             ~PayForPurchaseResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["CreditApplied"], CreditApplied);
                 FromJsonUtilS(input["OrderId"], OrderId);
@@ -12149,7 +12232,7 @@ namespace PlayFab
 
             ~PaymentOption() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Currency"], Currency);
                 FromJsonUtilP(input["Price"], Price);
@@ -12199,7 +12282,7 @@ namespace PlayFab
 
             ~PurchaseItemRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
                 FromJsonUtilS(input["CharacterId"], CharacterId);
@@ -12238,7 +12321,7 @@ namespace PlayFab
 
             ~PurchaseItemResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Items"], Items);
             }
@@ -12276,7 +12359,7 @@ namespace PlayFab
 
             ~PurchaseReceiptFulfillment() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["FulfilledItems"], FulfilledItems);
                 FromJsonUtilS(input["RecordedPriceSource"], RecordedPriceSource);
@@ -12317,7 +12400,7 @@ namespace PlayFab
 
             ~RedeemCouponRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
                 FromJsonUtilS(input["CharacterId"], CharacterId);
@@ -12350,7 +12433,7 @@ namespace PlayFab
 
             ~RedeemCouponResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["GrantedItems"], GrantedItems);
             }
@@ -12385,7 +12468,7 @@ namespace PlayFab
 
             ~RefreshPSNAuthTokenRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AuthCode"], AuthCode);
                 FromJsonUtilP(input["IssuerId"], IssuerId);
@@ -12424,7 +12507,7 @@ namespace PlayFab
 
             ~RegisterForIOSPushNotificationRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["ConfirmationMessage"], ConfirmationMessage);
                 FromJsonUtilS(input["DeviceToken"], DeviceToken);
@@ -12454,7 +12537,7 @@ namespace PlayFab
 
             ~RegisterForIOSPushNotificationResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -12505,7 +12588,7 @@ namespace PlayFab
 
             ~RegisterPlayFabUserRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["DisplayName"], DisplayName);
                 FromJsonUtilS(input["Email"], Email);
@@ -12562,7 +12645,7 @@ namespace PlayFab
 
             ~RegisterPlayFabUserResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["EntityToken"], EntityToken);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
@@ -12617,7 +12700,7 @@ namespace PlayFab
 
             ~RegisterWithWindowsHelloRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["DeviceName"], DeviceName);
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
@@ -12655,7 +12738,7 @@ namespace PlayFab
 
             ~RemoveContactEmailRequest() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -12679,7 +12762,7 @@ namespace PlayFab
 
             ~RemoveContactEmailResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -12706,7 +12789,7 @@ namespace PlayFab
 
             ~RemoveFriendRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["FriendPlayFabId"], FriendPlayFabId);
             }
@@ -12732,7 +12815,7 @@ namespace PlayFab
 
             ~RemoveFriendResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -12759,7 +12842,7 @@ namespace PlayFab
 
             ~RemoveGenericIDRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["GenericId"], GenericId);
             }
@@ -12785,7 +12868,7 @@ namespace PlayFab
 
             ~RemoveGenericIDResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -12815,7 +12898,7 @@ namespace PlayFab
 
             ~RemoveSharedGroupMembersRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["PlayFabIds"], PlayFabIds);
                 FromJsonUtilS(input["SharedGroupId"], SharedGroupId);
@@ -12843,7 +12926,7 @@ namespace PlayFab
 
             ~RemoveSharedGroupMembersResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -12873,7 +12956,7 @@ namespace PlayFab
 
             ~ReportPlayerClientRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Comment"], Comment);
                 FromJsonUtilS(input["ReporteeId"], ReporteeId);
@@ -12904,7 +12987,7 @@ namespace PlayFab
 
             ~ReportPlayerClientResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["SubmissionsRemaining"], SubmissionsRemaining);
             }
@@ -12936,7 +13019,7 @@ namespace PlayFab
 
             ~RestoreIOSPurchasesRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
                 FromJsonUtilS(input["ReceiptData"], ReceiptData);
@@ -12967,7 +13050,7 @@ namespace PlayFab
 
             ~RestoreIOSPurchasesResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Fulfillments"], Fulfillments);
             }
@@ -13002,7 +13085,7 @@ namespace PlayFab
 
             ~SendAccountRecoveryEmailRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Email"], Email);
                 FromJsonUtilS(input["EmailTemplateId"], EmailTemplateId);
@@ -13032,7 +13115,7 @@ namespace PlayFab
 
             ~SendAccountRecoveryEmailResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -13062,7 +13145,7 @@ namespace PlayFab
 
             ~SetFriendTagsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["FriendPlayFabId"], FriendPlayFabId);
                 FromJsonUtilS(input["Tags"], Tags);
@@ -13090,7 +13173,7 @@ namespace PlayFab
 
             ~SetFriendTagsResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -13120,7 +13203,7 @@ namespace PlayFab
 
             ~SetPlayerSecretRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
                 FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
@@ -13148,7 +13231,7 @@ namespace PlayFab
 
             ~SetPlayerSecretResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -13190,7 +13273,7 @@ namespace PlayFab
 
             ~StartGameRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildVersion"], BuildVersion);
                 FromJsonUtilS(input["CharacterId"], CharacterId);
@@ -13250,7 +13333,7 @@ namespace PlayFab
 
             ~StartGameResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Expires"], Expires);
                 FromJsonUtilS(input["LobbyID"], LobbyID);
@@ -13299,7 +13382,7 @@ namespace PlayFab
 
             ~StartPurchaseRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
                 FromJsonUtilO(input["Items"], Items);
@@ -13341,7 +13424,7 @@ namespace PlayFab
 
             ~StartPurchaseResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Contents"], Contents);
                 FromJsonUtilS(input["OrderId"], OrderId);
@@ -13382,7 +13465,7 @@ namespace PlayFab
 
             ~StatisticUpdate() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["StatisticName"], StatisticName);
                 FromJsonUtilP(input["Value"], Value);
@@ -13418,7 +13501,7 @@ namespace PlayFab
 
             ~SubtractUserVirtualCurrencyRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["Amount"], Amount);
                 FromJsonUtilS(input["VirtualCurrency"], VirtualCurrency);
@@ -13449,7 +13532,7 @@ namespace PlayFab
 
             ~UninkOpenIdConnectRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["ConnectionId"], ConnectionId);
             }
@@ -13478,7 +13561,7 @@ namespace PlayFab
 
             ~UnlinkAndroidDeviceIDRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AndroidDeviceId"], AndroidDeviceId);
             }
@@ -13504,7 +13587,7 @@ namespace PlayFab
 
             ~UnlinkAndroidDeviceIDResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -13531,7 +13614,7 @@ namespace PlayFab
 
             ~UnlinkCustomIDRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CustomId"], CustomId);
             }
@@ -13557,7 +13640,7 @@ namespace PlayFab
 
             ~UnlinkCustomIDResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -13581,7 +13664,7 @@ namespace PlayFab
 
             ~UnlinkFacebookAccountRequest() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -13605,7 +13688,7 @@ namespace PlayFab
 
             ~UnlinkFacebookAccountResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -13632,7 +13715,7 @@ namespace PlayFab
 
             ~UnlinkFacebookInstantGamesIdRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["FacebookInstantGamesId"], FacebookInstantGamesId);
             }
@@ -13658,7 +13741,7 @@ namespace PlayFab
 
             ~UnlinkFacebookInstantGamesIdResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -13682,7 +13765,7 @@ namespace PlayFab
 
             ~UnlinkGameCenterAccountRequest() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -13706,7 +13789,7 @@ namespace PlayFab
 
             ~UnlinkGameCenterAccountResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -13730,7 +13813,7 @@ namespace PlayFab
 
             ~UnlinkGoogleAccountRequest() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -13754,7 +13837,7 @@ namespace PlayFab
 
             ~UnlinkGoogleAccountResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -13781,7 +13864,7 @@ namespace PlayFab
 
             ~UnlinkIOSDeviceIDRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["DeviceId"], DeviceId);
             }
@@ -13807,7 +13890,7 @@ namespace PlayFab
 
             ~UnlinkIOSDeviceIDResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -13831,7 +13914,7 @@ namespace PlayFab
 
             ~UnlinkKongregateAccountRequest() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -13855,7 +13938,7 @@ namespace PlayFab
 
             ~UnlinkKongregateAccountResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -13882,7 +13965,7 @@ namespace PlayFab
 
             ~UnlinkNintendoSwitchDeviceIdRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["NintendoSwitchDeviceId"], NintendoSwitchDeviceId);
             }
@@ -13908,7 +13991,7 @@ namespace PlayFab
 
             ~UnlinkNintendoSwitchDeviceIdResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -13932,7 +14015,7 @@ namespace PlayFab
 
             ~UnlinkPSNAccountRequest() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -13956,7 +14039,7 @@ namespace PlayFab
 
             ~UnlinkPSNAccountResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -13980,7 +14063,7 @@ namespace PlayFab
 
             ~UnlinkSteamAccountRequest() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -14004,7 +14087,7 @@ namespace PlayFab
 
             ~UnlinkSteamAccountResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -14028,7 +14111,7 @@ namespace PlayFab
 
             ~UnlinkTwitchAccountRequest() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -14052,7 +14135,7 @@ namespace PlayFab
 
             ~UnlinkTwitchAccountResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -14079,7 +14162,7 @@ namespace PlayFab
 
             ~UnlinkWindowsHelloAccountRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["PublicKeyHint"], PublicKeyHint);
             }
@@ -14105,7 +14188,7 @@ namespace PlayFab
 
             ~UnlinkWindowsHelloAccountResponse() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -14132,7 +14215,7 @@ namespace PlayFab
 
             ~UnlinkXboxAccountRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["XboxToken"], XboxToken);
             }
@@ -14158,7 +14241,7 @@ namespace PlayFab
 
             ~UnlinkXboxAccountResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -14194,7 +14277,7 @@ namespace PlayFab
 
             ~UnlockContainerInstanceRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
                 FromJsonUtilS(input["CharacterId"], CharacterId);
@@ -14235,7 +14318,7 @@ namespace PlayFab
 
             ~UnlockContainerItemRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
                 FromJsonUtilS(input["CharacterId"], CharacterId);
@@ -14277,7 +14360,7 @@ namespace PlayFab
 
             ~UnlockContainerItemResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["GrantedItems"], GrantedItems);
                 FromJsonUtilS(input["UnlockedItemInstanceId"], UnlockedItemInstanceId);
@@ -14312,7 +14395,7 @@ namespace PlayFab
 
             ~UpdateAvatarUrlRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["ImageUrl"], ImageUrl);
             }
@@ -14350,7 +14433,7 @@ namespace PlayFab
 
             ~UpdateCharacterDataRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CharacterId"], CharacterId);
                 FromJsonUtilS(input["Data"], Data);
@@ -14385,7 +14468,7 @@ namespace PlayFab
 
             ~UpdateCharacterDataResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["DataVersion"], DataVersion);
             }
@@ -14417,7 +14500,7 @@ namespace PlayFab
 
             ~UpdateCharacterStatisticsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CharacterId"], CharacterId);
                 FromJsonUtilP(input["CharacterStatistics"], CharacterStatistics);
@@ -14445,7 +14528,7 @@ namespace PlayFab
 
             ~UpdateCharacterStatisticsResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -14472,7 +14555,7 @@ namespace PlayFab
 
             ~UpdatePlayerStatisticsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Statistics"], Statistics);
             }
@@ -14498,7 +14581,7 @@ namespace PlayFab
 
             ~UpdatePlayerStatisticsResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -14534,7 +14617,7 @@ namespace PlayFab
 
             ~UpdateSharedGroupDataRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Data"], Data);
                 FromJsonUtilS(input["KeysToRemove"], KeysToRemove);
@@ -14566,7 +14649,7 @@ namespace PlayFab
 
             ~UpdateSharedGroupDataResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -14599,7 +14682,7 @@ namespace PlayFab
 
             ~UpdateUserDataRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Data"], Data);
                 FromJsonUtilS(input["KeysToRemove"], KeysToRemove);
@@ -14632,7 +14715,7 @@ namespace PlayFab
 
             ~UpdateUserDataResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["DataVersion"], DataVersion);
             }
@@ -14661,7 +14744,7 @@ namespace PlayFab
 
             ~UpdateUserTitleDisplayNameRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["DisplayName"], DisplayName);
             }
@@ -14690,7 +14773,7 @@ namespace PlayFab
 
             ~UpdateUserTitleDisplayNameResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["DisplayName"], DisplayName);
             }
@@ -14731,7 +14814,7 @@ namespace PlayFab
 
             ~ValidateAmazonReceiptRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
                 FromJsonUtilS(input["CurrencyCode"], CurrencyCode);
@@ -14768,7 +14851,7 @@ namespace PlayFab
 
             ~ValidateAmazonReceiptResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Fulfillments"], Fulfillments);
             }
@@ -14809,7 +14892,7 @@ namespace PlayFab
 
             ~ValidateGooglePlayPurchaseRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
                 FromJsonUtilS(input["CurrencyCode"], CurrencyCode);
@@ -14846,7 +14929,7 @@ namespace PlayFab
 
             ~ValidateGooglePlayPurchaseResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Fulfillments"], Fulfillments);
             }
@@ -14884,7 +14967,7 @@ namespace PlayFab
 
             ~ValidateIOSReceiptRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
                 FromJsonUtilS(input["CurrencyCode"], CurrencyCode);
@@ -14919,7 +15002,7 @@ namespace PlayFab
 
             ~ValidateIOSReceiptResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Fulfillments"], Fulfillments);
             }
@@ -14957,7 +15040,7 @@ namespace PlayFab
 
             ~ValidateWindowsReceiptRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
                 FromJsonUtilS(input["CurrencyCode"], CurrencyCode);
@@ -14992,7 +15075,7 @@ namespace PlayFab
 
             ~ValidateWindowsReceiptResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Fulfillments"], Fulfillments);
             }
@@ -15030,7 +15113,7 @@ namespace PlayFab
 
             ~WriteClientCharacterEventRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 Body = input["Body"];
                 FromJsonUtilS(input["CharacterId"], CharacterId);
@@ -15071,7 +15154,7 @@ namespace PlayFab
 
             ~WriteClientPlayerEventRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 Body = input["Body"];
                 FromJsonUtilS(input["EventName"], EventName);
@@ -15104,7 +15187,7 @@ namespace PlayFab
 
             ~WriteEventResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["EventId"], EventId);
             }
@@ -15139,7 +15222,7 @@ namespace PlayFab
 
             ~WriteTitleEventRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 Body = input["Body"];
                 FromJsonUtilS(input["EventName"], EventName);

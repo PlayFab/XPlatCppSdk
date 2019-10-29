@@ -11,9 +11,6 @@ namespace PlayFab
     class PlayFabApiSettings
     {
     public:
-        std::string verticalName; // The name of a PlayFab service vertical
-        std::string baseServiceHost; // The base for a PlayFab service host
-        std::string titleId; // You must set this value for PlayFabSdk to work properly (found in the Game Manager for your title, at the PlayFab Website)
 #ifndef DISABLE_PLAYFABCLIENT_API
         std::string advertisingIdType; // Set this to the appropriate AD_TYPE_X constant (defined in PlayFabSettings)
         std::string advertisingIdValue; // Set this to corresponding device value
@@ -23,7 +20,11 @@ namespace PlayFab
         bool disableAdvertising;
 #endif
 
+        std::string verticalName; // The name of a PlayFab service vertical
+        std::string baseServiceHost; // The base for a PlayFab service host
+        std::string titleId; // You must set this value for PlayFabSdk to work properly (found in the Game Manager for your title, at the PlayFab Website)
+
         PlayFabApiSettings();
-        std::string GetUrl(const std::string& urlPath, const std::map<std::string, std::string>& getParams);
+        std::string GetUrl(const std::string& urlPath, const std::map<std::string, std::string>& getParams) const;
     };
 }

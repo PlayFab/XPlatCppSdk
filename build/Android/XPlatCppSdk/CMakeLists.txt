@@ -9,10 +9,6 @@ include_directories(
         ../../../code
         ../../../code/include
         ../../../external/jsoncpp/include
-        ../../../external/aria/lib/include/public
-        ../../../external/aria/lib
-        ../../../external/aria/bondlite/include/bond_lite
-        ../../../external/aria/bondlite/generated
 )
 
 # Creates and names a library, sets it as either STATIC

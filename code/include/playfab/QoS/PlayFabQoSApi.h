@@ -28,15 +28,15 @@ namespace PlayFab
             void InitializeAccumulatedPingResults(std::unordered_map<std::string, PingResult>& accumulatedPingResults);
             int SetupSockets(std::vector<std::shared_ptr<QoSSocket>>& sockets, unsigned int numThreads, unsigned int timeoutMs);
             void InitializeAsyncPingResults(std::vector<std::future<PingResult>>& asyncPingResults);
-            void PingServers(std::vector<std::string>& pings, std::vector<std::future<PingResult>>& asyncPingResults, std::vector<std::shared_ptr<QoSSocket>>& sockets, std::unordered_map<std::string, PingResult>& accumulatedPingResults, unsigned int timeoutMs);
-            void UpdateAccumulatedPingResult(PingResult& result, std::string region, std::unordered_map<std::string, PingResult>& accumulatedPingResults, unsigned int timeoutMs);
+            void PingServers(const std::vector<std::string>& pings, std::vector<std::future<PingResult>>& asyncPingResults, const std::vector<std::shared_ptr<QoSSocket>>& sockets, std::unordered_map<std::string, PingResult>& accumulatedPingResults, unsigned int timeoutMs);
+            void UpdateAccumulatedPingResult(const PingResult& result, const std::string& region, std::unordered_map<std::string, PingResult>& accumulatedPingResults, unsigned int timeoutMs);
             QoSResult GetResult(unsigned int numThreads, unsigned int timeoutMs);
 
             void PingThunderheadForServerList();
             static void ListQosServersSuccessCallBack(const PlayFab::MultiplayerModels::ListQosServersResponse& result, void* customData);
             static void ListQosServersFailureCallBack(const PlayFab::PlayFabError& error, void* customData);
 
-            void SendResultsToPlayFab(QoSResult& result);
+            void SendResultsToPlayFab(const QoSResult& result);
             static void WriteEventsSuccessCallBack(const PlayFab::EventsModels::WriteEventsResponse& result, void*);
             static void WriteEventsFailureCallBack(const PlayFab::PlayFabError& error, void*);
 

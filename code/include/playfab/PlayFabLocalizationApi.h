@@ -18,16 +18,16 @@ namespace PlayFab
 
 
         // ------------ Generated API calls
-        static void GetLanguageList(LocalizationModels::GetLanguageListRequest& request, ProcessApiCallback<LocalizationModels::GetLanguageListResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void GetLanguageList(LocalizationModels::GetLanguageListRequest& request, const ProcessApiCallback<LocalizationModels::GetLanguageListResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
 
     private:
         PlayFabLocalizationAPI(); // Private constructor, static class should never have an instance
         PlayFabLocalizationAPI(const PlayFabLocalizationAPI& other); // Private copy-constructor, static class should never have an instance
 
         // ------------ Generated result handlers
-        static void OnGetLanguageListResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        static void OnGetLanguageListResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
 
-        static bool ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container);
+        static bool ValidateResult(PlayFabResultCommon& resultCommon, const CallRequestContainer& container);
     };
 }
 

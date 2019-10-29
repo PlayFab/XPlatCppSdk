@@ -8,7 +8,9 @@
 #include <playfab/PlayFabError.h>
 #include <memory>
 
+#if defined(PLAYFAB_PLATFORM_WINDOWS)
 #pragma warning (disable: 4100) // formal parameters are part of a public interface
+#endif // defined(PLAYFAB_PLATFORM_WINDOWS)
 
 namespace PlayFab
 {
@@ -29,17 +31,15 @@ namespace PlayFab
 
     void PlayFabEventsAPI::WriteEvents(
         WriteEventsRequest& request,
-        ProcessApiCallback<WriteEventsResponse> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<WriteEventsResponse> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
@@ -54,13 +54,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<WriteEventsResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("EntityToken", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabEventsAPI::OnWriteEventsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabEventsAPI::OnWriteEventsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -79,17 +79,15 @@ namespace PlayFab
 
     void PlayFabEventsAPI::WriteTelemetryEvents(
         WriteEventsRequest& request,
-        ProcessApiCallback<WriteEventsResponse> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<WriteEventsResponse> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
@@ -104,13 +102,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<WriteEventsResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("EntityToken", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabEventsAPI::OnWriteTelemetryEventsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabEventsAPI::OnWriteTelemetryEventsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -127,7 +125,7 @@ namespace PlayFab
         }
     }
 
-    bool PlayFabEventsAPI::ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container)
+    bool PlayFabEventsAPI::ValidateResult(PlayFabResultCommon& resultCommon, const CallRequestContainer& container)
     {
         if (container.errorWrapper.HttpCode == 200)
         {
@@ -148,4 +146,6 @@ namespace PlayFab
 
 #endif
 
+#if defined(PLAYFAB_PLATFORM_WINDOWS)
 #pragma warning (default: 4100) // formal parameters are part of a public interface
+#endif // defined(PLAYFAB_PLATFORM_WINDOWS)

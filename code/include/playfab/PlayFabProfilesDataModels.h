@@ -77,7 +77,7 @@ namespace PlayFab
 
             ~EntityDataObject() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 DataObject = input["DataObject"];
                 FromJsonUtilS(input["EscapedDataObject"], EscapedDataObject);
@@ -113,7 +113,7 @@ namespace PlayFab
 
             ~EntityKey() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Id"], Id);
                 FromJsonUtilS(input["Type"], Type);
@@ -159,7 +159,7 @@ namespace PlayFab
 
             ~EntityLineage() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CharacterId"], CharacterId);
                 FromJsonUtilS(input["GroupId"], GroupId);
@@ -213,7 +213,7 @@ namespace PlayFab
 
             ~EntityPermissionStatement() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Action"], Action);
                 FromJsonUtilS(input["Comment"], Comment);
@@ -261,7 +261,7 @@ namespace PlayFab
 
             ~EntityProfileFileMetadata() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Checksum"], Checksum);
                 FromJsonUtilS(input["FileName"], FileName);
@@ -302,7 +302,7 @@ namespace PlayFab
 
             ~EntityStatisticChildValue() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["ChildName"], ChildName);
                 FromJsonUtilS(input["Metadata"], Metadata);
@@ -347,7 +347,7 @@ namespace PlayFab
 
             ~EntityStatisticValue() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["ChildStatistics"], ChildStatistics);
                 FromJsonUtilS(input["Metadata"], Metadata);
@@ -423,7 +423,7 @@ namespace PlayFab
 
             ~EntityProfileBody() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AvatarUrl"], AvatarUrl);
                 FromJsonUtilT(input["Created"], Created);
@@ -481,7 +481,7 @@ namespace PlayFab
 
             ~GetEntityProfileRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["DataAsObject"], DataAsObject);
                 FromJsonUtilO(input["Entity"], Entity);
@@ -512,7 +512,7 @@ namespace PlayFab
 
             ~GetEntityProfileResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Profile"], Profile);
             }
@@ -544,7 +544,7 @@ namespace PlayFab
 
             ~GetEntityProfilesRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["DataAsObject"], DataAsObject);
                 FromJsonUtilO(input["Entities"], Entities);
@@ -575,7 +575,7 @@ namespace PlayFab
 
             ~GetEntityProfilesResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Profiles"], Profiles);
             }
@@ -601,7 +601,7 @@ namespace PlayFab
 
             ~GetGlobalPolicyRequest() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -628,7 +628,7 @@ namespace PlayFab
 
             ~GetGlobalPolicyResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Permissions"], Permissions);
             }
@@ -660,7 +660,7 @@ namespace PlayFab
 
             ~GetTitlePlayersFromMasterPlayerAccountIdsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["MasterPlayerAccountIds"], MasterPlayerAccountIds);
                 FromJsonUtilS(input["TitleId"], TitleId);
@@ -677,28 +677,33 @@ namespace PlayFab
 
         struct GetTitlePlayersFromMasterPlayerAccountIdsResponse : public PlayFabResultCommon
         {
+            std::string TitleId;
             std::map<std::string, EntityKey> TitlePlayerAccounts;
 
             GetTitlePlayersFromMasterPlayerAccountIdsResponse() :
                 PlayFabResultCommon(),
+                TitleId(),
                 TitlePlayerAccounts()
             {}
 
             GetTitlePlayersFromMasterPlayerAccountIdsResponse(const GetTitlePlayersFromMasterPlayerAccountIdsResponse& src) :
                 PlayFabResultCommon(),
+                TitleId(src.TitleId),
                 TitlePlayerAccounts(src.TitlePlayerAccounts)
             {}
 
             ~GetTitlePlayersFromMasterPlayerAccountIdsResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["TitleId"], TitleId);
                 FromJsonUtilO(input["TitlePlayerAccounts"], TitlePlayerAccounts);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 Json::Value each_TitlePlayerAccounts; ToJsonUtilO(TitlePlayerAccounts, each_TitlePlayerAccounts); output["TitlePlayerAccounts"] = each_TitlePlayerAccounts;
                 return output;
             }
@@ -723,7 +728,7 @@ namespace PlayFab
 
             ~SetEntityProfilePolicyRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilO(input["Statements"], Statements);
@@ -754,7 +759,7 @@ namespace PlayFab
 
             ~SetEntityProfilePolicyResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Permissions"], Permissions);
             }
@@ -783,7 +788,7 @@ namespace PlayFab
 
             ~SetGlobalPolicyRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Permissions"], Permissions);
             }
@@ -809,7 +814,7 @@ namespace PlayFab
 
             ~SetGlobalPolicyResponse() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -842,7 +847,7 @@ namespace PlayFab
 
             ~SetProfileLanguageRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilP(input["ExpectedVersion"], ExpectedVersion);
@@ -878,7 +883,7 @@ namespace PlayFab
 
             ~SetProfileLanguageResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilE(input["OperationResult"], OperationResult);
                 FromJsonUtilP(input["VersionNumber"], VersionNumber);

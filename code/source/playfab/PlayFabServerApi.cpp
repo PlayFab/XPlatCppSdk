@@ -8,7 +8,9 @@
 #include <playfab/PlayFabError.h>
 #include <memory>
 
+#if defined(PLAYFAB_PLATFORM_WINDOWS)
 #pragma warning (disable: 4100) // formal parameters are part of a public interface
+#endif // defined(PLAYFAB_PLATFORM_WINDOWS)
 
 namespace PlayFab
 {
@@ -29,17 +31,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::AddCharacterVirtualCurrency(
         AddCharacterVirtualCurrencyRequest& request,
-        ProcessApiCallback<ModifyCharacterVirtualCurrencyResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<ModifyCharacterVirtualCurrencyResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -54,13 +54,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ModifyCharacterVirtualCurrencyResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnAddCharacterVirtualCurrencyResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnAddCharacterVirtualCurrencyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -79,17 +79,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::AddFriend(
         AddFriendRequest& request,
-        ProcessApiCallback<EmptyResponse> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<EmptyResponse> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -104,13 +102,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnAddFriendResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnAddFriendResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -129,17 +127,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::AddGenericID(
         AddGenericIDRequest& request,
-        ProcessApiCallback<EmptyResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<EmptyResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -154,13 +150,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnAddGenericIDResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnAddGenericIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -179,17 +175,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::AddPlayerTag(
         AddPlayerTagRequest& request,
-        ProcessApiCallback<AddPlayerTagResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<AddPlayerTagResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -204,13 +198,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AddPlayerTagResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnAddPlayerTagResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnAddPlayerTagResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -229,17 +223,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::AddSharedGroupMembers(
         AddSharedGroupMembersRequest& request,
-        ProcessApiCallback<AddSharedGroupMembersResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<AddSharedGroupMembersResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -254,13 +246,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AddSharedGroupMembersResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnAddSharedGroupMembersResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnAddSharedGroupMembersResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -279,17 +271,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::AddUserVirtualCurrency(
         AddUserVirtualCurrencyRequest& request,
-        ProcessApiCallback<ModifyUserVirtualCurrencyResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<ModifyUserVirtualCurrencyResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -304,13 +294,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ModifyUserVirtualCurrencyResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnAddUserVirtualCurrencyResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnAddUserVirtualCurrencyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -329,17 +319,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::AuthenticateSessionTicket(
         AuthenticateSessionTicketRequest& request,
-        ProcessApiCallback<AuthenticateSessionTicketResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<AuthenticateSessionTicketResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -354,13 +342,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AuthenticateSessionTicketResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnAuthenticateSessionTicketResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnAuthenticateSessionTicketResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -379,17 +367,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::AwardSteamAchievement(
         AwardSteamAchievementRequest& request,
-        ProcessApiCallback<AwardSteamAchievementResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<AwardSteamAchievementResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -404,13 +390,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AwardSteamAchievementResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnAwardSteamAchievementResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnAwardSteamAchievementResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -429,17 +415,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::BanUsers(
         BanUsersRequest& request,
-        ProcessApiCallback<BanUsersResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<BanUsersResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -454,13 +438,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<BanUsersResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnBanUsersResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnBanUsersResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -479,17 +463,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::ConsumeItem(
         ConsumeItemRequest& request,
-        ProcessApiCallback<ConsumeItemResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<ConsumeItemResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -504,13 +486,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ConsumeItemResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnConsumeItemResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnConsumeItemResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -529,17 +511,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::CreateSharedGroup(
         CreateSharedGroupRequest& request,
-        ProcessApiCallback<CreateSharedGroupResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<CreateSharedGroupResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -554,13 +534,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateSharedGroupResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnCreateSharedGroupResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnCreateSharedGroupResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -579,17 +559,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::DeleteCharacterFromUser(
         DeleteCharacterFromUserRequest& request,
-        ProcessApiCallback<DeleteCharacterFromUserResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<DeleteCharacterFromUserResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -604,13 +582,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeleteCharacterFromUserResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnDeleteCharacterFromUserResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnDeleteCharacterFromUserResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -629,17 +607,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::DeletePlayer(
         DeletePlayerRequest& request,
-        ProcessApiCallback<DeletePlayerResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<DeletePlayerResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -654,13 +630,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeletePlayerResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnDeletePlayerResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnDeletePlayerResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -679,17 +655,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::DeletePushNotificationTemplate(
         DeletePushNotificationTemplateRequest& request,
-        ProcessApiCallback<DeletePushNotificationTemplateResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<DeletePushNotificationTemplateResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -704,13 +678,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeletePushNotificationTemplateResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnDeletePushNotificationTemplateResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnDeletePushNotificationTemplateResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -729,17 +703,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::DeleteSharedGroup(
         DeleteSharedGroupRequest& request,
-        ProcessApiCallback<EmptyResponse> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<EmptyResponse> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -754,13 +726,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnDeleteSharedGroupResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnDeleteSharedGroupResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -779,17 +751,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::DeregisterGame(
         DeregisterGameRequest& request,
-        ProcessApiCallback<DeregisterGameResponse> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<DeregisterGameResponse> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -804,13 +774,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeregisterGameResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnDeregisterGameResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnDeregisterGameResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -829,17 +799,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::EvaluateRandomResultTable(
         EvaluateRandomResultTableRequest& request,
-        ProcessApiCallback<EvaluateRandomResultTableResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<EvaluateRandomResultTableResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -854,13 +822,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EvaluateRandomResultTableResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnEvaluateRandomResultTableResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnEvaluateRandomResultTableResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -879,17 +847,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::ExecuteCloudScript(
         ExecuteCloudScriptServerRequest& request,
-        ProcessApiCallback<ExecuteCloudScriptResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<ExecuteCloudScriptResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -904,13 +870,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ExecuteCloudScriptResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnExecuteCloudScriptResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnExecuteCloudScriptResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -929,17 +895,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetAllSegments(
         GetAllSegmentsRequest& request,
-        ProcessApiCallback<GetAllSegmentsResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetAllSegmentsResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -954,13 +918,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetAllSegmentsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetAllSegmentsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetAllSegmentsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -979,17 +943,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetAllUsersCharacters(
         ListUsersCharactersRequest& request,
-        ProcessApiCallback<ListUsersCharactersResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<ListUsersCharactersResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -1004,13 +966,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListUsersCharactersResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetAllUsersCharactersResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetAllUsersCharactersResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1029,17 +991,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetCatalogItems(
         GetCatalogItemsRequest& request,
-        ProcessApiCallback<GetCatalogItemsResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetCatalogItemsResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -1054,13 +1014,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCatalogItemsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetCatalogItemsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetCatalogItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1079,17 +1039,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetCharacterData(
         GetCharacterDataRequest& request,
-        ProcessApiCallback<GetCharacterDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetCharacterDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -1104,13 +1062,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCharacterDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetCharacterDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetCharacterDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1129,17 +1087,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetCharacterInternalData(
         GetCharacterDataRequest& request,
-        ProcessApiCallback<GetCharacterDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetCharacterDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -1154,13 +1110,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCharacterDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetCharacterInternalDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetCharacterInternalDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1179,17 +1135,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetCharacterInventory(
         GetCharacterInventoryRequest& request,
-        ProcessApiCallback<GetCharacterInventoryResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetCharacterInventoryResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -1204,13 +1158,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCharacterInventoryResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetCharacterInventoryResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetCharacterInventoryResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1229,17 +1183,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetCharacterLeaderboard(
         GetCharacterLeaderboardRequest& request,
-        ProcessApiCallback<GetCharacterLeaderboardResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetCharacterLeaderboardResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -1254,13 +1206,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCharacterLeaderboardResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetCharacterLeaderboardResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetCharacterLeaderboardResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1279,17 +1231,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetCharacterReadOnlyData(
         GetCharacterDataRequest& request,
-        ProcessApiCallback<GetCharacterDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetCharacterDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -1304,13 +1254,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCharacterDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetCharacterReadOnlyDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetCharacterReadOnlyDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1329,17 +1279,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetCharacterStatistics(
         GetCharacterStatisticsRequest& request,
-        ProcessApiCallback<GetCharacterStatisticsResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetCharacterStatisticsResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -1354,13 +1302,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCharacterStatisticsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetCharacterStatisticsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetCharacterStatisticsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1379,17 +1327,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetContentDownloadUrl(
         GetContentDownloadUrlRequest& request,
-        ProcessApiCallback<GetContentDownloadUrlResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetContentDownloadUrlResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -1404,13 +1350,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetContentDownloadUrlResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetContentDownloadUrlResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetContentDownloadUrlResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1429,17 +1375,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetFriendLeaderboard(
         GetFriendLeaderboardRequest& request,
-        ProcessApiCallback<GetLeaderboardResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetLeaderboardResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -1454,13 +1398,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetLeaderboardResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetFriendLeaderboardResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetFriendLeaderboardResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1479,17 +1423,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetFriendsList(
         GetFriendsListRequest& request,
-        ProcessApiCallback<GetFriendsListResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetFriendsListResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -1504,13 +1446,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetFriendsListResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetFriendsListResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetFriendsListResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1529,17 +1471,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetLeaderboard(
         GetLeaderboardRequest& request,
-        ProcessApiCallback<GetLeaderboardResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetLeaderboardResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -1554,13 +1494,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetLeaderboardResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetLeaderboardResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetLeaderboardResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1579,17 +1519,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetLeaderboardAroundCharacter(
         GetLeaderboardAroundCharacterRequest& request,
-        ProcessApiCallback<GetLeaderboardAroundCharacterResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetLeaderboardAroundCharacterResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -1604,13 +1542,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetLeaderboardAroundCharacterResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetLeaderboardAroundCharacterResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetLeaderboardAroundCharacterResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1629,17 +1567,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetLeaderboardAroundUser(
         GetLeaderboardAroundUserRequest& request,
-        ProcessApiCallback<GetLeaderboardAroundUserResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetLeaderboardAroundUserResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -1654,13 +1590,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetLeaderboardAroundUserResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetLeaderboardAroundUserResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetLeaderboardAroundUserResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1679,17 +1615,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetLeaderboardForUserCharacters(
         GetLeaderboardForUsersCharactersRequest& request,
-        ProcessApiCallback<GetLeaderboardForUsersCharactersResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetLeaderboardForUsersCharactersResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -1704,13 +1638,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetLeaderboardForUsersCharactersResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetLeaderboardForUserCharactersResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetLeaderboardForUserCharactersResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1729,17 +1663,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetPlayerCombinedInfo(
         GetPlayerCombinedInfoRequest& request,
-        ProcessApiCallback<GetPlayerCombinedInfoResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetPlayerCombinedInfoResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -1754,13 +1686,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerCombinedInfoResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetPlayerCombinedInfoResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetPlayerCombinedInfoResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1779,17 +1711,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetPlayerProfile(
         GetPlayerProfileRequest& request,
-        ProcessApiCallback<GetPlayerProfileResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetPlayerProfileResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -1804,13 +1734,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerProfileResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetPlayerProfileResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetPlayerProfileResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1829,17 +1759,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetPlayerSegments(
         GetPlayersSegmentsRequest& request,
-        ProcessApiCallback<GetPlayerSegmentsResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetPlayerSegmentsResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -1854,13 +1782,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerSegmentsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetPlayerSegmentsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetPlayerSegmentsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1879,17 +1807,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetPlayersInSegment(
         GetPlayersInSegmentRequest& request,
-        ProcessApiCallback<GetPlayersInSegmentResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetPlayersInSegmentResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -1904,13 +1830,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayersInSegmentResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetPlayersInSegmentResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetPlayersInSegmentResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1929,17 +1855,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetPlayerStatistics(
         GetPlayerStatisticsRequest& request,
-        ProcessApiCallback<GetPlayerStatisticsResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetPlayerStatisticsResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -1954,13 +1878,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerStatisticsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetPlayerStatisticsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetPlayerStatisticsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -1979,17 +1903,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetPlayerStatisticVersions(
         GetPlayerStatisticVersionsRequest& request,
-        ProcessApiCallback<GetPlayerStatisticVersionsResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetPlayerStatisticVersionsResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -2004,13 +1926,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerStatisticVersionsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetPlayerStatisticVersionsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetPlayerStatisticVersionsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2029,17 +1951,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetPlayerTags(
         GetPlayerTagsRequest& request,
-        ProcessApiCallback<GetPlayerTagsResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetPlayerTagsResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -2054,13 +1974,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerTagsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetPlayerTagsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetPlayerTagsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2079,17 +1999,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetPlayFabIDsFromFacebookIDs(
         GetPlayFabIDsFromFacebookIDsRequest& request,
-        ProcessApiCallback<GetPlayFabIDsFromFacebookIDsResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetPlayFabIDsFromFacebookIDsResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -2104,13 +2022,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromFacebookIDsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetPlayFabIDsFromFacebookIDsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetPlayFabIDsFromFacebookIDsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2129,17 +2047,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetPlayFabIDsFromFacebookInstantGamesIds(
         GetPlayFabIDsFromFacebookInstantGamesIdsRequest& request,
-        ProcessApiCallback<GetPlayFabIDsFromFacebookInstantGamesIdsResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetPlayFabIDsFromFacebookInstantGamesIdsResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -2154,13 +2070,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromFacebookInstantGamesIdsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetPlayFabIDsFromFacebookInstantGamesIdsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetPlayFabIDsFromFacebookInstantGamesIdsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2179,17 +2095,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetPlayFabIDsFromGenericIDs(
         GetPlayFabIDsFromGenericIDsRequest& request,
-        ProcessApiCallback<GetPlayFabIDsFromGenericIDsResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetPlayFabIDsFromGenericIDsResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -2204,13 +2118,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromGenericIDsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetPlayFabIDsFromGenericIDsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetPlayFabIDsFromGenericIDsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2229,17 +2143,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetPlayFabIDsFromNintendoSwitchDeviceIds(
         GetPlayFabIDsFromNintendoSwitchDeviceIdsRequest& request,
-        ProcessApiCallback<GetPlayFabIDsFromNintendoSwitchDeviceIdsResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetPlayFabIDsFromNintendoSwitchDeviceIdsResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -2254,13 +2166,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromNintendoSwitchDeviceIdsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetPlayFabIDsFromNintendoSwitchDeviceIdsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetPlayFabIDsFromNintendoSwitchDeviceIdsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2279,17 +2191,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetPlayFabIDsFromPSNAccountIDs(
         GetPlayFabIDsFromPSNAccountIDsRequest& request,
-        ProcessApiCallback<GetPlayFabIDsFromPSNAccountIDsResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetPlayFabIDsFromPSNAccountIDsResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -2304,13 +2214,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromPSNAccountIDsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetPlayFabIDsFromPSNAccountIDsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetPlayFabIDsFromPSNAccountIDsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2329,17 +2239,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetPlayFabIDsFromSteamIDs(
         GetPlayFabIDsFromSteamIDsRequest& request,
-        ProcessApiCallback<GetPlayFabIDsFromSteamIDsResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetPlayFabIDsFromSteamIDsResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -2354,13 +2262,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromSteamIDsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetPlayFabIDsFromSteamIDsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetPlayFabIDsFromSteamIDsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2379,17 +2287,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetPlayFabIDsFromXboxLiveIDs(
         GetPlayFabIDsFromXboxLiveIDsRequest& request,
-        ProcessApiCallback<GetPlayFabIDsFromXboxLiveIDsResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetPlayFabIDsFromXboxLiveIDsResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -2404,13 +2310,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayFabIDsFromXboxLiveIDsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetPlayFabIDsFromXboxLiveIDsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetPlayFabIDsFromXboxLiveIDsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2429,17 +2335,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetPublisherData(
         GetPublisherDataRequest& request,
-        ProcessApiCallback<GetPublisherDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetPublisherDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -2454,13 +2358,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPublisherDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetPublisherDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetPublisherDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2479,17 +2383,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetRandomResultTables(
         GetRandomResultTablesRequest& request,
-        ProcessApiCallback<GetRandomResultTablesResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetRandomResultTablesResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -2504,13 +2406,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetRandomResultTablesResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetRandomResultTablesResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetRandomResultTablesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2529,17 +2431,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetServerCustomIDsFromPlayFabIDs(
         GetServerCustomIDsFromPlayFabIDsRequest& request,
-        ProcessApiCallback<GetServerCustomIDsFromPlayFabIDsResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetServerCustomIDsFromPlayFabIDsResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -2554,13 +2454,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetServerCustomIDsFromPlayFabIDsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetServerCustomIDsFromPlayFabIDsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetServerCustomIDsFromPlayFabIDsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2579,17 +2479,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetSharedGroupData(
         GetSharedGroupDataRequest& request,
-        ProcessApiCallback<GetSharedGroupDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetSharedGroupDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -2604,13 +2502,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetSharedGroupDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetSharedGroupDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetSharedGroupDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2629,17 +2527,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetStoreItems(
         GetStoreItemsServerRequest& request,
-        ProcessApiCallback<GetStoreItemsResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetStoreItemsResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -2654,13 +2550,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetStoreItemsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetStoreItemsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetStoreItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2679,17 +2575,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetTime(
         GetTimeRequest& request,
-        ProcessApiCallback<GetTimeResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetTimeResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -2704,13 +2598,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTimeResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetTimeResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetTimeResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2729,17 +2623,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetTitleData(
         GetTitleDataRequest& request,
-        ProcessApiCallback<GetTitleDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetTitleDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -2754,13 +2646,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTitleDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetTitleDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetTitleDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2779,17 +2671,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetTitleInternalData(
         GetTitleDataRequest& request,
-        ProcessApiCallback<GetTitleDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetTitleDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -2804,13 +2694,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTitleDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetTitleInternalDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetTitleInternalDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2829,17 +2719,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetTitleNews(
         GetTitleNewsRequest& request,
-        ProcessApiCallback<GetTitleNewsResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetTitleNewsResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -2854,13 +2742,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTitleNewsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetTitleNewsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetTitleNewsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2879,17 +2767,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetUserAccountInfo(
         GetUserAccountInfoRequest& request,
-        ProcessApiCallback<GetUserAccountInfoResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetUserAccountInfoResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -2904,13 +2790,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserAccountInfoResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetUserAccountInfoResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetUserAccountInfoResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2929,17 +2815,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetUserBans(
         GetUserBansRequest& request,
-        ProcessApiCallback<GetUserBansResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetUserBansResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -2954,13 +2838,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserBansResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetUserBansResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetUserBansResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -2979,17 +2863,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetUserData(
         GetUserDataRequest& request,
-        ProcessApiCallback<GetUserDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetUserDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -3004,13 +2886,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetUserDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetUserDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3029,17 +2911,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetUserInternalData(
         GetUserDataRequest& request,
-        ProcessApiCallback<GetUserDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetUserDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -3054,13 +2934,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetUserInternalDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetUserInternalDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3079,17 +2959,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetUserInventory(
         GetUserInventoryRequest& request,
-        ProcessApiCallback<GetUserInventoryResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetUserInventoryResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -3104,13 +2982,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserInventoryResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetUserInventoryResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetUserInventoryResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3129,17 +3007,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetUserPublisherData(
         GetUserDataRequest& request,
-        ProcessApiCallback<GetUserDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetUserDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -3154,13 +3030,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetUserPublisherDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetUserPublisherDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3179,17 +3055,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetUserPublisherInternalData(
         GetUserDataRequest& request,
-        ProcessApiCallback<GetUserDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetUserDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -3204,13 +3078,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetUserPublisherInternalDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetUserPublisherInternalDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3229,17 +3103,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetUserPublisherReadOnlyData(
         GetUserDataRequest& request,
-        ProcessApiCallback<GetUserDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetUserDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -3254,13 +3126,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetUserPublisherReadOnlyDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetUserPublisherReadOnlyDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3279,17 +3151,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GetUserReadOnlyData(
         GetUserDataRequest& request,
-        ProcessApiCallback<GetUserDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GetUserDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -3304,13 +3174,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGetUserReadOnlyDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGetUserReadOnlyDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3329,17 +3199,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GrantCharacterToUser(
         GrantCharacterToUserRequest& request,
-        ProcessApiCallback<GrantCharacterToUserResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GrantCharacterToUserResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -3354,13 +3222,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GrantCharacterToUserResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGrantCharacterToUserResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGrantCharacterToUserResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3379,17 +3247,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GrantItemsToCharacter(
         GrantItemsToCharacterRequest& request,
-        ProcessApiCallback<GrantItemsToCharacterResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GrantItemsToCharacterResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -3404,13 +3270,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GrantItemsToCharacterResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGrantItemsToCharacterResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGrantItemsToCharacterResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3429,17 +3295,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GrantItemsToUser(
         GrantItemsToUserRequest& request,
-        ProcessApiCallback<GrantItemsToUserResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GrantItemsToUserResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -3454,13 +3318,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GrantItemsToUserResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGrantItemsToUserResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGrantItemsToUserResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3479,17 +3343,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::GrantItemsToUsers(
         GrantItemsToUsersRequest& request,
-        ProcessApiCallback<GrantItemsToUsersResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<GrantItemsToUsersResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -3504,13 +3366,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GrantItemsToUsersResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnGrantItemsToUsersResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnGrantItemsToUsersResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3529,17 +3391,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::LinkServerCustomId(
         LinkServerCustomIdRequest& request,
-        ProcessApiCallback<LinkServerCustomIdResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<LinkServerCustomIdResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -3554,13 +3414,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkServerCustomIdResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnLinkServerCustomIdResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnLinkServerCustomIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3579,17 +3439,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::LinkXboxAccount(
         LinkXboxAccountRequest& request,
-        ProcessApiCallback<LinkXboxAccountResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<LinkXboxAccountResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -3604,13 +3462,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkXboxAccountResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnLinkXboxAccountResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnLinkXboxAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3629,17 +3487,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::LoginWithServerCustomId(
         LoginWithServerCustomIdRequest& request,
-        ProcessApiCallback<ServerLoginResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<ServerLoginResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -3654,13 +3510,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ServerLoginResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnLoginWithServerCustomIdResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnLoginWithServerCustomIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3679,17 +3535,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::LoginWithXbox(
         LoginWithXboxRequest& request,
-        ProcessApiCallback<ServerLoginResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<ServerLoginResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -3704,13 +3558,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ServerLoginResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnLoginWithXboxResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnLoginWithXboxResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3729,17 +3583,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::LoginWithXboxId(
         LoginWithXboxIdRequest& request,
-        ProcessApiCallback<ServerLoginResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<ServerLoginResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -3754,13 +3606,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ServerLoginResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnLoginWithXboxIdResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnLoginWithXboxIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3779,17 +3631,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::ModifyItemUses(
         ModifyItemUsesRequest& request,
-        ProcessApiCallback<ModifyItemUsesResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<ModifyItemUsesResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -3804,13 +3654,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ModifyItemUsesResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnModifyItemUsesResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnModifyItemUsesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3829,17 +3679,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::MoveItemToCharacterFromCharacter(
         MoveItemToCharacterFromCharacterRequest& request,
-        ProcessApiCallback<MoveItemToCharacterFromCharacterResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<MoveItemToCharacterFromCharacterResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -3854,13 +3702,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<MoveItemToCharacterFromCharacterResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnMoveItemToCharacterFromCharacterResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnMoveItemToCharacterFromCharacterResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3879,17 +3727,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::MoveItemToCharacterFromUser(
         MoveItemToCharacterFromUserRequest& request,
-        ProcessApiCallback<MoveItemToCharacterFromUserResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<MoveItemToCharacterFromUserResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -3904,13 +3750,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<MoveItemToCharacterFromUserResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnMoveItemToCharacterFromUserResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnMoveItemToCharacterFromUserResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3929,17 +3775,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::MoveItemToUserFromCharacter(
         MoveItemToUserFromCharacterRequest& request,
-        ProcessApiCallback<MoveItemToUserFromCharacterResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<MoveItemToUserFromCharacterResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -3954,13 +3798,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<MoveItemToUserFromCharacterResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnMoveItemToUserFromCharacterResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnMoveItemToUserFromCharacterResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -3979,17 +3823,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::NotifyMatchmakerPlayerLeft(
         NotifyMatchmakerPlayerLeftRequest& request,
-        ProcessApiCallback<NotifyMatchmakerPlayerLeftResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<NotifyMatchmakerPlayerLeftResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -4004,13 +3846,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<NotifyMatchmakerPlayerLeftResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnNotifyMatchmakerPlayerLeftResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnNotifyMatchmakerPlayerLeftResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4029,17 +3871,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::RedeemCoupon(
         RedeemCouponRequest& request,
-        ProcessApiCallback<RedeemCouponResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<RedeemCouponResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -4054,13 +3894,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RedeemCouponResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnRedeemCouponResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnRedeemCouponResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4079,17 +3919,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::RedeemMatchmakerTicket(
         RedeemMatchmakerTicketRequest& request,
-        ProcessApiCallback<RedeemMatchmakerTicketResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<RedeemMatchmakerTicketResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -4104,13 +3942,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RedeemMatchmakerTicketResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnRedeemMatchmakerTicketResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnRedeemMatchmakerTicketResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4129,17 +3967,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::RefreshGameServerInstanceHeartbeat(
         RefreshGameServerInstanceHeartbeatRequest& request,
-        ProcessApiCallback<RefreshGameServerInstanceHeartbeatResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<RefreshGameServerInstanceHeartbeatResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -4154,13 +3990,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RefreshGameServerInstanceHeartbeatResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnRefreshGameServerInstanceHeartbeatResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnRefreshGameServerInstanceHeartbeatResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4179,17 +4015,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::RegisterGame(
         RegisterGameRequest& request,
-        ProcessApiCallback<RegisterGameResponse> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<RegisterGameResponse> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -4204,13 +4038,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RegisterGameResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnRegisterGameResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnRegisterGameResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4229,17 +4063,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::RemoveFriend(
         RemoveFriendRequest& request,
-        ProcessApiCallback<EmptyResponse> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<EmptyResponse> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -4254,13 +4086,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnRemoveFriendResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnRemoveFriendResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4279,17 +4111,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::RemoveGenericID(
         RemoveGenericIDRequest& request,
-        ProcessApiCallback<EmptyResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<EmptyResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -4304,13 +4134,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnRemoveGenericIDResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnRemoveGenericIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4329,17 +4159,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::RemovePlayerTag(
         RemovePlayerTagRequest& request,
-        ProcessApiCallback<RemovePlayerTagResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<RemovePlayerTagResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -4354,13 +4182,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RemovePlayerTagResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnRemovePlayerTagResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnRemovePlayerTagResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4379,17 +4207,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::RemoveSharedGroupMembers(
         RemoveSharedGroupMembersRequest& request,
-        ProcessApiCallback<RemoveSharedGroupMembersResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<RemoveSharedGroupMembersResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -4404,13 +4230,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RemoveSharedGroupMembersResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnRemoveSharedGroupMembersResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnRemoveSharedGroupMembersResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4429,17 +4255,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::ReportPlayer(
         ReportPlayerServerRequest& request,
-        ProcessApiCallback<ReportPlayerServerResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<ReportPlayerServerResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -4454,13 +4278,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ReportPlayerServerResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnReportPlayerResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnReportPlayerResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4479,17 +4303,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::RevokeAllBansForUser(
         RevokeAllBansForUserRequest& request,
-        ProcessApiCallback<RevokeAllBansForUserResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<RevokeAllBansForUserResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -4504,13 +4326,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RevokeAllBansForUserResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnRevokeAllBansForUserResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnRevokeAllBansForUserResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4529,17 +4351,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::RevokeBans(
         RevokeBansRequest& request,
-        ProcessApiCallback<RevokeBansResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<RevokeBansResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -4554,13 +4374,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RevokeBansResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnRevokeBansResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnRevokeBansResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4579,17 +4399,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::RevokeInventoryItem(
         RevokeInventoryItemRequest& request,
-        ProcessApiCallback<RevokeInventoryResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<RevokeInventoryResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -4604,13 +4422,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RevokeInventoryResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnRevokeInventoryItemResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnRevokeInventoryItemResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4629,17 +4447,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::RevokeInventoryItems(
         RevokeInventoryItemsRequest& request,
-        ProcessApiCallback<RevokeInventoryItemsResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<RevokeInventoryItemsResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -4654,13 +4470,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RevokeInventoryItemsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnRevokeInventoryItemsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnRevokeInventoryItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4679,17 +4495,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::SavePushNotificationTemplate(
         SavePushNotificationTemplateRequest& request,
-        ProcessApiCallback<SavePushNotificationTemplateResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<SavePushNotificationTemplateResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -4704,13 +4518,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SavePushNotificationTemplateResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnSavePushNotificationTemplateResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnSavePushNotificationTemplateResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4729,17 +4543,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::SendCustomAccountRecoveryEmail(
         SendCustomAccountRecoveryEmailRequest& request,
-        ProcessApiCallback<SendCustomAccountRecoveryEmailResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<SendCustomAccountRecoveryEmailResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -4754,13 +4566,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SendCustomAccountRecoveryEmailResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnSendCustomAccountRecoveryEmailResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnSendCustomAccountRecoveryEmailResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4779,17 +4591,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::SendEmailFromTemplate(
         SendEmailFromTemplateRequest& request,
-        ProcessApiCallback<SendEmailFromTemplateResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<SendEmailFromTemplateResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -4804,13 +4614,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SendEmailFromTemplateResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnSendEmailFromTemplateResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnSendEmailFromTemplateResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4829,17 +4639,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::SendPushNotification(
         SendPushNotificationRequest& request,
-        ProcessApiCallback<SendPushNotificationResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<SendPushNotificationResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -4854,13 +4662,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SendPushNotificationResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnSendPushNotificationResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnSendPushNotificationResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4879,17 +4687,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::SendPushNotificationFromTemplate(
         SendPushNotificationFromTemplateRequest& request,
-        ProcessApiCallback<SendPushNotificationResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<SendPushNotificationResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -4904,13 +4710,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SendPushNotificationResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnSendPushNotificationFromTemplateResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnSendPushNotificationFromTemplateResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4929,17 +4735,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::SetFriendTags(
         SetFriendTagsRequest& request,
-        ProcessApiCallback<EmptyResponse> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<EmptyResponse> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -4954,13 +4758,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnSetFriendTagsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnSetFriendTagsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -4979,17 +4783,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::SetGameServerInstanceData(
         SetGameServerInstanceDataRequest& request,
-        ProcessApiCallback<SetGameServerInstanceDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<SetGameServerInstanceDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -5004,13 +4806,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetGameServerInstanceDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnSetGameServerInstanceDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnSetGameServerInstanceDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5029,17 +4831,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::SetGameServerInstanceState(
         SetGameServerInstanceStateRequest& request,
-        ProcessApiCallback<SetGameServerInstanceStateResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<SetGameServerInstanceStateResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -5054,13 +4854,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetGameServerInstanceStateResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnSetGameServerInstanceStateResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnSetGameServerInstanceStateResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5079,17 +4879,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::SetGameServerInstanceTags(
         SetGameServerInstanceTagsRequest& request,
-        ProcessApiCallback<SetGameServerInstanceTagsResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<SetGameServerInstanceTagsResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -5104,13 +4902,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetGameServerInstanceTagsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnSetGameServerInstanceTagsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnSetGameServerInstanceTagsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5129,17 +4927,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::SetPlayerSecret(
         SetPlayerSecretRequest& request,
-        ProcessApiCallback<SetPlayerSecretResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<SetPlayerSecretResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -5154,13 +4950,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetPlayerSecretResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnSetPlayerSecretResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnSetPlayerSecretResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5179,17 +4975,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::SetPublisherData(
         SetPublisherDataRequest& request,
-        ProcessApiCallback<SetPublisherDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<SetPublisherDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -5204,13 +4998,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetPublisherDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnSetPublisherDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnSetPublisherDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5229,17 +5023,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::SetTitleData(
         SetTitleDataRequest& request,
-        ProcessApiCallback<SetTitleDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<SetTitleDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -5254,13 +5046,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetTitleDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnSetTitleDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnSetTitleDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5279,17 +5071,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::SetTitleInternalData(
         SetTitleDataRequest& request,
-        ProcessApiCallback<SetTitleDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<SetTitleDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -5304,13 +5094,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetTitleDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnSetTitleInternalDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnSetTitleInternalDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5329,17 +5119,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::SubtractCharacterVirtualCurrency(
         SubtractCharacterVirtualCurrencyRequest& request,
-        ProcessApiCallback<ModifyCharacterVirtualCurrencyResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<ModifyCharacterVirtualCurrencyResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -5354,13 +5142,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ModifyCharacterVirtualCurrencyResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnSubtractCharacterVirtualCurrencyResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnSubtractCharacterVirtualCurrencyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5379,17 +5167,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::SubtractUserVirtualCurrency(
         SubtractUserVirtualCurrencyRequest& request,
-        ProcessApiCallback<ModifyUserVirtualCurrencyResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<ModifyUserVirtualCurrencyResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -5404,13 +5190,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ModifyUserVirtualCurrencyResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnSubtractUserVirtualCurrencyResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnSubtractUserVirtualCurrencyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5429,17 +5215,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::UnlinkServerCustomId(
         UnlinkServerCustomIdRequest& request,
-        ProcessApiCallback<UnlinkServerCustomIdResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<UnlinkServerCustomIdResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -5454,13 +5238,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkServerCustomIdResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnUnlinkServerCustomIdResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnUnlinkServerCustomIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5479,17 +5263,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::UnlinkXboxAccount(
         UnlinkXboxAccountRequest& request,
-        ProcessApiCallback<UnlinkXboxAccountResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<UnlinkXboxAccountResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -5504,13 +5286,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkXboxAccountResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnUnlinkXboxAccountResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnUnlinkXboxAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5529,17 +5311,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::UnlockContainerInstance(
         UnlockContainerInstanceRequest& request,
-        ProcessApiCallback<UnlockContainerItemResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<UnlockContainerItemResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -5554,13 +5334,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlockContainerItemResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnUnlockContainerInstanceResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnUnlockContainerInstanceResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5579,17 +5359,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::UnlockContainerItem(
         UnlockContainerItemRequest& request,
-        ProcessApiCallback<UnlockContainerItemResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<UnlockContainerItemResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -5604,13 +5382,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlockContainerItemResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnUnlockContainerItemResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnUnlockContainerItemResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5629,17 +5407,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::UpdateAvatarUrl(
         UpdateAvatarUrlRequest& request,
-        ProcessApiCallback<EmptyResponse> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<EmptyResponse> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -5654,13 +5430,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnUpdateAvatarUrlResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnUpdateAvatarUrlResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5679,17 +5455,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::UpdateBans(
         UpdateBansRequest& request,
-        ProcessApiCallback<UpdateBansResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<UpdateBansResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -5704,13 +5478,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateBansResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnUpdateBansResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnUpdateBansResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5729,17 +5503,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::UpdateCharacterData(
         UpdateCharacterDataRequest& request,
-        ProcessApiCallback<UpdateCharacterDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<UpdateCharacterDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -5754,13 +5526,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateCharacterDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnUpdateCharacterDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnUpdateCharacterDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5779,17 +5551,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::UpdateCharacterInternalData(
         UpdateCharacterDataRequest& request,
-        ProcessApiCallback<UpdateCharacterDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<UpdateCharacterDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -5804,13 +5574,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateCharacterDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnUpdateCharacterInternalDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnUpdateCharacterInternalDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5829,17 +5599,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::UpdateCharacterReadOnlyData(
         UpdateCharacterDataRequest& request,
-        ProcessApiCallback<UpdateCharacterDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<UpdateCharacterDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -5854,13 +5622,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateCharacterDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnUpdateCharacterReadOnlyDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnUpdateCharacterReadOnlyDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5879,17 +5647,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::UpdateCharacterStatistics(
         UpdateCharacterStatisticsRequest& request,
-        ProcessApiCallback<UpdateCharacterStatisticsResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<UpdateCharacterStatisticsResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -5904,13 +5670,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateCharacterStatisticsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnUpdateCharacterStatisticsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnUpdateCharacterStatisticsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5929,17 +5695,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::UpdatePlayerStatistics(
         UpdatePlayerStatisticsRequest& request,
-        ProcessApiCallback<UpdatePlayerStatisticsResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<UpdatePlayerStatisticsResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -5954,13 +5718,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdatePlayerStatisticsResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnUpdatePlayerStatisticsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnUpdatePlayerStatisticsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -5979,17 +5743,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::UpdateSharedGroupData(
         UpdateSharedGroupDataRequest& request,
-        ProcessApiCallback<UpdateSharedGroupDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<UpdateSharedGroupDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -6004,13 +5766,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateSharedGroupDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnUpdateSharedGroupDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnUpdateSharedGroupDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6029,17 +5791,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::UpdateUserData(
         UpdateUserDataRequest& request,
-        ProcessApiCallback<UpdateUserDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<UpdateUserDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -6054,13 +5814,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnUpdateUserDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnUpdateUserDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6079,17 +5839,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::UpdateUserInternalData(
         UpdateUserInternalDataRequest& request,
-        ProcessApiCallback<UpdateUserDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<UpdateUserDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -6104,13 +5862,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnUpdateUserInternalDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnUpdateUserInternalDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6129,17 +5887,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::UpdateUserInventoryItemCustomData(
         UpdateUserInventoryItemDataRequest& request,
-        ProcessApiCallback<EmptyResponse> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<EmptyResponse> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -6154,13 +5910,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnUpdateUserInventoryItemCustomDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnUpdateUserInventoryItemCustomDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6179,17 +5935,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::UpdateUserPublisherData(
         UpdateUserDataRequest& request,
-        ProcessApiCallback<UpdateUserDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<UpdateUserDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -6204,13 +5958,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnUpdateUserPublisherDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnUpdateUserPublisherDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6229,17 +5983,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::UpdateUserPublisherInternalData(
         UpdateUserInternalDataRequest& request,
-        ProcessApiCallback<UpdateUserDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<UpdateUserDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -6254,13 +6006,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnUpdateUserPublisherInternalDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnUpdateUserPublisherInternalDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6279,17 +6031,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::UpdateUserPublisherReadOnlyData(
         UpdateUserDataRequest& request,
-        ProcessApiCallback<UpdateUserDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<UpdateUserDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -6304,13 +6054,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnUpdateUserPublisherReadOnlyDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnUpdateUserPublisherReadOnlyDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6329,17 +6079,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::UpdateUserReadOnlyData(
         UpdateUserDataRequest& request,
-        ProcessApiCallback<UpdateUserDataResult> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<UpdateUserDataResult> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -6354,13 +6102,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnUpdateUserReadOnlyDataResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnUpdateUserReadOnlyDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6379,17 +6127,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::WriteCharacterEvent(
         WriteServerCharacterEventRequest& request,
-        ProcessApiCallback<WriteEventResponse> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<WriteEventResponse> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -6404,13 +6150,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<WriteEventResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnWriteCharacterEventResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnWriteCharacterEventResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6429,17 +6175,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::WritePlayerEvent(
         WriteServerPlayerEventRequest& request,
-        ProcessApiCallback<WriteEventResponse> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<WriteEventResponse> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -6454,13 +6198,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<WriteEventResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnWritePlayerEventResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnWritePlayerEventResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6479,17 +6223,15 @@ namespace PlayFab
 
     void PlayFabServerAPI::WriteTitleEvent(
         WriteTitleEventRequest& request,
-        ProcessApiCallback<WriteEventResponse> callback,
-        ErrorCallback errorCallback,
+        const ProcessApiCallback<WriteEventResponse> callback,
+        const ErrorCallback errorCallback,
         void* customData
     )
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const auto requestJson = request.ToJson();
-
-        Json::FastWriter writer;
-        std::string jsonAsString = writer.write(requestJson);
+        std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
@@ -6504,13 +6246,13 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<WriteEventResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings("SecretKey", request.authenticationContext, nullptr, *reqContainer))
+        if (PlayFabSettings::ValidateSettings(request.authenticationContext, nullptr, *reqContainer))
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
     }
 
-    void PlayFabServerAPI::OnWriteTitleEventResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+    void PlayFabServerAPI::OnWriteTitleEventResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -6527,7 +6269,7 @@ namespace PlayFab
         }
     }
 
-    bool PlayFabServerAPI::ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container)
+    bool PlayFabServerAPI::ValidateResult(PlayFabResultCommon& resultCommon, const CallRequestContainer& container)
     {
         if (container.errorWrapper.HttpCode == 200)
         {
@@ -6548,4 +6290,6 @@ namespace PlayFab
 
 #endif
 
+#if defined(PLAYFAB_PLATFORM_WINDOWS)
 #pragma warning (default: 4100) // formal parameters are part of a public interface
+#endif // defined(PLAYFAB_PLATFORM_WINDOWS)

@@ -289,7 +289,7 @@ namespace PlayFab
 
             ~AssetReference() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["FileName"], FileName);
                 FromJsonUtilS(input["MountPath"], MountPath);
@@ -323,7 +323,7 @@ namespace PlayFab
 
             ~AssetReferenceParams() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["FileName"], FileName);
                 FromJsonUtilS(input["MountPath"], MountPath);
@@ -357,7 +357,7 @@ namespace PlayFab
 
             ~AssetSummary() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["FileName"], FileName);
                 FromJsonUtilS(input["Metadata"], Metadata);
@@ -388,7 +388,7 @@ namespace PlayFab
 
             ~BuildSelectionCriterion() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["BuildWeightDistribution"], BuildWeightDistribution);
             }
@@ -429,7 +429,7 @@ namespace PlayFab
 
             ~BuildAliasDetailsResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AliasId"], AliasId);
                 FromJsonUtilS(input["AliasName"], AliasName);
@@ -466,7 +466,7 @@ namespace PlayFab
 
             ~BuildAliasParams() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AliasId"], AliasId);
             }
@@ -504,7 +504,7 @@ namespace PlayFab
 
             ~CurrentServerStats() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["Active"], Active);
                 FromJsonUtilP(input["Propping"], Propping);
@@ -551,7 +551,7 @@ namespace PlayFab
 
             ~BuildRegion() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["CurrentServerStats"], pfCurrentServerStats);
                 FromJsonUtilP(input["MaxServers"], MaxServers);
@@ -594,7 +594,7 @@ namespace PlayFab
 
             ~BuildRegionParams() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["MaxServers"], MaxServers);
                 FromJsonUtilS(input["Region"], Region);
@@ -639,7 +639,7 @@ namespace PlayFab
 
             ~BuildSummary() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildId"], BuildId);
                 FromJsonUtilS(input["BuildName"], BuildName);
@@ -679,7 +679,7 @@ namespace PlayFab
 
             ~EntityKey() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Id"], Id);
                 FromJsonUtilS(input["Type"], Type);
@@ -713,7 +713,7 @@ namespace PlayFab
 
             ~CancelAllMatchmakingTicketsForPlayerRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilS(input["QueueName"], QueueName);
@@ -741,7 +741,7 @@ namespace PlayFab
 
             ~CancelAllMatchmakingTicketsForPlayerResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -771,7 +771,7 @@ namespace PlayFab
 
             ~CancelMatchmakingTicketRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["QueueName"], QueueName);
                 FromJsonUtilS(input["TicketId"], TicketId);
@@ -799,7 +799,7 @@ namespace PlayFab
 
             ~CancelMatchmakingTicketResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -832,7 +832,7 @@ namespace PlayFab
 
             ~Certificate() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Base64EncodedValue"], Base64EncodedValue);
                 FromJsonUtilS(input["Name"], Name);
@@ -868,7 +868,7 @@ namespace PlayFab
 
             ~CertificateSummary() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Name"], Name);
                 FromJsonUtilS(input["Thumbprint"], Thumbprint);
@@ -899,7 +899,7 @@ namespace PlayFab
 
             ~ConnectedPlayer() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["PlayerId"], PlayerId);
             }
@@ -931,7 +931,7 @@ namespace PlayFab
 
             ~ContainerImageReference() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["ImageName"], ImageName);
                 FromJsonUtilS(input["Tag"], Tag);
@@ -971,7 +971,7 @@ namespace PlayFab
 
             ~CoreCapacity() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["Available"], Available);
                 FromJsonUtilS(input["Region"], Region);
@@ -1009,7 +1009,7 @@ namespace PlayFab
 
             ~CreateBuildAliasRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AliasName"], AliasName);
                 FromJsonUtilO(input["BuildSelectionCriteria"], BuildSelectionCriteria);
@@ -1043,7 +1043,7 @@ namespace PlayFab
 
             ~GameCertificateReferenceParams() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["GsdkAlias"], GsdkAlias);
                 FromJsonUtilS(input["Name"], Name);
@@ -1080,7 +1080,7 @@ namespace PlayFab
 
             ~Port() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Name"], Name);
                 FromJsonUtilP(input["Num"], Num);
@@ -1143,7 +1143,7 @@ namespace PlayFab
 
             ~CreateBuildWithCustomContainerRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildName"], BuildName);
                 FromJsonUtilE(input["ContainerFlavor"], pfContainerFlavor);
@@ -1195,7 +1195,7 @@ namespace PlayFab
 
             ~GameCertificateReference() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["GsdkAlias"], GsdkAlias);
                 FromJsonUtilS(input["Name"], Name);
@@ -1262,7 +1262,7 @@ namespace PlayFab
 
             ~CreateBuildWithCustomContainerResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildId"], BuildId);
                 FromJsonUtilS(input["BuildName"], BuildName);
@@ -1315,7 +1315,7 @@ namespace PlayFab
 
             ~InstrumentationConfiguration() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["ProcessesToMonitor"], ProcessesToMonitor);
             }
@@ -1374,7 +1374,7 @@ namespace PlayFab
 
             ~CreateBuildWithManagedContainerRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildName"], BuildName);
                 FromJsonUtilE(input["ContainerFlavor"], pfContainerFlavor);
@@ -1459,7 +1459,7 @@ namespace PlayFab
 
             ~CreateBuildWithManagedContainerResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildId"], BuildId);
                 FromJsonUtilS(input["BuildName"], BuildName);
@@ -1515,7 +1515,7 @@ namespace PlayFab
 
             ~MatchmakingPlayerAttributes() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 DataObject = input["DataObject"];
                 FromJsonUtilS(input["EscapedDataObject"], EscapedDataObject);
@@ -1549,7 +1549,7 @@ namespace PlayFab
 
             ~MatchmakingPlayer() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Attributes"], Attributes);
                 FromJsonUtilO(input["Entity"], Entity);
@@ -1589,7 +1589,7 @@ namespace PlayFab
 
             ~CreateMatchmakingTicketRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Creator"], Creator);
                 FromJsonUtilP(input["GiveUpAfterSeconds"], GiveUpAfterSeconds);
@@ -1624,7 +1624,7 @@ namespace PlayFab
 
             ~CreateMatchmakingTicketResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["TicketId"], TicketId);
             }
@@ -1665,7 +1665,7 @@ namespace PlayFab
 
             ~CreateRemoteUserRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildId"], BuildId);
                 FromJsonUtilT(input["ExpirationTime"], ExpirationTime);
@@ -1708,7 +1708,7 @@ namespace PlayFab
 
             ~CreateRemoteUserResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilT(input["ExpirationTime"], ExpirationTime);
                 FromJsonUtilS(input["Password"], Password);
@@ -1747,7 +1747,7 @@ namespace PlayFab
 
             ~CreateServerMatchmakingTicketRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["GiveUpAfterSeconds"], GiveUpAfterSeconds);
                 FromJsonUtilO(input["Members"], Members);
@@ -1780,7 +1780,7 @@ namespace PlayFab
 
             ~DeleteAssetRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["FileName"], FileName);
             }
@@ -1809,7 +1809,7 @@ namespace PlayFab
 
             ~DeleteBuildAliasRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AliasId"], AliasId);
             }
@@ -1838,7 +1838,7 @@ namespace PlayFab
 
             ~DeleteBuildRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildId"], BuildId);
             }
@@ -1867,7 +1867,7 @@ namespace PlayFab
 
             ~DeleteCertificateRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Name"], Name);
             }
@@ -1905,7 +1905,7 @@ namespace PlayFab
 
             ~DeleteRemoteUserRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildId"], BuildId);
                 FromJsonUtilS(input["Region"], Region);
@@ -1937,7 +1937,7 @@ namespace PlayFab
 
             ~EmptyResponse() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -1961,7 +1961,7 @@ namespace PlayFab
 
             ~EnableMultiplayerServersForTitleRequest() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -1988,7 +1988,7 @@ namespace PlayFab
 
             ~EnableMultiplayerServersForTitleResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilE(input["Status"], Status);
             }
@@ -2017,7 +2017,7 @@ namespace PlayFab
 
             ~GetAssetUploadUrlRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["FileName"], FileName);
             }
@@ -2049,7 +2049,7 @@ namespace PlayFab
 
             ~GetAssetUploadUrlResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AssetUploadUrl"], AssetUploadUrl);
                 FromJsonUtilS(input["FileName"], FileName);
@@ -2080,7 +2080,7 @@ namespace PlayFab
 
             ~GetBuildAliasRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AliasId"], AliasId);
             }
@@ -2109,7 +2109,7 @@ namespace PlayFab
 
             ~GetBuildRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildId"], BuildId);
             }
@@ -2183,7 +2183,7 @@ namespace PlayFab
 
             ~GetBuildResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildId"], BuildId);
                 FromJsonUtilS(input["BuildName"], BuildName);
@@ -2239,7 +2239,7 @@ namespace PlayFab
 
             ~GetContainerRegistryCredentialsRequest() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -2272,7 +2272,7 @@ namespace PlayFab
 
             ~GetContainerRegistryCredentialsResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["DnsName"], DnsName);
                 FromJsonUtilS(input["Password"], Password);
@@ -2311,7 +2311,7 @@ namespace PlayFab
 
             ~GetMatchmakingTicketRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["EscapeObject"], EscapeObject);
                 FromJsonUtilS(input["QueueName"], QueueName);
@@ -2374,7 +2374,7 @@ namespace PlayFab
 
             ~GetMatchmakingTicketResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilE(input["CancellationReason"], pfCancellationReason);
                 FromJsonUtilS(input["CancellationReasonString"], CancellationReasonString);
@@ -2432,7 +2432,7 @@ namespace PlayFab
 
             ~GetMatchRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["EscapeObject"], EscapeObject);
                 FromJsonUtilS(input["MatchId"], MatchId);
@@ -2473,7 +2473,7 @@ namespace PlayFab
 
             ~MatchmakingPlayerWithTeamAssignment() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Attributes"], Attributes);
                 FromJsonUtilO(input["Entity"], Entity);
@@ -2512,7 +2512,7 @@ namespace PlayFab
 
             ~ServerDetails() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["IPV4Address"], IPV4Address);
                 FromJsonUtilO(input["Ports"], Ports);
@@ -2554,7 +2554,7 @@ namespace PlayFab
 
             ~GetMatchResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["MatchId"], MatchId);
                 FromJsonUtilO(input["Members"], Members);
@@ -2595,7 +2595,7 @@ namespace PlayFab
 
             ~GetMultiplayerServerDetailsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildId"], BuildId);
                 FromJsonUtilS(input["Region"], Region);
@@ -2655,7 +2655,7 @@ namespace PlayFab
 
             ~GetMultiplayerServerDetailsResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["ConnectedPlayers"], ConnectedPlayers);
                 FromJsonUtilS(input["FQDN"], FQDN);
@@ -2702,7 +2702,7 @@ namespace PlayFab
 
             ~GetQueueStatisticsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["QueueName"], QueueName);
             }
@@ -2740,7 +2740,7 @@ namespace PlayFab
 
             ~Statistics() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["Average"], Average);
                 FromJsonUtilP(input["Percentile50"], Percentile50);
@@ -2778,7 +2778,7 @@ namespace PlayFab
 
             ~GetQueueStatisticsResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["NumberOfPlayersMatching"], NumberOfPlayersMatching);
                 FromJsonUtilO(input["TimeToMatchStatisticsInSeconds"], TimeToMatchStatisticsInSeconds);
@@ -2815,7 +2815,7 @@ namespace PlayFab
 
             ~GetRemoteLoginEndpointRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildId"], BuildId);
                 FromJsonUtilS(input["Region"], Region);
@@ -2851,7 +2851,7 @@ namespace PlayFab
 
             ~GetRemoteLoginEndpointResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["IPV4Address"], IPV4Address);
                 FromJsonUtilP(input["Port"], Port);
@@ -2879,7 +2879,7 @@ namespace PlayFab
 
             ~GetTitleEnabledForMultiplayerServersStatusRequest() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -2906,7 +2906,7 @@ namespace PlayFab
 
             ~GetTitleEnabledForMultiplayerServersStatusResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilE(input["Status"], Status);
             }
@@ -2932,7 +2932,7 @@ namespace PlayFab
 
             ~GetTitleMultiplayerServersQuotasRequest() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -2959,7 +2959,7 @@ namespace PlayFab
 
             ~TitleMultiplayerServersQuotas() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["CoreCapacities"], CoreCapacities);
             }
@@ -2988,7 +2988,7 @@ namespace PlayFab
 
             ~GetTitleMultiplayerServersQuotasResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Quotas"], Quotas);
             }
@@ -3023,7 +3023,7 @@ namespace PlayFab
 
             ~JoinMatchmakingTicketRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Member"], Member);
                 FromJsonUtilS(input["QueueName"], QueueName);
@@ -3053,7 +3053,7 @@ namespace PlayFab
 
             ~JoinMatchmakingTicketResult() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -3083,7 +3083,7 @@ namespace PlayFab
 
             ~ListAssetSummariesRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["PageSize"], PageSize);
                 FromJsonUtilS(input["SkipToken"], SkipToken);
@@ -3120,7 +3120,7 @@ namespace PlayFab
 
             ~ListAssetSummariesResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["AssetSummaries"], AssetSummaries);
                 FromJsonUtilP(input["PageSize"], PageSize);
@@ -3153,7 +3153,7 @@ namespace PlayFab
 
             ~ListBuildAliasesForTitleResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["BuildAliases"], BuildAliases);
             }
@@ -3185,7 +3185,7 @@ namespace PlayFab
 
             ~ListBuildSummariesRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["PageSize"], PageSize);
                 FromJsonUtilS(input["SkipToken"], SkipToken);
@@ -3222,7 +3222,7 @@ namespace PlayFab
 
             ~ListBuildSummariesResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["BuildSummaries"], BuildSummaries);
                 FromJsonUtilP(input["PageSize"], PageSize);
@@ -3258,7 +3258,7 @@ namespace PlayFab
 
             ~ListCertificateSummariesRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["PageSize"], PageSize);
                 FromJsonUtilS(input["SkipToken"], SkipToken);
@@ -3295,7 +3295,7 @@ namespace PlayFab
 
             ~ListCertificateSummariesResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["CertificateSummaries"], CertificateSummaries);
                 FromJsonUtilP(input["PageSize"], PageSize);
@@ -3331,7 +3331,7 @@ namespace PlayFab
 
             ~ListContainerImagesRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["PageSize"], PageSize);
                 FromJsonUtilS(input["SkipToken"], SkipToken);
@@ -3368,7 +3368,7 @@ namespace PlayFab
 
             ~ListContainerImagesResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Images"], Images);
                 FromJsonUtilP(input["PageSize"], PageSize);
@@ -3401,7 +3401,7 @@ namespace PlayFab
 
             ~ListContainerImageTagsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["ImageName"], ImageName);
             }
@@ -3430,7 +3430,7 @@ namespace PlayFab
 
             ~ListContainerImageTagsResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Tags"], Tags);
             }
@@ -3462,7 +3462,7 @@ namespace PlayFab
 
             ~ListMatchmakingTicketsForPlayerRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilS(input["QueueName"], QueueName);
@@ -3493,7 +3493,7 @@ namespace PlayFab
 
             ~ListMatchmakingTicketsForPlayerResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["TicketIds"], TicketIds);
             }
@@ -3531,7 +3531,7 @@ namespace PlayFab
 
             ~ListMultiplayerServersRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildId"], BuildId);
                 FromJsonUtilP(input["PageSize"], PageSize);
@@ -3584,7 +3584,7 @@ namespace PlayFab
 
             ~MultiplayerServerSummary() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["ConnectedPlayers"], ConnectedPlayers);
                 FromJsonUtilT(input["LastStateTransitionTime"], LastStateTransitionTime);
@@ -3631,7 +3631,7 @@ namespace PlayFab
 
             ~ListMultiplayerServersResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["MultiplayerServerSummaries"], MultiplayerServerSummaries);
                 FromJsonUtilP(input["PageSize"], PageSize);
@@ -3664,7 +3664,7 @@ namespace PlayFab
 
             ~ListPartyQosServersRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Version"], Version);
             }
@@ -3696,7 +3696,7 @@ namespace PlayFab
 
             ~QosServer() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Region"], Region);
                 FromJsonUtilS(input["ServerUrl"], ServerUrl);
@@ -3733,7 +3733,7 @@ namespace PlayFab
 
             ~ListPartyQosServersResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["PageSize"], PageSize);
                 FromJsonUtilO(input["QosServers"], QosServers);
@@ -3763,7 +3763,7 @@ namespace PlayFab
 
             ~ListQosServersForTitleRequest() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -3796,7 +3796,7 @@ namespace PlayFab
 
             ~ListQosServersForTitleResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["PageSize"], PageSize);
                 FromJsonUtilO(input["QosServers"], QosServers);
@@ -3826,7 +3826,7 @@ namespace PlayFab
 
             ~ListQosServersRequest() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -3859,7 +3859,7 @@ namespace PlayFab
 
             ~ListQosServersResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["PageSize"], PageSize);
                 FromJsonUtilO(input["QosServers"], QosServers);
@@ -3901,7 +3901,7 @@ namespace PlayFab
 
             ~ListVirtualMachineSummariesRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildId"], BuildId);
                 FromJsonUtilP(input["PageSize"], PageSize);
@@ -3942,7 +3942,7 @@ namespace PlayFab
 
             ~VirtualMachineSummary() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["HealthStatus"], HealthStatus);
                 FromJsonUtilS(input["State"], State);
@@ -3981,7 +3981,7 @@ namespace PlayFab
 
             ~ListVirtualMachineSummariesResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["PageSize"], PageSize);
                 FromJsonUtilS(input["SkipToken"], SkipToken);
@@ -4011,7 +4011,7 @@ namespace PlayFab
 
             ~MultiplayerEmptyRequest() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -4053,7 +4053,7 @@ namespace PlayFab
 
             ~RequestMultiplayerServerRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["BuildAliasParams"], pfBuildAliasParams);
                 FromJsonUtilS(input["BuildId"], BuildId);
@@ -4119,7 +4119,7 @@ namespace PlayFab
 
             ~RequestMultiplayerServerResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["ConnectedPlayers"], ConnectedPlayers);
                 FromJsonUtilS(input["FQDN"], FQDN);
@@ -4163,7 +4163,7 @@ namespace PlayFab
 
             ~RolloverContainerRegistryCredentialsRequest() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -4196,7 +4196,7 @@ namespace PlayFab
 
             ~RolloverContainerRegistryCredentialsResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["DnsName"], DnsName);
                 FromJsonUtilS(input["Password"], Password);
@@ -4235,7 +4235,7 @@ namespace PlayFab
 
             ~ShutdownMultiplayerServerRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildId"], BuildId);
                 FromJsonUtilS(input["Region"], Region);
@@ -4274,7 +4274,7 @@ namespace PlayFab
 
             ~UpdateBuildAliasRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AliasId"], AliasId);
                 FromJsonUtilS(input["AliasName"], AliasName);
@@ -4310,7 +4310,7 @@ namespace PlayFab
 
             ~UpdateBuildRegionsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["BuildId"], BuildId);
                 FromJsonUtilO(input["BuildRegions"], BuildRegions);
@@ -4341,7 +4341,7 @@ namespace PlayFab
 
             ~UploadCertificateRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["GameCertificate"], GameCertificate);
             }

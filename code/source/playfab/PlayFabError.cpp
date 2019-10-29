@@ -4,7 +4,7 @@
 
 namespace PlayFab
 {
-    void PlayFabError::FromJson(Json::Value& input)
+    void PlayFabError::FromJson(const Json::Value& input)
     {
         const Json::Value HttpCode_member = input["code"];
         if (HttpCode_member != Json::Value::null) HttpCode = HttpCode_member.asInt();

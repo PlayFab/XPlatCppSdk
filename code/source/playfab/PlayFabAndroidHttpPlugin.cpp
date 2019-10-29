@@ -456,7 +456,7 @@ namespace PlayFab
         SetPredefinedHeaders(requestTask);
 
         // Call SetHeader
-        auto headers = requestContainer.GetHeaders();
+        auto headers = requestContainer.GetRequestHeaders();
         if (!headers.empty())
         {
             for (auto const &obj : headers)
@@ -597,13 +597,12 @@ namespace PlayFab
     }
 
 
-    std::string PlayFabAndroidHttpPlugin::GetUrl(RequestTask& requestTask) const
+    std::string PlayFabAndroidHttpPlugin::GetUrl(const RequestTask& requestTask) const
     {
-        CallRequestContainer& requestContainer = requestTask.RequestContainer();
-        return PlayFabSettings::GetUrl(requestContainer.GetUrl(), PlayFabSettings::requestGetParams);
+        return PlayFabSettings::GetUrl(requestTask.GetRequestContainerUrl(), PlayFabSettings::requestGetParams);
     }
 
-    void PlayFabAndroidHttpPlugin::SetPredefinedHeaders(RequestTask& requestTask)
+    void PlayFabAndroidHttpPlugin::SetPredefinedHeaders(const RequestTask& requestTask)
     {
         SetHeader(requestTask, "Accept", "application/json");
         SetHeader(requestTask, "Content-Type", "application/json; charset=utf-8");
@@ -611,10 +610,8 @@ namespace PlayFab
         SetHeader(requestTask, "X-ReportErrorAsSuccess", "true");
     }
 
-    void PlayFabAndroidHttpPlugin::SetHeader(RequestTask& requestTask, const char* name, const char* value)
+    void PlayFabAndroidHttpPlugin::SetHeader(const RequestTask& requestTask, const char* name, const char* value)
     {
-        CallRequestContainer& requestContainer = requestTask.RequestContainer();
-
         JNIEnv* jniEnv = requestTask.impl->JniEvn();
         if (jniEnv == nullptr)
         {
@@ -664,6 +661,8 @@ namespace PlayFab
         std::unique_ptr<Json::CharReader> jsonReader(jsonReaderFactory.newCharReader());
         JSONCPP_STRING jsonParseErrors;
         const bool parsedSuccessfully = jsonReader->parse(requestContainer.responseString.c_str(), requestContainer.responseString.c_str() + requestContainer.responseString.length(), &requestContainer.responseJson, &jsonParseErrors);
+
+        requestContainer.errorWrapper.RequestId = requestContainer.GetRequestId();
 
         if (parsedSuccessfully)
         {

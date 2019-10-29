@@ -52,7 +52,7 @@ namespace PlayFab
 
             ~EntityKey() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Id"], Id);
                 FromJsonUtilS(input["Type"], Type);
@@ -89,7 +89,7 @@ namespace PlayFab
 
             ~ScriptExecutionError() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Error"], Error);
                 FromJsonUtilS(input["Message"], Message);
@@ -128,7 +128,7 @@ namespace PlayFab
 
             ~LogStatement() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 Data = input["Data"];
                 FromJsonUtilS(input["Level"], Level);
@@ -194,7 +194,7 @@ namespace PlayFab
 
             ~ExecuteCloudScriptResult() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["APIRequestsIssued"], APIRequestsIssued);
                 FromJsonUtilO(input["Error"], Error);
@@ -260,7 +260,7 @@ namespace PlayFab
 
             ~ExecuteEntityCloudScriptRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilS(input["FunctionName"], FunctionName);

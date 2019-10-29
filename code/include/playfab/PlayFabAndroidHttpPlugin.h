@@ -32,9 +32,9 @@ namespace PlayFab
         bool CheckResponse(RequestTask& requestTask);
         void SetResponseAsBadRequest(RequestTask& requestTask);
 
-        virtual std::string GetUrl(RequestTask& requestTask) const;
-        virtual void SetPredefinedHeaders(RequestTask& requestTask);
-        virtual void SetHeader(RequestTask& requestTask, const char* name, const char* value);
+        virtual std::string GetUrl(const RequestTask& requestTask) const;
+        virtual void SetPredefinedHeaders(const RequestTask& requestTask);
+        virtual void SetHeader(const RequestTask& requestTask, const char* name, const char* value);
         virtual bool GetBinaryPayload(RequestTask& requestTask, void*& payload, size_t& payloadSize) const;
         virtual void ProcessResponse(RequestTask& requestTask, const int httpCode);
         virtual void HandleResults(RequestTask& requestTask);
@@ -57,6 +57,10 @@ namespace PlayFab
             CallRequestContainer& RequestContainer()
             {
                 return *dynamic_cast<CallRequestContainer*>(requestContainer.get());
+            }
+            std::string GetRequestContainerUrl() const
+            {
+                return requestContainer->GetUrl();
             }
             std::atomic<State> state;
             std::unique_ptr<CallRequestContainerBase> requestContainer;

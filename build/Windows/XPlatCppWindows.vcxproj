@@ -64,7 +64,7 @@
       <PreprocessorDefinitions>_DEBUG;_LIB;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SdkSourceDir);$(ExternalDir)/jsoncpp/include;$(ExternalDir)/aria/lib/include/public;$(ExternalDir)/aria/lib;$(ExternalDir)/aria/bondlite/include/bond_lite;$(ExternalDir)/aria/bondlite/generated;$(SdkSourceDir)/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SdkSourceDir);$(ExternalDir)/jsoncpp/include;$(SdkSourceDir)/include</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MinimalRebuild>false</MinimalRebuild>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -90,7 +90,7 @@
       <PreprocessorDefinitions>_LIB;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SdkSourceDir);$(ExternalDir)/jsoncpp/include;$(ExternalDir)/aria/lib/include/public;$(ExternalDir)/aria/lib;$(ExternalDir)/aria/bondlite/include/bond_lite;$(ExternalDir)/aria/bondlite/generated;$(SdkSourceDir)/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SdkSourceDir);$(ExternalDir)/jsoncpp/include;$(SdkSourceDir)/include</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MinimalRebuild>false</MinimalRebuild>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>

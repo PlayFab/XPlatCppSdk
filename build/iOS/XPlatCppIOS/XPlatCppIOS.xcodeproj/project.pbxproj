@@ -493,10 +493,6 @@
 				HEADER_SEARCH_PATHS = (
 					../../../code,
 					../../../external/jsoncpp/include,
-					../../../external/aria/lib/include/public,
-					../../../external/aria/lib,
-					../../../external/aria/bondlite/include/bond_lite,
-					../../../external/aria/bondlite/generated,
 					../../../code/include,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -559,10 +555,6 @@
 				HEADER_SEARCH_PATHS = (
 					../../../code,
 					../../../external/jsoncpp/include,
-					../../../external/aria/lib/include/public,
-					../../../external/aria/lib,
-					../../../external/aria/bondlite/include/bond_lite,
-					../../../external/aria/bondlite/generated,
 					../../../code/include,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

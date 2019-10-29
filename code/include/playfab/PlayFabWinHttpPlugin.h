@@ -27,8 +27,8 @@ namespace PlayFab
 
     protected:
         virtual void ExecuteRequest(std::unique_ptr<CallRequestContainer> requestContainer);
-        virtual std::string GetUrl(CallRequestContainer& requestContainer) const;
-        virtual void SetPredefinedHeaders(CallRequestContainer& requestContainer, HINTERNET hRequest);
+        virtual std::string GetUrl(const CallRequestContainer& requestContainer) const;
+        virtual void SetPredefinedHeaders(const CallRequestContainer& requestContainer, HINTERNET hRequest);
         virtual bool GetBinaryPayload(CallRequestContainer& requestContainer, LPVOID& payload, DWORD& payloadSize) const;
         virtual void ProcessResponse(CallRequestContainer& requestContainer, const int httpCode, std::string&& requestId);
         void WorkerThread();

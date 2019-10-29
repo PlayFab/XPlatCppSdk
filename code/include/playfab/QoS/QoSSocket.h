@@ -3,7 +3,9 @@
 #include <playfab/QoS/XPlatSocket.h>
 #include <playfab/QoS/PingResult.h>
 
+#if defined(PLAYFAB_PLATFORM_WINDOWS)
 #pragma warning (disable: 4309)     // Suppress static cast conversion of const value (line 54)
+#endif // defined(PLAYFAB_PLATFORM_WINDOWS)
 
 namespace PlayFab
 {
@@ -39,7 +41,7 @@ namespace PlayFab
             int ConfigureSocket(int timeoutMs);
 
             // Set the address that the socket would ping
-            int SetAddress(const char * socketAddr);
+            int SetAddress(const char* socketAddr);
 
             // Get the ping relay latency for the server set.
             PingResult GetQoSServerLatencyMs();
@@ -54,3 +56,7 @@ namespace PlayFab
         };
     }
 }
+
+#if defined(PLAYFAB_PLATFORM_WINDOWS)
+#pragma warning (default: 4309)     // Suppress static cast conversion of const value (line 54)
+#endif // defined(PLAYFAB_PLATFORM_WINDOWS)

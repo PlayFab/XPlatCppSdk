@@ -18,16 +18,16 @@ namespace PlayFab
 
 
         // ------------ Generated API calls
-        static void ExecuteEntityCloudScript(CloudScriptModels::ExecuteEntityCloudScriptRequest& request, ProcessApiCallback<CloudScriptModels::ExecuteCloudScriptResult> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void ExecuteEntityCloudScript(CloudScriptModels::ExecuteEntityCloudScriptRequest& request, const ProcessApiCallback<CloudScriptModels::ExecuteCloudScriptResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
 
     private:
         PlayFabCloudScriptAPI(); // Private constructor, static class should never have an instance
         PlayFabCloudScriptAPI(const PlayFabCloudScriptAPI& other); // Private copy-constructor, static class should never have an instance
 
         // ------------ Generated result handlers
-        static void OnExecuteEntityCloudScriptResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
+        static void OnExecuteEntityCloudScriptResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
 
-        static bool ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container);
+        static bool ValidateResult(PlayFabResultCommon& resultCommon, const CallRequestContainer& container);
     };
 }
 

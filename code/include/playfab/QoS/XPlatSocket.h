@@ -54,15 +54,15 @@ namespace PlayFab
             int ReceiveReply(char* buf, const int& buflen);
 
             // Get the last error code
-            int GetLastErrorCode();
+            int GetLastErrorCode() const;
 
         private:
             // Log if the socket was not initialized.
             // If we logged, will return true, else will return false.
-            bool LogErrorIfNotInitialized();
+            bool LogErrorIfNotInitialized() const;
 
             // returns error based on current platform
-            unsigned int platformSpecificError();
+            unsigned int platformSpecificError() const;
 
         private:
             bool initialized;

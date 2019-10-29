@@ -17,7 +17,7 @@ namespace PlayFab
     {
     }
 
-    std::string PlayFabApiSettings::GetUrl(const std::string& urlPath, const std::map<std::string, std::string>& getParams)
+    std::string PlayFabApiSettings::GetUrl(const std::string& urlPath, const std::map<std::string, std::string>& getParams) const
     {
         std::string fullUrl;
         fullUrl.reserve(1000);

@@ -38,13 +38,13 @@ namespace PlayFab
         void ForgetAllCredentials();
 
         // ------------ Generated API calls
-        void WriteEvents(EventsModels::WriteEventsRequest& request, ProcessApiCallback<EventsModels::WriteEventsResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
-        void WriteTelemetryEvents(EventsModels::WriteEventsRequest& request, ProcessApiCallback<EventsModels::WriteEventsResponse> callback, ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void WriteEvents(EventsModels::WriteEventsRequest& request, const ProcessApiCallback<EventsModels::WriteEventsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void WriteTelemetryEvents(EventsModels::WriteEventsRequest& request, const ProcessApiCallback<EventsModels::WriteEventsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
 
         // ------------ Generated result handlers
-        void OnWriteEventsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
-        void OnWriteTelemetryEventsResult(int httpCode, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer);
-        bool ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container);
+        void OnWriteEventsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnWriteTelemetryEventsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        bool ValidateResult(PlayFabResultCommon& resultCommon, const CallRequestContainer& container);
     private:
         std::shared_ptr<PlayFabAuthenticationContext> GetOrCreateAuthenticationContext();
     };

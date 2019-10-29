@@ -1,12 +1,13 @@
 #include <stdafx.h>
 
+#if defined(PLAYFAB_PLATFORM_WINDOWS)
+
 #include <playfab/PlayFabWinHttpPlugin.h>
 #include <playfab/PlayFabSettings.h>
 #include <stdexcept>
 #include <vector>
 #include <windows.h>
 
-#pragma warning (disable: 4100) // formal parameters are part of a public interface
 #pragma warning (disable: 4245) // Some DWORD arguments of WinHTTP API can accept -1, according to documentation
 
 namespace PlayFab
@@ -189,10 +190,10 @@ namespace PlayFab
                     {
                         // Add HTTP headers
                         SetPredefinedHeaders(reqContainer, hRequest);
-                        auto headers = reqContainer.GetHeaders();
+                        auto headers = reqContainer.GetRequestHeaders();
                         if (headers.size() > 0)
                         {
-                            for (auto const &obj : headers)
+                            for (auto const& obj : headers)
                             {
                                 if (obj.first.length() != 0 && obj.second.length() != 0) // no empty keys or values in headers
                                 {
@@ -254,7 +255,7 @@ namespace PlayFab
                                         }
 
                                         // Allocate space for the buffer
-                                        auto outBuffer = std::unique_ptr<char>(new char[dwSize + 1]);
+                                        auto outBuffer = std::unique_ptr<char[]>(new char[dwSize + 1]);
                                         if (!outBuffer)
                                         {
                                             SetErrorInfo(reqContainer, "Out of memory, failed to allocate a buffer to read a data block in HTTP response");
@@ -313,7 +314,7 @@ namespace PlayFab
                                                 WINHTTP_NO_HEADER_INDEX);
                                             if (bResults)
                                             {
-                                                requestId = std::string(wideRequestIdBuffer.get(), wideRequestIdBuffer.get() + wideRequestIdLength);
+                                                requestId = std::string(wideRequestIdBuffer.get(), wideRequestIdBuffer.get() + wideRequestIdLength - 1);
                                             }
                                             else
                                             {
@@ -350,13 +351,14 @@ namespace PlayFab
         if (hSession) WinHttpCloseHandle(hSession);
     }
 
-    std::string PlayFabWinHttpPlugin::GetUrl(CallRequestContainer& reqContainer) const
+    std::string PlayFabWinHttpPlugin::GetUrl(const CallRequestContainer& reqContainer) const
     {
         return reqContainer.GetFullUrl();
     }
 
-    void PlayFabWinHttpPlugin::SetPredefinedHeaders(CallRequestContainer& requestContainer, HINTERNET hRequest)
+    void PlayFabWinHttpPlugin::SetPredefinedHeaders(const CallRequestContainer& requestContainer, HINTERNET hRequest)
     {
+        UNREFERENCED_PARAMETER(requestContainer);
         WinHttpAddRequestHeaders(hRequest, L"Accept: application/json", -1, 0);
         WinHttpAddRequestHeaders(hRequest, L"Content-Type: application/json; charset=utf-8", -1, 0);
         WinHttpAddRequestHeaders(hRequest, (L"X-PlayFabSDK: " + std::wstring(PlayFabSettings::versionString.begin(), PlayFabSettings::versionString.end())).c_str(), -1, 0);
@@ -365,6 +367,9 @@ namespace PlayFab
 
     bool PlayFabWinHttpPlugin::GetBinaryPayload(CallRequestContainer& reqContainer, LPVOID& payload, DWORD& payloadSize) const
     {
+        UNREFERENCED_PARAMETER(reqContainer);
+        UNREFERENCED_PARAMETER(payload);
+        UNREFERENCED_PARAMETER(payloadSize);
         return false;
     }
 
@@ -449,3 +454,5 @@ namespace PlayFab
         }
     }
 }
+
+#endif // defined(PLAYFAB_PLATFORM_WINDOWS)

@@ -24,7 +24,7 @@ namespace PlayFab
 
             ~GetLanguageListRequest() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -51,7 +51,7 @@ namespace PlayFab
 
             ~GetLanguageListResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["LanguageList"], LanguageList);
             }

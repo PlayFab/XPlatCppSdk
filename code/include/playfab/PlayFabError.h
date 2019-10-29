@@ -489,6 +489,8 @@ namespace PlayFab
         PlayFabErrorInsightsManagementSetStorageRetentionInvalidParameter = 1486,
         PlayFabErrorInsightsManagementGetStorageUsageInvalidParameter = 1487,
         PlayFabErrorInsightsManagementGetOperationStatusInvalidParameter = 1488,
+        PlayFabErrorDuplicatePurchaseTransactionId = 1489,
+        PlayFabErrorEvaluationModePlayerCountExceeded = 1490,
         PlayFabErrorMatchmakingEntityInvalid = 2001,
         PlayFabErrorMatchmakingPlayerAttributesInvalid = 2002,
         PlayFabErrorMatchmakingQueueNotFound = 2016,
@@ -525,6 +527,8 @@ namespace PlayFab
         PlayFabErrorCatalogConfigInvalid = 4010,
         PlayFabErrorCatalogUnauthorized = 4011,
         PlayFabErrorCatalogItemTypeInvalid = 4012,
+        PlayFabErrorCatalogBadRequest = 4013,
+        PlayFabErrorCatalogTooManyRequests = 4014,
         PlayFabErrorExportInvalidStatusUpdate = 5000,
         PlayFabErrorExportInvalidPrefix = 5001,
         PlayFabErrorExportBlobContainerDoesNotExist = 5002,
@@ -551,6 +555,7 @@ namespace PlayFab
         PlayFabErrorExperimentationExceededVariantNameLength = 7006,
         PlayFabErrorExperimentationExceededMaxVariantLength = 7007,
         PlayFabErrorExperimentInvalidId = 7008,
+        PlayFabErrorExperimentationNoScorecard = 7009,
         PlayFabErrorMaxActionDepthExceeded = 8000,
         PlayFabErrorSnapshotNotFound = 11000,
     };
@@ -573,7 +578,7 @@ namespace PlayFab
         std::string UrlPath;
         Json::Value Request;
 
-        void FromJson(Json::Value& input) override;
+        void FromJson(const Json::Value& input) override;
         Json::Value ToJson() const override;
 
         std::string GenerateErrorReport() const;

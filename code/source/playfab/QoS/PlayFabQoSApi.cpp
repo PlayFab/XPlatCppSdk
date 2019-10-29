@@ -23,7 +23,7 @@ namespace PlayFab
 {
     namespace QoS
     {
-        bool ValidateResult(PlayFabResultCommon& resultCommon, CallRequestContainer& container)
+        bool ValidateResult(PlayFabResultCommon& resultCommon, const CallRequestContainer& container)
         {
             if (container.errorWrapper.HttpCode == 200)
             {
@@ -41,7 +41,7 @@ namespace PlayFab
             }
         }
 
-        void OnWriteEventsResult(int, std::string result, std::shared_ptr<CallRequestContainerBase> reqContainer)
+        void OnWriteEventsResult(int, const std::string&, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
         {
             CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
 
@@ -59,16 +59,14 @@ namespace PlayFab
 
         void WriteTelemetryEvents(
             WriteEventsRequest& request,
-            ProcessApiCallback<WriteEventsResponse> callback,
-            ErrorCallback errorCallback = nullptr,
+            const ProcessApiCallback<WriteEventsResponse> callback,
+            const ErrorCallback errorCallback = nullptr,
             void* customData = nullptr
         )
         {
             IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
             const auto requestJson = request.ToJson();
-
-            Json::FastWriter writer;
-            std::string jsonAsString = writer.write(requestJson);
+            std::string jsonAsString = requestJson.toStyledString();
 
             std::unordered_map<std::string, std::string> headers;
             headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
@@ -173,7 +171,7 @@ namespace PlayFab
             return result;
         }
 
-        void PlayFabQoSApi::SendResultsToPlayFab(QoSResult& result)
+        void PlayFabQoSApi::SendResultsToPlayFab(const QoSResult& result)
         {
             Json::Value value;
             value["ErrorCode"] = Json::Value(result.errorCode);
@@ -312,7 +310,7 @@ namespace PlayFab
             }
         }
 
-        void PlayFabQoSApi::PingServers(vector<std::string>& pings, vector<future<PingResult>>& asyncPingResults, std::vector<std::shared_ptr<QoSSocket>>& sockets, unordered_map<std::string, PingResult>& accumulatedPingResults, unsigned int timeoutMs)
+        void PlayFabQoSApi::PingServers(const vector<std::string>& pings, vector<future<PingResult>>& asyncPingResults, const std::vector<std::shared_ptr<QoSSocket>>& sockets, unordered_map<std::string, PingResult>& accumulatedPingResults, unsigned int timeoutMs)
         {
             int pingItr = 0;
             size_t numThreads = asyncPingResults.size();
@@ -391,7 +389,7 @@ namespace PlayFab
         }
 
         // Add the new ping result to the unordered map.
-        void PlayFabQoSApi::UpdateAccumulatedPingResult(PingResult& result, std::string region, std::unordered_map<std::string, PingResult>& accumulatedPingResults, unsigned int timeoutMs)
+        void PlayFabQoSApi::UpdateAccumulatedPingResult(const PingResult& result, const std::string& region, std::unordered_map<std::string, PingResult>& accumulatedPingResults, unsigned int timeoutMs)
         {
             if (result.errorCode != 0)
             {

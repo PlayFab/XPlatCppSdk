@@ -97,8 +97,13 @@ namespace PlayFabUnit
     void PlayFabApiTest::LoginFailedCallback(const PlayFabError& error, void* customData)
     {
         TestContext* testContext = reinterpret_cast<TestContext*>(customData);
+#if defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_PLAYSTATION)
+        if (error.RequestId.empty())
+            testContext->Fail("The requestId should be set on a failure.");
+        else
+#endif // defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_PLAYSTATION)
         if (error.ErrorMessage.find("password") != -1)
-            testContext->Pass();
+            testContext->Pass(error.RequestId);
         else
             testContext->Fail("Password error message not found: " + error.ErrorMessage);
     }

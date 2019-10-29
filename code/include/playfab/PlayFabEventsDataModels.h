@@ -30,7 +30,7 @@ namespace PlayFab
 
             ~EntityKey() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Id"], Id);
                 FromJsonUtilS(input["Type"], Type);
@@ -79,7 +79,7 @@ namespace PlayFab
 
             ~EventContents() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilS(input["EventNamespace"], EventNamespace);
@@ -120,7 +120,7 @@ namespace PlayFab
 
             ~WriteEventsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Events"], Events);
             }
@@ -149,7 +149,7 @@ namespace PlayFab
 
             ~WriteEventsResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AssignedEventIds"], AssignedEventIds);
             }

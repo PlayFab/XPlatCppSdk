@@ -55,7 +55,7 @@ namespace PlayFab
 
             ~EntityKey() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Id"], Id);
                 FromJsonUtilS(input["Type"], Type);
@@ -89,7 +89,7 @@ namespace PlayFab
 
             ~AcceptGroupApplicationRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilO(input["Group"], Group);
@@ -123,7 +123,7 @@ namespace PlayFab
 
             ~AcceptGroupInvitationRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilO(input["Group"], Group);
@@ -160,7 +160,7 @@ namespace PlayFab
 
             ~AddMembersRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Group"], Group);
                 FromJsonUtilO(input["Members"], Members);
@@ -199,7 +199,7 @@ namespace PlayFab
 
             ~ApplyToGroupRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["AutoAcceptOutstandingInvite"], AutoAcceptOutstandingInvite);
                 FromJsonUtilO(input["Entity"], Entity);
@@ -235,7 +235,7 @@ namespace PlayFab
 
             ~EntityWithLineage() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Key"], Key);
                 FromJsonUtilO(input["Lineage"], Lineage);
@@ -272,7 +272,7 @@ namespace PlayFab
 
             ~ApplyToGroupResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilT(input["Expires"], Expires);
@@ -308,7 +308,7 @@ namespace PlayFab
 
             ~BlockEntityRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilO(input["Group"], Group);
@@ -348,7 +348,7 @@ namespace PlayFab
 
             ~ChangeMemberRoleRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["DestinationRoleId"], DestinationRoleId);
                 FromJsonUtilO(input["Group"], Group);
@@ -386,7 +386,7 @@ namespace PlayFab
 
             ~CreateGroupRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilS(input["GroupName"], GroupName);
@@ -435,7 +435,7 @@ namespace PlayFab
 
             ~CreateGroupResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AdminRoleId"], AdminRoleId);
                 FromJsonUtilT(input["Created"], Created);
@@ -482,7 +482,7 @@ namespace PlayFab
 
             ~CreateGroupRoleRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Group"], Group);
                 FromJsonUtilS(input["RoleId"], RoleId);
@@ -521,7 +521,7 @@ namespace PlayFab
 
             ~CreateGroupRoleResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["ProfileVersion"], ProfileVersion);
                 FromJsonUtilS(input["RoleId"], RoleId);
@@ -554,7 +554,7 @@ namespace PlayFab
 
             ~DeleteGroupRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Group"], Group);
             }
@@ -586,7 +586,7 @@ namespace PlayFab
 
             ~DeleteRoleRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Group"], Group);
                 FromJsonUtilS(input["RoleId"], RoleId);
@@ -614,7 +614,7 @@ namespace PlayFab
 
             ~EmptyResponse() = default;
 
-            void FromJson(Json::Value&) override
+            void FromJson(const Json::Value&) override
             {
             }
 
@@ -647,7 +647,7 @@ namespace PlayFab
 
             ~EntityMemberRole() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Members"], Members);
                 FromJsonUtilS(input["RoleId"], RoleId);
@@ -683,7 +683,7 @@ namespace PlayFab
 
             ~GetGroupRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Group"], Group);
                 FromJsonUtilS(input["GroupName"], GroupName);
@@ -732,7 +732,7 @@ namespace PlayFab
 
             ~GetGroupResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AdminRoleId"], AdminRoleId);
                 FromJsonUtilT(input["Created"], Created);
@@ -779,7 +779,7 @@ namespace PlayFab
 
             ~GroupApplication() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilT(input["Expires"], Expires);
@@ -815,7 +815,7 @@ namespace PlayFab
 
             ~GroupBlock() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilO(input["Group"], Group);
@@ -858,7 +858,7 @@ namespace PlayFab
 
             ~GroupInvitation() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilT(input["Expires"], Expires);
                 FromJsonUtilO(input["Group"], Group);
@@ -898,7 +898,7 @@ namespace PlayFab
 
             ~GroupRole() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["RoleId"], RoleId);
                 FromJsonUtilS(input["RoleName"], RoleName);
@@ -938,7 +938,7 @@ namespace PlayFab
 
             ~GroupWithRoles() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Group"], Group);
                 FromJsonUtilS(input["GroupName"], GroupName);
@@ -982,7 +982,7 @@ namespace PlayFab
 
             ~InviteToGroupRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["AutoAcceptOutstandingApplication"], AutoAcceptOutstandingApplication);
                 FromJsonUtilO(input["Entity"], Entity);
@@ -1029,7 +1029,7 @@ namespace PlayFab
 
             ~InviteToGroupResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilT(input["Expires"], Expires);
                 FromJsonUtilO(input["Group"], Group);
@@ -1072,7 +1072,7 @@ namespace PlayFab
 
             ~IsMemberRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilO(input["Group"], Group);
@@ -1105,7 +1105,7 @@ namespace PlayFab
 
             ~IsMemberResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["IsMember"], IsMember);
             }
@@ -1134,7 +1134,7 @@ namespace PlayFab
 
             ~ListGroupApplicationsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Group"], Group);
             }
@@ -1163,7 +1163,7 @@ namespace PlayFab
 
             ~ListGroupApplicationsResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Applications"], Applications);
             }
@@ -1192,7 +1192,7 @@ namespace PlayFab
 
             ~ListGroupBlocksRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Group"], Group);
             }
@@ -1221,7 +1221,7 @@ namespace PlayFab
 
             ~ListGroupBlocksResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["BlockedEntities"], BlockedEntities);
             }
@@ -1250,7 +1250,7 @@ namespace PlayFab
 
             ~ListGroupInvitationsRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Group"], Group);
             }
@@ -1279,7 +1279,7 @@ namespace PlayFab
 
             ~ListGroupInvitationsResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Invitations"], Invitations);
             }
@@ -1308,7 +1308,7 @@ namespace PlayFab
 
             ~ListGroupMembersRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Group"], Group);
             }
@@ -1337,7 +1337,7 @@ namespace PlayFab
 
             ~ListGroupMembersResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Members"], Members);
             }
@@ -1366,7 +1366,7 @@ namespace PlayFab
 
             ~ListMembershipOpportunitiesRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Entity"], Entity);
             }
@@ -1398,7 +1398,7 @@ namespace PlayFab
 
             ~ListMembershipOpportunitiesResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Applications"], Applications);
                 FromJsonUtilO(input["Invitations"], Invitations);
@@ -1429,7 +1429,7 @@ namespace PlayFab
 
             ~ListMembershipRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Entity"], Entity);
             }
@@ -1458,7 +1458,7 @@ namespace PlayFab
 
             ~ListMembershipResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Groups"], Groups);
             }
@@ -1490,7 +1490,7 @@ namespace PlayFab
 
             ~RemoveGroupApplicationRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilO(input["Group"], Group);
@@ -1524,7 +1524,7 @@ namespace PlayFab
 
             ~RemoveGroupInvitationRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilO(input["Group"], Group);
@@ -1561,7 +1561,7 @@ namespace PlayFab
 
             ~RemoveMembersRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Group"], Group);
                 FromJsonUtilO(input["Members"], Members);
@@ -1597,7 +1597,7 @@ namespace PlayFab
 
             ~UnblockEntityRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilO(input["Group"], Group);
@@ -1640,7 +1640,7 @@ namespace PlayFab
 
             ~UpdateGroupRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AdminRoleId"], AdminRoleId);
                 FromJsonUtilP(input["ExpectedProfileVersion"], ExpectedProfileVersion);
@@ -1683,7 +1683,7 @@ namespace PlayFab
 
             ~UpdateGroupResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["OperationReason"], OperationReason);
                 FromJsonUtilP(input["ProfileVersion"], ProfileVersion);
@@ -1725,7 +1725,7 @@ namespace PlayFab
 
             ~UpdateGroupRoleRequest() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["ExpectedProfileVersion"], ExpectedProfileVersion);
                 FromJsonUtilO(input["Group"], Group);
@@ -1766,7 +1766,7 @@ namespace PlayFab
 
             ~UpdateGroupRoleResponse() = default;
 
-            void FromJson(Json::Value& input) override
+            void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["OperationReason"], OperationReason);
                 FromJsonUtilP(input["ProfileVersion"], ProfileVersion);

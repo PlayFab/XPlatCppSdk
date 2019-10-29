@@ -34,7 +34,7 @@ namespace PlayFab
         /// starts the process of making a post request.
         /// A user is expected to supply their own CallRequestContainerBase
         /// </summary>
-        virtual void MakePostRequest(std::unique_ptr<CallRequestContainerBase>) = 0;
+        virtual void MakePostRequest(std::unique_ptr<CallRequestContainerBase> requestContainer) = 0;
 
         /// <summary>
         /// updates the process of making post requests.

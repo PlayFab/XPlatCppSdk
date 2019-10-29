@@ -30,17 +30,12 @@ namespace PlayFab
             void* customData = nullptr,
             std::shared_ptr<PlayFabApiSettings> apiSettings = nullptr);
 
-        CallRequestContainerBase(const CallRequestContainerBase& reqContainer);
-        const CallRequestContainerBase& operator=(const CallRequestContainerBase& reqContainer);
-
-        // Prevent move construction and assignment operations
-        CallRequestContainerBase(CallRequestContainerBase&&) = delete;
-        CallRequestContainerBase& operator=(CallRequestContainerBase&&) = delete;
-
-        virtual ~CallRequestContainerBase();
+        virtual ~CallRequestContainerBase() = default;
 
         std::string GetUrl() const;
-        std::unordered_map<std::string, std::string> GetHeaders() const;
+        std::unordered_map<std::string, std::string> GetRequestHeaders() const;
+        std::string GetRequestId() const;
+        void SetRequestId(std::string newRequestId);
         std::string GetRequestBody() const;
         std::shared_ptr<PlayFabApiSettings> GetApiSettings() const;
 
@@ -53,12 +48,19 @@ namespace PlayFab
 
     protected:
         std::string url;
-        std::unordered_map<std::string, std::string> headers;
+        std::unordered_map<std::string, std::string> requestHeaders;
         std::string requestBody;
+        std::string requestId;
         std::shared_ptr<PlayFabApiSettings> apiSettings;
         CallRequestContainerCallback callback;
 
         // I never own this, I can never destroy it
         void* customData; // optional user data (relayed to callback). This gives users the flexibility to tag each request with some data that can be accessed in callback.
+
+    private:
+        // Prevent move construction and assignment operations
+        CallRequestContainerBase() = delete;
+        CallRequestContainerBase(const CallRequestContainerBase&) = delete;
+        CallRequestContainerBase& operator=(const CallRequestContainerBase&) = delete;
     };
 }

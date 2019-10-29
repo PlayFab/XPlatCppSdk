@@ -2,13 +2,11 @@
 
 #include <playfab/PlayFabSettings.h>
 
-#pragma warning (disable: 4100) // formal parameters are part of a public interface
-
 namespace PlayFab
 {
-    const std::string PlayFabSettings::sdkVersion = "3.20.191015";
-    const std::string PlayFabSettings::buildIdentifier = "jbuild_xplatcppsdk__sdk-genericslave-2_1";
-    const std::string PlayFabSettings::versionString = "XPlatCppSdk-3.20.191015";
+    const std::string PlayFabSettings::sdkVersion = "3.21.191029";
+    const std::string PlayFabSettings::buildIdentifier = "jbuild_xplatcppsdk__sdk-genericslave-3_2";
+    const std::string PlayFabSettings::versionString = "XPlatCppSdk-3.21.191029";
     const std::string PlayFabSettings::verticalName = "";
 
     const std::map<std::string, std::string> PlayFabSettings::requestGetParams = {
@@ -81,7 +79,7 @@ namespace PlayFab
         return fullUrl;
     }
 
-    bool PlayFabSettings::ValidateSettings(const std::string& apiAuth, const std::shared_ptr<PlayFabAuthenticationContext> authenticationContext, const std::shared_ptr<PlayFabApiSettings> apiSettings, CallRequestContainer& container)
+    bool PlayFabSettings::ValidateSettings(const std::shared_ptr<PlayFabAuthenticationContext> authenticationContext, const std::shared_ptr<PlayFabApiSettings> apiSettings, CallRequestContainer& container)
     {
         bool valid = true;
         if (PlayFabSettings::titleId.empty())
@@ -105,5 +103,3 @@ namespace PlayFab
         return false;
     }
 }
-
-#pragma warning (default: 4100) // formal parameters are part of a public interface

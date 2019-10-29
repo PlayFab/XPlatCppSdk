@@ -1,7 +1,5 @@
 #include <stdafx.h>
 
-#pragma warning (disable: 4996)         // Suppress the warning thrown for _WINSOCK_DEPRECATED_NO_WARNINGS by the getHostByName api
-
 #include <playfab/QoS/XPlatSocket.h>
 #include <playfab/QoS/QoS.h>
 
@@ -190,7 +188,7 @@ namespace PlayFab
             }
         }
 
-        int XPlatSocket::GetLastErrorCode()
+        int XPlatSocket::GetLastErrorCode() const
         {
             // If an initialization error was logged, return -1
             if (LogErrorIfNotInitialized())
@@ -201,7 +199,7 @@ namespace PlayFab
             return h_errno;
         }
 
-        bool XPlatSocket::LogErrorIfNotInitialized()
+        bool XPlatSocket::LogErrorIfNotInitialized() const
         {
             if (!initialized)
             {
@@ -210,7 +208,7 @@ namespace PlayFab
 
             return !initialized;
         }
-        unsigned int XPlatSocket::platformSpecificError()
+        unsigned int XPlatSocket::platformSpecificError() const
         {
 #if defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX)
             return WSAGetLastError();
