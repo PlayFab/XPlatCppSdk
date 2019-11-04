@@ -61,7 +61,7 @@ namespace PlayFab
         return output;
     }
 
-    PlayFabException::PlayFabException(PlayFabExceptionCode code, const char* const message) : std::exception(message)
+    PlayFabException::PlayFabException(PlayFabExceptionCode code, const char* const message) : std::runtime_error(message)
     {
         this->Code = code;
     }

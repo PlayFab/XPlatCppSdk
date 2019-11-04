@@ -602,10 +602,11 @@ namespace PlayFab
     class PlayFabException : public std::runtime_error
     {
     public:
-        PlayFabException(const PlayFabException& source) = delete; // disable copy
-        PlayFabException(PlayFabException&&) = delete; // disable move
-        PlayFabException& operator=(const PlayFabException& source) = delete; // disable assignment
-        PlayFabException& operator=(PlayFabException&& other) = delete; // disable move assignment
+        PlayFabException() = delete;
+        PlayFabException(const PlayFabException& source) = default;
+        PlayFabException(PlayFabException&&) = default;
+        PlayFabException& operator=(const PlayFabException& source) = default;
+        PlayFabException& operator=(PlayFabException&& other) = default;
 
         PlayFabExceptionCode Code;
         PlayFabException(PlayFabExceptionCode code, const char* const message);
