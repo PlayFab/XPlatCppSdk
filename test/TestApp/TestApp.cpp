@@ -114,7 +114,7 @@ namespace PlayFabUnit
         va_start(args, format);
 #if defined(PLAYFAB_PLATFORM_PLAYSTATION)
         vsnprintf_s(message, sizeof(message), format, args);
-#elif defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID) || defined(PLAYFAB_PLATFORM_LINUX)
+#elif defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID) || defined(PLAYFAB_PLATFORM_LINUX) || defined(PLAYFAB_PLATFORM_SWITCH)
         vsnprintf(message, sizeof(message), format, args);
 #else
         _vsnprintf_s(message, sizeof(message), format, args);

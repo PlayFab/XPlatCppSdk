@@ -48,10 +48,10 @@ namespace PlayFab
             WriteEventsResponse outResult;
             if (ValidateResult(outResult, container))
             {
-                const auto internalPtr = container.successCallback.get();
-                if (internalPtr != nullptr)
+                std::shared_ptr<void> internalPtr = container.successCallback;
+                if (internalPtr.get() != nullptr)
                 {
-                    const auto callback = (*static_cast<ProcessApiCallback<WriteEventsResponse> *>(internalPtr));
+                    const auto& callback = *static_cast<ProcessApiCallback<WriteEventsResponse> *>(internalPtr.get());
                     callback(outResult, container.GetCustomData());
                 }
             }
@@ -65,7 +65,7 @@ namespace PlayFab
         )
         {
             IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-            const auto requestJson = request.ToJson();
+            Json::Value requestJson = request.ToJson();
             std::string jsonAsString = requestJson.toStyledString();
 
             std::unordered_map<std::string, std::string> headers;
@@ -229,10 +229,9 @@ namespace PlayFab
             // Custom data received is a pointer to our api object
             PlayFabQoSApi* api = reinterpret_cast<PlayFabQoSApi*>(customData);
 
-            auto a = result.QosServers;
-            for (auto it = a.begin(); it != a.end(); ++it)
+            for(const QosServer& server :result.QosServers)
             {
-                api->regionMap[it->Region] = move(it->ServerUrl);
+                api->regionMap[server.Region] = server.ServerUrl;
             }
 
             api->listQosServersCompleted = true;

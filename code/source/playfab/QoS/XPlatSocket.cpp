@@ -107,7 +107,7 @@ namespace PlayFab
                 return GetLastErrorCode();
             }
 
-            auto inAddr = (struct in_addr*) he->h_addr_list[0];
+            in_addr* inAddr = reinterpret_cast<in_addr*>(he->h_addr_list[0]);
 
 #if defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX)
             if (inAddr->S_un.S_addr == 0)
@@ -166,17 +166,16 @@ namespace PlayFab
             FD_CLR(0, &socketSet);
             FD_SET(s, &socketSet);
 
-            auto fd_max = s+1;
-            int selectResult = select(fd_max, &socketSet, nullptr, nullptr, &timeOutVal);
+            int selectResult = select(s+1, &socketSet, nullptr, nullptr, &timeOutVal);
 
             if (selectResult > 0)
             {
-                auto recvResult = recvfrom(s, buf, buflen, 0, (struct sockaddr *) &siOther, &slen);
+                int recvResult = static_cast<int>(recvfrom(s, buf, buflen, 0, (struct sockaddr *) &siOther, &slen));
                 if (recvResult < 0)
                 {
                     return platformSpecificError();
                 }
-                return static_cast<int>(recvResult);
+                return recvResult;
             }
             else if (selectResult < 0)
             {

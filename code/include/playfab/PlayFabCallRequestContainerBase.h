@@ -35,7 +35,7 @@ namespace PlayFab
         std::string GetUrl() const;
         std::unordered_map<std::string, std::string> GetRequestHeaders() const;
         std::string GetRequestId() const;
-        void SetRequestId(std::string newRequestId);
+        void SetRequestId(const std::string& newRequestId);
         std::string GetRequestBody() const;
         std::shared_ptr<PlayFabApiSettings> GetApiSettings() const;
 

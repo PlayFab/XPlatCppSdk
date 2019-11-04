@@ -5,9 +5,9 @@
 
 namespace PlayFab
 {
-    CallRequestContainer::CallRequestContainer(std::string url,
+    CallRequestContainer::CallRequestContainer(const std::string& url,
         const std::unordered_map<std::string, std::string>& headers,
-        std::string requestBody,
+        const std::string& requestBody,
         CallRequestContainerCallback callback,
         void* customData,
         std::shared_ptr<PlayFabApiSettings> settings) :
@@ -22,8 +22,14 @@ namespace PlayFab
         errorWrapper.UrlPath = url;
 
         Json::Value request;
-        Json::Reader reader;
-        bool parsingSuccessful = reader.parse(requestBody, request);
+        std::string errs;
+        Json::CharReaderBuilder builder;
+        std::unique_ptr<Json::CharReader> reader(builder.newCharReader());
+
+        const char* reqBod = requestBody.c_str();
+        size_t reqBodLength = requestBody.length();
+
+        bool parsingSuccessful = reader->parse(reqBod, reqBod + reqBodLength, &request, &errs);
 
         if (parsingSuccessful)
         {

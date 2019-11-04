@@ -21,8 +21,8 @@ namespace PlayFabUnit
         GetPlayerProfileRequest profileRequest;
         profileRequest.authenticationContext = result.authenticationContext;
 
-        auto user1ProfileSuccess = std::bind(&PlayFabTestMultiUserInstance::MultiUserProfile1Success, this, std::placeholders::_1, std::placeholders::_2);
-        auto user1ProfileFailure = std::bind(&PlayFabTestMultiUserInstance::MultiUserProfile1Failure, this, std::placeholders::_1, std::placeholders::_2);
+        const auto& user1ProfileSuccess = std::bind(&PlayFabTestMultiUserInstance::MultiUserProfile1Success, this, std::placeholders::_1, std::placeholders::_2);
+        const auto& user1ProfileFailure = std::bind(&PlayFabTestMultiUserInstance::MultiUserProfile1Failure, this, std::placeholders::_1, std::placeholders::_2);
         (*multiUser1ClientApi)->GetPlayerProfile(profileRequest, user1ProfileSuccess, user1ProfileFailure, customData);
     }
     void PlayFabTestMultiUserInstance::MultiUserLogin1Failure(const PlayFabError& error, void* customData)
@@ -45,8 +45,8 @@ namespace PlayFabUnit
         GetPlayerProfileRequest profileRequest;
         profileRequest.authenticationContext = result.authenticationContext;
 
-        auto user2ProfileSuccess = std::bind(&PlayFabTestMultiUserInstance::MultiUserProfile2Success, this, std::placeholders::_1, std::placeholders::_2);
-        auto user2ProfileFailure = std::bind(&PlayFabTestMultiUserInstance::MultiUserProfile2Failure, this, std::placeholders::_1, std::placeholders::_2);
+        const auto& user2ProfileSuccess = std::bind(&PlayFabTestMultiUserInstance::MultiUserProfile2Success, this, std::placeholders::_1, std::placeholders::_2);
+        const auto& user2ProfileFailure = std::bind(&PlayFabTestMultiUserInstance::MultiUserProfile2Failure, this, std::placeholders::_1, std::placeholders::_2);
         (*multiUser2ClientApi)->GetPlayerProfile(profileRequest, user2ProfileSuccess, user2ProfileFailure, customData);
     }
     void PlayFabTestMultiUserInstance::MultiUserLogin2Failure(const PlayFabError& error, void* customData)
@@ -71,16 +71,16 @@ namespace PlayFabUnit
         user1LoginRequest.CustomId = "test_MultiInstance1";
         user1LoginRequest.CreateAccount = true;
 
-        auto user1LoginSuccess = std::bind(&PlayFabTestMultiUserInstance::MultiUserLogin1Success, this, std::placeholders::_1, std::placeholders::_2);
-        auto user1LoginFailure = std::bind(&PlayFabTestMultiUserInstance::MultiUserLogin1Failure, this, std::placeholders::_1, std::placeholders::_2);
+        const auto& user1LoginSuccess = std::bind(&PlayFabTestMultiUserInstance::MultiUserLogin1Success, this, std::placeholders::_1, std::placeholders::_2);
+        const auto& user1LoginFailure = std::bind(&PlayFabTestMultiUserInstance::MultiUserLogin1Failure, this, std::placeholders::_1, std::placeholders::_2);
         (*multiUser1ClientApi)->LoginWithCustomID(user1LoginRequest, user1LoginSuccess, user1LoginFailure, &testContext);
 
         LoginWithCustomIDRequest user2LoginRequest;
         user2LoginRequest.CustomId = "test_MultiInstance2";
         user2LoginRequest.CreateAccount = true;
 
-        auto user2LoginSuccess = std::bind(&PlayFabTestMultiUserInstance::MultiUserLogin2Success, this, std::placeholders::_1, std::placeholders::_2);
-        auto user2LoginFailure = std::bind(&PlayFabTestMultiUserInstance::MultiUserLogin2Failure, this, std::placeholders::_1, std::placeholders::_2);
+        const auto& user2LoginSuccess = std::bind(&PlayFabTestMultiUserInstance::MultiUserLogin2Success, this, std::placeholders::_1, std::placeholders::_2);
+        const auto& user2LoginFailure = std::bind(&PlayFabTestMultiUserInstance::MultiUserLogin2Failure, this, std::placeholders::_1, std::placeholders::_2);
         (*multiUser2ClientApi)->LoginWithCustomID(user2LoginRequest, user2LoginSuccess, user2LoginFailure, &testContext);
     }
 

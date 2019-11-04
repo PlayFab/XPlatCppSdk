@@ -38,7 +38,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -68,10 +68,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<WriteEventsResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<WriteEventsResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -86,7 +86,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -116,10 +116,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<WriteEventsResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<WriteEventsResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }

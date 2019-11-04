@@ -431,7 +431,7 @@ namespace PlayFab
 
         // Call SetUrl
         {
-            auto requestUrl = GetUrl(requestTask);
+            const std::string requestUrl = GetUrl(requestTask);
 
             jmethodID methodId = jniEnv->GetMethodID(GetHelper().GetHttpRequestClass(), "setUrl", "(Ljava/lang/String;)Z");
             if (methodId == nullptr)
@@ -456,7 +456,8 @@ namespace PlayFab
         SetPredefinedHeaders(requestTask);
 
         // Call SetHeader
-        auto headers = requestContainer.GetRequestHeaders();
+        const std::unordered_map<std::string, std::string> headers = requestContainer.GetRequestHeaders();
+        
         if (!headers.empty())
         {
             for (auto const &obj : headers)
@@ -470,7 +471,7 @@ namespace PlayFab
 
         // Call SetBody
         {
-            auto requestUrl = GetUrl(requestTask);
+            const std::string requestUrl = GetUrl(requestTask);
 
             jmethodID methodId = jniEnv->GetMethodID(GetHelper().GetHttpRequestClass(), "setBody", "([B)V");
             if (methodId == nullptr)
@@ -561,7 +562,7 @@ namespace PlayFab
                 methodId = jniEnv->GetMethodID(GetHelper().GetHttpRequestClass(), "getResponseHttpBody", "()[B");
                 if (methodId)
                 {
-                    auto responseBody = (jbyteArray)jniEnv->CallObjectMethod(httpRequestObject, methodId);
+                    jbyteArray responseBody = (jbyteArray)jniEnv->CallObjectMethod(httpRequestObject, methodId);
 
                     if (responseBody != nullptr)
                     {
@@ -689,7 +690,7 @@ namespace PlayFab
     {
         CallRequestContainer& requestContainer = requestTask.RequestContainer();
 
-        auto callback = requestContainer.GetCallback();
+        CallRequestContainerCallback callback = requestContainer.GetCallback();
         if (callback != nullptr)
         {
             callback(requestContainer.responseJson.get("code", Json::Value::null).asInt(),

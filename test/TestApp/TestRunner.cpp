@@ -28,7 +28,7 @@ namespace PlayFabUnit
             return;
 
         // Add the tests from the given test case.
-        auto testCaseTests = testCase.GetTests();
+        std::shared_ptr<TestList*> testCaseTests = testCase.GetTests();
         suiteTests.splice(suiteTests.end(), **testCaseTests);
     }
 
@@ -59,7 +59,7 @@ namespace PlayFabUnit
             // Tick the test.
             while (TestActiveState::ACTIVE == test->activeState)
             {
-                auto timeNow = TestTimeNow();
+                PlayFabUnit::TimePoint timeNow = TestTimeNow();
                 bool timeExpired = (timeNow - test->startTime) > TEST_TIMEOUT_DURATION;
 
                 if ((TestActiveState::READY != test->activeState) && !timeExpired) // Not finished & not timed out

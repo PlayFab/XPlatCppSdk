@@ -11,9 +11,9 @@ namespace PlayFab
     class CallRequestContainer : public CallRequestContainerBase
     {
     public:
-        CallRequestContainer(std::string url,
+        CallRequestContainer(const std::string& url,
             const std::unordered_map<std::string, std::string>& headers,
-            std::string requestBody,
+            const std::string& requestBody,
             CallRequestContainerCallback callback,
             void* customData = nullptr,
             std::shared_ptr<PlayFabApiSettings> apiSettings = nullptr);

@@ -48,7 +48,7 @@ namespace PlayFabUnit
         request.CreateAccount = true;
 
         // store current (valid) title id
-        auto validTitleId = PlayFabSettings::titleId;
+        const std::string validTitleId = PlayFabSettings::titleId;
 
         // set invalid title id
         PlayFabSettings::titleId = "";
@@ -97,15 +97,21 @@ namespace PlayFabUnit
     void PlayFabApiTest::LoginFailedCallback(const PlayFabError& error, void* customData)
     {
         TestContext* testContext = reinterpret_cast<TestContext*>(customData);
-#if defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_PLAYSTATION)
+#if defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_PLAYSTATION) || defined(PLAYFAB_PLATFORM_SWITCH)
         if (error.RequestId.empty())
+        {
             testContext->Fail("The requestId should be set on a failure.");
+        }
         else
 #endif // defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_PLAYSTATION)
         if (error.ErrorMessage.find("password") != -1)
+        {
             testContext->Pass(error.RequestId);
+        }
         else
+        {
             testContext->Fail("Password error message not found: " + error.ErrorMessage);
+        }
     }
 
     /// CLIENT API
@@ -233,11 +239,11 @@ namespace PlayFabUnit
         // itoa is not avaialable in android
         char buffer[16];
         std::string temp;
-#if defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID) || defined(PLAYFAB_PLATFORM_LINUX) || defined(PLAYFAB_PLATFORM_PLAYSTATION)
+#if defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID) || defined(PLAYFAB_PLATFORM_LINUX) || defined(PLAYFAB_PLATFORM_PLAYSTATION) || defined(PLAYFAB_PLATFORM_SWITCH)
         sprintf(buffer, "%d", testMessageInt);
-#else
+#else // PLAYFAB_PLATFORM_IOS || PLAYFAB_PLATFORM_ANDROID || PLAYFAB_PLATFORM_LINUX || PLAYFAB_PLATFORM_SWITCH || PLAYFAB_PLATFORM_SWITCH
         sprintf_s(buffer, "%d", testMessageInt);
-#endif
+#endif // PLAYFAB_PLATFORM_IOS || PLAYFAB_PLATFORM_ANDROID || PLAYFAB_PLATFORM_LINUX || PLAYFAB_PLATFORM_SWITCH || PLAYFAB_PLATFORM_SWITCH
         temp.append(buffer);
 
         updateRequest.Data[TEST_DATA_KEY] = temp;
@@ -272,7 +278,7 @@ namespace PlayFabUnit
 #endif // PLAYFAB_PLATFORM_IOS || PLAYFAB_PLATFORM_ANDROID || PLAYFAB_PLATFORM_LINUX
         time_t minTime = now - (60 * 5);
         time_t maxTime = now + (60 * 5);
-#endif
+#endif // PLAYFAB_PLATFORM_PLAYSTATION
 
         TestContext* testContext = reinterpret_cast<TestContext*>(customData);
         if (it == result.Data.end())
@@ -282,7 +288,7 @@ namespace PlayFabUnit
 #if !defined(PLAYFAB_PLATFORM_PLAYSTATION) // Issue 32699
         else if (!(minTime <= testMessageTime && testMessageTime <= maxTime))
             testContext->Fail("DateTime not parsed correctly..");
-#endif
+#endif // PLAYFAB_PLATFORM_PLAYSTATION
         else
             testContext->Pass();
     }

@@ -38,7 +38,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -68,10 +68,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<CancelAllMatchmakingTicketsForPlayerResult> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<CancelAllMatchmakingTicketsForPlayerResult> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -86,7 +86,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -116,10 +116,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<CancelMatchmakingTicketResult> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<CancelMatchmakingTicketResult> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -134,7 +134,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -164,10 +164,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<BuildAliasDetailsResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<BuildAliasDetailsResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -182,7 +182,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -212,10 +212,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<CreateBuildWithCustomContainerResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<CreateBuildWithCustomContainerResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -230,7 +230,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -260,10 +260,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<CreateBuildWithManagedContainerResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<CreateBuildWithManagedContainerResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -278,7 +278,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -308,10 +308,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<CreateMatchmakingTicketResult> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<CreateMatchmakingTicketResult> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -326,7 +326,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -356,10 +356,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<CreateRemoteUserResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<CreateRemoteUserResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -374,7 +374,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -404,10 +404,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<CreateMatchmakingTicketResult> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<CreateMatchmakingTicketResult> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -422,7 +422,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -452,10 +452,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -470,7 +470,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -500,10 +500,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -518,7 +518,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -548,10 +548,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -566,7 +566,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -596,10 +596,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -614,7 +614,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -644,10 +644,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -662,7 +662,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -692,10 +692,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<EnableMultiplayerServersForTitleResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<EnableMultiplayerServersForTitleResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -710,7 +710,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -740,10 +740,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<GetAssetUploadUrlResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<GetAssetUploadUrlResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -758,7 +758,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -788,10 +788,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<GetBuildResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<GetBuildResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -806,7 +806,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -836,10 +836,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<BuildAliasDetailsResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<BuildAliasDetailsResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -854,7 +854,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -884,10 +884,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<GetContainerRegistryCredentialsResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<GetContainerRegistryCredentialsResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -902,7 +902,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -932,10 +932,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<GetMatchResult> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<GetMatchResult> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -950,7 +950,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -980,10 +980,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<GetMatchmakingTicketResult> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<GetMatchmakingTicketResult> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -998,7 +998,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -1028,10 +1028,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<GetMultiplayerServerDetailsResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<GetMultiplayerServerDetailsResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -1046,7 +1046,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -1076,10 +1076,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<GetQueueStatisticsResult> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<GetQueueStatisticsResult> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -1094,7 +1094,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -1124,10 +1124,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<GetRemoteLoginEndpointResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<GetRemoteLoginEndpointResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -1142,7 +1142,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -1172,10 +1172,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<GetTitleEnabledForMultiplayerServersStatusResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<GetTitleEnabledForMultiplayerServersStatusResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -1190,7 +1190,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -1220,10 +1220,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<GetTitleMultiplayerServersQuotasResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<GetTitleMultiplayerServersQuotasResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -1238,7 +1238,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -1268,10 +1268,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<JoinMatchmakingTicketResult> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<JoinMatchmakingTicketResult> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -1286,7 +1286,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -1316,10 +1316,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<ListMultiplayerServersResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<ListMultiplayerServersResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -1334,7 +1334,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -1364,10 +1364,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<ListAssetSummariesResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<ListAssetSummariesResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -1382,7 +1382,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -1412,10 +1412,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<ListBuildAliasesForTitleResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<ListBuildAliasesForTitleResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -1430,7 +1430,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -1460,10 +1460,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<ListBuildSummariesResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<ListBuildSummariesResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -1478,7 +1478,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -1508,10 +1508,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<ListCertificateSummariesResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<ListCertificateSummariesResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -1526,7 +1526,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -1556,10 +1556,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<ListContainerImagesResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<ListContainerImagesResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -1574,7 +1574,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -1604,10 +1604,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<ListContainerImageTagsResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<ListContainerImageTagsResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -1622,7 +1622,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -1652,10 +1652,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<ListMatchmakingTicketsForPlayerResult> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<ListMatchmakingTicketsForPlayerResult> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -1670,7 +1670,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -1700,10 +1700,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<ListMultiplayerServersResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<ListMultiplayerServersResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -1718,7 +1718,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -1748,10 +1748,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<ListPartyQosServersResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<ListPartyQosServersResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -1766,11 +1766,10 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("", "");
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/ListQosServers",
@@ -1796,10 +1795,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<ListQosServersResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<ListQosServersResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -1814,7 +1813,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -1844,10 +1843,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<ListQosServersForTitleResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<ListQosServersForTitleResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -1862,7 +1861,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -1892,10 +1891,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<ListVirtualMachineSummariesResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<ListVirtualMachineSummariesResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -1910,7 +1909,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -1940,10 +1939,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<RequestMultiplayerServerResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<RequestMultiplayerServerResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -1958,7 +1957,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -1988,10 +1987,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<RolloverContainerRegistryCredentialsResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<RolloverContainerRegistryCredentialsResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -2006,7 +2005,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -2036,10 +2035,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -2054,7 +2053,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -2084,10 +2083,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<BuildAliasDetailsResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<BuildAliasDetailsResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -2102,7 +2101,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -2132,10 +2131,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -2150,7 +2149,7 @@ namespace PlayFab
     {
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
@@ -2180,10 +2179,10 @@ namespace PlayFab
         if (ValidateResult(outResult, container))
         {
 
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr));
+                const auto& callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }

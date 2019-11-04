@@ -6,6 +6,13 @@
 
 #include <stdexcept>
 
+#ifndef _countof
+template <typename _CountofType, size_t _SizeOfArray>
+char(*__countof_helper(_CountofType(&_Array)[_SizeOfArray]))[_SizeOfArray];
+
+#define _countof(_Array) (sizeof(*__countof_helper(_Array)) + 0)
+#endif
+
 namespace PlayFab
 {
     PlayFabCurlHttpPlugin::PlayFabCurlHttpPlugin()
@@ -110,6 +117,38 @@ namespace PlayFab
         } // UNLOCK httpRequestMutex
     }
 
+    constexpr char requestIdHeaderKey[] = "X-RequestId:";
+    constexpr size_t requestIdheaderKeyLen = _countof(requestIdHeaderKey) - 1;
+    constexpr char whitespace[] = "\t\n\v\f\r ";
+
+    size_t HeaderCallback(char* buffer, size_t size, size_t nitems, void* userdata)
+    {
+        CallRequestContainer& reqContainer = *static_cast<CallRequestContainer*>(userdata);
+        if (!reqContainer.errorWrapper.RequestId.empty())
+        {
+            // For now, we only care about the RequestId header
+            return nitems * size; // The return expected by curl for this callback
+        }
+
+        // If this header-line is long enough, and the header starts with the key we expect
+        if ((nitems > requestIdheaderKeyLen) && (strncasecmp(buffer, requestIdHeaderKey, requestIdheaderKeyLen) == 0))
+        {
+            // The value is the requestId
+            std::string requestId = std::string(buffer + requestIdheaderKeyLen, nitems - requestIdheaderKeyLen);
+            auto offset = requestId.find_first_not_of(whitespace);
+            if (offset != std::string::npos)
+            {
+                // Trim any whitespace
+                requestId.erase(requestId.find_last_not_of(whitespace) + 1);
+                requestId.erase(0, offset);
+                // Save it
+                reqContainer.SetRequestId(requestId);
+                reqContainer.errorWrapper.RequestId = requestId;
+            }
+        }
+        return nitems * size; // The return expected by curl for this callback
+    }
+
     void PlayFabCurlHttpPlugin::ExecuteRequest(std::unique_ptr<CallRequestContainer> requestContainer)
     {
         CallRequestContainer& reqContainer = *requestContainer;
@@ -128,11 +167,11 @@ namespace PlayFab
         curlHttpHeaders = curl_slist_append(curlHttpHeaders, ("X-PlayFabSDK: " + PlayFabSettings::versionString).c_str());
         curlHttpHeaders = curl_slist_append(curlHttpHeaders, "X-ReportErrorAsSuccess: true");
 
-        auto headers = reqContainer.GetRequestHeaders();
+        const std::unordered_map<std::string, std::string> headers = reqContainer.GetRequestHeaders();
 
         if (headers.size() > 0)
         {
-            for (auto const &obj : headers)
+            for (auto const& obj : headers)
             {
                 if (obj.first.length() != 0 && obj.second.length() != 0) // no empty keys or values in headers
                 {
@@ -155,9 +194,12 @@ namespace PlayFab
         curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &reqContainer);
         curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, CurlReceiveData);
 
+        curl_easy_setopt(curlHandle, CURLOPT_HEADERDATA, &reqContainer);
+        curl_easy_setopt(curlHandle, CURLOPT_HEADERFUNCTION, HeaderCallback);
+
         // Send
         curl_easy_setopt(curlHandle, CURLOPT_SSL_VERIFYPEER, true);
-        const auto res = curl_easy_perform(curlHandle);
+        CURLcode res = curl_easy_perform(curlHandle);
         long curlHttpResponseCode = 0;
         curl_easy_getinfo(curlHandle, CURLINFO_RESPONSE_CODE, &curlHttpResponseCode);
 
@@ -167,7 +209,7 @@ namespace PlayFab
         {
             reqContainer.errorWrapper.HttpCode = curlHttpResponseCode != 0 ? curlHttpResponseCode : 408;
             reqContainer.errorWrapper.HttpStatus = "Failed to contact server";
-            reqContainer.errorWrapper.ErrorCode = PlayFabErrorConnectionTimeout;
+            reqContainer.errorWrapper.ErrorCode = PlayFabErrorCode::PlayFabErrorConnectionTimeout;
             reqContainer.errorWrapper.ErrorName = "Failed to contact server";
             reqContainer.errorWrapper.ErrorMessage = "Failed to contact server, curl error: " + std::to_string(res);
             HandleCallback(std::move(requestContainer));
@@ -193,7 +235,7 @@ namespace PlayFab
             {
                 reqContainer.errorWrapper.HttpCode = curlHttpResponseCode != 0 ? curlHttpResponseCode : 408;
                 reqContainer.errorWrapper.HttpStatus = reqContainer.responseString;
-                reqContainer.errorWrapper.ErrorCode = PlayFabErrorConnectionTimeout;
+                reqContainer.errorWrapper.ErrorCode = PlayFabErrorCode::PlayFabErrorConnectionTimeout;
                 reqContainer.errorWrapper.ErrorName = "Failed to parse PlayFab response";
                 reqContainer.errorWrapper.ErrorMessage = jsonParseErrors;
             }
@@ -209,7 +251,7 @@ namespace PlayFab
     void PlayFabCurlHttpPlugin::HandleResults(std::unique_ptr<CallRequestContainer> requestContainer)
     {
         CallRequestContainer& reqContainer = *requestContainer;
-        auto callback = reqContainer.GetCallback();
+        CallRequestContainerCallback callback = reqContainer.GetCallback();
         if (callback != nullptr)
         {
             callback(

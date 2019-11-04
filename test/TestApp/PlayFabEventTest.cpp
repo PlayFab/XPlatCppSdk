@@ -17,13 +17,13 @@ using namespace EventsModels;
 
 namespace PlayFabUnit
 {
-#if (!UNITY_IOS && !UNITY_ANDROID) && (!defined(PLAYFAB_PLATFORM_IOS) && !defined(PLAYFAB_PLATFORM_ANDROID))
+#if (!UNITY_IOS && !UNITY_ANDROID) && (!defined(PLAYFAB_PLATFORM_IOS) && !defined(PLAYFAB_PLATFORM_ANDROID) && !defined(PLAYFAB_PLATFORM_SWITCH))
     /// QoS API
     void PlayFabEventTest::QosResultApi(TestContext& testContext)
     {
         QoS::PlayFabQoSApi api;
 
-        auto result = api.GetQoSResult(5, 200);
+        QoS::QoSResult result = api.GetQoSResult(5, 200);
 
         if (result.errorCode == 0)
             testContext.Pass();
@@ -93,8 +93,8 @@ namespace PlayFabUnit
     
     void PlayFabEventTest::EmitEventCallback(std::shared_ptr<const PlayFab::IPlayFabEvent> event, std::shared_ptr<const PlayFab::IPlayFabEmitEventResponse> response)
     {
-        auto pfEvent = std::dynamic_pointer_cast<const PlayFab::PlayFabEvent>(event);
-        auto pfResponse = std::dynamic_pointer_cast<const PlayFab::PlayFabEmitEventResponse>(response);
+        std::shared_ptr<const PlayFab::PlayFabEvent> pfEvent = std::dynamic_pointer_cast<const PlayFab::PlayFabEvent>(event);
+        std::shared_ptr<const PlayFab::PlayFabEmitEventResponse> pfResponse = std::dynamic_pointer_cast<const PlayFab::PlayFabEmitEventResponse>(response);
 
         if (pfResponse->playFabError != nullptr)
         {
@@ -125,7 +125,7 @@ namespace PlayFabUnit
                     "\n";
             }
         }
-        else 
+        else
         {
             (*eventTestContext)->Fail("EmitEventCallback received an error");
         }
@@ -150,7 +150,7 @@ namespace PlayFabUnit
         // They will be batched up according to pipeline's settings
         for (int i = 0; i < eventEmitCount; i++)
         {
-            auto event = MakeEvent(i, eventType);
+            std::unique_ptr<PlayFab::PlayFabEvent> event = MakeEvent(i, eventType);
             (*api)->EmitEvent(std::move(event), EmitEventCallback);
         }
     }
@@ -204,7 +204,7 @@ namespace PlayFabUnit
     void PlayFabEventTest::AddTests()
     {
         // TODO: Fix whatever limitation causes this test to fail for these platforms
-#if !defined(PLAYFAB_PLATFORM_IOS) && !defined(PLAYFAB_PLATFORM_ANDROID) && !defined(PLAYFAB_PLATFORM_PLAYSTATION)
+#if !defined(PLAYFAB_PLATFORM_IOS) && !defined(PLAYFAB_PLATFORM_ANDROID) && !defined(PLAYFAB_PLATFORM_PLAYSTATION) && !defined(PLAYFAB_PLATFORM_SWITCH)
         AddTest("QosResultApi", &PlayFabEventTest::QosResultApi);
 #endif
         AddTest("EventsApi", &PlayFabEventTest::EventsApi);
@@ -238,7 +238,7 @@ namespace PlayFabUnit
                 loginComplete = true;
             },
             &loggedIn);
-        
+
         // Sleep while waiting for log in to complete.
         while (!loginComplete)
         {
@@ -281,8 +281,8 @@ namespace PlayFabUnit
         std::shared_ptr<PlayFabEventAPI*> api = std::make_shared<PlayFabEventAPI*>(new PlayFabEventAPI()); // create Event API instance
 
         // adjust some pipeline settings
-        auto pipeline = std::dynamic_pointer_cast<PlayFab::PlayFabEventPipeline>((*api)->GetEventRouter()->GetPipelines().at(PlayFab::EventPipelineKey::PlayFabTelemetry)); // get non-playstream pipeline
-        auto settings = pipeline->GetSettings(); // get pipeline's settings
+        std::shared_ptr<PlayFab::PlayFabEventPipeline>  pipeline = std::dynamic_pointer_cast<PlayFab::PlayFabEventPipeline>((*api)->GetEventRouter()->GetPipelines().at(PlayFab::EventPipelineKey::PlayFabTelemetry)); // get non-playstream pipeline
+        std::shared_ptr<PlayFab::PlayFabEventPipelineSettings>  settings = pipeline->GetSettings(); // get pipeline's settings
         settings->maximalBatchWaitTime = maxBatchWaitTime; // incomplete batch expiration in seconds
         settings->maximalNumberOfItemsInBatch = maxItemsInBatch; // number of events in a batch
         settings->maximalNumberOfBatchesInFlight = maxBatchesInFlight; // maximal number of batches processed simultaneously by a transport plugin before taking next events from the buffer

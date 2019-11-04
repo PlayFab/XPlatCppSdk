@@ -212,7 +212,7 @@ namespace PlayFab
     void PlayFabIOSHttpPlugin::ExecuteRequest(RequestTask& requestTask)
     {
         CallRequestContainer& requestContainer = requestTask.RequestContainer();
-        auto requestUrl = GetUrl(requestTask);
+        const auto& requestUrl = GetUrl(requestTask);
 
         NSURL* url = [NSURL URLWithString:[NSString stringWithUTF8String:requestUrl.c_str()]];
         NSURLSessionConfiguration* config = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -222,7 +222,8 @@ namespace PlayFab
         urlRequest.HTTPMethod = @"POST";
         SetPredefinedHeaders(requestTask, (__bridge void*)urlRequest);
 
-        auto headers = requestContainer.GetHeaders();
+        const auto& headers = requestContainer.GetRequestHeaders();
+
         if (headers.size() > 0)
         {
             for (auto const &obj : headers)
@@ -298,6 +299,8 @@ namespace PlayFab
         JSONCPP_STRING jsonParseErrors;
         const bool parsedSuccessfully = jsonReader->parse(requestContainer.responseString.c_str(), requestContainer.responseString.c_str() + requestContainer.responseString.length(), &requestContainer.responseJson, &jsonParseErrors);
 
+        requestContainer.errorWrapper.RequestId = requestContainer.GetRequestId();
+
         if (parsedSuccessfully)
         {
             // fully successful response
@@ -323,7 +326,7 @@ namespace PlayFab
     {
         CallRequestContainer& requestContainer = requestTask.RequestContainer();
 
-        auto callback = requestContainer.GetCallback();
+        const auto& callback = requestContainer.GetCallback();
         if (callback != nullptr)
         {
             callback(requestContainer.responseJson.get("code", Json::Value::null).asInt(),

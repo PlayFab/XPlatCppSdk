@@ -35,7 +35,7 @@ namespace PlayFab
         return this->requestId;
     }
 
-    void CallRequestContainerBase::SetRequestId(std::string newRequestId)
+    void CallRequestContainerBase::SetRequestId(const std::string& newRequestId)
     {
         this->requestId = newRequestId;
     }

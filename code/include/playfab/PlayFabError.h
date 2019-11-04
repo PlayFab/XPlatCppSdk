@@ -5,7 +5,7 @@
 
 namespace PlayFab
 {
-    enum  class PlayFabErrorCode
+    enum class PlayFabErrorCode
     {
         PlayFabErrorHostnameNotFound = 1,
         PlayFabErrorConnectionTimeout,
