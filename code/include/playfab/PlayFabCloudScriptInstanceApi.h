@@ -20,8 +20,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> authContext;
 
     public:
-        PlayFabCloudScriptInstanceAPI();
-        explicit PlayFabCloudScriptInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings);
         explicit PlayFabCloudScriptInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
         PlayFabCloudScriptInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings, std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
         ~PlayFabCloudScriptInstanceAPI();

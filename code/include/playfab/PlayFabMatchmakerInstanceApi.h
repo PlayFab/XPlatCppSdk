@@ -20,8 +20,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> authContext;
 
     public:
-        PlayFabMatchmakerInstanceAPI();
-        explicit PlayFabMatchmakerInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings);
         explicit PlayFabMatchmakerInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
         PlayFabMatchmakerInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings, std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
         ~PlayFabMatchmakerInstanceAPI();

@@ -42,7 +42,7 @@ namespace PlayFab
                 pluginPtr = CreatePlayFabTransportPlugin();
                 break;
             default:
-                throw std::runtime_error("This contract is not supported");
+                throw PlayFabException(PlayFabExceptionCode::PluginAmbiguity, "This contract is not supported");
                 break;
             }
 

@@ -586,4 +586,28 @@ namespace PlayFab
 
     typedef std::function<void(const PlayFabError& error, void* customData)> ErrorCallback;
     typedef std::function<void(std::exception exception)> ExceptionCallback;
+
+    enum class PlayFabExceptionCode
+    {
+        AuthContextRequired,
+        DeveloperKeyNotSet,
+        EntityTokenNotSet,
+        NotLoggedIn,
+        PluginAmbiguity,
+        PluginNotFound,
+        ThreadMisuse,
+        TitleNotSet,
+    };
+
+    class PlayFabException : public std::exception
+    {
+    public:
+        PlayFabException(const PlayFabException& source) = delete; // disable copy
+        PlayFabException(PlayFabException&&) = delete; // disable move
+        PlayFabException& operator=(const PlayFabException& source) = delete; // disable assignment
+        PlayFabException& operator=(PlayFabException&& other) = delete; // disable move assignment
+
+        PlayFabExceptionCode Code;
+        PlayFabException(PlayFabExceptionCode code, const char* const message);
+    };
 }

@@ -16,22 +16,17 @@ namespace PlayFab
 {
     using namespace ProfilesModels;
 
-    PlayFabProfilesInstanceAPI::PlayFabProfilesInstanceAPI()
-    {
-    }
-
-    PlayFabProfilesInstanceAPI::PlayFabProfilesInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings)
-    {
-        this->settings = std::move(apiSettings);
-    }
-
     PlayFabProfilesInstanceAPI::PlayFabProfilesInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext)
     {
+        if (authenticationContext == nullptr)
+            throw PlayFabException(PlayFabExceptionCode::AuthContextRequired, "Context cannot be null, create a PlayFabAuthenticationContext for each player in advance, or get <PlayFabClientInstanceAPI>.authenticationContext");
         this->authContext = std::move(authenticationContext);
     }
 
     PlayFabProfilesInstanceAPI::PlayFabProfilesInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings, std::shared_ptr<PlayFabAuthenticationContext> authenticationContext)
     {
+        if (authenticationContext == nullptr)
+            throw PlayFabException(PlayFabExceptionCode::AuthContextRequired, "Context cannot be null, create a PlayFabAuthenticationContext for each player in advance, or get <PlayFabClientInstanceAPI>.authenticationContext");
         this->settings = std::move(apiSettings);
         this->authContext = std::move(authenticationContext);
     }

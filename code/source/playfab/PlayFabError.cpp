@@ -60,4 +60,9 @@ namespace PlayFab
         }
         return output;
     }
+
+    PlayFabException::PlayFabException(PlayFabExceptionCode code, const char* const message) : std::exception(message)
+    {
+        this->Code = code;
+    }
 }

@@ -20,8 +20,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> authContext;
 
     public:
-        PlayFabGroupsInstanceAPI();
-        explicit PlayFabGroupsInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings);
         explicit PlayFabGroupsInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
         PlayFabGroupsInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings, std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
         ~PlayFabGroupsInstanceAPI();
