@@ -8,13 +8,10 @@ namespace PlayFab
     PlayFabAuthenticationContext::PlayFabAuthenticationContext()
     {
 #ifndef DISABLE_PLAYFABCLIENT_API
-        clientSessionTicket = PlayFabSettings::clientSessionTicket;
+        clientSessionTicket = PlayFabSettings::staticPlayer->clientSessionTicket;
 #endif
 #ifndef DISABLE_PLAYFABENTITY_API
-        entityToken = PlayFabSettings::entityToken;
-#endif
-#if defined(ENABLE_PLAYFABSERVER_API) || defined(ENABLE_PLAYFABADMIN_API)
-        developerSecretKey = PlayFabSettings::developerSecretKey;
+        entityToken = PlayFabSettings::staticPlayer->entityToken;
 #endif
     }
 
@@ -25,9 +22,6 @@ namespace PlayFab
 #endif
 #ifndef DISABLE_PLAYFABENTITY_API
         entityToken.clear();
-#endif
-#if defined(ENABLE_PLAYFABSERVER_API) || defined(ENABLE_PLAYFABADMIN_API)
-        developerSecretKey.clear();
 #endif
     }
 }

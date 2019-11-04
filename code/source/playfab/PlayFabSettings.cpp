@@ -19,7 +19,7 @@ namespace PlayFab
     std::string PlayFabSettings::titleId; // You must set this value for PlayFabSdk to work properly (Found in the Game Manager for your title, at the PlayFab Website)
     ErrorCallback PlayFabSettings::globalErrorHandler = nullptr;
 
-    // Control whether all callbacks are threaded or whether the user manually controlls callback timing from their main-thread
+    // Control whether all callbacks are threaded or whether the user manually controls callback timing from their main-thread
     bool PlayFabSettings::threadedCallbacks = false;
 
     std::string PlayFabSettings::entityToken; // This is set by entity GetEntityToken method, and is required by all other Entity API methods

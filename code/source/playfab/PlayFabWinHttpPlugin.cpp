@@ -83,12 +83,12 @@ namespace PlayFab
     {
         CallRequestContainer& reqContainer = *requestContainer;
         reqContainer.finished = true;
-        if (PlayFabSettings::threadedCallbacks)
+        if (PlayFabSettings::staticSettings->threadedCallbacks)
         {
             HandleResults(std::move(requestContainer));
         }
 
-        if (!PlayFabSettings::threadedCallbacks)
+        if (!PlayFabSettings::staticSettings->threadedCallbacks)
         {
             { // LOCK httpRequestMutex
                 std::unique_lock<std::mutex> lock(httpRequestMutex);

@@ -42,7 +42,7 @@ namespace PlayFab
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::developerSecretKey : request.authenticationContext->developerSecretKey);
+        headers.emplace("X-SecretKey", request.authenticationContext == nullptr ? PlayFabSettings::staticSettings->developerSecretKey : request.settings->developerSecretKey);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/Matchmaker/AuthUser",

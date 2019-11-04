@@ -189,8 +189,8 @@ namespace PlayFabUnit
     /// Test that the login call sequence sends the AdvertisingId when set
     void PlayFabApiTest::LoginWithAdvertisingId(TestContext& testContext)
     {
-        PlayFabSettings::advertisingIdType = PlayFabSettings::AD_TYPE_ANDROID_ID;
-        PlayFabSettings::advertisingIdValue = "PlayFabTestId";
+        PlayFabSettings::staticPlayer->advertisingIdType = PlayFabSettings::AD_TYPE_ANDROID_ID;
+        PlayFabSettings::staticPlayer->advertisingIdValue = "PlayFabTestId";
 
         LoginWithCustomIDRequest request;
         request.CustomId = PlayFabSettings::buildIdentifier;

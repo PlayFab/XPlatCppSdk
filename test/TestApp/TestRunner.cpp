@@ -19,7 +19,7 @@ namespace PlayFabUnit
         suiteTestCase(nullptr),
         suiteTestReport(PlayFabSettings::buildIdentifier)
     {
-        PlayFabSettings::threadedCallbacks = true;
+        PlayFabSettings::staticSettings->threadedCallbacks = true;
     }
 
     void TestRunner::Add(TestCase& testCase)
@@ -39,10 +39,10 @@ namespace PlayFabUnit
             suiteState = TestActiveState::ACTIVE;
 
         // Run the tests.
-        for (auto testsIter = suiteTests.begin(); testsIter != suiteTests.end(); ++testsIter)
+        for (auto & suiteTest : suiteTests)
         {
             // Get the next test.
-            TestContext* test = **testsIter;
+            TestContext* test = *suiteTest;
 
             // Handle transitions between TestCases.
             ManageTestCase(test->testCase, suiteTestCase);
