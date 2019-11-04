@@ -599,7 +599,7 @@ namespace PlayFab
         TitleNotSet,
     };
 
-    class PlayFabException : public std::exception
+    class PlayFabException : public std::runtime_error
     {
     public:
         PlayFabException(const PlayFabException& source) = delete; // disable copy

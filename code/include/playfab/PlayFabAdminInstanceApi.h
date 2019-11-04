@@ -24,6 +24,7 @@ namespace PlayFab
         explicit PlayFabAdminInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings);
         explicit PlayFabAdminInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
         PlayFabAdminInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings, std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
+
         ~PlayFabAdminInstanceAPI();
         PlayFabAdminInstanceAPI(const PlayFabAdminInstanceAPI& source) = delete; // disable copy
         PlayFabAdminInstanceAPI(PlayFabAdminInstanceAPI&&) = delete; // disable move

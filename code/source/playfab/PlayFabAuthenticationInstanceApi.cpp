@@ -23,10 +23,12 @@ namespace PlayFab
     PlayFabAuthenticationInstanceAPI::PlayFabAuthenticationInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings)
     {
         this->settings = std::move(apiSettings);
+        this->authContext = std::make_shared<PlayFabAuthenticationContext>();
     }
 
     PlayFabAuthenticationInstanceAPI::PlayFabAuthenticationInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext)
     {
+        this->settings = std::make_shared<PlayFabApiSettings>();
         this->authContext = std::move(authenticationContext);
     }
 

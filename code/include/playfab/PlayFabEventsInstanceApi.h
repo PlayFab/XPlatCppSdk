@@ -16,14 +16,13 @@ namespace PlayFab
     class PlayFabEventsInstanceAPI
     {
     private:
-        std::shared_ptr<PlayFabApiSettings> settings;
-        std::shared_ptr<PlayFabAuthenticationContext> authContext;
+        std::shared_ptr<PlayFabApiSettings> settings{ nullptr };
+        std::shared_ptr<PlayFabAuthenticationContext> authContext{ nullptr };
 
     public:
-        PlayFabEventsInstanceAPI();
-        explicit PlayFabEventsInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings);
         explicit PlayFabEventsInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
         PlayFabEventsInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings, std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
+
         ~PlayFabEventsInstanceAPI();
         PlayFabEventsInstanceAPI(const PlayFabEventsInstanceAPI& source) = delete; // disable copy
         PlayFabEventsInstanceAPI(PlayFabEventsInstanceAPI&&) = delete; // disable move
