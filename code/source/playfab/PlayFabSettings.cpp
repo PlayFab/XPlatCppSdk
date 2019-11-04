@@ -22,17 +22,7 @@ namespace PlayFab
     // Control whether all callbacks are threaded or whether the user manually controls callback timing from their main-thread
     bool PlayFabSettings::threadedCallbacks = false;
 
-    std::string PlayFabSettings::entityToken; // This is set by entity GetEntityToken method, and is required by all other Entity API methods
-#if defined(ENABLE_PLAYFABSERVER_API) || defined(ENABLE_PLAYFABADMIN_API)
-    std::string PlayFabSettings::developerSecretKey; // You must set this value for PlayFabSdk to work properly (Found in the Game Manager for your title, at the PlayFab Website)
-#endif
-
 #ifndef DISABLE_PLAYFABCLIENT_API
-    std::string PlayFabSettings::clientSessionTicket; // This is set by any Client Login method, and is required for all other Client API methods
-    std::string PlayFabSettings::advertisingIdType = ""; // Set this to the appropriate AD_TYPE_X constant below
-    std::string PlayFabSettings::advertisingIdValue = ""; // Set this to corresponding device value
-
-    bool PlayFabSettings::disableAdvertising = false;
     const std::string PlayFabSettings::AD_TYPE_IDFA = "Idfa";
     const std::string PlayFabSettings::AD_TYPE_ANDROID_ID = "Adid";
 #endif

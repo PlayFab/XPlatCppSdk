@@ -203,7 +203,7 @@ namespace PlayFabUnit
     }
     void PlayFabApiTest::OnLoginWithAdvertisingId(const LoginResult&, void* customData)
     {
-        // TODO: Need to wait for the NEXT api call to complete, and then test PlayFabSettings::advertisingIdType
+        // TODO: Need to wait for the NEXT api call to complete, and then test PlayFabSettings::staticPlayer->advertisingIdType
         TestContext* testContext = reinterpret_cast<TestContext*>(customData);
         testContext->Pass();
     }

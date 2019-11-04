@@ -1,6 +1,7 @@
 #pragma once
 
 #ifndef DISABLE_PLAYFABCLIENT_API
+#ifndef PLAYFAB_DISABLE_STATIC_API
 
 #include <playfab/PlayFabCallRequestContainer.h>
 #include <playfab/PlayFabClientDataModels.h>
@@ -342,9 +343,10 @@ namespace PlayFab
 
 
         // Private, Client-Specific
-        static void MultiStepClientLogin(bool needsAttribution);
+        static void MultiStepClientLogin(std::shared_ptr<PlayFabAuthenticationContext> context, bool needsAttribution);
         static bool ValidateResult(PlayFabResultCommon& resultCommon, const CallRequestContainer& container);
     };
 }
 
-#endif
+#endif // PLAYFAB_DISABLE_STATIC_API
+#endif // #ifndef DISABLE_PLAYFABCLIENT_API

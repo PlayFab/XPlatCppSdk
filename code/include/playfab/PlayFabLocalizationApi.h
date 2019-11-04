@@ -1,6 +1,7 @@
 #pragma once
 
 #ifndef DISABLE_PLAYFABENTITY_API
+#ifndef PLAYFAB_DISABLE_STATIC_API
 
 #include <playfab/PlayFabCallRequestContainer.h>
 #include <playfab/PlayFabLocalizationDataModels.h>
@@ -31,4 +32,5 @@ namespace PlayFab
     };
 }
 
-#endif
+#endif // PLAYFAB_DISABLE_STATIC_API
+#endif // #ifndef DISABLE_PLAYFABENTITY_API

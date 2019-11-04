@@ -1,6 +1,7 @@
 #pragma once
 
 #ifdef ENABLE_PLAYFABSERVER_API
+#ifndef PLAYFAB_DISABLE_STATIC_API
 
 #include <playfab/PlayFabCallRequestContainer.h>
 #include <playfab/PlayFabMatchmakerDataModels.h>
@@ -39,4 +40,5 @@ namespace PlayFab
     };
 }
 
-#endif
+#endif // PLAYFAB_DISABLE_STATIC_API
+#endif // #ifdef ENABLE_PLAYFABSERVER_API

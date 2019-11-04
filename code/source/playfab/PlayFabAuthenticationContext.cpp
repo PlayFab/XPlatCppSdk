@@ -7,12 +7,7 @@ namespace PlayFab
 {
     PlayFabAuthenticationContext::PlayFabAuthenticationContext()
     {
-#ifndef DISABLE_PLAYFABCLIENT_API
-        clientSessionTicket = PlayFabSettings::staticPlayer->clientSessionTicket;
-#endif
-#ifndef DISABLE_PLAYFABENTITY_API
-        entityToken = PlayFabSettings::staticPlayer->entityToken;
-#endif
+        ForgetAllCredentials();
     }
 
     void PlayFabAuthenticationContext::ForgetAllCredentials()
