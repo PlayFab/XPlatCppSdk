@@ -116,6 +116,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnAcceptTradeResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         AcceptTradeResponse outResult;
         if (ValidateResult(outResult, container))
@@ -168,6 +169,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnAddFriendResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         AddFriendResult outResult;
         if (ValidateResult(outResult, container))
@@ -220,6 +222,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnAddGenericIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         AddGenericIDResult outResult;
         if (ValidateResult(outResult, container))
@@ -272,6 +275,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnAddOrUpdateContactEmailResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         AddOrUpdateContactEmailResult outResult;
         if (ValidateResult(outResult, container))
@@ -324,6 +328,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnAddSharedGroupMembersResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         AddSharedGroupMembersResult outResult;
         if (ValidateResult(outResult, container))
@@ -376,6 +381,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnAddUsernamePasswordResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         AddUsernamePasswordResult outResult;
         if (ValidateResult(outResult, container))
@@ -428,6 +434,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnAddUserVirtualCurrencyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ModifyUserVirtualCurrencyResult outResult;
         if (ValidateResult(outResult, container))
@@ -480,6 +487,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnAndroidDevicePushNotificationRegistrationResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         AndroidDevicePushNotificationRegistrationResult outResult;
         if (ValidateResult(outResult, container))
@@ -532,11 +540,20 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnAttributeInstallResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         AttributeInstallResult outResult;
         if (ValidateResult(outResult, container))
         {
-            container.GetContext()->advertisingIdType += "_Successful";
+            auto apiSettings = this->GetSettings();
+            if (apiSettings == nullptr)
+            {
+                container.GetContext()->advertisingIdType += "_Successful";
+            }
+            else
+            {
+                apiSettings->advertisingIdType += "_Successful";
+            }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -585,6 +602,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnCancelTradeResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         CancelTradeResponse outResult;
         if (ValidateResult(outResult, container))
@@ -637,6 +655,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnConfirmPurchaseResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ConfirmPurchaseResult outResult;
         if (ValidateResult(outResult, container))
@@ -689,6 +708,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnConsumeItemResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ConsumeItemResult outResult;
         if (ValidateResult(outResult, container))
@@ -741,6 +761,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnConsumePSNEntitlementsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ConsumePSNEntitlementsResult outResult;
         if (ValidateResult(outResult, container))
@@ -793,6 +814,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnConsumeXboxEntitlementsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ConsumeXboxEntitlementsResult outResult;
         if (ValidateResult(outResult, container))
@@ -845,6 +867,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnCreateSharedGroupResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         CreateSharedGroupResult outResult;
         if (ValidateResult(outResult, container))
@@ -897,6 +920,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnExecuteCloudScriptResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ExecuteCloudScriptResult outResult;
         if (ValidateResult(outResult, container))
@@ -949,6 +973,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetAccountInfoResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetAccountInfoResult outResult;
         if (ValidateResult(outResult, container))
@@ -1001,6 +1026,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetAllUsersCharactersResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ListUsersCharactersResult outResult;
         if (ValidateResult(outResult, container))
@@ -1053,6 +1079,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetCatalogItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetCatalogItemsResult outResult;
         if (ValidateResult(outResult, container))
@@ -1105,6 +1132,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetCharacterDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetCharacterDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -1157,6 +1185,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetCharacterInventoryResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetCharacterInventoryResult outResult;
         if (ValidateResult(outResult, container))
@@ -1209,6 +1238,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetCharacterLeaderboardResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetCharacterLeaderboardResult outResult;
         if (ValidateResult(outResult, container))
@@ -1261,6 +1291,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetCharacterReadOnlyDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetCharacterDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -1313,6 +1344,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetCharacterStatisticsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetCharacterStatisticsResult outResult;
         if (ValidateResult(outResult, container))
@@ -1365,6 +1397,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetContentDownloadUrlResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetContentDownloadUrlResult outResult;
         if (ValidateResult(outResult, container))
@@ -1417,6 +1450,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetCurrentGamesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         CurrentGamesResult outResult;
         if (ValidateResult(outResult, container))
@@ -1469,6 +1503,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetFriendLeaderboardResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetLeaderboardResult outResult;
         if (ValidateResult(outResult, container))
@@ -1521,6 +1556,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetFriendLeaderboardAroundPlayerResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetFriendLeaderboardAroundPlayerResult outResult;
         if (ValidateResult(outResult, container))
@@ -1573,6 +1609,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetFriendsListResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetFriendsListResult outResult;
         if (ValidateResult(outResult, container))
@@ -1625,6 +1662,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetGameServerRegionsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GameServerRegionsResult outResult;
         if (ValidateResult(outResult, container))
@@ -1677,6 +1715,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetLeaderboardResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetLeaderboardResult outResult;
         if (ValidateResult(outResult, container))
@@ -1729,6 +1768,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetLeaderboardAroundCharacterResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetLeaderboardAroundCharacterResult outResult;
         if (ValidateResult(outResult, container))
@@ -1781,6 +1821,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetLeaderboardAroundPlayerResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetLeaderboardAroundPlayerResult outResult;
         if (ValidateResult(outResult, container))
@@ -1833,6 +1874,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetLeaderboardForUserCharactersResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetLeaderboardForUsersCharactersResult outResult;
         if (ValidateResult(outResult, container))
@@ -1885,6 +1927,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetPaymentTokenResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPaymentTokenResult outResult;
         if (ValidateResult(outResult, container))
@@ -1937,6 +1980,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetPhotonAuthenticationTokenResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPhotonAuthenticationTokenResult outResult;
         if (ValidateResult(outResult, container))
@@ -1989,6 +2033,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetPlayerCombinedInfoResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayerCombinedInfoResult outResult;
         if (ValidateResult(outResult, container))
@@ -2041,6 +2086,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetPlayerProfileResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayerProfileResult outResult;
         if (ValidateResult(outResult, container))
@@ -2093,6 +2139,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetPlayerSegmentsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayerSegmentsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2145,6 +2192,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetPlayerStatisticsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayerStatisticsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2197,6 +2245,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetPlayerStatisticVersionsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayerStatisticVersionsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2249,6 +2298,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetPlayerTagsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayerTagsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2301,6 +2351,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetPlayerTradesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayerTradesResponse outResult;
         if (ValidateResult(outResult, container))
@@ -2353,6 +2404,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetPlayFabIDsFromFacebookIDsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayFabIDsFromFacebookIDsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2405,6 +2457,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetPlayFabIDsFromFacebookInstantGamesIdsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayFabIDsFromFacebookInstantGamesIdsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2457,6 +2510,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetPlayFabIDsFromGameCenterIDsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayFabIDsFromGameCenterIDsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2509,6 +2563,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetPlayFabIDsFromGenericIDsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayFabIDsFromGenericIDsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2561,6 +2616,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetPlayFabIDsFromGoogleIDsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayFabIDsFromGoogleIDsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2613,6 +2669,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetPlayFabIDsFromKongregateIDsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayFabIDsFromKongregateIDsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2665,6 +2722,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetPlayFabIDsFromNintendoSwitchDeviceIdsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayFabIDsFromNintendoSwitchDeviceIdsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2717,6 +2775,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetPlayFabIDsFromPSNAccountIDsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayFabIDsFromPSNAccountIDsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2769,6 +2828,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetPlayFabIDsFromSteamIDsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayFabIDsFromSteamIDsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2821,6 +2881,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetPlayFabIDsFromTwitchIDsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayFabIDsFromTwitchIDsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2873,6 +2934,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetPlayFabIDsFromXboxLiveIDsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayFabIDsFromXboxLiveIDsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2925,6 +2987,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetPublisherDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPublisherDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -2977,6 +3040,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetPurchaseResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPurchaseResult outResult;
         if (ValidateResult(outResult, container))
@@ -3029,6 +3093,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetSharedGroupDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetSharedGroupDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -3081,6 +3146,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetStoreItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetStoreItemsResult outResult;
         if (ValidateResult(outResult, container))
@@ -3133,6 +3199,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetTimeResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetTimeResult outResult;
         if (ValidateResult(outResult, container))
@@ -3185,6 +3252,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetTitleDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetTitleDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -3237,6 +3305,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetTitleNewsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetTitleNewsResult outResult;
         if (ValidateResult(outResult, container))
@@ -3288,6 +3357,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetTitlePublicKeyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetTitlePublicKeyResult outResult;
         if (ValidateResult(outResult, container))
@@ -3340,6 +3410,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetTradeStatusResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetTradeStatusResponse outResult;
         if (ValidateResult(outResult, container))
@@ -3392,6 +3463,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetUserDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetUserDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -3444,6 +3516,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetUserInventoryResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetUserInventoryResult outResult;
         if (ValidateResult(outResult, container))
@@ -3496,6 +3569,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetUserPublisherDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetUserDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -3548,6 +3622,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetUserPublisherReadOnlyDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetUserDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -3600,6 +3675,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetUserReadOnlyDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetUserDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -3651,6 +3727,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGetWindowsHelloChallengeResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetWindowsHelloChallengeResponse outResult;
         if (ValidateResult(outResult, container))
@@ -3703,6 +3780,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnGrantCharacterToUserResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GrantCharacterToUserResult outResult;
         if (ValidateResult(outResult, container))
@@ -3755,6 +3833,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnLinkAndroidDeviceIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LinkAndroidDeviceIDResult outResult;
         if (ValidateResult(outResult, container))
@@ -3807,6 +3886,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnLinkCustomIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LinkCustomIDResult outResult;
         if (ValidateResult(outResult, container))
@@ -3859,6 +3939,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnLinkFacebookAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LinkFacebookAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -3911,6 +3992,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnLinkFacebookInstantGamesIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LinkFacebookInstantGamesIdResult outResult;
         if (ValidateResult(outResult, container))
@@ -3963,6 +4045,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnLinkGameCenterAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LinkGameCenterAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -4015,6 +4098,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnLinkGoogleAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LinkGoogleAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -4067,6 +4151,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnLinkIOSDeviceIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LinkIOSDeviceIDResult outResult;
         if (ValidateResult(outResult, container))
@@ -4119,6 +4204,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnLinkKongregateResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LinkKongregateAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -4171,6 +4257,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnLinkNintendoSwitchDeviceIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LinkNintendoSwitchDeviceIdResult outResult;
         if (ValidateResult(outResult, container))
@@ -4223,6 +4310,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnLinkOpenIdConnectResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         EmptyResult outResult;
         if (ValidateResult(outResult, container))
@@ -4275,6 +4363,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnLinkPSNAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LinkPSNAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -4327,6 +4416,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnLinkSteamAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LinkSteamAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -4379,6 +4469,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnLinkTwitchResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LinkTwitchAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -4431,6 +4522,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnLinkWindowsHelloResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LinkWindowsHelloAccountResponse outResult;
         if (ValidateResult(outResult, container))
@@ -4483,6 +4575,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnLinkXboxAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LinkXboxAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -4558,11 +4651,10 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = this->m_authContext;
-                authenticationContext->clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
                 MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
@@ -4637,11 +4729,10 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = this->m_authContext;
-                authenticationContext->clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
                 MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
@@ -4716,11 +4807,10 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = this->m_authContext;
-                authenticationContext->clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
                 MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
@@ -4795,11 +4885,10 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = this->m_authContext;
-                authenticationContext->clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
                 MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
@@ -4874,11 +4963,10 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = this->m_authContext;
-                authenticationContext->clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
                 MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
@@ -4953,11 +5041,10 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = this->m_authContext;
-                authenticationContext->clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
                 MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
@@ -5032,11 +5119,10 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = this->m_authContext;
-                authenticationContext->clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
                 MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
@@ -5111,11 +5197,10 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = this->m_authContext;
-                authenticationContext->clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
                 MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
@@ -5190,11 +5275,10 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = this->m_authContext;
-                authenticationContext->clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
                 MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
@@ -5269,11 +5353,10 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = this->m_authContext;
-                authenticationContext->clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
                 MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
@@ -5348,11 +5431,10 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = this->m_authContext;
-                authenticationContext->clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
                 MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
@@ -5427,11 +5509,10 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = this->m_authContext;
-                authenticationContext->clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
                 MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
@@ -5506,11 +5587,10 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = this->m_authContext;
-                authenticationContext->clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
                 MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
@@ -5585,11 +5665,10 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = this->m_authContext;
-                authenticationContext->clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
                 MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
@@ -5664,11 +5743,10 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = this->m_authContext;
-                authenticationContext->clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
                 MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
@@ -5743,11 +5821,10 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = this->m_authContext;
-                authenticationContext->clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
                 MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
@@ -5822,11 +5899,10 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = this->m_authContext;
-                authenticationContext->clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
                 MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
@@ -5878,6 +5954,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnMatchmakeResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         MatchmakeResult outResult;
         if (ValidateResult(outResult, container))
@@ -5930,6 +6007,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnOpenTradeResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         OpenTradeResponse outResult;
         if (ValidateResult(outResult, container))
@@ -5982,6 +6060,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnPayForPurchaseResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         PayForPurchaseResult outResult;
         if (ValidateResult(outResult, container))
@@ -6034,6 +6113,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnPurchaseItemResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         PurchaseItemResult outResult;
         if (ValidateResult(outResult, container))
@@ -6086,6 +6166,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnRedeemCouponResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         RedeemCouponResult outResult;
         if (ValidateResult(outResult, container))
@@ -6138,6 +6219,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnRefreshPSNAuthTokenResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -6190,6 +6272,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnRegisterForIOSPushNotificationResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         RegisterForIOSPushNotificationResult outResult;
         if (ValidateResult(outResult, container))
@@ -6263,7 +6346,7 @@ namespace PlayFab
         {
             if (outResult.SessionTicket.length() > 0)
             {
-                this->m_authContext->clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
 
@@ -6337,11 +6420,10 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = this->m_authContext;
-                authenticationContext->clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    authenticationContext->entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
                 MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
@@ -6393,6 +6475,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnRemoveContactEmailResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         RemoveContactEmailResult outResult;
         if (ValidateResult(outResult, container))
@@ -6445,6 +6528,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnRemoveFriendResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         RemoveFriendResult outResult;
         if (ValidateResult(outResult, container))
@@ -6497,6 +6581,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnRemoveGenericIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         RemoveGenericIDResult outResult;
         if (ValidateResult(outResult, container))
@@ -6549,6 +6634,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnRemoveSharedGroupMembersResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         RemoveSharedGroupMembersResult outResult;
         if (ValidateResult(outResult, container))
@@ -6601,6 +6687,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnReportDeviceInfoResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -6653,6 +6740,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnReportPlayerResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ReportPlayerClientResult outResult;
         if (ValidateResult(outResult, container))
@@ -6705,6 +6793,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnRestoreIOSPurchasesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         RestoreIOSPurchasesResult outResult;
         if (ValidateResult(outResult, container))
@@ -6756,6 +6845,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnSendAccountRecoveryEmailResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         SendAccountRecoveryEmailResult outResult;
         if (ValidateResult(outResult, container))
@@ -6808,6 +6898,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnSetFriendTagsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         SetFriendTagsResult outResult;
         if (ValidateResult(outResult, container))
@@ -6860,6 +6951,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnSetPlayerSecretResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         SetPlayerSecretResult outResult;
         if (ValidateResult(outResult, container))
@@ -6912,6 +7004,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnStartGameResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         StartGameResult outResult;
         if (ValidateResult(outResult, container))
@@ -6964,6 +7057,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnStartPurchaseResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         StartPurchaseResult outResult;
         if (ValidateResult(outResult, container))
@@ -7016,6 +7110,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnSubtractUserVirtualCurrencyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ModifyUserVirtualCurrencyResult outResult;
         if (ValidateResult(outResult, container))
@@ -7068,6 +7163,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnUnlinkAndroidDeviceIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UnlinkAndroidDeviceIDResult outResult;
         if (ValidateResult(outResult, container))
@@ -7120,6 +7216,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnUnlinkCustomIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UnlinkCustomIDResult outResult;
         if (ValidateResult(outResult, container))
@@ -7172,6 +7269,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnUnlinkFacebookAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UnlinkFacebookAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -7224,6 +7322,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnUnlinkFacebookInstantGamesIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UnlinkFacebookInstantGamesIdResult outResult;
         if (ValidateResult(outResult, container))
@@ -7276,6 +7375,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnUnlinkGameCenterAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UnlinkGameCenterAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -7328,6 +7428,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnUnlinkGoogleAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UnlinkGoogleAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -7380,6 +7481,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnUnlinkIOSDeviceIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UnlinkIOSDeviceIDResult outResult;
         if (ValidateResult(outResult, container))
@@ -7432,6 +7534,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnUnlinkKongregateResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UnlinkKongregateAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -7484,6 +7587,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnUnlinkNintendoSwitchDeviceIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UnlinkNintendoSwitchDeviceIdResult outResult;
         if (ValidateResult(outResult, container))
@@ -7536,6 +7640,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnUnlinkOpenIdConnectResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -7588,6 +7693,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnUnlinkPSNAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UnlinkPSNAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -7640,6 +7746,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnUnlinkSteamAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UnlinkSteamAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -7692,6 +7799,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnUnlinkTwitchResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UnlinkTwitchAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -7744,6 +7852,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnUnlinkWindowsHelloResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UnlinkWindowsHelloAccountResponse outResult;
         if (ValidateResult(outResult, container))
@@ -7796,6 +7905,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnUnlinkXboxAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UnlinkXboxAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -7848,6 +7958,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnUnlockContainerInstanceResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UnlockContainerItemResult outResult;
         if (ValidateResult(outResult, container))
@@ -7900,6 +8011,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnUnlockContainerItemResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UnlockContainerItemResult outResult;
         if (ValidateResult(outResult, container))
@@ -7952,6 +8064,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnUpdateAvatarUrlResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -8004,6 +8117,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnUpdateCharacterDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UpdateCharacterDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -8056,6 +8170,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnUpdateCharacterStatisticsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UpdateCharacterStatisticsResult outResult;
         if (ValidateResult(outResult, container))
@@ -8108,6 +8223,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnUpdatePlayerStatisticsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UpdatePlayerStatisticsResult outResult;
         if (ValidateResult(outResult, container))
@@ -8160,6 +8276,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnUpdateSharedGroupDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UpdateSharedGroupDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -8212,6 +8329,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnUpdateUserDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UpdateUserDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -8264,6 +8382,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnUpdateUserPublisherDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UpdateUserDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -8316,6 +8435,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnUpdateUserTitleDisplayNameResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UpdateUserTitleDisplayNameResult outResult;
         if (ValidateResult(outResult, container))
@@ -8368,6 +8488,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnValidateAmazonIAPReceiptResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ValidateAmazonReceiptResult outResult;
         if (ValidateResult(outResult, container))
@@ -8420,6 +8541,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnValidateGooglePlayPurchaseResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ValidateGooglePlayPurchaseResult outResult;
         if (ValidateResult(outResult, container))
@@ -8472,6 +8594,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnValidateIOSReceiptResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ValidateIOSReceiptResult outResult;
         if (ValidateResult(outResult, container))
@@ -8524,6 +8647,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnValidateWindowsStoreReceiptResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ValidateWindowsReceiptResult outResult;
         if (ValidateResult(outResult, container))
@@ -8576,6 +8700,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnWriteCharacterEventResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         WriteEventResponse outResult;
         if (ValidateResult(outResult, container))
@@ -8628,6 +8753,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnWritePlayerEventResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         WriteEventResponse outResult;
         if (ValidateResult(outResult, container))
@@ -8680,6 +8806,7 @@ namespace PlayFab
     void PlayFabClientInstanceAPI::OnWriteTitleEventResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         WriteEventResponse outResult;
         if (ValidateResult(outResult, container))
@@ -8697,7 +8824,7 @@ namespace PlayFab
     // Private PlayFabClientInstanceAPI specific
     bool PlayFabClientInstanceAPI::IsClientLoggedIn()
     {
-        return !this->m_authContext->clientSessionTicket.empty();
+        return !this->m_context->clientSessionTicket.empty();
     }
 
     void PlayFabClientInstanceAPI::MultiStepClientLogin(std::shared_ptr<PlayFabAuthenticationContext> context, bool needsAttribution)

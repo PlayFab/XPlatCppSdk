@@ -109,6 +109,7 @@ namespace PlayFab
     void PlayFabProfilesInstanceAPI::OnGetGlobalPolicyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetGlobalPolicyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -161,6 +162,7 @@ namespace PlayFab
     void PlayFabProfilesInstanceAPI::OnGetProfileResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetEntityProfileResponse outResult;
         if (ValidateResult(outResult, container))
@@ -213,6 +215,7 @@ namespace PlayFab
     void PlayFabProfilesInstanceAPI::OnGetProfilesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetEntityProfilesResponse outResult;
         if (ValidateResult(outResult, container))
@@ -265,6 +268,7 @@ namespace PlayFab
     void PlayFabProfilesInstanceAPI::OnGetTitlePlayersFromMasterPlayerAccountIdsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetTitlePlayersFromMasterPlayerAccountIdsResponse outResult;
         if (ValidateResult(outResult, container))
@@ -317,6 +321,7 @@ namespace PlayFab
     void PlayFabProfilesInstanceAPI::OnSetGlobalPolicyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         SetGlobalPolicyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -369,6 +374,7 @@ namespace PlayFab
     void PlayFabProfilesInstanceAPI::OnSetProfileLanguageResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         SetProfileLanguageResponse outResult;
         if (ValidateResult(outResult, container))
@@ -421,6 +427,7 @@ namespace PlayFab
     void PlayFabProfilesInstanceAPI::OnSetProfilePolicyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         SetEntityProfilePolicyResponse outResult;
         if (ValidateResult(outResult, container))

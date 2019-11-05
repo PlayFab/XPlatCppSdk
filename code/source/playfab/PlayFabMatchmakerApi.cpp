@@ -66,6 +66,7 @@ namespace PlayFab
     void PlayFabMatchmakerAPI::OnAuthUserResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         AuthUserResponse outResult;
         if (ValidateResult(outResult, container))
@@ -116,6 +117,7 @@ namespace PlayFab
     void PlayFabMatchmakerAPI::OnPlayerJoinedResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         PlayerJoinedResponse outResult;
         if (ValidateResult(outResult, container))
@@ -166,6 +168,7 @@ namespace PlayFab
     void PlayFabMatchmakerAPI::OnPlayerLeftResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         PlayerLeftResponse outResult;
         if (ValidateResult(outResult, container))
@@ -216,6 +219,7 @@ namespace PlayFab
     void PlayFabMatchmakerAPI::OnStartGameResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         StartGameResponse outResult;
         if (ValidateResult(outResult, container))
@@ -266,6 +270,7 @@ namespace PlayFab
     void PlayFabMatchmakerAPI::OnUserInfoResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UserInfoResponse outResult;
         if (ValidateResult(outResult, container))

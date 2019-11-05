@@ -109,6 +109,7 @@ namespace PlayFab
     void PlayFabLocalizationInstanceAPI::OnGetLanguageListResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetLanguageListResponse outResult;
         if (ValidateResult(outResult, container))

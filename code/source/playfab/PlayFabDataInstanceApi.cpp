@@ -109,6 +109,7 @@ namespace PlayFab
     void PlayFabDataInstanceAPI::OnAbortFileUploadsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         AbortFileUploadsResponse outResult;
         if (ValidateResult(outResult, container))
@@ -161,6 +162,7 @@ namespace PlayFab
     void PlayFabDataInstanceAPI::OnDeleteFilesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         DeleteFilesResponse outResult;
         if (ValidateResult(outResult, container))
@@ -213,6 +215,7 @@ namespace PlayFab
     void PlayFabDataInstanceAPI::OnFinalizeFileUploadsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         FinalizeFileUploadsResponse outResult;
         if (ValidateResult(outResult, container))
@@ -265,6 +268,7 @@ namespace PlayFab
     void PlayFabDataInstanceAPI::OnGetFilesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetFilesResponse outResult;
         if (ValidateResult(outResult, container))
@@ -317,6 +321,7 @@ namespace PlayFab
     void PlayFabDataInstanceAPI::OnGetObjectsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetObjectsResponse outResult;
         if (ValidateResult(outResult, container))
@@ -369,6 +374,7 @@ namespace PlayFab
     void PlayFabDataInstanceAPI::OnInitiateFileUploadsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         InitiateFileUploadsResponse outResult;
         if (ValidateResult(outResult, container))
@@ -421,6 +427,7 @@ namespace PlayFab
     void PlayFabDataInstanceAPI::OnSetObjectsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         SetObjectsResponse outResult;
         if (ValidateResult(outResult, container))

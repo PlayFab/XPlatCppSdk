@@ -114,6 +114,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnAbortTaskInstanceResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -166,6 +167,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnAddLocalizedNewsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         AddLocalizedNewsResult outResult;
         if (ValidateResult(outResult, container))
@@ -218,6 +220,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnAddNewsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         AddNewsResult outResult;
         if (ValidateResult(outResult, container))
@@ -270,6 +273,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnAddPlayerTagResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         AddPlayerTagResult outResult;
         if (ValidateResult(outResult, container))
@@ -322,6 +326,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnAddServerBuildResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         AddServerBuildResult outResult;
         if (ValidateResult(outResult, container))
@@ -374,6 +379,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnAddUserVirtualCurrencyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ModifyUserVirtualCurrencyResult outResult;
         if (ValidateResult(outResult, container))
@@ -426,6 +432,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnAddVirtualCurrencyTypesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         BlankResult outResult;
         if (ValidateResult(outResult, container))
@@ -478,6 +485,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnBanUsersResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         BanUsersResult outResult;
         if (ValidateResult(outResult, container))
@@ -530,6 +538,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnCheckLimitedEditionItemAvailabilityResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         CheckLimitedEditionItemAvailabilityResult outResult;
         if (ValidateResult(outResult, container))
@@ -582,6 +591,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnCreateActionsOnPlayersInSegmentTaskResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         CreateTaskResult outResult;
         if (ValidateResult(outResult, container))
@@ -634,6 +644,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnCreateCloudScriptTaskResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         CreateTaskResult outResult;
         if (ValidateResult(outResult, container))
@@ -686,6 +697,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnCreateOpenIdConnectionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -738,6 +750,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnCreatePlayerSharedSecretResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         CreatePlayerSharedSecretResult outResult;
         if (ValidateResult(outResult, container))
@@ -790,6 +803,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnCreatePlayerStatisticDefinitionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         CreatePlayerStatisticDefinitionResult outResult;
         if (ValidateResult(outResult, container))
@@ -842,6 +856,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnDeleteContentResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         BlankResult outResult;
         if (ValidateResult(outResult, container))
@@ -894,6 +909,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnDeleteMasterPlayerAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         DeleteMasterPlayerAccountResult outResult;
         if (ValidateResult(outResult, container))
@@ -946,6 +962,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnDeleteOpenIdConnectionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -998,6 +1015,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnDeletePlayerResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         DeletePlayerResult outResult;
         if (ValidateResult(outResult, container))
@@ -1050,6 +1068,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnDeletePlayerSharedSecretResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         DeletePlayerSharedSecretResult outResult;
         if (ValidateResult(outResult, container))
@@ -1102,6 +1121,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnDeleteStoreResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         DeleteStoreResult outResult;
         if (ValidateResult(outResult, container))
@@ -1154,6 +1174,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnDeleteTaskResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -1206,6 +1227,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnDeleteTitleResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         DeleteTitleResult outResult;
         if (ValidateResult(outResult, container))
@@ -1258,6 +1280,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnExportMasterPlayerDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ExportMasterPlayerDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -1310,6 +1333,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetActionsOnPlayersInSegmentTaskInstanceResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetActionsOnPlayersInSegmentTaskInstanceResult outResult;
         if (ValidateResult(outResult, container))
@@ -1362,6 +1386,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetAllSegmentsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetAllSegmentsResult outResult;
         if (ValidateResult(outResult, container))
@@ -1414,6 +1439,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetCatalogItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetCatalogItemsResult outResult;
         if (ValidateResult(outResult, container))
@@ -1466,6 +1492,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetCloudScriptRevisionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetCloudScriptRevisionResult outResult;
         if (ValidateResult(outResult, container))
@@ -1518,6 +1545,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetCloudScriptTaskInstanceResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetCloudScriptTaskInstanceResult outResult;
         if (ValidateResult(outResult, container))
@@ -1570,6 +1598,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetCloudScriptVersionsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetCloudScriptVersionsResult outResult;
         if (ValidateResult(outResult, container))
@@ -1622,6 +1651,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetContentListResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetContentListResult outResult;
         if (ValidateResult(outResult, container))
@@ -1674,6 +1704,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetContentUploadUrlResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetContentUploadUrlResult outResult;
         if (ValidateResult(outResult, container))
@@ -1726,6 +1757,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetDataReportResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetDataReportResult outResult;
         if (ValidateResult(outResult, container))
@@ -1778,6 +1810,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetMatchmakerGameInfoResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetMatchmakerGameInfoResult outResult;
         if (ValidateResult(outResult, container))
@@ -1830,6 +1863,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetMatchmakerGameModesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetMatchmakerGameModesResult outResult;
         if (ValidateResult(outResult, container))
@@ -1882,6 +1916,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetPlayedTitleListResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayedTitleListResult outResult;
         if (ValidateResult(outResult, container))
@@ -1934,6 +1969,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetPlayerIdFromAuthTokenResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayerIdFromAuthTokenResult outResult;
         if (ValidateResult(outResult, container))
@@ -1986,6 +2022,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetPlayerProfileResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayerProfileResult outResult;
         if (ValidateResult(outResult, container))
@@ -2038,6 +2075,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetPlayerSegmentsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayerSegmentsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2090,6 +2128,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetPlayerSharedSecretsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayerSharedSecretsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2142,6 +2181,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetPlayersInSegmentResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayersInSegmentResult outResult;
         if (ValidateResult(outResult, container))
@@ -2194,6 +2234,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetPlayerStatisticDefinitionsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayerStatisticDefinitionsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2246,6 +2287,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetPlayerStatisticVersionsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayerStatisticVersionsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2298,6 +2340,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetPlayerTagsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPlayerTagsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2350,6 +2393,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetPolicyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPolicyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -2402,6 +2446,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetPublisherDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetPublisherDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -2454,6 +2499,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetRandomResultTablesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetRandomResultTablesResult outResult;
         if (ValidateResult(outResult, container))
@@ -2506,6 +2552,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetServerBuildInfoResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetServerBuildInfoResult outResult;
         if (ValidateResult(outResult, container))
@@ -2558,6 +2605,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetServerBuildUploadUrlResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetServerBuildUploadURLResult outResult;
         if (ValidateResult(outResult, container))
@@ -2610,6 +2658,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetStoreItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetStoreItemsResult outResult;
         if (ValidateResult(outResult, container))
@@ -2662,6 +2711,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetTaskInstancesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetTaskInstancesResult outResult;
         if (ValidateResult(outResult, container))
@@ -2714,6 +2764,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetTasksResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetTasksResult outResult;
         if (ValidateResult(outResult, container))
@@ -2766,6 +2817,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetTitleDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetTitleDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -2818,6 +2870,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetTitleInternalDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetTitleDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -2870,6 +2923,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetUserAccountInfoResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LookupUserAccountInfoResult outResult;
         if (ValidateResult(outResult, container))
@@ -2922,6 +2976,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetUserBansResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetUserBansResult outResult;
         if (ValidateResult(outResult, container))
@@ -2974,6 +3029,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetUserDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetUserDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -3026,6 +3082,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetUserInternalDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetUserDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -3078,6 +3135,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetUserInventoryResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetUserInventoryResult outResult;
         if (ValidateResult(outResult, container))
@@ -3130,6 +3188,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetUserPublisherDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetUserDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -3182,6 +3241,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetUserPublisherInternalDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetUserDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -3234,6 +3294,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetUserPublisherReadOnlyDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetUserDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -3286,6 +3347,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGetUserReadOnlyDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetUserDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -3338,6 +3400,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnGrantItemsToUsersResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GrantItemsToUsersResult outResult;
         if (ValidateResult(outResult, container))
@@ -3390,6 +3453,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnIncrementLimitedEditionItemAvailabilityResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         IncrementLimitedEditionItemAvailabilityResult outResult;
         if (ValidateResult(outResult, container))
@@ -3442,6 +3506,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnIncrementPlayerStatisticVersionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         IncrementPlayerStatisticVersionResult outResult;
         if (ValidateResult(outResult, container))
@@ -3494,6 +3559,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnListOpenIdConnectionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ListOpenIdConnectionResponse outResult;
         if (ValidateResult(outResult, container))
@@ -3546,6 +3612,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnListServerBuildsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ListBuildsResult outResult;
         if (ValidateResult(outResult, container))
@@ -3598,6 +3665,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnListVirtualCurrencyTypesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ListVirtualCurrencyTypesResult outResult;
         if (ValidateResult(outResult, container))
@@ -3650,6 +3718,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnModifyMatchmakerGameModesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ModifyMatchmakerGameModesResult outResult;
         if (ValidateResult(outResult, container))
@@ -3702,6 +3771,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnModifyServerBuildResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ModifyServerBuildResult outResult;
         if (ValidateResult(outResult, container))
@@ -3754,6 +3824,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnRefundPurchaseResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         RefundPurchaseResponse outResult;
         if (ValidateResult(outResult, container))
@@ -3806,6 +3877,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnRemovePlayerTagResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         RemovePlayerTagResult outResult;
         if (ValidateResult(outResult, container))
@@ -3858,6 +3930,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnRemoveServerBuildResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         RemoveServerBuildResult outResult;
         if (ValidateResult(outResult, container))
@@ -3910,6 +3983,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnRemoveVirtualCurrencyTypesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         BlankResult outResult;
         if (ValidateResult(outResult, container))
@@ -3962,6 +4036,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnResetCharacterStatisticsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ResetCharacterStatisticsResult outResult;
         if (ValidateResult(outResult, container))
@@ -4014,6 +4089,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnResetPasswordResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ResetPasswordResult outResult;
         if (ValidateResult(outResult, container))
@@ -4066,6 +4142,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnResetUserStatisticsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ResetUserStatisticsResult outResult;
         if (ValidateResult(outResult, container))
@@ -4118,6 +4195,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnResolvePurchaseDisputeResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ResolvePurchaseDisputeResponse outResult;
         if (ValidateResult(outResult, container))
@@ -4170,6 +4248,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnRevokeAllBansForUserResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         RevokeAllBansForUserResult outResult;
         if (ValidateResult(outResult, container))
@@ -4222,6 +4301,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnRevokeBansResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         RevokeBansResult outResult;
         if (ValidateResult(outResult, container))
@@ -4274,6 +4354,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnRevokeInventoryItemResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         RevokeInventoryResult outResult;
         if (ValidateResult(outResult, container))
@@ -4326,6 +4407,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnRevokeInventoryItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         RevokeInventoryItemsResult outResult;
         if (ValidateResult(outResult, container))
@@ -4378,6 +4460,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnRunTaskResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         RunTaskResult outResult;
         if (ValidateResult(outResult, container))
@@ -4430,6 +4513,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnSendAccountRecoveryEmailResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         SendAccountRecoveryEmailResult outResult;
         if (ValidateResult(outResult, container))
@@ -4482,6 +4566,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnSetCatalogItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UpdateCatalogItemsResult outResult;
         if (ValidateResult(outResult, container))
@@ -4534,6 +4619,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnSetPlayerSecretResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         SetPlayerSecretResult outResult;
         if (ValidateResult(outResult, container))
@@ -4586,6 +4672,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnSetPublishedRevisionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         SetPublishedRevisionResult outResult;
         if (ValidateResult(outResult, container))
@@ -4638,6 +4725,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnSetPublisherDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         SetPublisherDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -4690,6 +4778,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnSetStoreItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UpdateStoreItemsResult outResult;
         if (ValidateResult(outResult, container))
@@ -4742,6 +4831,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnSetTitleDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         SetTitleDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -4794,6 +4884,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnSetTitleInternalDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         SetTitleDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -4846,6 +4937,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnSetupPushNotificationResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         SetupPushNotificationResult outResult;
         if (ValidateResult(outResult, container))
@@ -4898,6 +4990,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnSubtractUserVirtualCurrencyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ModifyUserVirtualCurrencyResult outResult;
         if (ValidateResult(outResult, container))
@@ -4950,6 +5043,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnUpdateBansResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UpdateBansResult outResult;
         if (ValidateResult(outResult, container))
@@ -5002,6 +5096,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnUpdateCatalogItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UpdateCatalogItemsResult outResult;
         if (ValidateResult(outResult, container))
@@ -5054,6 +5149,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnUpdateCloudScriptResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UpdateCloudScriptResult outResult;
         if (ValidateResult(outResult, container))
@@ -5106,6 +5202,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnUpdateOpenIdConnectionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -5158,6 +5255,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnUpdatePlayerSharedSecretResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UpdatePlayerSharedSecretResult outResult;
         if (ValidateResult(outResult, container))
@@ -5210,6 +5308,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnUpdatePlayerStatisticDefinitionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UpdatePlayerStatisticDefinitionResult outResult;
         if (ValidateResult(outResult, container))
@@ -5262,6 +5361,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnUpdatePolicyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UpdatePolicyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -5314,6 +5414,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnUpdateRandomResultTablesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UpdateRandomResultTablesResult outResult;
         if (ValidateResult(outResult, container))
@@ -5366,6 +5467,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnUpdateStoreItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UpdateStoreItemsResult outResult;
         if (ValidateResult(outResult, container))
@@ -5418,6 +5520,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnUpdateTaskResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         EmptyResponse outResult;
         if (ValidateResult(outResult, container))
@@ -5470,6 +5573,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnUpdateUserDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UpdateUserDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -5522,6 +5626,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnUpdateUserInternalDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UpdateUserDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -5574,6 +5679,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnUpdateUserPublisherDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UpdateUserDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -5626,6 +5732,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnUpdateUserPublisherInternalDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UpdateUserDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -5678,6 +5785,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnUpdateUserPublisherReadOnlyDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UpdateUserDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -5730,6 +5838,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnUpdateUserReadOnlyDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UpdateUserDataResult outResult;
         if (ValidateResult(outResult, container))
@@ -5782,6 +5891,7 @@ namespace PlayFab
     void PlayFabAdminInstanceAPI::OnUpdateUserTitleDisplayNameResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         UpdateUserTitleDisplayNameResult outResult;
         if (ValidateResult(outResult, container))

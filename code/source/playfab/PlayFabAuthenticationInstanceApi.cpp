@@ -128,12 +128,14 @@ namespace PlayFab
     void PlayFabAuthenticationInstanceAPI::OnGetEntityTokenResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         GetEntityTokenResponse outResult;
         if (ValidateResult(outResult, container))
         {
-            if (outResult.EntityToken.length() > 0)            {
-                this->m_authContext->entityToken = outResult.EntityToken;
+            if (outResult.EntityToken.length() > 0)
+            {
+                reqContainer->GetContext()->entityToken = outResult.EntityToken;
             }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
@@ -183,6 +185,7 @@ namespace PlayFab
     void PlayFabAuthenticationInstanceAPI::OnValidateEntityTokenResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ValidateEntityTokenResponse outResult;
         if (ValidateResult(outResult, container))

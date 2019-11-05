@@ -109,6 +109,7 @@ namespace PlayFab
     void PlayFabCloudScriptInstanceAPI::OnExecuteEntityCloudScriptResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ExecuteCloudScriptResult outResult;
         if (ValidateResult(outResult, container))
