@@ -24,30 +24,4 @@ namespace PlayFab
     {
         staticPlayer->ForgetAllCredentials();
     }
-
-    bool PlayFabSettings::ValidateSettings(CallRequestContainer& container)
-    {
-        const auto& settings = container.GetApiSettings();
-
-        bool valid = true;
-        if (settings->titleId.empty())
-        {
-            container.errorWrapper.HttpCode = 0;
-            container.errorWrapper.HttpStatus = "Client-side validation failure";
-            container.errorWrapper.ErrorCode = PlayFabErrorCode::PlayFabErrorInvalidParams;
-            container.errorWrapper.ErrorName = container.errorWrapper.HttpStatus;
-            container.errorWrapper.ErrorMessage = "PlayFabSettings::staticSettings->titleId has not been set properly. It must not be empty.";
-            valid = false;
-        }
-
-        if (valid)
-            return true;
-
-        if (PlayFabSettings::globalErrorHandler != nullptr)
-            PlayFabSettings::globalErrorHandler(container.errorWrapper, container.GetCustomData());
-        if (container.errorCallback != nullptr)
-            container.errorCallback(container.errorWrapper, container.GetCustomData());
-
-        return false;
-    }
 }

@@ -120,7 +120,7 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetEntityTokenResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings(*reqContainer))
+
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
@@ -178,7 +178,7 @@ namespace PlayFab
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ValidateEntityTokenResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings(*reqContainer))
+
         {
             http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }

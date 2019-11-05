@@ -47,6 +47,7 @@ namespace PlayFab
         CallRequestContainerCallback GetCallback() const;
 
         void* GetCustomData() const;
+        virtual bool ValidateSettings() = 0;
 
     protected:
         std::string url;
