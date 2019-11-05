@@ -52,6 +52,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnAbortTaskInstanceResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
@@ -103,6 +105,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnAddLocalizedNewsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AddLocalizedNewsResult>(callback));
@@ -154,6 +158,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnAddNewsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AddNewsResult>(callback));
@@ -205,6 +211,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnAddPlayerTagResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AddPlayerTagResult>(callback));
@@ -256,6 +264,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnAddServerBuildResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AddServerBuildResult>(callback));
@@ -307,6 +317,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnAddUserVirtualCurrencyResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ModifyUserVirtualCurrencyResult>(callback));
@@ -358,6 +370,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnAddVirtualCurrencyTypesResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<BlankResult>(callback));
@@ -409,6 +423,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnBanUsersResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<BanUsersResult>(callback));
@@ -460,6 +476,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnCheckLimitedEditionItemAvailabilityResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CheckLimitedEditionItemAvailabilityResult>(callback));
@@ -511,6 +529,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnCreateActionsOnPlayersInSegmentTaskResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateTaskResult>(callback));
@@ -562,6 +582,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnCreateCloudScriptTaskResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateTaskResult>(callback));
@@ -613,6 +635,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnCreateOpenIdConnectionResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
@@ -664,6 +688,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnCreatePlayerSharedSecretResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreatePlayerSharedSecretResult>(callback));
@@ -715,6 +741,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnCreatePlayerStatisticDefinitionResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreatePlayerStatisticDefinitionResult>(callback));
@@ -766,6 +794,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnDeleteContentResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<BlankResult>(callback));
@@ -817,6 +847,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnDeleteMasterPlayerAccountResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeleteMasterPlayerAccountResult>(callback));
@@ -868,6 +900,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnDeleteOpenIdConnectionResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
@@ -919,6 +953,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnDeletePlayerResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeletePlayerResult>(callback));
@@ -970,6 +1006,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnDeletePlayerSharedSecretResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeletePlayerSharedSecretResult>(callback));
@@ -1021,6 +1059,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnDeleteStoreResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeleteStoreResult>(callback));
@@ -1072,6 +1112,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnDeleteTaskResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
@@ -1123,6 +1165,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnDeleteTitleResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeleteTitleResult>(callback));
@@ -1174,6 +1218,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnExportMasterPlayerDataResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ExportMasterPlayerDataResult>(callback));
@@ -1225,6 +1271,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetActionsOnPlayersInSegmentTaskInstanceResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetActionsOnPlayersInSegmentTaskInstanceResult>(callback));
@@ -1276,6 +1324,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetAllSegmentsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetAllSegmentsResult>(callback));
@@ -1327,6 +1377,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetCatalogItemsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCatalogItemsResult>(callback));
@@ -1378,6 +1430,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetCloudScriptRevisionResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCloudScriptRevisionResult>(callback));
@@ -1429,6 +1483,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetCloudScriptTaskInstanceResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCloudScriptTaskInstanceResult>(callback));
@@ -1480,6 +1536,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetCloudScriptVersionsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetCloudScriptVersionsResult>(callback));
@@ -1531,6 +1589,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetContentListResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetContentListResult>(callback));
@@ -1582,6 +1642,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetContentUploadUrlResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetContentUploadUrlResult>(callback));
@@ -1633,6 +1695,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetDataReportResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetDataReportResult>(callback));
@@ -1684,6 +1748,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetMatchmakerGameInfoResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetMatchmakerGameInfoResult>(callback));
@@ -1735,6 +1801,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetMatchmakerGameModesResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetMatchmakerGameModesResult>(callback));
@@ -1786,6 +1854,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetPlayedTitleListResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayedTitleListResult>(callback));
@@ -1837,6 +1907,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetPlayerIdFromAuthTokenResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerIdFromAuthTokenResult>(callback));
@@ -1888,6 +1960,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetPlayerProfileResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerProfileResult>(callback));
@@ -1939,6 +2013,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetPlayerSegmentsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerSegmentsResult>(callback));
@@ -1990,6 +2066,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetPlayerSharedSecretsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerSharedSecretsResult>(callback));
@@ -2041,6 +2119,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetPlayersInSegmentResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayersInSegmentResult>(callback));
@@ -2092,6 +2172,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetPlayerStatisticDefinitionsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerStatisticDefinitionsResult>(callback));
@@ -2143,6 +2225,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetPlayerStatisticVersionsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerStatisticVersionsResult>(callback));
@@ -2194,6 +2278,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetPlayerTagsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerTagsResult>(callback));
@@ -2245,6 +2331,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetPolicyResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPolicyResponse>(callback));
@@ -2296,6 +2384,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetPublisherDataResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPublisherDataResult>(callback));
@@ -2347,6 +2437,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetRandomResultTablesResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetRandomResultTablesResult>(callback));
@@ -2398,6 +2490,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetServerBuildInfoResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetServerBuildInfoResult>(callback));
@@ -2449,6 +2543,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetServerBuildUploadUrlResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetServerBuildUploadURLResult>(callback));
@@ -2500,6 +2596,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetStoreItemsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetStoreItemsResult>(callback));
@@ -2551,6 +2649,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetTaskInstancesResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTaskInstancesResult>(callback));
@@ -2602,6 +2702,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetTasksResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTasksResult>(callback));
@@ -2653,6 +2755,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetTitleDataResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTitleDataResult>(callback));
@@ -2704,6 +2808,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetTitleInternalDataResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTitleDataResult>(callback));
@@ -2755,6 +2861,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetUserAccountInfoResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LookupUserAccountInfoResult>(callback));
@@ -2806,6 +2914,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetUserBansResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserBansResult>(callback));
@@ -2857,6 +2967,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetUserDataResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
@@ -2908,6 +3020,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetUserInternalDataResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
@@ -2959,6 +3073,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetUserInventoryResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserInventoryResult>(callback));
@@ -3010,6 +3126,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetUserPublisherDataResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
@@ -3061,6 +3179,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetUserPublisherInternalDataResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
@@ -3112,6 +3232,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetUserPublisherReadOnlyDataResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
@@ -3163,6 +3285,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetUserReadOnlyDataResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetUserDataResult>(callback));
@@ -3214,6 +3338,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGrantItemsToUsersResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GrantItemsToUsersResult>(callback));
@@ -3265,6 +3391,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnIncrementLimitedEditionItemAvailabilityResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<IncrementLimitedEditionItemAvailabilityResult>(callback));
@@ -3316,6 +3444,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnIncrementPlayerStatisticVersionResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<IncrementPlayerStatisticVersionResult>(callback));
@@ -3367,6 +3497,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnListOpenIdConnectionResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListOpenIdConnectionResponse>(callback));
@@ -3418,6 +3550,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnListServerBuildsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListBuildsResult>(callback));
@@ -3469,6 +3603,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnListVirtualCurrencyTypesResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListVirtualCurrencyTypesResult>(callback));
@@ -3520,6 +3656,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnModifyMatchmakerGameModesResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ModifyMatchmakerGameModesResult>(callback));
@@ -3571,6 +3709,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnModifyServerBuildResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ModifyServerBuildResult>(callback));
@@ -3622,6 +3762,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnRefundPurchaseResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RefundPurchaseResponse>(callback));
@@ -3673,6 +3815,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnRemovePlayerTagResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RemovePlayerTagResult>(callback));
@@ -3724,6 +3868,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnRemoveServerBuildResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RemoveServerBuildResult>(callback));
@@ -3775,6 +3921,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnRemoveVirtualCurrencyTypesResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<BlankResult>(callback));
@@ -3826,6 +3974,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnResetCharacterStatisticsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ResetCharacterStatisticsResult>(callback));
@@ -3877,6 +4027,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnResetPasswordResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ResetPasswordResult>(callback));
@@ -3928,6 +4080,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnResetUserStatisticsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ResetUserStatisticsResult>(callback));
@@ -3979,6 +4133,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnResolvePurchaseDisputeResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ResolvePurchaseDisputeResponse>(callback));
@@ -4030,6 +4186,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnRevokeAllBansForUserResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RevokeAllBansForUserResult>(callback));
@@ -4081,6 +4239,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnRevokeBansResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RevokeBansResult>(callback));
@@ -4132,6 +4292,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnRevokeInventoryItemResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RevokeInventoryResult>(callback));
@@ -4183,6 +4345,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnRevokeInventoryItemsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RevokeInventoryItemsResult>(callback));
@@ -4234,6 +4398,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnRunTaskResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RunTaskResult>(callback));
@@ -4285,6 +4451,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnSendAccountRecoveryEmailResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SendAccountRecoveryEmailResult>(callback));
@@ -4336,6 +4504,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnSetCatalogItemsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateCatalogItemsResult>(callback));
@@ -4387,6 +4557,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnSetPlayerSecretResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetPlayerSecretResult>(callback));
@@ -4438,6 +4610,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnSetPublishedRevisionResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetPublishedRevisionResult>(callback));
@@ -4489,6 +4663,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnSetPublisherDataResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetPublisherDataResult>(callback));
@@ -4540,6 +4716,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnSetStoreItemsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateStoreItemsResult>(callback));
@@ -4591,6 +4769,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnSetTitleDataResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetTitleDataResult>(callback));
@@ -4642,6 +4822,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnSetTitleInternalDataResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetTitleDataResult>(callback));
@@ -4693,6 +4875,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnSetupPushNotificationResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetupPushNotificationResult>(callback));
@@ -4744,6 +4928,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnSubtractUserVirtualCurrencyResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ModifyUserVirtualCurrencyResult>(callback));
@@ -4795,6 +4981,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnUpdateBansResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateBansResult>(callback));
@@ -4846,6 +5034,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnUpdateCatalogItemsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateCatalogItemsResult>(callback));
@@ -4897,6 +5087,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnUpdateCloudScriptResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateCloudScriptResult>(callback));
@@ -4948,6 +5140,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnUpdateOpenIdConnectionResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
@@ -4999,6 +5193,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnUpdatePlayerSharedSecretResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdatePlayerSharedSecretResult>(callback));
@@ -5050,6 +5246,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnUpdatePlayerStatisticDefinitionResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdatePlayerStatisticDefinitionResult>(callback));
@@ -5101,6 +5299,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnUpdatePolicyResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdatePolicyResponse>(callback));
@@ -5152,6 +5352,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnUpdateRandomResultTablesResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateRandomResultTablesResult>(callback));
@@ -5203,6 +5405,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnUpdateStoreItemsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateStoreItemsResult>(callback));
@@ -5254,6 +5458,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnUpdateTaskResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
@@ -5305,6 +5511,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnUpdateUserDataResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
@@ -5356,6 +5564,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnUpdateUserInternalDataResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
@@ -5407,6 +5617,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnUpdateUserPublisherDataResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
@@ -5458,6 +5670,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnUpdateUserPublisherInternalDataResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
@@ -5509,6 +5723,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnUpdateUserPublisherReadOnlyDataResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
@@ -5560,6 +5776,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnUpdateUserReadOnlyDataResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserDataResult>(callback));
@@ -5611,6 +5829,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnUpdateUserTitleDisplayNameResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateUserTitleDisplayNameResult>(callback));

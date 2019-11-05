@@ -52,6 +52,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnAbortFileUploadsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<AbortFileUploadsResponse>(callback));
@@ -103,6 +105,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnDeleteFilesResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeleteFilesResponse>(callback));
@@ -154,6 +158,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnFinalizeFileUploadsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<FinalizeFileUploadsResponse>(callback));
@@ -205,6 +211,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetFilesResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetFilesResponse>(callback));
@@ -256,6 +264,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetObjectsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetObjectsResponse>(callback));
@@ -307,6 +317,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnInitiateFileUploadsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<InitiateFileUploadsResponse>(callback));
@@ -358,6 +370,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnSetObjectsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetObjectsResponse>(callback));

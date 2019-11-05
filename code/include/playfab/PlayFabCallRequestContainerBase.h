@@ -27,9 +27,9 @@ namespace PlayFab
             const std::unordered_map<std::string, std::string>& headers,
             std::string requestBody,
             CallRequestContainerCallback callback,
-            void* customData = nullptr,
-            std::shared_ptr<PlayFabApiSettings> apiSettings = nullptr,
-            std::shared_ptr<PlayFabAuthenticationContext> context = nullptr);
+            std::shared_ptr<PlayFabApiSettings> apiSettings,
+            std::shared_ptr<PlayFabAuthenticationContext> context,
+            void* customData);
 
         virtual ~CallRequestContainerBase() = default;
 

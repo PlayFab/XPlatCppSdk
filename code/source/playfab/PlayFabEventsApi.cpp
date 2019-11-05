@@ -52,6 +52,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnWriteEventsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<WriteEventsResponse>(callback));
@@ -103,6 +105,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnWriteTelemetryEventsResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<WriteEventsResponse>(callback));

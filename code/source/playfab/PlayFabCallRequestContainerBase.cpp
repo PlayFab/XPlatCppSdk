@@ -9,9 +9,9 @@ namespace PlayFab
         const std::unordered_map<std::string, std::string>& headers,
         std::string requestBody,
         CallRequestContainerCallback callback,
-        void* customData,
         std::shared_ptr<PlayFabApiSettings> settings,
-        std::shared_ptr<PlayFabAuthenticationContext> context) :
+        std::shared_ptr<PlayFabAuthenticationContext> context,
+        void* customData) :
         url(url),
         requestHeaders(headers),
         requestBody(requestBody),

@@ -64,6 +64,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetEntityTokenResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetEntityTokenResponse>(callback));
@@ -119,6 +121,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnValidateEntityTokenResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ValidateEntityTokenResponse>(callback));

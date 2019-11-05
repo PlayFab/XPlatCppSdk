@@ -94,8 +94,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabCloudScriptInstanceAPI::OnExecuteEntityCloudScriptResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ExecuteCloudScriptResult>(callback));
         reqContainer->errorCallback = errorCallback;

@@ -94,8 +94,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabEventsInstanceAPI::OnWriteEventsResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<WriteEventsResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -147,8 +148,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabEventsInstanceAPI::OnWriteTelemetryEventsResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<WriteEventsResponse>(callback));
         reqContainer->errorCallback = errorCallback;

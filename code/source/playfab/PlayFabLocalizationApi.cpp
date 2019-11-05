@@ -52,6 +52,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnGetLanguageListResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetLanguageListResponse>(callback));

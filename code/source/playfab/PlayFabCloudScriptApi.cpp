@@ -52,6 +52,8 @@ namespace PlayFab
             headers,
             jsonAsString,
             OnExecuteEntityCloudScriptResult,
+            settings,
+            context,
             customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ExecuteCloudScriptResult>(callback));

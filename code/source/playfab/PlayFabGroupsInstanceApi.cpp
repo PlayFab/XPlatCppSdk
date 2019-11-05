@@ -94,8 +94,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabGroupsInstanceAPI::OnAcceptGroupApplicationResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -147,8 +148,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabGroupsInstanceAPI::OnAcceptGroupInvitationResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -200,8 +202,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabGroupsInstanceAPI::OnAddMembersResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -253,8 +256,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabGroupsInstanceAPI::OnApplyToGroupResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ApplyToGroupResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -306,8 +310,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabGroupsInstanceAPI::OnBlockEntityResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -359,8 +364,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabGroupsInstanceAPI::OnChangeMemberRoleResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -412,8 +418,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabGroupsInstanceAPI::OnCreateGroupResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateGroupResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -465,8 +472,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabGroupsInstanceAPI::OnCreateRoleResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateGroupRoleResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -518,8 +526,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabGroupsInstanceAPI::OnDeleteGroupResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -571,8 +580,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabGroupsInstanceAPI::OnDeleteRoleResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -624,8 +634,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabGroupsInstanceAPI::OnGetGroupResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetGroupResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -677,8 +688,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabGroupsInstanceAPI::OnInviteToGroupResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<InviteToGroupResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -730,8 +742,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabGroupsInstanceAPI::OnIsMemberResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<IsMemberResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -783,8 +796,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabGroupsInstanceAPI::OnListGroupApplicationsResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListGroupApplicationsResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -836,8 +850,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabGroupsInstanceAPI::OnListGroupBlocksResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListGroupBlocksResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -889,8 +904,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabGroupsInstanceAPI::OnListGroupInvitationsResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListGroupInvitationsResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -942,8 +958,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabGroupsInstanceAPI::OnListGroupMembersResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListGroupMembersResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -995,8 +1012,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabGroupsInstanceAPI::OnListMembershipResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListMembershipResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -1048,8 +1066,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabGroupsInstanceAPI::OnListMembershipOpportunitiesResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListMembershipOpportunitiesResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -1101,8 +1120,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabGroupsInstanceAPI::OnRemoveGroupApplicationResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -1154,8 +1174,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabGroupsInstanceAPI::OnRemoveGroupInvitationResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -1207,8 +1228,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabGroupsInstanceAPI::OnRemoveMembersResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -1260,8 +1282,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabGroupsInstanceAPI::OnUnblockEntityResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -1313,8 +1336,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabGroupsInstanceAPI::OnUpdateGroupResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateGroupResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -1366,8 +1390,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabGroupsInstanceAPI::OnUpdateRoleResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateGroupRoleResponse>(callback));
         reqContainer->errorCallback = errorCallback;

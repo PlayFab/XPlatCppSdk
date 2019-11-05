@@ -94,8 +94,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnCancelAllMatchmakingTicketsForPlayerResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CancelAllMatchmakingTicketsForPlayerResult>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -147,8 +148,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnCancelMatchmakingTicketResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CancelMatchmakingTicketResult>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -200,8 +202,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnCreateBuildAliasResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<BuildAliasDetailsResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -253,8 +256,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnCreateBuildWithCustomContainerResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateBuildWithCustomContainerResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -306,8 +310,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnCreateBuildWithManagedContainerResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateBuildWithManagedContainerResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -359,8 +364,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnCreateMatchmakingTicketResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateMatchmakingTicketResult>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -412,8 +418,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnCreateRemoteUserResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateRemoteUserResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -465,8 +472,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnCreateServerMatchmakingTicketResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateMatchmakingTicketResult>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -518,8 +526,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnDeleteAssetResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -571,8 +580,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnDeleteBuildResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -624,8 +634,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnDeleteBuildAliasResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -677,8 +688,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnDeleteCertificateResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -730,8 +742,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnDeleteRemoteUserResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -783,8 +796,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnEnableMultiplayerServersForTitleResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EnableMultiplayerServersForTitleResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -836,8 +850,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnGetAssetUploadUrlResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetAssetUploadUrlResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -889,8 +904,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnGetBuildResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetBuildResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -942,8 +958,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnGetBuildAliasResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<BuildAliasDetailsResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -995,8 +1012,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnGetContainerRegistryCredentialsResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetContainerRegistryCredentialsResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -1048,8 +1066,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnGetMatchResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetMatchResult>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -1101,8 +1120,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnGetMatchmakingTicketResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetMatchmakingTicketResult>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -1154,8 +1174,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnGetMultiplayerServerDetailsResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetMultiplayerServerDetailsResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -1207,8 +1228,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnGetQueueStatisticsResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetQueueStatisticsResult>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -1260,8 +1282,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnGetRemoteLoginEndpointResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetRemoteLoginEndpointResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -1313,8 +1336,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnGetTitleEnabledForMultiplayerServersStatusResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTitleEnabledForMultiplayerServersStatusResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -1366,8 +1390,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnGetTitleMultiplayerServersQuotasResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTitleMultiplayerServersQuotasResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -1419,8 +1444,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnJoinMatchmakingTicketResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<JoinMatchmakingTicketResult>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -1472,8 +1498,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnListArchivedMultiplayerServersResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListMultiplayerServersResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -1525,8 +1552,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnListAssetSummariesResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListAssetSummariesResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -1578,8 +1606,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnListBuildAliasesResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListBuildAliasesForTitleResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -1631,8 +1660,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnListBuildSummariesResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListBuildSummariesResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -1684,8 +1714,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnListCertificateSummariesResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListCertificateSummariesResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -1737,8 +1768,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnListContainerImagesResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListContainerImagesResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -1790,8 +1822,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnListContainerImageTagsResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListContainerImageTagsResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -1843,8 +1876,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnListMatchmakingTicketsForPlayerResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListMatchmakingTicketsForPlayerResult>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -1896,8 +1930,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnListMultiplayerServersResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListMultiplayerServersResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -1949,8 +1984,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnListPartyQosServersResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListPartyQosServersResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -2001,8 +2037,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnListQosServersResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListQosServersResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -2054,8 +2091,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnListQosServersForTitleResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListQosServersForTitleResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -2107,8 +2145,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnListVirtualMachineSummariesResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListVirtualMachineSummariesResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -2160,8 +2199,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnRequestMultiplayerServerResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RequestMultiplayerServerResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -2213,8 +2253,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnRolloverContainerRegistryCredentialsResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<RolloverContainerRegistryCredentialsResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -2266,8 +2307,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnShutdownMultiplayerServerResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -2319,8 +2361,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnUpdateBuildAliasResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<BuildAliasDetailsResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -2372,8 +2415,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnUpdateBuildRegionsResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -2425,8 +2469,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabMultiplayerInstanceAPI::OnUploadCertificateResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
         reqContainer->errorCallback = errorCallback;

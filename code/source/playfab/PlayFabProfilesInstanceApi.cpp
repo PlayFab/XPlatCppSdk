@@ -94,8 +94,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabProfilesInstanceAPI::OnGetGlobalPolicyResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetGlobalPolicyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -147,8 +148,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabProfilesInstanceAPI::OnGetProfileResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetEntityProfileResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -200,8 +202,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabProfilesInstanceAPI::OnGetProfilesResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetEntityProfilesResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -253,8 +256,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabProfilesInstanceAPI::OnGetTitlePlayersFromMasterPlayerAccountIdsResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTitlePlayersFromMasterPlayerAccountIdsResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -306,8 +310,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabProfilesInstanceAPI::OnSetGlobalPolicyResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetGlobalPolicyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -359,8 +364,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabProfilesInstanceAPI::OnSetProfileLanguageResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetProfileLanguageResponse>(callback));
         reqContainer->errorCallback = errorCallback;
@@ -412,8 +418,9 @@ namespace PlayFab
             headers,
             jsonAsString,
             std::bind(&PlayFabProfilesInstanceAPI::OnSetProfilePolicyResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetEntityProfilePolicyResponse>(callback));
         reqContainer->errorCallback = errorCallback;
