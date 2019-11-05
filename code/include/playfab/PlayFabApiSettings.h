@@ -11,15 +11,6 @@ namespace PlayFab
     class PlayFabApiSettings
     {
     public:
-#ifndef DISABLE_PLAYFABCLIENT_API
-        std::string advertisingIdType; // Set this to the appropriate AD_TYPE_X constant (defined in PlayFabSettings)
-        std::string advertisingIdValue; // Set this to corresponding device value
-
-        // DisableAdvertising is provided for completeness, but changing it is not suggested
-        // Disabling this may prevent your advertising-related PlayFab marketplace partners from working correctly
-        bool disableAdvertising;
-#endif
-
         static const std::map<std::string, std::string> requestGetParams;
 
         std::string verticalName; // The name of a PlayFab service vertical

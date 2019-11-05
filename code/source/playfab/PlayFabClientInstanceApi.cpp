@@ -545,15 +545,7 @@ namespace PlayFab
         AttributeInstallResult outResult;
         if (ValidateResult(outResult, container))
         {
-            auto apiSettings = this->GetSettings();
-            if (apiSettings == nullptr)
-            {
-                container.GetContext()->advertisingIdType += "_Successful";
-            }
-            else
-            {
-                apiSettings->advertisingIdType += "_Successful";
-            }
+            context->advertisingIdType += "_Successful";
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)

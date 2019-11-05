@@ -46,11 +46,11 @@ namespace PlayFab
     {
         if (m_settings == nullptr)
         {
-            return PlayFabSettings::GetUrl(this->GetUrl(), PlayFabSettings::requestGetParams);
+            return PlayFabSettings::GetUrl(this->GetUrl(), PlayFabSettings::staticSettings->requestGetParams);
         }
         else
         {
-            return m_settings->GetUrl(this->GetUrl(), PlayFabSettings::requestGetParams);
+            return m_settings->GetUrl(this->GetUrl(), PlayFabSettings::staticSettings->requestGetParams);
         }
     }
 }

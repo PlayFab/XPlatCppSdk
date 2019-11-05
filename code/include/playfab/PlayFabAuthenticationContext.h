@@ -13,10 +13,10 @@ namespace PlayFab
 #ifndef DISABLE_PLAYFABCLIENT_API
         // DisableAdvertising is provided for completeness, but changing it is not suggested
         // Disabling this may prevent your advertising-related PlayFab marketplace partners from working correctly
-        static bool disableAdvertising;
+        bool disableAdvertising;
         std::string clientSessionTicket; // Client session ticket that is used as an authentication token in many PlayFab API methods.
-        static std::string advertisingIdType; // Set this to the appropriate AD_TYPE_X constant below
-        static std::string advertisingIdValue; // Set this to corresponding device value
+        std::string advertisingIdType; // Set this to the appropriate AD_TYPE_X constant below
+        std::string advertisingIdValue; // Set this to corresponding device value
 #endif
 #ifndef DISABLE_PLAYFABENTITY_API
         std::string entityToken; // User's entity token. Entity tokens are required by all Entity API methods.
