@@ -273,7 +273,7 @@ namespace PlayFab
 
     std::string PlayFabIOSHttpPlugin::GetUrl(const RequestTask& requestTask) const
     {
-        return PlayFabSettings::GetUrl(requestTask.GetRequestContainerUrl(), PlayFabSettings::requestGetParams);
+        return PlayFabSettings::GetUrl(requestTask.GetRequestContainerUrl(), PlayFabSettings::staticSettings->requestGetParams);
     }
 
     void PlayFabIOSHttpPlugin::SetPredefinedHeaders(const RequestTask& requestTask, void* urlRequest)

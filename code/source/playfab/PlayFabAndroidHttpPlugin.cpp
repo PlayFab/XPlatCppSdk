@@ -600,7 +600,7 @@ namespace PlayFab
 
     std::string PlayFabAndroidHttpPlugin::GetUrl(const RequestTask& requestTask) const
     {
-        return PlayFabSettings::GetUrl(requestTask.GetRequestContainerUrl(), PlayFabSettings::requestGetParams);
+        return PlayFabSettings::GetUrl(requestTask.GetRequestContainerUrl(), PlayFabSettings::staticSettings->requestGetParams);
     }
 
     void PlayFabAndroidHttpPlugin::SetPredefinedHeaders(const RequestTask& requestTask)
