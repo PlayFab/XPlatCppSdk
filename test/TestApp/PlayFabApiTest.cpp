@@ -55,23 +55,23 @@ namespace PlayFabUnit
 
         PlayFabClientAPI::LoginWithCustomID(request,
             [&validTitleId](const LoginResult&, void* customData)
-            {
-                PlayFabSettings::staticSettings->titleId = validTitleId;
-                TestContext* testContext = reinterpret_cast<TestContext*>(customData);
-                testContext->Fail("Expected API call to fail on the client side");
-            },
+        {
+            PlayFabSettings::staticSettings->titleId = validTitleId;
+            TestContext* testContext = reinterpret_cast<TestContext*>(customData);
+            testContext->Fail("Expected API call to fail on the client side");
+        },
             [&validTitleId](const PlayFabError& error, void* customData)
-            {
-                PlayFabSettings::staticSettings->titleId = validTitleId;
-                TestContext* testContext = reinterpret_cast<TestContext*>(customData);
-                if (error.HttpCode == 0
-                    && error.HttpStatus == "Client-side validation failure"
-                    && error.ErrorCode == PlayFabErrorCode::PlayFabErrorInvalidParams
-                    && error.ErrorName == error.HttpStatus)
-                    testContext->Pass();
-                else
-                    testContext->Fail("Returned error is different from expected");
-            },
+        {
+            PlayFabSettings::staticSettings->titleId = validTitleId;
+            TestContext* testContext = reinterpret_cast<TestContext*>(customData);
+            if (error.HttpCode == 0
+                && error.HttpStatus == "Client-side validation failure"
+                && error.ErrorCode == PlayFabErrorCode::PlayFabErrorInvalidParams
+                && error.ErrorName == error.HttpStatus)
+                testContext->Pass();
+            else
+                testContext->Fail("Returned error is different from expected");
+        },
             &testContext);
     }
 
@@ -104,14 +104,14 @@ namespace PlayFabUnit
         }
         else
 #endif // defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_PLAYSTATION)
-        if (error.ErrorMessage.find("password") != -1)
-        {
-            testContext->Pass(error.RequestId);
-        }
-        else
-        {
-            testContext->Fail("Password error message not found: " + error.ErrorMessage);
-        }
+            if (error.ErrorMessage.find("password") != -1)
+            {
+                testContext->Pass(error.RequestId);
+            }
+            else
+            {
+                testContext->Fail("Password error message not found: " + error.ErrorMessage);
+            }
     }
 
     /// CLIENT API

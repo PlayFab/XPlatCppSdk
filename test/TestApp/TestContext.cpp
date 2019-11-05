@@ -19,45 +19,45 @@ namespace PlayFabUnit
         {
             switch (state)
             {
-                case PlayFabUnit::TestFinishState::PASSED:
-                    testResultMsg += "Tests should not attempt to pass twice.";
-                    break;
-                case PlayFabUnit::TestFinishState::FAILED:
-                    testResultMsg += "Test try to Fail after Passing. " + resultMsg;
-                    break;
-                case PlayFabUnit::TestFinishState::SKIPPED:
-                    testResultMsg += "Test try to be Skipped after Passing.";
-                    break;
-                case PlayFabUnit::TestFinishState::TIMEDOUT:
-                    testResultMsg += "Test try to Timeout after Passing.";
-                    break;
-                default:
-                    testResultMsg += "How are you switching back to a Pending state from Passing.";
-                    break;
+            case PlayFabUnit::TestFinishState::PASSED:
+                testResultMsg += "Tests should not attempt to pass twice.";
+                break;
+            case PlayFabUnit::TestFinishState::FAILED:
+                testResultMsg += "Test try to Fail after Passing. " + resultMsg;
+                break;
+            case PlayFabUnit::TestFinishState::SKIPPED:
+                testResultMsg += "Test try to be Skipped after Passing.";
+                break;
+            case PlayFabUnit::TestFinishState::TIMEDOUT:
+                testResultMsg += "Test try to Timeout after Passing.";
+                break;
+            default:
+                testResultMsg += "How are you switching back to a Pending state from Passing.";
+                break;
             }
         }
-        else if(finishState == TestFinishState::FAILED) 
+        else if (finishState == TestFinishState::FAILED)
         {
             switch (state)
             {
-                case PlayFabUnit::TestFinishState::PASSED:
-                    testResultMsg += "Test try to Pass after Failing.";
-                    break;
-                case PlayFabUnit::TestFinishState::FAILED:
-                    testResultMsg += "Test try to Fail twice. " + resultMsg;
-                    break;
-                case PlayFabUnit::TestFinishState::SKIPPED:
-                    testResultMsg += "Test try to be Skipped after Failing.";
-                    break;
-                case PlayFabUnit::TestFinishState::TIMEDOUT:
-                    testResultMsg += "Test try to Timeout after Failing.";
-                    break;
-                default:
-                    testResultMsg += "How are you switching back to a Pending state from Failing.";
-                    break;
+            case PlayFabUnit::TestFinishState::PASSED:
+                testResultMsg += "Test try to Pass after Failing.";
+                break;
+            case PlayFabUnit::TestFinishState::FAILED:
+                testResultMsg += "Test try to Fail twice. " + resultMsg;
+                break;
+            case PlayFabUnit::TestFinishState::SKIPPED:
+                testResultMsg += "Test try to be Skipped after Failing.";
+                break;
+            case PlayFabUnit::TestFinishState::TIMEDOUT:
+                testResultMsg += "Test try to Timeout after Failing.";
+                break;
+            default:
+                testResultMsg += "How are you switching back to a Pending state from Failing.";
+                break;
             }
         }
-        else if(finishState == TestFinishState::SKIPPED)
+        else if (finishState == TestFinishState::SKIPPED)
         {
             switch (state)
             {
@@ -78,7 +78,7 @@ namespace PlayFabUnit
                 break;
             }
         }
-        else 
+        else
         {
             switch (state)
             {

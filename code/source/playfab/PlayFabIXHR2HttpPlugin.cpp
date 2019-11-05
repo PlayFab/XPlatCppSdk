@@ -94,6 +94,11 @@ namespace PlayFab
 
     void PlayFabIXHR2HttpPlugin::MakePostRequest(std::unique_ptr<CallRequestContainerBase> requestContainer)
     {
+        if (!requestContainer->ValidateSettings())
+        {
+            return;
+        }
+
         { // LOCK httpRequestMutex
             std::unique_lock<std::mutex> lock(httpRequestMutex);
             pendingRequests.push_back(std::move(requestContainer));

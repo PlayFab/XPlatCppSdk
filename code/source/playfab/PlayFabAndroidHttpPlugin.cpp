@@ -247,6 +247,11 @@ namespace PlayFab
 
     void PlayFabAndroidHttpPlugin::MakePostRequest(std::unique_ptr<CallRequestContainerBase> requestContainer)
     {
+        if (!requestContainer->ValidateSettings())
+        {
+            return;
+        }
+
         std::shared_ptr<RequestTask> requestTask = nullptr;
         try
         {
