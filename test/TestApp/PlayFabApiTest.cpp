@@ -26,11 +26,11 @@ namespace PlayFabUnit
 
     void PlayFabApiTest::SetTitleInfo(TestTitleData& testInputs)
     {
-        PlayFabSettings::titleId = testInputs.titleId;
+        PlayFabSettings::staticSettings->titleId = testInputs.titleId;
         USER_EMAIL = testInputs.userEmail;
 
         // Verify all the inputs won't cause crashes in the tests
-        TITLE_INFO_SET = !PlayFabSettings::titleId.empty() && !USER_EMAIL.empty();
+        TITLE_INFO_SET = !PlayFabSettings::staticSettings->titleId.empty() && !USER_EMAIL.empty();
     }
 
     void PlayFabApiTest::OnErrorSharedCallback(const PlayFabError& error, void* customData)
@@ -48,21 +48,21 @@ namespace PlayFabUnit
         request.CreateAccount = true;
 
         // store current (valid) title id
-        const std::string validTitleId = PlayFabSettings::titleId;
+        const std::string validTitleId = PlayFabSettings::staticSettings->titleId;
 
         // set invalid title id
-        PlayFabSettings::titleId = "";
+        PlayFabSettings::staticSettings->titleId = "";
 
         PlayFabClientAPI::LoginWithCustomID(request,
             [&validTitleId](const LoginResult&, void* customData)
             {
-                PlayFabSettings::titleId = validTitleId;
+                PlayFabSettings::staticSettings->titleId = validTitleId;
                 TestContext* testContext = reinterpret_cast<TestContext*>(customData);
                 testContext->Fail("Expected API call to fail on the client side");
             },
             [&validTitleId](const PlayFabError& error, void* customData)
             {
-                PlayFabSettings::titleId = validTitleId;
+                PlayFabSettings::staticSettings->titleId = validTitleId;
                 TestContext* testContext = reinterpret_cast<TestContext*>(customData);
                 if (error.HttpCode == 0
                     && error.HttpStatus == "Client-side validation failure"

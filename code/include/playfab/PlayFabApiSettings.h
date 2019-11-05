@@ -13,7 +13,6 @@ namespace PlayFab
     public:
         static const std::map<std::string, std::string> requestGetParams;
 
-        std::string verticalName; // The name of a PlayFab service vertical
         std::string baseServiceHost; // The base for a PlayFab service host
         std::string titleId; // You must set this value for PlayFabSdk to work properly (found in the Game Manager for your title, at the PlayFab Website)
 #if defined(ENABLE_PLAYFABSERVER_API) || defined(ENABLE_PLAYFABADMIN_API)
@@ -21,6 +20,6 @@ namespace PlayFab
 #endif
 
         PlayFabApiSettings();
-        std::string GetUrl(const std::string& urlPath, const std::map<std::string, std::string>& getParams) const;
+        std::string GetUrl(const std::string& urlPath) const;
     };
 }

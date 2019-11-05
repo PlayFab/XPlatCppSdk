@@ -4,22 +4,16 @@
 
 namespace PlayFab
 {
+    // Control whether all callbacks are threaded or whether the user manually controls callback timing from their main-thread
+    bool PlayFabSettings::threadedCallbacks = false;
     const std::string PlayFabSettings::sdkVersion = "3.21.191029";
     const std::string PlayFabSettings::buildIdentifier = "xplatcppsdk_manual";
     const std::string PlayFabSettings::versionString = "XPlatCppSdk-3.21.191029";
-    const std::string PlayFabSettings::verticalName = "";
-
-    bool PlayFabSettings::useDevelopmentEnvironment = false;
-    std::string PlayFabSettings::developmentEnvironmentURL = ".playfabsandbox.com";
     std::string PlayFabSettings::productionEnvironmentURL = ".playfabapi.com";
-    std::string PlayFabSettings::titleId; // You must set this value for PlayFabSdk to work properly (Found in the Game Manager for your title, at the PlayFab Website)
     ErrorCallback PlayFabSettings::globalErrorHandler = nullptr;
 
     std::shared_ptr<PlayFabApiSettings> PlayFabSettings::staticSettings = std::make_shared<PlayFabApiSettings>();
     std::shared_ptr<PlayFabAuthenticationContext> PlayFabSettings::staticPlayer = std::make_shared<PlayFabAuthenticationContext>();
-
-    // Control whether all callbacks are threaded or whether the user manually controls callback timing from their main-thread
-    bool PlayFabSettings::threadedCallbacks = false;
 
 #ifndef DISABLE_PLAYFABCLIENT_API
     const std::string PlayFabSettings::AD_TYPE_IDFA = "Idfa";
@@ -31,52 +25,18 @@ namespace PlayFab
         staticPlayer->ForgetAllCredentials();
     }
 
-    std::string PlayFabSettings::GetUrl(const std::string& urlPath, const std::map<std::string, std::string>& getParams)
+    bool PlayFabSettings::ValidateSettings(CallRequestContainer& container)
     {
-        std::string fullUrl;
-        fullUrl.reserve(1000);
+        const auto& settings = container.GetApiSettings();
 
-        fullUrl += "https://";
-
-        if(PlayFabSettings::verticalName.length() > 0)
-        {
-            fullUrl += PlayFabSettings::verticalName;
-        }
-        else
-        {
-            fullUrl += titleId;
-        }
-
-        fullUrl += useDevelopmentEnvironment ? developmentEnvironmentURL : productionEnvironmentURL;
-        fullUrl += urlPath;
-
-        bool firstParam = true;
-        for (auto const& paramPair : getParams)
-        {
-            if (firstParam) {
-                fullUrl += "?";
-                firstParam = false;
-            } else {
-                fullUrl += "&";
-            }
-            fullUrl += paramPair.first;
-            fullUrl += "=";
-            fullUrl += paramPair.second;
-        }
-        
-        return fullUrl;
-    }
-
-    bool PlayFabSettings::ValidateSettings(const std::shared_ptr<PlayFabAuthenticationContext> authenticationContext, const std::shared_ptr<PlayFabApiSettings> apiSettings, CallRequestContainer& container)
-    {
         bool valid = true;
-        if (PlayFabSettings::titleId.empty())
+        if (settings->titleId.empty())
         {
             container.errorWrapper.HttpCode = 0;
             container.errorWrapper.HttpStatus = "Client-side validation failure";
             container.errorWrapper.ErrorCode = PlayFabErrorCode::PlayFabErrorInvalidParams;
             container.errorWrapper.ErrorName = container.errorWrapper.HttpStatus;
-            container.errorWrapper.ErrorMessage = "PlayFabSettings::titleId has not been set properly. It must not be empty.";
+            container.errorWrapper.ErrorMessage = "PlayFabSettings::staticSettings->titleId has not been set properly. It must not be empty.";
             valid = false;
         }
 

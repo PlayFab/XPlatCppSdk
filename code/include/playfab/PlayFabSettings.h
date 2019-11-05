@@ -15,12 +15,9 @@ namespace PlayFab
         static const std::string sdkVersion;
         static const std::string buildIdentifier;
         static const std::string versionString;
-        static const std::string verticalName;
 
         static bool useDevelopmentEnvironment;
-        static std::string developmentEnvironmentURL;
         static std::string productionEnvironmentURL;
-        static std::string titleId; // You must set this value for PlayFabSdk to work properly (Found in the Game Manager for your title, at the PlayFab Website)
         static ErrorCallback globalErrorHandler;
 
         static std::shared_ptr<PlayFabApiSettings> staticSettings;
@@ -34,10 +31,8 @@ namespace PlayFab
         static const std::string AD_TYPE_ANDROID_ID;
 
         static void ForgetAllCredentials();
-
-        static std::string GetUrl(const std::string& urlPath, const std::map<std::string, std::string>& getParams);
 #endif
-        static bool ValidateSettings(const std::shared_ptr<PlayFabAuthenticationContext> authenticationContext, const std::shared_ptr<PlayFabApiSettings> apiSettings, CallRequestContainer& container);
+        static bool ValidateSettings(CallRequestContainer& container);
     private:
         PlayFabSettings(); // Private constructor, static class should never have an instance
         PlayFabSettings(const PlayFabSettings& other); // Private copy-constructor, static class should never have an instance

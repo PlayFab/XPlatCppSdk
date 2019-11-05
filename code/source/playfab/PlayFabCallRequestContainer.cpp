@@ -44,13 +44,6 @@ namespace PlayFab
 
     std::string CallRequestContainer::GetFullUrl() const
     {
-        if (m_settings == nullptr)
-        {
-            return PlayFabSettings::GetUrl(this->GetUrl(), PlayFabSettings::staticSettings->requestGetParams);
-        }
-        else
-        {
-            return m_settings->GetUrl(this->GetUrl(), PlayFabSettings::staticSettings->requestGetParams);
-        }
+        return m_settings->GetUrl(this->GetUrl());
     }
 }

@@ -25,10 +25,11 @@ namespace PlayFabUnit
             /// CLIENT API
             /// Try to log in two users simultaneously using instance APIs.
             /// </summary>
-            std::shared_ptr<PlayFab::PlayFabClientInstanceAPI*> multiUser1ClientApi;
-            std::string multiUser1PlayFabId;
-            std::shared_ptr<PlayFab::PlayFabClientInstanceAPI*> multiUser2ClientApi;
-            std::string multiUser2PlayFabId;
+            std::shared_ptr<PlayFab::PlayFabClientInstanceAPI> multiUser1ClientApi;
+            std::shared_ptr<PlayFab::PlayFabClientInstanceAPI> multiUser2ClientApi;
+            std::string multiUser1PlayFabId, multiUser2PlayFabId;
+            std::string multiUser1Error, multiUser2Error;
+            bool thread1Complete, thread2Complete;
 
             void MultiUserLogin1Success(const PlayFab::ClientModels::LoginResult& result, void* customData);
             void MultiUserLogin1Failure(const PlayFab::PlayFabError& error, void* customData);
@@ -45,7 +46,9 @@ namespace PlayFabUnit
 
         public:
             void ClassSetUp() override;
-            void Tick(TestContext& /*testContext*/) override;
+            void SetUp(TestContext& testContext) override;
+            void Tick(TestContext& testContext) override;
+            void TearDown(TestContext& testContext) override;
             void ClassTearDown() override;
     };
 }

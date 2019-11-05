@@ -10,33 +10,28 @@ namespace PlayFab
     };
 
     PlayFabApiSettings::PlayFabApiSettings() :
-        verticalName(PlayFabSettings::verticalName),
         baseServiceHost(PlayFabSettings::productionEnvironmentURL),
-        titleId(PlayFabSettings::titleId)
+        titleId()
     {
+        // Don't let PlayFabSettings::staticSettings pull titleId from itself
+        if (PlayFabSettings::staticSettings != nullptr)
+        {
+            titleId = PlayFabSettings::staticSettings->titleId;
+        }
     }
 
-    std::string PlayFabApiSettings::GetUrl(const std::string& urlPath, const std::map<std::string, std::string>& getParams) const
+    std::string PlayFabApiSettings::GetUrl(const std::string& urlPath) const
     {
         std::string fullUrl;
         fullUrl.reserve(1000);
 
         fullUrl += "https://";
-
-        if (verticalName.length() > 0)
-        {
-            fullUrl += verticalName;
-        }
-        else
-        {
-            fullUrl += titleId;
-        }
-
+        fullUrl += titleId;
         fullUrl += baseServiceHost;
         fullUrl += urlPath;
 
         bool firstParam = true;
-        for (auto const& paramPair : getParams)
+        for (auto const& paramPair : requestGetParams)
         {
             if (firstParam) {
                 fullUrl += "?";
