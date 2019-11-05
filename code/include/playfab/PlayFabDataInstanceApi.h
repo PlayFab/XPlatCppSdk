@@ -17,7 +17,7 @@ namespace PlayFab
     {
     private:
         std::shared_ptr<PlayFabApiSettings> m_settings{ nullptr };
-        std::shared_ptr<PlayFabAuthenticationContext> m_authContext{ nullptr };
+        std::shared_ptr<PlayFabAuthenticationContext> m_context{ nullptr };
 
     public:
         explicit PlayFabDataInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);

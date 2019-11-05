@@ -23,19 +23,19 @@ namespace PlayFab
     PlayFabAuthenticationInstanceAPI::PlayFabAuthenticationInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings)
     {
         this->m_settings = std::move(apiSettings);
-        this->m_authContext = std::make_shared<PlayFabAuthenticationContext>();
+        this->m_context = std::make_shared<PlayFabAuthenticationContext>();
     }
 
     PlayFabAuthenticationInstanceAPI::PlayFabAuthenticationInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext)
     {
         this->m_settings = std::make_shared<PlayFabApiSettings>();
-        this->m_authContext = std::move(authenticationContext);
+        this->m_context = std::move(authenticationContext);
     }
 
     PlayFabAuthenticationInstanceAPI::PlayFabAuthenticationInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings, std::shared_ptr<PlayFabAuthenticationContext> authenticationContext)
     {
         this->m_settings = std::move(apiSettings);
-        this->m_authContext = std::move(authenticationContext);
+        this->m_context = std::move(authenticationContext);
     }
 
     PlayFabAuthenticationInstanceAPI::~PlayFabAuthenticationInstanceAPI()
@@ -54,12 +54,12 @@ namespace PlayFab
 
     std::shared_ptr<PlayFabAuthenticationContext> PlayFabAuthenticationInstanceAPI::GetAuthenticationContext() const
     {
-        return this->m_authContext;
+        return this->m_context;
     }
 
     void PlayFabAuthenticationInstanceAPI::SetAuthenticationContext(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext)
     {
-        this->m_authContext = std::move(authenticationContext);
+        this->m_context = std::move(authenticationContext);
     }
 
     size_t PlayFabAuthenticationInstanceAPI::Update()
@@ -70,10 +70,10 @@ namespace PlayFab
 
     void PlayFabAuthenticationInstanceAPI::ForgetAllCredentials()
     {
-        if (this->m_authContext == nullptr)
+        if (this->m_context == nullptr)
             return;
 
-        this->m_authContext->ForgetAllCredentials();
+        this->m_context->ForgetAllCredentials();
     }
 
     // PlayFabAuthentication instance APIs
@@ -85,7 +85,7 @@ namespace PlayFab
         void* customData
     )
     {
-        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : this->m_authContext != nullptr ? this->m_authContext : PlayFabSettings::staticPlayer;
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : this->m_context != nullptr ? this->m_context : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = this->m_settings != nullptr ? this->m_settings : PlayFabSettings::staticSettings;
         std::string authKey, authValue;
         if (context->entityToken.length() > 0) {
@@ -104,7 +104,7 @@ namespace PlayFab
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
-        std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = request.authenticationContext == nullptr ? this->m_authContext : request.authenticationContext;
+        std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = request.authenticationContext == nullptr ? this->m_context : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace(authKey, authValue);
 
@@ -154,14 +154,14 @@ namespace PlayFab
         void* customData
     )
     {
-        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : this->m_authContext != nullptr ? this->m_authContext : PlayFabSettings::staticPlayer;
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : this->m_context != nullptr ? this->m_context : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = this->m_settings != nullptr ? this->m_settings : PlayFabSettings::staticSettings;
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
-        std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = request.authenticationContext == nullptr ? this->m_authContext : request.authenticationContext;
+        std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = request.authenticationContext == nullptr ? this->m_context : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
         headers.emplace("X-EntityToken", context->entityToken);
 
