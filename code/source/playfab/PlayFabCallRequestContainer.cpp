@@ -10,8 +10,9 @@ namespace PlayFab
         const std::string& requestBody,
         CallRequestContainerCallback callback,
         void* customData,
-        std::shared_ptr<PlayFabApiSettings> settings) :
-        CallRequestContainerBase(url, headers, requestBody, callback, customData, settings),
+        std::shared_ptr<PlayFabApiSettings> settings,
+        std::shared_ptr<PlayFabAuthenticationContext> context) :
+        CallRequestContainerBase(url, headers, requestBody, callback, customData, settings, context),
         finished(false),
         responseString(""),
         responseJson(Json::Value::null),
@@ -43,13 +44,13 @@ namespace PlayFab
 
     std::string CallRequestContainer::GetFullUrl() const
     {
-        if (apiSettings == nullptr)
+        if (m_settings == nullptr)
         {
             return PlayFabSettings::GetUrl(this->GetUrl(), PlayFabSettings::requestGetParams);
         }
         else
         {
-            return apiSettings->GetUrl(this->GetUrl(), PlayFabSettings::requestGetParams);
+            return m_settings->GetUrl(this->GetUrl(), PlayFabSettings::requestGetParams);
         }
     }
 }

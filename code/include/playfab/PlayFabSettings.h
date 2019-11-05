@@ -26,6 +26,9 @@ namespace PlayFab
         static std::shared_ptr<PlayFabApiSettings> staticSettings;
         static std::shared_ptr<PlayFabAuthenticationContext> staticPlayer;
 
+        // Control whether all callbacks are threaded or whether the user manually controls callback timing from their main-thread
+        static bool threadedCallbacks;
+
 #ifndef DISABLE_PLAYFABCLIENT_API
         static const std::string AD_TYPE_IDFA;
         static const std::string AD_TYPE_ANDROID_ID;

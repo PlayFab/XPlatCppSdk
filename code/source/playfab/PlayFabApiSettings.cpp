@@ -5,6 +5,10 @@
 
 namespace PlayFab
 {
+    const std::map<std::string, std::string> PlayFabApiSettings::requestGetParams = {
+        { "sdk", PlayFabSettings::versionString }
+    };
+
     PlayFabApiSettings::PlayFabApiSettings() :
         verticalName(PlayFabSettings::verticalName),
         baseServiceHost(PlayFabSettings::productionEnvironmentURL),

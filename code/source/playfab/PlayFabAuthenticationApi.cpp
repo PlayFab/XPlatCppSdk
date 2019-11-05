@@ -39,7 +39,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
         std::string authKey, authValue;
         if (context->entityToken.length() > 0) {
             authKey = "X-EntityToken"; authValue = context->entityToken;
@@ -83,8 +82,8 @@ namespace PlayFab
         GetEntityTokenResponse outResult;
         if (ValidateResult(outResult, container))
         {
-            if (outResult.EntityToken.length() > 0)            {
-                PlayFabSettings::entityToken = outResult.EntityToken;
+            if (outResult.EntityToken.length() > 0) {
+                reqContainer->GetContext()->entityToken = outResult.EntityToken;
             }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
@@ -105,7 +104,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();

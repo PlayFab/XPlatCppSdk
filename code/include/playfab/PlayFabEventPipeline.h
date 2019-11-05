@@ -88,7 +88,8 @@ namespace PlayFab
         std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>> batch;
 
     private:
-        std::shared_ptr<PlayFabEventPipelineSettings> settings;
+        std::shared_ptr<PlayFabEventPipelineSettings> m_settings;
+        std::shared_ptr<PlayFabAuthenticationContext> m_context;
         PlayFabEventBuffer buffer;
         std::thread workerThread;
         std::atomic<bool> isWorkerThreadRunning;

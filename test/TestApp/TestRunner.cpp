@@ -19,7 +19,7 @@ namespace PlayFabUnit
         suiteTestCase(nullptr),
         suiteTestReport(PlayFabSettings::buildIdentifier)
     {
-        PlayFabSettings::staticSettings->threadedCallbacks = true;
+        PlayFabSettings::threadedCallbacks = true;
     }
 
     void TestRunner::Add(TestCase& testCase)

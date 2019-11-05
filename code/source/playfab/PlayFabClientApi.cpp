@@ -40,7 +40,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -90,7 +89,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -142,7 +140,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -192,7 +189,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -244,7 +240,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -294,7 +289,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -346,7 +340,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -396,7 +389,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -448,7 +440,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -479,7 +470,7 @@ namespace PlayFab
         AttributeInstallResult outResult;
         if (ValidateResult(outResult, container))
         {
-            PlayFabSettings::advertisingIdType += "_Successful";
+            container.GetContext()->advertisingIdType += "_Successful";
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -499,7 +490,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -551,7 +541,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -601,7 +590,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -653,7 +641,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -703,7 +690,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -755,7 +741,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -805,7 +790,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -857,7 +841,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -907,7 +890,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -959,7 +941,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -1009,7 +990,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -1061,7 +1041,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -1111,7 +1090,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -1163,7 +1141,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -1213,7 +1190,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -1265,7 +1241,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -1315,7 +1290,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -1367,7 +1341,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -1417,7 +1390,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -1469,7 +1441,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -1519,7 +1490,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -1571,7 +1541,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -1621,7 +1590,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -1673,7 +1641,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -1723,7 +1690,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -1775,7 +1741,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -1825,7 +1790,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -1877,7 +1841,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -1927,7 +1890,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -1979,7 +1941,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -2029,7 +1990,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -2081,7 +2041,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -2131,7 +2090,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -2183,7 +2141,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -2233,7 +2190,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -2285,7 +2241,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -2335,7 +2290,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -2387,7 +2341,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -2437,7 +2390,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -2489,7 +2441,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -2539,7 +2490,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -2591,7 +2541,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -2641,7 +2590,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -2693,7 +2641,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -2743,7 +2690,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -2795,7 +2741,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -2845,7 +2790,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -2897,7 +2841,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -2947,7 +2890,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -2999,7 +2941,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -3049,7 +2990,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -3101,7 +3041,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -3152,7 +3091,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -3201,7 +3139,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -3253,7 +3190,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -3303,7 +3239,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -3355,7 +3290,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -3405,7 +3339,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -3457,7 +3390,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -3508,7 +3440,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -3557,7 +3488,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -3609,7 +3539,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -3659,7 +3588,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -3711,7 +3639,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -3761,7 +3688,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -3813,7 +3739,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -3863,7 +3788,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -3915,7 +3839,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -3965,7 +3888,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -4017,7 +3939,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -4067,7 +3988,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -4119,7 +4039,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -4169,7 +4088,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -4221,7 +4139,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -4271,7 +4188,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -4323,7 +4239,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -4373,7 +4288,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
         if (PlayFabSettings::titleId.length() > 0)
         {
             request.TitleId = PlayFabSettings::titleId;
@@ -4404,6 +4318,7 @@ namespace PlayFab
     void PlayFabClientAPI::OnLoginWithAndroidDeviceIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4412,12 +4327,12 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
-                MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
+                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
@@ -4438,7 +4353,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
         if (PlayFabSettings::titleId.length() > 0)
         {
             request.TitleId = PlayFabSettings::titleId;
@@ -4469,6 +4383,7 @@ namespace PlayFab
     void PlayFabClientAPI::OnLoginWithCustomIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4477,12 +4392,12 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
-                MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
+                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
@@ -4503,7 +4418,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
         if (PlayFabSettings::titleId.length() > 0)
         {
             request.TitleId = PlayFabSettings::titleId;
@@ -4534,6 +4448,7 @@ namespace PlayFab
     void PlayFabClientAPI::OnLoginWithEmailAddressResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4542,12 +4457,12 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
-                MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
+                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
@@ -4568,7 +4483,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
         if (PlayFabSettings::titleId.length() > 0)
         {
             request.TitleId = PlayFabSettings::titleId;
@@ -4599,6 +4513,7 @@ namespace PlayFab
     void PlayFabClientAPI::OnLoginWithFacebookResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4607,12 +4522,12 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
-                MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
+                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
@@ -4633,7 +4548,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
         if (PlayFabSettings::titleId.length() > 0)
         {
             request.TitleId = PlayFabSettings::titleId;
@@ -4664,6 +4578,7 @@ namespace PlayFab
     void PlayFabClientAPI::OnLoginWithFacebookInstantGamesIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4672,12 +4587,12 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
-                MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
+                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
@@ -4698,7 +4613,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
         if (PlayFabSettings::titleId.length() > 0)
         {
             request.TitleId = PlayFabSettings::titleId;
@@ -4729,6 +4643,7 @@ namespace PlayFab
     void PlayFabClientAPI::OnLoginWithGameCenterResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4737,12 +4652,12 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
-                MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
+                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
@@ -4763,7 +4678,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
         if (PlayFabSettings::titleId.length() > 0)
         {
             request.TitleId = PlayFabSettings::titleId;
@@ -4794,6 +4708,7 @@ namespace PlayFab
     void PlayFabClientAPI::OnLoginWithGoogleAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4802,12 +4717,12 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
-                MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
+                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
@@ -4828,7 +4743,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
         if (PlayFabSettings::titleId.length() > 0)
         {
             request.TitleId = PlayFabSettings::titleId;
@@ -4859,6 +4773,7 @@ namespace PlayFab
     void PlayFabClientAPI::OnLoginWithIOSDeviceIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4867,12 +4782,12 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
-                MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
+                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
@@ -4893,7 +4808,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
         if (PlayFabSettings::titleId.length() > 0)
         {
             request.TitleId = PlayFabSettings::titleId;
@@ -4924,6 +4838,7 @@ namespace PlayFab
     void PlayFabClientAPI::OnLoginWithKongregateResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4932,12 +4847,12 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
-                MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
+                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
@@ -4958,7 +4873,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
         if (PlayFabSettings::titleId.length() > 0)
         {
             request.TitleId = PlayFabSettings::titleId;
@@ -4989,6 +4903,7 @@ namespace PlayFab
     void PlayFabClientAPI::OnLoginWithNintendoSwitchDeviceIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -4997,12 +4912,12 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
-                MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
+                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
@@ -5023,7 +4938,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
         if (PlayFabSettings::titleId.length() > 0)
         {
             request.TitleId = PlayFabSettings::titleId;
@@ -5054,6 +4968,7 @@ namespace PlayFab
     void PlayFabClientAPI::OnLoginWithOpenIdConnectResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -5062,12 +4977,12 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
-                MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
+                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
@@ -5088,7 +5003,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
         if (PlayFabSettings::titleId.length() > 0)
         {
             request.TitleId = PlayFabSettings::titleId;
@@ -5119,6 +5033,7 @@ namespace PlayFab
     void PlayFabClientAPI::OnLoginWithPlayFabResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -5127,12 +5042,12 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
-                MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
+                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
@@ -5153,7 +5068,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
         if (PlayFabSettings::titleId.length() > 0)
         {
             request.TitleId = PlayFabSettings::titleId;
@@ -5184,6 +5098,7 @@ namespace PlayFab
     void PlayFabClientAPI::OnLoginWithPSNResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -5192,12 +5107,12 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
-                MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
+                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
@@ -5218,7 +5133,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
         if (PlayFabSettings::titleId.length() > 0)
         {
             request.TitleId = PlayFabSettings::titleId;
@@ -5249,6 +5163,7 @@ namespace PlayFab
     void PlayFabClientAPI::OnLoginWithSteamResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -5257,12 +5172,12 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
-                MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
+                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
@@ -5283,7 +5198,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
         if (PlayFabSettings::titleId.length() > 0)
         {
             request.TitleId = PlayFabSettings::titleId;
@@ -5314,6 +5228,7 @@ namespace PlayFab
     void PlayFabClientAPI::OnLoginWithTwitchResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -5322,12 +5237,12 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
-                MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
+                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
@@ -5348,7 +5263,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
         if (PlayFabSettings::titleId.length() > 0)
         {
             request.TitleId = PlayFabSettings::titleId;
@@ -5379,6 +5293,7 @@ namespace PlayFab
     void PlayFabClientAPI::OnLoginWithWindowsHelloResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -5387,12 +5302,12 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
-                MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
+                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
@@ -5413,7 +5328,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
         if (PlayFabSettings::titleId.length() > 0)
         {
             request.TitleId = PlayFabSettings::titleId;
@@ -5444,6 +5358,7 @@ namespace PlayFab
     void PlayFabClientAPI::OnLoginWithXboxResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -5452,12 +5367,12 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
-                MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
+                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
@@ -5478,7 +5393,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -5530,7 +5444,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -5580,7 +5493,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -5632,7 +5544,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -5682,7 +5593,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -5734,7 +5644,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -5785,7 +5694,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -5835,7 +5743,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
         if (PlayFabSettings::titleId.length() > 0)
         {
             request.TitleId = PlayFabSettings::titleId;
@@ -5866,14 +5773,15 @@ namespace PlayFab
     void PlayFabClientAPI::OnRegisterPlayFabUserResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         RegisterPlayFabUserResult outResult;
         if (ValidateResult(outResult, container))
         {
             if (outResult.SessionTicket.length() > 0)
             {
-                PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
-                MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
+                context->clientSessionTicket = outResult.SessionTicket;
+                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
@@ -5894,7 +5802,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
         if (PlayFabSettings::titleId.length() > 0)
         {
             request.TitleId = PlayFabSettings::titleId;
@@ -5925,6 +5832,7 @@ namespace PlayFab
     void PlayFabClientAPI::OnRegisterWithWindowsHelloResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
@@ -5933,12 +5841,12 @@ namespace PlayFab
             {
                 outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
                 outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                PlayFabSettings::clientSessionTicket = outResult.SessionTicket;
+                context->clientSessionTicket = outResult.SessionTicket;
                 if (outResult.EntityToken.notNull()) {
                     outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    PlayFabSettings::entityToken = outResult.EntityToken->EntityToken;
+                    context->entityToken = outResult.EntityToken->EntityToken;
                 }
-                MultiStepClientLogin(outResult.SettingsForUser->NeedsAttribution);
+                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
             }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
@@ -5959,7 +5867,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -6011,7 +5918,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -6061,7 +5967,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -6113,7 +6018,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -6163,7 +6067,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -6215,7 +6118,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -6265,7 +6167,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -6317,7 +6218,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -6366,7 +6266,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -6418,7 +6317,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -6468,7 +6366,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -6520,7 +6417,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -6570,7 +6466,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -6622,7 +6517,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -6672,7 +6566,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -6724,7 +6617,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -6774,7 +6666,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -6826,7 +6717,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -6876,7 +6766,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -6928,7 +6817,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -6978,7 +6866,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -7030,7 +6917,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -7080,7 +6966,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -7132,7 +7017,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -7182,7 +7066,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -7234,7 +7117,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -7284,7 +7166,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -7336,7 +7217,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -7386,7 +7266,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -7438,7 +7317,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -7488,7 +7366,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -7540,7 +7417,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -7590,7 +7466,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -7642,7 +7517,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -7692,7 +7566,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -7744,7 +7617,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -7794,7 +7666,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -7846,7 +7717,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -7896,7 +7766,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -7948,7 +7817,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -7998,7 +7866,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -8050,7 +7917,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -8100,7 +7966,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
@@ -8152,7 +8017,6 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
 
-
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
@@ -8202,7 +8066,6 @@ namespace PlayFab
     {
         std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         const Json::Value requestJson = request.ToJson();

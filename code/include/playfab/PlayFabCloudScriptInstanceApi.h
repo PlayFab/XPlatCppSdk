@@ -16,8 +16,8 @@ namespace PlayFab
     class PlayFabCloudScriptInstanceAPI
     {
     private:
-        std::shared_ptr<PlayFabApiSettings> settings{ nullptr };
-        std::shared_ptr<PlayFabAuthenticationContext> authContext{ nullptr };
+        std::shared_ptr<PlayFabApiSettings> m_settings{ nullptr };
+        std::shared_ptr<PlayFabAuthenticationContext> m_authContext{ nullptr };
 
     public:
         explicit PlayFabCloudScriptInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
@@ -42,8 +42,6 @@ namespace PlayFab
         // ------------ Generated result handlers
         void OnExecuteEntityCloudScriptResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         bool ValidateResult(PlayFabResultCommon& resultCommon, const CallRequestContainer& container);
-    private:
-        std::shared_ptr<PlayFabAuthenticationContext> GetOrCreateAuthenticationContext();
     };
 }
 

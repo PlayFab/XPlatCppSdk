@@ -16,8 +16,8 @@ namespace PlayFab
     class PlayFabMultiplayerInstanceAPI
     {
     private:
-        std::shared_ptr<PlayFabApiSettings> settings{ nullptr };
-        std::shared_ptr<PlayFabAuthenticationContext> authContext{ nullptr };
+        std::shared_ptr<PlayFabApiSettings> m_settings{ nullptr };
+        std::shared_ptr<PlayFabAuthenticationContext> m_authContext{ nullptr };
 
     public:
         explicit PlayFabMultiplayerInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
@@ -130,8 +130,6 @@ namespace PlayFab
         void OnUpdateBuildRegionsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUploadCertificateResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         bool ValidateResult(PlayFabResultCommon& resultCommon, const CallRequestContainer& container);
-    private:
-        std::shared_ptr<PlayFabAuthenticationContext> GetOrCreateAuthenticationContext();
     };
 }
 

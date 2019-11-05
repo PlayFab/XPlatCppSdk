@@ -40,9 +40,9 @@ namespace PlayFab
         buffer(settings->bufferSize),
         isWorkerThreadRunning(false)
     {
-        this->settings = std::move(settings);
-        this->batch.reserve(this->settings->maximalNumberOfItemsInBatch);
-        this->batchesInFlight.reserve(this->settings->maximalNumberOfBatchesInFlight);
+        this->m_settings = std::move(settings);
+        this->batch.reserve(this->m_settings->maximalNumberOfItemsInBatch);
+        this->batchesInFlight.reserve(this->m_settings->maximalNumberOfBatchesInFlight);
         this->Start();
     }
 
@@ -68,7 +68,7 @@ namespace PlayFab
 
     std::shared_ptr<PlayFabEventPipelineSettings> PlayFabEventPipeline::GetSettings() const
     {
-        return this->settings;
+        return this->m_settings;
     }
 
     void PlayFabEventPipeline::IntakeEvent(std::shared_ptr<const IPlayFabEmitEventRequest> request)
@@ -140,11 +140,11 @@ namespace PlayFab
             try
             {
                 // Process events in the loop
-                if (this->batchesInFlight.size() >= this->settings->maximalNumberOfBatchesInFlight)
+                if (this->batchesInFlight.size() >= this->m_settings->maximalNumberOfBatchesInFlight)
                 {
                     // do not take new events from buffer if batches currently in flight are at the maximum allowed number
                     // and are not sent out (or received an error) yet
-                    std::this_thread::sleep_for(std::chrono::milliseconds(this->settings->readBufferWaitTime)); // give some time for batches in flight to deflate
+                    std::this_thread::sleep_for(std::chrono::milliseconds(this->m_settings->readBufferWaitTime)); // give some time for batches in flight to deflate
                     continue;
                 }
 
@@ -156,7 +156,7 @@ namespace PlayFab
                         this->batch.push_back(std::move(request));
 
                         // if batch is full
-                        if (this->batch.size() >= this->settings->maximalNumberOfItemsInBatch)
+                        if (this->batch.size() >= this->m_settings->maximalNumberOfItemsInBatch)
                         {
                             this->SendBatch(batchCounter);
                         }
@@ -181,7 +181,7 @@ namespace PlayFab
                 {
                     // check if the batch wait time expired
                     std::chrono::seconds batchAge = std::chrono::duration_cast<std::chrono::seconds>(clock::now() - momentBatchStarted);
-                    if (batchAge.count() >= (int32_t)this->settings->maximalBatchWaitTime)
+                    if (batchAge.count() >= (int32_t)this->m_settings->maximalBatchWaitTime)
                     {
                         // batch wait time expired, send incomplete batch
                         this->SendBatch(batchCounter);
@@ -191,7 +191,7 @@ namespace PlayFab
 
                 // event buffer is disabled or empty, and batch is not ready to be sent yet
                 // give some time back to CPU, don't starve it without a good reason
-                std::this_thread::sleep_for(std::chrono::milliseconds(this->settings->readBufferWaitTime));
+                std::this_thread::sleep_for(std::chrono::milliseconds(this->m_settings->readBufferWaitTime));
             }
             catch (const std::exception& ex)
             {
@@ -217,9 +217,9 @@ namespace PlayFab
     {
         // create a WriteEvents API request to send the batch
         EventsModels::WriteEventsRequest batchReq;
-        if (this->settings->authenticationContext != nullptr)
+        if (this->m_settings->authenticationContext != nullptr)
         {
-            batchReq.authenticationContext = this->settings->authenticationContext;
+            batchReq.authenticationContext = this->m_settings->authenticationContext;
         }
 
         for (const auto& eventEmitRequest : this->batch)
@@ -234,8 +234,8 @@ namespace PlayFab
         batchCounter++;
 
         this->batch.clear(); // batch vector will be reused
-        this->batch.reserve(this->settings->maximalNumberOfItemsInBatch);
-        if(this->settings->emitType == PlayFabEventPipelineType::PlayFabPlayStream)
+        this->batch.reserve(this->m_settings->maximalNumberOfItemsInBatch);
+        if(this->m_settings->emitType == PlayFabEventPipelineType::PlayFabPlayStream)
         {
             // call Events API to send the batch
             PlayFabEventsAPI::WriteEvents(

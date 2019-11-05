@@ -16,8 +16,8 @@ namespace PlayFab
     class PlayFabMatchmakerInstanceAPI
     {
     private:
-        std::shared_ptr<PlayFabApiSettings> settings{ nullptr };
-        std::shared_ptr<PlayFabAuthenticationContext> authContext{ nullptr };
+        std::shared_ptr<PlayFabApiSettings> m_settings{ nullptr };
+        std::shared_ptr<PlayFabAuthenticationContext> m_authContext{ nullptr };
 
     public:
         explicit PlayFabMatchmakerInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);

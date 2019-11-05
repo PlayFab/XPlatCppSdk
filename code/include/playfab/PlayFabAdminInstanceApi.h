@@ -16,8 +16,8 @@ namespace PlayFab
     class PlayFabAdminInstanceAPI
     {
     private:
-        std::shared_ptr<PlayFabApiSettings> settings{ nullptr };
-        std::shared_ptr<PlayFabAuthenticationContext> authContext{ nullptr };
+        std::shared_ptr<PlayFabApiSettings> m_settings{ nullptr };
+        std::shared_ptr<PlayFabAuthenticationContext> m_authContext{ nullptr };
 
     public:
         PlayFabAdminInstanceAPI();
@@ -262,8 +262,6 @@ namespace PlayFab
         void OnUpdateUserReadOnlyDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUpdateUserTitleDisplayNameResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         bool ValidateResult(PlayFabResultCommon& resultCommon, const CallRequestContainer& container);
-    private:
-        std::shared_ptr<PlayFabAuthenticationContext> GetOrCreateAuthenticationContext();
     };
 }
 

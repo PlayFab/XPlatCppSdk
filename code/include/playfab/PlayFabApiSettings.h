@@ -20,9 +20,6 @@ namespace PlayFab
         bool disableAdvertising;
 #endif
 
-        // Control whether all callbacks are threaded or whether the user manually controls callback timing from their main-thread
-        static bool threadedCallbacks;
-
         static const std::map<std::string, std::string> requestGetParams;
 
         std::string verticalName; // The name of a PlayFab service vertical

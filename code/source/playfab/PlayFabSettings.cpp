@@ -9,10 +9,6 @@ namespace PlayFab
     const std::string PlayFabSettings::versionString = "XPlatCppSdk-3.21.191029";
     const std::string PlayFabSettings::verticalName = "";
 
-    const std::map<std::string, std::string> PlayFabSettings::requestGetParams = {
-        { "sdk", PlayFabSettings::versionString }
-    };
-
     bool PlayFabSettings::useDevelopmentEnvironment = false;
     std::string PlayFabSettings::developmentEnvironmentURL = ".playfabsandbox.com";
     std::string PlayFabSettings::productionEnvironmentURL = ".playfabapi.com";
@@ -29,8 +25,7 @@ namespace PlayFab
 
     void PlayFabSettings::ForgetAllCredentials()
     {
-        entityToken.clear();
-        clientSessionTicket.clear();
+        staticPlayer->ForgetAllCredentials();
     }
 
     std::string PlayFabSettings::GetUrl(const std::string& urlPath, const std::map<std::string, std::string>& getParams)
