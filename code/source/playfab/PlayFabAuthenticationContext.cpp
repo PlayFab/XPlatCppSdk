@@ -13,11 +13,14 @@ namespace PlayFab
     void PlayFabAuthenticationContext::ForgetAllCredentials()
     {
 #ifndef DISABLE_PLAYFABCLIENT_API
+        playFabId.clear();
         clientSessionTicket.clear();
+        advertisingIdType.clear();
+        advertisingIdValue.clear();
 #endif
-#ifndef DISABLE_PLAYFABENTITY_API
+        entityId.clear();
+        entityType.clear();
         entityToken.clear();
-#endif
     }
 
     void PlayFabAuthenticationContext::HandlePlayFabLogin(const std::string& setPlayFabId, const std::string& setClientSessionTicket, const std::string& setEntityId, const std::string& setEntityType, const std::string& setEntityToken)
