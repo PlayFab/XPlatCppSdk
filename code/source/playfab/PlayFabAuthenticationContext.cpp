@@ -19,4 +19,13 @@ namespace PlayFab
         entityToken.clear();
 #endif
     }
+
+    void PlayFabAuthenticationContext::HandlePlayFabLogin(const std::string& setPlayFabId, const std::string& setClientSessionTicket, const std::string& setEntityId, const std::string& setEntityType, const std::string& setEntityToken)
+    {
+        if (!setPlayFabId.empty()) playFabId = setPlayFabId;
+        if (!setClientSessionTicket.empty()) clientSessionTicket = setClientSessionTicket;
+        if (!setEntityId.empty()) entityId = setEntityId;
+        if (!setEntityType.empty()) entityType = setEntityType;
+        if (!setEntityToken.empty()) entityToken = setEntityToken;
+    }
 }

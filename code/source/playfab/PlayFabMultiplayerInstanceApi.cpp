@@ -20,15 +20,15 @@ namespace PlayFab
     {
         if (authenticationContext == nullptr)
             throw PlayFabException(PlayFabExceptionCode::AuthContextRequired, "Context cannot be null, create a PlayFabAuthenticationContext for each player in advance, or get <PlayFabClientInstanceAPI>.authenticationContext");
-        this->m_context = std::move(authenticationContext);
+        this->m_context = authenticationContext;
     }
 
     PlayFabMultiplayerInstanceAPI::PlayFabMultiplayerInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings, std::shared_ptr<PlayFabAuthenticationContext> authenticationContext)
     {
         if (authenticationContext == nullptr)
             throw PlayFabException(PlayFabExceptionCode::AuthContextRequired, "Context cannot be null, create a PlayFabAuthenticationContext for each player in advance, or get <PlayFabClientInstanceAPI>.authenticationContext");
-        this->m_settings = std::move(apiSettings);
-        this->m_context = std::move(authenticationContext);
+        this->m_settings = apiSettings;
+        this->m_context = authenticationContext;
     }
 
     PlayFabMultiplayerInstanceAPI::~PlayFabMultiplayerInstanceAPI()
@@ -40,19 +40,9 @@ namespace PlayFab
         return this->m_settings;
     }
 
-    void PlayFabMultiplayerInstanceAPI::SetSettings(std::shared_ptr<PlayFabApiSettings> apiSettings)
-    {
-        this->m_settings = std::move(apiSettings);
-    }
-
     std::shared_ptr<PlayFabAuthenticationContext> PlayFabMultiplayerInstanceAPI::GetAuthenticationContext() const
     {
         return this->m_context;
-    }
-
-    void PlayFabMultiplayerInstanceAPI::SetAuthenticationContext(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext)
-    {
-        this->m_context = std::move(authenticationContext);
     }
 
     size_t PlayFabMultiplayerInstanceAPI::Update()

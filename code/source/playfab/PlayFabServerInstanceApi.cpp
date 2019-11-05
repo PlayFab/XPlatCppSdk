@@ -22,18 +22,18 @@ namespace PlayFab
 
     PlayFabServerInstanceAPI::PlayFabServerInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings)
     {
-        this->m_settings = std::move(apiSettings);
+        this->m_settings = apiSettings;
     }
 
     PlayFabServerInstanceAPI::PlayFabServerInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext)
     {
-        this->m_context = std::move(authenticationContext);
+        this->m_context = authenticationContext;
     }
 
     PlayFabServerInstanceAPI::PlayFabServerInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings, std::shared_ptr<PlayFabAuthenticationContext> authenticationContext)
     {
-        this->m_settings = std::move(apiSettings);
-        this->m_context = std::move(authenticationContext);
+        this->m_settings = apiSettings;
+        this->m_context = authenticationContext;
     }
 
     PlayFabServerInstanceAPI::~PlayFabServerInstanceAPI()
@@ -45,19 +45,9 @@ namespace PlayFab
         return this->m_settings;
     }
 
-    void PlayFabServerInstanceAPI::SetSettings(std::shared_ptr<PlayFabApiSettings> apiSettings)
-    {
-        this->m_settings = std::move(apiSettings);
-    }
-
     std::shared_ptr<PlayFabAuthenticationContext> PlayFabServerInstanceAPI::GetAuthenticationContext() const
     {
         return this->m_context;
-    }
-
-    void PlayFabServerInstanceAPI::SetAuthenticationContext(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext)
-    {
-        this->m_context = std::move(authenticationContext);
     }
 
     size_t PlayFabServerInstanceAPI::Update()

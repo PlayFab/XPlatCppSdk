@@ -32,9 +32,7 @@ namespace PlayFab
         PlayFabClientInstanceAPI& operator=(PlayFabClientInstanceAPI&& other) = delete; // disable move assignment
 
         std::shared_ptr<PlayFabApiSettings> GetSettings() const;
-        void SetSettings(std::shared_ptr<PlayFabApiSettings> apiSettings);
         std::shared_ptr<PlayFabAuthenticationContext> GetAuthenticationContext() const;
-        void SetAuthenticationContext(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
         size_t Update();
         void ForgetAllCredentials();
 

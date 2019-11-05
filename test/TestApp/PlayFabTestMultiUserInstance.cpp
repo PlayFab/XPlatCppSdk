@@ -30,9 +30,8 @@ namespace PlayFabUnit
         multiUser1Error = "Failed to log in user 1: " + error.GenerateErrorReport();
         thread1Complete = true;
     }
-    void PlayFabTestMultiUserInstance::MultiUserProfile1Success(const GetPlayerProfileResult& result, void* /*customData*/)
+    void PlayFabTestMultiUserInstance::MultiUserProfile1Success(const GetPlayerProfileResult& /*result*/, void* /*customData*/)
     {
-        multiUser1PlayFabId = result.PlayerProfile->PlayerId;
         thread1Complete = true;
     }
     void PlayFabTestMultiUserInstance::MultiUserProfile1Failure(const PlayFabError& error, void* /*customData*/)
@@ -55,9 +54,8 @@ namespace PlayFabUnit
         multiUser2Error = "Failed to log in user 2: " + error.GenerateErrorReport();
         thread2Complete = true;
     }
-    void PlayFabTestMultiUserInstance::MultiUserProfile2Success(const GetPlayerProfileResult& result, void* /*customData*/)
+    void PlayFabTestMultiUserInstance::MultiUserProfile2Success(const GetPlayerProfileResult& /*result*/, void* /*customData*/)
     {
-        multiUser2PlayFabId = result.PlayerProfile->PlayerId;
         thread2Complete = true;
     }
     void PlayFabTestMultiUserInstance::MultiUserProfile2Failure(const PlayFabError& error, void* /*customData*/)
@@ -104,8 +102,6 @@ namespace PlayFabUnit
         PlayFabSettings::ForgetAllCredentials();
 
         // Reset state variables.
-        multiUser1PlayFabId.clear();
-        multiUser2PlayFabId.clear();
         multiUser1Error.clear();
         multiUser2Error.clear();
         thread1Complete = false;
@@ -124,6 +120,9 @@ namespace PlayFabUnit
             testContext.Fail(multiUser1Error + multiUser2Error);
             return;
         }
+
+        std::string multiUser1PlayFabId = multiUser1ClientApi->GetAuthenticationContext()->playFabId;
+        std::string multiUser2PlayFabId = multiUser2ClientApi->GetAuthenticationContext()->playFabId;
 
         if (multiUser1PlayFabId == multiUser2PlayFabId)
             testContext.Fail("User 1 PlayFabId (" + multiUser1PlayFabId + ") should not match User 2 PlayFabId (" + multiUser2PlayFabId + ")");

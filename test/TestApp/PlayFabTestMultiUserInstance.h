@@ -27,7 +27,6 @@ namespace PlayFabUnit
         /// </summary>
         std::shared_ptr<PlayFab::PlayFabClientInstanceAPI> multiUser1ClientApi;
         std::shared_ptr<PlayFab::PlayFabClientInstanceAPI> multiUser2ClientApi;
-        std::string multiUser1PlayFabId, multiUser2PlayFabId;
         std::string multiUser1Error, multiUser2Error;
         bool thread1Complete, thread2Complete;
 

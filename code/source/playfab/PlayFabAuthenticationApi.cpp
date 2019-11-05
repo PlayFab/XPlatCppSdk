@@ -82,10 +82,7 @@ namespace PlayFab
         GetEntityTokenResponse outResult;
         if (ValidateResult(outResult, container))
         {
-            if (outResult.EntityToken.length() > 0)
-            {
-                reqContainer->GetContext()->entityToken = outResult.EntityToken;
-            }
+            context->HandlePlayFabLogin("", "", outResult.Entity->Id, outResult.Entity->Type, outResult.EntityToken);
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)

@@ -470,7 +470,7 @@ namespace PlayFab
         AttributeInstallResult outResult;
         if (ValidateResult(outResult, container))
         {
-            container.GetContext()->advertisingIdType += "_Successful";
+            context->advertisingIdType += "_Successful";
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -4322,17 +4322,10 @@ namespace PlayFab
         LoginResult outResult;
         if (ValidateResult(outResult, container))
         {
-            if (outResult.SessionTicket.length() > 0)
-            {
-                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                context->clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) {
-                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    context->entityToken = outResult.EntityToken->EntityToken;
-                }
-                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
-            }
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -4386,17 +4379,10 @@ namespace PlayFab
         LoginResult outResult;
         if (ValidateResult(outResult, container))
         {
-            if (outResult.SessionTicket.length() > 0)
-            {
-                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                context->clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) {
-                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    context->entityToken = outResult.EntityToken->EntityToken;
-                }
-                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
-            }
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -4450,17 +4436,10 @@ namespace PlayFab
         LoginResult outResult;
         if (ValidateResult(outResult, container))
         {
-            if (outResult.SessionTicket.length() > 0)
-            {
-                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                context->clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) {
-                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    context->entityToken = outResult.EntityToken->EntityToken;
-                }
-                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
-            }
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -4514,17 +4493,10 @@ namespace PlayFab
         LoginResult outResult;
         if (ValidateResult(outResult, container))
         {
-            if (outResult.SessionTicket.length() > 0)
-            {
-                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                context->clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) {
-                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    context->entityToken = outResult.EntityToken->EntityToken;
-                }
-                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
-            }
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -4578,17 +4550,10 @@ namespace PlayFab
         LoginResult outResult;
         if (ValidateResult(outResult, container))
         {
-            if (outResult.SessionTicket.length() > 0)
-            {
-                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                context->clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) {
-                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    context->entityToken = outResult.EntityToken->EntityToken;
-                }
-                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
-            }
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -4642,17 +4607,10 @@ namespace PlayFab
         LoginResult outResult;
         if (ValidateResult(outResult, container))
         {
-            if (outResult.SessionTicket.length() > 0)
-            {
-                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                context->clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) {
-                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    context->entityToken = outResult.EntityToken->EntityToken;
-                }
-                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
-            }
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -4706,17 +4664,10 @@ namespace PlayFab
         LoginResult outResult;
         if (ValidateResult(outResult, container))
         {
-            if (outResult.SessionTicket.length() > 0)
-            {
-                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                context->clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) {
-                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    context->entityToken = outResult.EntityToken->EntityToken;
-                }
-                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
-            }
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -4770,17 +4721,10 @@ namespace PlayFab
         LoginResult outResult;
         if (ValidateResult(outResult, container))
         {
-            if (outResult.SessionTicket.length() > 0)
-            {
-                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                context->clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) {
-                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    context->entityToken = outResult.EntityToken->EntityToken;
-                }
-                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
-            }
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -4834,17 +4778,10 @@ namespace PlayFab
         LoginResult outResult;
         if (ValidateResult(outResult, container))
         {
-            if (outResult.SessionTicket.length() > 0)
-            {
-                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                context->clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) {
-                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    context->entityToken = outResult.EntityToken->EntityToken;
-                }
-                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
-            }
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -4898,17 +4835,10 @@ namespace PlayFab
         LoginResult outResult;
         if (ValidateResult(outResult, container))
         {
-            if (outResult.SessionTicket.length() > 0)
-            {
-                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                context->clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) {
-                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    context->entityToken = outResult.EntityToken->EntityToken;
-                }
-                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
-            }
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -4962,17 +4892,10 @@ namespace PlayFab
         LoginResult outResult;
         if (ValidateResult(outResult, container))
         {
-            if (outResult.SessionTicket.length() > 0)
-            {
-                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                context->clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) {
-                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    context->entityToken = outResult.EntityToken->EntityToken;
-                }
-                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
-            }
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -5026,17 +4949,10 @@ namespace PlayFab
         LoginResult outResult;
         if (ValidateResult(outResult, container))
         {
-            if (outResult.SessionTicket.length() > 0)
-            {
-                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                context->clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) {
-                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    context->entityToken = outResult.EntityToken->EntityToken;
-                }
-                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
-            }
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -5090,17 +5006,10 @@ namespace PlayFab
         LoginResult outResult;
         if (ValidateResult(outResult, container))
         {
-            if (outResult.SessionTicket.length() > 0)
-            {
-                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                context->clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) {
-                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    context->entityToken = outResult.EntityToken->EntityToken;
-                }
-                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
-            }
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -5154,17 +5063,10 @@ namespace PlayFab
         LoginResult outResult;
         if (ValidateResult(outResult, container))
         {
-            if (outResult.SessionTicket.length() > 0)
-            {
-                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                context->clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) {
-                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    context->entityToken = outResult.EntityToken->EntityToken;
-                }
-                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
-            }
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -5218,17 +5120,10 @@ namespace PlayFab
         LoginResult outResult;
         if (ValidateResult(outResult, container))
         {
-            if (outResult.SessionTicket.length() > 0)
-            {
-                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                context->clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) {
-                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    context->entityToken = outResult.EntityToken->EntityToken;
-                }
-                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
-            }
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -5282,17 +5177,10 @@ namespace PlayFab
         LoginResult outResult;
         if (ValidateResult(outResult, container))
         {
-            if (outResult.SessionTicket.length() > 0)
-            {
-                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                context->clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) {
-                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    context->entityToken = outResult.EntityToken->EntityToken;
-                }
-                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
-            }
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -5346,17 +5234,10 @@ namespace PlayFab
         LoginResult outResult;
         if (ValidateResult(outResult, container))
         {
-            if (outResult.SessionTicket.length() > 0)
-            {
-                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                context->clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) {
-                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    context->entityToken = outResult.EntityToken->EntityToken;
-                }
-                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
-            }
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -5760,11 +5641,8 @@ namespace PlayFab
         RegisterPlayFabUserResult outResult;
         if (ValidateResult(outResult, container))
         {
-            if (outResult.SessionTicket.length() > 0)
-            {
-                context->clientSessionTicket = outResult.SessionTicket;
-                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
-            }
+            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -5818,17 +5696,10 @@ namespace PlayFab
         LoginResult outResult;
         if (ValidateResult(outResult, container))
         {
-            if (outResult.SessionTicket.length() > 0)
-            {
-                outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-                outResult.authenticationContext->clientSessionTicket = outResult.SessionTicket;
-                context->clientSessionTicket = outResult.SessionTicket;
-                if (outResult.EntityToken.notNull()) {
-                    outResult.authenticationContext->entityToken = outResult.EntityToken->EntityToken;
-                    context->entityToken = outResult.EntityToken->EntityToken;
-                }
-                MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
-            }
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)

@@ -18,24 +18,24 @@ namespace PlayFab
 
     PlayFabAuthenticationInstanceAPI::PlayFabAuthenticationInstanceAPI()
     {
+        this->m_context = std::make_shared<PlayFabAuthenticationContext>();
     }
 
     PlayFabAuthenticationInstanceAPI::PlayFabAuthenticationInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings)
     {
-        this->m_settings = std::move(apiSettings);
+        this->m_settings = apiSettings;
         this->m_context = std::make_shared<PlayFabAuthenticationContext>();
     }
 
     PlayFabAuthenticationInstanceAPI::PlayFabAuthenticationInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext)
     {
-        this->m_settings = std::make_shared<PlayFabApiSettings>();
-        this->m_context = std::move(authenticationContext);
+        this->m_context = authenticationContext;
     }
 
     PlayFabAuthenticationInstanceAPI::PlayFabAuthenticationInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings, std::shared_ptr<PlayFabAuthenticationContext> authenticationContext)
     {
-        this->m_settings = std::move(apiSettings);
-        this->m_context = std::move(authenticationContext);
+        this->m_settings = apiSettings;
+        this->m_context = authenticationContext;
     }
 
     PlayFabAuthenticationInstanceAPI::~PlayFabAuthenticationInstanceAPI()
@@ -47,19 +47,9 @@ namespace PlayFab
         return this->m_settings;
     }
 
-    void PlayFabAuthenticationInstanceAPI::SetSettings(std::shared_ptr<PlayFabApiSettings> apiSettings)
-    {
-        this->m_settings = std::move(apiSettings);
-    }
-
     std::shared_ptr<PlayFabAuthenticationContext> PlayFabAuthenticationInstanceAPI::GetAuthenticationContext() const
     {
         return this->m_context;
-    }
-
-    void PlayFabAuthenticationInstanceAPI::SetAuthenticationContext(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext)
-    {
-        this->m_context = std::move(authenticationContext);
     }
 
     size_t PlayFabAuthenticationInstanceAPI::Update()
@@ -131,10 +121,7 @@ namespace PlayFab
         GetEntityTokenResponse outResult;
         if (ValidateResult(outResult, container))
         {
-            if (outResult.EntityToken.length() > 0)
-            {
-                reqContainer->GetContext()->entityToken = outResult.EntityToken;
-            }
+            context->HandlePlayFabLogin("", "", outResult.Entity->Id, outResult.Entity->Type, outResult.EntityToken);
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
