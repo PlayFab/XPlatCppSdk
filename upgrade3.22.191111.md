@@ -26,12 +26,12 @@ We apologize that while trivial, these changes were necessary in order to ensure
 ## Significant changes that should affect very few customers
 
 * PlayFabSettings::ValidateSettings() has been moved to CallRequestContainer. The most likely scenario if you're calling this method, is that you've replaced the HTTP interface in the PluginManager, with a custom HTTP interface. PlayFab HTTP calls are packaged and described with the CallRequestContainer, and so it should be straightforward to change:
-    * PlayFabSettings::ValidateSettings( ..., callRequestContainer);
-    *  - to -
-    * callRequestContainer.HandleInvalidSettings();
+    * ```PlayFabSettings::ValidateSettings( ..., callRequestContainer);```
+    * to
+    * ```callRequestContainer.HandleInvalidSettings();```
     * Note, the additional parameters passed into the original ValidateSettings() method, are now available as fields of CallRequestContainer
 * CallRequestContainerBase no longer contains a PlayFabApiSettings shared_ptr
-    * If this affects you, then you're almost certainly holding a unique_ptr/shared_ptr<CallRequestContainerBase>, which you can dynamic_cast to a CallRequestContainer
+    * If this affects you, then you're almost certainly holding a ```unique_ptr/shared_ptr<CallRequestContainerBase>```, which you can dynamic_cast to a CallRequestContainer
     * ```CallRequestContainer* container = dynamic_cast<CallRequestContainer*>(requestContainer.get());```
     * The ```container.GetApiSettings()``` will allow you to access the apiSettings
 * CallRequestContainer constructor parameters have been reordered and must provide a new shared_ptr<PlayFabAuthenticationContext>
@@ -39,8 +39,8 @@ We apologize that while trivial, these changes were necessary in order to ensure
     * If you are, then you will need to find and pass the relevant PlayFabAuthenticationContext into that constructor
     * PlayFabAuthenticationContext contains vital information, and PlayFab API calls can't be completed without it
 * Some API instances will throw a new PlayFabException if the shared_ptr<PlayFabAuthenticationContext> inputs are null
-    * PlayFabClientInstanceApi does not require a shared_ptr<PlayFabAuthenticationContext> input (it will create its own)
-    * To create most others, call PlayFabClientInstanceApi.GetAuthenticationContext(), and pass that context into the other apiInstance constructor.
+    * PlayFabClientInstanceApi does not require a ```shared_ptr<PlayFabAuthenticationContext>``` input (it will create its own)
+    * To create most others, call ```PlayFabClientInstanceApi.GetAuthenticationContext()```, and pass that context into the other apiInstance constructor.
     * This will bind those apiInstances to the same player, allowing you to access different types of information about that player
 
 ## Trivial changes that should affect very few customers
