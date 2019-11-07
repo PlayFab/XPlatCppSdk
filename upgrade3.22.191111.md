@@ -21,7 +21,7 @@ All customers will need to update how they assign the titleId for their game. An
     * Old: ```PlayFabSettings::developerSecretKey  = "YourId";```
     * New: ```PlayFabSettings::staticSettings->developerSecretKey  = "YourId";```
 
-We apologize that while trivial, these changes were necessary in order to ensure proper data-solation between API instances.
+We apologize that while trivial, these changes were necessary in order to ensure proper data-isolation between API instances.
 
 ## Significant changes that should affect very few customers
 
