@@ -259,7 +259,7 @@ namespace PlayFabUnit
         // Sleep while waiting for log in to complete.
         while (!loginComplete)
         {
-            std::this_thread::sleep_for(TimeValueMs(100));
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
         }
     }
 

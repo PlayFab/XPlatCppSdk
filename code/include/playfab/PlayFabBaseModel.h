@@ -1,38 +1,18 @@
 #pragma once
 
-#include <ctime>
+#include <assert.h>
 #include <functional>
 #include <list>
 #include <map>
-#include <assert.h>
-
-#include <sstream>
-#include <iomanip>
-#include <memory>
 
 #include <playfab/PlayFabPlatformMacros.h>
 #include <playfab/PlayFabJsonHeaders.h>
-#include <playfab/PlayFabAuthenticationContext.h>
+#include <playfab/PlayFabPlatformUtils.h>
 
 namespace PlayFab
 {
-#if defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX)
-    typedef signed __int64 Int64;
-    typedef signed __int32 Int32;
-    typedef signed __int16 Int16;
+    class PlayFabAuthenticationContext;
 
-    typedef unsigned __int64 Uint64;
-    typedef unsigned __int32 Uint32;
-    typedef unsigned __int16 Uint16;
-#elif defined(PLAYFAB_PLATFORM_LINUX) || defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID) || defined(PLAYFAB_PLATFORM_PLAYSTATION)
-    typedef int64_t Int64;
-    typedef int32_t Int32;
-    typedef int16_t Int16;
-
-    typedef uint64_t Uint64;
-    typedef uint32_t Uint32;
-    typedef uint16_t Uint16;
-#endif
     template <typename BoxedType>
     class Boxed
     {
@@ -97,35 +77,12 @@ namespace PlayFab
     // Utilities for [de]serializing time_t to/from json
     inline void ToJsonUtilT(const time_t input, Json::Value& output)
     {
-        tm timeInfo;
-#if defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX)
-        gmtime_s(&timeInfo, &input);
-#elif defined(PLAYFAB_PLATFORM_LINUX) || defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID) || defined(PLAYFAB_PLATFORM_PLAYSTATION)
-        timeInfo = *gmtime(&input);
-#endif
-        char buff[40];
-        strftime(buff, 40, "%Y-%m-%dT%H:%M:%S.000Z", &timeInfo);
-        output = Json::Value(buff);
+        output = Json::Value(LocalTimeTToUtcString(input));
     }
-
     inline void FromJsonUtilT(const Json::Value& input, time_t& output)
     {
-        if (input == Json::Value::null)
-        {
-            return;
-        }
-
-        const std::string timeStr = input.asString();
-        tm timeStruct = {};
-        std::istringstream iss(timeStr);
-        iss >> std::get_time(&timeStruct, "%Y-%m-%dT%T");
-#if defined(PLAYFAB_PLATFORM_PLAYSTATION)
-        output = mktime(&timeStruct);
-#elif defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID) || defined(PLAYFAB_PLATFORM_LINUX)
-        output = timegm(&timeStruct);
-#else
-        output = _mkgmtime(&timeStruct);
-#endif
+        if (input == Json::Value::null) return;
+        output = UtcStringToLocalTimeT(input.asString());
     }
 
     inline void ToJsonUtilT(const Boxed<time_t>& input, Json::Value& output)

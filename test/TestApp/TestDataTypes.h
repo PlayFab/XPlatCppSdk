@@ -31,7 +31,4 @@ namespace PlayFabUnit
         SKIPPED,
         TIMEDOUT
     };
-
-    typedef std::chrono::time_point<std::chrono::system_clock> TimePoint;
-    typedef std::chrono::milliseconds TimeValueMs;
 }

@@ -69,7 +69,7 @@ namespace PlayFabUnit
 
         while (cloudResponse.empty())
         {
-            std::this_thread::sleep_for(TimeValueMs(100));
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
         }
 
         // Publish the test summary (including cloud script response) to STDOUT.

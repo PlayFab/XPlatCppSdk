@@ -81,6 +81,7 @@
 		5A3F09B922418B1500AC0816 /* PlayFabMultiplayerDataModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayFabMultiplayerDataModels.h; path = ../../../code/include/playfab/PlayFabMultiplayerDataModels.h; sourceTree = "<group>"; };
 		5A3F09BA22418B1500AC0816 /* PlayFabServerDataModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayFabServerDataModels.h; path = ../../../code/include/playfab/PlayFabServerDataModels.h; sourceTree = "<group>"; };
 		5A3F09BC22418B1500AC0816 /* PlayFabPlatformMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayFabPlatformMacros.h; path = ../../../code/include/playfab/PlayFabPlatformMacros.h; sourceTree = "<group>"; };
+		5A3F09BC22418B1500AC0816 /* PlayFabPlatformUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayFabPlatformUtils.h; path = ../../../code/include/playfab/PlayFabPlatformUtils.h; sourceTree = "<group>"; };
 		5A3F09BD22418B1500AC0816 /* PlayFabMultiplayerApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayFabMultiplayerApi.h; path = ../../../code/include/playfab/PlayFabMultiplayerApi.h; sourceTree = "<group>"; };
 		5A3F09BE22418B1500AC0816 /* PlayFabAuthenticationDataModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayFabAuthenticationDataModels.h; path = ../../../code/include/playfab/PlayFabAuthenticationDataModels.h; sourceTree = "<group>"; };
 		5A3F09BF22418B1500AC0816 /* PlayFabServerInstanceApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayFabServerInstanceApi.h; path = ../../../code/include/playfab/PlayFabServerInstanceApi.h; sourceTree = "<group>"; };
@@ -245,6 +246,7 @@
 				5A3F09B922418B1500AC0816 /* PlayFabMultiplayerDataModels.h */,
 				5A3F09C022418B1500AC0816 /* PlayFabMultiplayerInstanceApi.h */,
 				5A3F09BC22418B1500AC0816 /* PlayFabPlatformMacros.h */,
+				5A3F09BC22418B1500AC0816 /* PlayFabPlatformUtils.h */,
 				5A3F09C522418B1600AC0816 /* PlayFabPluginManager.h */,
 				5A3F09C422418B1600AC0816 /* PlayFabProfilesApi.h */,
 				5A3F09D822418B1700AC0816 /* PlayFabProfilesDataModels.h */,

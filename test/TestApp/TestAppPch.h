@@ -3,6 +3,8 @@
 #pragma once
 
 #include <playfab/PlayFabPlatformMacros.h>
+#include <playfab/PlayFabPlatformUtils.h>
+#include <playfab/PlayFabAuthenticationContext.h>
 
 #if defined (_XBOX_ONE)
 

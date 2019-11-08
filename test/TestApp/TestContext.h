@@ -4,7 +4,10 @@
 
 #include <functional>
 #include <string>
+
 #include "TestDataTypes.h"
+
+#include <playfab/PlayFabPlatformUtils.h>
 
 namespace PlayFabUnit
 {
@@ -30,8 +33,8 @@ namespace PlayFabUnit
         std::string testResultMsg;
         TestFunc testFunc;
         TestCase* testCase;
-        TimePoint startTime;
-        TimePoint endTime;
+        PlayFab::TimePoint startTime;
+        PlayFab::TimePoint endTime;
 
         void EndTest(TestFinishState state, std::string resultMsg);
 

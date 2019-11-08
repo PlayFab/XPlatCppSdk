@@ -8,8 +8,6 @@
 #include "TestRunner.h"
 #include "TestUtils.h"
 
-using namespace PlayFab;
-
 namespace PlayFabUnit
 {
     static const auto TEST_TIMEOUT_DURATION = std::chrono::seconds(15);
@@ -17,9 +15,9 @@ namespace PlayFabUnit
     TestRunner::TestRunner() :
         suiteState(TestActiveState::PENDING),
         suiteTestCase(nullptr),
-        suiteTestReport(PlayFabSettings::buildIdentifier)
+        suiteTestReport(PlayFab::PlayFabSettings::buildIdentifier)
     {
-        PlayFabSettings::threadedCallbacks = true;
+        PlayFab::PlayFabSettings::threadedCallbacks = true;
     }
 
     void TestRunner::Add(TestCase& testCase)
@@ -52,7 +50,7 @@ namespace PlayFabUnit
             ManageTestCase(test->testCase, suiteTestCase);
 
             // Start the test.
-            test->startTime = TestTimeNow();
+            test->startTime = PlayFab::GetPlayFabTimePointNow();
             test->activeState = TestActiveState::ACTIVE;
             suiteTestReport.TestStarted();
 
@@ -65,7 +63,7 @@ namespace PlayFabUnit
             // Tick the test.
             while (TestActiveState::ACTIVE == test->activeState)
             {
-                PlayFabUnit::TimePoint timeNow = TestTimeNow();
+                PlayFab::TimePoint timeNow = PlayFab::GetPlayFabTimePointNow();
                 bool timeExpired = (timeNow - test->startTime) > TEST_TIMEOUT_DURATION;
 
                 if ((TestActiveState::READY != test->activeState) && !timeExpired) // Not finished & not timed out
@@ -87,12 +85,12 @@ namespace PlayFabUnit
             }
 
             // Tear down the test.
-            test->endTime = TestTimeNow();
+            test->endTime = PlayFab::GetPlayFabTimePointNow();
             test->testCase->TearDown(*test);
             test->activeState = TestActiveState::COMPLETE;
 
             // Update the report.
-            TimeValueMs testDurationMs = TestTimeDelta<TimeValueMs>(test->startTime, test->endTime);
+            auto testDurationMs = std::chrono::duration_cast<std::chrono::milliseconds>(test->endTime - test->startTime);
             suiteTestReport.TestComplete(test->testName, test->finishState, testDurationMs, test->testResultMsg);
         }
 
@@ -110,8 +108,8 @@ namespace PlayFabUnit
     {
         std::stringstream summaryStream;
 
-        TimePoint timeNow = TestTimeNow();
-        TimePoint testStartTime, testEndTime;
+        PlayFab::TimePoint timeNow = PlayFab::GetPlayFabTimePointNow();
+        PlayFab::TimePoint testStartTime, testEndTime;
         size_t testsFinishedCount = 0, testsPassedCount = 0, testsFailedCount = 0, testsSkippedCount = 0;
 
         for (auto testIter = suiteTests.begin(); testIter != suiteTests.end(); ++testIter)
@@ -151,7 +149,7 @@ namespace PlayFabUnit
                 summaryStream << "\n";
             }
 
-            TimeValueMs testDurationMs = TestTimeDelta<TimeValueMs>(test->startTime, test->endTime);
+            auto testDurationMs = std::chrono::duration_cast<std::chrono::milliseconds>(test->endTime - test->startTime);
             summaryStream << std::setw(10) << testDurationMs.count() << " ms";
             summaryStream << " - " << ToString(test->finishState);
             summaryStream << " - " << test->testName;
