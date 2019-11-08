@@ -235,7 +235,7 @@ namespace PlayFab
 
         this->batch.clear(); // batch vector will be reused
         this->batch.reserve(this->settings->maximalNumberOfItemsInBatch);
-        if(this->settings->emitType == PlayFabEventPipelineType::PlayFabPlayStream)
+        if (this->settings->emitType == PlayFabEventPipelineType::PlayFabPlayStream)
         {
             // call Events API to send the batch
             PlayFabEventsAPI::WriteEvents(
@@ -339,12 +339,12 @@ namespace PlayFab
     {
         const auto& playFabEmitRequest = std::dynamic_pointer_cast<const PlayFabEmitEventRequest>(request);
 
-        if(playFabEmitRequest->callback != nullptr)
+        if (playFabEmitRequest->callback != nullptr)
         {
             playFabEmitRequest->callback(playFabEmitRequest->event, std::move(response));
         }
 
-        if(playFabEmitRequest->stdCallback != nullptr)
+        if (playFabEmitRequest->stdCallback != nullptr)
         {
             playFabEmitRequest->stdCallback(playFabEmitRequest->event, std::move(response));
         }

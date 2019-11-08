@@ -247,35 +247,39 @@ namespace PlayFab
 
     void PlayFabAndroidHttpPlugin::MakePostRequest(std::unique_ptr<CallRequestContainerBase> requestContainer)
     {
-        std::shared_ptr<RequestTask> requestTask = nullptr;
-        try
+        CallRequestContainer* container = dynamic_cast<CallRequestContainer*>(requestContainer.get());
+        if (container != nullptr && !container->HandleInvalidSettings())
         {
-            requestTask = std::make_shared<RequestTask>();
-            requestTask->Initialize(requestContainer);
-        }
-        catch (const std::exception& ex)
-        {
-            PlayFabPluginManager::GetInstance().HandleException(ex);
-        }
-
-        if(requestTask != nullptr)
-        { // LOCK httpRequestMutex
-            std::unique_lock<std::mutex> lock(httpRequestMutex);
-            requestTask->state = RequestTask::State::Pending;
-            pendingRequests.push_back(std::move(requestTask));
-            if(workerThread == nullptr)
+            std::shared_ptr<RequestTask> requestTask = nullptr;
+            try
             {
-                threadRunning = true;
-                workerThread = std::make_unique<std::thread>(&PlayFabAndroidHttpPlugin::WorkerThreadEntry, this);
+                requestTask = std::make_shared<RequestTask>();
+                requestTask->Initialize(requestContainer);
             }
-        } // UNLOCK httpRequestMutex
+            catch (const std::exception & ex)
+            {
+                PlayFabPluginManager::GetInstance().HandleException(ex);
+            }
+
+            if (requestTask != nullptr)
+            { // LOCK httpRequestMutex
+                std::unique_lock<std::mutex> lock(httpRequestMutex);
+                requestTask->state = RequestTask::State::Pending;
+                pendingRequests.push_back(std::move(requestTask));
+                if (workerThread == nullptr)
+                {
+                    threadRunning = true;
+                    workerThread = std::make_unique<std::thread>(&PlayFabAndroidHttpPlugin::WorkerThreadEntry, this);
+                }
+            } // UNLOCK httpRequestMutex
+        }
     }
 
     size_t PlayFabAndroidHttpPlugin::Update()
     {
         if (PlayFabSettings::threadedCallbacks)
         {
-            throw std::runtime_error("You should not call Update() when PlayFabSettings::threadedCallbacks == true");
+            throw PlayFabException(PlayFabExceptionCode::ThreadMisuse, "You should not call Update() when PlayFabSettings::threadedCallbacks == true");
         }
 
         std::shared_ptr<RequestTask> requestTask = nullptr;
@@ -600,7 +604,7 @@ namespace PlayFab
 
     std::string PlayFabAndroidHttpPlugin::GetUrl(const RequestTask& requestTask) const
     {
-        return PlayFabSettings::GetUrl(requestTask.GetRequestContainerUrl(), PlayFabSettings::requestGetParams);
+        return requestTask.GetRequestContainerUrl();
     }
 
     void PlayFabAndroidHttpPlugin::SetPredefinedHeaders(const RequestTask& requestTask)

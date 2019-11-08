@@ -26,11 +26,11 @@ namespace PlayFabUnit
 
     void PlayFabApiTest::SetTitleInfo(TestTitleData& testInputs)
     {
-        PlayFabSettings::titleId = testInputs.titleId;
+        PlayFabSettings::staticSettings->titleId = testInputs.titleId;
         USER_EMAIL = testInputs.userEmail;
 
         // Verify all the inputs won't cause crashes in the tests
-        TITLE_INFO_SET = !PlayFabSettings::titleId.empty() && !USER_EMAIL.empty();
+        TITLE_INFO_SET = !PlayFabSettings::staticSettings->titleId.empty() && !USER_EMAIL.empty();
     }
 
     void PlayFabApiTest::OnErrorSharedCallback(const PlayFabError& error, void* customData)
@@ -48,30 +48,30 @@ namespace PlayFabUnit
         request.CreateAccount = true;
 
         // store current (valid) title id
-        const std::string validTitleId = PlayFabSettings::titleId;
+        const std::string validTitleId = PlayFabSettings::staticSettings->titleId;
 
         // set invalid title id
-        PlayFabSettings::titleId = "";
+        PlayFabSettings::staticSettings->titleId = "";
 
         PlayFabClientAPI::LoginWithCustomID(request,
             [&validTitleId](const LoginResult&, void* customData)
-            {
-                PlayFabSettings::titleId = validTitleId;
-                TestContext* testContext = reinterpret_cast<TestContext*>(customData);
-                testContext->Fail("Expected API call to fail on the client side");
-            },
+        {
+            PlayFabSettings::staticSettings->titleId = validTitleId;
+            TestContext* testContext = reinterpret_cast<TestContext*>(customData);
+            testContext->Fail("Expected API call to fail on the client side");
+        },
             [&validTitleId](const PlayFabError& error, void* customData)
-            {
-                PlayFabSettings::titleId = validTitleId;
-                TestContext* testContext = reinterpret_cast<TestContext*>(customData);
-                if (error.HttpCode == 0
-                    && error.HttpStatus == "Client-side validation failure"
-                    && error.ErrorCode == PlayFabErrorCode::PlayFabErrorInvalidParams
-                    && error.ErrorName == error.HttpStatus)
-                    testContext->Pass();
-                else
-                    testContext->Fail("Returned error is different from expected");
-            },
+        {
+            PlayFabSettings::staticSettings->titleId = validTitleId;
+            TestContext* testContext = reinterpret_cast<TestContext*>(customData);
+            if (error.HttpCode == 0
+                && error.HttpStatus == "Client-side validation failure"
+                && error.ErrorCode == PlayFabErrorCode::PlayFabErrorInvalidParams
+                && error.ErrorName == error.HttpStatus)
+                testContext->Pass();
+            else
+                testContext->Fail("Returned error is different from expected");
+        },
             &testContext);
     }
 
@@ -104,14 +104,14 @@ namespace PlayFabUnit
         }
         else
 #endif // defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_PLAYSTATION)
-        if (error.ErrorMessage.find("password") != -1)
-        {
-            testContext->Pass(error.RequestId);
-        }
-        else
-        {
-            testContext->Fail("Password error message not found: " + error.ErrorMessage);
-        }
+            if (error.ErrorMessage.find("password") != -1)
+            {
+                testContext->Pass(error.RequestId);
+            }
+            else
+            {
+                testContext->Fail("Password error message not found: " + error.ErrorMessage);
+            }
     }
 
     /// CLIENT API
@@ -160,9 +160,13 @@ namespace PlayFabUnit
 
         TestContext* testContext = reinterpret_cast<TestContext*>(customData);
         if (foundEmailMsg && foundPasswordMsg)
+        {
             testContext->Pass();
+        }
         else
+        {
             testContext->Fail("All error details: " + errorReport);
+        }
     }
 
     /// CLIENT API
@@ -189,8 +193,8 @@ namespace PlayFabUnit
     /// Test that the login call sequence sends the AdvertisingId when set
     void PlayFabApiTest::LoginWithAdvertisingId(TestContext& testContext)
     {
-        PlayFabSettings::advertisingIdType = PlayFabSettings::AD_TYPE_ANDROID_ID;
-        PlayFabSettings::advertisingIdValue = "PlayFabTestId";
+        PlayFabSettings::staticPlayer->advertisingIdType = PlayFabSettings::AD_TYPE_ANDROID_ID;
+        PlayFabSettings::staticPlayer->advertisingIdValue = "PlayFabTestId";
 
         LoginWithCustomIDRequest request;
         request.CustomId = PlayFabSettings::buildIdentifier;
@@ -201,9 +205,10 @@ namespace PlayFabUnit
             Callback(&PlayFabApiTest::OnErrorSharedCallback),
             &testContext);
     }
+
     void PlayFabApiTest::OnLoginWithAdvertisingId(const LoginResult&, void* customData)
     {
-        // TODO: Need to wait for the NEXT api call to complete, and then test PlayFabSettings::advertisingIdType
+        // TODO: Need to wait for the NEXT api call to complete, and then test PlayFabSettings::staticPlayer->advertisingIdType
         TestContext* testContext = reinterpret_cast<TestContext*>(customData);
         testContext->Pass();
     }
@@ -282,15 +287,23 @@ namespace PlayFabUnit
 
         TestContext* testContext = reinterpret_cast<TestContext*>(customData);
         if (it == result.Data.end())
+        {
             testContext->Fail("Expected user data not found.");
+        }
         else if (testMessageInt != actualDataValue)
+        {
             testContext->Fail("User data not updated as expected.");
+        }
 #if !defined(PLAYFAB_PLATFORM_PLAYSTATION) // Issue 32699
         else if (!(minTime <= testMessageTime && testMessageTime <= maxTime))
+        {
             testContext->Fail("DateTime not parsed correctly..");
+        }
 #endif // PLAYFAB_PLATFORM_PLAYSTATION
         else
+        {
             testContext->Pass();
+        }
     }
 
     /// CLIENT API
@@ -316,8 +329,13 @@ namespace PlayFabUnit
     {
         testMessageInt = 0;
         for (auto it = result.Statistics.begin(); it != result.Statistics.end(); ++it)
+        {
             if (it->StatisticName == TEST_STAT_NAME)
+            {
                 testMessageInt = it->Value;
+            }
+        }
+
         testMessageInt = (testMessageInt + 1) % 100;
         // testMessageTime = it->second.LastUpdated; // Don't need the first time
 
@@ -332,6 +350,7 @@ namespace PlayFabUnit
             Callback(&PlayFabApiTest::OnErrorSharedCallback),
             customData);
     }
+
     void PlayFabApiTest::OnPlayerStatisticsApiUpdate(const UpdatePlayerStatisticsResult&, void* customData)
     {
         GetPlayerStatisticsRequest request;
@@ -340,20 +359,31 @@ namespace PlayFabUnit
             Callback(&PlayFabApiTest::OnErrorSharedCallback),
             customData);
     }
+
     void PlayFabApiTest::OnPlayerStatisticsApiGet2(const GetPlayerStatisticsResult& result, void* customData)
     {
         int actualStatValue = -1000; // A value that is never expected to appear
         for (auto it = result.Statistics.begin(); it != result.Statistics.end(); ++it)
+        {
             if (it->StatisticName == TEST_STAT_NAME)
+            {
                 actualStatValue = it->Value;
+            }
+        }
 
         TestContext* testContext = reinterpret_cast<TestContext*>(customData);
         if (actualStatValue == -1000)
+        {
             testContext->Fail("Expected user statistic not found.");
+        }
         else if (testMessageInt != actualStatValue)
+        {
             testContext->Fail("User statistic not updated as expected.");
+        }
         else
+        {
             testContext->Pass();
+        }
     }
 
     /// CLIENT API
@@ -405,9 +435,13 @@ namespace PlayFabUnit
     {
         TestContext* testContext = reinterpret_cast<TestContext*>(customData);
         if (result.Leaderboard.size() > 0) // We added too many users and stats to test for a specific user, so we just have to test for "any number of results" now
+        {
             testContext->Pass();
+        }
         else
+        {
             testContext->Fail("Leaderboard entry not found.");
+        }
     }
 
     /// CLIENT API
@@ -432,9 +466,13 @@ namespace PlayFabUnit
         TestContext* testContext = reinterpret_cast<TestContext*>(customData);
         // Enums-by-name can't really be tested in C++, the way they can in other languages
         if (result.AccountInfo.isNull() || result.AccountInfo->TitleInfo.isNull() || result.AccountInfo->TitleInfo->Origination.isNull())
+        {
             testContext->Fail("The Origination data is not present");
+        }
         else // Received data-format as expected
+        {
             testContext->Pass();
+        }
     }
 
     /// CLIENT API
@@ -460,15 +498,24 @@ namespace PlayFabUnit
         TestContext* testContext = reinterpret_cast<TestContext*>(customData);
         std::string cloudScriptLogReport = "";
         if (result.Error.notNull())
+        {
             cloudScriptLogReport = result.Error->Error + ": " + result.Error->Message;
+        }
+
         for (auto it = result.Logs.begin(); it != result.Logs.end(); ++it)
+        {
             cloudScriptLogReport += "\n" + (*it).Message;
+        }
 
         bool success = (cloudScriptLogReport.find("Hello " + playFabId + "!") != -1);
         if (!success)
+        {
             testContext->Fail(cloudScriptLogReport);
+        }
         else
+        {
             testContext->Pass();
+        }
     }
 
     /// CLIENT API
@@ -510,9 +557,13 @@ namespace PlayFabUnit
         success &= result.Error.notNull();
         success &= result.Error->Error.compare("JavascriptException") == 0;
         if (!success)
+        {
             testContext->Fail("Expected Cloud Script error was not present.");
+        }
         else
+        {
             testContext->Pass();
+        }
     }
 
     /// CLIENT API
@@ -566,11 +617,17 @@ namespace PlayFabUnit
         entityType = result.Entity->Type;
 
         if (entityType != "title_player_account")
+        {
             testContext->Fail("entityType unexpected: " + entityType);
+        }
         else if (entityId.length() == 0)
+        {
             testContext->Fail("EntityID was empty");
+        }
         else
+        {
             testContext->Pass();
+        }
     }
 
     /// ENTITY API
@@ -599,7 +656,10 @@ namespace PlayFabUnit
         testMessageInt = 0;
         auto found = result.Objects.find(TEST_DATA_KEY);
         if (found != result.Objects.end())
+        {
             testMessageInt = atoi(found->second.EscapedDataObject.c_str());
+        }
+
         testMessageInt = (testMessageInt + 1) % 100;
 
         SetObjectsRequest request;
@@ -635,14 +695,22 @@ namespace PlayFabUnit
         int actualDataValue = -1000;
         auto found = result.Objects.find(TEST_DATA_KEY);
         if (found != result.Objects.end())
+        {
             actualDataValue = atoi(found->second.EscapedDataObject.c_str());
+        }
         else
+        {
             testContext->Fail("Object saved in SetObjects cannot be found in GetObjects.");
+        }
 
         if (testMessageInt != actualDataValue)
+        {
             testContext->Fail("User data not updated as expected.");
+        }
         else
+        {
             testContext->Pass();
+        }
     }
 
     ///
@@ -687,7 +755,9 @@ namespace PlayFabUnit
     void PlayFabApiTest::SetUp(TestContext& testContext)
     {
         if (!TITLE_INFO_SET)
+        {
             testContext.Skip(); // We cannot do client tests if the titleId is not given
+        }
     }
 
     void PlayFabApiTest::Tick(TestContext& /*testContext*/)

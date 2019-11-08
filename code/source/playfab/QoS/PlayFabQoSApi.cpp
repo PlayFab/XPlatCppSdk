@@ -34,9 +34,14 @@ namespace PlayFab
             else // Process the error case
             {
                 if (PlayFabSettings::globalErrorHandler != nullptr)
+                {
                     PlayFabSettings::globalErrorHandler(container.errorWrapper, container.GetCustomData());
+                }
+                
                 if (container.errorCallback != nullptr)
+                {
                     container.errorCallback(container.errorWrapper, container.GetCustomData());
+                }
                 return false;
             }
         }
@@ -55,33 +60,6 @@ namespace PlayFab
                     callback(outResult, container.GetCustomData());
                 }
             }
-        }
-
-        void WriteTelemetryEvents(
-            WriteEventsRequest& request,
-            const ProcessApiCallback<WriteEventsResponse> callback,
-            const ErrorCallback errorCallback = nullptr,
-            void* customData = nullptr
-        )
-        {
-            IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-            Json::Value requestJson = request.ToJson();
-            std::string jsonAsString = requestJson.toStyledString();
-
-            std::unordered_map<std::string, std::string> headers;
-            headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
-
-            auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-                "/Event/WriteTelemetryEvents",
-                headers,
-                jsonAsString,
-                OnWriteEventsResult,
-                customData));
-
-            reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<WriteEventsResponse>(callback));
-            reqContainer->errorCallback = errorCallback;
-
-            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
 
         std::future<QoSResult> PlayFabQoSApi::GetQoSResultAsync(unsigned int numThreads, unsigned int timeoutMs)
@@ -198,7 +176,7 @@ namespace PlayFab
             eventContents.Payload = value;
             request.Events.push_back(eventContents);
 
-            WriteTelemetryEvents(request, WriteEventsSuccessCallBack, WriteEventsFailureCallBack);
+            PlayFabEventsAPI::WriteTelemetryEvents(request, WriteEventsSuccessCallBack, WriteEventsFailureCallBack);
         }
 
         void PlayFabQoSApi::WriteEventsSuccessCallBack(const WriteEventsResponse&, void*)

@@ -1,6 +1,5 @@
 #pragma once
 
-#include <playfab/PlayFabApiSettings.h>
 #include <unordered_map>
 #include <memory>
 
@@ -27,8 +26,7 @@ namespace PlayFab
             const std::unordered_map<std::string, std::string>& headers,
             std::string requestBody,
             CallRequestContainerCallback callback,
-            void* customData = nullptr,
-            std::shared_ptr<PlayFabApiSettings> apiSettings = nullptr);
+            void* customData = nullptr);
 
         virtual ~CallRequestContainerBase() = default;
 
@@ -37,7 +35,6 @@ namespace PlayFab
         std::string GetRequestId() const;
         void SetRequestId(const std::string& newRequestId);
         std::string GetRequestBody() const;
-        std::shared_ptr<PlayFabApiSettings> GetApiSettings() const;
 
         /// <summary>
         /// This function is meant to handle logic of calling the error callback or success
@@ -51,7 +48,6 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> requestHeaders;
         std::string requestBody;
         std::string requestId;
-        std::shared_ptr<PlayFabApiSettings> apiSettings;
         CallRequestContainerCallback callback;
 
         // I never own this, I can never destroy it

@@ -15,39 +15,24 @@ namespace PlayFab
         static const std::string sdkVersion;
         static const std::string buildIdentifier;
         static const std::string versionString;
-        static const std::string verticalName;
 
-        static const std::map<std::string, std::string> requestGetParams;
-
-        static bool useDevelopmentEnvironment;
-        static std::string developmentEnvironmentURL;
+        // Control whether all callbacks are threaded or whether the user manually controls callback timing from their main-thread
+        static bool threadedCallbacks;
+        // Used to override the PlayFab endpoint url - Not typical
         static std::string productionEnvironmentURL;
-        static std::string titleId; // You must set this value for PlayFabSdk to work properly (Found in the Game Manager for your title, at the PlayFab Website)
+        // Used to receive a callback for every failed PlayFab API call - Parallel to the individual error callbacks
         static ErrorCallback globalErrorHandler;
 
-        // Control whether all callbacks are threaded or whether the user manually controlls callback timing from their main-thread
-        static bool threadedCallbacks;
+        // The pointers to these objects should be const as they should always be fixed, but the contents are still mutable
+        static const std::shared_ptr<PlayFabApiSettings> staticSettings;
+        static const std::shared_ptr<PlayFabAuthenticationContext> staticPlayer;
 
-        static std::string entityToken; // This is set by entity GetEntityToken method, and is required by all other Entity API methods
-#if defined(ENABLE_PLAYFABSERVER_API) || defined(ENABLE_PLAYFABADMIN_API)
-        static std::string developerSecretKey; // You must set this value for PlayFabSdk to work properly (Found in the Game Manager for your title, at the PlayFab Website)
-#endif
 #ifndef DISABLE_PLAYFABCLIENT_API
-        static std::string clientSessionTicket; // This is set by any Client Login method, and is required for all other Client API methods
-        static std::string advertisingIdType; // Set this to the appropriate AD_TYPE_X constant below
-        static std::string advertisingIdValue; // Set this to corresponding device value
-
-        // DisableAdvertising is provided for completeness, but changing it is not suggested
-        // Disabling this may prevent your advertising-related PlayFab marketplace partners from working correctly
-        static bool disableAdvertising;
         static const std::string AD_TYPE_IDFA;
         static const std::string AD_TYPE_ANDROID_ID;
+#endif
 
         static void ForgetAllCredentials();
-
-        static std::string GetUrl(const std::string& urlPath, const std::map<std::string, std::string>& getParams);
-#endif
-        static bool ValidateSettings(const std::shared_ptr<PlayFabAuthenticationContext> authenticationContext, const std::shared_ptr<PlayFabApiSettings> apiSettings, CallRequestContainer& container);
     private:
         PlayFabSettings(); // Private constructor, static class should never have an instance
         PlayFabSettings(const PlayFabSettings& other); // Private copy-constructor, static class should never have an instance

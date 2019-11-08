@@ -19,17 +19,38 @@ namespace PlayFab
 
         inline void ToJsonEnum(const CloudScriptRevisionOption input, Json::Value& output)
         {
-            if (input == CloudScriptRevisionOption::CloudScriptRevisionOptionLive) output = Json::Value("Live");
-            if (input == CloudScriptRevisionOption::CloudScriptRevisionOptionLatest) output = Json::Value("Latest");
-            if (input == CloudScriptRevisionOption::CloudScriptRevisionOptionSpecific) output = Json::Value("Specific");
+            if (input == CloudScriptRevisionOption::CloudScriptRevisionOptionLive)
+            {
+                output = Json::Value("Live");
+            }
+            if (input == CloudScriptRevisionOption::CloudScriptRevisionOptionLatest)
+            {
+                output = Json::Value("Latest");
+            }
+            if (input == CloudScriptRevisionOption::CloudScriptRevisionOptionSpecific)
+            {
+                output = Json::Value("Specific");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, CloudScriptRevisionOption& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "Live") output = CloudScriptRevisionOption::CloudScriptRevisionOptionLive;
-            if (inputStr == "Latest") output = CloudScriptRevisionOption::CloudScriptRevisionOptionLatest;
-            if (inputStr == "Specific") output = CloudScriptRevisionOption::CloudScriptRevisionOptionSpecific;
+            if (inputStr == "Live")
+            {
+                output = CloudScriptRevisionOption::CloudScriptRevisionOptionLive;
+            }
+            if (inputStr == "Latest")
+            {
+                output = CloudScriptRevisionOption::CloudScriptRevisionOptionLatest;
+            }
+            if (inputStr == "Specific")
+            {
+                output = CloudScriptRevisionOption::CloudScriptRevisionOptionSpecific;
+            }
         }
 
         enum class ContinentCode
@@ -45,25 +66,70 @@ namespace PlayFab
 
         inline void ToJsonEnum(const ContinentCode input, Json::Value& output)
         {
-            if (input == ContinentCode::ContinentCodeAF) output = Json::Value("AF");
-            if (input == ContinentCode::ContinentCodeAN) output = Json::Value("AN");
-            if (input == ContinentCode::ContinentCodeAS) output = Json::Value("AS");
-            if (input == ContinentCode::ContinentCodeEU) output = Json::Value("EU");
-            if (input == ContinentCode::ContinentCodeNA) output = Json::Value("NA");
-            if (input == ContinentCode::ContinentCodeOC) output = Json::Value("OC");
-            if (input == ContinentCode::ContinentCodeSA) output = Json::Value("SA");
+            if (input == ContinentCode::ContinentCodeAF)
+            {
+                output = Json::Value("AF");
+            }
+            if (input == ContinentCode::ContinentCodeAN)
+            {
+                output = Json::Value("AN");
+            }
+            if (input == ContinentCode::ContinentCodeAS)
+            {
+                output = Json::Value("AS");
+            }
+            if (input == ContinentCode::ContinentCodeEU)
+            {
+                output = Json::Value("EU");
+            }
+            if (input == ContinentCode::ContinentCodeNA)
+            {
+                output = Json::Value("NA");
+            }
+            if (input == ContinentCode::ContinentCodeOC)
+            {
+                output = Json::Value("OC");
+            }
+            if (input == ContinentCode::ContinentCodeSA)
+            {
+                output = Json::Value("SA");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, ContinentCode& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "AF") output = ContinentCode::ContinentCodeAF;
-            if (inputStr == "AN") output = ContinentCode::ContinentCodeAN;
-            if (inputStr == "AS") output = ContinentCode::ContinentCodeAS;
-            if (inputStr == "EU") output = ContinentCode::ContinentCodeEU;
-            if (inputStr == "NA") output = ContinentCode::ContinentCodeNA;
-            if (inputStr == "OC") output = ContinentCode::ContinentCodeOC;
-            if (inputStr == "SA") output = ContinentCode::ContinentCodeSA;
+            if (inputStr == "AF")
+            {
+                output = ContinentCode::ContinentCodeAF;
+            }
+            if (inputStr == "AN")
+            {
+                output = ContinentCode::ContinentCodeAN;
+            }
+            if (inputStr == "AS")
+            {
+                output = ContinentCode::ContinentCodeAS;
+            }
+            if (inputStr == "EU")
+            {
+                output = ContinentCode::ContinentCodeEU;
+            }
+            if (inputStr == "NA")
+            {
+                output = ContinentCode::ContinentCodeNA;
+            }
+            if (inputStr == "OC")
+            {
+                output = ContinentCode::ContinentCodeOC;
+            }
+            if (inputStr == "SA")
+            {
+                output = ContinentCode::ContinentCodeSA;
+            }
         }
 
         enum class CountryCode
@@ -321,509 +387,2006 @@ namespace PlayFab
 
         inline void ToJsonEnum(const CountryCode input, Json::Value& output)
         {
-            if (input == CountryCode::CountryCodeAF) output = Json::Value("AF");
-            if (input == CountryCode::CountryCodeAX) output = Json::Value("AX");
-            if (input == CountryCode::CountryCodeAL) output = Json::Value("AL");
-            if (input == CountryCode::CountryCodeDZ) output = Json::Value("DZ");
-            if (input == CountryCode::CountryCodeAS) output = Json::Value("AS");
-            if (input == CountryCode::CountryCodeAD) output = Json::Value("AD");
-            if (input == CountryCode::CountryCodeAO) output = Json::Value("AO");
-            if (input == CountryCode::CountryCodeAI) output = Json::Value("AI");
-            if (input == CountryCode::CountryCodeAQ) output = Json::Value("AQ");
-            if (input == CountryCode::CountryCodeAG) output = Json::Value("AG");
-            if (input == CountryCode::CountryCodeAR) output = Json::Value("AR");
-            if (input == CountryCode::CountryCodeAM) output = Json::Value("AM");
-            if (input == CountryCode::CountryCodeAW) output = Json::Value("AW");
-            if (input == CountryCode::CountryCodeAU) output = Json::Value("AU");
-            if (input == CountryCode::CountryCodeAT) output = Json::Value("AT");
-            if (input == CountryCode::CountryCodeAZ) output = Json::Value("AZ");
-            if (input == CountryCode::CountryCodeBS) output = Json::Value("BS");
-            if (input == CountryCode::CountryCodeBH) output = Json::Value("BH");
-            if (input == CountryCode::CountryCodeBD) output = Json::Value("BD");
-            if (input == CountryCode::CountryCodeBB) output = Json::Value("BB");
-            if (input == CountryCode::CountryCodeBY) output = Json::Value("BY");
-            if (input == CountryCode::CountryCodeBE) output = Json::Value("BE");
-            if (input == CountryCode::CountryCodeBZ) output = Json::Value("BZ");
-            if (input == CountryCode::CountryCodeBJ) output = Json::Value("BJ");
-            if (input == CountryCode::CountryCodeBM) output = Json::Value("BM");
-            if (input == CountryCode::CountryCodeBT) output = Json::Value("BT");
-            if (input == CountryCode::CountryCodeBO) output = Json::Value("BO");
-            if (input == CountryCode::CountryCodeBQ) output = Json::Value("BQ");
-            if (input == CountryCode::CountryCodeBA) output = Json::Value("BA");
-            if (input == CountryCode::CountryCodeBW) output = Json::Value("BW");
-            if (input == CountryCode::CountryCodeBV) output = Json::Value("BV");
-            if (input == CountryCode::CountryCodeBR) output = Json::Value("BR");
-            if (input == CountryCode::CountryCodeIO) output = Json::Value("IO");
-            if (input == CountryCode::CountryCodeBN) output = Json::Value("BN");
-            if (input == CountryCode::CountryCodeBG) output = Json::Value("BG");
-            if (input == CountryCode::CountryCodeBF) output = Json::Value("BF");
-            if (input == CountryCode::CountryCodeBI) output = Json::Value("BI");
-            if (input == CountryCode::CountryCodeKH) output = Json::Value("KH");
-            if (input == CountryCode::CountryCodeCM) output = Json::Value("CM");
-            if (input == CountryCode::CountryCodeCA) output = Json::Value("CA");
-            if (input == CountryCode::CountryCodeCV) output = Json::Value("CV");
-            if (input == CountryCode::CountryCodeKY) output = Json::Value("KY");
-            if (input == CountryCode::CountryCodeCF) output = Json::Value("CF");
-            if (input == CountryCode::CountryCodeTD) output = Json::Value("TD");
-            if (input == CountryCode::CountryCodeCL) output = Json::Value("CL");
-            if (input == CountryCode::CountryCodeCN) output = Json::Value("CN");
-            if (input == CountryCode::CountryCodeCX) output = Json::Value("CX");
-            if (input == CountryCode::CountryCodeCC) output = Json::Value("CC");
-            if (input == CountryCode::CountryCodeCO) output = Json::Value("CO");
-            if (input == CountryCode::CountryCodeKM) output = Json::Value("KM");
-            if (input == CountryCode::CountryCodeCG) output = Json::Value("CG");
-            if (input == CountryCode::CountryCodeCD) output = Json::Value("CD");
-            if (input == CountryCode::CountryCodeCK) output = Json::Value("CK");
-            if (input == CountryCode::CountryCodeCR) output = Json::Value("CR");
-            if (input == CountryCode::CountryCodeCI) output = Json::Value("CI");
-            if (input == CountryCode::CountryCodeHR) output = Json::Value("HR");
-            if (input == CountryCode::CountryCodeCU) output = Json::Value("CU");
-            if (input == CountryCode::CountryCodeCW) output = Json::Value("CW");
-            if (input == CountryCode::CountryCodeCY) output = Json::Value("CY");
-            if (input == CountryCode::CountryCodeCZ) output = Json::Value("CZ");
-            if (input == CountryCode::CountryCodeDK) output = Json::Value("DK");
-            if (input == CountryCode::CountryCodeDJ) output = Json::Value("DJ");
-            if (input == CountryCode::CountryCodeDM) output = Json::Value("DM");
-            if (input == CountryCode::CountryCodeDO) output = Json::Value("DO");
-            if (input == CountryCode::CountryCodeEC) output = Json::Value("EC");
-            if (input == CountryCode::CountryCodeEG) output = Json::Value("EG");
-            if (input == CountryCode::CountryCodeSV) output = Json::Value("SV");
-            if (input == CountryCode::CountryCodeGQ) output = Json::Value("GQ");
-            if (input == CountryCode::CountryCodeER) output = Json::Value("ER");
-            if (input == CountryCode::CountryCodeEE) output = Json::Value("EE");
-            if (input == CountryCode::CountryCodeET) output = Json::Value("ET");
-            if (input == CountryCode::CountryCodeFK) output = Json::Value("FK");
-            if (input == CountryCode::CountryCodeFO) output = Json::Value("FO");
-            if (input == CountryCode::CountryCodeFJ) output = Json::Value("FJ");
-            if (input == CountryCode::CountryCodeFI) output = Json::Value("FI");
-            if (input == CountryCode::CountryCodeFR) output = Json::Value("FR");
-            if (input == CountryCode::CountryCodeGF) output = Json::Value("GF");
-            if (input == CountryCode::CountryCodePF) output = Json::Value("PF");
-            if (input == CountryCode::CountryCodeTF) output = Json::Value("TF");
-            if (input == CountryCode::CountryCodeGA) output = Json::Value("GA");
-            if (input == CountryCode::CountryCodeGM) output = Json::Value("GM");
-            if (input == CountryCode::CountryCodeGE) output = Json::Value("GE");
-            if (input == CountryCode::CountryCodeDE) output = Json::Value("DE");
-            if (input == CountryCode::CountryCodeGH) output = Json::Value("GH");
-            if (input == CountryCode::CountryCodeGI) output = Json::Value("GI");
-            if (input == CountryCode::CountryCodeGR) output = Json::Value("GR");
-            if (input == CountryCode::CountryCodeGL) output = Json::Value("GL");
-            if (input == CountryCode::CountryCodeGD) output = Json::Value("GD");
-            if (input == CountryCode::CountryCodeGP) output = Json::Value("GP");
-            if (input == CountryCode::CountryCodeGU) output = Json::Value("GU");
-            if (input == CountryCode::CountryCodeGT) output = Json::Value("GT");
-            if (input == CountryCode::CountryCodeGG) output = Json::Value("GG");
-            if (input == CountryCode::CountryCodeGN) output = Json::Value("GN");
-            if (input == CountryCode::CountryCodeGW) output = Json::Value("GW");
-            if (input == CountryCode::CountryCodeGY) output = Json::Value("GY");
-            if (input == CountryCode::CountryCodeHT) output = Json::Value("HT");
-            if (input == CountryCode::CountryCodeHM) output = Json::Value("HM");
-            if (input == CountryCode::CountryCodeVA) output = Json::Value("VA");
-            if (input == CountryCode::CountryCodeHN) output = Json::Value("HN");
-            if (input == CountryCode::CountryCodeHK) output = Json::Value("HK");
-            if (input == CountryCode::CountryCodeHU) output = Json::Value("HU");
-            if (input == CountryCode::CountryCodeIS) output = Json::Value("IS");
-            if (input == CountryCode::CountryCodeIN) output = Json::Value("IN");
-            if (input == CountryCode::CountryCodeID) output = Json::Value("ID");
-            if (input == CountryCode::CountryCodeIR) output = Json::Value("IR");
-            if (input == CountryCode::CountryCodeIQ) output = Json::Value("IQ");
-            if (input == CountryCode::CountryCodeIE) output = Json::Value("IE");
-            if (input == CountryCode::CountryCodeIM) output = Json::Value("IM");
-            if (input == CountryCode::CountryCodeIL) output = Json::Value("IL");
-            if (input == CountryCode::CountryCodeIT) output = Json::Value("IT");
-            if (input == CountryCode::CountryCodeJM) output = Json::Value("JM");
-            if (input == CountryCode::CountryCodeJP) output = Json::Value("JP");
-            if (input == CountryCode::CountryCodeJE) output = Json::Value("JE");
-            if (input == CountryCode::CountryCodeJO) output = Json::Value("JO");
-            if (input == CountryCode::CountryCodeKZ) output = Json::Value("KZ");
-            if (input == CountryCode::CountryCodeKE) output = Json::Value("KE");
-            if (input == CountryCode::CountryCodeKI) output = Json::Value("KI");
-            if (input == CountryCode::CountryCodeKP) output = Json::Value("KP");
-            if (input == CountryCode::CountryCodeKR) output = Json::Value("KR");
-            if (input == CountryCode::CountryCodeKW) output = Json::Value("KW");
-            if (input == CountryCode::CountryCodeKG) output = Json::Value("KG");
-            if (input == CountryCode::CountryCodeLA) output = Json::Value("LA");
-            if (input == CountryCode::CountryCodeLV) output = Json::Value("LV");
-            if (input == CountryCode::CountryCodeLB) output = Json::Value("LB");
-            if (input == CountryCode::CountryCodeLS) output = Json::Value("LS");
-            if (input == CountryCode::CountryCodeLR) output = Json::Value("LR");
-            if (input == CountryCode::CountryCodeLY) output = Json::Value("LY");
-            if (input == CountryCode::CountryCodeLI) output = Json::Value("LI");
-            if (input == CountryCode::CountryCodeLT) output = Json::Value("LT");
-            if (input == CountryCode::CountryCodeLU) output = Json::Value("LU");
-            if (input == CountryCode::CountryCodeMO) output = Json::Value("MO");
-            if (input == CountryCode::CountryCodeMK) output = Json::Value("MK");
-            if (input == CountryCode::CountryCodeMG) output = Json::Value("MG");
-            if (input == CountryCode::CountryCodeMW) output = Json::Value("MW");
-            if (input == CountryCode::CountryCodeMY) output = Json::Value("MY");
-            if (input == CountryCode::CountryCodeMV) output = Json::Value("MV");
-            if (input == CountryCode::CountryCodeML) output = Json::Value("ML");
-            if (input == CountryCode::CountryCodeMT) output = Json::Value("MT");
-            if (input == CountryCode::CountryCodeMH) output = Json::Value("MH");
-            if (input == CountryCode::CountryCodeMQ) output = Json::Value("MQ");
-            if (input == CountryCode::CountryCodeMR) output = Json::Value("MR");
-            if (input == CountryCode::CountryCodeMU) output = Json::Value("MU");
-            if (input == CountryCode::CountryCodeYT) output = Json::Value("YT");
-            if (input == CountryCode::CountryCodeMX) output = Json::Value("MX");
-            if (input == CountryCode::CountryCodeFM) output = Json::Value("FM");
-            if (input == CountryCode::CountryCodeMD) output = Json::Value("MD");
-            if (input == CountryCode::CountryCodeMC) output = Json::Value("MC");
-            if (input == CountryCode::CountryCodeMN) output = Json::Value("MN");
-            if (input == CountryCode::CountryCodeME) output = Json::Value("ME");
-            if (input == CountryCode::CountryCodeMS) output = Json::Value("MS");
-            if (input == CountryCode::CountryCodeMA) output = Json::Value("MA");
-            if (input == CountryCode::CountryCodeMZ) output = Json::Value("MZ");
-            if (input == CountryCode::CountryCodeMM) output = Json::Value("MM");
-            if (input == CountryCode::CountryCodeNA) output = Json::Value("NA");
-            if (input == CountryCode::CountryCodeNR) output = Json::Value("NR");
-            if (input == CountryCode::CountryCodeNP) output = Json::Value("NP");
-            if (input == CountryCode::CountryCodeNL) output = Json::Value("NL");
-            if (input == CountryCode::CountryCodeNC) output = Json::Value("NC");
-            if (input == CountryCode::CountryCodeNZ) output = Json::Value("NZ");
-            if (input == CountryCode::CountryCodeNI) output = Json::Value("NI");
-            if (input == CountryCode::CountryCodeNE) output = Json::Value("NE");
-            if (input == CountryCode::CountryCodeNG) output = Json::Value("NG");
-            if (input == CountryCode::CountryCodeNU) output = Json::Value("NU");
-            if (input == CountryCode::CountryCodeNF) output = Json::Value("NF");
-            if (input == CountryCode::CountryCodeMP) output = Json::Value("MP");
-            if (input == CountryCode::CountryCodeNO) output = Json::Value("NO");
-            if (input == CountryCode::CountryCodeOM) output = Json::Value("OM");
-            if (input == CountryCode::CountryCodePK) output = Json::Value("PK");
-            if (input == CountryCode::CountryCodePW) output = Json::Value("PW");
-            if (input == CountryCode::CountryCodePS) output = Json::Value("PS");
-            if (input == CountryCode::CountryCodePA) output = Json::Value("PA");
-            if (input == CountryCode::CountryCodePG) output = Json::Value("PG");
-            if (input == CountryCode::CountryCodePY) output = Json::Value("PY");
-            if (input == CountryCode::CountryCodePE) output = Json::Value("PE");
-            if (input == CountryCode::CountryCodePH) output = Json::Value("PH");
-            if (input == CountryCode::CountryCodePN) output = Json::Value("PN");
-            if (input == CountryCode::CountryCodePL) output = Json::Value("PL");
-            if (input == CountryCode::CountryCodePT) output = Json::Value("PT");
-            if (input == CountryCode::CountryCodePR) output = Json::Value("PR");
-            if (input == CountryCode::CountryCodeQA) output = Json::Value("QA");
-            if (input == CountryCode::CountryCodeRE) output = Json::Value("RE");
-            if (input == CountryCode::CountryCodeRO) output = Json::Value("RO");
-            if (input == CountryCode::CountryCodeRU) output = Json::Value("RU");
-            if (input == CountryCode::CountryCodeRW) output = Json::Value("RW");
-            if (input == CountryCode::CountryCodeBL) output = Json::Value("BL");
-            if (input == CountryCode::CountryCodeSH) output = Json::Value("SH");
-            if (input == CountryCode::CountryCodeKN) output = Json::Value("KN");
-            if (input == CountryCode::CountryCodeLC) output = Json::Value("LC");
-            if (input == CountryCode::CountryCodeMF) output = Json::Value("MF");
-            if (input == CountryCode::CountryCodePM) output = Json::Value("PM");
-            if (input == CountryCode::CountryCodeVC) output = Json::Value("VC");
-            if (input == CountryCode::CountryCodeWS) output = Json::Value("WS");
-            if (input == CountryCode::CountryCodeSM) output = Json::Value("SM");
-            if (input == CountryCode::CountryCodeST) output = Json::Value("ST");
-            if (input == CountryCode::CountryCodeSA) output = Json::Value("SA");
-            if (input == CountryCode::CountryCodeSN) output = Json::Value("SN");
-            if (input == CountryCode::CountryCodeRS) output = Json::Value("RS");
-            if (input == CountryCode::CountryCodeSC) output = Json::Value("SC");
-            if (input == CountryCode::CountryCodeSL) output = Json::Value("SL");
-            if (input == CountryCode::CountryCodeSG) output = Json::Value("SG");
-            if (input == CountryCode::CountryCodeSX) output = Json::Value("SX");
-            if (input == CountryCode::CountryCodeSK) output = Json::Value("SK");
-            if (input == CountryCode::CountryCodeSI) output = Json::Value("SI");
-            if (input == CountryCode::CountryCodeSB) output = Json::Value("SB");
-            if (input == CountryCode::CountryCodeSO) output = Json::Value("SO");
-            if (input == CountryCode::CountryCodeZA) output = Json::Value("ZA");
-            if (input == CountryCode::CountryCodeGS) output = Json::Value("GS");
-            if (input == CountryCode::CountryCodeSS) output = Json::Value("SS");
-            if (input == CountryCode::CountryCodeES) output = Json::Value("ES");
-            if (input == CountryCode::CountryCodeLK) output = Json::Value("LK");
-            if (input == CountryCode::CountryCodeSD) output = Json::Value("SD");
-            if (input == CountryCode::CountryCodeSR) output = Json::Value("SR");
-            if (input == CountryCode::CountryCodeSJ) output = Json::Value("SJ");
-            if (input == CountryCode::CountryCodeSZ) output = Json::Value("SZ");
-            if (input == CountryCode::CountryCodeSE) output = Json::Value("SE");
-            if (input == CountryCode::CountryCodeCH) output = Json::Value("CH");
-            if (input == CountryCode::CountryCodeSY) output = Json::Value("SY");
-            if (input == CountryCode::CountryCodeTW) output = Json::Value("TW");
-            if (input == CountryCode::CountryCodeTJ) output = Json::Value("TJ");
-            if (input == CountryCode::CountryCodeTZ) output = Json::Value("TZ");
-            if (input == CountryCode::CountryCodeTH) output = Json::Value("TH");
-            if (input == CountryCode::CountryCodeTL) output = Json::Value("TL");
-            if (input == CountryCode::CountryCodeTG) output = Json::Value("TG");
-            if (input == CountryCode::CountryCodeTK) output = Json::Value("TK");
-            if (input == CountryCode::CountryCodeTO) output = Json::Value("TO");
-            if (input == CountryCode::CountryCodeTT) output = Json::Value("TT");
-            if (input == CountryCode::CountryCodeTN) output = Json::Value("TN");
-            if (input == CountryCode::CountryCodeTR) output = Json::Value("TR");
-            if (input == CountryCode::CountryCodeTM) output = Json::Value("TM");
-            if (input == CountryCode::CountryCodeTC) output = Json::Value("TC");
-            if (input == CountryCode::CountryCodeTV) output = Json::Value("TV");
-            if (input == CountryCode::CountryCodeUG) output = Json::Value("UG");
-            if (input == CountryCode::CountryCodeUA) output = Json::Value("UA");
-            if (input == CountryCode::CountryCodeAE) output = Json::Value("AE");
-            if (input == CountryCode::CountryCodeGB) output = Json::Value("GB");
-            if (input == CountryCode::CountryCodeUS) output = Json::Value("US");
-            if (input == CountryCode::CountryCodeUM) output = Json::Value("UM");
-            if (input == CountryCode::CountryCodeUY) output = Json::Value("UY");
-            if (input == CountryCode::CountryCodeUZ) output = Json::Value("UZ");
-            if (input == CountryCode::CountryCodeVU) output = Json::Value("VU");
-            if (input == CountryCode::CountryCodeVE) output = Json::Value("VE");
-            if (input == CountryCode::CountryCodeVN) output = Json::Value("VN");
-            if (input == CountryCode::CountryCodeVG) output = Json::Value("VG");
-            if (input == CountryCode::CountryCodeVI) output = Json::Value("VI");
-            if (input == CountryCode::CountryCodeWF) output = Json::Value("WF");
-            if (input == CountryCode::CountryCodeEH) output = Json::Value("EH");
-            if (input == CountryCode::CountryCodeYE) output = Json::Value("YE");
-            if (input == CountryCode::CountryCodeZM) output = Json::Value("ZM");
-            if (input == CountryCode::CountryCodeZW) output = Json::Value("ZW");
+            if (input == CountryCode::CountryCodeAF)
+            {
+                output = Json::Value("AF");
+            }
+            if (input == CountryCode::CountryCodeAX)
+            {
+                output = Json::Value("AX");
+            }
+            if (input == CountryCode::CountryCodeAL)
+            {
+                output = Json::Value("AL");
+            }
+            if (input == CountryCode::CountryCodeDZ)
+            {
+                output = Json::Value("DZ");
+            }
+            if (input == CountryCode::CountryCodeAS)
+            {
+                output = Json::Value("AS");
+            }
+            if (input == CountryCode::CountryCodeAD)
+            {
+                output = Json::Value("AD");
+            }
+            if (input == CountryCode::CountryCodeAO)
+            {
+                output = Json::Value("AO");
+            }
+            if (input == CountryCode::CountryCodeAI)
+            {
+                output = Json::Value("AI");
+            }
+            if (input == CountryCode::CountryCodeAQ)
+            {
+                output = Json::Value("AQ");
+            }
+            if (input == CountryCode::CountryCodeAG)
+            {
+                output = Json::Value("AG");
+            }
+            if (input == CountryCode::CountryCodeAR)
+            {
+                output = Json::Value("AR");
+            }
+            if (input == CountryCode::CountryCodeAM)
+            {
+                output = Json::Value("AM");
+            }
+            if (input == CountryCode::CountryCodeAW)
+            {
+                output = Json::Value("AW");
+            }
+            if (input == CountryCode::CountryCodeAU)
+            {
+                output = Json::Value("AU");
+            }
+            if (input == CountryCode::CountryCodeAT)
+            {
+                output = Json::Value("AT");
+            }
+            if (input == CountryCode::CountryCodeAZ)
+            {
+                output = Json::Value("AZ");
+            }
+            if (input == CountryCode::CountryCodeBS)
+            {
+                output = Json::Value("BS");
+            }
+            if (input == CountryCode::CountryCodeBH)
+            {
+                output = Json::Value("BH");
+            }
+            if (input == CountryCode::CountryCodeBD)
+            {
+                output = Json::Value("BD");
+            }
+            if (input == CountryCode::CountryCodeBB)
+            {
+                output = Json::Value("BB");
+            }
+            if (input == CountryCode::CountryCodeBY)
+            {
+                output = Json::Value("BY");
+            }
+            if (input == CountryCode::CountryCodeBE)
+            {
+                output = Json::Value("BE");
+            }
+            if (input == CountryCode::CountryCodeBZ)
+            {
+                output = Json::Value("BZ");
+            }
+            if (input == CountryCode::CountryCodeBJ)
+            {
+                output = Json::Value("BJ");
+            }
+            if (input == CountryCode::CountryCodeBM)
+            {
+                output = Json::Value("BM");
+            }
+            if (input == CountryCode::CountryCodeBT)
+            {
+                output = Json::Value("BT");
+            }
+            if (input == CountryCode::CountryCodeBO)
+            {
+                output = Json::Value("BO");
+            }
+            if (input == CountryCode::CountryCodeBQ)
+            {
+                output = Json::Value("BQ");
+            }
+            if (input == CountryCode::CountryCodeBA)
+            {
+                output = Json::Value("BA");
+            }
+            if (input == CountryCode::CountryCodeBW)
+            {
+                output = Json::Value("BW");
+            }
+            if (input == CountryCode::CountryCodeBV)
+            {
+                output = Json::Value("BV");
+            }
+            if (input == CountryCode::CountryCodeBR)
+            {
+                output = Json::Value("BR");
+            }
+            if (input == CountryCode::CountryCodeIO)
+            {
+                output = Json::Value("IO");
+            }
+            if (input == CountryCode::CountryCodeBN)
+            {
+                output = Json::Value("BN");
+            }
+            if (input == CountryCode::CountryCodeBG)
+            {
+                output = Json::Value("BG");
+            }
+            if (input == CountryCode::CountryCodeBF)
+            {
+                output = Json::Value("BF");
+            }
+            if (input == CountryCode::CountryCodeBI)
+            {
+                output = Json::Value("BI");
+            }
+            if (input == CountryCode::CountryCodeKH)
+            {
+                output = Json::Value("KH");
+            }
+            if (input == CountryCode::CountryCodeCM)
+            {
+                output = Json::Value("CM");
+            }
+            if (input == CountryCode::CountryCodeCA)
+            {
+                output = Json::Value("CA");
+            }
+            if (input == CountryCode::CountryCodeCV)
+            {
+                output = Json::Value("CV");
+            }
+            if (input == CountryCode::CountryCodeKY)
+            {
+                output = Json::Value("KY");
+            }
+            if (input == CountryCode::CountryCodeCF)
+            {
+                output = Json::Value("CF");
+            }
+            if (input == CountryCode::CountryCodeTD)
+            {
+                output = Json::Value("TD");
+            }
+            if (input == CountryCode::CountryCodeCL)
+            {
+                output = Json::Value("CL");
+            }
+            if (input == CountryCode::CountryCodeCN)
+            {
+                output = Json::Value("CN");
+            }
+            if (input == CountryCode::CountryCodeCX)
+            {
+                output = Json::Value("CX");
+            }
+            if (input == CountryCode::CountryCodeCC)
+            {
+                output = Json::Value("CC");
+            }
+            if (input == CountryCode::CountryCodeCO)
+            {
+                output = Json::Value("CO");
+            }
+            if (input == CountryCode::CountryCodeKM)
+            {
+                output = Json::Value("KM");
+            }
+            if (input == CountryCode::CountryCodeCG)
+            {
+                output = Json::Value("CG");
+            }
+            if (input == CountryCode::CountryCodeCD)
+            {
+                output = Json::Value("CD");
+            }
+            if (input == CountryCode::CountryCodeCK)
+            {
+                output = Json::Value("CK");
+            }
+            if (input == CountryCode::CountryCodeCR)
+            {
+                output = Json::Value("CR");
+            }
+            if (input == CountryCode::CountryCodeCI)
+            {
+                output = Json::Value("CI");
+            }
+            if (input == CountryCode::CountryCodeHR)
+            {
+                output = Json::Value("HR");
+            }
+            if (input == CountryCode::CountryCodeCU)
+            {
+                output = Json::Value("CU");
+            }
+            if (input == CountryCode::CountryCodeCW)
+            {
+                output = Json::Value("CW");
+            }
+            if (input == CountryCode::CountryCodeCY)
+            {
+                output = Json::Value("CY");
+            }
+            if (input == CountryCode::CountryCodeCZ)
+            {
+                output = Json::Value("CZ");
+            }
+            if (input == CountryCode::CountryCodeDK)
+            {
+                output = Json::Value("DK");
+            }
+            if (input == CountryCode::CountryCodeDJ)
+            {
+                output = Json::Value("DJ");
+            }
+            if (input == CountryCode::CountryCodeDM)
+            {
+                output = Json::Value("DM");
+            }
+            if (input == CountryCode::CountryCodeDO)
+            {
+                output = Json::Value("DO");
+            }
+            if (input == CountryCode::CountryCodeEC)
+            {
+                output = Json::Value("EC");
+            }
+            if (input == CountryCode::CountryCodeEG)
+            {
+                output = Json::Value("EG");
+            }
+            if (input == CountryCode::CountryCodeSV)
+            {
+                output = Json::Value("SV");
+            }
+            if (input == CountryCode::CountryCodeGQ)
+            {
+                output = Json::Value("GQ");
+            }
+            if (input == CountryCode::CountryCodeER)
+            {
+                output = Json::Value("ER");
+            }
+            if (input == CountryCode::CountryCodeEE)
+            {
+                output = Json::Value("EE");
+            }
+            if (input == CountryCode::CountryCodeET)
+            {
+                output = Json::Value("ET");
+            }
+            if (input == CountryCode::CountryCodeFK)
+            {
+                output = Json::Value("FK");
+            }
+            if (input == CountryCode::CountryCodeFO)
+            {
+                output = Json::Value("FO");
+            }
+            if (input == CountryCode::CountryCodeFJ)
+            {
+                output = Json::Value("FJ");
+            }
+            if (input == CountryCode::CountryCodeFI)
+            {
+                output = Json::Value("FI");
+            }
+            if (input == CountryCode::CountryCodeFR)
+            {
+                output = Json::Value("FR");
+            }
+            if (input == CountryCode::CountryCodeGF)
+            {
+                output = Json::Value("GF");
+            }
+            if (input == CountryCode::CountryCodePF)
+            {
+                output = Json::Value("PF");
+            }
+            if (input == CountryCode::CountryCodeTF)
+            {
+                output = Json::Value("TF");
+            }
+            if (input == CountryCode::CountryCodeGA)
+            {
+                output = Json::Value("GA");
+            }
+            if (input == CountryCode::CountryCodeGM)
+            {
+                output = Json::Value("GM");
+            }
+            if (input == CountryCode::CountryCodeGE)
+            {
+                output = Json::Value("GE");
+            }
+            if (input == CountryCode::CountryCodeDE)
+            {
+                output = Json::Value("DE");
+            }
+            if (input == CountryCode::CountryCodeGH)
+            {
+                output = Json::Value("GH");
+            }
+            if (input == CountryCode::CountryCodeGI)
+            {
+                output = Json::Value("GI");
+            }
+            if (input == CountryCode::CountryCodeGR)
+            {
+                output = Json::Value("GR");
+            }
+            if (input == CountryCode::CountryCodeGL)
+            {
+                output = Json::Value("GL");
+            }
+            if (input == CountryCode::CountryCodeGD)
+            {
+                output = Json::Value("GD");
+            }
+            if (input == CountryCode::CountryCodeGP)
+            {
+                output = Json::Value("GP");
+            }
+            if (input == CountryCode::CountryCodeGU)
+            {
+                output = Json::Value("GU");
+            }
+            if (input == CountryCode::CountryCodeGT)
+            {
+                output = Json::Value("GT");
+            }
+            if (input == CountryCode::CountryCodeGG)
+            {
+                output = Json::Value("GG");
+            }
+            if (input == CountryCode::CountryCodeGN)
+            {
+                output = Json::Value("GN");
+            }
+            if (input == CountryCode::CountryCodeGW)
+            {
+                output = Json::Value("GW");
+            }
+            if (input == CountryCode::CountryCodeGY)
+            {
+                output = Json::Value("GY");
+            }
+            if (input == CountryCode::CountryCodeHT)
+            {
+                output = Json::Value("HT");
+            }
+            if (input == CountryCode::CountryCodeHM)
+            {
+                output = Json::Value("HM");
+            }
+            if (input == CountryCode::CountryCodeVA)
+            {
+                output = Json::Value("VA");
+            }
+            if (input == CountryCode::CountryCodeHN)
+            {
+                output = Json::Value("HN");
+            }
+            if (input == CountryCode::CountryCodeHK)
+            {
+                output = Json::Value("HK");
+            }
+            if (input == CountryCode::CountryCodeHU)
+            {
+                output = Json::Value("HU");
+            }
+            if (input == CountryCode::CountryCodeIS)
+            {
+                output = Json::Value("IS");
+            }
+            if (input == CountryCode::CountryCodeIN)
+            {
+                output = Json::Value("IN");
+            }
+            if (input == CountryCode::CountryCodeID)
+            {
+                output = Json::Value("ID");
+            }
+            if (input == CountryCode::CountryCodeIR)
+            {
+                output = Json::Value("IR");
+            }
+            if (input == CountryCode::CountryCodeIQ)
+            {
+                output = Json::Value("IQ");
+            }
+            if (input == CountryCode::CountryCodeIE)
+            {
+                output = Json::Value("IE");
+            }
+            if (input == CountryCode::CountryCodeIM)
+            {
+                output = Json::Value("IM");
+            }
+            if (input == CountryCode::CountryCodeIL)
+            {
+                output = Json::Value("IL");
+            }
+            if (input == CountryCode::CountryCodeIT)
+            {
+                output = Json::Value("IT");
+            }
+            if (input == CountryCode::CountryCodeJM)
+            {
+                output = Json::Value("JM");
+            }
+            if (input == CountryCode::CountryCodeJP)
+            {
+                output = Json::Value("JP");
+            }
+            if (input == CountryCode::CountryCodeJE)
+            {
+                output = Json::Value("JE");
+            }
+            if (input == CountryCode::CountryCodeJO)
+            {
+                output = Json::Value("JO");
+            }
+            if (input == CountryCode::CountryCodeKZ)
+            {
+                output = Json::Value("KZ");
+            }
+            if (input == CountryCode::CountryCodeKE)
+            {
+                output = Json::Value("KE");
+            }
+            if (input == CountryCode::CountryCodeKI)
+            {
+                output = Json::Value("KI");
+            }
+            if (input == CountryCode::CountryCodeKP)
+            {
+                output = Json::Value("KP");
+            }
+            if (input == CountryCode::CountryCodeKR)
+            {
+                output = Json::Value("KR");
+            }
+            if (input == CountryCode::CountryCodeKW)
+            {
+                output = Json::Value("KW");
+            }
+            if (input == CountryCode::CountryCodeKG)
+            {
+                output = Json::Value("KG");
+            }
+            if (input == CountryCode::CountryCodeLA)
+            {
+                output = Json::Value("LA");
+            }
+            if (input == CountryCode::CountryCodeLV)
+            {
+                output = Json::Value("LV");
+            }
+            if (input == CountryCode::CountryCodeLB)
+            {
+                output = Json::Value("LB");
+            }
+            if (input == CountryCode::CountryCodeLS)
+            {
+                output = Json::Value("LS");
+            }
+            if (input == CountryCode::CountryCodeLR)
+            {
+                output = Json::Value("LR");
+            }
+            if (input == CountryCode::CountryCodeLY)
+            {
+                output = Json::Value("LY");
+            }
+            if (input == CountryCode::CountryCodeLI)
+            {
+                output = Json::Value("LI");
+            }
+            if (input == CountryCode::CountryCodeLT)
+            {
+                output = Json::Value("LT");
+            }
+            if (input == CountryCode::CountryCodeLU)
+            {
+                output = Json::Value("LU");
+            }
+            if (input == CountryCode::CountryCodeMO)
+            {
+                output = Json::Value("MO");
+            }
+            if (input == CountryCode::CountryCodeMK)
+            {
+                output = Json::Value("MK");
+            }
+            if (input == CountryCode::CountryCodeMG)
+            {
+                output = Json::Value("MG");
+            }
+            if (input == CountryCode::CountryCodeMW)
+            {
+                output = Json::Value("MW");
+            }
+            if (input == CountryCode::CountryCodeMY)
+            {
+                output = Json::Value("MY");
+            }
+            if (input == CountryCode::CountryCodeMV)
+            {
+                output = Json::Value("MV");
+            }
+            if (input == CountryCode::CountryCodeML)
+            {
+                output = Json::Value("ML");
+            }
+            if (input == CountryCode::CountryCodeMT)
+            {
+                output = Json::Value("MT");
+            }
+            if (input == CountryCode::CountryCodeMH)
+            {
+                output = Json::Value("MH");
+            }
+            if (input == CountryCode::CountryCodeMQ)
+            {
+                output = Json::Value("MQ");
+            }
+            if (input == CountryCode::CountryCodeMR)
+            {
+                output = Json::Value("MR");
+            }
+            if (input == CountryCode::CountryCodeMU)
+            {
+                output = Json::Value("MU");
+            }
+            if (input == CountryCode::CountryCodeYT)
+            {
+                output = Json::Value("YT");
+            }
+            if (input == CountryCode::CountryCodeMX)
+            {
+                output = Json::Value("MX");
+            }
+            if (input == CountryCode::CountryCodeFM)
+            {
+                output = Json::Value("FM");
+            }
+            if (input == CountryCode::CountryCodeMD)
+            {
+                output = Json::Value("MD");
+            }
+            if (input == CountryCode::CountryCodeMC)
+            {
+                output = Json::Value("MC");
+            }
+            if (input == CountryCode::CountryCodeMN)
+            {
+                output = Json::Value("MN");
+            }
+            if (input == CountryCode::CountryCodeME)
+            {
+                output = Json::Value("ME");
+            }
+            if (input == CountryCode::CountryCodeMS)
+            {
+                output = Json::Value("MS");
+            }
+            if (input == CountryCode::CountryCodeMA)
+            {
+                output = Json::Value("MA");
+            }
+            if (input == CountryCode::CountryCodeMZ)
+            {
+                output = Json::Value("MZ");
+            }
+            if (input == CountryCode::CountryCodeMM)
+            {
+                output = Json::Value("MM");
+            }
+            if (input == CountryCode::CountryCodeNA)
+            {
+                output = Json::Value("NA");
+            }
+            if (input == CountryCode::CountryCodeNR)
+            {
+                output = Json::Value("NR");
+            }
+            if (input == CountryCode::CountryCodeNP)
+            {
+                output = Json::Value("NP");
+            }
+            if (input == CountryCode::CountryCodeNL)
+            {
+                output = Json::Value("NL");
+            }
+            if (input == CountryCode::CountryCodeNC)
+            {
+                output = Json::Value("NC");
+            }
+            if (input == CountryCode::CountryCodeNZ)
+            {
+                output = Json::Value("NZ");
+            }
+            if (input == CountryCode::CountryCodeNI)
+            {
+                output = Json::Value("NI");
+            }
+            if (input == CountryCode::CountryCodeNE)
+            {
+                output = Json::Value("NE");
+            }
+            if (input == CountryCode::CountryCodeNG)
+            {
+                output = Json::Value("NG");
+            }
+            if (input == CountryCode::CountryCodeNU)
+            {
+                output = Json::Value("NU");
+            }
+            if (input == CountryCode::CountryCodeNF)
+            {
+                output = Json::Value("NF");
+            }
+            if (input == CountryCode::CountryCodeMP)
+            {
+                output = Json::Value("MP");
+            }
+            if (input == CountryCode::CountryCodeNO)
+            {
+                output = Json::Value("NO");
+            }
+            if (input == CountryCode::CountryCodeOM)
+            {
+                output = Json::Value("OM");
+            }
+            if (input == CountryCode::CountryCodePK)
+            {
+                output = Json::Value("PK");
+            }
+            if (input == CountryCode::CountryCodePW)
+            {
+                output = Json::Value("PW");
+            }
+            if (input == CountryCode::CountryCodePS)
+            {
+                output = Json::Value("PS");
+            }
+            if (input == CountryCode::CountryCodePA)
+            {
+                output = Json::Value("PA");
+            }
+            if (input == CountryCode::CountryCodePG)
+            {
+                output = Json::Value("PG");
+            }
+            if (input == CountryCode::CountryCodePY)
+            {
+                output = Json::Value("PY");
+            }
+            if (input == CountryCode::CountryCodePE)
+            {
+                output = Json::Value("PE");
+            }
+            if (input == CountryCode::CountryCodePH)
+            {
+                output = Json::Value("PH");
+            }
+            if (input == CountryCode::CountryCodePN)
+            {
+                output = Json::Value("PN");
+            }
+            if (input == CountryCode::CountryCodePL)
+            {
+                output = Json::Value("PL");
+            }
+            if (input == CountryCode::CountryCodePT)
+            {
+                output = Json::Value("PT");
+            }
+            if (input == CountryCode::CountryCodePR)
+            {
+                output = Json::Value("PR");
+            }
+            if (input == CountryCode::CountryCodeQA)
+            {
+                output = Json::Value("QA");
+            }
+            if (input == CountryCode::CountryCodeRE)
+            {
+                output = Json::Value("RE");
+            }
+            if (input == CountryCode::CountryCodeRO)
+            {
+                output = Json::Value("RO");
+            }
+            if (input == CountryCode::CountryCodeRU)
+            {
+                output = Json::Value("RU");
+            }
+            if (input == CountryCode::CountryCodeRW)
+            {
+                output = Json::Value("RW");
+            }
+            if (input == CountryCode::CountryCodeBL)
+            {
+                output = Json::Value("BL");
+            }
+            if (input == CountryCode::CountryCodeSH)
+            {
+                output = Json::Value("SH");
+            }
+            if (input == CountryCode::CountryCodeKN)
+            {
+                output = Json::Value("KN");
+            }
+            if (input == CountryCode::CountryCodeLC)
+            {
+                output = Json::Value("LC");
+            }
+            if (input == CountryCode::CountryCodeMF)
+            {
+                output = Json::Value("MF");
+            }
+            if (input == CountryCode::CountryCodePM)
+            {
+                output = Json::Value("PM");
+            }
+            if (input == CountryCode::CountryCodeVC)
+            {
+                output = Json::Value("VC");
+            }
+            if (input == CountryCode::CountryCodeWS)
+            {
+                output = Json::Value("WS");
+            }
+            if (input == CountryCode::CountryCodeSM)
+            {
+                output = Json::Value("SM");
+            }
+            if (input == CountryCode::CountryCodeST)
+            {
+                output = Json::Value("ST");
+            }
+            if (input == CountryCode::CountryCodeSA)
+            {
+                output = Json::Value("SA");
+            }
+            if (input == CountryCode::CountryCodeSN)
+            {
+                output = Json::Value("SN");
+            }
+            if (input == CountryCode::CountryCodeRS)
+            {
+                output = Json::Value("RS");
+            }
+            if (input == CountryCode::CountryCodeSC)
+            {
+                output = Json::Value("SC");
+            }
+            if (input == CountryCode::CountryCodeSL)
+            {
+                output = Json::Value("SL");
+            }
+            if (input == CountryCode::CountryCodeSG)
+            {
+                output = Json::Value("SG");
+            }
+            if (input == CountryCode::CountryCodeSX)
+            {
+                output = Json::Value("SX");
+            }
+            if (input == CountryCode::CountryCodeSK)
+            {
+                output = Json::Value("SK");
+            }
+            if (input == CountryCode::CountryCodeSI)
+            {
+                output = Json::Value("SI");
+            }
+            if (input == CountryCode::CountryCodeSB)
+            {
+                output = Json::Value("SB");
+            }
+            if (input == CountryCode::CountryCodeSO)
+            {
+                output = Json::Value("SO");
+            }
+            if (input == CountryCode::CountryCodeZA)
+            {
+                output = Json::Value("ZA");
+            }
+            if (input == CountryCode::CountryCodeGS)
+            {
+                output = Json::Value("GS");
+            }
+            if (input == CountryCode::CountryCodeSS)
+            {
+                output = Json::Value("SS");
+            }
+            if (input == CountryCode::CountryCodeES)
+            {
+                output = Json::Value("ES");
+            }
+            if (input == CountryCode::CountryCodeLK)
+            {
+                output = Json::Value("LK");
+            }
+            if (input == CountryCode::CountryCodeSD)
+            {
+                output = Json::Value("SD");
+            }
+            if (input == CountryCode::CountryCodeSR)
+            {
+                output = Json::Value("SR");
+            }
+            if (input == CountryCode::CountryCodeSJ)
+            {
+                output = Json::Value("SJ");
+            }
+            if (input == CountryCode::CountryCodeSZ)
+            {
+                output = Json::Value("SZ");
+            }
+            if (input == CountryCode::CountryCodeSE)
+            {
+                output = Json::Value("SE");
+            }
+            if (input == CountryCode::CountryCodeCH)
+            {
+                output = Json::Value("CH");
+            }
+            if (input == CountryCode::CountryCodeSY)
+            {
+                output = Json::Value("SY");
+            }
+            if (input == CountryCode::CountryCodeTW)
+            {
+                output = Json::Value("TW");
+            }
+            if (input == CountryCode::CountryCodeTJ)
+            {
+                output = Json::Value("TJ");
+            }
+            if (input == CountryCode::CountryCodeTZ)
+            {
+                output = Json::Value("TZ");
+            }
+            if (input == CountryCode::CountryCodeTH)
+            {
+                output = Json::Value("TH");
+            }
+            if (input == CountryCode::CountryCodeTL)
+            {
+                output = Json::Value("TL");
+            }
+            if (input == CountryCode::CountryCodeTG)
+            {
+                output = Json::Value("TG");
+            }
+            if (input == CountryCode::CountryCodeTK)
+            {
+                output = Json::Value("TK");
+            }
+            if (input == CountryCode::CountryCodeTO)
+            {
+                output = Json::Value("TO");
+            }
+            if (input == CountryCode::CountryCodeTT)
+            {
+                output = Json::Value("TT");
+            }
+            if (input == CountryCode::CountryCodeTN)
+            {
+                output = Json::Value("TN");
+            }
+            if (input == CountryCode::CountryCodeTR)
+            {
+                output = Json::Value("TR");
+            }
+            if (input == CountryCode::CountryCodeTM)
+            {
+                output = Json::Value("TM");
+            }
+            if (input == CountryCode::CountryCodeTC)
+            {
+                output = Json::Value("TC");
+            }
+            if (input == CountryCode::CountryCodeTV)
+            {
+                output = Json::Value("TV");
+            }
+            if (input == CountryCode::CountryCodeUG)
+            {
+                output = Json::Value("UG");
+            }
+            if (input == CountryCode::CountryCodeUA)
+            {
+                output = Json::Value("UA");
+            }
+            if (input == CountryCode::CountryCodeAE)
+            {
+                output = Json::Value("AE");
+            }
+            if (input == CountryCode::CountryCodeGB)
+            {
+                output = Json::Value("GB");
+            }
+            if (input == CountryCode::CountryCodeUS)
+            {
+                output = Json::Value("US");
+            }
+            if (input == CountryCode::CountryCodeUM)
+            {
+                output = Json::Value("UM");
+            }
+            if (input == CountryCode::CountryCodeUY)
+            {
+                output = Json::Value("UY");
+            }
+            if (input == CountryCode::CountryCodeUZ)
+            {
+                output = Json::Value("UZ");
+            }
+            if (input == CountryCode::CountryCodeVU)
+            {
+                output = Json::Value("VU");
+            }
+            if (input == CountryCode::CountryCodeVE)
+            {
+                output = Json::Value("VE");
+            }
+            if (input == CountryCode::CountryCodeVN)
+            {
+                output = Json::Value("VN");
+            }
+            if (input == CountryCode::CountryCodeVG)
+            {
+                output = Json::Value("VG");
+            }
+            if (input == CountryCode::CountryCodeVI)
+            {
+                output = Json::Value("VI");
+            }
+            if (input == CountryCode::CountryCodeWF)
+            {
+                output = Json::Value("WF");
+            }
+            if (input == CountryCode::CountryCodeEH)
+            {
+                output = Json::Value("EH");
+            }
+            if (input == CountryCode::CountryCodeYE)
+            {
+                output = Json::Value("YE");
+            }
+            if (input == CountryCode::CountryCodeZM)
+            {
+                output = Json::Value("ZM");
+            }
+            if (input == CountryCode::CountryCodeZW)
+            {
+                output = Json::Value("ZW");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, CountryCode& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "AF") output = CountryCode::CountryCodeAF;
-            if (inputStr == "AX") output = CountryCode::CountryCodeAX;
-            if (inputStr == "AL") output = CountryCode::CountryCodeAL;
-            if (inputStr == "DZ") output = CountryCode::CountryCodeDZ;
-            if (inputStr == "AS") output = CountryCode::CountryCodeAS;
-            if (inputStr == "AD") output = CountryCode::CountryCodeAD;
-            if (inputStr == "AO") output = CountryCode::CountryCodeAO;
-            if (inputStr == "AI") output = CountryCode::CountryCodeAI;
-            if (inputStr == "AQ") output = CountryCode::CountryCodeAQ;
-            if (inputStr == "AG") output = CountryCode::CountryCodeAG;
-            if (inputStr == "AR") output = CountryCode::CountryCodeAR;
-            if (inputStr == "AM") output = CountryCode::CountryCodeAM;
-            if (inputStr == "AW") output = CountryCode::CountryCodeAW;
-            if (inputStr == "AU") output = CountryCode::CountryCodeAU;
-            if (inputStr == "AT") output = CountryCode::CountryCodeAT;
-            if (inputStr == "AZ") output = CountryCode::CountryCodeAZ;
-            if (inputStr == "BS") output = CountryCode::CountryCodeBS;
-            if (inputStr == "BH") output = CountryCode::CountryCodeBH;
-            if (inputStr == "BD") output = CountryCode::CountryCodeBD;
-            if (inputStr == "BB") output = CountryCode::CountryCodeBB;
-            if (inputStr == "BY") output = CountryCode::CountryCodeBY;
-            if (inputStr == "BE") output = CountryCode::CountryCodeBE;
-            if (inputStr == "BZ") output = CountryCode::CountryCodeBZ;
-            if (inputStr == "BJ") output = CountryCode::CountryCodeBJ;
-            if (inputStr == "BM") output = CountryCode::CountryCodeBM;
-            if (inputStr == "BT") output = CountryCode::CountryCodeBT;
-            if (inputStr == "BO") output = CountryCode::CountryCodeBO;
-            if (inputStr == "BQ") output = CountryCode::CountryCodeBQ;
-            if (inputStr == "BA") output = CountryCode::CountryCodeBA;
-            if (inputStr == "BW") output = CountryCode::CountryCodeBW;
-            if (inputStr == "BV") output = CountryCode::CountryCodeBV;
-            if (inputStr == "BR") output = CountryCode::CountryCodeBR;
-            if (inputStr == "IO") output = CountryCode::CountryCodeIO;
-            if (inputStr == "BN") output = CountryCode::CountryCodeBN;
-            if (inputStr == "BG") output = CountryCode::CountryCodeBG;
-            if (inputStr == "BF") output = CountryCode::CountryCodeBF;
-            if (inputStr == "BI") output = CountryCode::CountryCodeBI;
-            if (inputStr == "KH") output = CountryCode::CountryCodeKH;
-            if (inputStr == "CM") output = CountryCode::CountryCodeCM;
-            if (inputStr == "CA") output = CountryCode::CountryCodeCA;
-            if (inputStr == "CV") output = CountryCode::CountryCodeCV;
-            if (inputStr == "KY") output = CountryCode::CountryCodeKY;
-            if (inputStr == "CF") output = CountryCode::CountryCodeCF;
-            if (inputStr == "TD") output = CountryCode::CountryCodeTD;
-            if (inputStr == "CL") output = CountryCode::CountryCodeCL;
-            if (inputStr == "CN") output = CountryCode::CountryCodeCN;
-            if (inputStr == "CX") output = CountryCode::CountryCodeCX;
-            if (inputStr == "CC") output = CountryCode::CountryCodeCC;
-            if (inputStr == "CO") output = CountryCode::CountryCodeCO;
-            if (inputStr == "KM") output = CountryCode::CountryCodeKM;
-            if (inputStr == "CG") output = CountryCode::CountryCodeCG;
-            if (inputStr == "CD") output = CountryCode::CountryCodeCD;
-            if (inputStr == "CK") output = CountryCode::CountryCodeCK;
-            if (inputStr == "CR") output = CountryCode::CountryCodeCR;
-            if (inputStr == "CI") output = CountryCode::CountryCodeCI;
-            if (inputStr == "HR") output = CountryCode::CountryCodeHR;
-            if (inputStr == "CU") output = CountryCode::CountryCodeCU;
-            if (inputStr == "CW") output = CountryCode::CountryCodeCW;
-            if (inputStr == "CY") output = CountryCode::CountryCodeCY;
-            if (inputStr == "CZ") output = CountryCode::CountryCodeCZ;
-            if (inputStr == "DK") output = CountryCode::CountryCodeDK;
-            if (inputStr == "DJ") output = CountryCode::CountryCodeDJ;
-            if (inputStr == "DM") output = CountryCode::CountryCodeDM;
-            if (inputStr == "DO") output = CountryCode::CountryCodeDO;
-            if (inputStr == "EC") output = CountryCode::CountryCodeEC;
-            if (inputStr == "EG") output = CountryCode::CountryCodeEG;
-            if (inputStr == "SV") output = CountryCode::CountryCodeSV;
-            if (inputStr == "GQ") output = CountryCode::CountryCodeGQ;
-            if (inputStr == "ER") output = CountryCode::CountryCodeER;
-            if (inputStr == "EE") output = CountryCode::CountryCodeEE;
-            if (inputStr == "ET") output = CountryCode::CountryCodeET;
-            if (inputStr == "FK") output = CountryCode::CountryCodeFK;
-            if (inputStr == "FO") output = CountryCode::CountryCodeFO;
-            if (inputStr == "FJ") output = CountryCode::CountryCodeFJ;
-            if (inputStr == "FI") output = CountryCode::CountryCodeFI;
-            if (inputStr == "FR") output = CountryCode::CountryCodeFR;
-            if (inputStr == "GF") output = CountryCode::CountryCodeGF;
-            if (inputStr == "PF") output = CountryCode::CountryCodePF;
-            if (inputStr == "TF") output = CountryCode::CountryCodeTF;
-            if (inputStr == "GA") output = CountryCode::CountryCodeGA;
-            if (inputStr == "GM") output = CountryCode::CountryCodeGM;
-            if (inputStr == "GE") output = CountryCode::CountryCodeGE;
-            if (inputStr == "DE") output = CountryCode::CountryCodeDE;
-            if (inputStr == "GH") output = CountryCode::CountryCodeGH;
-            if (inputStr == "GI") output = CountryCode::CountryCodeGI;
-            if (inputStr == "GR") output = CountryCode::CountryCodeGR;
-            if (inputStr == "GL") output = CountryCode::CountryCodeGL;
-            if (inputStr == "GD") output = CountryCode::CountryCodeGD;
-            if (inputStr == "GP") output = CountryCode::CountryCodeGP;
-            if (inputStr == "GU") output = CountryCode::CountryCodeGU;
-            if (inputStr == "GT") output = CountryCode::CountryCodeGT;
-            if (inputStr == "GG") output = CountryCode::CountryCodeGG;
-            if (inputStr == "GN") output = CountryCode::CountryCodeGN;
-            if (inputStr == "GW") output = CountryCode::CountryCodeGW;
-            if (inputStr == "GY") output = CountryCode::CountryCodeGY;
-            if (inputStr == "HT") output = CountryCode::CountryCodeHT;
-            if (inputStr == "HM") output = CountryCode::CountryCodeHM;
-            if (inputStr == "VA") output = CountryCode::CountryCodeVA;
-            if (inputStr == "HN") output = CountryCode::CountryCodeHN;
-            if (inputStr == "HK") output = CountryCode::CountryCodeHK;
-            if (inputStr == "HU") output = CountryCode::CountryCodeHU;
-            if (inputStr == "IS") output = CountryCode::CountryCodeIS;
-            if (inputStr == "IN") output = CountryCode::CountryCodeIN;
-            if (inputStr == "ID") output = CountryCode::CountryCodeID;
-            if (inputStr == "IR") output = CountryCode::CountryCodeIR;
-            if (inputStr == "IQ") output = CountryCode::CountryCodeIQ;
-            if (inputStr == "IE") output = CountryCode::CountryCodeIE;
-            if (inputStr == "IM") output = CountryCode::CountryCodeIM;
-            if (inputStr == "IL") output = CountryCode::CountryCodeIL;
-            if (inputStr == "IT") output = CountryCode::CountryCodeIT;
-            if (inputStr == "JM") output = CountryCode::CountryCodeJM;
-            if (inputStr == "JP") output = CountryCode::CountryCodeJP;
-            if (inputStr == "JE") output = CountryCode::CountryCodeJE;
-            if (inputStr == "JO") output = CountryCode::CountryCodeJO;
-            if (inputStr == "KZ") output = CountryCode::CountryCodeKZ;
-            if (inputStr == "KE") output = CountryCode::CountryCodeKE;
-            if (inputStr == "KI") output = CountryCode::CountryCodeKI;
-            if (inputStr == "KP") output = CountryCode::CountryCodeKP;
-            if (inputStr == "KR") output = CountryCode::CountryCodeKR;
-            if (inputStr == "KW") output = CountryCode::CountryCodeKW;
-            if (inputStr == "KG") output = CountryCode::CountryCodeKG;
-            if (inputStr == "LA") output = CountryCode::CountryCodeLA;
-            if (inputStr == "LV") output = CountryCode::CountryCodeLV;
-            if (inputStr == "LB") output = CountryCode::CountryCodeLB;
-            if (inputStr == "LS") output = CountryCode::CountryCodeLS;
-            if (inputStr == "LR") output = CountryCode::CountryCodeLR;
-            if (inputStr == "LY") output = CountryCode::CountryCodeLY;
-            if (inputStr == "LI") output = CountryCode::CountryCodeLI;
-            if (inputStr == "LT") output = CountryCode::CountryCodeLT;
-            if (inputStr == "LU") output = CountryCode::CountryCodeLU;
-            if (inputStr == "MO") output = CountryCode::CountryCodeMO;
-            if (inputStr == "MK") output = CountryCode::CountryCodeMK;
-            if (inputStr == "MG") output = CountryCode::CountryCodeMG;
-            if (inputStr == "MW") output = CountryCode::CountryCodeMW;
-            if (inputStr == "MY") output = CountryCode::CountryCodeMY;
-            if (inputStr == "MV") output = CountryCode::CountryCodeMV;
-            if (inputStr == "ML") output = CountryCode::CountryCodeML;
-            if (inputStr == "MT") output = CountryCode::CountryCodeMT;
-            if (inputStr == "MH") output = CountryCode::CountryCodeMH;
-            if (inputStr == "MQ") output = CountryCode::CountryCodeMQ;
-            if (inputStr == "MR") output = CountryCode::CountryCodeMR;
-            if (inputStr == "MU") output = CountryCode::CountryCodeMU;
-            if (inputStr == "YT") output = CountryCode::CountryCodeYT;
-            if (inputStr == "MX") output = CountryCode::CountryCodeMX;
-            if (inputStr == "FM") output = CountryCode::CountryCodeFM;
-            if (inputStr == "MD") output = CountryCode::CountryCodeMD;
-            if (inputStr == "MC") output = CountryCode::CountryCodeMC;
-            if (inputStr == "MN") output = CountryCode::CountryCodeMN;
-            if (inputStr == "ME") output = CountryCode::CountryCodeME;
-            if (inputStr == "MS") output = CountryCode::CountryCodeMS;
-            if (inputStr == "MA") output = CountryCode::CountryCodeMA;
-            if (inputStr == "MZ") output = CountryCode::CountryCodeMZ;
-            if (inputStr == "MM") output = CountryCode::CountryCodeMM;
-            if (inputStr == "NA") output = CountryCode::CountryCodeNA;
-            if (inputStr == "NR") output = CountryCode::CountryCodeNR;
-            if (inputStr == "NP") output = CountryCode::CountryCodeNP;
-            if (inputStr == "NL") output = CountryCode::CountryCodeNL;
-            if (inputStr == "NC") output = CountryCode::CountryCodeNC;
-            if (inputStr == "NZ") output = CountryCode::CountryCodeNZ;
-            if (inputStr == "NI") output = CountryCode::CountryCodeNI;
-            if (inputStr == "NE") output = CountryCode::CountryCodeNE;
-            if (inputStr == "NG") output = CountryCode::CountryCodeNG;
-            if (inputStr == "NU") output = CountryCode::CountryCodeNU;
-            if (inputStr == "NF") output = CountryCode::CountryCodeNF;
-            if (inputStr == "MP") output = CountryCode::CountryCodeMP;
-            if (inputStr == "NO") output = CountryCode::CountryCodeNO;
-            if (inputStr == "OM") output = CountryCode::CountryCodeOM;
-            if (inputStr == "PK") output = CountryCode::CountryCodePK;
-            if (inputStr == "PW") output = CountryCode::CountryCodePW;
-            if (inputStr == "PS") output = CountryCode::CountryCodePS;
-            if (inputStr == "PA") output = CountryCode::CountryCodePA;
-            if (inputStr == "PG") output = CountryCode::CountryCodePG;
-            if (inputStr == "PY") output = CountryCode::CountryCodePY;
-            if (inputStr == "PE") output = CountryCode::CountryCodePE;
-            if (inputStr == "PH") output = CountryCode::CountryCodePH;
-            if (inputStr == "PN") output = CountryCode::CountryCodePN;
-            if (inputStr == "PL") output = CountryCode::CountryCodePL;
-            if (inputStr == "PT") output = CountryCode::CountryCodePT;
-            if (inputStr == "PR") output = CountryCode::CountryCodePR;
-            if (inputStr == "QA") output = CountryCode::CountryCodeQA;
-            if (inputStr == "RE") output = CountryCode::CountryCodeRE;
-            if (inputStr == "RO") output = CountryCode::CountryCodeRO;
-            if (inputStr == "RU") output = CountryCode::CountryCodeRU;
-            if (inputStr == "RW") output = CountryCode::CountryCodeRW;
-            if (inputStr == "BL") output = CountryCode::CountryCodeBL;
-            if (inputStr == "SH") output = CountryCode::CountryCodeSH;
-            if (inputStr == "KN") output = CountryCode::CountryCodeKN;
-            if (inputStr == "LC") output = CountryCode::CountryCodeLC;
-            if (inputStr == "MF") output = CountryCode::CountryCodeMF;
-            if (inputStr == "PM") output = CountryCode::CountryCodePM;
-            if (inputStr == "VC") output = CountryCode::CountryCodeVC;
-            if (inputStr == "WS") output = CountryCode::CountryCodeWS;
-            if (inputStr == "SM") output = CountryCode::CountryCodeSM;
-            if (inputStr == "ST") output = CountryCode::CountryCodeST;
-            if (inputStr == "SA") output = CountryCode::CountryCodeSA;
-            if (inputStr == "SN") output = CountryCode::CountryCodeSN;
-            if (inputStr == "RS") output = CountryCode::CountryCodeRS;
-            if (inputStr == "SC") output = CountryCode::CountryCodeSC;
-            if (inputStr == "SL") output = CountryCode::CountryCodeSL;
-            if (inputStr == "SG") output = CountryCode::CountryCodeSG;
-            if (inputStr == "SX") output = CountryCode::CountryCodeSX;
-            if (inputStr == "SK") output = CountryCode::CountryCodeSK;
-            if (inputStr == "SI") output = CountryCode::CountryCodeSI;
-            if (inputStr == "SB") output = CountryCode::CountryCodeSB;
-            if (inputStr == "SO") output = CountryCode::CountryCodeSO;
-            if (inputStr == "ZA") output = CountryCode::CountryCodeZA;
-            if (inputStr == "GS") output = CountryCode::CountryCodeGS;
-            if (inputStr == "SS") output = CountryCode::CountryCodeSS;
-            if (inputStr == "ES") output = CountryCode::CountryCodeES;
-            if (inputStr == "LK") output = CountryCode::CountryCodeLK;
-            if (inputStr == "SD") output = CountryCode::CountryCodeSD;
-            if (inputStr == "SR") output = CountryCode::CountryCodeSR;
-            if (inputStr == "SJ") output = CountryCode::CountryCodeSJ;
-            if (inputStr == "SZ") output = CountryCode::CountryCodeSZ;
-            if (inputStr == "SE") output = CountryCode::CountryCodeSE;
-            if (inputStr == "CH") output = CountryCode::CountryCodeCH;
-            if (inputStr == "SY") output = CountryCode::CountryCodeSY;
-            if (inputStr == "TW") output = CountryCode::CountryCodeTW;
-            if (inputStr == "TJ") output = CountryCode::CountryCodeTJ;
-            if (inputStr == "TZ") output = CountryCode::CountryCodeTZ;
-            if (inputStr == "TH") output = CountryCode::CountryCodeTH;
-            if (inputStr == "TL") output = CountryCode::CountryCodeTL;
-            if (inputStr == "TG") output = CountryCode::CountryCodeTG;
-            if (inputStr == "TK") output = CountryCode::CountryCodeTK;
-            if (inputStr == "TO") output = CountryCode::CountryCodeTO;
-            if (inputStr == "TT") output = CountryCode::CountryCodeTT;
-            if (inputStr == "TN") output = CountryCode::CountryCodeTN;
-            if (inputStr == "TR") output = CountryCode::CountryCodeTR;
-            if (inputStr == "TM") output = CountryCode::CountryCodeTM;
-            if (inputStr == "TC") output = CountryCode::CountryCodeTC;
-            if (inputStr == "TV") output = CountryCode::CountryCodeTV;
-            if (inputStr == "UG") output = CountryCode::CountryCodeUG;
-            if (inputStr == "UA") output = CountryCode::CountryCodeUA;
-            if (inputStr == "AE") output = CountryCode::CountryCodeAE;
-            if (inputStr == "GB") output = CountryCode::CountryCodeGB;
-            if (inputStr == "US") output = CountryCode::CountryCodeUS;
-            if (inputStr == "UM") output = CountryCode::CountryCodeUM;
-            if (inputStr == "UY") output = CountryCode::CountryCodeUY;
-            if (inputStr == "UZ") output = CountryCode::CountryCodeUZ;
-            if (inputStr == "VU") output = CountryCode::CountryCodeVU;
-            if (inputStr == "VE") output = CountryCode::CountryCodeVE;
-            if (inputStr == "VN") output = CountryCode::CountryCodeVN;
-            if (inputStr == "VG") output = CountryCode::CountryCodeVG;
-            if (inputStr == "VI") output = CountryCode::CountryCodeVI;
-            if (inputStr == "WF") output = CountryCode::CountryCodeWF;
-            if (inputStr == "EH") output = CountryCode::CountryCodeEH;
-            if (inputStr == "YE") output = CountryCode::CountryCodeYE;
-            if (inputStr == "ZM") output = CountryCode::CountryCodeZM;
-            if (inputStr == "ZW") output = CountryCode::CountryCodeZW;
+            if (inputStr == "AF")
+            {
+                output = CountryCode::CountryCodeAF;
+            }
+            if (inputStr == "AX")
+            {
+                output = CountryCode::CountryCodeAX;
+            }
+            if (inputStr == "AL")
+            {
+                output = CountryCode::CountryCodeAL;
+            }
+            if (inputStr == "DZ")
+            {
+                output = CountryCode::CountryCodeDZ;
+            }
+            if (inputStr == "AS")
+            {
+                output = CountryCode::CountryCodeAS;
+            }
+            if (inputStr == "AD")
+            {
+                output = CountryCode::CountryCodeAD;
+            }
+            if (inputStr == "AO")
+            {
+                output = CountryCode::CountryCodeAO;
+            }
+            if (inputStr == "AI")
+            {
+                output = CountryCode::CountryCodeAI;
+            }
+            if (inputStr == "AQ")
+            {
+                output = CountryCode::CountryCodeAQ;
+            }
+            if (inputStr == "AG")
+            {
+                output = CountryCode::CountryCodeAG;
+            }
+            if (inputStr == "AR")
+            {
+                output = CountryCode::CountryCodeAR;
+            }
+            if (inputStr == "AM")
+            {
+                output = CountryCode::CountryCodeAM;
+            }
+            if (inputStr == "AW")
+            {
+                output = CountryCode::CountryCodeAW;
+            }
+            if (inputStr == "AU")
+            {
+                output = CountryCode::CountryCodeAU;
+            }
+            if (inputStr == "AT")
+            {
+                output = CountryCode::CountryCodeAT;
+            }
+            if (inputStr == "AZ")
+            {
+                output = CountryCode::CountryCodeAZ;
+            }
+            if (inputStr == "BS")
+            {
+                output = CountryCode::CountryCodeBS;
+            }
+            if (inputStr == "BH")
+            {
+                output = CountryCode::CountryCodeBH;
+            }
+            if (inputStr == "BD")
+            {
+                output = CountryCode::CountryCodeBD;
+            }
+            if (inputStr == "BB")
+            {
+                output = CountryCode::CountryCodeBB;
+            }
+            if (inputStr == "BY")
+            {
+                output = CountryCode::CountryCodeBY;
+            }
+            if (inputStr == "BE")
+            {
+                output = CountryCode::CountryCodeBE;
+            }
+            if (inputStr == "BZ")
+            {
+                output = CountryCode::CountryCodeBZ;
+            }
+            if (inputStr == "BJ")
+            {
+                output = CountryCode::CountryCodeBJ;
+            }
+            if (inputStr == "BM")
+            {
+                output = CountryCode::CountryCodeBM;
+            }
+            if (inputStr == "BT")
+            {
+                output = CountryCode::CountryCodeBT;
+            }
+            if (inputStr == "BO")
+            {
+                output = CountryCode::CountryCodeBO;
+            }
+            if (inputStr == "BQ")
+            {
+                output = CountryCode::CountryCodeBQ;
+            }
+            if (inputStr == "BA")
+            {
+                output = CountryCode::CountryCodeBA;
+            }
+            if (inputStr == "BW")
+            {
+                output = CountryCode::CountryCodeBW;
+            }
+            if (inputStr == "BV")
+            {
+                output = CountryCode::CountryCodeBV;
+            }
+            if (inputStr == "BR")
+            {
+                output = CountryCode::CountryCodeBR;
+            }
+            if (inputStr == "IO")
+            {
+                output = CountryCode::CountryCodeIO;
+            }
+            if (inputStr == "BN")
+            {
+                output = CountryCode::CountryCodeBN;
+            }
+            if (inputStr == "BG")
+            {
+                output = CountryCode::CountryCodeBG;
+            }
+            if (inputStr == "BF")
+            {
+                output = CountryCode::CountryCodeBF;
+            }
+            if (inputStr == "BI")
+            {
+                output = CountryCode::CountryCodeBI;
+            }
+            if (inputStr == "KH")
+            {
+                output = CountryCode::CountryCodeKH;
+            }
+            if (inputStr == "CM")
+            {
+                output = CountryCode::CountryCodeCM;
+            }
+            if (inputStr == "CA")
+            {
+                output = CountryCode::CountryCodeCA;
+            }
+            if (inputStr == "CV")
+            {
+                output = CountryCode::CountryCodeCV;
+            }
+            if (inputStr == "KY")
+            {
+                output = CountryCode::CountryCodeKY;
+            }
+            if (inputStr == "CF")
+            {
+                output = CountryCode::CountryCodeCF;
+            }
+            if (inputStr == "TD")
+            {
+                output = CountryCode::CountryCodeTD;
+            }
+            if (inputStr == "CL")
+            {
+                output = CountryCode::CountryCodeCL;
+            }
+            if (inputStr == "CN")
+            {
+                output = CountryCode::CountryCodeCN;
+            }
+            if (inputStr == "CX")
+            {
+                output = CountryCode::CountryCodeCX;
+            }
+            if (inputStr == "CC")
+            {
+                output = CountryCode::CountryCodeCC;
+            }
+            if (inputStr == "CO")
+            {
+                output = CountryCode::CountryCodeCO;
+            }
+            if (inputStr == "KM")
+            {
+                output = CountryCode::CountryCodeKM;
+            }
+            if (inputStr == "CG")
+            {
+                output = CountryCode::CountryCodeCG;
+            }
+            if (inputStr == "CD")
+            {
+                output = CountryCode::CountryCodeCD;
+            }
+            if (inputStr == "CK")
+            {
+                output = CountryCode::CountryCodeCK;
+            }
+            if (inputStr == "CR")
+            {
+                output = CountryCode::CountryCodeCR;
+            }
+            if (inputStr == "CI")
+            {
+                output = CountryCode::CountryCodeCI;
+            }
+            if (inputStr == "HR")
+            {
+                output = CountryCode::CountryCodeHR;
+            }
+            if (inputStr == "CU")
+            {
+                output = CountryCode::CountryCodeCU;
+            }
+            if (inputStr == "CW")
+            {
+                output = CountryCode::CountryCodeCW;
+            }
+            if (inputStr == "CY")
+            {
+                output = CountryCode::CountryCodeCY;
+            }
+            if (inputStr == "CZ")
+            {
+                output = CountryCode::CountryCodeCZ;
+            }
+            if (inputStr == "DK")
+            {
+                output = CountryCode::CountryCodeDK;
+            }
+            if (inputStr == "DJ")
+            {
+                output = CountryCode::CountryCodeDJ;
+            }
+            if (inputStr == "DM")
+            {
+                output = CountryCode::CountryCodeDM;
+            }
+            if (inputStr == "DO")
+            {
+                output = CountryCode::CountryCodeDO;
+            }
+            if (inputStr == "EC")
+            {
+                output = CountryCode::CountryCodeEC;
+            }
+            if (inputStr == "EG")
+            {
+                output = CountryCode::CountryCodeEG;
+            }
+            if (inputStr == "SV")
+            {
+                output = CountryCode::CountryCodeSV;
+            }
+            if (inputStr == "GQ")
+            {
+                output = CountryCode::CountryCodeGQ;
+            }
+            if (inputStr == "ER")
+            {
+                output = CountryCode::CountryCodeER;
+            }
+            if (inputStr == "EE")
+            {
+                output = CountryCode::CountryCodeEE;
+            }
+            if (inputStr == "ET")
+            {
+                output = CountryCode::CountryCodeET;
+            }
+            if (inputStr == "FK")
+            {
+                output = CountryCode::CountryCodeFK;
+            }
+            if (inputStr == "FO")
+            {
+                output = CountryCode::CountryCodeFO;
+            }
+            if (inputStr == "FJ")
+            {
+                output = CountryCode::CountryCodeFJ;
+            }
+            if (inputStr == "FI")
+            {
+                output = CountryCode::CountryCodeFI;
+            }
+            if (inputStr == "FR")
+            {
+                output = CountryCode::CountryCodeFR;
+            }
+            if (inputStr == "GF")
+            {
+                output = CountryCode::CountryCodeGF;
+            }
+            if (inputStr == "PF")
+            {
+                output = CountryCode::CountryCodePF;
+            }
+            if (inputStr == "TF")
+            {
+                output = CountryCode::CountryCodeTF;
+            }
+            if (inputStr == "GA")
+            {
+                output = CountryCode::CountryCodeGA;
+            }
+            if (inputStr == "GM")
+            {
+                output = CountryCode::CountryCodeGM;
+            }
+            if (inputStr == "GE")
+            {
+                output = CountryCode::CountryCodeGE;
+            }
+            if (inputStr == "DE")
+            {
+                output = CountryCode::CountryCodeDE;
+            }
+            if (inputStr == "GH")
+            {
+                output = CountryCode::CountryCodeGH;
+            }
+            if (inputStr == "GI")
+            {
+                output = CountryCode::CountryCodeGI;
+            }
+            if (inputStr == "GR")
+            {
+                output = CountryCode::CountryCodeGR;
+            }
+            if (inputStr == "GL")
+            {
+                output = CountryCode::CountryCodeGL;
+            }
+            if (inputStr == "GD")
+            {
+                output = CountryCode::CountryCodeGD;
+            }
+            if (inputStr == "GP")
+            {
+                output = CountryCode::CountryCodeGP;
+            }
+            if (inputStr == "GU")
+            {
+                output = CountryCode::CountryCodeGU;
+            }
+            if (inputStr == "GT")
+            {
+                output = CountryCode::CountryCodeGT;
+            }
+            if (inputStr == "GG")
+            {
+                output = CountryCode::CountryCodeGG;
+            }
+            if (inputStr == "GN")
+            {
+                output = CountryCode::CountryCodeGN;
+            }
+            if (inputStr == "GW")
+            {
+                output = CountryCode::CountryCodeGW;
+            }
+            if (inputStr == "GY")
+            {
+                output = CountryCode::CountryCodeGY;
+            }
+            if (inputStr == "HT")
+            {
+                output = CountryCode::CountryCodeHT;
+            }
+            if (inputStr == "HM")
+            {
+                output = CountryCode::CountryCodeHM;
+            }
+            if (inputStr == "VA")
+            {
+                output = CountryCode::CountryCodeVA;
+            }
+            if (inputStr == "HN")
+            {
+                output = CountryCode::CountryCodeHN;
+            }
+            if (inputStr == "HK")
+            {
+                output = CountryCode::CountryCodeHK;
+            }
+            if (inputStr == "HU")
+            {
+                output = CountryCode::CountryCodeHU;
+            }
+            if (inputStr == "IS")
+            {
+                output = CountryCode::CountryCodeIS;
+            }
+            if (inputStr == "IN")
+            {
+                output = CountryCode::CountryCodeIN;
+            }
+            if (inputStr == "ID")
+            {
+                output = CountryCode::CountryCodeID;
+            }
+            if (inputStr == "IR")
+            {
+                output = CountryCode::CountryCodeIR;
+            }
+            if (inputStr == "IQ")
+            {
+                output = CountryCode::CountryCodeIQ;
+            }
+            if (inputStr == "IE")
+            {
+                output = CountryCode::CountryCodeIE;
+            }
+            if (inputStr == "IM")
+            {
+                output = CountryCode::CountryCodeIM;
+            }
+            if (inputStr == "IL")
+            {
+                output = CountryCode::CountryCodeIL;
+            }
+            if (inputStr == "IT")
+            {
+                output = CountryCode::CountryCodeIT;
+            }
+            if (inputStr == "JM")
+            {
+                output = CountryCode::CountryCodeJM;
+            }
+            if (inputStr == "JP")
+            {
+                output = CountryCode::CountryCodeJP;
+            }
+            if (inputStr == "JE")
+            {
+                output = CountryCode::CountryCodeJE;
+            }
+            if (inputStr == "JO")
+            {
+                output = CountryCode::CountryCodeJO;
+            }
+            if (inputStr == "KZ")
+            {
+                output = CountryCode::CountryCodeKZ;
+            }
+            if (inputStr == "KE")
+            {
+                output = CountryCode::CountryCodeKE;
+            }
+            if (inputStr == "KI")
+            {
+                output = CountryCode::CountryCodeKI;
+            }
+            if (inputStr == "KP")
+            {
+                output = CountryCode::CountryCodeKP;
+            }
+            if (inputStr == "KR")
+            {
+                output = CountryCode::CountryCodeKR;
+            }
+            if (inputStr == "KW")
+            {
+                output = CountryCode::CountryCodeKW;
+            }
+            if (inputStr == "KG")
+            {
+                output = CountryCode::CountryCodeKG;
+            }
+            if (inputStr == "LA")
+            {
+                output = CountryCode::CountryCodeLA;
+            }
+            if (inputStr == "LV")
+            {
+                output = CountryCode::CountryCodeLV;
+            }
+            if (inputStr == "LB")
+            {
+                output = CountryCode::CountryCodeLB;
+            }
+            if (inputStr == "LS")
+            {
+                output = CountryCode::CountryCodeLS;
+            }
+            if (inputStr == "LR")
+            {
+                output = CountryCode::CountryCodeLR;
+            }
+            if (inputStr == "LY")
+            {
+                output = CountryCode::CountryCodeLY;
+            }
+            if (inputStr == "LI")
+            {
+                output = CountryCode::CountryCodeLI;
+            }
+            if (inputStr == "LT")
+            {
+                output = CountryCode::CountryCodeLT;
+            }
+            if (inputStr == "LU")
+            {
+                output = CountryCode::CountryCodeLU;
+            }
+            if (inputStr == "MO")
+            {
+                output = CountryCode::CountryCodeMO;
+            }
+            if (inputStr == "MK")
+            {
+                output = CountryCode::CountryCodeMK;
+            }
+            if (inputStr == "MG")
+            {
+                output = CountryCode::CountryCodeMG;
+            }
+            if (inputStr == "MW")
+            {
+                output = CountryCode::CountryCodeMW;
+            }
+            if (inputStr == "MY")
+            {
+                output = CountryCode::CountryCodeMY;
+            }
+            if (inputStr == "MV")
+            {
+                output = CountryCode::CountryCodeMV;
+            }
+            if (inputStr == "ML")
+            {
+                output = CountryCode::CountryCodeML;
+            }
+            if (inputStr == "MT")
+            {
+                output = CountryCode::CountryCodeMT;
+            }
+            if (inputStr == "MH")
+            {
+                output = CountryCode::CountryCodeMH;
+            }
+            if (inputStr == "MQ")
+            {
+                output = CountryCode::CountryCodeMQ;
+            }
+            if (inputStr == "MR")
+            {
+                output = CountryCode::CountryCodeMR;
+            }
+            if (inputStr == "MU")
+            {
+                output = CountryCode::CountryCodeMU;
+            }
+            if (inputStr == "YT")
+            {
+                output = CountryCode::CountryCodeYT;
+            }
+            if (inputStr == "MX")
+            {
+                output = CountryCode::CountryCodeMX;
+            }
+            if (inputStr == "FM")
+            {
+                output = CountryCode::CountryCodeFM;
+            }
+            if (inputStr == "MD")
+            {
+                output = CountryCode::CountryCodeMD;
+            }
+            if (inputStr == "MC")
+            {
+                output = CountryCode::CountryCodeMC;
+            }
+            if (inputStr == "MN")
+            {
+                output = CountryCode::CountryCodeMN;
+            }
+            if (inputStr == "ME")
+            {
+                output = CountryCode::CountryCodeME;
+            }
+            if (inputStr == "MS")
+            {
+                output = CountryCode::CountryCodeMS;
+            }
+            if (inputStr == "MA")
+            {
+                output = CountryCode::CountryCodeMA;
+            }
+            if (inputStr == "MZ")
+            {
+                output = CountryCode::CountryCodeMZ;
+            }
+            if (inputStr == "MM")
+            {
+                output = CountryCode::CountryCodeMM;
+            }
+            if (inputStr == "NA")
+            {
+                output = CountryCode::CountryCodeNA;
+            }
+            if (inputStr == "NR")
+            {
+                output = CountryCode::CountryCodeNR;
+            }
+            if (inputStr == "NP")
+            {
+                output = CountryCode::CountryCodeNP;
+            }
+            if (inputStr == "NL")
+            {
+                output = CountryCode::CountryCodeNL;
+            }
+            if (inputStr == "NC")
+            {
+                output = CountryCode::CountryCodeNC;
+            }
+            if (inputStr == "NZ")
+            {
+                output = CountryCode::CountryCodeNZ;
+            }
+            if (inputStr == "NI")
+            {
+                output = CountryCode::CountryCodeNI;
+            }
+            if (inputStr == "NE")
+            {
+                output = CountryCode::CountryCodeNE;
+            }
+            if (inputStr == "NG")
+            {
+                output = CountryCode::CountryCodeNG;
+            }
+            if (inputStr == "NU")
+            {
+                output = CountryCode::CountryCodeNU;
+            }
+            if (inputStr == "NF")
+            {
+                output = CountryCode::CountryCodeNF;
+            }
+            if (inputStr == "MP")
+            {
+                output = CountryCode::CountryCodeMP;
+            }
+            if (inputStr == "NO")
+            {
+                output = CountryCode::CountryCodeNO;
+            }
+            if (inputStr == "OM")
+            {
+                output = CountryCode::CountryCodeOM;
+            }
+            if (inputStr == "PK")
+            {
+                output = CountryCode::CountryCodePK;
+            }
+            if (inputStr == "PW")
+            {
+                output = CountryCode::CountryCodePW;
+            }
+            if (inputStr == "PS")
+            {
+                output = CountryCode::CountryCodePS;
+            }
+            if (inputStr == "PA")
+            {
+                output = CountryCode::CountryCodePA;
+            }
+            if (inputStr == "PG")
+            {
+                output = CountryCode::CountryCodePG;
+            }
+            if (inputStr == "PY")
+            {
+                output = CountryCode::CountryCodePY;
+            }
+            if (inputStr == "PE")
+            {
+                output = CountryCode::CountryCodePE;
+            }
+            if (inputStr == "PH")
+            {
+                output = CountryCode::CountryCodePH;
+            }
+            if (inputStr == "PN")
+            {
+                output = CountryCode::CountryCodePN;
+            }
+            if (inputStr == "PL")
+            {
+                output = CountryCode::CountryCodePL;
+            }
+            if (inputStr == "PT")
+            {
+                output = CountryCode::CountryCodePT;
+            }
+            if (inputStr == "PR")
+            {
+                output = CountryCode::CountryCodePR;
+            }
+            if (inputStr == "QA")
+            {
+                output = CountryCode::CountryCodeQA;
+            }
+            if (inputStr == "RE")
+            {
+                output = CountryCode::CountryCodeRE;
+            }
+            if (inputStr == "RO")
+            {
+                output = CountryCode::CountryCodeRO;
+            }
+            if (inputStr == "RU")
+            {
+                output = CountryCode::CountryCodeRU;
+            }
+            if (inputStr == "RW")
+            {
+                output = CountryCode::CountryCodeRW;
+            }
+            if (inputStr == "BL")
+            {
+                output = CountryCode::CountryCodeBL;
+            }
+            if (inputStr == "SH")
+            {
+                output = CountryCode::CountryCodeSH;
+            }
+            if (inputStr == "KN")
+            {
+                output = CountryCode::CountryCodeKN;
+            }
+            if (inputStr == "LC")
+            {
+                output = CountryCode::CountryCodeLC;
+            }
+            if (inputStr == "MF")
+            {
+                output = CountryCode::CountryCodeMF;
+            }
+            if (inputStr == "PM")
+            {
+                output = CountryCode::CountryCodePM;
+            }
+            if (inputStr == "VC")
+            {
+                output = CountryCode::CountryCodeVC;
+            }
+            if (inputStr == "WS")
+            {
+                output = CountryCode::CountryCodeWS;
+            }
+            if (inputStr == "SM")
+            {
+                output = CountryCode::CountryCodeSM;
+            }
+            if (inputStr == "ST")
+            {
+                output = CountryCode::CountryCodeST;
+            }
+            if (inputStr == "SA")
+            {
+                output = CountryCode::CountryCodeSA;
+            }
+            if (inputStr == "SN")
+            {
+                output = CountryCode::CountryCodeSN;
+            }
+            if (inputStr == "RS")
+            {
+                output = CountryCode::CountryCodeRS;
+            }
+            if (inputStr == "SC")
+            {
+                output = CountryCode::CountryCodeSC;
+            }
+            if (inputStr == "SL")
+            {
+                output = CountryCode::CountryCodeSL;
+            }
+            if (inputStr == "SG")
+            {
+                output = CountryCode::CountryCodeSG;
+            }
+            if (inputStr == "SX")
+            {
+                output = CountryCode::CountryCodeSX;
+            }
+            if (inputStr == "SK")
+            {
+                output = CountryCode::CountryCodeSK;
+            }
+            if (inputStr == "SI")
+            {
+                output = CountryCode::CountryCodeSI;
+            }
+            if (inputStr == "SB")
+            {
+                output = CountryCode::CountryCodeSB;
+            }
+            if (inputStr == "SO")
+            {
+                output = CountryCode::CountryCodeSO;
+            }
+            if (inputStr == "ZA")
+            {
+                output = CountryCode::CountryCodeZA;
+            }
+            if (inputStr == "GS")
+            {
+                output = CountryCode::CountryCodeGS;
+            }
+            if (inputStr == "SS")
+            {
+                output = CountryCode::CountryCodeSS;
+            }
+            if (inputStr == "ES")
+            {
+                output = CountryCode::CountryCodeES;
+            }
+            if (inputStr == "LK")
+            {
+                output = CountryCode::CountryCodeLK;
+            }
+            if (inputStr == "SD")
+            {
+                output = CountryCode::CountryCodeSD;
+            }
+            if (inputStr == "SR")
+            {
+                output = CountryCode::CountryCodeSR;
+            }
+            if (inputStr == "SJ")
+            {
+                output = CountryCode::CountryCodeSJ;
+            }
+            if (inputStr == "SZ")
+            {
+                output = CountryCode::CountryCodeSZ;
+            }
+            if (inputStr == "SE")
+            {
+                output = CountryCode::CountryCodeSE;
+            }
+            if (inputStr == "CH")
+            {
+                output = CountryCode::CountryCodeCH;
+            }
+            if (inputStr == "SY")
+            {
+                output = CountryCode::CountryCodeSY;
+            }
+            if (inputStr == "TW")
+            {
+                output = CountryCode::CountryCodeTW;
+            }
+            if (inputStr == "TJ")
+            {
+                output = CountryCode::CountryCodeTJ;
+            }
+            if (inputStr == "TZ")
+            {
+                output = CountryCode::CountryCodeTZ;
+            }
+            if (inputStr == "TH")
+            {
+                output = CountryCode::CountryCodeTH;
+            }
+            if (inputStr == "TL")
+            {
+                output = CountryCode::CountryCodeTL;
+            }
+            if (inputStr == "TG")
+            {
+                output = CountryCode::CountryCodeTG;
+            }
+            if (inputStr == "TK")
+            {
+                output = CountryCode::CountryCodeTK;
+            }
+            if (inputStr == "TO")
+            {
+                output = CountryCode::CountryCodeTO;
+            }
+            if (inputStr == "TT")
+            {
+                output = CountryCode::CountryCodeTT;
+            }
+            if (inputStr == "TN")
+            {
+                output = CountryCode::CountryCodeTN;
+            }
+            if (inputStr == "TR")
+            {
+                output = CountryCode::CountryCodeTR;
+            }
+            if (inputStr == "TM")
+            {
+                output = CountryCode::CountryCodeTM;
+            }
+            if (inputStr == "TC")
+            {
+                output = CountryCode::CountryCodeTC;
+            }
+            if (inputStr == "TV")
+            {
+                output = CountryCode::CountryCodeTV;
+            }
+            if (inputStr == "UG")
+            {
+                output = CountryCode::CountryCodeUG;
+            }
+            if (inputStr == "UA")
+            {
+                output = CountryCode::CountryCodeUA;
+            }
+            if (inputStr == "AE")
+            {
+                output = CountryCode::CountryCodeAE;
+            }
+            if (inputStr == "GB")
+            {
+                output = CountryCode::CountryCodeGB;
+            }
+            if (inputStr == "US")
+            {
+                output = CountryCode::CountryCodeUS;
+            }
+            if (inputStr == "UM")
+            {
+                output = CountryCode::CountryCodeUM;
+            }
+            if (inputStr == "UY")
+            {
+                output = CountryCode::CountryCodeUY;
+            }
+            if (inputStr == "UZ")
+            {
+                output = CountryCode::CountryCodeUZ;
+            }
+            if (inputStr == "VU")
+            {
+                output = CountryCode::CountryCodeVU;
+            }
+            if (inputStr == "VE")
+            {
+                output = CountryCode::CountryCodeVE;
+            }
+            if (inputStr == "VN")
+            {
+                output = CountryCode::CountryCodeVN;
+            }
+            if (inputStr == "VG")
+            {
+                output = CountryCode::CountryCodeVG;
+            }
+            if (inputStr == "VI")
+            {
+                output = CountryCode::CountryCodeVI;
+            }
+            if (inputStr == "WF")
+            {
+                output = CountryCode::CountryCodeWF;
+            }
+            if (inputStr == "EH")
+            {
+                output = CountryCode::CountryCodeEH;
+            }
+            if (inputStr == "YE")
+            {
+                output = CountryCode::CountryCodeYE;
+            }
+            if (inputStr == "ZM")
+            {
+                output = CountryCode::CountryCodeZM;
+            }
+            if (inputStr == "ZW")
+            {
+                output = CountryCode::CountryCodeZW;
+            }
         }
 
         enum class Currency
@@ -994,335 +2557,1310 @@ namespace PlayFab
 
         inline void ToJsonEnum(const Currency input, Json::Value& output)
         {
-            if (input == Currency::CurrencyAED) output = Json::Value("AED");
-            if (input == Currency::CurrencyAFN) output = Json::Value("AFN");
-            if (input == Currency::CurrencyALL) output = Json::Value("ALL");
-            if (input == Currency::CurrencyAMD) output = Json::Value("AMD");
-            if (input == Currency::CurrencyANG) output = Json::Value("ANG");
-            if (input == Currency::CurrencyAOA) output = Json::Value("AOA");
-            if (input == Currency::CurrencyARS) output = Json::Value("ARS");
-            if (input == Currency::CurrencyAUD) output = Json::Value("AUD");
-            if (input == Currency::CurrencyAWG) output = Json::Value("AWG");
-            if (input == Currency::CurrencyAZN) output = Json::Value("AZN");
-            if (input == Currency::CurrencyBAM) output = Json::Value("BAM");
-            if (input == Currency::CurrencyBBD) output = Json::Value("BBD");
-            if (input == Currency::CurrencyBDT) output = Json::Value("BDT");
-            if (input == Currency::CurrencyBGN) output = Json::Value("BGN");
-            if (input == Currency::CurrencyBHD) output = Json::Value("BHD");
-            if (input == Currency::CurrencyBIF) output = Json::Value("BIF");
-            if (input == Currency::CurrencyBMD) output = Json::Value("BMD");
-            if (input == Currency::CurrencyBND) output = Json::Value("BND");
-            if (input == Currency::CurrencyBOB) output = Json::Value("BOB");
-            if (input == Currency::CurrencyBRL) output = Json::Value("BRL");
-            if (input == Currency::CurrencyBSD) output = Json::Value("BSD");
-            if (input == Currency::CurrencyBTN) output = Json::Value("BTN");
-            if (input == Currency::CurrencyBWP) output = Json::Value("BWP");
-            if (input == Currency::CurrencyBYR) output = Json::Value("BYR");
-            if (input == Currency::CurrencyBZD) output = Json::Value("BZD");
-            if (input == Currency::CurrencyCAD) output = Json::Value("CAD");
-            if (input == Currency::CurrencyCDF) output = Json::Value("CDF");
-            if (input == Currency::CurrencyCHF) output = Json::Value("CHF");
-            if (input == Currency::CurrencyCLP) output = Json::Value("CLP");
-            if (input == Currency::CurrencyCNY) output = Json::Value("CNY");
-            if (input == Currency::CurrencyCOP) output = Json::Value("COP");
-            if (input == Currency::CurrencyCRC) output = Json::Value("CRC");
-            if (input == Currency::CurrencyCUC) output = Json::Value("CUC");
-            if (input == Currency::CurrencyCUP) output = Json::Value("CUP");
-            if (input == Currency::CurrencyCVE) output = Json::Value("CVE");
-            if (input == Currency::CurrencyCZK) output = Json::Value("CZK");
-            if (input == Currency::CurrencyDJF) output = Json::Value("DJF");
-            if (input == Currency::CurrencyDKK) output = Json::Value("DKK");
-            if (input == Currency::CurrencyDOP) output = Json::Value("DOP");
-            if (input == Currency::CurrencyDZD) output = Json::Value("DZD");
-            if (input == Currency::CurrencyEGP) output = Json::Value("EGP");
-            if (input == Currency::CurrencyERN) output = Json::Value("ERN");
-            if (input == Currency::CurrencyETB) output = Json::Value("ETB");
-            if (input == Currency::CurrencyEUR) output = Json::Value("EUR");
-            if (input == Currency::CurrencyFJD) output = Json::Value("FJD");
-            if (input == Currency::CurrencyFKP) output = Json::Value("FKP");
-            if (input == Currency::CurrencyGBP) output = Json::Value("GBP");
-            if (input == Currency::CurrencyGEL) output = Json::Value("GEL");
-            if (input == Currency::CurrencyGGP) output = Json::Value("GGP");
-            if (input == Currency::CurrencyGHS) output = Json::Value("GHS");
-            if (input == Currency::CurrencyGIP) output = Json::Value("GIP");
-            if (input == Currency::CurrencyGMD) output = Json::Value("GMD");
-            if (input == Currency::CurrencyGNF) output = Json::Value("GNF");
-            if (input == Currency::CurrencyGTQ) output = Json::Value("GTQ");
-            if (input == Currency::CurrencyGYD) output = Json::Value("GYD");
-            if (input == Currency::CurrencyHKD) output = Json::Value("HKD");
-            if (input == Currency::CurrencyHNL) output = Json::Value("HNL");
-            if (input == Currency::CurrencyHRK) output = Json::Value("HRK");
-            if (input == Currency::CurrencyHTG) output = Json::Value("HTG");
-            if (input == Currency::CurrencyHUF) output = Json::Value("HUF");
-            if (input == Currency::CurrencyIDR) output = Json::Value("IDR");
-            if (input == Currency::CurrencyILS) output = Json::Value("ILS");
-            if (input == Currency::CurrencyIMP) output = Json::Value("IMP");
-            if (input == Currency::CurrencyINR) output = Json::Value("INR");
-            if (input == Currency::CurrencyIQD) output = Json::Value("IQD");
-            if (input == Currency::CurrencyIRR) output = Json::Value("IRR");
-            if (input == Currency::CurrencyISK) output = Json::Value("ISK");
-            if (input == Currency::CurrencyJEP) output = Json::Value("JEP");
-            if (input == Currency::CurrencyJMD) output = Json::Value("JMD");
-            if (input == Currency::CurrencyJOD) output = Json::Value("JOD");
-            if (input == Currency::CurrencyJPY) output = Json::Value("JPY");
-            if (input == Currency::CurrencyKES) output = Json::Value("KES");
-            if (input == Currency::CurrencyKGS) output = Json::Value("KGS");
-            if (input == Currency::CurrencyKHR) output = Json::Value("KHR");
-            if (input == Currency::CurrencyKMF) output = Json::Value("KMF");
-            if (input == Currency::CurrencyKPW) output = Json::Value("KPW");
-            if (input == Currency::CurrencyKRW) output = Json::Value("KRW");
-            if (input == Currency::CurrencyKWD) output = Json::Value("KWD");
-            if (input == Currency::CurrencyKYD) output = Json::Value("KYD");
-            if (input == Currency::CurrencyKZT) output = Json::Value("KZT");
-            if (input == Currency::CurrencyLAK) output = Json::Value("LAK");
-            if (input == Currency::CurrencyLBP) output = Json::Value("LBP");
-            if (input == Currency::CurrencyLKR) output = Json::Value("LKR");
-            if (input == Currency::CurrencyLRD) output = Json::Value("LRD");
-            if (input == Currency::CurrencyLSL) output = Json::Value("LSL");
-            if (input == Currency::CurrencyLYD) output = Json::Value("LYD");
-            if (input == Currency::CurrencyMAD) output = Json::Value("MAD");
-            if (input == Currency::CurrencyMDL) output = Json::Value("MDL");
-            if (input == Currency::CurrencyMGA) output = Json::Value("MGA");
-            if (input == Currency::CurrencyMKD) output = Json::Value("MKD");
-            if (input == Currency::CurrencyMMK) output = Json::Value("MMK");
-            if (input == Currency::CurrencyMNT) output = Json::Value("MNT");
-            if (input == Currency::CurrencyMOP) output = Json::Value("MOP");
-            if (input == Currency::CurrencyMRO) output = Json::Value("MRO");
-            if (input == Currency::CurrencyMUR) output = Json::Value("MUR");
-            if (input == Currency::CurrencyMVR) output = Json::Value("MVR");
-            if (input == Currency::CurrencyMWK) output = Json::Value("MWK");
-            if (input == Currency::CurrencyMXN) output = Json::Value("MXN");
-            if (input == Currency::CurrencyMYR) output = Json::Value("MYR");
-            if (input == Currency::CurrencyMZN) output = Json::Value("MZN");
-            if (input == Currency::CurrencyNAD) output = Json::Value("NAD");
-            if (input == Currency::CurrencyNGN) output = Json::Value("NGN");
-            if (input == Currency::CurrencyNIO) output = Json::Value("NIO");
-            if (input == Currency::CurrencyNOK) output = Json::Value("NOK");
-            if (input == Currency::CurrencyNPR) output = Json::Value("NPR");
-            if (input == Currency::CurrencyNZD) output = Json::Value("NZD");
-            if (input == Currency::CurrencyOMR) output = Json::Value("OMR");
-            if (input == Currency::CurrencyPAB) output = Json::Value("PAB");
-            if (input == Currency::CurrencyPEN) output = Json::Value("PEN");
-            if (input == Currency::CurrencyPGK) output = Json::Value("PGK");
-            if (input == Currency::CurrencyPHP) output = Json::Value("PHP");
-            if (input == Currency::CurrencyPKR) output = Json::Value("PKR");
-            if (input == Currency::CurrencyPLN) output = Json::Value("PLN");
-            if (input == Currency::CurrencyPYG) output = Json::Value("PYG");
-            if (input == Currency::CurrencyQAR) output = Json::Value("QAR");
-            if (input == Currency::CurrencyRON) output = Json::Value("RON");
-            if (input == Currency::CurrencyRSD) output = Json::Value("RSD");
-            if (input == Currency::CurrencyRUB) output = Json::Value("RUB");
-            if (input == Currency::CurrencyRWF) output = Json::Value("RWF");
-            if (input == Currency::CurrencySAR) output = Json::Value("SAR");
-            if (input == Currency::CurrencySBD) output = Json::Value("SBD");
-            if (input == Currency::CurrencySCR) output = Json::Value("SCR");
-            if (input == Currency::CurrencySDG) output = Json::Value("SDG");
-            if (input == Currency::CurrencySEK) output = Json::Value("SEK");
-            if (input == Currency::CurrencySGD) output = Json::Value("SGD");
-            if (input == Currency::CurrencySHP) output = Json::Value("SHP");
-            if (input == Currency::CurrencySLL) output = Json::Value("SLL");
-            if (input == Currency::CurrencySOS) output = Json::Value("SOS");
-            if (input == Currency::CurrencySPL) output = Json::Value("SPL");
-            if (input == Currency::CurrencySRD) output = Json::Value("SRD");
-            if (input == Currency::CurrencySTD) output = Json::Value("STD");
-            if (input == Currency::CurrencySVC) output = Json::Value("SVC");
-            if (input == Currency::CurrencySYP) output = Json::Value("SYP");
-            if (input == Currency::CurrencySZL) output = Json::Value("SZL");
-            if (input == Currency::CurrencyTHB) output = Json::Value("THB");
-            if (input == Currency::CurrencyTJS) output = Json::Value("TJS");
-            if (input == Currency::CurrencyTMT) output = Json::Value("TMT");
-            if (input == Currency::CurrencyTND) output = Json::Value("TND");
-            if (input == Currency::CurrencyTOP) output = Json::Value("TOP");
-            if (input == Currency::CurrencyTRY) output = Json::Value("TRY");
-            if (input == Currency::CurrencyTTD) output = Json::Value("TTD");
-            if (input == Currency::CurrencyTVD) output = Json::Value("TVD");
-            if (input == Currency::CurrencyTWD) output = Json::Value("TWD");
-            if (input == Currency::CurrencyTZS) output = Json::Value("TZS");
-            if (input == Currency::CurrencyUAH) output = Json::Value("UAH");
-            if (input == Currency::CurrencyUGX) output = Json::Value("UGX");
-            if (input == Currency::CurrencyUSD) output = Json::Value("USD");
-            if (input == Currency::CurrencyUYU) output = Json::Value("UYU");
-            if (input == Currency::CurrencyUZS) output = Json::Value("UZS");
-            if (input == Currency::CurrencyVEF) output = Json::Value("VEF");
-            if (input == Currency::CurrencyVND) output = Json::Value("VND");
-            if (input == Currency::CurrencyVUV) output = Json::Value("VUV");
-            if (input == Currency::CurrencyWST) output = Json::Value("WST");
-            if (input == Currency::CurrencyXAF) output = Json::Value("XAF");
-            if (input == Currency::CurrencyXCD) output = Json::Value("XCD");
-            if (input == Currency::CurrencyXDR) output = Json::Value("XDR");
-            if (input == Currency::CurrencyXOF) output = Json::Value("XOF");
-            if (input == Currency::CurrencyXPF) output = Json::Value("XPF");
-            if (input == Currency::CurrencyYER) output = Json::Value("YER");
-            if (input == Currency::CurrencyZAR) output = Json::Value("ZAR");
-            if (input == Currency::CurrencyZMW) output = Json::Value("ZMW");
-            if (input == Currency::CurrencyZWD) output = Json::Value("ZWD");
+            if (input == Currency::CurrencyAED)
+            {
+                output = Json::Value("AED");
+            }
+            if (input == Currency::CurrencyAFN)
+            {
+                output = Json::Value("AFN");
+            }
+            if (input == Currency::CurrencyALL)
+            {
+                output = Json::Value("ALL");
+            }
+            if (input == Currency::CurrencyAMD)
+            {
+                output = Json::Value("AMD");
+            }
+            if (input == Currency::CurrencyANG)
+            {
+                output = Json::Value("ANG");
+            }
+            if (input == Currency::CurrencyAOA)
+            {
+                output = Json::Value("AOA");
+            }
+            if (input == Currency::CurrencyARS)
+            {
+                output = Json::Value("ARS");
+            }
+            if (input == Currency::CurrencyAUD)
+            {
+                output = Json::Value("AUD");
+            }
+            if (input == Currency::CurrencyAWG)
+            {
+                output = Json::Value("AWG");
+            }
+            if (input == Currency::CurrencyAZN)
+            {
+                output = Json::Value("AZN");
+            }
+            if (input == Currency::CurrencyBAM)
+            {
+                output = Json::Value("BAM");
+            }
+            if (input == Currency::CurrencyBBD)
+            {
+                output = Json::Value("BBD");
+            }
+            if (input == Currency::CurrencyBDT)
+            {
+                output = Json::Value("BDT");
+            }
+            if (input == Currency::CurrencyBGN)
+            {
+                output = Json::Value("BGN");
+            }
+            if (input == Currency::CurrencyBHD)
+            {
+                output = Json::Value("BHD");
+            }
+            if (input == Currency::CurrencyBIF)
+            {
+                output = Json::Value("BIF");
+            }
+            if (input == Currency::CurrencyBMD)
+            {
+                output = Json::Value("BMD");
+            }
+            if (input == Currency::CurrencyBND)
+            {
+                output = Json::Value("BND");
+            }
+            if (input == Currency::CurrencyBOB)
+            {
+                output = Json::Value("BOB");
+            }
+            if (input == Currency::CurrencyBRL)
+            {
+                output = Json::Value("BRL");
+            }
+            if (input == Currency::CurrencyBSD)
+            {
+                output = Json::Value("BSD");
+            }
+            if (input == Currency::CurrencyBTN)
+            {
+                output = Json::Value("BTN");
+            }
+            if (input == Currency::CurrencyBWP)
+            {
+                output = Json::Value("BWP");
+            }
+            if (input == Currency::CurrencyBYR)
+            {
+                output = Json::Value("BYR");
+            }
+            if (input == Currency::CurrencyBZD)
+            {
+                output = Json::Value("BZD");
+            }
+            if (input == Currency::CurrencyCAD)
+            {
+                output = Json::Value("CAD");
+            }
+            if (input == Currency::CurrencyCDF)
+            {
+                output = Json::Value("CDF");
+            }
+            if (input == Currency::CurrencyCHF)
+            {
+                output = Json::Value("CHF");
+            }
+            if (input == Currency::CurrencyCLP)
+            {
+                output = Json::Value("CLP");
+            }
+            if (input == Currency::CurrencyCNY)
+            {
+                output = Json::Value("CNY");
+            }
+            if (input == Currency::CurrencyCOP)
+            {
+                output = Json::Value("COP");
+            }
+            if (input == Currency::CurrencyCRC)
+            {
+                output = Json::Value("CRC");
+            }
+            if (input == Currency::CurrencyCUC)
+            {
+                output = Json::Value("CUC");
+            }
+            if (input == Currency::CurrencyCUP)
+            {
+                output = Json::Value("CUP");
+            }
+            if (input == Currency::CurrencyCVE)
+            {
+                output = Json::Value("CVE");
+            }
+            if (input == Currency::CurrencyCZK)
+            {
+                output = Json::Value("CZK");
+            }
+            if (input == Currency::CurrencyDJF)
+            {
+                output = Json::Value("DJF");
+            }
+            if (input == Currency::CurrencyDKK)
+            {
+                output = Json::Value("DKK");
+            }
+            if (input == Currency::CurrencyDOP)
+            {
+                output = Json::Value("DOP");
+            }
+            if (input == Currency::CurrencyDZD)
+            {
+                output = Json::Value("DZD");
+            }
+            if (input == Currency::CurrencyEGP)
+            {
+                output = Json::Value("EGP");
+            }
+            if (input == Currency::CurrencyERN)
+            {
+                output = Json::Value("ERN");
+            }
+            if (input == Currency::CurrencyETB)
+            {
+                output = Json::Value("ETB");
+            }
+            if (input == Currency::CurrencyEUR)
+            {
+                output = Json::Value("EUR");
+            }
+            if (input == Currency::CurrencyFJD)
+            {
+                output = Json::Value("FJD");
+            }
+            if (input == Currency::CurrencyFKP)
+            {
+                output = Json::Value("FKP");
+            }
+            if (input == Currency::CurrencyGBP)
+            {
+                output = Json::Value("GBP");
+            }
+            if (input == Currency::CurrencyGEL)
+            {
+                output = Json::Value("GEL");
+            }
+            if (input == Currency::CurrencyGGP)
+            {
+                output = Json::Value("GGP");
+            }
+            if (input == Currency::CurrencyGHS)
+            {
+                output = Json::Value("GHS");
+            }
+            if (input == Currency::CurrencyGIP)
+            {
+                output = Json::Value("GIP");
+            }
+            if (input == Currency::CurrencyGMD)
+            {
+                output = Json::Value("GMD");
+            }
+            if (input == Currency::CurrencyGNF)
+            {
+                output = Json::Value("GNF");
+            }
+            if (input == Currency::CurrencyGTQ)
+            {
+                output = Json::Value("GTQ");
+            }
+            if (input == Currency::CurrencyGYD)
+            {
+                output = Json::Value("GYD");
+            }
+            if (input == Currency::CurrencyHKD)
+            {
+                output = Json::Value("HKD");
+            }
+            if (input == Currency::CurrencyHNL)
+            {
+                output = Json::Value("HNL");
+            }
+            if (input == Currency::CurrencyHRK)
+            {
+                output = Json::Value("HRK");
+            }
+            if (input == Currency::CurrencyHTG)
+            {
+                output = Json::Value("HTG");
+            }
+            if (input == Currency::CurrencyHUF)
+            {
+                output = Json::Value("HUF");
+            }
+            if (input == Currency::CurrencyIDR)
+            {
+                output = Json::Value("IDR");
+            }
+            if (input == Currency::CurrencyILS)
+            {
+                output = Json::Value("ILS");
+            }
+            if (input == Currency::CurrencyIMP)
+            {
+                output = Json::Value("IMP");
+            }
+            if (input == Currency::CurrencyINR)
+            {
+                output = Json::Value("INR");
+            }
+            if (input == Currency::CurrencyIQD)
+            {
+                output = Json::Value("IQD");
+            }
+            if (input == Currency::CurrencyIRR)
+            {
+                output = Json::Value("IRR");
+            }
+            if (input == Currency::CurrencyISK)
+            {
+                output = Json::Value("ISK");
+            }
+            if (input == Currency::CurrencyJEP)
+            {
+                output = Json::Value("JEP");
+            }
+            if (input == Currency::CurrencyJMD)
+            {
+                output = Json::Value("JMD");
+            }
+            if (input == Currency::CurrencyJOD)
+            {
+                output = Json::Value("JOD");
+            }
+            if (input == Currency::CurrencyJPY)
+            {
+                output = Json::Value("JPY");
+            }
+            if (input == Currency::CurrencyKES)
+            {
+                output = Json::Value("KES");
+            }
+            if (input == Currency::CurrencyKGS)
+            {
+                output = Json::Value("KGS");
+            }
+            if (input == Currency::CurrencyKHR)
+            {
+                output = Json::Value("KHR");
+            }
+            if (input == Currency::CurrencyKMF)
+            {
+                output = Json::Value("KMF");
+            }
+            if (input == Currency::CurrencyKPW)
+            {
+                output = Json::Value("KPW");
+            }
+            if (input == Currency::CurrencyKRW)
+            {
+                output = Json::Value("KRW");
+            }
+            if (input == Currency::CurrencyKWD)
+            {
+                output = Json::Value("KWD");
+            }
+            if (input == Currency::CurrencyKYD)
+            {
+                output = Json::Value("KYD");
+            }
+            if (input == Currency::CurrencyKZT)
+            {
+                output = Json::Value("KZT");
+            }
+            if (input == Currency::CurrencyLAK)
+            {
+                output = Json::Value("LAK");
+            }
+            if (input == Currency::CurrencyLBP)
+            {
+                output = Json::Value("LBP");
+            }
+            if (input == Currency::CurrencyLKR)
+            {
+                output = Json::Value("LKR");
+            }
+            if (input == Currency::CurrencyLRD)
+            {
+                output = Json::Value("LRD");
+            }
+            if (input == Currency::CurrencyLSL)
+            {
+                output = Json::Value("LSL");
+            }
+            if (input == Currency::CurrencyLYD)
+            {
+                output = Json::Value("LYD");
+            }
+            if (input == Currency::CurrencyMAD)
+            {
+                output = Json::Value("MAD");
+            }
+            if (input == Currency::CurrencyMDL)
+            {
+                output = Json::Value("MDL");
+            }
+            if (input == Currency::CurrencyMGA)
+            {
+                output = Json::Value("MGA");
+            }
+            if (input == Currency::CurrencyMKD)
+            {
+                output = Json::Value("MKD");
+            }
+            if (input == Currency::CurrencyMMK)
+            {
+                output = Json::Value("MMK");
+            }
+            if (input == Currency::CurrencyMNT)
+            {
+                output = Json::Value("MNT");
+            }
+            if (input == Currency::CurrencyMOP)
+            {
+                output = Json::Value("MOP");
+            }
+            if (input == Currency::CurrencyMRO)
+            {
+                output = Json::Value("MRO");
+            }
+            if (input == Currency::CurrencyMUR)
+            {
+                output = Json::Value("MUR");
+            }
+            if (input == Currency::CurrencyMVR)
+            {
+                output = Json::Value("MVR");
+            }
+            if (input == Currency::CurrencyMWK)
+            {
+                output = Json::Value("MWK");
+            }
+            if (input == Currency::CurrencyMXN)
+            {
+                output = Json::Value("MXN");
+            }
+            if (input == Currency::CurrencyMYR)
+            {
+                output = Json::Value("MYR");
+            }
+            if (input == Currency::CurrencyMZN)
+            {
+                output = Json::Value("MZN");
+            }
+            if (input == Currency::CurrencyNAD)
+            {
+                output = Json::Value("NAD");
+            }
+            if (input == Currency::CurrencyNGN)
+            {
+                output = Json::Value("NGN");
+            }
+            if (input == Currency::CurrencyNIO)
+            {
+                output = Json::Value("NIO");
+            }
+            if (input == Currency::CurrencyNOK)
+            {
+                output = Json::Value("NOK");
+            }
+            if (input == Currency::CurrencyNPR)
+            {
+                output = Json::Value("NPR");
+            }
+            if (input == Currency::CurrencyNZD)
+            {
+                output = Json::Value("NZD");
+            }
+            if (input == Currency::CurrencyOMR)
+            {
+                output = Json::Value("OMR");
+            }
+            if (input == Currency::CurrencyPAB)
+            {
+                output = Json::Value("PAB");
+            }
+            if (input == Currency::CurrencyPEN)
+            {
+                output = Json::Value("PEN");
+            }
+            if (input == Currency::CurrencyPGK)
+            {
+                output = Json::Value("PGK");
+            }
+            if (input == Currency::CurrencyPHP)
+            {
+                output = Json::Value("PHP");
+            }
+            if (input == Currency::CurrencyPKR)
+            {
+                output = Json::Value("PKR");
+            }
+            if (input == Currency::CurrencyPLN)
+            {
+                output = Json::Value("PLN");
+            }
+            if (input == Currency::CurrencyPYG)
+            {
+                output = Json::Value("PYG");
+            }
+            if (input == Currency::CurrencyQAR)
+            {
+                output = Json::Value("QAR");
+            }
+            if (input == Currency::CurrencyRON)
+            {
+                output = Json::Value("RON");
+            }
+            if (input == Currency::CurrencyRSD)
+            {
+                output = Json::Value("RSD");
+            }
+            if (input == Currency::CurrencyRUB)
+            {
+                output = Json::Value("RUB");
+            }
+            if (input == Currency::CurrencyRWF)
+            {
+                output = Json::Value("RWF");
+            }
+            if (input == Currency::CurrencySAR)
+            {
+                output = Json::Value("SAR");
+            }
+            if (input == Currency::CurrencySBD)
+            {
+                output = Json::Value("SBD");
+            }
+            if (input == Currency::CurrencySCR)
+            {
+                output = Json::Value("SCR");
+            }
+            if (input == Currency::CurrencySDG)
+            {
+                output = Json::Value("SDG");
+            }
+            if (input == Currency::CurrencySEK)
+            {
+                output = Json::Value("SEK");
+            }
+            if (input == Currency::CurrencySGD)
+            {
+                output = Json::Value("SGD");
+            }
+            if (input == Currency::CurrencySHP)
+            {
+                output = Json::Value("SHP");
+            }
+            if (input == Currency::CurrencySLL)
+            {
+                output = Json::Value("SLL");
+            }
+            if (input == Currency::CurrencySOS)
+            {
+                output = Json::Value("SOS");
+            }
+            if (input == Currency::CurrencySPL)
+            {
+                output = Json::Value("SPL");
+            }
+            if (input == Currency::CurrencySRD)
+            {
+                output = Json::Value("SRD");
+            }
+            if (input == Currency::CurrencySTD)
+            {
+                output = Json::Value("STD");
+            }
+            if (input == Currency::CurrencySVC)
+            {
+                output = Json::Value("SVC");
+            }
+            if (input == Currency::CurrencySYP)
+            {
+                output = Json::Value("SYP");
+            }
+            if (input == Currency::CurrencySZL)
+            {
+                output = Json::Value("SZL");
+            }
+            if (input == Currency::CurrencyTHB)
+            {
+                output = Json::Value("THB");
+            }
+            if (input == Currency::CurrencyTJS)
+            {
+                output = Json::Value("TJS");
+            }
+            if (input == Currency::CurrencyTMT)
+            {
+                output = Json::Value("TMT");
+            }
+            if (input == Currency::CurrencyTND)
+            {
+                output = Json::Value("TND");
+            }
+            if (input == Currency::CurrencyTOP)
+            {
+                output = Json::Value("TOP");
+            }
+            if (input == Currency::CurrencyTRY)
+            {
+                output = Json::Value("TRY");
+            }
+            if (input == Currency::CurrencyTTD)
+            {
+                output = Json::Value("TTD");
+            }
+            if (input == Currency::CurrencyTVD)
+            {
+                output = Json::Value("TVD");
+            }
+            if (input == Currency::CurrencyTWD)
+            {
+                output = Json::Value("TWD");
+            }
+            if (input == Currency::CurrencyTZS)
+            {
+                output = Json::Value("TZS");
+            }
+            if (input == Currency::CurrencyUAH)
+            {
+                output = Json::Value("UAH");
+            }
+            if (input == Currency::CurrencyUGX)
+            {
+                output = Json::Value("UGX");
+            }
+            if (input == Currency::CurrencyUSD)
+            {
+                output = Json::Value("USD");
+            }
+            if (input == Currency::CurrencyUYU)
+            {
+                output = Json::Value("UYU");
+            }
+            if (input == Currency::CurrencyUZS)
+            {
+                output = Json::Value("UZS");
+            }
+            if (input == Currency::CurrencyVEF)
+            {
+                output = Json::Value("VEF");
+            }
+            if (input == Currency::CurrencyVND)
+            {
+                output = Json::Value("VND");
+            }
+            if (input == Currency::CurrencyVUV)
+            {
+                output = Json::Value("VUV");
+            }
+            if (input == Currency::CurrencyWST)
+            {
+                output = Json::Value("WST");
+            }
+            if (input == Currency::CurrencyXAF)
+            {
+                output = Json::Value("XAF");
+            }
+            if (input == Currency::CurrencyXCD)
+            {
+                output = Json::Value("XCD");
+            }
+            if (input == Currency::CurrencyXDR)
+            {
+                output = Json::Value("XDR");
+            }
+            if (input == Currency::CurrencyXOF)
+            {
+                output = Json::Value("XOF");
+            }
+            if (input == Currency::CurrencyXPF)
+            {
+                output = Json::Value("XPF");
+            }
+            if (input == Currency::CurrencyYER)
+            {
+                output = Json::Value("YER");
+            }
+            if (input == Currency::CurrencyZAR)
+            {
+                output = Json::Value("ZAR");
+            }
+            if (input == Currency::CurrencyZMW)
+            {
+                output = Json::Value("ZMW");
+            }
+            if (input == Currency::CurrencyZWD)
+            {
+                output = Json::Value("ZWD");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, Currency& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "AED") output = Currency::CurrencyAED;
-            if (inputStr == "AFN") output = Currency::CurrencyAFN;
-            if (inputStr == "ALL") output = Currency::CurrencyALL;
-            if (inputStr == "AMD") output = Currency::CurrencyAMD;
-            if (inputStr == "ANG") output = Currency::CurrencyANG;
-            if (inputStr == "AOA") output = Currency::CurrencyAOA;
-            if (inputStr == "ARS") output = Currency::CurrencyARS;
-            if (inputStr == "AUD") output = Currency::CurrencyAUD;
-            if (inputStr == "AWG") output = Currency::CurrencyAWG;
-            if (inputStr == "AZN") output = Currency::CurrencyAZN;
-            if (inputStr == "BAM") output = Currency::CurrencyBAM;
-            if (inputStr == "BBD") output = Currency::CurrencyBBD;
-            if (inputStr == "BDT") output = Currency::CurrencyBDT;
-            if (inputStr == "BGN") output = Currency::CurrencyBGN;
-            if (inputStr == "BHD") output = Currency::CurrencyBHD;
-            if (inputStr == "BIF") output = Currency::CurrencyBIF;
-            if (inputStr == "BMD") output = Currency::CurrencyBMD;
-            if (inputStr == "BND") output = Currency::CurrencyBND;
-            if (inputStr == "BOB") output = Currency::CurrencyBOB;
-            if (inputStr == "BRL") output = Currency::CurrencyBRL;
-            if (inputStr == "BSD") output = Currency::CurrencyBSD;
-            if (inputStr == "BTN") output = Currency::CurrencyBTN;
-            if (inputStr == "BWP") output = Currency::CurrencyBWP;
-            if (inputStr == "BYR") output = Currency::CurrencyBYR;
-            if (inputStr == "BZD") output = Currency::CurrencyBZD;
-            if (inputStr == "CAD") output = Currency::CurrencyCAD;
-            if (inputStr == "CDF") output = Currency::CurrencyCDF;
-            if (inputStr == "CHF") output = Currency::CurrencyCHF;
-            if (inputStr == "CLP") output = Currency::CurrencyCLP;
-            if (inputStr == "CNY") output = Currency::CurrencyCNY;
-            if (inputStr == "COP") output = Currency::CurrencyCOP;
-            if (inputStr == "CRC") output = Currency::CurrencyCRC;
-            if (inputStr == "CUC") output = Currency::CurrencyCUC;
-            if (inputStr == "CUP") output = Currency::CurrencyCUP;
-            if (inputStr == "CVE") output = Currency::CurrencyCVE;
-            if (inputStr == "CZK") output = Currency::CurrencyCZK;
-            if (inputStr == "DJF") output = Currency::CurrencyDJF;
-            if (inputStr == "DKK") output = Currency::CurrencyDKK;
-            if (inputStr == "DOP") output = Currency::CurrencyDOP;
-            if (inputStr == "DZD") output = Currency::CurrencyDZD;
-            if (inputStr == "EGP") output = Currency::CurrencyEGP;
-            if (inputStr == "ERN") output = Currency::CurrencyERN;
-            if (inputStr == "ETB") output = Currency::CurrencyETB;
-            if (inputStr == "EUR") output = Currency::CurrencyEUR;
-            if (inputStr == "FJD") output = Currency::CurrencyFJD;
-            if (inputStr == "FKP") output = Currency::CurrencyFKP;
-            if (inputStr == "GBP") output = Currency::CurrencyGBP;
-            if (inputStr == "GEL") output = Currency::CurrencyGEL;
-            if (inputStr == "GGP") output = Currency::CurrencyGGP;
-            if (inputStr == "GHS") output = Currency::CurrencyGHS;
-            if (inputStr == "GIP") output = Currency::CurrencyGIP;
-            if (inputStr == "GMD") output = Currency::CurrencyGMD;
-            if (inputStr == "GNF") output = Currency::CurrencyGNF;
-            if (inputStr == "GTQ") output = Currency::CurrencyGTQ;
-            if (inputStr == "GYD") output = Currency::CurrencyGYD;
-            if (inputStr == "HKD") output = Currency::CurrencyHKD;
-            if (inputStr == "HNL") output = Currency::CurrencyHNL;
-            if (inputStr == "HRK") output = Currency::CurrencyHRK;
-            if (inputStr == "HTG") output = Currency::CurrencyHTG;
-            if (inputStr == "HUF") output = Currency::CurrencyHUF;
-            if (inputStr == "IDR") output = Currency::CurrencyIDR;
-            if (inputStr == "ILS") output = Currency::CurrencyILS;
-            if (inputStr == "IMP") output = Currency::CurrencyIMP;
-            if (inputStr == "INR") output = Currency::CurrencyINR;
-            if (inputStr == "IQD") output = Currency::CurrencyIQD;
-            if (inputStr == "IRR") output = Currency::CurrencyIRR;
-            if (inputStr == "ISK") output = Currency::CurrencyISK;
-            if (inputStr == "JEP") output = Currency::CurrencyJEP;
-            if (inputStr == "JMD") output = Currency::CurrencyJMD;
-            if (inputStr == "JOD") output = Currency::CurrencyJOD;
-            if (inputStr == "JPY") output = Currency::CurrencyJPY;
-            if (inputStr == "KES") output = Currency::CurrencyKES;
-            if (inputStr == "KGS") output = Currency::CurrencyKGS;
-            if (inputStr == "KHR") output = Currency::CurrencyKHR;
-            if (inputStr == "KMF") output = Currency::CurrencyKMF;
-            if (inputStr == "KPW") output = Currency::CurrencyKPW;
-            if (inputStr == "KRW") output = Currency::CurrencyKRW;
-            if (inputStr == "KWD") output = Currency::CurrencyKWD;
-            if (inputStr == "KYD") output = Currency::CurrencyKYD;
-            if (inputStr == "KZT") output = Currency::CurrencyKZT;
-            if (inputStr == "LAK") output = Currency::CurrencyLAK;
-            if (inputStr == "LBP") output = Currency::CurrencyLBP;
-            if (inputStr == "LKR") output = Currency::CurrencyLKR;
-            if (inputStr == "LRD") output = Currency::CurrencyLRD;
-            if (inputStr == "LSL") output = Currency::CurrencyLSL;
-            if (inputStr == "LYD") output = Currency::CurrencyLYD;
-            if (inputStr == "MAD") output = Currency::CurrencyMAD;
-            if (inputStr == "MDL") output = Currency::CurrencyMDL;
-            if (inputStr == "MGA") output = Currency::CurrencyMGA;
-            if (inputStr == "MKD") output = Currency::CurrencyMKD;
-            if (inputStr == "MMK") output = Currency::CurrencyMMK;
-            if (inputStr == "MNT") output = Currency::CurrencyMNT;
-            if (inputStr == "MOP") output = Currency::CurrencyMOP;
-            if (inputStr == "MRO") output = Currency::CurrencyMRO;
-            if (inputStr == "MUR") output = Currency::CurrencyMUR;
-            if (inputStr == "MVR") output = Currency::CurrencyMVR;
-            if (inputStr == "MWK") output = Currency::CurrencyMWK;
-            if (inputStr == "MXN") output = Currency::CurrencyMXN;
-            if (inputStr == "MYR") output = Currency::CurrencyMYR;
-            if (inputStr == "MZN") output = Currency::CurrencyMZN;
-            if (inputStr == "NAD") output = Currency::CurrencyNAD;
-            if (inputStr == "NGN") output = Currency::CurrencyNGN;
-            if (inputStr == "NIO") output = Currency::CurrencyNIO;
-            if (inputStr == "NOK") output = Currency::CurrencyNOK;
-            if (inputStr == "NPR") output = Currency::CurrencyNPR;
-            if (inputStr == "NZD") output = Currency::CurrencyNZD;
-            if (inputStr == "OMR") output = Currency::CurrencyOMR;
-            if (inputStr == "PAB") output = Currency::CurrencyPAB;
-            if (inputStr == "PEN") output = Currency::CurrencyPEN;
-            if (inputStr == "PGK") output = Currency::CurrencyPGK;
-            if (inputStr == "PHP") output = Currency::CurrencyPHP;
-            if (inputStr == "PKR") output = Currency::CurrencyPKR;
-            if (inputStr == "PLN") output = Currency::CurrencyPLN;
-            if (inputStr == "PYG") output = Currency::CurrencyPYG;
-            if (inputStr == "QAR") output = Currency::CurrencyQAR;
-            if (inputStr == "RON") output = Currency::CurrencyRON;
-            if (inputStr == "RSD") output = Currency::CurrencyRSD;
-            if (inputStr == "RUB") output = Currency::CurrencyRUB;
-            if (inputStr == "RWF") output = Currency::CurrencyRWF;
-            if (inputStr == "SAR") output = Currency::CurrencySAR;
-            if (inputStr == "SBD") output = Currency::CurrencySBD;
-            if (inputStr == "SCR") output = Currency::CurrencySCR;
-            if (inputStr == "SDG") output = Currency::CurrencySDG;
-            if (inputStr == "SEK") output = Currency::CurrencySEK;
-            if (inputStr == "SGD") output = Currency::CurrencySGD;
-            if (inputStr == "SHP") output = Currency::CurrencySHP;
-            if (inputStr == "SLL") output = Currency::CurrencySLL;
-            if (inputStr == "SOS") output = Currency::CurrencySOS;
-            if (inputStr == "SPL") output = Currency::CurrencySPL;
-            if (inputStr == "SRD") output = Currency::CurrencySRD;
-            if (inputStr == "STD") output = Currency::CurrencySTD;
-            if (inputStr == "SVC") output = Currency::CurrencySVC;
-            if (inputStr == "SYP") output = Currency::CurrencySYP;
-            if (inputStr == "SZL") output = Currency::CurrencySZL;
-            if (inputStr == "THB") output = Currency::CurrencyTHB;
-            if (inputStr == "TJS") output = Currency::CurrencyTJS;
-            if (inputStr == "TMT") output = Currency::CurrencyTMT;
-            if (inputStr == "TND") output = Currency::CurrencyTND;
-            if (inputStr == "TOP") output = Currency::CurrencyTOP;
-            if (inputStr == "TRY") output = Currency::CurrencyTRY;
-            if (inputStr == "TTD") output = Currency::CurrencyTTD;
-            if (inputStr == "TVD") output = Currency::CurrencyTVD;
-            if (inputStr == "TWD") output = Currency::CurrencyTWD;
-            if (inputStr == "TZS") output = Currency::CurrencyTZS;
-            if (inputStr == "UAH") output = Currency::CurrencyUAH;
-            if (inputStr == "UGX") output = Currency::CurrencyUGX;
-            if (inputStr == "USD") output = Currency::CurrencyUSD;
-            if (inputStr == "UYU") output = Currency::CurrencyUYU;
-            if (inputStr == "UZS") output = Currency::CurrencyUZS;
-            if (inputStr == "VEF") output = Currency::CurrencyVEF;
-            if (inputStr == "VND") output = Currency::CurrencyVND;
-            if (inputStr == "VUV") output = Currency::CurrencyVUV;
-            if (inputStr == "WST") output = Currency::CurrencyWST;
-            if (inputStr == "XAF") output = Currency::CurrencyXAF;
-            if (inputStr == "XCD") output = Currency::CurrencyXCD;
-            if (inputStr == "XDR") output = Currency::CurrencyXDR;
-            if (inputStr == "XOF") output = Currency::CurrencyXOF;
-            if (inputStr == "XPF") output = Currency::CurrencyXPF;
-            if (inputStr == "YER") output = Currency::CurrencyYER;
-            if (inputStr == "ZAR") output = Currency::CurrencyZAR;
-            if (inputStr == "ZMW") output = Currency::CurrencyZMW;
-            if (inputStr == "ZWD") output = Currency::CurrencyZWD;
+            if (inputStr == "AED")
+            {
+                output = Currency::CurrencyAED;
+            }
+            if (inputStr == "AFN")
+            {
+                output = Currency::CurrencyAFN;
+            }
+            if (inputStr == "ALL")
+            {
+                output = Currency::CurrencyALL;
+            }
+            if (inputStr == "AMD")
+            {
+                output = Currency::CurrencyAMD;
+            }
+            if (inputStr == "ANG")
+            {
+                output = Currency::CurrencyANG;
+            }
+            if (inputStr == "AOA")
+            {
+                output = Currency::CurrencyAOA;
+            }
+            if (inputStr == "ARS")
+            {
+                output = Currency::CurrencyARS;
+            }
+            if (inputStr == "AUD")
+            {
+                output = Currency::CurrencyAUD;
+            }
+            if (inputStr == "AWG")
+            {
+                output = Currency::CurrencyAWG;
+            }
+            if (inputStr == "AZN")
+            {
+                output = Currency::CurrencyAZN;
+            }
+            if (inputStr == "BAM")
+            {
+                output = Currency::CurrencyBAM;
+            }
+            if (inputStr == "BBD")
+            {
+                output = Currency::CurrencyBBD;
+            }
+            if (inputStr == "BDT")
+            {
+                output = Currency::CurrencyBDT;
+            }
+            if (inputStr == "BGN")
+            {
+                output = Currency::CurrencyBGN;
+            }
+            if (inputStr == "BHD")
+            {
+                output = Currency::CurrencyBHD;
+            }
+            if (inputStr == "BIF")
+            {
+                output = Currency::CurrencyBIF;
+            }
+            if (inputStr == "BMD")
+            {
+                output = Currency::CurrencyBMD;
+            }
+            if (inputStr == "BND")
+            {
+                output = Currency::CurrencyBND;
+            }
+            if (inputStr == "BOB")
+            {
+                output = Currency::CurrencyBOB;
+            }
+            if (inputStr == "BRL")
+            {
+                output = Currency::CurrencyBRL;
+            }
+            if (inputStr == "BSD")
+            {
+                output = Currency::CurrencyBSD;
+            }
+            if (inputStr == "BTN")
+            {
+                output = Currency::CurrencyBTN;
+            }
+            if (inputStr == "BWP")
+            {
+                output = Currency::CurrencyBWP;
+            }
+            if (inputStr == "BYR")
+            {
+                output = Currency::CurrencyBYR;
+            }
+            if (inputStr == "BZD")
+            {
+                output = Currency::CurrencyBZD;
+            }
+            if (inputStr == "CAD")
+            {
+                output = Currency::CurrencyCAD;
+            }
+            if (inputStr == "CDF")
+            {
+                output = Currency::CurrencyCDF;
+            }
+            if (inputStr == "CHF")
+            {
+                output = Currency::CurrencyCHF;
+            }
+            if (inputStr == "CLP")
+            {
+                output = Currency::CurrencyCLP;
+            }
+            if (inputStr == "CNY")
+            {
+                output = Currency::CurrencyCNY;
+            }
+            if (inputStr == "COP")
+            {
+                output = Currency::CurrencyCOP;
+            }
+            if (inputStr == "CRC")
+            {
+                output = Currency::CurrencyCRC;
+            }
+            if (inputStr == "CUC")
+            {
+                output = Currency::CurrencyCUC;
+            }
+            if (inputStr == "CUP")
+            {
+                output = Currency::CurrencyCUP;
+            }
+            if (inputStr == "CVE")
+            {
+                output = Currency::CurrencyCVE;
+            }
+            if (inputStr == "CZK")
+            {
+                output = Currency::CurrencyCZK;
+            }
+            if (inputStr == "DJF")
+            {
+                output = Currency::CurrencyDJF;
+            }
+            if (inputStr == "DKK")
+            {
+                output = Currency::CurrencyDKK;
+            }
+            if (inputStr == "DOP")
+            {
+                output = Currency::CurrencyDOP;
+            }
+            if (inputStr == "DZD")
+            {
+                output = Currency::CurrencyDZD;
+            }
+            if (inputStr == "EGP")
+            {
+                output = Currency::CurrencyEGP;
+            }
+            if (inputStr == "ERN")
+            {
+                output = Currency::CurrencyERN;
+            }
+            if (inputStr == "ETB")
+            {
+                output = Currency::CurrencyETB;
+            }
+            if (inputStr == "EUR")
+            {
+                output = Currency::CurrencyEUR;
+            }
+            if (inputStr == "FJD")
+            {
+                output = Currency::CurrencyFJD;
+            }
+            if (inputStr == "FKP")
+            {
+                output = Currency::CurrencyFKP;
+            }
+            if (inputStr == "GBP")
+            {
+                output = Currency::CurrencyGBP;
+            }
+            if (inputStr == "GEL")
+            {
+                output = Currency::CurrencyGEL;
+            }
+            if (inputStr == "GGP")
+            {
+                output = Currency::CurrencyGGP;
+            }
+            if (inputStr == "GHS")
+            {
+                output = Currency::CurrencyGHS;
+            }
+            if (inputStr == "GIP")
+            {
+                output = Currency::CurrencyGIP;
+            }
+            if (inputStr == "GMD")
+            {
+                output = Currency::CurrencyGMD;
+            }
+            if (inputStr == "GNF")
+            {
+                output = Currency::CurrencyGNF;
+            }
+            if (inputStr == "GTQ")
+            {
+                output = Currency::CurrencyGTQ;
+            }
+            if (inputStr == "GYD")
+            {
+                output = Currency::CurrencyGYD;
+            }
+            if (inputStr == "HKD")
+            {
+                output = Currency::CurrencyHKD;
+            }
+            if (inputStr == "HNL")
+            {
+                output = Currency::CurrencyHNL;
+            }
+            if (inputStr == "HRK")
+            {
+                output = Currency::CurrencyHRK;
+            }
+            if (inputStr == "HTG")
+            {
+                output = Currency::CurrencyHTG;
+            }
+            if (inputStr == "HUF")
+            {
+                output = Currency::CurrencyHUF;
+            }
+            if (inputStr == "IDR")
+            {
+                output = Currency::CurrencyIDR;
+            }
+            if (inputStr == "ILS")
+            {
+                output = Currency::CurrencyILS;
+            }
+            if (inputStr == "IMP")
+            {
+                output = Currency::CurrencyIMP;
+            }
+            if (inputStr == "INR")
+            {
+                output = Currency::CurrencyINR;
+            }
+            if (inputStr == "IQD")
+            {
+                output = Currency::CurrencyIQD;
+            }
+            if (inputStr == "IRR")
+            {
+                output = Currency::CurrencyIRR;
+            }
+            if (inputStr == "ISK")
+            {
+                output = Currency::CurrencyISK;
+            }
+            if (inputStr == "JEP")
+            {
+                output = Currency::CurrencyJEP;
+            }
+            if (inputStr == "JMD")
+            {
+                output = Currency::CurrencyJMD;
+            }
+            if (inputStr == "JOD")
+            {
+                output = Currency::CurrencyJOD;
+            }
+            if (inputStr == "JPY")
+            {
+                output = Currency::CurrencyJPY;
+            }
+            if (inputStr == "KES")
+            {
+                output = Currency::CurrencyKES;
+            }
+            if (inputStr == "KGS")
+            {
+                output = Currency::CurrencyKGS;
+            }
+            if (inputStr == "KHR")
+            {
+                output = Currency::CurrencyKHR;
+            }
+            if (inputStr == "KMF")
+            {
+                output = Currency::CurrencyKMF;
+            }
+            if (inputStr == "KPW")
+            {
+                output = Currency::CurrencyKPW;
+            }
+            if (inputStr == "KRW")
+            {
+                output = Currency::CurrencyKRW;
+            }
+            if (inputStr == "KWD")
+            {
+                output = Currency::CurrencyKWD;
+            }
+            if (inputStr == "KYD")
+            {
+                output = Currency::CurrencyKYD;
+            }
+            if (inputStr == "KZT")
+            {
+                output = Currency::CurrencyKZT;
+            }
+            if (inputStr == "LAK")
+            {
+                output = Currency::CurrencyLAK;
+            }
+            if (inputStr == "LBP")
+            {
+                output = Currency::CurrencyLBP;
+            }
+            if (inputStr == "LKR")
+            {
+                output = Currency::CurrencyLKR;
+            }
+            if (inputStr == "LRD")
+            {
+                output = Currency::CurrencyLRD;
+            }
+            if (inputStr == "LSL")
+            {
+                output = Currency::CurrencyLSL;
+            }
+            if (inputStr == "LYD")
+            {
+                output = Currency::CurrencyLYD;
+            }
+            if (inputStr == "MAD")
+            {
+                output = Currency::CurrencyMAD;
+            }
+            if (inputStr == "MDL")
+            {
+                output = Currency::CurrencyMDL;
+            }
+            if (inputStr == "MGA")
+            {
+                output = Currency::CurrencyMGA;
+            }
+            if (inputStr == "MKD")
+            {
+                output = Currency::CurrencyMKD;
+            }
+            if (inputStr == "MMK")
+            {
+                output = Currency::CurrencyMMK;
+            }
+            if (inputStr == "MNT")
+            {
+                output = Currency::CurrencyMNT;
+            }
+            if (inputStr == "MOP")
+            {
+                output = Currency::CurrencyMOP;
+            }
+            if (inputStr == "MRO")
+            {
+                output = Currency::CurrencyMRO;
+            }
+            if (inputStr == "MUR")
+            {
+                output = Currency::CurrencyMUR;
+            }
+            if (inputStr == "MVR")
+            {
+                output = Currency::CurrencyMVR;
+            }
+            if (inputStr == "MWK")
+            {
+                output = Currency::CurrencyMWK;
+            }
+            if (inputStr == "MXN")
+            {
+                output = Currency::CurrencyMXN;
+            }
+            if (inputStr == "MYR")
+            {
+                output = Currency::CurrencyMYR;
+            }
+            if (inputStr == "MZN")
+            {
+                output = Currency::CurrencyMZN;
+            }
+            if (inputStr == "NAD")
+            {
+                output = Currency::CurrencyNAD;
+            }
+            if (inputStr == "NGN")
+            {
+                output = Currency::CurrencyNGN;
+            }
+            if (inputStr == "NIO")
+            {
+                output = Currency::CurrencyNIO;
+            }
+            if (inputStr == "NOK")
+            {
+                output = Currency::CurrencyNOK;
+            }
+            if (inputStr == "NPR")
+            {
+                output = Currency::CurrencyNPR;
+            }
+            if (inputStr == "NZD")
+            {
+                output = Currency::CurrencyNZD;
+            }
+            if (inputStr == "OMR")
+            {
+                output = Currency::CurrencyOMR;
+            }
+            if (inputStr == "PAB")
+            {
+                output = Currency::CurrencyPAB;
+            }
+            if (inputStr == "PEN")
+            {
+                output = Currency::CurrencyPEN;
+            }
+            if (inputStr == "PGK")
+            {
+                output = Currency::CurrencyPGK;
+            }
+            if (inputStr == "PHP")
+            {
+                output = Currency::CurrencyPHP;
+            }
+            if (inputStr == "PKR")
+            {
+                output = Currency::CurrencyPKR;
+            }
+            if (inputStr == "PLN")
+            {
+                output = Currency::CurrencyPLN;
+            }
+            if (inputStr == "PYG")
+            {
+                output = Currency::CurrencyPYG;
+            }
+            if (inputStr == "QAR")
+            {
+                output = Currency::CurrencyQAR;
+            }
+            if (inputStr == "RON")
+            {
+                output = Currency::CurrencyRON;
+            }
+            if (inputStr == "RSD")
+            {
+                output = Currency::CurrencyRSD;
+            }
+            if (inputStr == "RUB")
+            {
+                output = Currency::CurrencyRUB;
+            }
+            if (inputStr == "RWF")
+            {
+                output = Currency::CurrencyRWF;
+            }
+            if (inputStr == "SAR")
+            {
+                output = Currency::CurrencySAR;
+            }
+            if (inputStr == "SBD")
+            {
+                output = Currency::CurrencySBD;
+            }
+            if (inputStr == "SCR")
+            {
+                output = Currency::CurrencySCR;
+            }
+            if (inputStr == "SDG")
+            {
+                output = Currency::CurrencySDG;
+            }
+            if (inputStr == "SEK")
+            {
+                output = Currency::CurrencySEK;
+            }
+            if (inputStr == "SGD")
+            {
+                output = Currency::CurrencySGD;
+            }
+            if (inputStr == "SHP")
+            {
+                output = Currency::CurrencySHP;
+            }
+            if (inputStr == "SLL")
+            {
+                output = Currency::CurrencySLL;
+            }
+            if (inputStr == "SOS")
+            {
+                output = Currency::CurrencySOS;
+            }
+            if (inputStr == "SPL")
+            {
+                output = Currency::CurrencySPL;
+            }
+            if (inputStr == "SRD")
+            {
+                output = Currency::CurrencySRD;
+            }
+            if (inputStr == "STD")
+            {
+                output = Currency::CurrencySTD;
+            }
+            if (inputStr == "SVC")
+            {
+                output = Currency::CurrencySVC;
+            }
+            if (inputStr == "SYP")
+            {
+                output = Currency::CurrencySYP;
+            }
+            if (inputStr == "SZL")
+            {
+                output = Currency::CurrencySZL;
+            }
+            if (inputStr == "THB")
+            {
+                output = Currency::CurrencyTHB;
+            }
+            if (inputStr == "TJS")
+            {
+                output = Currency::CurrencyTJS;
+            }
+            if (inputStr == "TMT")
+            {
+                output = Currency::CurrencyTMT;
+            }
+            if (inputStr == "TND")
+            {
+                output = Currency::CurrencyTND;
+            }
+            if (inputStr == "TOP")
+            {
+                output = Currency::CurrencyTOP;
+            }
+            if (inputStr == "TRY")
+            {
+                output = Currency::CurrencyTRY;
+            }
+            if (inputStr == "TTD")
+            {
+                output = Currency::CurrencyTTD;
+            }
+            if (inputStr == "TVD")
+            {
+                output = Currency::CurrencyTVD;
+            }
+            if (inputStr == "TWD")
+            {
+                output = Currency::CurrencyTWD;
+            }
+            if (inputStr == "TZS")
+            {
+                output = Currency::CurrencyTZS;
+            }
+            if (inputStr == "UAH")
+            {
+                output = Currency::CurrencyUAH;
+            }
+            if (inputStr == "UGX")
+            {
+                output = Currency::CurrencyUGX;
+            }
+            if (inputStr == "USD")
+            {
+                output = Currency::CurrencyUSD;
+            }
+            if (inputStr == "UYU")
+            {
+                output = Currency::CurrencyUYU;
+            }
+            if (inputStr == "UZS")
+            {
+                output = Currency::CurrencyUZS;
+            }
+            if (inputStr == "VEF")
+            {
+                output = Currency::CurrencyVEF;
+            }
+            if (inputStr == "VND")
+            {
+                output = Currency::CurrencyVND;
+            }
+            if (inputStr == "VUV")
+            {
+                output = Currency::CurrencyVUV;
+            }
+            if (inputStr == "WST")
+            {
+                output = Currency::CurrencyWST;
+            }
+            if (inputStr == "XAF")
+            {
+                output = Currency::CurrencyXAF;
+            }
+            if (inputStr == "XCD")
+            {
+                output = Currency::CurrencyXCD;
+            }
+            if (inputStr == "XDR")
+            {
+                output = Currency::CurrencyXDR;
+            }
+            if (inputStr == "XOF")
+            {
+                output = Currency::CurrencyXOF;
+            }
+            if (inputStr == "XPF")
+            {
+                output = Currency::CurrencyXPF;
+            }
+            if (inputStr == "YER")
+            {
+                output = Currency::CurrencyYER;
+            }
+            if (inputStr == "ZAR")
+            {
+                output = Currency::CurrencyZAR;
+            }
+            if (inputStr == "ZMW")
+            {
+                output = Currency::CurrencyZMW;
+            }
+            if (inputStr == "ZWD")
+            {
+                output = Currency::CurrencyZWD;
+            }
         }
 
         enum class EmailVerificationStatus
@@ -1334,17 +3872,38 @@ namespace PlayFab
 
         inline void ToJsonEnum(const EmailVerificationStatus input, Json::Value& output)
         {
-            if (input == EmailVerificationStatus::EmailVerificationStatusUnverified) output = Json::Value("Unverified");
-            if (input == EmailVerificationStatus::EmailVerificationStatusPending) output = Json::Value("Pending");
-            if (input == EmailVerificationStatus::EmailVerificationStatusConfirmed) output = Json::Value("Confirmed");
+            if (input == EmailVerificationStatus::EmailVerificationStatusUnverified)
+            {
+                output = Json::Value("Unverified");
+            }
+            if (input == EmailVerificationStatus::EmailVerificationStatusPending)
+            {
+                output = Json::Value("Pending");
+            }
+            if (input == EmailVerificationStatus::EmailVerificationStatusConfirmed)
+            {
+                output = Json::Value("Confirmed");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, EmailVerificationStatus& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "Unverified") output = EmailVerificationStatus::EmailVerificationStatusUnverified;
-            if (inputStr == "Pending") output = EmailVerificationStatus::EmailVerificationStatusPending;
-            if (inputStr == "Confirmed") output = EmailVerificationStatus::EmailVerificationStatusConfirmed;
+            if (inputStr == "Unverified")
+            {
+                output = EmailVerificationStatus::EmailVerificationStatusUnverified;
+            }
+            if (inputStr == "Pending")
+            {
+                output = EmailVerificationStatus::EmailVerificationStatusPending;
+            }
+            if (inputStr == "Confirmed")
+            {
+                output = EmailVerificationStatus::EmailVerificationStatusConfirmed;
+            }
         }
 
         enum class GameInstanceState
@@ -1355,15 +3914,30 @@ namespace PlayFab
 
         inline void ToJsonEnum(const GameInstanceState input, Json::Value& output)
         {
-            if (input == GameInstanceState::GameInstanceStateOpen) output = Json::Value("Open");
-            if (input == GameInstanceState::GameInstanceStateClosed) output = Json::Value("Closed");
+            if (input == GameInstanceState::GameInstanceStateOpen)
+            {
+                output = Json::Value("Open");
+            }
+            if (input == GameInstanceState::GameInstanceStateClosed)
+            {
+                output = Json::Value("Closed");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, GameInstanceState& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "Open") output = GameInstanceState::GameInstanceStateOpen;
-            if (inputStr == "Closed") output = GameInstanceState::GameInstanceStateClosed;
+            if (inputStr == "Open")
+            {
+                output = GameInstanceState::GameInstanceStateOpen;
+            }
+            if (inputStr == "Closed")
+            {
+                output = GameInstanceState::GameInstanceStateClosed;
+            }
         }
 
         enum class LoginIdentityProvider
@@ -1391,49 +3965,166 @@ namespace PlayFab
 
         inline void ToJsonEnum(const LoginIdentityProvider input, Json::Value& output)
         {
-            if (input == LoginIdentityProvider::LoginIdentityProviderUnknown) output = Json::Value("Unknown");
-            if (input == LoginIdentityProvider::LoginIdentityProviderPlayFab) output = Json::Value("PlayFab");
-            if (input == LoginIdentityProvider::LoginIdentityProviderCustom) output = Json::Value("Custom");
-            if (input == LoginIdentityProvider::LoginIdentityProviderGameCenter) output = Json::Value("GameCenter");
-            if (input == LoginIdentityProvider::LoginIdentityProviderGooglePlay) output = Json::Value("GooglePlay");
-            if (input == LoginIdentityProvider::LoginIdentityProviderSteam) output = Json::Value("Steam");
-            if (input == LoginIdentityProvider::LoginIdentityProviderXBoxLive) output = Json::Value("XBoxLive");
-            if (input == LoginIdentityProvider::LoginIdentityProviderPSN) output = Json::Value("PSN");
-            if (input == LoginIdentityProvider::LoginIdentityProviderKongregate) output = Json::Value("Kongregate");
-            if (input == LoginIdentityProvider::LoginIdentityProviderFacebook) output = Json::Value("Facebook");
-            if (input == LoginIdentityProvider::LoginIdentityProviderIOSDevice) output = Json::Value("IOSDevice");
-            if (input == LoginIdentityProvider::LoginIdentityProviderAndroidDevice) output = Json::Value("AndroidDevice");
-            if (input == LoginIdentityProvider::LoginIdentityProviderTwitch) output = Json::Value("Twitch");
-            if (input == LoginIdentityProvider::LoginIdentityProviderWindowsHello) output = Json::Value("WindowsHello");
-            if (input == LoginIdentityProvider::LoginIdentityProviderGameServer) output = Json::Value("GameServer");
-            if (input == LoginIdentityProvider::LoginIdentityProviderCustomServer) output = Json::Value("CustomServer");
-            if (input == LoginIdentityProvider::LoginIdentityProviderNintendoSwitch) output = Json::Value("NintendoSwitch");
-            if (input == LoginIdentityProvider::LoginIdentityProviderFacebookInstantGames) output = Json::Value("FacebookInstantGames");
-            if (input == LoginIdentityProvider::LoginIdentityProviderOpenIdConnect) output = Json::Value("OpenIdConnect");
+            if (input == LoginIdentityProvider::LoginIdentityProviderUnknown)
+            {
+                output = Json::Value("Unknown");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderPlayFab)
+            {
+                output = Json::Value("PlayFab");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderCustom)
+            {
+                output = Json::Value("Custom");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderGameCenter)
+            {
+                output = Json::Value("GameCenter");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderGooglePlay)
+            {
+                output = Json::Value("GooglePlay");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderSteam)
+            {
+                output = Json::Value("Steam");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderXBoxLive)
+            {
+                output = Json::Value("XBoxLive");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderPSN)
+            {
+                output = Json::Value("PSN");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderKongregate)
+            {
+                output = Json::Value("Kongregate");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderFacebook)
+            {
+                output = Json::Value("Facebook");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderIOSDevice)
+            {
+                output = Json::Value("IOSDevice");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderAndroidDevice)
+            {
+                output = Json::Value("AndroidDevice");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderTwitch)
+            {
+                output = Json::Value("Twitch");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderWindowsHello)
+            {
+                output = Json::Value("WindowsHello");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderGameServer)
+            {
+                output = Json::Value("GameServer");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderCustomServer)
+            {
+                output = Json::Value("CustomServer");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderNintendoSwitch)
+            {
+                output = Json::Value("NintendoSwitch");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderFacebookInstantGames)
+            {
+                output = Json::Value("FacebookInstantGames");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderOpenIdConnect)
+            {
+                output = Json::Value("OpenIdConnect");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, LoginIdentityProvider& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "Unknown") output = LoginIdentityProvider::LoginIdentityProviderUnknown;
-            if (inputStr == "PlayFab") output = LoginIdentityProvider::LoginIdentityProviderPlayFab;
-            if (inputStr == "Custom") output = LoginIdentityProvider::LoginIdentityProviderCustom;
-            if (inputStr == "GameCenter") output = LoginIdentityProvider::LoginIdentityProviderGameCenter;
-            if (inputStr == "GooglePlay") output = LoginIdentityProvider::LoginIdentityProviderGooglePlay;
-            if (inputStr == "Steam") output = LoginIdentityProvider::LoginIdentityProviderSteam;
-            if (inputStr == "XBoxLive") output = LoginIdentityProvider::LoginIdentityProviderXBoxLive;
-            if (inputStr == "PSN") output = LoginIdentityProvider::LoginIdentityProviderPSN;
-            if (inputStr == "Kongregate") output = LoginIdentityProvider::LoginIdentityProviderKongregate;
-            if (inputStr == "Facebook") output = LoginIdentityProvider::LoginIdentityProviderFacebook;
-            if (inputStr == "IOSDevice") output = LoginIdentityProvider::LoginIdentityProviderIOSDevice;
-            if (inputStr == "AndroidDevice") output = LoginIdentityProvider::LoginIdentityProviderAndroidDevice;
-            if (inputStr == "Twitch") output = LoginIdentityProvider::LoginIdentityProviderTwitch;
-            if (inputStr == "WindowsHello") output = LoginIdentityProvider::LoginIdentityProviderWindowsHello;
-            if (inputStr == "GameServer") output = LoginIdentityProvider::LoginIdentityProviderGameServer;
-            if (inputStr == "CustomServer") output = LoginIdentityProvider::LoginIdentityProviderCustomServer;
-            if (inputStr == "NintendoSwitch") output = LoginIdentityProvider::LoginIdentityProviderNintendoSwitch;
-            if (inputStr == "FacebookInstantGames") output = LoginIdentityProvider::LoginIdentityProviderFacebookInstantGames;
-            if (inputStr == "OpenIdConnect") output = LoginIdentityProvider::LoginIdentityProviderOpenIdConnect;
+            if (inputStr == "Unknown")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderUnknown;
+            }
+            if (inputStr == "PlayFab")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderPlayFab;
+            }
+            if (inputStr == "Custom")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderCustom;
+            }
+            if (inputStr == "GameCenter")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderGameCenter;
+            }
+            if (inputStr == "GooglePlay")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderGooglePlay;
+            }
+            if (inputStr == "Steam")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderSteam;
+            }
+            if (inputStr == "XBoxLive")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderXBoxLive;
+            }
+            if (inputStr == "PSN")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderPSN;
+            }
+            if (inputStr == "Kongregate")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderKongregate;
+            }
+            if (inputStr == "Facebook")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderFacebook;
+            }
+            if (inputStr == "IOSDevice")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderIOSDevice;
+            }
+            if (inputStr == "AndroidDevice")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderAndroidDevice;
+            }
+            if (inputStr == "Twitch")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderTwitch;
+            }
+            if (inputStr == "WindowsHello")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderWindowsHello;
+            }
+            if (inputStr == "GameServer")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderGameServer;
+            }
+            if (inputStr == "CustomServer")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderCustomServer;
+            }
+            if (inputStr == "NintendoSwitch")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderNintendoSwitch;
+            }
+            if (inputStr == "FacebookInstantGames")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderFacebookInstantGames;
+            }
+            if (inputStr == "OpenIdConnect")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderOpenIdConnect;
+            }
         }
 
         enum class MatchmakeStatus
@@ -1447,21 +4138,54 @@ namespace PlayFab
 
         inline void ToJsonEnum(const MatchmakeStatus input, Json::Value& output)
         {
-            if (input == MatchmakeStatus::MatchmakeStatusComplete) output = Json::Value("Complete");
-            if (input == MatchmakeStatus::MatchmakeStatusWaiting) output = Json::Value("Waiting");
-            if (input == MatchmakeStatus::MatchmakeStatusGameNotFound) output = Json::Value("GameNotFound");
-            if (input == MatchmakeStatus::MatchmakeStatusNoAvailableSlots) output = Json::Value("NoAvailableSlots");
-            if (input == MatchmakeStatus::MatchmakeStatusSessionClosed) output = Json::Value("SessionClosed");
+            if (input == MatchmakeStatus::MatchmakeStatusComplete)
+            {
+                output = Json::Value("Complete");
+            }
+            if (input == MatchmakeStatus::MatchmakeStatusWaiting)
+            {
+                output = Json::Value("Waiting");
+            }
+            if (input == MatchmakeStatus::MatchmakeStatusGameNotFound)
+            {
+                output = Json::Value("GameNotFound");
+            }
+            if (input == MatchmakeStatus::MatchmakeStatusNoAvailableSlots)
+            {
+                output = Json::Value("NoAvailableSlots");
+            }
+            if (input == MatchmakeStatus::MatchmakeStatusSessionClosed)
+            {
+                output = Json::Value("SessionClosed");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, MatchmakeStatus& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "Complete") output = MatchmakeStatus::MatchmakeStatusComplete;
-            if (inputStr == "Waiting") output = MatchmakeStatus::MatchmakeStatusWaiting;
-            if (inputStr == "GameNotFound") output = MatchmakeStatus::MatchmakeStatusGameNotFound;
-            if (inputStr == "NoAvailableSlots") output = MatchmakeStatus::MatchmakeStatusNoAvailableSlots;
-            if (inputStr == "SessionClosed") output = MatchmakeStatus::MatchmakeStatusSessionClosed;
+            if (inputStr == "Complete")
+            {
+                output = MatchmakeStatus::MatchmakeStatusComplete;
+            }
+            if (inputStr == "Waiting")
+            {
+                output = MatchmakeStatus::MatchmakeStatusWaiting;
+            }
+            if (inputStr == "GameNotFound")
+            {
+                output = MatchmakeStatus::MatchmakeStatusGameNotFound;
+            }
+            if (inputStr == "NoAvailableSlots")
+            {
+                output = MatchmakeStatus::MatchmakeStatusNoAvailableSlots;
+            }
+            if (inputStr == "SessionClosed")
+            {
+                output = MatchmakeStatus::MatchmakeStatusSessionClosed;
+            }
         }
 
         enum class PushNotificationPlatform
@@ -1472,15 +4196,30 @@ namespace PlayFab
 
         inline void ToJsonEnum(const PushNotificationPlatform input, Json::Value& output)
         {
-            if (input == PushNotificationPlatform::PushNotificationPlatformApplePushNotificationService) output = Json::Value("ApplePushNotificationService");
-            if (input == PushNotificationPlatform::PushNotificationPlatformGoogleCloudMessaging) output = Json::Value("GoogleCloudMessaging");
+            if (input == PushNotificationPlatform::PushNotificationPlatformApplePushNotificationService)
+            {
+                output = Json::Value("ApplePushNotificationService");
+            }
+            if (input == PushNotificationPlatform::PushNotificationPlatformGoogleCloudMessaging)
+            {
+                output = Json::Value("GoogleCloudMessaging");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, PushNotificationPlatform& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "ApplePushNotificationService") output = PushNotificationPlatform::PushNotificationPlatformApplePushNotificationService;
-            if (inputStr == "GoogleCloudMessaging") output = PushNotificationPlatform::PushNotificationPlatformGoogleCloudMessaging;
+            if (inputStr == "ApplePushNotificationService")
+            {
+                output = PushNotificationPlatform::PushNotificationPlatformApplePushNotificationService;
+            }
+            if (inputStr == "GoogleCloudMessaging")
+            {
+                output = PushNotificationPlatform::PushNotificationPlatformGoogleCloudMessaging;
+            }
         }
 
         enum class Region
@@ -1496,25 +4235,70 @@ namespace PlayFab
 
         inline void ToJsonEnum(const Region input, Json::Value& output)
         {
-            if (input == Region::RegionUSCentral) output = Json::Value("USCentral");
-            if (input == Region::RegionUSEast) output = Json::Value("USEast");
-            if (input == Region::RegionEUWest) output = Json::Value("EUWest");
-            if (input == Region::RegionSingapore) output = Json::Value("Singapore");
-            if (input == Region::RegionJapan) output = Json::Value("Japan");
-            if (input == Region::RegionBrazil) output = Json::Value("Brazil");
-            if (input == Region::RegionAustralia) output = Json::Value("Australia");
+            if (input == Region::RegionUSCentral)
+            {
+                output = Json::Value("USCentral");
+            }
+            if (input == Region::RegionUSEast)
+            {
+                output = Json::Value("USEast");
+            }
+            if (input == Region::RegionEUWest)
+            {
+                output = Json::Value("EUWest");
+            }
+            if (input == Region::RegionSingapore)
+            {
+                output = Json::Value("Singapore");
+            }
+            if (input == Region::RegionJapan)
+            {
+                output = Json::Value("Japan");
+            }
+            if (input == Region::RegionBrazil)
+            {
+                output = Json::Value("Brazil");
+            }
+            if (input == Region::RegionAustralia)
+            {
+                output = Json::Value("Australia");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, Region& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "USCentral") output = Region::RegionUSCentral;
-            if (inputStr == "USEast") output = Region::RegionUSEast;
-            if (inputStr == "EUWest") output = Region::RegionEUWest;
-            if (inputStr == "Singapore") output = Region::RegionSingapore;
-            if (inputStr == "Japan") output = Region::RegionJapan;
-            if (inputStr == "Brazil") output = Region::RegionBrazil;
-            if (inputStr == "Australia") output = Region::RegionAustralia;
+            if (inputStr == "USCentral")
+            {
+                output = Region::RegionUSCentral;
+            }
+            if (inputStr == "USEast")
+            {
+                output = Region::RegionUSEast;
+            }
+            if (inputStr == "EUWest")
+            {
+                output = Region::RegionEUWest;
+            }
+            if (inputStr == "Singapore")
+            {
+                output = Region::RegionSingapore;
+            }
+            if (inputStr == "Japan")
+            {
+                output = Region::RegionJapan;
+            }
+            if (inputStr == "Brazil")
+            {
+                output = Region::RegionBrazil;
+            }
+            if (inputStr == "Australia")
+            {
+                output = Region::RegionAustralia;
+            }
         }
 
         enum class SourceType
@@ -1530,25 +4314,70 @@ namespace PlayFab
 
         inline void ToJsonEnum(const SourceType input, Json::Value& output)
         {
-            if (input == SourceType::SourceTypeAdmin) output = Json::Value("Admin");
-            if (input == SourceType::SourceTypeBackEnd) output = Json::Value("BackEnd");
-            if (input == SourceType::SourceTypeGameClient) output = Json::Value("GameClient");
-            if (input == SourceType::SourceTypeGameServer) output = Json::Value("GameServer");
-            if (input == SourceType::SourceTypePartner) output = Json::Value("Partner");
-            if (input == SourceType::SourceTypeCustom) output = Json::Value("Custom");
-            if (input == SourceType::SourceTypeAPI) output = Json::Value("API");
+            if (input == SourceType::SourceTypeAdmin)
+            {
+                output = Json::Value("Admin");
+            }
+            if (input == SourceType::SourceTypeBackEnd)
+            {
+                output = Json::Value("BackEnd");
+            }
+            if (input == SourceType::SourceTypeGameClient)
+            {
+                output = Json::Value("GameClient");
+            }
+            if (input == SourceType::SourceTypeGameServer)
+            {
+                output = Json::Value("GameServer");
+            }
+            if (input == SourceType::SourceTypePartner)
+            {
+                output = Json::Value("Partner");
+            }
+            if (input == SourceType::SourceTypeCustom)
+            {
+                output = Json::Value("Custom");
+            }
+            if (input == SourceType::SourceTypeAPI)
+            {
+                output = Json::Value("API");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, SourceType& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "Admin") output = SourceType::SourceTypeAdmin;
-            if (inputStr == "BackEnd") output = SourceType::SourceTypeBackEnd;
-            if (inputStr == "GameClient") output = SourceType::SourceTypeGameClient;
-            if (inputStr == "GameServer") output = SourceType::SourceTypeGameServer;
-            if (inputStr == "Partner") output = SourceType::SourceTypePartner;
-            if (inputStr == "Custom") output = SourceType::SourceTypeCustom;
-            if (inputStr == "API") output = SourceType::SourceTypeAPI;
+            if (inputStr == "Admin")
+            {
+                output = SourceType::SourceTypeAdmin;
+            }
+            if (inputStr == "BackEnd")
+            {
+                output = SourceType::SourceTypeBackEnd;
+            }
+            if (inputStr == "GameClient")
+            {
+                output = SourceType::SourceTypeGameClient;
+            }
+            if (inputStr == "GameServer")
+            {
+                output = SourceType::SourceTypeGameServer;
+            }
+            if (inputStr == "Partner")
+            {
+                output = SourceType::SourceTypePartner;
+            }
+            if (inputStr == "Custom")
+            {
+                output = SourceType::SourceTypeCustom;
+            }
+            if (inputStr == "API")
+            {
+                output = SourceType::SourceTypeAPI;
+            }
         }
 
         enum class SubscriptionProviderStatus
@@ -1565,27 +4394,78 @@ namespace PlayFab
 
         inline void ToJsonEnum(const SubscriptionProviderStatus input, Json::Value& output)
         {
-            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusNoError) output = Json::Value("NoError");
-            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusCancelled) output = Json::Value("Cancelled");
-            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusUnknownError) output = Json::Value("UnknownError");
-            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusBillingError) output = Json::Value("BillingError");
-            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusProductUnavailable) output = Json::Value("ProductUnavailable");
-            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusCustomerDidNotAcceptPriceChange) output = Json::Value("CustomerDidNotAcceptPriceChange");
-            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusFreeTrial) output = Json::Value("FreeTrial");
-            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusPaymentPending) output = Json::Value("PaymentPending");
+            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusNoError)
+            {
+                output = Json::Value("NoError");
+            }
+            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusCancelled)
+            {
+                output = Json::Value("Cancelled");
+            }
+            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusUnknownError)
+            {
+                output = Json::Value("UnknownError");
+            }
+            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusBillingError)
+            {
+                output = Json::Value("BillingError");
+            }
+            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusProductUnavailable)
+            {
+                output = Json::Value("ProductUnavailable");
+            }
+            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusCustomerDidNotAcceptPriceChange)
+            {
+                output = Json::Value("CustomerDidNotAcceptPriceChange");
+            }
+            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusFreeTrial)
+            {
+                output = Json::Value("FreeTrial");
+            }
+            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusPaymentPending)
+            {
+                output = Json::Value("PaymentPending");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, SubscriptionProviderStatus& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "NoError") output = SubscriptionProviderStatus::SubscriptionProviderStatusNoError;
-            if (inputStr == "Cancelled") output = SubscriptionProviderStatus::SubscriptionProviderStatusCancelled;
-            if (inputStr == "UnknownError") output = SubscriptionProviderStatus::SubscriptionProviderStatusUnknownError;
-            if (inputStr == "BillingError") output = SubscriptionProviderStatus::SubscriptionProviderStatusBillingError;
-            if (inputStr == "ProductUnavailable") output = SubscriptionProviderStatus::SubscriptionProviderStatusProductUnavailable;
-            if (inputStr == "CustomerDidNotAcceptPriceChange") output = SubscriptionProviderStatus::SubscriptionProviderStatusCustomerDidNotAcceptPriceChange;
-            if (inputStr == "FreeTrial") output = SubscriptionProviderStatus::SubscriptionProviderStatusFreeTrial;
-            if (inputStr == "PaymentPending") output = SubscriptionProviderStatus::SubscriptionProviderStatusPaymentPending;
+            if (inputStr == "NoError")
+            {
+                output = SubscriptionProviderStatus::SubscriptionProviderStatusNoError;
+            }
+            if (inputStr == "Cancelled")
+            {
+                output = SubscriptionProviderStatus::SubscriptionProviderStatusCancelled;
+            }
+            if (inputStr == "UnknownError")
+            {
+                output = SubscriptionProviderStatus::SubscriptionProviderStatusUnknownError;
+            }
+            if (inputStr == "BillingError")
+            {
+                output = SubscriptionProviderStatus::SubscriptionProviderStatusBillingError;
+            }
+            if (inputStr == "ProductUnavailable")
+            {
+                output = SubscriptionProviderStatus::SubscriptionProviderStatusProductUnavailable;
+            }
+            if (inputStr == "CustomerDidNotAcceptPriceChange")
+            {
+                output = SubscriptionProviderStatus::SubscriptionProviderStatusCustomerDidNotAcceptPriceChange;
+            }
+            if (inputStr == "FreeTrial")
+            {
+                output = SubscriptionProviderStatus::SubscriptionProviderStatusFreeTrial;
+            }
+            if (inputStr == "PaymentPending")
+            {
+                output = SubscriptionProviderStatus::SubscriptionProviderStatusPaymentPending;
+            }
         }
 
         enum class TitleActivationStatus
@@ -1599,21 +4479,54 @@ namespace PlayFab
 
         inline void ToJsonEnum(const TitleActivationStatus input, Json::Value& output)
         {
-            if (input == TitleActivationStatus::TitleActivationStatusNone) output = Json::Value("None");
-            if (input == TitleActivationStatus::TitleActivationStatusActivatedTitleKey) output = Json::Value("ActivatedTitleKey");
-            if (input == TitleActivationStatus::TitleActivationStatusPendingSteam) output = Json::Value("PendingSteam");
-            if (input == TitleActivationStatus::TitleActivationStatusActivatedSteam) output = Json::Value("ActivatedSteam");
-            if (input == TitleActivationStatus::TitleActivationStatusRevokedSteam) output = Json::Value("RevokedSteam");
+            if (input == TitleActivationStatus::TitleActivationStatusNone)
+            {
+                output = Json::Value("None");
+            }
+            if (input == TitleActivationStatus::TitleActivationStatusActivatedTitleKey)
+            {
+                output = Json::Value("ActivatedTitleKey");
+            }
+            if (input == TitleActivationStatus::TitleActivationStatusPendingSteam)
+            {
+                output = Json::Value("PendingSteam");
+            }
+            if (input == TitleActivationStatus::TitleActivationStatusActivatedSteam)
+            {
+                output = Json::Value("ActivatedSteam");
+            }
+            if (input == TitleActivationStatus::TitleActivationStatusRevokedSteam)
+            {
+                output = Json::Value("RevokedSteam");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, TitleActivationStatus& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "None") output = TitleActivationStatus::TitleActivationStatusNone;
-            if (inputStr == "ActivatedTitleKey") output = TitleActivationStatus::TitleActivationStatusActivatedTitleKey;
-            if (inputStr == "PendingSteam") output = TitleActivationStatus::TitleActivationStatusPendingSteam;
-            if (inputStr == "ActivatedSteam") output = TitleActivationStatus::TitleActivationStatusActivatedSteam;
-            if (inputStr == "RevokedSteam") output = TitleActivationStatus::TitleActivationStatusRevokedSteam;
+            if (inputStr == "None")
+            {
+                output = TitleActivationStatus::TitleActivationStatusNone;
+            }
+            if (inputStr == "ActivatedTitleKey")
+            {
+                output = TitleActivationStatus::TitleActivationStatusActivatedTitleKey;
+            }
+            if (inputStr == "PendingSteam")
+            {
+                output = TitleActivationStatus::TitleActivationStatusPendingSteam;
+            }
+            if (inputStr == "ActivatedSteam")
+            {
+                output = TitleActivationStatus::TitleActivationStatusActivatedSteam;
+            }
+            if (inputStr == "RevokedSteam")
+            {
+                output = TitleActivationStatus::TitleActivationStatusRevokedSteam;
+            }
         }
 
         enum class TradeStatus
@@ -1629,25 +4542,70 @@ namespace PlayFab
 
         inline void ToJsonEnum(const TradeStatus input, Json::Value& output)
         {
-            if (input == TradeStatus::TradeStatusInvalid) output = Json::Value("Invalid");
-            if (input == TradeStatus::TradeStatusOpening) output = Json::Value("Opening");
-            if (input == TradeStatus::TradeStatusOpen) output = Json::Value("Open");
-            if (input == TradeStatus::TradeStatusAccepting) output = Json::Value("Accepting");
-            if (input == TradeStatus::TradeStatusAccepted) output = Json::Value("Accepted");
-            if (input == TradeStatus::TradeStatusFilled) output = Json::Value("Filled");
-            if (input == TradeStatus::TradeStatusCancelled) output = Json::Value("Cancelled");
+            if (input == TradeStatus::TradeStatusInvalid)
+            {
+                output = Json::Value("Invalid");
+            }
+            if (input == TradeStatus::TradeStatusOpening)
+            {
+                output = Json::Value("Opening");
+            }
+            if (input == TradeStatus::TradeStatusOpen)
+            {
+                output = Json::Value("Open");
+            }
+            if (input == TradeStatus::TradeStatusAccepting)
+            {
+                output = Json::Value("Accepting");
+            }
+            if (input == TradeStatus::TradeStatusAccepted)
+            {
+                output = Json::Value("Accepted");
+            }
+            if (input == TradeStatus::TradeStatusFilled)
+            {
+                output = Json::Value("Filled");
+            }
+            if (input == TradeStatus::TradeStatusCancelled)
+            {
+                output = Json::Value("Cancelled");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, TradeStatus& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "Invalid") output = TradeStatus::TradeStatusInvalid;
-            if (inputStr == "Opening") output = TradeStatus::TradeStatusOpening;
-            if (inputStr == "Open") output = TradeStatus::TradeStatusOpen;
-            if (inputStr == "Accepting") output = TradeStatus::TradeStatusAccepting;
-            if (inputStr == "Accepted") output = TradeStatus::TradeStatusAccepted;
-            if (inputStr == "Filled") output = TradeStatus::TradeStatusFilled;
-            if (inputStr == "Cancelled") output = TradeStatus::TradeStatusCancelled;
+            if (inputStr == "Invalid")
+            {
+                output = TradeStatus::TradeStatusInvalid;
+            }
+            if (inputStr == "Opening")
+            {
+                output = TradeStatus::TradeStatusOpening;
+            }
+            if (inputStr == "Open")
+            {
+                output = TradeStatus::TradeStatusOpen;
+            }
+            if (inputStr == "Accepting")
+            {
+                output = TradeStatus::TradeStatusAccepting;
+            }
+            if (inputStr == "Accepted")
+            {
+                output = TradeStatus::TradeStatusAccepted;
+            }
+            if (inputStr == "Filled")
+            {
+                output = TradeStatus::TradeStatusFilled;
+            }
+            if (inputStr == "Cancelled")
+            {
+                output = TradeStatus::TradeStatusCancelled;
+            }
         }
 
         enum class TransactionStatus
@@ -1676,51 +4634,174 @@ namespace PlayFab
 
         inline void ToJsonEnum(const TransactionStatus input, Json::Value& output)
         {
-            if (input == TransactionStatus::TransactionStatusCreateCart) output = Json::Value("CreateCart");
-            if (input == TransactionStatus::TransactionStatusInit) output = Json::Value("Init");
-            if (input == TransactionStatus::TransactionStatusApproved) output = Json::Value("Approved");
-            if (input == TransactionStatus::TransactionStatusSucceeded) output = Json::Value("Succeeded");
-            if (input == TransactionStatus::TransactionStatusFailedByProvider) output = Json::Value("FailedByProvider");
-            if (input == TransactionStatus::TransactionStatusDisputePending) output = Json::Value("DisputePending");
-            if (input == TransactionStatus::TransactionStatusRefundPending) output = Json::Value("RefundPending");
-            if (input == TransactionStatus::TransactionStatusRefunded) output = Json::Value("Refunded");
-            if (input == TransactionStatus::TransactionStatusRefundFailed) output = Json::Value("RefundFailed");
-            if (input == TransactionStatus::TransactionStatusChargedBack) output = Json::Value("ChargedBack");
-            if (input == TransactionStatus::TransactionStatusFailedByUber) output = Json::Value("FailedByUber");
-            if (input == TransactionStatus::TransactionStatusFailedByPlayFab) output = Json::Value("FailedByPlayFab");
-            if (input == TransactionStatus::TransactionStatusRevoked) output = Json::Value("Revoked");
-            if (input == TransactionStatus::TransactionStatusTradePending) output = Json::Value("TradePending");
-            if (input == TransactionStatus::TransactionStatusTraded) output = Json::Value("Traded");
-            if (input == TransactionStatus::TransactionStatusUpgraded) output = Json::Value("Upgraded");
-            if (input == TransactionStatus::TransactionStatusStackPending) output = Json::Value("StackPending");
-            if (input == TransactionStatus::TransactionStatusStacked) output = Json::Value("Stacked");
-            if (input == TransactionStatus::TransactionStatusOther) output = Json::Value("Other");
-            if (input == TransactionStatus::TransactionStatusFailed) output = Json::Value("Failed");
+            if (input == TransactionStatus::TransactionStatusCreateCart)
+            {
+                output = Json::Value("CreateCart");
+            }
+            if (input == TransactionStatus::TransactionStatusInit)
+            {
+                output = Json::Value("Init");
+            }
+            if (input == TransactionStatus::TransactionStatusApproved)
+            {
+                output = Json::Value("Approved");
+            }
+            if (input == TransactionStatus::TransactionStatusSucceeded)
+            {
+                output = Json::Value("Succeeded");
+            }
+            if (input == TransactionStatus::TransactionStatusFailedByProvider)
+            {
+                output = Json::Value("FailedByProvider");
+            }
+            if (input == TransactionStatus::TransactionStatusDisputePending)
+            {
+                output = Json::Value("DisputePending");
+            }
+            if (input == TransactionStatus::TransactionStatusRefundPending)
+            {
+                output = Json::Value("RefundPending");
+            }
+            if (input == TransactionStatus::TransactionStatusRefunded)
+            {
+                output = Json::Value("Refunded");
+            }
+            if (input == TransactionStatus::TransactionStatusRefundFailed)
+            {
+                output = Json::Value("RefundFailed");
+            }
+            if (input == TransactionStatus::TransactionStatusChargedBack)
+            {
+                output = Json::Value("ChargedBack");
+            }
+            if (input == TransactionStatus::TransactionStatusFailedByUber)
+            {
+                output = Json::Value("FailedByUber");
+            }
+            if (input == TransactionStatus::TransactionStatusFailedByPlayFab)
+            {
+                output = Json::Value("FailedByPlayFab");
+            }
+            if (input == TransactionStatus::TransactionStatusRevoked)
+            {
+                output = Json::Value("Revoked");
+            }
+            if (input == TransactionStatus::TransactionStatusTradePending)
+            {
+                output = Json::Value("TradePending");
+            }
+            if (input == TransactionStatus::TransactionStatusTraded)
+            {
+                output = Json::Value("Traded");
+            }
+            if (input == TransactionStatus::TransactionStatusUpgraded)
+            {
+                output = Json::Value("Upgraded");
+            }
+            if (input == TransactionStatus::TransactionStatusStackPending)
+            {
+                output = Json::Value("StackPending");
+            }
+            if (input == TransactionStatus::TransactionStatusStacked)
+            {
+                output = Json::Value("Stacked");
+            }
+            if (input == TransactionStatus::TransactionStatusOther)
+            {
+                output = Json::Value("Other");
+            }
+            if (input == TransactionStatus::TransactionStatusFailed)
+            {
+                output = Json::Value("Failed");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, TransactionStatus& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "CreateCart") output = TransactionStatus::TransactionStatusCreateCart;
-            if (inputStr == "Init") output = TransactionStatus::TransactionStatusInit;
-            if (inputStr == "Approved") output = TransactionStatus::TransactionStatusApproved;
-            if (inputStr == "Succeeded") output = TransactionStatus::TransactionStatusSucceeded;
-            if (inputStr == "FailedByProvider") output = TransactionStatus::TransactionStatusFailedByProvider;
-            if (inputStr == "DisputePending") output = TransactionStatus::TransactionStatusDisputePending;
-            if (inputStr == "RefundPending") output = TransactionStatus::TransactionStatusRefundPending;
-            if (inputStr == "Refunded") output = TransactionStatus::TransactionStatusRefunded;
-            if (inputStr == "RefundFailed") output = TransactionStatus::TransactionStatusRefundFailed;
-            if (inputStr == "ChargedBack") output = TransactionStatus::TransactionStatusChargedBack;
-            if (inputStr == "FailedByUber") output = TransactionStatus::TransactionStatusFailedByUber;
-            if (inputStr == "FailedByPlayFab") output = TransactionStatus::TransactionStatusFailedByPlayFab;
-            if (inputStr == "Revoked") output = TransactionStatus::TransactionStatusRevoked;
-            if (inputStr == "TradePending") output = TransactionStatus::TransactionStatusTradePending;
-            if (inputStr == "Traded") output = TransactionStatus::TransactionStatusTraded;
-            if (inputStr == "Upgraded") output = TransactionStatus::TransactionStatusUpgraded;
-            if (inputStr == "StackPending") output = TransactionStatus::TransactionStatusStackPending;
-            if (inputStr == "Stacked") output = TransactionStatus::TransactionStatusStacked;
-            if (inputStr == "Other") output = TransactionStatus::TransactionStatusOther;
-            if (inputStr == "Failed") output = TransactionStatus::TransactionStatusFailed;
+            if (inputStr == "CreateCart")
+            {
+                output = TransactionStatus::TransactionStatusCreateCart;
+            }
+            if (inputStr == "Init")
+            {
+                output = TransactionStatus::TransactionStatusInit;
+            }
+            if (inputStr == "Approved")
+            {
+                output = TransactionStatus::TransactionStatusApproved;
+            }
+            if (inputStr == "Succeeded")
+            {
+                output = TransactionStatus::TransactionStatusSucceeded;
+            }
+            if (inputStr == "FailedByProvider")
+            {
+                output = TransactionStatus::TransactionStatusFailedByProvider;
+            }
+            if (inputStr == "DisputePending")
+            {
+                output = TransactionStatus::TransactionStatusDisputePending;
+            }
+            if (inputStr == "RefundPending")
+            {
+                output = TransactionStatus::TransactionStatusRefundPending;
+            }
+            if (inputStr == "Refunded")
+            {
+                output = TransactionStatus::TransactionStatusRefunded;
+            }
+            if (inputStr == "RefundFailed")
+            {
+                output = TransactionStatus::TransactionStatusRefundFailed;
+            }
+            if (inputStr == "ChargedBack")
+            {
+                output = TransactionStatus::TransactionStatusChargedBack;
+            }
+            if (inputStr == "FailedByUber")
+            {
+                output = TransactionStatus::TransactionStatusFailedByUber;
+            }
+            if (inputStr == "FailedByPlayFab")
+            {
+                output = TransactionStatus::TransactionStatusFailedByPlayFab;
+            }
+            if (inputStr == "Revoked")
+            {
+                output = TransactionStatus::TransactionStatusRevoked;
+            }
+            if (inputStr == "TradePending")
+            {
+                output = TransactionStatus::TransactionStatusTradePending;
+            }
+            if (inputStr == "Traded")
+            {
+                output = TransactionStatus::TransactionStatusTraded;
+            }
+            if (inputStr == "Upgraded")
+            {
+                output = TransactionStatus::TransactionStatusUpgraded;
+            }
+            if (inputStr == "StackPending")
+            {
+                output = TransactionStatus::TransactionStatusStackPending;
+            }
+            if (inputStr == "Stacked")
+            {
+                output = TransactionStatus::TransactionStatusStacked;
+            }
+            if (inputStr == "Other")
+            {
+                output = TransactionStatus::TransactionStatusOther;
+            }
+            if (inputStr == "Failed")
+            {
+                output = TransactionStatus::TransactionStatusFailed;
+            }
         }
 
         enum class UserDataPermission
@@ -1731,15 +4812,30 @@ namespace PlayFab
 
         inline void ToJsonEnum(const UserDataPermission input, Json::Value& output)
         {
-            if (input == UserDataPermission::UserDataPermissionPrivate) output = Json::Value("Private");
-            if (input == UserDataPermission::UserDataPermissionPublic) output = Json::Value("Public");
+            if (input == UserDataPermission::UserDataPermissionPrivate)
+            {
+                output = Json::Value("Private");
+            }
+            if (input == UserDataPermission::UserDataPermissionPublic)
+            {
+                output = Json::Value("Public");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, UserDataPermission& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "Private") output = UserDataPermission::UserDataPermissionPrivate;
-            if (inputStr == "Public") output = UserDataPermission::UserDataPermissionPublic;
+            if (inputStr == "Private")
+            {
+                output = UserDataPermission::UserDataPermissionPrivate;
+            }
+            if (inputStr == "Public")
+            {
+                output = UserDataPermission::UserDataPermissionPublic;
+            }
         }
 
         enum class UserOrigination
@@ -1770,55 +4866,190 @@ namespace PlayFab
 
         inline void ToJsonEnum(const UserOrigination input, Json::Value& output)
         {
-            if (input == UserOrigination::UserOriginationOrganic) output = Json::Value("Organic");
-            if (input == UserOrigination::UserOriginationSteam) output = Json::Value("Steam");
-            if (input == UserOrigination::UserOriginationGoogle) output = Json::Value("Google");
-            if (input == UserOrigination::UserOriginationAmazon) output = Json::Value("Amazon");
-            if (input == UserOrigination::UserOriginationFacebook) output = Json::Value("Facebook");
-            if (input == UserOrigination::UserOriginationKongregate) output = Json::Value("Kongregate");
-            if (input == UserOrigination::UserOriginationGamersFirst) output = Json::Value("GamersFirst");
-            if (input == UserOrigination::UserOriginationUnknown) output = Json::Value("Unknown");
-            if (input == UserOrigination::UserOriginationIOS) output = Json::Value("IOS");
-            if (input == UserOrigination::UserOriginationLoadTest) output = Json::Value("LoadTest");
-            if (input == UserOrigination::UserOriginationAndroid) output = Json::Value("Android");
-            if (input == UserOrigination::UserOriginationPSN) output = Json::Value("PSN");
-            if (input == UserOrigination::UserOriginationGameCenter) output = Json::Value("GameCenter");
-            if (input == UserOrigination::UserOriginationCustomId) output = Json::Value("CustomId");
-            if (input == UserOrigination::UserOriginationXboxLive) output = Json::Value("XboxLive");
-            if (input == UserOrigination::UserOriginationParse) output = Json::Value("Parse");
-            if (input == UserOrigination::UserOriginationTwitch) output = Json::Value("Twitch");
-            if (input == UserOrigination::UserOriginationWindowsHello) output = Json::Value("WindowsHello");
-            if (input == UserOrigination::UserOriginationServerCustomId) output = Json::Value("ServerCustomId");
-            if (input == UserOrigination::UserOriginationNintendoSwitchDeviceId) output = Json::Value("NintendoSwitchDeviceId");
-            if (input == UserOrigination::UserOriginationFacebookInstantGamesId) output = Json::Value("FacebookInstantGamesId");
-            if (input == UserOrigination::UserOriginationOpenIdConnect) output = Json::Value("OpenIdConnect");
+            if (input == UserOrigination::UserOriginationOrganic)
+            {
+                output = Json::Value("Organic");
+            }
+            if (input == UserOrigination::UserOriginationSteam)
+            {
+                output = Json::Value("Steam");
+            }
+            if (input == UserOrigination::UserOriginationGoogle)
+            {
+                output = Json::Value("Google");
+            }
+            if (input == UserOrigination::UserOriginationAmazon)
+            {
+                output = Json::Value("Amazon");
+            }
+            if (input == UserOrigination::UserOriginationFacebook)
+            {
+                output = Json::Value("Facebook");
+            }
+            if (input == UserOrigination::UserOriginationKongregate)
+            {
+                output = Json::Value("Kongregate");
+            }
+            if (input == UserOrigination::UserOriginationGamersFirst)
+            {
+                output = Json::Value("GamersFirst");
+            }
+            if (input == UserOrigination::UserOriginationUnknown)
+            {
+                output = Json::Value("Unknown");
+            }
+            if (input == UserOrigination::UserOriginationIOS)
+            {
+                output = Json::Value("IOS");
+            }
+            if (input == UserOrigination::UserOriginationLoadTest)
+            {
+                output = Json::Value("LoadTest");
+            }
+            if (input == UserOrigination::UserOriginationAndroid)
+            {
+                output = Json::Value("Android");
+            }
+            if (input == UserOrigination::UserOriginationPSN)
+            {
+                output = Json::Value("PSN");
+            }
+            if (input == UserOrigination::UserOriginationGameCenter)
+            {
+                output = Json::Value("GameCenter");
+            }
+            if (input == UserOrigination::UserOriginationCustomId)
+            {
+                output = Json::Value("CustomId");
+            }
+            if (input == UserOrigination::UserOriginationXboxLive)
+            {
+                output = Json::Value("XboxLive");
+            }
+            if (input == UserOrigination::UserOriginationParse)
+            {
+                output = Json::Value("Parse");
+            }
+            if (input == UserOrigination::UserOriginationTwitch)
+            {
+                output = Json::Value("Twitch");
+            }
+            if (input == UserOrigination::UserOriginationWindowsHello)
+            {
+                output = Json::Value("WindowsHello");
+            }
+            if (input == UserOrigination::UserOriginationServerCustomId)
+            {
+                output = Json::Value("ServerCustomId");
+            }
+            if (input == UserOrigination::UserOriginationNintendoSwitchDeviceId)
+            {
+                output = Json::Value("NintendoSwitchDeviceId");
+            }
+            if (input == UserOrigination::UserOriginationFacebookInstantGamesId)
+            {
+                output = Json::Value("FacebookInstantGamesId");
+            }
+            if (input == UserOrigination::UserOriginationOpenIdConnect)
+            {
+                output = Json::Value("OpenIdConnect");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, UserOrigination& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "Organic") output = UserOrigination::UserOriginationOrganic;
-            if (inputStr == "Steam") output = UserOrigination::UserOriginationSteam;
-            if (inputStr == "Google") output = UserOrigination::UserOriginationGoogle;
-            if (inputStr == "Amazon") output = UserOrigination::UserOriginationAmazon;
-            if (inputStr == "Facebook") output = UserOrigination::UserOriginationFacebook;
-            if (inputStr == "Kongregate") output = UserOrigination::UserOriginationKongregate;
-            if (inputStr == "GamersFirst") output = UserOrigination::UserOriginationGamersFirst;
-            if (inputStr == "Unknown") output = UserOrigination::UserOriginationUnknown;
-            if (inputStr == "IOS") output = UserOrigination::UserOriginationIOS;
-            if (inputStr == "LoadTest") output = UserOrigination::UserOriginationLoadTest;
-            if (inputStr == "Android") output = UserOrigination::UserOriginationAndroid;
-            if (inputStr == "PSN") output = UserOrigination::UserOriginationPSN;
-            if (inputStr == "GameCenter") output = UserOrigination::UserOriginationGameCenter;
-            if (inputStr == "CustomId") output = UserOrigination::UserOriginationCustomId;
-            if (inputStr == "XboxLive") output = UserOrigination::UserOriginationXboxLive;
-            if (inputStr == "Parse") output = UserOrigination::UserOriginationParse;
-            if (inputStr == "Twitch") output = UserOrigination::UserOriginationTwitch;
-            if (inputStr == "WindowsHello") output = UserOrigination::UserOriginationWindowsHello;
-            if (inputStr == "ServerCustomId") output = UserOrigination::UserOriginationServerCustomId;
-            if (inputStr == "NintendoSwitchDeviceId") output = UserOrigination::UserOriginationNintendoSwitchDeviceId;
-            if (inputStr == "FacebookInstantGamesId") output = UserOrigination::UserOriginationFacebookInstantGamesId;
-            if (inputStr == "OpenIdConnect") output = UserOrigination::UserOriginationOpenIdConnect;
+            if (inputStr == "Organic")
+            {
+                output = UserOrigination::UserOriginationOrganic;
+            }
+            if (inputStr == "Steam")
+            {
+                output = UserOrigination::UserOriginationSteam;
+            }
+            if (inputStr == "Google")
+            {
+                output = UserOrigination::UserOriginationGoogle;
+            }
+            if (inputStr == "Amazon")
+            {
+                output = UserOrigination::UserOriginationAmazon;
+            }
+            if (inputStr == "Facebook")
+            {
+                output = UserOrigination::UserOriginationFacebook;
+            }
+            if (inputStr == "Kongregate")
+            {
+                output = UserOrigination::UserOriginationKongregate;
+            }
+            if (inputStr == "GamersFirst")
+            {
+                output = UserOrigination::UserOriginationGamersFirst;
+            }
+            if (inputStr == "Unknown")
+            {
+                output = UserOrigination::UserOriginationUnknown;
+            }
+            if (inputStr == "IOS")
+            {
+                output = UserOrigination::UserOriginationIOS;
+            }
+            if (inputStr == "LoadTest")
+            {
+                output = UserOrigination::UserOriginationLoadTest;
+            }
+            if (inputStr == "Android")
+            {
+                output = UserOrigination::UserOriginationAndroid;
+            }
+            if (inputStr == "PSN")
+            {
+                output = UserOrigination::UserOriginationPSN;
+            }
+            if (inputStr == "GameCenter")
+            {
+                output = UserOrigination::UserOriginationGameCenter;
+            }
+            if (inputStr == "CustomId")
+            {
+                output = UserOrigination::UserOriginationCustomId;
+            }
+            if (inputStr == "XboxLive")
+            {
+                output = UserOrigination::UserOriginationXboxLive;
+            }
+            if (inputStr == "Parse")
+            {
+                output = UserOrigination::UserOriginationParse;
+            }
+            if (inputStr == "Twitch")
+            {
+                output = UserOrigination::UserOriginationTwitch;
+            }
+            if (inputStr == "WindowsHello")
+            {
+                output = UserOrigination::UserOriginationWindowsHello;
+            }
+            if (inputStr == "ServerCustomId")
+            {
+                output = UserOrigination::UserOriginationServerCustomId;
+            }
+            if (inputStr == "NintendoSwitchDeviceId")
+            {
+                output = UserOrigination::UserOriginationNintendoSwitchDeviceId;
+            }
+            if (inputStr == "FacebookInstantGamesId")
+            {
+                output = UserOrigination::UserOriginationFacebookInstantGamesId;
+            }
+            if (inputStr == "OpenIdConnect")
+            {
+                output = UserOrigination::UserOriginationOpenIdConnect;
+            }
         }
 
         // Client Classes

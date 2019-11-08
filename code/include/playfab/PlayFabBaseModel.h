@@ -107,9 +107,14 @@ namespace PlayFab
         strftime(buff, 40, "%Y-%m-%dT%H:%M:%S.000Z", &timeInfo);
         output = Json::Value(buff);
     }
+
     inline void FromJsonUtilT(const Json::Value& input, time_t& output)
     {
-        if (input == Json::Value::null) return;
+        if (input == Json::Value::null)
+        {
+            return;
+        }
+
         const std::string timeStr = input.asString();
         tm timeStruct = {};
         std::istringstream iss(timeStr);
@@ -122,6 +127,7 @@ namespace PlayFab
         output = _mkgmtime(&timeStruct);
 #endif
     }
+
     inline void ToJsonUtilT(const Boxed<time_t>& input, Json::Value& output)
     {
         if (input.isNull())
@@ -133,6 +139,7 @@ namespace PlayFab
             ToJsonUtilT(static_cast<time_t>(input), output);
         }
     }
+
     inline void FromJsonUtilT(const Json::Value& input, Boxed<time_t>& output)
     {
         if (input == Json::Value::null)
@@ -146,6 +153,7 @@ namespace PlayFab
             output = outputVal;
         }
     }
+
     inline void ToJsonUtilT(const std::list<time_t>& input, Json::Value& output)
     {
         if (input.size() == 0)
@@ -164,11 +172,14 @@ namespace PlayFab
             }
         }
     }
-    inline void FromJsonUtilT(Json::Value& input, std::list<time_t>& output)
+
+    inline void FromJsonUtilT(const Json::Value& input, std::list<time_t>& output)
     {
         output.clear();
         if (input == Json::Value::null || !input.isArray())
+        {
             return;
+        }
 
         time_t eachOutput;
         for (auto iter = input.begin(); iter != input.end(); ++iter)
@@ -177,6 +188,7 @@ namespace PlayFab
             output.push_back(eachOutput);
         }
     }
+
     inline void ToJsonUtilT(const std::map<std::string, time_t>& input, Json::Value& output)
     {
         output = Json::Value(Json::objectValue);
@@ -187,11 +199,14 @@ namespace PlayFab
             output[iter->first] = eachOutput;
         }
     }
-    inline void FromJsonUtilT(Json::Value& input, std::map<std::string, time_t>& output)
+
+    inline void FromJsonUtilT(const Json::Value& input, std::map<std::string, time_t>& output)
     {
         output.clear();
         if (input == Json::Value::null)
+        {
             return;
+        }
 
         time_t eachOutput;
         for (auto iter = input.begin(); iter != input.end(); ++iter)
@@ -213,6 +228,7 @@ namespace PlayFab
             ToJsonEnum(input, output);
         }
     }
+
     template <typename EnumType> inline void FromJsonUtilE(const Json::Value& input, Boxed<EnumType>& output)
     {
         if (input == Json::Value::null)
@@ -226,6 +242,7 @@ namespace PlayFab
             output = outputVal;
         }
     }
+
     template <typename EnumType> inline void ToJsonUtilE(const std::list<EnumType>& input, Json::Value& output)
     {
         if (input.size() == 0)
@@ -244,11 +261,14 @@ namespace PlayFab
             }
         }
     }
+
     template <typename EnumType> inline void FromJsonUtilE(const Json::Value& input, std::list<EnumType>& output)
     {
         output.clear();
         if (input == Json::Value::null)
+        {
             return;
+        }
 
         EnumType eachOutput;
         for (auto iter = input.begin(); iter != input.end(); ++iter)
@@ -257,6 +277,7 @@ namespace PlayFab
             output.push_back(eachOutput);
         }
     }
+
     template <typename EnumType> inline void ToJsonUtilE(const std::map<std::string, EnumType>& input, Json::Value& output)
     {
         output = Json::Value(Json::objectValue);
@@ -267,11 +288,14 @@ namespace PlayFab
             output[iter->first] = eachOutput;
         }
     }
+
     template <typename EnumType> inline void FromJsonUtilE(const Json::Value& input, std::map<std::string, EnumType>& output)
     {
         output.clear();
         if (input == Json::Value::null)
+        {
             return;
+        }
 
         EnumType eachOutput;
         for (auto iter = input.begin(); iter != input.end(); ++iter)
@@ -285,17 +309,27 @@ namespace PlayFab
     inline void ToJsonUtilS(const std::string& input, Json::Value& output)
     {
         if (input.length() == 0)
+        {
             output = Json::Value::null;
+        }
         else
+        {
             output = Json::Value(input);
+        }
     }
+
     inline void FromJsonUtilS(const Json::Value& input, std::string& output)
     {
         if (input == Json::Value::null)
+        {
             output.clear();
+        }
         else
+        {
             output = input.asString();
+        }
     }
+
     inline void ToJsonUtilS(const std::list<std::string>& input, Json::Value& output)
     {
         if (input.size() == 0)
@@ -314,11 +348,14 @@ namespace PlayFab
             }
         }
     }
+
     inline void FromJsonUtilS(const Json::Value& input, std::list<std::string>& output)
     {
         output.clear();
         if (input == Json::Value::null)
+        {
             return;
+        }
 
         std::string eachOutput;
         for (auto iter = input.begin(); iter != input.end(); ++iter)
@@ -327,6 +364,7 @@ namespace PlayFab
             output.push_back(eachOutput);
         }
     }
+
     inline void ToJsonUtilS(const std::map<std::string, std::string>& input, Json::Value& output)
     {
         output = Json::Value(Json::objectValue);
@@ -337,11 +375,14 @@ namespace PlayFab
             output[iter->first] = eachOutput;
         }
     }
+
     inline void FromJsonUtilS(const Json::Value& input, std::map<std::string, std::string>& output)
     {
         output.clear();
         if (input == Json::Value::null)
+        {
             return;
+        }
 
         std::string eachOutput;
         for (auto iter = input.begin(); iter != input.end(); ++iter)
@@ -356,21 +397,30 @@ namespace PlayFab
     {
         output = input.ToJson();
     }
+
     inline void FromJsonUtilO(const Json::Value& input, PlayFabBaseModel& output)
     {
         output.FromJson(input);
     }
+
     template <typename ObjectType> inline void ToJsonUtilO(const Boxed<ObjectType> input, Json::Value& output)
     {
         if (input.isNull())
+        {
             output = Json::Value();
+        }
         else
+        {
             output = static_cast<ObjectType>(input).ToJson();
+        }
     }
+
     template <typename ObjectType> inline void FromJsonUtilO(const Json::Value& input, Boxed<ObjectType>& output)
     {
         if (input == Json::Value::null)
+        {
             output.setNull();
+        }
         else
         {
             ObjectType outputTemp;
@@ -378,6 +428,7 @@ namespace PlayFab
             output = outputTemp;
         }
     }
+
     template <typename ObjectType> inline void ToJsonUtilO(const std::list<ObjectType>& input, Json::Value& output)
     {
         if (input.size() == 0)
@@ -396,11 +447,14 @@ namespace PlayFab
             }
         }
     }
+
     template <typename ObjectType> inline void FromJsonUtilO(const Json::Value& input, std::list<ObjectType>& output)
     {
         output.clear();
         if (input == Json::Value::null)
+        {
             return;
+        }
 
         ObjectType eachOutput;
         for (auto iter = input.begin(); iter != input.end(); ++iter)
@@ -409,6 +463,7 @@ namespace PlayFab
             output.push_back(eachOutput);
         }
     }
+
     template <typename ObjectType> inline void ToJsonUtilO(const std::map<std::string, ObjectType>& input, Json::Value& output)
     {
         output = Json::Value(Json::objectValue);
@@ -419,11 +474,14 @@ namespace PlayFab
             output[iter->first] = eachOutput;
         }
     }
+
     template <typename ObjectType> inline void FromJsonUtilO(const Json::Value& input, std::map<std::string, ObjectType>& output)
     {
         output.clear();
         if (input == Json::Value::null)
+        {
             return;
+        }
 
         ObjectType eachOutput;
         for (auto iter = input.begin(); iter != input.end(); ++iter)
@@ -438,42 +496,52 @@ namespace PlayFab
     {
         output = Json::Value(input);
     }
+
     inline void FromJsonUtilP(const Json::Value& input, bool& output)
     {
         output = input == Json::Value::null ? false : input.asBool();
     }
+
     inline void FromJsonUtilP(const Json::Value& input, Int16& output)
     {
         output = input == Json::Value::null ? 0 : static_cast<Int16>(input.asInt());
     }
+
     inline void FromJsonUtilP(const Json::Value& input, Uint16& output)
     {
         output = input == Json::Value::null ? static_cast<Uint16>(0) : static_cast<Uint16>(input.asInt());
     }
+
     inline void FromJsonUtilP(const Json::Value& input, Int32& output)
     {
         output = input == Json::Value::null ? 0 : input.asInt();
     }
+
     inline void FromJsonUtilP(const Json::Value& input, Uint32& output)
     {
         output = input == Json::Value::null ? 0 : input.asUInt();
     }
+
     inline void FromJsonUtilP(const Json::Value& input, Int64& output)
     {
         output = input == Json::Value::null ? 0 : input.asInt64();
     }
+
     inline void FromJsonUtilP(const Json::Value& input, Uint64& output)
     {
         output = input == Json::Value::null ? 0 : input.asUInt64();
     }
+
     inline void FromJsonUtilP(const Json::Value& input, float& output)
     {
         output = input == Json::Value::null ? 0 : input.asFloat();
     }
+
     inline void FromJsonUtilP(const Json::Value& input, double& output)
     {
         output = input == Json::Value::null ? 0 : input.asDouble();
     }
+
     template <typename PrimitiveType> inline void ToJsonUtilP(const Boxed<PrimitiveType>& input, Json::Value& output)
     {
         if (input.isNull())
@@ -485,6 +553,7 @@ namespace PlayFab
             ToJsonUtilP(static_cast<PrimitiveType>(input), output);
         }
     }
+
     template <typename PrimitiveType> inline void FromJsonUtilP(const Json::Value& input, Boxed<PrimitiveType>& output)
     {
         if (input == Json::Value::null)
@@ -498,6 +567,7 @@ namespace PlayFab
             output = outputVal;
         }
     }
+
     template <typename PrimitiveType> inline void ToJsonUtilP(const std::list<PrimitiveType>& input, Json::Value& output)
     {
         if (input.size() == 0)
@@ -516,11 +586,14 @@ namespace PlayFab
             }
         }
     }
+
     template <typename PrimitiveType> inline void FromJsonUtilP(const Json::Value& input, std::list<PrimitiveType>& output)
     {
         output.clear();
         if (input == Json::Value::null)
+        {
             return;
+        }
 
         PrimitiveType eachOutput;
         for (auto iter = input.begin(); iter != input.end(); ++iter)
@@ -529,6 +602,7 @@ namespace PlayFab
             output.push_back(eachOutput);
         }
     }
+
     template <typename PrimitiveType> inline void ToJsonUtilP(const std::map<std::string, PrimitiveType>& input, Json::Value& output)
     {
         output = Json::Value(Json::objectValue);
@@ -539,11 +613,14 @@ namespace PlayFab
             output[iter->first] = eachOutput;
         }
     }
+
     template <typename PrimitiveType> inline void FromJsonUtilP(const Json::Value& input, std::map<std::string, PrimitiveType>& output)
     {
         output.clear();
         if (input == Json::Value::null)
+        {
             return;
+        }
 
         PrimitiveType eachOutput;
         for (auto iter = input.begin(); iter != input.end(); ++iter)
@@ -553,4 +630,3 @@ namespace PlayFab
         }
     }
 }
-

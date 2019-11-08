@@ -34,47 +34,158 @@ namespace PlayFab
 
         inline void ToJsonEnum(const AzureRegion input, Json::Value& output)
         {
-            if (input == AzureRegion::AzureRegionAustraliaEast) output = Json::Value("AustraliaEast");
-            if (input == AzureRegion::AzureRegionAustraliaSoutheast) output = Json::Value("AustraliaSoutheast");
-            if (input == AzureRegion::AzureRegionBrazilSouth) output = Json::Value("BrazilSouth");
-            if (input == AzureRegion::AzureRegionCentralUs) output = Json::Value("CentralUs");
-            if (input == AzureRegion::AzureRegionEastAsia) output = Json::Value("EastAsia");
-            if (input == AzureRegion::AzureRegionEastUs) output = Json::Value("EastUs");
-            if (input == AzureRegion::AzureRegionEastUs2) output = Json::Value("EastUs2");
-            if (input == AzureRegion::AzureRegionJapanEast) output = Json::Value("JapanEast");
-            if (input == AzureRegion::AzureRegionJapanWest) output = Json::Value("JapanWest");
-            if (input == AzureRegion::AzureRegionNorthCentralUs) output = Json::Value("NorthCentralUs");
-            if (input == AzureRegion::AzureRegionNorthEurope) output = Json::Value("NorthEurope");
-            if (input == AzureRegion::AzureRegionSouthCentralUs) output = Json::Value("SouthCentralUs");
-            if (input == AzureRegion::AzureRegionSoutheastAsia) output = Json::Value("SoutheastAsia");
-            if (input == AzureRegion::AzureRegionWestEurope) output = Json::Value("WestEurope");
-            if (input == AzureRegion::AzureRegionWestUs) output = Json::Value("WestUs");
-            if (input == AzureRegion::AzureRegionChinaEast2) output = Json::Value("ChinaEast2");
-            if (input == AzureRegion::AzureRegionChinaNorth2) output = Json::Value("ChinaNorth2");
-            if (input == AzureRegion::AzureRegionSouthAfricaNorth) output = Json::Value("SouthAfricaNorth");
+            if (input == AzureRegion::AzureRegionAustraliaEast)
+            {
+                output = Json::Value("AustraliaEast");
+            }
+            if (input == AzureRegion::AzureRegionAustraliaSoutheast)
+            {
+                output = Json::Value("AustraliaSoutheast");
+            }
+            if (input == AzureRegion::AzureRegionBrazilSouth)
+            {
+                output = Json::Value("BrazilSouth");
+            }
+            if (input == AzureRegion::AzureRegionCentralUs)
+            {
+                output = Json::Value("CentralUs");
+            }
+            if (input == AzureRegion::AzureRegionEastAsia)
+            {
+                output = Json::Value("EastAsia");
+            }
+            if (input == AzureRegion::AzureRegionEastUs)
+            {
+                output = Json::Value("EastUs");
+            }
+            if (input == AzureRegion::AzureRegionEastUs2)
+            {
+                output = Json::Value("EastUs2");
+            }
+            if (input == AzureRegion::AzureRegionJapanEast)
+            {
+                output = Json::Value("JapanEast");
+            }
+            if (input == AzureRegion::AzureRegionJapanWest)
+            {
+                output = Json::Value("JapanWest");
+            }
+            if (input == AzureRegion::AzureRegionNorthCentralUs)
+            {
+                output = Json::Value("NorthCentralUs");
+            }
+            if (input == AzureRegion::AzureRegionNorthEurope)
+            {
+                output = Json::Value("NorthEurope");
+            }
+            if (input == AzureRegion::AzureRegionSouthCentralUs)
+            {
+                output = Json::Value("SouthCentralUs");
+            }
+            if (input == AzureRegion::AzureRegionSoutheastAsia)
+            {
+                output = Json::Value("SoutheastAsia");
+            }
+            if (input == AzureRegion::AzureRegionWestEurope)
+            {
+                output = Json::Value("WestEurope");
+            }
+            if (input == AzureRegion::AzureRegionWestUs)
+            {
+                output = Json::Value("WestUs");
+            }
+            if (input == AzureRegion::AzureRegionChinaEast2)
+            {
+                output = Json::Value("ChinaEast2");
+            }
+            if (input == AzureRegion::AzureRegionChinaNorth2)
+            {
+                output = Json::Value("ChinaNorth2");
+            }
+            if (input == AzureRegion::AzureRegionSouthAfricaNorth)
+            {
+                output = Json::Value("SouthAfricaNorth");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, AzureRegion& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "AustraliaEast") output = AzureRegion::AzureRegionAustraliaEast;
-            if (inputStr == "AustraliaSoutheast") output = AzureRegion::AzureRegionAustraliaSoutheast;
-            if (inputStr == "BrazilSouth") output = AzureRegion::AzureRegionBrazilSouth;
-            if (inputStr == "CentralUs") output = AzureRegion::AzureRegionCentralUs;
-            if (inputStr == "EastAsia") output = AzureRegion::AzureRegionEastAsia;
-            if (inputStr == "EastUs") output = AzureRegion::AzureRegionEastUs;
-            if (inputStr == "EastUs2") output = AzureRegion::AzureRegionEastUs2;
-            if (inputStr == "JapanEast") output = AzureRegion::AzureRegionJapanEast;
-            if (inputStr == "JapanWest") output = AzureRegion::AzureRegionJapanWest;
-            if (inputStr == "NorthCentralUs") output = AzureRegion::AzureRegionNorthCentralUs;
-            if (inputStr == "NorthEurope") output = AzureRegion::AzureRegionNorthEurope;
-            if (inputStr == "SouthCentralUs") output = AzureRegion::AzureRegionSouthCentralUs;
-            if (inputStr == "SoutheastAsia") output = AzureRegion::AzureRegionSoutheastAsia;
-            if (inputStr == "WestEurope") output = AzureRegion::AzureRegionWestEurope;
-            if (inputStr == "WestUs") output = AzureRegion::AzureRegionWestUs;
-            if (inputStr == "ChinaEast2") output = AzureRegion::AzureRegionChinaEast2;
-            if (inputStr == "ChinaNorth2") output = AzureRegion::AzureRegionChinaNorth2;
-            if (inputStr == "SouthAfricaNorth") output = AzureRegion::AzureRegionSouthAfricaNorth;
+            if (inputStr == "AustraliaEast")
+            {
+                output = AzureRegion::AzureRegionAustraliaEast;
+            }
+            if (inputStr == "AustraliaSoutheast")
+            {
+                output = AzureRegion::AzureRegionAustraliaSoutheast;
+            }
+            if (inputStr == "BrazilSouth")
+            {
+                output = AzureRegion::AzureRegionBrazilSouth;
+            }
+            if (inputStr == "CentralUs")
+            {
+                output = AzureRegion::AzureRegionCentralUs;
+            }
+            if (inputStr == "EastAsia")
+            {
+                output = AzureRegion::AzureRegionEastAsia;
+            }
+            if (inputStr == "EastUs")
+            {
+                output = AzureRegion::AzureRegionEastUs;
+            }
+            if (inputStr == "EastUs2")
+            {
+                output = AzureRegion::AzureRegionEastUs2;
+            }
+            if (inputStr == "JapanEast")
+            {
+                output = AzureRegion::AzureRegionJapanEast;
+            }
+            if (inputStr == "JapanWest")
+            {
+                output = AzureRegion::AzureRegionJapanWest;
+            }
+            if (inputStr == "NorthCentralUs")
+            {
+                output = AzureRegion::AzureRegionNorthCentralUs;
+            }
+            if (inputStr == "NorthEurope")
+            {
+                output = AzureRegion::AzureRegionNorthEurope;
+            }
+            if (inputStr == "SouthCentralUs")
+            {
+                output = AzureRegion::AzureRegionSouthCentralUs;
+            }
+            if (inputStr == "SoutheastAsia")
+            {
+                output = AzureRegion::AzureRegionSoutheastAsia;
+            }
+            if (inputStr == "WestEurope")
+            {
+                output = AzureRegion::AzureRegionWestEurope;
+            }
+            if (inputStr == "WestUs")
+            {
+                output = AzureRegion::AzureRegionWestUs;
+            }
+            if (inputStr == "ChinaEast2")
+            {
+                output = AzureRegion::AzureRegionChinaEast2;
+            }
+            if (inputStr == "ChinaNorth2")
+            {
+                output = AzureRegion::AzureRegionChinaNorth2;
+            }
+            if (inputStr == "SouthAfricaNorth")
+            {
+                output = AzureRegion::AzureRegionSouthAfricaNorth;
+            }
         }
 
         enum class AzureVmFamily
@@ -88,21 +199,54 @@ namespace PlayFab
 
         inline void ToJsonEnum(const AzureVmFamily input, Json::Value& output)
         {
-            if (input == AzureVmFamily::AzureVmFamilyA) output = Json::Value("A");
-            if (input == AzureVmFamily::AzureVmFamilyAv2) output = Json::Value("Av2");
-            if (input == AzureVmFamily::AzureVmFamilyDv2) output = Json::Value("Dv2");
-            if (input == AzureVmFamily::AzureVmFamilyF) output = Json::Value("F");
-            if (input == AzureVmFamily::AzureVmFamilyFsv2) output = Json::Value("Fsv2");
+            if (input == AzureVmFamily::AzureVmFamilyA)
+            {
+                output = Json::Value("A");
+            }
+            if (input == AzureVmFamily::AzureVmFamilyAv2)
+            {
+                output = Json::Value("Av2");
+            }
+            if (input == AzureVmFamily::AzureVmFamilyDv2)
+            {
+                output = Json::Value("Dv2");
+            }
+            if (input == AzureVmFamily::AzureVmFamilyF)
+            {
+                output = Json::Value("F");
+            }
+            if (input == AzureVmFamily::AzureVmFamilyFsv2)
+            {
+                output = Json::Value("Fsv2");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, AzureVmFamily& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "A") output = AzureVmFamily::AzureVmFamilyA;
-            if (inputStr == "Av2") output = AzureVmFamily::AzureVmFamilyAv2;
-            if (inputStr == "Dv2") output = AzureVmFamily::AzureVmFamilyDv2;
-            if (inputStr == "F") output = AzureVmFamily::AzureVmFamilyF;
-            if (inputStr == "Fsv2") output = AzureVmFamily::AzureVmFamilyFsv2;
+            if (inputStr == "A")
+            {
+                output = AzureVmFamily::AzureVmFamilyA;
+            }
+            if (inputStr == "Av2")
+            {
+                output = AzureVmFamily::AzureVmFamilyAv2;
+            }
+            if (inputStr == "Dv2")
+            {
+                output = AzureVmFamily::AzureVmFamilyDv2;
+            }
+            if (inputStr == "F")
+            {
+                output = AzureVmFamily::AzureVmFamilyF;
+            }
+            if (inputStr == "Fsv2")
+            {
+                output = AzureVmFamily::AzureVmFamilyFsv2;
+            }
         }
 
         enum class AzureVmSize
@@ -133,55 +277,190 @@ namespace PlayFab
 
         inline void ToJsonEnum(const AzureVmSize input, Json::Value& output)
         {
-            if (input == AzureVmSize::AzureVmSizeStandard_D1_v2) output = Json::Value("Standard_D1_v2");
-            if (input == AzureVmSize::AzureVmSizeStandard_D2_v2) output = Json::Value("Standard_D2_v2");
-            if (input == AzureVmSize::AzureVmSizeStandard_D3_v2) output = Json::Value("Standard_D3_v2");
-            if (input == AzureVmSize::AzureVmSizeStandard_D4_v2) output = Json::Value("Standard_D4_v2");
-            if (input == AzureVmSize::AzureVmSizeStandard_D5_v2) output = Json::Value("Standard_D5_v2");
-            if (input == AzureVmSize::AzureVmSizeStandard_A1_v2) output = Json::Value("Standard_A1_v2");
-            if (input == AzureVmSize::AzureVmSizeStandard_A2_v2) output = Json::Value("Standard_A2_v2");
-            if (input == AzureVmSize::AzureVmSizeStandard_A4_v2) output = Json::Value("Standard_A4_v2");
-            if (input == AzureVmSize::AzureVmSizeStandard_A8_v2) output = Json::Value("Standard_A8_v2");
-            if (input == AzureVmSize::AzureVmSizeStandard_F1) output = Json::Value("Standard_F1");
-            if (input == AzureVmSize::AzureVmSizeStandard_F2) output = Json::Value("Standard_F2");
-            if (input == AzureVmSize::AzureVmSizeStandard_F4) output = Json::Value("Standard_F4");
-            if (input == AzureVmSize::AzureVmSizeStandard_F8) output = Json::Value("Standard_F8");
-            if (input == AzureVmSize::AzureVmSizeStandard_F16) output = Json::Value("Standard_F16");
-            if (input == AzureVmSize::AzureVmSizeStandard_F2s_v2) output = Json::Value("Standard_F2s_v2");
-            if (input == AzureVmSize::AzureVmSizeStandard_F4s_v2) output = Json::Value("Standard_F4s_v2");
-            if (input == AzureVmSize::AzureVmSizeStandard_F8s_v2) output = Json::Value("Standard_F8s_v2");
-            if (input == AzureVmSize::AzureVmSizeStandard_F16s_v2) output = Json::Value("Standard_F16s_v2");
-            if (input == AzureVmSize::AzureVmSizeStandard_A1) output = Json::Value("Standard_A1");
-            if (input == AzureVmSize::AzureVmSizeStandard_A2) output = Json::Value("Standard_A2");
-            if (input == AzureVmSize::AzureVmSizeStandard_A3) output = Json::Value("Standard_A3");
-            if (input == AzureVmSize::AzureVmSizeStandard_A4) output = Json::Value("Standard_A4");
+            if (input == AzureVmSize::AzureVmSizeStandard_D1_v2)
+            {
+                output = Json::Value("Standard_D1_v2");
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D2_v2)
+            {
+                output = Json::Value("Standard_D2_v2");
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D3_v2)
+            {
+                output = Json::Value("Standard_D3_v2");
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D4_v2)
+            {
+                output = Json::Value("Standard_D4_v2");
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D5_v2)
+            {
+                output = Json::Value("Standard_D5_v2");
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_A1_v2)
+            {
+                output = Json::Value("Standard_A1_v2");
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_A2_v2)
+            {
+                output = Json::Value("Standard_A2_v2");
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_A4_v2)
+            {
+                output = Json::Value("Standard_A4_v2");
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_A8_v2)
+            {
+                output = Json::Value("Standard_A8_v2");
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_F1)
+            {
+                output = Json::Value("Standard_F1");
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_F2)
+            {
+                output = Json::Value("Standard_F2");
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_F4)
+            {
+                output = Json::Value("Standard_F4");
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_F8)
+            {
+                output = Json::Value("Standard_F8");
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_F16)
+            {
+                output = Json::Value("Standard_F16");
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_F2s_v2)
+            {
+                output = Json::Value("Standard_F2s_v2");
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_F4s_v2)
+            {
+                output = Json::Value("Standard_F4s_v2");
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_F8s_v2)
+            {
+                output = Json::Value("Standard_F8s_v2");
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_F16s_v2)
+            {
+                output = Json::Value("Standard_F16s_v2");
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_A1)
+            {
+                output = Json::Value("Standard_A1");
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_A2)
+            {
+                output = Json::Value("Standard_A2");
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_A3)
+            {
+                output = Json::Value("Standard_A3");
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_A4)
+            {
+                output = Json::Value("Standard_A4");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, AzureVmSize& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "Standard_D1_v2") output = AzureVmSize::AzureVmSizeStandard_D1_v2;
-            if (inputStr == "Standard_D2_v2") output = AzureVmSize::AzureVmSizeStandard_D2_v2;
-            if (inputStr == "Standard_D3_v2") output = AzureVmSize::AzureVmSizeStandard_D3_v2;
-            if (inputStr == "Standard_D4_v2") output = AzureVmSize::AzureVmSizeStandard_D4_v2;
-            if (inputStr == "Standard_D5_v2") output = AzureVmSize::AzureVmSizeStandard_D5_v2;
-            if (inputStr == "Standard_A1_v2") output = AzureVmSize::AzureVmSizeStandard_A1_v2;
-            if (inputStr == "Standard_A2_v2") output = AzureVmSize::AzureVmSizeStandard_A2_v2;
-            if (inputStr == "Standard_A4_v2") output = AzureVmSize::AzureVmSizeStandard_A4_v2;
-            if (inputStr == "Standard_A8_v2") output = AzureVmSize::AzureVmSizeStandard_A8_v2;
-            if (inputStr == "Standard_F1") output = AzureVmSize::AzureVmSizeStandard_F1;
-            if (inputStr == "Standard_F2") output = AzureVmSize::AzureVmSizeStandard_F2;
-            if (inputStr == "Standard_F4") output = AzureVmSize::AzureVmSizeStandard_F4;
-            if (inputStr == "Standard_F8") output = AzureVmSize::AzureVmSizeStandard_F8;
-            if (inputStr == "Standard_F16") output = AzureVmSize::AzureVmSizeStandard_F16;
-            if (inputStr == "Standard_F2s_v2") output = AzureVmSize::AzureVmSizeStandard_F2s_v2;
-            if (inputStr == "Standard_F4s_v2") output = AzureVmSize::AzureVmSizeStandard_F4s_v2;
-            if (inputStr == "Standard_F8s_v2") output = AzureVmSize::AzureVmSizeStandard_F8s_v2;
-            if (inputStr == "Standard_F16s_v2") output = AzureVmSize::AzureVmSizeStandard_F16s_v2;
-            if (inputStr == "Standard_A1") output = AzureVmSize::AzureVmSizeStandard_A1;
-            if (inputStr == "Standard_A2") output = AzureVmSize::AzureVmSizeStandard_A2;
-            if (inputStr == "Standard_A3") output = AzureVmSize::AzureVmSizeStandard_A3;
-            if (inputStr == "Standard_A4") output = AzureVmSize::AzureVmSizeStandard_A4;
+            if (inputStr == "Standard_D1_v2")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D1_v2;
+            }
+            if (inputStr == "Standard_D2_v2")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D2_v2;
+            }
+            if (inputStr == "Standard_D3_v2")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D3_v2;
+            }
+            if (inputStr == "Standard_D4_v2")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D4_v2;
+            }
+            if (inputStr == "Standard_D5_v2")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D5_v2;
+            }
+            if (inputStr == "Standard_A1_v2")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_A1_v2;
+            }
+            if (inputStr == "Standard_A2_v2")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_A2_v2;
+            }
+            if (inputStr == "Standard_A4_v2")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_A4_v2;
+            }
+            if (inputStr == "Standard_A8_v2")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_A8_v2;
+            }
+            if (inputStr == "Standard_F1")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_F1;
+            }
+            if (inputStr == "Standard_F2")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_F2;
+            }
+            if (inputStr == "Standard_F4")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_F4;
+            }
+            if (inputStr == "Standard_F8")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_F8;
+            }
+            if (inputStr == "Standard_F16")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_F16;
+            }
+            if (inputStr == "Standard_F2s_v2")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_F2s_v2;
+            }
+            if (inputStr == "Standard_F4s_v2")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_F4s_v2;
+            }
+            if (inputStr == "Standard_F8s_v2")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_F8s_v2;
+            }
+            if (inputStr == "Standard_F16s_v2")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_F16s_v2;
+            }
+            if (inputStr == "Standard_A1")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_A1;
+            }
+            if (inputStr == "Standard_A2")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_A2;
+            }
+            if (inputStr == "Standard_A3")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_A3;
+            }
+            if (inputStr == "Standard_A4")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_A4;
+            }
         }
 
         enum class CancellationReason
@@ -193,17 +472,38 @@ namespace PlayFab
 
         inline void ToJsonEnum(const CancellationReason input, Json::Value& output)
         {
-            if (input == CancellationReason::CancellationReasonRequested) output = Json::Value("Requested");
-            if (input == CancellationReason::CancellationReasonInternal) output = Json::Value("Internal");
-            if (input == CancellationReason::CancellationReasonTimeout) output = Json::Value("Timeout");
+            if (input == CancellationReason::CancellationReasonRequested)
+            {
+                output = Json::Value("Requested");
+            }
+            if (input == CancellationReason::CancellationReasonInternal)
+            {
+                output = Json::Value("Internal");
+            }
+            if (input == CancellationReason::CancellationReasonTimeout)
+            {
+                output = Json::Value("Timeout");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, CancellationReason& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "Requested") output = CancellationReason::CancellationReasonRequested;
-            if (inputStr == "Internal") output = CancellationReason::CancellationReasonInternal;
-            if (inputStr == "Timeout") output = CancellationReason::CancellationReasonTimeout;
+            if (inputStr == "Requested")
+            {
+                output = CancellationReason::CancellationReasonRequested;
+            }
+            if (inputStr == "Internal")
+            {
+                output = CancellationReason::CancellationReasonInternal;
+            }
+            if (inputStr == "Timeout")
+            {
+                output = CancellationReason::CancellationReasonTimeout;
+            }
         }
 
         enum class ContainerFlavor
@@ -215,17 +515,38 @@ namespace PlayFab
 
         inline void ToJsonEnum(const ContainerFlavor input, Json::Value& output)
         {
-            if (input == ContainerFlavor::ContainerFlavorManagedWindowsServerCore) output = Json::Value("ManagedWindowsServerCore");
-            if (input == ContainerFlavor::ContainerFlavorCustomLinux) output = Json::Value("CustomLinux");
-            if (input == ContainerFlavor::ContainerFlavorManagedWindowsServerCorePreview) output = Json::Value("ManagedWindowsServerCorePreview");
+            if (input == ContainerFlavor::ContainerFlavorManagedWindowsServerCore)
+            {
+                output = Json::Value("ManagedWindowsServerCore");
+            }
+            if (input == ContainerFlavor::ContainerFlavorCustomLinux)
+            {
+                output = Json::Value("CustomLinux");
+            }
+            if (input == ContainerFlavor::ContainerFlavorManagedWindowsServerCorePreview)
+            {
+                output = Json::Value("ManagedWindowsServerCorePreview");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, ContainerFlavor& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "ManagedWindowsServerCore") output = ContainerFlavor::ContainerFlavorManagedWindowsServerCore;
-            if (inputStr == "CustomLinux") output = ContainerFlavor::ContainerFlavorCustomLinux;
-            if (inputStr == "ManagedWindowsServerCorePreview") output = ContainerFlavor::ContainerFlavorManagedWindowsServerCorePreview;
+            if (inputStr == "ManagedWindowsServerCore")
+            {
+                output = ContainerFlavor::ContainerFlavorManagedWindowsServerCore;
+            }
+            if (inputStr == "CustomLinux")
+            {
+                output = ContainerFlavor::ContainerFlavorCustomLinux;
+            }
+            if (inputStr == "ManagedWindowsServerCorePreview")
+            {
+                output = ContainerFlavor::ContainerFlavorManagedWindowsServerCorePreview;
+            }
         }
 
         enum class ProtocolType
@@ -236,15 +557,30 @@ namespace PlayFab
 
         inline void ToJsonEnum(const ProtocolType input, Json::Value& output)
         {
-            if (input == ProtocolType::ProtocolTypeTCP) output = Json::Value("TCP");
-            if (input == ProtocolType::ProtocolTypeUDP) output = Json::Value("UDP");
+            if (input == ProtocolType::ProtocolTypeTCP)
+            {
+                output = Json::Value("TCP");
+            }
+            if (input == ProtocolType::ProtocolTypeUDP)
+            {
+                output = Json::Value("UDP");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, ProtocolType& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "TCP") output = ProtocolType::ProtocolTypeTCP;
-            if (inputStr == "UDP") output = ProtocolType::ProtocolTypeUDP;
+            if (inputStr == "TCP")
+            {
+                output = ProtocolType::ProtocolTypeTCP;
+            }
+            if (inputStr == "UDP")
+            {
+                output = ProtocolType::ProtocolTypeUDP;
+            }
         }
 
         enum class TitleMultiplayerServerEnabledStatus
@@ -256,17 +592,38 @@ namespace PlayFab
 
         inline void ToJsonEnum(const TitleMultiplayerServerEnabledStatus input, Json::Value& output)
         {
-            if (input == TitleMultiplayerServerEnabledStatus::TitleMultiplayerServerEnabledStatusInitializing) output = Json::Value("Initializing");
-            if (input == TitleMultiplayerServerEnabledStatus::TitleMultiplayerServerEnabledStatusEnabled) output = Json::Value("Enabled");
-            if (input == TitleMultiplayerServerEnabledStatus::TitleMultiplayerServerEnabledStatusDisabled) output = Json::Value("Disabled");
+            if (input == TitleMultiplayerServerEnabledStatus::TitleMultiplayerServerEnabledStatusInitializing)
+            {
+                output = Json::Value("Initializing");
+            }
+            if (input == TitleMultiplayerServerEnabledStatus::TitleMultiplayerServerEnabledStatusEnabled)
+            {
+                output = Json::Value("Enabled");
+            }
+            if (input == TitleMultiplayerServerEnabledStatus::TitleMultiplayerServerEnabledStatusDisabled)
+            {
+                output = Json::Value("Disabled");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, TitleMultiplayerServerEnabledStatus& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "Initializing") output = TitleMultiplayerServerEnabledStatus::TitleMultiplayerServerEnabledStatusInitializing;
-            if (inputStr == "Enabled") output = TitleMultiplayerServerEnabledStatus::TitleMultiplayerServerEnabledStatusEnabled;
-            if (inputStr == "Disabled") output = TitleMultiplayerServerEnabledStatus::TitleMultiplayerServerEnabledStatusDisabled;
+            if (inputStr == "Initializing")
+            {
+                output = TitleMultiplayerServerEnabledStatus::TitleMultiplayerServerEnabledStatusInitializing;
+            }
+            if (inputStr == "Enabled")
+            {
+                output = TitleMultiplayerServerEnabledStatus::TitleMultiplayerServerEnabledStatusEnabled;
+            }
+            if (inputStr == "Disabled")
+            {
+                output = TitleMultiplayerServerEnabledStatus::TitleMultiplayerServerEnabledStatusDisabled;
+            }
         }
 
         // Multiplayer Classes

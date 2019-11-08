@@ -11,16 +11,26 @@ namespace PlayFab
     {
     public:
 #ifndef DISABLE_PLAYFABCLIENT_API
+        // DisableAdvertising is provided for completeness, but changing it is not suggested
+        // Disabling this may prevent your advertising-related PlayFab marketplace partners from working correctly
+        bool disableAdvertising;
+        std::string playFabId; // Master_Player_Entity Id for the Player that logged in
         std::string clientSessionTicket; // Client session ticket that is used as an authentication token in many PlayFab API methods.
+        std::string advertisingIdType; // Set this to the appropriate AD_TYPE_X constant below
+        std::string advertisingIdValue; // Set this to corresponding device value
 #endif
-#ifndef DISABLE_PLAYFABENTITY_API
+        std::string entityId; // Entity Id for the active entity
+        std::string entityType; // Entity Type for the active entity
         std::string entityToken; // User's entity token. Entity tokens are required by all Entity API methods.
-#endif
-#if defined(ENABLE_PLAYFABSERVER_API) || defined(ENABLE_PLAYFABADMIN_API)
-        std::string developerSecretKey; // Developer secret key. These keys can be used in development environments.
-#endif
 
         PlayFabAuthenticationContext();
+        PlayFabAuthenticationContext(const PlayFabAuthenticationContext& other) = delete;
+        PlayFabAuthenticationContext(PlayFabAuthenticationContext&& other) = delete;
+        PlayFabAuthenticationContext& operator=(const PlayFabAuthenticationContext& other) = delete;
+        PlayFabAuthenticationContext& operator=(PlayFabAuthenticationContext&& other) = delete;
+        ~PlayFabAuthenticationContext() = default;
+
+        void HandlePlayFabLogin(const std::string& _playFabId, const std::string& _clientSessionTicket, const std::string& _entityId, const std::string& _entityType, const std::string& _entityToken);
         void ForgetAllCredentials();
     };
 }
