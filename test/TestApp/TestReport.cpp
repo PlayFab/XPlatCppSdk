@@ -2,7 +2,9 @@
 #include <memory>
 
 #include "TestAppPch.h"
+
 #include <playfab/PlayFabJsonHeaders.h>
+
 #include "TestReport.h"
 #include "TestUtils.h"
 
@@ -26,12 +28,7 @@ namespace PlayFabUnit
         json["errors"] = errors;
         json["skipped"] = skipped;
         json["time"] = time;
-#if defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID) || defined(PLAYFAB_PLATFORM_LINUX) || defined(PLAYFAB_PLATFORM_SWITCH)
-        json["timestamp"] = static_cast<Json::Int64>(std::chrono::system_clock::to_time_t(timeStamp));
-#else // PLAYFAB_PLATFORM_IOS || PLAYFAB_PLATFORM_ANDROID || PLAYFAB_PLATFORM_LINUX || PLAYFAB_PLATFORM_SWITCH
-        json["timestamp"] = std::chrono::system_clock::to_time_t(timeStamp);
-#endif // PLAYFAB_PLATFORM_IOS || PLAYFAB_PLATFORM_ANDROID || PLAYFAB_PLATFORM_LINUX || PLAYFAB_PLATFORM_SWITCH
-
+        json["timestamp"] = PlayFab::LocalTimePointToUtcString(timeStamp);
         json["testResults"];
         Json::Value init(Json::arrayValue);
         json["testResults"].swapPayload(init);
@@ -47,7 +44,7 @@ namespace PlayFabUnit
     TestReport::TestReport(std::string className)
     {
         internalReport.name = className;
-        internalReport.timeStamp = TestTimeNow();
+        internalReport.timeStamp = PlayFab::GetTimePointNow();
         internalReport.tests = 0;
         internalReport.failures = 0;
         internalReport.errors = 0;
@@ -60,7 +57,7 @@ namespace PlayFabUnit
         internalReport.tests += 1;
     }
 
-    void TestReport::TestComplete(std::string testName, TestFinishState testFinishState, TimeValueMs testDurationMs, std::string message)
+    void TestReport::TestComplete(std::string testName, TestFinishState testFinishState, std::chrono::milliseconds testDurationMs, std::string message)
     {
         // Add a new TestCaseReport for the completed test.
         TestCaseReport* testReport = new TestCaseReport();
@@ -78,20 +75,20 @@ namespace PlayFabUnit
         // Update statistics.
         switch (testFinishState)
         {
-            case TestFinishState::PASSED: internalReport.passed += 1; break;
-            case TestFinishState::FAILED: internalReport.failures += 1; break;
-            case TestFinishState::SKIPPED: internalReport.skipped += 1; break;
-            case TestFinishState::PENDING:
-                break;
-            case TestFinishState::TIMEDOUT: 
-                break;
-            default:
-                break;
+        case TestFinishState::PASSED: internalReport.passed += 1; break;
+        case TestFinishState::FAILED: internalReport.failures += 1; break;
+        case TestFinishState::SKIPPED: internalReport.skipped += 1; break;
+        case TestFinishState::PENDING:
+            break;
+        case TestFinishState::TIMEDOUT:
+            break;
+        default:
+            break;
         }
 
         // Update overall runtime.
         // TODO: Add hooks for SuiteSetUp and SuiteTearDown, so this can be estimated more accurately
-        internalReport.time = std::chrono::duration<double>(TestTimeNow() - internalReport.timeStamp).count(); // For now, update the duration on every test complete - the last one will be essentially correct
+        internalReport.time = std::chrono::duration<double>(PlayFab::GetTimePointNow() - internalReport.timeStamp).count(); // For now, update the duration on every test complete - the last one will be essentially correct
     }
 
     bool TestReport::AllTestsPassed()

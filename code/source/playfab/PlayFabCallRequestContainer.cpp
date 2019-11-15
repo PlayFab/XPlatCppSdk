@@ -32,11 +32,16 @@ namespace PlayFab
         const char* reqBod = requestBody.c_str();
         size_t reqBodLength = requestBody.length();
 
-        bool parsingSuccessful = reader->parse(reqBod, reqBod + reqBodLength, &request, &errs);
-
-        if (parsingSuccessful)
+        try {
+            bool parsingSuccessful = reader->parse(reqBod, reqBod + reqBodLength, &request, &errs);
+            if (parsingSuccessful)
+            {
+                errorWrapper.Request = request;
+            }
+        }
+        catch (std::exception)
         {
-            errorWrapper.Request = request;
+            // We can't parse the request back into a JSON::Value, so the caller won't receive it back...?
         }
     }
 

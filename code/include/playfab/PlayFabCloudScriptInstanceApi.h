@@ -4,7 +4,6 @@
 
 #include <playfab/PlayFabCallRequestContainer.h>
 #include <playfab/PlayFabApiSettings.h>
-#include <playfab/PlayFabAuthenticationContext.h>
 #include <playfab/PlayFabCloudScriptDataModels.h>
 #include <memory>
 
@@ -16,14 +15,14 @@ namespace PlayFab
     class PlayFabCloudScriptInstanceAPI
     {
     private:
-        std::shared_ptr<PlayFabApiSettings> m_settings{ nullptr };
-        std::shared_ptr<PlayFabAuthenticationContext> m_context{ nullptr };
+        std::shared_ptr<PlayFabApiSettings> m_settings;
+        std::shared_ptr<PlayFabAuthenticationContext> m_context;
 
     public:
-        explicit PlayFabCloudScriptInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
+        PlayFabCloudScriptInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
         PlayFabCloudScriptInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings, std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
 
-        ~PlayFabCloudScriptInstanceAPI();
+        ~PlayFabCloudScriptInstanceAPI() = default;
         PlayFabCloudScriptInstanceAPI(const PlayFabCloudScriptInstanceAPI& source) = delete; // disable copy
         PlayFabCloudScriptInstanceAPI(PlayFabCloudScriptInstanceAPI&&) = delete; // disable move
         PlayFabCloudScriptInstanceAPI& operator=(const PlayFabCloudScriptInstanceAPI& source) = delete; // disable assignment

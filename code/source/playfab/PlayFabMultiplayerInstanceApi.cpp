@@ -35,10 +35,6 @@ namespace PlayFab
         this->m_context = authenticationContext;
     }
 
-    PlayFabMultiplayerInstanceAPI::~PlayFabMultiplayerInstanceAPI()
-    {
-    }
-
     std::shared_ptr<PlayFabApiSettings> PlayFabMultiplayerInstanceAPI::GetSettings() const
     {
         return this->m_settings;

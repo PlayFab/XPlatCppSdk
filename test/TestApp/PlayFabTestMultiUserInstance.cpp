@@ -93,9 +93,10 @@ namespace PlayFabUnit
 
     void PlayFabTestMultiUserInstance::ClassSetUp()
     {
+        settings2 = std::make_shared<PlayFab::PlayFabApiSettings>();
         // Create API handles for all users.
         multiUser1ClientApi = std::make_shared<PlayFabClientInstanceAPI>();
-        multiUser2ClientApi = std::make_shared<PlayFabClientInstanceAPI>(std::make_shared<PlayFab::PlayFabApiSettings>()); // also test explicit API settings
+        multiUser2ClientApi = std::make_shared<PlayFabClientInstanceAPI>(settings2); // also test explicit API settings
     }
 
     void PlayFabTestMultiUserInstance::SetUp(TestContext& /*testContext*/)
@@ -149,8 +150,9 @@ namespace PlayFabUnit
     void PlayFabTestMultiUserInstance::ClassTearDown()
     {
         // Release API handles for all users.
-        multiUser1ClientApi = nullptr;
-        multiUser2ClientApi = nullptr;
+        multiUser1ClientApi.reset();
+        settings2.reset();
+        multiUser2ClientApi.reset();
     }
 }
 

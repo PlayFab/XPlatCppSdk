@@ -4,7 +4,6 @@
 
 #include <playfab/PlayFabCallRequestContainer.h>
 #include <playfab/PlayFabApiSettings.h>
-#include <playfab/PlayFabAuthenticationContext.h>
 #include <playfab/PlayFabAuthenticationDataModels.h>
 #include <memory>
 
@@ -16,16 +15,16 @@ namespace PlayFab
     class PlayFabAuthenticationInstanceAPI
     {
     private:
-        std::shared_ptr<PlayFabApiSettings> m_settings{ nullptr };
-        std::shared_ptr<PlayFabAuthenticationContext> m_context{ nullptr };
+        std::shared_ptr<PlayFabApiSettings> m_settings;
+        std::shared_ptr<PlayFabAuthenticationContext> m_context;
 
     public:
         PlayFabAuthenticationInstanceAPI();
-        explicit PlayFabAuthenticationInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings);
-        explicit PlayFabAuthenticationInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
+        PlayFabAuthenticationInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings);
+        PlayFabAuthenticationInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
         PlayFabAuthenticationInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings, std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
 
-        ~PlayFabAuthenticationInstanceAPI();
+        ~PlayFabAuthenticationInstanceAPI() = default;
         PlayFabAuthenticationInstanceAPI(const PlayFabAuthenticationInstanceAPI& source) = delete; // disable copy
         PlayFabAuthenticationInstanceAPI(PlayFabAuthenticationInstanceAPI&&) = delete; // disable move
         PlayFabAuthenticationInstanceAPI& operator=(const PlayFabAuthenticationInstanceAPI& source) = delete; // disable assignment

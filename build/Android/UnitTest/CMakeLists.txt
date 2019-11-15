@@ -30,6 +30,7 @@ add_library( # Sets the name of the library.
              ../../../test/TestApp/PlayFabEventTest.cpp
              ../../../test/TestApp/PlayFabTestMultiUserInstance.cpp
              ../../../test/TestApp/PlayFabTestMultiUserStatic.cpp
+             ../../../test/TestApp/PlayFabTestAlloc.cpp
              ../../../test/TestApp/TestApp.cpp
              ../../../test/TestApp/TestAppPch.cpp
              ../../../test/TestApp/TestContext.cpp

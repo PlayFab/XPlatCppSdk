@@ -4,7 +4,6 @@
 
 #include <playfab/PlayFabCallRequestContainer.h>
 #include <playfab/PlayFabApiSettings.h>
-#include <playfab/PlayFabAuthenticationContext.h>
 #include <playfab/PlayFabEventsDataModels.h>
 #include <memory>
 
@@ -16,14 +15,14 @@ namespace PlayFab
     class PlayFabEventsInstanceAPI
     {
     private:
-        std::shared_ptr<PlayFabApiSettings> m_settings{ nullptr };
-        std::shared_ptr<PlayFabAuthenticationContext> m_context{ nullptr };
+        std::shared_ptr<PlayFabApiSettings> m_settings;
+        std::shared_ptr<PlayFabAuthenticationContext> m_context;
 
     public:
-        explicit PlayFabEventsInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
+        PlayFabEventsInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
         PlayFabEventsInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings, std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
 
-        ~PlayFabEventsInstanceAPI();
+        ~PlayFabEventsInstanceAPI() = default;
         PlayFabEventsInstanceAPI(const PlayFabEventsInstanceAPI& source) = delete; // disable copy
         PlayFabEventsInstanceAPI(PlayFabEventsInstanceAPI&&) = delete; // disable move
         PlayFabEventsInstanceAPI& operator=(const PlayFabEventsInstanceAPI& source) = delete; // disable assignment

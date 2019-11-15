@@ -15,6 +15,7 @@
 #include "PlayFabEventTest.h"
 #include "PlayFabTestMultiUserStatic.h"
 #include "PlayFabTestMultiUserInstance.h"
+#include "PlayFabTestAlloc.h"
 
 using namespace PlayFab;
 using namespace ClientModels;
@@ -60,6 +61,9 @@ namespace PlayFabUnit
         // Initialize the test runner/test data.
         TestRunner testRunner;
 
+        PlayFabTestAlloc allocTest;
+        testRunner.Add(allocTest);
+
 #ifndef DISABLE_PLAYFABCLIENT_API
         // Add PlayFab API tests.
         PlayFabApiTest pfApiTest;
@@ -79,6 +83,9 @@ namespace PlayFabUnit
         // Run the tests (blocks until all tests have finished).
         testRunner.Run();
 
+        // Publish the test summary to STDOUT.
+        Log("%s\n", testRunner.suiteTestSummary.c_str());
+
 #ifndef DISABLE_PLAYFABCLIENT_API
         // Publish the test report via cloud script (and wait for it to finish).
         LoginWithCustomIDRequest request;
@@ -89,17 +96,21 @@ namespace PlayFabUnit
             std::bind(&TestApp::OnPostReportError, this, std::placeholders::_1, std::placeholders::_2),
             &testRunner.suiteTestReport);
 
-        while (cloudResponse.empty())
+        for (int i = 0; i < 300; i++)
         {
-            std::this_thread::sleep_for(TimeValueMs(100));
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            if (!cloudResponse.empty())
+            {
+                break;
+            }
         }
 #endif
 
-        // Publish the test summary (including cloud script response) to STDOUT.
-        Log("%s\n%s\n", testRunner.suiteTestSummary.c_str(), cloudResponse.c_str());
+        // Publish the cloud script response to STDOUT.
+        Log("Cloud Response: %s\n", cloudResponse.c_str());
 
         // Return 0 (success) if all tests passed. Otherwise, return 1 (error).
-        return testRunner.AllTestsPassed() ? 0 : 1;
+        return testRunner.AllTestsPassed() && !cloudResponse.empty() ? 0 : 1;
     }
 
     bool TestApp::LoadTitleData(TestTitleData& titleData)

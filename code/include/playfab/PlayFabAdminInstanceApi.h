@@ -4,7 +4,6 @@
 
 #include <playfab/PlayFabCallRequestContainer.h>
 #include <playfab/PlayFabApiSettings.h>
-#include <playfab/PlayFabAuthenticationContext.h>
 #include <playfab/PlayFabAdminDataModels.h>
 #include <memory>
 
@@ -16,16 +15,16 @@ namespace PlayFab
     class PlayFabAdminInstanceAPI
     {
     private:
-        std::shared_ptr<PlayFabApiSettings> m_settings{ nullptr };
-        std::shared_ptr<PlayFabAuthenticationContext> m_context{ nullptr };
+        std::shared_ptr<PlayFabApiSettings> m_settings;
+        std::shared_ptr<PlayFabAuthenticationContext> m_context;
 
     public:
         PlayFabAdminInstanceAPI();
-        explicit PlayFabAdminInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings);
-        explicit PlayFabAdminInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
+        PlayFabAdminInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings);
+        PlayFabAdminInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
         PlayFabAdminInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings, std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
 
-        ~PlayFabAdminInstanceAPI();
+        ~PlayFabAdminInstanceAPI() = default;
         PlayFabAdminInstanceAPI(const PlayFabAdminInstanceAPI& source) = delete; // disable copy
         PlayFabAdminInstanceAPI(PlayFabAdminInstanceAPI&&) = delete; // disable move
         PlayFabAdminInstanceAPI& operator=(const PlayFabAdminInstanceAPI& source) = delete; // disable assignment

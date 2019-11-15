@@ -35,10 +35,6 @@ namespace PlayFab
         this->m_context = authenticationContext;
     }
 
-    PlayFabCloudScriptInstanceAPI::~PlayFabCloudScriptInstanceAPI()
-    {
-    }
-
     std::shared_ptr<PlayFabApiSettings> PlayFabCloudScriptInstanceAPI::GetSettings() const
     {
         return this->m_settings;

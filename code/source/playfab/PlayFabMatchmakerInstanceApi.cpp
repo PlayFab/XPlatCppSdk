@@ -35,10 +35,6 @@ namespace PlayFab
         this->m_context = authenticationContext;
     }
 
-    PlayFabMatchmakerInstanceAPI::~PlayFabMatchmakerInstanceAPI()
-    {
-    }
-
     std::shared_ptr<PlayFabApiSettings> PlayFabMatchmakerInstanceAPI::GetSettings() const
     {
         return this->m_settings;

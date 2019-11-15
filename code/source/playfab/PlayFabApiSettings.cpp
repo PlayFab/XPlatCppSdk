@@ -5,14 +5,11 @@
 
 namespace PlayFab
 {
-    const std::map<std::string, std::string> PlayFabApiSettings::requestGetParams = {
-        { "sdk", PlayFabSettings::versionString }
-    };
-
     PlayFabApiSettings::PlayFabApiSettings() :
-        baseServiceHost(PlayFabSettings::productionEnvironmentURL),
-        titleId()
+        baseServiceHost(PlayFabSettings::productionEnvironmentURL)
     {
+        requestGetParams["sdk"] = PlayFabSettings::versionString;
+
         // Don't let PlayFabSettings::staticSettings pull titleId from itself
         if (PlayFabSettings::staticSettings != nullptr)
         {

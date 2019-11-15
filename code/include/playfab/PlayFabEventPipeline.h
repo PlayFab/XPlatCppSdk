@@ -7,7 +7,6 @@
 
 #include <playfab/PlayFabEvent.h>
 #include <playfab/PlayFabEventBuffer.h>
-#include <playfab/PlayFabAuthenticationContext.h>
 #include <mutex>
 
 namespace PlayFab

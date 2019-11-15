@@ -2,8 +2,9 @@
 
 #pragma once
 
-#include <string>
 #include <list>
+#include <memory>
+#include <string>
 #include <TestContext.h>
 
 namespace PlayFabUnit

@@ -46,22 +46,6 @@ namespace PlayFab
             }
         }
 
-        void OnWriteEventsResult(int, const std::string&, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
-        {
-            CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
-
-            WriteEventsResponse outResult;
-            if (ValidateResult(outResult, container))
-            {
-                std::shared_ptr<void> internalPtr = container.successCallback;
-                if (internalPtr.get() != nullptr)
-                {
-                    const auto& callback = *static_cast<ProcessApiCallback<WriteEventsResponse> *>(internalPtr.get());
-                    callback(outResult, container.GetCustomData());
-                }
-            }
-        }
-
         std::future<QoSResult> PlayFabQoSApi::GetQoSResultAsync(unsigned int numThreads, unsigned int timeoutMs)
         {
             return async(launch::async, [&, numThreads, timeoutMs]() { return GetQoSResult(numThreads, timeoutMs); });

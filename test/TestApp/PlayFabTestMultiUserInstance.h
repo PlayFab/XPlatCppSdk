@@ -28,6 +28,7 @@ namespace PlayFabUnit
         /// Try to log in two users simultaneously using instance APIs.
         /// </summary>
         std::shared_ptr<PlayFab::PlayFabClientInstanceAPI> multiUser1ClientApi;
+        std::shared_ptr<PlayFab::PlayFabApiSettings> settings2;
         std::shared_ptr<PlayFab::PlayFabClientInstanceAPI> multiUser2ClientApi;
         std::string multiUser1Error, multiUser2Error;
         bool thread1Complete, thread2Complete;

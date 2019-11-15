@@ -4,18 +4,20 @@
 
 #ifndef DISABLE_PLAYFABCLIENT_API
 
-#include <string>
-#include <playfab/PlayFabClientApi.h>
+#include <chrono>
+
+#include <playfab/PlayFabApiSettings.h>
 #include <playfab/PlayFabSettings.h>
-#include <playfab/PlayFabAuthenticationDataModels.h>
+
 #include <playfab/PlayFabAuthenticationApi.h>
+#include <playfab/PlayFabAuthenticationDataModels.h>
+#include <playfab/PlayFabClientApi.h>
 #include <playfab/PlayFabClientDataModels.h>
-#include <playfab/PlayFabDataDataModels.h>
 #include <playfab/PlayFabDataApi.h>
-#include <playfab/PlayFabPlatformMacros.h>
+#include <playfab/PlayFabDataDataModels.h>
+
 #include "PlayFabApiTest.h"
 #include "TestContext.h"
-
 
 using namespace PlayFab;
 using namespace ClientModels;
@@ -38,49 +40,50 @@ namespace PlayFabUnit
 
     void PlayFabApiTest::OnErrorSharedCallback(const PlayFabError& error, void* customData)
     {
-        TestContext* testContext = reinterpret_cast<TestContext*>(customData);
+        TestContext* testContext = static_cast<TestContext*>(customData);
         testContext->Fail("Unexpected error: " + error.ErrorMessage);
     }
 
-    /// CLIENT API
-    /// Try to deliberately cause a client-side validation error
-    void PlayFabApiTest::InvalidSettings(TestContext& testContext)
-    {
-        LoginWithCustomIDRequest request;
-        request.CustomId = PlayFabSettings::buildIdentifier;
-        request.CreateAccount = true;
+    // CLIENT API
+    // Try to deliberately cause a client-side validation error
+    // THIS TEST CORRUPTS THE PlayFabSettings::staticSettings->titleId, because validTitleId leaves scope before it can be restored
+    //void PlayFabApiTest::InvalidSettings(TestContext& testContext)
+    //{
+    //    LoginWithCustomIDRequest request;
+    //    request.CustomId = PlayFabSettings::buildIdentifier;
+    //    request.CreateAccount = true;
 
-        // store current (valid) title id
-        const std::string validTitleId = PlayFabSettings::staticSettings->titleId;
+    //    // store current (valid) title id
+    //    const std::string validTitleId = PlayFabSettings::staticSettings->titleId;
 
-        // set invalid title id
-        PlayFabSettings::staticSettings->titleId = "";
+    //    // set invalid title id
+    //    PlayFabSettings::staticSettings->titleId = "";
 
-        PlayFabClientAPI::LoginWithCustomID(request,
-            [&validTitleId](const LoginResult&, void* customData)
-        {
-            PlayFabSettings::staticSettings->titleId = validTitleId;
-            TestContext* testContext = reinterpret_cast<TestContext*>(customData);
-            testContext->Fail("Expected API call to fail on the client side");
-        },
-            [&validTitleId](const PlayFabError& error, void* customData)
-        {
-            PlayFabSettings::staticSettings->titleId = validTitleId;
-            TestContext* testContext = reinterpret_cast<TestContext*>(customData);
-            if (error.HttpCode == 0
-                && error.HttpStatus == "Client-side validation failure"
-                && error.ErrorCode == PlayFabErrorCode::PlayFabErrorInvalidParams
-                && error.ErrorName == error.HttpStatus)
-                testContext->Pass();
-            else
-                testContext->Fail("Returned error is different from expected");
-        },
-            &testContext);
-    }
+    //    PlayFabClientAPI::LoginWithCustomID(request,
+    //        [&validTitleId](const LoginResult&, void* customData)
+    //    {
+    //        PlayFabSettings::staticSettings->titleId = validTitleId;
+    //        TestContext* testContext = static_cast<TestContext*>(customData);
+    //        testContext->Fail("Expected API call to fail on the client side");
+    //    },
+    //        [&validTitleId](const PlayFabError& error, void* customData)
+    //    {
+    //        PlayFabSettings::staticSettings->titleId = validTitleId;
+    //        TestContext* testContext = static_cast<TestContext*>(customData);
+    //        if (error.HttpCode == 0
+    //            && error.HttpStatus == "Client-side validation failure"
+    //            && error.ErrorCode == PlayFabErrorCode::PlayFabErrorInvalidParams
+    //            && error.ErrorName == error.HttpStatus)
+    //            testContext->Pass();
+    //        else
+    //            testContext->Fail("Returned error is different from expected");
+    //    },
+    //        &testContext);
+    //}
 
-    /// CLIENT API
-    /// Try to deliberately log in with an inappropriate password,
-    ///   and verify that the error displays as expected.
+    // CLIENT API
+    // Try to deliberately log in with an inappropriate password,
+    //   and verify that the error displays as expected.
     void PlayFabApiTest::InvalidLogin(TestContext& testContext)
     {
         LoginWithEmailAddressRequest request;
@@ -94,31 +97,28 @@ namespace PlayFabUnit
     }
     void PlayFabApiTest::LoginCallback(const LoginResult&, void* customData)
     {
-        TestContext* testContext = reinterpret_cast<TestContext*>(customData);
+        TestContext* testContext = static_cast<TestContext*>(customData);
         testContext->Fail("Expected login to fail");
     }
     void PlayFabApiTest::LoginFailedCallback(const PlayFabError& error, void* customData)
     {
-        TestContext* testContext = reinterpret_cast<TestContext*>(customData);
-#if defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_PLAYSTATION) || defined(PLAYFAB_PLATFORM_SWITCH)
+        TestContext* testContext = static_cast<TestContext*>(customData);
         if (error.RequestId.empty())
         {
             testContext->Fail("The requestId should be set on a failure.");
         }
+        else if (error.ErrorMessage.find("password") != -1)
+        {
+            testContext->Pass(error.RequestId);
+        }
         else
-#endif // defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_PLAYSTATION)
-            if (error.ErrorMessage.find("password") != -1)
-            {
-                testContext->Pass(error.RequestId);
-            }
-            else
-            {
-                testContext->Fail("Password error message not found: " + error.ErrorMessage);
-            }
+        {
+            testContext->Fail("Password error message not found: " + error.ErrorMessage);
+        }
     }
 
-    /// CLIENT API
-    /// Test that a lambda error callback can be successfully invoked
+    // CLIENT API
+    // Test that a lambda error callback can be successfully invoked
     void PlayFabApiTest::InvalidLoginLambda(TestContext& testContext)
     {
         LoginWithEmailAddressRequest request;
@@ -127,13 +127,13 @@ namespace PlayFabUnit
 
         PlayFabClientAPI::LoginWithEmailAddress(request,
             nullptr,
-            [](const PlayFabError& error, void* customData) { TestContext* testContext = reinterpret_cast<TestContext*>(customData); if (error.ErrorMessage.find("password") != -1) testContext->Pass(); },
+            [](const PlayFabError& error, void* customData) { TestContext* testContext = static_cast<TestContext*>(customData); if (error.ErrorMessage.find("password") != -1) testContext->Pass(); },
             &testContext);
     }
 
-    /// CLIENT API
-    /// Try to deliberately register a user with an invalid email and password
-    ///   Verify that errorDetails are populated correctly.
+    // CLIENT API
+    // Try to deliberately register a user with an invalid email and password
+    //   Verify that errorDetails are populated correctly.
     void PlayFabApiTest::InvalidRegistration(TestContext& testContext)
     {
         RegisterPlayFabUserRequest request;
@@ -148,7 +148,7 @@ namespace PlayFabUnit
     }
     void PlayFabApiTest::InvalidRegistrationSuccess(const RegisterPlayFabUserResult&, void* customData)
     {
-        TestContext* testContext = reinterpret_cast<TestContext*>(customData);
+        TestContext* testContext = static_cast<TestContext*>(customData);
         testContext->Fail("Expected registration to fail");
     }
     void PlayFabApiTest::InvalidRegistrationFail(const PlayFabError& error, void* customData)
@@ -161,7 +161,7 @@ namespace PlayFabUnit
         foundEmailMsg = (errorReport.find(expectedEmailMsg) != -1);
         foundPasswordMsg = (errorReport.find(expectedPasswordMsg) != -1);
 
-        TestContext* testContext = reinterpret_cast<TestContext*>(customData);
+        TestContext* testContext = static_cast<TestContext*>(customData);
         if (foundEmailMsg && foundPasswordMsg)
         {
             testContext->Pass();
@@ -172,8 +172,8 @@ namespace PlayFabUnit
         }
     }
 
-    /// CLIENT API
-    /// Attempt a successful login
+    // CLIENT API
+    // Attempt a successful login
     void PlayFabApiTest::LoginOrRegister(TestContext& testContext)
     {
         LoginWithCustomIDRequest request;
@@ -188,12 +188,12 @@ namespace PlayFabUnit
     void PlayFabApiTest::OnLoginOrRegister(const LoginResult& result, void* customData)
     {
         playFabId = result.PlayFabId;
-        TestContext* testContext = reinterpret_cast<TestContext*>(customData);
+        TestContext* testContext = static_cast<TestContext*>(customData);
         testContext->Pass();
     }
 
-    /// CLIENT API
-    /// Test that the login call sequence sends the AdvertisingId when set
+    // CLIENT API
+    // Test that the login call sequence sends the AdvertisingId when set
     void PlayFabApiTest::LoginWithAdvertisingId(TestContext& testContext)
     {
         PlayFabSettings::staticPlayer->advertisingIdType = PlayFabSettings::AD_TYPE_ANDROID_ID;
@@ -212,15 +212,15 @@ namespace PlayFabUnit
     void PlayFabApiTest::OnLoginWithAdvertisingId(const LoginResult&, void* customData)
     {
         // TODO: Need to wait for the NEXT api call to complete, and then test PlayFabSettings::staticPlayer->advertisingIdType
-        TestContext* testContext = reinterpret_cast<TestContext*>(customData);
+        TestContext* testContext = static_cast<TestContext*>(customData);
         testContext->Pass();
     }
 
-    /// CLIENT API
-    /// Test a sequence of calls that modifies saved data,
-    ///   and verifies that the next sequential API call contains updated data.
-    /// Verify that the data is correctly modified on the next call.
-    /// Parameter types tested: string, Dictionary<string, string>, DateTime
+    // CLIENT API
+    // Test a sequence of calls that modifies saved data,
+    //   and verifies that the next sequential API call contains updated data.
+    // Verify that the data is correctly modified on the next call.
+    // Parameter types tested: string, Dictionary<string, string>
     void PlayFabApiTest::UserDataApi(TestContext& testContext)
     {
         if (!PlayFabClientAPI::IsClientLoggedIn())
@@ -244,15 +244,8 @@ namespace PlayFabUnit
         testMessageInt = (testMessageInt + 1) % 100;
         UpdateUserDataRequest updateRequest;
 
-        // itoa is not avaialable in android
-        char buffer[16];
         std::string temp;
-#if defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID) || defined(PLAYFAB_PLATFORM_LINUX) || defined(PLAYFAB_PLATFORM_PLAYSTATION) || defined(PLAYFAB_PLATFORM_SWITCH)
-        sprintf(buffer, "%d", testMessageInt);
-#else // PLAYFAB_PLATFORM_IOS || PLAYFAB_PLATFORM_ANDROID || PLAYFAB_PLATFORM_LINUX || PLAYFAB_PLATFORM_SWITCH || PLAYFAB_PLATFORM_SWITCH
-        sprintf_s(buffer, "%d", testMessageInt);
-#endif // PLAYFAB_PLATFORM_IOS || PLAYFAB_PLATFORM_ANDROID || PLAYFAB_PLATFORM_LINUX || PLAYFAB_PLATFORM_SWITCH || PLAYFAB_PLATFORM_SWITCH
-        temp.append(buffer);
+        AppendIntToString(testMessageInt, temp);
 
         updateRequest.Data[TEST_DATA_KEY] = temp;
         PlayFabClientAPI::UpdateUserData(updateRequest,
@@ -272,23 +265,8 @@ namespace PlayFabUnit
     {
         auto it = result.Data.find(TEST_DATA_KEY);
         int actualDataValue = (it == result.Data.end()) ? -1 : atoi(it->second.Value.c_str());
-        testMessageTime = (it == result.Data.end()) ? 0 : it->second.LastUpdated;
 
-#if !defined(PLAYFAB_PLATFORM_PLAYSTATION)
-        time_t now = time(nullptr);
-        struct tm timeinfo;
-#if defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID) || defined(PLAYFAB_PLATFORM_LINUX)
-        timeinfo = *gmtime(&now);
-        now = timegm(&timeinfo);
-#else // PLAYFAB_PLATFORM_IOS || PLAYFAB_PLATFORM_ANDROID || PLAYFAB_PLATFORM_LINUX
-        gmtime_s(&timeinfo, &now);
-        now = _mkgmtime(&timeinfo);
-#endif // PLAYFAB_PLATFORM_IOS || PLAYFAB_PLATFORM_ANDROID || PLAYFAB_PLATFORM_LINUX
-        time_t minTime = now - (60 * 5);
-        time_t maxTime = now + (60 * 5);
-#endif // PLAYFAB_PLATFORM_PLAYSTATION
-
-        TestContext* testContext = reinterpret_cast<TestContext*>(customData);
+        TestContext* testContext = static_cast<TestContext*>(customData);
         if (it == result.Data.end())
         {
             testContext->Fail("Expected user data not found.");
@@ -297,23 +275,49 @@ namespace PlayFabUnit
         {
             testContext->Fail("User data not updated as expected.");
         }
-#if !defined(PLAYFAB_PLATFORM_PLAYSTATION) // Issue 32699
-        else if (!(minTime <= testMessageTime && testMessageTime <= maxTime))
-        {
-            testContext->Fail("DateTime not parsed correctly..");
-        }
-#endif // PLAYFAB_PLATFORM_PLAYSTATION
         else
         {
             testContext->Pass();
         }
     }
 
-    /// CLIENT API
-    /// Test a sequence of calls that modifies saved data,
-    ///   and verifies that the next sequential API call contains updated data.
-    /// Verify that the data is saved correctly, and that specific types are tested
-    /// Parameter types tested: Dictionary<string, int>
+    // CLIENT API
+    // Verify that the timestamp returned is within 5 minutes of the time according to the local timezone for the current machine.
+    // Parameter types tested: DateTime
+    void PlayFabApiTest::GetServerTime(TestContext& testContext)
+    {
+        if (!PlayFabClientAPI::IsClientLoggedIn())
+        {
+            testContext.Skip("Earlier tests failed to log in");
+            return;
+        }
+
+        GetTimeRequest request;
+        PlayFabClientAPI::GetTime(request,
+            Callback(&PlayFabApiTest::OnGetServerTime),
+            Callback(&PlayFabApiTest::OnErrorSharedCallback),
+            &testContext);
+    }
+    void PlayFabApiTest::OnGetServerTime(const GetTimeResult& result, void* customData)
+    {
+        testMessageTime = std::chrono::system_clock::from_time_t(result.Time);
+
+        TimePoint now = GetTimePointNow();
+        TimePoint minTime = now - std::chrono::minutes(5);
+        TimePoint maxTime = now + std::chrono::minutes(5);
+
+        TestContext* testContext = static_cast<TestContext*>(customData);
+        if (!(minTime <= testMessageTime && testMessageTime <= maxTime))
+            testContext->Fail("DateTime not parsed correctly.");
+        else
+            testContext->Pass();
+    }
+
+    // CLIENT API
+    // Test a sequence of calls that modifies saved data,
+    //   and verifies that the next sequential API call contains updated data.
+    // Verify that the data is saved correctly, and that specific types are tested
+    // Parameter types tested: Dictionary<string, int>
     void PlayFabApiTest::PlayerStatisticsApi(TestContext& testContext)
     {
         if (!PlayFabClientAPI::IsClientLoggedIn())
@@ -374,7 +378,7 @@ namespace PlayFabUnit
             }
         }
 
-        TestContext* testContext = reinterpret_cast<TestContext*>(customData);
+        TestContext* testContext = static_cast<TestContext*>(customData);
         if (actualStatValue == -1000)
         {
             testContext->Fail("Expected user statistic not found.");
@@ -389,9 +393,9 @@ namespace PlayFabUnit
         }
     }
 
-    /// CLIENT API
-    /// Get or create the given test character for the given user
-    /// Parameter types tested: Contained-Classes, string
+    // CLIENT API
+    // Get or create the given test character for the given user
+    // Parameter types tested: Contained-Classes, string
     void PlayFabApiTest::UserCharacter(TestContext& testContext)
     {
         if (!PlayFabClientAPI::IsClientLoggedIn())
@@ -409,13 +413,13 @@ namespace PlayFabUnit
     void PlayFabApiTest::OnUserCharacter(const ListUsersCharactersResult&, void* customData)
     {
         // We aren't adding a character to this account, so there's nothing really to test here
-        TestContext* testContext = reinterpret_cast<TestContext*>(customData);
+        TestContext* testContext = static_cast<TestContext*>(customData);
         testContext->Pass();
     }
 
-    /// CLIENT API
-    /// Test that leaderboard results can be requested
-    /// Parameter types tested: List of contained-classes
+    // CLIENT API
+    // Test that leaderboard results can be requested
+    // Parameter types tested: List of contained-classes
     void PlayFabApiTest::LeaderBoard(TestContext& testContext)
     {
         if (!PlayFabClientAPI::IsClientLoggedIn())
@@ -436,7 +440,7 @@ namespace PlayFabUnit
     }
     void PlayFabApiTest::OnClientLeaderBoard(const GetLeaderboardResult& result, void* customData)
     {
-        TestContext* testContext = reinterpret_cast<TestContext*>(customData);
+        TestContext* testContext = static_cast<TestContext*>(customData);
         if (result.Leaderboard.size() > 0) // We added too many users and stats to test for a specific user, so we just have to test for "any number of results" now
         {
             testContext->Pass();
@@ -447,9 +451,9 @@ namespace PlayFabUnit
         }
     }
 
-    /// CLIENT API
-    /// Test that AccountInfo can be requested
-    /// Parameter types tested: List of enum-as-strings converted to list of enums
+    // CLIENT API
+    // Test that AccountInfo can be requested
+    // Parameter types tested: List of enum-as-strings converted to list of enums
     void PlayFabApiTest::AccountInfo(TestContext& testContext)
     {
         if (!PlayFabClientAPI::IsClientLoggedIn())
@@ -466,7 +470,7 @@ namespace PlayFabUnit
     }
     void PlayFabApiTest::OnAccountInfo(const GetAccountInfoResult& result, void* customData)
     {
-        TestContext* testContext = reinterpret_cast<TestContext*>(customData);
+        TestContext* testContext = static_cast<TestContext*>(customData);
         // Enums-by-name can't really be tested in C++, the way they can in other languages
         if (result.AccountInfo.isNull() || result.AccountInfo->TitleInfo.isNull() || result.AccountInfo->TitleInfo->Origination.isNull())
         {
@@ -478,8 +482,8 @@ namespace PlayFabUnit
         }
     }
 
-    /// CLIENT API
-    /// Test that CloudScript can be properly set up and invoked
+    // CLIENT API
+    // Test that CloudScript can be properly set up and invoked
     void PlayFabApiTest::CloudScript(TestContext& testContext)
     {
         if (!PlayFabClientAPI::IsClientLoggedIn())
@@ -498,7 +502,7 @@ namespace PlayFabUnit
     }
     void PlayFabApiTest::OnHelloWorldCloudScript(const ExecuteCloudScriptResult& result, void* customData)
     {
-        TestContext* testContext = reinterpret_cast<TestContext*>(customData);
+        TestContext* testContext = static_cast<TestContext*>(customData);
         std::string cloudScriptLogReport = "";
         if (result.Error.notNull())
         {
@@ -521,8 +525,8 @@ namespace PlayFabUnit
         }
     }
 
-    /// CLIENT API
-    /// Test that a lambda success callback can be successfully invoked
+    // CLIENT API
+    // Test that a lambda success callback can be successfully invoked
     void PlayFabApiTest::CloudScriptLambda(TestContext& testContext)
     {
         ExecuteCloudScriptRequest hwRequest;
@@ -534,8 +538,8 @@ namespace PlayFabUnit
             &testContext);
     }
 
-    /// CLIENT API
-    /// Test that CloudScript errors can be deciphered
+    // CLIENT API
+    // Test that CloudScript errors can be deciphered
     void PlayFabApiTest::CloudScriptError(TestContext& testContext)
     {
         if (!PlayFabClientAPI::IsClientLoggedIn())
@@ -554,7 +558,7 @@ namespace PlayFabUnit
     }
     void PlayFabApiTest::OnCloudScriptError(const ExecuteCloudScriptResult& result, void* customData)
     {
-        TestContext* testContext = reinterpret_cast<TestContext*>(customData);
+        TestContext* testContext = static_cast<TestContext*>(customData);
         bool success = true;
         success &= result.FunctionResult.isNull();
         success &= result.Error.notNull();
@@ -569,8 +573,8 @@ namespace PlayFabUnit
         }
     }
 
-    /// CLIENT API
-    /// Test that the client can publish custom PlayStream events
+    // CLIENT API
+    // Test that the client can publish custom PlayStream events
     void PlayFabApiTest::WriteEvent(TestContext& testContext)
     {
         if (!PlayFabClientAPI::IsClientLoggedIn())
@@ -592,12 +596,12 @@ namespace PlayFabUnit
     }
     void PlayFabApiTest::OnWritePlayerEvent(const WriteEventResponse&, void* customData)
     {
-        TestContext* testContext = reinterpret_cast<TestContext*>(customData);
+        TestContext* testContext = static_cast<TestContext*>(customData);
         testContext->Pass();
     }
 
-    /// ENTITY API
-    /// Verify that a client login can be converted into an entity token
+    // ENTITY API
+    // Verify that a client login can be converted into an entity token
     void PlayFabApiTest::GetEntityToken(TestContext& testContext)
     {
         if (!PlayFabClientAPI::IsClientLoggedIn())
@@ -614,7 +618,7 @@ namespace PlayFabUnit
     }
     void PlayFabApiTest::OnGetEntityToken(const GetEntityTokenResponse& result, void* customData)
     {
-        TestContext* testContext = reinterpret_cast<TestContext*>(customData);
+        TestContext* testContext = static_cast<TestContext*>(customData);
 
         entityId = result.Entity->Id;
         entityType = result.Entity->Type;
@@ -633,10 +637,10 @@ namespace PlayFabUnit
         }
     }
 
-    /// ENTITY API
-    /// Test a sequence of calls that modifies entity objects,
-    ///   and verifies that the next sequential API call contains updated information.
-    /// Verify that the object is correctly modified on the next call.
+    // ENTITY API
+    // Test a sequence of calls that modifies entity objects,
+    //   and verifies that the next sequential API call contains updated information.
+    // Verify that the object is correctly modified on the next call.
     void PlayFabApiTest::ObjectApi(TestContext& testContext)
     {
         if (!PlayFabClientAPI::IsClientLoggedIn())
@@ -693,7 +697,7 @@ namespace PlayFabUnit
     }
     void PlayFabApiTest::OnGetObjects2(const GetObjectsResponse& result, void* customData)
     {
-        TestContext* testContext = reinterpret_cast<TestContext*>(customData);
+        TestContext* testContext = static_cast<TestContext*>(customData);
 
         int actualDataValue = -1000;
         auto found = result.Objects.find(TEST_DATA_KEY);
@@ -716,15 +720,14 @@ namespace PlayFabUnit
         }
     }
 
-    ///
-    ///
-    /// Add test calls to this method, after implementation
-    ///
-    ///
-
+    //
+    //
+    // Add test calls to this method, after implementation
+    //
+    //
     void PlayFabApiTest::AddTests()
     {
-        AddTest("InvalidSettings", &PlayFabApiTest::InvalidSettings);
+        // AddTest("InvalidSettings", &PlayFabApiTest::InvalidSettings);
         AddTest("InvalidLogin", &PlayFabApiTest::InvalidLogin);
         AddTest("InvalidLoginLambda", &PlayFabApiTest::InvalidLoginLambda);
         AddTest("InvalidRegistration", &PlayFabApiTest::InvalidRegistration);
@@ -732,6 +735,7 @@ namespace PlayFabUnit
         AddTest("LoginWithAdvertisingId", &PlayFabApiTest::LoginWithAdvertisingId);
         AddTest("UserDataApi", &PlayFabApiTest::UserDataApi);
         AddTest("PlayerStatisticsApi", &PlayFabApiTest::PlayerStatisticsApi);
+        AddTest("GetServerTime", &PlayFabApiTest::GetServerTime);
         AddTest("UserCharacter", &PlayFabApiTest::UserCharacter);
         AddTest("LeaderBoard", &PlayFabApiTest::LeaderBoard);
         AddTest("AccountInfo", &PlayFabApiTest::AccountInfo);
@@ -752,7 +756,7 @@ namespace PlayFabUnit
         entityId = "";
         entityType = "";
         testMessageInt = 0;
-        testMessageTime = 0;
+        testMessageTime = PlayFab::GetTimePointNow();
     }
 
     void PlayFabApiTest::SetUp(TestContext& testContext)
