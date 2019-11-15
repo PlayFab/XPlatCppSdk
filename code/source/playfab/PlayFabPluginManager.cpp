@@ -27,8 +27,8 @@ namespace PlayFab
 
     std::shared_ptr<IPlayFabPlugin> PlayFabPluginManager::GetPluginInternal(const PlayFabPluginContract contract, const std::string& instanceName)
     {
-        const auto key = std::make_pair(contract, instanceName);
-        auto pluginEntry = plugins.find(key);
+        std::pair<PlayFabPluginContract, std::string> key = std::make_pair(contract, instanceName);
+        const auto pluginEntry = plugins.find(key);
         if (pluginEntry == plugins.end())
         {
             // Requested plugin is not in the cache, create the default one
@@ -42,7 +42,7 @@ namespace PlayFab
                 pluginPtr = CreatePlayFabTransportPlugin();
                 break;
             default:
-                throw std::runtime_error("This contract is not supported");
+                throw PlayFabException(PlayFabExceptionCode::PluginAmbiguity, "This contract is not supported");
                 break;
             }
 
@@ -57,8 +57,8 @@ namespace PlayFab
 
     void PlayFabPluginManager::SetPluginInternal(std::shared_ptr<IPlayFabPlugin> plugin, const PlayFabPluginContract contract, const std::string& instanceName)
     {
-        const auto key = std::make_pair(contract, instanceName);
-        auto pluginEntry = plugins.find(key);
+        std::pair<PlayFabPluginContract, std::string> key = std::make_pair(contract, instanceName);
+        const auto pluginEntry = plugins.find(key);
         if (pluginEntry == plugins.end())
         {
             plugins.insert({ key, std::move(plugin) });
@@ -87,6 +87,8 @@ namespace PlayFab
         return std::make_shared<PlayFabAndroidHttpPlugin>();
 #elif defined(PLAYFAB_PLATFORM_PLAYSTATION)
         return std::make_shared<PlayFabPS4HttpPlugin>();
+#elif defined(PLAYFAB_PLATFORM_SWITCH)
+        return std::make_shared<PlayFabCurlHttpPlugin>();
 #else
         return std::make_shared<PlayFabCurlHttpPlugin>();
 #endif // PLAYFAB_PLATFORM_XBOX

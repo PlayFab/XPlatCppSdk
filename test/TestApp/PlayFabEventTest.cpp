@@ -1,6 +1,9 @@
 // Copyright (C) Microsoft Corporation. All rights reserved.
 
 #include "TestAppPch.h"
+
+#ifndef DISABLE_PLAYFABCLIENT_API
+
 #include <thread>
 #include <chrono>
 #include <playfab/PlayFabClientApi.h>
@@ -17,18 +20,22 @@ using namespace EventsModels;
 
 namespace PlayFabUnit
 {
-#if (!UNITY_IOS && !UNITY_ANDROID) && (!defined(PLAYFAB_PLATFORM_IOS) && !defined(PLAYFAB_PLATFORM_ANDROID))
+#if (!UNITY_IOS && !UNITY_ANDROID) && (!defined(PLAYFAB_PLATFORM_IOS) && !defined(PLAYFAB_PLATFORM_ANDROID) && !defined(PLAYFAB_PLATFORM_SWITCH))
     /// QoS API
     void PlayFabEventTest::QosResultApi(TestContext& testContext)
     {
         QoS::PlayFabQoSApi api;
 
-        auto result = api.GetQoSResult(5, 200);
+        QoS::QoSResult result = api.GetQoSResult(5, 200);
 
         if (result.errorCode == 0)
+        {
             testContext.Pass();
+        }
         else
+        {
             testContext.Fail("Error Code:" + std::to_string(result.errorCode));
+        }
     }
 #endif
 
@@ -55,23 +62,26 @@ namespace PlayFabUnit
 
         EventsModels::WriteEventsRequest request;
 
+        // TODO: Bug 38165 automated builds either time out here or tests will never complete.
         // send several events
-        for (int i = 0; i < 2; i++)
-        {
-            request.Events.push_back(CreateEventContents("event_A_", i));
-            request.Events.push_back(CreateEventContents("event_B_", i));
-        }
+        //for (int i = 0; i < 2; i++)
+        //{
+            request.Events.push_back(CreateEventContents("event_A_", 0));
+            //request.Events.push_back(CreateEventContents("event_B_", i));
+        //}
 
         PlayFabEventsAPI::WriteEvents(request,
             Callback(&PlayFabEventTest::OnEventsApiSucceeded),
             Callback(&PlayFabEventTest::OnEventsApiFailed),
             &testContext);
     }
+
     void PlayFabEventTest::OnEventsApiSucceeded(const PlayFab::EventsModels::WriteEventsResponse&, void* customData)
     {
         TestContext* testContext = reinterpret_cast<TestContext*>(customData);
         testContext->Pass();
     }
+
     void PlayFabEventTest::OnEventsApiFailed(const PlayFab::PlayFabError& error, void* customData)
     {
         TestContext* testContext = reinterpret_cast<TestContext*>(customData);
@@ -86,15 +96,15 @@ namespace PlayFabUnit
     int PlayFabEventTest::eventFailCount;
     std::string PlayFabEventTest::eventFailLog;
 
-    void PlayFabEventTest::NonStaticEmitEventCallback(std::shared_ptr<const PlayFab::IPlayFabEvent> event, std::shared_ptr<const PlayFab::IPlayFabEmitEventResponse> response)
+    void PlayFabEventTest::NonStaticEmitEventCallback(std::shared_ptr<const PlayFab::IPlayFabEvent> /*event*/, std::shared_ptr<const PlayFab::IPlayFabEmitEventResponse> /*response*/)
     {
         (*eventTestContext)->Pass("Private member called back!");
     }
-    
+
     void PlayFabEventTest::EmitEventCallback(std::shared_ptr<const PlayFab::IPlayFabEvent> event, std::shared_ptr<const PlayFab::IPlayFabEmitEventResponse> response)
     {
-        auto pfEvent = std::dynamic_pointer_cast<const PlayFab::PlayFabEvent>(event);
-        auto pfResponse = std::dynamic_pointer_cast<const PlayFab::PlayFabEmitEventResponse>(response);
+        std::shared_ptr<const PlayFab::PlayFabEvent> pfEvent = std::dynamic_pointer_cast<const PlayFab::PlayFabEvent>(event);
+        std::shared_ptr<const PlayFab::PlayFabEmitEventResponse> pfResponse = std::dynamic_pointer_cast<const PlayFab::PlayFabEmitEventResponse>(response);
 
         if (pfResponse->playFabError != nullptr)
         {
@@ -125,7 +135,7 @@ namespace PlayFabUnit
                     "\n";
             }
         }
-        else 
+        else
         {
             (*eventTestContext)->Fail("EmitEventCallback received an error");
         }
@@ -135,11 +145,17 @@ namespace PlayFabUnit
         if (eventCount >= eventEmitCount)
         {
             if (eventBatchMax >= eventEmitCount)
+            {
                 (*eventTestContext)->Fail("Events did not batch:\n" + eventFailLog);
+            }
             else if (eventFailCount > 0)
+            {
                 (*eventTestContext)->Fail("Events failed delivery:\n" + eventFailLog);
+            }
             else
+            {
                 (*eventTestContext)->Pass();
+            }
         }
     }
 
@@ -150,7 +166,7 @@ namespace PlayFabUnit
         // They will be batched up according to pipeline's settings
         for (int i = 0; i < eventEmitCount; i++)
         {
-            auto event = MakeEvent(i, eventType);
+            std::unique_ptr<PlayFab::PlayFabEvent> event = MakeEvent(i, eventType);
             (*api)->EmitEvent(std::move(event), EmitEventCallback);
         }
     }
@@ -188,23 +204,80 @@ namespace PlayFabUnit
         (*api)->EmitEvent(MakeEvent(0, PlayFabEventType::Default),
             [&testContext]
             (std::shared_ptr<const IPlayFabEvent>, std::shared_ptr<const IPlayFabEmitEventResponse>)
-            { if(testContext.activeState != TestActiveState::COMPLETE){ testContext.Pass("Lambda Function Callback Succeeded.");}});
+            {
+                if (testContext.activeState != TestActiveState::COMPLETE)
+                {
+                    testContext.Pass("Lambda Function Callback Succeeded.");
+                }
+            });
     }
 
     void PlayFabEventTest::PrivateMemberCallbackTest(TestContext& testContext)
     {
-        eventTestContext = std::make_shared<TestContext*>(&testContext);
+       eventTestContext = std::make_shared<TestContext*>(&testContext);
 
-        std::shared_ptr<PlayFabEventAPI*> api = SetupEventTest();
+        eventApi = SetupEventTest();
 
-        (*api)->EmitEvent(MakeEvent(0, PlayFabEventType::Default),
+        (*eventApi)->EmitEvent(MakeEvent(0, PlayFabEventType::Default),
         std::bind(&PlayFabEventTest::NonStaticEmitEventCallback, this, std::placeholders::_1, std::placeholders::_2));
+    }
+
+    void PlayFabEventTest::GenericMultiThreadedTest(uint32_t pNumThreads, uint32_t pNumEventsPerThread)
+    {
+        std::atomic<uint32_t> eventsRemaining = pNumThreads * pNumEventsPerThread;
+        for (uint32_t thread = 0; thread < pNumThreads; ++thread)
+        {
+            testThreadPool.emplace_back(
+                [&eventsRemaining, pNumEventsPerThread, this]() 
+                {
+                    std::shared_ptr<PlayFabEventAPI*> api = SetupEventTest();
+                    for (uint32_t i = 0; i < pNumEventsPerThread; ++i)
+                    {
+                        (*api)->EmitEvent(MakeEvent(0, PlayFabEventType::Default),
+                            [&eventsRemaining, pNumEventsPerThread]
+                            (std::shared_ptr<const PlayFab::IPlayFabEvent>, std::shared_ptr<const PlayFab::IPlayFabEmitEventResponse>)
+                            {
+                                if (--eventsRemaining == 0)
+                                {
+                                    (*eventTestContext)->Pass("Threaded callback Received all events Emitted.");
+                                }
+                            }
+                        );
+                    }
+                std::this_thread::yield();
+                }
+            );
+        }
+    }
+
+    void PlayFabEventTest::BasicMultiThreadedTest(TestContext& testContext)
+    {
+        eventTestContext = std::make_shared<TestContext*>(&testContext);
+        uint32_t numThreads = 6;
+        uint32_t numEventsPerThread = 5;
+        GenericMultiThreadedTest(numThreads, numEventsPerThread);
+    }
+
+    void PlayFabEventTest::ManyThreadsLowEventsPerTest(TestContext& testContext)
+    {
+        eventTestContext = std::make_shared<TestContext*>(&testContext);
+        uint32_t numThreads = 30;
+        uint32_t numEventsPerThread = 2;
+        GenericMultiThreadedTest(numThreads, numEventsPerThread);
+    }
+
+    void PlayFabEventTest::FewThreadsHighEventsPerTest(TestContext& testContext)
+    {
+        eventTestContext = std::make_shared<TestContext*>(&testContext);
+        uint32_t numThreads = 2;
+        uint32_t numEventsPerThread = 15;
+        GenericMultiThreadedTest(numThreads, numEventsPerThread);
     }
 
     void PlayFabEventTest::AddTests()
     {
         // TODO: Fix whatever limitation causes this test to fail for these platforms
-#if !defined(PLAYFAB_PLATFORM_IOS) && !defined(PLAYFAB_PLATFORM_ANDROID) && !defined(PLAYFAB_PLATFORM_PLAYSTATION)
+#if !defined(PLAYFAB_PLATFORM_IOS) && !defined(PLAYFAB_PLATFORM_ANDROID) && !defined(PLAYFAB_PLATFORM_PLAYSTATION) && !defined(PLAYFAB_PLATFORM_SWITCH)
         AddTest("QosResultApi", &PlayFabEventTest::QosResultApi);
 #endif
         AddTest("EventsApi", &PlayFabEventTest::EventsApi);
@@ -212,6 +285,9 @@ namespace PlayFabUnit
         AddTest("LightweightEvents", &PlayFabEventTest::LightweightEvents);
         AddTest("LambdaCallback", &PlayFabEventTest::LambdaCallbackTest);
         AddTest("PrivateMemberCallback", &PlayFabEventTest::PrivateMemberCallbackTest);
+        AddTest("BasicMultiThreadedTest", &PlayFabEventTest::BasicMultiThreadedTest);
+        AddTest("ManyThreadsLowEventsPerTest", &PlayFabEventTest::ManyThreadsLowEventsPerTest);
+        AddTest("FewThreadsHighEventsPerTest", &PlayFabEventTest::FewThreadsHighEventsPerTest);
     }
 
     void PlayFabEventTest::ClassSetUp()
@@ -238,18 +314,20 @@ namespace PlayFabUnit
                 loginComplete = true;
             },
             &loggedIn);
-        
+
         // Sleep while waiting for log in to complete.
         while (!loginComplete)
         {
-            std::this_thread::sleep_for(TimeValueMs(100));
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
         }
     }
 
     void PlayFabEventTest::SetUp(TestContext& testContext)
     {
         if (!loggedIn)
+        {
             testContext.Skip("Not logged in to PlayFab"); // Cannot run event tests if not logged in
+        }
 
         // Reset event test values.
         eventBatchMax = 0;
@@ -267,6 +345,12 @@ namespace PlayFabUnit
     {
         eventTestContext = nullptr;
         eventApi = nullptr;
+
+        for (auto& thread : testThreadPool)
+        {
+            thread.join();
+        }
+        testThreadPool.clear();
     }
 
     void PlayFabEventTest::ClassTearDown()
@@ -281,8 +365,8 @@ namespace PlayFabUnit
         std::shared_ptr<PlayFabEventAPI*> api = std::make_shared<PlayFabEventAPI*>(new PlayFabEventAPI()); // create Event API instance
 
         // adjust some pipeline settings
-        auto pipeline = std::dynamic_pointer_cast<PlayFab::PlayFabEventPipeline>((*api)->GetEventRouter()->GetPipelines().at(PlayFab::EventPipelineKey::PlayFabTelemetry)); // get non-playstream pipeline
-        auto settings = pipeline->GetSettings(); // get pipeline's settings
+        std::shared_ptr<PlayFab::PlayFabEventPipeline> pipeline = std::dynamic_pointer_cast<PlayFab::PlayFabEventPipeline>((*api)->GetEventRouter()->GetPipelines().at(PlayFab::EventPipelineKey::PlayFabTelemetry)); // get non-playstream pipeline
+        std::shared_ptr<PlayFab::PlayFabEventPipelineSettings>  settings = pipeline->GetSettings(); // get pipeline's settings
         settings->maximalBatchWaitTime = maxBatchWaitTime; // incomplete batch expiration in seconds
         settings->maximalNumberOfItemsInBatch = maxItemsInBatch; // number of events in a batch
         settings->maximalNumberOfBatchesInFlight = maxBatchesInFlight; // maximal number of batches processed simultaneously by a transport plugin before taking next events from the buffer
@@ -307,3 +391,5 @@ namespace PlayFabUnit
         return event;
     }
 }
+
+#endif

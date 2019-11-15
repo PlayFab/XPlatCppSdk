@@ -16,14 +16,13 @@ namespace PlayFab
     class PlayFabDataInstanceAPI
     {
     private:
-        std::shared_ptr<PlayFabApiSettings> settings;
-        std::shared_ptr<PlayFabAuthenticationContext> authContext;
+        std::shared_ptr<PlayFabApiSettings> m_settings{ nullptr };
+        std::shared_ptr<PlayFabAuthenticationContext> m_context{ nullptr };
 
     public:
-        PlayFabDataInstanceAPI();
-        explicit PlayFabDataInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings);
         explicit PlayFabDataInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
         PlayFabDataInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings, std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
+
         ~PlayFabDataInstanceAPI();
         PlayFabDataInstanceAPI(const PlayFabDataInstanceAPI& source) = delete; // disable copy
         PlayFabDataInstanceAPI(PlayFabDataInstanceAPI&&) = delete; // disable move
@@ -31,9 +30,7 @@ namespace PlayFab
         PlayFabDataInstanceAPI& operator=(PlayFabDataInstanceAPI&& other) = delete; // disable move assignment
 
         std::shared_ptr<PlayFabApiSettings> GetSettings() const;
-        void SetSettings(std::shared_ptr<PlayFabApiSettings> apiSettings);
         std::shared_ptr<PlayFabAuthenticationContext> GetAuthenticationContext() const;
-        void SetAuthenticationContext(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
         size_t Update();
         void ForgetAllCredentials();
 
@@ -55,8 +52,6 @@ namespace PlayFab
         void OnInitiateFileUploadsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnSetObjectsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         bool ValidateResult(PlayFabResultCommon& resultCommon, const CallRequestContainer& container);
-    private:
-        std::shared_ptr<PlayFabAuthenticationContext> GetOrCreateAuthenticationContext();
     };
 }
 

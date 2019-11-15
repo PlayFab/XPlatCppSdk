@@ -16,14 +16,13 @@ namespace PlayFab
     class PlayFabEventsInstanceAPI
     {
     private:
-        std::shared_ptr<PlayFabApiSettings> settings;
-        std::shared_ptr<PlayFabAuthenticationContext> authContext;
+        std::shared_ptr<PlayFabApiSettings> m_settings{ nullptr };
+        std::shared_ptr<PlayFabAuthenticationContext> m_context{ nullptr };
 
     public:
-        PlayFabEventsInstanceAPI();
-        explicit PlayFabEventsInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings);
         explicit PlayFabEventsInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
         PlayFabEventsInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings, std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
+
         ~PlayFabEventsInstanceAPI();
         PlayFabEventsInstanceAPI(const PlayFabEventsInstanceAPI& source) = delete; // disable copy
         PlayFabEventsInstanceAPI(PlayFabEventsInstanceAPI&&) = delete; // disable move
@@ -31,9 +30,7 @@ namespace PlayFab
         PlayFabEventsInstanceAPI& operator=(PlayFabEventsInstanceAPI&& other) = delete; // disable move assignment
 
         std::shared_ptr<PlayFabApiSettings> GetSettings() const;
-        void SetSettings(std::shared_ptr<PlayFabApiSettings> apiSettings);
         std::shared_ptr<PlayFabAuthenticationContext> GetAuthenticationContext() const;
-        void SetAuthenticationContext(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
         size_t Update();
         void ForgetAllCredentials();
 
@@ -45,8 +42,6 @@ namespace PlayFab
         void OnWriteEventsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnWriteTelemetryEventsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         bool ValidateResult(PlayFabResultCommon& resultCommon, const CallRequestContainer& container);
-    private:
-        std::shared_ptr<PlayFabAuthenticationContext> GetOrCreateAuthenticationContext();
     };
 }
 

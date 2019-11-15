@@ -2,6 +2,8 @@
 
 #pragma once
 
+#ifndef DISABLE_PLAYFABCLIENT_API
+
 #include <functional>
 #include <string>
 #include <playfab/PlayFabEventApi.h>
@@ -47,6 +49,13 @@ namespace PlayFabUnit
             void LambdaCallbackTest(TestContext& testContext);
             void PrivateMemberCallbackTest(TestContext& testContext);
 
+            // We need to make sure these are able to pass within TEST_TIMEOUT_DURATION
+            void BasicMultiThreadedTest(TestContext& testContext);
+            void ManyThreadsLowEventsPerTest(TestContext& testContext);
+            void FewThreadsHighEventsPerTest(TestContext& testContext);
+            
+            void GenericMultiThreadedTest(uint32_t pNumThreads, uint32_t pNumEventsPerThread);
+
             // State
             bool loggedIn;
             std::shared_ptr<PlayFab::PlayFabEventAPI*> eventApi;
@@ -56,6 +65,8 @@ namespace PlayFabUnit
             static int eventPassCount;
             static int eventFailCount;
             static std::string eventFailLog;
+
+            std::vector<std::thread> testThreadPool;
 
             // Utility
             void EmitEvents(PlayFab::PlayFabEventType eventType, int maxBatchWaitTime=2, int maxItemsInBatch=3, int maxBatchesInFlight=10);
@@ -81,3 +92,5 @@ namespace PlayFabUnit
             void ClassTearDown() override;
     };
 }
+
+#endif

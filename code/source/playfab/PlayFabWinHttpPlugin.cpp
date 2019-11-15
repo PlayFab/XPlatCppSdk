@@ -99,6 +99,8 @@ namespace PlayFab
 
     void PlayFabWinHttpPlugin::MakePostRequest(std::unique_ptr<CallRequestContainerBase> requestContainer)
     {
+        CallRequestContainer* container = dynamic_cast<CallRequestContainer*>(requestContainer.get());
+        if (container != nullptr && container->HandleInvalidSettings())
         { // LOCK httpRequestMutex
             std::unique_lock<std::mutex> lock(httpRequestMutex);
             pendingRequests.push_back(std::move(requestContainer));
@@ -190,7 +192,7 @@ namespace PlayFab
                     {
                         // Add HTTP headers
                         SetPredefinedHeaders(reqContainer, hRequest);
-                        auto headers = reqContainer.GetRequestHeaders();
+                        const std::unordered_map<std::string, std::string> headers = reqContainer.GetRequestHeaders();
                         if (headers.size() > 0)
                         {
                             for (auto const& obj : headers)
@@ -346,9 +348,20 @@ namespace PlayFab
         HandleCallback(std::move(requestContainer));
 
         // Close any open handles
-        if (hRequest) WinHttpCloseHandle(hRequest);
-        if (hConnect) WinHttpCloseHandle(hConnect);
-        if (hSession) WinHttpCloseHandle(hSession);
+        if (hRequest)
+        {
+            WinHttpCloseHandle(hRequest);
+        }
+
+        if (hConnect)
+        {
+            WinHttpCloseHandle(hConnect);
+        }
+
+        if (hSession)
+        {
+            WinHttpCloseHandle(hSession);
+        }
     }
 
     std::string PlayFabWinHttpPlugin::GetUrl(const CallRequestContainer& reqContainer) const
@@ -415,7 +428,7 @@ namespace PlayFab
     void PlayFabWinHttpPlugin::HandleResults(std::unique_ptr<CallRequestContainer> requestContainer)
     {
         CallRequestContainer& reqContainer = *requestContainer;
-        auto callback = reqContainer.GetCallback();
+        CallRequestContainerCallback callback = reqContainer.GetCallback();
         if (callback != nullptr)
         {
             callback(
@@ -429,7 +442,7 @@ namespace PlayFab
     {
         if (PlayFabSettings::threadedCallbacks)
         {
-            throw std::runtime_error("You should not call Update() when PlayFabSettings::threadedCallbacks == true");
+            throw PlayFabException(PlayFabExceptionCode::ThreadMisuse, "You should not call Update() when PlayFabSettings::threadedCallbacks == true");
         }
 
         std::unique_ptr<CallRequestContainerBase> requestContainer = nullptr;

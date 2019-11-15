@@ -1,5 +1,6 @@
 #include <stdafx.h>
 
+#include <assert.h>
 #include <playfab/PlayFabSpinLock.h>
 
 namespace PlayFab
@@ -25,7 +26,7 @@ namespace PlayFab
             std::thread::id expected = invalidThreadId;
             size_t spinCount = spinToSwitch;
 
-            while (!threadId.compare_exchange_weak(expected, current_thread_id, std::memory_order_release, std::memory_order_acquire))
+            while (!threadId.compare_exchange_weak(expected, current_thread_id, std::memory_order_acq_rel, std::memory_order_acquire))
             {
                 expected = invalidThreadId;
                 --spinCount;
@@ -35,6 +36,8 @@ namespace PlayFab
                     spinCount = spinToSwitch;
                 }
             }
+
+            assert(count==0);
         }
 
         ++count;
@@ -48,7 +51,7 @@ namespace PlayFab
         if (current_thread_id != threadId.load(std::memory_order_acquire))
         {
             std::thread::id expected = invalidThreadId;
-            result = threadId.compare_exchange_strong(expected, current_thread_id, std::memory_order_release, std::memory_order_acquire);
+            result = threadId.compare_exchange_strong(expected, current_thread_id, std::memory_order_acq_rel, std::memory_order_acquire);
         }
 
         if (result)

@@ -16,14 +16,15 @@ namespace PlayFab
     class PlayFabAuthenticationInstanceAPI
     {
     private:
-        std::shared_ptr<PlayFabApiSettings> settings;
-        std::shared_ptr<PlayFabAuthenticationContext> authContext;
+        std::shared_ptr<PlayFabApiSettings> m_settings{ nullptr };
+        std::shared_ptr<PlayFabAuthenticationContext> m_context{ nullptr };
 
     public:
         PlayFabAuthenticationInstanceAPI();
         explicit PlayFabAuthenticationInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings);
         explicit PlayFabAuthenticationInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
         PlayFabAuthenticationInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings, std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
+
         ~PlayFabAuthenticationInstanceAPI();
         PlayFabAuthenticationInstanceAPI(const PlayFabAuthenticationInstanceAPI& source) = delete; // disable copy
         PlayFabAuthenticationInstanceAPI(PlayFabAuthenticationInstanceAPI&&) = delete; // disable move
@@ -31,9 +32,7 @@ namespace PlayFab
         PlayFabAuthenticationInstanceAPI& operator=(PlayFabAuthenticationInstanceAPI&& other) = delete; // disable move assignment
 
         std::shared_ptr<PlayFabApiSettings> GetSettings() const;
-        void SetSettings(std::shared_ptr<PlayFabApiSettings> apiSettings);
         std::shared_ptr<PlayFabAuthenticationContext> GetAuthenticationContext() const;
-        void SetAuthenticationContext(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
         size_t Update();
         void ForgetAllCredentials();
 
@@ -45,8 +44,6 @@ namespace PlayFab
         void OnGetEntityTokenResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnValidateEntityTokenResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         bool ValidateResult(PlayFabResultCommon& resultCommon, const CallRequestContainer& container);
-    private:
-        std::shared_ptr<PlayFabAuthenticationContext> GetOrCreateAuthenticationContext();
     };
 }
 

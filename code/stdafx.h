@@ -1,26 +1,29 @@
 // Copyright (C) Microsoft Corporation. All rights reserved.
+// stdafx.h : The file for declaring precompiled headers.
+
+#ifndef STDAFX_H
+#define STDAFX_H
 
 #pragma once
 
-#include <list>
-#include <unordered_map>
-#include <map>
 #include <algorithm>
-#include <functional>
-#include <string>
+#include <chrono>
+#include <condition_variable>
 #include <cstring>
+#include <functional>
+#include <fstream>
 #include <future>
-
 #include <iomanip>
 #include <iostream>
-#include <sstream>
-#include <fstream>
-
-#include <chrono>
+#include <list>
+#include <map>
 #include <mutex>
-#include <condition_variable>
+#include <sstream>
+#include <string>
 #include <thread>
+#include <unordered_map>
 
+#include <playfab/PlayFabJsonHeaders.h>
 #include <playfab/PlayFabPlatformMacros.h>
 
 #define UNREFERENCED_PARAMETER(P) (P)
@@ -33,4 +36,4 @@
 #define WIN32_LEAN_AND_MEAN
 #endif // PLAYFAB_PLATFORM_WINDOWS
 
-#include <playfab/PlayFabJsonHeaders.h>
+#endif // STDAFX_H

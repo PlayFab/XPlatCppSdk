@@ -5,7 +5,7 @@
 
 namespace PlayFab
 {
-    enum  class PlayFabErrorCode
+    enum class PlayFabErrorCode
     {
         PlayFabErrorHostnameNotFound = 1,
         PlayFabErrorConnectionTimeout,
@@ -586,4 +586,29 @@ namespace PlayFab
 
     typedef std::function<void(const PlayFabError& error, void* customData)> ErrorCallback;
     typedef std::function<void(std::exception exception)> ExceptionCallback;
+
+    enum class PlayFabExceptionCode
+    {
+        AuthContextRequired,
+        DeveloperKeyNotSet,
+        EntityTokenNotSet,
+        NotLoggedIn,
+        PluginAmbiguity,
+        PluginNotFound,
+        ThreadMisuse,
+        TitleNotSet,
+    };
+
+    class PlayFabException : public std::runtime_error
+    {
+    public:
+        PlayFabException() = delete;
+        PlayFabException(const PlayFabException& source) = delete;
+        PlayFabException(PlayFabException&&) = default;
+        PlayFabException& operator=(const PlayFabException& source) = delete;
+        PlayFabException& operator=(PlayFabException&& other) = delete;
+
+        PlayFabExceptionCode Code;
+        PlayFabException(PlayFabExceptionCode code, const char* const message);
+    };
 }

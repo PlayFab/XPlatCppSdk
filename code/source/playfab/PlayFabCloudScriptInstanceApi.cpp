@@ -16,24 +16,23 @@ namespace PlayFab
 {
     using namespace CloudScriptModels;
 
-    PlayFabCloudScriptInstanceAPI::PlayFabCloudScriptInstanceAPI()
-    {
-    }
-
-    PlayFabCloudScriptInstanceAPI::PlayFabCloudScriptInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings)
-    {
-        this->settings = std::move(apiSettings);
-    }
-
     PlayFabCloudScriptInstanceAPI::PlayFabCloudScriptInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext)
     {
-        this->authContext = std::move(authenticationContext);
+        if (authenticationContext == nullptr)
+        {
+            throw PlayFabException(PlayFabExceptionCode::AuthContextRequired, "Context cannot be null, create a PlayFabAuthenticationContext for each player in advance, or get <PlayFabClientInstanceAPI>.authenticationContext");
+        }
+        this->m_context = authenticationContext;
     }
 
     PlayFabCloudScriptInstanceAPI::PlayFabCloudScriptInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings, std::shared_ptr<PlayFabAuthenticationContext> authenticationContext)
     {
-        this->settings = std::move(apiSettings);
-        this->authContext = std::move(authenticationContext);
+        if (authenticationContext == nullptr)
+        {
+            throw PlayFabException(PlayFabExceptionCode::AuthContextRequired, "Context cannot be null, create a PlayFabAuthenticationContext for each player in advance, or get <PlayFabClientInstanceAPI>.authenticationContext");
+        }
+        this->m_settings = apiSettings;
+        this->m_context = authenticationContext;
     }
 
     PlayFabCloudScriptInstanceAPI::~PlayFabCloudScriptInstanceAPI()
@@ -42,32 +41,12 @@ namespace PlayFab
 
     std::shared_ptr<PlayFabApiSettings> PlayFabCloudScriptInstanceAPI::GetSettings() const
     {
-        return this->settings;
-    }
-
-    void PlayFabCloudScriptInstanceAPI::SetSettings(std::shared_ptr<PlayFabApiSettings> apiSettings)
-    {
-        this->settings = std::move(apiSettings);
+        return this->m_settings;
     }
 
     std::shared_ptr<PlayFabAuthenticationContext> PlayFabCloudScriptInstanceAPI::GetAuthenticationContext() const
     {
-        return this->authContext;
-    }
-
-    void PlayFabCloudScriptInstanceAPI::SetAuthenticationContext(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext)
-    {
-        this->authContext = std::move(authenticationContext);
-    }
-
-    std::shared_ptr<PlayFabAuthenticationContext> PlayFabCloudScriptInstanceAPI::GetOrCreateAuthenticationContext()
-    {
-        if (this->authContext == nullptr)
-        {
-            this->authContext = std::make_shared<PlayFabAuthenticationContext>();
-        }
-        
-        return this->authContext;
+        return this->m_context;
     }
 
     size_t PlayFabCloudScriptInstanceAPI::Update()
@@ -78,10 +57,10 @@ namespace PlayFab
 
     void PlayFabCloudScriptInstanceAPI::ForgetAllCredentials()
     {
-        if (this->authContext == nullptr)
-            return;
-
-        this->authContext->ForgetAllCredentials();
+        if (this->m_context != nullptr)
+        {
+            this->m_context->ForgetAllCredentials();
+        }
     }
 
     // PlayFabCloudScript instance APIs
@@ -93,44 +72,44 @@ namespace PlayFab
         void* customData
     )
     {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : this->m_context;
+        std::shared_ptr<PlayFabApiSettings> settings = this->m_settings != nullptr ? this->m_settings : PlayFabSettings::staticSettings;
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const auto requestJson = request.ToJson();
+        const Json::Value requestJson = request.ToJson();
         std::string jsonAsString = requestJson.toStyledString();
 
-        auto authenticationContext = request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext() : request.authenticationContext;
+        std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = request.authenticationContext == nullptr ? this->m_context : request.authenticationContext;
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? this->GetOrCreateAuthenticationContext()->entityToken : request.authenticationContext->entityToken);
+        headers.emplace("X-EntityToken", context->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/CloudScript/ExecuteEntityCloudScript",
             headers,
             jsonAsString,
             std::bind(&PlayFabCloudScriptInstanceAPI::OnExecuteEntityCloudScriptResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
-            customData,
-            this->settings));
+            settings,
+            context,
+            customData));
 
         reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ExecuteCloudScriptResult>(callback));
         reqContainer->errorCallback = errorCallback;
 
-        if (PlayFabSettings::ValidateSettings(authenticationContext, this->settings, *reqContainer))
-        {
-            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
-        }
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
     void PlayFabCloudScriptInstanceAPI::OnExecuteEntityCloudScriptResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
         ExecuteCloudScriptResult outResult;
         if (ValidateResult(outResult, container))
         {
-
-            const auto internalPtr = container.successCallback.get();
-            if (internalPtr != nullptr)
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
             {
-                const auto callback = (*static_cast<ProcessApiCallback<ExecuteCloudScriptResult> *>(internalPtr));
+                const auto& callback = *static_cast<ProcessApiCallback<ExecuteCloudScriptResult> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -147,9 +126,14 @@ namespace PlayFab
         else // Process the error case
         {
             if (PlayFabSettings::globalErrorHandler != nullptr)
+            {
                 PlayFabSettings::globalErrorHandler(container.errorWrapper, container.GetCustomData());
+            }
+
             if (container.errorCallback != nullptr)
+            {
                 container.errorCallback(container.errorWrapper, container.GetCustomData());
+            }
             return false;
         }
     }

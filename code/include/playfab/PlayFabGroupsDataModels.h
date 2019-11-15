@@ -20,19 +20,46 @@ namespace PlayFab
 
         inline void ToJsonEnum(const OperationTypes input, Json::Value& output)
         {
-            if (input == OperationTypes::OperationTypesCreated) output = Json::Value("Created");
-            if (input == OperationTypes::OperationTypesUpdated) output = Json::Value("Updated");
-            if (input == OperationTypes::OperationTypesDeleted) output = Json::Value("Deleted");
-            if (input == OperationTypes::OperationTypesNone) output = Json::Value("None");
+            if (input == OperationTypes::OperationTypesCreated)
+            {
+                output = Json::Value("Created");
+            }
+            if (input == OperationTypes::OperationTypesUpdated)
+            {
+                output = Json::Value("Updated");
+            }
+            if (input == OperationTypes::OperationTypesDeleted)
+            {
+                output = Json::Value("Deleted");
+            }
+            if (input == OperationTypes::OperationTypesNone)
+            {
+                output = Json::Value("None");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, OperationTypes& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "Created") output = OperationTypes::OperationTypesCreated;
-            if (inputStr == "Updated") output = OperationTypes::OperationTypesUpdated;
-            if (inputStr == "Deleted") output = OperationTypes::OperationTypesDeleted;
-            if (inputStr == "None") output = OperationTypes::OperationTypesNone;
+            if (inputStr == "Created")
+            {
+                output = OperationTypes::OperationTypesCreated;
+            }
+            if (inputStr == "Updated")
+            {
+                output = OperationTypes::OperationTypesUpdated;
+            }
+            if (inputStr == "Deleted")
+            {
+                output = OperationTypes::OperationTypesDeleted;
+            }
+            if (inputStr == "None")
+            {
+                output = OperationTypes::OperationTypesNone;
+            }
         }
 
         // Groups Classes

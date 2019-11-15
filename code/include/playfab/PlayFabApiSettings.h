@@ -10,21 +10,26 @@ namespace PlayFab
     /// </summary>
     class PlayFabApiSettings
     {
-    public:
-#ifndef DISABLE_PLAYFABCLIENT_API
-        std::string advertisingIdType; // Set this to the appropriate AD_TYPE_X constant (defined in PlayFabSettings)
-        std::string advertisingIdValue; // Set this to corresponding device value
-
-        // DisableAdvertising is provided for completeness, but changing it is not suggested
-        // Disabling this may prevent your advertising-related PlayFab marketplace partners from working correctly
-        bool disableAdvertising;
+#if defined(ENABLE_PLAYFABSERVER_API) || defined(ENABLE_PLAYFABADMIN_API)
+    public: // Server-only variables should only be visible when appropriate
+#else
+    private: // But, static library memory size and alloc issues mean it always needs to exist
 #endif
+        std::string developerSecretKey; // Developer secret key. These keys can be used in development environments.
 
-        std::string verticalName; // The name of a PlayFab service vertical
+    public:
+        static const std::map<std::string, std::string> requestGetParams;
+
         std::string baseServiceHost; // The base for a PlayFab service host
         std::string titleId; // You must set this value for PlayFabSdk to work properly (found in the Game Manager for your title, at the PlayFab Website)
 
         PlayFabApiSettings();
-        std::string GetUrl(const std::string& urlPath, const std::map<std::string, std::string>& getParams) const;
+        PlayFabApiSettings(const PlayFabApiSettings& other) = delete;
+        PlayFabApiSettings(PlayFabApiSettings&& other) = delete;
+        PlayFabApiSettings& operator=(const PlayFabApiSettings& other) = delete;
+        PlayFabApiSettings& operator=(PlayFabApiSettings&& other) = delete;
+        ~PlayFabApiSettings() = default;
+
+        std::string GetUrl(const std::string& urlPath) const;
     };
 }

@@ -21,6 +21,25 @@ using namespace ClientModels;
 
 namespace PlayFabUnit
 {
+    void TestApp::Log(const char* format, ...)
+    {
+        static char message[4096];
+
+        va_list args;
+        va_start(args, format);
+#if defined(PLAYFAB_PLATFORM_PLAYSTATION)
+        vsnprintf_s(message, sizeof(message), format, args);
+#elif defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID) || defined(PLAYFAB_PLATFORM_LINUX) || defined(PLAYFAB_PLATFORM_SWITCH)
+        vsnprintf(message, sizeof(message), format, args);
+#else
+        _vsnprintf_s(message, sizeof(message), format, args);
+#endif
+        va_end(args);
+
+        // Output the message in a platform-dependent way.
+        LogPut(message);
+    }
+
     int TestApp::Main()
     {
         // Load the TestTitleData
@@ -41,6 +60,7 @@ namespace PlayFabUnit
         // Initialize the test runner/test data.
         TestRunner testRunner;
 
+#ifndef DISABLE_PLAYFABCLIENT_API
         // Add PlayFab API tests.
         PlayFabApiTest pfApiTest;
         pfApiTest.SetTitleInfo(testInputs);
@@ -54,10 +74,12 @@ namespace PlayFabUnit
 
         PlayFabTestMultiUserInstance pfMultiUserInstanceTest;
         testRunner.Add(pfMultiUserInstanceTest);
+#endif
 
         // Run the tests (blocks until all tests have finished).
         testRunner.Run();
 
+#ifndef DISABLE_PLAYFABCLIENT_API
         // Publish the test report via cloud script (and wait for it to finish).
         LoginWithCustomIDRequest request;
         request.CustomId = PlayFabSettings::buildIdentifier;
@@ -71,6 +93,7 @@ namespace PlayFabUnit
         {
             std::this_thread::sleep_for(TimeValueMs(100));
         }
+#endif
 
         // Publish the test summary (including cloud script response) to STDOUT.
         Log("%s\n%s\n", testRunner.suiteTestSummary.c_str(), cloudResponse.c_str());
@@ -87,7 +110,9 @@ namespace PlayFabUnit
         const bool loadedSuccessfully = LoadTitleDataJson(titleJsonPtr, size);
 
         if (!loadedSuccessfully)
+        {
             return false;
+        }
 
         // Parse JSON string into output TestTitleData.
         Json::CharReaderBuilder jsonReaderFactory;
@@ -106,25 +131,7 @@ namespace PlayFabUnit
         return parsedSuccessfully;
     }
 
-    void TestApp::Log(const char* format, ...)
-    {
-        static char message[4096];
-
-        va_list args;
-        va_start(args, format);
-#if defined(PLAYFAB_PLATFORM_PLAYSTATION)
-        vsnprintf_s(message, sizeof(message), format, args);
-#elif defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID) || defined(PLAYFAB_PLATFORM_LINUX)
-        vsnprintf(message, sizeof(message), format, args);
-#else
-        _vsnprintf_s(message, sizeof(message), format, args);
-#endif
-        va_end(args);
-
-        // Output the message in a platform-dependent way.
-        LogPut(message);
-    }
-
+#ifndef DISABLE_PLAYFABCLIENT_API
     void TestApp::OnPostReportLogin(const LoginResult& result, void* customData)
     {
         cloudPlayFabId = result.PlayFabId;
@@ -155,13 +162,18 @@ namespace PlayFabUnit
     void TestApp::OnPostReportComplete(const ExecuteCloudScriptResult& result, void* /*customData*/)
     {
         if (result.Error.isNull())
+        {
             cloudResponse = "Test report submitted via cloud script: " + PlayFabSettings::buildIdentifier + ", " + cloudPlayFabId;
+        }
         else
+        {
             cloudResponse += "Error executing test report cloud script:\n" + result.Error->Error + ": " + result.Error->Message;
+        }
     }
 
     void TestApp::OnPostReportError(const PlayFabError& error, void* /*customData*/)
     {
         cloudResponse = "Failed to report results via cloud script: " + error.GenerateErrorReport();
     }
+#endif
 }

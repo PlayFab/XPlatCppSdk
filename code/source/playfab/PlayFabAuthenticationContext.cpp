@@ -7,27 +7,42 @@ namespace PlayFab
 {
     PlayFabAuthenticationContext::PlayFabAuthenticationContext()
     {
-#ifndef DISABLE_PLAYFABCLIENT_API
-        clientSessionTicket = PlayFabSettings::clientSessionTicket;
-#endif
-#ifndef DISABLE_PLAYFABENTITY_API
-        entityToken = PlayFabSettings::entityToken;
-#endif
-#if defined(ENABLE_PLAYFABSERVER_API) || defined(ENABLE_PLAYFABADMIN_API)
-        developerSecretKey = PlayFabSettings::developerSecretKey;
-#endif
+        ForgetAllCredentials();
     }
 
     void PlayFabAuthenticationContext::ForgetAllCredentials()
     {
 #ifndef DISABLE_PLAYFABCLIENT_API
+        playFabId.clear();
         clientSessionTicket.clear();
+        advertisingIdType.clear();
+        advertisingIdValue.clear();
 #endif
-#ifndef DISABLE_PLAYFABENTITY_API
+        entityId.clear();
+        entityType.clear();
         entityToken.clear();
-#endif
-#if defined(ENABLE_PLAYFABSERVER_API) || defined(ENABLE_PLAYFABADMIN_API)
-        developerSecretKey.clear();
-#endif
+    }
+
+    void SetIfNotNull(const std::string& input, std::string& output)
+    {
+        if (!input.empty())
+        {
+            output = input;
+        }
+    }
+
+    void PlayFabAuthenticationContext::HandlePlayFabLogin(
+        const std::string& _playFabId,
+        const std::string& _clientSessionTicket,
+        const std::string& _entityId,
+        const std::string& _entityType,
+        const std::string& _entityToken
+    )
+    {
+        SetIfNotNull(_playFabId, playFabId);
+        SetIfNotNull(_clientSessionTicket, clientSessionTicket);
+        SetIfNotNull(_entityId, entityId);
+        SetIfNotNull(_entityType, entityType);
+        SetIfNotNull(_entityToken, entityToken);
     }
 }

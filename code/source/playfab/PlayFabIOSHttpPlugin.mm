@@ -55,6 +55,7 @@ namespace PlayFab
         this->impl = new PlayFabIOSHttpPlugin::RequestImpl();
         return true;
     }
+
     void PlayFabIOSHttpPlugin::RequestTask::Cancel()
     {
         if(this->impl)
@@ -76,53 +77,61 @@ namespace PlayFab
         threadRunning = false;
 
         httpRequestMutex.lock();
+
         if(this->requestingTask)
         {
             this->requestingTask->Cancel();
         }
+
         if(workerThread)
         {
             httpRequestMutex.unlock();
             workerThread->join();
             httpRequestMutex.lock();
         }
+
         httpRequestMutex.unlock();
     }
 
     void PlayFabIOSHttpPlugin::MakePostRequest(std::unique_ptr<CallRequestContainerBase> requestContainer)
     {
-        std::shared_ptr<RequestTask> requestTask = nullptr;
-        try
+        CallRequestContainer* container = dynamic_cast<CallRequestContainer*>(requestContainer.get());
+        if (container != nullptr && container->HandleInvalidSettings())
         {
-            requestTask = std::make_shared<RequestTask>();
-            requestTask->Initialize(requestContainer);
-        }
-        catch (const std::exception& ex)
-        {
-            PlayFabPluginManager::GetInstance().HandleException(ex);
-        }
-        catch (...)
-        {
-
-        }
-        if(requestTask != nullptr)
-        { // LOCK httpRequestMutex
-            std::unique_lock<std::mutex> lock(httpRequestMutex);
-            requestTask->state = RequestTask::State::Pending;
-            pendingRequests.push_back(std::move(requestTask));
-            if(workerThread == nullptr)
+            std::shared_ptr<RequestTask> requestTask = nullptr;
+            try
             {
-                threadRunning = true;
-                workerThread = std::make_unique<std::thread>(&PlayFabIOSHttpPlugin::WorkerThread, this);
+                requestTask = std::make_shared<RequestTask>();
+                requestTask->Initialize(requestContainer);
             }
-        } // UNLOCK httpRequestMutex
+            catch (const std::exception& ex)
+            {
+                PlayFabPluginManager::GetInstance().HandleException(ex);
+            }
+            catch (...)
+            {
+            }
+
+            if(requestTask != nullptr)
+            { // LOCK httpRequestMutex
+                std::unique_lock<std::mutex> lock(httpRequestMutex);
+                requestTask->state = RequestTask::State::Pending;
+                pendingRequests.push_back(std::move(requestTask));
+
+                if(workerThread == nullptr)
+                {
+                    threadRunning = true;
+                    workerThread = std::make_unique<std::thread>(&PlayFabIOSHttpPlugin::WorkerThread, this);
+                }
+            } // UNLOCK httpRequestMutex
+        }
     }
 
     size_t PlayFabIOSHttpPlugin::Update()
     {
         if (PlayFabSettings::threadedCallbacks)
         {
-            throw std::runtime_error("You should not call Update() when PlayFabSettings::threadedCallbacks == true");
+            throw PlayFabException(PlayFabExceptionCode::ThreadMisuse, "You should not call Update() when PlayFabSettings::threadedCallbacks == true");
         }
 
         std::shared_ptr<RequestTask> requestTask = nullptr;
@@ -212,7 +221,7 @@ namespace PlayFab
     void PlayFabIOSHttpPlugin::ExecuteRequest(RequestTask& requestTask)
     {
         CallRequestContainer& requestContainer = requestTask.RequestContainer();
-        auto requestUrl = GetUrl(requestTask);
+        const auto& requestUrl = GetUrl(requestTask);
 
         NSURL* url = [NSURL URLWithString:[NSString stringWithUTF8String:requestUrl.c_str()]];
         NSURLSessionConfiguration* config = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -222,7 +231,8 @@ namespace PlayFab
         urlRequest.HTTPMethod = @"POST";
         SetPredefinedHeaders(requestTask, (__bridge void*)urlRequest);
 
-        auto headers = requestContainer.GetHeaders();
+        const auto& headers = requestContainer.GetRequestHeaders();
+
         if (headers.size() > 0)
         {
             for (auto const &obj : headers)
@@ -272,7 +282,7 @@ namespace PlayFab
 
     std::string PlayFabIOSHttpPlugin::GetUrl(const RequestTask& requestTask) const
     {
-        return PlayFabSettings::GetUrl(requestTask.GetRequestContainerUrl(), PlayFabSettings::requestGetParams);
+        return requestTask.GetRequestContainerUrl();
     }
 
     void PlayFabIOSHttpPlugin::SetPredefinedHeaders(const RequestTask& requestTask, void* urlRequest)
@@ -297,6 +307,8 @@ namespace PlayFab
         std::unique_ptr<Json::CharReader> jsonReader(jsonReaderFactory.newCharReader());
         JSONCPP_STRING jsonParseErrors;
         const bool parsedSuccessfully = jsonReader->parse(requestContainer.responseString.c_str(), requestContainer.responseString.c_str() + requestContainer.responseString.length(), &requestContainer.responseJson, &jsonParseErrors);
+
+        requestContainer.errorWrapper.RequestId = requestContainer.GetRequestId();
 
         if (parsedSuccessfully)
         {
@@ -323,7 +335,7 @@ namespace PlayFab
     {
         CallRequestContainer& requestContainer = requestTask.RequestContainer();
 
-        auto callback = requestContainer.GetCallback();
+        const auto& callback = requestContainer.GetCallback();
         if (callback != nullptr)
         {
             callback(requestContainer.responseJson.get("code", Json::Value::null).asInt(),

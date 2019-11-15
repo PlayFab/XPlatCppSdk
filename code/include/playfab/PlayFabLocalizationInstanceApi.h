@@ -16,14 +16,13 @@ namespace PlayFab
     class PlayFabLocalizationInstanceAPI
     {
     private:
-        std::shared_ptr<PlayFabApiSettings> settings;
-        std::shared_ptr<PlayFabAuthenticationContext> authContext;
+        std::shared_ptr<PlayFabApiSettings> m_settings{ nullptr };
+        std::shared_ptr<PlayFabAuthenticationContext> m_context{ nullptr };
 
     public:
-        PlayFabLocalizationInstanceAPI();
-        explicit PlayFabLocalizationInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings);
         explicit PlayFabLocalizationInstanceAPI(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
         PlayFabLocalizationInstanceAPI(std::shared_ptr<PlayFabApiSettings> apiSettings, std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
+
         ~PlayFabLocalizationInstanceAPI();
         PlayFabLocalizationInstanceAPI(const PlayFabLocalizationInstanceAPI& source) = delete; // disable copy
         PlayFabLocalizationInstanceAPI(PlayFabLocalizationInstanceAPI&&) = delete; // disable move
@@ -31,9 +30,7 @@ namespace PlayFab
         PlayFabLocalizationInstanceAPI& operator=(PlayFabLocalizationInstanceAPI&& other) = delete; // disable move assignment
 
         std::shared_ptr<PlayFabApiSettings> GetSettings() const;
-        void SetSettings(std::shared_ptr<PlayFabApiSettings> apiSettings);
         std::shared_ptr<PlayFabAuthenticationContext> GetAuthenticationContext() const;
-        void SetAuthenticationContext(std::shared_ptr<PlayFabAuthenticationContext> authenticationContext);
         size_t Update();
         void ForgetAllCredentials();
 
@@ -43,8 +40,6 @@ namespace PlayFab
         // ------------ Generated result handlers
         void OnGetLanguageListResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         bool ValidateResult(PlayFabResultCommon& resultCommon, const CallRequestContainer& container);
-    private:
-        std::shared_ptr<PlayFabAuthenticationContext> GetOrCreateAuthenticationContext();
     };
 }
 

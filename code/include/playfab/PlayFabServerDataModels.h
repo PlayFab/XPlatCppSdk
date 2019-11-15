@@ -19,17 +19,38 @@ namespace PlayFab
 
         inline void ToJsonEnum(const CloudScriptRevisionOption input, Json::Value& output)
         {
-            if (input == CloudScriptRevisionOption::CloudScriptRevisionOptionLive) output = Json::Value("Live");
-            if (input == CloudScriptRevisionOption::CloudScriptRevisionOptionLatest) output = Json::Value("Latest");
-            if (input == CloudScriptRevisionOption::CloudScriptRevisionOptionSpecific) output = Json::Value("Specific");
+            if (input == CloudScriptRevisionOption::CloudScriptRevisionOptionLive)
+            {
+                output = Json::Value("Live");
+            }
+            if (input == CloudScriptRevisionOption::CloudScriptRevisionOptionLatest)
+            {
+                output = Json::Value("Latest");
+            }
+            if (input == CloudScriptRevisionOption::CloudScriptRevisionOptionSpecific)
+            {
+                output = Json::Value("Specific");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, CloudScriptRevisionOption& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "Live") output = CloudScriptRevisionOption::CloudScriptRevisionOptionLive;
-            if (inputStr == "Latest") output = CloudScriptRevisionOption::CloudScriptRevisionOptionLatest;
-            if (inputStr == "Specific") output = CloudScriptRevisionOption::CloudScriptRevisionOptionSpecific;
+            if (inputStr == "Live")
+            {
+                output = CloudScriptRevisionOption::CloudScriptRevisionOptionLive;
+            }
+            if (inputStr == "Latest")
+            {
+                output = CloudScriptRevisionOption::CloudScriptRevisionOptionLatest;
+            }
+            if (inputStr == "Specific")
+            {
+                output = CloudScriptRevisionOption::CloudScriptRevisionOptionSpecific;
+            }
         }
 
         enum class ContinentCode
@@ -45,25 +66,70 @@ namespace PlayFab
 
         inline void ToJsonEnum(const ContinentCode input, Json::Value& output)
         {
-            if (input == ContinentCode::ContinentCodeAF) output = Json::Value("AF");
-            if (input == ContinentCode::ContinentCodeAN) output = Json::Value("AN");
-            if (input == ContinentCode::ContinentCodeAS) output = Json::Value("AS");
-            if (input == ContinentCode::ContinentCodeEU) output = Json::Value("EU");
-            if (input == ContinentCode::ContinentCodeNA) output = Json::Value("NA");
-            if (input == ContinentCode::ContinentCodeOC) output = Json::Value("OC");
-            if (input == ContinentCode::ContinentCodeSA) output = Json::Value("SA");
+            if (input == ContinentCode::ContinentCodeAF)
+            {
+                output = Json::Value("AF");
+            }
+            if (input == ContinentCode::ContinentCodeAN)
+            {
+                output = Json::Value("AN");
+            }
+            if (input == ContinentCode::ContinentCodeAS)
+            {
+                output = Json::Value("AS");
+            }
+            if (input == ContinentCode::ContinentCodeEU)
+            {
+                output = Json::Value("EU");
+            }
+            if (input == ContinentCode::ContinentCodeNA)
+            {
+                output = Json::Value("NA");
+            }
+            if (input == ContinentCode::ContinentCodeOC)
+            {
+                output = Json::Value("OC");
+            }
+            if (input == ContinentCode::ContinentCodeSA)
+            {
+                output = Json::Value("SA");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, ContinentCode& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "AF") output = ContinentCode::ContinentCodeAF;
-            if (inputStr == "AN") output = ContinentCode::ContinentCodeAN;
-            if (inputStr == "AS") output = ContinentCode::ContinentCodeAS;
-            if (inputStr == "EU") output = ContinentCode::ContinentCodeEU;
-            if (inputStr == "NA") output = ContinentCode::ContinentCodeNA;
-            if (inputStr == "OC") output = ContinentCode::ContinentCodeOC;
-            if (inputStr == "SA") output = ContinentCode::ContinentCodeSA;
+            if (inputStr == "AF")
+            {
+                output = ContinentCode::ContinentCodeAF;
+            }
+            if (inputStr == "AN")
+            {
+                output = ContinentCode::ContinentCodeAN;
+            }
+            if (inputStr == "AS")
+            {
+                output = ContinentCode::ContinentCodeAS;
+            }
+            if (inputStr == "EU")
+            {
+                output = ContinentCode::ContinentCodeEU;
+            }
+            if (inputStr == "NA")
+            {
+                output = ContinentCode::ContinentCodeNA;
+            }
+            if (inputStr == "OC")
+            {
+                output = ContinentCode::ContinentCodeOC;
+            }
+            if (inputStr == "SA")
+            {
+                output = ContinentCode::ContinentCodeSA;
+            }
         }
 
         enum class CountryCode
@@ -321,509 +387,2006 @@ namespace PlayFab
 
         inline void ToJsonEnum(const CountryCode input, Json::Value& output)
         {
-            if (input == CountryCode::CountryCodeAF) output = Json::Value("AF");
-            if (input == CountryCode::CountryCodeAX) output = Json::Value("AX");
-            if (input == CountryCode::CountryCodeAL) output = Json::Value("AL");
-            if (input == CountryCode::CountryCodeDZ) output = Json::Value("DZ");
-            if (input == CountryCode::CountryCodeAS) output = Json::Value("AS");
-            if (input == CountryCode::CountryCodeAD) output = Json::Value("AD");
-            if (input == CountryCode::CountryCodeAO) output = Json::Value("AO");
-            if (input == CountryCode::CountryCodeAI) output = Json::Value("AI");
-            if (input == CountryCode::CountryCodeAQ) output = Json::Value("AQ");
-            if (input == CountryCode::CountryCodeAG) output = Json::Value("AG");
-            if (input == CountryCode::CountryCodeAR) output = Json::Value("AR");
-            if (input == CountryCode::CountryCodeAM) output = Json::Value("AM");
-            if (input == CountryCode::CountryCodeAW) output = Json::Value("AW");
-            if (input == CountryCode::CountryCodeAU) output = Json::Value("AU");
-            if (input == CountryCode::CountryCodeAT) output = Json::Value("AT");
-            if (input == CountryCode::CountryCodeAZ) output = Json::Value("AZ");
-            if (input == CountryCode::CountryCodeBS) output = Json::Value("BS");
-            if (input == CountryCode::CountryCodeBH) output = Json::Value("BH");
-            if (input == CountryCode::CountryCodeBD) output = Json::Value("BD");
-            if (input == CountryCode::CountryCodeBB) output = Json::Value("BB");
-            if (input == CountryCode::CountryCodeBY) output = Json::Value("BY");
-            if (input == CountryCode::CountryCodeBE) output = Json::Value("BE");
-            if (input == CountryCode::CountryCodeBZ) output = Json::Value("BZ");
-            if (input == CountryCode::CountryCodeBJ) output = Json::Value("BJ");
-            if (input == CountryCode::CountryCodeBM) output = Json::Value("BM");
-            if (input == CountryCode::CountryCodeBT) output = Json::Value("BT");
-            if (input == CountryCode::CountryCodeBO) output = Json::Value("BO");
-            if (input == CountryCode::CountryCodeBQ) output = Json::Value("BQ");
-            if (input == CountryCode::CountryCodeBA) output = Json::Value("BA");
-            if (input == CountryCode::CountryCodeBW) output = Json::Value("BW");
-            if (input == CountryCode::CountryCodeBV) output = Json::Value("BV");
-            if (input == CountryCode::CountryCodeBR) output = Json::Value("BR");
-            if (input == CountryCode::CountryCodeIO) output = Json::Value("IO");
-            if (input == CountryCode::CountryCodeBN) output = Json::Value("BN");
-            if (input == CountryCode::CountryCodeBG) output = Json::Value("BG");
-            if (input == CountryCode::CountryCodeBF) output = Json::Value("BF");
-            if (input == CountryCode::CountryCodeBI) output = Json::Value("BI");
-            if (input == CountryCode::CountryCodeKH) output = Json::Value("KH");
-            if (input == CountryCode::CountryCodeCM) output = Json::Value("CM");
-            if (input == CountryCode::CountryCodeCA) output = Json::Value("CA");
-            if (input == CountryCode::CountryCodeCV) output = Json::Value("CV");
-            if (input == CountryCode::CountryCodeKY) output = Json::Value("KY");
-            if (input == CountryCode::CountryCodeCF) output = Json::Value("CF");
-            if (input == CountryCode::CountryCodeTD) output = Json::Value("TD");
-            if (input == CountryCode::CountryCodeCL) output = Json::Value("CL");
-            if (input == CountryCode::CountryCodeCN) output = Json::Value("CN");
-            if (input == CountryCode::CountryCodeCX) output = Json::Value("CX");
-            if (input == CountryCode::CountryCodeCC) output = Json::Value("CC");
-            if (input == CountryCode::CountryCodeCO) output = Json::Value("CO");
-            if (input == CountryCode::CountryCodeKM) output = Json::Value("KM");
-            if (input == CountryCode::CountryCodeCG) output = Json::Value("CG");
-            if (input == CountryCode::CountryCodeCD) output = Json::Value("CD");
-            if (input == CountryCode::CountryCodeCK) output = Json::Value("CK");
-            if (input == CountryCode::CountryCodeCR) output = Json::Value("CR");
-            if (input == CountryCode::CountryCodeCI) output = Json::Value("CI");
-            if (input == CountryCode::CountryCodeHR) output = Json::Value("HR");
-            if (input == CountryCode::CountryCodeCU) output = Json::Value("CU");
-            if (input == CountryCode::CountryCodeCW) output = Json::Value("CW");
-            if (input == CountryCode::CountryCodeCY) output = Json::Value("CY");
-            if (input == CountryCode::CountryCodeCZ) output = Json::Value("CZ");
-            if (input == CountryCode::CountryCodeDK) output = Json::Value("DK");
-            if (input == CountryCode::CountryCodeDJ) output = Json::Value("DJ");
-            if (input == CountryCode::CountryCodeDM) output = Json::Value("DM");
-            if (input == CountryCode::CountryCodeDO) output = Json::Value("DO");
-            if (input == CountryCode::CountryCodeEC) output = Json::Value("EC");
-            if (input == CountryCode::CountryCodeEG) output = Json::Value("EG");
-            if (input == CountryCode::CountryCodeSV) output = Json::Value("SV");
-            if (input == CountryCode::CountryCodeGQ) output = Json::Value("GQ");
-            if (input == CountryCode::CountryCodeER) output = Json::Value("ER");
-            if (input == CountryCode::CountryCodeEE) output = Json::Value("EE");
-            if (input == CountryCode::CountryCodeET) output = Json::Value("ET");
-            if (input == CountryCode::CountryCodeFK) output = Json::Value("FK");
-            if (input == CountryCode::CountryCodeFO) output = Json::Value("FO");
-            if (input == CountryCode::CountryCodeFJ) output = Json::Value("FJ");
-            if (input == CountryCode::CountryCodeFI) output = Json::Value("FI");
-            if (input == CountryCode::CountryCodeFR) output = Json::Value("FR");
-            if (input == CountryCode::CountryCodeGF) output = Json::Value("GF");
-            if (input == CountryCode::CountryCodePF) output = Json::Value("PF");
-            if (input == CountryCode::CountryCodeTF) output = Json::Value("TF");
-            if (input == CountryCode::CountryCodeGA) output = Json::Value("GA");
-            if (input == CountryCode::CountryCodeGM) output = Json::Value("GM");
-            if (input == CountryCode::CountryCodeGE) output = Json::Value("GE");
-            if (input == CountryCode::CountryCodeDE) output = Json::Value("DE");
-            if (input == CountryCode::CountryCodeGH) output = Json::Value("GH");
-            if (input == CountryCode::CountryCodeGI) output = Json::Value("GI");
-            if (input == CountryCode::CountryCodeGR) output = Json::Value("GR");
-            if (input == CountryCode::CountryCodeGL) output = Json::Value("GL");
-            if (input == CountryCode::CountryCodeGD) output = Json::Value("GD");
-            if (input == CountryCode::CountryCodeGP) output = Json::Value("GP");
-            if (input == CountryCode::CountryCodeGU) output = Json::Value("GU");
-            if (input == CountryCode::CountryCodeGT) output = Json::Value("GT");
-            if (input == CountryCode::CountryCodeGG) output = Json::Value("GG");
-            if (input == CountryCode::CountryCodeGN) output = Json::Value("GN");
-            if (input == CountryCode::CountryCodeGW) output = Json::Value("GW");
-            if (input == CountryCode::CountryCodeGY) output = Json::Value("GY");
-            if (input == CountryCode::CountryCodeHT) output = Json::Value("HT");
-            if (input == CountryCode::CountryCodeHM) output = Json::Value("HM");
-            if (input == CountryCode::CountryCodeVA) output = Json::Value("VA");
-            if (input == CountryCode::CountryCodeHN) output = Json::Value("HN");
-            if (input == CountryCode::CountryCodeHK) output = Json::Value("HK");
-            if (input == CountryCode::CountryCodeHU) output = Json::Value("HU");
-            if (input == CountryCode::CountryCodeIS) output = Json::Value("IS");
-            if (input == CountryCode::CountryCodeIN) output = Json::Value("IN");
-            if (input == CountryCode::CountryCodeID) output = Json::Value("ID");
-            if (input == CountryCode::CountryCodeIR) output = Json::Value("IR");
-            if (input == CountryCode::CountryCodeIQ) output = Json::Value("IQ");
-            if (input == CountryCode::CountryCodeIE) output = Json::Value("IE");
-            if (input == CountryCode::CountryCodeIM) output = Json::Value("IM");
-            if (input == CountryCode::CountryCodeIL) output = Json::Value("IL");
-            if (input == CountryCode::CountryCodeIT) output = Json::Value("IT");
-            if (input == CountryCode::CountryCodeJM) output = Json::Value("JM");
-            if (input == CountryCode::CountryCodeJP) output = Json::Value("JP");
-            if (input == CountryCode::CountryCodeJE) output = Json::Value("JE");
-            if (input == CountryCode::CountryCodeJO) output = Json::Value("JO");
-            if (input == CountryCode::CountryCodeKZ) output = Json::Value("KZ");
-            if (input == CountryCode::CountryCodeKE) output = Json::Value("KE");
-            if (input == CountryCode::CountryCodeKI) output = Json::Value("KI");
-            if (input == CountryCode::CountryCodeKP) output = Json::Value("KP");
-            if (input == CountryCode::CountryCodeKR) output = Json::Value("KR");
-            if (input == CountryCode::CountryCodeKW) output = Json::Value("KW");
-            if (input == CountryCode::CountryCodeKG) output = Json::Value("KG");
-            if (input == CountryCode::CountryCodeLA) output = Json::Value("LA");
-            if (input == CountryCode::CountryCodeLV) output = Json::Value("LV");
-            if (input == CountryCode::CountryCodeLB) output = Json::Value("LB");
-            if (input == CountryCode::CountryCodeLS) output = Json::Value("LS");
-            if (input == CountryCode::CountryCodeLR) output = Json::Value("LR");
-            if (input == CountryCode::CountryCodeLY) output = Json::Value("LY");
-            if (input == CountryCode::CountryCodeLI) output = Json::Value("LI");
-            if (input == CountryCode::CountryCodeLT) output = Json::Value("LT");
-            if (input == CountryCode::CountryCodeLU) output = Json::Value("LU");
-            if (input == CountryCode::CountryCodeMO) output = Json::Value("MO");
-            if (input == CountryCode::CountryCodeMK) output = Json::Value("MK");
-            if (input == CountryCode::CountryCodeMG) output = Json::Value("MG");
-            if (input == CountryCode::CountryCodeMW) output = Json::Value("MW");
-            if (input == CountryCode::CountryCodeMY) output = Json::Value("MY");
-            if (input == CountryCode::CountryCodeMV) output = Json::Value("MV");
-            if (input == CountryCode::CountryCodeML) output = Json::Value("ML");
-            if (input == CountryCode::CountryCodeMT) output = Json::Value("MT");
-            if (input == CountryCode::CountryCodeMH) output = Json::Value("MH");
-            if (input == CountryCode::CountryCodeMQ) output = Json::Value("MQ");
-            if (input == CountryCode::CountryCodeMR) output = Json::Value("MR");
-            if (input == CountryCode::CountryCodeMU) output = Json::Value("MU");
-            if (input == CountryCode::CountryCodeYT) output = Json::Value("YT");
-            if (input == CountryCode::CountryCodeMX) output = Json::Value("MX");
-            if (input == CountryCode::CountryCodeFM) output = Json::Value("FM");
-            if (input == CountryCode::CountryCodeMD) output = Json::Value("MD");
-            if (input == CountryCode::CountryCodeMC) output = Json::Value("MC");
-            if (input == CountryCode::CountryCodeMN) output = Json::Value("MN");
-            if (input == CountryCode::CountryCodeME) output = Json::Value("ME");
-            if (input == CountryCode::CountryCodeMS) output = Json::Value("MS");
-            if (input == CountryCode::CountryCodeMA) output = Json::Value("MA");
-            if (input == CountryCode::CountryCodeMZ) output = Json::Value("MZ");
-            if (input == CountryCode::CountryCodeMM) output = Json::Value("MM");
-            if (input == CountryCode::CountryCodeNA) output = Json::Value("NA");
-            if (input == CountryCode::CountryCodeNR) output = Json::Value("NR");
-            if (input == CountryCode::CountryCodeNP) output = Json::Value("NP");
-            if (input == CountryCode::CountryCodeNL) output = Json::Value("NL");
-            if (input == CountryCode::CountryCodeNC) output = Json::Value("NC");
-            if (input == CountryCode::CountryCodeNZ) output = Json::Value("NZ");
-            if (input == CountryCode::CountryCodeNI) output = Json::Value("NI");
-            if (input == CountryCode::CountryCodeNE) output = Json::Value("NE");
-            if (input == CountryCode::CountryCodeNG) output = Json::Value("NG");
-            if (input == CountryCode::CountryCodeNU) output = Json::Value("NU");
-            if (input == CountryCode::CountryCodeNF) output = Json::Value("NF");
-            if (input == CountryCode::CountryCodeMP) output = Json::Value("MP");
-            if (input == CountryCode::CountryCodeNO) output = Json::Value("NO");
-            if (input == CountryCode::CountryCodeOM) output = Json::Value("OM");
-            if (input == CountryCode::CountryCodePK) output = Json::Value("PK");
-            if (input == CountryCode::CountryCodePW) output = Json::Value("PW");
-            if (input == CountryCode::CountryCodePS) output = Json::Value("PS");
-            if (input == CountryCode::CountryCodePA) output = Json::Value("PA");
-            if (input == CountryCode::CountryCodePG) output = Json::Value("PG");
-            if (input == CountryCode::CountryCodePY) output = Json::Value("PY");
-            if (input == CountryCode::CountryCodePE) output = Json::Value("PE");
-            if (input == CountryCode::CountryCodePH) output = Json::Value("PH");
-            if (input == CountryCode::CountryCodePN) output = Json::Value("PN");
-            if (input == CountryCode::CountryCodePL) output = Json::Value("PL");
-            if (input == CountryCode::CountryCodePT) output = Json::Value("PT");
-            if (input == CountryCode::CountryCodePR) output = Json::Value("PR");
-            if (input == CountryCode::CountryCodeQA) output = Json::Value("QA");
-            if (input == CountryCode::CountryCodeRE) output = Json::Value("RE");
-            if (input == CountryCode::CountryCodeRO) output = Json::Value("RO");
-            if (input == CountryCode::CountryCodeRU) output = Json::Value("RU");
-            if (input == CountryCode::CountryCodeRW) output = Json::Value("RW");
-            if (input == CountryCode::CountryCodeBL) output = Json::Value("BL");
-            if (input == CountryCode::CountryCodeSH) output = Json::Value("SH");
-            if (input == CountryCode::CountryCodeKN) output = Json::Value("KN");
-            if (input == CountryCode::CountryCodeLC) output = Json::Value("LC");
-            if (input == CountryCode::CountryCodeMF) output = Json::Value("MF");
-            if (input == CountryCode::CountryCodePM) output = Json::Value("PM");
-            if (input == CountryCode::CountryCodeVC) output = Json::Value("VC");
-            if (input == CountryCode::CountryCodeWS) output = Json::Value("WS");
-            if (input == CountryCode::CountryCodeSM) output = Json::Value("SM");
-            if (input == CountryCode::CountryCodeST) output = Json::Value("ST");
-            if (input == CountryCode::CountryCodeSA) output = Json::Value("SA");
-            if (input == CountryCode::CountryCodeSN) output = Json::Value("SN");
-            if (input == CountryCode::CountryCodeRS) output = Json::Value("RS");
-            if (input == CountryCode::CountryCodeSC) output = Json::Value("SC");
-            if (input == CountryCode::CountryCodeSL) output = Json::Value("SL");
-            if (input == CountryCode::CountryCodeSG) output = Json::Value("SG");
-            if (input == CountryCode::CountryCodeSX) output = Json::Value("SX");
-            if (input == CountryCode::CountryCodeSK) output = Json::Value("SK");
-            if (input == CountryCode::CountryCodeSI) output = Json::Value("SI");
-            if (input == CountryCode::CountryCodeSB) output = Json::Value("SB");
-            if (input == CountryCode::CountryCodeSO) output = Json::Value("SO");
-            if (input == CountryCode::CountryCodeZA) output = Json::Value("ZA");
-            if (input == CountryCode::CountryCodeGS) output = Json::Value("GS");
-            if (input == CountryCode::CountryCodeSS) output = Json::Value("SS");
-            if (input == CountryCode::CountryCodeES) output = Json::Value("ES");
-            if (input == CountryCode::CountryCodeLK) output = Json::Value("LK");
-            if (input == CountryCode::CountryCodeSD) output = Json::Value("SD");
-            if (input == CountryCode::CountryCodeSR) output = Json::Value("SR");
-            if (input == CountryCode::CountryCodeSJ) output = Json::Value("SJ");
-            if (input == CountryCode::CountryCodeSZ) output = Json::Value("SZ");
-            if (input == CountryCode::CountryCodeSE) output = Json::Value("SE");
-            if (input == CountryCode::CountryCodeCH) output = Json::Value("CH");
-            if (input == CountryCode::CountryCodeSY) output = Json::Value("SY");
-            if (input == CountryCode::CountryCodeTW) output = Json::Value("TW");
-            if (input == CountryCode::CountryCodeTJ) output = Json::Value("TJ");
-            if (input == CountryCode::CountryCodeTZ) output = Json::Value("TZ");
-            if (input == CountryCode::CountryCodeTH) output = Json::Value("TH");
-            if (input == CountryCode::CountryCodeTL) output = Json::Value("TL");
-            if (input == CountryCode::CountryCodeTG) output = Json::Value("TG");
-            if (input == CountryCode::CountryCodeTK) output = Json::Value("TK");
-            if (input == CountryCode::CountryCodeTO) output = Json::Value("TO");
-            if (input == CountryCode::CountryCodeTT) output = Json::Value("TT");
-            if (input == CountryCode::CountryCodeTN) output = Json::Value("TN");
-            if (input == CountryCode::CountryCodeTR) output = Json::Value("TR");
-            if (input == CountryCode::CountryCodeTM) output = Json::Value("TM");
-            if (input == CountryCode::CountryCodeTC) output = Json::Value("TC");
-            if (input == CountryCode::CountryCodeTV) output = Json::Value("TV");
-            if (input == CountryCode::CountryCodeUG) output = Json::Value("UG");
-            if (input == CountryCode::CountryCodeUA) output = Json::Value("UA");
-            if (input == CountryCode::CountryCodeAE) output = Json::Value("AE");
-            if (input == CountryCode::CountryCodeGB) output = Json::Value("GB");
-            if (input == CountryCode::CountryCodeUS) output = Json::Value("US");
-            if (input == CountryCode::CountryCodeUM) output = Json::Value("UM");
-            if (input == CountryCode::CountryCodeUY) output = Json::Value("UY");
-            if (input == CountryCode::CountryCodeUZ) output = Json::Value("UZ");
-            if (input == CountryCode::CountryCodeVU) output = Json::Value("VU");
-            if (input == CountryCode::CountryCodeVE) output = Json::Value("VE");
-            if (input == CountryCode::CountryCodeVN) output = Json::Value("VN");
-            if (input == CountryCode::CountryCodeVG) output = Json::Value("VG");
-            if (input == CountryCode::CountryCodeVI) output = Json::Value("VI");
-            if (input == CountryCode::CountryCodeWF) output = Json::Value("WF");
-            if (input == CountryCode::CountryCodeEH) output = Json::Value("EH");
-            if (input == CountryCode::CountryCodeYE) output = Json::Value("YE");
-            if (input == CountryCode::CountryCodeZM) output = Json::Value("ZM");
-            if (input == CountryCode::CountryCodeZW) output = Json::Value("ZW");
+            if (input == CountryCode::CountryCodeAF)
+            {
+                output = Json::Value("AF");
+            }
+            if (input == CountryCode::CountryCodeAX)
+            {
+                output = Json::Value("AX");
+            }
+            if (input == CountryCode::CountryCodeAL)
+            {
+                output = Json::Value("AL");
+            }
+            if (input == CountryCode::CountryCodeDZ)
+            {
+                output = Json::Value("DZ");
+            }
+            if (input == CountryCode::CountryCodeAS)
+            {
+                output = Json::Value("AS");
+            }
+            if (input == CountryCode::CountryCodeAD)
+            {
+                output = Json::Value("AD");
+            }
+            if (input == CountryCode::CountryCodeAO)
+            {
+                output = Json::Value("AO");
+            }
+            if (input == CountryCode::CountryCodeAI)
+            {
+                output = Json::Value("AI");
+            }
+            if (input == CountryCode::CountryCodeAQ)
+            {
+                output = Json::Value("AQ");
+            }
+            if (input == CountryCode::CountryCodeAG)
+            {
+                output = Json::Value("AG");
+            }
+            if (input == CountryCode::CountryCodeAR)
+            {
+                output = Json::Value("AR");
+            }
+            if (input == CountryCode::CountryCodeAM)
+            {
+                output = Json::Value("AM");
+            }
+            if (input == CountryCode::CountryCodeAW)
+            {
+                output = Json::Value("AW");
+            }
+            if (input == CountryCode::CountryCodeAU)
+            {
+                output = Json::Value("AU");
+            }
+            if (input == CountryCode::CountryCodeAT)
+            {
+                output = Json::Value("AT");
+            }
+            if (input == CountryCode::CountryCodeAZ)
+            {
+                output = Json::Value("AZ");
+            }
+            if (input == CountryCode::CountryCodeBS)
+            {
+                output = Json::Value("BS");
+            }
+            if (input == CountryCode::CountryCodeBH)
+            {
+                output = Json::Value("BH");
+            }
+            if (input == CountryCode::CountryCodeBD)
+            {
+                output = Json::Value("BD");
+            }
+            if (input == CountryCode::CountryCodeBB)
+            {
+                output = Json::Value("BB");
+            }
+            if (input == CountryCode::CountryCodeBY)
+            {
+                output = Json::Value("BY");
+            }
+            if (input == CountryCode::CountryCodeBE)
+            {
+                output = Json::Value("BE");
+            }
+            if (input == CountryCode::CountryCodeBZ)
+            {
+                output = Json::Value("BZ");
+            }
+            if (input == CountryCode::CountryCodeBJ)
+            {
+                output = Json::Value("BJ");
+            }
+            if (input == CountryCode::CountryCodeBM)
+            {
+                output = Json::Value("BM");
+            }
+            if (input == CountryCode::CountryCodeBT)
+            {
+                output = Json::Value("BT");
+            }
+            if (input == CountryCode::CountryCodeBO)
+            {
+                output = Json::Value("BO");
+            }
+            if (input == CountryCode::CountryCodeBQ)
+            {
+                output = Json::Value("BQ");
+            }
+            if (input == CountryCode::CountryCodeBA)
+            {
+                output = Json::Value("BA");
+            }
+            if (input == CountryCode::CountryCodeBW)
+            {
+                output = Json::Value("BW");
+            }
+            if (input == CountryCode::CountryCodeBV)
+            {
+                output = Json::Value("BV");
+            }
+            if (input == CountryCode::CountryCodeBR)
+            {
+                output = Json::Value("BR");
+            }
+            if (input == CountryCode::CountryCodeIO)
+            {
+                output = Json::Value("IO");
+            }
+            if (input == CountryCode::CountryCodeBN)
+            {
+                output = Json::Value("BN");
+            }
+            if (input == CountryCode::CountryCodeBG)
+            {
+                output = Json::Value("BG");
+            }
+            if (input == CountryCode::CountryCodeBF)
+            {
+                output = Json::Value("BF");
+            }
+            if (input == CountryCode::CountryCodeBI)
+            {
+                output = Json::Value("BI");
+            }
+            if (input == CountryCode::CountryCodeKH)
+            {
+                output = Json::Value("KH");
+            }
+            if (input == CountryCode::CountryCodeCM)
+            {
+                output = Json::Value("CM");
+            }
+            if (input == CountryCode::CountryCodeCA)
+            {
+                output = Json::Value("CA");
+            }
+            if (input == CountryCode::CountryCodeCV)
+            {
+                output = Json::Value("CV");
+            }
+            if (input == CountryCode::CountryCodeKY)
+            {
+                output = Json::Value("KY");
+            }
+            if (input == CountryCode::CountryCodeCF)
+            {
+                output = Json::Value("CF");
+            }
+            if (input == CountryCode::CountryCodeTD)
+            {
+                output = Json::Value("TD");
+            }
+            if (input == CountryCode::CountryCodeCL)
+            {
+                output = Json::Value("CL");
+            }
+            if (input == CountryCode::CountryCodeCN)
+            {
+                output = Json::Value("CN");
+            }
+            if (input == CountryCode::CountryCodeCX)
+            {
+                output = Json::Value("CX");
+            }
+            if (input == CountryCode::CountryCodeCC)
+            {
+                output = Json::Value("CC");
+            }
+            if (input == CountryCode::CountryCodeCO)
+            {
+                output = Json::Value("CO");
+            }
+            if (input == CountryCode::CountryCodeKM)
+            {
+                output = Json::Value("KM");
+            }
+            if (input == CountryCode::CountryCodeCG)
+            {
+                output = Json::Value("CG");
+            }
+            if (input == CountryCode::CountryCodeCD)
+            {
+                output = Json::Value("CD");
+            }
+            if (input == CountryCode::CountryCodeCK)
+            {
+                output = Json::Value("CK");
+            }
+            if (input == CountryCode::CountryCodeCR)
+            {
+                output = Json::Value("CR");
+            }
+            if (input == CountryCode::CountryCodeCI)
+            {
+                output = Json::Value("CI");
+            }
+            if (input == CountryCode::CountryCodeHR)
+            {
+                output = Json::Value("HR");
+            }
+            if (input == CountryCode::CountryCodeCU)
+            {
+                output = Json::Value("CU");
+            }
+            if (input == CountryCode::CountryCodeCW)
+            {
+                output = Json::Value("CW");
+            }
+            if (input == CountryCode::CountryCodeCY)
+            {
+                output = Json::Value("CY");
+            }
+            if (input == CountryCode::CountryCodeCZ)
+            {
+                output = Json::Value("CZ");
+            }
+            if (input == CountryCode::CountryCodeDK)
+            {
+                output = Json::Value("DK");
+            }
+            if (input == CountryCode::CountryCodeDJ)
+            {
+                output = Json::Value("DJ");
+            }
+            if (input == CountryCode::CountryCodeDM)
+            {
+                output = Json::Value("DM");
+            }
+            if (input == CountryCode::CountryCodeDO)
+            {
+                output = Json::Value("DO");
+            }
+            if (input == CountryCode::CountryCodeEC)
+            {
+                output = Json::Value("EC");
+            }
+            if (input == CountryCode::CountryCodeEG)
+            {
+                output = Json::Value("EG");
+            }
+            if (input == CountryCode::CountryCodeSV)
+            {
+                output = Json::Value("SV");
+            }
+            if (input == CountryCode::CountryCodeGQ)
+            {
+                output = Json::Value("GQ");
+            }
+            if (input == CountryCode::CountryCodeER)
+            {
+                output = Json::Value("ER");
+            }
+            if (input == CountryCode::CountryCodeEE)
+            {
+                output = Json::Value("EE");
+            }
+            if (input == CountryCode::CountryCodeET)
+            {
+                output = Json::Value("ET");
+            }
+            if (input == CountryCode::CountryCodeFK)
+            {
+                output = Json::Value("FK");
+            }
+            if (input == CountryCode::CountryCodeFO)
+            {
+                output = Json::Value("FO");
+            }
+            if (input == CountryCode::CountryCodeFJ)
+            {
+                output = Json::Value("FJ");
+            }
+            if (input == CountryCode::CountryCodeFI)
+            {
+                output = Json::Value("FI");
+            }
+            if (input == CountryCode::CountryCodeFR)
+            {
+                output = Json::Value("FR");
+            }
+            if (input == CountryCode::CountryCodeGF)
+            {
+                output = Json::Value("GF");
+            }
+            if (input == CountryCode::CountryCodePF)
+            {
+                output = Json::Value("PF");
+            }
+            if (input == CountryCode::CountryCodeTF)
+            {
+                output = Json::Value("TF");
+            }
+            if (input == CountryCode::CountryCodeGA)
+            {
+                output = Json::Value("GA");
+            }
+            if (input == CountryCode::CountryCodeGM)
+            {
+                output = Json::Value("GM");
+            }
+            if (input == CountryCode::CountryCodeGE)
+            {
+                output = Json::Value("GE");
+            }
+            if (input == CountryCode::CountryCodeDE)
+            {
+                output = Json::Value("DE");
+            }
+            if (input == CountryCode::CountryCodeGH)
+            {
+                output = Json::Value("GH");
+            }
+            if (input == CountryCode::CountryCodeGI)
+            {
+                output = Json::Value("GI");
+            }
+            if (input == CountryCode::CountryCodeGR)
+            {
+                output = Json::Value("GR");
+            }
+            if (input == CountryCode::CountryCodeGL)
+            {
+                output = Json::Value("GL");
+            }
+            if (input == CountryCode::CountryCodeGD)
+            {
+                output = Json::Value("GD");
+            }
+            if (input == CountryCode::CountryCodeGP)
+            {
+                output = Json::Value("GP");
+            }
+            if (input == CountryCode::CountryCodeGU)
+            {
+                output = Json::Value("GU");
+            }
+            if (input == CountryCode::CountryCodeGT)
+            {
+                output = Json::Value("GT");
+            }
+            if (input == CountryCode::CountryCodeGG)
+            {
+                output = Json::Value("GG");
+            }
+            if (input == CountryCode::CountryCodeGN)
+            {
+                output = Json::Value("GN");
+            }
+            if (input == CountryCode::CountryCodeGW)
+            {
+                output = Json::Value("GW");
+            }
+            if (input == CountryCode::CountryCodeGY)
+            {
+                output = Json::Value("GY");
+            }
+            if (input == CountryCode::CountryCodeHT)
+            {
+                output = Json::Value("HT");
+            }
+            if (input == CountryCode::CountryCodeHM)
+            {
+                output = Json::Value("HM");
+            }
+            if (input == CountryCode::CountryCodeVA)
+            {
+                output = Json::Value("VA");
+            }
+            if (input == CountryCode::CountryCodeHN)
+            {
+                output = Json::Value("HN");
+            }
+            if (input == CountryCode::CountryCodeHK)
+            {
+                output = Json::Value("HK");
+            }
+            if (input == CountryCode::CountryCodeHU)
+            {
+                output = Json::Value("HU");
+            }
+            if (input == CountryCode::CountryCodeIS)
+            {
+                output = Json::Value("IS");
+            }
+            if (input == CountryCode::CountryCodeIN)
+            {
+                output = Json::Value("IN");
+            }
+            if (input == CountryCode::CountryCodeID)
+            {
+                output = Json::Value("ID");
+            }
+            if (input == CountryCode::CountryCodeIR)
+            {
+                output = Json::Value("IR");
+            }
+            if (input == CountryCode::CountryCodeIQ)
+            {
+                output = Json::Value("IQ");
+            }
+            if (input == CountryCode::CountryCodeIE)
+            {
+                output = Json::Value("IE");
+            }
+            if (input == CountryCode::CountryCodeIM)
+            {
+                output = Json::Value("IM");
+            }
+            if (input == CountryCode::CountryCodeIL)
+            {
+                output = Json::Value("IL");
+            }
+            if (input == CountryCode::CountryCodeIT)
+            {
+                output = Json::Value("IT");
+            }
+            if (input == CountryCode::CountryCodeJM)
+            {
+                output = Json::Value("JM");
+            }
+            if (input == CountryCode::CountryCodeJP)
+            {
+                output = Json::Value("JP");
+            }
+            if (input == CountryCode::CountryCodeJE)
+            {
+                output = Json::Value("JE");
+            }
+            if (input == CountryCode::CountryCodeJO)
+            {
+                output = Json::Value("JO");
+            }
+            if (input == CountryCode::CountryCodeKZ)
+            {
+                output = Json::Value("KZ");
+            }
+            if (input == CountryCode::CountryCodeKE)
+            {
+                output = Json::Value("KE");
+            }
+            if (input == CountryCode::CountryCodeKI)
+            {
+                output = Json::Value("KI");
+            }
+            if (input == CountryCode::CountryCodeKP)
+            {
+                output = Json::Value("KP");
+            }
+            if (input == CountryCode::CountryCodeKR)
+            {
+                output = Json::Value("KR");
+            }
+            if (input == CountryCode::CountryCodeKW)
+            {
+                output = Json::Value("KW");
+            }
+            if (input == CountryCode::CountryCodeKG)
+            {
+                output = Json::Value("KG");
+            }
+            if (input == CountryCode::CountryCodeLA)
+            {
+                output = Json::Value("LA");
+            }
+            if (input == CountryCode::CountryCodeLV)
+            {
+                output = Json::Value("LV");
+            }
+            if (input == CountryCode::CountryCodeLB)
+            {
+                output = Json::Value("LB");
+            }
+            if (input == CountryCode::CountryCodeLS)
+            {
+                output = Json::Value("LS");
+            }
+            if (input == CountryCode::CountryCodeLR)
+            {
+                output = Json::Value("LR");
+            }
+            if (input == CountryCode::CountryCodeLY)
+            {
+                output = Json::Value("LY");
+            }
+            if (input == CountryCode::CountryCodeLI)
+            {
+                output = Json::Value("LI");
+            }
+            if (input == CountryCode::CountryCodeLT)
+            {
+                output = Json::Value("LT");
+            }
+            if (input == CountryCode::CountryCodeLU)
+            {
+                output = Json::Value("LU");
+            }
+            if (input == CountryCode::CountryCodeMO)
+            {
+                output = Json::Value("MO");
+            }
+            if (input == CountryCode::CountryCodeMK)
+            {
+                output = Json::Value("MK");
+            }
+            if (input == CountryCode::CountryCodeMG)
+            {
+                output = Json::Value("MG");
+            }
+            if (input == CountryCode::CountryCodeMW)
+            {
+                output = Json::Value("MW");
+            }
+            if (input == CountryCode::CountryCodeMY)
+            {
+                output = Json::Value("MY");
+            }
+            if (input == CountryCode::CountryCodeMV)
+            {
+                output = Json::Value("MV");
+            }
+            if (input == CountryCode::CountryCodeML)
+            {
+                output = Json::Value("ML");
+            }
+            if (input == CountryCode::CountryCodeMT)
+            {
+                output = Json::Value("MT");
+            }
+            if (input == CountryCode::CountryCodeMH)
+            {
+                output = Json::Value("MH");
+            }
+            if (input == CountryCode::CountryCodeMQ)
+            {
+                output = Json::Value("MQ");
+            }
+            if (input == CountryCode::CountryCodeMR)
+            {
+                output = Json::Value("MR");
+            }
+            if (input == CountryCode::CountryCodeMU)
+            {
+                output = Json::Value("MU");
+            }
+            if (input == CountryCode::CountryCodeYT)
+            {
+                output = Json::Value("YT");
+            }
+            if (input == CountryCode::CountryCodeMX)
+            {
+                output = Json::Value("MX");
+            }
+            if (input == CountryCode::CountryCodeFM)
+            {
+                output = Json::Value("FM");
+            }
+            if (input == CountryCode::CountryCodeMD)
+            {
+                output = Json::Value("MD");
+            }
+            if (input == CountryCode::CountryCodeMC)
+            {
+                output = Json::Value("MC");
+            }
+            if (input == CountryCode::CountryCodeMN)
+            {
+                output = Json::Value("MN");
+            }
+            if (input == CountryCode::CountryCodeME)
+            {
+                output = Json::Value("ME");
+            }
+            if (input == CountryCode::CountryCodeMS)
+            {
+                output = Json::Value("MS");
+            }
+            if (input == CountryCode::CountryCodeMA)
+            {
+                output = Json::Value("MA");
+            }
+            if (input == CountryCode::CountryCodeMZ)
+            {
+                output = Json::Value("MZ");
+            }
+            if (input == CountryCode::CountryCodeMM)
+            {
+                output = Json::Value("MM");
+            }
+            if (input == CountryCode::CountryCodeNA)
+            {
+                output = Json::Value("NA");
+            }
+            if (input == CountryCode::CountryCodeNR)
+            {
+                output = Json::Value("NR");
+            }
+            if (input == CountryCode::CountryCodeNP)
+            {
+                output = Json::Value("NP");
+            }
+            if (input == CountryCode::CountryCodeNL)
+            {
+                output = Json::Value("NL");
+            }
+            if (input == CountryCode::CountryCodeNC)
+            {
+                output = Json::Value("NC");
+            }
+            if (input == CountryCode::CountryCodeNZ)
+            {
+                output = Json::Value("NZ");
+            }
+            if (input == CountryCode::CountryCodeNI)
+            {
+                output = Json::Value("NI");
+            }
+            if (input == CountryCode::CountryCodeNE)
+            {
+                output = Json::Value("NE");
+            }
+            if (input == CountryCode::CountryCodeNG)
+            {
+                output = Json::Value("NG");
+            }
+            if (input == CountryCode::CountryCodeNU)
+            {
+                output = Json::Value("NU");
+            }
+            if (input == CountryCode::CountryCodeNF)
+            {
+                output = Json::Value("NF");
+            }
+            if (input == CountryCode::CountryCodeMP)
+            {
+                output = Json::Value("MP");
+            }
+            if (input == CountryCode::CountryCodeNO)
+            {
+                output = Json::Value("NO");
+            }
+            if (input == CountryCode::CountryCodeOM)
+            {
+                output = Json::Value("OM");
+            }
+            if (input == CountryCode::CountryCodePK)
+            {
+                output = Json::Value("PK");
+            }
+            if (input == CountryCode::CountryCodePW)
+            {
+                output = Json::Value("PW");
+            }
+            if (input == CountryCode::CountryCodePS)
+            {
+                output = Json::Value("PS");
+            }
+            if (input == CountryCode::CountryCodePA)
+            {
+                output = Json::Value("PA");
+            }
+            if (input == CountryCode::CountryCodePG)
+            {
+                output = Json::Value("PG");
+            }
+            if (input == CountryCode::CountryCodePY)
+            {
+                output = Json::Value("PY");
+            }
+            if (input == CountryCode::CountryCodePE)
+            {
+                output = Json::Value("PE");
+            }
+            if (input == CountryCode::CountryCodePH)
+            {
+                output = Json::Value("PH");
+            }
+            if (input == CountryCode::CountryCodePN)
+            {
+                output = Json::Value("PN");
+            }
+            if (input == CountryCode::CountryCodePL)
+            {
+                output = Json::Value("PL");
+            }
+            if (input == CountryCode::CountryCodePT)
+            {
+                output = Json::Value("PT");
+            }
+            if (input == CountryCode::CountryCodePR)
+            {
+                output = Json::Value("PR");
+            }
+            if (input == CountryCode::CountryCodeQA)
+            {
+                output = Json::Value("QA");
+            }
+            if (input == CountryCode::CountryCodeRE)
+            {
+                output = Json::Value("RE");
+            }
+            if (input == CountryCode::CountryCodeRO)
+            {
+                output = Json::Value("RO");
+            }
+            if (input == CountryCode::CountryCodeRU)
+            {
+                output = Json::Value("RU");
+            }
+            if (input == CountryCode::CountryCodeRW)
+            {
+                output = Json::Value("RW");
+            }
+            if (input == CountryCode::CountryCodeBL)
+            {
+                output = Json::Value("BL");
+            }
+            if (input == CountryCode::CountryCodeSH)
+            {
+                output = Json::Value("SH");
+            }
+            if (input == CountryCode::CountryCodeKN)
+            {
+                output = Json::Value("KN");
+            }
+            if (input == CountryCode::CountryCodeLC)
+            {
+                output = Json::Value("LC");
+            }
+            if (input == CountryCode::CountryCodeMF)
+            {
+                output = Json::Value("MF");
+            }
+            if (input == CountryCode::CountryCodePM)
+            {
+                output = Json::Value("PM");
+            }
+            if (input == CountryCode::CountryCodeVC)
+            {
+                output = Json::Value("VC");
+            }
+            if (input == CountryCode::CountryCodeWS)
+            {
+                output = Json::Value("WS");
+            }
+            if (input == CountryCode::CountryCodeSM)
+            {
+                output = Json::Value("SM");
+            }
+            if (input == CountryCode::CountryCodeST)
+            {
+                output = Json::Value("ST");
+            }
+            if (input == CountryCode::CountryCodeSA)
+            {
+                output = Json::Value("SA");
+            }
+            if (input == CountryCode::CountryCodeSN)
+            {
+                output = Json::Value("SN");
+            }
+            if (input == CountryCode::CountryCodeRS)
+            {
+                output = Json::Value("RS");
+            }
+            if (input == CountryCode::CountryCodeSC)
+            {
+                output = Json::Value("SC");
+            }
+            if (input == CountryCode::CountryCodeSL)
+            {
+                output = Json::Value("SL");
+            }
+            if (input == CountryCode::CountryCodeSG)
+            {
+                output = Json::Value("SG");
+            }
+            if (input == CountryCode::CountryCodeSX)
+            {
+                output = Json::Value("SX");
+            }
+            if (input == CountryCode::CountryCodeSK)
+            {
+                output = Json::Value("SK");
+            }
+            if (input == CountryCode::CountryCodeSI)
+            {
+                output = Json::Value("SI");
+            }
+            if (input == CountryCode::CountryCodeSB)
+            {
+                output = Json::Value("SB");
+            }
+            if (input == CountryCode::CountryCodeSO)
+            {
+                output = Json::Value("SO");
+            }
+            if (input == CountryCode::CountryCodeZA)
+            {
+                output = Json::Value("ZA");
+            }
+            if (input == CountryCode::CountryCodeGS)
+            {
+                output = Json::Value("GS");
+            }
+            if (input == CountryCode::CountryCodeSS)
+            {
+                output = Json::Value("SS");
+            }
+            if (input == CountryCode::CountryCodeES)
+            {
+                output = Json::Value("ES");
+            }
+            if (input == CountryCode::CountryCodeLK)
+            {
+                output = Json::Value("LK");
+            }
+            if (input == CountryCode::CountryCodeSD)
+            {
+                output = Json::Value("SD");
+            }
+            if (input == CountryCode::CountryCodeSR)
+            {
+                output = Json::Value("SR");
+            }
+            if (input == CountryCode::CountryCodeSJ)
+            {
+                output = Json::Value("SJ");
+            }
+            if (input == CountryCode::CountryCodeSZ)
+            {
+                output = Json::Value("SZ");
+            }
+            if (input == CountryCode::CountryCodeSE)
+            {
+                output = Json::Value("SE");
+            }
+            if (input == CountryCode::CountryCodeCH)
+            {
+                output = Json::Value("CH");
+            }
+            if (input == CountryCode::CountryCodeSY)
+            {
+                output = Json::Value("SY");
+            }
+            if (input == CountryCode::CountryCodeTW)
+            {
+                output = Json::Value("TW");
+            }
+            if (input == CountryCode::CountryCodeTJ)
+            {
+                output = Json::Value("TJ");
+            }
+            if (input == CountryCode::CountryCodeTZ)
+            {
+                output = Json::Value("TZ");
+            }
+            if (input == CountryCode::CountryCodeTH)
+            {
+                output = Json::Value("TH");
+            }
+            if (input == CountryCode::CountryCodeTL)
+            {
+                output = Json::Value("TL");
+            }
+            if (input == CountryCode::CountryCodeTG)
+            {
+                output = Json::Value("TG");
+            }
+            if (input == CountryCode::CountryCodeTK)
+            {
+                output = Json::Value("TK");
+            }
+            if (input == CountryCode::CountryCodeTO)
+            {
+                output = Json::Value("TO");
+            }
+            if (input == CountryCode::CountryCodeTT)
+            {
+                output = Json::Value("TT");
+            }
+            if (input == CountryCode::CountryCodeTN)
+            {
+                output = Json::Value("TN");
+            }
+            if (input == CountryCode::CountryCodeTR)
+            {
+                output = Json::Value("TR");
+            }
+            if (input == CountryCode::CountryCodeTM)
+            {
+                output = Json::Value("TM");
+            }
+            if (input == CountryCode::CountryCodeTC)
+            {
+                output = Json::Value("TC");
+            }
+            if (input == CountryCode::CountryCodeTV)
+            {
+                output = Json::Value("TV");
+            }
+            if (input == CountryCode::CountryCodeUG)
+            {
+                output = Json::Value("UG");
+            }
+            if (input == CountryCode::CountryCodeUA)
+            {
+                output = Json::Value("UA");
+            }
+            if (input == CountryCode::CountryCodeAE)
+            {
+                output = Json::Value("AE");
+            }
+            if (input == CountryCode::CountryCodeGB)
+            {
+                output = Json::Value("GB");
+            }
+            if (input == CountryCode::CountryCodeUS)
+            {
+                output = Json::Value("US");
+            }
+            if (input == CountryCode::CountryCodeUM)
+            {
+                output = Json::Value("UM");
+            }
+            if (input == CountryCode::CountryCodeUY)
+            {
+                output = Json::Value("UY");
+            }
+            if (input == CountryCode::CountryCodeUZ)
+            {
+                output = Json::Value("UZ");
+            }
+            if (input == CountryCode::CountryCodeVU)
+            {
+                output = Json::Value("VU");
+            }
+            if (input == CountryCode::CountryCodeVE)
+            {
+                output = Json::Value("VE");
+            }
+            if (input == CountryCode::CountryCodeVN)
+            {
+                output = Json::Value("VN");
+            }
+            if (input == CountryCode::CountryCodeVG)
+            {
+                output = Json::Value("VG");
+            }
+            if (input == CountryCode::CountryCodeVI)
+            {
+                output = Json::Value("VI");
+            }
+            if (input == CountryCode::CountryCodeWF)
+            {
+                output = Json::Value("WF");
+            }
+            if (input == CountryCode::CountryCodeEH)
+            {
+                output = Json::Value("EH");
+            }
+            if (input == CountryCode::CountryCodeYE)
+            {
+                output = Json::Value("YE");
+            }
+            if (input == CountryCode::CountryCodeZM)
+            {
+                output = Json::Value("ZM");
+            }
+            if (input == CountryCode::CountryCodeZW)
+            {
+                output = Json::Value("ZW");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, CountryCode& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "AF") output = CountryCode::CountryCodeAF;
-            if (inputStr == "AX") output = CountryCode::CountryCodeAX;
-            if (inputStr == "AL") output = CountryCode::CountryCodeAL;
-            if (inputStr == "DZ") output = CountryCode::CountryCodeDZ;
-            if (inputStr == "AS") output = CountryCode::CountryCodeAS;
-            if (inputStr == "AD") output = CountryCode::CountryCodeAD;
-            if (inputStr == "AO") output = CountryCode::CountryCodeAO;
-            if (inputStr == "AI") output = CountryCode::CountryCodeAI;
-            if (inputStr == "AQ") output = CountryCode::CountryCodeAQ;
-            if (inputStr == "AG") output = CountryCode::CountryCodeAG;
-            if (inputStr == "AR") output = CountryCode::CountryCodeAR;
-            if (inputStr == "AM") output = CountryCode::CountryCodeAM;
-            if (inputStr == "AW") output = CountryCode::CountryCodeAW;
-            if (inputStr == "AU") output = CountryCode::CountryCodeAU;
-            if (inputStr == "AT") output = CountryCode::CountryCodeAT;
-            if (inputStr == "AZ") output = CountryCode::CountryCodeAZ;
-            if (inputStr == "BS") output = CountryCode::CountryCodeBS;
-            if (inputStr == "BH") output = CountryCode::CountryCodeBH;
-            if (inputStr == "BD") output = CountryCode::CountryCodeBD;
-            if (inputStr == "BB") output = CountryCode::CountryCodeBB;
-            if (inputStr == "BY") output = CountryCode::CountryCodeBY;
-            if (inputStr == "BE") output = CountryCode::CountryCodeBE;
-            if (inputStr == "BZ") output = CountryCode::CountryCodeBZ;
-            if (inputStr == "BJ") output = CountryCode::CountryCodeBJ;
-            if (inputStr == "BM") output = CountryCode::CountryCodeBM;
-            if (inputStr == "BT") output = CountryCode::CountryCodeBT;
-            if (inputStr == "BO") output = CountryCode::CountryCodeBO;
-            if (inputStr == "BQ") output = CountryCode::CountryCodeBQ;
-            if (inputStr == "BA") output = CountryCode::CountryCodeBA;
-            if (inputStr == "BW") output = CountryCode::CountryCodeBW;
-            if (inputStr == "BV") output = CountryCode::CountryCodeBV;
-            if (inputStr == "BR") output = CountryCode::CountryCodeBR;
-            if (inputStr == "IO") output = CountryCode::CountryCodeIO;
-            if (inputStr == "BN") output = CountryCode::CountryCodeBN;
-            if (inputStr == "BG") output = CountryCode::CountryCodeBG;
-            if (inputStr == "BF") output = CountryCode::CountryCodeBF;
-            if (inputStr == "BI") output = CountryCode::CountryCodeBI;
-            if (inputStr == "KH") output = CountryCode::CountryCodeKH;
-            if (inputStr == "CM") output = CountryCode::CountryCodeCM;
-            if (inputStr == "CA") output = CountryCode::CountryCodeCA;
-            if (inputStr == "CV") output = CountryCode::CountryCodeCV;
-            if (inputStr == "KY") output = CountryCode::CountryCodeKY;
-            if (inputStr == "CF") output = CountryCode::CountryCodeCF;
-            if (inputStr == "TD") output = CountryCode::CountryCodeTD;
-            if (inputStr == "CL") output = CountryCode::CountryCodeCL;
-            if (inputStr == "CN") output = CountryCode::CountryCodeCN;
-            if (inputStr == "CX") output = CountryCode::CountryCodeCX;
-            if (inputStr == "CC") output = CountryCode::CountryCodeCC;
-            if (inputStr == "CO") output = CountryCode::CountryCodeCO;
-            if (inputStr == "KM") output = CountryCode::CountryCodeKM;
-            if (inputStr == "CG") output = CountryCode::CountryCodeCG;
-            if (inputStr == "CD") output = CountryCode::CountryCodeCD;
-            if (inputStr == "CK") output = CountryCode::CountryCodeCK;
-            if (inputStr == "CR") output = CountryCode::CountryCodeCR;
-            if (inputStr == "CI") output = CountryCode::CountryCodeCI;
-            if (inputStr == "HR") output = CountryCode::CountryCodeHR;
-            if (inputStr == "CU") output = CountryCode::CountryCodeCU;
-            if (inputStr == "CW") output = CountryCode::CountryCodeCW;
-            if (inputStr == "CY") output = CountryCode::CountryCodeCY;
-            if (inputStr == "CZ") output = CountryCode::CountryCodeCZ;
-            if (inputStr == "DK") output = CountryCode::CountryCodeDK;
-            if (inputStr == "DJ") output = CountryCode::CountryCodeDJ;
-            if (inputStr == "DM") output = CountryCode::CountryCodeDM;
-            if (inputStr == "DO") output = CountryCode::CountryCodeDO;
-            if (inputStr == "EC") output = CountryCode::CountryCodeEC;
-            if (inputStr == "EG") output = CountryCode::CountryCodeEG;
-            if (inputStr == "SV") output = CountryCode::CountryCodeSV;
-            if (inputStr == "GQ") output = CountryCode::CountryCodeGQ;
-            if (inputStr == "ER") output = CountryCode::CountryCodeER;
-            if (inputStr == "EE") output = CountryCode::CountryCodeEE;
-            if (inputStr == "ET") output = CountryCode::CountryCodeET;
-            if (inputStr == "FK") output = CountryCode::CountryCodeFK;
-            if (inputStr == "FO") output = CountryCode::CountryCodeFO;
-            if (inputStr == "FJ") output = CountryCode::CountryCodeFJ;
-            if (inputStr == "FI") output = CountryCode::CountryCodeFI;
-            if (inputStr == "FR") output = CountryCode::CountryCodeFR;
-            if (inputStr == "GF") output = CountryCode::CountryCodeGF;
-            if (inputStr == "PF") output = CountryCode::CountryCodePF;
-            if (inputStr == "TF") output = CountryCode::CountryCodeTF;
-            if (inputStr == "GA") output = CountryCode::CountryCodeGA;
-            if (inputStr == "GM") output = CountryCode::CountryCodeGM;
-            if (inputStr == "GE") output = CountryCode::CountryCodeGE;
-            if (inputStr == "DE") output = CountryCode::CountryCodeDE;
-            if (inputStr == "GH") output = CountryCode::CountryCodeGH;
-            if (inputStr == "GI") output = CountryCode::CountryCodeGI;
-            if (inputStr == "GR") output = CountryCode::CountryCodeGR;
-            if (inputStr == "GL") output = CountryCode::CountryCodeGL;
-            if (inputStr == "GD") output = CountryCode::CountryCodeGD;
-            if (inputStr == "GP") output = CountryCode::CountryCodeGP;
-            if (inputStr == "GU") output = CountryCode::CountryCodeGU;
-            if (inputStr == "GT") output = CountryCode::CountryCodeGT;
-            if (inputStr == "GG") output = CountryCode::CountryCodeGG;
-            if (inputStr == "GN") output = CountryCode::CountryCodeGN;
-            if (inputStr == "GW") output = CountryCode::CountryCodeGW;
-            if (inputStr == "GY") output = CountryCode::CountryCodeGY;
-            if (inputStr == "HT") output = CountryCode::CountryCodeHT;
-            if (inputStr == "HM") output = CountryCode::CountryCodeHM;
-            if (inputStr == "VA") output = CountryCode::CountryCodeVA;
-            if (inputStr == "HN") output = CountryCode::CountryCodeHN;
-            if (inputStr == "HK") output = CountryCode::CountryCodeHK;
-            if (inputStr == "HU") output = CountryCode::CountryCodeHU;
-            if (inputStr == "IS") output = CountryCode::CountryCodeIS;
-            if (inputStr == "IN") output = CountryCode::CountryCodeIN;
-            if (inputStr == "ID") output = CountryCode::CountryCodeID;
-            if (inputStr == "IR") output = CountryCode::CountryCodeIR;
-            if (inputStr == "IQ") output = CountryCode::CountryCodeIQ;
-            if (inputStr == "IE") output = CountryCode::CountryCodeIE;
-            if (inputStr == "IM") output = CountryCode::CountryCodeIM;
-            if (inputStr == "IL") output = CountryCode::CountryCodeIL;
-            if (inputStr == "IT") output = CountryCode::CountryCodeIT;
-            if (inputStr == "JM") output = CountryCode::CountryCodeJM;
-            if (inputStr == "JP") output = CountryCode::CountryCodeJP;
-            if (inputStr == "JE") output = CountryCode::CountryCodeJE;
-            if (inputStr == "JO") output = CountryCode::CountryCodeJO;
-            if (inputStr == "KZ") output = CountryCode::CountryCodeKZ;
-            if (inputStr == "KE") output = CountryCode::CountryCodeKE;
-            if (inputStr == "KI") output = CountryCode::CountryCodeKI;
-            if (inputStr == "KP") output = CountryCode::CountryCodeKP;
-            if (inputStr == "KR") output = CountryCode::CountryCodeKR;
-            if (inputStr == "KW") output = CountryCode::CountryCodeKW;
-            if (inputStr == "KG") output = CountryCode::CountryCodeKG;
-            if (inputStr == "LA") output = CountryCode::CountryCodeLA;
-            if (inputStr == "LV") output = CountryCode::CountryCodeLV;
-            if (inputStr == "LB") output = CountryCode::CountryCodeLB;
-            if (inputStr == "LS") output = CountryCode::CountryCodeLS;
-            if (inputStr == "LR") output = CountryCode::CountryCodeLR;
-            if (inputStr == "LY") output = CountryCode::CountryCodeLY;
-            if (inputStr == "LI") output = CountryCode::CountryCodeLI;
-            if (inputStr == "LT") output = CountryCode::CountryCodeLT;
-            if (inputStr == "LU") output = CountryCode::CountryCodeLU;
-            if (inputStr == "MO") output = CountryCode::CountryCodeMO;
-            if (inputStr == "MK") output = CountryCode::CountryCodeMK;
-            if (inputStr == "MG") output = CountryCode::CountryCodeMG;
-            if (inputStr == "MW") output = CountryCode::CountryCodeMW;
-            if (inputStr == "MY") output = CountryCode::CountryCodeMY;
-            if (inputStr == "MV") output = CountryCode::CountryCodeMV;
-            if (inputStr == "ML") output = CountryCode::CountryCodeML;
-            if (inputStr == "MT") output = CountryCode::CountryCodeMT;
-            if (inputStr == "MH") output = CountryCode::CountryCodeMH;
-            if (inputStr == "MQ") output = CountryCode::CountryCodeMQ;
-            if (inputStr == "MR") output = CountryCode::CountryCodeMR;
-            if (inputStr == "MU") output = CountryCode::CountryCodeMU;
-            if (inputStr == "YT") output = CountryCode::CountryCodeYT;
-            if (inputStr == "MX") output = CountryCode::CountryCodeMX;
-            if (inputStr == "FM") output = CountryCode::CountryCodeFM;
-            if (inputStr == "MD") output = CountryCode::CountryCodeMD;
-            if (inputStr == "MC") output = CountryCode::CountryCodeMC;
-            if (inputStr == "MN") output = CountryCode::CountryCodeMN;
-            if (inputStr == "ME") output = CountryCode::CountryCodeME;
-            if (inputStr == "MS") output = CountryCode::CountryCodeMS;
-            if (inputStr == "MA") output = CountryCode::CountryCodeMA;
-            if (inputStr == "MZ") output = CountryCode::CountryCodeMZ;
-            if (inputStr == "MM") output = CountryCode::CountryCodeMM;
-            if (inputStr == "NA") output = CountryCode::CountryCodeNA;
-            if (inputStr == "NR") output = CountryCode::CountryCodeNR;
-            if (inputStr == "NP") output = CountryCode::CountryCodeNP;
-            if (inputStr == "NL") output = CountryCode::CountryCodeNL;
-            if (inputStr == "NC") output = CountryCode::CountryCodeNC;
-            if (inputStr == "NZ") output = CountryCode::CountryCodeNZ;
-            if (inputStr == "NI") output = CountryCode::CountryCodeNI;
-            if (inputStr == "NE") output = CountryCode::CountryCodeNE;
-            if (inputStr == "NG") output = CountryCode::CountryCodeNG;
-            if (inputStr == "NU") output = CountryCode::CountryCodeNU;
-            if (inputStr == "NF") output = CountryCode::CountryCodeNF;
-            if (inputStr == "MP") output = CountryCode::CountryCodeMP;
-            if (inputStr == "NO") output = CountryCode::CountryCodeNO;
-            if (inputStr == "OM") output = CountryCode::CountryCodeOM;
-            if (inputStr == "PK") output = CountryCode::CountryCodePK;
-            if (inputStr == "PW") output = CountryCode::CountryCodePW;
-            if (inputStr == "PS") output = CountryCode::CountryCodePS;
-            if (inputStr == "PA") output = CountryCode::CountryCodePA;
-            if (inputStr == "PG") output = CountryCode::CountryCodePG;
-            if (inputStr == "PY") output = CountryCode::CountryCodePY;
-            if (inputStr == "PE") output = CountryCode::CountryCodePE;
-            if (inputStr == "PH") output = CountryCode::CountryCodePH;
-            if (inputStr == "PN") output = CountryCode::CountryCodePN;
-            if (inputStr == "PL") output = CountryCode::CountryCodePL;
-            if (inputStr == "PT") output = CountryCode::CountryCodePT;
-            if (inputStr == "PR") output = CountryCode::CountryCodePR;
-            if (inputStr == "QA") output = CountryCode::CountryCodeQA;
-            if (inputStr == "RE") output = CountryCode::CountryCodeRE;
-            if (inputStr == "RO") output = CountryCode::CountryCodeRO;
-            if (inputStr == "RU") output = CountryCode::CountryCodeRU;
-            if (inputStr == "RW") output = CountryCode::CountryCodeRW;
-            if (inputStr == "BL") output = CountryCode::CountryCodeBL;
-            if (inputStr == "SH") output = CountryCode::CountryCodeSH;
-            if (inputStr == "KN") output = CountryCode::CountryCodeKN;
-            if (inputStr == "LC") output = CountryCode::CountryCodeLC;
-            if (inputStr == "MF") output = CountryCode::CountryCodeMF;
-            if (inputStr == "PM") output = CountryCode::CountryCodePM;
-            if (inputStr == "VC") output = CountryCode::CountryCodeVC;
-            if (inputStr == "WS") output = CountryCode::CountryCodeWS;
-            if (inputStr == "SM") output = CountryCode::CountryCodeSM;
-            if (inputStr == "ST") output = CountryCode::CountryCodeST;
-            if (inputStr == "SA") output = CountryCode::CountryCodeSA;
-            if (inputStr == "SN") output = CountryCode::CountryCodeSN;
-            if (inputStr == "RS") output = CountryCode::CountryCodeRS;
-            if (inputStr == "SC") output = CountryCode::CountryCodeSC;
-            if (inputStr == "SL") output = CountryCode::CountryCodeSL;
-            if (inputStr == "SG") output = CountryCode::CountryCodeSG;
-            if (inputStr == "SX") output = CountryCode::CountryCodeSX;
-            if (inputStr == "SK") output = CountryCode::CountryCodeSK;
-            if (inputStr == "SI") output = CountryCode::CountryCodeSI;
-            if (inputStr == "SB") output = CountryCode::CountryCodeSB;
-            if (inputStr == "SO") output = CountryCode::CountryCodeSO;
-            if (inputStr == "ZA") output = CountryCode::CountryCodeZA;
-            if (inputStr == "GS") output = CountryCode::CountryCodeGS;
-            if (inputStr == "SS") output = CountryCode::CountryCodeSS;
-            if (inputStr == "ES") output = CountryCode::CountryCodeES;
-            if (inputStr == "LK") output = CountryCode::CountryCodeLK;
-            if (inputStr == "SD") output = CountryCode::CountryCodeSD;
-            if (inputStr == "SR") output = CountryCode::CountryCodeSR;
-            if (inputStr == "SJ") output = CountryCode::CountryCodeSJ;
-            if (inputStr == "SZ") output = CountryCode::CountryCodeSZ;
-            if (inputStr == "SE") output = CountryCode::CountryCodeSE;
-            if (inputStr == "CH") output = CountryCode::CountryCodeCH;
-            if (inputStr == "SY") output = CountryCode::CountryCodeSY;
-            if (inputStr == "TW") output = CountryCode::CountryCodeTW;
-            if (inputStr == "TJ") output = CountryCode::CountryCodeTJ;
-            if (inputStr == "TZ") output = CountryCode::CountryCodeTZ;
-            if (inputStr == "TH") output = CountryCode::CountryCodeTH;
-            if (inputStr == "TL") output = CountryCode::CountryCodeTL;
-            if (inputStr == "TG") output = CountryCode::CountryCodeTG;
-            if (inputStr == "TK") output = CountryCode::CountryCodeTK;
-            if (inputStr == "TO") output = CountryCode::CountryCodeTO;
-            if (inputStr == "TT") output = CountryCode::CountryCodeTT;
-            if (inputStr == "TN") output = CountryCode::CountryCodeTN;
-            if (inputStr == "TR") output = CountryCode::CountryCodeTR;
-            if (inputStr == "TM") output = CountryCode::CountryCodeTM;
-            if (inputStr == "TC") output = CountryCode::CountryCodeTC;
-            if (inputStr == "TV") output = CountryCode::CountryCodeTV;
-            if (inputStr == "UG") output = CountryCode::CountryCodeUG;
-            if (inputStr == "UA") output = CountryCode::CountryCodeUA;
-            if (inputStr == "AE") output = CountryCode::CountryCodeAE;
-            if (inputStr == "GB") output = CountryCode::CountryCodeGB;
-            if (inputStr == "US") output = CountryCode::CountryCodeUS;
-            if (inputStr == "UM") output = CountryCode::CountryCodeUM;
-            if (inputStr == "UY") output = CountryCode::CountryCodeUY;
-            if (inputStr == "UZ") output = CountryCode::CountryCodeUZ;
-            if (inputStr == "VU") output = CountryCode::CountryCodeVU;
-            if (inputStr == "VE") output = CountryCode::CountryCodeVE;
-            if (inputStr == "VN") output = CountryCode::CountryCodeVN;
-            if (inputStr == "VG") output = CountryCode::CountryCodeVG;
-            if (inputStr == "VI") output = CountryCode::CountryCodeVI;
-            if (inputStr == "WF") output = CountryCode::CountryCodeWF;
-            if (inputStr == "EH") output = CountryCode::CountryCodeEH;
-            if (inputStr == "YE") output = CountryCode::CountryCodeYE;
-            if (inputStr == "ZM") output = CountryCode::CountryCodeZM;
-            if (inputStr == "ZW") output = CountryCode::CountryCodeZW;
+            if (inputStr == "AF")
+            {
+                output = CountryCode::CountryCodeAF;
+            }
+            if (inputStr == "AX")
+            {
+                output = CountryCode::CountryCodeAX;
+            }
+            if (inputStr == "AL")
+            {
+                output = CountryCode::CountryCodeAL;
+            }
+            if (inputStr == "DZ")
+            {
+                output = CountryCode::CountryCodeDZ;
+            }
+            if (inputStr == "AS")
+            {
+                output = CountryCode::CountryCodeAS;
+            }
+            if (inputStr == "AD")
+            {
+                output = CountryCode::CountryCodeAD;
+            }
+            if (inputStr == "AO")
+            {
+                output = CountryCode::CountryCodeAO;
+            }
+            if (inputStr == "AI")
+            {
+                output = CountryCode::CountryCodeAI;
+            }
+            if (inputStr == "AQ")
+            {
+                output = CountryCode::CountryCodeAQ;
+            }
+            if (inputStr == "AG")
+            {
+                output = CountryCode::CountryCodeAG;
+            }
+            if (inputStr == "AR")
+            {
+                output = CountryCode::CountryCodeAR;
+            }
+            if (inputStr == "AM")
+            {
+                output = CountryCode::CountryCodeAM;
+            }
+            if (inputStr == "AW")
+            {
+                output = CountryCode::CountryCodeAW;
+            }
+            if (inputStr == "AU")
+            {
+                output = CountryCode::CountryCodeAU;
+            }
+            if (inputStr == "AT")
+            {
+                output = CountryCode::CountryCodeAT;
+            }
+            if (inputStr == "AZ")
+            {
+                output = CountryCode::CountryCodeAZ;
+            }
+            if (inputStr == "BS")
+            {
+                output = CountryCode::CountryCodeBS;
+            }
+            if (inputStr == "BH")
+            {
+                output = CountryCode::CountryCodeBH;
+            }
+            if (inputStr == "BD")
+            {
+                output = CountryCode::CountryCodeBD;
+            }
+            if (inputStr == "BB")
+            {
+                output = CountryCode::CountryCodeBB;
+            }
+            if (inputStr == "BY")
+            {
+                output = CountryCode::CountryCodeBY;
+            }
+            if (inputStr == "BE")
+            {
+                output = CountryCode::CountryCodeBE;
+            }
+            if (inputStr == "BZ")
+            {
+                output = CountryCode::CountryCodeBZ;
+            }
+            if (inputStr == "BJ")
+            {
+                output = CountryCode::CountryCodeBJ;
+            }
+            if (inputStr == "BM")
+            {
+                output = CountryCode::CountryCodeBM;
+            }
+            if (inputStr == "BT")
+            {
+                output = CountryCode::CountryCodeBT;
+            }
+            if (inputStr == "BO")
+            {
+                output = CountryCode::CountryCodeBO;
+            }
+            if (inputStr == "BQ")
+            {
+                output = CountryCode::CountryCodeBQ;
+            }
+            if (inputStr == "BA")
+            {
+                output = CountryCode::CountryCodeBA;
+            }
+            if (inputStr == "BW")
+            {
+                output = CountryCode::CountryCodeBW;
+            }
+            if (inputStr == "BV")
+            {
+                output = CountryCode::CountryCodeBV;
+            }
+            if (inputStr == "BR")
+            {
+                output = CountryCode::CountryCodeBR;
+            }
+            if (inputStr == "IO")
+            {
+                output = CountryCode::CountryCodeIO;
+            }
+            if (inputStr == "BN")
+            {
+                output = CountryCode::CountryCodeBN;
+            }
+            if (inputStr == "BG")
+            {
+                output = CountryCode::CountryCodeBG;
+            }
+            if (inputStr == "BF")
+            {
+                output = CountryCode::CountryCodeBF;
+            }
+            if (inputStr == "BI")
+            {
+                output = CountryCode::CountryCodeBI;
+            }
+            if (inputStr == "KH")
+            {
+                output = CountryCode::CountryCodeKH;
+            }
+            if (inputStr == "CM")
+            {
+                output = CountryCode::CountryCodeCM;
+            }
+            if (inputStr == "CA")
+            {
+                output = CountryCode::CountryCodeCA;
+            }
+            if (inputStr == "CV")
+            {
+                output = CountryCode::CountryCodeCV;
+            }
+            if (inputStr == "KY")
+            {
+                output = CountryCode::CountryCodeKY;
+            }
+            if (inputStr == "CF")
+            {
+                output = CountryCode::CountryCodeCF;
+            }
+            if (inputStr == "TD")
+            {
+                output = CountryCode::CountryCodeTD;
+            }
+            if (inputStr == "CL")
+            {
+                output = CountryCode::CountryCodeCL;
+            }
+            if (inputStr == "CN")
+            {
+                output = CountryCode::CountryCodeCN;
+            }
+            if (inputStr == "CX")
+            {
+                output = CountryCode::CountryCodeCX;
+            }
+            if (inputStr == "CC")
+            {
+                output = CountryCode::CountryCodeCC;
+            }
+            if (inputStr == "CO")
+            {
+                output = CountryCode::CountryCodeCO;
+            }
+            if (inputStr == "KM")
+            {
+                output = CountryCode::CountryCodeKM;
+            }
+            if (inputStr == "CG")
+            {
+                output = CountryCode::CountryCodeCG;
+            }
+            if (inputStr == "CD")
+            {
+                output = CountryCode::CountryCodeCD;
+            }
+            if (inputStr == "CK")
+            {
+                output = CountryCode::CountryCodeCK;
+            }
+            if (inputStr == "CR")
+            {
+                output = CountryCode::CountryCodeCR;
+            }
+            if (inputStr == "CI")
+            {
+                output = CountryCode::CountryCodeCI;
+            }
+            if (inputStr == "HR")
+            {
+                output = CountryCode::CountryCodeHR;
+            }
+            if (inputStr == "CU")
+            {
+                output = CountryCode::CountryCodeCU;
+            }
+            if (inputStr == "CW")
+            {
+                output = CountryCode::CountryCodeCW;
+            }
+            if (inputStr == "CY")
+            {
+                output = CountryCode::CountryCodeCY;
+            }
+            if (inputStr == "CZ")
+            {
+                output = CountryCode::CountryCodeCZ;
+            }
+            if (inputStr == "DK")
+            {
+                output = CountryCode::CountryCodeDK;
+            }
+            if (inputStr == "DJ")
+            {
+                output = CountryCode::CountryCodeDJ;
+            }
+            if (inputStr == "DM")
+            {
+                output = CountryCode::CountryCodeDM;
+            }
+            if (inputStr == "DO")
+            {
+                output = CountryCode::CountryCodeDO;
+            }
+            if (inputStr == "EC")
+            {
+                output = CountryCode::CountryCodeEC;
+            }
+            if (inputStr == "EG")
+            {
+                output = CountryCode::CountryCodeEG;
+            }
+            if (inputStr == "SV")
+            {
+                output = CountryCode::CountryCodeSV;
+            }
+            if (inputStr == "GQ")
+            {
+                output = CountryCode::CountryCodeGQ;
+            }
+            if (inputStr == "ER")
+            {
+                output = CountryCode::CountryCodeER;
+            }
+            if (inputStr == "EE")
+            {
+                output = CountryCode::CountryCodeEE;
+            }
+            if (inputStr == "ET")
+            {
+                output = CountryCode::CountryCodeET;
+            }
+            if (inputStr == "FK")
+            {
+                output = CountryCode::CountryCodeFK;
+            }
+            if (inputStr == "FO")
+            {
+                output = CountryCode::CountryCodeFO;
+            }
+            if (inputStr == "FJ")
+            {
+                output = CountryCode::CountryCodeFJ;
+            }
+            if (inputStr == "FI")
+            {
+                output = CountryCode::CountryCodeFI;
+            }
+            if (inputStr == "FR")
+            {
+                output = CountryCode::CountryCodeFR;
+            }
+            if (inputStr == "GF")
+            {
+                output = CountryCode::CountryCodeGF;
+            }
+            if (inputStr == "PF")
+            {
+                output = CountryCode::CountryCodePF;
+            }
+            if (inputStr == "TF")
+            {
+                output = CountryCode::CountryCodeTF;
+            }
+            if (inputStr == "GA")
+            {
+                output = CountryCode::CountryCodeGA;
+            }
+            if (inputStr == "GM")
+            {
+                output = CountryCode::CountryCodeGM;
+            }
+            if (inputStr == "GE")
+            {
+                output = CountryCode::CountryCodeGE;
+            }
+            if (inputStr == "DE")
+            {
+                output = CountryCode::CountryCodeDE;
+            }
+            if (inputStr == "GH")
+            {
+                output = CountryCode::CountryCodeGH;
+            }
+            if (inputStr == "GI")
+            {
+                output = CountryCode::CountryCodeGI;
+            }
+            if (inputStr == "GR")
+            {
+                output = CountryCode::CountryCodeGR;
+            }
+            if (inputStr == "GL")
+            {
+                output = CountryCode::CountryCodeGL;
+            }
+            if (inputStr == "GD")
+            {
+                output = CountryCode::CountryCodeGD;
+            }
+            if (inputStr == "GP")
+            {
+                output = CountryCode::CountryCodeGP;
+            }
+            if (inputStr == "GU")
+            {
+                output = CountryCode::CountryCodeGU;
+            }
+            if (inputStr == "GT")
+            {
+                output = CountryCode::CountryCodeGT;
+            }
+            if (inputStr == "GG")
+            {
+                output = CountryCode::CountryCodeGG;
+            }
+            if (inputStr == "GN")
+            {
+                output = CountryCode::CountryCodeGN;
+            }
+            if (inputStr == "GW")
+            {
+                output = CountryCode::CountryCodeGW;
+            }
+            if (inputStr == "GY")
+            {
+                output = CountryCode::CountryCodeGY;
+            }
+            if (inputStr == "HT")
+            {
+                output = CountryCode::CountryCodeHT;
+            }
+            if (inputStr == "HM")
+            {
+                output = CountryCode::CountryCodeHM;
+            }
+            if (inputStr == "VA")
+            {
+                output = CountryCode::CountryCodeVA;
+            }
+            if (inputStr == "HN")
+            {
+                output = CountryCode::CountryCodeHN;
+            }
+            if (inputStr == "HK")
+            {
+                output = CountryCode::CountryCodeHK;
+            }
+            if (inputStr == "HU")
+            {
+                output = CountryCode::CountryCodeHU;
+            }
+            if (inputStr == "IS")
+            {
+                output = CountryCode::CountryCodeIS;
+            }
+            if (inputStr == "IN")
+            {
+                output = CountryCode::CountryCodeIN;
+            }
+            if (inputStr == "ID")
+            {
+                output = CountryCode::CountryCodeID;
+            }
+            if (inputStr == "IR")
+            {
+                output = CountryCode::CountryCodeIR;
+            }
+            if (inputStr == "IQ")
+            {
+                output = CountryCode::CountryCodeIQ;
+            }
+            if (inputStr == "IE")
+            {
+                output = CountryCode::CountryCodeIE;
+            }
+            if (inputStr == "IM")
+            {
+                output = CountryCode::CountryCodeIM;
+            }
+            if (inputStr == "IL")
+            {
+                output = CountryCode::CountryCodeIL;
+            }
+            if (inputStr == "IT")
+            {
+                output = CountryCode::CountryCodeIT;
+            }
+            if (inputStr == "JM")
+            {
+                output = CountryCode::CountryCodeJM;
+            }
+            if (inputStr == "JP")
+            {
+                output = CountryCode::CountryCodeJP;
+            }
+            if (inputStr == "JE")
+            {
+                output = CountryCode::CountryCodeJE;
+            }
+            if (inputStr == "JO")
+            {
+                output = CountryCode::CountryCodeJO;
+            }
+            if (inputStr == "KZ")
+            {
+                output = CountryCode::CountryCodeKZ;
+            }
+            if (inputStr == "KE")
+            {
+                output = CountryCode::CountryCodeKE;
+            }
+            if (inputStr == "KI")
+            {
+                output = CountryCode::CountryCodeKI;
+            }
+            if (inputStr == "KP")
+            {
+                output = CountryCode::CountryCodeKP;
+            }
+            if (inputStr == "KR")
+            {
+                output = CountryCode::CountryCodeKR;
+            }
+            if (inputStr == "KW")
+            {
+                output = CountryCode::CountryCodeKW;
+            }
+            if (inputStr == "KG")
+            {
+                output = CountryCode::CountryCodeKG;
+            }
+            if (inputStr == "LA")
+            {
+                output = CountryCode::CountryCodeLA;
+            }
+            if (inputStr == "LV")
+            {
+                output = CountryCode::CountryCodeLV;
+            }
+            if (inputStr == "LB")
+            {
+                output = CountryCode::CountryCodeLB;
+            }
+            if (inputStr == "LS")
+            {
+                output = CountryCode::CountryCodeLS;
+            }
+            if (inputStr == "LR")
+            {
+                output = CountryCode::CountryCodeLR;
+            }
+            if (inputStr == "LY")
+            {
+                output = CountryCode::CountryCodeLY;
+            }
+            if (inputStr == "LI")
+            {
+                output = CountryCode::CountryCodeLI;
+            }
+            if (inputStr == "LT")
+            {
+                output = CountryCode::CountryCodeLT;
+            }
+            if (inputStr == "LU")
+            {
+                output = CountryCode::CountryCodeLU;
+            }
+            if (inputStr == "MO")
+            {
+                output = CountryCode::CountryCodeMO;
+            }
+            if (inputStr == "MK")
+            {
+                output = CountryCode::CountryCodeMK;
+            }
+            if (inputStr == "MG")
+            {
+                output = CountryCode::CountryCodeMG;
+            }
+            if (inputStr == "MW")
+            {
+                output = CountryCode::CountryCodeMW;
+            }
+            if (inputStr == "MY")
+            {
+                output = CountryCode::CountryCodeMY;
+            }
+            if (inputStr == "MV")
+            {
+                output = CountryCode::CountryCodeMV;
+            }
+            if (inputStr == "ML")
+            {
+                output = CountryCode::CountryCodeML;
+            }
+            if (inputStr == "MT")
+            {
+                output = CountryCode::CountryCodeMT;
+            }
+            if (inputStr == "MH")
+            {
+                output = CountryCode::CountryCodeMH;
+            }
+            if (inputStr == "MQ")
+            {
+                output = CountryCode::CountryCodeMQ;
+            }
+            if (inputStr == "MR")
+            {
+                output = CountryCode::CountryCodeMR;
+            }
+            if (inputStr == "MU")
+            {
+                output = CountryCode::CountryCodeMU;
+            }
+            if (inputStr == "YT")
+            {
+                output = CountryCode::CountryCodeYT;
+            }
+            if (inputStr == "MX")
+            {
+                output = CountryCode::CountryCodeMX;
+            }
+            if (inputStr == "FM")
+            {
+                output = CountryCode::CountryCodeFM;
+            }
+            if (inputStr == "MD")
+            {
+                output = CountryCode::CountryCodeMD;
+            }
+            if (inputStr == "MC")
+            {
+                output = CountryCode::CountryCodeMC;
+            }
+            if (inputStr == "MN")
+            {
+                output = CountryCode::CountryCodeMN;
+            }
+            if (inputStr == "ME")
+            {
+                output = CountryCode::CountryCodeME;
+            }
+            if (inputStr == "MS")
+            {
+                output = CountryCode::CountryCodeMS;
+            }
+            if (inputStr == "MA")
+            {
+                output = CountryCode::CountryCodeMA;
+            }
+            if (inputStr == "MZ")
+            {
+                output = CountryCode::CountryCodeMZ;
+            }
+            if (inputStr == "MM")
+            {
+                output = CountryCode::CountryCodeMM;
+            }
+            if (inputStr == "NA")
+            {
+                output = CountryCode::CountryCodeNA;
+            }
+            if (inputStr == "NR")
+            {
+                output = CountryCode::CountryCodeNR;
+            }
+            if (inputStr == "NP")
+            {
+                output = CountryCode::CountryCodeNP;
+            }
+            if (inputStr == "NL")
+            {
+                output = CountryCode::CountryCodeNL;
+            }
+            if (inputStr == "NC")
+            {
+                output = CountryCode::CountryCodeNC;
+            }
+            if (inputStr == "NZ")
+            {
+                output = CountryCode::CountryCodeNZ;
+            }
+            if (inputStr == "NI")
+            {
+                output = CountryCode::CountryCodeNI;
+            }
+            if (inputStr == "NE")
+            {
+                output = CountryCode::CountryCodeNE;
+            }
+            if (inputStr == "NG")
+            {
+                output = CountryCode::CountryCodeNG;
+            }
+            if (inputStr == "NU")
+            {
+                output = CountryCode::CountryCodeNU;
+            }
+            if (inputStr == "NF")
+            {
+                output = CountryCode::CountryCodeNF;
+            }
+            if (inputStr == "MP")
+            {
+                output = CountryCode::CountryCodeMP;
+            }
+            if (inputStr == "NO")
+            {
+                output = CountryCode::CountryCodeNO;
+            }
+            if (inputStr == "OM")
+            {
+                output = CountryCode::CountryCodeOM;
+            }
+            if (inputStr == "PK")
+            {
+                output = CountryCode::CountryCodePK;
+            }
+            if (inputStr == "PW")
+            {
+                output = CountryCode::CountryCodePW;
+            }
+            if (inputStr == "PS")
+            {
+                output = CountryCode::CountryCodePS;
+            }
+            if (inputStr == "PA")
+            {
+                output = CountryCode::CountryCodePA;
+            }
+            if (inputStr == "PG")
+            {
+                output = CountryCode::CountryCodePG;
+            }
+            if (inputStr == "PY")
+            {
+                output = CountryCode::CountryCodePY;
+            }
+            if (inputStr == "PE")
+            {
+                output = CountryCode::CountryCodePE;
+            }
+            if (inputStr == "PH")
+            {
+                output = CountryCode::CountryCodePH;
+            }
+            if (inputStr == "PN")
+            {
+                output = CountryCode::CountryCodePN;
+            }
+            if (inputStr == "PL")
+            {
+                output = CountryCode::CountryCodePL;
+            }
+            if (inputStr == "PT")
+            {
+                output = CountryCode::CountryCodePT;
+            }
+            if (inputStr == "PR")
+            {
+                output = CountryCode::CountryCodePR;
+            }
+            if (inputStr == "QA")
+            {
+                output = CountryCode::CountryCodeQA;
+            }
+            if (inputStr == "RE")
+            {
+                output = CountryCode::CountryCodeRE;
+            }
+            if (inputStr == "RO")
+            {
+                output = CountryCode::CountryCodeRO;
+            }
+            if (inputStr == "RU")
+            {
+                output = CountryCode::CountryCodeRU;
+            }
+            if (inputStr == "RW")
+            {
+                output = CountryCode::CountryCodeRW;
+            }
+            if (inputStr == "BL")
+            {
+                output = CountryCode::CountryCodeBL;
+            }
+            if (inputStr == "SH")
+            {
+                output = CountryCode::CountryCodeSH;
+            }
+            if (inputStr == "KN")
+            {
+                output = CountryCode::CountryCodeKN;
+            }
+            if (inputStr == "LC")
+            {
+                output = CountryCode::CountryCodeLC;
+            }
+            if (inputStr == "MF")
+            {
+                output = CountryCode::CountryCodeMF;
+            }
+            if (inputStr == "PM")
+            {
+                output = CountryCode::CountryCodePM;
+            }
+            if (inputStr == "VC")
+            {
+                output = CountryCode::CountryCodeVC;
+            }
+            if (inputStr == "WS")
+            {
+                output = CountryCode::CountryCodeWS;
+            }
+            if (inputStr == "SM")
+            {
+                output = CountryCode::CountryCodeSM;
+            }
+            if (inputStr == "ST")
+            {
+                output = CountryCode::CountryCodeST;
+            }
+            if (inputStr == "SA")
+            {
+                output = CountryCode::CountryCodeSA;
+            }
+            if (inputStr == "SN")
+            {
+                output = CountryCode::CountryCodeSN;
+            }
+            if (inputStr == "RS")
+            {
+                output = CountryCode::CountryCodeRS;
+            }
+            if (inputStr == "SC")
+            {
+                output = CountryCode::CountryCodeSC;
+            }
+            if (inputStr == "SL")
+            {
+                output = CountryCode::CountryCodeSL;
+            }
+            if (inputStr == "SG")
+            {
+                output = CountryCode::CountryCodeSG;
+            }
+            if (inputStr == "SX")
+            {
+                output = CountryCode::CountryCodeSX;
+            }
+            if (inputStr == "SK")
+            {
+                output = CountryCode::CountryCodeSK;
+            }
+            if (inputStr == "SI")
+            {
+                output = CountryCode::CountryCodeSI;
+            }
+            if (inputStr == "SB")
+            {
+                output = CountryCode::CountryCodeSB;
+            }
+            if (inputStr == "SO")
+            {
+                output = CountryCode::CountryCodeSO;
+            }
+            if (inputStr == "ZA")
+            {
+                output = CountryCode::CountryCodeZA;
+            }
+            if (inputStr == "GS")
+            {
+                output = CountryCode::CountryCodeGS;
+            }
+            if (inputStr == "SS")
+            {
+                output = CountryCode::CountryCodeSS;
+            }
+            if (inputStr == "ES")
+            {
+                output = CountryCode::CountryCodeES;
+            }
+            if (inputStr == "LK")
+            {
+                output = CountryCode::CountryCodeLK;
+            }
+            if (inputStr == "SD")
+            {
+                output = CountryCode::CountryCodeSD;
+            }
+            if (inputStr == "SR")
+            {
+                output = CountryCode::CountryCodeSR;
+            }
+            if (inputStr == "SJ")
+            {
+                output = CountryCode::CountryCodeSJ;
+            }
+            if (inputStr == "SZ")
+            {
+                output = CountryCode::CountryCodeSZ;
+            }
+            if (inputStr == "SE")
+            {
+                output = CountryCode::CountryCodeSE;
+            }
+            if (inputStr == "CH")
+            {
+                output = CountryCode::CountryCodeCH;
+            }
+            if (inputStr == "SY")
+            {
+                output = CountryCode::CountryCodeSY;
+            }
+            if (inputStr == "TW")
+            {
+                output = CountryCode::CountryCodeTW;
+            }
+            if (inputStr == "TJ")
+            {
+                output = CountryCode::CountryCodeTJ;
+            }
+            if (inputStr == "TZ")
+            {
+                output = CountryCode::CountryCodeTZ;
+            }
+            if (inputStr == "TH")
+            {
+                output = CountryCode::CountryCodeTH;
+            }
+            if (inputStr == "TL")
+            {
+                output = CountryCode::CountryCodeTL;
+            }
+            if (inputStr == "TG")
+            {
+                output = CountryCode::CountryCodeTG;
+            }
+            if (inputStr == "TK")
+            {
+                output = CountryCode::CountryCodeTK;
+            }
+            if (inputStr == "TO")
+            {
+                output = CountryCode::CountryCodeTO;
+            }
+            if (inputStr == "TT")
+            {
+                output = CountryCode::CountryCodeTT;
+            }
+            if (inputStr == "TN")
+            {
+                output = CountryCode::CountryCodeTN;
+            }
+            if (inputStr == "TR")
+            {
+                output = CountryCode::CountryCodeTR;
+            }
+            if (inputStr == "TM")
+            {
+                output = CountryCode::CountryCodeTM;
+            }
+            if (inputStr == "TC")
+            {
+                output = CountryCode::CountryCodeTC;
+            }
+            if (inputStr == "TV")
+            {
+                output = CountryCode::CountryCodeTV;
+            }
+            if (inputStr == "UG")
+            {
+                output = CountryCode::CountryCodeUG;
+            }
+            if (inputStr == "UA")
+            {
+                output = CountryCode::CountryCodeUA;
+            }
+            if (inputStr == "AE")
+            {
+                output = CountryCode::CountryCodeAE;
+            }
+            if (inputStr == "GB")
+            {
+                output = CountryCode::CountryCodeGB;
+            }
+            if (inputStr == "US")
+            {
+                output = CountryCode::CountryCodeUS;
+            }
+            if (inputStr == "UM")
+            {
+                output = CountryCode::CountryCodeUM;
+            }
+            if (inputStr == "UY")
+            {
+                output = CountryCode::CountryCodeUY;
+            }
+            if (inputStr == "UZ")
+            {
+                output = CountryCode::CountryCodeUZ;
+            }
+            if (inputStr == "VU")
+            {
+                output = CountryCode::CountryCodeVU;
+            }
+            if (inputStr == "VE")
+            {
+                output = CountryCode::CountryCodeVE;
+            }
+            if (inputStr == "VN")
+            {
+                output = CountryCode::CountryCodeVN;
+            }
+            if (inputStr == "VG")
+            {
+                output = CountryCode::CountryCodeVG;
+            }
+            if (inputStr == "VI")
+            {
+                output = CountryCode::CountryCodeVI;
+            }
+            if (inputStr == "WF")
+            {
+                output = CountryCode::CountryCodeWF;
+            }
+            if (inputStr == "EH")
+            {
+                output = CountryCode::CountryCodeEH;
+            }
+            if (inputStr == "YE")
+            {
+                output = CountryCode::CountryCodeYE;
+            }
+            if (inputStr == "ZM")
+            {
+                output = CountryCode::CountryCodeZM;
+            }
+            if (inputStr == "ZW")
+            {
+                output = CountryCode::CountryCodeZW;
+            }
         }
 
         enum class Currency
@@ -994,335 +2557,1310 @@ namespace PlayFab
 
         inline void ToJsonEnum(const Currency input, Json::Value& output)
         {
-            if (input == Currency::CurrencyAED) output = Json::Value("AED");
-            if (input == Currency::CurrencyAFN) output = Json::Value("AFN");
-            if (input == Currency::CurrencyALL) output = Json::Value("ALL");
-            if (input == Currency::CurrencyAMD) output = Json::Value("AMD");
-            if (input == Currency::CurrencyANG) output = Json::Value("ANG");
-            if (input == Currency::CurrencyAOA) output = Json::Value("AOA");
-            if (input == Currency::CurrencyARS) output = Json::Value("ARS");
-            if (input == Currency::CurrencyAUD) output = Json::Value("AUD");
-            if (input == Currency::CurrencyAWG) output = Json::Value("AWG");
-            if (input == Currency::CurrencyAZN) output = Json::Value("AZN");
-            if (input == Currency::CurrencyBAM) output = Json::Value("BAM");
-            if (input == Currency::CurrencyBBD) output = Json::Value("BBD");
-            if (input == Currency::CurrencyBDT) output = Json::Value("BDT");
-            if (input == Currency::CurrencyBGN) output = Json::Value("BGN");
-            if (input == Currency::CurrencyBHD) output = Json::Value("BHD");
-            if (input == Currency::CurrencyBIF) output = Json::Value("BIF");
-            if (input == Currency::CurrencyBMD) output = Json::Value("BMD");
-            if (input == Currency::CurrencyBND) output = Json::Value("BND");
-            if (input == Currency::CurrencyBOB) output = Json::Value("BOB");
-            if (input == Currency::CurrencyBRL) output = Json::Value("BRL");
-            if (input == Currency::CurrencyBSD) output = Json::Value("BSD");
-            if (input == Currency::CurrencyBTN) output = Json::Value("BTN");
-            if (input == Currency::CurrencyBWP) output = Json::Value("BWP");
-            if (input == Currency::CurrencyBYR) output = Json::Value("BYR");
-            if (input == Currency::CurrencyBZD) output = Json::Value("BZD");
-            if (input == Currency::CurrencyCAD) output = Json::Value("CAD");
-            if (input == Currency::CurrencyCDF) output = Json::Value("CDF");
-            if (input == Currency::CurrencyCHF) output = Json::Value("CHF");
-            if (input == Currency::CurrencyCLP) output = Json::Value("CLP");
-            if (input == Currency::CurrencyCNY) output = Json::Value("CNY");
-            if (input == Currency::CurrencyCOP) output = Json::Value("COP");
-            if (input == Currency::CurrencyCRC) output = Json::Value("CRC");
-            if (input == Currency::CurrencyCUC) output = Json::Value("CUC");
-            if (input == Currency::CurrencyCUP) output = Json::Value("CUP");
-            if (input == Currency::CurrencyCVE) output = Json::Value("CVE");
-            if (input == Currency::CurrencyCZK) output = Json::Value("CZK");
-            if (input == Currency::CurrencyDJF) output = Json::Value("DJF");
-            if (input == Currency::CurrencyDKK) output = Json::Value("DKK");
-            if (input == Currency::CurrencyDOP) output = Json::Value("DOP");
-            if (input == Currency::CurrencyDZD) output = Json::Value("DZD");
-            if (input == Currency::CurrencyEGP) output = Json::Value("EGP");
-            if (input == Currency::CurrencyERN) output = Json::Value("ERN");
-            if (input == Currency::CurrencyETB) output = Json::Value("ETB");
-            if (input == Currency::CurrencyEUR) output = Json::Value("EUR");
-            if (input == Currency::CurrencyFJD) output = Json::Value("FJD");
-            if (input == Currency::CurrencyFKP) output = Json::Value("FKP");
-            if (input == Currency::CurrencyGBP) output = Json::Value("GBP");
-            if (input == Currency::CurrencyGEL) output = Json::Value("GEL");
-            if (input == Currency::CurrencyGGP) output = Json::Value("GGP");
-            if (input == Currency::CurrencyGHS) output = Json::Value("GHS");
-            if (input == Currency::CurrencyGIP) output = Json::Value("GIP");
-            if (input == Currency::CurrencyGMD) output = Json::Value("GMD");
-            if (input == Currency::CurrencyGNF) output = Json::Value("GNF");
-            if (input == Currency::CurrencyGTQ) output = Json::Value("GTQ");
-            if (input == Currency::CurrencyGYD) output = Json::Value("GYD");
-            if (input == Currency::CurrencyHKD) output = Json::Value("HKD");
-            if (input == Currency::CurrencyHNL) output = Json::Value("HNL");
-            if (input == Currency::CurrencyHRK) output = Json::Value("HRK");
-            if (input == Currency::CurrencyHTG) output = Json::Value("HTG");
-            if (input == Currency::CurrencyHUF) output = Json::Value("HUF");
-            if (input == Currency::CurrencyIDR) output = Json::Value("IDR");
-            if (input == Currency::CurrencyILS) output = Json::Value("ILS");
-            if (input == Currency::CurrencyIMP) output = Json::Value("IMP");
-            if (input == Currency::CurrencyINR) output = Json::Value("INR");
-            if (input == Currency::CurrencyIQD) output = Json::Value("IQD");
-            if (input == Currency::CurrencyIRR) output = Json::Value("IRR");
-            if (input == Currency::CurrencyISK) output = Json::Value("ISK");
-            if (input == Currency::CurrencyJEP) output = Json::Value("JEP");
-            if (input == Currency::CurrencyJMD) output = Json::Value("JMD");
-            if (input == Currency::CurrencyJOD) output = Json::Value("JOD");
-            if (input == Currency::CurrencyJPY) output = Json::Value("JPY");
-            if (input == Currency::CurrencyKES) output = Json::Value("KES");
-            if (input == Currency::CurrencyKGS) output = Json::Value("KGS");
-            if (input == Currency::CurrencyKHR) output = Json::Value("KHR");
-            if (input == Currency::CurrencyKMF) output = Json::Value("KMF");
-            if (input == Currency::CurrencyKPW) output = Json::Value("KPW");
-            if (input == Currency::CurrencyKRW) output = Json::Value("KRW");
-            if (input == Currency::CurrencyKWD) output = Json::Value("KWD");
-            if (input == Currency::CurrencyKYD) output = Json::Value("KYD");
-            if (input == Currency::CurrencyKZT) output = Json::Value("KZT");
-            if (input == Currency::CurrencyLAK) output = Json::Value("LAK");
-            if (input == Currency::CurrencyLBP) output = Json::Value("LBP");
-            if (input == Currency::CurrencyLKR) output = Json::Value("LKR");
-            if (input == Currency::CurrencyLRD) output = Json::Value("LRD");
-            if (input == Currency::CurrencyLSL) output = Json::Value("LSL");
-            if (input == Currency::CurrencyLYD) output = Json::Value("LYD");
-            if (input == Currency::CurrencyMAD) output = Json::Value("MAD");
-            if (input == Currency::CurrencyMDL) output = Json::Value("MDL");
-            if (input == Currency::CurrencyMGA) output = Json::Value("MGA");
-            if (input == Currency::CurrencyMKD) output = Json::Value("MKD");
-            if (input == Currency::CurrencyMMK) output = Json::Value("MMK");
-            if (input == Currency::CurrencyMNT) output = Json::Value("MNT");
-            if (input == Currency::CurrencyMOP) output = Json::Value("MOP");
-            if (input == Currency::CurrencyMRO) output = Json::Value("MRO");
-            if (input == Currency::CurrencyMUR) output = Json::Value("MUR");
-            if (input == Currency::CurrencyMVR) output = Json::Value("MVR");
-            if (input == Currency::CurrencyMWK) output = Json::Value("MWK");
-            if (input == Currency::CurrencyMXN) output = Json::Value("MXN");
-            if (input == Currency::CurrencyMYR) output = Json::Value("MYR");
-            if (input == Currency::CurrencyMZN) output = Json::Value("MZN");
-            if (input == Currency::CurrencyNAD) output = Json::Value("NAD");
-            if (input == Currency::CurrencyNGN) output = Json::Value("NGN");
-            if (input == Currency::CurrencyNIO) output = Json::Value("NIO");
-            if (input == Currency::CurrencyNOK) output = Json::Value("NOK");
-            if (input == Currency::CurrencyNPR) output = Json::Value("NPR");
-            if (input == Currency::CurrencyNZD) output = Json::Value("NZD");
-            if (input == Currency::CurrencyOMR) output = Json::Value("OMR");
-            if (input == Currency::CurrencyPAB) output = Json::Value("PAB");
-            if (input == Currency::CurrencyPEN) output = Json::Value("PEN");
-            if (input == Currency::CurrencyPGK) output = Json::Value("PGK");
-            if (input == Currency::CurrencyPHP) output = Json::Value("PHP");
-            if (input == Currency::CurrencyPKR) output = Json::Value("PKR");
-            if (input == Currency::CurrencyPLN) output = Json::Value("PLN");
-            if (input == Currency::CurrencyPYG) output = Json::Value("PYG");
-            if (input == Currency::CurrencyQAR) output = Json::Value("QAR");
-            if (input == Currency::CurrencyRON) output = Json::Value("RON");
-            if (input == Currency::CurrencyRSD) output = Json::Value("RSD");
-            if (input == Currency::CurrencyRUB) output = Json::Value("RUB");
-            if (input == Currency::CurrencyRWF) output = Json::Value("RWF");
-            if (input == Currency::CurrencySAR) output = Json::Value("SAR");
-            if (input == Currency::CurrencySBD) output = Json::Value("SBD");
-            if (input == Currency::CurrencySCR) output = Json::Value("SCR");
-            if (input == Currency::CurrencySDG) output = Json::Value("SDG");
-            if (input == Currency::CurrencySEK) output = Json::Value("SEK");
-            if (input == Currency::CurrencySGD) output = Json::Value("SGD");
-            if (input == Currency::CurrencySHP) output = Json::Value("SHP");
-            if (input == Currency::CurrencySLL) output = Json::Value("SLL");
-            if (input == Currency::CurrencySOS) output = Json::Value("SOS");
-            if (input == Currency::CurrencySPL) output = Json::Value("SPL");
-            if (input == Currency::CurrencySRD) output = Json::Value("SRD");
-            if (input == Currency::CurrencySTD) output = Json::Value("STD");
-            if (input == Currency::CurrencySVC) output = Json::Value("SVC");
-            if (input == Currency::CurrencySYP) output = Json::Value("SYP");
-            if (input == Currency::CurrencySZL) output = Json::Value("SZL");
-            if (input == Currency::CurrencyTHB) output = Json::Value("THB");
-            if (input == Currency::CurrencyTJS) output = Json::Value("TJS");
-            if (input == Currency::CurrencyTMT) output = Json::Value("TMT");
-            if (input == Currency::CurrencyTND) output = Json::Value("TND");
-            if (input == Currency::CurrencyTOP) output = Json::Value("TOP");
-            if (input == Currency::CurrencyTRY) output = Json::Value("TRY");
-            if (input == Currency::CurrencyTTD) output = Json::Value("TTD");
-            if (input == Currency::CurrencyTVD) output = Json::Value("TVD");
-            if (input == Currency::CurrencyTWD) output = Json::Value("TWD");
-            if (input == Currency::CurrencyTZS) output = Json::Value("TZS");
-            if (input == Currency::CurrencyUAH) output = Json::Value("UAH");
-            if (input == Currency::CurrencyUGX) output = Json::Value("UGX");
-            if (input == Currency::CurrencyUSD) output = Json::Value("USD");
-            if (input == Currency::CurrencyUYU) output = Json::Value("UYU");
-            if (input == Currency::CurrencyUZS) output = Json::Value("UZS");
-            if (input == Currency::CurrencyVEF) output = Json::Value("VEF");
-            if (input == Currency::CurrencyVND) output = Json::Value("VND");
-            if (input == Currency::CurrencyVUV) output = Json::Value("VUV");
-            if (input == Currency::CurrencyWST) output = Json::Value("WST");
-            if (input == Currency::CurrencyXAF) output = Json::Value("XAF");
-            if (input == Currency::CurrencyXCD) output = Json::Value("XCD");
-            if (input == Currency::CurrencyXDR) output = Json::Value("XDR");
-            if (input == Currency::CurrencyXOF) output = Json::Value("XOF");
-            if (input == Currency::CurrencyXPF) output = Json::Value("XPF");
-            if (input == Currency::CurrencyYER) output = Json::Value("YER");
-            if (input == Currency::CurrencyZAR) output = Json::Value("ZAR");
-            if (input == Currency::CurrencyZMW) output = Json::Value("ZMW");
-            if (input == Currency::CurrencyZWD) output = Json::Value("ZWD");
+            if (input == Currency::CurrencyAED)
+            {
+                output = Json::Value("AED");
+            }
+            if (input == Currency::CurrencyAFN)
+            {
+                output = Json::Value("AFN");
+            }
+            if (input == Currency::CurrencyALL)
+            {
+                output = Json::Value("ALL");
+            }
+            if (input == Currency::CurrencyAMD)
+            {
+                output = Json::Value("AMD");
+            }
+            if (input == Currency::CurrencyANG)
+            {
+                output = Json::Value("ANG");
+            }
+            if (input == Currency::CurrencyAOA)
+            {
+                output = Json::Value("AOA");
+            }
+            if (input == Currency::CurrencyARS)
+            {
+                output = Json::Value("ARS");
+            }
+            if (input == Currency::CurrencyAUD)
+            {
+                output = Json::Value("AUD");
+            }
+            if (input == Currency::CurrencyAWG)
+            {
+                output = Json::Value("AWG");
+            }
+            if (input == Currency::CurrencyAZN)
+            {
+                output = Json::Value("AZN");
+            }
+            if (input == Currency::CurrencyBAM)
+            {
+                output = Json::Value("BAM");
+            }
+            if (input == Currency::CurrencyBBD)
+            {
+                output = Json::Value("BBD");
+            }
+            if (input == Currency::CurrencyBDT)
+            {
+                output = Json::Value("BDT");
+            }
+            if (input == Currency::CurrencyBGN)
+            {
+                output = Json::Value("BGN");
+            }
+            if (input == Currency::CurrencyBHD)
+            {
+                output = Json::Value("BHD");
+            }
+            if (input == Currency::CurrencyBIF)
+            {
+                output = Json::Value("BIF");
+            }
+            if (input == Currency::CurrencyBMD)
+            {
+                output = Json::Value("BMD");
+            }
+            if (input == Currency::CurrencyBND)
+            {
+                output = Json::Value("BND");
+            }
+            if (input == Currency::CurrencyBOB)
+            {
+                output = Json::Value("BOB");
+            }
+            if (input == Currency::CurrencyBRL)
+            {
+                output = Json::Value("BRL");
+            }
+            if (input == Currency::CurrencyBSD)
+            {
+                output = Json::Value("BSD");
+            }
+            if (input == Currency::CurrencyBTN)
+            {
+                output = Json::Value("BTN");
+            }
+            if (input == Currency::CurrencyBWP)
+            {
+                output = Json::Value("BWP");
+            }
+            if (input == Currency::CurrencyBYR)
+            {
+                output = Json::Value("BYR");
+            }
+            if (input == Currency::CurrencyBZD)
+            {
+                output = Json::Value("BZD");
+            }
+            if (input == Currency::CurrencyCAD)
+            {
+                output = Json::Value("CAD");
+            }
+            if (input == Currency::CurrencyCDF)
+            {
+                output = Json::Value("CDF");
+            }
+            if (input == Currency::CurrencyCHF)
+            {
+                output = Json::Value("CHF");
+            }
+            if (input == Currency::CurrencyCLP)
+            {
+                output = Json::Value("CLP");
+            }
+            if (input == Currency::CurrencyCNY)
+            {
+                output = Json::Value("CNY");
+            }
+            if (input == Currency::CurrencyCOP)
+            {
+                output = Json::Value("COP");
+            }
+            if (input == Currency::CurrencyCRC)
+            {
+                output = Json::Value("CRC");
+            }
+            if (input == Currency::CurrencyCUC)
+            {
+                output = Json::Value("CUC");
+            }
+            if (input == Currency::CurrencyCUP)
+            {
+                output = Json::Value("CUP");
+            }
+            if (input == Currency::CurrencyCVE)
+            {
+                output = Json::Value("CVE");
+            }
+            if (input == Currency::CurrencyCZK)
+            {
+                output = Json::Value("CZK");
+            }
+            if (input == Currency::CurrencyDJF)
+            {
+                output = Json::Value("DJF");
+            }
+            if (input == Currency::CurrencyDKK)
+            {
+                output = Json::Value("DKK");
+            }
+            if (input == Currency::CurrencyDOP)
+            {
+                output = Json::Value("DOP");
+            }
+            if (input == Currency::CurrencyDZD)
+            {
+                output = Json::Value("DZD");
+            }
+            if (input == Currency::CurrencyEGP)
+            {
+                output = Json::Value("EGP");
+            }
+            if (input == Currency::CurrencyERN)
+            {
+                output = Json::Value("ERN");
+            }
+            if (input == Currency::CurrencyETB)
+            {
+                output = Json::Value("ETB");
+            }
+            if (input == Currency::CurrencyEUR)
+            {
+                output = Json::Value("EUR");
+            }
+            if (input == Currency::CurrencyFJD)
+            {
+                output = Json::Value("FJD");
+            }
+            if (input == Currency::CurrencyFKP)
+            {
+                output = Json::Value("FKP");
+            }
+            if (input == Currency::CurrencyGBP)
+            {
+                output = Json::Value("GBP");
+            }
+            if (input == Currency::CurrencyGEL)
+            {
+                output = Json::Value("GEL");
+            }
+            if (input == Currency::CurrencyGGP)
+            {
+                output = Json::Value("GGP");
+            }
+            if (input == Currency::CurrencyGHS)
+            {
+                output = Json::Value("GHS");
+            }
+            if (input == Currency::CurrencyGIP)
+            {
+                output = Json::Value("GIP");
+            }
+            if (input == Currency::CurrencyGMD)
+            {
+                output = Json::Value("GMD");
+            }
+            if (input == Currency::CurrencyGNF)
+            {
+                output = Json::Value("GNF");
+            }
+            if (input == Currency::CurrencyGTQ)
+            {
+                output = Json::Value("GTQ");
+            }
+            if (input == Currency::CurrencyGYD)
+            {
+                output = Json::Value("GYD");
+            }
+            if (input == Currency::CurrencyHKD)
+            {
+                output = Json::Value("HKD");
+            }
+            if (input == Currency::CurrencyHNL)
+            {
+                output = Json::Value("HNL");
+            }
+            if (input == Currency::CurrencyHRK)
+            {
+                output = Json::Value("HRK");
+            }
+            if (input == Currency::CurrencyHTG)
+            {
+                output = Json::Value("HTG");
+            }
+            if (input == Currency::CurrencyHUF)
+            {
+                output = Json::Value("HUF");
+            }
+            if (input == Currency::CurrencyIDR)
+            {
+                output = Json::Value("IDR");
+            }
+            if (input == Currency::CurrencyILS)
+            {
+                output = Json::Value("ILS");
+            }
+            if (input == Currency::CurrencyIMP)
+            {
+                output = Json::Value("IMP");
+            }
+            if (input == Currency::CurrencyINR)
+            {
+                output = Json::Value("INR");
+            }
+            if (input == Currency::CurrencyIQD)
+            {
+                output = Json::Value("IQD");
+            }
+            if (input == Currency::CurrencyIRR)
+            {
+                output = Json::Value("IRR");
+            }
+            if (input == Currency::CurrencyISK)
+            {
+                output = Json::Value("ISK");
+            }
+            if (input == Currency::CurrencyJEP)
+            {
+                output = Json::Value("JEP");
+            }
+            if (input == Currency::CurrencyJMD)
+            {
+                output = Json::Value("JMD");
+            }
+            if (input == Currency::CurrencyJOD)
+            {
+                output = Json::Value("JOD");
+            }
+            if (input == Currency::CurrencyJPY)
+            {
+                output = Json::Value("JPY");
+            }
+            if (input == Currency::CurrencyKES)
+            {
+                output = Json::Value("KES");
+            }
+            if (input == Currency::CurrencyKGS)
+            {
+                output = Json::Value("KGS");
+            }
+            if (input == Currency::CurrencyKHR)
+            {
+                output = Json::Value("KHR");
+            }
+            if (input == Currency::CurrencyKMF)
+            {
+                output = Json::Value("KMF");
+            }
+            if (input == Currency::CurrencyKPW)
+            {
+                output = Json::Value("KPW");
+            }
+            if (input == Currency::CurrencyKRW)
+            {
+                output = Json::Value("KRW");
+            }
+            if (input == Currency::CurrencyKWD)
+            {
+                output = Json::Value("KWD");
+            }
+            if (input == Currency::CurrencyKYD)
+            {
+                output = Json::Value("KYD");
+            }
+            if (input == Currency::CurrencyKZT)
+            {
+                output = Json::Value("KZT");
+            }
+            if (input == Currency::CurrencyLAK)
+            {
+                output = Json::Value("LAK");
+            }
+            if (input == Currency::CurrencyLBP)
+            {
+                output = Json::Value("LBP");
+            }
+            if (input == Currency::CurrencyLKR)
+            {
+                output = Json::Value("LKR");
+            }
+            if (input == Currency::CurrencyLRD)
+            {
+                output = Json::Value("LRD");
+            }
+            if (input == Currency::CurrencyLSL)
+            {
+                output = Json::Value("LSL");
+            }
+            if (input == Currency::CurrencyLYD)
+            {
+                output = Json::Value("LYD");
+            }
+            if (input == Currency::CurrencyMAD)
+            {
+                output = Json::Value("MAD");
+            }
+            if (input == Currency::CurrencyMDL)
+            {
+                output = Json::Value("MDL");
+            }
+            if (input == Currency::CurrencyMGA)
+            {
+                output = Json::Value("MGA");
+            }
+            if (input == Currency::CurrencyMKD)
+            {
+                output = Json::Value("MKD");
+            }
+            if (input == Currency::CurrencyMMK)
+            {
+                output = Json::Value("MMK");
+            }
+            if (input == Currency::CurrencyMNT)
+            {
+                output = Json::Value("MNT");
+            }
+            if (input == Currency::CurrencyMOP)
+            {
+                output = Json::Value("MOP");
+            }
+            if (input == Currency::CurrencyMRO)
+            {
+                output = Json::Value("MRO");
+            }
+            if (input == Currency::CurrencyMUR)
+            {
+                output = Json::Value("MUR");
+            }
+            if (input == Currency::CurrencyMVR)
+            {
+                output = Json::Value("MVR");
+            }
+            if (input == Currency::CurrencyMWK)
+            {
+                output = Json::Value("MWK");
+            }
+            if (input == Currency::CurrencyMXN)
+            {
+                output = Json::Value("MXN");
+            }
+            if (input == Currency::CurrencyMYR)
+            {
+                output = Json::Value("MYR");
+            }
+            if (input == Currency::CurrencyMZN)
+            {
+                output = Json::Value("MZN");
+            }
+            if (input == Currency::CurrencyNAD)
+            {
+                output = Json::Value("NAD");
+            }
+            if (input == Currency::CurrencyNGN)
+            {
+                output = Json::Value("NGN");
+            }
+            if (input == Currency::CurrencyNIO)
+            {
+                output = Json::Value("NIO");
+            }
+            if (input == Currency::CurrencyNOK)
+            {
+                output = Json::Value("NOK");
+            }
+            if (input == Currency::CurrencyNPR)
+            {
+                output = Json::Value("NPR");
+            }
+            if (input == Currency::CurrencyNZD)
+            {
+                output = Json::Value("NZD");
+            }
+            if (input == Currency::CurrencyOMR)
+            {
+                output = Json::Value("OMR");
+            }
+            if (input == Currency::CurrencyPAB)
+            {
+                output = Json::Value("PAB");
+            }
+            if (input == Currency::CurrencyPEN)
+            {
+                output = Json::Value("PEN");
+            }
+            if (input == Currency::CurrencyPGK)
+            {
+                output = Json::Value("PGK");
+            }
+            if (input == Currency::CurrencyPHP)
+            {
+                output = Json::Value("PHP");
+            }
+            if (input == Currency::CurrencyPKR)
+            {
+                output = Json::Value("PKR");
+            }
+            if (input == Currency::CurrencyPLN)
+            {
+                output = Json::Value("PLN");
+            }
+            if (input == Currency::CurrencyPYG)
+            {
+                output = Json::Value("PYG");
+            }
+            if (input == Currency::CurrencyQAR)
+            {
+                output = Json::Value("QAR");
+            }
+            if (input == Currency::CurrencyRON)
+            {
+                output = Json::Value("RON");
+            }
+            if (input == Currency::CurrencyRSD)
+            {
+                output = Json::Value("RSD");
+            }
+            if (input == Currency::CurrencyRUB)
+            {
+                output = Json::Value("RUB");
+            }
+            if (input == Currency::CurrencyRWF)
+            {
+                output = Json::Value("RWF");
+            }
+            if (input == Currency::CurrencySAR)
+            {
+                output = Json::Value("SAR");
+            }
+            if (input == Currency::CurrencySBD)
+            {
+                output = Json::Value("SBD");
+            }
+            if (input == Currency::CurrencySCR)
+            {
+                output = Json::Value("SCR");
+            }
+            if (input == Currency::CurrencySDG)
+            {
+                output = Json::Value("SDG");
+            }
+            if (input == Currency::CurrencySEK)
+            {
+                output = Json::Value("SEK");
+            }
+            if (input == Currency::CurrencySGD)
+            {
+                output = Json::Value("SGD");
+            }
+            if (input == Currency::CurrencySHP)
+            {
+                output = Json::Value("SHP");
+            }
+            if (input == Currency::CurrencySLL)
+            {
+                output = Json::Value("SLL");
+            }
+            if (input == Currency::CurrencySOS)
+            {
+                output = Json::Value("SOS");
+            }
+            if (input == Currency::CurrencySPL)
+            {
+                output = Json::Value("SPL");
+            }
+            if (input == Currency::CurrencySRD)
+            {
+                output = Json::Value("SRD");
+            }
+            if (input == Currency::CurrencySTD)
+            {
+                output = Json::Value("STD");
+            }
+            if (input == Currency::CurrencySVC)
+            {
+                output = Json::Value("SVC");
+            }
+            if (input == Currency::CurrencySYP)
+            {
+                output = Json::Value("SYP");
+            }
+            if (input == Currency::CurrencySZL)
+            {
+                output = Json::Value("SZL");
+            }
+            if (input == Currency::CurrencyTHB)
+            {
+                output = Json::Value("THB");
+            }
+            if (input == Currency::CurrencyTJS)
+            {
+                output = Json::Value("TJS");
+            }
+            if (input == Currency::CurrencyTMT)
+            {
+                output = Json::Value("TMT");
+            }
+            if (input == Currency::CurrencyTND)
+            {
+                output = Json::Value("TND");
+            }
+            if (input == Currency::CurrencyTOP)
+            {
+                output = Json::Value("TOP");
+            }
+            if (input == Currency::CurrencyTRY)
+            {
+                output = Json::Value("TRY");
+            }
+            if (input == Currency::CurrencyTTD)
+            {
+                output = Json::Value("TTD");
+            }
+            if (input == Currency::CurrencyTVD)
+            {
+                output = Json::Value("TVD");
+            }
+            if (input == Currency::CurrencyTWD)
+            {
+                output = Json::Value("TWD");
+            }
+            if (input == Currency::CurrencyTZS)
+            {
+                output = Json::Value("TZS");
+            }
+            if (input == Currency::CurrencyUAH)
+            {
+                output = Json::Value("UAH");
+            }
+            if (input == Currency::CurrencyUGX)
+            {
+                output = Json::Value("UGX");
+            }
+            if (input == Currency::CurrencyUSD)
+            {
+                output = Json::Value("USD");
+            }
+            if (input == Currency::CurrencyUYU)
+            {
+                output = Json::Value("UYU");
+            }
+            if (input == Currency::CurrencyUZS)
+            {
+                output = Json::Value("UZS");
+            }
+            if (input == Currency::CurrencyVEF)
+            {
+                output = Json::Value("VEF");
+            }
+            if (input == Currency::CurrencyVND)
+            {
+                output = Json::Value("VND");
+            }
+            if (input == Currency::CurrencyVUV)
+            {
+                output = Json::Value("VUV");
+            }
+            if (input == Currency::CurrencyWST)
+            {
+                output = Json::Value("WST");
+            }
+            if (input == Currency::CurrencyXAF)
+            {
+                output = Json::Value("XAF");
+            }
+            if (input == Currency::CurrencyXCD)
+            {
+                output = Json::Value("XCD");
+            }
+            if (input == Currency::CurrencyXDR)
+            {
+                output = Json::Value("XDR");
+            }
+            if (input == Currency::CurrencyXOF)
+            {
+                output = Json::Value("XOF");
+            }
+            if (input == Currency::CurrencyXPF)
+            {
+                output = Json::Value("XPF");
+            }
+            if (input == Currency::CurrencyYER)
+            {
+                output = Json::Value("YER");
+            }
+            if (input == Currency::CurrencyZAR)
+            {
+                output = Json::Value("ZAR");
+            }
+            if (input == Currency::CurrencyZMW)
+            {
+                output = Json::Value("ZMW");
+            }
+            if (input == Currency::CurrencyZWD)
+            {
+                output = Json::Value("ZWD");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, Currency& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "AED") output = Currency::CurrencyAED;
-            if (inputStr == "AFN") output = Currency::CurrencyAFN;
-            if (inputStr == "ALL") output = Currency::CurrencyALL;
-            if (inputStr == "AMD") output = Currency::CurrencyAMD;
-            if (inputStr == "ANG") output = Currency::CurrencyANG;
-            if (inputStr == "AOA") output = Currency::CurrencyAOA;
-            if (inputStr == "ARS") output = Currency::CurrencyARS;
-            if (inputStr == "AUD") output = Currency::CurrencyAUD;
-            if (inputStr == "AWG") output = Currency::CurrencyAWG;
-            if (inputStr == "AZN") output = Currency::CurrencyAZN;
-            if (inputStr == "BAM") output = Currency::CurrencyBAM;
-            if (inputStr == "BBD") output = Currency::CurrencyBBD;
-            if (inputStr == "BDT") output = Currency::CurrencyBDT;
-            if (inputStr == "BGN") output = Currency::CurrencyBGN;
-            if (inputStr == "BHD") output = Currency::CurrencyBHD;
-            if (inputStr == "BIF") output = Currency::CurrencyBIF;
-            if (inputStr == "BMD") output = Currency::CurrencyBMD;
-            if (inputStr == "BND") output = Currency::CurrencyBND;
-            if (inputStr == "BOB") output = Currency::CurrencyBOB;
-            if (inputStr == "BRL") output = Currency::CurrencyBRL;
-            if (inputStr == "BSD") output = Currency::CurrencyBSD;
-            if (inputStr == "BTN") output = Currency::CurrencyBTN;
-            if (inputStr == "BWP") output = Currency::CurrencyBWP;
-            if (inputStr == "BYR") output = Currency::CurrencyBYR;
-            if (inputStr == "BZD") output = Currency::CurrencyBZD;
-            if (inputStr == "CAD") output = Currency::CurrencyCAD;
-            if (inputStr == "CDF") output = Currency::CurrencyCDF;
-            if (inputStr == "CHF") output = Currency::CurrencyCHF;
-            if (inputStr == "CLP") output = Currency::CurrencyCLP;
-            if (inputStr == "CNY") output = Currency::CurrencyCNY;
-            if (inputStr == "COP") output = Currency::CurrencyCOP;
-            if (inputStr == "CRC") output = Currency::CurrencyCRC;
-            if (inputStr == "CUC") output = Currency::CurrencyCUC;
-            if (inputStr == "CUP") output = Currency::CurrencyCUP;
-            if (inputStr == "CVE") output = Currency::CurrencyCVE;
-            if (inputStr == "CZK") output = Currency::CurrencyCZK;
-            if (inputStr == "DJF") output = Currency::CurrencyDJF;
-            if (inputStr == "DKK") output = Currency::CurrencyDKK;
-            if (inputStr == "DOP") output = Currency::CurrencyDOP;
-            if (inputStr == "DZD") output = Currency::CurrencyDZD;
-            if (inputStr == "EGP") output = Currency::CurrencyEGP;
-            if (inputStr == "ERN") output = Currency::CurrencyERN;
-            if (inputStr == "ETB") output = Currency::CurrencyETB;
-            if (inputStr == "EUR") output = Currency::CurrencyEUR;
-            if (inputStr == "FJD") output = Currency::CurrencyFJD;
-            if (inputStr == "FKP") output = Currency::CurrencyFKP;
-            if (inputStr == "GBP") output = Currency::CurrencyGBP;
-            if (inputStr == "GEL") output = Currency::CurrencyGEL;
-            if (inputStr == "GGP") output = Currency::CurrencyGGP;
-            if (inputStr == "GHS") output = Currency::CurrencyGHS;
-            if (inputStr == "GIP") output = Currency::CurrencyGIP;
-            if (inputStr == "GMD") output = Currency::CurrencyGMD;
-            if (inputStr == "GNF") output = Currency::CurrencyGNF;
-            if (inputStr == "GTQ") output = Currency::CurrencyGTQ;
-            if (inputStr == "GYD") output = Currency::CurrencyGYD;
-            if (inputStr == "HKD") output = Currency::CurrencyHKD;
-            if (inputStr == "HNL") output = Currency::CurrencyHNL;
-            if (inputStr == "HRK") output = Currency::CurrencyHRK;
-            if (inputStr == "HTG") output = Currency::CurrencyHTG;
-            if (inputStr == "HUF") output = Currency::CurrencyHUF;
-            if (inputStr == "IDR") output = Currency::CurrencyIDR;
-            if (inputStr == "ILS") output = Currency::CurrencyILS;
-            if (inputStr == "IMP") output = Currency::CurrencyIMP;
-            if (inputStr == "INR") output = Currency::CurrencyINR;
-            if (inputStr == "IQD") output = Currency::CurrencyIQD;
-            if (inputStr == "IRR") output = Currency::CurrencyIRR;
-            if (inputStr == "ISK") output = Currency::CurrencyISK;
-            if (inputStr == "JEP") output = Currency::CurrencyJEP;
-            if (inputStr == "JMD") output = Currency::CurrencyJMD;
-            if (inputStr == "JOD") output = Currency::CurrencyJOD;
-            if (inputStr == "JPY") output = Currency::CurrencyJPY;
-            if (inputStr == "KES") output = Currency::CurrencyKES;
-            if (inputStr == "KGS") output = Currency::CurrencyKGS;
-            if (inputStr == "KHR") output = Currency::CurrencyKHR;
-            if (inputStr == "KMF") output = Currency::CurrencyKMF;
-            if (inputStr == "KPW") output = Currency::CurrencyKPW;
-            if (inputStr == "KRW") output = Currency::CurrencyKRW;
-            if (inputStr == "KWD") output = Currency::CurrencyKWD;
-            if (inputStr == "KYD") output = Currency::CurrencyKYD;
-            if (inputStr == "KZT") output = Currency::CurrencyKZT;
-            if (inputStr == "LAK") output = Currency::CurrencyLAK;
-            if (inputStr == "LBP") output = Currency::CurrencyLBP;
-            if (inputStr == "LKR") output = Currency::CurrencyLKR;
-            if (inputStr == "LRD") output = Currency::CurrencyLRD;
-            if (inputStr == "LSL") output = Currency::CurrencyLSL;
-            if (inputStr == "LYD") output = Currency::CurrencyLYD;
-            if (inputStr == "MAD") output = Currency::CurrencyMAD;
-            if (inputStr == "MDL") output = Currency::CurrencyMDL;
-            if (inputStr == "MGA") output = Currency::CurrencyMGA;
-            if (inputStr == "MKD") output = Currency::CurrencyMKD;
-            if (inputStr == "MMK") output = Currency::CurrencyMMK;
-            if (inputStr == "MNT") output = Currency::CurrencyMNT;
-            if (inputStr == "MOP") output = Currency::CurrencyMOP;
-            if (inputStr == "MRO") output = Currency::CurrencyMRO;
-            if (inputStr == "MUR") output = Currency::CurrencyMUR;
-            if (inputStr == "MVR") output = Currency::CurrencyMVR;
-            if (inputStr == "MWK") output = Currency::CurrencyMWK;
-            if (inputStr == "MXN") output = Currency::CurrencyMXN;
-            if (inputStr == "MYR") output = Currency::CurrencyMYR;
-            if (inputStr == "MZN") output = Currency::CurrencyMZN;
-            if (inputStr == "NAD") output = Currency::CurrencyNAD;
-            if (inputStr == "NGN") output = Currency::CurrencyNGN;
-            if (inputStr == "NIO") output = Currency::CurrencyNIO;
-            if (inputStr == "NOK") output = Currency::CurrencyNOK;
-            if (inputStr == "NPR") output = Currency::CurrencyNPR;
-            if (inputStr == "NZD") output = Currency::CurrencyNZD;
-            if (inputStr == "OMR") output = Currency::CurrencyOMR;
-            if (inputStr == "PAB") output = Currency::CurrencyPAB;
-            if (inputStr == "PEN") output = Currency::CurrencyPEN;
-            if (inputStr == "PGK") output = Currency::CurrencyPGK;
-            if (inputStr == "PHP") output = Currency::CurrencyPHP;
-            if (inputStr == "PKR") output = Currency::CurrencyPKR;
-            if (inputStr == "PLN") output = Currency::CurrencyPLN;
-            if (inputStr == "PYG") output = Currency::CurrencyPYG;
-            if (inputStr == "QAR") output = Currency::CurrencyQAR;
-            if (inputStr == "RON") output = Currency::CurrencyRON;
-            if (inputStr == "RSD") output = Currency::CurrencyRSD;
-            if (inputStr == "RUB") output = Currency::CurrencyRUB;
-            if (inputStr == "RWF") output = Currency::CurrencyRWF;
-            if (inputStr == "SAR") output = Currency::CurrencySAR;
-            if (inputStr == "SBD") output = Currency::CurrencySBD;
-            if (inputStr == "SCR") output = Currency::CurrencySCR;
-            if (inputStr == "SDG") output = Currency::CurrencySDG;
-            if (inputStr == "SEK") output = Currency::CurrencySEK;
-            if (inputStr == "SGD") output = Currency::CurrencySGD;
-            if (inputStr == "SHP") output = Currency::CurrencySHP;
-            if (inputStr == "SLL") output = Currency::CurrencySLL;
-            if (inputStr == "SOS") output = Currency::CurrencySOS;
-            if (inputStr == "SPL") output = Currency::CurrencySPL;
-            if (inputStr == "SRD") output = Currency::CurrencySRD;
-            if (inputStr == "STD") output = Currency::CurrencySTD;
-            if (inputStr == "SVC") output = Currency::CurrencySVC;
-            if (inputStr == "SYP") output = Currency::CurrencySYP;
-            if (inputStr == "SZL") output = Currency::CurrencySZL;
-            if (inputStr == "THB") output = Currency::CurrencyTHB;
-            if (inputStr == "TJS") output = Currency::CurrencyTJS;
-            if (inputStr == "TMT") output = Currency::CurrencyTMT;
-            if (inputStr == "TND") output = Currency::CurrencyTND;
-            if (inputStr == "TOP") output = Currency::CurrencyTOP;
-            if (inputStr == "TRY") output = Currency::CurrencyTRY;
-            if (inputStr == "TTD") output = Currency::CurrencyTTD;
-            if (inputStr == "TVD") output = Currency::CurrencyTVD;
-            if (inputStr == "TWD") output = Currency::CurrencyTWD;
-            if (inputStr == "TZS") output = Currency::CurrencyTZS;
-            if (inputStr == "UAH") output = Currency::CurrencyUAH;
-            if (inputStr == "UGX") output = Currency::CurrencyUGX;
-            if (inputStr == "USD") output = Currency::CurrencyUSD;
-            if (inputStr == "UYU") output = Currency::CurrencyUYU;
-            if (inputStr == "UZS") output = Currency::CurrencyUZS;
-            if (inputStr == "VEF") output = Currency::CurrencyVEF;
-            if (inputStr == "VND") output = Currency::CurrencyVND;
-            if (inputStr == "VUV") output = Currency::CurrencyVUV;
-            if (inputStr == "WST") output = Currency::CurrencyWST;
-            if (inputStr == "XAF") output = Currency::CurrencyXAF;
-            if (inputStr == "XCD") output = Currency::CurrencyXCD;
-            if (inputStr == "XDR") output = Currency::CurrencyXDR;
-            if (inputStr == "XOF") output = Currency::CurrencyXOF;
-            if (inputStr == "XPF") output = Currency::CurrencyXPF;
-            if (inputStr == "YER") output = Currency::CurrencyYER;
-            if (inputStr == "ZAR") output = Currency::CurrencyZAR;
-            if (inputStr == "ZMW") output = Currency::CurrencyZMW;
-            if (inputStr == "ZWD") output = Currency::CurrencyZWD;
+            if (inputStr == "AED")
+            {
+                output = Currency::CurrencyAED;
+            }
+            if (inputStr == "AFN")
+            {
+                output = Currency::CurrencyAFN;
+            }
+            if (inputStr == "ALL")
+            {
+                output = Currency::CurrencyALL;
+            }
+            if (inputStr == "AMD")
+            {
+                output = Currency::CurrencyAMD;
+            }
+            if (inputStr == "ANG")
+            {
+                output = Currency::CurrencyANG;
+            }
+            if (inputStr == "AOA")
+            {
+                output = Currency::CurrencyAOA;
+            }
+            if (inputStr == "ARS")
+            {
+                output = Currency::CurrencyARS;
+            }
+            if (inputStr == "AUD")
+            {
+                output = Currency::CurrencyAUD;
+            }
+            if (inputStr == "AWG")
+            {
+                output = Currency::CurrencyAWG;
+            }
+            if (inputStr == "AZN")
+            {
+                output = Currency::CurrencyAZN;
+            }
+            if (inputStr == "BAM")
+            {
+                output = Currency::CurrencyBAM;
+            }
+            if (inputStr == "BBD")
+            {
+                output = Currency::CurrencyBBD;
+            }
+            if (inputStr == "BDT")
+            {
+                output = Currency::CurrencyBDT;
+            }
+            if (inputStr == "BGN")
+            {
+                output = Currency::CurrencyBGN;
+            }
+            if (inputStr == "BHD")
+            {
+                output = Currency::CurrencyBHD;
+            }
+            if (inputStr == "BIF")
+            {
+                output = Currency::CurrencyBIF;
+            }
+            if (inputStr == "BMD")
+            {
+                output = Currency::CurrencyBMD;
+            }
+            if (inputStr == "BND")
+            {
+                output = Currency::CurrencyBND;
+            }
+            if (inputStr == "BOB")
+            {
+                output = Currency::CurrencyBOB;
+            }
+            if (inputStr == "BRL")
+            {
+                output = Currency::CurrencyBRL;
+            }
+            if (inputStr == "BSD")
+            {
+                output = Currency::CurrencyBSD;
+            }
+            if (inputStr == "BTN")
+            {
+                output = Currency::CurrencyBTN;
+            }
+            if (inputStr == "BWP")
+            {
+                output = Currency::CurrencyBWP;
+            }
+            if (inputStr == "BYR")
+            {
+                output = Currency::CurrencyBYR;
+            }
+            if (inputStr == "BZD")
+            {
+                output = Currency::CurrencyBZD;
+            }
+            if (inputStr == "CAD")
+            {
+                output = Currency::CurrencyCAD;
+            }
+            if (inputStr == "CDF")
+            {
+                output = Currency::CurrencyCDF;
+            }
+            if (inputStr == "CHF")
+            {
+                output = Currency::CurrencyCHF;
+            }
+            if (inputStr == "CLP")
+            {
+                output = Currency::CurrencyCLP;
+            }
+            if (inputStr == "CNY")
+            {
+                output = Currency::CurrencyCNY;
+            }
+            if (inputStr == "COP")
+            {
+                output = Currency::CurrencyCOP;
+            }
+            if (inputStr == "CRC")
+            {
+                output = Currency::CurrencyCRC;
+            }
+            if (inputStr == "CUC")
+            {
+                output = Currency::CurrencyCUC;
+            }
+            if (inputStr == "CUP")
+            {
+                output = Currency::CurrencyCUP;
+            }
+            if (inputStr == "CVE")
+            {
+                output = Currency::CurrencyCVE;
+            }
+            if (inputStr == "CZK")
+            {
+                output = Currency::CurrencyCZK;
+            }
+            if (inputStr == "DJF")
+            {
+                output = Currency::CurrencyDJF;
+            }
+            if (inputStr == "DKK")
+            {
+                output = Currency::CurrencyDKK;
+            }
+            if (inputStr == "DOP")
+            {
+                output = Currency::CurrencyDOP;
+            }
+            if (inputStr == "DZD")
+            {
+                output = Currency::CurrencyDZD;
+            }
+            if (inputStr == "EGP")
+            {
+                output = Currency::CurrencyEGP;
+            }
+            if (inputStr == "ERN")
+            {
+                output = Currency::CurrencyERN;
+            }
+            if (inputStr == "ETB")
+            {
+                output = Currency::CurrencyETB;
+            }
+            if (inputStr == "EUR")
+            {
+                output = Currency::CurrencyEUR;
+            }
+            if (inputStr == "FJD")
+            {
+                output = Currency::CurrencyFJD;
+            }
+            if (inputStr == "FKP")
+            {
+                output = Currency::CurrencyFKP;
+            }
+            if (inputStr == "GBP")
+            {
+                output = Currency::CurrencyGBP;
+            }
+            if (inputStr == "GEL")
+            {
+                output = Currency::CurrencyGEL;
+            }
+            if (inputStr == "GGP")
+            {
+                output = Currency::CurrencyGGP;
+            }
+            if (inputStr == "GHS")
+            {
+                output = Currency::CurrencyGHS;
+            }
+            if (inputStr == "GIP")
+            {
+                output = Currency::CurrencyGIP;
+            }
+            if (inputStr == "GMD")
+            {
+                output = Currency::CurrencyGMD;
+            }
+            if (inputStr == "GNF")
+            {
+                output = Currency::CurrencyGNF;
+            }
+            if (inputStr == "GTQ")
+            {
+                output = Currency::CurrencyGTQ;
+            }
+            if (inputStr == "GYD")
+            {
+                output = Currency::CurrencyGYD;
+            }
+            if (inputStr == "HKD")
+            {
+                output = Currency::CurrencyHKD;
+            }
+            if (inputStr == "HNL")
+            {
+                output = Currency::CurrencyHNL;
+            }
+            if (inputStr == "HRK")
+            {
+                output = Currency::CurrencyHRK;
+            }
+            if (inputStr == "HTG")
+            {
+                output = Currency::CurrencyHTG;
+            }
+            if (inputStr == "HUF")
+            {
+                output = Currency::CurrencyHUF;
+            }
+            if (inputStr == "IDR")
+            {
+                output = Currency::CurrencyIDR;
+            }
+            if (inputStr == "ILS")
+            {
+                output = Currency::CurrencyILS;
+            }
+            if (inputStr == "IMP")
+            {
+                output = Currency::CurrencyIMP;
+            }
+            if (inputStr == "INR")
+            {
+                output = Currency::CurrencyINR;
+            }
+            if (inputStr == "IQD")
+            {
+                output = Currency::CurrencyIQD;
+            }
+            if (inputStr == "IRR")
+            {
+                output = Currency::CurrencyIRR;
+            }
+            if (inputStr == "ISK")
+            {
+                output = Currency::CurrencyISK;
+            }
+            if (inputStr == "JEP")
+            {
+                output = Currency::CurrencyJEP;
+            }
+            if (inputStr == "JMD")
+            {
+                output = Currency::CurrencyJMD;
+            }
+            if (inputStr == "JOD")
+            {
+                output = Currency::CurrencyJOD;
+            }
+            if (inputStr == "JPY")
+            {
+                output = Currency::CurrencyJPY;
+            }
+            if (inputStr == "KES")
+            {
+                output = Currency::CurrencyKES;
+            }
+            if (inputStr == "KGS")
+            {
+                output = Currency::CurrencyKGS;
+            }
+            if (inputStr == "KHR")
+            {
+                output = Currency::CurrencyKHR;
+            }
+            if (inputStr == "KMF")
+            {
+                output = Currency::CurrencyKMF;
+            }
+            if (inputStr == "KPW")
+            {
+                output = Currency::CurrencyKPW;
+            }
+            if (inputStr == "KRW")
+            {
+                output = Currency::CurrencyKRW;
+            }
+            if (inputStr == "KWD")
+            {
+                output = Currency::CurrencyKWD;
+            }
+            if (inputStr == "KYD")
+            {
+                output = Currency::CurrencyKYD;
+            }
+            if (inputStr == "KZT")
+            {
+                output = Currency::CurrencyKZT;
+            }
+            if (inputStr == "LAK")
+            {
+                output = Currency::CurrencyLAK;
+            }
+            if (inputStr == "LBP")
+            {
+                output = Currency::CurrencyLBP;
+            }
+            if (inputStr == "LKR")
+            {
+                output = Currency::CurrencyLKR;
+            }
+            if (inputStr == "LRD")
+            {
+                output = Currency::CurrencyLRD;
+            }
+            if (inputStr == "LSL")
+            {
+                output = Currency::CurrencyLSL;
+            }
+            if (inputStr == "LYD")
+            {
+                output = Currency::CurrencyLYD;
+            }
+            if (inputStr == "MAD")
+            {
+                output = Currency::CurrencyMAD;
+            }
+            if (inputStr == "MDL")
+            {
+                output = Currency::CurrencyMDL;
+            }
+            if (inputStr == "MGA")
+            {
+                output = Currency::CurrencyMGA;
+            }
+            if (inputStr == "MKD")
+            {
+                output = Currency::CurrencyMKD;
+            }
+            if (inputStr == "MMK")
+            {
+                output = Currency::CurrencyMMK;
+            }
+            if (inputStr == "MNT")
+            {
+                output = Currency::CurrencyMNT;
+            }
+            if (inputStr == "MOP")
+            {
+                output = Currency::CurrencyMOP;
+            }
+            if (inputStr == "MRO")
+            {
+                output = Currency::CurrencyMRO;
+            }
+            if (inputStr == "MUR")
+            {
+                output = Currency::CurrencyMUR;
+            }
+            if (inputStr == "MVR")
+            {
+                output = Currency::CurrencyMVR;
+            }
+            if (inputStr == "MWK")
+            {
+                output = Currency::CurrencyMWK;
+            }
+            if (inputStr == "MXN")
+            {
+                output = Currency::CurrencyMXN;
+            }
+            if (inputStr == "MYR")
+            {
+                output = Currency::CurrencyMYR;
+            }
+            if (inputStr == "MZN")
+            {
+                output = Currency::CurrencyMZN;
+            }
+            if (inputStr == "NAD")
+            {
+                output = Currency::CurrencyNAD;
+            }
+            if (inputStr == "NGN")
+            {
+                output = Currency::CurrencyNGN;
+            }
+            if (inputStr == "NIO")
+            {
+                output = Currency::CurrencyNIO;
+            }
+            if (inputStr == "NOK")
+            {
+                output = Currency::CurrencyNOK;
+            }
+            if (inputStr == "NPR")
+            {
+                output = Currency::CurrencyNPR;
+            }
+            if (inputStr == "NZD")
+            {
+                output = Currency::CurrencyNZD;
+            }
+            if (inputStr == "OMR")
+            {
+                output = Currency::CurrencyOMR;
+            }
+            if (inputStr == "PAB")
+            {
+                output = Currency::CurrencyPAB;
+            }
+            if (inputStr == "PEN")
+            {
+                output = Currency::CurrencyPEN;
+            }
+            if (inputStr == "PGK")
+            {
+                output = Currency::CurrencyPGK;
+            }
+            if (inputStr == "PHP")
+            {
+                output = Currency::CurrencyPHP;
+            }
+            if (inputStr == "PKR")
+            {
+                output = Currency::CurrencyPKR;
+            }
+            if (inputStr == "PLN")
+            {
+                output = Currency::CurrencyPLN;
+            }
+            if (inputStr == "PYG")
+            {
+                output = Currency::CurrencyPYG;
+            }
+            if (inputStr == "QAR")
+            {
+                output = Currency::CurrencyQAR;
+            }
+            if (inputStr == "RON")
+            {
+                output = Currency::CurrencyRON;
+            }
+            if (inputStr == "RSD")
+            {
+                output = Currency::CurrencyRSD;
+            }
+            if (inputStr == "RUB")
+            {
+                output = Currency::CurrencyRUB;
+            }
+            if (inputStr == "RWF")
+            {
+                output = Currency::CurrencyRWF;
+            }
+            if (inputStr == "SAR")
+            {
+                output = Currency::CurrencySAR;
+            }
+            if (inputStr == "SBD")
+            {
+                output = Currency::CurrencySBD;
+            }
+            if (inputStr == "SCR")
+            {
+                output = Currency::CurrencySCR;
+            }
+            if (inputStr == "SDG")
+            {
+                output = Currency::CurrencySDG;
+            }
+            if (inputStr == "SEK")
+            {
+                output = Currency::CurrencySEK;
+            }
+            if (inputStr == "SGD")
+            {
+                output = Currency::CurrencySGD;
+            }
+            if (inputStr == "SHP")
+            {
+                output = Currency::CurrencySHP;
+            }
+            if (inputStr == "SLL")
+            {
+                output = Currency::CurrencySLL;
+            }
+            if (inputStr == "SOS")
+            {
+                output = Currency::CurrencySOS;
+            }
+            if (inputStr == "SPL")
+            {
+                output = Currency::CurrencySPL;
+            }
+            if (inputStr == "SRD")
+            {
+                output = Currency::CurrencySRD;
+            }
+            if (inputStr == "STD")
+            {
+                output = Currency::CurrencySTD;
+            }
+            if (inputStr == "SVC")
+            {
+                output = Currency::CurrencySVC;
+            }
+            if (inputStr == "SYP")
+            {
+                output = Currency::CurrencySYP;
+            }
+            if (inputStr == "SZL")
+            {
+                output = Currency::CurrencySZL;
+            }
+            if (inputStr == "THB")
+            {
+                output = Currency::CurrencyTHB;
+            }
+            if (inputStr == "TJS")
+            {
+                output = Currency::CurrencyTJS;
+            }
+            if (inputStr == "TMT")
+            {
+                output = Currency::CurrencyTMT;
+            }
+            if (inputStr == "TND")
+            {
+                output = Currency::CurrencyTND;
+            }
+            if (inputStr == "TOP")
+            {
+                output = Currency::CurrencyTOP;
+            }
+            if (inputStr == "TRY")
+            {
+                output = Currency::CurrencyTRY;
+            }
+            if (inputStr == "TTD")
+            {
+                output = Currency::CurrencyTTD;
+            }
+            if (inputStr == "TVD")
+            {
+                output = Currency::CurrencyTVD;
+            }
+            if (inputStr == "TWD")
+            {
+                output = Currency::CurrencyTWD;
+            }
+            if (inputStr == "TZS")
+            {
+                output = Currency::CurrencyTZS;
+            }
+            if (inputStr == "UAH")
+            {
+                output = Currency::CurrencyUAH;
+            }
+            if (inputStr == "UGX")
+            {
+                output = Currency::CurrencyUGX;
+            }
+            if (inputStr == "USD")
+            {
+                output = Currency::CurrencyUSD;
+            }
+            if (inputStr == "UYU")
+            {
+                output = Currency::CurrencyUYU;
+            }
+            if (inputStr == "UZS")
+            {
+                output = Currency::CurrencyUZS;
+            }
+            if (inputStr == "VEF")
+            {
+                output = Currency::CurrencyVEF;
+            }
+            if (inputStr == "VND")
+            {
+                output = Currency::CurrencyVND;
+            }
+            if (inputStr == "VUV")
+            {
+                output = Currency::CurrencyVUV;
+            }
+            if (inputStr == "WST")
+            {
+                output = Currency::CurrencyWST;
+            }
+            if (inputStr == "XAF")
+            {
+                output = Currency::CurrencyXAF;
+            }
+            if (inputStr == "XCD")
+            {
+                output = Currency::CurrencyXCD;
+            }
+            if (inputStr == "XDR")
+            {
+                output = Currency::CurrencyXDR;
+            }
+            if (inputStr == "XOF")
+            {
+                output = Currency::CurrencyXOF;
+            }
+            if (inputStr == "XPF")
+            {
+                output = Currency::CurrencyXPF;
+            }
+            if (inputStr == "YER")
+            {
+                output = Currency::CurrencyYER;
+            }
+            if (inputStr == "ZAR")
+            {
+                output = Currency::CurrencyZAR;
+            }
+            if (inputStr == "ZMW")
+            {
+                output = Currency::CurrencyZMW;
+            }
+            if (inputStr == "ZWD")
+            {
+                output = Currency::CurrencyZWD;
+            }
         }
 
         enum class EmailVerificationStatus
@@ -1334,17 +3872,38 @@ namespace PlayFab
 
         inline void ToJsonEnum(const EmailVerificationStatus input, Json::Value& output)
         {
-            if (input == EmailVerificationStatus::EmailVerificationStatusUnverified) output = Json::Value("Unverified");
-            if (input == EmailVerificationStatus::EmailVerificationStatusPending) output = Json::Value("Pending");
-            if (input == EmailVerificationStatus::EmailVerificationStatusConfirmed) output = Json::Value("Confirmed");
+            if (input == EmailVerificationStatus::EmailVerificationStatusUnverified)
+            {
+                output = Json::Value("Unverified");
+            }
+            if (input == EmailVerificationStatus::EmailVerificationStatusPending)
+            {
+                output = Json::Value("Pending");
+            }
+            if (input == EmailVerificationStatus::EmailVerificationStatusConfirmed)
+            {
+                output = Json::Value("Confirmed");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, EmailVerificationStatus& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "Unverified") output = EmailVerificationStatus::EmailVerificationStatusUnverified;
-            if (inputStr == "Pending") output = EmailVerificationStatus::EmailVerificationStatusPending;
-            if (inputStr == "Confirmed") output = EmailVerificationStatus::EmailVerificationStatusConfirmed;
+            if (inputStr == "Unverified")
+            {
+                output = EmailVerificationStatus::EmailVerificationStatusUnverified;
+            }
+            if (inputStr == "Pending")
+            {
+                output = EmailVerificationStatus::EmailVerificationStatusPending;
+            }
+            if (inputStr == "Confirmed")
+            {
+                output = EmailVerificationStatus::EmailVerificationStatusConfirmed;
+            }
         }
 
         enum class GameInstanceState
@@ -1355,15 +3914,30 @@ namespace PlayFab
 
         inline void ToJsonEnum(const GameInstanceState input, Json::Value& output)
         {
-            if (input == GameInstanceState::GameInstanceStateOpen) output = Json::Value("Open");
-            if (input == GameInstanceState::GameInstanceStateClosed) output = Json::Value("Closed");
+            if (input == GameInstanceState::GameInstanceStateOpen)
+            {
+                output = Json::Value("Open");
+            }
+            if (input == GameInstanceState::GameInstanceStateClosed)
+            {
+                output = Json::Value("Closed");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, GameInstanceState& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "Open") output = GameInstanceState::GameInstanceStateOpen;
-            if (inputStr == "Closed") output = GameInstanceState::GameInstanceStateClosed;
+            if (inputStr == "Open")
+            {
+                output = GameInstanceState::GameInstanceStateOpen;
+            }
+            if (inputStr == "Closed")
+            {
+                output = GameInstanceState::GameInstanceStateClosed;
+            }
         }
 
         enum class GenericErrorCodes
@@ -1919,1105 +4493,4390 @@ namespace PlayFab
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
         {
-            if (input == GenericErrorCodes::GenericErrorCodesSuccess) output = Json::Value("Success");
-            if (input == GenericErrorCodes::GenericErrorCodesUnkownError) output = Json::Value("UnkownError");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidParams) output = Json::Value("InvalidParams");
-            if (input == GenericErrorCodes::GenericErrorCodesAccountNotFound) output = Json::Value("AccountNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesAccountBanned) output = Json::Value("AccountBanned");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidUsernameOrPassword) output = Json::Value("InvalidUsernameOrPassword");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidTitleId) output = Json::Value("InvalidTitleId");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidEmailAddress) output = Json::Value("InvalidEmailAddress");
-            if (input == GenericErrorCodes::GenericErrorCodesEmailAddressNotAvailable) output = Json::Value("EmailAddressNotAvailable");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidUsername) output = Json::Value("InvalidUsername");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidPassword) output = Json::Value("InvalidPassword");
-            if (input == GenericErrorCodes::GenericErrorCodesUsernameNotAvailable) output = Json::Value("UsernameNotAvailable");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidSteamTicket) output = Json::Value("InvalidSteamTicket");
-            if (input == GenericErrorCodes::GenericErrorCodesAccountAlreadyLinked) output = Json::Value("AccountAlreadyLinked");
-            if (input == GenericErrorCodes::GenericErrorCodesLinkedAccountAlreadyClaimed) output = Json::Value("LinkedAccountAlreadyClaimed");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidFacebookToken) output = Json::Value("InvalidFacebookToken");
-            if (input == GenericErrorCodes::GenericErrorCodesAccountNotLinked) output = Json::Value("AccountNotLinked");
-            if (input == GenericErrorCodes::GenericErrorCodesFailedByPaymentProvider) output = Json::Value("FailedByPaymentProvider");
-            if (input == GenericErrorCodes::GenericErrorCodesCouponCodeNotFound) output = Json::Value("CouponCodeNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidContainerItem) output = Json::Value("InvalidContainerItem");
-            if (input == GenericErrorCodes::GenericErrorCodesContainerNotOwned) output = Json::Value("ContainerNotOwned");
-            if (input == GenericErrorCodes::GenericErrorCodesKeyNotOwned) output = Json::Value("KeyNotOwned");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidItemIdInTable) output = Json::Value("InvalidItemIdInTable");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidReceipt) output = Json::Value("InvalidReceipt");
-            if (input == GenericErrorCodes::GenericErrorCodesReceiptAlreadyUsed) output = Json::Value("ReceiptAlreadyUsed");
-            if (input == GenericErrorCodes::GenericErrorCodesReceiptCancelled) output = Json::Value("ReceiptCancelled");
-            if (input == GenericErrorCodes::GenericErrorCodesGameNotFound) output = Json::Value("GameNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesGameModeNotFound) output = Json::Value("GameModeNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidGoogleToken) output = Json::Value("InvalidGoogleToken");
-            if (input == GenericErrorCodes::GenericErrorCodesUserIsNotPartOfDeveloper) output = Json::Value("UserIsNotPartOfDeveloper");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidTitleForDeveloper) output = Json::Value("InvalidTitleForDeveloper");
-            if (input == GenericErrorCodes::GenericErrorCodesTitleNameConflicts) output = Json::Value("TitleNameConflicts");
-            if (input == GenericErrorCodes::GenericErrorCodesUserisNotValid) output = Json::Value("UserisNotValid");
-            if (input == GenericErrorCodes::GenericErrorCodesValueAlreadyExists) output = Json::Value("ValueAlreadyExists");
-            if (input == GenericErrorCodes::GenericErrorCodesBuildNotFound) output = Json::Value("BuildNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesPlayerNotInGame) output = Json::Value("PlayerNotInGame");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidTicket) output = Json::Value("InvalidTicket");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidDeveloper) output = Json::Value("InvalidDeveloper");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidOrderInfo) output = Json::Value("InvalidOrderInfo");
-            if (input == GenericErrorCodes::GenericErrorCodesRegistrationIncomplete) output = Json::Value("RegistrationIncomplete");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidPlatform) output = Json::Value("InvalidPlatform");
-            if (input == GenericErrorCodes::GenericErrorCodesUnknownError) output = Json::Value("UnknownError");
-            if (input == GenericErrorCodes::GenericErrorCodesSteamApplicationNotOwned) output = Json::Value("SteamApplicationNotOwned");
-            if (input == GenericErrorCodes::GenericErrorCodesWrongSteamAccount) output = Json::Value("WrongSteamAccount");
-            if (input == GenericErrorCodes::GenericErrorCodesTitleNotActivated) output = Json::Value("TitleNotActivated");
-            if (input == GenericErrorCodes::GenericErrorCodesRegistrationSessionNotFound) output = Json::Value("RegistrationSessionNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesNoSuchMod) output = Json::Value("NoSuchMod");
-            if (input == GenericErrorCodes::GenericErrorCodesFileNotFound) output = Json::Value("FileNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesDuplicateEmail) output = Json::Value("DuplicateEmail");
-            if (input == GenericErrorCodes::GenericErrorCodesItemNotFound) output = Json::Value("ItemNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesItemNotOwned) output = Json::Value("ItemNotOwned");
-            if (input == GenericErrorCodes::GenericErrorCodesItemNotRecycleable) output = Json::Value("ItemNotRecycleable");
-            if (input == GenericErrorCodes::GenericErrorCodesItemNotAffordable) output = Json::Value("ItemNotAffordable");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidVirtualCurrency) output = Json::Value("InvalidVirtualCurrency");
-            if (input == GenericErrorCodes::GenericErrorCodesWrongVirtualCurrency) output = Json::Value("WrongVirtualCurrency");
-            if (input == GenericErrorCodes::GenericErrorCodesWrongPrice) output = Json::Value("WrongPrice");
-            if (input == GenericErrorCodes::GenericErrorCodesNonPositiveValue) output = Json::Value("NonPositiveValue");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidRegion) output = Json::Value("InvalidRegion");
-            if (input == GenericErrorCodes::GenericErrorCodesRegionAtCapacity) output = Json::Value("RegionAtCapacity");
-            if (input == GenericErrorCodes::GenericErrorCodesServerFailedToStart) output = Json::Value("ServerFailedToStart");
-            if (input == GenericErrorCodes::GenericErrorCodesNameNotAvailable) output = Json::Value("NameNotAvailable");
-            if (input == GenericErrorCodes::GenericErrorCodesInsufficientFunds) output = Json::Value("InsufficientFunds");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidDeviceID) output = Json::Value("InvalidDeviceID");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidPushNotificationToken) output = Json::Value("InvalidPushNotificationToken");
-            if (input == GenericErrorCodes::GenericErrorCodesNoRemainingUses) output = Json::Value("NoRemainingUses");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidPaymentProvider) output = Json::Value("InvalidPaymentProvider");
-            if (input == GenericErrorCodes::GenericErrorCodesPurchaseInitializationFailure) output = Json::Value("PurchaseInitializationFailure");
-            if (input == GenericErrorCodes::GenericErrorCodesDuplicateUsername) output = Json::Value("DuplicateUsername");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidBuyerInfo) output = Json::Value("InvalidBuyerInfo");
-            if (input == GenericErrorCodes::GenericErrorCodesNoGameModeParamsSet) output = Json::Value("NoGameModeParamsSet");
-            if (input == GenericErrorCodes::GenericErrorCodesBodyTooLarge) output = Json::Value("BodyTooLarge");
-            if (input == GenericErrorCodes::GenericErrorCodesReservedWordInBody) output = Json::Value("ReservedWordInBody");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidTypeInBody) output = Json::Value("InvalidTypeInBody");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidRequest) output = Json::Value("InvalidRequest");
-            if (input == GenericErrorCodes::GenericErrorCodesReservedEventName) output = Json::Value("ReservedEventName");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidUserStatistics) output = Json::Value("InvalidUserStatistics");
-            if (input == GenericErrorCodes::GenericErrorCodesNotAuthenticated) output = Json::Value("NotAuthenticated");
-            if (input == GenericErrorCodes::GenericErrorCodesStreamAlreadyExists) output = Json::Value("StreamAlreadyExists");
-            if (input == GenericErrorCodes::GenericErrorCodesErrorCreatingStream) output = Json::Value("ErrorCreatingStream");
-            if (input == GenericErrorCodes::GenericErrorCodesStreamNotFound) output = Json::Value("StreamNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidAccount) output = Json::Value("InvalidAccount");
-            if (input == GenericErrorCodes::GenericErrorCodesPurchaseDoesNotExist) output = Json::Value("PurchaseDoesNotExist");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidPurchaseTransactionStatus) output = Json::Value("InvalidPurchaseTransactionStatus");
-            if (input == GenericErrorCodes::GenericErrorCodesAPINotEnabledForGameClientAccess) output = Json::Value("APINotEnabledForGameClientAccess");
-            if (input == GenericErrorCodes::GenericErrorCodesNoPushNotificationARNForTitle) output = Json::Value("NoPushNotificationARNForTitle");
-            if (input == GenericErrorCodes::GenericErrorCodesBuildAlreadyExists) output = Json::Value("BuildAlreadyExists");
-            if (input == GenericErrorCodes::GenericErrorCodesBuildPackageDoesNotExist) output = Json::Value("BuildPackageDoesNotExist");
-            if (input == GenericErrorCodes::GenericErrorCodesCustomAnalyticsEventsNotEnabledForTitle) output = Json::Value("CustomAnalyticsEventsNotEnabledForTitle");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidSharedGroupId) output = Json::Value("InvalidSharedGroupId");
-            if (input == GenericErrorCodes::GenericErrorCodesNotAuthorized) output = Json::Value("NotAuthorized");
-            if (input == GenericErrorCodes::GenericErrorCodesMissingTitleGoogleProperties) output = Json::Value("MissingTitleGoogleProperties");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidItemProperties) output = Json::Value("InvalidItemProperties");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidPSNAuthCode) output = Json::Value("InvalidPSNAuthCode");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidItemId) output = Json::Value("InvalidItemId");
-            if (input == GenericErrorCodes::GenericErrorCodesPushNotEnabledForAccount) output = Json::Value("PushNotEnabledForAccount");
-            if (input == GenericErrorCodes::GenericErrorCodesPushServiceError) output = Json::Value("PushServiceError");
-            if (input == GenericErrorCodes::GenericErrorCodesReceiptDoesNotContainInAppItems) output = Json::Value("ReceiptDoesNotContainInAppItems");
-            if (input == GenericErrorCodes::GenericErrorCodesReceiptContainsMultipleInAppItems) output = Json::Value("ReceiptContainsMultipleInAppItems");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidBundleID) output = Json::Value("InvalidBundleID");
-            if (input == GenericErrorCodes::GenericErrorCodesJavascriptException) output = Json::Value("JavascriptException");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidSessionTicket) output = Json::Value("InvalidSessionTicket");
-            if (input == GenericErrorCodes::GenericErrorCodesUnableToConnectToDatabase) output = Json::Value("UnableToConnectToDatabase");
-            if (input == GenericErrorCodes::GenericErrorCodesInternalServerError) output = Json::Value("InternalServerError");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidReportDate) output = Json::Value("InvalidReportDate");
-            if (input == GenericErrorCodes::GenericErrorCodesReportNotAvailable) output = Json::Value("ReportNotAvailable");
-            if (input == GenericErrorCodes::GenericErrorCodesDatabaseThroughputExceeded) output = Json::Value("DatabaseThroughputExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidGameTicket) output = Json::Value("InvalidGameTicket");
-            if (input == GenericErrorCodes::GenericErrorCodesExpiredGameTicket) output = Json::Value("ExpiredGameTicket");
-            if (input == GenericErrorCodes::GenericErrorCodesGameTicketDoesNotMatchLobby) output = Json::Value("GameTicketDoesNotMatchLobby");
-            if (input == GenericErrorCodes::GenericErrorCodesLinkedDeviceAlreadyClaimed) output = Json::Value("LinkedDeviceAlreadyClaimed");
-            if (input == GenericErrorCodes::GenericErrorCodesDeviceAlreadyLinked) output = Json::Value("DeviceAlreadyLinked");
-            if (input == GenericErrorCodes::GenericErrorCodesDeviceNotLinked) output = Json::Value("DeviceNotLinked");
-            if (input == GenericErrorCodes::GenericErrorCodesPartialFailure) output = Json::Value("PartialFailure");
-            if (input == GenericErrorCodes::GenericErrorCodesPublisherNotSet) output = Json::Value("PublisherNotSet");
-            if (input == GenericErrorCodes::GenericErrorCodesServiceUnavailable) output = Json::Value("ServiceUnavailable");
-            if (input == GenericErrorCodes::GenericErrorCodesVersionNotFound) output = Json::Value("VersionNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesRevisionNotFound) output = Json::Value("RevisionNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidPublisherId) output = Json::Value("InvalidPublisherId");
-            if (input == GenericErrorCodes::GenericErrorCodesDownstreamServiceUnavailable) output = Json::Value("DownstreamServiceUnavailable");
-            if (input == GenericErrorCodes::GenericErrorCodesAPINotIncludedInTitleUsageTier) output = Json::Value("APINotIncludedInTitleUsageTier");
-            if (input == GenericErrorCodes::GenericErrorCodesDAULimitExceeded) output = Json::Value("DAULimitExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesAPIRequestLimitExceeded) output = Json::Value("APIRequestLimitExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidAPIEndpoint) output = Json::Value("InvalidAPIEndpoint");
-            if (input == GenericErrorCodes::GenericErrorCodesBuildNotAvailable) output = Json::Value("BuildNotAvailable");
-            if (input == GenericErrorCodes::GenericErrorCodesConcurrentEditError) output = Json::Value("ConcurrentEditError");
-            if (input == GenericErrorCodes::GenericErrorCodesContentNotFound) output = Json::Value("ContentNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesCharacterNotFound) output = Json::Value("CharacterNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesCloudScriptNotFound) output = Json::Value("CloudScriptNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesContentQuotaExceeded) output = Json::Value("ContentQuotaExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidCharacterStatistics) output = Json::Value("InvalidCharacterStatistics");
-            if (input == GenericErrorCodes::GenericErrorCodesPhotonNotEnabledForTitle) output = Json::Value("PhotonNotEnabledForTitle");
-            if (input == GenericErrorCodes::GenericErrorCodesPhotonApplicationNotFound) output = Json::Value("PhotonApplicationNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesPhotonApplicationNotAssociatedWithTitle) output = Json::Value("PhotonApplicationNotAssociatedWithTitle");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidEmailOrPassword) output = Json::Value("InvalidEmailOrPassword");
-            if (input == GenericErrorCodes::GenericErrorCodesFacebookAPIError) output = Json::Value("FacebookAPIError");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidContentType) output = Json::Value("InvalidContentType");
-            if (input == GenericErrorCodes::GenericErrorCodesKeyLengthExceeded) output = Json::Value("KeyLengthExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesDataLengthExceeded) output = Json::Value("DataLengthExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesTooManyKeys) output = Json::Value("TooManyKeys");
-            if (input == GenericErrorCodes::GenericErrorCodesFreeTierCannotHaveVirtualCurrency) output = Json::Value("FreeTierCannotHaveVirtualCurrency");
-            if (input == GenericErrorCodes::GenericErrorCodesMissingAmazonSharedKey) output = Json::Value("MissingAmazonSharedKey");
-            if (input == GenericErrorCodes::GenericErrorCodesAmazonValidationError) output = Json::Value("AmazonValidationError");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidPSNIssuerId) output = Json::Value("InvalidPSNIssuerId");
-            if (input == GenericErrorCodes::GenericErrorCodesPSNInaccessible) output = Json::Value("PSNInaccessible");
-            if (input == GenericErrorCodes::GenericErrorCodesExpiredAuthToken) output = Json::Value("ExpiredAuthToken");
-            if (input == GenericErrorCodes::GenericErrorCodesFailedToGetEntitlements) output = Json::Value("FailedToGetEntitlements");
-            if (input == GenericErrorCodes::GenericErrorCodesFailedToConsumeEntitlement) output = Json::Value("FailedToConsumeEntitlement");
-            if (input == GenericErrorCodes::GenericErrorCodesTradeAcceptingUserNotAllowed) output = Json::Value("TradeAcceptingUserNotAllowed");
-            if (input == GenericErrorCodes::GenericErrorCodesTradeInventoryItemIsAssignedToCharacter) output = Json::Value("TradeInventoryItemIsAssignedToCharacter");
-            if (input == GenericErrorCodes::GenericErrorCodesTradeInventoryItemIsBundle) output = Json::Value("TradeInventoryItemIsBundle");
-            if (input == GenericErrorCodes::GenericErrorCodesTradeStatusNotValidForCancelling) output = Json::Value("TradeStatusNotValidForCancelling");
-            if (input == GenericErrorCodes::GenericErrorCodesTradeStatusNotValidForAccepting) output = Json::Value("TradeStatusNotValidForAccepting");
-            if (input == GenericErrorCodes::GenericErrorCodesTradeDoesNotExist) output = Json::Value("TradeDoesNotExist");
-            if (input == GenericErrorCodes::GenericErrorCodesTradeCancelled) output = Json::Value("TradeCancelled");
-            if (input == GenericErrorCodes::GenericErrorCodesTradeAlreadyFilled) output = Json::Value("TradeAlreadyFilled");
-            if (input == GenericErrorCodes::GenericErrorCodesTradeWaitForStatusTimeout) output = Json::Value("TradeWaitForStatusTimeout");
-            if (input == GenericErrorCodes::GenericErrorCodesTradeInventoryItemExpired) output = Json::Value("TradeInventoryItemExpired");
-            if (input == GenericErrorCodes::GenericErrorCodesTradeMissingOfferedAndAcceptedItems) output = Json::Value("TradeMissingOfferedAndAcceptedItems");
-            if (input == GenericErrorCodes::GenericErrorCodesTradeAcceptedItemIsBundle) output = Json::Value("TradeAcceptedItemIsBundle");
-            if (input == GenericErrorCodes::GenericErrorCodesTradeAcceptedItemIsStackable) output = Json::Value("TradeAcceptedItemIsStackable");
-            if (input == GenericErrorCodes::GenericErrorCodesTradeInventoryItemInvalidStatus) output = Json::Value("TradeInventoryItemInvalidStatus");
-            if (input == GenericErrorCodes::GenericErrorCodesTradeAcceptedCatalogItemInvalid) output = Json::Value("TradeAcceptedCatalogItemInvalid");
-            if (input == GenericErrorCodes::GenericErrorCodesTradeAllowedUsersInvalid) output = Json::Value("TradeAllowedUsersInvalid");
-            if (input == GenericErrorCodes::GenericErrorCodesTradeInventoryItemDoesNotExist) output = Json::Value("TradeInventoryItemDoesNotExist");
-            if (input == GenericErrorCodes::GenericErrorCodesTradeInventoryItemIsConsumed) output = Json::Value("TradeInventoryItemIsConsumed");
-            if (input == GenericErrorCodes::GenericErrorCodesTradeInventoryItemIsStackable) output = Json::Value("TradeInventoryItemIsStackable");
-            if (input == GenericErrorCodes::GenericErrorCodesTradeAcceptedItemsMismatch) output = Json::Value("TradeAcceptedItemsMismatch");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidKongregateToken) output = Json::Value("InvalidKongregateToken");
-            if (input == GenericErrorCodes::GenericErrorCodesFeatureNotConfiguredForTitle) output = Json::Value("FeatureNotConfiguredForTitle");
-            if (input == GenericErrorCodes::GenericErrorCodesNoMatchingCatalogItemForReceipt) output = Json::Value("NoMatchingCatalogItemForReceipt");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidCurrencyCode) output = Json::Value("InvalidCurrencyCode");
-            if (input == GenericErrorCodes::GenericErrorCodesNoRealMoneyPriceForCatalogItem) output = Json::Value("NoRealMoneyPriceForCatalogItem");
-            if (input == GenericErrorCodes::GenericErrorCodesTradeInventoryItemIsNotTradable) output = Json::Value("TradeInventoryItemIsNotTradable");
-            if (input == GenericErrorCodes::GenericErrorCodesTradeAcceptedCatalogItemIsNotTradable) output = Json::Value("TradeAcceptedCatalogItemIsNotTradable");
-            if (input == GenericErrorCodes::GenericErrorCodesUsersAlreadyFriends) output = Json::Value("UsersAlreadyFriends");
-            if (input == GenericErrorCodes::GenericErrorCodesLinkedIdentifierAlreadyClaimed) output = Json::Value("LinkedIdentifierAlreadyClaimed");
-            if (input == GenericErrorCodes::GenericErrorCodesCustomIdNotLinked) output = Json::Value("CustomIdNotLinked");
-            if (input == GenericErrorCodes::GenericErrorCodesTotalDataSizeExceeded) output = Json::Value("TotalDataSizeExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesDeleteKeyConflict) output = Json::Value("DeleteKeyConflict");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidXboxLiveToken) output = Json::Value("InvalidXboxLiveToken");
-            if (input == GenericErrorCodes::GenericErrorCodesExpiredXboxLiveToken) output = Json::Value("ExpiredXboxLiveToken");
-            if (input == GenericErrorCodes::GenericErrorCodesResettableStatisticVersionRequired) output = Json::Value("ResettableStatisticVersionRequired");
-            if (input == GenericErrorCodes::GenericErrorCodesNotAuthorizedByTitle) output = Json::Value("NotAuthorizedByTitle");
-            if (input == GenericErrorCodes::GenericErrorCodesNoPartnerEnabled) output = Json::Value("NoPartnerEnabled");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidPartnerResponse) output = Json::Value("InvalidPartnerResponse");
-            if (input == GenericErrorCodes::GenericErrorCodesAPINotEnabledForGameServerAccess) output = Json::Value("APINotEnabledForGameServerAccess");
-            if (input == GenericErrorCodes::GenericErrorCodesStatisticNotFound) output = Json::Value("StatisticNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesStatisticNameConflict) output = Json::Value("StatisticNameConflict");
-            if (input == GenericErrorCodes::GenericErrorCodesStatisticVersionClosedForWrites) output = Json::Value("StatisticVersionClosedForWrites");
-            if (input == GenericErrorCodes::GenericErrorCodesStatisticVersionInvalid) output = Json::Value("StatisticVersionInvalid");
-            if (input == GenericErrorCodes::GenericErrorCodesAPIClientRequestRateLimitExceeded) output = Json::Value("APIClientRequestRateLimitExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidJSONContent) output = Json::Value("InvalidJSONContent");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidDropTable) output = Json::Value("InvalidDropTable");
-            if (input == GenericErrorCodes::GenericErrorCodesStatisticVersionAlreadyIncrementedForScheduledInterval) output = Json::Value("StatisticVersionAlreadyIncrementedForScheduledInterval");
-            if (input == GenericErrorCodes::GenericErrorCodesStatisticCountLimitExceeded) output = Json::Value("StatisticCountLimitExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesStatisticVersionIncrementRateExceeded) output = Json::Value("StatisticVersionIncrementRateExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesContainerKeyInvalid) output = Json::Value("ContainerKeyInvalid");
-            if (input == GenericErrorCodes::GenericErrorCodesCloudScriptExecutionTimeLimitExceeded) output = Json::Value("CloudScriptExecutionTimeLimitExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesNoWritePermissionsForEvent) output = Json::Value("NoWritePermissionsForEvent");
-            if (input == GenericErrorCodes::GenericErrorCodesCloudScriptFunctionArgumentSizeExceeded) output = Json::Value("CloudScriptFunctionArgumentSizeExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesCloudScriptAPIRequestCountExceeded) output = Json::Value("CloudScriptAPIRequestCountExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesCloudScriptAPIRequestError) output = Json::Value("CloudScriptAPIRequestError");
-            if (input == GenericErrorCodes::GenericErrorCodesCloudScriptHTTPRequestError) output = Json::Value("CloudScriptHTTPRequestError");
-            if (input == GenericErrorCodes::GenericErrorCodesInsufficientGuildRole) output = Json::Value("InsufficientGuildRole");
-            if (input == GenericErrorCodes::GenericErrorCodesGuildNotFound) output = Json::Value("GuildNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesOverLimit) output = Json::Value("OverLimit");
-            if (input == GenericErrorCodes::GenericErrorCodesEventNotFound) output = Json::Value("EventNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidEventField) output = Json::Value("InvalidEventField");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidEventName) output = Json::Value("InvalidEventName");
-            if (input == GenericErrorCodes::GenericErrorCodesCatalogNotConfigured) output = Json::Value("CatalogNotConfigured");
-            if (input == GenericErrorCodes::GenericErrorCodesOperationNotSupportedForPlatform) output = Json::Value("OperationNotSupportedForPlatform");
-            if (input == GenericErrorCodes::GenericErrorCodesSegmentNotFound) output = Json::Value("SegmentNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesStoreNotFound) output = Json::Value("StoreNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidStatisticName) output = Json::Value("InvalidStatisticName");
-            if (input == GenericErrorCodes::GenericErrorCodesTitleNotQualifiedForLimit) output = Json::Value("TitleNotQualifiedForLimit");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidServiceLimitLevel) output = Json::Value("InvalidServiceLimitLevel");
-            if (input == GenericErrorCodes::GenericErrorCodesServiceLimitLevelInTransition) output = Json::Value("ServiceLimitLevelInTransition");
-            if (input == GenericErrorCodes::GenericErrorCodesCouponAlreadyRedeemed) output = Json::Value("CouponAlreadyRedeemed");
-            if (input == GenericErrorCodes::GenericErrorCodesGameServerBuildSizeLimitExceeded) output = Json::Value("GameServerBuildSizeLimitExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesGameServerBuildCountLimitExceeded) output = Json::Value("GameServerBuildCountLimitExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyCountLimitExceeded) output = Json::Value("VirtualCurrencyCountLimitExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyCodeExists) output = Json::Value("VirtualCurrencyCodeExists");
-            if (input == GenericErrorCodes::GenericErrorCodesTitleNewsItemCountLimitExceeded) output = Json::Value("TitleNewsItemCountLimitExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidTwitchToken) output = Json::Value("InvalidTwitchToken");
-            if (input == GenericErrorCodes::GenericErrorCodesTwitchResponseError) output = Json::Value("TwitchResponseError");
-            if (input == GenericErrorCodes::GenericErrorCodesProfaneDisplayName) output = Json::Value("ProfaneDisplayName");
-            if (input == GenericErrorCodes::GenericErrorCodesUserAlreadyAdded) output = Json::Value("UserAlreadyAdded");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidVirtualCurrencyCode) output = Json::Value("InvalidVirtualCurrencyCode");
-            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyCannotBeDeleted) output = Json::Value("VirtualCurrencyCannotBeDeleted");
-            if (input == GenericErrorCodes::GenericErrorCodesIdentifierAlreadyClaimed) output = Json::Value("IdentifierAlreadyClaimed");
-            if (input == GenericErrorCodes::GenericErrorCodesIdentifierNotLinked) output = Json::Value("IdentifierNotLinked");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidContinuationToken) output = Json::Value("InvalidContinuationToken");
-            if (input == GenericErrorCodes::GenericErrorCodesExpiredContinuationToken) output = Json::Value("ExpiredContinuationToken");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidSegment) output = Json::Value("InvalidSegment");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidSessionId) output = Json::Value("InvalidSessionId");
-            if (input == GenericErrorCodes::GenericErrorCodesSessionLogNotFound) output = Json::Value("SessionLogNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidSearchTerm) output = Json::Value("InvalidSearchTerm");
-            if (input == GenericErrorCodes::GenericErrorCodesTwoFactorAuthenticationTokenRequired) output = Json::Value("TwoFactorAuthenticationTokenRequired");
-            if (input == GenericErrorCodes::GenericErrorCodesGameServerHostCountLimitExceeded) output = Json::Value("GameServerHostCountLimitExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesPlayerTagCountLimitExceeded) output = Json::Value("PlayerTagCountLimitExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesRequestAlreadyRunning) output = Json::Value("RequestAlreadyRunning");
-            if (input == GenericErrorCodes::GenericErrorCodesActionGroupNotFound) output = Json::Value("ActionGroupNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesMaximumSegmentBulkActionJobsRunning) output = Json::Value("MaximumSegmentBulkActionJobsRunning");
-            if (input == GenericErrorCodes::GenericErrorCodesNoActionsOnPlayersInSegmentJob) output = Json::Value("NoActionsOnPlayersInSegmentJob");
-            if (input == GenericErrorCodes::GenericErrorCodesDuplicateStatisticName) output = Json::Value("DuplicateStatisticName");
-            if (input == GenericErrorCodes::GenericErrorCodesScheduledTaskNameConflict) output = Json::Value("ScheduledTaskNameConflict");
-            if (input == GenericErrorCodes::GenericErrorCodesScheduledTaskCreateConflict) output = Json::Value("ScheduledTaskCreateConflict");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidScheduledTaskName) output = Json::Value("InvalidScheduledTaskName");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidTaskSchedule) output = Json::Value("InvalidTaskSchedule");
-            if (input == GenericErrorCodes::GenericErrorCodesSteamNotEnabledForTitle) output = Json::Value("SteamNotEnabledForTitle");
-            if (input == GenericErrorCodes::GenericErrorCodesLimitNotAnUpgradeOption) output = Json::Value("LimitNotAnUpgradeOption");
-            if (input == GenericErrorCodes::GenericErrorCodesNoSecretKeyEnabledForCloudScript) output = Json::Value("NoSecretKeyEnabledForCloudScript");
-            if (input == GenericErrorCodes::GenericErrorCodesTaskNotFound) output = Json::Value("TaskNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesTaskInstanceNotFound) output = Json::Value("TaskInstanceNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidIdentityProviderId) output = Json::Value("InvalidIdentityProviderId");
-            if (input == GenericErrorCodes::GenericErrorCodesMisconfiguredIdentityProvider) output = Json::Value("MisconfiguredIdentityProvider");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidScheduledTaskType) output = Json::Value("InvalidScheduledTaskType");
-            if (input == GenericErrorCodes::GenericErrorCodesBillingInformationRequired) output = Json::Value("BillingInformationRequired");
-            if (input == GenericErrorCodes::GenericErrorCodesLimitedEditionItemUnavailable) output = Json::Value("LimitedEditionItemUnavailable");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidAdPlacementAndReward) output = Json::Value("InvalidAdPlacementAndReward");
-            if (input == GenericErrorCodes::GenericErrorCodesAllAdPlacementViewsAlreadyConsumed) output = Json::Value("AllAdPlacementViewsAlreadyConsumed");
-            if (input == GenericErrorCodes::GenericErrorCodesGoogleOAuthNotConfiguredForTitle) output = Json::Value("GoogleOAuthNotConfiguredForTitle");
-            if (input == GenericErrorCodes::GenericErrorCodesGoogleOAuthError) output = Json::Value("GoogleOAuthError");
-            if (input == GenericErrorCodes::GenericErrorCodesUserNotFriend) output = Json::Value("UserNotFriend");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidSignature) output = Json::Value("InvalidSignature");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidPublicKey) output = Json::Value("InvalidPublicKey");
-            if (input == GenericErrorCodes::GenericErrorCodesGoogleOAuthNoIdTokenIncludedInResponse) output = Json::Value("GoogleOAuthNoIdTokenIncludedInResponse");
-            if (input == GenericErrorCodes::GenericErrorCodesStatisticUpdateInProgress) output = Json::Value("StatisticUpdateInProgress");
-            if (input == GenericErrorCodes::GenericErrorCodesLeaderboardVersionNotAvailable) output = Json::Value("LeaderboardVersionNotAvailable");
-            if (input == GenericErrorCodes::GenericErrorCodesStatisticAlreadyHasPrizeTable) output = Json::Value("StatisticAlreadyHasPrizeTable");
-            if (input == GenericErrorCodes::GenericErrorCodesPrizeTableHasOverlappingRanks) output = Json::Value("PrizeTableHasOverlappingRanks");
-            if (input == GenericErrorCodes::GenericErrorCodesPrizeTableHasMissingRanks) output = Json::Value("PrizeTableHasMissingRanks");
-            if (input == GenericErrorCodes::GenericErrorCodesPrizeTableRankStartsAtZero) output = Json::Value("PrizeTableRankStartsAtZero");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidStatistic) output = Json::Value("InvalidStatistic");
-            if (input == GenericErrorCodes::GenericErrorCodesExpressionParseFailure) output = Json::Value("ExpressionParseFailure");
-            if (input == GenericErrorCodes::GenericErrorCodesExpressionInvokeFailure) output = Json::Value("ExpressionInvokeFailure");
-            if (input == GenericErrorCodes::GenericErrorCodesExpressionTooLong) output = Json::Value("ExpressionTooLong");
-            if (input == GenericErrorCodes::GenericErrorCodesDataUpdateRateExceeded) output = Json::Value("DataUpdateRateExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesRestrictedEmailDomain) output = Json::Value("RestrictedEmailDomain");
-            if (input == GenericErrorCodes::GenericErrorCodesEncryptionKeyDisabled) output = Json::Value("EncryptionKeyDisabled");
-            if (input == GenericErrorCodes::GenericErrorCodesEncryptionKeyMissing) output = Json::Value("EncryptionKeyMissing");
-            if (input == GenericErrorCodes::GenericErrorCodesEncryptionKeyBroken) output = Json::Value("EncryptionKeyBroken");
-            if (input == GenericErrorCodes::GenericErrorCodesNoSharedSecretKeyConfigured) output = Json::Value("NoSharedSecretKeyConfigured");
-            if (input == GenericErrorCodes::GenericErrorCodesSecretKeyNotFound) output = Json::Value("SecretKeyNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesPlayerSecretAlreadyConfigured) output = Json::Value("PlayerSecretAlreadyConfigured");
-            if (input == GenericErrorCodes::GenericErrorCodesAPIRequestsDisabledForTitle) output = Json::Value("APIRequestsDisabledForTitle");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidSharedSecretKey) output = Json::Value("InvalidSharedSecretKey");
-            if (input == GenericErrorCodes::GenericErrorCodesPrizeTableHasNoRanks) output = Json::Value("PrizeTableHasNoRanks");
-            if (input == GenericErrorCodes::GenericErrorCodesProfileDoesNotExist) output = Json::Value("ProfileDoesNotExist");
-            if (input == GenericErrorCodes::GenericErrorCodesContentS3OriginBucketNotConfigured) output = Json::Value("ContentS3OriginBucketNotConfigured");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidEnvironmentForReceipt) output = Json::Value("InvalidEnvironmentForReceipt");
-            if (input == GenericErrorCodes::GenericErrorCodesEncryptedRequestNotAllowed) output = Json::Value("EncryptedRequestNotAllowed");
-            if (input == GenericErrorCodes::GenericErrorCodesSignedRequestNotAllowed) output = Json::Value("SignedRequestNotAllowed");
-            if (input == GenericErrorCodes::GenericErrorCodesRequestViewConstraintParamsNotAllowed) output = Json::Value("RequestViewConstraintParamsNotAllowed");
-            if (input == GenericErrorCodes::GenericErrorCodesBadPartnerConfiguration) output = Json::Value("BadPartnerConfiguration");
-            if (input == GenericErrorCodes::GenericErrorCodesXboxBPCertificateFailure) output = Json::Value("XboxBPCertificateFailure");
-            if (input == GenericErrorCodes::GenericErrorCodesXboxXASSExchangeFailure) output = Json::Value("XboxXASSExchangeFailure");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidEntityId) output = Json::Value("InvalidEntityId");
-            if (input == GenericErrorCodes::GenericErrorCodesStatisticValueAggregationOverflow) output = Json::Value("StatisticValueAggregationOverflow");
-            if (input == GenericErrorCodes::GenericErrorCodesEmailMessageFromAddressIsMissing) output = Json::Value("EmailMessageFromAddressIsMissing");
-            if (input == GenericErrorCodes::GenericErrorCodesEmailMessageToAddressIsMissing) output = Json::Value("EmailMessageToAddressIsMissing");
-            if (input == GenericErrorCodes::GenericErrorCodesSmtpServerAuthenticationError) output = Json::Value("SmtpServerAuthenticationError");
-            if (input == GenericErrorCodes::GenericErrorCodesSmtpServerLimitExceeded) output = Json::Value("SmtpServerLimitExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesSmtpServerInsufficientStorage) output = Json::Value("SmtpServerInsufficientStorage");
-            if (input == GenericErrorCodes::GenericErrorCodesSmtpServerCommunicationError) output = Json::Value("SmtpServerCommunicationError");
-            if (input == GenericErrorCodes::GenericErrorCodesSmtpServerGeneralFailure) output = Json::Value("SmtpServerGeneralFailure");
-            if (input == GenericErrorCodes::GenericErrorCodesEmailClientTimeout) output = Json::Value("EmailClientTimeout");
-            if (input == GenericErrorCodes::GenericErrorCodesEmailClientCanceledTask) output = Json::Value("EmailClientCanceledTask");
-            if (input == GenericErrorCodes::GenericErrorCodesEmailTemplateMissing) output = Json::Value("EmailTemplateMissing");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidHostForTitleId) output = Json::Value("InvalidHostForTitleId");
-            if (input == GenericErrorCodes::GenericErrorCodesEmailConfirmationTokenDoesNotExist) output = Json::Value("EmailConfirmationTokenDoesNotExist");
-            if (input == GenericErrorCodes::GenericErrorCodesEmailConfirmationTokenExpired) output = Json::Value("EmailConfirmationTokenExpired");
-            if (input == GenericErrorCodes::GenericErrorCodesAccountDeleted) output = Json::Value("AccountDeleted");
-            if (input == GenericErrorCodes::GenericErrorCodesPlayerSecretNotConfigured) output = Json::Value("PlayerSecretNotConfigured");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidSignatureTime) output = Json::Value("InvalidSignatureTime");
-            if (input == GenericErrorCodes::GenericErrorCodesNoContactEmailAddressFound) output = Json::Value("NoContactEmailAddressFound");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidAuthToken) output = Json::Value("InvalidAuthToken");
-            if (input == GenericErrorCodes::GenericErrorCodesAuthTokenDoesNotExist) output = Json::Value("AuthTokenDoesNotExist");
-            if (input == GenericErrorCodes::GenericErrorCodesAuthTokenExpired) output = Json::Value("AuthTokenExpired");
-            if (input == GenericErrorCodes::GenericErrorCodesAuthTokenAlreadyUsedToResetPassword) output = Json::Value("AuthTokenAlreadyUsedToResetPassword");
-            if (input == GenericErrorCodes::GenericErrorCodesMembershipNameTooLong) output = Json::Value("MembershipNameTooLong");
-            if (input == GenericErrorCodes::GenericErrorCodesMembershipNotFound) output = Json::Value("MembershipNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesGoogleServiceAccountInvalid) output = Json::Value("GoogleServiceAccountInvalid");
-            if (input == GenericErrorCodes::GenericErrorCodesGoogleServiceAccountParseFailure) output = Json::Value("GoogleServiceAccountParseFailure");
-            if (input == GenericErrorCodes::GenericErrorCodesEntityTokenMissing) output = Json::Value("EntityTokenMissing");
-            if (input == GenericErrorCodes::GenericErrorCodesEntityTokenInvalid) output = Json::Value("EntityTokenInvalid");
-            if (input == GenericErrorCodes::GenericErrorCodesEntityTokenExpired) output = Json::Value("EntityTokenExpired");
-            if (input == GenericErrorCodes::GenericErrorCodesEntityTokenRevoked) output = Json::Value("EntityTokenRevoked");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidProductForSubscription) output = Json::Value("InvalidProductForSubscription");
-            if (input == GenericErrorCodes::GenericErrorCodesXboxInaccessible) output = Json::Value("XboxInaccessible");
-            if (input == GenericErrorCodes::GenericErrorCodesSubscriptionAlreadyTaken) output = Json::Value("SubscriptionAlreadyTaken");
-            if (input == GenericErrorCodes::GenericErrorCodesSmtpAddonNotEnabled) output = Json::Value("SmtpAddonNotEnabled");
-            if (input == GenericErrorCodes::GenericErrorCodesAPIConcurrentRequestLimitExceeded) output = Json::Value("APIConcurrentRequestLimitExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesXboxRejectedXSTSExchangeRequest) output = Json::Value("XboxRejectedXSTSExchangeRequest");
-            if (input == GenericErrorCodes::GenericErrorCodesVariableNotDefined) output = Json::Value("VariableNotDefined");
-            if (input == GenericErrorCodes::GenericErrorCodesTemplateVersionNotDefined) output = Json::Value("TemplateVersionNotDefined");
-            if (input == GenericErrorCodes::GenericErrorCodesFileTooLarge) output = Json::Value("FileTooLarge");
-            if (input == GenericErrorCodes::GenericErrorCodesTitleDeleted) output = Json::Value("TitleDeleted");
-            if (input == GenericErrorCodes::GenericErrorCodesTitleContainsUserAccounts) output = Json::Value("TitleContainsUserAccounts");
-            if (input == GenericErrorCodes::GenericErrorCodesTitleDeletionPlayerCleanupFailure) output = Json::Value("TitleDeletionPlayerCleanupFailure");
-            if (input == GenericErrorCodes::GenericErrorCodesEntityFileOperationPending) output = Json::Value("EntityFileOperationPending");
-            if (input == GenericErrorCodes::GenericErrorCodesNoEntityFileOperationPending) output = Json::Value("NoEntityFileOperationPending");
-            if (input == GenericErrorCodes::GenericErrorCodesEntityProfileVersionMismatch) output = Json::Value("EntityProfileVersionMismatch");
-            if (input == GenericErrorCodes::GenericErrorCodesTemplateVersionTooOld) output = Json::Value("TemplateVersionTooOld");
-            if (input == GenericErrorCodes::GenericErrorCodesMembershipDefinitionInUse) output = Json::Value("MembershipDefinitionInUse");
-            if (input == GenericErrorCodes::GenericErrorCodesPaymentPageNotConfigured) output = Json::Value("PaymentPageNotConfigured");
-            if (input == GenericErrorCodes::GenericErrorCodesFailedLoginAttemptRateLimitExceeded) output = Json::Value("FailedLoginAttemptRateLimitExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesEntityBlockedByGroup) output = Json::Value("EntityBlockedByGroup");
-            if (input == GenericErrorCodes::GenericErrorCodesRoleDoesNotExist) output = Json::Value("RoleDoesNotExist");
-            if (input == GenericErrorCodes::GenericErrorCodesEntityIsAlreadyMember) output = Json::Value("EntityIsAlreadyMember");
-            if (input == GenericErrorCodes::GenericErrorCodesDuplicateRoleId) output = Json::Value("DuplicateRoleId");
-            if (input == GenericErrorCodes::GenericErrorCodesGroupInvitationNotFound) output = Json::Value("GroupInvitationNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesGroupApplicationNotFound) output = Json::Value("GroupApplicationNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesOutstandingInvitationAcceptedInstead) output = Json::Value("OutstandingInvitationAcceptedInstead");
-            if (input == GenericErrorCodes::GenericErrorCodesOutstandingApplicationAcceptedInstead) output = Json::Value("OutstandingApplicationAcceptedInstead");
-            if (input == GenericErrorCodes::GenericErrorCodesRoleIsGroupDefaultMember) output = Json::Value("RoleIsGroupDefaultMember");
-            if (input == GenericErrorCodes::GenericErrorCodesRoleIsGroupAdmin) output = Json::Value("RoleIsGroupAdmin");
-            if (input == GenericErrorCodes::GenericErrorCodesRoleNameNotAvailable) output = Json::Value("RoleNameNotAvailable");
-            if (input == GenericErrorCodes::GenericErrorCodesGroupNameNotAvailable) output = Json::Value("GroupNameNotAvailable");
-            if (input == GenericErrorCodes::GenericErrorCodesEmailReportAlreadySent) output = Json::Value("EmailReportAlreadySent");
-            if (input == GenericErrorCodes::GenericErrorCodesEmailReportRecipientBlacklisted) output = Json::Value("EmailReportRecipientBlacklisted");
-            if (input == GenericErrorCodes::GenericErrorCodesEventNamespaceNotAllowed) output = Json::Value("EventNamespaceNotAllowed");
-            if (input == GenericErrorCodes::GenericErrorCodesEventEntityNotAllowed) output = Json::Value("EventEntityNotAllowed");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidEntityType) output = Json::Value("InvalidEntityType");
-            if (input == GenericErrorCodes::GenericErrorCodesNullTokenResultFromAad) output = Json::Value("NullTokenResultFromAad");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidTokenResultFromAad) output = Json::Value("InvalidTokenResultFromAad");
-            if (input == GenericErrorCodes::GenericErrorCodesNoValidCertificateForAad) output = Json::Value("NoValidCertificateForAad");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidCertificateForAad) output = Json::Value("InvalidCertificateForAad");
-            if (input == GenericErrorCodes::GenericErrorCodesDuplicateDropTableId) output = Json::Value("DuplicateDropTableId");
-            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerError) output = Json::Value("MultiplayerServerError");
-            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerTooManyRequests) output = Json::Value("MultiplayerServerTooManyRequests");
-            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerNoContent) output = Json::Value("MultiplayerServerNoContent");
-            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerBadRequest) output = Json::Value("MultiplayerServerBadRequest");
-            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerUnauthorized) output = Json::Value("MultiplayerServerUnauthorized");
-            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerForbidden) output = Json::Value("MultiplayerServerForbidden");
-            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerNotFound) output = Json::Value("MultiplayerServerNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerConflict) output = Json::Value("MultiplayerServerConflict");
-            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerInternalServerError) output = Json::Value("MultiplayerServerInternalServerError");
-            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerUnavailable) output = Json::Value("MultiplayerServerUnavailable");
-            if (input == GenericErrorCodes::GenericErrorCodesExplicitContentDetected) output = Json::Value("ExplicitContentDetected");
-            if (input == GenericErrorCodes::GenericErrorCodesPIIContentDetected) output = Json::Value("PIIContentDetected");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidScheduledTaskParameter) output = Json::Value("InvalidScheduledTaskParameter");
-            if (input == GenericErrorCodes::GenericErrorCodesPerEntityEventRateLimitExceeded) output = Json::Value("PerEntityEventRateLimitExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesTitleDefaultLanguageNotSet) output = Json::Value("TitleDefaultLanguageNotSet");
-            if (input == GenericErrorCodes::GenericErrorCodesEmailTemplateMissingDefaultVersion) output = Json::Value("EmailTemplateMissingDefaultVersion");
-            if (input == GenericErrorCodes::GenericErrorCodesFacebookInstantGamesIdNotLinked) output = Json::Value("FacebookInstantGamesIdNotLinked");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidFacebookInstantGamesSignature) output = Json::Value("InvalidFacebookInstantGamesSignature");
-            if (input == GenericErrorCodes::GenericErrorCodesFacebookInstantGamesAuthNotConfiguredForTitle) output = Json::Value("FacebookInstantGamesAuthNotConfiguredForTitle");
-            if (input == GenericErrorCodes::GenericErrorCodesEntityProfileConstraintValidationFailed) output = Json::Value("EntityProfileConstraintValidationFailed");
-            if (input == GenericErrorCodes::GenericErrorCodesTelemetryIngestionKeyPending) output = Json::Value("TelemetryIngestionKeyPending");
-            if (input == GenericErrorCodes::GenericErrorCodesTelemetryIngestionKeyNotFound) output = Json::Value("TelemetryIngestionKeyNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesStatisticChildNameInvalid) output = Json::Value("StatisticChildNameInvalid");
-            if (input == GenericErrorCodes::GenericErrorCodesDataIntegrityError) output = Json::Value("DataIntegrityError");
-            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyCannotBeSetToOlderVersion) output = Json::Value("VirtualCurrencyCannotBeSetToOlderVersion");
-            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyMustBeWithinIntegerRange) output = Json::Value("VirtualCurrencyMustBeWithinIntegerRange");
-            if (input == GenericErrorCodes::GenericErrorCodesEmailTemplateInvalidSyntax) output = Json::Value("EmailTemplateInvalidSyntax");
-            if (input == GenericErrorCodes::GenericErrorCodesEmailTemplateMissingCallback) output = Json::Value("EmailTemplateMissingCallback");
-            if (input == GenericErrorCodes::GenericErrorCodesPushNotificationTemplateInvalidPayload) output = Json::Value("PushNotificationTemplateInvalidPayload");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidLocalizedPushNotificationLanguage) output = Json::Value("InvalidLocalizedPushNotificationLanguage");
-            if (input == GenericErrorCodes::GenericErrorCodesMissingLocalizedPushNotificationMessage) output = Json::Value("MissingLocalizedPushNotificationMessage");
-            if (input == GenericErrorCodes::GenericErrorCodesPushNotificationTemplateMissingPlatformPayload) output = Json::Value("PushNotificationTemplateMissingPlatformPayload");
-            if (input == GenericErrorCodes::GenericErrorCodesPushNotificationTemplatePayloadContainsInvalidJson) output = Json::Value("PushNotificationTemplatePayloadContainsInvalidJson");
-            if (input == GenericErrorCodes::GenericErrorCodesPushNotificationTemplateContainsInvalidIosPayload) output = Json::Value("PushNotificationTemplateContainsInvalidIosPayload");
-            if (input == GenericErrorCodes::GenericErrorCodesPushNotificationTemplateContainsInvalidAndroidPayload) output = Json::Value("PushNotificationTemplateContainsInvalidAndroidPayload");
-            if (input == GenericErrorCodes::GenericErrorCodesPushNotificationTemplateIosPayloadMissingNotificationBody) output = Json::Value("PushNotificationTemplateIosPayloadMissingNotificationBody");
-            if (input == GenericErrorCodes::GenericErrorCodesPushNotificationTemplateAndroidPayloadMissingNotificationBody) output = Json::Value("PushNotificationTemplateAndroidPayloadMissingNotificationBody");
-            if (input == GenericErrorCodes::GenericErrorCodesPushNotificationTemplateNotFound) output = Json::Value("PushNotificationTemplateNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesPushNotificationTemplateMissingDefaultVersion) output = Json::Value("PushNotificationTemplateMissingDefaultVersion");
-            if (input == GenericErrorCodes::GenericErrorCodesPushNotificationTemplateInvalidSyntax) output = Json::Value("PushNotificationTemplateInvalidSyntax");
-            if (input == GenericErrorCodes::GenericErrorCodesPushNotificationTemplateNoCustomPayloadForV1) output = Json::Value("PushNotificationTemplateNoCustomPayloadForV1");
-            if (input == GenericErrorCodes::GenericErrorCodesNoLeaderboardForStatistic) output = Json::Value("NoLeaderboardForStatistic");
-            if (input == GenericErrorCodes::GenericErrorCodesTitleNewsMissingDefaultLanguage) output = Json::Value("TitleNewsMissingDefaultLanguage");
-            if (input == GenericErrorCodes::GenericErrorCodesTitleNewsNotFound) output = Json::Value("TitleNewsNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesTitleNewsDuplicateLanguage) output = Json::Value("TitleNewsDuplicateLanguage");
-            if (input == GenericErrorCodes::GenericErrorCodesTitleNewsMissingTitleOrBody) output = Json::Value("TitleNewsMissingTitleOrBody");
-            if (input == GenericErrorCodes::GenericErrorCodesTitleNewsInvalidLanguage) output = Json::Value("TitleNewsInvalidLanguage");
-            if (input == GenericErrorCodes::GenericErrorCodesEmailRecipientBlacklisted) output = Json::Value("EmailRecipientBlacklisted");
-            if (input == GenericErrorCodes::GenericErrorCodesInvalidGameCenterAuthRequest) output = Json::Value("InvalidGameCenterAuthRequest");
-            if (input == GenericErrorCodes::GenericErrorCodesGameCenterAuthenticationFailed) output = Json::Value("GameCenterAuthenticationFailed");
-            if (input == GenericErrorCodes::GenericErrorCodesCannotEnablePartiesForTitle) output = Json::Value("CannotEnablePartiesForTitle");
-            if (input == GenericErrorCodes::GenericErrorCodesPartyError) output = Json::Value("PartyError");
-            if (input == GenericErrorCodes::GenericErrorCodesPartyRequests) output = Json::Value("PartyRequests");
-            if (input == GenericErrorCodes::GenericErrorCodesPartyNoContent) output = Json::Value("PartyNoContent");
-            if (input == GenericErrorCodes::GenericErrorCodesPartyBadRequest) output = Json::Value("PartyBadRequest");
-            if (input == GenericErrorCodes::GenericErrorCodesPartyUnauthorized) output = Json::Value("PartyUnauthorized");
-            if (input == GenericErrorCodes::GenericErrorCodesPartyForbidden) output = Json::Value("PartyForbidden");
-            if (input == GenericErrorCodes::GenericErrorCodesPartyNotFound) output = Json::Value("PartyNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesPartyConflict) output = Json::Value("PartyConflict");
-            if (input == GenericErrorCodes::GenericErrorCodesPartyInternalServerError) output = Json::Value("PartyInternalServerError");
-            if (input == GenericErrorCodes::GenericErrorCodesPartyUnavailable) output = Json::Value("PartyUnavailable");
-            if (input == GenericErrorCodes::GenericErrorCodesPartyTooManyRequests) output = Json::Value("PartyTooManyRequests");
-            if (input == GenericErrorCodes::GenericErrorCodesPushNotificationTemplateMissingName) output = Json::Value("PushNotificationTemplateMissingName");
-            if (input == GenericErrorCodes::GenericErrorCodesCannotEnableMultiplayerServersForTitle) output = Json::Value("CannotEnableMultiplayerServersForTitle");
-            if (input == GenericErrorCodes::GenericErrorCodesWriteAttemptedDuringExport) output = Json::Value("WriteAttemptedDuringExport");
-            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerTitleQuotaCoresExceeded) output = Json::Value("MultiplayerServerTitleQuotaCoresExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesAutomationRuleNotFound) output = Json::Value("AutomationRuleNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesEntityAPIKeyLimitExceeded) output = Json::Value("EntityAPIKeyLimitExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesEntityAPIKeyNotFound) output = Json::Value("EntityAPIKeyNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesEntityAPIKeyOrSecretInvalid) output = Json::Value("EntityAPIKeyOrSecretInvalid");
-            if (input == GenericErrorCodes::GenericErrorCodesEconomyServiceUnavailable) output = Json::Value("EconomyServiceUnavailable");
-            if (input == GenericErrorCodes::GenericErrorCodesEconomyServiceInternalError) output = Json::Value("EconomyServiceInternalError");
-            if (input == GenericErrorCodes::GenericErrorCodesQueryRateLimitExceeded) output = Json::Value("QueryRateLimitExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesEntityAPIKeyCreationDisabledForEntity) output = Json::Value("EntityAPIKeyCreationDisabledForEntity");
-            if (input == GenericErrorCodes::GenericErrorCodesForbiddenByEntityPolicy) output = Json::Value("ForbiddenByEntityPolicy");
-            if (input == GenericErrorCodes::GenericErrorCodesUpdateInventoryRateLimitExceeded) output = Json::Value("UpdateInventoryRateLimitExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesStudioCreationRateLimited) output = Json::Value("StudioCreationRateLimited");
-            if (input == GenericErrorCodes::GenericErrorCodesStudioCreationInProgress) output = Json::Value("StudioCreationInProgress");
-            if (input == GenericErrorCodes::GenericErrorCodesDuplicateStudioName) output = Json::Value("DuplicateStudioName");
-            if (input == GenericErrorCodes::GenericErrorCodesStudioNotFound) output = Json::Value("StudioNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesStudioDeleted) output = Json::Value("StudioDeleted");
-            if (input == GenericErrorCodes::GenericErrorCodesStudioDeactivated) output = Json::Value("StudioDeactivated");
-            if (input == GenericErrorCodes::GenericErrorCodesStudioActivated) output = Json::Value("StudioActivated");
-            if (input == GenericErrorCodes::GenericErrorCodesTitleCreationRateLimited) output = Json::Value("TitleCreationRateLimited");
-            if (input == GenericErrorCodes::GenericErrorCodesTitleCreationInProgress) output = Json::Value("TitleCreationInProgress");
-            if (input == GenericErrorCodes::GenericErrorCodesDuplicateTitleName) output = Json::Value("DuplicateTitleName");
-            if (input == GenericErrorCodes::GenericErrorCodesTitleActivationRateLimited) output = Json::Value("TitleActivationRateLimited");
-            if (input == GenericErrorCodes::GenericErrorCodesTitleActivationInProgress) output = Json::Value("TitleActivationInProgress");
-            if (input == GenericErrorCodes::GenericErrorCodesTitleDeactivated) output = Json::Value("TitleDeactivated");
-            if (input == GenericErrorCodes::GenericErrorCodesTitleActivated) output = Json::Value("TitleActivated");
-            if (input == GenericErrorCodes::GenericErrorCodesCloudScriptAzureFunctionsExecutionTimeLimitExceeded) output = Json::Value("CloudScriptAzureFunctionsExecutionTimeLimitExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesCloudScriptAzureFunctionsArgumentSizeExceeded) output = Json::Value("CloudScriptAzureFunctionsArgumentSizeExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesCloudScriptAzureFunctionsReturnSizeExceeded) output = Json::Value("CloudScriptAzureFunctionsReturnSizeExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesCloudScriptAzureFunctionsHTTPRequestError) output = Json::Value("CloudScriptAzureFunctionsHTTPRequestError");
-            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaGetError) output = Json::Value("VirtualCurrencyBetaGetError");
-            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaCreateError) output = Json::Value("VirtualCurrencyBetaCreateError");
-            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaInitialDepositSaveError) output = Json::Value("VirtualCurrencyBetaInitialDepositSaveError");
-            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaSaveError) output = Json::Value("VirtualCurrencyBetaSaveError");
-            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaDeleteError) output = Json::Value("VirtualCurrencyBetaDeleteError");
-            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaRestoreError) output = Json::Value("VirtualCurrencyBetaRestoreError");
-            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaSaveConflict) output = Json::Value("VirtualCurrencyBetaSaveConflict");
-            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaUpdateError) output = Json::Value("VirtualCurrencyBetaUpdateError");
-            if (input == GenericErrorCodes::GenericErrorCodesInsightsManagementDatabaseNotFound) output = Json::Value("InsightsManagementDatabaseNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesInsightsManagementOperationNotFound) output = Json::Value("InsightsManagementOperationNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesInsightsManagementErrorPendingOperationExists) output = Json::Value("InsightsManagementErrorPendingOperationExists");
-            if (input == GenericErrorCodes::GenericErrorCodesInsightsManagementSetPerformanceLevelInvalidParameter) output = Json::Value("InsightsManagementSetPerformanceLevelInvalidParameter");
-            if (input == GenericErrorCodes::GenericErrorCodesInsightsManagementSetStorageRetentionInvalidParameter) output = Json::Value("InsightsManagementSetStorageRetentionInvalidParameter");
-            if (input == GenericErrorCodes::GenericErrorCodesInsightsManagementGetStorageUsageInvalidParameter) output = Json::Value("InsightsManagementGetStorageUsageInvalidParameter");
-            if (input == GenericErrorCodes::GenericErrorCodesInsightsManagementGetOperationStatusInvalidParameter) output = Json::Value("InsightsManagementGetOperationStatusInvalidParameter");
-            if (input == GenericErrorCodes::GenericErrorCodesDuplicatePurchaseTransactionId) output = Json::Value("DuplicatePurchaseTransactionId");
-            if (input == GenericErrorCodes::GenericErrorCodesEvaluationModePlayerCountExceeded) output = Json::Value("EvaluationModePlayerCountExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid) output = Json::Value("MatchmakingEntityInvalid");
-            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingPlayerAttributesInvalid) output = Json::Value("MatchmakingPlayerAttributesInvalid");
-            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingQueueNotFound) output = Json::Value("MatchmakingQueueNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingMatchNotFound) output = Json::Value("MatchmakingMatchNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingTicketNotFound) output = Json::Value("MatchmakingTicketNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingAlreadyJoinedTicket) output = Json::Value("MatchmakingAlreadyJoinedTicket");
-            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingTicketAlreadyCompleted) output = Json::Value("MatchmakingTicketAlreadyCompleted");
-            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingQueueConfigInvalid) output = Json::Value("MatchmakingQueueConfigInvalid");
-            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingMemberProfileInvalid) output = Json::Value("MatchmakingMemberProfileInvalid");
-            if (input == GenericErrorCodes::GenericErrorCodesNintendoSwitchDeviceIdNotLinked) output = Json::Value("NintendoSwitchDeviceIdNotLinked");
-            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingNotEnabled) output = Json::Value("MatchmakingNotEnabled");
-            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingPlayerAttributesTooLarge) output = Json::Value("MatchmakingPlayerAttributesTooLarge");
-            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingNumberOfPlayersInTicketTooLarge) output = Json::Value("MatchmakingNumberOfPlayersInTicketTooLarge");
-            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingAttributeInvalid) output = Json::Value("MatchmakingAttributeInvalid");
-            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingPlayerHasNotJoinedTicket) output = Json::Value("MatchmakingPlayerHasNotJoinedTicket");
-            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingRateLimitExceeded) output = Json::Value("MatchmakingRateLimitExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingTicketMembershipLimitExceeded) output = Json::Value("MatchmakingTicketMembershipLimitExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingUnauthorized) output = Json::Value("MatchmakingUnauthorized");
-            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingQueueLimitExceeded) output = Json::Value("MatchmakingQueueLimitExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingRequestTypeMismatch) output = Json::Value("MatchmakingRequestTypeMismatch");
-            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingBadRequest) output = Json::Value("MatchmakingBadRequest");
-            if (input == GenericErrorCodes::GenericErrorCodesTitleConfigNotFound) output = Json::Value("TitleConfigNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesTitleConfigUpdateConflict) output = Json::Value("TitleConfigUpdateConflict");
-            if (input == GenericErrorCodes::GenericErrorCodesTitleConfigSerializationError) output = Json::Value("TitleConfigSerializationError");
-            if (input == GenericErrorCodes::GenericErrorCodesCatalogEntityInvalid) output = Json::Value("CatalogEntityInvalid");
-            if (input == GenericErrorCodes::GenericErrorCodesCatalogTitleIdMissing) output = Json::Value("CatalogTitleIdMissing");
-            if (input == GenericErrorCodes::GenericErrorCodesCatalogPlayerIdMissing) output = Json::Value("CatalogPlayerIdMissing");
-            if (input == GenericErrorCodes::GenericErrorCodesCatalogClientIdentityInvalid) output = Json::Value("CatalogClientIdentityInvalid");
-            if (input == GenericErrorCodes::GenericErrorCodesCatalogOneOrMoreFilesInvalid) output = Json::Value("CatalogOneOrMoreFilesInvalid");
-            if (input == GenericErrorCodes::GenericErrorCodesCatalogItemMetadataInvalid) output = Json::Value("CatalogItemMetadataInvalid");
-            if (input == GenericErrorCodes::GenericErrorCodesCatalogItemIdInvalid) output = Json::Value("CatalogItemIdInvalid");
-            if (input == GenericErrorCodes::GenericErrorCodesCatalogSearchParameterInvalid) output = Json::Value("CatalogSearchParameterInvalid");
-            if (input == GenericErrorCodes::GenericErrorCodesCatalogFeatureDisabled) output = Json::Value("CatalogFeatureDisabled");
-            if (input == GenericErrorCodes::GenericErrorCodesCatalogConfigInvalid) output = Json::Value("CatalogConfigInvalid");
-            if (input == GenericErrorCodes::GenericErrorCodesCatalogUnauthorized) output = Json::Value("CatalogUnauthorized");
-            if (input == GenericErrorCodes::GenericErrorCodesCatalogItemTypeInvalid) output = Json::Value("CatalogItemTypeInvalid");
-            if (input == GenericErrorCodes::GenericErrorCodesCatalogBadRequest) output = Json::Value("CatalogBadRequest");
-            if (input == GenericErrorCodes::GenericErrorCodesCatalogTooManyRequests) output = Json::Value("CatalogTooManyRequests");
-            if (input == GenericErrorCodes::GenericErrorCodesExportInvalidStatusUpdate) output = Json::Value("ExportInvalidStatusUpdate");
-            if (input == GenericErrorCodes::GenericErrorCodesExportInvalidPrefix) output = Json::Value("ExportInvalidPrefix");
-            if (input == GenericErrorCodes::GenericErrorCodesExportBlobContainerDoesNotExist) output = Json::Value("ExportBlobContainerDoesNotExist");
-            if (input == GenericErrorCodes::GenericErrorCodesExportNotFound) output = Json::Value("ExportNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesExportCouldNotUpdate) output = Json::Value("ExportCouldNotUpdate");
-            if (input == GenericErrorCodes::GenericErrorCodesExportInvalidStorageType) output = Json::Value("ExportInvalidStorageType");
-            if (input == GenericErrorCodes::GenericErrorCodesExportAmazonBucketDoesNotExist) output = Json::Value("ExportAmazonBucketDoesNotExist");
-            if (input == GenericErrorCodes::GenericErrorCodesExportInvalidBlobStorage) output = Json::Value("ExportInvalidBlobStorage");
-            if (input == GenericErrorCodes::GenericErrorCodesExportKustoException) output = Json::Value("ExportKustoException");
-            if (input == GenericErrorCodes::GenericErrorCodesExportKustoConnectionFailed) output = Json::Value("ExportKustoConnectionFailed");
-            if (input == GenericErrorCodes::GenericErrorCodesExportUnknownError) output = Json::Value("ExportUnknownError");
-            if (input == GenericErrorCodes::GenericErrorCodesExportCantEditPendingExport) output = Json::Value("ExportCantEditPendingExport");
-            if (input == GenericErrorCodes::GenericErrorCodesExportLimitExports) output = Json::Value("ExportLimitExports");
-            if (input == GenericErrorCodes::GenericErrorCodesExportLimitEvents) output = Json::Value("ExportLimitEvents");
-            if (input == GenericErrorCodes::GenericErrorCodesTitleNotEnabledForParty) output = Json::Value("TitleNotEnabledForParty");
-            if (input == GenericErrorCodes::GenericErrorCodesPartyVersionNotFound) output = Json::Value("PartyVersionNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerBuildReferencedByMatchmakingQueue) output = Json::Value("MultiplayerServerBuildReferencedByMatchmakingQueue");
-            if (input == GenericErrorCodes::GenericErrorCodesExperimentationExperimentStopped) output = Json::Value("ExperimentationExperimentStopped");
-            if (input == GenericErrorCodes::GenericErrorCodesExperimentationExperimentRunning) output = Json::Value("ExperimentationExperimentRunning");
-            if (input == GenericErrorCodes::GenericErrorCodesExperimentationExperimentNotFound) output = Json::Value("ExperimentationExperimentNotFound");
-            if (input == GenericErrorCodes::GenericErrorCodesExperimentationExperimentNeverStarted) output = Json::Value("ExperimentationExperimentNeverStarted");
-            if (input == GenericErrorCodes::GenericErrorCodesExperimentationExperimentDeleted) output = Json::Value("ExperimentationExperimentDeleted");
-            if (input == GenericErrorCodes::GenericErrorCodesExperimentationClientTimeout) output = Json::Value("ExperimentationClientTimeout");
-            if (input == GenericErrorCodes::GenericErrorCodesExperimentationExceededVariantNameLength) output = Json::Value("ExperimentationExceededVariantNameLength");
-            if (input == GenericErrorCodes::GenericErrorCodesExperimentationExceededMaxVariantLength) output = Json::Value("ExperimentationExceededMaxVariantLength");
-            if (input == GenericErrorCodes::GenericErrorCodesExperimentInvalidId) output = Json::Value("ExperimentInvalidId");
-            if (input == GenericErrorCodes::GenericErrorCodesExperimentationNoScorecard) output = Json::Value("ExperimentationNoScorecard");
-            if (input == GenericErrorCodes::GenericErrorCodesMaxActionDepthExceeded) output = Json::Value("MaxActionDepthExceeded");
-            if (input == GenericErrorCodes::GenericErrorCodesSnapshotNotFound) output = Json::Value("SnapshotNotFound");
+            if (input == GenericErrorCodes::GenericErrorCodesSuccess)
+            {
+                output = Json::Value("Success");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesUnkownError)
+            {
+                output = Json::Value("UnkownError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidParams)
+            {
+                output = Json::Value("InvalidParams");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAccountNotFound)
+            {
+                output = Json::Value("AccountNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAccountBanned)
+            {
+                output = Json::Value("AccountBanned");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidUsernameOrPassword)
+            {
+                output = Json::Value("InvalidUsernameOrPassword");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidTitleId)
+            {
+                output = Json::Value("InvalidTitleId");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidEmailAddress)
+            {
+                output = Json::Value("InvalidEmailAddress");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEmailAddressNotAvailable)
+            {
+                output = Json::Value("EmailAddressNotAvailable");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidUsername)
+            {
+                output = Json::Value("InvalidUsername");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidPassword)
+            {
+                output = Json::Value("InvalidPassword");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesUsernameNotAvailable)
+            {
+                output = Json::Value("UsernameNotAvailable");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidSteamTicket)
+            {
+                output = Json::Value("InvalidSteamTicket");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAccountAlreadyLinked)
+            {
+                output = Json::Value("AccountAlreadyLinked");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLinkedAccountAlreadyClaimed)
+            {
+                output = Json::Value("LinkedAccountAlreadyClaimed");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidFacebookToken)
+            {
+                output = Json::Value("InvalidFacebookToken");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAccountNotLinked)
+            {
+                output = Json::Value("AccountNotLinked");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesFailedByPaymentProvider)
+            {
+                output = Json::Value("FailedByPaymentProvider");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCouponCodeNotFound)
+            {
+                output = Json::Value("CouponCodeNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidContainerItem)
+            {
+                output = Json::Value("InvalidContainerItem");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesContainerNotOwned)
+            {
+                output = Json::Value("ContainerNotOwned");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesKeyNotOwned)
+            {
+                output = Json::Value("KeyNotOwned");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidItemIdInTable)
+            {
+                output = Json::Value("InvalidItemIdInTable");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidReceipt)
+            {
+                output = Json::Value("InvalidReceipt");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesReceiptAlreadyUsed)
+            {
+                output = Json::Value("ReceiptAlreadyUsed");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesReceiptCancelled)
+            {
+                output = Json::Value("ReceiptCancelled");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameNotFound)
+            {
+                output = Json::Value("GameNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameModeNotFound)
+            {
+                output = Json::Value("GameModeNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidGoogleToken)
+            {
+                output = Json::Value("InvalidGoogleToken");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesUserIsNotPartOfDeveloper)
+            {
+                output = Json::Value("UserIsNotPartOfDeveloper");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidTitleForDeveloper)
+            {
+                output = Json::Value("InvalidTitleForDeveloper");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleNameConflicts)
+            {
+                output = Json::Value("TitleNameConflicts");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesUserisNotValid)
+            {
+                output = Json::Value("UserisNotValid");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesValueAlreadyExists)
+            {
+                output = Json::Value("ValueAlreadyExists");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesBuildNotFound)
+            {
+                output = Json::Value("BuildNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerNotInGame)
+            {
+                output = Json::Value("PlayerNotInGame");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidTicket)
+            {
+                output = Json::Value("InvalidTicket");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidDeveloper)
+            {
+                output = Json::Value("InvalidDeveloper");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidOrderInfo)
+            {
+                output = Json::Value("InvalidOrderInfo");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesRegistrationIncomplete)
+            {
+                output = Json::Value("RegistrationIncomplete");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidPlatform)
+            {
+                output = Json::Value("InvalidPlatform");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesUnknownError)
+            {
+                output = Json::Value("UnknownError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesSteamApplicationNotOwned)
+            {
+                output = Json::Value("SteamApplicationNotOwned");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesWrongSteamAccount)
+            {
+                output = Json::Value("WrongSteamAccount");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleNotActivated)
+            {
+                output = Json::Value("TitleNotActivated");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesRegistrationSessionNotFound)
+            {
+                output = Json::Value("RegistrationSessionNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNoSuchMod)
+            {
+                output = Json::Value("NoSuchMod");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesFileNotFound)
+            {
+                output = Json::Value("FileNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesDuplicateEmail)
+            {
+                output = Json::Value("DuplicateEmail");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesItemNotFound)
+            {
+                output = Json::Value("ItemNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesItemNotOwned)
+            {
+                output = Json::Value("ItemNotOwned");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesItemNotRecycleable)
+            {
+                output = Json::Value("ItemNotRecycleable");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesItemNotAffordable)
+            {
+                output = Json::Value("ItemNotAffordable");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidVirtualCurrency)
+            {
+                output = Json::Value("InvalidVirtualCurrency");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesWrongVirtualCurrency)
+            {
+                output = Json::Value("WrongVirtualCurrency");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesWrongPrice)
+            {
+                output = Json::Value("WrongPrice");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNonPositiveValue)
+            {
+                output = Json::Value("NonPositiveValue");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidRegion)
+            {
+                output = Json::Value("InvalidRegion");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesRegionAtCapacity)
+            {
+                output = Json::Value("RegionAtCapacity");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesServerFailedToStart)
+            {
+                output = Json::Value("ServerFailedToStart");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNameNotAvailable)
+            {
+                output = Json::Value("NameNotAvailable");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInsufficientFunds)
+            {
+                output = Json::Value("InsufficientFunds");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidDeviceID)
+            {
+                output = Json::Value("InvalidDeviceID");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidPushNotificationToken)
+            {
+                output = Json::Value("InvalidPushNotificationToken");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNoRemainingUses)
+            {
+                output = Json::Value("NoRemainingUses");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidPaymentProvider)
+            {
+                output = Json::Value("InvalidPaymentProvider");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPurchaseInitializationFailure)
+            {
+                output = Json::Value("PurchaseInitializationFailure");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesDuplicateUsername)
+            {
+                output = Json::Value("DuplicateUsername");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidBuyerInfo)
+            {
+                output = Json::Value("InvalidBuyerInfo");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNoGameModeParamsSet)
+            {
+                output = Json::Value("NoGameModeParamsSet");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesBodyTooLarge)
+            {
+                output = Json::Value("BodyTooLarge");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesReservedWordInBody)
+            {
+                output = Json::Value("ReservedWordInBody");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidTypeInBody)
+            {
+                output = Json::Value("InvalidTypeInBody");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidRequest)
+            {
+                output = Json::Value("InvalidRequest");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesReservedEventName)
+            {
+                output = Json::Value("ReservedEventName");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidUserStatistics)
+            {
+                output = Json::Value("InvalidUserStatistics");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNotAuthenticated)
+            {
+                output = Json::Value("NotAuthenticated");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStreamAlreadyExists)
+            {
+                output = Json::Value("StreamAlreadyExists");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesErrorCreatingStream)
+            {
+                output = Json::Value("ErrorCreatingStream");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStreamNotFound)
+            {
+                output = Json::Value("StreamNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidAccount)
+            {
+                output = Json::Value("InvalidAccount");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPurchaseDoesNotExist)
+            {
+                output = Json::Value("PurchaseDoesNotExist");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidPurchaseTransactionStatus)
+            {
+                output = Json::Value("InvalidPurchaseTransactionStatus");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAPINotEnabledForGameClientAccess)
+            {
+                output = Json::Value("APINotEnabledForGameClientAccess");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNoPushNotificationARNForTitle)
+            {
+                output = Json::Value("NoPushNotificationARNForTitle");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesBuildAlreadyExists)
+            {
+                output = Json::Value("BuildAlreadyExists");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesBuildPackageDoesNotExist)
+            {
+                output = Json::Value("BuildPackageDoesNotExist");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCustomAnalyticsEventsNotEnabledForTitle)
+            {
+                output = Json::Value("CustomAnalyticsEventsNotEnabledForTitle");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidSharedGroupId)
+            {
+                output = Json::Value("InvalidSharedGroupId");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNotAuthorized)
+            {
+                output = Json::Value("NotAuthorized");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMissingTitleGoogleProperties)
+            {
+                output = Json::Value("MissingTitleGoogleProperties");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidItemProperties)
+            {
+                output = Json::Value("InvalidItemProperties");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidPSNAuthCode)
+            {
+                output = Json::Value("InvalidPSNAuthCode");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidItemId)
+            {
+                output = Json::Value("InvalidItemId");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPushNotEnabledForAccount)
+            {
+                output = Json::Value("PushNotEnabledForAccount");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPushServiceError)
+            {
+                output = Json::Value("PushServiceError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesReceiptDoesNotContainInAppItems)
+            {
+                output = Json::Value("ReceiptDoesNotContainInAppItems");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesReceiptContainsMultipleInAppItems)
+            {
+                output = Json::Value("ReceiptContainsMultipleInAppItems");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidBundleID)
+            {
+                output = Json::Value("InvalidBundleID");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesJavascriptException)
+            {
+                output = Json::Value("JavascriptException");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidSessionTicket)
+            {
+                output = Json::Value("InvalidSessionTicket");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesUnableToConnectToDatabase)
+            {
+                output = Json::Value("UnableToConnectToDatabase");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInternalServerError)
+            {
+                output = Json::Value("InternalServerError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidReportDate)
+            {
+                output = Json::Value("InvalidReportDate");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesReportNotAvailable)
+            {
+                output = Json::Value("ReportNotAvailable");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesDatabaseThroughputExceeded)
+            {
+                output = Json::Value("DatabaseThroughputExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidGameTicket)
+            {
+                output = Json::Value("InvalidGameTicket");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExpiredGameTicket)
+            {
+                output = Json::Value("ExpiredGameTicket");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameTicketDoesNotMatchLobby)
+            {
+                output = Json::Value("GameTicketDoesNotMatchLobby");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLinkedDeviceAlreadyClaimed)
+            {
+                output = Json::Value("LinkedDeviceAlreadyClaimed");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesDeviceAlreadyLinked)
+            {
+                output = Json::Value("DeviceAlreadyLinked");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesDeviceNotLinked)
+            {
+                output = Json::Value("DeviceNotLinked");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPartialFailure)
+            {
+                output = Json::Value("PartialFailure");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPublisherNotSet)
+            {
+                output = Json::Value("PublisherNotSet");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesServiceUnavailable)
+            {
+                output = Json::Value("ServiceUnavailable");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesVersionNotFound)
+            {
+                output = Json::Value("VersionNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesRevisionNotFound)
+            {
+                output = Json::Value("RevisionNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidPublisherId)
+            {
+                output = Json::Value("InvalidPublisherId");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesDownstreamServiceUnavailable)
+            {
+                output = Json::Value("DownstreamServiceUnavailable");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAPINotIncludedInTitleUsageTier)
+            {
+                output = Json::Value("APINotIncludedInTitleUsageTier");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesDAULimitExceeded)
+            {
+                output = Json::Value("DAULimitExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAPIRequestLimitExceeded)
+            {
+                output = Json::Value("APIRequestLimitExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidAPIEndpoint)
+            {
+                output = Json::Value("InvalidAPIEndpoint");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesBuildNotAvailable)
+            {
+                output = Json::Value("BuildNotAvailable");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesConcurrentEditError)
+            {
+                output = Json::Value("ConcurrentEditError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesContentNotFound)
+            {
+                output = Json::Value("ContentNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCharacterNotFound)
+            {
+                output = Json::Value("CharacterNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCloudScriptNotFound)
+            {
+                output = Json::Value("CloudScriptNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesContentQuotaExceeded)
+            {
+                output = Json::Value("ContentQuotaExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidCharacterStatistics)
+            {
+                output = Json::Value("InvalidCharacterStatistics");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPhotonNotEnabledForTitle)
+            {
+                output = Json::Value("PhotonNotEnabledForTitle");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPhotonApplicationNotFound)
+            {
+                output = Json::Value("PhotonApplicationNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPhotonApplicationNotAssociatedWithTitle)
+            {
+                output = Json::Value("PhotonApplicationNotAssociatedWithTitle");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidEmailOrPassword)
+            {
+                output = Json::Value("InvalidEmailOrPassword");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesFacebookAPIError)
+            {
+                output = Json::Value("FacebookAPIError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidContentType)
+            {
+                output = Json::Value("InvalidContentType");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesKeyLengthExceeded)
+            {
+                output = Json::Value("KeyLengthExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesDataLengthExceeded)
+            {
+                output = Json::Value("DataLengthExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTooManyKeys)
+            {
+                output = Json::Value("TooManyKeys");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesFreeTierCannotHaveVirtualCurrency)
+            {
+                output = Json::Value("FreeTierCannotHaveVirtualCurrency");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMissingAmazonSharedKey)
+            {
+                output = Json::Value("MissingAmazonSharedKey");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAmazonValidationError)
+            {
+                output = Json::Value("AmazonValidationError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidPSNIssuerId)
+            {
+                output = Json::Value("InvalidPSNIssuerId");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPSNInaccessible)
+            {
+                output = Json::Value("PSNInaccessible");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExpiredAuthToken)
+            {
+                output = Json::Value("ExpiredAuthToken");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesFailedToGetEntitlements)
+            {
+                output = Json::Value("FailedToGetEntitlements");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesFailedToConsumeEntitlement)
+            {
+                output = Json::Value("FailedToConsumeEntitlement");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTradeAcceptingUserNotAllowed)
+            {
+                output = Json::Value("TradeAcceptingUserNotAllowed");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTradeInventoryItemIsAssignedToCharacter)
+            {
+                output = Json::Value("TradeInventoryItemIsAssignedToCharacter");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTradeInventoryItemIsBundle)
+            {
+                output = Json::Value("TradeInventoryItemIsBundle");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTradeStatusNotValidForCancelling)
+            {
+                output = Json::Value("TradeStatusNotValidForCancelling");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTradeStatusNotValidForAccepting)
+            {
+                output = Json::Value("TradeStatusNotValidForAccepting");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTradeDoesNotExist)
+            {
+                output = Json::Value("TradeDoesNotExist");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTradeCancelled)
+            {
+                output = Json::Value("TradeCancelled");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTradeAlreadyFilled)
+            {
+                output = Json::Value("TradeAlreadyFilled");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTradeWaitForStatusTimeout)
+            {
+                output = Json::Value("TradeWaitForStatusTimeout");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTradeInventoryItemExpired)
+            {
+                output = Json::Value("TradeInventoryItemExpired");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTradeMissingOfferedAndAcceptedItems)
+            {
+                output = Json::Value("TradeMissingOfferedAndAcceptedItems");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTradeAcceptedItemIsBundle)
+            {
+                output = Json::Value("TradeAcceptedItemIsBundle");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTradeAcceptedItemIsStackable)
+            {
+                output = Json::Value("TradeAcceptedItemIsStackable");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTradeInventoryItemInvalidStatus)
+            {
+                output = Json::Value("TradeInventoryItemInvalidStatus");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTradeAcceptedCatalogItemInvalid)
+            {
+                output = Json::Value("TradeAcceptedCatalogItemInvalid");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTradeAllowedUsersInvalid)
+            {
+                output = Json::Value("TradeAllowedUsersInvalid");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTradeInventoryItemDoesNotExist)
+            {
+                output = Json::Value("TradeInventoryItemDoesNotExist");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTradeInventoryItemIsConsumed)
+            {
+                output = Json::Value("TradeInventoryItemIsConsumed");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTradeInventoryItemIsStackable)
+            {
+                output = Json::Value("TradeInventoryItemIsStackable");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTradeAcceptedItemsMismatch)
+            {
+                output = Json::Value("TradeAcceptedItemsMismatch");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidKongregateToken)
+            {
+                output = Json::Value("InvalidKongregateToken");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesFeatureNotConfiguredForTitle)
+            {
+                output = Json::Value("FeatureNotConfiguredForTitle");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNoMatchingCatalogItemForReceipt)
+            {
+                output = Json::Value("NoMatchingCatalogItemForReceipt");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidCurrencyCode)
+            {
+                output = Json::Value("InvalidCurrencyCode");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNoRealMoneyPriceForCatalogItem)
+            {
+                output = Json::Value("NoRealMoneyPriceForCatalogItem");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTradeInventoryItemIsNotTradable)
+            {
+                output = Json::Value("TradeInventoryItemIsNotTradable");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTradeAcceptedCatalogItemIsNotTradable)
+            {
+                output = Json::Value("TradeAcceptedCatalogItemIsNotTradable");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesUsersAlreadyFriends)
+            {
+                output = Json::Value("UsersAlreadyFriends");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLinkedIdentifierAlreadyClaimed)
+            {
+                output = Json::Value("LinkedIdentifierAlreadyClaimed");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCustomIdNotLinked)
+            {
+                output = Json::Value("CustomIdNotLinked");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTotalDataSizeExceeded)
+            {
+                output = Json::Value("TotalDataSizeExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesDeleteKeyConflict)
+            {
+                output = Json::Value("DeleteKeyConflict");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidXboxLiveToken)
+            {
+                output = Json::Value("InvalidXboxLiveToken");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExpiredXboxLiveToken)
+            {
+                output = Json::Value("ExpiredXboxLiveToken");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesResettableStatisticVersionRequired)
+            {
+                output = Json::Value("ResettableStatisticVersionRequired");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNotAuthorizedByTitle)
+            {
+                output = Json::Value("NotAuthorizedByTitle");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNoPartnerEnabled)
+            {
+                output = Json::Value("NoPartnerEnabled");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidPartnerResponse)
+            {
+                output = Json::Value("InvalidPartnerResponse");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAPINotEnabledForGameServerAccess)
+            {
+                output = Json::Value("APINotEnabledForGameServerAccess");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStatisticNotFound)
+            {
+                output = Json::Value("StatisticNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStatisticNameConflict)
+            {
+                output = Json::Value("StatisticNameConflict");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStatisticVersionClosedForWrites)
+            {
+                output = Json::Value("StatisticVersionClosedForWrites");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStatisticVersionInvalid)
+            {
+                output = Json::Value("StatisticVersionInvalid");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAPIClientRequestRateLimitExceeded)
+            {
+                output = Json::Value("APIClientRequestRateLimitExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidJSONContent)
+            {
+                output = Json::Value("InvalidJSONContent");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidDropTable)
+            {
+                output = Json::Value("InvalidDropTable");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStatisticVersionAlreadyIncrementedForScheduledInterval)
+            {
+                output = Json::Value("StatisticVersionAlreadyIncrementedForScheduledInterval");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStatisticCountLimitExceeded)
+            {
+                output = Json::Value("StatisticCountLimitExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStatisticVersionIncrementRateExceeded)
+            {
+                output = Json::Value("StatisticVersionIncrementRateExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesContainerKeyInvalid)
+            {
+                output = Json::Value("ContainerKeyInvalid");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCloudScriptExecutionTimeLimitExceeded)
+            {
+                output = Json::Value("CloudScriptExecutionTimeLimitExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNoWritePermissionsForEvent)
+            {
+                output = Json::Value("NoWritePermissionsForEvent");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCloudScriptFunctionArgumentSizeExceeded)
+            {
+                output = Json::Value("CloudScriptFunctionArgumentSizeExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCloudScriptAPIRequestCountExceeded)
+            {
+                output = Json::Value("CloudScriptAPIRequestCountExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCloudScriptAPIRequestError)
+            {
+                output = Json::Value("CloudScriptAPIRequestError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCloudScriptHTTPRequestError)
+            {
+                output = Json::Value("CloudScriptHTTPRequestError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInsufficientGuildRole)
+            {
+                output = Json::Value("InsufficientGuildRole");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGuildNotFound)
+            {
+                output = Json::Value("GuildNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesOverLimit)
+            {
+                output = Json::Value("OverLimit");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventNotFound)
+            {
+                output = Json::Value("EventNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidEventField)
+            {
+                output = Json::Value("InvalidEventField");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidEventName)
+            {
+                output = Json::Value("InvalidEventName");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCatalogNotConfigured)
+            {
+                output = Json::Value("CatalogNotConfigured");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesOperationNotSupportedForPlatform)
+            {
+                output = Json::Value("OperationNotSupportedForPlatform");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesSegmentNotFound)
+            {
+                output = Json::Value("SegmentNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStoreNotFound)
+            {
+                output = Json::Value("StoreNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidStatisticName)
+            {
+                output = Json::Value("InvalidStatisticName");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleNotQualifiedForLimit)
+            {
+                output = Json::Value("TitleNotQualifiedForLimit");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidServiceLimitLevel)
+            {
+                output = Json::Value("InvalidServiceLimitLevel");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesServiceLimitLevelInTransition)
+            {
+                output = Json::Value("ServiceLimitLevelInTransition");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCouponAlreadyRedeemed)
+            {
+                output = Json::Value("CouponAlreadyRedeemed");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameServerBuildSizeLimitExceeded)
+            {
+                output = Json::Value("GameServerBuildSizeLimitExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameServerBuildCountLimitExceeded)
+            {
+                output = Json::Value("GameServerBuildCountLimitExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyCountLimitExceeded)
+            {
+                output = Json::Value("VirtualCurrencyCountLimitExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyCodeExists)
+            {
+                output = Json::Value("VirtualCurrencyCodeExists");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleNewsItemCountLimitExceeded)
+            {
+                output = Json::Value("TitleNewsItemCountLimitExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidTwitchToken)
+            {
+                output = Json::Value("InvalidTwitchToken");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTwitchResponseError)
+            {
+                output = Json::Value("TwitchResponseError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesProfaneDisplayName)
+            {
+                output = Json::Value("ProfaneDisplayName");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesUserAlreadyAdded)
+            {
+                output = Json::Value("UserAlreadyAdded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidVirtualCurrencyCode)
+            {
+                output = Json::Value("InvalidVirtualCurrencyCode");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyCannotBeDeleted)
+            {
+                output = Json::Value("VirtualCurrencyCannotBeDeleted");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesIdentifierAlreadyClaimed)
+            {
+                output = Json::Value("IdentifierAlreadyClaimed");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesIdentifierNotLinked)
+            {
+                output = Json::Value("IdentifierNotLinked");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidContinuationToken)
+            {
+                output = Json::Value("InvalidContinuationToken");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExpiredContinuationToken)
+            {
+                output = Json::Value("ExpiredContinuationToken");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidSegment)
+            {
+                output = Json::Value("InvalidSegment");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidSessionId)
+            {
+                output = Json::Value("InvalidSessionId");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesSessionLogNotFound)
+            {
+                output = Json::Value("SessionLogNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidSearchTerm)
+            {
+                output = Json::Value("InvalidSearchTerm");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTwoFactorAuthenticationTokenRequired)
+            {
+                output = Json::Value("TwoFactorAuthenticationTokenRequired");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameServerHostCountLimitExceeded)
+            {
+                output = Json::Value("GameServerHostCountLimitExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerTagCountLimitExceeded)
+            {
+                output = Json::Value("PlayerTagCountLimitExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesRequestAlreadyRunning)
+            {
+                output = Json::Value("RequestAlreadyRunning");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesActionGroupNotFound)
+            {
+                output = Json::Value("ActionGroupNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMaximumSegmentBulkActionJobsRunning)
+            {
+                output = Json::Value("MaximumSegmentBulkActionJobsRunning");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNoActionsOnPlayersInSegmentJob)
+            {
+                output = Json::Value("NoActionsOnPlayersInSegmentJob");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesDuplicateStatisticName)
+            {
+                output = Json::Value("DuplicateStatisticName");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesScheduledTaskNameConflict)
+            {
+                output = Json::Value("ScheduledTaskNameConflict");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesScheduledTaskCreateConflict)
+            {
+                output = Json::Value("ScheduledTaskCreateConflict");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidScheduledTaskName)
+            {
+                output = Json::Value("InvalidScheduledTaskName");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidTaskSchedule)
+            {
+                output = Json::Value("InvalidTaskSchedule");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesSteamNotEnabledForTitle)
+            {
+                output = Json::Value("SteamNotEnabledForTitle");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLimitNotAnUpgradeOption)
+            {
+                output = Json::Value("LimitNotAnUpgradeOption");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNoSecretKeyEnabledForCloudScript)
+            {
+                output = Json::Value("NoSecretKeyEnabledForCloudScript");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTaskNotFound)
+            {
+                output = Json::Value("TaskNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTaskInstanceNotFound)
+            {
+                output = Json::Value("TaskInstanceNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidIdentityProviderId)
+            {
+                output = Json::Value("InvalidIdentityProviderId");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMisconfiguredIdentityProvider)
+            {
+                output = Json::Value("MisconfiguredIdentityProvider");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidScheduledTaskType)
+            {
+                output = Json::Value("InvalidScheduledTaskType");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesBillingInformationRequired)
+            {
+                output = Json::Value("BillingInformationRequired");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLimitedEditionItemUnavailable)
+            {
+                output = Json::Value("LimitedEditionItemUnavailable");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidAdPlacementAndReward)
+            {
+                output = Json::Value("InvalidAdPlacementAndReward");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAllAdPlacementViewsAlreadyConsumed)
+            {
+                output = Json::Value("AllAdPlacementViewsAlreadyConsumed");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGoogleOAuthNotConfiguredForTitle)
+            {
+                output = Json::Value("GoogleOAuthNotConfiguredForTitle");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGoogleOAuthError)
+            {
+                output = Json::Value("GoogleOAuthError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesUserNotFriend)
+            {
+                output = Json::Value("UserNotFriend");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidSignature)
+            {
+                output = Json::Value("InvalidSignature");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidPublicKey)
+            {
+                output = Json::Value("InvalidPublicKey");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGoogleOAuthNoIdTokenIncludedInResponse)
+            {
+                output = Json::Value("GoogleOAuthNoIdTokenIncludedInResponse");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStatisticUpdateInProgress)
+            {
+                output = Json::Value("StatisticUpdateInProgress");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLeaderboardVersionNotAvailable)
+            {
+                output = Json::Value("LeaderboardVersionNotAvailable");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStatisticAlreadyHasPrizeTable)
+            {
+                output = Json::Value("StatisticAlreadyHasPrizeTable");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPrizeTableHasOverlappingRanks)
+            {
+                output = Json::Value("PrizeTableHasOverlappingRanks");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPrizeTableHasMissingRanks)
+            {
+                output = Json::Value("PrizeTableHasMissingRanks");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPrizeTableRankStartsAtZero)
+            {
+                output = Json::Value("PrizeTableRankStartsAtZero");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidStatistic)
+            {
+                output = Json::Value("InvalidStatistic");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExpressionParseFailure)
+            {
+                output = Json::Value("ExpressionParseFailure");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExpressionInvokeFailure)
+            {
+                output = Json::Value("ExpressionInvokeFailure");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExpressionTooLong)
+            {
+                output = Json::Value("ExpressionTooLong");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesDataUpdateRateExceeded)
+            {
+                output = Json::Value("DataUpdateRateExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesRestrictedEmailDomain)
+            {
+                output = Json::Value("RestrictedEmailDomain");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEncryptionKeyDisabled)
+            {
+                output = Json::Value("EncryptionKeyDisabled");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEncryptionKeyMissing)
+            {
+                output = Json::Value("EncryptionKeyMissing");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEncryptionKeyBroken)
+            {
+                output = Json::Value("EncryptionKeyBroken");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNoSharedSecretKeyConfigured)
+            {
+                output = Json::Value("NoSharedSecretKeyConfigured");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesSecretKeyNotFound)
+            {
+                output = Json::Value("SecretKeyNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerSecretAlreadyConfigured)
+            {
+                output = Json::Value("PlayerSecretAlreadyConfigured");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAPIRequestsDisabledForTitle)
+            {
+                output = Json::Value("APIRequestsDisabledForTitle");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidSharedSecretKey)
+            {
+                output = Json::Value("InvalidSharedSecretKey");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPrizeTableHasNoRanks)
+            {
+                output = Json::Value("PrizeTableHasNoRanks");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesProfileDoesNotExist)
+            {
+                output = Json::Value("ProfileDoesNotExist");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesContentS3OriginBucketNotConfigured)
+            {
+                output = Json::Value("ContentS3OriginBucketNotConfigured");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidEnvironmentForReceipt)
+            {
+                output = Json::Value("InvalidEnvironmentForReceipt");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEncryptedRequestNotAllowed)
+            {
+                output = Json::Value("EncryptedRequestNotAllowed");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesSignedRequestNotAllowed)
+            {
+                output = Json::Value("SignedRequestNotAllowed");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesRequestViewConstraintParamsNotAllowed)
+            {
+                output = Json::Value("RequestViewConstraintParamsNotAllowed");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesBadPartnerConfiguration)
+            {
+                output = Json::Value("BadPartnerConfiguration");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesXboxBPCertificateFailure)
+            {
+                output = Json::Value("XboxBPCertificateFailure");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesXboxXASSExchangeFailure)
+            {
+                output = Json::Value("XboxXASSExchangeFailure");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidEntityId)
+            {
+                output = Json::Value("InvalidEntityId");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStatisticValueAggregationOverflow)
+            {
+                output = Json::Value("StatisticValueAggregationOverflow");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEmailMessageFromAddressIsMissing)
+            {
+                output = Json::Value("EmailMessageFromAddressIsMissing");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEmailMessageToAddressIsMissing)
+            {
+                output = Json::Value("EmailMessageToAddressIsMissing");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesSmtpServerAuthenticationError)
+            {
+                output = Json::Value("SmtpServerAuthenticationError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesSmtpServerLimitExceeded)
+            {
+                output = Json::Value("SmtpServerLimitExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesSmtpServerInsufficientStorage)
+            {
+                output = Json::Value("SmtpServerInsufficientStorage");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesSmtpServerCommunicationError)
+            {
+                output = Json::Value("SmtpServerCommunicationError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesSmtpServerGeneralFailure)
+            {
+                output = Json::Value("SmtpServerGeneralFailure");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEmailClientTimeout)
+            {
+                output = Json::Value("EmailClientTimeout");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEmailClientCanceledTask)
+            {
+                output = Json::Value("EmailClientCanceledTask");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEmailTemplateMissing)
+            {
+                output = Json::Value("EmailTemplateMissing");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidHostForTitleId)
+            {
+                output = Json::Value("InvalidHostForTitleId");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEmailConfirmationTokenDoesNotExist)
+            {
+                output = Json::Value("EmailConfirmationTokenDoesNotExist");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEmailConfirmationTokenExpired)
+            {
+                output = Json::Value("EmailConfirmationTokenExpired");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAccountDeleted)
+            {
+                output = Json::Value("AccountDeleted");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerSecretNotConfigured)
+            {
+                output = Json::Value("PlayerSecretNotConfigured");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidSignatureTime)
+            {
+                output = Json::Value("InvalidSignatureTime");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNoContactEmailAddressFound)
+            {
+                output = Json::Value("NoContactEmailAddressFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidAuthToken)
+            {
+                output = Json::Value("InvalidAuthToken");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAuthTokenDoesNotExist)
+            {
+                output = Json::Value("AuthTokenDoesNotExist");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAuthTokenExpired)
+            {
+                output = Json::Value("AuthTokenExpired");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAuthTokenAlreadyUsedToResetPassword)
+            {
+                output = Json::Value("AuthTokenAlreadyUsedToResetPassword");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMembershipNameTooLong)
+            {
+                output = Json::Value("MembershipNameTooLong");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMembershipNotFound)
+            {
+                output = Json::Value("MembershipNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGoogleServiceAccountInvalid)
+            {
+                output = Json::Value("GoogleServiceAccountInvalid");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGoogleServiceAccountParseFailure)
+            {
+                output = Json::Value("GoogleServiceAccountParseFailure");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEntityTokenMissing)
+            {
+                output = Json::Value("EntityTokenMissing");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEntityTokenInvalid)
+            {
+                output = Json::Value("EntityTokenInvalid");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEntityTokenExpired)
+            {
+                output = Json::Value("EntityTokenExpired");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEntityTokenRevoked)
+            {
+                output = Json::Value("EntityTokenRevoked");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidProductForSubscription)
+            {
+                output = Json::Value("InvalidProductForSubscription");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesXboxInaccessible)
+            {
+                output = Json::Value("XboxInaccessible");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesSubscriptionAlreadyTaken)
+            {
+                output = Json::Value("SubscriptionAlreadyTaken");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesSmtpAddonNotEnabled)
+            {
+                output = Json::Value("SmtpAddonNotEnabled");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAPIConcurrentRequestLimitExceeded)
+            {
+                output = Json::Value("APIConcurrentRequestLimitExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesXboxRejectedXSTSExchangeRequest)
+            {
+                output = Json::Value("XboxRejectedXSTSExchangeRequest");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesVariableNotDefined)
+            {
+                output = Json::Value("VariableNotDefined");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTemplateVersionNotDefined)
+            {
+                output = Json::Value("TemplateVersionNotDefined");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesFileTooLarge)
+            {
+                output = Json::Value("FileTooLarge");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleDeleted)
+            {
+                output = Json::Value("TitleDeleted");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleContainsUserAccounts)
+            {
+                output = Json::Value("TitleContainsUserAccounts");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleDeletionPlayerCleanupFailure)
+            {
+                output = Json::Value("TitleDeletionPlayerCleanupFailure");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEntityFileOperationPending)
+            {
+                output = Json::Value("EntityFileOperationPending");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNoEntityFileOperationPending)
+            {
+                output = Json::Value("NoEntityFileOperationPending");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEntityProfileVersionMismatch)
+            {
+                output = Json::Value("EntityProfileVersionMismatch");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTemplateVersionTooOld)
+            {
+                output = Json::Value("TemplateVersionTooOld");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMembershipDefinitionInUse)
+            {
+                output = Json::Value("MembershipDefinitionInUse");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPaymentPageNotConfigured)
+            {
+                output = Json::Value("PaymentPageNotConfigured");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesFailedLoginAttemptRateLimitExceeded)
+            {
+                output = Json::Value("FailedLoginAttemptRateLimitExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEntityBlockedByGroup)
+            {
+                output = Json::Value("EntityBlockedByGroup");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesRoleDoesNotExist)
+            {
+                output = Json::Value("RoleDoesNotExist");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEntityIsAlreadyMember)
+            {
+                output = Json::Value("EntityIsAlreadyMember");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesDuplicateRoleId)
+            {
+                output = Json::Value("DuplicateRoleId");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGroupInvitationNotFound)
+            {
+                output = Json::Value("GroupInvitationNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGroupApplicationNotFound)
+            {
+                output = Json::Value("GroupApplicationNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesOutstandingInvitationAcceptedInstead)
+            {
+                output = Json::Value("OutstandingInvitationAcceptedInstead");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesOutstandingApplicationAcceptedInstead)
+            {
+                output = Json::Value("OutstandingApplicationAcceptedInstead");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesRoleIsGroupDefaultMember)
+            {
+                output = Json::Value("RoleIsGroupDefaultMember");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesRoleIsGroupAdmin)
+            {
+                output = Json::Value("RoleIsGroupAdmin");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesRoleNameNotAvailable)
+            {
+                output = Json::Value("RoleNameNotAvailable");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGroupNameNotAvailable)
+            {
+                output = Json::Value("GroupNameNotAvailable");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEmailReportAlreadySent)
+            {
+                output = Json::Value("EmailReportAlreadySent");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEmailReportRecipientBlacklisted)
+            {
+                output = Json::Value("EmailReportRecipientBlacklisted");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventNamespaceNotAllowed)
+            {
+                output = Json::Value("EventNamespaceNotAllowed");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventEntityNotAllowed)
+            {
+                output = Json::Value("EventEntityNotAllowed");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidEntityType)
+            {
+                output = Json::Value("InvalidEntityType");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNullTokenResultFromAad)
+            {
+                output = Json::Value("NullTokenResultFromAad");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidTokenResultFromAad)
+            {
+                output = Json::Value("InvalidTokenResultFromAad");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNoValidCertificateForAad)
+            {
+                output = Json::Value("NoValidCertificateForAad");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidCertificateForAad)
+            {
+                output = Json::Value("InvalidCertificateForAad");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesDuplicateDropTableId)
+            {
+                output = Json::Value("DuplicateDropTableId");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerError)
+            {
+                output = Json::Value("MultiplayerServerError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerTooManyRequests)
+            {
+                output = Json::Value("MultiplayerServerTooManyRequests");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerNoContent)
+            {
+                output = Json::Value("MultiplayerServerNoContent");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerBadRequest)
+            {
+                output = Json::Value("MultiplayerServerBadRequest");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerUnauthorized)
+            {
+                output = Json::Value("MultiplayerServerUnauthorized");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerForbidden)
+            {
+                output = Json::Value("MultiplayerServerForbidden");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerNotFound)
+            {
+                output = Json::Value("MultiplayerServerNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerConflict)
+            {
+                output = Json::Value("MultiplayerServerConflict");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerInternalServerError)
+            {
+                output = Json::Value("MultiplayerServerInternalServerError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerUnavailable)
+            {
+                output = Json::Value("MultiplayerServerUnavailable");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExplicitContentDetected)
+            {
+                output = Json::Value("ExplicitContentDetected");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPIIContentDetected)
+            {
+                output = Json::Value("PIIContentDetected");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidScheduledTaskParameter)
+            {
+                output = Json::Value("InvalidScheduledTaskParameter");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPerEntityEventRateLimitExceeded)
+            {
+                output = Json::Value("PerEntityEventRateLimitExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleDefaultLanguageNotSet)
+            {
+                output = Json::Value("TitleDefaultLanguageNotSet");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEmailTemplateMissingDefaultVersion)
+            {
+                output = Json::Value("EmailTemplateMissingDefaultVersion");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesFacebookInstantGamesIdNotLinked)
+            {
+                output = Json::Value("FacebookInstantGamesIdNotLinked");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidFacebookInstantGamesSignature)
+            {
+                output = Json::Value("InvalidFacebookInstantGamesSignature");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesFacebookInstantGamesAuthNotConfiguredForTitle)
+            {
+                output = Json::Value("FacebookInstantGamesAuthNotConfiguredForTitle");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEntityProfileConstraintValidationFailed)
+            {
+                output = Json::Value("EntityProfileConstraintValidationFailed");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTelemetryIngestionKeyPending)
+            {
+                output = Json::Value("TelemetryIngestionKeyPending");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTelemetryIngestionKeyNotFound)
+            {
+                output = Json::Value("TelemetryIngestionKeyNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStatisticChildNameInvalid)
+            {
+                output = Json::Value("StatisticChildNameInvalid");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesDataIntegrityError)
+            {
+                output = Json::Value("DataIntegrityError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyCannotBeSetToOlderVersion)
+            {
+                output = Json::Value("VirtualCurrencyCannotBeSetToOlderVersion");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyMustBeWithinIntegerRange)
+            {
+                output = Json::Value("VirtualCurrencyMustBeWithinIntegerRange");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEmailTemplateInvalidSyntax)
+            {
+                output = Json::Value("EmailTemplateInvalidSyntax");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEmailTemplateMissingCallback)
+            {
+                output = Json::Value("EmailTemplateMissingCallback");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPushNotificationTemplateInvalidPayload)
+            {
+                output = Json::Value("PushNotificationTemplateInvalidPayload");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidLocalizedPushNotificationLanguage)
+            {
+                output = Json::Value("InvalidLocalizedPushNotificationLanguage");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMissingLocalizedPushNotificationMessage)
+            {
+                output = Json::Value("MissingLocalizedPushNotificationMessage");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPushNotificationTemplateMissingPlatformPayload)
+            {
+                output = Json::Value("PushNotificationTemplateMissingPlatformPayload");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPushNotificationTemplatePayloadContainsInvalidJson)
+            {
+                output = Json::Value("PushNotificationTemplatePayloadContainsInvalidJson");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPushNotificationTemplateContainsInvalidIosPayload)
+            {
+                output = Json::Value("PushNotificationTemplateContainsInvalidIosPayload");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPushNotificationTemplateContainsInvalidAndroidPayload)
+            {
+                output = Json::Value("PushNotificationTemplateContainsInvalidAndroidPayload");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPushNotificationTemplateIosPayloadMissingNotificationBody)
+            {
+                output = Json::Value("PushNotificationTemplateIosPayloadMissingNotificationBody");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPushNotificationTemplateAndroidPayloadMissingNotificationBody)
+            {
+                output = Json::Value("PushNotificationTemplateAndroidPayloadMissingNotificationBody");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPushNotificationTemplateNotFound)
+            {
+                output = Json::Value("PushNotificationTemplateNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPushNotificationTemplateMissingDefaultVersion)
+            {
+                output = Json::Value("PushNotificationTemplateMissingDefaultVersion");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPushNotificationTemplateInvalidSyntax)
+            {
+                output = Json::Value("PushNotificationTemplateInvalidSyntax");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPushNotificationTemplateNoCustomPayloadForV1)
+            {
+                output = Json::Value("PushNotificationTemplateNoCustomPayloadForV1");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNoLeaderboardForStatistic)
+            {
+                output = Json::Value("NoLeaderboardForStatistic");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleNewsMissingDefaultLanguage)
+            {
+                output = Json::Value("TitleNewsMissingDefaultLanguage");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleNewsNotFound)
+            {
+                output = Json::Value("TitleNewsNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleNewsDuplicateLanguage)
+            {
+                output = Json::Value("TitleNewsDuplicateLanguage");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleNewsMissingTitleOrBody)
+            {
+                output = Json::Value("TitleNewsMissingTitleOrBody");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleNewsInvalidLanguage)
+            {
+                output = Json::Value("TitleNewsInvalidLanguage");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEmailRecipientBlacklisted)
+            {
+                output = Json::Value("EmailRecipientBlacklisted");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidGameCenterAuthRequest)
+            {
+                output = Json::Value("InvalidGameCenterAuthRequest");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameCenterAuthenticationFailed)
+            {
+                output = Json::Value("GameCenterAuthenticationFailed");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCannotEnablePartiesForTitle)
+            {
+                output = Json::Value("CannotEnablePartiesForTitle");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPartyError)
+            {
+                output = Json::Value("PartyError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPartyRequests)
+            {
+                output = Json::Value("PartyRequests");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPartyNoContent)
+            {
+                output = Json::Value("PartyNoContent");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPartyBadRequest)
+            {
+                output = Json::Value("PartyBadRequest");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPartyUnauthorized)
+            {
+                output = Json::Value("PartyUnauthorized");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPartyForbidden)
+            {
+                output = Json::Value("PartyForbidden");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPartyNotFound)
+            {
+                output = Json::Value("PartyNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPartyConflict)
+            {
+                output = Json::Value("PartyConflict");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPartyInternalServerError)
+            {
+                output = Json::Value("PartyInternalServerError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPartyUnavailable)
+            {
+                output = Json::Value("PartyUnavailable");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPartyTooManyRequests)
+            {
+                output = Json::Value("PartyTooManyRequests");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPushNotificationTemplateMissingName)
+            {
+                output = Json::Value("PushNotificationTemplateMissingName");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCannotEnableMultiplayerServersForTitle)
+            {
+                output = Json::Value("CannotEnableMultiplayerServersForTitle");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesWriteAttemptedDuringExport)
+            {
+                output = Json::Value("WriteAttemptedDuringExport");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerTitleQuotaCoresExceeded)
+            {
+                output = Json::Value("MultiplayerServerTitleQuotaCoresExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAutomationRuleNotFound)
+            {
+                output = Json::Value("AutomationRuleNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEntityAPIKeyLimitExceeded)
+            {
+                output = Json::Value("EntityAPIKeyLimitExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEntityAPIKeyNotFound)
+            {
+                output = Json::Value("EntityAPIKeyNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEntityAPIKeyOrSecretInvalid)
+            {
+                output = Json::Value("EntityAPIKeyOrSecretInvalid");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEconomyServiceUnavailable)
+            {
+                output = Json::Value("EconomyServiceUnavailable");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEconomyServiceInternalError)
+            {
+                output = Json::Value("EconomyServiceInternalError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesQueryRateLimitExceeded)
+            {
+                output = Json::Value("QueryRateLimitExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEntityAPIKeyCreationDisabledForEntity)
+            {
+                output = Json::Value("EntityAPIKeyCreationDisabledForEntity");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesForbiddenByEntityPolicy)
+            {
+                output = Json::Value("ForbiddenByEntityPolicy");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesUpdateInventoryRateLimitExceeded)
+            {
+                output = Json::Value("UpdateInventoryRateLimitExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStudioCreationRateLimited)
+            {
+                output = Json::Value("StudioCreationRateLimited");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStudioCreationInProgress)
+            {
+                output = Json::Value("StudioCreationInProgress");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesDuplicateStudioName)
+            {
+                output = Json::Value("DuplicateStudioName");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStudioNotFound)
+            {
+                output = Json::Value("StudioNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStudioDeleted)
+            {
+                output = Json::Value("StudioDeleted");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStudioDeactivated)
+            {
+                output = Json::Value("StudioDeactivated");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStudioActivated)
+            {
+                output = Json::Value("StudioActivated");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleCreationRateLimited)
+            {
+                output = Json::Value("TitleCreationRateLimited");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleCreationInProgress)
+            {
+                output = Json::Value("TitleCreationInProgress");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesDuplicateTitleName)
+            {
+                output = Json::Value("DuplicateTitleName");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleActivationRateLimited)
+            {
+                output = Json::Value("TitleActivationRateLimited");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleActivationInProgress)
+            {
+                output = Json::Value("TitleActivationInProgress");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleDeactivated)
+            {
+                output = Json::Value("TitleDeactivated");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleActivated)
+            {
+                output = Json::Value("TitleActivated");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCloudScriptAzureFunctionsExecutionTimeLimitExceeded)
+            {
+                output = Json::Value("CloudScriptAzureFunctionsExecutionTimeLimitExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCloudScriptAzureFunctionsArgumentSizeExceeded)
+            {
+                output = Json::Value("CloudScriptAzureFunctionsArgumentSizeExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCloudScriptAzureFunctionsReturnSizeExceeded)
+            {
+                output = Json::Value("CloudScriptAzureFunctionsReturnSizeExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCloudScriptAzureFunctionsHTTPRequestError)
+            {
+                output = Json::Value("CloudScriptAzureFunctionsHTTPRequestError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaGetError)
+            {
+                output = Json::Value("VirtualCurrencyBetaGetError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaCreateError)
+            {
+                output = Json::Value("VirtualCurrencyBetaCreateError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaInitialDepositSaveError)
+            {
+                output = Json::Value("VirtualCurrencyBetaInitialDepositSaveError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaSaveError)
+            {
+                output = Json::Value("VirtualCurrencyBetaSaveError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaDeleteError)
+            {
+                output = Json::Value("VirtualCurrencyBetaDeleteError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaRestoreError)
+            {
+                output = Json::Value("VirtualCurrencyBetaRestoreError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaSaveConflict)
+            {
+                output = Json::Value("VirtualCurrencyBetaSaveConflict");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaUpdateError)
+            {
+                output = Json::Value("VirtualCurrencyBetaUpdateError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInsightsManagementDatabaseNotFound)
+            {
+                output = Json::Value("InsightsManagementDatabaseNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInsightsManagementOperationNotFound)
+            {
+                output = Json::Value("InsightsManagementOperationNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInsightsManagementErrorPendingOperationExists)
+            {
+                output = Json::Value("InsightsManagementErrorPendingOperationExists");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInsightsManagementSetPerformanceLevelInvalidParameter)
+            {
+                output = Json::Value("InsightsManagementSetPerformanceLevelInvalidParameter");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInsightsManagementSetStorageRetentionInvalidParameter)
+            {
+                output = Json::Value("InsightsManagementSetStorageRetentionInvalidParameter");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInsightsManagementGetStorageUsageInvalidParameter)
+            {
+                output = Json::Value("InsightsManagementGetStorageUsageInvalidParameter");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInsightsManagementGetOperationStatusInvalidParameter)
+            {
+                output = Json::Value("InsightsManagementGetOperationStatusInvalidParameter");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesDuplicatePurchaseTransactionId)
+            {
+                output = Json::Value("DuplicatePurchaseTransactionId");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEvaluationModePlayerCountExceeded)
+            {
+                output = Json::Value("EvaluationModePlayerCountExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
+            {
+                output = Json::Value("MatchmakingEntityInvalid");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingPlayerAttributesInvalid)
+            {
+                output = Json::Value("MatchmakingPlayerAttributesInvalid");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingQueueNotFound)
+            {
+                output = Json::Value("MatchmakingQueueNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingMatchNotFound)
+            {
+                output = Json::Value("MatchmakingMatchNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingTicketNotFound)
+            {
+                output = Json::Value("MatchmakingTicketNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingAlreadyJoinedTicket)
+            {
+                output = Json::Value("MatchmakingAlreadyJoinedTicket");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingTicketAlreadyCompleted)
+            {
+                output = Json::Value("MatchmakingTicketAlreadyCompleted");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingQueueConfigInvalid)
+            {
+                output = Json::Value("MatchmakingQueueConfigInvalid");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingMemberProfileInvalid)
+            {
+                output = Json::Value("MatchmakingMemberProfileInvalid");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNintendoSwitchDeviceIdNotLinked)
+            {
+                output = Json::Value("NintendoSwitchDeviceIdNotLinked");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingNotEnabled)
+            {
+                output = Json::Value("MatchmakingNotEnabled");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingPlayerAttributesTooLarge)
+            {
+                output = Json::Value("MatchmakingPlayerAttributesTooLarge");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingNumberOfPlayersInTicketTooLarge)
+            {
+                output = Json::Value("MatchmakingNumberOfPlayersInTicketTooLarge");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingAttributeInvalid)
+            {
+                output = Json::Value("MatchmakingAttributeInvalid");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingPlayerHasNotJoinedTicket)
+            {
+                output = Json::Value("MatchmakingPlayerHasNotJoinedTicket");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingRateLimitExceeded)
+            {
+                output = Json::Value("MatchmakingRateLimitExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingTicketMembershipLimitExceeded)
+            {
+                output = Json::Value("MatchmakingTicketMembershipLimitExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingUnauthorized)
+            {
+                output = Json::Value("MatchmakingUnauthorized");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingQueueLimitExceeded)
+            {
+                output = Json::Value("MatchmakingQueueLimitExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingRequestTypeMismatch)
+            {
+                output = Json::Value("MatchmakingRequestTypeMismatch");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMatchmakingBadRequest)
+            {
+                output = Json::Value("MatchmakingBadRequest");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleConfigNotFound)
+            {
+                output = Json::Value("TitleConfigNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleConfigUpdateConflict)
+            {
+                output = Json::Value("TitleConfigUpdateConflict");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleConfigSerializationError)
+            {
+                output = Json::Value("TitleConfigSerializationError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCatalogEntityInvalid)
+            {
+                output = Json::Value("CatalogEntityInvalid");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCatalogTitleIdMissing)
+            {
+                output = Json::Value("CatalogTitleIdMissing");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCatalogPlayerIdMissing)
+            {
+                output = Json::Value("CatalogPlayerIdMissing");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCatalogClientIdentityInvalid)
+            {
+                output = Json::Value("CatalogClientIdentityInvalid");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCatalogOneOrMoreFilesInvalid)
+            {
+                output = Json::Value("CatalogOneOrMoreFilesInvalid");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCatalogItemMetadataInvalid)
+            {
+                output = Json::Value("CatalogItemMetadataInvalid");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCatalogItemIdInvalid)
+            {
+                output = Json::Value("CatalogItemIdInvalid");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCatalogSearchParameterInvalid)
+            {
+                output = Json::Value("CatalogSearchParameterInvalid");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCatalogFeatureDisabled)
+            {
+                output = Json::Value("CatalogFeatureDisabled");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCatalogConfigInvalid)
+            {
+                output = Json::Value("CatalogConfigInvalid");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCatalogUnauthorized)
+            {
+                output = Json::Value("CatalogUnauthorized");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCatalogItemTypeInvalid)
+            {
+                output = Json::Value("CatalogItemTypeInvalid");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCatalogBadRequest)
+            {
+                output = Json::Value("CatalogBadRequest");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCatalogTooManyRequests)
+            {
+                output = Json::Value("CatalogTooManyRequests");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExportInvalidStatusUpdate)
+            {
+                output = Json::Value("ExportInvalidStatusUpdate");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExportInvalidPrefix)
+            {
+                output = Json::Value("ExportInvalidPrefix");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExportBlobContainerDoesNotExist)
+            {
+                output = Json::Value("ExportBlobContainerDoesNotExist");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExportNotFound)
+            {
+                output = Json::Value("ExportNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExportCouldNotUpdate)
+            {
+                output = Json::Value("ExportCouldNotUpdate");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExportInvalidStorageType)
+            {
+                output = Json::Value("ExportInvalidStorageType");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExportAmazonBucketDoesNotExist)
+            {
+                output = Json::Value("ExportAmazonBucketDoesNotExist");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExportInvalidBlobStorage)
+            {
+                output = Json::Value("ExportInvalidBlobStorage");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExportKustoException)
+            {
+                output = Json::Value("ExportKustoException");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExportKustoConnectionFailed)
+            {
+                output = Json::Value("ExportKustoConnectionFailed");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExportUnknownError)
+            {
+                output = Json::Value("ExportUnknownError");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExportCantEditPendingExport)
+            {
+                output = Json::Value("ExportCantEditPendingExport");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExportLimitExports)
+            {
+                output = Json::Value("ExportLimitExports");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExportLimitEvents)
+            {
+                output = Json::Value("ExportLimitEvents");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleNotEnabledForParty)
+            {
+                output = Json::Value("TitleNotEnabledForParty");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPartyVersionNotFound)
+            {
+                output = Json::Value("PartyVersionNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerBuildReferencedByMatchmakingQueue)
+            {
+                output = Json::Value("MultiplayerServerBuildReferencedByMatchmakingQueue");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentationExperimentStopped)
+            {
+                output = Json::Value("ExperimentationExperimentStopped");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentationExperimentRunning)
+            {
+                output = Json::Value("ExperimentationExperimentRunning");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentationExperimentNotFound)
+            {
+                output = Json::Value("ExperimentationExperimentNotFound");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentationExperimentNeverStarted)
+            {
+                output = Json::Value("ExperimentationExperimentNeverStarted");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentationExperimentDeleted)
+            {
+                output = Json::Value("ExperimentationExperimentDeleted");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentationClientTimeout)
+            {
+                output = Json::Value("ExperimentationClientTimeout");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentationExceededVariantNameLength)
+            {
+                output = Json::Value("ExperimentationExceededVariantNameLength");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentationExceededMaxVariantLength)
+            {
+                output = Json::Value("ExperimentationExceededMaxVariantLength");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentInvalidId)
+            {
+                output = Json::Value("ExperimentInvalidId");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentationNoScorecard)
+            {
+                output = Json::Value("ExperimentationNoScorecard");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMaxActionDepthExceeded)
+            {
+                output = Json::Value("MaxActionDepthExceeded");
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesSnapshotNotFound)
+            {
+                output = Json::Value("SnapshotNotFound");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, GenericErrorCodes& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "Success") output = GenericErrorCodes::GenericErrorCodesSuccess;
-            if (inputStr == "UnkownError") output = GenericErrorCodes::GenericErrorCodesUnkownError;
-            if (inputStr == "InvalidParams") output = GenericErrorCodes::GenericErrorCodesInvalidParams;
-            if (inputStr == "AccountNotFound") output = GenericErrorCodes::GenericErrorCodesAccountNotFound;
-            if (inputStr == "AccountBanned") output = GenericErrorCodes::GenericErrorCodesAccountBanned;
-            if (inputStr == "InvalidUsernameOrPassword") output = GenericErrorCodes::GenericErrorCodesInvalidUsernameOrPassword;
-            if (inputStr == "InvalidTitleId") output = GenericErrorCodes::GenericErrorCodesInvalidTitleId;
-            if (inputStr == "InvalidEmailAddress") output = GenericErrorCodes::GenericErrorCodesInvalidEmailAddress;
-            if (inputStr == "EmailAddressNotAvailable") output = GenericErrorCodes::GenericErrorCodesEmailAddressNotAvailable;
-            if (inputStr == "InvalidUsername") output = GenericErrorCodes::GenericErrorCodesInvalidUsername;
-            if (inputStr == "InvalidPassword") output = GenericErrorCodes::GenericErrorCodesInvalidPassword;
-            if (inputStr == "UsernameNotAvailable") output = GenericErrorCodes::GenericErrorCodesUsernameNotAvailable;
-            if (inputStr == "InvalidSteamTicket") output = GenericErrorCodes::GenericErrorCodesInvalidSteamTicket;
-            if (inputStr == "AccountAlreadyLinked") output = GenericErrorCodes::GenericErrorCodesAccountAlreadyLinked;
-            if (inputStr == "LinkedAccountAlreadyClaimed") output = GenericErrorCodes::GenericErrorCodesLinkedAccountAlreadyClaimed;
-            if (inputStr == "InvalidFacebookToken") output = GenericErrorCodes::GenericErrorCodesInvalidFacebookToken;
-            if (inputStr == "AccountNotLinked") output = GenericErrorCodes::GenericErrorCodesAccountNotLinked;
-            if (inputStr == "FailedByPaymentProvider") output = GenericErrorCodes::GenericErrorCodesFailedByPaymentProvider;
-            if (inputStr == "CouponCodeNotFound") output = GenericErrorCodes::GenericErrorCodesCouponCodeNotFound;
-            if (inputStr == "InvalidContainerItem") output = GenericErrorCodes::GenericErrorCodesInvalidContainerItem;
-            if (inputStr == "ContainerNotOwned") output = GenericErrorCodes::GenericErrorCodesContainerNotOwned;
-            if (inputStr == "KeyNotOwned") output = GenericErrorCodes::GenericErrorCodesKeyNotOwned;
-            if (inputStr == "InvalidItemIdInTable") output = GenericErrorCodes::GenericErrorCodesInvalidItemIdInTable;
-            if (inputStr == "InvalidReceipt") output = GenericErrorCodes::GenericErrorCodesInvalidReceipt;
-            if (inputStr == "ReceiptAlreadyUsed") output = GenericErrorCodes::GenericErrorCodesReceiptAlreadyUsed;
-            if (inputStr == "ReceiptCancelled") output = GenericErrorCodes::GenericErrorCodesReceiptCancelled;
-            if (inputStr == "GameNotFound") output = GenericErrorCodes::GenericErrorCodesGameNotFound;
-            if (inputStr == "GameModeNotFound") output = GenericErrorCodes::GenericErrorCodesGameModeNotFound;
-            if (inputStr == "InvalidGoogleToken") output = GenericErrorCodes::GenericErrorCodesInvalidGoogleToken;
-            if (inputStr == "UserIsNotPartOfDeveloper") output = GenericErrorCodes::GenericErrorCodesUserIsNotPartOfDeveloper;
-            if (inputStr == "InvalidTitleForDeveloper") output = GenericErrorCodes::GenericErrorCodesInvalidTitleForDeveloper;
-            if (inputStr == "TitleNameConflicts") output = GenericErrorCodes::GenericErrorCodesTitleNameConflicts;
-            if (inputStr == "UserisNotValid") output = GenericErrorCodes::GenericErrorCodesUserisNotValid;
-            if (inputStr == "ValueAlreadyExists") output = GenericErrorCodes::GenericErrorCodesValueAlreadyExists;
-            if (inputStr == "BuildNotFound") output = GenericErrorCodes::GenericErrorCodesBuildNotFound;
-            if (inputStr == "PlayerNotInGame") output = GenericErrorCodes::GenericErrorCodesPlayerNotInGame;
-            if (inputStr == "InvalidTicket") output = GenericErrorCodes::GenericErrorCodesInvalidTicket;
-            if (inputStr == "InvalidDeveloper") output = GenericErrorCodes::GenericErrorCodesInvalidDeveloper;
-            if (inputStr == "InvalidOrderInfo") output = GenericErrorCodes::GenericErrorCodesInvalidOrderInfo;
-            if (inputStr == "RegistrationIncomplete") output = GenericErrorCodes::GenericErrorCodesRegistrationIncomplete;
-            if (inputStr == "InvalidPlatform") output = GenericErrorCodes::GenericErrorCodesInvalidPlatform;
-            if (inputStr == "UnknownError") output = GenericErrorCodes::GenericErrorCodesUnknownError;
-            if (inputStr == "SteamApplicationNotOwned") output = GenericErrorCodes::GenericErrorCodesSteamApplicationNotOwned;
-            if (inputStr == "WrongSteamAccount") output = GenericErrorCodes::GenericErrorCodesWrongSteamAccount;
-            if (inputStr == "TitleNotActivated") output = GenericErrorCodes::GenericErrorCodesTitleNotActivated;
-            if (inputStr == "RegistrationSessionNotFound") output = GenericErrorCodes::GenericErrorCodesRegistrationSessionNotFound;
-            if (inputStr == "NoSuchMod") output = GenericErrorCodes::GenericErrorCodesNoSuchMod;
-            if (inputStr == "FileNotFound") output = GenericErrorCodes::GenericErrorCodesFileNotFound;
-            if (inputStr == "DuplicateEmail") output = GenericErrorCodes::GenericErrorCodesDuplicateEmail;
-            if (inputStr == "ItemNotFound") output = GenericErrorCodes::GenericErrorCodesItemNotFound;
-            if (inputStr == "ItemNotOwned") output = GenericErrorCodes::GenericErrorCodesItemNotOwned;
-            if (inputStr == "ItemNotRecycleable") output = GenericErrorCodes::GenericErrorCodesItemNotRecycleable;
-            if (inputStr == "ItemNotAffordable") output = GenericErrorCodes::GenericErrorCodesItemNotAffordable;
-            if (inputStr == "InvalidVirtualCurrency") output = GenericErrorCodes::GenericErrorCodesInvalidVirtualCurrency;
-            if (inputStr == "WrongVirtualCurrency") output = GenericErrorCodes::GenericErrorCodesWrongVirtualCurrency;
-            if (inputStr == "WrongPrice") output = GenericErrorCodes::GenericErrorCodesWrongPrice;
-            if (inputStr == "NonPositiveValue") output = GenericErrorCodes::GenericErrorCodesNonPositiveValue;
-            if (inputStr == "InvalidRegion") output = GenericErrorCodes::GenericErrorCodesInvalidRegion;
-            if (inputStr == "RegionAtCapacity") output = GenericErrorCodes::GenericErrorCodesRegionAtCapacity;
-            if (inputStr == "ServerFailedToStart") output = GenericErrorCodes::GenericErrorCodesServerFailedToStart;
-            if (inputStr == "NameNotAvailable") output = GenericErrorCodes::GenericErrorCodesNameNotAvailable;
-            if (inputStr == "InsufficientFunds") output = GenericErrorCodes::GenericErrorCodesInsufficientFunds;
-            if (inputStr == "InvalidDeviceID") output = GenericErrorCodes::GenericErrorCodesInvalidDeviceID;
-            if (inputStr == "InvalidPushNotificationToken") output = GenericErrorCodes::GenericErrorCodesInvalidPushNotificationToken;
-            if (inputStr == "NoRemainingUses") output = GenericErrorCodes::GenericErrorCodesNoRemainingUses;
-            if (inputStr == "InvalidPaymentProvider") output = GenericErrorCodes::GenericErrorCodesInvalidPaymentProvider;
-            if (inputStr == "PurchaseInitializationFailure") output = GenericErrorCodes::GenericErrorCodesPurchaseInitializationFailure;
-            if (inputStr == "DuplicateUsername") output = GenericErrorCodes::GenericErrorCodesDuplicateUsername;
-            if (inputStr == "InvalidBuyerInfo") output = GenericErrorCodes::GenericErrorCodesInvalidBuyerInfo;
-            if (inputStr == "NoGameModeParamsSet") output = GenericErrorCodes::GenericErrorCodesNoGameModeParamsSet;
-            if (inputStr == "BodyTooLarge") output = GenericErrorCodes::GenericErrorCodesBodyTooLarge;
-            if (inputStr == "ReservedWordInBody") output = GenericErrorCodes::GenericErrorCodesReservedWordInBody;
-            if (inputStr == "InvalidTypeInBody") output = GenericErrorCodes::GenericErrorCodesInvalidTypeInBody;
-            if (inputStr == "InvalidRequest") output = GenericErrorCodes::GenericErrorCodesInvalidRequest;
-            if (inputStr == "ReservedEventName") output = GenericErrorCodes::GenericErrorCodesReservedEventName;
-            if (inputStr == "InvalidUserStatistics") output = GenericErrorCodes::GenericErrorCodesInvalidUserStatistics;
-            if (inputStr == "NotAuthenticated") output = GenericErrorCodes::GenericErrorCodesNotAuthenticated;
-            if (inputStr == "StreamAlreadyExists") output = GenericErrorCodes::GenericErrorCodesStreamAlreadyExists;
-            if (inputStr == "ErrorCreatingStream") output = GenericErrorCodes::GenericErrorCodesErrorCreatingStream;
-            if (inputStr == "StreamNotFound") output = GenericErrorCodes::GenericErrorCodesStreamNotFound;
-            if (inputStr == "InvalidAccount") output = GenericErrorCodes::GenericErrorCodesInvalidAccount;
-            if (inputStr == "PurchaseDoesNotExist") output = GenericErrorCodes::GenericErrorCodesPurchaseDoesNotExist;
-            if (inputStr == "InvalidPurchaseTransactionStatus") output = GenericErrorCodes::GenericErrorCodesInvalidPurchaseTransactionStatus;
-            if (inputStr == "APINotEnabledForGameClientAccess") output = GenericErrorCodes::GenericErrorCodesAPINotEnabledForGameClientAccess;
-            if (inputStr == "NoPushNotificationARNForTitle") output = GenericErrorCodes::GenericErrorCodesNoPushNotificationARNForTitle;
-            if (inputStr == "BuildAlreadyExists") output = GenericErrorCodes::GenericErrorCodesBuildAlreadyExists;
-            if (inputStr == "BuildPackageDoesNotExist") output = GenericErrorCodes::GenericErrorCodesBuildPackageDoesNotExist;
-            if (inputStr == "CustomAnalyticsEventsNotEnabledForTitle") output = GenericErrorCodes::GenericErrorCodesCustomAnalyticsEventsNotEnabledForTitle;
-            if (inputStr == "InvalidSharedGroupId") output = GenericErrorCodes::GenericErrorCodesInvalidSharedGroupId;
-            if (inputStr == "NotAuthorized") output = GenericErrorCodes::GenericErrorCodesNotAuthorized;
-            if (inputStr == "MissingTitleGoogleProperties") output = GenericErrorCodes::GenericErrorCodesMissingTitleGoogleProperties;
-            if (inputStr == "InvalidItemProperties") output = GenericErrorCodes::GenericErrorCodesInvalidItemProperties;
-            if (inputStr == "InvalidPSNAuthCode") output = GenericErrorCodes::GenericErrorCodesInvalidPSNAuthCode;
-            if (inputStr == "InvalidItemId") output = GenericErrorCodes::GenericErrorCodesInvalidItemId;
-            if (inputStr == "PushNotEnabledForAccount") output = GenericErrorCodes::GenericErrorCodesPushNotEnabledForAccount;
-            if (inputStr == "PushServiceError") output = GenericErrorCodes::GenericErrorCodesPushServiceError;
-            if (inputStr == "ReceiptDoesNotContainInAppItems") output = GenericErrorCodes::GenericErrorCodesReceiptDoesNotContainInAppItems;
-            if (inputStr == "ReceiptContainsMultipleInAppItems") output = GenericErrorCodes::GenericErrorCodesReceiptContainsMultipleInAppItems;
-            if (inputStr == "InvalidBundleID") output = GenericErrorCodes::GenericErrorCodesInvalidBundleID;
-            if (inputStr == "JavascriptException") output = GenericErrorCodes::GenericErrorCodesJavascriptException;
-            if (inputStr == "InvalidSessionTicket") output = GenericErrorCodes::GenericErrorCodesInvalidSessionTicket;
-            if (inputStr == "UnableToConnectToDatabase") output = GenericErrorCodes::GenericErrorCodesUnableToConnectToDatabase;
-            if (inputStr == "InternalServerError") output = GenericErrorCodes::GenericErrorCodesInternalServerError;
-            if (inputStr == "InvalidReportDate") output = GenericErrorCodes::GenericErrorCodesInvalidReportDate;
-            if (inputStr == "ReportNotAvailable") output = GenericErrorCodes::GenericErrorCodesReportNotAvailable;
-            if (inputStr == "DatabaseThroughputExceeded") output = GenericErrorCodes::GenericErrorCodesDatabaseThroughputExceeded;
-            if (inputStr == "InvalidGameTicket") output = GenericErrorCodes::GenericErrorCodesInvalidGameTicket;
-            if (inputStr == "ExpiredGameTicket") output = GenericErrorCodes::GenericErrorCodesExpiredGameTicket;
-            if (inputStr == "GameTicketDoesNotMatchLobby") output = GenericErrorCodes::GenericErrorCodesGameTicketDoesNotMatchLobby;
-            if (inputStr == "LinkedDeviceAlreadyClaimed") output = GenericErrorCodes::GenericErrorCodesLinkedDeviceAlreadyClaimed;
-            if (inputStr == "DeviceAlreadyLinked") output = GenericErrorCodes::GenericErrorCodesDeviceAlreadyLinked;
-            if (inputStr == "DeviceNotLinked") output = GenericErrorCodes::GenericErrorCodesDeviceNotLinked;
-            if (inputStr == "PartialFailure") output = GenericErrorCodes::GenericErrorCodesPartialFailure;
-            if (inputStr == "PublisherNotSet") output = GenericErrorCodes::GenericErrorCodesPublisherNotSet;
-            if (inputStr == "ServiceUnavailable") output = GenericErrorCodes::GenericErrorCodesServiceUnavailable;
-            if (inputStr == "VersionNotFound") output = GenericErrorCodes::GenericErrorCodesVersionNotFound;
-            if (inputStr == "RevisionNotFound") output = GenericErrorCodes::GenericErrorCodesRevisionNotFound;
-            if (inputStr == "InvalidPublisherId") output = GenericErrorCodes::GenericErrorCodesInvalidPublisherId;
-            if (inputStr == "DownstreamServiceUnavailable") output = GenericErrorCodes::GenericErrorCodesDownstreamServiceUnavailable;
-            if (inputStr == "APINotIncludedInTitleUsageTier") output = GenericErrorCodes::GenericErrorCodesAPINotIncludedInTitleUsageTier;
-            if (inputStr == "DAULimitExceeded") output = GenericErrorCodes::GenericErrorCodesDAULimitExceeded;
-            if (inputStr == "APIRequestLimitExceeded") output = GenericErrorCodes::GenericErrorCodesAPIRequestLimitExceeded;
-            if (inputStr == "InvalidAPIEndpoint") output = GenericErrorCodes::GenericErrorCodesInvalidAPIEndpoint;
-            if (inputStr == "BuildNotAvailable") output = GenericErrorCodes::GenericErrorCodesBuildNotAvailable;
-            if (inputStr == "ConcurrentEditError") output = GenericErrorCodes::GenericErrorCodesConcurrentEditError;
-            if (inputStr == "ContentNotFound") output = GenericErrorCodes::GenericErrorCodesContentNotFound;
-            if (inputStr == "CharacterNotFound") output = GenericErrorCodes::GenericErrorCodesCharacterNotFound;
-            if (inputStr == "CloudScriptNotFound") output = GenericErrorCodes::GenericErrorCodesCloudScriptNotFound;
-            if (inputStr == "ContentQuotaExceeded") output = GenericErrorCodes::GenericErrorCodesContentQuotaExceeded;
-            if (inputStr == "InvalidCharacterStatistics") output = GenericErrorCodes::GenericErrorCodesInvalidCharacterStatistics;
-            if (inputStr == "PhotonNotEnabledForTitle") output = GenericErrorCodes::GenericErrorCodesPhotonNotEnabledForTitle;
-            if (inputStr == "PhotonApplicationNotFound") output = GenericErrorCodes::GenericErrorCodesPhotonApplicationNotFound;
-            if (inputStr == "PhotonApplicationNotAssociatedWithTitle") output = GenericErrorCodes::GenericErrorCodesPhotonApplicationNotAssociatedWithTitle;
-            if (inputStr == "InvalidEmailOrPassword") output = GenericErrorCodes::GenericErrorCodesInvalidEmailOrPassword;
-            if (inputStr == "FacebookAPIError") output = GenericErrorCodes::GenericErrorCodesFacebookAPIError;
-            if (inputStr == "InvalidContentType") output = GenericErrorCodes::GenericErrorCodesInvalidContentType;
-            if (inputStr == "KeyLengthExceeded") output = GenericErrorCodes::GenericErrorCodesKeyLengthExceeded;
-            if (inputStr == "DataLengthExceeded") output = GenericErrorCodes::GenericErrorCodesDataLengthExceeded;
-            if (inputStr == "TooManyKeys") output = GenericErrorCodes::GenericErrorCodesTooManyKeys;
-            if (inputStr == "FreeTierCannotHaveVirtualCurrency") output = GenericErrorCodes::GenericErrorCodesFreeTierCannotHaveVirtualCurrency;
-            if (inputStr == "MissingAmazonSharedKey") output = GenericErrorCodes::GenericErrorCodesMissingAmazonSharedKey;
-            if (inputStr == "AmazonValidationError") output = GenericErrorCodes::GenericErrorCodesAmazonValidationError;
-            if (inputStr == "InvalidPSNIssuerId") output = GenericErrorCodes::GenericErrorCodesInvalidPSNIssuerId;
-            if (inputStr == "PSNInaccessible") output = GenericErrorCodes::GenericErrorCodesPSNInaccessible;
-            if (inputStr == "ExpiredAuthToken") output = GenericErrorCodes::GenericErrorCodesExpiredAuthToken;
-            if (inputStr == "FailedToGetEntitlements") output = GenericErrorCodes::GenericErrorCodesFailedToGetEntitlements;
-            if (inputStr == "FailedToConsumeEntitlement") output = GenericErrorCodes::GenericErrorCodesFailedToConsumeEntitlement;
-            if (inputStr == "TradeAcceptingUserNotAllowed") output = GenericErrorCodes::GenericErrorCodesTradeAcceptingUserNotAllowed;
-            if (inputStr == "TradeInventoryItemIsAssignedToCharacter") output = GenericErrorCodes::GenericErrorCodesTradeInventoryItemIsAssignedToCharacter;
-            if (inputStr == "TradeInventoryItemIsBundle") output = GenericErrorCodes::GenericErrorCodesTradeInventoryItemIsBundle;
-            if (inputStr == "TradeStatusNotValidForCancelling") output = GenericErrorCodes::GenericErrorCodesTradeStatusNotValidForCancelling;
-            if (inputStr == "TradeStatusNotValidForAccepting") output = GenericErrorCodes::GenericErrorCodesTradeStatusNotValidForAccepting;
-            if (inputStr == "TradeDoesNotExist") output = GenericErrorCodes::GenericErrorCodesTradeDoesNotExist;
-            if (inputStr == "TradeCancelled") output = GenericErrorCodes::GenericErrorCodesTradeCancelled;
-            if (inputStr == "TradeAlreadyFilled") output = GenericErrorCodes::GenericErrorCodesTradeAlreadyFilled;
-            if (inputStr == "TradeWaitForStatusTimeout") output = GenericErrorCodes::GenericErrorCodesTradeWaitForStatusTimeout;
-            if (inputStr == "TradeInventoryItemExpired") output = GenericErrorCodes::GenericErrorCodesTradeInventoryItemExpired;
-            if (inputStr == "TradeMissingOfferedAndAcceptedItems") output = GenericErrorCodes::GenericErrorCodesTradeMissingOfferedAndAcceptedItems;
-            if (inputStr == "TradeAcceptedItemIsBundle") output = GenericErrorCodes::GenericErrorCodesTradeAcceptedItemIsBundle;
-            if (inputStr == "TradeAcceptedItemIsStackable") output = GenericErrorCodes::GenericErrorCodesTradeAcceptedItemIsStackable;
-            if (inputStr == "TradeInventoryItemInvalidStatus") output = GenericErrorCodes::GenericErrorCodesTradeInventoryItemInvalidStatus;
-            if (inputStr == "TradeAcceptedCatalogItemInvalid") output = GenericErrorCodes::GenericErrorCodesTradeAcceptedCatalogItemInvalid;
-            if (inputStr == "TradeAllowedUsersInvalid") output = GenericErrorCodes::GenericErrorCodesTradeAllowedUsersInvalid;
-            if (inputStr == "TradeInventoryItemDoesNotExist") output = GenericErrorCodes::GenericErrorCodesTradeInventoryItemDoesNotExist;
-            if (inputStr == "TradeInventoryItemIsConsumed") output = GenericErrorCodes::GenericErrorCodesTradeInventoryItemIsConsumed;
-            if (inputStr == "TradeInventoryItemIsStackable") output = GenericErrorCodes::GenericErrorCodesTradeInventoryItemIsStackable;
-            if (inputStr == "TradeAcceptedItemsMismatch") output = GenericErrorCodes::GenericErrorCodesTradeAcceptedItemsMismatch;
-            if (inputStr == "InvalidKongregateToken") output = GenericErrorCodes::GenericErrorCodesInvalidKongregateToken;
-            if (inputStr == "FeatureNotConfiguredForTitle") output = GenericErrorCodes::GenericErrorCodesFeatureNotConfiguredForTitle;
-            if (inputStr == "NoMatchingCatalogItemForReceipt") output = GenericErrorCodes::GenericErrorCodesNoMatchingCatalogItemForReceipt;
-            if (inputStr == "InvalidCurrencyCode") output = GenericErrorCodes::GenericErrorCodesInvalidCurrencyCode;
-            if (inputStr == "NoRealMoneyPriceForCatalogItem") output = GenericErrorCodes::GenericErrorCodesNoRealMoneyPriceForCatalogItem;
-            if (inputStr == "TradeInventoryItemIsNotTradable") output = GenericErrorCodes::GenericErrorCodesTradeInventoryItemIsNotTradable;
-            if (inputStr == "TradeAcceptedCatalogItemIsNotTradable") output = GenericErrorCodes::GenericErrorCodesTradeAcceptedCatalogItemIsNotTradable;
-            if (inputStr == "UsersAlreadyFriends") output = GenericErrorCodes::GenericErrorCodesUsersAlreadyFriends;
-            if (inputStr == "LinkedIdentifierAlreadyClaimed") output = GenericErrorCodes::GenericErrorCodesLinkedIdentifierAlreadyClaimed;
-            if (inputStr == "CustomIdNotLinked") output = GenericErrorCodes::GenericErrorCodesCustomIdNotLinked;
-            if (inputStr == "TotalDataSizeExceeded") output = GenericErrorCodes::GenericErrorCodesTotalDataSizeExceeded;
-            if (inputStr == "DeleteKeyConflict") output = GenericErrorCodes::GenericErrorCodesDeleteKeyConflict;
-            if (inputStr == "InvalidXboxLiveToken") output = GenericErrorCodes::GenericErrorCodesInvalidXboxLiveToken;
-            if (inputStr == "ExpiredXboxLiveToken") output = GenericErrorCodes::GenericErrorCodesExpiredXboxLiveToken;
-            if (inputStr == "ResettableStatisticVersionRequired") output = GenericErrorCodes::GenericErrorCodesResettableStatisticVersionRequired;
-            if (inputStr == "NotAuthorizedByTitle") output = GenericErrorCodes::GenericErrorCodesNotAuthorizedByTitle;
-            if (inputStr == "NoPartnerEnabled") output = GenericErrorCodes::GenericErrorCodesNoPartnerEnabled;
-            if (inputStr == "InvalidPartnerResponse") output = GenericErrorCodes::GenericErrorCodesInvalidPartnerResponse;
-            if (inputStr == "APINotEnabledForGameServerAccess") output = GenericErrorCodes::GenericErrorCodesAPINotEnabledForGameServerAccess;
-            if (inputStr == "StatisticNotFound") output = GenericErrorCodes::GenericErrorCodesStatisticNotFound;
-            if (inputStr == "StatisticNameConflict") output = GenericErrorCodes::GenericErrorCodesStatisticNameConflict;
-            if (inputStr == "StatisticVersionClosedForWrites") output = GenericErrorCodes::GenericErrorCodesStatisticVersionClosedForWrites;
-            if (inputStr == "StatisticVersionInvalid") output = GenericErrorCodes::GenericErrorCodesStatisticVersionInvalid;
-            if (inputStr == "APIClientRequestRateLimitExceeded") output = GenericErrorCodes::GenericErrorCodesAPIClientRequestRateLimitExceeded;
-            if (inputStr == "InvalidJSONContent") output = GenericErrorCodes::GenericErrorCodesInvalidJSONContent;
-            if (inputStr == "InvalidDropTable") output = GenericErrorCodes::GenericErrorCodesInvalidDropTable;
-            if (inputStr == "StatisticVersionAlreadyIncrementedForScheduledInterval") output = GenericErrorCodes::GenericErrorCodesStatisticVersionAlreadyIncrementedForScheduledInterval;
-            if (inputStr == "StatisticCountLimitExceeded") output = GenericErrorCodes::GenericErrorCodesStatisticCountLimitExceeded;
-            if (inputStr == "StatisticVersionIncrementRateExceeded") output = GenericErrorCodes::GenericErrorCodesStatisticVersionIncrementRateExceeded;
-            if (inputStr == "ContainerKeyInvalid") output = GenericErrorCodes::GenericErrorCodesContainerKeyInvalid;
-            if (inputStr == "CloudScriptExecutionTimeLimitExceeded") output = GenericErrorCodes::GenericErrorCodesCloudScriptExecutionTimeLimitExceeded;
-            if (inputStr == "NoWritePermissionsForEvent") output = GenericErrorCodes::GenericErrorCodesNoWritePermissionsForEvent;
-            if (inputStr == "CloudScriptFunctionArgumentSizeExceeded") output = GenericErrorCodes::GenericErrorCodesCloudScriptFunctionArgumentSizeExceeded;
-            if (inputStr == "CloudScriptAPIRequestCountExceeded") output = GenericErrorCodes::GenericErrorCodesCloudScriptAPIRequestCountExceeded;
-            if (inputStr == "CloudScriptAPIRequestError") output = GenericErrorCodes::GenericErrorCodesCloudScriptAPIRequestError;
-            if (inputStr == "CloudScriptHTTPRequestError") output = GenericErrorCodes::GenericErrorCodesCloudScriptHTTPRequestError;
-            if (inputStr == "InsufficientGuildRole") output = GenericErrorCodes::GenericErrorCodesInsufficientGuildRole;
-            if (inputStr == "GuildNotFound") output = GenericErrorCodes::GenericErrorCodesGuildNotFound;
-            if (inputStr == "OverLimit") output = GenericErrorCodes::GenericErrorCodesOverLimit;
-            if (inputStr == "EventNotFound") output = GenericErrorCodes::GenericErrorCodesEventNotFound;
-            if (inputStr == "InvalidEventField") output = GenericErrorCodes::GenericErrorCodesInvalidEventField;
-            if (inputStr == "InvalidEventName") output = GenericErrorCodes::GenericErrorCodesInvalidEventName;
-            if (inputStr == "CatalogNotConfigured") output = GenericErrorCodes::GenericErrorCodesCatalogNotConfigured;
-            if (inputStr == "OperationNotSupportedForPlatform") output = GenericErrorCodes::GenericErrorCodesOperationNotSupportedForPlatform;
-            if (inputStr == "SegmentNotFound") output = GenericErrorCodes::GenericErrorCodesSegmentNotFound;
-            if (inputStr == "StoreNotFound") output = GenericErrorCodes::GenericErrorCodesStoreNotFound;
-            if (inputStr == "InvalidStatisticName") output = GenericErrorCodes::GenericErrorCodesInvalidStatisticName;
-            if (inputStr == "TitleNotQualifiedForLimit") output = GenericErrorCodes::GenericErrorCodesTitleNotQualifiedForLimit;
-            if (inputStr == "InvalidServiceLimitLevel") output = GenericErrorCodes::GenericErrorCodesInvalidServiceLimitLevel;
-            if (inputStr == "ServiceLimitLevelInTransition") output = GenericErrorCodes::GenericErrorCodesServiceLimitLevelInTransition;
-            if (inputStr == "CouponAlreadyRedeemed") output = GenericErrorCodes::GenericErrorCodesCouponAlreadyRedeemed;
-            if (inputStr == "GameServerBuildSizeLimitExceeded") output = GenericErrorCodes::GenericErrorCodesGameServerBuildSizeLimitExceeded;
-            if (inputStr == "GameServerBuildCountLimitExceeded") output = GenericErrorCodes::GenericErrorCodesGameServerBuildCountLimitExceeded;
-            if (inputStr == "VirtualCurrencyCountLimitExceeded") output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyCountLimitExceeded;
-            if (inputStr == "VirtualCurrencyCodeExists") output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyCodeExists;
-            if (inputStr == "TitleNewsItemCountLimitExceeded") output = GenericErrorCodes::GenericErrorCodesTitleNewsItemCountLimitExceeded;
-            if (inputStr == "InvalidTwitchToken") output = GenericErrorCodes::GenericErrorCodesInvalidTwitchToken;
-            if (inputStr == "TwitchResponseError") output = GenericErrorCodes::GenericErrorCodesTwitchResponseError;
-            if (inputStr == "ProfaneDisplayName") output = GenericErrorCodes::GenericErrorCodesProfaneDisplayName;
-            if (inputStr == "UserAlreadyAdded") output = GenericErrorCodes::GenericErrorCodesUserAlreadyAdded;
-            if (inputStr == "InvalidVirtualCurrencyCode") output = GenericErrorCodes::GenericErrorCodesInvalidVirtualCurrencyCode;
-            if (inputStr == "VirtualCurrencyCannotBeDeleted") output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyCannotBeDeleted;
-            if (inputStr == "IdentifierAlreadyClaimed") output = GenericErrorCodes::GenericErrorCodesIdentifierAlreadyClaimed;
-            if (inputStr == "IdentifierNotLinked") output = GenericErrorCodes::GenericErrorCodesIdentifierNotLinked;
-            if (inputStr == "InvalidContinuationToken") output = GenericErrorCodes::GenericErrorCodesInvalidContinuationToken;
-            if (inputStr == "ExpiredContinuationToken") output = GenericErrorCodes::GenericErrorCodesExpiredContinuationToken;
-            if (inputStr == "InvalidSegment") output = GenericErrorCodes::GenericErrorCodesInvalidSegment;
-            if (inputStr == "InvalidSessionId") output = GenericErrorCodes::GenericErrorCodesInvalidSessionId;
-            if (inputStr == "SessionLogNotFound") output = GenericErrorCodes::GenericErrorCodesSessionLogNotFound;
-            if (inputStr == "InvalidSearchTerm") output = GenericErrorCodes::GenericErrorCodesInvalidSearchTerm;
-            if (inputStr == "TwoFactorAuthenticationTokenRequired") output = GenericErrorCodes::GenericErrorCodesTwoFactorAuthenticationTokenRequired;
-            if (inputStr == "GameServerHostCountLimitExceeded") output = GenericErrorCodes::GenericErrorCodesGameServerHostCountLimitExceeded;
-            if (inputStr == "PlayerTagCountLimitExceeded") output = GenericErrorCodes::GenericErrorCodesPlayerTagCountLimitExceeded;
-            if (inputStr == "RequestAlreadyRunning") output = GenericErrorCodes::GenericErrorCodesRequestAlreadyRunning;
-            if (inputStr == "ActionGroupNotFound") output = GenericErrorCodes::GenericErrorCodesActionGroupNotFound;
-            if (inputStr == "MaximumSegmentBulkActionJobsRunning") output = GenericErrorCodes::GenericErrorCodesMaximumSegmentBulkActionJobsRunning;
-            if (inputStr == "NoActionsOnPlayersInSegmentJob") output = GenericErrorCodes::GenericErrorCodesNoActionsOnPlayersInSegmentJob;
-            if (inputStr == "DuplicateStatisticName") output = GenericErrorCodes::GenericErrorCodesDuplicateStatisticName;
-            if (inputStr == "ScheduledTaskNameConflict") output = GenericErrorCodes::GenericErrorCodesScheduledTaskNameConflict;
-            if (inputStr == "ScheduledTaskCreateConflict") output = GenericErrorCodes::GenericErrorCodesScheduledTaskCreateConflict;
-            if (inputStr == "InvalidScheduledTaskName") output = GenericErrorCodes::GenericErrorCodesInvalidScheduledTaskName;
-            if (inputStr == "InvalidTaskSchedule") output = GenericErrorCodes::GenericErrorCodesInvalidTaskSchedule;
-            if (inputStr == "SteamNotEnabledForTitle") output = GenericErrorCodes::GenericErrorCodesSteamNotEnabledForTitle;
-            if (inputStr == "LimitNotAnUpgradeOption") output = GenericErrorCodes::GenericErrorCodesLimitNotAnUpgradeOption;
-            if (inputStr == "NoSecretKeyEnabledForCloudScript") output = GenericErrorCodes::GenericErrorCodesNoSecretKeyEnabledForCloudScript;
-            if (inputStr == "TaskNotFound") output = GenericErrorCodes::GenericErrorCodesTaskNotFound;
-            if (inputStr == "TaskInstanceNotFound") output = GenericErrorCodes::GenericErrorCodesTaskInstanceNotFound;
-            if (inputStr == "InvalidIdentityProviderId") output = GenericErrorCodes::GenericErrorCodesInvalidIdentityProviderId;
-            if (inputStr == "MisconfiguredIdentityProvider") output = GenericErrorCodes::GenericErrorCodesMisconfiguredIdentityProvider;
-            if (inputStr == "InvalidScheduledTaskType") output = GenericErrorCodes::GenericErrorCodesInvalidScheduledTaskType;
-            if (inputStr == "BillingInformationRequired") output = GenericErrorCodes::GenericErrorCodesBillingInformationRequired;
-            if (inputStr == "LimitedEditionItemUnavailable") output = GenericErrorCodes::GenericErrorCodesLimitedEditionItemUnavailable;
-            if (inputStr == "InvalidAdPlacementAndReward") output = GenericErrorCodes::GenericErrorCodesInvalidAdPlacementAndReward;
-            if (inputStr == "AllAdPlacementViewsAlreadyConsumed") output = GenericErrorCodes::GenericErrorCodesAllAdPlacementViewsAlreadyConsumed;
-            if (inputStr == "GoogleOAuthNotConfiguredForTitle") output = GenericErrorCodes::GenericErrorCodesGoogleOAuthNotConfiguredForTitle;
-            if (inputStr == "GoogleOAuthError") output = GenericErrorCodes::GenericErrorCodesGoogleOAuthError;
-            if (inputStr == "UserNotFriend") output = GenericErrorCodes::GenericErrorCodesUserNotFriend;
-            if (inputStr == "InvalidSignature") output = GenericErrorCodes::GenericErrorCodesInvalidSignature;
-            if (inputStr == "InvalidPublicKey") output = GenericErrorCodes::GenericErrorCodesInvalidPublicKey;
-            if (inputStr == "GoogleOAuthNoIdTokenIncludedInResponse") output = GenericErrorCodes::GenericErrorCodesGoogleOAuthNoIdTokenIncludedInResponse;
-            if (inputStr == "StatisticUpdateInProgress") output = GenericErrorCodes::GenericErrorCodesStatisticUpdateInProgress;
-            if (inputStr == "LeaderboardVersionNotAvailable") output = GenericErrorCodes::GenericErrorCodesLeaderboardVersionNotAvailable;
-            if (inputStr == "StatisticAlreadyHasPrizeTable") output = GenericErrorCodes::GenericErrorCodesStatisticAlreadyHasPrizeTable;
-            if (inputStr == "PrizeTableHasOverlappingRanks") output = GenericErrorCodes::GenericErrorCodesPrizeTableHasOverlappingRanks;
-            if (inputStr == "PrizeTableHasMissingRanks") output = GenericErrorCodes::GenericErrorCodesPrizeTableHasMissingRanks;
-            if (inputStr == "PrizeTableRankStartsAtZero") output = GenericErrorCodes::GenericErrorCodesPrizeTableRankStartsAtZero;
-            if (inputStr == "InvalidStatistic") output = GenericErrorCodes::GenericErrorCodesInvalidStatistic;
-            if (inputStr == "ExpressionParseFailure") output = GenericErrorCodes::GenericErrorCodesExpressionParseFailure;
-            if (inputStr == "ExpressionInvokeFailure") output = GenericErrorCodes::GenericErrorCodesExpressionInvokeFailure;
-            if (inputStr == "ExpressionTooLong") output = GenericErrorCodes::GenericErrorCodesExpressionTooLong;
-            if (inputStr == "DataUpdateRateExceeded") output = GenericErrorCodes::GenericErrorCodesDataUpdateRateExceeded;
-            if (inputStr == "RestrictedEmailDomain") output = GenericErrorCodes::GenericErrorCodesRestrictedEmailDomain;
-            if (inputStr == "EncryptionKeyDisabled") output = GenericErrorCodes::GenericErrorCodesEncryptionKeyDisabled;
-            if (inputStr == "EncryptionKeyMissing") output = GenericErrorCodes::GenericErrorCodesEncryptionKeyMissing;
-            if (inputStr == "EncryptionKeyBroken") output = GenericErrorCodes::GenericErrorCodesEncryptionKeyBroken;
-            if (inputStr == "NoSharedSecretKeyConfigured") output = GenericErrorCodes::GenericErrorCodesNoSharedSecretKeyConfigured;
-            if (inputStr == "SecretKeyNotFound") output = GenericErrorCodes::GenericErrorCodesSecretKeyNotFound;
-            if (inputStr == "PlayerSecretAlreadyConfigured") output = GenericErrorCodes::GenericErrorCodesPlayerSecretAlreadyConfigured;
-            if (inputStr == "APIRequestsDisabledForTitle") output = GenericErrorCodes::GenericErrorCodesAPIRequestsDisabledForTitle;
-            if (inputStr == "InvalidSharedSecretKey") output = GenericErrorCodes::GenericErrorCodesInvalidSharedSecretKey;
-            if (inputStr == "PrizeTableHasNoRanks") output = GenericErrorCodes::GenericErrorCodesPrizeTableHasNoRanks;
-            if (inputStr == "ProfileDoesNotExist") output = GenericErrorCodes::GenericErrorCodesProfileDoesNotExist;
-            if (inputStr == "ContentS3OriginBucketNotConfigured") output = GenericErrorCodes::GenericErrorCodesContentS3OriginBucketNotConfigured;
-            if (inputStr == "InvalidEnvironmentForReceipt") output = GenericErrorCodes::GenericErrorCodesInvalidEnvironmentForReceipt;
-            if (inputStr == "EncryptedRequestNotAllowed") output = GenericErrorCodes::GenericErrorCodesEncryptedRequestNotAllowed;
-            if (inputStr == "SignedRequestNotAllowed") output = GenericErrorCodes::GenericErrorCodesSignedRequestNotAllowed;
-            if (inputStr == "RequestViewConstraintParamsNotAllowed") output = GenericErrorCodes::GenericErrorCodesRequestViewConstraintParamsNotAllowed;
-            if (inputStr == "BadPartnerConfiguration") output = GenericErrorCodes::GenericErrorCodesBadPartnerConfiguration;
-            if (inputStr == "XboxBPCertificateFailure") output = GenericErrorCodes::GenericErrorCodesXboxBPCertificateFailure;
-            if (inputStr == "XboxXASSExchangeFailure") output = GenericErrorCodes::GenericErrorCodesXboxXASSExchangeFailure;
-            if (inputStr == "InvalidEntityId") output = GenericErrorCodes::GenericErrorCodesInvalidEntityId;
-            if (inputStr == "StatisticValueAggregationOverflow") output = GenericErrorCodes::GenericErrorCodesStatisticValueAggregationOverflow;
-            if (inputStr == "EmailMessageFromAddressIsMissing") output = GenericErrorCodes::GenericErrorCodesEmailMessageFromAddressIsMissing;
-            if (inputStr == "EmailMessageToAddressIsMissing") output = GenericErrorCodes::GenericErrorCodesEmailMessageToAddressIsMissing;
-            if (inputStr == "SmtpServerAuthenticationError") output = GenericErrorCodes::GenericErrorCodesSmtpServerAuthenticationError;
-            if (inputStr == "SmtpServerLimitExceeded") output = GenericErrorCodes::GenericErrorCodesSmtpServerLimitExceeded;
-            if (inputStr == "SmtpServerInsufficientStorage") output = GenericErrorCodes::GenericErrorCodesSmtpServerInsufficientStorage;
-            if (inputStr == "SmtpServerCommunicationError") output = GenericErrorCodes::GenericErrorCodesSmtpServerCommunicationError;
-            if (inputStr == "SmtpServerGeneralFailure") output = GenericErrorCodes::GenericErrorCodesSmtpServerGeneralFailure;
-            if (inputStr == "EmailClientTimeout") output = GenericErrorCodes::GenericErrorCodesEmailClientTimeout;
-            if (inputStr == "EmailClientCanceledTask") output = GenericErrorCodes::GenericErrorCodesEmailClientCanceledTask;
-            if (inputStr == "EmailTemplateMissing") output = GenericErrorCodes::GenericErrorCodesEmailTemplateMissing;
-            if (inputStr == "InvalidHostForTitleId") output = GenericErrorCodes::GenericErrorCodesInvalidHostForTitleId;
-            if (inputStr == "EmailConfirmationTokenDoesNotExist") output = GenericErrorCodes::GenericErrorCodesEmailConfirmationTokenDoesNotExist;
-            if (inputStr == "EmailConfirmationTokenExpired") output = GenericErrorCodes::GenericErrorCodesEmailConfirmationTokenExpired;
-            if (inputStr == "AccountDeleted") output = GenericErrorCodes::GenericErrorCodesAccountDeleted;
-            if (inputStr == "PlayerSecretNotConfigured") output = GenericErrorCodes::GenericErrorCodesPlayerSecretNotConfigured;
-            if (inputStr == "InvalidSignatureTime") output = GenericErrorCodes::GenericErrorCodesInvalidSignatureTime;
-            if (inputStr == "NoContactEmailAddressFound") output = GenericErrorCodes::GenericErrorCodesNoContactEmailAddressFound;
-            if (inputStr == "InvalidAuthToken") output = GenericErrorCodes::GenericErrorCodesInvalidAuthToken;
-            if (inputStr == "AuthTokenDoesNotExist") output = GenericErrorCodes::GenericErrorCodesAuthTokenDoesNotExist;
-            if (inputStr == "AuthTokenExpired") output = GenericErrorCodes::GenericErrorCodesAuthTokenExpired;
-            if (inputStr == "AuthTokenAlreadyUsedToResetPassword") output = GenericErrorCodes::GenericErrorCodesAuthTokenAlreadyUsedToResetPassword;
-            if (inputStr == "MembershipNameTooLong") output = GenericErrorCodes::GenericErrorCodesMembershipNameTooLong;
-            if (inputStr == "MembershipNotFound") output = GenericErrorCodes::GenericErrorCodesMembershipNotFound;
-            if (inputStr == "GoogleServiceAccountInvalid") output = GenericErrorCodes::GenericErrorCodesGoogleServiceAccountInvalid;
-            if (inputStr == "GoogleServiceAccountParseFailure") output = GenericErrorCodes::GenericErrorCodesGoogleServiceAccountParseFailure;
-            if (inputStr == "EntityTokenMissing") output = GenericErrorCodes::GenericErrorCodesEntityTokenMissing;
-            if (inputStr == "EntityTokenInvalid") output = GenericErrorCodes::GenericErrorCodesEntityTokenInvalid;
-            if (inputStr == "EntityTokenExpired") output = GenericErrorCodes::GenericErrorCodesEntityTokenExpired;
-            if (inputStr == "EntityTokenRevoked") output = GenericErrorCodes::GenericErrorCodesEntityTokenRevoked;
-            if (inputStr == "InvalidProductForSubscription") output = GenericErrorCodes::GenericErrorCodesInvalidProductForSubscription;
-            if (inputStr == "XboxInaccessible") output = GenericErrorCodes::GenericErrorCodesXboxInaccessible;
-            if (inputStr == "SubscriptionAlreadyTaken") output = GenericErrorCodes::GenericErrorCodesSubscriptionAlreadyTaken;
-            if (inputStr == "SmtpAddonNotEnabled") output = GenericErrorCodes::GenericErrorCodesSmtpAddonNotEnabled;
-            if (inputStr == "APIConcurrentRequestLimitExceeded") output = GenericErrorCodes::GenericErrorCodesAPIConcurrentRequestLimitExceeded;
-            if (inputStr == "XboxRejectedXSTSExchangeRequest") output = GenericErrorCodes::GenericErrorCodesXboxRejectedXSTSExchangeRequest;
-            if (inputStr == "VariableNotDefined") output = GenericErrorCodes::GenericErrorCodesVariableNotDefined;
-            if (inputStr == "TemplateVersionNotDefined") output = GenericErrorCodes::GenericErrorCodesTemplateVersionNotDefined;
-            if (inputStr == "FileTooLarge") output = GenericErrorCodes::GenericErrorCodesFileTooLarge;
-            if (inputStr == "TitleDeleted") output = GenericErrorCodes::GenericErrorCodesTitleDeleted;
-            if (inputStr == "TitleContainsUserAccounts") output = GenericErrorCodes::GenericErrorCodesTitleContainsUserAccounts;
-            if (inputStr == "TitleDeletionPlayerCleanupFailure") output = GenericErrorCodes::GenericErrorCodesTitleDeletionPlayerCleanupFailure;
-            if (inputStr == "EntityFileOperationPending") output = GenericErrorCodes::GenericErrorCodesEntityFileOperationPending;
-            if (inputStr == "NoEntityFileOperationPending") output = GenericErrorCodes::GenericErrorCodesNoEntityFileOperationPending;
-            if (inputStr == "EntityProfileVersionMismatch") output = GenericErrorCodes::GenericErrorCodesEntityProfileVersionMismatch;
-            if (inputStr == "TemplateVersionTooOld") output = GenericErrorCodes::GenericErrorCodesTemplateVersionTooOld;
-            if (inputStr == "MembershipDefinitionInUse") output = GenericErrorCodes::GenericErrorCodesMembershipDefinitionInUse;
-            if (inputStr == "PaymentPageNotConfigured") output = GenericErrorCodes::GenericErrorCodesPaymentPageNotConfigured;
-            if (inputStr == "FailedLoginAttemptRateLimitExceeded") output = GenericErrorCodes::GenericErrorCodesFailedLoginAttemptRateLimitExceeded;
-            if (inputStr == "EntityBlockedByGroup") output = GenericErrorCodes::GenericErrorCodesEntityBlockedByGroup;
-            if (inputStr == "RoleDoesNotExist") output = GenericErrorCodes::GenericErrorCodesRoleDoesNotExist;
-            if (inputStr == "EntityIsAlreadyMember") output = GenericErrorCodes::GenericErrorCodesEntityIsAlreadyMember;
-            if (inputStr == "DuplicateRoleId") output = GenericErrorCodes::GenericErrorCodesDuplicateRoleId;
-            if (inputStr == "GroupInvitationNotFound") output = GenericErrorCodes::GenericErrorCodesGroupInvitationNotFound;
-            if (inputStr == "GroupApplicationNotFound") output = GenericErrorCodes::GenericErrorCodesGroupApplicationNotFound;
-            if (inputStr == "OutstandingInvitationAcceptedInstead") output = GenericErrorCodes::GenericErrorCodesOutstandingInvitationAcceptedInstead;
-            if (inputStr == "OutstandingApplicationAcceptedInstead") output = GenericErrorCodes::GenericErrorCodesOutstandingApplicationAcceptedInstead;
-            if (inputStr == "RoleIsGroupDefaultMember") output = GenericErrorCodes::GenericErrorCodesRoleIsGroupDefaultMember;
-            if (inputStr == "RoleIsGroupAdmin") output = GenericErrorCodes::GenericErrorCodesRoleIsGroupAdmin;
-            if (inputStr == "RoleNameNotAvailable") output = GenericErrorCodes::GenericErrorCodesRoleNameNotAvailable;
-            if (inputStr == "GroupNameNotAvailable") output = GenericErrorCodes::GenericErrorCodesGroupNameNotAvailable;
-            if (inputStr == "EmailReportAlreadySent") output = GenericErrorCodes::GenericErrorCodesEmailReportAlreadySent;
-            if (inputStr == "EmailReportRecipientBlacklisted") output = GenericErrorCodes::GenericErrorCodesEmailReportRecipientBlacklisted;
-            if (inputStr == "EventNamespaceNotAllowed") output = GenericErrorCodes::GenericErrorCodesEventNamespaceNotAllowed;
-            if (inputStr == "EventEntityNotAllowed") output = GenericErrorCodes::GenericErrorCodesEventEntityNotAllowed;
-            if (inputStr == "InvalidEntityType") output = GenericErrorCodes::GenericErrorCodesInvalidEntityType;
-            if (inputStr == "NullTokenResultFromAad") output = GenericErrorCodes::GenericErrorCodesNullTokenResultFromAad;
-            if (inputStr == "InvalidTokenResultFromAad") output = GenericErrorCodes::GenericErrorCodesInvalidTokenResultFromAad;
-            if (inputStr == "NoValidCertificateForAad") output = GenericErrorCodes::GenericErrorCodesNoValidCertificateForAad;
-            if (inputStr == "InvalidCertificateForAad") output = GenericErrorCodes::GenericErrorCodesInvalidCertificateForAad;
-            if (inputStr == "DuplicateDropTableId") output = GenericErrorCodes::GenericErrorCodesDuplicateDropTableId;
-            if (inputStr == "MultiplayerServerError") output = GenericErrorCodes::GenericErrorCodesMultiplayerServerError;
-            if (inputStr == "MultiplayerServerTooManyRequests") output = GenericErrorCodes::GenericErrorCodesMultiplayerServerTooManyRequests;
-            if (inputStr == "MultiplayerServerNoContent") output = GenericErrorCodes::GenericErrorCodesMultiplayerServerNoContent;
-            if (inputStr == "MultiplayerServerBadRequest") output = GenericErrorCodes::GenericErrorCodesMultiplayerServerBadRequest;
-            if (inputStr == "MultiplayerServerUnauthorized") output = GenericErrorCodes::GenericErrorCodesMultiplayerServerUnauthorized;
-            if (inputStr == "MultiplayerServerForbidden") output = GenericErrorCodes::GenericErrorCodesMultiplayerServerForbidden;
-            if (inputStr == "MultiplayerServerNotFound") output = GenericErrorCodes::GenericErrorCodesMultiplayerServerNotFound;
-            if (inputStr == "MultiplayerServerConflict") output = GenericErrorCodes::GenericErrorCodesMultiplayerServerConflict;
-            if (inputStr == "MultiplayerServerInternalServerError") output = GenericErrorCodes::GenericErrorCodesMultiplayerServerInternalServerError;
-            if (inputStr == "MultiplayerServerUnavailable") output = GenericErrorCodes::GenericErrorCodesMultiplayerServerUnavailable;
-            if (inputStr == "ExplicitContentDetected") output = GenericErrorCodes::GenericErrorCodesExplicitContentDetected;
-            if (inputStr == "PIIContentDetected") output = GenericErrorCodes::GenericErrorCodesPIIContentDetected;
-            if (inputStr == "InvalidScheduledTaskParameter") output = GenericErrorCodes::GenericErrorCodesInvalidScheduledTaskParameter;
-            if (inputStr == "PerEntityEventRateLimitExceeded") output = GenericErrorCodes::GenericErrorCodesPerEntityEventRateLimitExceeded;
-            if (inputStr == "TitleDefaultLanguageNotSet") output = GenericErrorCodes::GenericErrorCodesTitleDefaultLanguageNotSet;
-            if (inputStr == "EmailTemplateMissingDefaultVersion") output = GenericErrorCodes::GenericErrorCodesEmailTemplateMissingDefaultVersion;
-            if (inputStr == "FacebookInstantGamesIdNotLinked") output = GenericErrorCodes::GenericErrorCodesFacebookInstantGamesIdNotLinked;
-            if (inputStr == "InvalidFacebookInstantGamesSignature") output = GenericErrorCodes::GenericErrorCodesInvalidFacebookInstantGamesSignature;
-            if (inputStr == "FacebookInstantGamesAuthNotConfiguredForTitle") output = GenericErrorCodes::GenericErrorCodesFacebookInstantGamesAuthNotConfiguredForTitle;
-            if (inputStr == "EntityProfileConstraintValidationFailed") output = GenericErrorCodes::GenericErrorCodesEntityProfileConstraintValidationFailed;
-            if (inputStr == "TelemetryIngestionKeyPending") output = GenericErrorCodes::GenericErrorCodesTelemetryIngestionKeyPending;
-            if (inputStr == "TelemetryIngestionKeyNotFound") output = GenericErrorCodes::GenericErrorCodesTelemetryIngestionKeyNotFound;
-            if (inputStr == "StatisticChildNameInvalid") output = GenericErrorCodes::GenericErrorCodesStatisticChildNameInvalid;
-            if (inputStr == "DataIntegrityError") output = GenericErrorCodes::GenericErrorCodesDataIntegrityError;
-            if (inputStr == "VirtualCurrencyCannotBeSetToOlderVersion") output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyCannotBeSetToOlderVersion;
-            if (inputStr == "VirtualCurrencyMustBeWithinIntegerRange") output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyMustBeWithinIntegerRange;
-            if (inputStr == "EmailTemplateInvalidSyntax") output = GenericErrorCodes::GenericErrorCodesEmailTemplateInvalidSyntax;
-            if (inputStr == "EmailTemplateMissingCallback") output = GenericErrorCodes::GenericErrorCodesEmailTemplateMissingCallback;
-            if (inputStr == "PushNotificationTemplateInvalidPayload") output = GenericErrorCodes::GenericErrorCodesPushNotificationTemplateInvalidPayload;
-            if (inputStr == "InvalidLocalizedPushNotificationLanguage") output = GenericErrorCodes::GenericErrorCodesInvalidLocalizedPushNotificationLanguage;
-            if (inputStr == "MissingLocalizedPushNotificationMessage") output = GenericErrorCodes::GenericErrorCodesMissingLocalizedPushNotificationMessage;
-            if (inputStr == "PushNotificationTemplateMissingPlatformPayload") output = GenericErrorCodes::GenericErrorCodesPushNotificationTemplateMissingPlatformPayload;
-            if (inputStr == "PushNotificationTemplatePayloadContainsInvalidJson") output = GenericErrorCodes::GenericErrorCodesPushNotificationTemplatePayloadContainsInvalidJson;
-            if (inputStr == "PushNotificationTemplateContainsInvalidIosPayload") output = GenericErrorCodes::GenericErrorCodesPushNotificationTemplateContainsInvalidIosPayload;
-            if (inputStr == "PushNotificationTemplateContainsInvalidAndroidPayload") output = GenericErrorCodes::GenericErrorCodesPushNotificationTemplateContainsInvalidAndroidPayload;
-            if (inputStr == "PushNotificationTemplateIosPayloadMissingNotificationBody") output = GenericErrorCodes::GenericErrorCodesPushNotificationTemplateIosPayloadMissingNotificationBody;
-            if (inputStr == "PushNotificationTemplateAndroidPayloadMissingNotificationBody") output = GenericErrorCodes::GenericErrorCodesPushNotificationTemplateAndroidPayloadMissingNotificationBody;
-            if (inputStr == "PushNotificationTemplateNotFound") output = GenericErrorCodes::GenericErrorCodesPushNotificationTemplateNotFound;
-            if (inputStr == "PushNotificationTemplateMissingDefaultVersion") output = GenericErrorCodes::GenericErrorCodesPushNotificationTemplateMissingDefaultVersion;
-            if (inputStr == "PushNotificationTemplateInvalidSyntax") output = GenericErrorCodes::GenericErrorCodesPushNotificationTemplateInvalidSyntax;
-            if (inputStr == "PushNotificationTemplateNoCustomPayloadForV1") output = GenericErrorCodes::GenericErrorCodesPushNotificationTemplateNoCustomPayloadForV1;
-            if (inputStr == "NoLeaderboardForStatistic") output = GenericErrorCodes::GenericErrorCodesNoLeaderboardForStatistic;
-            if (inputStr == "TitleNewsMissingDefaultLanguage") output = GenericErrorCodes::GenericErrorCodesTitleNewsMissingDefaultLanguage;
-            if (inputStr == "TitleNewsNotFound") output = GenericErrorCodes::GenericErrorCodesTitleNewsNotFound;
-            if (inputStr == "TitleNewsDuplicateLanguage") output = GenericErrorCodes::GenericErrorCodesTitleNewsDuplicateLanguage;
-            if (inputStr == "TitleNewsMissingTitleOrBody") output = GenericErrorCodes::GenericErrorCodesTitleNewsMissingTitleOrBody;
-            if (inputStr == "TitleNewsInvalidLanguage") output = GenericErrorCodes::GenericErrorCodesTitleNewsInvalidLanguage;
-            if (inputStr == "EmailRecipientBlacklisted") output = GenericErrorCodes::GenericErrorCodesEmailRecipientBlacklisted;
-            if (inputStr == "InvalidGameCenterAuthRequest") output = GenericErrorCodes::GenericErrorCodesInvalidGameCenterAuthRequest;
-            if (inputStr == "GameCenterAuthenticationFailed") output = GenericErrorCodes::GenericErrorCodesGameCenterAuthenticationFailed;
-            if (inputStr == "CannotEnablePartiesForTitle") output = GenericErrorCodes::GenericErrorCodesCannotEnablePartiesForTitle;
-            if (inputStr == "PartyError") output = GenericErrorCodes::GenericErrorCodesPartyError;
-            if (inputStr == "PartyRequests") output = GenericErrorCodes::GenericErrorCodesPartyRequests;
-            if (inputStr == "PartyNoContent") output = GenericErrorCodes::GenericErrorCodesPartyNoContent;
-            if (inputStr == "PartyBadRequest") output = GenericErrorCodes::GenericErrorCodesPartyBadRequest;
-            if (inputStr == "PartyUnauthorized") output = GenericErrorCodes::GenericErrorCodesPartyUnauthorized;
-            if (inputStr == "PartyForbidden") output = GenericErrorCodes::GenericErrorCodesPartyForbidden;
-            if (inputStr == "PartyNotFound") output = GenericErrorCodes::GenericErrorCodesPartyNotFound;
-            if (inputStr == "PartyConflict") output = GenericErrorCodes::GenericErrorCodesPartyConflict;
-            if (inputStr == "PartyInternalServerError") output = GenericErrorCodes::GenericErrorCodesPartyInternalServerError;
-            if (inputStr == "PartyUnavailable") output = GenericErrorCodes::GenericErrorCodesPartyUnavailable;
-            if (inputStr == "PartyTooManyRequests") output = GenericErrorCodes::GenericErrorCodesPartyTooManyRequests;
-            if (inputStr == "PushNotificationTemplateMissingName") output = GenericErrorCodes::GenericErrorCodesPushNotificationTemplateMissingName;
-            if (inputStr == "CannotEnableMultiplayerServersForTitle") output = GenericErrorCodes::GenericErrorCodesCannotEnableMultiplayerServersForTitle;
-            if (inputStr == "WriteAttemptedDuringExport") output = GenericErrorCodes::GenericErrorCodesWriteAttemptedDuringExport;
-            if (inputStr == "MultiplayerServerTitleQuotaCoresExceeded") output = GenericErrorCodes::GenericErrorCodesMultiplayerServerTitleQuotaCoresExceeded;
-            if (inputStr == "AutomationRuleNotFound") output = GenericErrorCodes::GenericErrorCodesAutomationRuleNotFound;
-            if (inputStr == "EntityAPIKeyLimitExceeded") output = GenericErrorCodes::GenericErrorCodesEntityAPIKeyLimitExceeded;
-            if (inputStr == "EntityAPIKeyNotFound") output = GenericErrorCodes::GenericErrorCodesEntityAPIKeyNotFound;
-            if (inputStr == "EntityAPIKeyOrSecretInvalid") output = GenericErrorCodes::GenericErrorCodesEntityAPIKeyOrSecretInvalid;
-            if (inputStr == "EconomyServiceUnavailable") output = GenericErrorCodes::GenericErrorCodesEconomyServiceUnavailable;
-            if (inputStr == "EconomyServiceInternalError") output = GenericErrorCodes::GenericErrorCodesEconomyServiceInternalError;
-            if (inputStr == "QueryRateLimitExceeded") output = GenericErrorCodes::GenericErrorCodesQueryRateLimitExceeded;
-            if (inputStr == "EntityAPIKeyCreationDisabledForEntity") output = GenericErrorCodes::GenericErrorCodesEntityAPIKeyCreationDisabledForEntity;
-            if (inputStr == "ForbiddenByEntityPolicy") output = GenericErrorCodes::GenericErrorCodesForbiddenByEntityPolicy;
-            if (inputStr == "UpdateInventoryRateLimitExceeded") output = GenericErrorCodes::GenericErrorCodesUpdateInventoryRateLimitExceeded;
-            if (inputStr == "StudioCreationRateLimited") output = GenericErrorCodes::GenericErrorCodesStudioCreationRateLimited;
-            if (inputStr == "StudioCreationInProgress") output = GenericErrorCodes::GenericErrorCodesStudioCreationInProgress;
-            if (inputStr == "DuplicateStudioName") output = GenericErrorCodes::GenericErrorCodesDuplicateStudioName;
-            if (inputStr == "StudioNotFound") output = GenericErrorCodes::GenericErrorCodesStudioNotFound;
-            if (inputStr == "StudioDeleted") output = GenericErrorCodes::GenericErrorCodesStudioDeleted;
-            if (inputStr == "StudioDeactivated") output = GenericErrorCodes::GenericErrorCodesStudioDeactivated;
-            if (inputStr == "StudioActivated") output = GenericErrorCodes::GenericErrorCodesStudioActivated;
-            if (inputStr == "TitleCreationRateLimited") output = GenericErrorCodes::GenericErrorCodesTitleCreationRateLimited;
-            if (inputStr == "TitleCreationInProgress") output = GenericErrorCodes::GenericErrorCodesTitleCreationInProgress;
-            if (inputStr == "DuplicateTitleName") output = GenericErrorCodes::GenericErrorCodesDuplicateTitleName;
-            if (inputStr == "TitleActivationRateLimited") output = GenericErrorCodes::GenericErrorCodesTitleActivationRateLimited;
-            if (inputStr == "TitleActivationInProgress") output = GenericErrorCodes::GenericErrorCodesTitleActivationInProgress;
-            if (inputStr == "TitleDeactivated") output = GenericErrorCodes::GenericErrorCodesTitleDeactivated;
-            if (inputStr == "TitleActivated") output = GenericErrorCodes::GenericErrorCodesTitleActivated;
-            if (inputStr == "CloudScriptAzureFunctionsExecutionTimeLimitExceeded") output = GenericErrorCodes::GenericErrorCodesCloudScriptAzureFunctionsExecutionTimeLimitExceeded;
-            if (inputStr == "CloudScriptAzureFunctionsArgumentSizeExceeded") output = GenericErrorCodes::GenericErrorCodesCloudScriptAzureFunctionsArgumentSizeExceeded;
-            if (inputStr == "CloudScriptAzureFunctionsReturnSizeExceeded") output = GenericErrorCodes::GenericErrorCodesCloudScriptAzureFunctionsReturnSizeExceeded;
-            if (inputStr == "CloudScriptAzureFunctionsHTTPRequestError") output = GenericErrorCodes::GenericErrorCodesCloudScriptAzureFunctionsHTTPRequestError;
-            if (inputStr == "VirtualCurrencyBetaGetError") output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaGetError;
-            if (inputStr == "VirtualCurrencyBetaCreateError") output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaCreateError;
-            if (inputStr == "VirtualCurrencyBetaInitialDepositSaveError") output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaInitialDepositSaveError;
-            if (inputStr == "VirtualCurrencyBetaSaveError") output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaSaveError;
-            if (inputStr == "VirtualCurrencyBetaDeleteError") output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaDeleteError;
-            if (inputStr == "VirtualCurrencyBetaRestoreError") output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaRestoreError;
-            if (inputStr == "VirtualCurrencyBetaSaveConflict") output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaSaveConflict;
-            if (inputStr == "VirtualCurrencyBetaUpdateError") output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaUpdateError;
-            if (inputStr == "InsightsManagementDatabaseNotFound") output = GenericErrorCodes::GenericErrorCodesInsightsManagementDatabaseNotFound;
-            if (inputStr == "InsightsManagementOperationNotFound") output = GenericErrorCodes::GenericErrorCodesInsightsManagementOperationNotFound;
-            if (inputStr == "InsightsManagementErrorPendingOperationExists") output = GenericErrorCodes::GenericErrorCodesInsightsManagementErrorPendingOperationExists;
-            if (inputStr == "InsightsManagementSetPerformanceLevelInvalidParameter") output = GenericErrorCodes::GenericErrorCodesInsightsManagementSetPerformanceLevelInvalidParameter;
-            if (inputStr == "InsightsManagementSetStorageRetentionInvalidParameter") output = GenericErrorCodes::GenericErrorCodesInsightsManagementSetStorageRetentionInvalidParameter;
-            if (inputStr == "InsightsManagementGetStorageUsageInvalidParameter") output = GenericErrorCodes::GenericErrorCodesInsightsManagementGetStorageUsageInvalidParameter;
-            if (inputStr == "InsightsManagementGetOperationStatusInvalidParameter") output = GenericErrorCodes::GenericErrorCodesInsightsManagementGetOperationStatusInvalidParameter;
-            if (inputStr == "DuplicatePurchaseTransactionId") output = GenericErrorCodes::GenericErrorCodesDuplicatePurchaseTransactionId;
-            if (inputStr == "EvaluationModePlayerCountExceeded") output = GenericErrorCodes::GenericErrorCodesEvaluationModePlayerCountExceeded;
-            if (inputStr == "MatchmakingEntityInvalid") output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
-            if (inputStr == "MatchmakingPlayerAttributesInvalid") output = GenericErrorCodes::GenericErrorCodesMatchmakingPlayerAttributesInvalid;
-            if (inputStr == "MatchmakingQueueNotFound") output = GenericErrorCodes::GenericErrorCodesMatchmakingQueueNotFound;
-            if (inputStr == "MatchmakingMatchNotFound") output = GenericErrorCodes::GenericErrorCodesMatchmakingMatchNotFound;
-            if (inputStr == "MatchmakingTicketNotFound") output = GenericErrorCodes::GenericErrorCodesMatchmakingTicketNotFound;
-            if (inputStr == "MatchmakingAlreadyJoinedTicket") output = GenericErrorCodes::GenericErrorCodesMatchmakingAlreadyJoinedTicket;
-            if (inputStr == "MatchmakingTicketAlreadyCompleted") output = GenericErrorCodes::GenericErrorCodesMatchmakingTicketAlreadyCompleted;
-            if (inputStr == "MatchmakingQueueConfigInvalid") output = GenericErrorCodes::GenericErrorCodesMatchmakingQueueConfigInvalid;
-            if (inputStr == "MatchmakingMemberProfileInvalid") output = GenericErrorCodes::GenericErrorCodesMatchmakingMemberProfileInvalid;
-            if (inputStr == "NintendoSwitchDeviceIdNotLinked") output = GenericErrorCodes::GenericErrorCodesNintendoSwitchDeviceIdNotLinked;
-            if (inputStr == "MatchmakingNotEnabled") output = GenericErrorCodes::GenericErrorCodesMatchmakingNotEnabled;
-            if (inputStr == "MatchmakingPlayerAttributesTooLarge") output = GenericErrorCodes::GenericErrorCodesMatchmakingPlayerAttributesTooLarge;
-            if (inputStr == "MatchmakingNumberOfPlayersInTicketTooLarge") output = GenericErrorCodes::GenericErrorCodesMatchmakingNumberOfPlayersInTicketTooLarge;
-            if (inputStr == "MatchmakingAttributeInvalid") output = GenericErrorCodes::GenericErrorCodesMatchmakingAttributeInvalid;
-            if (inputStr == "MatchmakingPlayerHasNotJoinedTicket") output = GenericErrorCodes::GenericErrorCodesMatchmakingPlayerHasNotJoinedTicket;
-            if (inputStr == "MatchmakingRateLimitExceeded") output = GenericErrorCodes::GenericErrorCodesMatchmakingRateLimitExceeded;
-            if (inputStr == "MatchmakingTicketMembershipLimitExceeded") output = GenericErrorCodes::GenericErrorCodesMatchmakingTicketMembershipLimitExceeded;
-            if (inputStr == "MatchmakingUnauthorized") output = GenericErrorCodes::GenericErrorCodesMatchmakingUnauthorized;
-            if (inputStr == "MatchmakingQueueLimitExceeded") output = GenericErrorCodes::GenericErrorCodesMatchmakingQueueLimitExceeded;
-            if (inputStr == "MatchmakingRequestTypeMismatch") output = GenericErrorCodes::GenericErrorCodesMatchmakingRequestTypeMismatch;
-            if (inputStr == "MatchmakingBadRequest") output = GenericErrorCodes::GenericErrorCodesMatchmakingBadRequest;
-            if (inputStr == "TitleConfigNotFound") output = GenericErrorCodes::GenericErrorCodesTitleConfigNotFound;
-            if (inputStr == "TitleConfigUpdateConflict") output = GenericErrorCodes::GenericErrorCodesTitleConfigUpdateConflict;
-            if (inputStr == "TitleConfigSerializationError") output = GenericErrorCodes::GenericErrorCodesTitleConfigSerializationError;
-            if (inputStr == "CatalogEntityInvalid") output = GenericErrorCodes::GenericErrorCodesCatalogEntityInvalid;
-            if (inputStr == "CatalogTitleIdMissing") output = GenericErrorCodes::GenericErrorCodesCatalogTitleIdMissing;
-            if (inputStr == "CatalogPlayerIdMissing") output = GenericErrorCodes::GenericErrorCodesCatalogPlayerIdMissing;
-            if (inputStr == "CatalogClientIdentityInvalid") output = GenericErrorCodes::GenericErrorCodesCatalogClientIdentityInvalid;
-            if (inputStr == "CatalogOneOrMoreFilesInvalid") output = GenericErrorCodes::GenericErrorCodesCatalogOneOrMoreFilesInvalid;
-            if (inputStr == "CatalogItemMetadataInvalid") output = GenericErrorCodes::GenericErrorCodesCatalogItemMetadataInvalid;
-            if (inputStr == "CatalogItemIdInvalid") output = GenericErrorCodes::GenericErrorCodesCatalogItemIdInvalid;
-            if (inputStr == "CatalogSearchParameterInvalid") output = GenericErrorCodes::GenericErrorCodesCatalogSearchParameterInvalid;
-            if (inputStr == "CatalogFeatureDisabled") output = GenericErrorCodes::GenericErrorCodesCatalogFeatureDisabled;
-            if (inputStr == "CatalogConfigInvalid") output = GenericErrorCodes::GenericErrorCodesCatalogConfigInvalid;
-            if (inputStr == "CatalogUnauthorized") output = GenericErrorCodes::GenericErrorCodesCatalogUnauthorized;
-            if (inputStr == "CatalogItemTypeInvalid") output = GenericErrorCodes::GenericErrorCodesCatalogItemTypeInvalid;
-            if (inputStr == "CatalogBadRequest") output = GenericErrorCodes::GenericErrorCodesCatalogBadRequest;
-            if (inputStr == "CatalogTooManyRequests") output = GenericErrorCodes::GenericErrorCodesCatalogTooManyRequests;
-            if (inputStr == "ExportInvalidStatusUpdate") output = GenericErrorCodes::GenericErrorCodesExportInvalidStatusUpdate;
-            if (inputStr == "ExportInvalidPrefix") output = GenericErrorCodes::GenericErrorCodesExportInvalidPrefix;
-            if (inputStr == "ExportBlobContainerDoesNotExist") output = GenericErrorCodes::GenericErrorCodesExportBlobContainerDoesNotExist;
-            if (inputStr == "ExportNotFound") output = GenericErrorCodes::GenericErrorCodesExportNotFound;
-            if (inputStr == "ExportCouldNotUpdate") output = GenericErrorCodes::GenericErrorCodesExportCouldNotUpdate;
-            if (inputStr == "ExportInvalidStorageType") output = GenericErrorCodes::GenericErrorCodesExportInvalidStorageType;
-            if (inputStr == "ExportAmazonBucketDoesNotExist") output = GenericErrorCodes::GenericErrorCodesExportAmazonBucketDoesNotExist;
-            if (inputStr == "ExportInvalidBlobStorage") output = GenericErrorCodes::GenericErrorCodesExportInvalidBlobStorage;
-            if (inputStr == "ExportKustoException") output = GenericErrorCodes::GenericErrorCodesExportKustoException;
-            if (inputStr == "ExportKustoConnectionFailed") output = GenericErrorCodes::GenericErrorCodesExportKustoConnectionFailed;
-            if (inputStr == "ExportUnknownError") output = GenericErrorCodes::GenericErrorCodesExportUnknownError;
-            if (inputStr == "ExportCantEditPendingExport") output = GenericErrorCodes::GenericErrorCodesExportCantEditPendingExport;
-            if (inputStr == "ExportLimitExports") output = GenericErrorCodes::GenericErrorCodesExportLimitExports;
-            if (inputStr == "ExportLimitEvents") output = GenericErrorCodes::GenericErrorCodesExportLimitEvents;
-            if (inputStr == "TitleNotEnabledForParty") output = GenericErrorCodes::GenericErrorCodesTitleNotEnabledForParty;
-            if (inputStr == "PartyVersionNotFound") output = GenericErrorCodes::GenericErrorCodesPartyVersionNotFound;
-            if (inputStr == "MultiplayerServerBuildReferencedByMatchmakingQueue") output = GenericErrorCodes::GenericErrorCodesMultiplayerServerBuildReferencedByMatchmakingQueue;
-            if (inputStr == "ExperimentationExperimentStopped") output = GenericErrorCodes::GenericErrorCodesExperimentationExperimentStopped;
-            if (inputStr == "ExperimentationExperimentRunning") output = GenericErrorCodes::GenericErrorCodesExperimentationExperimentRunning;
-            if (inputStr == "ExperimentationExperimentNotFound") output = GenericErrorCodes::GenericErrorCodesExperimentationExperimentNotFound;
-            if (inputStr == "ExperimentationExperimentNeverStarted") output = GenericErrorCodes::GenericErrorCodesExperimentationExperimentNeverStarted;
-            if (inputStr == "ExperimentationExperimentDeleted") output = GenericErrorCodes::GenericErrorCodesExperimentationExperimentDeleted;
-            if (inputStr == "ExperimentationClientTimeout") output = GenericErrorCodes::GenericErrorCodesExperimentationClientTimeout;
-            if (inputStr == "ExperimentationExceededVariantNameLength") output = GenericErrorCodes::GenericErrorCodesExperimentationExceededVariantNameLength;
-            if (inputStr == "ExperimentationExceededMaxVariantLength") output = GenericErrorCodes::GenericErrorCodesExperimentationExceededMaxVariantLength;
-            if (inputStr == "ExperimentInvalidId") output = GenericErrorCodes::GenericErrorCodesExperimentInvalidId;
-            if (inputStr == "ExperimentationNoScorecard") output = GenericErrorCodes::GenericErrorCodesExperimentationNoScorecard;
-            if (inputStr == "MaxActionDepthExceeded") output = GenericErrorCodes::GenericErrorCodesMaxActionDepthExceeded;
-            if (inputStr == "SnapshotNotFound") output = GenericErrorCodes::GenericErrorCodesSnapshotNotFound;
+            if (inputStr == "Success")
+            {
+                output = GenericErrorCodes::GenericErrorCodesSuccess;
+            }
+            if (inputStr == "UnkownError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesUnkownError;
+            }
+            if (inputStr == "InvalidParams")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidParams;
+            }
+            if (inputStr == "AccountNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAccountNotFound;
+            }
+            if (inputStr == "AccountBanned")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAccountBanned;
+            }
+            if (inputStr == "InvalidUsernameOrPassword")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidUsernameOrPassword;
+            }
+            if (inputStr == "InvalidTitleId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidTitleId;
+            }
+            if (inputStr == "InvalidEmailAddress")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidEmailAddress;
+            }
+            if (inputStr == "EmailAddressNotAvailable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEmailAddressNotAvailable;
+            }
+            if (inputStr == "InvalidUsername")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidUsername;
+            }
+            if (inputStr == "InvalidPassword")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidPassword;
+            }
+            if (inputStr == "UsernameNotAvailable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesUsernameNotAvailable;
+            }
+            if (inputStr == "InvalidSteamTicket")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidSteamTicket;
+            }
+            if (inputStr == "AccountAlreadyLinked")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAccountAlreadyLinked;
+            }
+            if (inputStr == "LinkedAccountAlreadyClaimed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLinkedAccountAlreadyClaimed;
+            }
+            if (inputStr == "InvalidFacebookToken")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidFacebookToken;
+            }
+            if (inputStr == "AccountNotLinked")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAccountNotLinked;
+            }
+            if (inputStr == "FailedByPaymentProvider")
+            {
+                output = GenericErrorCodes::GenericErrorCodesFailedByPaymentProvider;
+            }
+            if (inputStr == "CouponCodeNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCouponCodeNotFound;
+            }
+            if (inputStr == "InvalidContainerItem")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidContainerItem;
+            }
+            if (inputStr == "ContainerNotOwned")
+            {
+                output = GenericErrorCodes::GenericErrorCodesContainerNotOwned;
+            }
+            if (inputStr == "KeyNotOwned")
+            {
+                output = GenericErrorCodes::GenericErrorCodesKeyNotOwned;
+            }
+            if (inputStr == "InvalidItemIdInTable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidItemIdInTable;
+            }
+            if (inputStr == "InvalidReceipt")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidReceipt;
+            }
+            if (inputStr == "ReceiptAlreadyUsed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesReceiptAlreadyUsed;
+            }
+            if (inputStr == "ReceiptCancelled")
+            {
+                output = GenericErrorCodes::GenericErrorCodesReceiptCancelled;
+            }
+            if (inputStr == "GameNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameNotFound;
+            }
+            if (inputStr == "GameModeNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameModeNotFound;
+            }
+            if (inputStr == "InvalidGoogleToken")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidGoogleToken;
+            }
+            if (inputStr == "UserIsNotPartOfDeveloper")
+            {
+                output = GenericErrorCodes::GenericErrorCodesUserIsNotPartOfDeveloper;
+            }
+            if (inputStr == "InvalidTitleForDeveloper")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidTitleForDeveloper;
+            }
+            if (inputStr == "TitleNameConflicts")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleNameConflicts;
+            }
+            if (inputStr == "UserisNotValid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesUserisNotValid;
+            }
+            if (inputStr == "ValueAlreadyExists")
+            {
+                output = GenericErrorCodes::GenericErrorCodesValueAlreadyExists;
+            }
+            if (inputStr == "BuildNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesBuildNotFound;
+            }
+            if (inputStr == "PlayerNotInGame")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerNotInGame;
+            }
+            if (inputStr == "InvalidTicket")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidTicket;
+            }
+            if (inputStr == "InvalidDeveloper")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidDeveloper;
+            }
+            if (inputStr == "InvalidOrderInfo")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidOrderInfo;
+            }
+            if (inputStr == "RegistrationIncomplete")
+            {
+                output = GenericErrorCodes::GenericErrorCodesRegistrationIncomplete;
+            }
+            if (inputStr == "InvalidPlatform")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidPlatform;
+            }
+            if (inputStr == "UnknownError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesUnknownError;
+            }
+            if (inputStr == "SteamApplicationNotOwned")
+            {
+                output = GenericErrorCodes::GenericErrorCodesSteamApplicationNotOwned;
+            }
+            if (inputStr == "WrongSteamAccount")
+            {
+                output = GenericErrorCodes::GenericErrorCodesWrongSteamAccount;
+            }
+            if (inputStr == "TitleNotActivated")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleNotActivated;
+            }
+            if (inputStr == "RegistrationSessionNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesRegistrationSessionNotFound;
+            }
+            if (inputStr == "NoSuchMod")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNoSuchMod;
+            }
+            if (inputStr == "FileNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesFileNotFound;
+            }
+            if (inputStr == "DuplicateEmail")
+            {
+                output = GenericErrorCodes::GenericErrorCodesDuplicateEmail;
+            }
+            if (inputStr == "ItemNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesItemNotFound;
+            }
+            if (inputStr == "ItemNotOwned")
+            {
+                output = GenericErrorCodes::GenericErrorCodesItemNotOwned;
+            }
+            if (inputStr == "ItemNotRecycleable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesItemNotRecycleable;
+            }
+            if (inputStr == "ItemNotAffordable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesItemNotAffordable;
+            }
+            if (inputStr == "InvalidVirtualCurrency")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidVirtualCurrency;
+            }
+            if (inputStr == "WrongVirtualCurrency")
+            {
+                output = GenericErrorCodes::GenericErrorCodesWrongVirtualCurrency;
+            }
+            if (inputStr == "WrongPrice")
+            {
+                output = GenericErrorCodes::GenericErrorCodesWrongPrice;
+            }
+            if (inputStr == "NonPositiveValue")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNonPositiveValue;
+            }
+            if (inputStr == "InvalidRegion")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidRegion;
+            }
+            if (inputStr == "RegionAtCapacity")
+            {
+                output = GenericErrorCodes::GenericErrorCodesRegionAtCapacity;
+            }
+            if (inputStr == "ServerFailedToStart")
+            {
+                output = GenericErrorCodes::GenericErrorCodesServerFailedToStart;
+            }
+            if (inputStr == "NameNotAvailable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNameNotAvailable;
+            }
+            if (inputStr == "InsufficientFunds")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInsufficientFunds;
+            }
+            if (inputStr == "InvalidDeviceID")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidDeviceID;
+            }
+            if (inputStr == "InvalidPushNotificationToken")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidPushNotificationToken;
+            }
+            if (inputStr == "NoRemainingUses")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNoRemainingUses;
+            }
+            if (inputStr == "InvalidPaymentProvider")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidPaymentProvider;
+            }
+            if (inputStr == "PurchaseInitializationFailure")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPurchaseInitializationFailure;
+            }
+            if (inputStr == "DuplicateUsername")
+            {
+                output = GenericErrorCodes::GenericErrorCodesDuplicateUsername;
+            }
+            if (inputStr == "InvalidBuyerInfo")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidBuyerInfo;
+            }
+            if (inputStr == "NoGameModeParamsSet")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNoGameModeParamsSet;
+            }
+            if (inputStr == "BodyTooLarge")
+            {
+                output = GenericErrorCodes::GenericErrorCodesBodyTooLarge;
+            }
+            if (inputStr == "ReservedWordInBody")
+            {
+                output = GenericErrorCodes::GenericErrorCodesReservedWordInBody;
+            }
+            if (inputStr == "InvalidTypeInBody")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidTypeInBody;
+            }
+            if (inputStr == "InvalidRequest")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidRequest;
+            }
+            if (inputStr == "ReservedEventName")
+            {
+                output = GenericErrorCodes::GenericErrorCodesReservedEventName;
+            }
+            if (inputStr == "InvalidUserStatistics")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidUserStatistics;
+            }
+            if (inputStr == "NotAuthenticated")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNotAuthenticated;
+            }
+            if (inputStr == "StreamAlreadyExists")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStreamAlreadyExists;
+            }
+            if (inputStr == "ErrorCreatingStream")
+            {
+                output = GenericErrorCodes::GenericErrorCodesErrorCreatingStream;
+            }
+            if (inputStr == "StreamNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStreamNotFound;
+            }
+            if (inputStr == "InvalidAccount")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidAccount;
+            }
+            if (inputStr == "PurchaseDoesNotExist")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPurchaseDoesNotExist;
+            }
+            if (inputStr == "InvalidPurchaseTransactionStatus")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidPurchaseTransactionStatus;
+            }
+            if (inputStr == "APINotEnabledForGameClientAccess")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAPINotEnabledForGameClientAccess;
+            }
+            if (inputStr == "NoPushNotificationARNForTitle")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNoPushNotificationARNForTitle;
+            }
+            if (inputStr == "BuildAlreadyExists")
+            {
+                output = GenericErrorCodes::GenericErrorCodesBuildAlreadyExists;
+            }
+            if (inputStr == "BuildPackageDoesNotExist")
+            {
+                output = GenericErrorCodes::GenericErrorCodesBuildPackageDoesNotExist;
+            }
+            if (inputStr == "CustomAnalyticsEventsNotEnabledForTitle")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCustomAnalyticsEventsNotEnabledForTitle;
+            }
+            if (inputStr == "InvalidSharedGroupId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidSharedGroupId;
+            }
+            if (inputStr == "NotAuthorized")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNotAuthorized;
+            }
+            if (inputStr == "MissingTitleGoogleProperties")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMissingTitleGoogleProperties;
+            }
+            if (inputStr == "InvalidItemProperties")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidItemProperties;
+            }
+            if (inputStr == "InvalidPSNAuthCode")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidPSNAuthCode;
+            }
+            if (inputStr == "InvalidItemId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidItemId;
+            }
+            if (inputStr == "PushNotEnabledForAccount")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPushNotEnabledForAccount;
+            }
+            if (inputStr == "PushServiceError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPushServiceError;
+            }
+            if (inputStr == "ReceiptDoesNotContainInAppItems")
+            {
+                output = GenericErrorCodes::GenericErrorCodesReceiptDoesNotContainInAppItems;
+            }
+            if (inputStr == "ReceiptContainsMultipleInAppItems")
+            {
+                output = GenericErrorCodes::GenericErrorCodesReceiptContainsMultipleInAppItems;
+            }
+            if (inputStr == "InvalidBundleID")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidBundleID;
+            }
+            if (inputStr == "JavascriptException")
+            {
+                output = GenericErrorCodes::GenericErrorCodesJavascriptException;
+            }
+            if (inputStr == "InvalidSessionTicket")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidSessionTicket;
+            }
+            if (inputStr == "UnableToConnectToDatabase")
+            {
+                output = GenericErrorCodes::GenericErrorCodesUnableToConnectToDatabase;
+            }
+            if (inputStr == "InternalServerError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInternalServerError;
+            }
+            if (inputStr == "InvalidReportDate")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidReportDate;
+            }
+            if (inputStr == "ReportNotAvailable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesReportNotAvailable;
+            }
+            if (inputStr == "DatabaseThroughputExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesDatabaseThroughputExceeded;
+            }
+            if (inputStr == "InvalidGameTicket")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidGameTicket;
+            }
+            if (inputStr == "ExpiredGameTicket")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExpiredGameTicket;
+            }
+            if (inputStr == "GameTicketDoesNotMatchLobby")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameTicketDoesNotMatchLobby;
+            }
+            if (inputStr == "LinkedDeviceAlreadyClaimed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLinkedDeviceAlreadyClaimed;
+            }
+            if (inputStr == "DeviceAlreadyLinked")
+            {
+                output = GenericErrorCodes::GenericErrorCodesDeviceAlreadyLinked;
+            }
+            if (inputStr == "DeviceNotLinked")
+            {
+                output = GenericErrorCodes::GenericErrorCodesDeviceNotLinked;
+            }
+            if (inputStr == "PartialFailure")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPartialFailure;
+            }
+            if (inputStr == "PublisherNotSet")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPublisherNotSet;
+            }
+            if (inputStr == "ServiceUnavailable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesServiceUnavailable;
+            }
+            if (inputStr == "VersionNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesVersionNotFound;
+            }
+            if (inputStr == "RevisionNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesRevisionNotFound;
+            }
+            if (inputStr == "InvalidPublisherId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidPublisherId;
+            }
+            if (inputStr == "DownstreamServiceUnavailable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesDownstreamServiceUnavailable;
+            }
+            if (inputStr == "APINotIncludedInTitleUsageTier")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAPINotIncludedInTitleUsageTier;
+            }
+            if (inputStr == "DAULimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesDAULimitExceeded;
+            }
+            if (inputStr == "APIRequestLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAPIRequestLimitExceeded;
+            }
+            if (inputStr == "InvalidAPIEndpoint")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidAPIEndpoint;
+            }
+            if (inputStr == "BuildNotAvailable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesBuildNotAvailable;
+            }
+            if (inputStr == "ConcurrentEditError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesConcurrentEditError;
+            }
+            if (inputStr == "ContentNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesContentNotFound;
+            }
+            if (inputStr == "CharacterNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCharacterNotFound;
+            }
+            if (inputStr == "CloudScriptNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCloudScriptNotFound;
+            }
+            if (inputStr == "ContentQuotaExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesContentQuotaExceeded;
+            }
+            if (inputStr == "InvalidCharacterStatistics")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidCharacterStatistics;
+            }
+            if (inputStr == "PhotonNotEnabledForTitle")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPhotonNotEnabledForTitle;
+            }
+            if (inputStr == "PhotonApplicationNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPhotonApplicationNotFound;
+            }
+            if (inputStr == "PhotonApplicationNotAssociatedWithTitle")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPhotonApplicationNotAssociatedWithTitle;
+            }
+            if (inputStr == "InvalidEmailOrPassword")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidEmailOrPassword;
+            }
+            if (inputStr == "FacebookAPIError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesFacebookAPIError;
+            }
+            if (inputStr == "InvalidContentType")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidContentType;
+            }
+            if (inputStr == "KeyLengthExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesKeyLengthExceeded;
+            }
+            if (inputStr == "DataLengthExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesDataLengthExceeded;
+            }
+            if (inputStr == "TooManyKeys")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTooManyKeys;
+            }
+            if (inputStr == "FreeTierCannotHaveVirtualCurrency")
+            {
+                output = GenericErrorCodes::GenericErrorCodesFreeTierCannotHaveVirtualCurrency;
+            }
+            if (inputStr == "MissingAmazonSharedKey")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMissingAmazonSharedKey;
+            }
+            if (inputStr == "AmazonValidationError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAmazonValidationError;
+            }
+            if (inputStr == "InvalidPSNIssuerId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidPSNIssuerId;
+            }
+            if (inputStr == "PSNInaccessible")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPSNInaccessible;
+            }
+            if (inputStr == "ExpiredAuthToken")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExpiredAuthToken;
+            }
+            if (inputStr == "FailedToGetEntitlements")
+            {
+                output = GenericErrorCodes::GenericErrorCodesFailedToGetEntitlements;
+            }
+            if (inputStr == "FailedToConsumeEntitlement")
+            {
+                output = GenericErrorCodes::GenericErrorCodesFailedToConsumeEntitlement;
+            }
+            if (inputStr == "TradeAcceptingUserNotAllowed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTradeAcceptingUserNotAllowed;
+            }
+            if (inputStr == "TradeInventoryItemIsAssignedToCharacter")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTradeInventoryItemIsAssignedToCharacter;
+            }
+            if (inputStr == "TradeInventoryItemIsBundle")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTradeInventoryItemIsBundle;
+            }
+            if (inputStr == "TradeStatusNotValidForCancelling")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTradeStatusNotValidForCancelling;
+            }
+            if (inputStr == "TradeStatusNotValidForAccepting")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTradeStatusNotValidForAccepting;
+            }
+            if (inputStr == "TradeDoesNotExist")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTradeDoesNotExist;
+            }
+            if (inputStr == "TradeCancelled")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTradeCancelled;
+            }
+            if (inputStr == "TradeAlreadyFilled")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTradeAlreadyFilled;
+            }
+            if (inputStr == "TradeWaitForStatusTimeout")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTradeWaitForStatusTimeout;
+            }
+            if (inputStr == "TradeInventoryItemExpired")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTradeInventoryItemExpired;
+            }
+            if (inputStr == "TradeMissingOfferedAndAcceptedItems")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTradeMissingOfferedAndAcceptedItems;
+            }
+            if (inputStr == "TradeAcceptedItemIsBundle")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTradeAcceptedItemIsBundle;
+            }
+            if (inputStr == "TradeAcceptedItemIsStackable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTradeAcceptedItemIsStackable;
+            }
+            if (inputStr == "TradeInventoryItemInvalidStatus")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTradeInventoryItemInvalidStatus;
+            }
+            if (inputStr == "TradeAcceptedCatalogItemInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTradeAcceptedCatalogItemInvalid;
+            }
+            if (inputStr == "TradeAllowedUsersInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTradeAllowedUsersInvalid;
+            }
+            if (inputStr == "TradeInventoryItemDoesNotExist")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTradeInventoryItemDoesNotExist;
+            }
+            if (inputStr == "TradeInventoryItemIsConsumed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTradeInventoryItemIsConsumed;
+            }
+            if (inputStr == "TradeInventoryItemIsStackable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTradeInventoryItemIsStackable;
+            }
+            if (inputStr == "TradeAcceptedItemsMismatch")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTradeAcceptedItemsMismatch;
+            }
+            if (inputStr == "InvalidKongregateToken")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidKongregateToken;
+            }
+            if (inputStr == "FeatureNotConfiguredForTitle")
+            {
+                output = GenericErrorCodes::GenericErrorCodesFeatureNotConfiguredForTitle;
+            }
+            if (inputStr == "NoMatchingCatalogItemForReceipt")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNoMatchingCatalogItemForReceipt;
+            }
+            if (inputStr == "InvalidCurrencyCode")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidCurrencyCode;
+            }
+            if (inputStr == "NoRealMoneyPriceForCatalogItem")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNoRealMoneyPriceForCatalogItem;
+            }
+            if (inputStr == "TradeInventoryItemIsNotTradable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTradeInventoryItemIsNotTradable;
+            }
+            if (inputStr == "TradeAcceptedCatalogItemIsNotTradable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTradeAcceptedCatalogItemIsNotTradable;
+            }
+            if (inputStr == "UsersAlreadyFriends")
+            {
+                output = GenericErrorCodes::GenericErrorCodesUsersAlreadyFriends;
+            }
+            if (inputStr == "LinkedIdentifierAlreadyClaimed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLinkedIdentifierAlreadyClaimed;
+            }
+            if (inputStr == "CustomIdNotLinked")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCustomIdNotLinked;
+            }
+            if (inputStr == "TotalDataSizeExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTotalDataSizeExceeded;
+            }
+            if (inputStr == "DeleteKeyConflict")
+            {
+                output = GenericErrorCodes::GenericErrorCodesDeleteKeyConflict;
+            }
+            if (inputStr == "InvalidXboxLiveToken")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidXboxLiveToken;
+            }
+            if (inputStr == "ExpiredXboxLiveToken")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExpiredXboxLiveToken;
+            }
+            if (inputStr == "ResettableStatisticVersionRequired")
+            {
+                output = GenericErrorCodes::GenericErrorCodesResettableStatisticVersionRequired;
+            }
+            if (inputStr == "NotAuthorizedByTitle")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNotAuthorizedByTitle;
+            }
+            if (inputStr == "NoPartnerEnabled")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNoPartnerEnabled;
+            }
+            if (inputStr == "InvalidPartnerResponse")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidPartnerResponse;
+            }
+            if (inputStr == "APINotEnabledForGameServerAccess")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAPINotEnabledForGameServerAccess;
+            }
+            if (inputStr == "StatisticNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStatisticNotFound;
+            }
+            if (inputStr == "StatisticNameConflict")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStatisticNameConflict;
+            }
+            if (inputStr == "StatisticVersionClosedForWrites")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStatisticVersionClosedForWrites;
+            }
+            if (inputStr == "StatisticVersionInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStatisticVersionInvalid;
+            }
+            if (inputStr == "APIClientRequestRateLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAPIClientRequestRateLimitExceeded;
+            }
+            if (inputStr == "InvalidJSONContent")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidJSONContent;
+            }
+            if (inputStr == "InvalidDropTable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidDropTable;
+            }
+            if (inputStr == "StatisticVersionAlreadyIncrementedForScheduledInterval")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStatisticVersionAlreadyIncrementedForScheduledInterval;
+            }
+            if (inputStr == "StatisticCountLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStatisticCountLimitExceeded;
+            }
+            if (inputStr == "StatisticVersionIncrementRateExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStatisticVersionIncrementRateExceeded;
+            }
+            if (inputStr == "ContainerKeyInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesContainerKeyInvalid;
+            }
+            if (inputStr == "CloudScriptExecutionTimeLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCloudScriptExecutionTimeLimitExceeded;
+            }
+            if (inputStr == "NoWritePermissionsForEvent")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNoWritePermissionsForEvent;
+            }
+            if (inputStr == "CloudScriptFunctionArgumentSizeExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCloudScriptFunctionArgumentSizeExceeded;
+            }
+            if (inputStr == "CloudScriptAPIRequestCountExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCloudScriptAPIRequestCountExceeded;
+            }
+            if (inputStr == "CloudScriptAPIRequestError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCloudScriptAPIRequestError;
+            }
+            if (inputStr == "CloudScriptHTTPRequestError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCloudScriptHTTPRequestError;
+            }
+            if (inputStr == "InsufficientGuildRole")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInsufficientGuildRole;
+            }
+            if (inputStr == "GuildNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGuildNotFound;
+            }
+            if (inputStr == "OverLimit")
+            {
+                output = GenericErrorCodes::GenericErrorCodesOverLimit;
+            }
+            if (inputStr == "EventNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventNotFound;
+            }
+            if (inputStr == "InvalidEventField")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidEventField;
+            }
+            if (inputStr == "InvalidEventName")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidEventName;
+            }
+            if (inputStr == "CatalogNotConfigured")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCatalogNotConfigured;
+            }
+            if (inputStr == "OperationNotSupportedForPlatform")
+            {
+                output = GenericErrorCodes::GenericErrorCodesOperationNotSupportedForPlatform;
+            }
+            if (inputStr == "SegmentNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesSegmentNotFound;
+            }
+            if (inputStr == "StoreNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStoreNotFound;
+            }
+            if (inputStr == "InvalidStatisticName")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidStatisticName;
+            }
+            if (inputStr == "TitleNotQualifiedForLimit")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleNotQualifiedForLimit;
+            }
+            if (inputStr == "InvalidServiceLimitLevel")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidServiceLimitLevel;
+            }
+            if (inputStr == "ServiceLimitLevelInTransition")
+            {
+                output = GenericErrorCodes::GenericErrorCodesServiceLimitLevelInTransition;
+            }
+            if (inputStr == "CouponAlreadyRedeemed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCouponAlreadyRedeemed;
+            }
+            if (inputStr == "GameServerBuildSizeLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameServerBuildSizeLimitExceeded;
+            }
+            if (inputStr == "GameServerBuildCountLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameServerBuildCountLimitExceeded;
+            }
+            if (inputStr == "VirtualCurrencyCountLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyCountLimitExceeded;
+            }
+            if (inputStr == "VirtualCurrencyCodeExists")
+            {
+                output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyCodeExists;
+            }
+            if (inputStr == "TitleNewsItemCountLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleNewsItemCountLimitExceeded;
+            }
+            if (inputStr == "InvalidTwitchToken")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidTwitchToken;
+            }
+            if (inputStr == "TwitchResponseError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTwitchResponseError;
+            }
+            if (inputStr == "ProfaneDisplayName")
+            {
+                output = GenericErrorCodes::GenericErrorCodesProfaneDisplayName;
+            }
+            if (inputStr == "UserAlreadyAdded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesUserAlreadyAdded;
+            }
+            if (inputStr == "InvalidVirtualCurrencyCode")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidVirtualCurrencyCode;
+            }
+            if (inputStr == "VirtualCurrencyCannotBeDeleted")
+            {
+                output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyCannotBeDeleted;
+            }
+            if (inputStr == "IdentifierAlreadyClaimed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesIdentifierAlreadyClaimed;
+            }
+            if (inputStr == "IdentifierNotLinked")
+            {
+                output = GenericErrorCodes::GenericErrorCodesIdentifierNotLinked;
+            }
+            if (inputStr == "InvalidContinuationToken")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidContinuationToken;
+            }
+            if (inputStr == "ExpiredContinuationToken")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExpiredContinuationToken;
+            }
+            if (inputStr == "InvalidSegment")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidSegment;
+            }
+            if (inputStr == "InvalidSessionId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidSessionId;
+            }
+            if (inputStr == "SessionLogNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesSessionLogNotFound;
+            }
+            if (inputStr == "InvalidSearchTerm")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidSearchTerm;
+            }
+            if (inputStr == "TwoFactorAuthenticationTokenRequired")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTwoFactorAuthenticationTokenRequired;
+            }
+            if (inputStr == "GameServerHostCountLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameServerHostCountLimitExceeded;
+            }
+            if (inputStr == "PlayerTagCountLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerTagCountLimitExceeded;
+            }
+            if (inputStr == "RequestAlreadyRunning")
+            {
+                output = GenericErrorCodes::GenericErrorCodesRequestAlreadyRunning;
+            }
+            if (inputStr == "ActionGroupNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesActionGroupNotFound;
+            }
+            if (inputStr == "MaximumSegmentBulkActionJobsRunning")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMaximumSegmentBulkActionJobsRunning;
+            }
+            if (inputStr == "NoActionsOnPlayersInSegmentJob")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNoActionsOnPlayersInSegmentJob;
+            }
+            if (inputStr == "DuplicateStatisticName")
+            {
+                output = GenericErrorCodes::GenericErrorCodesDuplicateStatisticName;
+            }
+            if (inputStr == "ScheduledTaskNameConflict")
+            {
+                output = GenericErrorCodes::GenericErrorCodesScheduledTaskNameConflict;
+            }
+            if (inputStr == "ScheduledTaskCreateConflict")
+            {
+                output = GenericErrorCodes::GenericErrorCodesScheduledTaskCreateConflict;
+            }
+            if (inputStr == "InvalidScheduledTaskName")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidScheduledTaskName;
+            }
+            if (inputStr == "InvalidTaskSchedule")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidTaskSchedule;
+            }
+            if (inputStr == "SteamNotEnabledForTitle")
+            {
+                output = GenericErrorCodes::GenericErrorCodesSteamNotEnabledForTitle;
+            }
+            if (inputStr == "LimitNotAnUpgradeOption")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLimitNotAnUpgradeOption;
+            }
+            if (inputStr == "NoSecretKeyEnabledForCloudScript")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNoSecretKeyEnabledForCloudScript;
+            }
+            if (inputStr == "TaskNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTaskNotFound;
+            }
+            if (inputStr == "TaskInstanceNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTaskInstanceNotFound;
+            }
+            if (inputStr == "InvalidIdentityProviderId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidIdentityProviderId;
+            }
+            if (inputStr == "MisconfiguredIdentityProvider")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMisconfiguredIdentityProvider;
+            }
+            if (inputStr == "InvalidScheduledTaskType")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidScheduledTaskType;
+            }
+            if (inputStr == "BillingInformationRequired")
+            {
+                output = GenericErrorCodes::GenericErrorCodesBillingInformationRequired;
+            }
+            if (inputStr == "LimitedEditionItemUnavailable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLimitedEditionItemUnavailable;
+            }
+            if (inputStr == "InvalidAdPlacementAndReward")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidAdPlacementAndReward;
+            }
+            if (inputStr == "AllAdPlacementViewsAlreadyConsumed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAllAdPlacementViewsAlreadyConsumed;
+            }
+            if (inputStr == "GoogleOAuthNotConfiguredForTitle")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGoogleOAuthNotConfiguredForTitle;
+            }
+            if (inputStr == "GoogleOAuthError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGoogleOAuthError;
+            }
+            if (inputStr == "UserNotFriend")
+            {
+                output = GenericErrorCodes::GenericErrorCodesUserNotFriend;
+            }
+            if (inputStr == "InvalidSignature")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidSignature;
+            }
+            if (inputStr == "InvalidPublicKey")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidPublicKey;
+            }
+            if (inputStr == "GoogleOAuthNoIdTokenIncludedInResponse")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGoogleOAuthNoIdTokenIncludedInResponse;
+            }
+            if (inputStr == "StatisticUpdateInProgress")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStatisticUpdateInProgress;
+            }
+            if (inputStr == "LeaderboardVersionNotAvailable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLeaderboardVersionNotAvailable;
+            }
+            if (inputStr == "StatisticAlreadyHasPrizeTable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStatisticAlreadyHasPrizeTable;
+            }
+            if (inputStr == "PrizeTableHasOverlappingRanks")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPrizeTableHasOverlappingRanks;
+            }
+            if (inputStr == "PrizeTableHasMissingRanks")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPrizeTableHasMissingRanks;
+            }
+            if (inputStr == "PrizeTableRankStartsAtZero")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPrizeTableRankStartsAtZero;
+            }
+            if (inputStr == "InvalidStatistic")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidStatistic;
+            }
+            if (inputStr == "ExpressionParseFailure")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExpressionParseFailure;
+            }
+            if (inputStr == "ExpressionInvokeFailure")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExpressionInvokeFailure;
+            }
+            if (inputStr == "ExpressionTooLong")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExpressionTooLong;
+            }
+            if (inputStr == "DataUpdateRateExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesDataUpdateRateExceeded;
+            }
+            if (inputStr == "RestrictedEmailDomain")
+            {
+                output = GenericErrorCodes::GenericErrorCodesRestrictedEmailDomain;
+            }
+            if (inputStr == "EncryptionKeyDisabled")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEncryptionKeyDisabled;
+            }
+            if (inputStr == "EncryptionKeyMissing")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEncryptionKeyMissing;
+            }
+            if (inputStr == "EncryptionKeyBroken")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEncryptionKeyBroken;
+            }
+            if (inputStr == "NoSharedSecretKeyConfigured")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNoSharedSecretKeyConfigured;
+            }
+            if (inputStr == "SecretKeyNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesSecretKeyNotFound;
+            }
+            if (inputStr == "PlayerSecretAlreadyConfigured")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerSecretAlreadyConfigured;
+            }
+            if (inputStr == "APIRequestsDisabledForTitle")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAPIRequestsDisabledForTitle;
+            }
+            if (inputStr == "InvalidSharedSecretKey")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidSharedSecretKey;
+            }
+            if (inputStr == "PrizeTableHasNoRanks")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPrizeTableHasNoRanks;
+            }
+            if (inputStr == "ProfileDoesNotExist")
+            {
+                output = GenericErrorCodes::GenericErrorCodesProfileDoesNotExist;
+            }
+            if (inputStr == "ContentS3OriginBucketNotConfigured")
+            {
+                output = GenericErrorCodes::GenericErrorCodesContentS3OriginBucketNotConfigured;
+            }
+            if (inputStr == "InvalidEnvironmentForReceipt")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidEnvironmentForReceipt;
+            }
+            if (inputStr == "EncryptedRequestNotAllowed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEncryptedRequestNotAllowed;
+            }
+            if (inputStr == "SignedRequestNotAllowed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesSignedRequestNotAllowed;
+            }
+            if (inputStr == "RequestViewConstraintParamsNotAllowed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesRequestViewConstraintParamsNotAllowed;
+            }
+            if (inputStr == "BadPartnerConfiguration")
+            {
+                output = GenericErrorCodes::GenericErrorCodesBadPartnerConfiguration;
+            }
+            if (inputStr == "XboxBPCertificateFailure")
+            {
+                output = GenericErrorCodes::GenericErrorCodesXboxBPCertificateFailure;
+            }
+            if (inputStr == "XboxXASSExchangeFailure")
+            {
+                output = GenericErrorCodes::GenericErrorCodesXboxXASSExchangeFailure;
+            }
+            if (inputStr == "InvalidEntityId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidEntityId;
+            }
+            if (inputStr == "StatisticValueAggregationOverflow")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStatisticValueAggregationOverflow;
+            }
+            if (inputStr == "EmailMessageFromAddressIsMissing")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEmailMessageFromAddressIsMissing;
+            }
+            if (inputStr == "EmailMessageToAddressIsMissing")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEmailMessageToAddressIsMissing;
+            }
+            if (inputStr == "SmtpServerAuthenticationError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesSmtpServerAuthenticationError;
+            }
+            if (inputStr == "SmtpServerLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesSmtpServerLimitExceeded;
+            }
+            if (inputStr == "SmtpServerInsufficientStorage")
+            {
+                output = GenericErrorCodes::GenericErrorCodesSmtpServerInsufficientStorage;
+            }
+            if (inputStr == "SmtpServerCommunicationError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesSmtpServerCommunicationError;
+            }
+            if (inputStr == "SmtpServerGeneralFailure")
+            {
+                output = GenericErrorCodes::GenericErrorCodesSmtpServerGeneralFailure;
+            }
+            if (inputStr == "EmailClientTimeout")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEmailClientTimeout;
+            }
+            if (inputStr == "EmailClientCanceledTask")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEmailClientCanceledTask;
+            }
+            if (inputStr == "EmailTemplateMissing")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEmailTemplateMissing;
+            }
+            if (inputStr == "InvalidHostForTitleId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidHostForTitleId;
+            }
+            if (inputStr == "EmailConfirmationTokenDoesNotExist")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEmailConfirmationTokenDoesNotExist;
+            }
+            if (inputStr == "EmailConfirmationTokenExpired")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEmailConfirmationTokenExpired;
+            }
+            if (inputStr == "AccountDeleted")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAccountDeleted;
+            }
+            if (inputStr == "PlayerSecretNotConfigured")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerSecretNotConfigured;
+            }
+            if (inputStr == "InvalidSignatureTime")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidSignatureTime;
+            }
+            if (inputStr == "NoContactEmailAddressFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNoContactEmailAddressFound;
+            }
+            if (inputStr == "InvalidAuthToken")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidAuthToken;
+            }
+            if (inputStr == "AuthTokenDoesNotExist")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAuthTokenDoesNotExist;
+            }
+            if (inputStr == "AuthTokenExpired")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAuthTokenExpired;
+            }
+            if (inputStr == "AuthTokenAlreadyUsedToResetPassword")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAuthTokenAlreadyUsedToResetPassword;
+            }
+            if (inputStr == "MembershipNameTooLong")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMembershipNameTooLong;
+            }
+            if (inputStr == "MembershipNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMembershipNotFound;
+            }
+            if (inputStr == "GoogleServiceAccountInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGoogleServiceAccountInvalid;
+            }
+            if (inputStr == "GoogleServiceAccountParseFailure")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGoogleServiceAccountParseFailure;
+            }
+            if (inputStr == "EntityTokenMissing")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEntityTokenMissing;
+            }
+            if (inputStr == "EntityTokenInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEntityTokenInvalid;
+            }
+            if (inputStr == "EntityTokenExpired")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEntityTokenExpired;
+            }
+            if (inputStr == "EntityTokenRevoked")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEntityTokenRevoked;
+            }
+            if (inputStr == "InvalidProductForSubscription")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidProductForSubscription;
+            }
+            if (inputStr == "XboxInaccessible")
+            {
+                output = GenericErrorCodes::GenericErrorCodesXboxInaccessible;
+            }
+            if (inputStr == "SubscriptionAlreadyTaken")
+            {
+                output = GenericErrorCodes::GenericErrorCodesSubscriptionAlreadyTaken;
+            }
+            if (inputStr == "SmtpAddonNotEnabled")
+            {
+                output = GenericErrorCodes::GenericErrorCodesSmtpAddonNotEnabled;
+            }
+            if (inputStr == "APIConcurrentRequestLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAPIConcurrentRequestLimitExceeded;
+            }
+            if (inputStr == "XboxRejectedXSTSExchangeRequest")
+            {
+                output = GenericErrorCodes::GenericErrorCodesXboxRejectedXSTSExchangeRequest;
+            }
+            if (inputStr == "VariableNotDefined")
+            {
+                output = GenericErrorCodes::GenericErrorCodesVariableNotDefined;
+            }
+            if (inputStr == "TemplateVersionNotDefined")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTemplateVersionNotDefined;
+            }
+            if (inputStr == "FileTooLarge")
+            {
+                output = GenericErrorCodes::GenericErrorCodesFileTooLarge;
+            }
+            if (inputStr == "TitleDeleted")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleDeleted;
+            }
+            if (inputStr == "TitleContainsUserAccounts")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleContainsUserAccounts;
+            }
+            if (inputStr == "TitleDeletionPlayerCleanupFailure")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleDeletionPlayerCleanupFailure;
+            }
+            if (inputStr == "EntityFileOperationPending")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEntityFileOperationPending;
+            }
+            if (inputStr == "NoEntityFileOperationPending")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNoEntityFileOperationPending;
+            }
+            if (inputStr == "EntityProfileVersionMismatch")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEntityProfileVersionMismatch;
+            }
+            if (inputStr == "TemplateVersionTooOld")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTemplateVersionTooOld;
+            }
+            if (inputStr == "MembershipDefinitionInUse")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMembershipDefinitionInUse;
+            }
+            if (inputStr == "PaymentPageNotConfigured")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPaymentPageNotConfigured;
+            }
+            if (inputStr == "FailedLoginAttemptRateLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesFailedLoginAttemptRateLimitExceeded;
+            }
+            if (inputStr == "EntityBlockedByGroup")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEntityBlockedByGroup;
+            }
+            if (inputStr == "RoleDoesNotExist")
+            {
+                output = GenericErrorCodes::GenericErrorCodesRoleDoesNotExist;
+            }
+            if (inputStr == "EntityIsAlreadyMember")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEntityIsAlreadyMember;
+            }
+            if (inputStr == "DuplicateRoleId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesDuplicateRoleId;
+            }
+            if (inputStr == "GroupInvitationNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGroupInvitationNotFound;
+            }
+            if (inputStr == "GroupApplicationNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGroupApplicationNotFound;
+            }
+            if (inputStr == "OutstandingInvitationAcceptedInstead")
+            {
+                output = GenericErrorCodes::GenericErrorCodesOutstandingInvitationAcceptedInstead;
+            }
+            if (inputStr == "OutstandingApplicationAcceptedInstead")
+            {
+                output = GenericErrorCodes::GenericErrorCodesOutstandingApplicationAcceptedInstead;
+            }
+            if (inputStr == "RoleIsGroupDefaultMember")
+            {
+                output = GenericErrorCodes::GenericErrorCodesRoleIsGroupDefaultMember;
+            }
+            if (inputStr == "RoleIsGroupAdmin")
+            {
+                output = GenericErrorCodes::GenericErrorCodesRoleIsGroupAdmin;
+            }
+            if (inputStr == "RoleNameNotAvailable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesRoleNameNotAvailable;
+            }
+            if (inputStr == "GroupNameNotAvailable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGroupNameNotAvailable;
+            }
+            if (inputStr == "EmailReportAlreadySent")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEmailReportAlreadySent;
+            }
+            if (inputStr == "EmailReportRecipientBlacklisted")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEmailReportRecipientBlacklisted;
+            }
+            if (inputStr == "EventNamespaceNotAllowed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventNamespaceNotAllowed;
+            }
+            if (inputStr == "EventEntityNotAllowed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventEntityNotAllowed;
+            }
+            if (inputStr == "InvalidEntityType")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidEntityType;
+            }
+            if (inputStr == "NullTokenResultFromAad")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNullTokenResultFromAad;
+            }
+            if (inputStr == "InvalidTokenResultFromAad")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidTokenResultFromAad;
+            }
+            if (inputStr == "NoValidCertificateForAad")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNoValidCertificateForAad;
+            }
+            if (inputStr == "InvalidCertificateForAad")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidCertificateForAad;
+            }
+            if (inputStr == "DuplicateDropTableId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesDuplicateDropTableId;
+            }
+            if (inputStr == "MultiplayerServerError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMultiplayerServerError;
+            }
+            if (inputStr == "MultiplayerServerTooManyRequests")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMultiplayerServerTooManyRequests;
+            }
+            if (inputStr == "MultiplayerServerNoContent")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMultiplayerServerNoContent;
+            }
+            if (inputStr == "MultiplayerServerBadRequest")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMultiplayerServerBadRequest;
+            }
+            if (inputStr == "MultiplayerServerUnauthorized")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMultiplayerServerUnauthorized;
+            }
+            if (inputStr == "MultiplayerServerForbidden")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMultiplayerServerForbidden;
+            }
+            if (inputStr == "MultiplayerServerNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMultiplayerServerNotFound;
+            }
+            if (inputStr == "MultiplayerServerConflict")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMultiplayerServerConflict;
+            }
+            if (inputStr == "MultiplayerServerInternalServerError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMultiplayerServerInternalServerError;
+            }
+            if (inputStr == "MultiplayerServerUnavailable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMultiplayerServerUnavailable;
+            }
+            if (inputStr == "ExplicitContentDetected")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExplicitContentDetected;
+            }
+            if (inputStr == "PIIContentDetected")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPIIContentDetected;
+            }
+            if (inputStr == "InvalidScheduledTaskParameter")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidScheduledTaskParameter;
+            }
+            if (inputStr == "PerEntityEventRateLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPerEntityEventRateLimitExceeded;
+            }
+            if (inputStr == "TitleDefaultLanguageNotSet")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleDefaultLanguageNotSet;
+            }
+            if (inputStr == "EmailTemplateMissingDefaultVersion")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEmailTemplateMissingDefaultVersion;
+            }
+            if (inputStr == "FacebookInstantGamesIdNotLinked")
+            {
+                output = GenericErrorCodes::GenericErrorCodesFacebookInstantGamesIdNotLinked;
+            }
+            if (inputStr == "InvalidFacebookInstantGamesSignature")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidFacebookInstantGamesSignature;
+            }
+            if (inputStr == "FacebookInstantGamesAuthNotConfiguredForTitle")
+            {
+                output = GenericErrorCodes::GenericErrorCodesFacebookInstantGamesAuthNotConfiguredForTitle;
+            }
+            if (inputStr == "EntityProfileConstraintValidationFailed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEntityProfileConstraintValidationFailed;
+            }
+            if (inputStr == "TelemetryIngestionKeyPending")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTelemetryIngestionKeyPending;
+            }
+            if (inputStr == "TelemetryIngestionKeyNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTelemetryIngestionKeyNotFound;
+            }
+            if (inputStr == "StatisticChildNameInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStatisticChildNameInvalid;
+            }
+            if (inputStr == "DataIntegrityError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesDataIntegrityError;
+            }
+            if (inputStr == "VirtualCurrencyCannotBeSetToOlderVersion")
+            {
+                output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyCannotBeSetToOlderVersion;
+            }
+            if (inputStr == "VirtualCurrencyMustBeWithinIntegerRange")
+            {
+                output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyMustBeWithinIntegerRange;
+            }
+            if (inputStr == "EmailTemplateInvalidSyntax")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEmailTemplateInvalidSyntax;
+            }
+            if (inputStr == "EmailTemplateMissingCallback")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEmailTemplateMissingCallback;
+            }
+            if (inputStr == "PushNotificationTemplateInvalidPayload")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPushNotificationTemplateInvalidPayload;
+            }
+            if (inputStr == "InvalidLocalizedPushNotificationLanguage")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidLocalizedPushNotificationLanguage;
+            }
+            if (inputStr == "MissingLocalizedPushNotificationMessage")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMissingLocalizedPushNotificationMessage;
+            }
+            if (inputStr == "PushNotificationTemplateMissingPlatformPayload")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPushNotificationTemplateMissingPlatformPayload;
+            }
+            if (inputStr == "PushNotificationTemplatePayloadContainsInvalidJson")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPushNotificationTemplatePayloadContainsInvalidJson;
+            }
+            if (inputStr == "PushNotificationTemplateContainsInvalidIosPayload")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPushNotificationTemplateContainsInvalidIosPayload;
+            }
+            if (inputStr == "PushNotificationTemplateContainsInvalidAndroidPayload")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPushNotificationTemplateContainsInvalidAndroidPayload;
+            }
+            if (inputStr == "PushNotificationTemplateIosPayloadMissingNotificationBody")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPushNotificationTemplateIosPayloadMissingNotificationBody;
+            }
+            if (inputStr == "PushNotificationTemplateAndroidPayloadMissingNotificationBody")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPushNotificationTemplateAndroidPayloadMissingNotificationBody;
+            }
+            if (inputStr == "PushNotificationTemplateNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPushNotificationTemplateNotFound;
+            }
+            if (inputStr == "PushNotificationTemplateMissingDefaultVersion")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPushNotificationTemplateMissingDefaultVersion;
+            }
+            if (inputStr == "PushNotificationTemplateInvalidSyntax")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPushNotificationTemplateInvalidSyntax;
+            }
+            if (inputStr == "PushNotificationTemplateNoCustomPayloadForV1")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPushNotificationTemplateNoCustomPayloadForV1;
+            }
+            if (inputStr == "NoLeaderboardForStatistic")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNoLeaderboardForStatistic;
+            }
+            if (inputStr == "TitleNewsMissingDefaultLanguage")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleNewsMissingDefaultLanguage;
+            }
+            if (inputStr == "TitleNewsNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleNewsNotFound;
+            }
+            if (inputStr == "TitleNewsDuplicateLanguage")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleNewsDuplicateLanguage;
+            }
+            if (inputStr == "TitleNewsMissingTitleOrBody")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleNewsMissingTitleOrBody;
+            }
+            if (inputStr == "TitleNewsInvalidLanguage")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleNewsInvalidLanguage;
+            }
+            if (inputStr == "EmailRecipientBlacklisted")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEmailRecipientBlacklisted;
+            }
+            if (inputStr == "InvalidGameCenterAuthRequest")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidGameCenterAuthRequest;
+            }
+            if (inputStr == "GameCenterAuthenticationFailed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameCenterAuthenticationFailed;
+            }
+            if (inputStr == "CannotEnablePartiesForTitle")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCannotEnablePartiesForTitle;
+            }
+            if (inputStr == "PartyError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPartyError;
+            }
+            if (inputStr == "PartyRequests")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPartyRequests;
+            }
+            if (inputStr == "PartyNoContent")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPartyNoContent;
+            }
+            if (inputStr == "PartyBadRequest")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPartyBadRequest;
+            }
+            if (inputStr == "PartyUnauthorized")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPartyUnauthorized;
+            }
+            if (inputStr == "PartyForbidden")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPartyForbidden;
+            }
+            if (inputStr == "PartyNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPartyNotFound;
+            }
+            if (inputStr == "PartyConflict")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPartyConflict;
+            }
+            if (inputStr == "PartyInternalServerError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPartyInternalServerError;
+            }
+            if (inputStr == "PartyUnavailable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPartyUnavailable;
+            }
+            if (inputStr == "PartyTooManyRequests")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPartyTooManyRequests;
+            }
+            if (inputStr == "PushNotificationTemplateMissingName")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPushNotificationTemplateMissingName;
+            }
+            if (inputStr == "CannotEnableMultiplayerServersForTitle")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCannotEnableMultiplayerServersForTitle;
+            }
+            if (inputStr == "WriteAttemptedDuringExport")
+            {
+                output = GenericErrorCodes::GenericErrorCodesWriteAttemptedDuringExport;
+            }
+            if (inputStr == "MultiplayerServerTitleQuotaCoresExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMultiplayerServerTitleQuotaCoresExceeded;
+            }
+            if (inputStr == "AutomationRuleNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAutomationRuleNotFound;
+            }
+            if (inputStr == "EntityAPIKeyLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEntityAPIKeyLimitExceeded;
+            }
+            if (inputStr == "EntityAPIKeyNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEntityAPIKeyNotFound;
+            }
+            if (inputStr == "EntityAPIKeyOrSecretInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEntityAPIKeyOrSecretInvalid;
+            }
+            if (inputStr == "EconomyServiceUnavailable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEconomyServiceUnavailable;
+            }
+            if (inputStr == "EconomyServiceInternalError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEconomyServiceInternalError;
+            }
+            if (inputStr == "QueryRateLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesQueryRateLimitExceeded;
+            }
+            if (inputStr == "EntityAPIKeyCreationDisabledForEntity")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEntityAPIKeyCreationDisabledForEntity;
+            }
+            if (inputStr == "ForbiddenByEntityPolicy")
+            {
+                output = GenericErrorCodes::GenericErrorCodesForbiddenByEntityPolicy;
+            }
+            if (inputStr == "UpdateInventoryRateLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesUpdateInventoryRateLimitExceeded;
+            }
+            if (inputStr == "StudioCreationRateLimited")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStudioCreationRateLimited;
+            }
+            if (inputStr == "StudioCreationInProgress")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStudioCreationInProgress;
+            }
+            if (inputStr == "DuplicateStudioName")
+            {
+                output = GenericErrorCodes::GenericErrorCodesDuplicateStudioName;
+            }
+            if (inputStr == "StudioNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStudioNotFound;
+            }
+            if (inputStr == "StudioDeleted")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStudioDeleted;
+            }
+            if (inputStr == "StudioDeactivated")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStudioDeactivated;
+            }
+            if (inputStr == "StudioActivated")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStudioActivated;
+            }
+            if (inputStr == "TitleCreationRateLimited")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleCreationRateLimited;
+            }
+            if (inputStr == "TitleCreationInProgress")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleCreationInProgress;
+            }
+            if (inputStr == "DuplicateTitleName")
+            {
+                output = GenericErrorCodes::GenericErrorCodesDuplicateTitleName;
+            }
+            if (inputStr == "TitleActivationRateLimited")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleActivationRateLimited;
+            }
+            if (inputStr == "TitleActivationInProgress")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleActivationInProgress;
+            }
+            if (inputStr == "TitleDeactivated")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleDeactivated;
+            }
+            if (inputStr == "TitleActivated")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleActivated;
+            }
+            if (inputStr == "CloudScriptAzureFunctionsExecutionTimeLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCloudScriptAzureFunctionsExecutionTimeLimitExceeded;
+            }
+            if (inputStr == "CloudScriptAzureFunctionsArgumentSizeExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCloudScriptAzureFunctionsArgumentSizeExceeded;
+            }
+            if (inputStr == "CloudScriptAzureFunctionsReturnSizeExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCloudScriptAzureFunctionsReturnSizeExceeded;
+            }
+            if (inputStr == "CloudScriptAzureFunctionsHTTPRequestError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCloudScriptAzureFunctionsHTTPRequestError;
+            }
+            if (inputStr == "VirtualCurrencyBetaGetError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaGetError;
+            }
+            if (inputStr == "VirtualCurrencyBetaCreateError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaCreateError;
+            }
+            if (inputStr == "VirtualCurrencyBetaInitialDepositSaveError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaInitialDepositSaveError;
+            }
+            if (inputStr == "VirtualCurrencyBetaSaveError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaSaveError;
+            }
+            if (inputStr == "VirtualCurrencyBetaDeleteError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaDeleteError;
+            }
+            if (inputStr == "VirtualCurrencyBetaRestoreError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaRestoreError;
+            }
+            if (inputStr == "VirtualCurrencyBetaSaveConflict")
+            {
+                output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaSaveConflict;
+            }
+            if (inputStr == "VirtualCurrencyBetaUpdateError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyBetaUpdateError;
+            }
+            if (inputStr == "InsightsManagementDatabaseNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInsightsManagementDatabaseNotFound;
+            }
+            if (inputStr == "InsightsManagementOperationNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInsightsManagementOperationNotFound;
+            }
+            if (inputStr == "InsightsManagementErrorPendingOperationExists")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInsightsManagementErrorPendingOperationExists;
+            }
+            if (inputStr == "InsightsManagementSetPerformanceLevelInvalidParameter")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInsightsManagementSetPerformanceLevelInvalidParameter;
+            }
+            if (inputStr == "InsightsManagementSetStorageRetentionInvalidParameter")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInsightsManagementSetStorageRetentionInvalidParameter;
+            }
+            if (inputStr == "InsightsManagementGetStorageUsageInvalidParameter")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInsightsManagementGetStorageUsageInvalidParameter;
+            }
+            if (inputStr == "InsightsManagementGetOperationStatusInvalidParameter")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInsightsManagementGetOperationStatusInvalidParameter;
+            }
+            if (inputStr == "DuplicatePurchaseTransactionId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesDuplicatePurchaseTransactionId;
+            }
+            if (inputStr == "EvaluationModePlayerCountExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEvaluationModePlayerCountExceeded;
+            }
+            if (inputStr == "MatchmakingEntityInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
+            }
+            if (inputStr == "MatchmakingPlayerAttributesInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMatchmakingPlayerAttributesInvalid;
+            }
+            if (inputStr == "MatchmakingQueueNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMatchmakingQueueNotFound;
+            }
+            if (inputStr == "MatchmakingMatchNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMatchmakingMatchNotFound;
+            }
+            if (inputStr == "MatchmakingTicketNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMatchmakingTicketNotFound;
+            }
+            if (inputStr == "MatchmakingAlreadyJoinedTicket")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMatchmakingAlreadyJoinedTicket;
+            }
+            if (inputStr == "MatchmakingTicketAlreadyCompleted")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMatchmakingTicketAlreadyCompleted;
+            }
+            if (inputStr == "MatchmakingQueueConfigInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMatchmakingQueueConfigInvalid;
+            }
+            if (inputStr == "MatchmakingMemberProfileInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMatchmakingMemberProfileInvalid;
+            }
+            if (inputStr == "NintendoSwitchDeviceIdNotLinked")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNintendoSwitchDeviceIdNotLinked;
+            }
+            if (inputStr == "MatchmakingNotEnabled")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMatchmakingNotEnabled;
+            }
+            if (inputStr == "MatchmakingPlayerAttributesTooLarge")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMatchmakingPlayerAttributesTooLarge;
+            }
+            if (inputStr == "MatchmakingNumberOfPlayersInTicketTooLarge")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMatchmakingNumberOfPlayersInTicketTooLarge;
+            }
+            if (inputStr == "MatchmakingAttributeInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMatchmakingAttributeInvalid;
+            }
+            if (inputStr == "MatchmakingPlayerHasNotJoinedTicket")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMatchmakingPlayerHasNotJoinedTicket;
+            }
+            if (inputStr == "MatchmakingRateLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMatchmakingRateLimitExceeded;
+            }
+            if (inputStr == "MatchmakingTicketMembershipLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMatchmakingTicketMembershipLimitExceeded;
+            }
+            if (inputStr == "MatchmakingUnauthorized")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMatchmakingUnauthorized;
+            }
+            if (inputStr == "MatchmakingQueueLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMatchmakingQueueLimitExceeded;
+            }
+            if (inputStr == "MatchmakingRequestTypeMismatch")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMatchmakingRequestTypeMismatch;
+            }
+            if (inputStr == "MatchmakingBadRequest")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMatchmakingBadRequest;
+            }
+            if (inputStr == "TitleConfigNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleConfigNotFound;
+            }
+            if (inputStr == "TitleConfigUpdateConflict")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleConfigUpdateConflict;
+            }
+            if (inputStr == "TitleConfigSerializationError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleConfigSerializationError;
+            }
+            if (inputStr == "CatalogEntityInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCatalogEntityInvalid;
+            }
+            if (inputStr == "CatalogTitleIdMissing")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCatalogTitleIdMissing;
+            }
+            if (inputStr == "CatalogPlayerIdMissing")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCatalogPlayerIdMissing;
+            }
+            if (inputStr == "CatalogClientIdentityInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCatalogClientIdentityInvalid;
+            }
+            if (inputStr == "CatalogOneOrMoreFilesInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCatalogOneOrMoreFilesInvalid;
+            }
+            if (inputStr == "CatalogItemMetadataInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCatalogItemMetadataInvalid;
+            }
+            if (inputStr == "CatalogItemIdInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCatalogItemIdInvalid;
+            }
+            if (inputStr == "CatalogSearchParameterInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCatalogSearchParameterInvalid;
+            }
+            if (inputStr == "CatalogFeatureDisabled")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCatalogFeatureDisabled;
+            }
+            if (inputStr == "CatalogConfigInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCatalogConfigInvalid;
+            }
+            if (inputStr == "CatalogUnauthorized")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCatalogUnauthorized;
+            }
+            if (inputStr == "CatalogItemTypeInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCatalogItemTypeInvalid;
+            }
+            if (inputStr == "CatalogBadRequest")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCatalogBadRequest;
+            }
+            if (inputStr == "CatalogTooManyRequests")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCatalogTooManyRequests;
+            }
+            if (inputStr == "ExportInvalidStatusUpdate")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExportInvalidStatusUpdate;
+            }
+            if (inputStr == "ExportInvalidPrefix")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExportInvalidPrefix;
+            }
+            if (inputStr == "ExportBlobContainerDoesNotExist")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExportBlobContainerDoesNotExist;
+            }
+            if (inputStr == "ExportNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExportNotFound;
+            }
+            if (inputStr == "ExportCouldNotUpdate")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExportCouldNotUpdate;
+            }
+            if (inputStr == "ExportInvalidStorageType")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExportInvalidStorageType;
+            }
+            if (inputStr == "ExportAmazonBucketDoesNotExist")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExportAmazonBucketDoesNotExist;
+            }
+            if (inputStr == "ExportInvalidBlobStorage")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExportInvalidBlobStorage;
+            }
+            if (inputStr == "ExportKustoException")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExportKustoException;
+            }
+            if (inputStr == "ExportKustoConnectionFailed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExportKustoConnectionFailed;
+            }
+            if (inputStr == "ExportUnknownError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExportUnknownError;
+            }
+            if (inputStr == "ExportCantEditPendingExport")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExportCantEditPendingExport;
+            }
+            if (inputStr == "ExportLimitExports")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExportLimitExports;
+            }
+            if (inputStr == "ExportLimitEvents")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExportLimitEvents;
+            }
+            if (inputStr == "TitleNotEnabledForParty")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleNotEnabledForParty;
+            }
+            if (inputStr == "PartyVersionNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPartyVersionNotFound;
+            }
+            if (inputStr == "MultiplayerServerBuildReferencedByMatchmakingQueue")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMultiplayerServerBuildReferencedByMatchmakingQueue;
+            }
+            if (inputStr == "ExperimentationExperimentStopped")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentationExperimentStopped;
+            }
+            if (inputStr == "ExperimentationExperimentRunning")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentationExperimentRunning;
+            }
+            if (inputStr == "ExperimentationExperimentNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentationExperimentNotFound;
+            }
+            if (inputStr == "ExperimentationExperimentNeverStarted")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentationExperimentNeverStarted;
+            }
+            if (inputStr == "ExperimentationExperimentDeleted")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentationExperimentDeleted;
+            }
+            if (inputStr == "ExperimentationClientTimeout")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentationClientTimeout;
+            }
+            if (inputStr == "ExperimentationExceededVariantNameLength")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentationExceededVariantNameLength;
+            }
+            if (inputStr == "ExperimentationExceededMaxVariantLength")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentationExceededMaxVariantLength;
+            }
+            if (inputStr == "ExperimentInvalidId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentInvalidId;
+            }
+            if (inputStr == "ExperimentationNoScorecard")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentationNoScorecard;
+            }
+            if (inputStr == "MaxActionDepthExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMaxActionDepthExceeded;
+            }
+            if (inputStr == "SnapshotNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesSnapshotNotFound;
+            }
         }
 
         enum class LoginIdentityProvider
@@ -3045,49 +8904,166 @@ namespace PlayFab
 
         inline void ToJsonEnum(const LoginIdentityProvider input, Json::Value& output)
         {
-            if (input == LoginIdentityProvider::LoginIdentityProviderUnknown) output = Json::Value("Unknown");
-            if (input == LoginIdentityProvider::LoginIdentityProviderPlayFab) output = Json::Value("PlayFab");
-            if (input == LoginIdentityProvider::LoginIdentityProviderCustom) output = Json::Value("Custom");
-            if (input == LoginIdentityProvider::LoginIdentityProviderGameCenter) output = Json::Value("GameCenter");
-            if (input == LoginIdentityProvider::LoginIdentityProviderGooglePlay) output = Json::Value("GooglePlay");
-            if (input == LoginIdentityProvider::LoginIdentityProviderSteam) output = Json::Value("Steam");
-            if (input == LoginIdentityProvider::LoginIdentityProviderXBoxLive) output = Json::Value("XBoxLive");
-            if (input == LoginIdentityProvider::LoginIdentityProviderPSN) output = Json::Value("PSN");
-            if (input == LoginIdentityProvider::LoginIdentityProviderKongregate) output = Json::Value("Kongregate");
-            if (input == LoginIdentityProvider::LoginIdentityProviderFacebook) output = Json::Value("Facebook");
-            if (input == LoginIdentityProvider::LoginIdentityProviderIOSDevice) output = Json::Value("IOSDevice");
-            if (input == LoginIdentityProvider::LoginIdentityProviderAndroidDevice) output = Json::Value("AndroidDevice");
-            if (input == LoginIdentityProvider::LoginIdentityProviderTwitch) output = Json::Value("Twitch");
-            if (input == LoginIdentityProvider::LoginIdentityProviderWindowsHello) output = Json::Value("WindowsHello");
-            if (input == LoginIdentityProvider::LoginIdentityProviderGameServer) output = Json::Value("GameServer");
-            if (input == LoginIdentityProvider::LoginIdentityProviderCustomServer) output = Json::Value("CustomServer");
-            if (input == LoginIdentityProvider::LoginIdentityProviderNintendoSwitch) output = Json::Value("NintendoSwitch");
-            if (input == LoginIdentityProvider::LoginIdentityProviderFacebookInstantGames) output = Json::Value("FacebookInstantGames");
-            if (input == LoginIdentityProvider::LoginIdentityProviderOpenIdConnect) output = Json::Value("OpenIdConnect");
+            if (input == LoginIdentityProvider::LoginIdentityProviderUnknown)
+            {
+                output = Json::Value("Unknown");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderPlayFab)
+            {
+                output = Json::Value("PlayFab");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderCustom)
+            {
+                output = Json::Value("Custom");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderGameCenter)
+            {
+                output = Json::Value("GameCenter");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderGooglePlay)
+            {
+                output = Json::Value("GooglePlay");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderSteam)
+            {
+                output = Json::Value("Steam");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderXBoxLive)
+            {
+                output = Json::Value("XBoxLive");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderPSN)
+            {
+                output = Json::Value("PSN");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderKongregate)
+            {
+                output = Json::Value("Kongregate");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderFacebook)
+            {
+                output = Json::Value("Facebook");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderIOSDevice)
+            {
+                output = Json::Value("IOSDevice");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderAndroidDevice)
+            {
+                output = Json::Value("AndroidDevice");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderTwitch)
+            {
+                output = Json::Value("Twitch");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderWindowsHello)
+            {
+                output = Json::Value("WindowsHello");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderGameServer)
+            {
+                output = Json::Value("GameServer");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderCustomServer)
+            {
+                output = Json::Value("CustomServer");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderNintendoSwitch)
+            {
+                output = Json::Value("NintendoSwitch");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderFacebookInstantGames)
+            {
+                output = Json::Value("FacebookInstantGames");
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderOpenIdConnect)
+            {
+                output = Json::Value("OpenIdConnect");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, LoginIdentityProvider& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "Unknown") output = LoginIdentityProvider::LoginIdentityProviderUnknown;
-            if (inputStr == "PlayFab") output = LoginIdentityProvider::LoginIdentityProviderPlayFab;
-            if (inputStr == "Custom") output = LoginIdentityProvider::LoginIdentityProviderCustom;
-            if (inputStr == "GameCenter") output = LoginIdentityProvider::LoginIdentityProviderGameCenter;
-            if (inputStr == "GooglePlay") output = LoginIdentityProvider::LoginIdentityProviderGooglePlay;
-            if (inputStr == "Steam") output = LoginIdentityProvider::LoginIdentityProviderSteam;
-            if (inputStr == "XBoxLive") output = LoginIdentityProvider::LoginIdentityProviderXBoxLive;
-            if (inputStr == "PSN") output = LoginIdentityProvider::LoginIdentityProviderPSN;
-            if (inputStr == "Kongregate") output = LoginIdentityProvider::LoginIdentityProviderKongregate;
-            if (inputStr == "Facebook") output = LoginIdentityProvider::LoginIdentityProviderFacebook;
-            if (inputStr == "IOSDevice") output = LoginIdentityProvider::LoginIdentityProviderIOSDevice;
-            if (inputStr == "AndroidDevice") output = LoginIdentityProvider::LoginIdentityProviderAndroidDevice;
-            if (inputStr == "Twitch") output = LoginIdentityProvider::LoginIdentityProviderTwitch;
-            if (inputStr == "WindowsHello") output = LoginIdentityProvider::LoginIdentityProviderWindowsHello;
-            if (inputStr == "GameServer") output = LoginIdentityProvider::LoginIdentityProviderGameServer;
-            if (inputStr == "CustomServer") output = LoginIdentityProvider::LoginIdentityProviderCustomServer;
-            if (inputStr == "NintendoSwitch") output = LoginIdentityProvider::LoginIdentityProviderNintendoSwitch;
-            if (inputStr == "FacebookInstantGames") output = LoginIdentityProvider::LoginIdentityProviderFacebookInstantGames;
-            if (inputStr == "OpenIdConnect") output = LoginIdentityProvider::LoginIdentityProviderOpenIdConnect;
+            if (inputStr == "Unknown")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderUnknown;
+            }
+            if (inputStr == "PlayFab")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderPlayFab;
+            }
+            if (inputStr == "Custom")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderCustom;
+            }
+            if (inputStr == "GameCenter")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderGameCenter;
+            }
+            if (inputStr == "GooglePlay")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderGooglePlay;
+            }
+            if (inputStr == "Steam")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderSteam;
+            }
+            if (inputStr == "XBoxLive")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderXBoxLive;
+            }
+            if (inputStr == "PSN")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderPSN;
+            }
+            if (inputStr == "Kongregate")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderKongregate;
+            }
+            if (inputStr == "Facebook")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderFacebook;
+            }
+            if (inputStr == "IOSDevice")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderIOSDevice;
+            }
+            if (inputStr == "AndroidDevice")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderAndroidDevice;
+            }
+            if (inputStr == "Twitch")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderTwitch;
+            }
+            if (inputStr == "WindowsHello")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderWindowsHello;
+            }
+            if (inputStr == "GameServer")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderGameServer;
+            }
+            if (inputStr == "CustomServer")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderCustomServer;
+            }
+            if (inputStr == "NintendoSwitch")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderNintendoSwitch;
+            }
+            if (inputStr == "FacebookInstantGames")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderFacebookInstantGames;
+            }
+            if (inputStr == "OpenIdConnect")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderOpenIdConnect;
+            }
         }
 
         enum class PlayerConnectionState
@@ -3100,19 +9076,46 @@ namespace PlayFab
 
         inline void ToJsonEnum(const PlayerConnectionState input, Json::Value& output)
         {
-            if (input == PlayerConnectionState::PlayerConnectionStateUnassigned) output = Json::Value("Unassigned");
-            if (input == PlayerConnectionState::PlayerConnectionStateConnecting) output = Json::Value("Connecting");
-            if (input == PlayerConnectionState::PlayerConnectionStateParticipating) output = Json::Value("Participating");
-            if (input == PlayerConnectionState::PlayerConnectionStateParticipated) output = Json::Value("Participated");
+            if (input == PlayerConnectionState::PlayerConnectionStateUnassigned)
+            {
+                output = Json::Value("Unassigned");
+            }
+            if (input == PlayerConnectionState::PlayerConnectionStateConnecting)
+            {
+                output = Json::Value("Connecting");
+            }
+            if (input == PlayerConnectionState::PlayerConnectionStateParticipating)
+            {
+                output = Json::Value("Participating");
+            }
+            if (input == PlayerConnectionState::PlayerConnectionStateParticipated)
+            {
+                output = Json::Value("Participated");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, PlayerConnectionState& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "Unassigned") output = PlayerConnectionState::PlayerConnectionStateUnassigned;
-            if (inputStr == "Connecting") output = PlayerConnectionState::PlayerConnectionStateConnecting;
-            if (inputStr == "Participating") output = PlayerConnectionState::PlayerConnectionStateParticipating;
-            if (inputStr == "Participated") output = PlayerConnectionState::PlayerConnectionStateParticipated;
+            if (inputStr == "Unassigned")
+            {
+                output = PlayerConnectionState::PlayerConnectionStateUnassigned;
+            }
+            if (inputStr == "Connecting")
+            {
+                output = PlayerConnectionState::PlayerConnectionStateConnecting;
+            }
+            if (inputStr == "Participating")
+            {
+                output = PlayerConnectionState::PlayerConnectionStateParticipating;
+            }
+            if (inputStr == "Participated")
+            {
+                output = PlayerConnectionState::PlayerConnectionStateParticipated;
+            }
         }
 
         enum class PushNotificationPlatform
@@ -3123,15 +9126,30 @@ namespace PlayFab
 
         inline void ToJsonEnum(const PushNotificationPlatform input, Json::Value& output)
         {
-            if (input == PushNotificationPlatform::PushNotificationPlatformApplePushNotificationService) output = Json::Value("ApplePushNotificationService");
-            if (input == PushNotificationPlatform::PushNotificationPlatformGoogleCloudMessaging) output = Json::Value("GoogleCloudMessaging");
+            if (input == PushNotificationPlatform::PushNotificationPlatformApplePushNotificationService)
+            {
+                output = Json::Value("ApplePushNotificationService");
+            }
+            if (input == PushNotificationPlatform::PushNotificationPlatformGoogleCloudMessaging)
+            {
+                output = Json::Value("GoogleCloudMessaging");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, PushNotificationPlatform& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "ApplePushNotificationService") output = PushNotificationPlatform::PushNotificationPlatformApplePushNotificationService;
-            if (inputStr == "GoogleCloudMessaging") output = PushNotificationPlatform::PushNotificationPlatformGoogleCloudMessaging;
+            if (inputStr == "ApplePushNotificationService")
+            {
+                output = PushNotificationPlatform::PushNotificationPlatformApplePushNotificationService;
+            }
+            if (inputStr == "GoogleCloudMessaging")
+            {
+                output = PushNotificationPlatform::PushNotificationPlatformGoogleCloudMessaging;
+            }
         }
 
         enum class Region
@@ -3147,25 +9165,70 @@ namespace PlayFab
 
         inline void ToJsonEnum(const Region input, Json::Value& output)
         {
-            if (input == Region::RegionUSCentral) output = Json::Value("USCentral");
-            if (input == Region::RegionUSEast) output = Json::Value("USEast");
-            if (input == Region::RegionEUWest) output = Json::Value("EUWest");
-            if (input == Region::RegionSingapore) output = Json::Value("Singapore");
-            if (input == Region::RegionJapan) output = Json::Value("Japan");
-            if (input == Region::RegionBrazil) output = Json::Value("Brazil");
-            if (input == Region::RegionAustralia) output = Json::Value("Australia");
+            if (input == Region::RegionUSCentral)
+            {
+                output = Json::Value("USCentral");
+            }
+            if (input == Region::RegionUSEast)
+            {
+                output = Json::Value("USEast");
+            }
+            if (input == Region::RegionEUWest)
+            {
+                output = Json::Value("EUWest");
+            }
+            if (input == Region::RegionSingapore)
+            {
+                output = Json::Value("Singapore");
+            }
+            if (input == Region::RegionJapan)
+            {
+                output = Json::Value("Japan");
+            }
+            if (input == Region::RegionBrazil)
+            {
+                output = Json::Value("Brazil");
+            }
+            if (input == Region::RegionAustralia)
+            {
+                output = Json::Value("Australia");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, Region& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "USCentral") output = Region::RegionUSCentral;
-            if (inputStr == "USEast") output = Region::RegionUSEast;
-            if (inputStr == "EUWest") output = Region::RegionEUWest;
-            if (inputStr == "Singapore") output = Region::RegionSingapore;
-            if (inputStr == "Japan") output = Region::RegionJapan;
-            if (inputStr == "Brazil") output = Region::RegionBrazil;
-            if (inputStr == "Australia") output = Region::RegionAustralia;
+            if (inputStr == "USCentral")
+            {
+                output = Region::RegionUSCentral;
+            }
+            if (inputStr == "USEast")
+            {
+                output = Region::RegionUSEast;
+            }
+            if (inputStr == "EUWest")
+            {
+                output = Region::RegionEUWest;
+            }
+            if (inputStr == "Singapore")
+            {
+                output = Region::RegionSingapore;
+            }
+            if (inputStr == "Japan")
+            {
+                output = Region::RegionJapan;
+            }
+            if (inputStr == "Brazil")
+            {
+                output = Region::RegionBrazil;
+            }
+            if (inputStr == "Australia")
+            {
+                output = Region::RegionAustralia;
+            }
         }
 
         enum class ResultTableNodeType
@@ -3176,15 +9239,30 @@ namespace PlayFab
 
         inline void ToJsonEnum(const ResultTableNodeType input, Json::Value& output)
         {
-            if (input == ResultTableNodeType::ResultTableNodeTypeItemId) output = Json::Value("ItemId");
-            if (input == ResultTableNodeType::ResultTableNodeTypeTableId) output = Json::Value("TableId");
+            if (input == ResultTableNodeType::ResultTableNodeTypeItemId)
+            {
+                output = Json::Value("ItemId");
+            }
+            if (input == ResultTableNodeType::ResultTableNodeTypeTableId)
+            {
+                output = Json::Value("TableId");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, ResultTableNodeType& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "ItemId") output = ResultTableNodeType::ResultTableNodeTypeItemId;
-            if (inputStr == "TableId") output = ResultTableNodeType::ResultTableNodeTypeTableId;
+            if (inputStr == "ItemId")
+            {
+                output = ResultTableNodeType::ResultTableNodeTypeItemId;
+            }
+            if (inputStr == "TableId")
+            {
+                output = ResultTableNodeType::ResultTableNodeTypeTableId;
+            }
         }
 
         enum class SourceType
@@ -3200,25 +9278,70 @@ namespace PlayFab
 
         inline void ToJsonEnum(const SourceType input, Json::Value& output)
         {
-            if (input == SourceType::SourceTypeAdmin) output = Json::Value("Admin");
-            if (input == SourceType::SourceTypeBackEnd) output = Json::Value("BackEnd");
-            if (input == SourceType::SourceTypeGameClient) output = Json::Value("GameClient");
-            if (input == SourceType::SourceTypeGameServer) output = Json::Value("GameServer");
-            if (input == SourceType::SourceTypePartner) output = Json::Value("Partner");
-            if (input == SourceType::SourceTypeCustom) output = Json::Value("Custom");
-            if (input == SourceType::SourceTypeAPI) output = Json::Value("API");
+            if (input == SourceType::SourceTypeAdmin)
+            {
+                output = Json::Value("Admin");
+            }
+            if (input == SourceType::SourceTypeBackEnd)
+            {
+                output = Json::Value("BackEnd");
+            }
+            if (input == SourceType::SourceTypeGameClient)
+            {
+                output = Json::Value("GameClient");
+            }
+            if (input == SourceType::SourceTypeGameServer)
+            {
+                output = Json::Value("GameServer");
+            }
+            if (input == SourceType::SourceTypePartner)
+            {
+                output = Json::Value("Partner");
+            }
+            if (input == SourceType::SourceTypeCustom)
+            {
+                output = Json::Value("Custom");
+            }
+            if (input == SourceType::SourceTypeAPI)
+            {
+                output = Json::Value("API");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, SourceType& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "Admin") output = SourceType::SourceTypeAdmin;
-            if (inputStr == "BackEnd") output = SourceType::SourceTypeBackEnd;
-            if (inputStr == "GameClient") output = SourceType::SourceTypeGameClient;
-            if (inputStr == "GameServer") output = SourceType::SourceTypeGameServer;
-            if (inputStr == "Partner") output = SourceType::SourceTypePartner;
-            if (inputStr == "Custom") output = SourceType::SourceTypeCustom;
-            if (inputStr == "API") output = SourceType::SourceTypeAPI;
+            if (inputStr == "Admin")
+            {
+                output = SourceType::SourceTypeAdmin;
+            }
+            if (inputStr == "BackEnd")
+            {
+                output = SourceType::SourceTypeBackEnd;
+            }
+            if (inputStr == "GameClient")
+            {
+                output = SourceType::SourceTypeGameClient;
+            }
+            if (inputStr == "GameServer")
+            {
+                output = SourceType::SourceTypeGameServer;
+            }
+            if (inputStr == "Partner")
+            {
+                output = SourceType::SourceTypePartner;
+            }
+            if (inputStr == "Custom")
+            {
+                output = SourceType::SourceTypeCustom;
+            }
+            if (inputStr == "API")
+            {
+                output = SourceType::SourceTypeAPI;
+            }
         }
 
         enum class SubscriptionProviderStatus
@@ -3235,27 +9358,78 @@ namespace PlayFab
 
         inline void ToJsonEnum(const SubscriptionProviderStatus input, Json::Value& output)
         {
-            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusNoError) output = Json::Value("NoError");
-            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusCancelled) output = Json::Value("Cancelled");
-            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusUnknownError) output = Json::Value("UnknownError");
-            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusBillingError) output = Json::Value("BillingError");
-            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusProductUnavailable) output = Json::Value("ProductUnavailable");
-            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusCustomerDidNotAcceptPriceChange) output = Json::Value("CustomerDidNotAcceptPriceChange");
-            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusFreeTrial) output = Json::Value("FreeTrial");
-            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusPaymentPending) output = Json::Value("PaymentPending");
+            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusNoError)
+            {
+                output = Json::Value("NoError");
+            }
+            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusCancelled)
+            {
+                output = Json::Value("Cancelled");
+            }
+            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusUnknownError)
+            {
+                output = Json::Value("UnknownError");
+            }
+            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusBillingError)
+            {
+                output = Json::Value("BillingError");
+            }
+            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusProductUnavailable)
+            {
+                output = Json::Value("ProductUnavailable");
+            }
+            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusCustomerDidNotAcceptPriceChange)
+            {
+                output = Json::Value("CustomerDidNotAcceptPriceChange");
+            }
+            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusFreeTrial)
+            {
+                output = Json::Value("FreeTrial");
+            }
+            if (input == SubscriptionProviderStatus::SubscriptionProviderStatusPaymentPending)
+            {
+                output = Json::Value("PaymentPending");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, SubscriptionProviderStatus& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "NoError") output = SubscriptionProviderStatus::SubscriptionProviderStatusNoError;
-            if (inputStr == "Cancelled") output = SubscriptionProviderStatus::SubscriptionProviderStatusCancelled;
-            if (inputStr == "UnknownError") output = SubscriptionProviderStatus::SubscriptionProviderStatusUnknownError;
-            if (inputStr == "BillingError") output = SubscriptionProviderStatus::SubscriptionProviderStatusBillingError;
-            if (inputStr == "ProductUnavailable") output = SubscriptionProviderStatus::SubscriptionProviderStatusProductUnavailable;
-            if (inputStr == "CustomerDidNotAcceptPriceChange") output = SubscriptionProviderStatus::SubscriptionProviderStatusCustomerDidNotAcceptPriceChange;
-            if (inputStr == "FreeTrial") output = SubscriptionProviderStatus::SubscriptionProviderStatusFreeTrial;
-            if (inputStr == "PaymentPending") output = SubscriptionProviderStatus::SubscriptionProviderStatusPaymentPending;
+            if (inputStr == "NoError")
+            {
+                output = SubscriptionProviderStatus::SubscriptionProviderStatusNoError;
+            }
+            if (inputStr == "Cancelled")
+            {
+                output = SubscriptionProviderStatus::SubscriptionProviderStatusCancelled;
+            }
+            if (inputStr == "UnknownError")
+            {
+                output = SubscriptionProviderStatus::SubscriptionProviderStatusUnknownError;
+            }
+            if (inputStr == "BillingError")
+            {
+                output = SubscriptionProviderStatus::SubscriptionProviderStatusBillingError;
+            }
+            if (inputStr == "ProductUnavailable")
+            {
+                output = SubscriptionProviderStatus::SubscriptionProviderStatusProductUnavailable;
+            }
+            if (inputStr == "CustomerDidNotAcceptPriceChange")
+            {
+                output = SubscriptionProviderStatus::SubscriptionProviderStatusCustomerDidNotAcceptPriceChange;
+            }
+            if (inputStr == "FreeTrial")
+            {
+                output = SubscriptionProviderStatus::SubscriptionProviderStatusFreeTrial;
+            }
+            if (inputStr == "PaymentPending")
+            {
+                output = SubscriptionProviderStatus::SubscriptionProviderStatusPaymentPending;
+            }
         }
 
         enum class TitleActivationStatus
@@ -3269,21 +9443,54 @@ namespace PlayFab
 
         inline void ToJsonEnum(const TitleActivationStatus input, Json::Value& output)
         {
-            if (input == TitleActivationStatus::TitleActivationStatusNone) output = Json::Value("None");
-            if (input == TitleActivationStatus::TitleActivationStatusActivatedTitleKey) output = Json::Value("ActivatedTitleKey");
-            if (input == TitleActivationStatus::TitleActivationStatusPendingSteam) output = Json::Value("PendingSteam");
-            if (input == TitleActivationStatus::TitleActivationStatusActivatedSteam) output = Json::Value("ActivatedSteam");
-            if (input == TitleActivationStatus::TitleActivationStatusRevokedSteam) output = Json::Value("RevokedSteam");
+            if (input == TitleActivationStatus::TitleActivationStatusNone)
+            {
+                output = Json::Value("None");
+            }
+            if (input == TitleActivationStatus::TitleActivationStatusActivatedTitleKey)
+            {
+                output = Json::Value("ActivatedTitleKey");
+            }
+            if (input == TitleActivationStatus::TitleActivationStatusPendingSteam)
+            {
+                output = Json::Value("PendingSteam");
+            }
+            if (input == TitleActivationStatus::TitleActivationStatusActivatedSteam)
+            {
+                output = Json::Value("ActivatedSteam");
+            }
+            if (input == TitleActivationStatus::TitleActivationStatusRevokedSteam)
+            {
+                output = Json::Value("RevokedSteam");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, TitleActivationStatus& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "None") output = TitleActivationStatus::TitleActivationStatusNone;
-            if (inputStr == "ActivatedTitleKey") output = TitleActivationStatus::TitleActivationStatusActivatedTitleKey;
-            if (inputStr == "PendingSteam") output = TitleActivationStatus::TitleActivationStatusPendingSteam;
-            if (inputStr == "ActivatedSteam") output = TitleActivationStatus::TitleActivationStatusActivatedSteam;
-            if (inputStr == "RevokedSteam") output = TitleActivationStatus::TitleActivationStatusRevokedSteam;
+            if (inputStr == "None")
+            {
+                output = TitleActivationStatus::TitleActivationStatusNone;
+            }
+            if (inputStr == "ActivatedTitleKey")
+            {
+                output = TitleActivationStatus::TitleActivationStatusActivatedTitleKey;
+            }
+            if (inputStr == "PendingSteam")
+            {
+                output = TitleActivationStatus::TitleActivationStatusPendingSteam;
+            }
+            if (inputStr == "ActivatedSteam")
+            {
+                output = TitleActivationStatus::TitleActivationStatusActivatedSteam;
+            }
+            if (inputStr == "RevokedSteam")
+            {
+                output = TitleActivationStatus::TitleActivationStatusRevokedSteam;
+            }
         }
 
         enum class UserDataPermission
@@ -3294,15 +9501,30 @@ namespace PlayFab
 
         inline void ToJsonEnum(const UserDataPermission input, Json::Value& output)
         {
-            if (input == UserDataPermission::UserDataPermissionPrivate) output = Json::Value("Private");
-            if (input == UserDataPermission::UserDataPermissionPublic) output = Json::Value("Public");
+            if (input == UserDataPermission::UserDataPermissionPrivate)
+            {
+                output = Json::Value("Private");
+            }
+            if (input == UserDataPermission::UserDataPermissionPublic)
+            {
+                output = Json::Value("Public");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, UserDataPermission& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "Private") output = UserDataPermission::UserDataPermissionPrivate;
-            if (inputStr == "Public") output = UserDataPermission::UserDataPermissionPublic;
+            if (inputStr == "Private")
+            {
+                output = UserDataPermission::UserDataPermissionPrivate;
+            }
+            if (inputStr == "Public")
+            {
+                output = UserDataPermission::UserDataPermissionPublic;
+            }
         }
 
         enum class UserOrigination
@@ -3333,55 +9555,190 @@ namespace PlayFab
 
         inline void ToJsonEnum(const UserOrigination input, Json::Value& output)
         {
-            if (input == UserOrigination::UserOriginationOrganic) output = Json::Value("Organic");
-            if (input == UserOrigination::UserOriginationSteam) output = Json::Value("Steam");
-            if (input == UserOrigination::UserOriginationGoogle) output = Json::Value("Google");
-            if (input == UserOrigination::UserOriginationAmazon) output = Json::Value("Amazon");
-            if (input == UserOrigination::UserOriginationFacebook) output = Json::Value("Facebook");
-            if (input == UserOrigination::UserOriginationKongregate) output = Json::Value("Kongregate");
-            if (input == UserOrigination::UserOriginationGamersFirst) output = Json::Value("GamersFirst");
-            if (input == UserOrigination::UserOriginationUnknown) output = Json::Value("Unknown");
-            if (input == UserOrigination::UserOriginationIOS) output = Json::Value("IOS");
-            if (input == UserOrigination::UserOriginationLoadTest) output = Json::Value("LoadTest");
-            if (input == UserOrigination::UserOriginationAndroid) output = Json::Value("Android");
-            if (input == UserOrigination::UserOriginationPSN) output = Json::Value("PSN");
-            if (input == UserOrigination::UserOriginationGameCenter) output = Json::Value("GameCenter");
-            if (input == UserOrigination::UserOriginationCustomId) output = Json::Value("CustomId");
-            if (input == UserOrigination::UserOriginationXboxLive) output = Json::Value("XboxLive");
-            if (input == UserOrigination::UserOriginationParse) output = Json::Value("Parse");
-            if (input == UserOrigination::UserOriginationTwitch) output = Json::Value("Twitch");
-            if (input == UserOrigination::UserOriginationWindowsHello) output = Json::Value("WindowsHello");
-            if (input == UserOrigination::UserOriginationServerCustomId) output = Json::Value("ServerCustomId");
-            if (input == UserOrigination::UserOriginationNintendoSwitchDeviceId) output = Json::Value("NintendoSwitchDeviceId");
-            if (input == UserOrigination::UserOriginationFacebookInstantGamesId) output = Json::Value("FacebookInstantGamesId");
-            if (input == UserOrigination::UserOriginationOpenIdConnect) output = Json::Value("OpenIdConnect");
+            if (input == UserOrigination::UserOriginationOrganic)
+            {
+                output = Json::Value("Organic");
+            }
+            if (input == UserOrigination::UserOriginationSteam)
+            {
+                output = Json::Value("Steam");
+            }
+            if (input == UserOrigination::UserOriginationGoogle)
+            {
+                output = Json::Value("Google");
+            }
+            if (input == UserOrigination::UserOriginationAmazon)
+            {
+                output = Json::Value("Amazon");
+            }
+            if (input == UserOrigination::UserOriginationFacebook)
+            {
+                output = Json::Value("Facebook");
+            }
+            if (input == UserOrigination::UserOriginationKongregate)
+            {
+                output = Json::Value("Kongregate");
+            }
+            if (input == UserOrigination::UserOriginationGamersFirst)
+            {
+                output = Json::Value("GamersFirst");
+            }
+            if (input == UserOrigination::UserOriginationUnknown)
+            {
+                output = Json::Value("Unknown");
+            }
+            if (input == UserOrigination::UserOriginationIOS)
+            {
+                output = Json::Value("IOS");
+            }
+            if (input == UserOrigination::UserOriginationLoadTest)
+            {
+                output = Json::Value("LoadTest");
+            }
+            if (input == UserOrigination::UserOriginationAndroid)
+            {
+                output = Json::Value("Android");
+            }
+            if (input == UserOrigination::UserOriginationPSN)
+            {
+                output = Json::Value("PSN");
+            }
+            if (input == UserOrigination::UserOriginationGameCenter)
+            {
+                output = Json::Value("GameCenter");
+            }
+            if (input == UserOrigination::UserOriginationCustomId)
+            {
+                output = Json::Value("CustomId");
+            }
+            if (input == UserOrigination::UserOriginationXboxLive)
+            {
+                output = Json::Value("XboxLive");
+            }
+            if (input == UserOrigination::UserOriginationParse)
+            {
+                output = Json::Value("Parse");
+            }
+            if (input == UserOrigination::UserOriginationTwitch)
+            {
+                output = Json::Value("Twitch");
+            }
+            if (input == UserOrigination::UserOriginationWindowsHello)
+            {
+                output = Json::Value("WindowsHello");
+            }
+            if (input == UserOrigination::UserOriginationServerCustomId)
+            {
+                output = Json::Value("ServerCustomId");
+            }
+            if (input == UserOrigination::UserOriginationNintendoSwitchDeviceId)
+            {
+                output = Json::Value("NintendoSwitchDeviceId");
+            }
+            if (input == UserOrigination::UserOriginationFacebookInstantGamesId)
+            {
+                output = Json::Value("FacebookInstantGamesId");
+            }
+            if (input == UserOrigination::UserOriginationOpenIdConnect)
+            {
+                output = Json::Value("OpenIdConnect");
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, UserOrigination& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "Organic") output = UserOrigination::UserOriginationOrganic;
-            if (inputStr == "Steam") output = UserOrigination::UserOriginationSteam;
-            if (inputStr == "Google") output = UserOrigination::UserOriginationGoogle;
-            if (inputStr == "Amazon") output = UserOrigination::UserOriginationAmazon;
-            if (inputStr == "Facebook") output = UserOrigination::UserOriginationFacebook;
-            if (inputStr == "Kongregate") output = UserOrigination::UserOriginationKongregate;
-            if (inputStr == "GamersFirst") output = UserOrigination::UserOriginationGamersFirst;
-            if (inputStr == "Unknown") output = UserOrigination::UserOriginationUnknown;
-            if (inputStr == "IOS") output = UserOrigination::UserOriginationIOS;
-            if (inputStr == "LoadTest") output = UserOrigination::UserOriginationLoadTest;
-            if (inputStr == "Android") output = UserOrigination::UserOriginationAndroid;
-            if (inputStr == "PSN") output = UserOrigination::UserOriginationPSN;
-            if (inputStr == "GameCenter") output = UserOrigination::UserOriginationGameCenter;
-            if (inputStr == "CustomId") output = UserOrigination::UserOriginationCustomId;
-            if (inputStr == "XboxLive") output = UserOrigination::UserOriginationXboxLive;
-            if (inputStr == "Parse") output = UserOrigination::UserOriginationParse;
-            if (inputStr == "Twitch") output = UserOrigination::UserOriginationTwitch;
-            if (inputStr == "WindowsHello") output = UserOrigination::UserOriginationWindowsHello;
-            if (inputStr == "ServerCustomId") output = UserOrigination::UserOriginationServerCustomId;
-            if (inputStr == "NintendoSwitchDeviceId") output = UserOrigination::UserOriginationNintendoSwitchDeviceId;
-            if (inputStr == "FacebookInstantGamesId") output = UserOrigination::UserOriginationFacebookInstantGamesId;
-            if (inputStr == "OpenIdConnect") output = UserOrigination::UserOriginationOpenIdConnect;
+            if (inputStr == "Organic")
+            {
+                output = UserOrigination::UserOriginationOrganic;
+            }
+            if (inputStr == "Steam")
+            {
+                output = UserOrigination::UserOriginationSteam;
+            }
+            if (inputStr == "Google")
+            {
+                output = UserOrigination::UserOriginationGoogle;
+            }
+            if (inputStr == "Amazon")
+            {
+                output = UserOrigination::UserOriginationAmazon;
+            }
+            if (inputStr == "Facebook")
+            {
+                output = UserOrigination::UserOriginationFacebook;
+            }
+            if (inputStr == "Kongregate")
+            {
+                output = UserOrigination::UserOriginationKongregate;
+            }
+            if (inputStr == "GamersFirst")
+            {
+                output = UserOrigination::UserOriginationGamersFirst;
+            }
+            if (inputStr == "Unknown")
+            {
+                output = UserOrigination::UserOriginationUnknown;
+            }
+            if (inputStr == "IOS")
+            {
+                output = UserOrigination::UserOriginationIOS;
+            }
+            if (inputStr == "LoadTest")
+            {
+                output = UserOrigination::UserOriginationLoadTest;
+            }
+            if (inputStr == "Android")
+            {
+                output = UserOrigination::UserOriginationAndroid;
+            }
+            if (inputStr == "PSN")
+            {
+                output = UserOrigination::UserOriginationPSN;
+            }
+            if (inputStr == "GameCenter")
+            {
+                output = UserOrigination::UserOriginationGameCenter;
+            }
+            if (inputStr == "CustomId")
+            {
+                output = UserOrigination::UserOriginationCustomId;
+            }
+            if (inputStr == "XboxLive")
+            {
+                output = UserOrigination::UserOriginationXboxLive;
+            }
+            if (inputStr == "Parse")
+            {
+                output = UserOrigination::UserOriginationParse;
+            }
+            if (inputStr == "Twitch")
+            {
+                output = UserOrigination::UserOriginationTwitch;
+            }
+            if (inputStr == "WindowsHello")
+            {
+                output = UserOrigination::UserOriginationWindowsHello;
+            }
+            if (inputStr == "ServerCustomId")
+            {
+                output = UserOrigination::UserOriginationServerCustomId;
+            }
+            if (inputStr == "NintendoSwitchDeviceId")
+            {
+                output = UserOrigination::UserOriginationNintendoSwitchDeviceId;
+            }
+            if (inputStr == "FacebookInstantGamesId")
+            {
+                output = UserOrigination::UserOriginationFacebookInstantGamesId;
+            }
+            if (inputStr == "OpenIdConnect")
+            {
+                output = UserOrigination::UserOriginationOpenIdConnect;
+            }
         }
 
         // Server Classes

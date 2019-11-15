@@ -106,8 +106,8 @@ namespace PlayFab
             }
 
             // pipeline failed to intake the event, create a response
-            const auto& playFabEmitRequest = std::dynamic_pointer_cast<const PlayFabEmitEventRequest>(request);
-            auto playFabEmitEventResponse = std::shared_ptr<PlayFabEmitEventResponse>(new PlayFabEmitEventResponse());
+            std::shared_ptr<const PlayFabEmitEventRequest> playFabEmitRequest = std::dynamic_pointer_cast<const PlayFabEmitEventRequest>(request);
+            auto playFabEmitEventResponse = std::make_shared<PlayFabEmitEventResponse>();
             playFabEmitEventResponse->emitEventResult = emitResult;
 
             // call an emit event callback
@@ -235,7 +235,7 @@ namespace PlayFab
 
         this->batch.clear(); // batch vector will be reused
         this->batch.reserve(this->settings->maximalNumberOfItemsInBatch);
-        if(this->settings->emitType == PlayFabEventPipelineType::PlayFabPlayStream)
+        if (this->settings->emitType == PlayFabEventPipelineType::PlayFabPlayStream)
         {
             // call Events API to send the batch
             PlayFabEventsAPI::WriteEvents(
@@ -260,7 +260,7 @@ namespace PlayFab
         try
         {
             // batch was successfully sent out, find it in the batch tracking map using customData pointer as a key
-            auto foundBatchIterator = this->batchesInFlight.find(customData);
+            const auto foundBatchIterator = this->batchesInFlight.find(customData);
             if (foundBatchIterator == this->batchesInFlight.end())
             {
                 LOG_PIPELINE("Untracked batch was returned to EventsAPI.WriteEvents callback"); // normally this never happens
@@ -272,10 +272,10 @@ namespace PlayFab
                 // call individual emit event callbacks
                 for (const auto& eventEmitRequest : *requestBatchPtr)
                 {
-                    const auto& playFabEmitRequest = std::dynamic_pointer_cast<const PlayFabEmitEventRequest>(eventEmitRequest);
+                    std::shared_ptr<const PlayFabEmitEventRequest> playFabEmitRequest = std::dynamic_pointer_cast<const PlayFabEmitEventRequest>(eventEmitRequest);
                     auto playFabEmitEventResponse = std::shared_ptr<PlayFabEmitEventResponse>(new PlayFabEmitEventResponse());
                     playFabEmitEventResponse->emitEventResult = EmitEventResult::Success;
-                    auto playFabError = std::shared_ptr<PlayFabError>(new PlayFabError());
+                    auto playFabError = std::make_shared<PlayFabError>();
                     playFabError->HttpCode = 200;
                     playFabError->ErrorCode = PlayFabErrorCode::PlayFabErrorSuccess;
                     playFabEmitEventResponse->playFabError = playFabError;
@@ -302,7 +302,7 @@ namespace PlayFab
         try
         {
             // batch wasn't sent out due to an error, find it in the batch tracking map using customData pointer as a key
-            auto foundBatchIterator = this->batchesInFlight.find(customData);
+            const auto foundBatchIterator = this->batchesInFlight.find(customData);
             if (foundBatchIterator == this->batchesInFlight.end())
             {
                 LOG_PIPELINE("Untracked batch was returned to EventsAPI.WriteEvents callback"); // normally this never happens
@@ -314,7 +314,7 @@ namespace PlayFab
                 // call individual emit event callbacks
                 for (const auto& eventEmitRequest : *requestBatchPtr)
                 {
-                    const auto& playFabEmitRequest = std::dynamic_pointer_cast<const PlayFabEmitEventRequest>(eventEmitRequest);
+                    std::shared_ptr<const PlayFabEmitEventRequest> playFabEmitRequest = std::dynamic_pointer_cast<const PlayFabEmitEventRequest>(eventEmitRequest);
                     auto playFabEmitEventResponse = std::shared_ptr<PlayFabEmitEventResponse>(new PlayFabEmitEventResponse());
                     playFabEmitEventResponse->emitEventResult = EmitEventResult::Success;
                     playFabEmitEventResponse->playFabError = std::shared_ptr<PlayFabError>(new PlayFabError(error));
@@ -339,12 +339,12 @@ namespace PlayFab
     {
         const auto& playFabEmitRequest = std::dynamic_pointer_cast<const PlayFabEmitEventRequest>(request);
 
-        if(playFabEmitRequest->callback != nullptr)
+        if (playFabEmitRequest->callback != nullptr)
         {
             playFabEmitRequest->callback(playFabEmitRequest->event, std::move(response));
         }
 
-        if(playFabEmitRequest->stdCallback != nullptr)
+        if (playFabEmitRequest->stdCallback != nullptr)
         {
             playFabEmitRequest->stdCallback(playFabEmitRequest->event, std::move(response));
         }
