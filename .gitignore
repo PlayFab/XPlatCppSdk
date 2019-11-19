@@ -329,5 +329,10 @@ build/Xbox/TestXboxApp/[Dd]ebug
 build/Xbox/TestXboxApp/[Pp]rofile
 build/Xbox/TestXboxApp/[Rr]elease
 
+# Mac/iOS build temporary files
+.DS_Store
+Build/
+External/
+
 # Test title data
 **/*testTitleData.json
