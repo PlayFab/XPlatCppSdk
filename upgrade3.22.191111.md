@@ -1,4 +1,4 @@
-# Upgrade guide for 3.21.191029 -> 3.22.191111
+# Upgrade guide for 3.21.191029 -> 3.22.191218
 
 The 3.22 release of XPlatCppSdk will contain a some breaking changes, detailed later in the document. The primary goal for these changes is an overhaul and bugfix for the instance APIs, which allow everything from split-screen simultaneous multiplayer to multi-title access (primary for dev-test-live scenarios). The un-fixed implementation of those instances would allow instances associated with player2 to accidentally access data for player1, without any indication that the mix-up had taken place. This change strongly reinforces the state-isolation between API-instances, and ensures that cross-data contamination between players will not occur.
 
