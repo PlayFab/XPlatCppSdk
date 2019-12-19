@@ -36,11 +36,11 @@ namespace PlayFab
     {
     }
 
-    PlayFabEventPipeline::PlayFabEventPipeline(std::shared_ptr<PlayFabEventPipelineSettings> settings) :
+    PlayFabEventPipeline::PlayFabEventPipeline(const std::shared_ptr<PlayFabEventPipelineSettings>& settings) :
         buffer(settings->bufferSize),
         isWorkerThreadRunning(false)
     {
-        this->settings = std::move(settings);
+        this->settings = settings;
         this->batch.reserve(this->settings->maximalNumberOfItemsInBatch);
         this->batchesInFlight.reserve(this->settings->maximalNumberOfBatchesInFlight);
         this->Start();
@@ -81,34 +81,57 @@ namespace PlayFab
             // put event into buffer
             switch (this->buffer.TryPut(request))
             {
-                case Result::Success:
-                    return;
+            case Result::Success:
+                return;
 
-                case Result::Overflow:
-                {
-                    emitResult = EmitEventResult::Overflow;
-                    LOG_PIPELINE("Buffer overflow");
-                }
-                break;
+            case Result::Overflow:
+            {
+                emitResult = EmitEventResult::Overflow;
+                LOG_PIPELINE("Buffer overflow");
+            }
+            break;
 
-                case Result::Disabled:
-                {
-                    emitResult = EmitEventResult::Disabled;
-                }
-                break;
+            case Result::Disabled:
+            {
+                emitResult = EmitEventResult::Disabled;
+            }
+            break;
 
-                default:
-                {
-                    emitResult = EmitEventResult::NotSupported;
-                    LOG_PIPELINE("TryPut returned an unknown type of result");
-                }
-                break;
+            default:
+            {
+                emitResult = EmitEventResult::NotSupported;
+                LOG_PIPELINE("TryPut returned an unknown type of result");
+            }
+            break;
             }
 
             // pipeline failed to intake the event, create a response
-            const auto& playFabEmitRequest = std::dynamic_pointer_cast<const PlayFabEmitEventRequest>(request);
-            auto playFabEmitEventResponse = std::shared_ptr<PlayFabEmitEventResponse>(new PlayFabEmitEventResponse());
+            std::shared_ptr<const PlayFabEmitEventRequest> playFabEmitRequest = std::dynamic_pointer_cast<const PlayFabEmitEventRequest>(request);
+            auto playFabEmitEventResponse = std::make_shared<PlayFabEmitEventResponse>();
             playFabEmitEventResponse->emitEventResult = emitResult;
+
+            std::shared_ptr<PlayFabError> emitEventError = std::make_shared<PlayFabError>();
+
+            emitEventError->ErrorName = "PlayFabEventPipeline IntakeEvent Error";
+            emitEventError->ErrorMessage = "PlayFabEventPipeline did not accept the event. Please see ErrorDetails for more information.";
+
+            emitEventError->HttpCode = 0;
+            emitEventError->HttpStatus = "None";
+
+            if (emitResult == EmitEventResult::Overflow)
+            {
+                emitEventError->ErrorDetails = "PlayFabEventPipeline was unable to take the event due to memory limits. Please wait for batching to complete before retrying or increase the PlayFabEventBuffer size (see its constructor)";
+            }
+            else if (emitResult == EmitEventResult::Disabled)
+            {
+                emitEventError->ErrorDetails = "PlayFabEventPipeline was unable to take the event due to being disabled. Please enable the pipeline before attempting to add events.";
+            }
+            else
+            {
+                emitEventError->ErrorDetails = "PlayFabEventPipeline was unable to take the event due to an unknown reason.";
+            }
+
+            playFabEmitEventResponse->playFabError = emitEventError;
 
             // call an emit event callback
             CallbackRequest(playFabEmitRequest, std::move(playFabEmitEventResponse));
@@ -132,7 +155,7 @@ namespace PlayFab
         using clock = std::chrono::steady_clock;
         using Result = PlayFabEventBuffer::EventConsumingResult;
         std::shared_ptr<const IPlayFabEmitEventRequest> request;
-        size_t batchCounter = 0; // used to track uniqueness of batches in the map
+        size_t batchCounter = 1; // used to track uniqueness of batches in the map
         std::chrono::steady_clock::time_point momentBatchStarted; // used to track when a currently assembled batch got its first event
 
         while (this->isWorkerThreadRunning)
@@ -150,30 +173,30 @@ namespace PlayFab
 
                 switch (this->buffer.TryTake(request))
                 {
-                    case Result::Success:
+                case Result::Success:
+                {
+                    // add an event to batch
+                    this->batch.push_back(std::move(request));
+
+                    // if batch is full
+                    if (this->batch.size() >= this->settings->maximalNumberOfItemsInBatch)
                     {
-                        // add an event to batch
-                        this->batch.push_back(std::move(request));
-
-                        // if batch is full
-                        if (this->batch.size() >= this->settings->maximalNumberOfItemsInBatch)
-                        {
-                            this->SendBatch(batchCounter);
-                        }
-                        else if (this->batch.size() == 1)
-                        {
-                            // if it is the first event in an incomplete batch then set the batch creation moment
-                            momentBatchStarted = clock::now();
-                        }
-
-                        continue; // immediately check if there is next event in buffer
+                        this->SendBatch(batchCounter);
                     }
-                    break;
+                    else if (this->batch.size() == 1)
+                    {
+                        // if it is the first event in an incomplete batch then set the batch creation moment
+                        momentBatchStarted = clock::now();
+                    }
 
-                    case Result::Disabled:
-                    case Result::Empty:
-                    default:
-                        break;
+                    continue; // immediately check if there is next event in buffer
+                }
+                break;
+
+                case Result::Disabled:
+                case Result::Empty:
+                default:
+                    break;
                 }
 
                 // if batch was started
@@ -206,7 +229,7 @@ namespace PlayFab
                     }
                 } // UNLOCK userCallbackMutex
             }
-            catch(...)
+            catch (...)
             {
                 LOG_PIPELINE("A non std::exception was caught in PlayFabEventPipeline::WorkerThread method");
             }
@@ -235,7 +258,7 @@ namespace PlayFab
 
         this->batch.clear(); // batch vector will be reused
         this->batch.reserve(this->settings->maximalNumberOfItemsInBatch);
-        if(this->settings->emitType == PlayFabEventPipelineType::PlayFabPlayStream)
+        if (this->settings->emitType == PlayFabEventPipelineType::PlayFabPlayStream)
         {
             // call Events API to send the batch
             PlayFabEventsAPI::WriteEvents(
@@ -260,7 +283,7 @@ namespace PlayFab
         try
         {
             // batch was successfully sent out, find it in the batch tracking map using customData pointer as a key
-            auto foundBatchIterator = this->batchesInFlight.find(customData);
+            const auto foundBatchIterator = this->batchesInFlight.find(customData);
             if (foundBatchIterator == this->batchesInFlight.end())
             {
                 LOG_PIPELINE("Untracked batch was returned to EventsAPI.WriteEvents callback"); // normally this never happens
@@ -272,10 +295,10 @@ namespace PlayFab
                 // call individual emit event callbacks
                 for (const auto& eventEmitRequest : *requestBatchPtr)
                 {
-                    const auto& playFabEmitRequest = std::dynamic_pointer_cast<const PlayFabEmitEventRequest>(eventEmitRequest);
+                    std::shared_ptr<const PlayFabEmitEventRequest> playFabEmitRequest = std::dynamic_pointer_cast<const PlayFabEmitEventRequest>(eventEmitRequest);
                     auto playFabEmitEventResponse = std::shared_ptr<PlayFabEmitEventResponse>(new PlayFabEmitEventResponse());
                     playFabEmitEventResponse->emitEventResult = EmitEventResult::Success;
-                    auto playFabError = std::shared_ptr<PlayFabError>(new PlayFabError());
+                    auto playFabError = std::make_shared<PlayFabError>();
                     playFabError->HttpCode = 200;
                     playFabError->ErrorCode = PlayFabErrorCode::PlayFabErrorSuccess;
                     playFabEmitEventResponse->playFabError = playFabError;
@@ -302,7 +325,7 @@ namespace PlayFab
         try
         {
             // batch wasn't sent out due to an error, find it in the batch tracking map using customData pointer as a key
-            auto foundBatchIterator = this->batchesInFlight.find(customData);
+            const auto foundBatchIterator = this->batchesInFlight.find(customData);
             if (foundBatchIterator == this->batchesInFlight.end())
             {
                 LOG_PIPELINE("Untracked batch was returned to EventsAPI.WriteEvents callback"); // normally this never happens
@@ -314,7 +337,7 @@ namespace PlayFab
                 // call individual emit event callbacks
                 for (const auto& eventEmitRequest : *requestBatchPtr)
                 {
-                    const auto& playFabEmitRequest = std::dynamic_pointer_cast<const PlayFabEmitEventRequest>(eventEmitRequest);
+                    std::shared_ptr<const PlayFabEmitEventRequest> playFabEmitRequest = std::dynamic_pointer_cast<const PlayFabEmitEventRequest>(eventEmitRequest);
                     auto playFabEmitEventResponse = std::shared_ptr<PlayFabEmitEventResponse>(new PlayFabEmitEventResponse());
                     playFabEmitEventResponse->emitEventResult = EmitEventResult::Success;
                     playFabEmitEventResponse->playFabError = std::shared_ptr<PlayFabError>(new PlayFabError(error));
@@ -339,14 +362,14 @@ namespace PlayFab
     {
         const auto& playFabEmitRequest = std::dynamic_pointer_cast<const PlayFabEmitEventRequest>(request);
 
-        if(playFabEmitRequest->callback != nullptr)
+        if (playFabEmitRequest->callback != nullptr)
         {
-            playFabEmitRequest->callback(playFabEmitRequest->event, std::move(response));
+            playFabEmitRequest->callback(playFabEmitRequest->event, response);
         }
 
-        if(playFabEmitRequest->stdCallback != nullptr)
+        if (playFabEmitRequest->stdCallback != nullptr)
         {
-            playFabEmitRequest->stdCallback(playFabEmitRequest->event, std::move(response));
+            playFabEmitRequest->stdCallback(playFabEmitRequest->event, response);
         }
     }
 }

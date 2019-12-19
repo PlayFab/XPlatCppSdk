@@ -19,17 +19,44 @@ namespace PlayFab
 
         inline void ToJsonEnum(const CloudScriptRevisionOption input, Json::Value& output)
         {
-            if (input == CloudScriptRevisionOption::CloudScriptRevisionOptionLive) output = Json::Value("Live");
-            if (input == CloudScriptRevisionOption::CloudScriptRevisionOptionLatest) output = Json::Value("Latest");
-            if (input == CloudScriptRevisionOption::CloudScriptRevisionOptionSpecific) output = Json::Value("Specific");
+            if (input == CloudScriptRevisionOption::CloudScriptRevisionOptionLive)
+            {
+                output = Json::Value("Live");
+                return;
+            }
+            if (input == CloudScriptRevisionOption::CloudScriptRevisionOptionLatest)
+            {
+                output = Json::Value("Latest");
+                return;
+            }
+            if (input == CloudScriptRevisionOption::CloudScriptRevisionOptionSpecific)
+            {
+                output = Json::Value("Specific");
+                return;
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, CloudScriptRevisionOption& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "Live") output = CloudScriptRevisionOption::CloudScriptRevisionOptionLive;
-            if (inputStr == "Latest") output = CloudScriptRevisionOption::CloudScriptRevisionOptionLatest;
-            if (inputStr == "Specific") output = CloudScriptRevisionOption::CloudScriptRevisionOptionSpecific;
+            if (inputStr == "Live")
+            {
+                output = CloudScriptRevisionOption::CloudScriptRevisionOptionLive;
+                return;
+            }
+            if (inputStr == "Latest")
+            {
+                output = CloudScriptRevisionOption::CloudScriptRevisionOptionLatest;
+                return;
+            }
+            if (inputStr == "Specific")
+            {
+                output = CloudScriptRevisionOption::CloudScriptRevisionOptionSpecific;
+                return;
+            }
         }
 
         // CloudScript Classes

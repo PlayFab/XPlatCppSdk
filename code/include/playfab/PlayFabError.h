@@ -5,7 +5,7 @@
 
 namespace PlayFab
 {
-    enum  class PlayFabErrorCode
+    enum class PlayFabErrorCode
     {
         PlayFabErrorHostnameNotFound = 1,
         PlayFabErrorConnectionTimeout,
@@ -491,6 +491,11 @@ namespace PlayFab
         PlayFabErrorInsightsManagementGetOperationStatusInvalidParameter = 1488,
         PlayFabErrorDuplicatePurchaseTransactionId = 1489,
         PlayFabErrorEvaluationModePlayerCountExceeded = 1490,
+        PlayFabErrorGetPlayersInSegmentRateLimitExceeded = 1491,
+        PlayFabErrorCloudScriptFunctionNameSizeExceeded = 1492,
+        PlayFabErrorInsightsManagementTitleInEvaluationMode = 1493,
+        PlayFabErrorCloudScriptAzureFunctionsQueueRequestError = 1494,
+        PlayFabErrorEvaluationModeTitleCountExceeded = 1495,
         PlayFabErrorMatchmakingEntityInvalid = 2001,
         PlayFabErrorMatchmakingPlayerAttributesInvalid = 2002,
         PlayFabErrorMatchmakingQueueNotFound = 2016,
@@ -543,6 +548,10 @@ namespace PlayFab
         PlayFabErrorExportCantEditPendingExport = 5014,
         PlayFabErrorExportLimitExports = 5015,
         PlayFabErrorExportLimitEvents = 5016,
+        PlayFabErrorExportInvalidPartitionStatusModification = 5017,
+        PlayFabErrorExportCouldNotCreate = 5018,
+        PlayFabErrorExportNoBackingDatabaseFound = 5019,
+        PlayFabErrorExportCouldNotDelete = 5020,
         PlayFabErrorTitleNotEnabledForParty = 6000,
         PlayFabErrorPartyVersionNotFound = 6001,
         PlayFabErrorMultiplayerServerBuildReferencedByMatchmakingQueue = 6002,
@@ -552,10 +561,12 @@ namespace PlayFab
         PlayFabErrorExperimentationExperimentNeverStarted = 7003,
         PlayFabErrorExperimentationExperimentDeleted = 7004,
         PlayFabErrorExperimentationClientTimeout = 7005,
-        PlayFabErrorExperimentationExceededVariantNameLength = 7006,
-        PlayFabErrorExperimentationExceededMaxVariantLength = 7007,
+        PlayFabErrorExperimentationInvalidVariantConfiguration = 7006,
+        PlayFabErrorExperimentationInvalidVariableConfiguration = 7007,
         PlayFabErrorExperimentInvalidId = 7008,
         PlayFabErrorExperimentationNoScorecard = 7009,
+        PlayFabErrorExperimentationTreatmentAssignmentFailed = 7010,
+        PlayFabErrorExperimentationTreatmentAssignmentDisabled = 7011,
         PlayFabErrorMaxActionDepthExceeded = 8000,
         PlayFabErrorSnapshotNotFound = 11000,
     };
@@ -586,4 +597,29 @@ namespace PlayFab
 
     typedef std::function<void(const PlayFabError& error, void* customData)> ErrorCallback;
     typedef std::function<void(std::exception exception)> ExceptionCallback;
+
+    enum class PlayFabExceptionCode
+    {
+        AuthContextRequired,
+        DeveloperKeyNotSet,
+        EntityTokenNotSet,
+        NotLoggedIn,
+        PluginAmbiguity,
+        PluginNotFound,
+        ThreadMisuse,
+        TitleNotSet,
+    };
+
+    class PlayFabException : public std::runtime_error
+    {
+    public:
+        PlayFabException() = delete;
+        PlayFabException(const PlayFabException& source) = delete;
+        PlayFabException(PlayFabException&&) = default;
+        PlayFabException& operator=(const PlayFabException& source) = delete;
+        PlayFabException& operator=(PlayFabException&& other) = delete;
+
+        PlayFabExceptionCode Code;
+        PlayFabException(PlayFabExceptionCode code, const char* const message);
+    };
 }

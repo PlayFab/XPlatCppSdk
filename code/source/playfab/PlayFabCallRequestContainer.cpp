@@ -5,29 +5,43 @@
 
 namespace PlayFab
 {
-    CallRequestContainer::CallRequestContainer(std::string url,
+    CallRequestContainer::CallRequestContainer(const std::string& url,
         const std::unordered_map<std::string, std::string>& headers,
-        std::string requestBody,
+        const std::string& requestBody,
         CallRequestContainerCallback callback,
-        void* customData,
-        std::shared_ptr<PlayFabApiSettings> settings) :
-        CallRequestContainerBase(url, headers, requestBody, callback, customData, settings),
+        std::shared_ptr<PlayFabApiSettings> settings,
+        std::shared_ptr<PlayFabAuthenticationContext> context,
+        void* customData) :
+        CallRequestContainerBase(url, headers, requestBody, callback, customData),
         finished(false),
         responseString(""),
         responseJson(Json::Value::null),
         errorWrapper(),
         successCallback(nullptr),
-        errorCallback(nullptr)
+        errorCallback(nullptr),
+        m_settings(settings),
+        m_context(context)
     {
         errorWrapper.UrlPath = url;
 
         Json::Value request;
-        Json::Reader reader;
-        bool parsingSuccessful = reader.parse(requestBody, request);
+        std::string errs;
+        Json::CharReaderBuilder builder;
+        std::unique_ptr<Json::CharReader> reader(builder.newCharReader());
 
-        if (parsingSuccessful)
+        const char* reqBod = requestBody.c_str();
+        size_t reqBodLength = requestBody.length();
+
+        try {
+            bool parsingSuccessful = reader->parse(reqBod, reqBod + reqBodLength, &request, &errs);
+            if (parsingSuccessful)
+            {
+                errorWrapper.Request = request;
+            }
+        }
+        catch (const std::exception&)
         {
-            errorWrapper.Request = request;
+            // We can't parse the request back into a JSON::Value, so the caller won't receive it back...?
         }
     }
 
@@ -37,13 +51,55 @@ namespace PlayFab
 
     std::string CallRequestContainer::GetFullUrl() const
     {
-        if (apiSettings == nullptr)
+        return m_settings->GetUrl(this->GetUrl());
+    }
+
+    std::shared_ptr<PlayFabApiSettings> CallRequestContainer::GetApiSettings() const
+    {
+        return this->m_settings;
+    }
+
+    std::shared_ptr<PlayFabAuthenticationContext> CallRequestContainer::GetContext() const
+    {
+        return this->m_context;
+    }
+
+    std::string CallRequestContainer::GetRequestId() const
+    {
+        return this->requestId;
+    }
+
+    void CallRequestContainer::SetRequestId(const std::string& newRequestId)
+    {
+        this->requestId = newRequestId;
+        this->errorWrapper.RequestId = newRequestId;
+    }
+
+    bool CallRequestContainer::HandleInvalidSettings()
+    {
+        bool isValid = true;
+        if (m_settings->titleId.empty())
         {
-            return PlayFabSettings::GetUrl(this->GetUrl(), PlayFabSettings::requestGetParams);
+            errorWrapper.HttpCode = 0;
+            errorWrapper.HttpStatus = "Client-side validation failure";
+            errorWrapper.ErrorCode = PlayFabErrorCode::PlayFabErrorInvalidParams;
+            errorWrapper.ErrorName = errorWrapper.HttpStatus;
+            errorWrapper.ErrorMessage = "PlayFabSettings::staticSettings->titleId has not been set properly. It must not be empty.";
+            isValid = false;
         }
-        else
+
+        if (!isValid)
         {
-            return apiSettings->GetUrl(this->GetUrl(), PlayFabSettings::requestGetParams);
+            if (PlayFabSettings::globalErrorHandler != nullptr)
+            {
+                PlayFabSettings::globalErrorHandler(errorWrapper, GetCustomData());
+            }
+            if (errorCallback != nullptr)
+            {
+                errorCallback(errorWrapper, GetCustomData());
+            }
         }
+
+        return isValid;
     }
 }

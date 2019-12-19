@@ -342,9 +342,9 @@ namespace PlayFab
 
 
         // Private, Client-Specific
-        static void MultiStepClientLogin(bool needsAttribution);
+        static void MultiStepClientLogin(std::shared_ptr<PlayFabAuthenticationContext> context, bool needsAttribution);
         static bool ValidateResult(PlayFabResultCommon& resultCommon, const CallRequestContainer& container);
     };
 }
 
-#endif
+#endif // #ifndef DISABLE_PLAYFABCLIENT_API

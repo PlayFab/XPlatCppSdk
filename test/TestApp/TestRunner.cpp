@@ -8,59 +8,60 @@
 #include "TestRunner.h"
 #include "TestUtils.h"
 
-using namespace PlayFab;
-
 namespace PlayFabUnit
 {
-    static const auto TEST_TIMEOUT_DURATION = std::chrono::seconds(15);
+    static const Int64 TEST_TIMEOUT_MILLISECONDS = 15000;
 
-    TestRunner::TestRunner():
+    TestRunner::TestRunner() :
         suiteState(TestActiveState::PENDING),
         suiteTestCase(nullptr),
-        suiteTestReport(PlayFabSettings::buildIdentifier)
+        suiteTestReport(PlayFab::PlayFabSettings::buildIdentifier)
     {
-        PlayFabSettings::threadedCallbacks = true;
+        PlayFab::PlayFabSettings::threadedCallbacks = true;
     }
 
     void TestRunner::Add(TestCase& testCase)
     {
         if (TestActiveState::PENDING != suiteState)
+        {
             return;
+        }
 
         // Add the tests from the given test case.
-        auto testCaseTests = testCase.GetTests();
-        suiteTests.splice(suiteTests.end(), **testCaseTests);
+        std::shared_ptr<TestList> testCaseTests = testCase.GetTests();
+        suiteTests.splice(suiteTests.end(), *testCaseTests);
     }
 
     void TestRunner::Run()
     {
         // Mark the test suite as active.
         if (TestActiveState::PENDING == suiteState)
+        {
             suiteState = TestActiveState::ACTIVE;
+        }
 
         // Run the tests.
-        for (auto testsIter = suiteTests.begin(); testsIter != suiteTests.end(); ++testsIter)
+        for (auto& test : suiteTests)
         {
-            // Get the next test.
-            TestContext* test = **testsIter;
-
             // Handle transitions between TestCases.
             ManageTestCase(test->testCase, suiteTestCase);
 
             // Start the test.
-            test->startTime = TestTimeNow();
+            test->startTime = PlayFab::GetMilliTicks();
             test->activeState = TestActiveState::ACTIVE;
             suiteTestReport.TestStarted();
 
             test->testCase->SetUp(*test);
             if (TestActiveState::ACTIVE == test->activeState)
+            {
                 test->testFunc(*test);
+            }
 
             // Tick the test.
             while (TestActiveState::ACTIVE == test->activeState)
             {
-                auto timeNow = TestTimeNow();
-                bool timeExpired = (timeNow - test->startTime) > TEST_TIMEOUT_DURATION;
+                Int64 timeNow = PlayFab::GetMilliTicks();
+                bool timeExpired = (timeNow - test->startTime) > TEST_TIMEOUT_MILLISECONDS;
 
                 if ((TestActiveState::READY != test->activeState) && !timeExpired) // Not finished & not timed out
                 {
@@ -81,12 +82,13 @@ namespace PlayFabUnit
             }
 
             // Tear down the test.
-            test->endTime = TestTimeNow();
+            test->endTime = PlayFab::GetMilliTicks();
             test->testCase->TearDown(*test);
             test->activeState = TestActiveState::COMPLETE;
+            // printf("\n%s\n", suiteTestSummary.c_str()); // If we're debugging EventTests, it's nice to see each test as it happens...
 
             // Update the report.
-            TimeValueMs testDurationMs = TestTimeDelta<TimeValueMs>(test->startTime, test->endTime);
+            Int64 testDurationMs = test->endTime - test->startTime;
             suiteTestReport.TestComplete(test->testName, test->finishState, testDurationMs, test->testResultMsg);
         }
 
@@ -104,14 +106,12 @@ namespace PlayFabUnit
     {
         std::stringstream summaryStream;
 
-        TimePoint timeNow = TestTimeNow();
-        TimePoint testStartTime, testEndTime;
+        Int64 timeNow = PlayFab::GetMilliTicks();
+        Int64 testStartTime, testEndTime;
         size_t testsFinishedCount = 0, testsPassedCount = 0, testsFailedCount = 0, testsSkippedCount = 0;
 
-        for (auto testIter = suiteTests.begin(); testIter != suiteTests.end(); ++testIter)
+        for (auto& test : suiteTests)
         {
-            TestContext* test = **testIter;
-
             // Count tests
             if (TestActiveState::COMPLETE == test->activeState)
             {
@@ -121,11 +121,17 @@ namespace PlayFabUnit
                 testEndTime = test->endTime;
 
                 if (TestFinishState::PASSED == test->finishState)
+                {
                     testsPassedCount += 1;
+                }
                 else if (TestFinishState::SKIPPED == test->finishState)
+                {
                     testsSkippedCount += 1;
+                }
                 else
+                {
                     testsFailedCount += 1;
+                }
             }
             else
             {
@@ -134,18 +140,18 @@ namespace PlayFabUnit
             }
 
             // Line for each test report
-            if (suiteTests.begin() != testIter)
-                summaryStream << "\n";
-
-            TimeValueMs testDurationMs = TestTimeDelta<TimeValueMs>(test->startTime, test->endTime);
-            summaryStream << std::setw(10) << testDurationMs.count() << " ms";
+            Int64 testDurationMs = testEndTime - testStartTime;
+            summaryStream << std::setw(10) << testDurationMs << " ms";
             summaryStream << " - " << ToString(test->finishState);
             summaryStream << " - " << test->testName;
             if (!test->testResultMsg.empty())
+            {
                 summaryStream << " - " << test->testResultMsg;
+            }
+            summaryStream << "\n";
         }
 
-        summaryStream << "\n Testing complete:  ";
+        summaryStream << " - Testing complete:  ";
         summaryStream << testsFinishedCount << "/" << suiteTests.size() << " tests run, ";
         summaryStream << testsPassedCount << " tests passed, ";
         summaryStream << testsFailedCount << " tests failed, ";
@@ -157,12 +163,19 @@ namespace PlayFabUnit
     void TestRunner::ManageTestCase(TestCase* newTestCase, TestCase* oldTestCase)
     {
         if (newTestCase == oldTestCase)
+        {
             return;
+        }
 
         if (nullptr != oldTestCase)
+        {
             oldTestCase->ClassTearDown();
+        }
+
         if (nullptr != newTestCase)
+        {
             newTestCase->ClassSetUp();
+        }
 
         suiteTestCase = newTestCase;
     }

@@ -4,7 +4,7 @@ VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XPlatCppWindows", "XPlatCppWindows.vcxproj", "{92F6EC5F-B66C-4572-A74D-79329AFF3129}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestApp", "TestApp.vcxproj", "{3E4DF9A7-08A4-4188-9C86-B60605F3710B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestClientApp", "TestClientApp.vcxproj", "{3E4DF9A7-08A4-4188-9C86-B60605F3710B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PropertySheets", "PropertySheets", "{DDB43465-C46F-4041-9AC4-687E42680072}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PropertySheets", "PropertyS
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_json", "..\..\external\jsoncpp-build\lib_json.vcxproj", "{1E6C2C1C-6453-4129-AE3F-0EE8E6599C89}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestServerApp", "TestServerApp.vcxproj", "{C60B7622-A3C7-4109-AB39-399662D4FA87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,10 @@ Global
 		{1E6C2C1C-6453-4129-AE3F-0EE8E6599C89}.Debug|x64.Build.0 = Debug|x64
 		{1E6C2C1C-6453-4129-AE3F-0EE8E6599C89}.Release|x64.ActiveCfg = Release|x64
 		{1E6C2C1C-6453-4129-AE3F-0EE8E6599C89}.Release|x64.Build.0 = Release|x64
+		{C60B7622-A3C7-4109-AB39-399662D4FA87}.Debug|x64.ActiveCfg = Debug|x64
+		{C60B7622-A3C7-4109-AB39-399662D4FA87}.Debug|x64.Build.0 = Debug|x64
+		{C60B7622-A3C7-4109-AB39-399662D4FA87}.Release|x64.ActiveCfg = Release|x64
+		{C60B7622-A3C7-4109-AB39-399662D4FA87}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

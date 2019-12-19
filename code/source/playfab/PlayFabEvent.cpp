@@ -3,7 +3,7 @@
 #ifndef DISABLE_PLAYFABENTITY_API
 
 #include <playfab/PlayFabEvent.h>
-#include <playfab/PlayFabPlatformMacros.h>
+#include <playfab/PlayFabPlatformTypes.h>
 
 namespace PlayFab
 {
@@ -63,6 +63,8 @@ namespace PlayFab
         this->eventContents.Payload[name] = value;
 #elif defined(PLAYFAB_PLATFORM_ANDROID)
         this->eventContents.Payload[name] = (Int64)value;
+#elif defined(JSON_HAS_INT64)
+        this->eventContents.Payload[name] = (Json::Int64)value;
 #else // PLAYFAB_PLATFORM_ANDROID
         this->eventContents.Payload[name] = (long long int)value;
 #endif // PLAYFAB_PLATFORM_ANDROID
@@ -89,6 +91,8 @@ namespace PlayFab
         this->eventContents.Payload[name] = value;
 #elif defined(PLAYFAB_PLATFORM_ANDROID)
         this->eventContents.Payload[name] = (Uint64)value;
+#elif defined(JSON_HAS_INT64)
+        this->eventContents.Payload[name] = (Json::UInt64)value;
 #else // PLAYFAB_PLATFORM_ANDROID
         this->eventContents.Payload[name] = (long long unsigned int)value;
 #endif // PLAYFAB_PLATFORM_ANDROID

@@ -247,35 +247,39 @@ namespace PlayFab
 
     void PlayFabAndroidHttpPlugin::MakePostRequest(std::unique_ptr<CallRequestContainerBase> requestContainer)
     {
-        std::shared_ptr<RequestTask> requestTask = nullptr;
-        try
+        CallRequestContainer* container = dynamic_cast<CallRequestContainer*>(requestContainer.get());
+        if (container != nullptr && container->HandleInvalidSettings())
         {
-            requestTask = std::make_shared<RequestTask>();
-            requestTask->Initialize(requestContainer);
-        }
-        catch (const std::exception& ex)
-        {
-            PlayFabPluginManager::GetInstance().HandleException(ex);
-        }
-
-        if(requestTask != nullptr)
-        { // LOCK httpRequestMutex
-            std::unique_lock<std::mutex> lock(httpRequestMutex);
-            requestTask->state = RequestTask::State::Pending;
-            pendingRequests.push_back(std::move(requestTask));
-            if(workerThread == nullptr)
+            std::shared_ptr<RequestTask> requestTask = nullptr;
+            try
             {
-                threadRunning = true;
-                workerThread = std::make_unique<std::thread>(&PlayFabAndroidHttpPlugin::WorkerThreadEntry, this);
+                requestTask = std::make_shared<RequestTask>();
+                requestTask->Initialize(requestContainer);
             }
-        } // UNLOCK httpRequestMutex
+            catch (const std::exception& ex)
+            {
+                PlayFabPluginManager::GetInstance().HandleException(ex);
+            }
+
+            if (requestTask != nullptr)
+            { // LOCK httpRequestMutex
+                std::unique_lock<std::mutex> lock(httpRequestMutex);
+                requestTask->state = RequestTask::State::Pending;
+                pendingRequests.push_back(std::move(requestTask));
+                if (workerThread == nullptr)
+                {
+                    threadRunning = true;
+                    workerThread = std::make_unique<std::thread>(&PlayFabAndroidHttpPlugin::WorkerThreadEntry, this);
+                }
+            } // UNLOCK httpRequestMutex
+        }
     }
 
     size_t PlayFabAndroidHttpPlugin::Update()
     {
         if (PlayFabSettings::threadedCallbacks)
         {
-            throw std::runtime_error("You should not call Update() when PlayFabSettings::threadedCallbacks == true");
+            throw PlayFabException(PlayFabExceptionCode::ThreadMisuse, "You should not call Update() when PlayFabSettings::threadedCallbacks == true");
         }
 
         std::shared_ptr<RequestTask> requestTask = nullptr;
@@ -384,6 +388,7 @@ namespace PlayFab
                     else
                     { // LOCK httpRequestMutex
                         std::unique_lock<std::mutex> lock(httpRequestMutex);
+                        this->requestingTask->impl = nullptr;
                         this->pendingResults.emplace_back(std::move(this->requestingTask));
                     } // UNLOCK httpRequestMutex
 
@@ -420,7 +425,7 @@ namespace PlayFab
                 return false;
             }
 
-            jstring urlJstr = jniEnv->NewStringUTF("POST");
+            auto urlJstr = jniEnv->NewStringUTF("POST");
             if (urlJstr == nullptr)
             {
                 return false;
@@ -431,7 +436,8 @@ namespace PlayFab
 
         // Call SetUrl
         {
-            auto requestUrl = GetUrl(requestTask);
+            CallRequestContainer* pfReqContainer = static_cast<CallRequestContainer*>(requestTask.requestContainer.get());
+            const std::string requestUrl = pfReqContainer->GetFullUrl();
 
             jmethodID methodId = jniEnv->GetMethodID(GetHelper().GetHttpRequestClass(), "setUrl", "(Ljava/lang/String;)Z");
             if (methodId == nullptr)
@@ -439,7 +445,7 @@ namespace PlayFab
                 return false;
             }
 
-            jstring urlJstr = jniEnv->NewStringUTF(requestUrl.c_str());
+            auto urlJstr = jniEnv->NewStringUTF(requestUrl.c_str());
             if (urlJstr == nullptr)
             {
                 return false;
@@ -456,7 +462,8 @@ namespace PlayFab
         SetPredefinedHeaders(requestTask);
 
         // Call SetHeader
-        auto headers = requestContainer.GetRequestHeaders();
+        const std::unordered_map<std::string, std::string> headers = requestContainer.GetRequestHeaders();
+
         if (!headers.empty())
         {
             for (auto const &obj : headers)
@@ -470,8 +477,6 @@ namespace PlayFab
 
         // Call SetBody
         {
-            auto requestUrl = GetUrl(requestTask);
-
             jmethodID methodId = jniEnv->GetMethodID(GetHelper().GetHttpRequestClass(), "setBody", "([B)V");
             if (methodId == nullptr)
             {
@@ -558,10 +563,29 @@ namespace PlayFab
             }
 
             {
+                methodId = jniEnv->GetMethodID(GetHelper().GetHttpRequestClass(), "getRequestIdFromHeader","()[B");
+                if (methodId)
+                {
+                    jbyteArray requestIdBytes = (jbyteArray)jniEnv->CallObjectMethod(httpRequestObject, methodId);
+                    if(requestIdBytes != nullptr)
+                    {
+                        int requestIdSize = jniEnv->GetArrayLength(requestIdBytes);
+                        if(requestIdSize > 0)
+                        {
+                            std::vector<uint8_t> requestIdBuffer(static_cast<size_t>(requestIdSize));
+                            jniEnv->GetByteArrayRegion(requestIdBytes, 0, requestIdSize, reinterpret_cast<jbyte*>(requestIdBuffer.data()));
+                            std::string reqId(reinterpret_cast<const char*>(requestIdBuffer.data()), requestIdBuffer.size());
+                            requestContainer.SetRequestId(reqId);
+                        }
+                    }
+                }
+            }
+
+            {
                 methodId = jniEnv->GetMethodID(GetHelper().GetHttpRequestClass(), "getResponseHttpBody", "()[B");
                 if (methodId)
                 {
-                    auto responseBody = (jbyteArray)jniEnv->CallObjectMethod(httpRequestObject, methodId);
+                    jbyteArray responseBody = (jbyteArray)jniEnv->CallObjectMethod(httpRequestObject, methodId);
 
                     if (responseBody != nullptr)
                     {
@@ -596,12 +620,6 @@ namespace PlayFab
         ProcessResponse(*(this->requestingTask), 400); // 400 Bad Request
     }
 
-
-    std::string PlayFabAndroidHttpPlugin::GetUrl(const RequestTask& requestTask) const
-    {
-        return PlayFabSettings::GetUrl(requestTask.GetRequestContainerUrl(), PlayFabSettings::requestGetParams);
-    }
-
     void PlayFabAndroidHttpPlugin::SetPredefinedHeaders(const RequestTask& requestTask)
     {
         SetHeader(requestTask, "Accept", "application/json");
@@ -630,12 +648,12 @@ namespace PlayFab
             return ;
         }
 
-        jstring nameJstr = jniEnv->NewStringUTF(name);
+        auto nameJstr = jniEnv->NewStringUTF(name);
         if (nameJstr == nullptr)
         {
             return ;
         }
-        jstring valueJstr = jniEnv->NewStringUTF(value);
+        auto valueJstr = jniEnv->NewStringUTF(value);
         if (valueJstr == nullptr)
         {
             jniEnv->DeleteLocalRef(nameJstr);
@@ -662,8 +680,6 @@ namespace PlayFab
         JSONCPP_STRING jsonParseErrors;
         const bool parsedSuccessfully = jsonReader->parse(requestContainer.responseString.c_str(), requestContainer.responseString.c_str() + requestContainer.responseString.length(), &requestContainer.responseJson, &jsonParseErrors);
 
-        requestContainer.errorWrapper.RequestId = requestContainer.GetRequestId();
-
         if (parsedSuccessfully)
         {
             // fully successful response
@@ -689,7 +705,7 @@ namespace PlayFab
     {
         CallRequestContainer& requestContainer = requestTask.RequestContainer();
 
-        auto callback = requestContainer.GetCallback();
+        CallRequestContainerCallback callback = requestContainer.GetCallback();
         if (callback != nullptr)
         {
             callback(requestContainer.responseJson.get("code", Json::Value::null).asInt(),
@@ -697,5 +713,4 @@ namespace PlayFab
                      std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(requestTask.requestContainer.release())));
         }
     }
-
 }

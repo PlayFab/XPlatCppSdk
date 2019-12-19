@@ -6,117 +6,52 @@
 
 namespace PlayFabUnit
 {
-    void TestContext::EndTest(TestFinishState state, std::string resultMsg)
+    void TestContext::EndTest(TestFinishState state, const std::string& resultMsg)
     {
         if (finishState == TestFinishState::PENDING) // This means that we finish successfully
         {
-            endTime = TestTimeNow();
+            endTime = PlayFab::GetMilliTicks();
             testResultMsg = resultMsg;
             finishState = state;
             activeState = TestActiveState::READY;
+
+            // Interrim message if relevant
+            if (testResultMsg.empty() && state == PlayFabUnit::TestFinishState::TIMEDOUT)
+                testResultMsg = interrimMsg;
+
+            return;
         }
-        else if (finishState == TestFinishState::PASSED)
+
+        if (!testResultMsg.empty())
         {
-            switch (state)
-            {
-                case PlayFabUnit::TestFinishState::PASSED:
-                    testResultMsg += "Test try to Pass twice for some reason.\n";
-                    break;
-                case PlayFabUnit::TestFinishState::FAILED:
-                    testResultMsg += "Test try to Fail after Passing.\n";
-                    break;
-                case PlayFabUnit::TestFinishState::SKIPPED:
-                    testResultMsg += "Test try to be Skipped after Passing.\n";
-                    break;
-                case PlayFabUnit::TestFinishState::TIMEDOUT:
-                    testResultMsg += "Test try to Timeout after Passing.\n";
-                    break;
-                default:
-                    testResultMsg += "How are you switching back to a Pending state from Passing.\n";
-                    break;
-            }
+            testResultMsg += "\n";
         }
-        else if(finishState == TestFinishState::FAILED) 
-        {
-            switch (state)
-            {
-                case PlayFabUnit::TestFinishState::PASSED:
-                    testResultMsg += "Test try to Pass after Failing.\n";
-                    break;
-                case PlayFabUnit::TestFinishState::FAILED:
-                    testResultMsg += "Test try to Fail twice.\n";
-                    break;
-                case PlayFabUnit::TestFinishState::SKIPPED:
-                    testResultMsg += "Test try to be Skipped after Failing.\n";
-                    break;
-                case PlayFabUnit::TestFinishState::TIMEDOUT:
-                    testResultMsg += "Test try to Timeout after Failing.\n";
-                    break;
-                default:
-                    testResultMsg += "How are you switching back to a Pending state from Failing.\n";
-                    break;
-            }
-        }
-        else if(finishState == TestFinishState::SKIPPED)
-        {
-            switch (state)
-            {
-            case PlayFabUnit::TestFinishState::PASSED:
-                testResultMsg += "Test try to Pass after being Skipped.\n";
-                break;
-            case PlayFabUnit::TestFinishState::FAILED:
-                testResultMsg += "Test try to Fail after being Skipped.\n";
-                break;
-            case PlayFabUnit::TestFinishState::SKIPPED:
-                testResultMsg += "Test try to be Skipped twice.\n";
-                break;
-            case PlayFabUnit::TestFinishState::TIMEDOUT:
-                testResultMsg += "Test try to Timeout after being Skipped.\n";
-                break;
-            default:
-                testResultMsg += "How are you switching back to a Pending state from Skipping.\n";
-                break;
-            }
-        }
-        else 
-        {
-            switch (state)
-            {
-            case PlayFabUnit::TestFinishState::PASSED:
-                testResultMsg += "Test try to Pass after being Timeout.\n";
-                break;
-            case PlayFabUnit::TestFinishState::FAILED:
-                testResultMsg += "Test try to Fail after being Timeout.\n";
-                break;
-            case PlayFabUnit::TestFinishState::SKIPPED:
-                testResultMsg += "Test try to be Skipped after being Timeout.\n";
-                break;
-            case PlayFabUnit::TestFinishState::TIMEDOUT:
-                testResultMsg += "Test try to Timeout twice.\n";
-                break;
-            default:
-                testResultMsg += "How are you switching back to a Pending state from Timing Out.\n";
-                break;
-            }
-        }
+        testResultMsg += TestFinishStateToString[static_cast<int>(finishState)] + std::string("->") + TestFinishStateToString[static_cast<int>(state)] + " - Cannot declare test finished twice.";
+        if (!resultMsg.empty())
+            testResultMsg += "\n: " + resultMsg;
+        finishState = PlayFabUnit::TestFinishState::FAILED;
     }
 
-    void TestContext::Pass(std::string message)
+    void TestContext::Pass(const std::string& message)
     {
         EndTest(TestFinishState::PASSED, message);
     }
 
-    void TestContext::Fail(std::string message)
+    void TestContext::Fail(const std::string& message)
     {
-        if (message.empty())
-            message = "fail";
-        EndTest(TestFinishState::FAILED, message);
+        EndTest(TestFinishState::FAILED, message.empty() ? "fail" : message);
         // TODO: Throw "assert" exception
     }
 
-    void TestContext::Skip(std::string message)
+    void TestContext::Skip(const std::string& message)
     {
         EndTest(TestFinishState::SKIPPED, message);
         // TODO: Throw "test skipped" exception
+    }
+
+    void TestContext::SetInterrimMessage(const std::string& message)
+    {
+        interrimMsg = message;
+        // printf("Interrim: %s\n", message.c_str());
     }
 }

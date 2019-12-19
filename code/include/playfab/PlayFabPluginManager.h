@@ -38,7 +38,7 @@ namespace PlayFab
 
         /// <summary>
         /// updates the process of making post requests.
-        /// This method can be used when plugin is not using a working thread and instead should execute 
+        /// This method can be used when plugin is not using a working thread and instead should execute
         /// its long-running operations via polling using this method.
         /// Returns number of currently pending post requests.
         /// </summary>
@@ -70,29 +70,31 @@ namespace PlayFab
         PlayFabPluginManager& operator=(const PlayFabPluginManager&) = delete;
         PlayFabPluginManager& operator=(PlayFabPluginManager&&) = delete;
 
+        static const std::string defaultInstanceName;
+
         // Gets a plugin.
         // If a plugin with specified contract and optional instance name does not exist, it will create a new one.
         template <typename T>
-        static std::shared_ptr<T> GetPlugin(const PlayFabPluginContract contract, const std::string& instanceName = "")
+        static std::shared_ptr<T> GetPlugin(const PlayFabPluginContract contract, const std::string& instanceName = defaultInstanceName)
         {
             return std::static_pointer_cast<T>(GetInstance().GetPluginInternal(contract, instanceName));
         }
 
         // Sets a custom plugin.
         // If a plugin with specified contract and optional instance name already exists, it will be replaced with specified instance.
-        static void SetPlugin(std::shared_ptr<IPlayFabPlugin> plugin, const PlayFabPluginContract contract, const std::string& instanceName = "");
+        static void SetPlugin(const std::shared_ptr<IPlayFabPlugin>& plugin, const PlayFabPluginContract contract, const std::string& instanceName = defaultInstanceName);
 
         // Gets a plugin.
         // If a plugin with specified contract and optional instance name does not exist, it will create a new one.
         template <typename T>
-        std::shared_ptr<T> GetPluginInstance(const PlayFabPluginContract contract, const std::string& instanceName = "")
+        std::shared_ptr<T> GetPluginInstance(const PlayFabPluginContract contract, const std::string& instanceName = defaultInstanceName)
         {
             return std::static_pointer_cast<T>(GetPluginInternal(contract, instanceName));
         }
 
         // Sets a custom plugin.
         // If a plugin with specified contract and optional instance name already exists, it will be replaced with specified instance.
-        void SetPluginInstance(std::shared_ptr<IPlayFabPlugin> plugin, const PlayFabPluginContract contract, const std::string& instanceName = "");
+        void SetPluginInstance(const std::shared_ptr<IPlayFabPlugin>& plugin, const PlayFabPluginContract contract, const std::string& instanceName = defaultInstanceName);
 
         // Sets a custom exception handler for any possible background thread exceptions
         void SetExceptionHandler(ExceptionCallback exceptionHandler);
@@ -101,14 +103,23 @@ namespace PlayFab
         void HandleException(const std::exception);
 
     private:
-        std::shared_ptr<IPlayFabPlugin> GetPluginInternal(const PlayFabPluginContract contract, const std::string& instanceName);
-        void SetPluginInternal(std::shared_ptr<IPlayFabPlugin> plugin, const PlayFabPluginContract contract, const std::string& instanceName);
+    struct PluginEntry
+        {
+            const PlayFabPluginContract contract;
+            const std::string name;
+            std::shared_ptr<IPlayFabPlugin> plugin;
+        };
+
+        std::shared_ptr<IPlayFabPlugin> GetPluginInternal(const PlayFabPluginContract contract, const std::string& instanceName = defaultInstanceName);
+        void SetPluginInternal(const std::shared_ptr<IPlayFabPlugin>& plugin, const PlayFabPluginContract contract, const std::string& instanceName = defaultInstanceName);
+        PluginEntry& FindOrCreatePluginEntry(PlayFabPluginContract contract, const std::string& instanceName = defaultInstanceName);
 
         std::shared_ptr<IPlayFabPlugin> CreatePlayFabSerializerPlugin();
         std::shared_ptr<IPlayFabPlugin> CreatePlayFabTransportPlugin();
 
     private:
-        std::map<const std::pair<const PlayFabPluginContract, const std::string>, std::shared_ptr<IPlayFabPlugin>> plugins;
+        std::mutex pluginsMutex;
+        std::vector<PluginEntry> plugins;
         std::mutex userExceptionCallbackMutex;
         ExceptionCallback userExceptionCallback;
     };

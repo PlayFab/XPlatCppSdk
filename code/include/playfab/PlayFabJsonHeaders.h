@@ -6,7 +6,10 @@
 
 #include <playfab/PlayFabPlatformMacros.h>
 
-#ifdef PLAYFAB_PLATFORM_LINUX
+#if defined(PLAYFAB_PLATFORM_SWITCH)
+#include <json/json.h>
+#include <json/json-forwards.h>
+#elif defined(PLAYFAB_PLATFORM_LINUX)
 #include <jsoncpp/json/json.h>
 #include <jsoncpp/json/reader.h>
 #include <jsoncpp/json/value.h>

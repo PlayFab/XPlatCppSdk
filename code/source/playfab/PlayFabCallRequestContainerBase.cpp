@@ -5,16 +5,14 @@
 namespace PlayFab
 {
     CallRequestContainerBase::CallRequestContainerBase(
-        std::string url,
+        const std::string& url,
         const std::unordered_map<std::string, std::string>& headers,
-        std::string requestBody,
+        const std::string& requestBody,
         CallRequestContainerCallback callback,
-        void* customData,
-        std::shared_ptr<PlayFabApiSettings> settings) :
+        void* customData) :
         url(url),
         requestHeaders(headers),
         requestBody(requestBody),
-        apiSettings(settings),
         callback(callback),
         customData(customData)
     {
@@ -30,24 +28,9 @@ namespace PlayFab
         return this->requestHeaders;
     }
 
-    std::string CallRequestContainerBase::GetRequestId() const
-    {
-        return this->requestId;
-    }
-
-    void CallRequestContainerBase::SetRequestId(std::string newRequestId)
-    {
-        this->requestId = newRequestId;
-    }
-
     std::string CallRequestContainerBase::GetRequestBody() const
     {
         return this->requestBody;
-    }
-
-    std::shared_ptr<PlayFabApiSettings> CallRequestContainerBase::GetApiSettings() const
-    {
-        return this->apiSettings;
     }
 
     CallRequestContainerCallback CallRequestContainerBase::GetCallback() const

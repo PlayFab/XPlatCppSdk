@@ -30,9 +30,4 @@ namespace PlayFabUnit
             default: return "UNKNOWN";
         }
     }
-
-    TimePoint TestTimeNow()
-    {
-        return std::chrono::system_clock::now();
-    }
 }

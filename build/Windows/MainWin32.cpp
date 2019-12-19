@@ -7,7 +7,5 @@
 int main()
 {
     PlayFabUnit::TestApp testApp;
-
-    int result = testApp.Main();
-    return result;
+    return testApp.Main();
 }

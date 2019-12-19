@@ -34,54 +34,16 @@ namespace PlayFab
             else // Process the error case
             {
                 if (PlayFabSettings::globalErrorHandler != nullptr)
+                {
                     PlayFabSettings::globalErrorHandler(container.errorWrapper, container.GetCustomData());
+                }
+
                 if (container.errorCallback != nullptr)
+                {
                     container.errorCallback(container.errorWrapper, container.GetCustomData());
+                }
                 return false;
             }
-        }
-
-        void OnWriteEventsResult(int, const std::string&, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
-        {
-            CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
-
-            WriteEventsResponse outResult;
-            if (ValidateResult(outResult, container))
-            {
-                const auto internalPtr = container.successCallback.get();
-                if (internalPtr != nullptr)
-                {
-                    const auto callback = (*static_cast<ProcessApiCallback<WriteEventsResponse> *>(internalPtr));
-                    callback(outResult, container.GetCustomData());
-                }
-            }
-        }
-
-        void WriteTelemetryEvents(
-            WriteEventsRequest& request,
-            const ProcessApiCallback<WriteEventsResponse> callback,
-            const ErrorCallback errorCallback = nullptr,
-            void* customData = nullptr
-        )
-        {
-            IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-            const auto requestJson = request.ToJson();
-            std::string jsonAsString = requestJson.toStyledString();
-
-            std::unordered_map<std::string, std::string> headers;
-            headers.emplace("X-EntityToken", request.authenticationContext == nullptr ? PlayFabSettings::entityToken : request.authenticationContext->entityToken);
-
-            auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-                "/Event/WriteTelemetryEvents",
-                headers,
-                jsonAsString,
-                OnWriteEventsResult,
-                customData));
-
-            reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<WriteEventsResponse>(callback));
-            reqContainer->errorCallback = errorCallback;
-
-            http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
         }
 
         std::future<QoSResult> PlayFabQoSApi::GetQoSResultAsync(unsigned int numThreads, unsigned int timeoutMs)
@@ -175,7 +137,7 @@ namespace PlayFab
         {
             Json::Value value;
             value["ErrorCode"] = Json::Value(result.errorCode);
-            
+
             Json::Value each_regionCenterResult;
             for (int i = 0; i < result.regionResults.size(); ++i)
             {
@@ -198,7 +160,7 @@ namespace PlayFab
             eventContents.Payload = value;
             request.Events.push_back(eventContents);
 
-            WriteTelemetryEvents(request, WriteEventsSuccessCallBack, WriteEventsFailureCallBack);
+            PlayFabEventsAPI::WriteTelemetryEvents(request, WriteEventsSuccessCallBack, WriteEventsFailureCallBack);
         }
 
         void PlayFabQoSApi::WriteEventsSuccessCallBack(const WriteEventsResponse&, void*)
@@ -223,16 +185,15 @@ namespace PlayFab
             ListQosServersRequest request;
             PlayFabMultiplayerAPI::ListQosServers(request, ListQosServersSuccessCallBack, ListQosServersFailureCallBack, reinterpret_cast<void*>(this));
         }
-        
+
         void PlayFabQoSApi::ListQosServersSuccessCallBack(const ListQosServersResponse& result, void* customData)
         {
             // Custom data received is a pointer to our api object
             PlayFabQoSApi* api = reinterpret_cast<PlayFabQoSApi*>(customData);
 
-            auto a = result.QosServers;
-            for (auto it = a.begin(); it != a.end(); ++it)
+            for(const QosServer& server :result.QosServers)
             {
-                api->regionMap[it->Region] = move(it->ServerUrl);
+                api->regionMap[server.Region] = server.ServerUrl;
             }
 
             api->listQosServersCompleted = true;
@@ -286,7 +247,7 @@ namespace PlayFab
             // Setup sockets based on the number of threads
             for (unsigned int i = 0; i < numThreads; ++i)
             {
-                shared_ptr<QoSSocket> socket = shared_ptr<QoSSocket>(new QoSSocket());
+                shared_ptr<QoSSocket> socket = make_shared<QoSSocket>();
 
                 int errorCode;
                 if ((errorCode = socket->ConfigureSocket(timeoutMs)) == 0)
@@ -373,7 +334,7 @@ namespace PlayFab
             // Accumulate final results
             for (size_t i = 0; i < numThreads; ++i)
             {
-                // If the result is valid and available 
+                // If the result is valid and available
                 if (asyncPingResults[i].valid())
                 {
                     std::chrono::milliseconds pingWaitTime = std::chrono::milliseconds(timeoutMs);

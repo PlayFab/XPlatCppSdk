@@ -329,5 +329,12 @@ build/Xbox/TestXboxApp/[Dd]ebug
 build/Xbox/TestXboxApp/[Pp]rofile
 build/Xbox/TestXboxApp/[Rr]elease
 
+# Mac/iOS build temporary files
+**/.DS_Store
+**/xcuserdata/
+
+# Mac/iOS test sub-project (synced separately, not needed for SDK, just internal testing)
+**/calabash.framework/
+
 # Test title data
 **/*testTitleData.json
