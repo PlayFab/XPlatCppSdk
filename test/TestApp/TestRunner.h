@@ -14,25 +14,25 @@ namespace PlayFabUnit
 
     class TestRunner
     {
-        private:
-            TestActiveState suiteState;
-            TestCase* suiteTestCase;
-            std::list<std::shared_ptr<TestContext*>> suiteTests;
+    private:
+        TestActiveState suiteState;
+        TestCase* suiteTestCase;
+        std::list<std::shared_ptr<TestContext>> suiteTests;
 
-            void ManageTestCase(TestCase* newTestCase, TestCase* oldTestCase);
+        void ManageTestCase(TestCase* newTestCase, TestCase* oldTestCase);
 
-            std::string GenerateTestSummary();
+        std::string GenerateTestSummary();
 
-        public:
-            std::string suiteTestSummary;
-            TestReport suiteTestReport;
+    public:
+        std::string suiteTestSummary;
+        TestReport suiteTestReport;
 
-            TestRunner();
+        TestRunner();
 
-            void Add(TestCase& testCase);
+        void Add(TestCase& testCase);
 
-            void Run();
+        void Run();
 
-            bool AllTestsPassed();
+        bool AllTestsPassed();
     };
 }

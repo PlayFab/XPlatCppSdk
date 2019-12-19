@@ -1,5 +1,5 @@
 // Copyright (C) Microsoft Corporation. All rights reserved.
-// 
+//
 // This header file is used to include headers of transport plugins supported on each platform.
 
 #pragma once

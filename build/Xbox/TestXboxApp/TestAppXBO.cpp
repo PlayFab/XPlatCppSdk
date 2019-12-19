@@ -22,9 +22,9 @@ namespace PlayFabUnit
             return false;
         }
 
-        auto begin = titleDataFile.tellg();
+        std::streampos begin = titleDataFile.tellg();
         titleDataFile.seekg(0, std::ios::end);
-        auto end = titleDataFile.tellg();
+        std::streampos end = titleDataFile.tellg();
         testDataJsonLen = static_cast<int>(end - begin);
         testDataJson = std::make_shared<char*>(new char[testDataJsonLen + 1]);
 

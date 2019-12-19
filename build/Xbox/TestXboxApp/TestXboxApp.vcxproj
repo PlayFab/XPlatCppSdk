@@ -198,6 +198,7 @@
     <ClInclude Include="$(TestSourceDir)\TestApp\PlayFabEventTest.h" />
     <ClInclude Include="$(TestSourceDir)\TestApp\PlayFabTestMultiUserInstance.h" />
     <ClInclude Include="$(TestSourceDir)\TestApp\PlayFabTestMultiUserStatic.h" />
+    <ClInclude Include="$(TestSourceDir)\TestApp\PlayFabTestAlloc.h" />
     <ClInclude Include="$(TestSourceDir)\TestApp\TestApp.h" />
     <ClInclude Include="$(TestSourceDir)\TestApp\TestAppPch.h" />
     <ClInclude Include="$(TestSourceDir)\TestApp\TestCase.h" />
@@ -212,6 +213,7 @@
     <ClCompile Include="$(TestSourceDir)\TestApp\PlayFabEventTest.cpp" />
     <ClCompile Include="$(TestSourceDir)\TestApp\PlayFabTestMultiUserInstance.cpp" />
     <ClCompile Include="$(TestSourceDir)\TestApp\PlayFabTestMultiUserStatic.cpp" />
+    <ClCompile Include="$(TestSourceDir)\TestApp\PlayFabTestAlloc.cpp" />
     <ClCompile Include="$(TestSourceDir)\TestApp\TestApp.cpp" />
     <ClCompile Include="$(TestSourceDir)\TestApp\TestAppPch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Durango'">Create</PrecompiledHeader>

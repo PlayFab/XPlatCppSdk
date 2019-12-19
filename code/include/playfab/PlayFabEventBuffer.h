@@ -7,8 +7,8 @@ namespace PlayFab
 {
 #pragma pack(push)
 #pragma pack(8) // conservative memory alignment control to provide maximum platform compatibility
-    /// <summary> 
-    /// A "packet" (wrapper) for an event request. The packets are internal custom allocations inside the buffer. 
+    /// <summary>
+    /// A "packet" (wrapper) for an event request. The packets are internal custom allocations inside the buffer.
     /// Their purpose is to reduce heap churn as additional data about event (e.g. some event metadata) needs to be stored
     /// so that a wrapper object is not created on the heap for each event.
     /// The implementation is based on the implementation of FullEvent struct in Microsoft Gaming Cloud CELL library.
@@ -16,7 +16,7 @@ namespace PlayFab
     class PlayFabEventPacket final
     {
     public:
-        PlayFabEventPacket(const uint64_t index, std::shared_ptr<const IPlayFabEmitEventRequest> request) :
+        PlayFabEventPacket(const uint64_t index, const std::shared_ptr<const IPlayFabEmitEventRequest>& request) :
             next(nullptr),
             eventIndex(index),
             timestamp(std::time(nullptr)), // current time
@@ -85,7 +85,7 @@ namespace PlayFab
         const size_t buffMask; // A bit mask that is used for very fast buffer pointer arithmetics.
                                // The buffer's length is always a power of two and the buffer mask is (length - 1).
                                // For example if buffer length is 0x100 (256) then buffer mask is 0xFF (255)
-                               // (or 100000000 and 011111111 in binary form). Performing binary "&" operations 
+                               // (or 100000000 and 011111111 in binary form). Performing binary "&" operations
                                // with a mask like that allows for efficient pointer adjustments in a circular buffer.
 
         std::unique_ptr<uint8_t[]> bufferArray;

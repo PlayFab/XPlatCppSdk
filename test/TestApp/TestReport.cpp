@@ -2,7 +2,9 @@
 #include <memory>
 
 #include "TestAppPch.h"
+
 #include <playfab/PlayFabJsonHeaders.h>
+
 #include "TestReport.h"
 #include "TestUtils.h"
 
@@ -26,28 +28,22 @@ namespace PlayFabUnit
         json["errors"] = errors;
         json["skipped"] = skipped;
         json["time"] = time;
-#if defined(PLAYFAB_PLATFORM_IOS) || defined(PLAYFAB_PLATFORM_ANDROID) || defined(PLAYFAB_PLATFORM_LINUX)
-        json["timestamp"] = static_cast<Json::Int64>(std::chrono::system_clock::to_time_t(timeStamp));
-#else // PLAYFAB_PLATFORM_IOS || PLAYFAB_PLATFORM_ANDROID || PLAYFAB_PLATFORM_LINUX
-        json["timestamp"] = std::chrono::system_clock::to_time_t(timeStamp);
-#endif // PLAYFAB_PLATFORM_IOS || PLAYFAB_PLATFORM_ANDROID || PLAYFAB_PLATFORM_LINUX
-
         json["testResults"];
         Json::Value init(Json::arrayValue);
         json["testResults"].swapPayload(init);
 
         int testResultIndex = 0;
-        for (auto it = testResults.begin(); it != testResults.end(); ++it)
+        for (auto testResult : testResults)
         {
-            (**it)->ToJson(json["testResults"][testResultIndex]);
+            testResult->ToJson(json["testResults"][testResultIndex]);
             testResultIndex += 1;
         }
     }
 
-    TestReport::TestReport(std::string className)
+    TestReport::TestReport(const std::string& className)
     {
         internalReport.name = className;
-        internalReport.timeStamp = TestTimeNow();
+        internalReport.timeStamp = PlayFab::GetMilliTicks();
         internalReport.tests = 0;
         internalReport.failures = 0;
         internalReport.errors = 0;
@@ -60,13 +56,11 @@ namespace PlayFabUnit
         internalReport.tests += 1;
     }
 
-    void TestReport::TestComplete(std::string testName, TestFinishState testFinishState, TimeValueMs testDurationMs, std::string message)
+    void TestReport::TestComplete(const std::string& testName, TestFinishState testFinishState, Int64 testDurationMs, std::string message)
     {
         // Add a new TestCaseReport for the completed test.
-        TestCaseReport* testReport = new TestCaseReport();
-
-        std::shared_ptr<TestCaseReport*> testReportPtr = std::make_shared<TestCaseReport*>(testReport);
-        internalReport.testResults.push_back(testReportPtr);
+        std::shared_ptr<TestCaseReport> testReport = std::make_shared<TestCaseReport>();
+        internalReport.testResults.push_back(testReport);
 
         testReport->classname = internalReport.name;
         testReport->name = testName;
@@ -78,20 +72,20 @@ namespace PlayFabUnit
         // Update statistics.
         switch (testFinishState)
         {
-            case TestFinishState::PASSED: internalReport.passed += 1; break;
-            case TestFinishState::FAILED: internalReport.failures += 1; break;
-            case TestFinishState::SKIPPED: internalReport.skipped += 1; break;
-            case TestFinishState::PENDING:
-                break;
-            case TestFinishState::TIMEDOUT: 
-                break;
-            default:
-                break;
+        case TestFinishState::PASSED: internalReport.passed += 1; break;
+        case TestFinishState::FAILED: internalReport.failures += 1; break;
+        case TestFinishState::SKIPPED: internalReport.skipped += 1; break;
+        case TestFinishState::PENDING:
+            break;
+        case TestFinishState::TIMEDOUT:
+            break;
+        default:
+            break;
         }
 
         // Update overall runtime.
         // TODO: Add hooks for SuiteSetUp and SuiteTearDown, so this can be estimated more accurately
-        internalReport.time = std::chrono::duration<double>(TestTimeNow() - internalReport.timeStamp).count(); // For now, update the duration on every test complete - the last one will be essentially correct
+        internalReport.time = (PlayFab::GetMilliTicks() - internalReport.timeStamp) / 1000.0; // For now, update the duration on every test complete - the last one will be essentially correct
     }
 
     bool TestReport::AllTestsPassed()

@@ -32,7 +32,6 @@ namespace PlayFab
         bool CheckResponse(RequestTask& requestTask);
         void SetResponseAsBadRequest(RequestTask& requestTask);
 
-        virtual std::string GetUrl(const RequestTask& requestTask) const;
         virtual void SetPredefinedHeaders(const RequestTask& requestTask);
         virtual void SetHeader(const RequestTask& requestTask, const char* name, const char* value);
         virtual bool GetBinaryPayload(RequestTask& requestTask, void*& payload, size_t& payloadSize) const;

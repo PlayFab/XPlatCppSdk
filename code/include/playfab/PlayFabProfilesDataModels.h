@@ -18,15 +18,34 @@ namespace PlayFab
 
         inline void ToJsonEnum(const EffectType input, Json::Value& output)
         {
-            if (input == EffectType::EffectTypeAllow) output = Json::Value("Allow");
-            if (input == EffectType::EffectTypeDeny) output = Json::Value("Deny");
+            if (input == EffectType::EffectTypeAllow)
+            {
+                output = Json::Value("Allow");
+                return;
+            }
+            if (input == EffectType::EffectTypeDeny)
+            {
+                output = Json::Value("Deny");
+                return;
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, EffectType& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "Allow") output = EffectType::EffectTypeAllow;
-            if (inputStr == "Deny") output = EffectType::EffectTypeDeny;
+            if (inputStr == "Allow")
+            {
+                output = EffectType::EffectTypeAllow;
+                return;
+            }
+            if (inputStr == "Deny")
+            {
+                output = EffectType::EffectTypeDeny;
+                return;
+            }
         }
 
         enum class OperationTypes
@@ -39,19 +58,54 @@ namespace PlayFab
 
         inline void ToJsonEnum(const OperationTypes input, Json::Value& output)
         {
-            if (input == OperationTypes::OperationTypesCreated) output = Json::Value("Created");
-            if (input == OperationTypes::OperationTypesUpdated) output = Json::Value("Updated");
-            if (input == OperationTypes::OperationTypesDeleted) output = Json::Value("Deleted");
-            if (input == OperationTypes::OperationTypesNone) output = Json::Value("None");
+            if (input == OperationTypes::OperationTypesCreated)
+            {
+                output = Json::Value("Created");
+                return;
+            }
+            if (input == OperationTypes::OperationTypesUpdated)
+            {
+                output = Json::Value("Updated");
+                return;
+            }
+            if (input == OperationTypes::OperationTypesDeleted)
+            {
+                output = Json::Value("Deleted");
+                return;
+            }
+            if (input == OperationTypes::OperationTypesNone)
+            {
+                output = Json::Value("None");
+                return;
+            }
         }
         inline void FromJsonEnum(const Json::Value& input, OperationTypes& output)
         {
-            if (!input.isString()) return;
+            if (!input.isString())
+            {
+                return;
+            }
             const std::string& inputStr = input.asString();
-            if (inputStr == "Created") output = OperationTypes::OperationTypesCreated;
-            if (inputStr == "Updated") output = OperationTypes::OperationTypesUpdated;
-            if (inputStr == "Deleted") output = OperationTypes::OperationTypesDeleted;
-            if (inputStr == "None") output = OperationTypes::OperationTypesNone;
+            if (inputStr == "Created")
+            {
+                output = OperationTypes::OperationTypesCreated;
+                return;
+            }
+            if (inputStr == "Updated")
+            {
+                output = OperationTypes::OperationTypesUpdated;
+                return;
+            }
+            if (inputStr == "Deleted")
+            {
+                output = OperationTypes::OperationTypesDeleted;
+                return;
+            }
+            if (inputStr == "None")
+            {
+                output = OperationTypes::OperationTypesNone;
+                return;
+            }
         }
 
         // Profiles Classes

@@ -31,4 +31,4 @@ namespace PlayFab
     };
 }
 
-#endif
+#endif // #ifndef DISABLE_PLAYFABENTITY_API

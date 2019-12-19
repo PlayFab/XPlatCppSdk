@@ -6,44 +6,37 @@
 namespace PlayFab
 {
     PlayFabApiSettings::PlayFabApiSettings() :
-#ifndef DISABLE_PLAYFABCLIENT_API
-        advertisingIdType(PlayFabSettings::advertisingIdType),
-        advertisingIdValue(PlayFabSettings::advertisingIdValue),
-        disableAdvertising(PlayFabSettings::disableAdvertising),
-#endif
-        verticalName(PlayFabSettings::verticalName),
-        baseServiceHost(PlayFabSettings::productionEnvironmentURL),
-        titleId(PlayFabSettings::titleId)
+        baseServiceHost(PlayFabSettings::productionEnvironmentURL)
     {
+        requestGetParams["sdk"] = PlayFabSettings::versionString;
+
+        // Don't let PlayFabSettings::staticSettings pull titleId from itself
+        if (PlayFabSettings::staticSettings != nullptr)
+        {
+            titleId = PlayFabSettings::staticSettings->titleId;
+        }
     }
 
-    std::string PlayFabApiSettings::GetUrl(const std::string& urlPath, const std::map<std::string, std::string>& getParams) const
+    std::string PlayFabApiSettings::GetUrl(const std::string& urlPath) const
     {
         std::string fullUrl;
         fullUrl.reserve(1000);
 
         fullUrl += "https://";
-
-        if (verticalName.length() > 0)
-        {
-            fullUrl += verticalName;
-        }
-        else
-        {
-            fullUrl += titleId;
-        }
-
+        fullUrl += titleId;
         fullUrl += baseServiceHost;
         fullUrl += urlPath;
 
         bool firstParam = true;
-        for (auto const& paramPair : getParams)
+        for (auto const& paramPair : requestGetParams)
         {
-            if (firstParam) {
+            if (firstParam)
+            {
                 fullUrl += "?";
                 firstParam = false;
             }
-            else {
+            else
+            {
                 fullUrl += "&";
             }
             fullUrl += paramPair.first;

@@ -7,7 +7,7 @@
 namespace PlayFab
 {
     PlayFabEventAPI::PlayFabEventAPI() :
-        eventRouter(std::shared_ptr<PlayFabEventRouter>(new PlayFabEventRouter())) // default event router
+        eventRouter(std::make_shared<PlayFabEventRouter>()) // default event router
     {
     }
 

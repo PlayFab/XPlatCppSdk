@@ -136,6 +136,24 @@ public class HttpRequest {
 
         return null;
     }
+
+    public byte[] getRequestIdFromHeader()
+    {
+        return getResponseHttpForHeader("X-RequestId");
+    }
+
+    public byte[] getResponseHttpForHeader(String header)
+    {
+        if(this.response != null && this.requestCompleted) {
+
+            try {
+                return this.response.header(header).getBytes();
+            } catch (Exception e) {
+                Log.e("PlayFab","exception", e);
+            }
+        }
+        return null;
+    }
 }
 
 

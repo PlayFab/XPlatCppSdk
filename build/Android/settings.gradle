@@ -1,1 +1,1 @@
-include ':app', ':xplatcppsdk'
+include ':TestClient', ':xplatcppsdk'

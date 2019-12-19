@@ -67,6 +67,7 @@ OBJS = stdafx.o \
     PlayFabEventTest.o \
     PlayFabTestMultiUserInstance.o \
     PlayFabTestMultiUserStatic.o \
+    PlayFabTestAlloc.o \
     TestContext.o \
     TestUtils.o \
     TestReport.o \

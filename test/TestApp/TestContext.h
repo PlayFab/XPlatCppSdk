@@ -4,7 +4,10 @@
 
 #include <functional>
 #include <string>
+
 #include "TestDataTypes.h"
+
+#include <playfab/PlayFabPlatformUtils.h>
 
 namespace PlayFabUnit
 {
@@ -14,7 +17,7 @@ namespace PlayFabUnit
 
     struct TestContext
     {
-        TestContext(TestCase* testCase, std::string name, TestFunc func) :
+        TestContext(TestCase* testCase, const std::string& name, TestFunc func) :
             testName(name),
             activeState(TestActiveState::PENDING),
             finishState(TestFinishState::PENDING),
@@ -28,15 +31,23 @@ namespace PlayFabUnit
         TestActiveState activeState;
         TestFinishState finishState;
         std::string testResultMsg;
+        std::string interrimMsg;
         TestFunc testFunc;
         TestCase* testCase;
-        TimePoint startTime;
-        TimePoint endTime;
+        Int64 startTime;
+        Int64 endTime;
 
-        void EndTest(TestFinishState state, std::string resultMsg);
+        // End this test with the given state and message
+        void EndTest(TestFinishState state, const std::string& resultMsg);
 
-        void Pass(std::string message = "");
-        void Fail(std::string message = "");
-        void Skip(std::string message = "");
+        // End this test with PASSED state and optional message
+        void Pass(const std::string& message = "");
+        // End this test with FAILED state and optional message
+        void Fail(const std::string& message = "");
+        // End this test with SKIPPED state and optional message
+        void Skip(const std::string& message = "");
+
+        // Set a temporary message, which will display if the test times out
+        void SetInterrimMessage(const std::string& message);
     };
 }

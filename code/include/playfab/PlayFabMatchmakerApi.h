@@ -39,4 +39,4 @@ namespace PlayFab
     };
 }
 
-#endif
+#endif // #ifdef ENABLE_PLAYFABSERVER_API
