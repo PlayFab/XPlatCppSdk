@@ -1,11 +1,13 @@
 #pragma once
 
 #include <playfab/PlayFabError.h>
-#include <playfab/PlayFabSettings.h>
-#include <playfab/PlayFabCallRequestContainer.h>
+//#include <playfab/PlayFabCallRequestContainer.h>
 
 namespace PlayFab
 {
+    class PlayFabApiSettings;
+    class PlayFabAuthenticationContext;
+
     /// <summary>
     /// All settings and global variables for PlayFab
     /// </summary>
@@ -27,7 +29,7 @@ namespace PlayFab
         static const std::shared_ptr<PlayFabApiSettings> staticSettings;
         static const std::shared_ptr<PlayFabAuthenticationContext> staticPlayer;
 
-#ifndef DISABLE_PLAYFABCLIENT_API
+#if !defined(DISABLE_PLAYFABCLIENT_API)
         static const std::string AD_TYPE_IDFA;
         static const std::string AD_TYPE_ANDROID_ID;
 #endif

@@ -1,12 +1,15 @@
 #pragma once
 
-#ifdef ENABLE_PLAYFABSERVER_API
+#if defined(ENABLE_PLAYFABSERVER_API)
 
-#include <playfab/PlayFabCallRequestContainer.h>
 #include <playfab/PlayFabServerDataModels.h>
+#include <playfab/PlayFabError.h>
 
 namespace PlayFab
 {
+    class CallRequestContainerBase;
+    class CallRequestContainer;
+
     /// <summary>
     /// Main interface for PlayFab Sdk, specifically all Server APIs
     /// </summary>
@@ -289,4 +292,4 @@ namespace PlayFab
     };
 }
 
-#endif // #ifdef ENABLE_PLAYFABSERVER_API
+#endif // #if defined(ENABLE_PLAYFABSERVER_API)

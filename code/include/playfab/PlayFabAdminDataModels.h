@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef ENABLE_PLAYFABADMIN_API
+#if defined(ENABLE_PLAYFABADMIN_API)
 
 #include <playfab/PlayFabBaseModel.h>
 #include <playfab/PlayFabJsonHeaders.h>

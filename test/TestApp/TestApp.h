@@ -11,12 +11,13 @@
 
 namespace PlayFab
 {
+    class PlayFabClientInstanceAPI;
     struct PlayFabError;
 
     namespace ClientModels
     {
-        struct ExecuteCloudScriptResult;
         struct LoginResult;
+        struct ExecuteCloudScriptResult;
     }
 }
 
@@ -30,15 +31,18 @@ namespace PlayFabUnit
         static void LogPut(const char* message);
 
     private:
+#if !defined(DISABLE_PLAYFABCLIENT_API)
         // Cloud Report
         std::string cloudResponse = "";
         std::string cloudPlayFabId = "";
         std::mutex cloudResponseMutex;
         std::condition_variable cloudResponseConditionVar;
 
+        std::shared_ptr<PlayFab::PlayFabClientInstanceAPI> clientApi;
         void OnPostReportLogin(const PlayFab::ClientModels::LoginResult& result, void* customData);
         void OnPostReportComplete(const PlayFab::ClientModels::ExecuteCloudScriptResult& result, void* /*customData*/);
         void OnPostReportError(const PlayFab::PlayFabError& error, void* /*customData*/);
+#endif
 
         // Utility
         static bool LoadTitleData(TestTitleData& titleData);

@@ -1,7 +1,6 @@
 #include <stdafx.h>
 
 #include <playfab/PlayFabAuthenticationContext.h>
-#include <playfab/PlayFabSettings.h>
 
 namespace PlayFab
 {
@@ -12,7 +11,7 @@ namespace PlayFab
 
     void PlayFabAuthenticationContext::ForgetAllCredentials()
     {
-#ifndef DISABLE_PLAYFABCLIENT_API
+#if !defined(DISABLE_PLAYFABCLIENT_API)
         playFabId.clear();
         clientSessionTicket.clear();
         advertisingIdType.clear();
@@ -44,5 +43,15 @@ namespace PlayFab
         SetIfNotNull(_entityId, entityId);
         SetIfNotNull(_entityType, entityType);
         SetIfNotNull(_entityToken, entityToken);
+    }
+
+    bool PlayFabAuthenticationContext::IsClientLoggedIn()
+    {
+        return !clientSessionTicket.empty();
+    }
+
+    bool PlayFabAuthenticationContext::IsEntityLoggedIn()
+    {
+        return !entityToken.empty();
     }
 }

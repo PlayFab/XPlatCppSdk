@@ -1,11 +1,12 @@
 #pragma once
 
-#include <playfab/PlayFabApiSettings.h>
 #include <playfab/PlayFabError.h>
 #include <playfab/PlayFabCallRequestContainerBase.h>
 
 namespace PlayFab
 {
+    class PlayFabApiSettings;
+
     /// <summary>
     /// Internal PlayFabHttp container for each API call
     /// </summary>

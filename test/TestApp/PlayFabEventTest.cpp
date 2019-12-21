@@ -2,12 +2,14 @@
 
 #include "TestAppPch.h"
 
-#ifndef DISABLE_PLAYFABCLIENT_API
+#if !defined(DISABLE_PLAYFABCLIENT_API)
 
 #include <thread>
 #include <chrono>
-#include <playfab/PlayFabClientApi.h>
-#include <playfab/PlayFabEventsApi.h>
+#include <playfab/PlayFabClientDataModels.h>
+#include <playfab/PlayFabClientInstanceApi.h>
+#include <playfab/PlayFabEventsDataModels.h>
+#include <playfab/PlayFabEventsInstanceApi.h>
 #include <playfab/PlayFabSettings.h>
 #include <playfab/QoS/PlayFabQoSApi.h>
 #include "PlayFabEventTest.h"
@@ -50,7 +52,7 @@ namespace PlayFabUnit
         request.CustomId = PlayFabSettings::buildIdentifier;
         request.CreateAccount = true;
 
-        PlayFabClientAPI::LoginWithCustomID(request,
+        clientApi->LoginWithCustomID(request,
             ApiCallback(&PlayFabEventTest::OnLogin),
             ApiCallback(&PlayFabEventTest::OnErrorSharedCallback),
             &testContext);
@@ -76,7 +78,7 @@ namespace PlayFabUnit
     }
     void PlayFabEventTest::EventsApi(TestContext& testContext)
     {
-        if (!PlayFabClientAPI::IsClientLoggedIn())
+        if (!PlayFabSettings::staticPlayer->IsClientLoggedIn())
         {
             testContext.Skip("Earlier tests failed to log in");
             return;
@@ -92,7 +94,7 @@ namespace PlayFabUnit
             request.Events.push_back(CreateEventContents("event_B_", i));
         }
 
-        PlayFabEventsAPI::WriteEvents(request,
+        eventsApi->WriteEvents(request,
             ApiCallback(&PlayFabEventTest::OnEventsApiSucceeded),
             ApiCallback(&PlayFabEventTest::OnEventsApiFailed),
             &testContext);
@@ -311,6 +313,9 @@ namespace PlayFabUnit
 
     void PlayFabEventTest::ClassSetUp()
     {
+        clientApi = std::make_shared<PlayFabClientInstanceAPI>(PlayFabSettings::staticPlayer);
+        eventsApi = std::make_shared<PlayFabEventsInstanceAPI>(PlayFabSettings::staticPlayer);
+
         // Make sure PlayFab state is clean.
         PlayFabSettings::ForgetAllCredentials();
     }

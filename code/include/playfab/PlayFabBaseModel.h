@@ -1,16 +1,14 @@
 #pragma once
 
-#include <assert.h>
-#include <functional>
-#include <list>
-#include <map>
-#include <memory>
-
 #include <playfab/PlayFabPlatformMacros.h>
 #include <playfab/PlayFabPlatformTypes.h>
 #include <playfab/PlayFabJsonHeaders.h>
 #include <playfab/PlayFabPlatformTypes.h>
 #include <playfab/PlayFabPlatformUtils.h>
+
+#include <assert.h>
+#include <functional>
+#include <list>
 
 namespace PlayFab
 {

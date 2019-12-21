@@ -7,10 +7,14 @@
 
 #include <playfab/PlayFabEvent.h>
 #include <playfab/PlayFabEventBuffer.h>
+
 #include <mutex>
+#include <unordered_map>
 
 namespace PlayFab
 {
+    class PlayFabEventsInstanceAPI;
+
     enum class PlayFabEventPipelineType
     {
         PlayFabPlayStream,
@@ -51,7 +55,7 @@ namespace PlayFab
     /// <summary>
     /// Implementation of PlayFab-specific event pipeline
     /// </summary>
-    class PlayFabEventPipeline: public IPlayFabEventPipeline
+    class PlayFabEventPipeline : public IPlayFabEventPipeline
     {
     public:
         explicit PlayFabEventPipeline(const std::shared_ptr<PlayFabEventPipelineSettings>& settings);
@@ -87,6 +91,8 @@ namespace PlayFab
         std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>> batch;
 
     private:
+        std::shared_ptr<PlayFabEventsInstanceAPI> eventsApi;
+
         std::shared_ptr<PlayFabEventPipelineSettings> settings;
         PlayFabEventBuffer buffer;
         std::thread workerThread;
