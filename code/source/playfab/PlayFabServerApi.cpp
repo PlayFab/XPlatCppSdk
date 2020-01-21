@@ -1,6 +1,6 @@
 #include <stdafx.h>
 
-#ifdef ENABLE_PLAYFABSERVER_API
+#if defined(ENABLE_PLAYFABSERVER_API)
 
 #include <playfab/PlayFabServerApi.h>
 #include <playfab/PlayFabPluginManager.h>
@@ -3459,6 +3459,55 @@ namespace PlayFab
         }
     }
 
+    void PlayFabServerAPI::LinkPSNAccount(
+        LinkPSNAccountRequest& request,
+        const ProcessApiCallback<LinkPSNAccountResult> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
+        std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-SecretKey", settings->developerSecretKey);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Server/LinkPSNAccount",
+            headers,
+            jsonAsString,
+            OnLinkPSNAccountResult,
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkPSNAccountResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabServerAPI::OnLinkPSNAccountResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        LinkPSNAccountResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = (*static_cast<ProcessApiCallback<LinkPSNAccountResult> *>(internalPtr.get()));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
     void PlayFabServerAPI::LinkServerCustomId(
         LinkServerCustomIdRequest& request,
         const ProcessApiCallback<LinkServerCustomIdResult> callback,
@@ -5321,6 +5370,55 @@ namespace PlayFab
         }
     }
 
+    void PlayFabServerAPI::UnlinkPSNAccount(
+        UnlinkPSNAccountRequest& request,
+        const ProcessApiCallback<UnlinkPSNAccountResult> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
+        std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-SecretKey", settings->developerSecretKey);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Server/UnlinkPSNAccount",
+            headers,
+            jsonAsString,
+            OnUnlinkPSNAccountResult,
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkPSNAccountResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabServerAPI::OnUnlinkPSNAccountResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        UnlinkPSNAccountResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = (*static_cast<ProcessApiCallback<UnlinkPSNAccountResult> *>(internalPtr.get()));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
     void PlayFabServerAPI::UnlinkServerCustomId(
         UnlinkServerCustomIdRequest& request,
         const ProcessApiCallback<UnlinkServerCustomIdResult> callback,
@@ -6422,7 +6520,7 @@ namespace PlayFab
     }
 }
 
-#endif // #ifdef ENABLE_PLAYFABSERVER_API
+#endif // #if defined(ENABLE_PLAYFABSERVER_API)
 
 #if defined(PLAYFAB_PLATFORM_WINDOWS)
 #pragma warning (default: 4100) // formal parameters are part of a public interface

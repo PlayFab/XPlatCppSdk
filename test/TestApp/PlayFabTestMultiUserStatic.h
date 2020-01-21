@@ -2,7 +2,7 @@
 
 #pragma once
 
-#ifndef DISABLE_PLAYFABCLIENT_API
+#if !defined(DISABLE_PLAYFABCLIENT_API)
 
 #include "TestCase.h"
 
@@ -26,6 +26,7 @@ namespace PlayFabUnit
         /// CLIENT API
         /// Try to log in two users simultaneously using static APIs.
         /// </summary>
+        std::shared_ptr<PlayFab::PlayFabClientInstanceAPI> clientApi;
         std::shared_ptr<PlayFab::PlayFabAuthenticationContext> multiUser1Context;
         std::shared_ptr<PlayFab::PlayFabAuthenticationContext> multiUser2Context;
         std::string multiUser1Error, multiUser2Error;

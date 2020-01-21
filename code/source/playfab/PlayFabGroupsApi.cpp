@@ -1,6 +1,6 @@
 #include <stdafx.h>
 
-#ifndef DISABLE_PLAYFABENTITY_API
+#if !defined(DISABLE_PLAYFABENTITY_API)
 
 #include <playfab/PlayFabGroupsApi.h>
 #include <playfab/PlayFabPluginManager.h>
@@ -1277,7 +1277,7 @@ namespace PlayFab
     }
 }
 
-#endif // #ifndef DISABLE_PLAYFABENTITY_API
+#endif // #if !defined(DISABLE_PLAYFABENTITY_API)
 
 #if defined(PLAYFAB_PLATFORM_WINDOWS)
 #pragma warning (default: 4100) // formal parameters are part of a public interface

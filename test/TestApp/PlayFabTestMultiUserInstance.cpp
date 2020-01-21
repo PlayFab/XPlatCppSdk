@@ -2,7 +2,7 @@
 
 #include "TestAppPch.h"
 
-#ifndef DISABLE_PLAYFABCLIENT_API
+#if !defined(DISABLE_PLAYFABCLIENT_API)
 
 #include <playfab/PlayFabClientInstanceApi.h>
 #include <playfab/PlayFabSettings.h>

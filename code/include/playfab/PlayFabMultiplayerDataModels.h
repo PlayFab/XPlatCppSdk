@@ -1,6 +1,6 @@
 #pragma once
 
-#ifndef DISABLE_PLAYFABENTITY_API
+#if !defined(DISABLE_PLAYFABENTITY_API)
 
 #include <playfab/PlayFabBaseModel.h>
 #include <playfab/PlayFabJsonHeaders.h>
@@ -1304,6 +1304,64 @@ namespace PlayFab
             }
         };
 
+        struct CancelAllServerBackfillTicketsForPlayerRequest : public PlayFabRequestCommon
+        {
+            EntityKey Entity;
+            std::string QueueName;
+
+            CancelAllServerBackfillTicketsForPlayerRequest() :
+                PlayFabRequestCommon(),
+                Entity(),
+                QueueName()
+            {}
+
+            CancelAllServerBackfillTicketsForPlayerRequest(const CancelAllServerBackfillTicketsForPlayerRequest& src) :
+                PlayFabRequestCommon(),
+                Entity(src.Entity),
+                QueueName(src.QueueName)
+            {}
+
+            ~CancelAllServerBackfillTicketsForPlayerRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["Entity"], Entity);
+                FromJsonUtilS(input["QueueName"], QueueName);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
+                return output;
+            }
+        };
+
+        struct CancelAllServerBackfillTicketsForPlayerResult : public PlayFabResultCommon
+        {
+
+            CancelAllServerBackfillTicketsForPlayerResult() :
+                PlayFabResultCommon()
+            {}
+
+            CancelAllServerBackfillTicketsForPlayerResult(const CancelAllServerBackfillTicketsForPlayerResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~CancelAllServerBackfillTicketsForPlayerResult() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
         struct CancelMatchmakingTicketRequest : public PlayFabRequestCommon
         {
             std::string QueueName;
@@ -1350,6 +1408,64 @@ namespace PlayFab
             {}
 
             ~CancelMatchmakingTicketResult() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
+        struct CancelServerBackfillTicketRequest : public PlayFabRequestCommon
+        {
+            std::string QueueName;
+            std::string TicketId;
+
+            CancelServerBackfillTicketRequest() :
+                PlayFabRequestCommon(),
+                QueueName(),
+                TicketId()
+            {}
+
+            CancelServerBackfillTicketRequest(const CancelServerBackfillTicketRequest& src) :
+                PlayFabRequestCommon(),
+                QueueName(src.QueueName),
+                TicketId(src.TicketId)
+            {}
+
+            ~CancelServerBackfillTicketRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["QueueName"], QueueName);
+                FromJsonUtilS(input["TicketId"], TicketId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
+                Json::Value each_TicketId; ToJsonUtilS(TicketId, each_TicketId); output["TicketId"] = each_TicketId;
+                return output;
+            }
+        };
+
+        struct CancelServerBackfillTicketResult : public PlayFabResultCommon
+        {
+
+            CancelServerBackfillTicketResult() :
+                PlayFabResultCommon()
+            {}
+
+            CancelServerBackfillTicketResult(const CancelServerBackfillTicketResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~CancelServerBackfillTicketResult() = default;
 
             void FromJson(const Json::Value&) override
             {
@@ -2277,6 +2393,157 @@ namespace PlayFab
             }
         };
 
+        struct MatchmakingPlayerWithTeamAssignment : public PlayFabBaseModel
+        {
+            Boxed<MatchmakingPlayerAttributes> Attributes;
+            EntityKey Entity;
+            std::string TeamId;
+
+            MatchmakingPlayerWithTeamAssignment() :
+                PlayFabBaseModel(),
+                Attributes(),
+                Entity(),
+                TeamId()
+            {}
+
+            MatchmakingPlayerWithTeamAssignment(const MatchmakingPlayerWithTeamAssignment& src) :
+                PlayFabBaseModel(),
+                Attributes(src.Attributes),
+                Entity(src.Entity),
+                TeamId(src.TeamId)
+            {}
+
+            ~MatchmakingPlayerWithTeamAssignment() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["Attributes"], Attributes);
+                FromJsonUtilO(input["Entity"], Entity);
+                FromJsonUtilS(input["TeamId"], TeamId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Attributes; ToJsonUtilO(Attributes, each_Attributes); output["Attributes"] = each_Attributes;
+                Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                Json::Value each_TeamId; ToJsonUtilS(TeamId, each_TeamId); output["TeamId"] = each_TeamId;
+                return output;
+            }
+        };
+
+        struct ServerDetails : public PlayFabBaseModel
+        {
+            std::string IPV4Address;
+            std::list<Port> Ports;
+            std::string Region;
+
+            ServerDetails() :
+                PlayFabBaseModel(),
+                IPV4Address(),
+                Ports(),
+                Region()
+            {}
+
+            ServerDetails(const ServerDetails& src) :
+                PlayFabBaseModel(),
+                IPV4Address(src.IPV4Address),
+                Ports(src.Ports),
+                Region(src.Region)
+            {}
+
+            ~ServerDetails() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["IPV4Address"], IPV4Address);
+                FromJsonUtilO(input["Ports"], Ports);
+                FromJsonUtilS(input["Region"], Region);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_IPV4Address; ToJsonUtilS(IPV4Address, each_IPV4Address); output["IPV4Address"] = each_IPV4Address;
+                Json::Value each_Ports; ToJsonUtilO(Ports, each_Ports); output["Ports"] = each_Ports;
+                Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
+                return output;
+            }
+        };
+
+        struct CreateServerBackfillTicketRequest : public PlayFabRequestCommon
+        {
+            Int32 GiveUpAfterSeconds;
+            std::list<MatchmakingPlayerWithTeamAssignment> Members;
+            std::string QueueName;
+            Boxed<ServerDetails> pfServerDetails;
+
+            CreateServerBackfillTicketRequest() :
+                PlayFabRequestCommon(),
+                GiveUpAfterSeconds(),
+                Members(),
+                QueueName(),
+                pfServerDetails()
+            {}
+
+            CreateServerBackfillTicketRequest(const CreateServerBackfillTicketRequest& src) :
+                PlayFabRequestCommon(),
+                GiveUpAfterSeconds(src.GiveUpAfterSeconds),
+                Members(src.Members),
+                QueueName(src.QueueName),
+                pfServerDetails(src.pfServerDetails)
+            {}
+
+            ~CreateServerBackfillTicketRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["GiveUpAfterSeconds"], GiveUpAfterSeconds);
+                FromJsonUtilO(input["Members"], Members);
+                FromJsonUtilS(input["QueueName"], QueueName);
+                FromJsonUtilO(input["ServerDetails"], pfServerDetails);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_GiveUpAfterSeconds; ToJsonUtilP(GiveUpAfterSeconds, each_GiveUpAfterSeconds); output["GiveUpAfterSeconds"] = each_GiveUpAfterSeconds;
+                Json::Value each_Members; ToJsonUtilO(Members, each_Members); output["Members"] = each_Members;
+                Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
+                Json::Value each_pfServerDetails; ToJsonUtilO(pfServerDetails, each_pfServerDetails); output["ServerDetails"] = each_pfServerDetails;
+                return output;
+            }
+        };
+
+        struct CreateServerBackfillTicketResult : public PlayFabResultCommon
+        {
+            std::string TicketId;
+
+            CreateServerBackfillTicketResult() :
+                PlayFabResultCommon(),
+                TicketId()
+            {}
+
+            CreateServerBackfillTicketResult(const CreateServerBackfillTicketResult& src) :
+                PlayFabResultCommon(),
+                TicketId(src.TicketId)
+            {}
+
+            ~CreateServerBackfillTicketResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["TicketId"], TicketId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_TicketId; ToJsonUtilS(TicketId, each_TicketId); output["TicketId"] = each_TicketId;
+                return output;
+            }
+        };
+
         struct CreateServerMatchmakingTicketRequest : public PlayFabRequestCommon
         {
             Int32 GiveUpAfterSeconds;
@@ -2882,7 +3149,6 @@ namespace PlayFab
 
         struct GetMatchmakingTicketResult : public PlayFabResultCommon
         {
-            Boxed<CancellationReason> pfCancellationReason;
             std::string CancellationReasonString;
             time_t Created;
             EntityKey Creator;
@@ -2896,7 +3162,6 @@ namespace PlayFab
 
             GetMatchmakingTicketResult() :
                 PlayFabResultCommon(),
-                pfCancellationReason(),
                 CancellationReasonString(),
                 Created(),
                 Creator(),
@@ -2911,7 +3176,6 @@ namespace PlayFab
 
             GetMatchmakingTicketResult(const GetMatchmakingTicketResult& src) :
                 PlayFabResultCommon(),
-                pfCancellationReason(src.pfCancellationReason),
                 CancellationReasonString(src.CancellationReasonString),
                 Created(src.Created),
                 Creator(src.Creator),
@@ -2928,7 +3192,6 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
-                FromJsonUtilE(input["CancellationReason"], pfCancellationReason);
                 FromJsonUtilS(input["CancellationReasonString"], CancellationReasonString);
                 FromJsonUtilT(input["Created"], Created);
                 FromJsonUtilO(input["Creator"], Creator);
@@ -2944,7 +3207,6 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                Json::Value each_pfCancellationReason; ToJsonUtilE(pfCancellationReason, each_pfCancellationReason); output["CancellationReason"] = each_pfCancellationReason;
                 Json::Value each_CancellationReasonString; ToJsonUtilS(CancellationReasonString, each_CancellationReasonString); output["CancellationReasonString"] = each_CancellationReasonString;
                 Json::Value each_Created; ToJsonUtilT(Created, each_Created); output["Created"] = each_Created;
                 Json::Value each_Creator; ToJsonUtilO(Creator, each_Creator); output["Creator"] = each_Creator;
@@ -2999,84 +3261,6 @@ namespace PlayFab
                 Json::Value each_MatchId; ToJsonUtilS(MatchId, each_MatchId); output["MatchId"] = each_MatchId;
                 Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
                 Json::Value each_ReturnMemberAttributes; ToJsonUtilP(ReturnMemberAttributes, each_ReturnMemberAttributes); output["ReturnMemberAttributes"] = each_ReturnMemberAttributes;
-                return output;
-            }
-        };
-
-        struct MatchmakingPlayerWithTeamAssignment : public PlayFabBaseModel
-        {
-            Boxed<MatchmakingPlayerAttributes> Attributes;
-            EntityKey Entity;
-            std::string TeamId;
-
-            MatchmakingPlayerWithTeamAssignment() :
-                PlayFabBaseModel(),
-                Attributes(),
-                Entity(),
-                TeamId()
-            {}
-
-            MatchmakingPlayerWithTeamAssignment(const MatchmakingPlayerWithTeamAssignment& src) :
-                PlayFabBaseModel(),
-                Attributes(src.Attributes),
-                Entity(src.Entity),
-                TeamId(src.TeamId)
-            {}
-
-            ~MatchmakingPlayerWithTeamAssignment() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilO(input["Attributes"], Attributes);
-                FromJsonUtilO(input["Entity"], Entity);
-                FromJsonUtilS(input["TeamId"], TeamId);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_Attributes; ToJsonUtilO(Attributes, each_Attributes); output["Attributes"] = each_Attributes;
-                Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
-                Json::Value each_TeamId; ToJsonUtilS(TeamId, each_TeamId); output["TeamId"] = each_TeamId;
-                return output;
-            }
-        };
-
-        struct ServerDetails : public PlayFabBaseModel
-        {
-            std::string IPV4Address;
-            std::list<Port> Ports;
-            std::string Region;
-
-            ServerDetails() :
-                PlayFabBaseModel(),
-                IPV4Address(),
-                Ports(),
-                Region()
-            {}
-
-            ServerDetails(const ServerDetails& src) :
-                PlayFabBaseModel(),
-                IPV4Address(src.IPV4Address),
-                Ports(src.Ports),
-                Region(src.Region)
-            {}
-
-            ~ServerDetails() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilS(input["IPV4Address"], IPV4Address);
-                FromJsonUtilO(input["Ports"], Ports);
-                FromJsonUtilS(input["Region"], Region);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_IPV4Address; ToJsonUtilS(IPV4Address, each_IPV4Address); output["IPV4Address"] = each_IPV4Address;
-                Json::Value each_Ports; ToJsonUtilO(Ports, each_Ports); output["Ports"] = each_Ports;
-                Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
                 return output;
             }
         };
@@ -3477,6 +3661,114 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_IPV4Address; ToJsonUtilS(IPV4Address, each_IPV4Address); output["IPV4Address"] = each_IPV4Address;
                 Json::Value each_Port; ToJsonUtilP(Port, each_Port); output["Port"] = each_Port;
+                return output;
+            }
+        };
+
+        struct GetServerBackfillTicketRequest : public PlayFabRequestCommon
+        {
+            bool EscapeObject;
+            std::string QueueName;
+            std::string TicketId;
+
+            GetServerBackfillTicketRequest() :
+                PlayFabRequestCommon(),
+                EscapeObject(),
+                QueueName(),
+                TicketId()
+            {}
+
+            GetServerBackfillTicketRequest(const GetServerBackfillTicketRequest& src) :
+                PlayFabRequestCommon(),
+                EscapeObject(src.EscapeObject),
+                QueueName(src.QueueName),
+                TicketId(src.TicketId)
+            {}
+
+            ~GetServerBackfillTicketRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["EscapeObject"], EscapeObject);
+                FromJsonUtilS(input["QueueName"], QueueName);
+                FromJsonUtilS(input["TicketId"], TicketId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_EscapeObject; ToJsonUtilP(EscapeObject, each_EscapeObject); output["EscapeObject"] = each_EscapeObject;
+                Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
+                Json::Value each_TicketId; ToJsonUtilS(TicketId, each_TicketId); output["TicketId"] = each_TicketId;
+                return output;
+            }
+        };
+
+        struct GetServerBackfillTicketResult : public PlayFabResultCommon
+        {
+            std::string CancellationReasonString;
+            time_t Created;
+            Int32 GiveUpAfterSeconds;
+            std::string MatchId;
+            std::list<MatchmakingPlayerWithTeamAssignment> Members;
+            std::string QueueName;
+            ServerDetails pfServerDetails;
+            std::string Status;
+            std::string TicketId;
+
+            GetServerBackfillTicketResult() :
+                PlayFabResultCommon(),
+                CancellationReasonString(),
+                Created(),
+                GiveUpAfterSeconds(),
+                MatchId(),
+                Members(),
+                QueueName(),
+                pfServerDetails(),
+                Status(),
+                TicketId()
+            {}
+
+            GetServerBackfillTicketResult(const GetServerBackfillTicketResult& src) :
+                PlayFabResultCommon(),
+                CancellationReasonString(src.CancellationReasonString),
+                Created(src.Created),
+                GiveUpAfterSeconds(src.GiveUpAfterSeconds),
+                MatchId(src.MatchId),
+                Members(src.Members),
+                QueueName(src.QueueName),
+                pfServerDetails(src.pfServerDetails),
+                Status(src.Status),
+                TicketId(src.TicketId)
+            {}
+
+            ~GetServerBackfillTicketResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CancellationReasonString"], CancellationReasonString);
+                FromJsonUtilT(input["Created"], Created);
+                FromJsonUtilP(input["GiveUpAfterSeconds"], GiveUpAfterSeconds);
+                FromJsonUtilS(input["MatchId"], MatchId);
+                FromJsonUtilO(input["Members"], Members);
+                FromJsonUtilS(input["QueueName"], QueueName);
+                FromJsonUtilO(input["ServerDetails"], pfServerDetails);
+                FromJsonUtilS(input["Status"], Status);
+                FromJsonUtilS(input["TicketId"], TicketId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CancellationReasonString; ToJsonUtilS(CancellationReasonString, each_CancellationReasonString); output["CancellationReasonString"] = each_CancellationReasonString;
+                Json::Value each_Created; ToJsonUtilT(Created, each_Created); output["Created"] = each_Created;
+                Json::Value each_GiveUpAfterSeconds; ToJsonUtilP(GiveUpAfterSeconds, each_GiveUpAfterSeconds); output["GiveUpAfterSeconds"] = each_GiveUpAfterSeconds;
+                Json::Value each_MatchId; ToJsonUtilS(MatchId, each_MatchId); output["MatchId"] = each_MatchId;
+                Json::Value each_Members; ToJsonUtilO(Members, each_Members); output["Members"] = each_Members;
+                Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
+                Json::Value each_pfServerDetails; ToJsonUtilO(pfServerDetails, each_pfServerDetails); output["ServerDetails"] = each_pfServerDetails;
+                Json::Value each_Status; ToJsonUtilS(Status, each_Status); output["Status"] = each_Status;
+                Json::Value each_TicketId; ToJsonUtilS(TicketId, each_TicketId); output["TicketId"] = each_TicketId;
                 return output;
             }
         };
@@ -4487,6 +4779,69 @@ namespace PlayFab
                 Json::Value each_PageSize; ToJsonUtilP(PageSize, each_PageSize); output["PageSize"] = each_PageSize;
                 Json::Value each_QosServers; ToJsonUtilO(QosServers, each_QosServers); output["QosServers"] = each_QosServers;
                 Json::Value each_SkipToken; ToJsonUtilS(SkipToken, each_SkipToken); output["SkipToken"] = each_SkipToken;
+                return output;
+            }
+        };
+
+        struct ListServerBackfillTicketsForPlayerRequest : public PlayFabRequestCommon
+        {
+            EntityKey Entity;
+            std::string QueueName;
+
+            ListServerBackfillTicketsForPlayerRequest() :
+                PlayFabRequestCommon(),
+                Entity(),
+                QueueName()
+            {}
+
+            ListServerBackfillTicketsForPlayerRequest(const ListServerBackfillTicketsForPlayerRequest& src) :
+                PlayFabRequestCommon(),
+                Entity(src.Entity),
+                QueueName(src.QueueName)
+            {}
+
+            ~ListServerBackfillTicketsForPlayerRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["Entity"], Entity);
+                FromJsonUtilS(input["QueueName"], QueueName);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
+                return output;
+            }
+        };
+
+        struct ListServerBackfillTicketsForPlayerResult : public PlayFabResultCommon
+        {
+            std::list<std::string> TicketIds;
+
+            ListServerBackfillTicketsForPlayerResult() :
+                PlayFabResultCommon(),
+                TicketIds()
+            {}
+
+            ListServerBackfillTicketsForPlayerResult(const ListServerBackfillTicketsForPlayerResult& src) :
+                PlayFabResultCommon(),
+                TicketIds(src.TicketIds)
+            {}
+
+            ~ListServerBackfillTicketsForPlayerResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["TicketIds"], TicketIds);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_TicketIds; ToJsonUtilS(TicketIds, each_TicketIds); output["TicketIds"] = each_TicketIds;
                 return output;
             }
         };

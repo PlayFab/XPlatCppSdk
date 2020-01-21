@@ -2,9 +2,11 @@
 
 #ifndef DISABLE_PLAYFABENTITY_API
 
-#include <chrono>
 #include <playfab/PlayFabEventPipeline.h>
-#include <playfab/PlayFabEventsApi.h>
+#include <playfab/PlayFabEventsInstanceApi.h>
+#include <playfab/PlayFabSettings.h>
+
+#include <chrono>
 
 namespace PlayFab
 {
@@ -40,6 +42,8 @@ namespace PlayFab
         buffer(settings->bufferSize),
         isWorkerThreadRunning(false)
     {
+        eventsApi = std::make_shared<PlayFabEventsInstanceAPI>(PlayFabSettings::staticPlayer);
+
         this->settings = settings;
         this->batch.reserve(this->settings->maximalNumberOfItemsInBatch);
         this->batchesInFlight.reserve(this->settings->maximalNumberOfBatchesInFlight);
@@ -261,7 +265,7 @@ namespace PlayFab
         if (this->settings->emitType == PlayFabEventPipelineType::PlayFabPlayStream)
         {
             // call Events API to send the batch
-            PlayFabEventsAPI::WriteEvents(
+            eventsApi->WriteEvents(
                 batchReq,
                 std::bind(&PlayFabEventPipeline::WriteEventsApiCallback, this, std::placeholders::_1, std::placeholders::_2),
                 std::bind(&PlayFabEventPipeline::WriteEventsApiErrorCallback, this, std::placeholders::_1, std::placeholders::_2),
@@ -270,7 +274,7 @@ namespace PlayFab
         else
         {
             // call Events API to send the batch, bypassing Playstream
-            PlayFabEventsAPI::WriteTelemetryEvents(
+            eventsApi->WriteTelemetryEvents(
                 batchReq,
                 std::bind(&PlayFabEventPipeline::WriteEventsApiCallback, this, std::placeholders::_1, std::placeholders::_2),
                 std::bind(&PlayFabEventPipeline::WriteEventsApiErrorCallback, this, std::placeholders::_1, std::placeholders::_2),

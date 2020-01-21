@@ -2,8 +2,9 @@
 
 #ifndef DISABLE_PLAYFABENTITY_API
 
-#include <playfab/PlayFabEvent.h>
 #include <playfab/PlayFabEventPipeline.h>
+
+#include <unordered_map>
 
 namespace PlayFab
 {
@@ -33,7 +34,7 @@ namespace PlayFab
     /// <summary>
     /// Default implementation of event router
     /// </summary>
-    class PlayFabEventRouter: public IPlayFabEventRouter
+    class PlayFabEventRouter : public IPlayFabEventRouter
     {
     public:
         PlayFabEventRouter();

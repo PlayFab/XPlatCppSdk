@@ -1,12 +1,10 @@
 #include <stdafx.h>
 
-#ifndef DISABLE_PLAYFABCLIENT_API
+#if !defined(DISABLE_PLAYFABCLIENT_API)
 
 #include <playfab/PlayFabClientInstanceApi.h>
 #include <playfab/PlayFabPluginManager.h>
 #include <playfab/PlayFabSettings.h>
-#include <playfab/PlayFabError.h>
-#include <memory>
 
 #if defined(PLAYFAB_PLATFORM_WINDOWS)
 #pragma warning (disable: 4100) // formal parameters are part of a public interface

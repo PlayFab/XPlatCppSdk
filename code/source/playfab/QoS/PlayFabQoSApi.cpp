@@ -6,11 +6,9 @@
 #include <playfab/QoS/PingResult.h>
 #include <playfab/QoS/PlayFabQoSApi.h>
 
-#include <playfab/PlayFabClientApi.h>
-#include <playfab/PlayFabClientDataModels.h>
-#include <playfab/PlayFabMultiplayerApi.h>
+#include <playfab/PlayFabMultiplayerInstanceApi.h>
 #include <playfab/PlayFabMultiplayerDataModels.h>
-#include <playfab/PlayFabEventsApi.h>
+#include <playfab/PlayFabEventsInstanceApi.h>
 #include <playfab/PlayFabEventsDataModels.h>
 #include <playfab/PlayFabSettings.h>
 #include <playfab/PlayFabPluginManager.h>
@@ -23,6 +21,12 @@ namespace PlayFab
 {
     namespace QoS
     {
+        PlayFabQoSApi::PlayFabQoSApi()
+        {
+            eventsApi = std::make_shared<PlayFabEventsInstanceAPI>(PlayFabSettings::staticPlayer);
+            multiplayerApi = std::make_shared<PlayFabMultiplayerInstanceAPI>(PlayFabSettings::staticPlayer);
+        }
+
         bool ValidateResult(PlayFabResultCommon& resultCommon, const CallRequestContainer& container)
         {
             if (container.errorWrapper.HttpCode == 200)
@@ -68,7 +72,7 @@ namespace PlayFab
         {
             QoSResult result;
 
-            if (!PlayFabClientAPI::IsClientLoggedIn())
+            if (!PlayFabSettings::staticPlayer->IsClientLoggedIn())
             {
                 LOG_QOS("Client is not logged in" << endl);
                 result.errorCode = static_cast<int>(QoSErrorCode::NotLoggedIn);
@@ -160,7 +164,7 @@ namespace PlayFab
             eventContents.Payload = value;
             request.Events.push_back(eventContents);
 
-            PlayFabEventsAPI::WriteTelemetryEvents(request, WriteEventsSuccessCallBack, WriteEventsFailureCallBack);
+            eventsApi->WriteTelemetryEvents(request, WriteEventsSuccessCallBack, WriteEventsFailureCallBack);
         }
 
         void PlayFabQoSApi::WriteEventsSuccessCallBack(const WriteEventsResponse&, void*)
@@ -183,7 +187,7 @@ namespace PlayFab
             }
 
             ListQosServersRequest request;
-            PlayFabMultiplayerAPI::ListQosServers(request, ListQosServersSuccessCallBack, ListQosServersFailureCallBack, reinterpret_cast<void*>(this));
+            multiplayerApi->ListQosServers(request, ListQosServersSuccessCallBack, ListQosServersFailureCallBack, reinterpret_cast<void*>(this));
         }
 
         void PlayFabQoSApi::ListQosServersSuccessCallBack(const ListQosServersResponse& result, void* customData)
@@ -191,7 +195,7 @@ namespace PlayFab
             // Custom data received is a pointer to our api object
             PlayFabQoSApi* api = reinterpret_cast<PlayFabQoSApi*>(customData);
 
-            for(const QosServer& server :result.QosServers)
+            for (const QosServer& server : result.QosServers)
             {
                 api->regionMap[server.Region] = server.ServerUrl;
             }

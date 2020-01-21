@@ -9,7 +9,7 @@ namespace PlayFab
     /// </summary>
     class PlayFabAuthenticationContext
     {
-#ifndef DISABLE_PLAYFABCLIENT_API
+#if !defined(DISABLE_PLAYFABCLIENT_API)
     public: // Client-only variables should only be visible when appropriate
 #else
     private: // But, static library memory size and alloc issues mean it always needs to exist
@@ -36,5 +36,7 @@ namespace PlayFab
 
         void HandlePlayFabLogin(const std::string& _playFabId, const std::string& _clientSessionTicket, const std::string& _entityId, const std::string& _entityType, const std::string& _entityToken);
         void ForgetAllCredentials();
+        bool IsClientLoggedIn();
+        bool IsEntityLoggedIn();
     };
 }

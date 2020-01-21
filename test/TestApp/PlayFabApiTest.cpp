@@ -2,19 +2,16 @@
 
 #include "TestAppPch.h"
 
-#ifndef DISABLE_PLAYFABCLIENT_API
+#if !defined(DISABLE_PLAYFABCLIENT_API)
 
 #include <chrono>
 
 #include <playfab/PlayFabApiSettings.h>
 #include <playfab/PlayFabSettings.h>
 
-#include <playfab/PlayFabAuthenticationApi.h>
-#include <playfab/PlayFabAuthenticationDataModels.h>
-#include <playfab/PlayFabClientApi.h>
-#include <playfab/PlayFabClientDataModels.h>
-#include <playfab/PlayFabDataApi.h>
-#include <playfab/PlayFabDataDataModels.h>
+#include <playfab/PlayFabAuthenticationInstanceApi.h>
+#include <playfab/PlayFabClientInstanceApi.h>
+#include <playfab/PlayFabDataInstanceApi.h>
 
 #include "PlayFabApiTest.h"
 #include "TestContext.h"
@@ -32,7 +29,7 @@ namespace PlayFabUnit
     void PlayFabApiTest::OnErrorSharedCallback(const PlayFabError& error, void* customData)
     {
         TestContext* testContext = static_cast<TestContext*>(customData);
-        testContext->Fail("Unexpected error: " + error.ErrorMessage);
+        testContext->Fail("Unexpected error: " + error.GenerateErrorReport());
     }
 
     // CLIENT API
@@ -50,7 +47,7 @@ namespace PlayFabUnit
     //    // set invalid title id
     //    PlayFabSettings::staticSettings->titleId = "";
 
-    //    PlayFabClientAPI::LoginWithCustomID(request,
+    //    clientApi->LoginWithCustomID(request,
     //        [&validTitleId](const LoginResult&, void* customData)
     //    {
     //        PlayFabSettings::staticSettings->titleId = validTitleId;
@@ -81,7 +78,7 @@ namespace PlayFabUnit
         request.Email = USER_EMAIL;
         request.Password = "INVALID";
 
-        PlayFabClientAPI::LoginWithEmailAddress(request,
+        clientApi->LoginWithEmailAddress(request,
             Callback(&PlayFabApiTest::LoginCallback),
             Callback(&PlayFabApiTest::LoginFailedCallback),
             &testContext);
@@ -104,7 +101,7 @@ namespace PlayFabUnit
         }
         else
         {
-            testContext->Fail("Password error message not found: " + error.ErrorMessage);
+            testContext->Fail("Password error message not found: " + error.GenerateErrorReport());
         }
     }
 
@@ -116,7 +113,7 @@ namespace PlayFabUnit
         request.Email = USER_EMAIL;
         request.Password = "INVALID";
 
-        PlayFabClientAPI::LoginWithEmailAddress(request,
+        clientApi->LoginWithEmailAddress(request,
             nullptr,
             [](const PlayFabError& error, void* customData) { TestContext* testContext = static_cast<TestContext*>(customData); if (error.ErrorMessage.find("password") != -1) testContext->Pass(); },
             &testContext);
@@ -132,7 +129,7 @@ namespace PlayFabUnit
         request.Email = "x";
         request.Password = "x";
 
-        PlayFabClientAPI::RegisterPlayFabUser(request,
+        clientApi->RegisterPlayFabUser(request,
             Callback(&PlayFabApiTest::InvalidRegistrationSuccess),
             Callback(&PlayFabApiTest::InvalidRegistrationFail),
             &testContext);
@@ -171,14 +168,13 @@ namespace PlayFabUnit
         request.CustomId = PlayFabSettings::buildIdentifier;
         request.CreateAccount = true;
 
-        PlayFabClientAPI::LoginWithCustomID(request,
+        clientApi->LoginWithCustomID(request,
             Callback(&PlayFabApiTest::OnLoginOrRegister),
             Callback(&PlayFabApiTest::OnErrorSharedCallback),
             &testContext);
     }
-    void PlayFabApiTest::OnLoginOrRegister(const LoginResult& result, void* customData)
+    void PlayFabApiTest::OnLoginOrRegister(const LoginResult& /*result*/, void* customData)
     {
-        playFabId = result.PlayFabId;
         TestContext* testContext = static_cast<TestContext*>(customData);
         testContext->Pass();
     }
@@ -194,7 +190,7 @@ namespace PlayFabUnit
         request.CustomId = PlayFabSettings::buildIdentifier;
         request.CreateAccount = true;
 
-        PlayFabClientAPI::LoginWithCustomID(request,
+        clientApi->LoginWithCustomID(request,
             Callback(&PlayFabApiTest::OnLoginWithAdvertisingId),
             Callback(&PlayFabApiTest::OnErrorSharedCallback),
             &testContext);
@@ -214,14 +210,14 @@ namespace PlayFabUnit
     // Parameter types tested: string, Dictionary<string, string>
     void PlayFabApiTest::UserDataApi(TestContext& testContext)
     {
-        if (!PlayFabClientAPI::IsClientLoggedIn())
+        if (!clientApi->IsClientLoggedIn())
         {
             testContext.Skip("Earlier tests failed to log in");
             return;
         }
 
         GetUserDataRequest request;
-        PlayFabClientAPI::GetUserData(request,
+        clientApi->GetUserData(request,
             Callback(&PlayFabApiTest::OnUserDataApiGet1),
             Callback(&PlayFabApiTest::OnErrorSharedCallback),
             &testContext);
@@ -238,7 +234,7 @@ namespace PlayFabUnit
         std::string temp = std::to_string(testMessageInt);
 
         updateRequest.Data[TEST_DATA_KEY] = temp;
-        PlayFabClientAPI::UpdateUserData(updateRequest,
+        clientApi->UpdateUserData(updateRequest,
             Callback(&PlayFabApiTest::OnUserDataApiUpdate),
             Callback(&PlayFabApiTest::OnErrorSharedCallback),
             customData);
@@ -246,7 +242,7 @@ namespace PlayFabUnit
     void PlayFabApiTest::OnUserDataApiUpdate(const UpdateUserDataResult&, void* customData)
     {
         GetUserDataRequest request;
-        PlayFabClientAPI::GetUserData(request,
+        clientApi->GetUserData(request,
             Callback(&PlayFabApiTest::OnUserDataApiGet2),
             Callback(&PlayFabApiTest::OnErrorSharedCallback),
             customData);
@@ -294,14 +290,14 @@ namespace PlayFabUnit
             return;
         }
 
-        if (!PlayFabClientAPI::IsClientLoggedIn())
+        if (!clientApi->IsClientLoggedIn())
         {
             testContext.Skip("Earlier tests failed to log in");
             return;
         }
 
         GetTimeRequest request;
-        PlayFabClientAPI::GetTime(request,
+        clientApi->GetTime(request,
             Callback(&PlayFabApiTest::OnGetServerTime),
             Callback(&PlayFabApiTest::OnErrorSharedCallback),
             &testContext);
@@ -330,14 +326,14 @@ namespace PlayFabUnit
     // Parameter types tested: Dictionary<string, int>
     void PlayFabApiTest::PlayerStatisticsApi(TestContext& testContext)
     {
-        if (!PlayFabClientAPI::IsClientLoggedIn())
+        if (!clientApi->IsClientLoggedIn())
         {
             testContext.Skip("Earlier tests failed to log in");
             return;
         }
 
         GetPlayerStatisticsRequest request;
-        PlayFabClientAPI::GetPlayerStatistics(request,
+        clientApi->GetPlayerStatistics(request,
             Callback(&PlayFabApiTest::OnPlayerStatisticsApiGet1),
             Callback(&PlayFabApiTest::OnErrorSharedCallback),
             &testContext);
@@ -362,7 +358,7 @@ namespace PlayFabUnit
         updateStat.Value = testMessageInt;
         updateRequest.Statistics.insert(updateRequest.Statistics.end(), updateStat);
 
-        PlayFabClientAPI::UpdatePlayerStatistics(updateRequest,
+        clientApi->UpdatePlayerStatistics(updateRequest,
             Callback(&PlayFabApiTest::OnPlayerStatisticsApiUpdate),
             Callback(&PlayFabApiTest::OnErrorSharedCallback),
             customData);
@@ -371,7 +367,7 @@ namespace PlayFabUnit
     void PlayFabApiTest::OnPlayerStatisticsApiUpdate(const UpdatePlayerStatisticsResult&, void* customData)
     {
         GetPlayerStatisticsRequest request;
-        PlayFabClientAPI::GetPlayerStatistics(request,
+        clientApi->GetPlayerStatistics(request,
             Callback(&PlayFabApiTest::OnPlayerStatisticsApiGet2),
             Callback(&PlayFabApiTest::OnErrorSharedCallback),
             customData);
@@ -408,14 +404,14 @@ namespace PlayFabUnit
     // Parameter types tested: Contained-Classes, string
     void PlayFabApiTest::UserCharacter(TestContext& testContext)
     {
-        if (!PlayFabClientAPI::IsClientLoggedIn())
+        if (!clientApi->IsClientLoggedIn())
         {
             testContext.Skip("Earlier tests failed to log in");
             return;
         }
 
         ListUsersCharactersRequest request;
-        PlayFabClientAPI::GetAllUsersCharacters(request,
+        clientApi->GetAllUsersCharacters(request,
             Callback(&PlayFabApiTest::OnUserCharacter),
             Callback(&PlayFabApiTest::OnErrorSharedCallback),
             &testContext);
@@ -432,7 +428,7 @@ namespace PlayFabUnit
     // Parameter types tested: List of contained-classes
     void PlayFabApiTest::LeaderBoard(TestContext& testContext)
     {
-        if (!PlayFabClientAPI::IsClientLoggedIn())
+        if (!clientApi->IsClientLoggedIn())
         {
             testContext.Skip("Earlier tests failed to log in");
             return;
@@ -443,7 +439,7 @@ namespace PlayFabUnit
         clientRequest.MaxResultsCount = 3;
         clientRequest.StatisticName = TEST_STAT_NAME;
 
-        PlayFabClientAPI::GetLeaderboard(clientRequest,
+        clientApi->GetLeaderboard(clientRequest,
             Callback(&PlayFabApiTest::OnClientLeaderBoard),
             Callback(&PlayFabApiTest::OnErrorSharedCallback),
             &testContext);
@@ -466,14 +462,14 @@ namespace PlayFabUnit
     // Parameter types tested: List of enum-as-strings converted to list of enums
     void PlayFabApiTest::AccountInfo(TestContext& testContext)
     {
-        if (!PlayFabClientAPI::IsClientLoggedIn())
+        if (!clientApi->IsClientLoggedIn())
         {
             testContext.Skip("Earlier tests failed to log in");
             return;
         }
 
         GetAccountInfoRequest request;
-        PlayFabClientAPI::GetAccountInfo(request,
+        clientApi->GetAccountInfo(request,
             Callback(&PlayFabApiTest::OnAccountInfo),
             Callback(&PlayFabApiTest::OnErrorSharedCallback),
             &testContext);
@@ -496,7 +492,7 @@ namespace PlayFabUnit
     // Test that CloudScript can be properly set up and invoked
     void PlayFabApiTest::CloudScript(TestContext& testContext)
     {
-        if (!PlayFabClientAPI::IsClientLoggedIn())
+        if (!PlayFabSettings::staticPlayer->IsClientLoggedIn())
         {
             testContext.Skip("Earlier tests failed to log in");
             return;
@@ -505,7 +501,7 @@ namespace PlayFabUnit
         ExecuteCloudScriptRequest request;
         request.FunctionName = "helloWorld";
 
-        PlayFabClientAPI::ExecuteCloudScript(request,
+        clientApi->ExecuteCloudScript(request,
             Callback(&PlayFabApiTest::OnHelloWorldCloudScript),
             Callback(&PlayFabApiTest::OnErrorSharedCallback),
             &testContext);
@@ -524,7 +520,7 @@ namespace PlayFabUnit
             cloudScriptLogReport += "\n" + (*it).Message;
         }
 
-        bool success = (cloudScriptLogReport.find("Hello " + playFabId + "!") != -1);
+        bool success = (cloudScriptLogReport.find("Hello " + PlayFabSettings::staticPlayer->playFabId + "!") != -1);
         if (!success)
         {
             testContext->Fail(cloudScriptLogReport);
@@ -542,7 +538,7 @@ namespace PlayFabUnit
         ExecuteCloudScriptRequest hwRequest;
         hwRequest.FunctionName = "helloWorld";
 
-        PlayFabClientAPI::ExecuteCloudScript(hwRequest,
+        clientApi->ExecuteCloudScript(hwRequest,
             [&](const ExecuteCloudScriptResult& constResult, void* customData) { OnHelloWorldCloudScript(constResult, customData); },
             Callback(&PlayFabApiTest::OnErrorSharedCallback),
             &testContext);
@@ -552,7 +548,7 @@ namespace PlayFabUnit
     // Test that CloudScript errors can be deciphered
     void PlayFabApiTest::CloudScriptError(TestContext& testContext)
     {
-        if (!PlayFabClientAPI::IsClientLoggedIn())
+        if (!clientApi->IsClientLoggedIn())
         {
             testContext.Skip("Earlier tests failed to log in");
             return;
@@ -561,7 +557,7 @@ namespace PlayFabUnit
         ExecuteCloudScriptRequest request;
         request.FunctionName = "throwError";
 
-        PlayFabClientAPI::ExecuteCloudScript(request,
+        clientApi->ExecuteCloudScript(request,
             Callback(&PlayFabApiTest::OnCloudScriptError),
             Callback(&PlayFabApiTest::OnErrorSharedCallback),
             &testContext);
@@ -587,7 +583,7 @@ namespace PlayFabUnit
     // Test that the client can publish custom PlayStream events
     void PlayFabApiTest::WriteEvent(TestContext& testContext)
     {
-        if (!PlayFabClientAPI::IsClientLoggedIn())
+        if (!clientApi->IsClientLoggedIn())
         {
             testContext.Skip("Earlier tests failed to log in");
             return;
@@ -595,11 +591,10 @@ namespace PlayFabUnit
 
         WriteClientPlayerEventRequest request;
         request.EventName = "ForumPostEvent";
-        request.Timestamp = time(nullptr);
         request.Body["Subject"] = "My First Post";
         request.Body["Body"] = "My mega-sweet body text for my first post!";
 
-        PlayFabClientAPI::WritePlayerEvent(request,
+        clientApi->WritePlayerEvent(request,
             Callback(&PlayFabApiTest::OnWritePlayerEvent),
             Callback(&PlayFabApiTest::OnErrorSharedCallback),
             &testContext);
@@ -614,14 +609,14 @@ namespace PlayFabUnit
     // Verify that a client login can be converted into an entity token
     void PlayFabApiTest::GetEntityToken(TestContext& testContext)
     {
-        if (!PlayFabClientAPI::IsClientLoggedIn())
+        if (!clientApi->IsClientLoggedIn())
         {
             testContext.Skip("Earlier tests failed to log in");
             return;
         }
 
         GetEntityTokenRequest request;
-        PlayFabAuthenticationAPI::GetEntityToken(request,
+        authApi->GetEntityToken(request,
             Callback(&PlayFabApiTest::OnGetEntityToken),
             Callback(&PlayFabApiTest::OnErrorSharedCallback),
             &testContext);
@@ -630,14 +625,11 @@ namespace PlayFabUnit
     {
         TestContext* testContext = static_cast<TestContext*>(customData);
 
-        entityId = result.Entity->Id;
-        entityType = result.Entity->Type;
-
-        if (entityType != "title_player_account")
+        if (result.Entity->Type != "title_player_account")
         {
-            testContext->Fail("entityType unexpected: " + entityType);
+            testContext->Fail("entityType unexpected: " + result.Entity->Type);
         }
-        else if (entityId.length() == 0)
+        else if (result.Entity->Id.length() == 0)
         {
             testContext->Fail("EntityID was empty");
         }
@@ -653,17 +645,17 @@ namespace PlayFabUnit
     // Verify that the object is correctly modified on the next call.
     void PlayFabApiTest::ObjectApi(TestContext& testContext)
     {
-        if (!PlayFabClientAPI::IsClientLoggedIn())
+        if (!clientApi->IsClientLoggedIn())
         {
             testContext.Skip("Earlier tests failed to log in");
             return;
         }
 
         GetObjectsRequest request;
-        request.Entity.Id = entityId;
-        request.Entity.Type = entityType;
+        request.Entity.Id = PlayFabSettings::staticPlayer->entityId;
+        request.Entity.Type = PlayFabSettings::staticPlayer->entityType;
         request.EscapeObject = true;
-        PlayFabDataAPI::GetObjects(request,
+        dataApi->GetObjects(request,
             Callback(&PlayFabApiTest::OnGetObjects1),
             Callback(&PlayFabApiTest::OnErrorSharedCallback),
             &testContext);
@@ -680,15 +672,15 @@ namespace PlayFabUnit
         testMessageInt = (testMessageInt + 1) % 100;
 
         SetObjectsRequest request;
-        request.Entity.Id = entityId;
-        request.Entity.Type = entityType;
+        request.Entity.Id = PlayFabSettings::staticPlayer->entityId;
+        request.Entity.Type = PlayFabSettings::staticPlayer->entityType;
 
         SetObject updateObj;
         updateObj.ObjectName = TEST_DATA_KEY;
         updateObj.DataObject = testMessageInt;
         request.Objects.push_back(updateObj);
 
-        PlayFabDataAPI::SetObjects(request,
+        dataApi->SetObjects(request,
             Callback(&PlayFabApiTest::OnSetObjects),
             Callback(&PlayFabApiTest::OnErrorSharedCallback),
             customData);
@@ -696,11 +688,11 @@ namespace PlayFabUnit
     void PlayFabApiTest::OnSetObjects(const SetObjectsResponse&, void* customData)
     {
         GetObjectsRequest request;
-        request.Entity.Id = entityId;
-        request.Entity.Type = entityType;
+        request.Entity.Id = PlayFabSettings::staticPlayer->entityId;
+        request.Entity.Type = PlayFabSettings::staticPlayer->entityType;
         request.EscapeObject = true;
 
-        PlayFabDataAPI::GetObjects(request,
+        dataApi->GetObjects(request,
             Callback(&PlayFabApiTest::OnGetObjects2),
             Callback(&PlayFabApiTest::OnErrorSharedCallback),
             customData);
@@ -759,6 +751,10 @@ namespace PlayFabUnit
 
     void PlayFabApiTest::ClassSetUp()
     {
+        authApi = std::make_shared<PlayFabAuthenticationInstanceAPI>(PlayFabSettings::staticPlayer);
+        clientApi = std::make_shared<PlayFabClientInstanceAPI>(PlayFabSettings::staticPlayer);
+        dataApi = std::make_shared<PlayFabDataInstanceAPI>(PlayFabSettings::staticPlayer);
+
         PlayFabSettings::staticSettings->titleId = testTitleData.titleId;
         USER_EMAIL = testTitleData.userEmail;
 
@@ -768,9 +764,6 @@ namespace PlayFabUnit
         // Make sure PlayFab state is clean.
         PlayFabSettings::ForgetAllCredentials();
 
-        playFabId = "";
-        entityId = "";
-        entityType = "";
         testMessageInt = 0;
         testMessageTime = PlayFab::GetTimePointNow();
     }

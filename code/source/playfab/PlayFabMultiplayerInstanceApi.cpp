@@ -1,12 +1,10 @@
 #include <stdafx.h>
 
-#ifndef DISABLE_PLAYFABENTITY_API
+#if !defined(DISABLE_PLAYFABENTITY_API)
 
 #include <playfab/PlayFabMultiplayerInstanceApi.h>
 #include <playfab/PlayFabPluginManager.h>
 #include <playfab/PlayFabSettings.h>
-#include <playfab/PlayFabError.h>
-#include <memory>
 
 #if defined(PLAYFAB_PLATFORM_WINDOWS)
 #pragma warning (disable: 4100) // formal parameters are part of a public interface
@@ -111,6 +109,56 @@ namespace PlayFab
         }
     }
 
+    void PlayFabMultiplayerInstanceAPI::CancelAllServerBackfillTicketsForPlayer(
+        CancelAllServerBackfillTicketsForPlayerRequest& request,
+        const ProcessApiCallback<CancelAllServerBackfillTicketsForPlayerResult> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : this->m_context;
+        std::shared_ptr<PlayFabApiSettings> settings = this->m_settings != nullptr ? this->m_settings : PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = request.authenticationContext == nullptr ? this->m_context : request.authenticationContext;
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", context->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Match/CancelAllServerBackfillTicketsForPlayer",
+            headers,
+            jsonAsString,
+            std::bind(&PlayFabMultiplayerInstanceAPI::OnCancelAllServerBackfillTicketsForPlayerResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CancelAllServerBackfillTicketsForPlayerResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabMultiplayerInstanceAPI::OnCancelAllServerBackfillTicketsForPlayerResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        CancelAllServerBackfillTicketsForPlayerResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = *static_cast<ProcessApiCallback<CancelAllServerBackfillTicketsForPlayerResult> *>(internalPtr.get());
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
     void PlayFabMultiplayerInstanceAPI::CancelMatchmakingTicket(
         CancelMatchmakingTicketRequest& request,
         const ProcessApiCallback<CancelMatchmakingTicketResult> callback,
@@ -156,6 +204,56 @@ namespace PlayFab
             if (internalPtr.get() != nullptr)
             {
                 const auto& callback = *static_cast<ProcessApiCallback<CancelMatchmakingTicketResult> *>(internalPtr.get());
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabMultiplayerInstanceAPI::CancelServerBackfillTicket(
+        CancelServerBackfillTicketRequest& request,
+        const ProcessApiCallback<CancelServerBackfillTicketResult> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : this->m_context;
+        std::shared_ptr<PlayFabApiSettings> settings = this->m_settings != nullptr ? this->m_settings : PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = request.authenticationContext == nullptr ? this->m_context : request.authenticationContext;
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", context->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Match/CancelServerBackfillTicket",
+            headers,
+            jsonAsString,
+            std::bind(&PlayFabMultiplayerInstanceAPI::OnCancelServerBackfillTicketResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CancelServerBackfillTicketResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabMultiplayerInstanceAPI::OnCancelServerBackfillTicketResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        CancelServerBackfillTicketResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = *static_cast<ProcessApiCallback<CancelServerBackfillTicketResult> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -406,6 +504,56 @@ namespace PlayFab
             if (internalPtr.get() != nullptr)
             {
                 const auto& callback = *static_cast<ProcessApiCallback<CreateRemoteUserResponse> *>(internalPtr.get());
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabMultiplayerInstanceAPI::CreateServerBackfillTicket(
+        CreateServerBackfillTicketRequest& request,
+        const ProcessApiCallback<CreateServerBackfillTicketResult> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : this->m_context;
+        std::shared_ptr<PlayFabApiSettings> settings = this->m_settings != nullptr ? this->m_settings : PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = request.authenticationContext == nullptr ? this->m_context : request.authenticationContext;
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", context->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Match/CreateServerBackfillTicket",
+            headers,
+            jsonAsString,
+            std::bind(&PlayFabMultiplayerInstanceAPI::OnCreateServerBackfillTicketResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateServerBackfillTicketResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabMultiplayerInstanceAPI::OnCreateServerBackfillTicketResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        CreateServerBackfillTicketResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = *static_cast<ProcessApiCallback<CreateServerBackfillTicketResult> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -1261,6 +1409,56 @@ namespace PlayFab
         }
     }
 
+    void PlayFabMultiplayerInstanceAPI::GetServerBackfillTicket(
+        GetServerBackfillTicketRequest& request,
+        const ProcessApiCallback<GetServerBackfillTicketResult> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : this->m_context;
+        std::shared_ptr<PlayFabApiSettings> settings = this->m_settings != nullptr ? this->m_settings : PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = request.authenticationContext == nullptr ? this->m_context : request.authenticationContext;
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", context->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Match/GetServerBackfillTicket",
+            headers,
+            jsonAsString,
+            std::bind(&PlayFabMultiplayerInstanceAPI::OnGetServerBackfillTicketResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetServerBackfillTicketResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabMultiplayerInstanceAPI::OnGetServerBackfillTicketResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        GetServerBackfillTicketResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = *static_cast<ProcessApiCallback<GetServerBackfillTicketResult> *>(internalPtr.get());
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
     void PlayFabMultiplayerInstanceAPI::GetTitleEnabledForMultiplayerServersStatus(
         GetTitleEnabledForMultiplayerServersStatusRequest& request,
         const ProcessApiCallback<GetTitleEnabledForMultiplayerServersStatusResponse> callback,
@@ -2005,6 +2203,56 @@ namespace PlayFab
             if (internalPtr.get() != nullptr)
             {
                 const auto& callback = *static_cast<ProcessApiCallback<ListQosServersForTitleResponse> *>(internalPtr.get());
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabMultiplayerInstanceAPI::ListServerBackfillTicketsForPlayer(
+        ListServerBackfillTicketsForPlayerRequest& request,
+        const ProcessApiCallback<ListServerBackfillTicketsForPlayerResult> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : this->m_context;
+        std::shared_ptr<PlayFabApiSettings> settings = this->m_settings != nullptr ? this->m_settings : PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = request.authenticationContext == nullptr ? this->m_context : request.authenticationContext;
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", context->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Match/ListServerBackfillTicketsForPlayer",
+            headers,
+            jsonAsString,
+            std::bind(&PlayFabMultiplayerInstanceAPI::OnListServerBackfillTicketsForPlayerResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListServerBackfillTicketsForPlayerResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabMultiplayerInstanceAPI::OnListServerBackfillTicketsForPlayerResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        ListServerBackfillTicketsForPlayerResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = *static_cast<ProcessApiCallback<ListServerBackfillTicketsForPlayerResult> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }

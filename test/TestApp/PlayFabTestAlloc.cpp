@@ -46,21 +46,21 @@ namespace PlayFabUnit
         // Context
         PlayFab::PlayFabAuthenticationContext* testPtrContext = new PlayFab::PlayFabAuthenticationContext();
         testPtrContext->entityId = "this should succeed";
-#ifndef DISABLE_PLAYFABCLIENT_API
+#if !defined(DISABLE_PLAYFABCLIENT_API)
         testPtrContext->playFabId = "this is conditional";
 #endif
         delete testPtrContext;
 
         std::shared_ptr<PlayFab::PlayFabAuthenticationContext> testMSPContext = std::make_shared<PlayFab::PlayFabAuthenticationContext>();
         testMSPContext->entityId = "this should succeed";
-#ifndef DISABLE_PLAYFABCLIENT_API
+#if !defined(DISABLE_PLAYFABCLIENT_API)
         testMSPContext->playFabId = "this is conditional";
 #endif
         testMSPContext.reset();
 
         std::shared_ptr<PlayFab::PlayFabAuthenticationContext> testNSpContext = std::shared_ptr<PlayFab::PlayFabAuthenticationContext>(new PlayFab::PlayFabAuthenticationContext());
         testNSpContext->entityId = "this should succeed";
-#ifndef DISABLE_PLAYFABCLIENT_API
+#if !defined(DISABLE_PLAYFABCLIENT_API)
         testNSpContext->playFabId = "this is conditional";
 #endif
         testNSpContext.reset();
