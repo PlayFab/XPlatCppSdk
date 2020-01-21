@@ -1,6 +1,6 @@
 #pragma once
 
-#ifndef DISABLE_PLAYFABCLIENT_API
+#if !defined(DISABLE_PLAYFABCLIENT_API)
 
 #include <playfab/PlayFabBaseModel.h>
 #include <playfab/PlayFabJsonHeaders.h>
@@ -19383,7 +19383,6 @@ namespace PlayFab
         {
             Json::Value Body; // Not truly arbitrary. See documentation for restrictions on format
             std::string CharacterId;
-            std::map<std::string, std::string> EventCustomTags;
             std::string EventName;
             Boxed<time_t> Timestamp;
 
@@ -19391,7 +19390,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 Body(),
                 CharacterId(),
-                EventCustomTags(),
                 EventName(),
                 Timestamp()
             {}
@@ -19400,7 +19398,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 Body(src.Body),
                 CharacterId(src.CharacterId),
-                EventCustomTags(src.EventCustomTags),
                 EventName(src.EventName),
                 Timestamp(src.Timestamp)
             {}
@@ -19411,7 +19408,6 @@ namespace PlayFab
             {
                 Body = input["Body"];
                 FromJsonUtilS(input["CharacterId"], CharacterId);
-                FromJsonUtilS(input["EventCustomTags"], EventCustomTags);
                 FromJsonUtilS(input["EventName"], EventName);
                 FromJsonUtilT(input["Timestamp"], Timestamp);
             }
@@ -19421,7 +19417,6 @@ namespace PlayFab
                 Json::Value output;
                 output["Body"] = Body;
                 Json::Value each_CharacterId; ToJsonUtilS(CharacterId, each_CharacterId); output["CharacterId"] = each_CharacterId;
-                Json::Value each_EventCustomTags; ToJsonUtilS(EventCustomTags, each_EventCustomTags); output["EventCustomTags"] = each_EventCustomTags;
                 Json::Value each_EventName; ToJsonUtilS(EventName, each_EventName); output["EventName"] = each_EventName;
                 Json::Value each_Timestamp; ToJsonUtilT(Timestamp, each_Timestamp); output["Timestamp"] = each_Timestamp;
                 return output;
@@ -19431,14 +19426,12 @@ namespace PlayFab
         struct WriteClientPlayerEventRequest : public PlayFabRequestCommon
         {
             Json::Value Body; // Not truly arbitrary. See documentation for restrictions on format
-            std::map<std::string, std::string> EventCustomTags;
             std::string EventName;
             Boxed<time_t> Timestamp;
 
             WriteClientPlayerEventRequest() :
                 PlayFabRequestCommon(),
                 Body(),
-                EventCustomTags(),
                 EventName(),
                 Timestamp()
             {}
@@ -19446,7 +19439,6 @@ namespace PlayFab
             WriteClientPlayerEventRequest(const WriteClientPlayerEventRequest& src) :
                 PlayFabRequestCommon(),
                 Body(src.Body),
-                EventCustomTags(src.EventCustomTags),
                 EventName(src.EventName),
                 Timestamp(src.Timestamp)
             {}
@@ -19456,7 +19448,6 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 Body = input["Body"];
-                FromJsonUtilS(input["EventCustomTags"], EventCustomTags);
                 FromJsonUtilS(input["EventName"], EventName);
                 FromJsonUtilT(input["Timestamp"], Timestamp);
             }
@@ -19465,7 +19456,6 @@ namespace PlayFab
             {
                 Json::Value output;
                 output["Body"] = Body;
-                Json::Value each_EventCustomTags; ToJsonUtilS(EventCustomTags, each_EventCustomTags); output["EventCustomTags"] = each_EventCustomTags;
                 Json::Value each_EventName; ToJsonUtilS(EventName, each_EventName); output["EventName"] = each_EventName;
                 Json::Value each_Timestamp; ToJsonUtilT(Timestamp, each_Timestamp); output["Timestamp"] = each_Timestamp;
                 return output;
@@ -19504,14 +19494,12 @@ namespace PlayFab
         struct WriteTitleEventRequest : public PlayFabRequestCommon
         {
             Json::Value Body; // Not truly arbitrary. See documentation for restrictions on format
-            std::map<std::string, std::string> EventCustomTags;
             std::string EventName;
             Boxed<time_t> Timestamp;
 
             WriteTitleEventRequest() :
                 PlayFabRequestCommon(),
                 Body(),
-                EventCustomTags(),
                 EventName(),
                 Timestamp()
             {}
@@ -19519,7 +19507,6 @@ namespace PlayFab
             WriteTitleEventRequest(const WriteTitleEventRequest& src) :
                 PlayFabRequestCommon(),
                 Body(src.Body),
-                EventCustomTags(src.EventCustomTags),
                 EventName(src.EventName),
                 Timestamp(src.Timestamp)
             {}
@@ -19529,7 +19516,6 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 Body = input["Body"];
-                FromJsonUtilS(input["EventCustomTags"], EventCustomTags);
                 FromJsonUtilS(input["EventName"], EventName);
                 FromJsonUtilT(input["Timestamp"], Timestamp);
             }
@@ -19538,7 +19524,6 @@ namespace PlayFab
             {
                 Json::Value output;
                 output["Body"] = Body;
-                Json::Value each_EventCustomTags; ToJsonUtilS(EventCustomTags, each_EventCustomTags); output["EventCustomTags"] = each_EventCustomTags;
                 Json::Value each_EventName; ToJsonUtilS(EventName, each_EventName); output["EventName"] = each_EventName;
                 Json::Value each_Timestamp; ToJsonUtilT(Timestamp, each_Timestamp); output["Timestamp"] = each_Timestamp;
                 return output;

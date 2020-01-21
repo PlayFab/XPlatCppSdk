@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef ENABLE_PLAYFABADMIN_API
+#if defined(ENABLE_PLAYFABADMIN_API)
 
 #include <playfab/PlayFabBaseModel.h>
 #include <playfab/PlayFabJsonHeaders.h>
@@ -5377,6 +5377,7 @@ namespace PlayFab
             GenericErrorCodesInsightsManagementTitleInEvaluationMode,
             GenericErrorCodesCloudScriptAzureFunctionsQueueRequestError,
             GenericErrorCodesEvaluationModeTitleCountExceeded,
+            GenericErrorCodesInsightsManagementTitleNotInFlight,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -7877,6 +7878,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesEvaluationModeTitleCountExceeded)
             {
                 output = Json::Value("EvaluationModeTitleCountExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInsightsManagementTitleNotInFlight)
+            {
+                output = Json::Value("InsightsManagementTitleNotInFlight");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -10675,6 +10681,11 @@ namespace PlayFab
             if (inputStr == "EvaluationModeTitleCountExceeded")
             {
                 output = GenericErrorCodes::GenericErrorCodesEvaluationModeTitleCountExceeded;
+                return;
+            }
+            if (inputStr == "InsightsManagementTitleNotInFlight")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInsightsManagementTitleNotInFlight;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")

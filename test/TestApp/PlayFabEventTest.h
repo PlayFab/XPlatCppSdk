@@ -2,7 +2,7 @@
 
 #pragma once
 
-#ifndef DISABLE_PLAYFABCLIENT_API
+#if !defined(DISABLE_PLAYFABCLIENT_API)
 
 #include <functional>
 #include <string>
@@ -34,6 +34,9 @@ namespace PlayFabUnit
     class PlayFabEventTest : public PlayFabApiTestCase
     {
     private:
+        std::shared_ptr<PlayFab::PlayFabClientInstanceAPI> clientApi;
+        std::shared_ptr<PlayFab::PlayFabEventsInstanceAPI> eventsApi;
+
         /// QoS API
         void QosResultApi(TestContext& testContext);
 

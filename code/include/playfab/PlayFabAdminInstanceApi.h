@@ -1,14 +1,17 @@
 #pragma once
 
-#ifdef ENABLE_PLAYFABADMIN_API
+#if defined(ENABLE_PLAYFABADMIN_API)
 
-#include <playfab/PlayFabCallRequestContainer.h>
-#include <playfab/PlayFabApiSettings.h>
 #include <playfab/PlayFabAdminDataModels.h>
-#include <memory>
+#include <playfab/PlayFabError.h>
 
 namespace PlayFab
 {
+    class CallRequestContainerBase;
+    class CallRequestContainer;
+    class PlayFabApiSettings;
+    class PlayFabAuthenticationContext;
+
     /// <summary>
     /// Main interface for PlayFab Sdk, specifically all Admin APIs
     /// </summary>

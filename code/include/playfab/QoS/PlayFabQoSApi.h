@@ -1,22 +1,28 @@
 #pragma once
 
-#include <future>
-#include <chrono>
 
 #include <playfab/QoS/QoS.h>
 #include <playfab/QoS/QoSResult.h>
 #include <playfab/QoS/QoSSocket.h>
-#include <playfab/PlayFabMultiplayerDataModels.h>
 #include <playfab/PlayFabEventsDataModels.h>
 #include <playfab/PlayFabError.h>
 
+#include <chrono>
+#include <future>
+#include <unordered_map>
+
 namespace PlayFab
 {
+    class PlayFabEventsInstanceAPI;
+    class PlayFabMultiplayerInstanceAPI;
+
     namespace QoS
     {
         class PlayFabQoSApi
         {
         public:
+            PlayFabQoSApi();
+
             // Runs a QoS operation asynchronously. The operation pings a set of regions and returns a result with average response times.
             std::future<QoSResult> GetQoSResultAsync(unsigned int numThreads, unsigned int timeoutMs = DEFAULT_TIMEOUT_MS);
 
@@ -24,6 +30,9 @@ namespace PlayFab
             QoSResult GetQoSResult(unsigned int numThreads, unsigned int timeoutMs = DEFAULT_TIMEOUT_MS);
 
         private:
+            std::shared_ptr<PlayFabEventsInstanceAPI> eventsApi;
+            std::shared_ptr<PlayFabMultiplayerInstanceAPI> multiplayerApi;
+
             std::vector<std::string> GetPingList(unsigned int serverCount);
             void InitializeAccumulatedPingResults(std::unordered_map<std::string, PingResult>& accumulatedPingResults);
             int SetupSockets(std::vector<std::shared_ptr<QoSSocket>>& sockets, unsigned int numThreads, unsigned int timeoutMs);

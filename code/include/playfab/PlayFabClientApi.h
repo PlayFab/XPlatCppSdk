@@ -1,12 +1,15 @@
 #pragma once
 
-#ifndef DISABLE_PLAYFABCLIENT_API
+#if !defined(DISABLE_PLAYFABCLIENT_API)
 
-#include <playfab/PlayFabCallRequestContainer.h>
 #include <playfab/PlayFabClientDataModels.h>
+#include <playfab/PlayFabError.h>
 
 namespace PlayFab
 {
+    class CallRequestContainerBase;
+    class CallRequestContainer;
+
     /// <summary>
     /// Main interface for PlayFab Sdk, specifically all Client APIs
     /// </summary>
@@ -347,4 +350,4 @@ namespace PlayFab
     };
 }
 
-#endif // #ifndef DISABLE_PLAYFABCLIENT_API
+#endif // #if !defined(DISABLE_PLAYFABCLIENT_API)

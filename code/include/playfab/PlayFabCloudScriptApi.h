@@ -1,12 +1,15 @@
 #pragma once
 
-#ifndef DISABLE_PLAYFABENTITY_API
+#if !defined(DISABLE_PLAYFABENTITY_API)
 
-#include <playfab/PlayFabCallRequestContainer.h>
 #include <playfab/PlayFabCloudScriptDataModels.h>
+#include <playfab/PlayFabError.h>
 
 namespace PlayFab
 {
+    class CallRequestContainerBase;
+    class CallRequestContainer;
+
     /// <summary>
     /// Main interface for PlayFab Sdk, specifically all CloudScript APIs
     /// </summary>
@@ -31,4 +34,4 @@ namespace PlayFab
     };
 }
 
-#endif // #ifndef DISABLE_PLAYFABENTITY_API
+#endif // #if !defined(DISABLE_PLAYFABENTITY_API)

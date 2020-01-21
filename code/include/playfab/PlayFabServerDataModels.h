@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef ENABLE_PLAYFABSERVER_API
+#if defined(ENABLE_PLAYFABSERVER_API)
 
 #include <playfab/PlayFabBaseModel.h>
 #include <playfab/PlayFabJsonHeaders.h>
@@ -5279,6 +5279,7 @@ namespace PlayFab
             GenericErrorCodesInsightsManagementTitleInEvaluationMode,
             GenericErrorCodesCloudScriptAzureFunctionsQueueRequestError,
             GenericErrorCodesEvaluationModeTitleCountExceeded,
+            GenericErrorCodesInsightsManagementTitleNotInFlight,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -7779,6 +7780,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesEvaluationModeTitleCountExceeded)
             {
                 output = Json::Value("EvaluationModeTitleCountExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInsightsManagementTitleNotInFlight)
+            {
+                output = Json::Value("InsightsManagementTitleNotInFlight");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -10577,6 +10583,11 @@ namespace PlayFab
             if (inputStr == "EvaluationModeTitleCountExceeded")
             {
                 output = GenericErrorCodes::GenericErrorCodesEvaluationModeTitleCountExceeded;
+                return;
+            }
+            if (inputStr == "InsightsManagementTitleNotInFlight")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInsightsManagementTitleNotInFlight;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
@@ -19817,6 +19828,79 @@ namespace PlayFab
             }
         };
 
+        struct LinkPSNAccountRequest : public PlayFabRequestCommon
+        {
+            std::string AuthCode;
+            Boxed<bool> ForceLink;
+            Boxed<Int32> IssuerId;
+            std::string PlayFabId;
+            std::string RedirectUri;
+
+            LinkPSNAccountRequest() :
+                PlayFabRequestCommon(),
+                AuthCode(),
+                ForceLink(),
+                IssuerId(),
+                PlayFabId(),
+                RedirectUri()
+            {}
+
+            LinkPSNAccountRequest(const LinkPSNAccountRequest& src) :
+                PlayFabRequestCommon(),
+                AuthCode(src.AuthCode),
+                ForceLink(src.ForceLink),
+                IssuerId(src.IssuerId),
+                PlayFabId(src.PlayFabId),
+                RedirectUri(src.RedirectUri)
+            {}
+
+            ~LinkPSNAccountRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["AuthCode"], AuthCode);
+                FromJsonUtilP(input["ForceLink"], ForceLink);
+                FromJsonUtilP(input["IssuerId"], IssuerId);
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+                FromJsonUtilS(input["RedirectUri"], RedirectUri);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_AuthCode; ToJsonUtilS(AuthCode, each_AuthCode); output["AuthCode"] = each_AuthCode;
+                Json::Value each_ForceLink; ToJsonUtilP(ForceLink, each_ForceLink); output["ForceLink"] = each_ForceLink;
+                Json::Value each_IssuerId; ToJsonUtilP(IssuerId, each_IssuerId); output["IssuerId"] = each_IssuerId;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                Json::Value each_RedirectUri; ToJsonUtilS(RedirectUri, each_RedirectUri); output["RedirectUri"] = each_RedirectUri;
+                return output;
+            }
+        };
+
+        struct LinkPSNAccountResult : public PlayFabResultCommon
+        {
+
+            LinkPSNAccountResult() :
+                PlayFabResultCommon()
+            {}
+
+            LinkPSNAccountResult(const LinkPSNAccountResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~LinkPSNAccountResult() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
         struct LinkServerCustomIdRequest : public PlayFabRequestCommon
         {
             Boxed<bool> ForceLink;
@@ -22474,6 +22558,59 @@ namespace PlayFab
             }
         };
 
+        struct UnlinkPSNAccountRequest : public PlayFabRequestCommon
+        {
+            std::string PlayFabId;
+
+            UnlinkPSNAccountRequest() :
+                PlayFabRequestCommon(),
+                PlayFabId()
+            {}
+
+            UnlinkPSNAccountRequest(const UnlinkPSNAccountRequest& src) :
+                PlayFabRequestCommon(),
+                PlayFabId(src.PlayFabId)
+            {}
+
+            ~UnlinkPSNAccountRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                return output;
+            }
+        };
+
+        struct UnlinkPSNAccountResult : public PlayFabResultCommon
+        {
+
+            UnlinkPSNAccountResult() :
+                PlayFabResultCommon()
+            {}
+
+            UnlinkPSNAccountResult(const UnlinkPSNAccountResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~UnlinkPSNAccountResult() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
         struct UnlinkServerCustomIdRequest : public PlayFabRequestCommon
         {
             std::string PlayFabId;
@@ -23344,7 +23481,6 @@ namespace PlayFab
         {
             Json::Value Body; // Not truly arbitrary. See documentation for restrictions on format
             std::string CharacterId;
-            std::map<std::string, std::string> EventCustomTags;
             std::string EventName;
             std::string PlayFabId;
             Boxed<time_t> Timestamp;
@@ -23353,7 +23489,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 Body(),
                 CharacterId(),
-                EventCustomTags(),
                 EventName(),
                 PlayFabId(),
                 Timestamp()
@@ -23363,7 +23498,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 Body(src.Body),
                 CharacterId(src.CharacterId),
-                EventCustomTags(src.EventCustomTags),
                 EventName(src.EventName),
                 PlayFabId(src.PlayFabId),
                 Timestamp(src.Timestamp)
@@ -23375,7 +23509,6 @@ namespace PlayFab
             {
                 Body = input["Body"];
                 FromJsonUtilS(input["CharacterId"], CharacterId);
-                FromJsonUtilS(input["EventCustomTags"], EventCustomTags);
                 FromJsonUtilS(input["EventName"], EventName);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilT(input["Timestamp"], Timestamp);
@@ -23386,7 +23519,6 @@ namespace PlayFab
                 Json::Value output;
                 output["Body"] = Body;
                 Json::Value each_CharacterId; ToJsonUtilS(CharacterId, each_CharacterId); output["CharacterId"] = each_CharacterId;
-                Json::Value each_EventCustomTags; ToJsonUtilS(EventCustomTags, each_EventCustomTags); output["EventCustomTags"] = each_EventCustomTags;
                 Json::Value each_EventName; ToJsonUtilS(EventName, each_EventName); output["EventName"] = each_EventName;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_Timestamp; ToJsonUtilT(Timestamp, each_Timestamp); output["Timestamp"] = each_Timestamp;
@@ -23397,7 +23529,6 @@ namespace PlayFab
         struct WriteServerPlayerEventRequest : public PlayFabRequestCommon
         {
             Json::Value Body; // Not truly arbitrary. See documentation for restrictions on format
-            std::map<std::string, std::string> EventCustomTags;
             std::string EventName;
             std::string PlayFabId;
             Boxed<time_t> Timestamp;
@@ -23405,7 +23536,6 @@ namespace PlayFab
             WriteServerPlayerEventRequest() :
                 PlayFabRequestCommon(),
                 Body(),
-                EventCustomTags(),
                 EventName(),
                 PlayFabId(),
                 Timestamp()
@@ -23414,7 +23544,6 @@ namespace PlayFab
             WriteServerPlayerEventRequest(const WriteServerPlayerEventRequest& src) :
                 PlayFabRequestCommon(),
                 Body(src.Body),
-                EventCustomTags(src.EventCustomTags),
                 EventName(src.EventName),
                 PlayFabId(src.PlayFabId),
                 Timestamp(src.Timestamp)
@@ -23425,7 +23554,6 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 Body = input["Body"];
-                FromJsonUtilS(input["EventCustomTags"], EventCustomTags);
                 FromJsonUtilS(input["EventName"], EventName);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilT(input["Timestamp"], Timestamp);
@@ -23435,7 +23563,6 @@ namespace PlayFab
             {
                 Json::Value output;
                 output["Body"] = Body;
-                Json::Value each_EventCustomTags; ToJsonUtilS(EventCustomTags, each_EventCustomTags); output["EventCustomTags"] = each_EventCustomTags;
                 Json::Value each_EventName; ToJsonUtilS(EventName, each_EventName); output["EventName"] = each_EventName;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_Timestamp; ToJsonUtilT(Timestamp, each_Timestamp); output["Timestamp"] = each_Timestamp;
@@ -23446,14 +23573,12 @@ namespace PlayFab
         struct WriteTitleEventRequest : public PlayFabRequestCommon
         {
             Json::Value Body; // Not truly arbitrary. See documentation for restrictions on format
-            std::map<std::string, std::string> EventCustomTags;
             std::string EventName;
             Boxed<time_t> Timestamp;
 
             WriteTitleEventRequest() :
                 PlayFabRequestCommon(),
                 Body(),
-                EventCustomTags(),
                 EventName(),
                 Timestamp()
             {}
@@ -23461,7 +23586,6 @@ namespace PlayFab
             WriteTitleEventRequest(const WriteTitleEventRequest& src) :
                 PlayFabRequestCommon(),
                 Body(src.Body),
-                EventCustomTags(src.EventCustomTags),
                 EventName(src.EventName),
                 Timestamp(src.Timestamp)
             {}
@@ -23471,7 +23595,6 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 Body = input["Body"];
-                FromJsonUtilS(input["EventCustomTags"], EventCustomTags);
                 FromJsonUtilS(input["EventName"], EventName);
                 FromJsonUtilT(input["Timestamp"], Timestamp);
             }
@@ -23480,7 +23603,6 @@ namespace PlayFab
             {
                 Json::Value output;
                 output["Body"] = Body;
-                Json::Value each_EventCustomTags; ToJsonUtilS(EventCustomTags, each_EventCustomTags); output["EventCustomTags"] = each_EventCustomTags;
                 Json::Value each_EventName; ToJsonUtilS(EventName, each_EventName); output["EventName"] = each_EventName;
                 Json::Value each_Timestamp; ToJsonUtilT(Timestamp, each_Timestamp); output["Timestamp"] = each_Timestamp;
                 return output;

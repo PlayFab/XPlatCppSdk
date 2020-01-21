@@ -2,9 +2,14 @@
 
 #pragma once
 
-#ifndef DISABLE_PLAYFABCLIENT_API
+#if !defined(DISABLE_PLAYFABCLIENT_API)
+
+#include <memory>
 
 #include <playfab/PlayFabPlatformUtils.h>
+#include <playfab/PlayFabAuthenticationInstanceApi.h>
+#include <playfab/PlayFabClientInstanceApi.h>
+#include <playfab/PlayFabDataInstanceApi.h>
 
 #include "TestCase.h"
 
@@ -45,6 +50,11 @@ namespace PlayFabUnit
     class PlayFabApiTest : public PlayFabApiTestCase
     {
     private:
+        // Api instances
+        std::shared_ptr<PlayFab::PlayFabAuthenticationInstanceAPI> authApi;
+        std::shared_ptr<PlayFab::PlayFabClientInstanceAPI> clientApi;
+        std::shared_ptr<PlayFab::PlayFabDataInstanceAPI> dataApi;
+
         // Fixed values provided from testInputs
         bool TITLE_INFO_SET;
         std::string USER_EMAIL;
@@ -52,9 +62,6 @@ namespace PlayFabUnit
         // Information fetched by appropriate API calls
         const static std::string TEST_DATA_KEY;
         const static std::string TEST_STAT_NAME;
-        std::string playFabId;
-        std::string entityId;
-        std::string entityType;
         int testMessageInt;
         PlayFab::TimePoint testMessageTime;
 
