@@ -1,5 +1,8 @@
 #pragma once
 
+#include <unordered_map>
+#include <memory>
+
 namespace PlayFab
 {
     class CallRequestContainerBase;

@@ -11,7 +11,6 @@
 #include <playfab/PlayFabEventsDataModels.h>
 #include <playfab/PlayFabEventsInstanceApi.h>
 #include <playfab/PlayFabSettings.h>
-#include <playfab/QoS/PlayFabQoSApi.h>
 #include "PlayFabEventTest.h"
 #include "TestContext.h"
 #include "TestDataTypes.h"
@@ -22,25 +21,6 @@ using namespace EventsModels;
 
 namespace PlayFabUnit
 {
-#if (!UNITY_IOS && !UNITY_ANDROID) && (!defined(PLAYFAB_PLATFORM_IOS) && !defined(PLAYFAB_PLATFORM_ANDROID) && !defined(PLAYFAB_PLATFORM_SWITCH))
-    /// QoS API
-    void PlayFabEventTest::QosResultApi(TestContext& testContext)
-    {
-        QoS::PlayFabQoSApi api;
-
-        QoS::QoSResult result = api.GetQoSResult(5, 200);
-
-        if (result.errorCode == 0)
-        {
-            testContext.Pass();
-        }
-        else
-        {
-            testContext.Fail("Error Code:" + std::to_string(result.errorCode));
-        }
-    }
-#endif
-
     void PlayFabEventTest::OnErrorSharedCallback(const PlayFab::PlayFabError& error, void* customData)
     {
         TestContext* testContext = static_cast<TestContext*>(customData);
@@ -295,12 +275,6 @@ namespace PlayFabUnit
     void PlayFabEventTest::AddTests()
     {
         AddTest("BasicLogin", &PlayFabEventTest::BasicLogin);
-
-        // It is not appropriate for this test to block infinitely until the QoS result is returned
-        // Not the least of which is because it frequently blocks forever
-        // This needs to switch to the async mechanism, and allow the test to time out if QoS never completes
-        // AddTest("QosResultApi", &PlayFabEventTest::QosResultApi);
-
         AddTest("EventsApi", &PlayFabEventTest::EventsApi);
         AddTest("HeavyweightEvents", &PlayFabEventTest::HeavyweightEvents);
         AddTest("LightweightEvents", &PlayFabEventTest::LightweightEvents);

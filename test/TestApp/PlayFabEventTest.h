@@ -37,9 +37,6 @@ namespace PlayFabUnit
         std::shared_ptr<PlayFab::PlayFabClientInstanceAPI> clientApi;
         std::shared_ptr<PlayFab::PlayFabEventsInstanceAPI> eventsApi;
 
-        /// QoS API
-        void QosResultApi(TestContext& testContext);
-
         // Initial Login
         void OnErrorSharedCallback(const PlayFab::PlayFabError& error, void* customData);
         void BasicLogin(TestContext& testContext);

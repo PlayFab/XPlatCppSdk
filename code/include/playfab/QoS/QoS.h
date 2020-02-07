@@ -3,6 +3,8 @@
 /// </summary>
 
 #pragma once
+
+#if defined (PLAYFAB_PLATFORM_WINDOWS) || defined (PLAYFAB_PLATFORM_XBOX)
 #include <iostream>
 
 // define body for logging or debug output
@@ -35,3 +37,4 @@ namespace PlayFab
         };
     }
 }
+#endif // defined (PLAYFAB_PLATFORM_WINDOWS) || defined (PLAYFAB_PLATFORM_XBOX)

@@ -11,6 +11,8 @@
 
 #include <stdafx.h>
 
+#if defined(PLAYFAB_PLATFORM_XBOX)
+
 #include <playfab/PlayFabIXHR2HttpRequest.h>
 #include <string>
 #include <sstream>
@@ -820,3 +822,4 @@ HRESULT RequestStream::Invoke(
     return S_OK;
 }
 // ----------------------------------------------------------------------------
+#endif // defined(PLAYFAB_PLATFORM_XBOX)

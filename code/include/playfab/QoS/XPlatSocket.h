@@ -1,5 +1,6 @@
 #pragma once
 
+#if defined (PLAYFAB_PLATFORM_WINDOWS) || defined (PLAYFAB_PLATFORM_XBOX)
 #if defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX)
 #include <winsock2.h>
 #include <Windows.h>
@@ -81,3 +82,4 @@ namespace PlayFab
         };
     }
 }
+#endif // defined (PLAYFAB_PLATFORM_WINDOWS) || defined (PLAYFAB_PLATFORM_XBOX)

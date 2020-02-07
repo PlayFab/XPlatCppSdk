@@ -62,7 +62,7 @@ ref class ViewProvider sealed : public IFrameworkView
 
         void OnSuspending(Platform::Object^ sender, SuspendingEventArgs^ args)
         {
-            SuspendingDeferral deferral = args->SuspendingOperation->GetDeferral();
+            SuspendingDeferral^ deferral = args->SuspendingOperation->GetDeferral();
 
             create_task([this, deferral]()
             {

@@ -9,6 +9,7 @@
 #include <assert.h>
 #include <functional>
 #include <list>
+#include <memory>
 
 namespace PlayFab
 {
