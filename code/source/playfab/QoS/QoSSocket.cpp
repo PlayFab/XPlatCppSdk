@@ -1,5 +1,7 @@
 #include <stdafx.h>
 
+#if defined (PLAYFAB_PLATFORM_WINDOWS) || defined (PLAYFAB_PLATFORM_XBOX)
+
 #include <chrono>
 #include <thread>
 #include <iostream>
@@ -88,3 +90,4 @@ namespace PlayFab
         }
     }
 }
+#endif // defined (PLAYFAB_PLATFORM_WINDOWS) || defined (PLAYFAB_PLATFORM_XBOX)

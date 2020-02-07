@@ -98,7 +98,7 @@
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
     </Link>
     <ClCompile>
-      <PrecompiledHeader />
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <AdditionalUsingDirectories>$(Console_SdkPackagesRoot);$(Console_SdkWindowsMetadataPath);%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <Optimization>MaxSpeed</Optimization>
@@ -127,7 +127,7 @@
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
     </Link>
     <ClCompile>
-      <PrecompiledHeader />
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <AdditionalUsingDirectories>$(Console_SdkPackagesRoot);$(Console_SdkWindowsMetadataPath);%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <Optimization>MaxSpeed</Optimization>
@@ -152,8 +152,8 @@
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
     </Link>
     <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <PrecompiledHeader />
       <MinimalRebuild>false</MinimalRebuild>
       <AdditionalUsingDirectories>$(Console_SdkPackagesRoot);$(Console_SdkWindowsMetadataPath);%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <WarningLevel>Level4</WarningLevel>
@@ -218,8 +218,8 @@
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEventPipeline.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEventRouter.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabError.h" />
-    <ClCompile Include="$(SdkSourceDir)\include\playfab\PlayFabIXHR2HttpPlugin.h" />
-    <ClCompile Include="$(SdkSourceDir)\include\playfab\PlayFabIXHR2HttpRequest.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabIXHR2HttpPlugin.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabIXHR2HttpRequest.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabSettings.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabCallRequestContainer.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabCallRequestContainerBase.h" />

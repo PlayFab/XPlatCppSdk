@@ -117,7 +117,7 @@ $(LINK_TARGET) : $(OBJS)
 	g++ -o $@ $^ -ljsoncpp -lcurl -lssl -lpthread
 # Here is the compilation command Make Macro:
 COMPILE_CMD = \
-	g++ -I $(PROJ_DIR)/code -I $(PROJ_DIR)/code/include -I $(PROJ_DIR)/test/TestApp/ -include $(PROJ_DIR)/test/TestApp/TestAppPch.h -D ENABLE_PLAYFABADMIN_API -D ENABLE_PLAYFABSERVER_API -o $@ -c $<
+	g++ -include $(PROJ_DIR)/code/stdafx.h -I $(PROJ_DIR)/code -I $(PROJ_DIR)/code/include -I $(PROJ_DIR)/test/TestApp/ -include $(PROJ_DIR)/test/TestApp/TestAppPch.h -D ENABLE_PLAYFABADMIN_API -D ENABLE_PLAYFABSERVER_API -o $@ -c $<
 # Here is a Pattern Rule, often used for compile-line.
 # It says how to create a file with a .o suffix, given a file with a .cpp suffix.
 # The rule's command uses some built-in Make Macros:

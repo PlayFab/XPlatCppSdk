@@ -1,5 +1,6 @@
 #include <stdafx.h>
 
+#if defined(PLAYFAB_PLATFORM_XBOX)
 #include <playfab/PlayFabIXHR2HttpPlugin.h>
 #include <playfab/PlayFabSettings.h>
 
@@ -274,3 +275,4 @@ namespace PlayFab
         }
     }
 }
+#endif // defined(PLAYFAB_PLATFORM_XBOX)

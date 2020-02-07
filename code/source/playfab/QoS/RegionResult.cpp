@@ -1,5 +1,6 @@
 #include <stdafx.h>
 
+#if defined (PLAYFAB_PLATFORM_WINDOWS) || defined (PLAYFAB_PLATFORM_XBOX)
 #include <playfab/QoS/RegionResult.h>
 
 namespace PlayFab
@@ -12,3 +13,4 @@ namespace PlayFab
         }
     }
 }
+#endif // defined (PLAYFAB_PLATFORM_WINDOWS) || defined (PLAYFAB_PLATFORM_XBOX)

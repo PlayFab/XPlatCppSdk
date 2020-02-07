@@ -1,11 +1,8 @@
 #pragma once
 
+#if defined (PLAYFAB_PLATFORM_WINDOWS) || defined (PLAYFAB_PLATFORM_XBOX)
 #include <playfab/QoS/XPlatSocket.h>
 #include <playfab/QoS/PingResult.h>
-
-#if defined(PLAYFAB_PLATFORM_WINDOWS)
-#pragma warning (disable: 4309)     // Suppress static cast conversion of const value (line 54)
-#endif // defined(PLAYFAB_PLATFORM_WINDOWS)
 
 namespace PlayFab
 {
@@ -13,7 +10,7 @@ namespace PlayFab
     {
         constexpr int BUFLEN = 512; // Length of the message send and received
 
-        constexpr int MSGHEADER = 255; // Header of the message send over UDP
+        constexpr unsigned int MSGHEADER = 255; // Header of the message send over UDP
                                        // The message must start with 2 bytes of all bits set to 1
 
         constexpr char BUFFER_VALUE = '1'; // Clear the buffer with this value before receiving the reply.
@@ -56,7 +53,4 @@ namespace PlayFab
         };
     }
 }
-
-#if defined(PLAYFAB_PLATFORM_WINDOWS)
-#pragma warning (default: 4309)     // Suppress static cast conversion of const value (line 54)
-#endif // defined(PLAYFAB_PLATFORM_WINDOWS)
+#endif // defined (PLAYFAB_PLATFORM_WINDOWS) || defined (PLAYFAB_PLATFORM_XBOX)
