@@ -568,6 +568,8 @@ namespace PlayFab
         PlayFabErrorExperimentationNoScorecard = 7009,
         PlayFabErrorExperimentationTreatmentAssignmentFailed = 7010,
         PlayFabErrorExperimentationTreatmentAssignmentDisabled = 7011,
+        PlayFabErrorExperimentationInvalidDuration = 7012,
+        PlayFabErrorExperimentationMaxExperimentsReached = 7013,
         PlayFabErrorMaxActionDepthExceeded = 8000,
         PlayFabErrorSnapshotNotFound = 11000,
     };

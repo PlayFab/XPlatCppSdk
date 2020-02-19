@@ -5351,6 +5351,8 @@ namespace PlayFab
             GenericErrorCodesExperimentationNoScorecard,
             GenericErrorCodesExperimentationTreatmentAssignmentFailed,
             GenericErrorCodesExperimentationTreatmentAssignmentDisabled,
+            GenericErrorCodesExperimentationInvalidDuration,
+            GenericErrorCodesExperimentationMaxExperimentsReached,
             GenericErrorCodesMaxActionDepthExceeded,
             GenericErrorCodesSnapshotNotFound
         };
@@ -8140,6 +8142,16 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesExperimentationTreatmentAssignmentDisabled)
             {
                 output = Json::Value("ExperimentationTreatmentAssignmentDisabled");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentationInvalidDuration)
+            {
+                output = Json::Value("ExperimentationInvalidDuration");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentationMaxExperimentsReached)
+            {
+                output = Json::Value("ExperimentationMaxExperimentsReached");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMaxActionDepthExceeded)
@@ -10943,6 +10955,16 @@ namespace PlayFab
             if (inputStr == "ExperimentationTreatmentAssignmentDisabled")
             {
                 output = GenericErrorCodes::GenericErrorCodesExperimentationTreatmentAssignmentDisabled;
+                return;
+            }
+            if (inputStr == "ExperimentationInvalidDuration")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentationInvalidDuration;
+                return;
+            }
+            if (inputStr == "ExperimentationMaxExperimentsReached")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentationMaxExperimentsReached;
                 return;
             }
             if (inputStr == "MaxActionDepthExceeded")
