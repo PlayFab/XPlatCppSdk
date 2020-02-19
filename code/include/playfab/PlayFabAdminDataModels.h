@@ -5449,6 +5449,8 @@ namespace PlayFab
             GenericErrorCodesExperimentationNoScorecard,
             GenericErrorCodesExperimentationTreatmentAssignmentFailed,
             GenericErrorCodesExperimentationTreatmentAssignmentDisabled,
+            GenericErrorCodesExperimentationInvalidDuration,
+            GenericErrorCodesExperimentationMaxExperimentsReached,
             GenericErrorCodesMaxActionDepthExceeded,
             GenericErrorCodesSnapshotNotFound
         };
@@ -8238,6 +8240,16 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesExperimentationTreatmentAssignmentDisabled)
             {
                 output = Json::Value("ExperimentationTreatmentAssignmentDisabled");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentationInvalidDuration)
+            {
+                output = Json::Value("ExperimentationInvalidDuration");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentationMaxExperimentsReached)
+            {
+                output = Json::Value("ExperimentationMaxExperimentsReached");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMaxActionDepthExceeded)
@@ -11043,6 +11055,16 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesExperimentationTreatmentAssignmentDisabled;
                 return;
             }
+            if (inputStr == "ExperimentationInvalidDuration")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentationInvalidDuration;
+                return;
+            }
+            if (inputStr == "ExperimentationMaxExperimentsReached")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentationMaxExperimentsReached;
+                return;
+            }
             if (inputStr == "MaxActionDepthExceeded")
             {
                 output = GenericErrorCodes::GenericErrorCodesMaxActionDepthExceeded;
@@ -11551,7 +11573,8 @@ namespace PlayFab
         {
             ScheduledTaskTypeCloudScript,
             ScheduledTaskTypeActionsOnPlayerSegment,
-            ScheduledTaskTypeCloudScriptAzureFunctions
+            ScheduledTaskTypeCloudScriptAzureFunctions,
+            ScheduledTaskTypeInsightsScheduledScaling
         };
 
         inline void ToJsonEnum(const ScheduledTaskType input, Json::Value& output)
@@ -11569,6 +11592,11 @@ namespace PlayFab
             if (input == ScheduledTaskType::ScheduledTaskTypeCloudScriptAzureFunctions)
             {
                 output = Json::Value("CloudScriptAzureFunctions");
+                return;
+            }
+            if (input == ScheduledTaskType::ScheduledTaskTypeInsightsScheduledScaling)
+            {
+                output = Json::Value("InsightsScheduledScaling");
                 return;
             }
         }
@@ -11592,6 +11620,11 @@ namespace PlayFab
             if (inputStr == "CloudScriptAzureFunctions")
             {
                 output = ScheduledTaskType::ScheduledTaskTypeCloudScriptAzureFunctions;
+                return;
+            }
+            if (inputStr == "InsightsScheduledScaling")
+            {
+                output = ScheduledTaskType::ScheduledTaskTypeInsightsScheduledScaling;
                 return;
             }
         }
@@ -14273,6 +14306,84 @@ namespace PlayFab
             {}
 
             ~CreateCloudScriptTaskRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["Description"], Description);
+                FromJsonUtilP(input["IsActive"], IsActive);
+                FromJsonUtilS(input["Name"], Name);
+                FromJsonUtilO(input["Parameter"], Parameter);
+                FromJsonUtilS(input["Schedule"], Schedule);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Description; ToJsonUtilS(Description, each_Description); output["Description"] = each_Description;
+                Json::Value each_IsActive; ToJsonUtilP(IsActive, each_IsActive); output["IsActive"] = each_IsActive;
+                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
+                Json::Value each_Parameter; ToJsonUtilO(Parameter, each_Parameter); output["Parameter"] = each_Parameter;
+                Json::Value each_Schedule; ToJsonUtilS(Schedule, each_Schedule); output["Schedule"] = each_Schedule;
+                return output;
+            }
+        };
+
+        struct InsightsScalingTaskParameter : public PlayFabBaseModel
+        {
+            Int32 Level;
+
+            InsightsScalingTaskParameter() :
+                PlayFabBaseModel(),
+                Level()
+            {}
+
+            InsightsScalingTaskParameter(const InsightsScalingTaskParameter& src) :
+                PlayFabBaseModel(),
+                Level(src.Level)
+            {}
+
+            ~InsightsScalingTaskParameter() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["Level"], Level);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Level; ToJsonUtilP(Level, each_Level); output["Level"] = each_Level;
+                return output;
+            }
+        };
+
+        struct CreateInsightsScheduledScalingTaskRequest : public PlayFabRequestCommon
+        {
+            std::string Description;
+            bool IsActive;
+            std::string Name;
+            InsightsScalingTaskParameter Parameter;
+            std::string Schedule;
+
+            CreateInsightsScheduledScalingTaskRequest() :
+                PlayFabRequestCommon(),
+                Description(),
+                IsActive(),
+                Name(),
+                Parameter(),
+                Schedule()
+            {}
+
+            CreateInsightsScheduledScalingTaskRequest(const CreateInsightsScheduledScalingTaskRequest& src) :
+                PlayFabRequestCommon(),
+                Description(src.Description),
+                IsActive(src.IsActive),
+                Name(src.Name),
+                Parameter(src.Parameter),
+                Schedule(src.Schedule)
+            {}
+
+            ~CreateInsightsScheduledScalingTaskRequest() = default;
 
             void FromJson(const Json::Value& input) override
             {

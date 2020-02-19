@@ -62,6 +62,7 @@ namespace PlayFab
         void GetMatchmakingTicket(MultiplayerModels::GetMatchmakingTicketRequest& request, const ProcessApiCallback<MultiplayerModels::GetMatchmakingTicketResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void GetMultiplayerServerDetails(MultiplayerModels::GetMultiplayerServerDetailsRequest& request, const ProcessApiCallback<MultiplayerModels::GetMultiplayerServerDetailsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void GetMultiplayerServerLogs(MultiplayerModels::GetMultiplayerServerLogsRequest& request, const ProcessApiCallback<MultiplayerModels::GetMultiplayerServerLogsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void GetMultiplayerSessionLogsBySessionId(MultiplayerModels::GetMultiplayerSessionLogsBySessionIdRequest& request, const ProcessApiCallback<MultiplayerModels::GetMultiplayerServerLogsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void GetQueueStatistics(MultiplayerModels::GetQueueStatisticsRequest& request, const ProcessApiCallback<MultiplayerModels::GetQueueStatisticsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void GetRemoteLoginEndpoint(MultiplayerModels::GetRemoteLoginEndpointRequest& request, const ProcessApiCallback<MultiplayerModels::GetRemoteLoginEndpointResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void GetServerBackfillTicket(MultiplayerModels::GetServerBackfillTicketRequest& request, const ProcessApiCallback<MultiplayerModels::GetServerBackfillTicketResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -116,6 +117,7 @@ namespace PlayFab
         void OnGetMatchmakingTicketResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnGetMultiplayerServerDetailsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnGetMultiplayerServerLogsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnGetMultiplayerSessionLogsBySessionIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnGetQueueStatisticsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnGetRemoteLoginEndpointResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnGetServerBackfillTicketResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);

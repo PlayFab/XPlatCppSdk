@@ -3485,6 +3485,35 @@ namespace PlayFab
             }
         };
 
+        struct GetMultiplayerSessionLogsBySessionIdRequest : public PlayFabRequestCommon
+        {
+            std::string SessionId;
+
+            GetMultiplayerSessionLogsBySessionIdRequest() :
+                PlayFabRequestCommon(),
+                SessionId()
+            {}
+
+            GetMultiplayerSessionLogsBySessionIdRequest(const GetMultiplayerSessionLogsBySessionIdRequest& src) :
+                PlayFabRequestCommon(),
+                SessionId(src.SessionId)
+            {}
+
+            ~GetMultiplayerSessionLogsBySessionIdRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["SessionId"], SessionId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_SessionId; ToJsonUtilS(SessionId, each_SessionId); output["SessionId"] = each_SessionId;
+                return output;
+            }
+        };
+
         struct GetQueueStatisticsRequest : public PlayFabRequestCommon
         {
             std::string QueueName;

@@ -50,6 +50,7 @@ namespace PlayFab
         void CheckLimitedEditionItemAvailability(AdminModels::CheckLimitedEditionItemAvailabilityRequest& request, const ProcessApiCallback<AdminModels::CheckLimitedEditionItemAvailabilityResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void CreateActionsOnPlayersInSegmentTask(AdminModels::CreateActionsOnPlayerSegmentTaskRequest& request, const ProcessApiCallback<AdminModels::CreateTaskResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void CreateCloudScriptTask(AdminModels::CreateCloudScriptTaskRequest& request, const ProcessApiCallback<AdminModels::CreateTaskResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void CreateInsightsScheduledScalingTask(AdminModels::CreateInsightsScheduledScalingTaskRequest& request, const ProcessApiCallback<AdminModels::CreateTaskResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void CreateOpenIdConnection(AdminModels::CreateOpenIdConnectionRequest& request, const ProcessApiCallback<AdminModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void CreatePlayerSharedSecret(AdminModels::CreatePlayerSharedSecretRequest& request, const ProcessApiCallback<AdminModels::CreatePlayerSharedSecretResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void CreatePlayerStatisticDefinition(AdminModels::CreatePlayerStatisticDefinitionRequest& request, const ProcessApiCallback<AdminModels::CreatePlayerStatisticDefinitionResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -162,6 +163,7 @@ namespace PlayFab
         void OnCheckLimitedEditionItemAvailabilityResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnCreateActionsOnPlayersInSegmentTaskResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnCreateCloudScriptTaskResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnCreateInsightsScheduledScalingTaskResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnCreateOpenIdConnectionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnCreatePlayerSharedSecretResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnCreatePlayerStatisticDefinitionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
