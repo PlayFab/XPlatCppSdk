@@ -4,7 +4,7 @@
 
 #include <playfab/PlayFabApiSettings.h>
 #include <playfab/PlayFabAuthenticationContext.h>
-#include <playfab/PlayFabAuthenticationInstanceAPI.h>
+#include <playfab/PlayFabAuthenticationInstanceApi.h>
 #include "TestContext.h"
 #include "PlayFabTestAlloc.h"
 

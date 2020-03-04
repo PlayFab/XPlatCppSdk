@@ -3611,6 +3611,56 @@ namespace PlayFab
         }
     }
 
+    void PlayFabClientInstanceAPI::LinkApple(
+        LinkAppleRequest& request,
+        const ProcessApiCallback<EmptyResult> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : this->m_context;
+        std::shared_ptr<PlayFabApiSettings> settings = this->m_settings != nullptr ? this->m_settings : PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = request.authenticationContext == nullptr ? this->m_context : request.authenticationContext;
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-Authorization", context->clientSessionTicket);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Client/LinkApple",
+            headers,
+            jsonAsString,
+            std::bind(&PlayFabClientInstanceAPI::OnLinkAppleResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabClientInstanceAPI::OnLinkAppleResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        EmptyResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = *static_cast<ProcessApiCallback<EmptyResult> *>(internalPtr.get());
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
     void PlayFabClientInstanceAPI::LinkCustomID(
         LinkCustomIDRequest& request,
         const ProcessApiCallback<LinkCustomIDResult> callback,
@@ -4348,6 +4398,63 @@ namespace PlayFab
     }
 
     void PlayFabClientInstanceAPI::OnLoginWithAndroidDeviceIDResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        LoginResult outResult;
+        if (ValidateResult(outResult, container))
+        {            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
+
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = *static_cast<ProcessApiCallback<LoginResult> *>(internalPtr.get());
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabClientInstanceAPI::LoginWithApple(
+        LoginWithAppleRequest& request,
+        const ProcessApiCallback<LoginResult> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : this->m_context;
+        std::shared_ptr<PlayFabApiSettings> settings = this->m_settings != nullptr ? this->m_settings : PlayFabSettings::staticSettings;
+        if (request.TitleId.empty())
+        {
+            request.TitleId = settings->titleId;
+        }
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = request.authenticationContext == nullptr ? this->m_context : request.authenticationContext;
+        std::unordered_map<std::string, std::string> headers;
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Client/LoginWithApple",
+            headers,
+            jsonAsString,
+            std::bind(&PlayFabClientInstanceAPI::OnLoginWithAppleResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabClientInstanceAPI::OnLoginWithAppleResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
@@ -6436,6 +6543,56 @@ namespace PlayFab
             if (internalPtr.get() != nullptr)
             {
                 const auto& callback = *static_cast<ProcessApiCallback<UnlinkAndroidDeviceIDResult> *>(internalPtr.get());
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabClientInstanceAPI::UnlinkApple(
+        UnlinkAppleRequest& request,
+        const ProcessApiCallback<EmptyResponse> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : this->m_context;
+        std::shared_ptr<PlayFabApiSettings> settings = this->m_settings != nullptr ? this->m_settings : PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = request.authenticationContext == nullptr ? this->m_context : request.authenticationContext;
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-Authorization", context->clientSessionTicket);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Client/UnlinkApple",
+            headers,
+            jsonAsString,
+            std::bind(&PlayFabClientInstanceAPI::OnUnlinkAppleResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabClientInstanceAPI::OnUnlinkAppleResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        EmptyResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = *static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
