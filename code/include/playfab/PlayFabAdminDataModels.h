@@ -5378,6 +5378,12 @@ namespace PlayFab
             GenericErrorCodesCloudScriptAzureFunctionsQueueRequestError,
             GenericErrorCodesEvaluationModeTitleCountExceeded,
             GenericErrorCodesInsightsManagementTitleNotInFlight,
+            GenericErrorCodesLimitNotFound,
+            GenericErrorCodesLimitNotAvailableViaAPI,
+            GenericErrorCodesInsightsManagementSetStorageRetentionBelowMinimum,
+            GenericErrorCodesInsightsManagementSetStorageRetentionAboveMaximum,
+            GenericErrorCodesAppleNotEnabledForTitle,
+            GenericErrorCodesInsightsManagementNewActiveEventArchiveLimitInvalid,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -7885,6 +7891,36 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesInsightsManagementTitleNotInFlight)
             {
                 output = Json::Value("InsightsManagementTitleNotInFlight");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLimitNotFound)
+            {
+                output = Json::Value("LimitNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLimitNotAvailableViaAPI)
+            {
+                output = Json::Value("LimitNotAvailableViaAPI");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInsightsManagementSetStorageRetentionBelowMinimum)
+            {
+                output = Json::Value("InsightsManagementSetStorageRetentionBelowMinimum");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInsightsManagementSetStorageRetentionAboveMaximum)
+            {
+                output = Json::Value("InsightsManagementSetStorageRetentionAboveMaximum");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAppleNotEnabledForTitle)
+            {
+                output = Json::Value("AppleNotEnabledForTitle");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInsightsManagementNewActiveEventArchiveLimitInvalid)
+            {
+                output = Json::Value("InsightsManagementNewActiveEventArchiveLimitInvalid");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -10700,6 +10736,36 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesInsightsManagementTitleNotInFlight;
                 return;
             }
+            if (inputStr == "LimitNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLimitNotFound;
+                return;
+            }
+            if (inputStr == "LimitNotAvailableViaAPI")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLimitNotAvailableViaAPI;
+                return;
+            }
+            if (inputStr == "InsightsManagementSetStorageRetentionBelowMinimum")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInsightsManagementSetStorageRetentionBelowMinimum;
+                return;
+            }
+            if (inputStr == "InsightsManagementSetStorageRetentionAboveMaximum")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInsightsManagementSetStorageRetentionAboveMaximum;
+                return;
+            }
+            if (inputStr == "AppleNotEnabledForTitle")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAppleNotEnabledForTitle;
+                return;
+            }
+            if (inputStr == "InsightsManagementNewActiveEventArchiveLimitInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInsightsManagementNewActiveEventArchiveLimitInvalid;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -11097,7 +11163,8 @@ namespace PlayFab
             LoginIdentityProviderCustomServer,
             LoginIdentityProviderNintendoSwitch,
             LoginIdentityProviderFacebookInstantGames,
-            LoginIdentityProviderOpenIdConnect
+            LoginIdentityProviderOpenIdConnect,
+            LoginIdentityProviderApple
         };
 
         inline void ToJsonEnum(const LoginIdentityProvider input, Json::Value& output)
@@ -11195,6 +11262,11 @@ namespace PlayFab
             if (input == LoginIdentityProvider::LoginIdentityProviderOpenIdConnect)
             {
                 output = Json::Value("OpenIdConnect");
+                return;
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderApple)
+            {
+                output = Json::Value("Apple");
                 return;
             }
         }
@@ -11298,6 +11370,11 @@ namespace PlayFab
             if (inputStr == "OpenIdConnect")
             {
                 output = LoginIdentityProvider::LoginIdentityProviderOpenIdConnect;
+                return;
+            }
+            if (inputStr == "Apple")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderApple;
                 return;
             }
         }

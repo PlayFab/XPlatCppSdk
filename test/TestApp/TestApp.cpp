@@ -58,6 +58,7 @@ namespace PlayFabUnit
         // comment out the return statement and fill out the TestTitleData fields manually.
         if (!loadSuccessful)
         {
+            printf("Failed to load testTitleData\n");
             return 1;
 
             // TODO: POPULATE THIS SECTION WITH REAL INFORMATION (or set up a testTitleData file, and set your PF_TEST_TITLE_DATA_JSON to the path for that file)

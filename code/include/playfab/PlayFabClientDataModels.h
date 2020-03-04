@@ -4812,7 +4812,8 @@ namespace PlayFab
             LoginIdentityProviderCustomServer,
             LoginIdentityProviderNintendoSwitch,
             LoginIdentityProviderFacebookInstantGames,
-            LoginIdentityProviderOpenIdConnect
+            LoginIdentityProviderOpenIdConnect,
+            LoginIdentityProviderApple
         };
 
         inline void ToJsonEnum(const LoginIdentityProvider input, Json::Value& output)
@@ -4910,6 +4911,11 @@ namespace PlayFab
             if (input == LoginIdentityProvider::LoginIdentityProviderOpenIdConnect)
             {
                 output = Json::Value("OpenIdConnect");
+                return;
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderApple)
+            {
+                output = Json::Value("Apple");
                 return;
             }
         }
@@ -5013,6 +5019,11 @@ namespace PlayFab
             if (inputStr == "OpenIdConnect")
             {
                 output = LoginIdentityProvider::LoginIdentityProviderOpenIdConnect;
+                return;
+            }
+            if (inputStr == "Apple")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderApple;
                 return;
             }
         }
@@ -14110,6 +14121,40 @@ namespace PlayFab
             }
         };
 
+        struct LinkAppleRequest : public PlayFabRequestCommon
+        {
+            Boxed<bool> ForceLink;
+            std::string IdentityToken;
+
+            LinkAppleRequest() :
+                PlayFabRequestCommon(),
+                ForceLink(),
+                IdentityToken()
+            {}
+
+            LinkAppleRequest(const LinkAppleRequest& src) :
+                PlayFabRequestCommon(),
+                ForceLink(src.ForceLink),
+                IdentityToken(src.IdentityToken)
+            {}
+
+            ~LinkAppleRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["ForceLink"], ForceLink);
+                FromJsonUtilS(input["IdentityToken"], IdentityToken);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ForceLink; ToJsonUtilP(ForceLink, each_ForceLink); output["ForceLink"] = each_ForceLink;
+                Json::Value each_IdentityToken; ToJsonUtilS(IdentityToken, each_IdentityToken); output["IdentityToken"] = each_IdentityToken;
+                return output;
+            }
+        };
+
         struct LinkCustomIDRequest : public PlayFabRequestCommon
         {
             std::string CustomId;
@@ -15245,6 +15290,60 @@ namespace PlayFab
                 Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
                 Json::Value each_OS; ToJsonUtilS(OS, each_OS); output["OS"] = each_OS;
+                Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
+                Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
+                return output;
+            }
+        };
+
+        struct LoginWithAppleRequest : public PlayFabRequestCommon
+        {
+            Boxed<bool> CreateAccount;
+            std::string EncryptedRequest;
+            std::string IdentityToken;
+            Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
+            std::string PlayerSecret;
+            std::string TitleId;
+
+            LoginWithAppleRequest() :
+                PlayFabRequestCommon(),
+                CreateAccount(),
+                EncryptedRequest(),
+                IdentityToken(),
+                InfoRequestParameters(),
+                PlayerSecret(),
+                TitleId()
+            {}
+
+            LoginWithAppleRequest(const LoginWithAppleRequest& src) :
+                PlayFabRequestCommon(),
+                CreateAccount(src.CreateAccount),
+                EncryptedRequest(src.EncryptedRequest),
+                IdentityToken(src.IdentityToken),
+                InfoRequestParameters(src.InfoRequestParameters),
+                PlayerSecret(src.PlayerSecret),
+                TitleId(src.TitleId)
+            {}
+
+            ~LoginWithAppleRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["CreateAccount"], CreateAccount);
+                FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
+                FromJsonUtilS(input["IdentityToken"], IdentityToken);
+                FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
+                FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
+                FromJsonUtilS(input["TitleId"], TitleId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
+                Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
+                Json::Value each_IdentityToken; ToJsonUtilS(IdentityToken, each_IdentityToken); output["IdentityToken"] = each_IdentityToken;
+                Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 return output;
@@ -17877,6 +17976,30 @@ namespace PlayFab
             {}
 
             ~UnlinkAndroidDeviceIDResult() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
+        struct UnlinkAppleRequest : public PlayFabRequestCommon
+        {
+
+            UnlinkAppleRequest() :
+                PlayFabRequestCommon()
+            {}
+
+            UnlinkAppleRequest(const UnlinkAppleRequest&) :
+                PlayFabRequestCommon()
+            {}
+
+            ~UnlinkAppleRequest() = default;
 
             void FromJson(const Json::Value&) override
             {

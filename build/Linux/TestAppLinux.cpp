@@ -13,10 +13,13 @@ namespace PlayFabUnit
         // Get the path to the test data file from the current environment vars.
         std::string titleDataPath;
         {
-            char* titleDataPathCStr =  getenv("PF_TEST_TITLE_DATA_JSON");
+            char* titleDataPathCStr = getenv("PF_TEST_TITLE_DATA_JSON");
 
             if (titleDataPathCStr == nullptr)
+            {
+                printf("Could not load PF_TEST_TITLE_DATA_JSON var: %s\n", titleDataPathCStr);
                 return false;
+            }
 
             titleDataPath = titleDataPathCStr;
         }
@@ -27,6 +30,7 @@ namespace PlayFabUnit
 
         if (!titleDataFile)
         {
+            printf("Could not open testTitleData file: %s\n", titleDataPath.c_str());
             return false;
         }
 
@@ -48,6 +52,6 @@ namespace PlayFabUnit
     void TestApp::LogPut(const char* message)
     {
         // Write to STDOUT.
-        puts(message);
+        printf(message);
     }
 }
