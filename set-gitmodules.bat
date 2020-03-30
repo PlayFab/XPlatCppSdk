@@ -1,13 +1,13 @@
 @echo off
 echo ========= Setting Git Submodules to specific commits (BEGIN) =========
 if exist ".git" (
-	git submodule update --init --recursive
+    git submodule update --init --recursive
 ) else (
-	git init
-	git submodule add https://github.com/open-source-parsers/jsoncpp.git ./external/jsoncpp
-	if /I "%ERRORLEVEL%" gtr "1" (
-		exit /B %ERRORLEVEL%
-	)
+    git init
+    git submodule add https://github.com/open-source-parsers/jsoncpp.git ./external/jsoncpp
+    if /I "%ERRORLEVEL%" gtr "1" (
+        exit /B %ERRORLEVEL%
+    )
 )
 
 pushd "external/jsoncpp"

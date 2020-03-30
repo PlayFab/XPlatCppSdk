@@ -200,7 +200,7 @@ namespace PlayFab
             reqContainer.errorWrapper.HttpStatus = "Failed to contact server";
             reqContainer.errorWrapper.ErrorCode = PlayFabErrorCode::PlayFabErrorConnectionTimeout;
             reqContainer.errorWrapper.ErrorName = "Failed to contact server";
-            reqContainer.errorWrapper.ErrorMessage = "Failed to contact server, curl error: " + std::to_string(res);
+            reqContainer.errorWrapper.ErrorMessage = "Failed to contact server, IXHR2 error: " + std::to_string(res);
             HandleCallback(std::move(requestContainer));
         }
         else

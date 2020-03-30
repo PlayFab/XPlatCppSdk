@@ -137,7 +137,7 @@ namespace PlayFab
         {
             // The value is the requestId
             std::string requestId = std::string(buffer + requestIdheaderKeyLen, nitems - requestIdheaderKeyLen);
-            auto offset = requestId.find_first_not_of(whitespace);
+            size_t offset = requestId.find_first_not_of(whitespace);
             if (offset != std::string::npos)
             {
                 // Trim any whitespace

@@ -73,7 +73,7 @@ namespace PlayFab
         void SetExceptionCallback(ExceptionCallback callback);
 
     protected:
-        virtual void SendBatch(size_t& batchCounter);
+        virtual void SendBatch(std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>>& batch, uintptr_t& batchCounter);
 
     private:
         void WorkerThread();
@@ -87,8 +87,8 @@ namespace PlayFab
         // We are using that feature (custom pointer relay) because we need to know which batch it was when we receive a callback from the Events API.
         // To keep track of all batches currently in flight (i.e. those for which we called Events API) we need to have a container with controllable size
         // that would allow to quickly map a pointer (like void* customData) to a batch (like a std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>>).
+        std::mutex inFlightMutex;
         std::unordered_map<void*, std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>>> batchesInFlight;
-        std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>> batch;
 
     private:
         std::shared_ptr<PlayFabEventsInstanceAPI> eventsApi;
@@ -99,6 +99,8 @@ namespace PlayFab
         std::atomic<bool> isWorkerThreadRunning;
         std::mutex userExceptionCallbackMutex;
         ExceptionCallback userExceptionCallback;
+
+        bool TryGetBatchOutOfFlight(void* customData, std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>>* batchReturn);
     };
 }
 

@@ -20,6 +20,7 @@ namespace PlayFab
         XPlatSocket::XPlatSocket()
         {
             initialized = false;
+            timeOutVal = { 0 };
         }
 
         XPlatSocket::~XPlatSocket()
@@ -80,9 +81,11 @@ namespace PlayFab
                 return -1;
             }
 
-            // Input timeout is in milliseconds
+            // Input timeout is in milliseconds, tv_sec is in seconds
+            timeOutVal.tv_sec = timeoutMs / 1000;
+
             // tv_usec takes microseconds, hence convert the input milliseconds to microseconds
-            timeOutVal.tv_usec = timeoutMs * 1000;
+            timeOutVal.tv_usec = (timeoutMs - timeOutVal.tv_sec * 1000) * 1000;
 #if defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX)
             return setsockopt(s, SOL_SOCKET, SO_RCVTIMEO | SO_SNDTIMEO, reinterpret_cast<const char*>(&timeoutMs), sizeof(timeoutMs));
 #else
