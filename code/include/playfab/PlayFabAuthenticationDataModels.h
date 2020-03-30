@@ -31,7 +31,8 @@ namespace PlayFab
             LoginIdentityProviderNintendoSwitch,
             LoginIdentityProviderFacebookInstantGames,
             LoginIdentityProviderOpenIdConnect,
-            LoginIdentityProviderApple
+            LoginIdentityProviderApple,
+            LoginIdentityProviderNintendoSwitchAccount
         };
 
         inline void ToJsonEnum(const LoginIdentityProvider input, Json::Value& output)
@@ -134,6 +135,11 @@ namespace PlayFab
             if (input == LoginIdentityProvider::LoginIdentityProviderApple)
             {
                 output = Json::Value("Apple");
+                return;
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderNintendoSwitchAccount)
+            {
+                output = Json::Value("NintendoSwitchAccount");
                 return;
             }
         }
@@ -242,6 +248,11 @@ namespace PlayFab
             if (inputStr == "Apple")
             {
                 output = LoginIdentityProvider::LoginIdentityProviderApple;
+                return;
+            }
+            if (inputStr == "NintendoSwitchAccount")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderNintendoSwitchAccount;
                 return;
             }
         }

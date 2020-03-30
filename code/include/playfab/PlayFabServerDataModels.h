@@ -5285,7 +5285,11 @@ namespace PlayFab
             GenericErrorCodesInsightsManagementSetStorageRetentionBelowMinimum,
             GenericErrorCodesInsightsManagementSetStorageRetentionAboveMaximum,
             GenericErrorCodesAppleNotEnabledForTitle,
-            GenericErrorCodesInsightsManagementNewActiveEventArchiveLimitInvalid,
+            GenericErrorCodesInsightsManagementNewActiveEventExportLimitInvalid,
+            GenericErrorCodesInsightsManagementSetPerformanceRateLimited,
+            GenericErrorCodesPartyRequestsThrottledFromRateLimiter,
+            GenericErrorCodesXboxServiceTooManyRequests,
+            GenericErrorCodesNintendoSwitchNotEnabledForTitle,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5342,6 +5346,11 @@ namespace PlayFab
             GenericErrorCodesExportCouldNotCreate,
             GenericErrorCodesExportNoBackingDatabaseFound,
             GenericErrorCodesExportCouldNotDelete,
+            GenericErrorCodesExportCannotDetermineEventQuery,
+            GenericErrorCodesExportInvalidQuerySchemaModification,
+            GenericErrorCodesExportQuerySchemaMissingRequiredColumns,
+            GenericErrorCodesExportCannotParseQuery,
+            GenericErrorCodesExportControlCommandsNotAllowed,
             GenericErrorCodesTitleNotEnabledForParty,
             GenericErrorCodesPartyVersionNotFound,
             GenericErrorCodesMultiplayerServerBuildReferencedByMatchmakingQueue,
@@ -5360,6 +5369,7 @@ namespace PlayFab
             GenericErrorCodesExperimentationInvalidDuration,
             GenericErrorCodesExperimentationMaxExperimentsReached,
             GenericErrorCodesMaxActionDepthExceeded,
+            GenericErrorCodesTitleNotOnUpdatedPricingPlan,
             GenericErrorCodesSnapshotNotFound
         };
 
@@ -7820,9 +7830,29 @@ namespace PlayFab
                 output = Json::Value("AppleNotEnabledForTitle");
                 return;
             }
-            if (input == GenericErrorCodes::GenericErrorCodesInsightsManagementNewActiveEventArchiveLimitInvalid)
+            if (input == GenericErrorCodes::GenericErrorCodesInsightsManagementNewActiveEventExportLimitInvalid)
             {
-                output = Json::Value("InsightsManagementNewActiveEventArchiveLimitInvalid");
+                output = Json::Value("InsightsManagementNewActiveEventExportLimitInvalid");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInsightsManagementSetPerformanceRateLimited)
+            {
+                output = Json::Value("InsightsManagementSetPerformanceRateLimited");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPartyRequestsThrottledFromRateLimiter)
+            {
+                output = Json::Value("PartyRequestsThrottledFromRateLimiter");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesXboxServiceTooManyRequests)
+            {
+                output = Json::Value("XboxServiceTooManyRequests");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNintendoSwitchNotEnabledForTitle)
+            {
+                output = Json::Value("NintendoSwitchNotEnabledForTitle");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -8105,6 +8135,31 @@ namespace PlayFab
                 output = Json::Value("ExportCouldNotDelete");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesExportCannotDetermineEventQuery)
+            {
+                output = Json::Value("ExportCannotDetermineEventQuery");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExportInvalidQuerySchemaModification)
+            {
+                output = Json::Value("ExportInvalidQuerySchemaModification");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExportQuerySchemaMissingRequiredColumns)
+            {
+                output = Json::Value("ExportQuerySchemaMissingRequiredColumns");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExportCannotParseQuery)
+            {
+                output = Json::Value("ExportCannotParseQuery");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExportControlCommandsNotAllowed)
+            {
+                output = Json::Value("ExportControlCommandsNotAllowed");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesTitleNotEnabledForParty)
             {
                 output = Json::Value("TitleNotEnabledForParty");
@@ -8193,6 +8248,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesMaxActionDepthExceeded)
             {
                 output = Json::Value("MaxActionDepthExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleNotOnUpdatedPricingPlan)
+            {
+                output = Json::Value("TitleNotOnUpdatedPricingPlan");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesSnapshotNotFound)
@@ -10663,9 +10723,29 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesAppleNotEnabledForTitle;
                 return;
             }
-            if (inputStr == "InsightsManagementNewActiveEventArchiveLimitInvalid")
+            if (inputStr == "InsightsManagementNewActiveEventExportLimitInvalid")
             {
-                output = GenericErrorCodes::GenericErrorCodesInsightsManagementNewActiveEventArchiveLimitInvalid;
+                output = GenericErrorCodes::GenericErrorCodesInsightsManagementNewActiveEventExportLimitInvalid;
+                return;
+            }
+            if (inputStr == "InsightsManagementSetPerformanceRateLimited")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInsightsManagementSetPerformanceRateLimited;
+                return;
+            }
+            if (inputStr == "PartyRequestsThrottledFromRateLimiter")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPartyRequestsThrottledFromRateLimiter;
+                return;
+            }
+            if (inputStr == "XboxServiceTooManyRequests")
+            {
+                output = GenericErrorCodes::GenericErrorCodesXboxServiceTooManyRequests;
+                return;
+            }
+            if (inputStr == "NintendoSwitchNotEnabledForTitle")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNintendoSwitchNotEnabledForTitle;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
@@ -10948,6 +11028,31 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesExportCouldNotDelete;
                 return;
             }
+            if (inputStr == "ExportCannotDetermineEventQuery")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExportCannotDetermineEventQuery;
+                return;
+            }
+            if (inputStr == "ExportInvalidQuerySchemaModification")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExportInvalidQuerySchemaModification;
+                return;
+            }
+            if (inputStr == "ExportQuerySchemaMissingRequiredColumns")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExportQuerySchemaMissingRequiredColumns;
+                return;
+            }
+            if (inputStr == "ExportCannotParseQuery")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExportCannotParseQuery;
+                return;
+            }
+            if (inputStr == "ExportControlCommandsNotAllowed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExportControlCommandsNotAllowed;
+                return;
+            }
             if (inputStr == "TitleNotEnabledForParty")
             {
                 output = GenericErrorCodes::GenericErrorCodesTitleNotEnabledForParty;
@@ -11038,6 +11143,11 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesMaxActionDepthExceeded;
                 return;
             }
+            if (inputStr == "TitleNotOnUpdatedPricingPlan")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleNotOnUpdatedPricingPlan;
+                return;
+            }
             if (inputStr == "SnapshotNotFound")
             {
                 output = GenericErrorCodes::GenericErrorCodesSnapshotNotFound;
@@ -11066,7 +11176,8 @@ namespace PlayFab
             LoginIdentityProviderNintendoSwitch,
             LoginIdentityProviderFacebookInstantGames,
             LoginIdentityProviderOpenIdConnect,
-            LoginIdentityProviderApple
+            LoginIdentityProviderApple,
+            LoginIdentityProviderNintendoSwitchAccount
         };
 
         inline void ToJsonEnum(const LoginIdentityProvider input, Json::Value& output)
@@ -11169,6 +11280,11 @@ namespace PlayFab
             if (input == LoginIdentityProvider::LoginIdentityProviderApple)
             {
                 output = Json::Value("Apple");
+                return;
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderNintendoSwitchAccount)
+            {
+                output = Json::Value("NintendoSwitchAccount");
                 return;
             }
         }
@@ -11277,6 +11393,11 @@ namespace PlayFab
             if (inputStr == "Apple")
             {
                 output = LoginIdentityProvider::LoginIdentityProviderApple;
+                return;
+            }
+            if (inputStr == "NintendoSwitchAccount")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderNintendoSwitchAccount;
                 return;
             }
         }
@@ -11839,7 +11960,9 @@ namespace PlayFab
             UserOriginationServerCustomId,
             UserOriginationNintendoSwitchDeviceId,
             UserOriginationFacebookInstantGamesId,
-            UserOriginationOpenIdConnect
+            UserOriginationOpenIdConnect,
+            UserOriginationApple,
+            UserOriginationNintendoSwitchAccount
         };
 
         inline void ToJsonEnum(const UserOrigination input, Json::Value& output)
@@ -11952,6 +12075,16 @@ namespace PlayFab
             if (input == UserOrigination::UserOriginationOpenIdConnect)
             {
                 output = Json::Value("OpenIdConnect");
+                return;
+            }
+            if (input == UserOrigination::UserOriginationApple)
+            {
+                output = Json::Value("Apple");
+                return;
+            }
+            if (input == UserOrigination::UserOriginationNintendoSwitchAccount)
+            {
+                output = Json::Value("NintendoSwitchAccount");
                 return;
             }
         }
@@ -12070,6 +12203,16 @@ namespace PlayFab
             if (inputStr == "OpenIdConnect")
             {
                 output = UserOrigination::UserOriginationOpenIdConnect;
+                return;
+            }
+            if (inputStr == "Apple")
+            {
+                output = UserOrigination::UserOriginationApple;
+                return;
+            }
+            if (inputStr == "NintendoSwitchAccount")
+            {
+                output = UserOrigination::UserOriginationNintendoSwitchAccount;
                 return;
             }
         }
@@ -12561,6 +12704,35 @@ namespace PlayFab
             }
         };
 
+        struct UserAppleIdInfo : public PlayFabBaseModel
+        {
+            std::string AppleSubjectId;
+
+            UserAppleIdInfo() :
+                PlayFabBaseModel(),
+                AppleSubjectId()
+            {}
+
+            UserAppleIdInfo(const UserAppleIdInfo& src) :
+                PlayFabBaseModel(),
+                AppleSubjectId(src.AppleSubjectId)
+            {}
+
+            ~UserAppleIdInfo() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["AppleSubjectId"], AppleSubjectId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_AppleSubjectId; ToJsonUtilS(AppleSubjectId, each_AppleSubjectId); output["AppleSubjectId"] = each_AppleSubjectId;
+                return output;
+            }
+        };
+
         struct UserCustomIdInfo : public PlayFabBaseModel
         {
             std::string CustomId;
@@ -12790,6 +12962,35 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_KongregateId; ToJsonUtilS(KongregateId, each_KongregateId); output["KongregateId"] = each_KongregateId;
                 Json::Value each_KongregateName; ToJsonUtilS(KongregateName, each_KongregateName); output["KongregateName"] = each_KongregateName;
+                return output;
+            }
+        };
+
+        struct UserNintendoSwitchAccountIdInfo : public PlayFabBaseModel
+        {
+            std::string NintendoSwitchAccountSubjectId;
+
+            UserNintendoSwitchAccountIdInfo() :
+                PlayFabBaseModel(),
+                NintendoSwitchAccountSubjectId()
+            {}
+
+            UserNintendoSwitchAccountIdInfo(const UserNintendoSwitchAccountIdInfo& src) :
+                PlayFabBaseModel(),
+                NintendoSwitchAccountSubjectId(src.NintendoSwitchAccountSubjectId)
+            {}
+
+            ~UserNintendoSwitchAccountIdInfo() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["NintendoSwitchAccountSubjectId"], NintendoSwitchAccountSubjectId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_NintendoSwitchAccountSubjectId; ToJsonUtilS(NintendoSwitchAccountSubjectId, each_NintendoSwitchAccountSubjectId); output["NintendoSwitchAccountSubjectId"] = each_NintendoSwitchAccountSubjectId;
                 return output;
             }
         };
@@ -13172,6 +13373,7 @@ namespace PlayFab
         struct UserAccountInfo : public PlayFabBaseModel
         {
             Boxed<UserAndroidDeviceInfo> AndroidDeviceInfo;
+            Boxed<UserAppleIdInfo> AppleAccountInfo;
             time_t Created;
             Boxed<UserCustomIdInfo> CustomIdInfo;
             Boxed<UserFacebookInfo> FacebookInfo;
@@ -13180,6 +13382,7 @@ namespace PlayFab
             Boxed<UserGoogleInfo> GoogleInfo;
             Boxed<UserIosDeviceInfo> IosDeviceInfo;
             Boxed<UserKongregateInfo> KongregateInfo;
+            Boxed<UserNintendoSwitchAccountIdInfo> NintendoSwitchAccountInfo;
             Boxed<UserNintendoSwitchDeviceIdInfo> NintendoSwitchDeviceIdInfo;
             std::list<UserOpenIdInfo> OpenIdInfo;
             std::string PlayFabId;
@@ -13195,6 +13398,7 @@ namespace PlayFab
             UserAccountInfo() :
                 PlayFabBaseModel(),
                 AndroidDeviceInfo(),
+                AppleAccountInfo(),
                 Created(),
                 CustomIdInfo(),
                 FacebookInfo(),
@@ -13203,6 +13407,7 @@ namespace PlayFab
                 GoogleInfo(),
                 IosDeviceInfo(),
                 KongregateInfo(),
+                NintendoSwitchAccountInfo(),
                 NintendoSwitchDeviceIdInfo(),
                 OpenIdInfo(),
                 PlayFabId(),
@@ -13219,6 +13424,7 @@ namespace PlayFab
             UserAccountInfo(const UserAccountInfo& src) :
                 PlayFabBaseModel(),
                 AndroidDeviceInfo(src.AndroidDeviceInfo),
+                AppleAccountInfo(src.AppleAccountInfo),
                 Created(src.Created),
                 CustomIdInfo(src.CustomIdInfo),
                 FacebookInfo(src.FacebookInfo),
@@ -13227,6 +13433,7 @@ namespace PlayFab
                 GoogleInfo(src.GoogleInfo),
                 IosDeviceInfo(src.IosDeviceInfo),
                 KongregateInfo(src.KongregateInfo),
+                NintendoSwitchAccountInfo(src.NintendoSwitchAccountInfo),
                 NintendoSwitchDeviceIdInfo(src.NintendoSwitchDeviceIdInfo),
                 OpenIdInfo(src.OpenIdInfo),
                 PlayFabId(src.PlayFabId),
@@ -13245,6 +13452,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["AndroidDeviceInfo"], AndroidDeviceInfo);
+                FromJsonUtilO(input["AppleAccountInfo"], AppleAccountInfo);
                 FromJsonUtilT(input["Created"], Created);
                 FromJsonUtilO(input["CustomIdInfo"], CustomIdInfo);
                 FromJsonUtilO(input["FacebookInfo"], FacebookInfo);
@@ -13253,6 +13461,7 @@ namespace PlayFab
                 FromJsonUtilO(input["GoogleInfo"], GoogleInfo);
                 FromJsonUtilO(input["IosDeviceInfo"], IosDeviceInfo);
                 FromJsonUtilO(input["KongregateInfo"], KongregateInfo);
+                FromJsonUtilO(input["NintendoSwitchAccountInfo"], NintendoSwitchAccountInfo);
                 FromJsonUtilO(input["NintendoSwitchDeviceIdInfo"], NintendoSwitchDeviceIdInfo);
                 FromJsonUtilO(input["OpenIdInfo"], OpenIdInfo);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
@@ -13270,6 +13479,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_AndroidDeviceInfo; ToJsonUtilO(AndroidDeviceInfo, each_AndroidDeviceInfo); output["AndroidDeviceInfo"] = each_AndroidDeviceInfo;
+                Json::Value each_AppleAccountInfo; ToJsonUtilO(AppleAccountInfo, each_AppleAccountInfo); output["AppleAccountInfo"] = each_AppleAccountInfo;
                 Json::Value each_Created; ToJsonUtilT(Created, each_Created); output["Created"] = each_Created;
                 Json::Value each_CustomIdInfo; ToJsonUtilO(CustomIdInfo, each_CustomIdInfo); output["CustomIdInfo"] = each_CustomIdInfo;
                 Json::Value each_FacebookInfo; ToJsonUtilO(FacebookInfo, each_FacebookInfo); output["FacebookInfo"] = each_FacebookInfo;
@@ -13278,6 +13488,7 @@ namespace PlayFab
                 Json::Value each_GoogleInfo; ToJsonUtilO(GoogleInfo, each_GoogleInfo); output["GoogleInfo"] = each_GoogleInfo;
                 Json::Value each_IosDeviceInfo; ToJsonUtilO(IosDeviceInfo, each_IosDeviceInfo); output["IosDeviceInfo"] = each_IosDeviceInfo;
                 Json::Value each_KongregateInfo; ToJsonUtilO(KongregateInfo, each_KongregateInfo); output["KongregateInfo"] = each_KongregateInfo;
+                Json::Value each_NintendoSwitchAccountInfo; ToJsonUtilO(NintendoSwitchAccountInfo, each_NintendoSwitchAccountInfo); output["NintendoSwitchAccountInfo"] = each_NintendoSwitchAccountInfo;
                 Json::Value each_NintendoSwitchDeviceIdInfo; ToJsonUtilO(NintendoSwitchDeviceIdInfo, each_NintendoSwitchDeviceIdInfo); output["NintendoSwitchDeviceIdInfo"] = each_NintendoSwitchDeviceIdInfo;
                 Json::Value each_OpenIdInfo; ToJsonUtilO(OpenIdInfo, each_OpenIdInfo); output["OpenIdInfo"] = each_OpenIdInfo;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;

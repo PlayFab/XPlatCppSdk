@@ -22,6 +22,7 @@ namespace PlayFab
 {
     namespace QoS
     {
+        static const size_t MaxWaitForFuturesLoopCounts = 300;
         PlayFabQoSApi::PlayFabQoSApi()
         {
             eventsApi = std::make_shared<PlayFabEventsInstanceAPI>(PlayFabSettings::staticPlayer);
@@ -287,7 +288,8 @@ namespace PlayFab
                 // Iterate over all the threads and servers that need to be pinged
                 for (size_t i = 0; i < numThreads && pingItr < numPings; ++i)
                 {
-                    if (asyncPingResults[i].valid()) // the very first ping result might be a fake future
+                    // NOTE: the very first ping result might be a fake future
+                    for (size_t futuresCount = 0; futuresCount < MaxWaitForFuturesLoopCounts || asyncPingResults[i].valid(); ++futuresCount)
                     {
                         future_status status = asyncPingResults[i].wait_for(threadWaitTimespan);
                         if (status == future_status::ready)

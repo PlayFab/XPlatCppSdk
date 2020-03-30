@@ -45,7 +45,6 @@ namespace PlayFab
         eventsApi = std::make_shared<PlayFabEventsInstanceAPI>(PlayFabSettings::staticPlayer);
 
         this->settings = settings;
-        this->batch.reserve(this->settings->maximalNumberOfItemsInBatch);
         this->batchesInFlight.reserve(this->settings->maximalNumberOfBatchesInFlight);
         this->Start();
     }
@@ -159,15 +158,26 @@ namespace PlayFab
         using clock = std::chrono::steady_clock;
         using Result = PlayFabEventBuffer::EventConsumingResult;
         std::shared_ptr<const IPlayFabEmitEventRequest> request;
-        size_t batchCounter = 1; // used to track uniqueness of batches in the map
+        uintptr_t batchCounter = 1; // used to track uniqueness of batches in the map
         std::chrono::steady_clock::time_point momentBatchStarted; // used to track when a currently assembled batch got its first event
+        
+        std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>> batch;
 
-        while (this->isWorkerThreadRunning)
+        try
         {
-            try
+            batch.reserve(this->settings->maximalNumberOfItemsInBatch);
+        
+            while (this->isWorkerThreadRunning)
             {
+                size_t sizeOfBatchesInFlight = 0;
+
+                { // LOCK batchesInFlight mutex
+                    std::unique_lock<std::mutex> lock(inFlightMutex);
+                    sizeOfBatchesInFlight = this->batchesInFlight.size();
+                } // UNLOCK batchesInFlight
+
                 // Process events in the loop
-                if (this->batchesInFlight.size() >= this->settings->maximalNumberOfBatchesInFlight)
+                if (sizeOfBatchesInFlight >= this->settings->maximalNumberOfBatchesInFlight)
                 {
                     // do not take new events from buffer if batches currently in flight are at the maximum allowed number
                     // and are not sent out (or received an error) yet
@@ -180,14 +190,14 @@ namespace PlayFab
                 case Result::Success:
                 {
                     // add an event to batch
-                    this->batch.push_back(std::move(request));
+                    batch.push_back(std::move(request));
 
                     // if batch is full
-                    if (this->batch.size() >= this->settings->maximalNumberOfItemsInBatch)
+                    if (batch.size() >= this->settings->maximalNumberOfItemsInBatch)
                     {
-                        this->SendBatch(batchCounter);
+                        this->SendBatch(batch, batchCounter);
                     }
-                    else if (this->batch.size() == 1)
+                    else if (batch.size() == 1)
                     {
                         // if it is the first event in an incomplete batch then set the batch creation moment
                         momentBatchStarted = clock::now();
@@ -204,14 +214,14 @@ namespace PlayFab
                 }
 
                 // if batch was started
-                if (this->batch.size() > 0)
+                if (batch.size() > 0)
                 {
                     // check if the batch wait time expired
                     std::chrono::seconds batchAge = std::chrono::duration_cast<std::chrono::seconds>(clock::now() - momentBatchStarted);
                     if (batchAge.count() >= (int32_t)this->settings->maximalBatchWaitTime)
                     {
                         // batch wait time expired, send incomplete batch
-                        this->SendBatch(batchCounter);
+                        this->SendBatch(batch, batchCounter);
                         continue; // immediately check if there is next event in buffer
                     }
                 }
@@ -220,27 +230,27 @@ namespace PlayFab
                 // give some time back to CPU, don't starve it without a good reason
                 std::this_thread::sleep_for(std::chrono::milliseconds(this->settings->readBufferWaitTime));
             }
-            catch (const std::exception& ex)
-            {
-                LOG_PIPELINE("An exception was caught in PlayFabEventPipeline::WorkerThread method");
-                this->isWorkerThreadRunning = false;
+        }
+        catch (const std::exception& ex)
+        {
+            LOG_PIPELINE("An exception was caught in PlayFabEventPipeline::WorkerThread method");
+            this->isWorkerThreadRunning = false;
 
-                { // LOCK userCallbackMutex
-                    std::unique_lock<std::mutex> lock(userExceptionCallbackMutex);
-                    if (userExceptionCallback)
-                    {
-                        userExceptionCallback(ex);
-                    }
-                } // UNLOCK userCallbackMutex
-            }
-            catch (...)
-            {
-                LOG_PIPELINE("A non std::exception was caught in PlayFabEventPipeline::WorkerThread method");
-            }
+            { // LOCK userCallbackMutex
+                std::unique_lock<std::mutex> lock(userExceptionCallbackMutex);
+                if (userExceptionCallback)
+                {
+                    userExceptionCallback(ex);
+                }
+            } // UNLOCK userCallbackMutex
+        }
+        catch (...)
+        {
+            LOG_PIPELINE("A non std::exception was caught in PlayFabEventPipeline::WorkerThread method");
         }
     }
 
-    void PlayFabEventPipeline::SendBatch(size_t& batchCounter)
+    void PlayFabEventPipeline::SendBatch(std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>>& batch, uintptr_t& batchCounter)
     {
         // create a WriteEvents API request to send the batch
         EventsModels::WriteEventsRequest batchReq;
@@ -249,7 +259,7 @@ namespace PlayFab
             batchReq.authenticationContext = this->settings->authenticationContext;
         }
 
-        for (const auto& eventEmitRequest : this->batch)
+        for (const auto& eventEmitRequest : batch)
         {
             const auto& playFabEmitRequest = std::dynamic_pointer_cast<const PlayFabEmitEventRequest>(eventEmitRequest);
             batchReq.Events.push_back(playFabEmitRequest->event->eventContents);
@@ -257,11 +267,16 @@ namespace PlayFab
 
         // add batch to flight tracking map
         void* customData = reinterpret_cast<void*>(batchCounter); // used to track batches across asynchronous Events API
-        this->batchesInFlight[customData] = std::move(this->batch);
+
+        { // LOCK batchesInFlight mutex
+            std::unique_lock<std::mutex> lock(inFlightMutex);
+            this->batchesInFlight[customData] = std::move(batch);
+        } // UNLOCK batchesInFlight
+        
         batchCounter++;
 
-        this->batch.clear(); // batch vector will be reused
-        this->batch.reserve(this->settings->maximalNumberOfItemsInBatch);
+        batch.clear(); // batch vector will be reused
+        batch.reserve(this->settings->maximalNumberOfItemsInBatch);
         if (this->settings->emitType == PlayFabEventPipelineType::PlayFabPlayStream)
         {
             // call Events API to send the batch
@@ -286,16 +301,10 @@ namespace PlayFab
     {
         try
         {
-            // batch was successfully sent out, find it in the batch tracking map using customData pointer as a key
-            const auto foundBatchIterator = this->batchesInFlight.find(customData);
-            if (foundBatchIterator == this->batchesInFlight.end())
+            std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>> batchWritten;
+            if(TryGetBatchOutOfFlight(customData, &batchWritten))
             {
-                LOG_PIPELINE("Untracked batch was returned to EventsAPI.WriteEvents callback"); // normally this never happens
-            }
-            else
-            {
-                auto requestBatchPtr = std::shared_ptr<const std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>>>(new std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>>(std::move(foundBatchIterator->second)));
-
+                auto requestBatchPtr = std::make_shared<std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>>>(std::move(batchWritten));
                 // call individual emit event callbacks
                 for (const auto& eventEmitRequest : *requestBatchPtr)
                 {
@@ -308,15 +317,17 @@ namespace PlayFab
                     playFabEmitEventResponse->playFabError = playFabError;
                     playFabEmitEventResponse->writeEventsResponse = std::shared_ptr<EventsModels::WriteEventsResponse>(new EventsModels::WriteEventsResponse(result));
                     playFabEmitEventResponse->batch = requestBatchPtr;
-                    playFabEmitEventResponse->batchNumber = reinterpret_cast<size_t>(customData);
+                    playFabEmitEventResponse->batchNumber = static_cast<size_t>(reinterpret_cast<uintptr_t>(customData));
 
                     // call an emit event callback
                     CallbackRequest(playFabEmitRequest, std::move(playFabEmitEventResponse));
                 }
-
-                // remove the batch from tracking map
-                this->batchesInFlight.erase(foundBatchIterator->first);
             }
+            else
+            {
+                LOG_PIPELINE("After a valid PlayFabEventPipeline write call, the requested return Batch did not appear in our known flighted batches, there is no trustworthy data we can return to the user");
+            }
+            
         }
         catch (...)
         {
@@ -328,16 +339,10 @@ namespace PlayFab
     {
         try
         {
-            // batch wasn't sent out due to an error, find it in the batch tracking map using customData pointer as a key
-            const auto foundBatchIterator = this->batchesInFlight.find(customData);
-            if (foundBatchIterator == this->batchesInFlight.end())
+            std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>> batchWritten;
+            if(TryGetBatchOutOfFlight(customData, &batchWritten))
             {
-                LOG_PIPELINE("Untracked batch was returned to EventsAPI.WriteEvents callback"); // normally this never happens
-            }
-            else
-            {
-                auto requestBatchPtr = std::shared_ptr<const std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>>>(new std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>>(std::move(foundBatchIterator->second)));
-
+                auto requestBatchPtr = std::make_shared<std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>>>(std::move(batchWritten));
                 // call individual emit event callbacks
                 for (const auto& eventEmitRequest : *requestBatchPtr)
                 {
@@ -346,14 +351,15 @@ namespace PlayFab
                     playFabEmitEventResponse->emitEventResult = EmitEventResult::Success;
                     playFabEmitEventResponse->playFabError = std::shared_ptr<PlayFabError>(new PlayFabError(error));
                     playFabEmitEventResponse->batch = requestBatchPtr;
-                    playFabEmitEventResponse->batchNumber = reinterpret_cast<size_t>(customData);
+                    playFabEmitEventResponse->batchNumber = static_cast<size_t>(reinterpret_cast<uintptr_t>(customData));
 
                     // call an emit event callback
                     CallbackRequest(playFabEmitRequest, std::move(playFabEmitEventResponse));
                 }
-
-                // remove the batch from tracking map
-                this->batchesInFlight.erase(foundBatchIterator->first);
+            }
+            else
+            {
+                LOG_PIPELINE("After an invalid PlayFabEventPipeline write call error was being raised to the user, the requeted return Batch did not appear in our known flighted batches, there is no trustworthy data we can return to the user");
             }
         }
         catch (...)
@@ -375,6 +381,25 @@ namespace PlayFab
         {
             playFabEmitRequest->stdCallback(playFabEmitRequest->event, response);
         }
+    }
+
+    bool PlayFabEventPipeline::TryGetBatchOutOfFlight(void* customData, std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>>* batchReturn)
+    {
+        // LOCK batchesInFlight mutex
+        std::unique_lock<std::mutex> lock(inFlightMutex);
+        auto iter = this->batchesInFlight.find(customData);
+        if (iter == this->batchesInFlight.end())
+        {
+            // not finding the batch in the queue is a bug
+            LOG_PIPELINE("Untracked batch was returned to EventsAPI.WriteEvents callback");
+            return false;
+            // UNLOCK batchesInFlight
+        }
+
+        *batchReturn = std::move(iter->second);
+        this->batchesInFlight.erase(iter);
+        return true;
+        // UNLOCK batchesInFlight
     }
 }
 

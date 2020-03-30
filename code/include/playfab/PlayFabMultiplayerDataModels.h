@@ -606,7 +606,8 @@ namespace PlayFab
         {
             ContainerFlavorManagedWindowsServerCore,
             ContainerFlavorCustomLinux,
-            ContainerFlavorManagedWindowsServerCorePreview
+            ContainerFlavorManagedWindowsServerCorePreview,
+            ContainerFlavorInvalid
         };
 
         inline void ToJsonEnum(const ContainerFlavor input, Json::Value& output)
@@ -624,6 +625,11 @@ namespace PlayFab
             if (input == ContainerFlavor::ContainerFlavorManagedWindowsServerCorePreview)
             {
                 output = Json::Value("ManagedWindowsServerCorePreview");
+                return;
+            }
+            if (input == ContainerFlavor::ContainerFlavorInvalid)
+            {
+                output = Json::Value("Invalid");
                 return;
             }
         }
@@ -647,6 +653,49 @@ namespace PlayFab
             if (inputStr == "ManagedWindowsServerCorePreview")
             {
                 output = ContainerFlavor::ContainerFlavorManagedWindowsServerCorePreview;
+                return;
+            }
+            if (inputStr == "Invalid")
+            {
+                output = ContainerFlavor::ContainerFlavorInvalid;
+                return;
+            }
+        }
+
+        enum class OsPlatform
+        {
+            OsPlatformWindows,
+            OsPlatformLinux
+        };
+
+        inline void ToJsonEnum(const OsPlatform input, Json::Value& output)
+        {
+            if (input == OsPlatform::OsPlatformWindows)
+            {
+                output = Json::Value("Windows");
+                return;
+            }
+            if (input == OsPlatform::OsPlatformLinux)
+            {
+                output = Json::Value("Linux");
+                return;
+            }
+        }
+        inline void FromJsonEnum(const Json::Value& input, OsPlatform& output)
+        {
+            if (!input.isString())
+            {
+                return;
+            }
+            const std::string& inputStr = input.asString();
+            if (inputStr == "Windows")
+            {
+                output = OsPlatform::OsPlatformWindows;
+                return;
+            }
+            if (inputStr == "Linux")
+            {
+                output = OsPlatform::OsPlatformLinux;
                 return;
             }
         }
@@ -685,6 +734,44 @@ namespace PlayFab
             if (inputStr == "UDP")
             {
                 output = ProtocolType::ProtocolTypeUDP;
+                return;
+            }
+        }
+
+        enum class ServerType
+        {
+            ServerTypeContainer,
+            ServerTypeProcess
+        };
+
+        inline void ToJsonEnum(const ServerType input, Json::Value& output)
+        {
+            if (input == ServerType::ServerTypeContainer)
+            {
+                output = Json::Value("Container");
+                return;
+            }
+            if (input == ServerType::ServerTypeProcess)
+            {
+                output = Json::Value("Process");
+                return;
+            }
+        }
+        inline void FromJsonEnum(const Json::Value& input, ServerType& output)
+        {
+            if (!input.isString())
+            {
+                return;
+            }
+            const std::string& inputStr = input.asString();
+            if (inputStr == "Container")
+            {
+                output = ServerType::ServerTypeContainer;
+                return;
+            }
+            if (inputStr == "Process")
+            {
+                output = ServerType::ServerTypeProcess;
                 return;
             }
         }
@@ -1890,8 +1977,10 @@ namespace PlayFab
             std::list<GameCertificateReference> GameCertificateReferences;
             std::map<std::string, std::string> Metadata;
             Int32 MultiplayerServerCountPerVm;
+            std::string OsPlatform;
             std::list<Port> Ports;
             std::list<BuildRegion> RegionConfigurations;
+            std::string ServerType;
             Boxed<AzureVmSize> VmSize;
 
             CreateBuildWithCustomContainerResponse() :
@@ -1906,8 +1995,10 @@ namespace PlayFab
                 GameCertificateReferences(),
                 Metadata(),
                 MultiplayerServerCountPerVm(),
+                OsPlatform(),
                 Ports(),
                 RegionConfigurations(),
+                ServerType(),
                 VmSize()
             {}
 
@@ -1923,8 +2014,10 @@ namespace PlayFab
                 GameCertificateReferences(src.GameCertificateReferences),
                 Metadata(src.Metadata),
                 MultiplayerServerCountPerVm(src.MultiplayerServerCountPerVm),
+                OsPlatform(src.OsPlatform),
                 Ports(src.Ports),
                 RegionConfigurations(src.RegionConfigurations),
+                ServerType(src.ServerType),
                 VmSize(src.VmSize)
             {}
 
@@ -1942,8 +2035,10 @@ namespace PlayFab
                 FromJsonUtilO(input["GameCertificateReferences"], GameCertificateReferences);
                 FromJsonUtilS(input["Metadata"], Metadata);
                 FromJsonUtilP(input["MultiplayerServerCountPerVm"], MultiplayerServerCountPerVm);
+                FromJsonUtilS(input["OsPlatform"], OsPlatform);
                 FromJsonUtilO(input["Ports"], Ports);
                 FromJsonUtilO(input["RegionConfigurations"], RegionConfigurations);
+                FromJsonUtilS(input["ServerType"], ServerType);
                 FromJsonUtilE(input["VmSize"], VmSize);
             }
 
@@ -1960,8 +2055,10 @@ namespace PlayFab
                 Json::Value each_GameCertificateReferences; ToJsonUtilO(GameCertificateReferences, each_GameCertificateReferences); output["GameCertificateReferences"] = each_GameCertificateReferences;
                 Json::Value each_Metadata; ToJsonUtilS(Metadata, each_Metadata); output["Metadata"] = each_Metadata;
                 Json::Value each_MultiplayerServerCountPerVm; ToJsonUtilP(MultiplayerServerCountPerVm, each_MultiplayerServerCountPerVm); output["MultiplayerServerCountPerVm"] = each_MultiplayerServerCountPerVm;
+                Json::Value each_OsPlatform; ToJsonUtilS(OsPlatform, each_OsPlatform); output["OsPlatform"] = each_OsPlatform;
                 Json::Value each_Ports; ToJsonUtilO(Ports, each_Ports); output["Ports"] = each_Ports;
                 Json::Value each_RegionConfigurations; ToJsonUtilO(RegionConfigurations, each_RegionConfigurations); output["RegionConfigurations"] = each_RegionConfigurations;
+                Json::Value each_ServerType; ToJsonUtilS(ServerType, each_ServerType); output["ServerType"] = each_ServerType;
                 Json::Value each_VmSize; ToJsonUtilE(VmSize, each_VmSize); output["VmSize"] = each_VmSize;
                 return output;
             }
@@ -2002,6 +2099,7 @@ namespace PlayFab
             Boxed<ContainerFlavor> pfContainerFlavor;
             std::list<AssetReferenceParams> GameAssetReferences;
             std::list<GameCertificateReferenceParams> GameCertificateReferences;
+            std::string GameWorkingDirectory;
             Boxed<InstrumentationConfiguration> pfInstrumentationConfiguration;
             std::map<std::string, std::string> Metadata;
             Int32 MultiplayerServerCountPerVm;
@@ -2016,6 +2114,7 @@ namespace PlayFab
                 pfContainerFlavor(),
                 GameAssetReferences(),
                 GameCertificateReferences(),
+                GameWorkingDirectory(),
                 pfInstrumentationConfiguration(),
                 Metadata(),
                 MultiplayerServerCountPerVm(),
@@ -2031,6 +2130,7 @@ namespace PlayFab
                 pfContainerFlavor(src.pfContainerFlavor),
                 GameAssetReferences(src.GameAssetReferences),
                 GameCertificateReferences(src.GameCertificateReferences),
+                GameWorkingDirectory(src.GameWorkingDirectory),
                 pfInstrumentationConfiguration(src.pfInstrumentationConfiguration),
                 Metadata(src.Metadata),
                 MultiplayerServerCountPerVm(src.MultiplayerServerCountPerVm),
@@ -2048,6 +2148,7 @@ namespace PlayFab
                 FromJsonUtilE(input["ContainerFlavor"], pfContainerFlavor);
                 FromJsonUtilO(input["GameAssetReferences"], GameAssetReferences);
                 FromJsonUtilO(input["GameCertificateReferences"], GameCertificateReferences);
+                FromJsonUtilS(input["GameWorkingDirectory"], GameWorkingDirectory);
                 FromJsonUtilO(input["InstrumentationConfiguration"], pfInstrumentationConfiguration);
                 FromJsonUtilS(input["Metadata"], Metadata);
                 FromJsonUtilP(input["MultiplayerServerCountPerVm"], MultiplayerServerCountPerVm);
@@ -2064,6 +2165,7 @@ namespace PlayFab
                 Json::Value each_pfContainerFlavor; ToJsonUtilE(pfContainerFlavor, each_pfContainerFlavor); output["ContainerFlavor"] = each_pfContainerFlavor;
                 Json::Value each_GameAssetReferences; ToJsonUtilO(GameAssetReferences, each_GameAssetReferences); output["GameAssetReferences"] = each_GameAssetReferences;
                 Json::Value each_GameCertificateReferences; ToJsonUtilO(GameCertificateReferences, each_GameCertificateReferences); output["GameCertificateReferences"] = each_GameCertificateReferences;
+                Json::Value each_GameWorkingDirectory; ToJsonUtilS(GameWorkingDirectory, each_GameWorkingDirectory); output["GameWorkingDirectory"] = each_GameWorkingDirectory;
                 Json::Value each_pfInstrumentationConfiguration; ToJsonUtilO(pfInstrumentationConfiguration, each_pfInstrumentationConfiguration); output["InstrumentationConfiguration"] = each_pfInstrumentationConfiguration;
                 Json::Value each_Metadata; ToJsonUtilS(Metadata, each_Metadata); output["Metadata"] = each_Metadata;
                 Json::Value each_MultiplayerServerCountPerVm; ToJsonUtilP(MultiplayerServerCountPerVm, each_MultiplayerServerCountPerVm); output["MultiplayerServerCountPerVm"] = each_MultiplayerServerCountPerVm;
@@ -2083,11 +2185,14 @@ namespace PlayFab
             Boxed<time_t> CreationTime;
             std::list<AssetReference> GameAssetReferences;
             std::list<GameCertificateReference> GameCertificateReferences;
+            std::string GameWorkingDirectory;
             Boxed<InstrumentationConfiguration> pfInstrumentationConfiguration;
             std::map<std::string, std::string> Metadata;
             Int32 MultiplayerServerCountPerVm;
+            std::string OsPlatform;
             std::list<Port> Ports;
             std::list<BuildRegion> RegionConfigurations;
+            std::string ServerType;
             std::string StartMultiplayerServerCommand;
             Boxed<AzureVmSize> VmSize;
 
@@ -2099,11 +2204,14 @@ namespace PlayFab
                 CreationTime(),
                 GameAssetReferences(),
                 GameCertificateReferences(),
+                GameWorkingDirectory(),
                 pfInstrumentationConfiguration(),
                 Metadata(),
                 MultiplayerServerCountPerVm(),
+                OsPlatform(),
                 Ports(),
                 RegionConfigurations(),
+                ServerType(),
                 StartMultiplayerServerCommand(),
                 VmSize()
             {}
@@ -2116,11 +2224,14 @@ namespace PlayFab
                 CreationTime(src.CreationTime),
                 GameAssetReferences(src.GameAssetReferences),
                 GameCertificateReferences(src.GameCertificateReferences),
+                GameWorkingDirectory(src.GameWorkingDirectory),
                 pfInstrumentationConfiguration(src.pfInstrumentationConfiguration),
                 Metadata(src.Metadata),
                 MultiplayerServerCountPerVm(src.MultiplayerServerCountPerVm),
+                OsPlatform(src.OsPlatform),
                 Ports(src.Ports),
                 RegionConfigurations(src.RegionConfigurations),
+                ServerType(src.ServerType),
                 StartMultiplayerServerCommand(src.StartMultiplayerServerCommand),
                 VmSize(src.VmSize)
             {}
@@ -2135,11 +2246,14 @@ namespace PlayFab
                 FromJsonUtilT(input["CreationTime"], CreationTime);
                 FromJsonUtilO(input["GameAssetReferences"], GameAssetReferences);
                 FromJsonUtilO(input["GameCertificateReferences"], GameCertificateReferences);
+                FromJsonUtilS(input["GameWorkingDirectory"], GameWorkingDirectory);
                 FromJsonUtilO(input["InstrumentationConfiguration"], pfInstrumentationConfiguration);
                 FromJsonUtilS(input["Metadata"], Metadata);
                 FromJsonUtilP(input["MultiplayerServerCountPerVm"], MultiplayerServerCountPerVm);
+                FromJsonUtilS(input["OsPlatform"], OsPlatform);
                 FromJsonUtilO(input["Ports"], Ports);
                 FromJsonUtilO(input["RegionConfigurations"], RegionConfigurations);
+                FromJsonUtilS(input["ServerType"], ServerType);
                 FromJsonUtilS(input["StartMultiplayerServerCommand"], StartMultiplayerServerCommand);
                 FromJsonUtilE(input["VmSize"], VmSize);
             }
@@ -2153,11 +2267,14 @@ namespace PlayFab
                 Json::Value each_CreationTime; ToJsonUtilT(CreationTime, each_CreationTime); output["CreationTime"] = each_CreationTime;
                 Json::Value each_GameAssetReferences; ToJsonUtilO(GameAssetReferences, each_GameAssetReferences); output["GameAssetReferences"] = each_GameAssetReferences;
                 Json::Value each_GameCertificateReferences; ToJsonUtilO(GameCertificateReferences, each_GameCertificateReferences); output["GameCertificateReferences"] = each_GameCertificateReferences;
+                Json::Value each_GameWorkingDirectory; ToJsonUtilS(GameWorkingDirectory, each_GameWorkingDirectory); output["GameWorkingDirectory"] = each_GameWorkingDirectory;
                 Json::Value each_pfInstrumentationConfiguration; ToJsonUtilO(pfInstrumentationConfiguration, each_pfInstrumentationConfiguration); output["InstrumentationConfiguration"] = each_pfInstrumentationConfiguration;
                 Json::Value each_Metadata; ToJsonUtilS(Metadata, each_Metadata); output["Metadata"] = each_Metadata;
                 Json::Value each_MultiplayerServerCountPerVm; ToJsonUtilP(MultiplayerServerCountPerVm, each_MultiplayerServerCountPerVm); output["MultiplayerServerCountPerVm"] = each_MultiplayerServerCountPerVm;
+                Json::Value each_OsPlatform; ToJsonUtilS(OsPlatform, each_OsPlatform); output["OsPlatform"] = each_OsPlatform;
                 Json::Value each_Ports; ToJsonUtilO(Ports, each_Ports); output["Ports"] = each_Ports;
                 Json::Value each_RegionConfigurations; ToJsonUtilO(RegionConfigurations, each_RegionConfigurations); output["RegionConfigurations"] = each_RegionConfigurations;
+                Json::Value each_ServerType; ToJsonUtilS(ServerType, each_ServerType); output["ServerType"] = each_ServerType;
                 Json::Value each_StartMultiplayerServerCommand; ToJsonUtilS(StartMultiplayerServerCommand, each_StartMultiplayerServerCommand); output["StartMultiplayerServerCommand"] = each_StartMultiplayerServerCommand;
                 Json::Value each_VmSize; ToJsonUtilE(VmSize, each_VmSize); output["VmSize"] = each_VmSize;
                 return output;
@@ -2641,6 +2758,40 @@ namespace PlayFab
             }
         };
 
+        struct DeleteBuildRegionRequest : public PlayFabRequestCommon
+        {
+            std::string BuildId;
+            std::string Region;
+
+            DeleteBuildRegionRequest() :
+                PlayFabRequestCommon(),
+                BuildId(),
+                Region()
+            {}
+
+            DeleteBuildRegionRequest(const DeleteBuildRegionRequest& src) :
+                PlayFabRequestCommon(),
+                BuildId(src.BuildId),
+                Region(src.Region)
+            {}
+
+            ~DeleteBuildRegionRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["BuildId"], BuildId);
+                FromJsonUtilS(input["Region"], Region);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
+                Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
+                return output;
+            }
+        };
+
         struct DeleteBuildRequest : public PlayFabRequestCommon
         {
             std::string BuildId;
@@ -2955,8 +3106,10 @@ namespace PlayFab
             Boxed<InstrumentationConfiguration> pfInstrumentationConfiguration;
             std::map<std::string, std::string> Metadata;
             Int32 MultiplayerServerCountPerVm;
+            std::string OsPlatform;
             std::list<Port> Ports;
             std::list<BuildRegion> RegionConfigurations;
+            std::string ServerType;
             std::string StartMultiplayerServerCommand;
             Boxed<AzureVmSize> VmSize;
 
@@ -2974,8 +3127,10 @@ namespace PlayFab
                 pfInstrumentationConfiguration(),
                 Metadata(),
                 MultiplayerServerCountPerVm(),
+                OsPlatform(),
                 Ports(),
                 RegionConfigurations(),
+                ServerType(),
                 StartMultiplayerServerCommand(),
                 VmSize()
             {}
@@ -2994,8 +3149,10 @@ namespace PlayFab
                 pfInstrumentationConfiguration(src.pfInstrumentationConfiguration),
                 Metadata(src.Metadata),
                 MultiplayerServerCountPerVm(src.MultiplayerServerCountPerVm),
+                OsPlatform(src.OsPlatform),
                 Ports(src.Ports),
                 RegionConfigurations(src.RegionConfigurations),
+                ServerType(src.ServerType),
                 StartMultiplayerServerCommand(src.StartMultiplayerServerCommand),
                 VmSize(src.VmSize)
             {}
@@ -3016,8 +3173,10 @@ namespace PlayFab
                 FromJsonUtilO(input["InstrumentationConfiguration"], pfInstrumentationConfiguration);
                 FromJsonUtilS(input["Metadata"], Metadata);
                 FromJsonUtilP(input["MultiplayerServerCountPerVm"], MultiplayerServerCountPerVm);
+                FromJsonUtilS(input["OsPlatform"], OsPlatform);
                 FromJsonUtilO(input["Ports"], Ports);
                 FromJsonUtilO(input["RegionConfigurations"], RegionConfigurations);
+                FromJsonUtilS(input["ServerType"], ServerType);
                 FromJsonUtilS(input["StartMultiplayerServerCommand"], StartMultiplayerServerCommand);
                 FromJsonUtilE(input["VmSize"], VmSize);
             }
@@ -3037,8 +3196,10 @@ namespace PlayFab
                 Json::Value each_pfInstrumentationConfiguration; ToJsonUtilO(pfInstrumentationConfiguration, each_pfInstrumentationConfiguration); output["InstrumentationConfiguration"] = each_pfInstrumentationConfiguration;
                 Json::Value each_Metadata; ToJsonUtilS(Metadata, each_Metadata); output["Metadata"] = each_Metadata;
                 Json::Value each_MultiplayerServerCountPerVm; ToJsonUtilP(MultiplayerServerCountPerVm, each_MultiplayerServerCountPerVm); output["MultiplayerServerCountPerVm"] = each_MultiplayerServerCountPerVm;
+                Json::Value each_OsPlatform; ToJsonUtilS(OsPlatform, each_OsPlatform); output["OsPlatform"] = each_OsPlatform;
                 Json::Value each_Ports; ToJsonUtilO(Ports, each_Ports); output["Ports"] = each_Ports;
                 Json::Value each_RegionConfigurations; ToJsonUtilO(RegionConfigurations, each_RegionConfigurations); output["RegionConfigurations"] = each_RegionConfigurations;
+                Json::Value each_ServerType; ToJsonUtilS(ServerType, each_ServerType); output["ServerType"] = each_ServerType;
                 Json::Value each_StartMultiplayerServerCommand; ToJsonUtilS(StartMultiplayerServerCommand, each_StartMultiplayerServerCommand); output["StartMultiplayerServerCommand"] = each_StartMultiplayerServerCommand;
                 Json::Value each_VmSize; ToJsonUtilE(VmSize, each_VmSize); output["VmSize"] = each_VmSize;
                 return output;
@@ -3424,18 +3585,15 @@ namespace PlayFab
 
         struct GetMultiplayerServerLogsRequest : public PlayFabRequestCommon
         {
-            std::string Region;
             std::string ServerId;
 
             GetMultiplayerServerLogsRequest() :
                 PlayFabRequestCommon(),
-                Region(),
                 ServerId()
             {}
 
             GetMultiplayerServerLogsRequest(const GetMultiplayerServerLogsRequest& src) :
                 PlayFabRequestCommon(),
-                Region(src.Region),
                 ServerId(src.ServerId)
             {}
 
@@ -3443,14 +3601,12 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
-                FromJsonUtilS(input["Region"], Region);
                 FromJsonUtilS(input["ServerId"], ServerId);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
                 Json::Value each_ServerId; ToJsonUtilS(ServerId, each_ServerId); output["ServerId"] = each_ServerId;
                 return output;
             }
@@ -5320,6 +5476,40 @@ namespace PlayFab
                 Json::Value each_AliasId; ToJsonUtilS(AliasId, each_AliasId); output["AliasId"] = each_AliasId;
                 Json::Value each_AliasName; ToJsonUtilS(AliasName, each_AliasName); output["AliasName"] = each_AliasName;
                 Json::Value each_BuildSelectionCriteria; ToJsonUtilO(BuildSelectionCriteria, each_BuildSelectionCriteria); output["BuildSelectionCriteria"] = each_BuildSelectionCriteria;
+                return output;
+            }
+        };
+
+        struct UpdateBuildRegionRequest : public PlayFabRequestCommon
+        {
+            std::string BuildId;
+            BuildRegionParams BuildRegion;
+
+            UpdateBuildRegionRequest() :
+                PlayFabRequestCommon(),
+                BuildId(),
+                BuildRegion()
+            {}
+
+            UpdateBuildRegionRequest(const UpdateBuildRegionRequest& src) :
+                PlayFabRequestCommon(),
+                BuildId(src.BuildId),
+                BuildRegion(src.BuildRegion)
+            {}
+
+            ~UpdateBuildRegionRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["BuildId"], BuildId);
+                FromJsonUtilO(input["BuildRegion"], BuildRegion);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
+                Json::Value each_BuildRegion; ToJsonUtilO(BuildRegion, each_BuildRegion); output["BuildRegion"] = each_BuildRegion;
                 return output;
             }
         };
