@@ -41,6 +41,8 @@ OBJS = stdafx.o \
 	PlayFabEventsInstanceApi.o \
 	PlayFabExperimentationApi.o \
 	PlayFabExperimentationInstanceApi.o \
+	PlayFabInsightsApi.o \
+	PlayFabInsightsInstanceApi.o \
 	PlayFabGroupsApi.o \
 	PlayFabGroupsInstanceApi.o \
 	PlayFabLocalizationApi.o \

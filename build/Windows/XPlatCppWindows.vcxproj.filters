@@ -122,6 +122,15 @@
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabExperimentationDataModels.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabInsightsApi.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabInsightsInstanceApi.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabInsightsDataModels.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabGroupsApi.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
@@ -287,6 +296,12 @@
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabExperimentationInstanceApi.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabInsightsApi.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabInsightsInstanceApi.cpp">
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabGroupsApi.cpp">
