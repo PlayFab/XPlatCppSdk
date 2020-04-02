@@ -5351,6 +5351,7 @@ namespace PlayFab
             GenericErrorCodesExportQuerySchemaMissingRequiredColumns,
             GenericErrorCodesExportCannotParseQuery,
             GenericErrorCodesExportControlCommandsNotAllowed,
+            GenericErrorCodesExportQueryMissingTableReference,
             GenericErrorCodesTitleNotEnabledForParty,
             GenericErrorCodesPartyVersionNotFound,
             GenericErrorCodesMultiplayerServerBuildReferencedByMatchmakingQueue,
@@ -5368,6 +5369,7 @@ namespace PlayFab
             GenericErrorCodesExperimentationTreatmentAssignmentDisabled,
             GenericErrorCodesExperimentationInvalidDuration,
             GenericErrorCodesExperimentationMaxExperimentsReached,
+            GenericErrorCodesExperimentationExperimentSchedulingInProgress,
             GenericErrorCodesMaxActionDepthExceeded,
             GenericErrorCodesTitleNotOnUpdatedPricingPlan,
             GenericErrorCodesSnapshotNotFound
@@ -8160,6 +8162,11 @@ namespace PlayFab
                 output = Json::Value("ExportControlCommandsNotAllowed");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesExportQueryMissingTableReference)
+            {
+                output = Json::Value("ExportQueryMissingTableReference");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesTitleNotEnabledForParty)
             {
                 output = Json::Value("TitleNotEnabledForParty");
@@ -8243,6 +8250,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesExperimentationMaxExperimentsReached)
             {
                 output = Json::Value("ExperimentationMaxExperimentsReached");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentationExperimentSchedulingInProgress)
+            {
+                output = Json::Value("ExperimentationExperimentSchedulingInProgress");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMaxActionDepthExceeded)
@@ -11053,6 +11065,11 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesExportControlCommandsNotAllowed;
                 return;
             }
+            if (inputStr == "ExportQueryMissingTableReference")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExportQueryMissingTableReference;
+                return;
+            }
             if (inputStr == "TitleNotEnabledForParty")
             {
                 output = GenericErrorCodes::GenericErrorCodesTitleNotEnabledForParty;
@@ -11136,6 +11153,11 @@ namespace PlayFab
             if (inputStr == "ExperimentationMaxExperimentsReached")
             {
                 output = GenericErrorCodes::GenericErrorCodesExperimentationMaxExperimentsReached;
+                return;
+            }
+            if (inputStr == "ExperimentationExperimentSchedulingInProgress")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentationExperimentSchedulingInProgress;
                 return;
             }
             if (inputStr == "MaxActionDepthExceeded")

@@ -268,7 +268,10 @@ namespace PlayFab
                                                                        NSString* body = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 
                                                                        CallRequestContainer& requestContainer = request->RequestContainer();
-                                                                       requestContainer.responseString = [body UTF8String];
+                                                                       if(body != nil)
+                                                                       {
+                                                                           requestContainer.responseString = [body UTF8String];
+                                                                       }
                                                                        ProcessResponse(*request, static_cast<const int>(httpResponse.statusCode));
                                                                        { // LOCK httpRequestMutex
                                                                            lock->lock();
