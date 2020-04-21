@@ -2850,6 +2850,35 @@ namespace PlayFab
             }
         };
 
+        struct DeleteContainerImageRequest : public PlayFabRequestCommon
+        {
+            std::string ImageName;
+
+            DeleteContainerImageRequest() :
+                PlayFabRequestCommon(),
+                ImageName()
+            {}
+
+            DeleteContainerImageRequest(const DeleteContainerImageRequest& src) :
+                PlayFabRequestCommon(),
+                ImageName(src.ImageName)
+            {}
+
+            ~DeleteContainerImageRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["ImageName"], ImageName);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ImageName; ToJsonUtilS(ImageName, each_ImageName); output["ImageName"] = each_ImageName;
+                return output;
+            }
+        };
+
         struct DeleteRemoteUserRequest : public PlayFabRequestCommon
         {
             std::string BuildId;

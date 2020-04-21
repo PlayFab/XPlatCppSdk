@@ -5290,6 +5290,7 @@ namespace PlayFab
             GenericErrorCodesPartyRequestsThrottledFromRateLimiter,
             GenericErrorCodesXboxServiceTooManyRequests,
             GenericErrorCodesNintendoSwitchNotEnabledForTitle,
+            GenericErrorCodesRequestMultiplayerServersThrottledFromRateLimiter,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -7855,6 +7856,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesNintendoSwitchNotEnabledForTitle)
             {
                 output = Json::Value("NintendoSwitchNotEnabledForTitle");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesRequestMultiplayerServersThrottledFromRateLimiter)
+            {
+                output = Json::Value("RequestMultiplayerServersThrottledFromRateLimiter");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -10758,6 +10764,11 @@ namespace PlayFab
             if (inputStr == "NintendoSwitchNotEnabledForTitle")
             {
                 output = GenericErrorCodes::GenericErrorCodesNintendoSwitchNotEnabledForTitle;
+                return;
+            }
+            if (inputStr == "RequestMultiplayerServersThrottledFromRateLimiter")
+            {
+                output = GenericErrorCodes::GenericErrorCodesRequestMultiplayerServersThrottledFromRateLimiter;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
