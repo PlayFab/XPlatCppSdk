@@ -23,6 +23,9 @@ namespace PlayFab
 
     /// <summary>
     /// Settings for any event pipeline
+    /// NOTE: settings are expected to be set prior to calling PlayFabEventPipeline::Start()
+    /// changing them after PlayFabEventPipeline::Start() may cause threading issues
+    /// users should not expect changes made to settings to take effect after ::Start is called unless the pipeline is destroyed and re-created
     /// </summary>
     class PlayFabEventPipelineSettings
     {
@@ -66,6 +69,9 @@ namespace PlayFab
         PlayFabEventPipeline& operator=(const PlayFabEventPipeline& source) = delete; // disable assignment
         PlayFabEventPipeline& operator=(PlayFabEventPipeline&& other) = delete; // disable move assignment
 
+        // NOTE: settings are expected to be set prior to calling PlayFabEventPipeline::Start()
+        // changing them after PlayFabEventPipeline::Start() may cause threading issues
+        // users should not expect changes made to settings to take effect after ::Start is called unless the pipeline is destroyed and re-created
         std::shared_ptr<PlayFabEventPipelineSettings> GetSettings() const;
         virtual void Start() override;
         virtual void IntakeEvent(std::shared_ptr<const IPlayFabEmitEventRequest> request) override;

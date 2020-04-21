@@ -10,6 +10,66 @@ namespace PlayFab
     namespace ClientModels
     {
         // Client Enums
+        enum class AdActivity
+        {
+            AdActivityOpened,
+            AdActivityClosed,
+            AdActivityStart,
+            AdActivityEnd
+        };
+
+        inline void ToJsonEnum(const AdActivity input, Json::Value& output)
+        {
+            if (input == AdActivity::AdActivityOpened)
+            {
+                output = Json::Value("Opened");
+                return;
+            }
+            if (input == AdActivity::AdActivityClosed)
+            {
+                output = Json::Value("Closed");
+                return;
+            }
+            if (input == AdActivity::AdActivityStart)
+            {
+                output = Json::Value("Start");
+                return;
+            }
+            if (input == AdActivity::AdActivityEnd)
+            {
+                output = Json::Value("End");
+                return;
+            }
+        }
+        inline void FromJsonEnum(const Json::Value& input, AdActivity& output)
+        {
+            if (!input.isString())
+            {
+                return;
+            }
+            const std::string& inputStr = input.asString();
+            if (inputStr == "Opened")
+            {
+                output = AdActivity::AdActivityOpened;
+                return;
+            }
+            if (inputStr == "Closed")
+            {
+                output = AdActivity::AdActivityClosed;
+                return;
+            }
+            if (inputStr == "Start")
+            {
+                output = AdActivity::AdActivityStart;
+                return;
+            }
+            if (inputStr == "End")
+            {
+                output = AdActivity::AdActivityEnd;
+                return;
+            }
+        }
+
         enum class CloudScriptRevisionOption
         {
             CloudScriptRevisionOptionLive,
@@ -6726,6 +6786,153 @@ namespace PlayFab
             }
         };
 
+        struct AdPlacementDetails : public PlayFabBaseModel
+        {
+            std::string PlacementId;
+            std::string PlacementName;
+            Boxed<Int32> PlacementViewsRemaining;
+            Boxed<double> PlacementViewsResetMinutes;
+            std::string RewardAssetUrl;
+            std::string RewardDescription;
+            std::string RewardId;
+            std::string RewardName;
+
+            AdPlacementDetails() :
+                PlayFabBaseModel(),
+                PlacementId(),
+                PlacementName(),
+                PlacementViewsRemaining(),
+                PlacementViewsResetMinutes(),
+                RewardAssetUrl(),
+                RewardDescription(),
+                RewardId(),
+                RewardName()
+            {}
+
+            AdPlacementDetails(const AdPlacementDetails& src) :
+                PlayFabBaseModel(),
+                PlacementId(src.PlacementId),
+                PlacementName(src.PlacementName),
+                PlacementViewsRemaining(src.PlacementViewsRemaining),
+                PlacementViewsResetMinutes(src.PlacementViewsResetMinutes),
+                RewardAssetUrl(src.RewardAssetUrl),
+                RewardDescription(src.RewardDescription),
+                RewardId(src.RewardId),
+                RewardName(src.RewardName)
+            {}
+
+            ~AdPlacementDetails() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["PlacementId"], PlacementId);
+                FromJsonUtilS(input["PlacementName"], PlacementName);
+                FromJsonUtilP(input["PlacementViewsRemaining"], PlacementViewsRemaining);
+                FromJsonUtilP(input["PlacementViewsResetMinutes"], PlacementViewsResetMinutes);
+                FromJsonUtilS(input["RewardAssetUrl"], RewardAssetUrl);
+                FromJsonUtilS(input["RewardDescription"], RewardDescription);
+                FromJsonUtilS(input["RewardId"], RewardId);
+                FromJsonUtilS(input["RewardName"], RewardName);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_PlacementId; ToJsonUtilS(PlacementId, each_PlacementId); output["PlacementId"] = each_PlacementId;
+                Json::Value each_PlacementName; ToJsonUtilS(PlacementName, each_PlacementName); output["PlacementName"] = each_PlacementName;
+                Json::Value each_PlacementViewsRemaining; ToJsonUtilP(PlacementViewsRemaining, each_PlacementViewsRemaining); output["PlacementViewsRemaining"] = each_PlacementViewsRemaining;
+                Json::Value each_PlacementViewsResetMinutes; ToJsonUtilP(PlacementViewsResetMinutes, each_PlacementViewsResetMinutes); output["PlacementViewsResetMinutes"] = each_PlacementViewsResetMinutes;
+                Json::Value each_RewardAssetUrl; ToJsonUtilS(RewardAssetUrl, each_RewardAssetUrl); output["RewardAssetUrl"] = each_RewardAssetUrl;
+                Json::Value each_RewardDescription; ToJsonUtilS(RewardDescription, each_RewardDescription); output["RewardDescription"] = each_RewardDescription;
+                Json::Value each_RewardId; ToJsonUtilS(RewardId, each_RewardId); output["RewardId"] = each_RewardId;
+                Json::Value each_RewardName; ToJsonUtilS(RewardName, each_RewardName); output["RewardName"] = each_RewardName;
+                return output;
+            }
+        };
+
+        struct AdRewardItemGranted : public PlayFabBaseModel
+        {
+            std::string CatalogId;
+            std::string DisplayName;
+            std::string InstanceId;
+            std::string ItemId;
+
+            AdRewardItemGranted() :
+                PlayFabBaseModel(),
+                CatalogId(),
+                DisplayName(),
+                InstanceId(),
+                ItemId()
+            {}
+
+            AdRewardItemGranted(const AdRewardItemGranted& src) :
+                PlayFabBaseModel(),
+                CatalogId(src.CatalogId),
+                DisplayName(src.DisplayName),
+                InstanceId(src.InstanceId),
+                ItemId(src.ItemId)
+            {}
+
+            ~AdRewardItemGranted() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CatalogId"], CatalogId);
+                FromJsonUtilS(input["DisplayName"], DisplayName);
+                FromJsonUtilS(input["InstanceId"], InstanceId);
+                FromJsonUtilS(input["ItemId"], ItemId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CatalogId; ToJsonUtilS(CatalogId, each_CatalogId); output["CatalogId"] = each_CatalogId;
+                Json::Value each_DisplayName; ToJsonUtilS(DisplayName, each_DisplayName); output["DisplayName"] = each_DisplayName;
+                Json::Value each_InstanceId; ToJsonUtilS(InstanceId, each_InstanceId); output["InstanceId"] = each_InstanceId;
+                Json::Value each_ItemId; ToJsonUtilS(ItemId, each_ItemId); output["ItemId"] = each_ItemId;
+                return output;
+            }
+        };
+
+        struct AdRewardResults : public PlayFabBaseModel
+        {
+            std::list<AdRewardItemGranted> GrantedItems;
+            std::map<std::string, Int32> GrantedVirtualCurrencies;
+            std::map<std::string, Int32> IncrementedStatistics;
+
+            AdRewardResults() :
+                PlayFabBaseModel(),
+                GrantedItems(),
+                GrantedVirtualCurrencies(),
+                IncrementedStatistics()
+            {}
+
+            AdRewardResults(const AdRewardResults& src) :
+                PlayFabBaseModel(),
+                GrantedItems(src.GrantedItems),
+                GrantedVirtualCurrencies(src.GrantedVirtualCurrencies),
+                IncrementedStatistics(src.IncrementedStatistics)
+            {}
+
+            ~AdRewardResults() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["GrantedItems"], GrantedItems);
+                FromJsonUtilP(input["GrantedVirtualCurrencies"], GrantedVirtualCurrencies);
+                FromJsonUtilP(input["IncrementedStatistics"], IncrementedStatistics);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_GrantedItems; ToJsonUtilO(GrantedItems, each_GrantedItems); output["GrantedItems"] = each_GrantedItems;
+                Json::Value each_GrantedVirtualCurrencies; ToJsonUtilP(GrantedVirtualCurrencies, each_GrantedVirtualCurrencies); output["GrantedVirtualCurrencies"] = each_GrantedVirtualCurrencies;
+                Json::Value each_IncrementedStatistics; ToJsonUtilP(IncrementedStatistics, each_IncrementedStatistics); output["IncrementedStatistics"] = each_IncrementedStatistics;
+                return output;
+            }
+        };
+
         struct AndroidDevicePushNotificationRegistrationRequest : public PlayFabRequestCommon
         {
             std::string ConfirmationMessage;
@@ -10063,6 +10270,103 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_AccountInfo; ToJsonUtilO(AccountInfo, each_AccountInfo); output["AccountInfo"] = each_AccountInfo;
+                return output;
+            }
+        };
+
+        struct NameIdentifier : public PlayFabBaseModel
+        {
+            std::string Id;
+            std::string Name;
+
+            NameIdentifier() :
+                PlayFabBaseModel(),
+                Id(),
+                Name()
+            {}
+
+            NameIdentifier(const NameIdentifier& src) :
+                PlayFabBaseModel(),
+                Id(src.Id),
+                Name(src.Name)
+            {}
+
+            ~NameIdentifier() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["Id"], Id);
+                FromJsonUtilS(input["Name"], Name);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Id; ToJsonUtilS(Id, each_Id); output["Id"] = each_Id;
+                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
+                return output;
+            }
+        };
+
+        struct GetAdPlacementsRequest : public PlayFabRequestCommon
+        {
+            std::string AppId;
+            Boxed<NameIdentifier> Identifier;
+
+            GetAdPlacementsRequest() :
+                PlayFabRequestCommon(),
+                AppId(),
+                Identifier()
+            {}
+
+            GetAdPlacementsRequest(const GetAdPlacementsRequest& src) :
+                PlayFabRequestCommon(),
+                AppId(src.AppId),
+                Identifier(src.Identifier)
+            {}
+
+            ~GetAdPlacementsRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["AppId"], AppId);
+                FromJsonUtilO(input["Identifier"], Identifier);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_AppId; ToJsonUtilS(AppId, each_AppId); output["AppId"] = each_AppId;
+                Json::Value each_Identifier; ToJsonUtilO(Identifier, each_Identifier); output["Identifier"] = each_Identifier;
+                return output;
+            }
+        };
+
+        struct GetAdPlacementsResult : public PlayFabResultCommon
+        {
+            std::list<AdPlacementDetails> AdPlacements;
+
+            GetAdPlacementsResult() :
+                PlayFabResultCommon(),
+                AdPlacements()
+            {}
+
+            GetAdPlacementsResult(const GetAdPlacementsResult& src) :
+                PlayFabResultCommon(),
+                AdPlacements(src.AdPlacements)
+            {}
+
+            ~GetAdPlacementsResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["AdPlacements"], AdPlacements);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_AdPlacements; ToJsonUtilO(AdPlacements, each_AdPlacements); output["AdPlacements"] = each_AdPlacements;
                 return output;
             }
         };
@@ -14697,6 +15001,45 @@ namespace PlayFab
             }
         };
 
+        struct LinkNintendoSwitchAccountRequest : public PlayFabRequestCommon
+        {
+            std::string EnvironmentId;
+            Boxed<bool> ForceLink;
+            std::string IdentityToken;
+
+            LinkNintendoSwitchAccountRequest() :
+                PlayFabRequestCommon(),
+                EnvironmentId(),
+                ForceLink(),
+                IdentityToken()
+            {}
+
+            LinkNintendoSwitchAccountRequest(const LinkNintendoSwitchAccountRequest& src) :
+                PlayFabRequestCommon(),
+                EnvironmentId(src.EnvironmentId),
+                ForceLink(src.ForceLink),
+                IdentityToken(src.IdentityToken)
+            {}
+
+            ~LinkNintendoSwitchAccountRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["EnvironmentId"], EnvironmentId);
+                FromJsonUtilP(input["ForceLink"], ForceLink);
+                FromJsonUtilS(input["IdentityToken"], IdentityToken);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_EnvironmentId; ToJsonUtilS(EnvironmentId, each_EnvironmentId); output["EnvironmentId"] = each_EnvironmentId;
+                Json::Value each_ForceLink; ToJsonUtilP(ForceLink, each_ForceLink); output["ForceLink"] = each_ForceLink;
+                Json::Value each_IdentityToken; ToJsonUtilS(IdentityToken, each_IdentityToken); output["IdentityToken"] = each_IdentityToken;
+                return output;
+            }
+        };
+
         struct LinkNintendoSwitchDeviceIdRequest : public PlayFabRequestCommon
         {
             Boxed<bool> ForceLink;
@@ -15902,6 +16245,65 @@ namespace PlayFab
                 Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
                 Json::Value each_KongregateId; ToJsonUtilS(KongregateId, each_KongregateId); output["KongregateId"] = each_KongregateId;
+                Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
+                Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
+                return output;
+            }
+        };
+
+        struct LoginWithNintendoSwitchAccountRequest : public PlayFabRequestCommon
+        {
+            Boxed<bool> CreateAccount;
+            std::string EncryptedRequest;
+            std::string EnvironmentId;
+            std::string IdentityToken;
+            Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
+            std::string PlayerSecret;
+            std::string TitleId;
+
+            LoginWithNintendoSwitchAccountRequest() :
+                PlayFabRequestCommon(),
+                CreateAccount(),
+                EncryptedRequest(),
+                EnvironmentId(),
+                IdentityToken(),
+                InfoRequestParameters(),
+                PlayerSecret(),
+                TitleId()
+            {}
+
+            LoginWithNintendoSwitchAccountRequest(const LoginWithNintendoSwitchAccountRequest& src) :
+                PlayFabRequestCommon(),
+                CreateAccount(src.CreateAccount),
+                EncryptedRequest(src.EncryptedRequest),
+                EnvironmentId(src.EnvironmentId),
+                IdentityToken(src.IdentityToken),
+                InfoRequestParameters(src.InfoRequestParameters),
+                PlayerSecret(src.PlayerSecret),
+                TitleId(src.TitleId)
+            {}
+
+            ~LoginWithNintendoSwitchAccountRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["CreateAccount"], CreateAccount);
+                FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
+                FromJsonUtilS(input["EnvironmentId"], EnvironmentId);
+                FromJsonUtilS(input["IdentityToken"], IdentityToken);
+                FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
+                FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
+                FromJsonUtilS(input["TitleId"], TitleId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
+                Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
+                Json::Value each_EnvironmentId; ToJsonUtilS(EnvironmentId, each_EnvironmentId); output["EnvironmentId"] = each_EnvironmentId;
+                Json::Value each_IdentityToken; ToJsonUtilS(IdentityToken, each_IdentityToken); output["IdentityToken"] = each_IdentityToken;
+                Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 return output;
@@ -17428,6 +17830,69 @@ namespace PlayFab
             }
         };
 
+        struct ReportAdActivityRequest : public PlayFabRequestCommon
+        {
+            AdActivity Activity;
+            std::string PlacementId;
+            std::string RewardId;
+
+            ReportAdActivityRequest() :
+                PlayFabRequestCommon(),
+                Activity(),
+                PlacementId(),
+                RewardId()
+            {}
+
+            ReportAdActivityRequest(const ReportAdActivityRequest& src) :
+                PlayFabRequestCommon(),
+                Activity(src.Activity),
+                PlacementId(src.PlacementId),
+                RewardId(src.RewardId)
+            {}
+
+            ~ReportAdActivityRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonEnum(input["Activity"], Activity);
+                FromJsonUtilS(input["PlacementId"], PlacementId);
+                FromJsonUtilS(input["RewardId"], RewardId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Activity; ToJsonEnum(Activity, each_Activity); output["Activity"] = each_Activity;
+                Json::Value each_PlacementId; ToJsonUtilS(PlacementId, each_PlacementId); output["PlacementId"] = each_PlacementId;
+                Json::Value each_RewardId; ToJsonUtilS(RewardId, each_RewardId); output["RewardId"] = each_RewardId;
+                return output;
+            }
+        };
+
+        struct ReportAdActivityResult : public PlayFabResultCommon
+        {
+
+            ReportAdActivityResult() :
+                PlayFabResultCommon()
+            {}
+
+            ReportAdActivityResult(const ReportAdActivityResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~ReportAdActivityResult() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
         struct ReportPlayerClientRequest : public PlayFabRequestCommon
         {
             std::string Comment;
@@ -17550,6 +18015,99 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_Fulfillments; ToJsonUtilO(Fulfillments, each_Fulfillments); output["Fulfillments"] = each_Fulfillments;
+                return output;
+            }
+        };
+
+        struct RewardAdActivityRequest : public PlayFabRequestCommon
+        {
+            std::string PlacementId;
+            std::string RewardId;
+
+            RewardAdActivityRequest() :
+                PlayFabRequestCommon(),
+                PlacementId(),
+                RewardId()
+            {}
+
+            RewardAdActivityRequest(const RewardAdActivityRequest& src) :
+                PlayFabRequestCommon(),
+                PlacementId(src.PlacementId),
+                RewardId(src.RewardId)
+            {}
+
+            ~RewardAdActivityRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["PlacementId"], PlacementId);
+                FromJsonUtilS(input["RewardId"], RewardId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_PlacementId; ToJsonUtilS(PlacementId, each_PlacementId); output["PlacementId"] = each_PlacementId;
+                Json::Value each_RewardId; ToJsonUtilS(RewardId, each_RewardId); output["RewardId"] = each_RewardId;
+                return output;
+            }
+        };
+
+        struct RewardAdActivityResult : public PlayFabResultCommon
+        {
+            std::string AdActivityEventId;
+            std::list<std::string> DebugResults;
+            std::string PlacementId;
+            std::string PlacementName;
+            Boxed<Int32> PlacementViewsRemaining;
+            Boxed<double> PlacementViewsResetMinutes;
+            Boxed<AdRewardResults> RewardResults;
+
+            RewardAdActivityResult() :
+                PlayFabResultCommon(),
+                AdActivityEventId(),
+                DebugResults(),
+                PlacementId(),
+                PlacementName(),
+                PlacementViewsRemaining(),
+                PlacementViewsResetMinutes(),
+                RewardResults()
+            {}
+
+            RewardAdActivityResult(const RewardAdActivityResult& src) :
+                PlayFabResultCommon(),
+                AdActivityEventId(src.AdActivityEventId),
+                DebugResults(src.DebugResults),
+                PlacementId(src.PlacementId),
+                PlacementName(src.PlacementName),
+                PlacementViewsRemaining(src.PlacementViewsRemaining),
+                PlacementViewsResetMinutes(src.PlacementViewsResetMinutes),
+                RewardResults(src.RewardResults)
+            {}
+
+            ~RewardAdActivityResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["AdActivityEventId"], AdActivityEventId);
+                FromJsonUtilS(input["DebugResults"], DebugResults);
+                FromJsonUtilS(input["PlacementId"], PlacementId);
+                FromJsonUtilS(input["PlacementName"], PlacementName);
+                FromJsonUtilP(input["PlacementViewsRemaining"], PlacementViewsRemaining);
+                FromJsonUtilP(input["PlacementViewsResetMinutes"], PlacementViewsResetMinutes);
+                FromJsonUtilO(input["RewardResults"], RewardResults);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_AdActivityEventId; ToJsonUtilS(AdActivityEventId, each_AdActivityEventId); output["AdActivityEventId"] = each_AdActivityEventId;
+                Json::Value each_DebugResults; ToJsonUtilS(DebugResults, each_DebugResults); output["DebugResults"] = each_DebugResults;
+                Json::Value each_PlacementId; ToJsonUtilS(PlacementId, each_PlacementId); output["PlacementId"] = each_PlacementId;
+                Json::Value each_PlacementName; ToJsonUtilS(PlacementName, each_PlacementName); output["PlacementName"] = each_PlacementName;
+                Json::Value each_PlacementViewsRemaining; ToJsonUtilP(PlacementViewsRemaining, each_PlacementViewsRemaining); output["PlacementViewsRemaining"] = each_PlacementViewsRemaining;
+                Json::Value each_PlacementViewsResetMinutes; ToJsonUtilP(PlacementViewsResetMinutes, each_PlacementViewsResetMinutes); output["PlacementViewsResetMinutes"] = each_PlacementViewsResetMinutes;
+                Json::Value each_RewardResults; ToJsonUtilO(RewardResults, each_RewardResults); output["RewardResults"] = each_RewardResults;
                 return output;
             }
         };
@@ -18007,35 +18565,6 @@ namespace PlayFab
             }
         };
 
-        struct UninkOpenIdConnectRequest : public PlayFabRequestCommon
-        {
-            std::string ConnectionId;
-
-            UninkOpenIdConnectRequest() :
-                PlayFabRequestCommon(),
-                ConnectionId()
-            {}
-
-            UninkOpenIdConnectRequest(const UninkOpenIdConnectRequest& src) :
-                PlayFabRequestCommon(),
-                ConnectionId(src.ConnectionId)
-            {}
-
-            ~UninkOpenIdConnectRequest() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilS(input["ConnectionId"], ConnectionId);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_ConnectionId; ToJsonUtilS(ConnectionId, each_ConnectionId); output["ConnectionId"] = each_ConnectionId;
-                return output;
-            }
-        };
-
         struct UnlinkAndroidDeviceIDRequest : public PlayFabRequestCommon
         {
             std::string AndroidDeviceId;
@@ -18464,6 +18993,30 @@ namespace PlayFab
             }
         };
 
+        struct UnlinkNintendoSwitchAccountRequest : public PlayFabRequestCommon
+        {
+
+            UnlinkNintendoSwitchAccountRequest() :
+                PlayFabRequestCommon()
+            {}
+
+            UnlinkNintendoSwitchAccountRequest(const UnlinkNintendoSwitchAccountRequest&) :
+                PlayFabRequestCommon()
+            {}
+
+            ~UnlinkNintendoSwitchAccountRequest() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
         struct UnlinkNintendoSwitchDeviceIdRequest : public PlayFabRequestCommon
         {
             std::string NintendoSwitchDeviceId;
@@ -18513,6 +19066,35 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                return output;
+            }
+        };
+
+        struct UnlinkOpenIdConnectRequest : public PlayFabRequestCommon
+        {
+            std::string ConnectionId;
+
+            UnlinkOpenIdConnectRequest() :
+                PlayFabRequestCommon(),
+                ConnectionId()
+            {}
+
+            UnlinkOpenIdConnectRequest(const UnlinkOpenIdConnectRequest& src) :
+                PlayFabRequestCommon(),
+                ConnectionId(src.ConnectionId)
+            {}
+
+            ~UnlinkOpenIdConnectRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["ConnectionId"], ConnectionId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ConnectionId; ToJsonUtilS(ConnectionId, each_ConnectionId); output["ConnectionId"] = each_ConnectionId;
                 return output;
             }
         };

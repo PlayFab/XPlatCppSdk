@@ -41,6 +41,7 @@ namespace PlayFab
         static void CreateSharedGroup(ClientModels::CreateSharedGroupRequest& request, const ProcessApiCallback<ClientModels::CreateSharedGroupResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void ExecuteCloudScript(ClientModels::ExecuteCloudScriptRequest& request, const ProcessApiCallback<ClientModels::ExecuteCloudScriptResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetAccountInfo(ClientModels::GetAccountInfoRequest& request, const ProcessApiCallback<ClientModels::GetAccountInfoResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void GetAdPlacements(ClientModels::GetAdPlacementsRequest& request, const ProcessApiCallback<ClientModels::GetAdPlacementsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetAllUsersCharacters(ClientModels::ListUsersCharactersRequest& request, const ProcessApiCallback<ClientModels::ListUsersCharactersResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetCatalogItems(ClientModels::GetCatalogItemsRequest& request, const ProcessApiCallback<ClientModels::GetCatalogItemsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetCharacterData(ClientModels::GetCharacterDataRequest& request, const ProcessApiCallback<ClientModels::GetCharacterDataResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -103,6 +104,7 @@ namespace PlayFab
         static void LinkGoogleAccount(ClientModels::LinkGoogleAccountRequest& request, const ProcessApiCallback<ClientModels::LinkGoogleAccountResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void LinkIOSDeviceID(ClientModels::LinkIOSDeviceIDRequest& request, const ProcessApiCallback<ClientModels::LinkIOSDeviceIDResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void LinkKongregate(ClientModels::LinkKongregateAccountRequest& request, const ProcessApiCallback<ClientModels::LinkKongregateAccountResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void LinkNintendoSwitchAccount(ClientModels::LinkNintendoSwitchAccountRequest& request, const ProcessApiCallback<ClientModels::EmptyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void LinkNintendoSwitchDeviceId(ClientModels::LinkNintendoSwitchDeviceIdRequest& request, const ProcessApiCallback<ClientModels::LinkNintendoSwitchDeviceIdResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void LinkOpenIdConnect(ClientModels::LinkOpenIdConnectRequest& request, const ProcessApiCallback<ClientModels::EmptyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void LinkPSNAccount(ClientModels::LinkPSNAccountRequest& request, const ProcessApiCallback<ClientModels::LinkPSNAccountResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -120,6 +122,7 @@ namespace PlayFab
         static void LoginWithGoogleAccount(ClientModels::LoginWithGoogleAccountRequest& request, const ProcessApiCallback<ClientModels::LoginResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void LoginWithIOSDeviceID(ClientModels::LoginWithIOSDeviceIDRequest& request, const ProcessApiCallback<ClientModels::LoginResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void LoginWithKongregate(ClientModels::LoginWithKongregateRequest& request, const ProcessApiCallback<ClientModels::LoginResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void LoginWithNintendoSwitchAccount(ClientModels::LoginWithNintendoSwitchAccountRequest& request, const ProcessApiCallback<ClientModels::LoginResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void LoginWithNintendoSwitchDeviceId(ClientModels::LoginWithNintendoSwitchDeviceIdRequest& request, const ProcessApiCallback<ClientModels::LoginResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void LoginWithOpenIdConnect(ClientModels::LoginWithOpenIdConnectRequest& request, const ProcessApiCallback<ClientModels::LoginResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void LoginWithPlayFab(ClientModels::LoginWithPlayFabRequest& request, const ProcessApiCallback<ClientModels::LoginResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -141,9 +144,11 @@ namespace PlayFab
         static void RemoveFriend(ClientModels::RemoveFriendRequest& request, const ProcessApiCallback<ClientModels::RemoveFriendResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void RemoveGenericID(ClientModels::RemoveGenericIDRequest& request, const ProcessApiCallback<ClientModels::RemoveGenericIDResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void RemoveSharedGroupMembers(ClientModels::RemoveSharedGroupMembersRequest& request, const ProcessApiCallback<ClientModels::RemoveSharedGroupMembersResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void ReportAdActivity(ClientModels::ReportAdActivityRequest& request, const ProcessApiCallback<ClientModels::ReportAdActivityResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void ReportDeviceInfo(ClientModels::DeviceInfoRequest& request, const ProcessApiCallback<ClientModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void ReportPlayer(ClientModels::ReportPlayerClientRequest& request, const ProcessApiCallback<ClientModels::ReportPlayerClientResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void RestoreIOSPurchases(ClientModels::RestoreIOSPurchasesRequest& request, const ProcessApiCallback<ClientModels::RestoreIOSPurchasesResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void RewardAdActivity(ClientModels::RewardAdActivityRequest& request, const ProcessApiCallback<ClientModels::RewardAdActivityResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void SendAccountRecoveryEmail(ClientModels::SendAccountRecoveryEmailRequest& request, const ProcessApiCallback<ClientModels::SendAccountRecoveryEmailResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void SetFriendTags(ClientModels::SetFriendTagsRequest& request, const ProcessApiCallback<ClientModels::SetFriendTagsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void SetPlayerSecret(ClientModels::SetPlayerSecretRequest& request, const ProcessApiCallback<ClientModels::SetPlayerSecretResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -159,8 +164,9 @@ namespace PlayFab
         static void UnlinkGoogleAccount(ClientModels::UnlinkGoogleAccountRequest& request, const ProcessApiCallback<ClientModels::UnlinkGoogleAccountResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void UnlinkIOSDeviceID(ClientModels::UnlinkIOSDeviceIDRequest& request, const ProcessApiCallback<ClientModels::UnlinkIOSDeviceIDResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void UnlinkKongregate(ClientModels::UnlinkKongregateAccountRequest& request, const ProcessApiCallback<ClientModels::UnlinkKongregateAccountResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void UnlinkNintendoSwitchAccount(ClientModels::UnlinkNintendoSwitchAccountRequest& request, const ProcessApiCallback<ClientModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void UnlinkNintendoSwitchDeviceId(ClientModels::UnlinkNintendoSwitchDeviceIdRequest& request, const ProcessApiCallback<ClientModels::UnlinkNintendoSwitchDeviceIdResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
-        static void UnlinkOpenIdConnect(ClientModels::UninkOpenIdConnectRequest& request, const ProcessApiCallback<ClientModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void UnlinkOpenIdConnect(ClientModels::UnlinkOpenIdConnectRequest& request, const ProcessApiCallback<ClientModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void UnlinkPSNAccount(ClientModels::UnlinkPSNAccountRequest& request, const ProcessApiCallback<ClientModels::UnlinkPSNAccountResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void UnlinkSteamAccount(ClientModels::UnlinkSteamAccountRequest& request, const ProcessApiCallback<ClientModels::UnlinkSteamAccountResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void UnlinkTwitch(ClientModels::UnlinkTwitchAccountRequest& request, const ProcessApiCallback<ClientModels::UnlinkTwitchAccountResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -206,6 +212,7 @@ namespace PlayFab
         static void OnCreateSharedGroupResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnExecuteCloudScriptResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetAccountInfoResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnGetAdPlacementsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetAllUsersCharactersResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetCatalogItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetCharacterDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -268,6 +275,7 @@ namespace PlayFab
         static void OnLinkGoogleAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnLinkIOSDeviceIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnLinkKongregateResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnLinkNintendoSwitchAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnLinkNintendoSwitchDeviceIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnLinkOpenIdConnectResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnLinkPSNAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -285,6 +293,7 @@ namespace PlayFab
         static void OnLoginWithGoogleAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnLoginWithIOSDeviceIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnLoginWithKongregateResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnLoginWithNintendoSwitchAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnLoginWithNintendoSwitchDeviceIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnLoginWithOpenIdConnectResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnLoginWithPlayFabResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -306,9 +315,11 @@ namespace PlayFab
         static void OnRemoveFriendResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnRemoveGenericIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnRemoveSharedGroupMembersResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnReportAdActivityResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnReportDeviceInfoResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnReportPlayerResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnRestoreIOSPurchasesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnRewardAdActivityResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnSendAccountRecoveryEmailResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnSetFriendTagsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnSetPlayerSecretResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -324,6 +335,7 @@ namespace PlayFab
         static void OnUnlinkGoogleAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnUnlinkIOSDeviceIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnUnlinkKongregateResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnUnlinkNintendoSwitchAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnUnlinkNintendoSwitchDeviceIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnUnlinkOpenIdConnectResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnUnlinkPSNAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
