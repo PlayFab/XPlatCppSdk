@@ -68,6 +68,9 @@ namespace PlayFabUnit
 
         void GenericMultiThreadedTest(TestContext& testContext, uint32_t pNumThreads, uint32_t pNumEventsPerThread);
 
+        void TestQueueBeforeLogin(TestContext& testContext);
+        void OnQueingTestLogin(const PlayFab::ClientModels::LoginResult& result, void* customData);
+
         // State
         const int eventEmitCount = 6;
         size_t eventBatchMax;
@@ -77,11 +80,14 @@ namespace PlayFabUnit
         std::vector<std::thread> testThreadPool;
         std::vector<std::shared_ptr<PlayFab::PlayFabEventAPI>> eventApiPool;
         std::atomic<uint32_t> eventCounter;
+        std::atomic<uint32_t> queueTestCount;
+        const uint32_t c_numQueueTestEvents = 4;
 
         // Utility
         void EmitEvents(TestContext& testContext, PlayFab::PlayFabEventType eventType, int maxBatchWaitTime = 2, int maxItemsInBatch = 3, int maxBatchesInFlight = 10);
         void EmitEventCallback(std::shared_ptr<const PlayFab::IPlayFabEvent> event, std::shared_ptr<const PlayFab::IPlayFabEmitEventResponse> response);
         void NonStaticEmitEventCallback(std::shared_ptr<const PlayFab::IPlayFabEvent> event, std::shared_ptr<const PlayFab::IPlayFabEmitEventResponse> response);
+        void QueueTestCallback(std::shared_ptr<const PlayFab::IPlayFabEvent> event, std::shared_ptr<const PlayFab::IPlayFabEmitEventResponse> response);
 
         template<typename T> std::function<void(const T&, void*)> ApiCallback(void(PlayFabEventTest::* func)(const T&, void*))
         {

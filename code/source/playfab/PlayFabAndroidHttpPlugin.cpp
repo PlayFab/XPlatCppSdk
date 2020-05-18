@@ -248,8 +248,9 @@ namespace PlayFab
     void PlayFabAndroidHttpPlugin::MakePostRequest(std::unique_ptr<CallRequestContainerBase> requestContainer)
     {
         CallRequestContainer* container = dynamic_cast<CallRequestContainer*>(requestContainer.get());
-        if (container != nullptr && container->HandleInvalidSettings())
+        if (container != nullptr)
         {
+            container->ThrowIfSettingsInvalid();
             std::shared_ptr<RequestTask> requestTask = nullptr;
             try
             {

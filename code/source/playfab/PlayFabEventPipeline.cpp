@@ -23,22 +23,25 @@ namespace PlayFab
         maximalNumberOfBatchesInFlight(defaultMaxBatchesInFlight),
         readBufferWaitTime(defaultReadBufferWaitTimeInMs),
         authenticationContext(nullptr),
-        emitType(PlayFabEventPipelineType::PlayFabPlayStream)
+        emitType(PlayFabEventPipelineType::PlayFabPlayStream),
+        useBackgroundThread(true)
     {
     }
 
-    PlayFabEventPipelineSettings::PlayFabEventPipelineSettings(PlayFabEventPipelineType type) :
+    PlayFabEventPipelineSettings::PlayFabEventPipelineSettings(PlayFabEventPipelineType type, bool useBackgroundThread) :
         bufferSize(defaultBufferSize),
         maximalNumberOfItemsInBatch(defaultMaxItemsInBatch),
         maximalBatchWaitTime(defaultMaxBatchWaitTimeInSeconds),
         maximalNumberOfBatchesInFlight(defaultMaxBatchesInFlight),
         readBufferWaitTime(defaultReadBufferWaitTimeInMs),
         authenticationContext(nullptr),
-        emitType(type)
+        emitType(type),
+        useBackgroundThread(useBackgroundThread)
     {
     }
 
     PlayFabEventPipeline::PlayFabEventPipeline(const std::shared_ptr<PlayFabEventPipelineSettings>& settings) :
+        batchCounter(0),
         buffer(settings->bufferSize),
         isWorkerThreadRunning(false)
     {
@@ -46,11 +49,53 @@ namespace PlayFab
 
         this->settings = settings;
         this->batchesInFlight.reserve(this->settings->maximalNumberOfBatchesInFlight);
-        this->Start();
+        if (this->settings->useBackgroundThread)
+        {
+            this->Start();
+        }
     }
 
     PlayFabEventPipeline::~PlayFabEventPipeline()
     {
+        Stop();
+    }
+
+    void PlayFabEventPipeline::Start()
+    {
+        if (!this->settings->useBackgroundThread)
+        {
+            LOG_PIPELINE("PlayFabEventPipeline is set to NOT use background threads. Start() is not needed to be called then, but Update() is required to be manually called every tick in this case.");
+            return;
+        }
+
+        if(isWorkerThreadRunning)
+        {
+            LOG_PIPELINE("PlayFabEventPipeline has already been started, and should not be started again until Stop() is called.");
+            return;
+        }
+
+        // start worker thread
+        this->isWorkerThreadRunning = true;
+        if (!this->workerThread.joinable())
+        {
+            this->workerThread = std::thread(&PlayFabEventPipeline::WorkerThread, this);
+        }
+    }
+
+    void PlayFabEventPipeline::Stop()
+    {
+        if (!this->settings->useBackgroundThread)
+        {
+            LOG_PIPELINE("PlayFabEventPipeline is set to NOT use background threads. Stop() is not needed to be called then, but Update() is required to be manually called every tick in this case.");
+            return;
+        }
+
+        if(!isWorkerThreadRunning)
+        {
+            LOG_PIPELINE("PlayFabEventPipeline has already been stopped, and should not be stopped again until Start() is called.");
+            return;
+        }
+
         // stop worker thread
         this->isWorkerThreadRunning = false;
         if (this->workerThread.joinable())
@@ -59,14 +104,18 @@ namespace PlayFab
         }
     }
 
-    void PlayFabEventPipeline::Start()
+    void PlayFabEventPipeline::Update()
     {
-        // start worker thread
-        this->isWorkerThreadRunning = true;
-        if (!this->workerThread.joinable())
+        if (this->settings->useBackgroundThread)
         {
-            this->workerThread = std::thread(&PlayFabEventPipeline::WorkerThread, this);
+            throw std::runtime_error("You should not call Update() when PlayFabEventPipelineSettings::useBackgroundThread == true");
         }
+
+        bool hasMoreWorkToProcess = false;
+        do
+        {
+            hasMoreWorkToProcess = DoWork();
+        } while (hasMoreWorkToProcess);
     }
 
     // NOTE: settings are expected to be set prior to calling PlayFabEventPipeline::Start()
@@ -158,12 +207,22 @@ namespace PlayFab
 
     void PlayFabEventPipeline::WorkerThread()
     {
+        while (this->isWorkerThreadRunning)
+        {
+            bool hasMoreWorkToProcess = DoWork();
+            if (!hasMoreWorkToProcess)
+            {
+                // give some time for batches in flight to deflate
+                std::this_thread::sleep_for(std::chrono::milliseconds(this->settings->readBufferWaitTime));
+            }
+        }
+    }
+
+    bool PlayFabEventPipeline::DoWork()
+    {
         using clock = std::chrono::steady_clock;
         using Result = PlayFabEventBuffer::EventConsumingResult;
         std::shared_ptr<const IPlayFabEmitEventRequest> request;
-        uintptr_t batchCounter = 1; // used to track uniqueness of batches in the map
-        std::chrono::steady_clock::time_point momentBatchStarted; // used to track when a currently assembled batch got its first event
-        
         std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>> batch;
 
         try
@@ -184,10 +243,17 @@ namespace PlayFab
                 {
                     // do not take new events from buffer if batches currently in flight are at the maximum allowed number
                     // and are not sent out (or received an error) yet
-                    std::this_thread::sleep_for(std::chrono::milliseconds(this->settings->readBufferWaitTime)); // give some time for batches in flight to deflate
-                    continue;
+                    return false;
                 }
 
+                // Don't try taking a request until we get an entity token. We'd rather not lose events
+                // that were generated before an entity token was created (i.e. before a user was created).
+                if (PlayFabSettings::staticPlayer->entityToken.empty() &&
+                    (settings->authenticationContext == nullptr || settings->authenticationContext->entityToken.empty()))
+                {
+                    return false;
+                }
+                
                 switch (this->buffer.TryTake(request))
                 {
                 case Result::Success:
@@ -198,17 +264,15 @@ namespace PlayFab
                     // if batch is full
                     if (batch.size() >= this->settings->maximalNumberOfItemsInBatch)
                     {
-                        this->SendBatch(batch, batchCounter);
+                        this->SendBatch(batch);
                     }
                     else if (batch.size() == 1)
                     {
                         // if it is the first event in an incomplete batch then set the batch creation moment
                         momentBatchStarted = clock::now();
                     }
-
-                    continue; // immediately check if there is next event in buffer
+                    return true;
                 }
-                break;
 
                 case Result::Disabled:
                 case Result::Empty:
@@ -224,15 +288,12 @@ namespace PlayFab
                     if (batchAge.count() >= (int32_t)this->settings->maximalBatchWaitTime)
                     {
                         // batch wait time expired, send incomplete batch
-                        this->SendBatch(batch, batchCounter);
-                        continue; // immediately check if there is next event in buffer
+                        this->SendBatch(batch);
+                        return true;
                     }
                 }
-
-                // event buffer is disabled or empty, and batch is not ready to be sent yet
-                // give some time back to CPU, don't starve it without a good reason
-                std::this_thread::sleep_for(std::chrono::milliseconds(this->settings->readBufferWaitTime));
-            }
+                return false;
+                }
         }
         catch (const std::exception& ex)
         {
@@ -251,9 +312,10 @@ namespace PlayFab
         {
             LOG_PIPELINE("A non std::exception was caught in PlayFabEventPipeline::WorkerThread method");
         }
+        return false;
     }
 
-    void PlayFabEventPipeline::SendBatch(std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>>& batch, uintptr_t& batchCounter)
+    void PlayFabEventPipeline::SendBatch(std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>>& batch)
     {
         // create a WriteEvents API request to send the batch
         EventsModels::WriteEventsRequest batchReq;
@@ -267,16 +329,14 @@ namespace PlayFab
             const auto& playFabEmitRequest = std::dynamic_pointer_cast<const PlayFabEmitEventRequest>(eventEmitRequest);
             batchReq.Events.push_back(playFabEmitRequest->event->eventContents);
         }
-
+        uintptr_t batchId = this->batchCounter.fetch_add(1);
         // add batch to flight tracking map
-        void* customData = reinterpret_cast<void*>(batchCounter); // used to track batches across asynchronous Events API
+        void* customData = reinterpret_cast<void*>(batchId); // used to track batches across asynchronous Events API
 
         { // LOCK batchesInFlight mutex
             std::unique_lock<std::mutex> lock(inFlightMutex);
             this->batchesInFlight[customData] = std::move(batch);
         } // UNLOCK batchesInFlight
-        
-        batchCounter++;
 
         batch.clear(); // batch vector will be reused
         batch.reserve(this->settings->maximalNumberOfItemsInBatch);

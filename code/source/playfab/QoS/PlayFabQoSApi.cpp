@@ -188,11 +188,11 @@ namespace PlayFab
                 return;
             }
 
-            ListQosServersRequest request;
-            multiplayerApi->ListQosServers(request, ListQosServersSuccessCallBack, ListQosServersFailureCallBack, reinterpret_cast<void*>(this));
+            ListQosServersForTitleRequest request;
+            multiplayerApi->ListQosServersForTitle(request, ListQosServersForTitleSuccessCallBack, ListQosServersForTitleFailureCallBack, reinterpret_cast<void*>(this));
         }
 
-        void PlayFabQoSApi::ListQosServersSuccessCallBack(const ListQosServersResponse& result, void* customData)
+        void PlayFabQoSApi::ListQosServersForTitleSuccessCallBack(const ListQosServersForTitleResponse& result, void* customData)
         {
             // Custom data received is a pointer to our api object
             PlayFabQoSApi* api = reinterpret_cast<PlayFabQoSApi*>(customData);
@@ -205,7 +205,7 @@ namespace PlayFab
             api->listQosServersCompleted = true;
         }
 
-        void PlayFabQoSApi::ListQosServersFailureCallBack(const PlayFabError&, void* customData)
+        void PlayFabQoSApi::ListQosServersForTitleFailureCallBack(const PlayFabError&, void* customData)
         {
             // Custom data received is a pointer to our api object
             PlayFabQoSApi* api = reinterpret_cast<PlayFabQoSApi*>(customData);

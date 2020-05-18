@@ -43,8 +43,8 @@ namespace PlayFab
             QoSResult GetResult(unsigned int numThreads, unsigned int timeoutMs);
 
             void PingThunderheadForServerList();
-            static void ListQosServersSuccessCallBack(const PlayFab::MultiplayerModels::ListQosServersResponse& result, void* customData);
-            static void ListQosServersFailureCallBack(const PlayFab::PlayFabError& error, void* customData);
+            static void ListQosServersForTitleSuccessCallBack(const PlayFab::MultiplayerModels::ListQosServersForTitleResponse& result, void* customData);
+            static void ListQosServersForTitleFailureCallBack(const PlayFab::PlayFabError& error, void* customData);
 
             void SendResultsToPlayFab(const QoSResult& result);
             static void WriteEventsSuccessCallBack(const PlayFab::EventsModels::WriteEventsResponse& result, void*);

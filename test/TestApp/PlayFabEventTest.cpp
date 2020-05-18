@@ -26,6 +26,7 @@ namespace PlayFabUnit
         TestContext* testContext = static_cast<TestContext*>(customData);
         testContext->Fail(error.GenerateErrorReport());
     }
+
     void PlayFabEventTest::BasicLogin(TestContext& testContext)
     {
         LoginWithCustomIDRequest request;
@@ -37,6 +38,7 @@ namespace PlayFabUnit
             ApiCallback(&PlayFabEventTest::OnErrorSharedCallback),
             &testContext);
     }
+
     void PlayFabEventTest::OnLogin(const PlayFab::ClientModels::LoginResult& /*result*/, void* customData)
     {
         TestContext* testContext = static_cast<TestContext*>(customData);
@@ -56,6 +58,7 @@ namespace PlayFabUnit
         event.Payload["PropB"] = "prop-value-b";
         return event;
     }
+
     void PlayFabEventTest::EventsApi(TestContext& testContext)
     {
         if (!PlayFabSettings::staticPlayer->IsClientLoggedIn())
@@ -96,6 +99,17 @@ namespace PlayFabUnit
     {
         auto pfEvent = std::dynamic_pointer_cast<const TestEvent>(event);
         pfEvent->testContext->Pass("Private member called back!");
+    }
+
+    void PlayFabEventTest::QueueTestCallback(std::shared_ptr<const PlayFab::IPlayFabEvent> event, std::shared_ptr<const PlayFab::IPlayFabEmitEventResponse> /*response*/)
+    {
+        queueTestCount++;
+
+        if(queueTestCount >= c_numQueueTestEvents)
+        {
+            auto pfEvent = std::dynamic_pointer_cast<const TestEvent>(event);
+            pfEvent->testContext->Pass("Private member called back!");
+        }
     }
 
     void PlayFabEventTest::EmitEventCallback(std::shared_ptr<const PlayFab::IPlayFabEvent> event, std::shared_ptr<const PlayFab::IPlayFabEmitEventResponse> response)
@@ -272,6 +286,38 @@ namespace PlayFabUnit
         GenericMultiThreadedTest(testContext, numThreads, numEventsPerThread);
     }
 
+    void PlayFabEventTest::TestQueueBeforeLogin(TestContext& testContext)
+    {
+        queueTestCount = 0;
+        std::shared_ptr<PlayFabEventAPI> eventApi = SetupEventTest();
+
+        // Queue 2 events to PlayFabEventPipeline
+        eventApi->EmitEvent(MakeEvent(testContext, PlayFabEventType::Default), EmitCallback(&PlayFabEventTest::QueueTestCallback));
+        eventApi->EmitEvent(MakeEvent(testContext, PlayFabEventType::Default), EmitCallback(&PlayFabEventTest::QueueTestCallback));
+
+        // Login
+        LoginWithCustomIDRequest request;
+        request.CustomId = PlayFabSettings::buildIdentifier;
+        request.CreateAccount = true;
+
+        clientApi->LoginWithCustomID(request,
+            ApiCallback(&PlayFabEventTest::OnQueingTestLogin),
+            ApiCallback(&PlayFabEventTest::OnErrorSharedCallback),
+            &testContext);
+
+        // when we see all 4 events come in, we pass, otherwise we time out and fail
+    }
+
+    void PlayFabEventTest::OnQueingTestLogin(const PlayFab::ClientModels::LoginResult& /*result*/, void* customData)
+    {
+        std::shared_ptr<PlayFabEventAPI> eventApi = SetupEventTest();
+        TestContext* testContext = static_cast<TestContext*>(customData);
+
+        // Queue 2 more events
+        eventApi->EmitEvent(MakeEvent(*testContext, PlayFabEventType::Default), EmitCallback(&PlayFabEventTest::QueueTestCallback));
+        eventApi->EmitEvent(MakeEvent(*testContext, PlayFabEventType::Default), EmitCallback(&PlayFabEventTest::QueueTestCallback));
+    }
+
     void PlayFabEventTest::AddTests()
     {
         AddTest("BasicLogin", &PlayFabEventTest::BasicLogin);
@@ -283,6 +329,7 @@ namespace PlayFabUnit
         AddTest("BasicMultiThreadedTest", &PlayFabEventTest::BasicMultiThreadedTest);
         AddTest("ManyThreadsLowEventsPerTest", &PlayFabEventTest::ManyThreadsLowEventsPerTest);
         AddTest("FewThreadsHighEventsPerTest", &PlayFabEventTest::FewThreadsHighEventsPerTest);
+        AddTest("TestQueueBeforeLogin", &PlayFabEventTest::TestQueueBeforeLogin);
     }
 
     void PlayFabEventTest::ClassSetUp()

@@ -242,6 +242,7 @@ namespace PlayFab
             std::string Id;
             bool IsControl;
             std::string Name;
+            std::string TitleDataOverrideId;
             Uint32 TrafficPercentage;
             std::list<Variable> Variables;
 
@@ -251,6 +252,7 @@ namespace PlayFab
                 Id(),
                 IsControl(),
                 Name(),
+                TitleDataOverrideId(),
                 TrafficPercentage(),
                 Variables()
             {}
@@ -261,6 +263,7 @@ namespace PlayFab
                 Id(src.Id),
                 IsControl(src.IsControl),
                 Name(src.Name),
+                TitleDataOverrideId(src.TitleDataOverrideId),
                 TrafficPercentage(src.TrafficPercentage),
                 Variables(src.Variables)
             {}
@@ -273,6 +276,7 @@ namespace PlayFab
                 FromJsonUtilS(input["Id"], Id);
                 FromJsonUtilP(input["IsControl"], IsControl);
                 FromJsonUtilS(input["Name"], Name);
+                FromJsonUtilS(input["TitleDataOverrideId"], TitleDataOverrideId);
                 FromJsonUtilP(input["TrafficPercentage"], TrafficPercentage);
                 FromJsonUtilO(input["Variables"], Variables);
             }
@@ -284,6 +288,7 @@ namespace PlayFab
                 Json::Value each_Id; ToJsonUtilS(Id, each_Id); output["Id"] = each_Id;
                 Json::Value each_IsControl; ToJsonUtilP(IsControl, each_IsControl); output["IsControl"] = each_IsControl;
                 Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
+                Json::Value each_TitleDataOverrideId; ToJsonUtilS(TitleDataOverrideId, each_TitleDataOverrideId); output["TitleDataOverrideId"] = each_TitleDataOverrideId;
                 Json::Value each_TrafficPercentage; ToJsonUtilP(TrafficPercentage, each_TrafficPercentage); output["TrafficPercentage"] = each_TrafficPercentage;
                 Json::Value each_Variables; ToJsonUtilO(Variables, each_Variables); output["Variables"] = each_Variables;
                 return output;
