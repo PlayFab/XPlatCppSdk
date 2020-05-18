@@ -27,7 +27,7 @@ namespace PlayFab
         std::shared_ptr<PlayFabAuthenticationContext> GetContext() const;
         std::string GetRequestId() const;
         void SetRequestId(const std::string& newRequestId);
-        bool HandleInvalidSettings();
+        void ThrowIfSettingsInvalid();
 
         // TODO: clean up these public variables with setters/getters when you have the chance.
 

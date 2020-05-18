@@ -14,7 +14,8 @@ namespace PlayFab
     class PlayFabEventAPI
     {
     public:
-        PlayFabEventAPI(); // Default constructor
+        PlayFabEventAPI(bool threadedEventPipeline=true);
+
         std::shared_ptr<IPlayFabEventRouter> GetEventRouter() const;
 
         /// <summary>
@@ -25,6 +26,12 @@ namespace PlayFab
         void EmitEvent(std::unique_ptr<const IPlayFabEvent> event, const PlayFabEmitEventCallback callback) const;
 
         void EmitEvent(std::unique_ptr<const IPlayFabEvent> event, std::function<void(std::shared_ptr<const IPlayFabEvent>, std::shared_ptr<const IPlayFabEmitEventResponse>)> callback) const;
+
+        /// <summary>
+        /// Updates the underlying event router which in turn will update the eventpipeline.
+        /// This function must be called every game tick if threadedEventPipeline is set to false
+        /// </summary>
+        void Update();
 
     private:
         std::shared_ptr<IPlayFabEventRouter> eventRouter;

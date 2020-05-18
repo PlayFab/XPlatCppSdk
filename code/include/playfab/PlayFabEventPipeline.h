@@ -32,6 +32,7 @@ namespace PlayFab
     public:
         PlayFabEventPipelineSettings();
         PlayFabEventPipelineSettings(PlayFabEventPipelineType emitType);
+        PlayFabEventPipelineSettings(PlayFabEventPipelineType emitType, bool useBackgroundThread);
         virtual ~PlayFabEventPipelineSettings() {};
 
         size_t bufferSize; // The minimal size of buffer, in bytes. The actually allocated size will be a power of 2 that is equal or greater than this value.
@@ -42,6 +43,7 @@ namespace PlayFab
         int64_t readBufferWaitTime; // The wait time between attempts to read events from buffer when it is empty, in milliseconds.
         std::shared_ptr<PlayFabAuthenticationContext> authenticationContext; // The optional PlayFab authentication context that can be used with static PlayFab events API
         PlayFabEventPipelineType emitType; // whether we call WriteEvent or WriteTelemetryEvent through PlayFab
+        bool useBackgroundThread;
     };
 
     /// <summary>
@@ -52,6 +54,8 @@ namespace PlayFab
     public:
         virtual ~IPlayFabEventPipeline() {}
         virtual void Start() {} // Start pipeline's worker thread
+        virtual void Stop() = 0;
+        virtual void Update() = 0;
         virtual void IntakeEvent(std::shared_ptr<const IPlayFabEmitEventRequest> request) = 0; // Intake an event. This method must be thread-safe.
     };
 
@@ -70,19 +74,23 @@ namespace PlayFab
         PlayFabEventPipeline& operator=(PlayFabEventPipeline&& other) = delete; // disable move assignment
 
         // NOTE: settings are expected to be set prior to calling PlayFabEventPipeline::Start()
-        // changing them after PlayFabEventPipeline::Start() may cause threading issues
-        // users should not expect changes made to settings to take effect after ::Start is called unless the pipeline is destroyed and re-created
+        // changing them after PlayFabEventPipeline::Start() may cause threading issues unless you have set useBackgroundThread flag to true
+        // If this flag is not set, users should not expect changes made to settings to take effect after ::Start is called
+        //   unless the pipeline is A.) destroyed and re-created or B.) restart it by running Stop() and then Start() again 
         std::shared_ptr<PlayFabEventPipelineSettings> GetSettings() const;
         virtual void Start() override;
+        virtual void Stop() override;
+        virtual void Update() override;
         virtual void IntakeEvent(std::shared_ptr<const IPlayFabEmitEventRequest> request) override;
 
         void SetExceptionCallback(ExceptionCallback callback);
 
     protected:
-        virtual void SendBatch(std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>>& batch, uintptr_t& batchCounter);
+        virtual void SendBatch(std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>>& batch);
 
     private:
         void WorkerThread();
+        bool DoWork();
         void WriteEventsApiCallback(const EventsModels::WriteEventsResponse& result, void* customData);
         void WriteEventsApiErrorCallback(const PlayFabError& error, void* customData);
         void CallbackRequest(std::shared_ptr<const IPlayFabEmitEventRequest> request, std::shared_ptr<const IPlayFabEmitEventResponse> response);
@@ -99,6 +107,8 @@ namespace PlayFab
     private:
         std::shared_ptr<PlayFabEventsInstanceAPI> eventsApi;
 
+        std::atomic_uintptr_t batchCounter;
+        std::chrono::steady_clock::time_point momentBatchStarted;
         std::shared_ptr<PlayFabEventPipelineSettings> settings;
         PlayFabEventBuffer buffer;
         std::thread workerThread;

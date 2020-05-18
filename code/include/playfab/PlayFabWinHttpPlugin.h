@@ -36,9 +36,13 @@ namespace PlayFab
         void HandleResults(std::unique_ptr<CallRequestContainer> requestContainer);
         void SetErrorInfo(CallRequestContainer& requestContainer, const std::string& errorMessage, const int httpCode = 0) const;
 
+        HRESULT TryAddHeader(HINTERNET hRequest, LPCWSTR lpszHeaders);
+        void CompleteRequest(std::unique_ptr<CallRequestContainer> requestContainer, HINTERNET hRequest, HINTERNET hConnect, HINTERNET hSession);
+
         std::thread workerThread;
         std::mutex httpRequestMutex;
         std::atomic<bool> threadRunning;
+        std::atomic<HRESULT> setPredefinedHeadersResult;
         int activeRequestCount;
         std::deque<std::unique_ptr<CallRequestContainerBase>> pendingRequests;
         std::deque<std::unique_ptr<CallRequestContainerBase>> pendingResults;

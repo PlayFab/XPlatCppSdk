@@ -16,6 +16,7 @@ namespace PlayFab
     {
         activeRequestCount = 0;
         threadRunning = true;
+        setPredefinedHeadersResult = S_OK;
         workerThread = std::thread(&PlayFabWinHttpPlugin::WorkerThread, this);
     };
 
@@ -100,8 +101,10 @@ namespace PlayFab
     void PlayFabWinHttpPlugin::MakePostRequest(std::unique_ptr<CallRequestContainerBase> requestContainer)
     {
         CallRequestContainer* container = dynamic_cast<CallRequestContainer*>(requestContainer.get());
-        if (container != nullptr && container->HandleInvalidSettings())
-        { // LOCK httpRequestMutex
+        if (container != nullptr)
+        {
+            container->ThrowIfSettingsInvalid();
+            // LOCK httpRequestMutex
             std::unique_lock<std::mutex> lock(httpRequestMutex);
             pendingRequests.push_back(std::move(requestContainer));
             activeRequestCount++;
@@ -192,6 +195,15 @@ namespace PlayFab
                     {
                         // Add HTTP headers
                         SetPredefinedHeaders(reqContainer, hRequest);
+                        HRESULT hr = setPredefinedHeadersResult.exchange(S_OK);
+                        if(FAILED(hr))
+                        {
+                            SetErrorInfo(reqContainer, "Error in attempting to add Default Headers with HRESULT: " + std::to_string(hr));
+                            CompleteRequest(std::move(requestContainer), hRequest, hConnect, hSession);
+                            setPredefinedHeadersResult = S_OK;
+                            return;
+                        }
+
                         const std::unordered_map<std::string, std::string> headers = reqContainer.GetRequestHeaders();
                         if (headers.size() > 0)
                         {
@@ -200,7 +212,13 @@ namespace PlayFab
                                 if (obj.first.length() != 0 && obj.second.length() != 0) // no empty keys or values in headers
                                 {
                                     std::string header = obj.first + ": " + obj.second;
-                                    WinHttpAddRequestHeaders(hRequest, std::wstring(header.begin(), header.end()).c_str(), -1, 0);
+                                    hr = TryAddHeader(hRequest, std::wstring(header.begin(), header.end()).c_str());
+                                    if(FAILED(hr))
+                                    {
+                                        SetErrorInfo(reqContainer, "Error in WinHttpAddRequestHeaders attempting to add parameters with HRESULT: " + std::to_string(hr));
+                                        CompleteRequest(std::move(requestContainer), hRequest, hConnect, hSession);
+                                        return;
+                                    }
                                 }
                             }
                         }
@@ -345,23 +363,7 @@ namespace PlayFab
             } // WinHttpOpen
         } // WinHttpCrackUrl
 
-        HandleCallback(std::move(requestContainer));
-
-        // Close any open handles
-        if (hRequest)
-        {
-            WinHttpCloseHandle(hRequest);
-        }
-
-        if (hConnect)
-        {
-            WinHttpCloseHandle(hConnect);
-        }
-
-        if (hSession)
-        {
-            WinHttpCloseHandle(hSession);
-        }
+        CompleteRequest(std::move(requestContainer), hRequest, hConnect, hSession);
     }
 
     std::string PlayFabWinHttpPlugin::GetUrl(const CallRequestContainer& reqContainer) const
@@ -372,10 +374,36 @@ namespace PlayFab
     void PlayFabWinHttpPlugin::SetPredefinedHeaders(const CallRequestContainer& requestContainer, HINTERNET hRequest)
     {
         UNREFERENCED_PARAMETER(requestContainer);
-        WinHttpAddRequestHeaders(hRequest, L"Accept: application/json", -1, 0);
-        WinHttpAddRequestHeaders(hRequest, L"Content-Type: application/json; charset=utf-8", -1, 0);
-        WinHttpAddRequestHeaders(hRequest, (L"X-PlayFabSDK: " + std::wstring(PlayFabSettings::versionString.begin(), PlayFabSettings::versionString.end())).c_str(), -1, 0);
-        WinHttpAddRequestHeaders(hRequest, L"X-ReportErrorAsSuccess: true", -1, 0);
+
+        HRESULT hr = S_OK;
+
+        hr = TryAddHeader(hRequest, L"Accept: application/json");
+        if (SUCCEEDED(hr))
+        {
+            hr = TryAddHeader(hRequest, L"Content-Type: application/json; charset=utf-8");
+            if (SUCCEEDED(hr))
+            {
+                std::string versionHeader = "X-PlayFabSDK: " + PlayFabSettings::versionString;
+                std::wstring versionWideHeader(versionHeader.begin(), versionHeader.end());
+                hr = TryAddHeader(hRequest, versionWideHeader.c_str());
+                if (SUCCEEDED(hr))
+                {
+                    hr = TryAddHeader(hRequest, L"X-ReportErrorAsSuccess: true");
+                }
+            }
+        }
+
+        setPredefinedHeadersResult = hr;
+    }
+
+    HRESULT PlayFabWinHttpPlugin::TryAddHeader(HINTERNET hRequest, LPCWSTR lpszHeaders)
+    {
+        bool succeeded = WinHttpAddRequestHeaders(hRequest, lpszHeaders, -1, 0);
+        if (!succeeded)
+        {
+            return HRESULT_FROM_WIN32(GetLastError());
+        }
+        return S_OK;
     }
 
     bool PlayFabWinHttpPlugin::GetBinaryPayload(CallRequestContainer& reqContainer, LPVOID& payload, DWORD& payloadSize) const
@@ -464,6 +492,27 @@ namespace PlayFab
         { // LOCK httpRequestMutex
             std::unique_lock<std::mutex> lock(httpRequestMutex);
             return activeRequestCount;
+        }
+    }
+
+    void PlayFabWinHttpPlugin::CompleteRequest(std::unique_ptr<CallRequestContainer> requestContainer, HINTERNET hRequest, HINTERNET hConnect, HINTERNET hSession)
+    {
+        HandleCallback(std::move(requestContainer));
+
+        // Close any open handles
+        if (hRequest)
+        {
+            WinHttpCloseHandle(hRequest);
+        }
+
+        if (hConnect)
+        {
+            WinHttpCloseHandle(hConnect);
+        }
+
+        if (hSession)
+        {
+            WinHttpCloseHandle(hSession);
         }
     }
 }

@@ -6,8 +6,8 @@
 
 namespace PlayFab
 {
-    PlayFabEventAPI::PlayFabEventAPI() :
-        eventRouter(std::make_shared<PlayFabEventRouter>()) // default event router
+    PlayFabEventAPI::PlayFabEventAPI(bool threadedEventPipeline) : 
+        eventRouter(std::make_shared<PlayFabEventRouter>(threadedEventPipeline))
     {
     }
 
@@ -34,6 +34,11 @@ namespace PlayFab
         eventRequest->stdCallback = callback;
 
         this->eventRouter->RouteEvent(eventRequest);
+    }
+    
+    void PlayFabEventAPI::Update()
+    {
+        this->eventRouter->Update();
     }
 }
 

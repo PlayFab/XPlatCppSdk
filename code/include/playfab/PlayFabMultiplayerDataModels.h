@@ -297,15 +297,23 @@ namespace PlayFab
 
         enum class AzureVmSize
         {
+            AzureVmSizeStandard_A1,
+            AzureVmSizeStandard_A2,
+            AzureVmSizeStandard_A3,
+            AzureVmSizeStandard_A4,
+            AzureVmSizeStandard_A1_v2,
+            AzureVmSizeStandard_A2_v2,
+            AzureVmSizeStandard_A4_v2,
+            AzureVmSizeStandard_A8_v2,
             AzureVmSizeStandard_D1_v2,
             AzureVmSizeStandard_D2_v2,
             AzureVmSizeStandard_D3_v2,
             AzureVmSizeStandard_D4_v2,
             AzureVmSizeStandard_D5_v2,
-            AzureVmSizeStandard_A1_v2,
-            AzureVmSizeStandard_A2_v2,
-            AzureVmSizeStandard_A4_v2,
-            AzureVmSizeStandard_A8_v2,
+            AzureVmSizeStandard_D2_v3,
+            AzureVmSizeStandard_D4_v3,
+            AzureVmSizeStandard_D8_v3,
+            AzureVmSizeStandard_D16_v3,
             AzureVmSizeStandard_F1,
             AzureVmSizeStandard_F2,
             AzureVmSizeStandard_F4,
@@ -314,15 +322,51 @@ namespace PlayFab
             AzureVmSizeStandard_F2s_v2,
             AzureVmSizeStandard_F4s_v2,
             AzureVmSizeStandard_F8s_v2,
-            AzureVmSizeStandard_F16s_v2,
-            AzureVmSizeStandard_A1,
-            AzureVmSizeStandard_A2,
-            AzureVmSizeStandard_A3,
-            AzureVmSizeStandard_A4
+            AzureVmSizeStandard_F16s_v2
         };
 
         inline void ToJsonEnum(const AzureVmSize input, Json::Value& output)
         {
+            if (input == AzureVmSize::AzureVmSizeStandard_A1)
+            {
+                output = Json::Value("Standard_A1");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_A2)
+            {
+                output = Json::Value("Standard_A2");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_A3)
+            {
+                output = Json::Value("Standard_A3");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_A4)
+            {
+                output = Json::Value("Standard_A4");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_A1_v2)
+            {
+                output = Json::Value("Standard_A1_v2");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_A2_v2)
+            {
+                output = Json::Value("Standard_A2_v2");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_A4_v2)
+            {
+                output = Json::Value("Standard_A4_v2");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_A8_v2)
+            {
+                output = Json::Value("Standard_A8_v2");
+                return;
+            }
             if (input == AzureVmSize::AzureVmSizeStandard_D1_v2)
             {
                 output = Json::Value("Standard_D1_v2");
@@ -348,24 +392,24 @@ namespace PlayFab
                 output = Json::Value("Standard_D5_v2");
                 return;
             }
-            if (input == AzureVmSize::AzureVmSizeStandard_A1_v2)
+            if (input == AzureVmSize::AzureVmSizeStandard_D2_v3)
             {
-                output = Json::Value("Standard_A1_v2");
+                output = Json::Value("Standard_D2_v3");
                 return;
             }
-            if (input == AzureVmSize::AzureVmSizeStandard_A2_v2)
+            if (input == AzureVmSize::AzureVmSizeStandard_D4_v3)
             {
-                output = Json::Value("Standard_A2_v2");
+                output = Json::Value("Standard_D4_v3");
                 return;
             }
-            if (input == AzureVmSize::AzureVmSizeStandard_A4_v2)
+            if (input == AzureVmSize::AzureVmSizeStandard_D8_v3)
             {
-                output = Json::Value("Standard_A4_v2");
+                output = Json::Value("Standard_D8_v3");
                 return;
             }
-            if (input == AzureVmSize::AzureVmSizeStandard_A8_v2)
+            if (input == AzureVmSize::AzureVmSizeStandard_D16_v3)
             {
-                output = Json::Value("Standard_A8_v2");
+                output = Json::Value("Standard_D16_v3");
                 return;
             }
             if (input == AzureVmSize::AzureVmSizeStandard_F1)
@@ -413,26 +457,6 @@ namespace PlayFab
                 output = Json::Value("Standard_F16s_v2");
                 return;
             }
-            if (input == AzureVmSize::AzureVmSizeStandard_A1)
-            {
-                output = Json::Value("Standard_A1");
-                return;
-            }
-            if (input == AzureVmSize::AzureVmSizeStandard_A2)
-            {
-                output = Json::Value("Standard_A2");
-                return;
-            }
-            if (input == AzureVmSize::AzureVmSizeStandard_A3)
-            {
-                output = Json::Value("Standard_A3");
-                return;
-            }
-            if (input == AzureVmSize::AzureVmSizeStandard_A4)
-            {
-                output = Json::Value("Standard_A4");
-                return;
-            }
         }
         inline void FromJsonEnum(const Json::Value& input, AzureVmSize& output)
         {
@@ -441,6 +465,46 @@ namespace PlayFab
                 return;
             }
             const std::string& inputStr = input.asString();
+            if (inputStr == "Standard_A1")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_A1;
+                return;
+            }
+            if (inputStr == "Standard_A2")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_A2;
+                return;
+            }
+            if (inputStr == "Standard_A3")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_A3;
+                return;
+            }
+            if (inputStr == "Standard_A4")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_A4;
+                return;
+            }
+            if (inputStr == "Standard_A1_v2")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_A1_v2;
+                return;
+            }
+            if (inputStr == "Standard_A2_v2")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_A2_v2;
+                return;
+            }
+            if (inputStr == "Standard_A4_v2")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_A4_v2;
+                return;
+            }
+            if (inputStr == "Standard_A8_v2")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_A8_v2;
+                return;
+            }
             if (inputStr == "Standard_D1_v2")
             {
                 output = AzureVmSize::AzureVmSizeStandard_D1_v2;
@@ -466,24 +530,24 @@ namespace PlayFab
                 output = AzureVmSize::AzureVmSizeStandard_D5_v2;
                 return;
             }
-            if (inputStr == "Standard_A1_v2")
+            if (inputStr == "Standard_D2_v3")
             {
-                output = AzureVmSize::AzureVmSizeStandard_A1_v2;
+                output = AzureVmSize::AzureVmSizeStandard_D2_v3;
                 return;
             }
-            if (inputStr == "Standard_A2_v2")
+            if (inputStr == "Standard_D4_v3")
             {
-                output = AzureVmSize::AzureVmSizeStandard_A2_v2;
+                output = AzureVmSize::AzureVmSizeStandard_D4_v3;
                 return;
             }
-            if (inputStr == "Standard_A4_v2")
+            if (inputStr == "Standard_D8_v3")
             {
-                output = AzureVmSize::AzureVmSizeStandard_A4_v2;
+                output = AzureVmSize::AzureVmSizeStandard_D8_v3;
                 return;
             }
-            if (inputStr == "Standard_A8_v2")
+            if (inputStr == "Standard_D16_v3")
             {
-                output = AzureVmSize::AzureVmSizeStandard_A8_v2;
+                output = AzureVmSize::AzureVmSizeStandard_D16_v3;
                 return;
             }
             if (inputStr == "Standard_F1")
@@ -529,26 +593,6 @@ namespace PlayFab
             if (inputStr == "Standard_F16s_v2")
             {
                 output = AzureVmSize::AzureVmSizeStandard_F16s_v2;
-                return;
-            }
-            if (inputStr == "Standard_A1")
-            {
-                output = AzureVmSize::AzureVmSizeStandard_A1;
-                return;
-            }
-            if (inputStr == "Standard_A2")
-            {
-                output = AzureVmSize::AzureVmSizeStandard_A2;
-                return;
-            }
-            if (inputStr == "Standard_A3")
-            {
-                output = AzureVmSize::AzureVmSizeStandard_A3;
-                return;
-            }
-            if (inputStr == "Standard_A4")
-            {
-                output = AzureVmSize::AzureVmSizeStandard_A4;
                 return;
             }
         }

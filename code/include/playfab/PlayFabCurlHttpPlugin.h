@@ -3,6 +3,7 @@
 #include <playfab/PlayFabCallRequestContainer.h>
 #include <playfab/PlayFabPluginManager.h>
 #include <playfab/PlayFabError.h>
+#include <curl/curl.h>
 #include <functional>
 #include <deque>
 #include <memory>
@@ -42,5 +43,10 @@ namespace PlayFab
         int activeRequestCount;
         std::deque<std::unique_ptr<CallRequestContainerBase>> pendingRequests;
         std::deque<std::unique_ptr<CallRequestContainerBase>> pendingResults;
+
+    private:
+        void CurlHeaderFailed(CallRequestContainer& requestContainer, const char* failedHeader);
+        curl_slist* SetPredefinedHeaders(CallRequestContainer& requestContainer);
+        curl_slist* TryCurlAddHeader(CallRequestContainer& requestContainer, curl_slist* list, const char* headerToAppend);
     };
 }

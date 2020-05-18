@@ -19197,24 +19197,29 @@ namespace PlayFab
 
         struct UnlinkTwitchAccountRequest : public PlayFabRequestCommon
         {
+            std::string AccessToken;
 
             UnlinkTwitchAccountRequest() :
-                PlayFabRequestCommon()
+                PlayFabRequestCommon(),
+                AccessToken()
             {}
 
-            UnlinkTwitchAccountRequest(const UnlinkTwitchAccountRequest&) :
-                PlayFabRequestCommon()
+            UnlinkTwitchAccountRequest(const UnlinkTwitchAccountRequest& src) :
+                PlayFabRequestCommon(),
+                AccessToken(src.AccessToken)
             {}
 
             ~UnlinkTwitchAccountRequest() = default;
 
-            void FromJson(const Json::Value&) override
+            void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["AccessToken"], AccessToken);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_AccessToken; ToJsonUtilS(AccessToken, each_AccessToken); output["AccessToken"] = each_AccessToken;
                 return output;
             }
         };

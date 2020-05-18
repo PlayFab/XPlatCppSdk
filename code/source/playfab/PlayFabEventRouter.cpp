@@ -11,10 +11,10 @@ namespace PlayFab
         return this->pipelines;
     }
 
-    PlayFabEventRouter::PlayFabEventRouter()
+    PlayFabEventRouter::PlayFabEventRouter(bool threadedEventPipeline)
     {
-        this->pipelines.emplace(EventPipelineKey::PlayFabPlayStream, std::make_shared<PlayFabEventPipeline>(std::make_shared<PlayFabEventPipelineSettings>(PlayFabEventPipelineType::PlayFabPlayStream)));
-        this->pipelines.emplace(EventPipelineKey::PlayFabTelemetry, std::make_shared<PlayFabEventPipeline>(std::make_shared<PlayFabEventPipelineSettings>(PlayFabEventPipelineType::PlayFabTelemetry)));
+        this->pipelines.emplace(EventPipelineKey::PlayFabPlayStream, std::make_shared<PlayFabEventPipeline>(std::make_shared<PlayFabEventPipelineSettings>(PlayFabEventPipelineType::PlayFabPlayStream, threadedEventPipeline)));
+        this->pipelines.emplace(EventPipelineKey::PlayFabTelemetry, std::make_shared<PlayFabEventPipeline>(std::make_shared<PlayFabEventPipelineSettings>(PlayFabEventPipelineType::PlayFabTelemetry, threadedEventPipeline)));
     }
 
     void PlayFabEventRouter::RouteEvent(std::shared_ptr<const IPlayFabEmitEventRequest> request) const
@@ -52,6 +52,14 @@ namespace PlayFab
                     }
                 }
             }
+        }
+    }
+    
+    void PlayFabEventRouter::Update()
+    {
+        for (std::pair<EventPipelineKey, std::shared_ptr<IPlayFabEventPipeline>> pipeline : this->pipelines)
+        {
+            pipeline.second->Update();
         }
     }
 }

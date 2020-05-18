@@ -5389,6 +5389,8 @@ namespace PlayFab
             GenericErrorCodesXboxServiceTooManyRequests,
             GenericErrorCodesNintendoSwitchNotEnabledForTitle,
             GenericErrorCodesRequestMultiplayerServersThrottledFromRateLimiter,
+            GenericErrorCodesTitleDataInstanceNotFound,
+            GenericErrorCodesDuplicateTitleDataOverrideInstanceName,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5469,6 +5471,7 @@ namespace PlayFab
             GenericErrorCodesExperimentationInvalidDuration,
             GenericErrorCodesExperimentationMaxExperimentsReached,
             GenericErrorCodesExperimentationExperimentSchedulingInProgress,
+            GenericErrorCodesExperimentationExistingCodelessScheduled,
             GenericErrorCodesMaxActionDepthExceeded,
             GenericErrorCodesTitleNotOnUpdatedPricingPlan,
             GenericErrorCodesSnapshotNotFound
@@ -7961,6 +7964,16 @@ namespace PlayFab
                 output = Json::Value("RequestMultiplayerServersThrottledFromRateLimiter");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleDataInstanceNotFound)
+            {
+                output = Json::Value("TitleDataInstanceNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesDuplicateTitleDataOverrideInstanceName)
+            {
+                output = Json::Value("DuplicateTitleDataOverrideInstanceName");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
             {
                 output = Json::Value("MatchmakingEntityInvalid");
@@ -8359,6 +8372,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesExperimentationExperimentSchedulingInProgress)
             {
                 output = Json::Value("ExperimentationExperimentSchedulingInProgress");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentationExistingCodelessScheduled)
+            {
+                output = Json::Value("ExperimentationExistingCodelessScheduled");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMaxActionDepthExceeded)
@@ -10869,6 +10887,16 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesRequestMultiplayerServersThrottledFromRateLimiter;
                 return;
             }
+            if (inputStr == "TitleDataInstanceNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleDataInstanceNotFound;
+                return;
+            }
+            if (inputStr == "DuplicateTitleDataOverrideInstanceName")
+            {
+                output = GenericErrorCodes::GenericErrorCodesDuplicateTitleDataOverrideInstanceName;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -11267,6 +11295,11 @@ namespace PlayFab
             if (inputStr == "ExperimentationExperimentSchedulingInProgress")
             {
                 output = GenericErrorCodes::GenericErrorCodesExperimentationExperimentSchedulingInProgress;
+                return;
+            }
+            if (inputStr == "ExperimentationExistingCodelessScheduled")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentationExistingCodelessScheduled;
                 return;
             }
             if (inputStr == "MaxActionDepthExceeded")
