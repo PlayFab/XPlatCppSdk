@@ -4061,8 +4061,8 @@ namespace PlayFab
         }
     }
 
-    void PlayFabClientInstanceAPI::LinkNintendoSwitchAccount(
-        LinkNintendoSwitchAccountRequest& request,
+    void PlayFabClientInstanceAPI::LinkNintendoAccount(
+        LinkNintendoAccountRequest& request,
         const ProcessApiCallback<EmptyResult> callback,
         const ErrorCallback errorCallback,
         void* customData
@@ -4080,10 +4080,10 @@ namespace PlayFab
         headers.emplace("X-Authorization", context->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Client/LinkNintendoSwitchAccount",
+            "/Client/LinkNintendoAccount",
             headers,
             jsonAsString,
-            std::bind(&PlayFabClientInstanceAPI::OnLinkNintendoSwitchAccountResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            std::bind(&PlayFabClientInstanceAPI::OnLinkNintendoAccountResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
             settings,
             context,
             customData));
@@ -4094,7 +4094,7 @@ namespace PlayFab
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientInstanceAPI::OnLinkNintendoSwitchAccountResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabClientInstanceAPI::OnLinkNintendoAccountResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
@@ -5031,8 +5031,8 @@ namespace PlayFab
         }
     }
 
-    void PlayFabClientInstanceAPI::LoginWithNintendoSwitchAccount(
-        LoginWithNintendoSwitchAccountRequest& request,
+    void PlayFabClientInstanceAPI::LoginWithNintendoAccount(
+        LoginWithNintendoAccountRequest& request,
         const ProcessApiCallback<LoginResult> callback,
         const ErrorCallback errorCallback,
         void* customData
@@ -5053,10 +5053,10 @@ namespace PlayFab
         std::unordered_map<std::string, std::string> headers;
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Client/LoginWithNintendoSwitchAccount",
+            "/Client/LoginWithNintendoAccount",
             headers,
             jsonAsString,
-            std::bind(&PlayFabClientInstanceAPI::OnLoginWithNintendoSwitchAccountResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            std::bind(&PlayFabClientInstanceAPI::OnLoginWithNintendoAccountResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
             settings,
             context,
             customData));
@@ -5067,7 +5067,7 @@ namespace PlayFab
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientInstanceAPI::OnLoginWithNintendoSwitchAccountResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabClientInstanceAPI::OnLoginWithNintendoAccountResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
@@ -7205,8 +7205,8 @@ namespace PlayFab
         }
     }
 
-    void PlayFabClientInstanceAPI::UnlinkNintendoSwitchAccount(
-        UnlinkNintendoSwitchAccountRequest& request,
+    void PlayFabClientInstanceAPI::UnlinkNintendoAccount(
+        UnlinkNintendoAccountRequest& request,
         const ProcessApiCallback<EmptyResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
@@ -7224,10 +7224,10 @@ namespace PlayFab
         headers.emplace("X-Authorization", context->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Client/UnlinkNintendoSwitchAccount",
+            "/Client/UnlinkNintendoAccount",
             headers,
             jsonAsString,
-            std::bind(&PlayFabClientInstanceAPI::OnUnlinkNintendoSwitchAccountResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            std::bind(&PlayFabClientInstanceAPI::OnUnlinkNintendoAccountResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
             settings,
             context,
             customData));
@@ -7238,7 +7238,7 @@ namespace PlayFab
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientInstanceAPI::OnUnlinkNintendoSwitchAccountResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabClientInstanceAPI::OnUnlinkNintendoAccountResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();

@@ -89,6 +89,12 @@ namespace PlayFab
                 }
             }
         }
+
+        if(RequestId != "")
+        {
+            output += " \n RequestId: " + RequestId + "\n";
+        }
+
         return output;
     }
 

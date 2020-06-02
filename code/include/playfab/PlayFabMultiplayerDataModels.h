@@ -229,8 +229,10 @@ namespace PlayFab
             AzureVmFamilyA,
             AzureVmFamilyAv2,
             AzureVmFamilyDv2,
+            AzureVmFamilyDv3,
             AzureVmFamilyF,
-            AzureVmFamilyFsv2
+            AzureVmFamilyFsv2,
+            AzureVmFamilyDasv4
         };
 
         inline void ToJsonEnum(const AzureVmFamily input, Json::Value& output)
@@ -250,6 +252,11 @@ namespace PlayFab
                 output = Json::Value("Dv2");
                 return;
             }
+            if (input == AzureVmFamily::AzureVmFamilyDv3)
+            {
+                output = Json::Value("Dv3");
+                return;
+            }
             if (input == AzureVmFamily::AzureVmFamilyF)
             {
                 output = Json::Value("F");
@@ -258,6 +265,11 @@ namespace PlayFab
             if (input == AzureVmFamily::AzureVmFamilyFsv2)
             {
                 output = Json::Value("Fsv2");
+                return;
+            }
+            if (input == AzureVmFamily::AzureVmFamilyDasv4)
+            {
+                output = Json::Value("Dasv4");
                 return;
             }
         }
@@ -283,6 +295,11 @@ namespace PlayFab
                 output = AzureVmFamily::AzureVmFamilyDv2;
                 return;
             }
+            if (inputStr == "Dv3")
+            {
+                output = AzureVmFamily::AzureVmFamilyDv3;
+                return;
+            }
             if (inputStr == "F")
             {
                 output = AzureVmFamily::AzureVmFamilyF;
@@ -291,6 +308,11 @@ namespace PlayFab
             if (inputStr == "Fsv2")
             {
                 output = AzureVmFamily::AzureVmFamilyFsv2;
+                return;
+            }
+            if (inputStr == "Dasv4")
+            {
+                output = AzureVmFamily::AzureVmFamilyDasv4;
                 return;
             }
         }
@@ -322,7 +344,11 @@ namespace PlayFab
             AzureVmSizeStandard_F2s_v2,
             AzureVmSizeStandard_F4s_v2,
             AzureVmSizeStandard_F8s_v2,
-            AzureVmSizeStandard_F16s_v2
+            AzureVmSizeStandard_F16s_v2,
+            AzureVmSizeStandard_D2as_v4,
+            AzureVmSizeStandard_D4as_v4,
+            AzureVmSizeStandard_D8as_v4,
+            AzureVmSizeStandard_D16as_v4
         };
 
         inline void ToJsonEnum(const AzureVmSize input, Json::Value& output)
@@ -455,6 +481,26 @@ namespace PlayFab
             if (input == AzureVmSize::AzureVmSizeStandard_F16s_v2)
             {
                 output = Json::Value("Standard_F16s_v2");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D2as_v4)
+            {
+                output = Json::Value("Standard_D2as_v4");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D4as_v4)
+            {
+                output = Json::Value("Standard_D4as_v4");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D8as_v4)
+            {
+                output = Json::Value("Standard_D8as_v4");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D16as_v4)
+            {
+                output = Json::Value("Standard_D16as_v4");
                 return;
             }
         }
@@ -593,6 +639,26 @@ namespace PlayFab
             if (inputStr == "Standard_F16s_v2")
             {
                 output = AzureVmSize::AzureVmSizeStandard_F16s_v2;
+                return;
+            }
+            if (inputStr == "Standard_D2as_v4")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D2as_v4;
+                return;
+            }
+            if (inputStr == "Standard_D4as_v4")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D4as_v4;
+                return;
+            }
+            if (inputStr == "Standard_D8as_v4")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D8as_v4;
+                return;
+            }
+            if (inputStr == "Standard_D16as_v4")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D16as_v4;
                 return;
             }
         }

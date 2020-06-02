@@ -2151,7 +2151,6 @@ namespace PlayFab
         std::string jsonAsString = requestJson.toStyledString();
 
         std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-EntityToken", context->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
             "/MultiplayerServer/ListPartyQosServers",

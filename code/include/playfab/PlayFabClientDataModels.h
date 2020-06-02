@@ -15001,31 +15001,27 @@ namespace PlayFab
             }
         };
 
-        struct LinkNintendoSwitchAccountRequest : public PlayFabRequestCommon
+        struct LinkNintendoAccountRequest : public PlayFabRequestCommon
         {
-            std::string EnvironmentId;
             Boxed<bool> ForceLink;
             std::string IdentityToken;
 
-            LinkNintendoSwitchAccountRequest() :
+            LinkNintendoAccountRequest() :
                 PlayFabRequestCommon(),
-                EnvironmentId(),
                 ForceLink(),
                 IdentityToken()
             {}
 
-            LinkNintendoSwitchAccountRequest(const LinkNintendoSwitchAccountRequest& src) :
+            LinkNintendoAccountRequest(const LinkNintendoAccountRequest& src) :
                 PlayFabRequestCommon(),
-                EnvironmentId(src.EnvironmentId),
                 ForceLink(src.ForceLink),
                 IdentityToken(src.IdentityToken)
             {}
 
-            ~LinkNintendoSwitchAccountRequest() = default;
+            ~LinkNintendoAccountRequest() = default;
 
             void FromJson(const Json::Value& input) override
             {
-                FromJsonUtilS(input["EnvironmentId"], EnvironmentId);
                 FromJsonUtilP(input["ForceLink"], ForceLink);
                 FromJsonUtilS(input["IdentityToken"], IdentityToken);
             }
@@ -15033,7 +15029,6 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                Json::Value each_EnvironmentId; ToJsonUtilS(EnvironmentId, each_EnvironmentId); output["EnvironmentId"] = each_EnvironmentId;
                 Json::Value each_ForceLink; ToJsonUtilP(ForceLink, each_ForceLink); output["ForceLink"] = each_ForceLink;
                 Json::Value each_IdentityToken; ToJsonUtilS(IdentityToken, each_IdentityToken); output["IdentityToken"] = each_IdentityToken;
                 return output;
@@ -16251,45 +16246,41 @@ namespace PlayFab
             }
         };
 
-        struct LoginWithNintendoSwitchAccountRequest : public PlayFabRequestCommon
+        struct LoginWithNintendoAccountRequest : public PlayFabRequestCommon
         {
             Boxed<bool> CreateAccount;
             std::string EncryptedRequest;
-            std::string EnvironmentId;
             std::string IdentityToken;
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
             std::string PlayerSecret;
             std::string TitleId;
 
-            LoginWithNintendoSwitchAccountRequest() :
+            LoginWithNintendoAccountRequest() :
                 PlayFabRequestCommon(),
                 CreateAccount(),
                 EncryptedRequest(),
-                EnvironmentId(),
                 IdentityToken(),
                 InfoRequestParameters(),
                 PlayerSecret(),
                 TitleId()
             {}
 
-            LoginWithNintendoSwitchAccountRequest(const LoginWithNintendoSwitchAccountRequest& src) :
+            LoginWithNintendoAccountRequest(const LoginWithNintendoAccountRequest& src) :
                 PlayFabRequestCommon(),
                 CreateAccount(src.CreateAccount),
                 EncryptedRequest(src.EncryptedRequest),
-                EnvironmentId(src.EnvironmentId),
                 IdentityToken(src.IdentityToken),
                 InfoRequestParameters(src.InfoRequestParameters),
                 PlayerSecret(src.PlayerSecret),
                 TitleId(src.TitleId)
             {}
 
-            ~LoginWithNintendoSwitchAccountRequest() = default;
+            ~LoginWithNintendoAccountRequest() = default;
 
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
-                FromJsonUtilS(input["EnvironmentId"], EnvironmentId);
                 FromJsonUtilS(input["IdentityToken"], IdentityToken);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
                 FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
@@ -16301,7 +16292,6 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
                 Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
-                Json::Value each_EnvironmentId; ToJsonUtilS(EnvironmentId, each_EnvironmentId); output["EnvironmentId"] = each_EnvironmentId;
                 Json::Value each_IdentityToken; ToJsonUtilS(IdentityToken, each_IdentityToken); output["IdentityToken"] = each_IdentityToken;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
@@ -18993,18 +18983,18 @@ namespace PlayFab
             }
         };
 
-        struct UnlinkNintendoSwitchAccountRequest : public PlayFabRequestCommon
+        struct UnlinkNintendoAccountRequest : public PlayFabRequestCommon
         {
 
-            UnlinkNintendoSwitchAccountRequest() :
+            UnlinkNintendoAccountRequest() :
                 PlayFabRequestCommon()
             {}
 
-            UnlinkNintendoSwitchAccountRequest(const UnlinkNintendoSwitchAccountRequest&) :
+            UnlinkNintendoAccountRequest(const UnlinkNintendoAccountRequest&) :
                 PlayFabRequestCommon()
             {}
 
-            ~UnlinkNintendoSwitchAccountRequest() = default;
+            ~UnlinkNintendoAccountRequest() = default;
 
             void FromJson(const Json::Value&) override
             {
