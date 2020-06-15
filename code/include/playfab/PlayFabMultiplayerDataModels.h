@@ -1964,6 +1964,7 @@ namespace PlayFab
 
         struct CreateBuildWithCustomContainerRequest : public PlayFabRequestCommon
         {
+            Boxed<bool> AreAssetsReadonly;
             std::string BuildName;
             Boxed<ContainerFlavor> pfContainerFlavor;
             Boxed<ContainerImageReference> pfContainerImageReference;
@@ -1974,10 +1975,12 @@ namespace PlayFab
             Int32 MultiplayerServerCountPerVm;
             std::list<Port> Ports;
             std::list<BuildRegionParams> RegionConfigurations;
+            Boxed<bool> UseStreamingForAssetDownloads;
             Boxed<AzureVmSize> VmSize;
 
             CreateBuildWithCustomContainerRequest() :
                 PlayFabRequestCommon(),
+                AreAssetsReadonly(),
                 BuildName(),
                 pfContainerFlavor(),
                 pfContainerImageReference(),
@@ -1988,11 +1991,13 @@ namespace PlayFab
                 MultiplayerServerCountPerVm(),
                 Ports(),
                 RegionConfigurations(),
+                UseStreamingForAssetDownloads(),
                 VmSize()
             {}
 
             CreateBuildWithCustomContainerRequest(const CreateBuildWithCustomContainerRequest& src) :
                 PlayFabRequestCommon(),
+                AreAssetsReadonly(src.AreAssetsReadonly),
                 BuildName(src.BuildName),
                 pfContainerFlavor(src.pfContainerFlavor),
                 pfContainerImageReference(src.pfContainerImageReference),
@@ -2003,6 +2008,7 @@ namespace PlayFab
                 MultiplayerServerCountPerVm(src.MultiplayerServerCountPerVm),
                 Ports(src.Ports),
                 RegionConfigurations(src.RegionConfigurations),
+                UseStreamingForAssetDownloads(src.UseStreamingForAssetDownloads),
                 VmSize(src.VmSize)
             {}
 
@@ -2010,6 +2016,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilP(input["AreAssetsReadonly"], AreAssetsReadonly);
                 FromJsonUtilS(input["BuildName"], BuildName);
                 FromJsonUtilE(input["ContainerFlavor"], pfContainerFlavor);
                 FromJsonUtilO(input["ContainerImageReference"], pfContainerImageReference);
@@ -2020,12 +2027,14 @@ namespace PlayFab
                 FromJsonUtilP(input["MultiplayerServerCountPerVm"], MultiplayerServerCountPerVm);
                 FromJsonUtilO(input["Ports"], Ports);
                 FromJsonUtilO(input["RegionConfigurations"], RegionConfigurations);
+                FromJsonUtilP(input["UseStreamingForAssetDownloads"], UseStreamingForAssetDownloads);
                 FromJsonUtilE(input["VmSize"], VmSize);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_AreAssetsReadonly; ToJsonUtilP(AreAssetsReadonly, each_AreAssetsReadonly); output["AreAssetsReadonly"] = each_AreAssetsReadonly;
                 Json::Value each_BuildName; ToJsonUtilS(BuildName, each_BuildName); output["BuildName"] = each_BuildName;
                 Json::Value each_pfContainerFlavor; ToJsonUtilE(pfContainerFlavor, each_pfContainerFlavor); output["ContainerFlavor"] = each_pfContainerFlavor;
                 Json::Value each_pfContainerImageReference; ToJsonUtilO(pfContainerImageReference, each_pfContainerImageReference); output["ContainerImageReference"] = each_pfContainerImageReference;
@@ -2036,6 +2045,7 @@ namespace PlayFab
                 Json::Value each_MultiplayerServerCountPerVm; ToJsonUtilP(MultiplayerServerCountPerVm, each_MultiplayerServerCountPerVm); output["MultiplayerServerCountPerVm"] = each_MultiplayerServerCountPerVm;
                 Json::Value each_Ports; ToJsonUtilO(Ports, each_Ports); output["Ports"] = each_Ports;
                 Json::Value each_RegionConfigurations; ToJsonUtilO(RegionConfigurations, each_RegionConfigurations); output["RegionConfigurations"] = each_RegionConfigurations;
+                Json::Value each_UseStreamingForAssetDownloads; ToJsonUtilP(UseStreamingForAssetDownloads, each_UseStreamingForAssetDownloads); output["UseStreamingForAssetDownloads"] = each_UseStreamingForAssetDownloads;
                 Json::Value each_VmSize; ToJsonUtilE(VmSize, each_VmSize); output["VmSize"] = each_VmSize;
                 return output;
             }
@@ -2077,6 +2087,7 @@ namespace PlayFab
 
         struct CreateBuildWithCustomContainerResponse : public PlayFabResultCommon
         {
+            Boxed<bool> AreAssetsReadonly;
             std::string BuildId;
             std::string BuildName;
             Boxed<ContainerFlavor> pfContainerFlavor;
@@ -2091,10 +2102,12 @@ namespace PlayFab
             std::list<Port> Ports;
             std::list<BuildRegion> RegionConfigurations;
             std::string ServerType;
+            Boxed<bool> UseStreamingForAssetDownloads;
             Boxed<AzureVmSize> VmSize;
 
             CreateBuildWithCustomContainerResponse() :
                 PlayFabResultCommon(),
+                AreAssetsReadonly(),
                 BuildId(),
                 BuildName(),
                 pfContainerFlavor(),
@@ -2109,11 +2122,13 @@ namespace PlayFab
                 Ports(),
                 RegionConfigurations(),
                 ServerType(),
+                UseStreamingForAssetDownloads(),
                 VmSize()
             {}
 
             CreateBuildWithCustomContainerResponse(const CreateBuildWithCustomContainerResponse& src) :
                 PlayFabResultCommon(),
+                AreAssetsReadonly(src.AreAssetsReadonly),
                 BuildId(src.BuildId),
                 BuildName(src.BuildName),
                 pfContainerFlavor(src.pfContainerFlavor),
@@ -2128,6 +2143,7 @@ namespace PlayFab
                 Ports(src.Ports),
                 RegionConfigurations(src.RegionConfigurations),
                 ServerType(src.ServerType),
+                UseStreamingForAssetDownloads(src.UseStreamingForAssetDownloads),
                 VmSize(src.VmSize)
             {}
 
@@ -2135,6 +2151,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilP(input["AreAssetsReadonly"], AreAssetsReadonly);
                 FromJsonUtilS(input["BuildId"], BuildId);
                 FromJsonUtilS(input["BuildName"], BuildName);
                 FromJsonUtilE(input["ContainerFlavor"], pfContainerFlavor);
@@ -2149,12 +2166,14 @@ namespace PlayFab
                 FromJsonUtilO(input["Ports"], Ports);
                 FromJsonUtilO(input["RegionConfigurations"], RegionConfigurations);
                 FromJsonUtilS(input["ServerType"], ServerType);
+                FromJsonUtilP(input["UseStreamingForAssetDownloads"], UseStreamingForAssetDownloads);
                 FromJsonUtilE(input["VmSize"], VmSize);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_AreAssetsReadonly; ToJsonUtilP(AreAssetsReadonly, each_AreAssetsReadonly); output["AreAssetsReadonly"] = each_AreAssetsReadonly;
                 Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
                 Json::Value each_BuildName; ToJsonUtilS(BuildName, each_BuildName); output["BuildName"] = each_BuildName;
                 Json::Value each_pfContainerFlavor; ToJsonUtilE(pfContainerFlavor, each_pfContainerFlavor); output["ContainerFlavor"] = each_pfContainerFlavor;
@@ -2169,6 +2188,7 @@ namespace PlayFab
                 Json::Value each_Ports; ToJsonUtilO(Ports, each_Ports); output["Ports"] = each_Ports;
                 Json::Value each_RegionConfigurations; ToJsonUtilO(RegionConfigurations, each_RegionConfigurations); output["RegionConfigurations"] = each_RegionConfigurations;
                 Json::Value each_ServerType; ToJsonUtilS(ServerType, each_ServerType); output["ServerType"] = each_ServerType;
+                Json::Value each_UseStreamingForAssetDownloads; ToJsonUtilP(UseStreamingForAssetDownloads, each_UseStreamingForAssetDownloads); output["UseStreamingForAssetDownloads"] = each_UseStreamingForAssetDownloads;
                 Json::Value each_VmSize; ToJsonUtilE(VmSize, each_VmSize); output["VmSize"] = each_VmSize;
                 return output;
             }
@@ -2205,6 +2225,7 @@ namespace PlayFab
 
         struct CreateBuildWithManagedContainerRequest : public PlayFabRequestCommon
         {
+            Boxed<bool> AreAssetsReadonly;
             std::string BuildName;
             Boxed<ContainerFlavor> pfContainerFlavor;
             std::list<AssetReferenceParams> GameAssetReferences;
@@ -2216,10 +2237,12 @@ namespace PlayFab
             std::list<Port> Ports;
             std::list<BuildRegionParams> RegionConfigurations;
             std::string StartMultiplayerServerCommand;
+            Boxed<bool> UseStreamingForAssetDownloads;
             Boxed<AzureVmSize> VmSize;
 
             CreateBuildWithManagedContainerRequest() :
                 PlayFabRequestCommon(),
+                AreAssetsReadonly(),
                 BuildName(),
                 pfContainerFlavor(),
                 GameAssetReferences(),
@@ -2231,11 +2254,13 @@ namespace PlayFab
                 Ports(),
                 RegionConfigurations(),
                 StartMultiplayerServerCommand(),
+                UseStreamingForAssetDownloads(),
                 VmSize()
             {}
 
             CreateBuildWithManagedContainerRequest(const CreateBuildWithManagedContainerRequest& src) :
                 PlayFabRequestCommon(),
+                AreAssetsReadonly(src.AreAssetsReadonly),
                 BuildName(src.BuildName),
                 pfContainerFlavor(src.pfContainerFlavor),
                 GameAssetReferences(src.GameAssetReferences),
@@ -2247,6 +2272,7 @@ namespace PlayFab
                 Ports(src.Ports),
                 RegionConfigurations(src.RegionConfigurations),
                 StartMultiplayerServerCommand(src.StartMultiplayerServerCommand),
+                UseStreamingForAssetDownloads(src.UseStreamingForAssetDownloads),
                 VmSize(src.VmSize)
             {}
 
@@ -2254,6 +2280,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilP(input["AreAssetsReadonly"], AreAssetsReadonly);
                 FromJsonUtilS(input["BuildName"], BuildName);
                 FromJsonUtilE(input["ContainerFlavor"], pfContainerFlavor);
                 FromJsonUtilO(input["GameAssetReferences"], GameAssetReferences);
@@ -2265,12 +2292,14 @@ namespace PlayFab
                 FromJsonUtilO(input["Ports"], Ports);
                 FromJsonUtilO(input["RegionConfigurations"], RegionConfigurations);
                 FromJsonUtilS(input["StartMultiplayerServerCommand"], StartMultiplayerServerCommand);
+                FromJsonUtilP(input["UseStreamingForAssetDownloads"], UseStreamingForAssetDownloads);
                 FromJsonUtilE(input["VmSize"], VmSize);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_AreAssetsReadonly; ToJsonUtilP(AreAssetsReadonly, each_AreAssetsReadonly); output["AreAssetsReadonly"] = each_AreAssetsReadonly;
                 Json::Value each_BuildName; ToJsonUtilS(BuildName, each_BuildName); output["BuildName"] = each_BuildName;
                 Json::Value each_pfContainerFlavor; ToJsonUtilE(pfContainerFlavor, each_pfContainerFlavor); output["ContainerFlavor"] = each_pfContainerFlavor;
                 Json::Value each_GameAssetReferences; ToJsonUtilO(GameAssetReferences, each_GameAssetReferences); output["GameAssetReferences"] = each_GameAssetReferences;
@@ -2282,6 +2311,7 @@ namespace PlayFab
                 Json::Value each_Ports; ToJsonUtilO(Ports, each_Ports); output["Ports"] = each_Ports;
                 Json::Value each_RegionConfigurations; ToJsonUtilO(RegionConfigurations, each_RegionConfigurations); output["RegionConfigurations"] = each_RegionConfigurations;
                 Json::Value each_StartMultiplayerServerCommand; ToJsonUtilS(StartMultiplayerServerCommand, each_StartMultiplayerServerCommand); output["StartMultiplayerServerCommand"] = each_StartMultiplayerServerCommand;
+                Json::Value each_UseStreamingForAssetDownloads; ToJsonUtilP(UseStreamingForAssetDownloads, each_UseStreamingForAssetDownloads); output["UseStreamingForAssetDownloads"] = each_UseStreamingForAssetDownloads;
                 Json::Value each_VmSize; ToJsonUtilE(VmSize, each_VmSize); output["VmSize"] = each_VmSize;
                 return output;
             }
@@ -2289,6 +2319,7 @@ namespace PlayFab
 
         struct CreateBuildWithManagedContainerResponse : public PlayFabResultCommon
         {
+            Boxed<bool> AreAssetsReadonly;
             std::string BuildId;
             std::string BuildName;
             Boxed<ContainerFlavor> pfContainerFlavor;
@@ -2304,10 +2335,12 @@ namespace PlayFab
             std::list<BuildRegion> RegionConfigurations;
             std::string ServerType;
             std::string StartMultiplayerServerCommand;
+            Boxed<bool> UseStreamingForAssetDownloads;
             Boxed<AzureVmSize> VmSize;
 
             CreateBuildWithManagedContainerResponse() :
                 PlayFabResultCommon(),
+                AreAssetsReadonly(),
                 BuildId(),
                 BuildName(),
                 pfContainerFlavor(),
@@ -2323,11 +2356,13 @@ namespace PlayFab
                 RegionConfigurations(),
                 ServerType(),
                 StartMultiplayerServerCommand(),
+                UseStreamingForAssetDownloads(),
                 VmSize()
             {}
 
             CreateBuildWithManagedContainerResponse(const CreateBuildWithManagedContainerResponse& src) :
                 PlayFabResultCommon(),
+                AreAssetsReadonly(src.AreAssetsReadonly),
                 BuildId(src.BuildId),
                 BuildName(src.BuildName),
                 pfContainerFlavor(src.pfContainerFlavor),
@@ -2343,6 +2378,7 @@ namespace PlayFab
                 RegionConfigurations(src.RegionConfigurations),
                 ServerType(src.ServerType),
                 StartMultiplayerServerCommand(src.StartMultiplayerServerCommand),
+                UseStreamingForAssetDownloads(src.UseStreamingForAssetDownloads),
                 VmSize(src.VmSize)
             {}
 
@@ -2350,6 +2386,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilP(input["AreAssetsReadonly"], AreAssetsReadonly);
                 FromJsonUtilS(input["BuildId"], BuildId);
                 FromJsonUtilS(input["BuildName"], BuildName);
                 FromJsonUtilE(input["ContainerFlavor"], pfContainerFlavor);
@@ -2365,12 +2402,14 @@ namespace PlayFab
                 FromJsonUtilO(input["RegionConfigurations"], RegionConfigurations);
                 FromJsonUtilS(input["ServerType"], ServerType);
                 FromJsonUtilS(input["StartMultiplayerServerCommand"], StartMultiplayerServerCommand);
+                FromJsonUtilP(input["UseStreamingForAssetDownloads"], UseStreamingForAssetDownloads);
                 FromJsonUtilE(input["VmSize"], VmSize);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_AreAssetsReadonly; ToJsonUtilP(AreAssetsReadonly, each_AreAssetsReadonly); output["AreAssetsReadonly"] = each_AreAssetsReadonly;
                 Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
                 Json::Value each_BuildName; ToJsonUtilS(BuildName, each_BuildName); output["BuildName"] = each_BuildName;
                 Json::Value each_pfContainerFlavor; ToJsonUtilE(pfContainerFlavor, each_pfContainerFlavor); output["ContainerFlavor"] = each_pfContainerFlavor;
@@ -2386,6 +2425,7 @@ namespace PlayFab
                 Json::Value each_RegionConfigurations; ToJsonUtilO(RegionConfigurations, each_RegionConfigurations); output["RegionConfigurations"] = each_RegionConfigurations;
                 Json::Value each_ServerType; ToJsonUtilS(ServerType, each_ServerType); output["ServerType"] = each_ServerType;
                 Json::Value each_StartMultiplayerServerCommand; ToJsonUtilS(StartMultiplayerServerCommand, each_StartMultiplayerServerCommand); output["StartMultiplayerServerCommand"] = each_StartMultiplayerServerCommand;
+                Json::Value each_UseStreamingForAssetDownloads; ToJsonUtilP(UseStreamingForAssetDownloads, each_UseStreamingForAssetDownloads); output["UseStreamingForAssetDownloads"] = each_UseStreamingForAssetDownloads;
                 Json::Value each_VmSize; ToJsonUtilE(VmSize, each_VmSize); output["VmSize"] = each_VmSize;
                 return output;
             }
@@ -3233,6 +3273,7 @@ namespace PlayFab
 
         struct GetBuildResponse : public PlayFabResultCommon
         {
+            Boxed<bool> AreAssetsReadonly;
             std::string BuildId;
             std::string BuildName;
             std::string BuildStatus;
@@ -3250,10 +3291,12 @@ namespace PlayFab
             std::list<BuildRegion> RegionConfigurations;
             std::string ServerType;
             std::string StartMultiplayerServerCommand;
+            Boxed<bool> UseStreamingForAssetDownloads;
             Boxed<AzureVmSize> VmSize;
 
             GetBuildResponse() :
                 PlayFabResultCommon(),
+                AreAssetsReadonly(),
                 BuildId(),
                 BuildName(),
                 BuildStatus(),
@@ -3271,11 +3314,13 @@ namespace PlayFab
                 RegionConfigurations(),
                 ServerType(),
                 StartMultiplayerServerCommand(),
+                UseStreamingForAssetDownloads(),
                 VmSize()
             {}
 
             GetBuildResponse(const GetBuildResponse& src) :
                 PlayFabResultCommon(),
+                AreAssetsReadonly(src.AreAssetsReadonly),
                 BuildId(src.BuildId),
                 BuildName(src.BuildName),
                 BuildStatus(src.BuildStatus),
@@ -3293,6 +3338,7 @@ namespace PlayFab
                 RegionConfigurations(src.RegionConfigurations),
                 ServerType(src.ServerType),
                 StartMultiplayerServerCommand(src.StartMultiplayerServerCommand),
+                UseStreamingForAssetDownloads(src.UseStreamingForAssetDownloads),
                 VmSize(src.VmSize)
             {}
 
@@ -3300,6 +3346,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilP(input["AreAssetsReadonly"], AreAssetsReadonly);
                 FromJsonUtilS(input["BuildId"], BuildId);
                 FromJsonUtilS(input["BuildName"], BuildName);
                 FromJsonUtilS(input["BuildStatus"], BuildStatus);
@@ -3317,12 +3364,14 @@ namespace PlayFab
                 FromJsonUtilO(input["RegionConfigurations"], RegionConfigurations);
                 FromJsonUtilS(input["ServerType"], ServerType);
                 FromJsonUtilS(input["StartMultiplayerServerCommand"], StartMultiplayerServerCommand);
+                FromJsonUtilP(input["UseStreamingForAssetDownloads"], UseStreamingForAssetDownloads);
                 FromJsonUtilE(input["VmSize"], VmSize);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_AreAssetsReadonly; ToJsonUtilP(AreAssetsReadonly, each_AreAssetsReadonly); output["AreAssetsReadonly"] = each_AreAssetsReadonly;
                 Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
                 Json::Value each_BuildName; ToJsonUtilS(BuildName, each_BuildName); output["BuildName"] = each_BuildName;
                 Json::Value each_BuildStatus; ToJsonUtilS(BuildStatus, each_BuildStatus); output["BuildStatus"] = each_BuildStatus;
@@ -3340,6 +3389,7 @@ namespace PlayFab
                 Json::Value each_RegionConfigurations; ToJsonUtilO(RegionConfigurations, each_RegionConfigurations); output["RegionConfigurations"] = each_RegionConfigurations;
                 Json::Value each_ServerType; ToJsonUtilS(ServerType, each_ServerType); output["ServerType"] = each_ServerType;
                 Json::Value each_StartMultiplayerServerCommand; ToJsonUtilS(StartMultiplayerServerCommand, each_StartMultiplayerServerCommand); output["StartMultiplayerServerCommand"] = each_StartMultiplayerServerCommand;
+                Json::Value each_UseStreamingForAssetDownloads; ToJsonUtilP(UseStreamingForAssetDownloads, each_UseStreamingForAssetDownloads); output["UseStreamingForAssetDownloads"] = each_UseStreamingForAssetDownloads;
                 Json::Value each_VmSize; ToJsonUtilE(VmSize, each_VmSize); output["VmSize"] = each_VmSize;
                 return output;
             }
