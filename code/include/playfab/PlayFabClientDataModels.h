@@ -13854,15 +13854,18 @@ namespace PlayFab
         struct GetTitleDataRequest : public PlayFabRequestCommon
         {
             std::list<std::string> Keys;
+            std::string OverrideLabel;
 
             GetTitleDataRequest() :
                 PlayFabRequestCommon(),
-                Keys()
+                Keys(),
+                OverrideLabel()
             {}
 
             GetTitleDataRequest(const GetTitleDataRequest& src) :
                 PlayFabRequestCommon(),
-                Keys(src.Keys)
+                Keys(src.Keys),
+                OverrideLabel(src.OverrideLabel)
             {}
 
             ~GetTitleDataRequest() = default;
@@ -13870,12 +13873,14 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Keys"], Keys);
+                FromJsonUtilS(input["OverrideLabel"], OverrideLabel);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
                 Json::Value each_Keys; ToJsonUtilS(Keys, each_Keys); output["Keys"] = each_Keys;
+                Json::Value each_OverrideLabel; ToJsonUtilS(OverrideLabel, each_OverrideLabel); output["OverrideLabel"] = each_OverrideLabel;
                 return output;
             }
         };
