@@ -23053,18 +23053,15 @@ namespace PlayFab
         struct UnlinkXboxAccountRequest : public PlayFabRequestCommon
         {
             std::string PlayFabId;
-            std::string XboxToken;
 
             UnlinkXboxAccountRequest() :
                 PlayFabRequestCommon(),
-                PlayFabId(),
-                XboxToken()
+                PlayFabId()
             {}
 
             UnlinkXboxAccountRequest(const UnlinkXboxAccountRequest& src) :
                 PlayFabRequestCommon(),
-                PlayFabId(src.PlayFabId),
-                XboxToken(src.XboxToken)
+                PlayFabId(src.PlayFabId)
             {}
 
             ~UnlinkXboxAccountRequest() = default;
@@ -23072,14 +23069,12 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
-                FromJsonUtilS(input["XboxToken"], XboxToken);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
-                Json::Value each_XboxToken; ToJsonUtilS(XboxToken, each_XboxToken); output["XboxToken"] = each_XboxToken;
                 return output;
             }
         };
