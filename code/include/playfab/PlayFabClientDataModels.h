@@ -15006,24 +15006,24 @@ namespace PlayFab
             }
         };
 
-        struct LinkNintendoAccountRequest : public PlayFabRequestCommon
+        struct LinkNintendoServiceAccountRequest : public PlayFabRequestCommon
         {
             Boxed<bool> ForceLink;
             std::string IdentityToken;
 
-            LinkNintendoAccountRequest() :
+            LinkNintendoServiceAccountRequest() :
                 PlayFabRequestCommon(),
                 ForceLink(),
                 IdentityToken()
             {}
 
-            LinkNintendoAccountRequest(const LinkNintendoAccountRequest& src) :
+            LinkNintendoServiceAccountRequest(const LinkNintendoServiceAccountRequest& src) :
                 PlayFabRequestCommon(),
                 ForceLink(src.ForceLink),
                 IdentityToken(src.IdentityToken)
             {}
 
-            ~LinkNintendoAccountRequest() = default;
+            ~LinkNintendoServiceAccountRequest() = default;
 
             void FromJson(const Json::Value& input) override
             {
@@ -16251,7 +16251,7 @@ namespace PlayFab
             }
         };
 
-        struct LoginWithNintendoAccountRequest : public PlayFabRequestCommon
+        struct LoginWithNintendoServiceAccountRequest : public PlayFabRequestCommon
         {
             Boxed<bool> CreateAccount;
             std::string EncryptedRequest;
@@ -16260,7 +16260,7 @@ namespace PlayFab
             std::string PlayerSecret;
             std::string TitleId;
 
-            LoginWithNintendoAccountRequest() :
+            LoginWithNintendoServiceAccountRequest() :
                 PlayFabRequestCommon(),
                 CreateAccount(),
                 EncryptedRequest(),
@@ -16270,7 +16270,7 @@ namespace PlayFab
                 TitleId()
             {}
 
-            LoginWithNintendoAccountRequest(const LoginWithNintendoAccountRequest& src) :
+            LoginWithNintendoServiceAccountRequest(const LoginWithNintendoServiceAccountRequest& src) :
                 PlayFabRequestCommon(),
                 CreateAccount(src.CreateAccount),
                 EncryptedRequest(src.EncryptedRequest),
@@ -16280,7 +16280,7 @@ namespace PlayFab
                 TitleId(src.TitleId)
             {}
 
-            ~LoginWithNintendoAccountRequest() = default;
+            ~LoginWithNintendoServiceAccountRequest() = default;
 
             void FromJson(const Json::Value& input) override
             {
@@ -18988,18 +18988,18 @@ namespace PlayFab
             }
         };
 
-        struct UnlinkNintendoAccountRequest : public PlayFabRequestCommon
+        struct UnlinkNintendoServiceAccountRequest : public PlayFabRequestCommon
         {
 
-            UnlinkNintendoAccountRequest() :
+            UnlinkNintendoServiceAccountRequest() :
                 PlayFabRequestCommon()
             {}
 
-            UnlinkNintendoAccountRequest(const UnlinkNintendoAccountRequest&) :
+            UnlinkNintendoServiceAccountRequest(const UnlinkNintendoServiceAccountRequest&) :
                 PlayFabRequestCommon()
             {}
 
-            ~UnlinkNintendoAccountRequest() = default;
+            ~UnlinkNintendoServiceAccountRequest() = default;
 
             void FromJson(const Json::Value&) override
             {
@@ -19298,29 +19298,24 @@ namespace PlayFab
 
         struct UnlinkXboxAccountRequest : public PlayFabRequestCommon
         {
-            std::string XboxToken;
 
             UnlinkXboxAccountRequest() :
-                PlayFabRequestCommon(),
-                XboxToken()
+                PlayFabRequestCommon()
             {}
 
-            UnlinkXboxAccountRequest(const UnlinkXboxAccountRequest& src) :
-                PlayFabRequestCommon(),
-                XboxToken(src.XboxToken)
+            UnlinkXboxAccountRequest(const UnlinkXboxAccountRequest&) :
+                PlayFabRequestCommon()
             {}
 
             ~UnlinkXboxAccountRequest() = default;
 
-            void FromJson(const Json::Value& input) override
+            void FromJson(const Json::Value&) override
             {
-                FromJsonUtilS(input["XboxToken"], XboxToken);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                Json::Value each_XboxToken; ToJsonUtilS(XboxToken, each_XboxToken); output["XboxToken"] = each_XboxToken;
                 return output;
             }
         };
