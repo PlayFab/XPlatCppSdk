@@ -16,6 +16,9 @@
     <ClInclude Include="$(TestSourceDir)\TestApp\PlayFabApiTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="$(TestSourceDir)\TestApp\PlatformLoginTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="$(TestSourceDir)\TestApp\PlayFabEventTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -55,6 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(TestSourceDir)\TestApp\PlayFabApiTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(TestSourceDir)\TestApp\PlatformLoginTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="$(TestSourceDir)\TestApp\PlayFabEventTest.cpp">

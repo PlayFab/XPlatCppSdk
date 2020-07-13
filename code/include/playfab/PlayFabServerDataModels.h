@@ -5293,6 +5293,7 @@ namespace PlayFab
             GenericErrorCodesRequestMultiplayerServersThrottledFromRateLimiter,
             GenericErrorCodesTitleDataOverrideNotFound,
             GenericErrorCodesDuplicateKeys,
+            GenericErrorCodesWasNotCreatedWithCloudRoot,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -7874,6 +7875,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesDuplicateKeys)
             {
                 output = Json::Value("DuplicateKeys");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesWasNotCreatedWithCloudRoot)
+            {
+                output = Json::Value("WasNotCreatedWithCloudRoot");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -10799,6 +10805,11 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesDuplicateKeys;
                 return;
             }
+            if (inputStr == "WasNotCreatedWithCloudRoot")
+            {
+                output = GenericErrorCodes::GenericErrorCodesWasNotCreatedWithCloudRoot;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -12366,6 +12377,7 @@ namespace PlayFab
         {
             Int32 Amount;
             std::string CharacterId;
+            std::map<std::string, std::string> CustomTags;
             std::string PlayFabId;
             std::string VirtualCurrency;
 
@@ -12373,6 +12385,7 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 Amount(),
                 CharacterId(),
+                CustomTags(),
                 PlayFabId(),
                 VirtualCurrency()
             {}
@@ -12381,6 +12394,7 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 Amount(src.Amount),
                 CharacterId(src.CharacterId),
+                CustomTags(src.CustomTags),
                 PlayFabId(src.PlayFabId),
                 VirtualCurrency(src.VirtualCurrency)
             {}
@@ -12391,6 +12405,7 @@ namespace PlayFab
             {
                 FromJsonUtilP(input["Amount"], Amount);
                 FromJsonUtilS(input["CharacterId"], CharacterId);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["VirtualCurrency"], VirtualCurrency);
             }
@@ -12400,6 +12415,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_Amount; ToJsonUtilP(Amount, each_Amount); output["Amount"] = each_Amount;
                 Json::Value each_CharacterId; ToJsonUtilS(CharacterId, each_CharacterId); output["CharacterId"] = each_CharacterId;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_VirtualCurrency; ToJsonUtilS(VirtualCurrency, each_VirtualCurrency); output["VirtualCurrency"] = each_VirtualCurrency;
                 return output;
@@ -12525,17 +12541,20 @@ namespace PlayFab
 
         struct AddPlayerTagRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::string PlayFabId;
             std::string TagName;
 
             AddPlayerTagRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 PlayFabId(),
                 TagName()
             {}
 
             AddPlayerTagRequest(const AddPlayerTagRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 PlayFabId(src.PlayFabId),
                 TagName(src.TagName)
             {}
@@ -12544,6 +12563,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["TagName"], TagName);
             }
@@ -12551,6 +12571,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_TagName; ToJsonUtilS(TagName, each_TagName); output["TagName"] = each_TagName;
                 return output;
@@ -12642,12 +12663,14 @@ namespace PlayFab
         struct AddUserVirtualCurrencyRequest : public PlayFabRequestCommon
         {
             Int32 Amount;
+            std::map<std::string, std::string> CustomTags;
             std::string PlayFabId;
             std::string VirtualCurrency;
 
             AddUserVirtualCurrencyRequest() :
                 PlayFabRequestCommon(),
                 Amount(),
+                CustomTags(),
                 PlayFabId(),
                 VirtualCurrency()
             {}
@@ -12655,6 +12678,7 @@ namespace PlayFab
             AddUserVirtualCurrencyRequest(const AddUserVirtualCurrencyRequest& src) :
                 PlayFabRequestCommon(),
                 Amount(src.Amount),
+                CustomTags(src.CustomTags),
                 PlayFabId(src.PlayFabId),
                 VirtualCurrency(src.VirtualCurrency)
             {}
@@ -12664,6 +12688,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["Amount"], Amount);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["VirtualCurrency"], VirtualCurrency);
             }
@@ -12672,6 +12697,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_Amount; ToJsonUtilP(Amount, each_Amount); output["Amount"] = each_Amount;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_VirtualCurrency; ToJsonUtilS(VirtualCurrency, each_VirtualCurrency); output["VirtualCurrency"] = each_VirtualCurrency;
                 return output;
@@ -13812,15 +13838,18 @@ namespace PlayFab
         struct BanUsersRequest : public PlayFabRequestCommon
         {
             std::list<BanRequest> Bans;
+            std::map<std::string, std::string> CustomTags;
 
             BanUsersRequest() :
                 PlayFabRequestCommon(),
-                Bans()
+                Bans(),
+                CustomTags()
             {}
 
             BanUsersRequest(const BanUsersRequest& src) :
                 PlayFabRequestCommon(),
-                Bans(src.Bans)
+                Bans(src.Bans),
+                CustomTags(src.CustomTags)
             {}
 
             ~BanUsersRequest() = default;
@@ -13828,12 +13857,14 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Bans"], Bans);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
                 Json::Value each_Bans; ToJsonUtilO(Bans, each_Bans); output["Bans"] = each_Bans;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 return output;
             }
         };
@@ -14338,6 +14369,7 @@ namespace PlayFab
         {
             std::string CharacterId;
             Int32 ConsumeCount;
+            std::map<std::string, std::string> CustomTags;
             std::string ItemInstanceId;
             std::string PlayFabId;
 
@@ -14345,6 +14377,7 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 CharacterId(),
                 ConsumeCount(),
+                CustomTags(),
                 ItemInstanceId(),
                 PlayFabId()
             {}
@@ -14353,6 +14386,7 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 CharacterId(src.CharacterId),
                 ConsumeCount(src.ConsumeCount),
+                CustomTags(src.CustomTags),
                 ItemInstanceId(src.ItemInstanceId),
                 PlayFabId(src.PlayFabId)
             {}
@@ -14363,6 +14397,7 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["CharacterId"], CharacterId);
                 FromJsonUtilP(input["ConsumeCount"], ConsumeCount);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["ItemInstanceId"], ItemInstanceId);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
             }
@@ -14372,6 +14407,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_CharacterId; ToJsonUtilS(CharacterId, each_CharacterId); output["CharacterId"] = each_CharacterId;
                 Json::Value each_ConsumeCount; ToJsonUtilP(ConsumeCount, each_ConsumeCount); output["ConsumeCount"] = each_ConsumeCount;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_ItemInstanceId; ToJsonUtilS(ItemInstanceId, each_ItemInstanceId); output["ItemInstanceId"] = each_ItemInstanceId;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 return output;
@@ -14551,12 +14587,14 @@ namespace PlayFab
         struct DeleteCharacterFromUserRequest : public PlayFabRequestCommon
         {
             std::string CharacterId;
+            std::map<std::string, std::string> CustomTags;
             std::string PlayFabId;
             bool SaveCharacterInventory;
 
             DeleteCharacterFromUserRequest() :
                 PlayFabRequestCommon(),
                 CharacterId(),
+                CustomTags(),
                 PlayFabId(),
                 SaveCharacterInventory()
             {}
@@ -14564,6 +14602,7 @@ namespace PlayFab
             DeleteCharacterFromUserRequest(const DeleteCharacterFromUserRequest& src) :
                 PlayFabRequestCommon(),
                 CharacterId(src.CharacterId),
+                CustomTags(src.CustomTags),
                 PlayFabId(src.PlayFabId),
                 SaveCharacterInventory(src.SaveCharacterInventory)
             {}
@@ -14573,6 +14612,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CharacterId"], CharacterId);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilP(input["SaveCharacterInventory"], SaveCharacterInventory);
             }
@@ -14581,6 +14621,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_CharacterId; ToJsonUtilS(CharacterId, each_CharacterId); output["CharacterId"] = each_CharacterId;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_SaveCharacterInventory; ToJsonUtilP(SaveCharacterInventory, each_SaveCharacterInventory); output["SaveCharacterInventory"] = each_SaveCharacterInventory;
                 return output;
@@ -14748,15 +14789,18 @@ namespace PlayFab
 
         struct DeregisterGameRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::string LobbyId;
 
             DeregisterGameRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 LobbyId()
             {}
 
             DeregisterGameRequest(const DeregisterGameRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 LobbyId(src.LobbyId)
             {}
 
@@ -14764,12 +14808,14 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["LobbyId"], LobbyId);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
                 return output;
             }
@@ -15113,6 +15159,7 @@ namespace PlayFab
 
         struct ExecuteCloudScriptServerRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::string FunctionName;
             Json::Value FunctionParameter;
             Boxed<bool> GeneratePlayStreamEvent;
@@ -15122,6 +15169,7 @@ namespace PlayFab
 
             ExecuteCloudScriptServerRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 FunctionName(),
                 FunctionParameter(),
                 GeneratePlayStreamEvent(),
@@ -15132,6 +15180,7 @@ namespace PlayFab
 
             ExecuteCloudScriptServerRequest(const ExecuteCloudScriptServerRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 FunctionName(src.FunctionName),
                 FunctionParameter(src.FunctionParameter),
                 GeneratePlayStreamEvent(src.GeneratePlayStreamEvent),
@@ -15144,6 +15193,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["FunctionName"], FunctionName);
                 FunctionParameter = input["FunctionParameter"];
                 FromJsonUtilP(input["GeneratePlayStreamEvent"], GeneratePlayStreamEvent);
@@ -15155,6 +15205,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_FunctionName; ToJsonUtilS(FunctionName, each_FunctionName); output["FunctionName"] = each_FunctionName;
                 output["FunctionParameter"] = FunctionParameter;
                 Json::Value each_GeneratePlayStreamEvent; ToJsonUtilP(GeneratePlayStreamEvent, each_GeneratePlayStreamEvent); output["GeneratePlayStreamEvent"] = each_GeneratePlayStreamEvent;
@@ -16088,12 +16139,14 @@ namespace PlayFab
         {
             std::string CatalogVersion;
             std::string CharacterId;
+            std::map<std::string, std::string> CustomTags;
             std::string PlayFabId;
 
             GetCharacterInventoryRequest() :
                 PlayFabRequestCommon(),
                 CatalogVersion(),
                 CharacterId(),
+                CustomTags(),
                 PlayFabId()
             {}
 
@@ -16101,6 +16154,7 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 CatalogVersion(src.CatalogVersion),
                 CharacterId(src.CharacterId),
+                CustomTags(src.CustomTags),
                 PlayFabId(src.PlayFabId)
             {}
 
@@ -16110,6 +16164,7 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
                 FromJsonUtilS(input["CharacterId"], CharacterId);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
             }
 
@@ -16118,6 +16173,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_CatalogVersion; ToJsonUtilS(CatalogVersion, each_CatalogVersion); output["CatalogVersion"] = each_CatalogVersion;
                 Json::Value each_CharacterId; ToJsonUtilS(CharacterId, each_CharacterId); output["CharacterId"] = each_CharacterId;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 return output;
             }
@@ -16536,6 +16592,7 @@ namespace PlayFab
 
         struct GetFriendLeaderboardRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             Boxed<bool> IncludeFacebookFriends;
             Boxed<bool> IncludeSteamFriends;
             Int32 MaxResultsCount;
@@ -16548,6 +16605,7 @@ namespace PlayFab
 
             GetFriendLeaderboardRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 IncludeFacebookFriends(),
                 IncludeSteamFriends(),
                 MaxResultsCount(),
@@ -16561,6 +16619,7 @@ namespace PlayFab
 
             GetFriendLeaderboardRequest(const GetFriendLeaderboardRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 IncludeFacebookFriends(src.IncludeFacebookFriends),
                 IncludeSteamFriends(src.IncludeSteamFriends),
                 MaxResultsCount(src.MaxResultsCount),
@@ -16576,6 +16635,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilP(input["IncludeFacebookFriends"], IncludeFacebookFriends);
                 FromJsonUtilP(input["IncludeSteamFriends"], IncludeSteamFriends);
                 FromJsonUtilP(input["MaxResultsCount"], MaxResultsCount);
@@ -16590,6 +16650,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_IncludeFacebookFriends; ToJsonUtilP(IncludeFacebookFriends, each_IncludeFacebookFriends); output["IncludeFacebookFriends"] = each_IncludeFacebookFriends;
                 Json::Value each_IncludeSteamFriends; ToJsonUtilP(IncludeSteamFriends, each_IncludeSteamFriends); output["IncludeSteamFriends"] = each_IncludeSteamFriends;
                 Json::Value each_MaxResultsCount; ToJsonUtilP(MaxResultsCount, each_MaxResultsCount); output["MaxResultsCount"] = each_MaxResultsCount;
@@ -16605,6 +16666,7 @@ namespace PlayFab
 
         struct GetFriendsListRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             Boxed<bool> IncludeFacebookFriends;
             Boxed<bool> IncludeSteamFriends;
             std::string PlayFabId;
@@ -16613,6 +16675,7 @@ namespace PlayFab
 
             GetFriendsListRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 IncludeFacebookFriends(),
                 IncludeSteamFriends(),
                 PlayFabId(),
@@ -16622,6 +16685,7 @@ namespace PlayFab
 
             GetFriendsListRequest(const GetFriendsListRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 IncludeFacebookFriends(src.IncludeFacebookFriends),
                 IncludeSteamFriends(src.IncludeSteamFriends),
                 PlayFabId(src.PlayFabId),
@@ -16633,6 +16697,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilP(input["IncludeFacebookFriends"], IncludeFacebookFriends);
                 FromJsonUtilP(input["IncludeSteamFriends"], IncludeSteamFriends);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
@@ -16643,6 +16708,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_IncludeFacebookFriends; ToJsonUtilP(IncludeFacebookFriends, each_IncludeFacebookFriends); output["IncludeFacebookFriends"] = each_IncludeFacebookFriends;
                 Json::Value each_IncludeSteamFriends; ToJsonUtilP(IncludeSteamFriends, each_IncludeSteamFriends); output["IncludeSteamFriends"] = each_IncludeSteamFriends;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
@@ -16761,6 +16827,7 @@ namespace PlayFab
 
         struct GetLeaderboardAroundUserRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             Int32 MaxResultsCount;
             std::string PlayFabId;
             Boxed<PlayerProfileViewConstraints> ProfileConstraints;
@@ -16769,6 +16836,7 @@ namespace PlayFab
 
             GetLeaderboardAroundUserRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 MaxResultsCount(),
                 PlayFabId(),
                 ProfileConstraints(),
@@ -16778,6 +16846,7 @@ namespace PlayFab
 
             GetLeaderboardAroundUserRequest(const GetLeaderboardAroundUserRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 MaxResultsCount(src.MaxResultsCount),
                 PlayFabId(src.PlayFabId),
                 ProfileConstraints(src.ProfileConstraints),
@@ -16789,6 +16858,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilP(input["MaxResultsCount"], MaxResultsCount);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilO(input["ProfileConstraints"], ProfileConstraints);
@@ -16799,6 +16869,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_MaxResultsCount; ToJsonUtilP(MaxResultsCount, each_MaxResultsCount); output["MaxResultsCount"] = each_MaxResultsCount;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_ProfileConstraints; ToJsonUtilO(ProfileConstraints, each_ProfileConstraints); output["ProfileConstraints"] = each_ProfileConstraints;
@@ -16966,6 +17037,7 @@ namespace PlayFab
 
         struct GetLeaderboardRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             Int32 MaxResultsCount;
             Boxed<PlayerProfileViewConstraints> ProfileConstraints;
             Int32 StartPosition;
@@ -16974,6 +17046,7 @@ namespace PlayFab
 
             GetLeaderboardRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 MaxResultsCount(),
                 ProfileConstraints(),
                 StartPosition(),
@@ -16983,6 +17056,7 @@ namespace PlayFab
 
             GetLeaderboardRequest(const GetLeaderboardRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 MaxResultsCount(src.MaxResultsCount),
                 ProfileConstraints(src.ProfileConstraints),
                 StartPosition(src.StartPosition),
@@ -16994,6 +17068,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilP(input["MaxResultsCount"], MaxResultsCount);
                 FromJsonUtilO(input["ProfileConstraints"], ProfileConstraints);
                 FromJsonUtilP(input["StartPosition"], StartPosition);
@@ -17004,6 +17079,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_MaxResultsCount; ToJsonUtilP(MaxResultsCount, each_MaxResultsCount); output["MaxResultsCount"] = each_MaxResultsCount;
                 Json::Value each_ProfileConstraints; ToJsonUtilO(ProfileConstraints, each_ProfileConstraints); output["ProfileConstraints"] = each_ProfileConstraints;
                 Json::Value each_StartPosition; ToJsonUtilP(StartPosition, each_StartPosition); output["StartPosition"] = each_StartPosition;
@@ -17153,17 +17229,20 @@ namespace PlayFab
 
         struct GetPlayerCombinedInfoRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             GetPlayerCombinedInfoRequestParams InfoRequestParameters;
             std::string PlayFabId;
 
             GetPlayerCombinedInfoRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 InfoRequestParameters(),
                 PlayFabId()
             {}
 
             GetPlayerCombinedInfoRequest(const GetPlayerCombinedInfoRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 InfoRequestParameters(src.InfoRequestParameters),
                 PlayFabId(src.PlayFabId)
             {}
@@ -17172,6 +17251,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
             }
@@ -17179,6 +17259,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 return output;
@@ -17349,17 +17430,20 @@ namespace PlayFab
 
         struct GetPlayerProfileRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::string PlayFabId;
             Boxed<PlayerProfileViewConstraints> ProfileConstraints;
 
             GetPlayerProfileRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 PlayFabId(),
                 ProfileConstraints()
             {}
 
             GetPlayerProfileRequest(const GetPlayerProfileRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 PlayFabId(src.PlayFabId),
                 ProfileConstraints(src.ProfileConstraints)
             {}
@@ -17368,6 +17452,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilO(input["ProfileConstraints"], ProfileConstraints);
             }
@@ -17375,6 +17460,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_ProfileConstraints; ToJsonUtilO(ProfileConstraints, each_ProfileConstraints); output["ProfileConstraints"] = each_ProfileConstraints;
                 return output;
@@ -17442,6 +17528,7 @@ namespace PlayFab
         struct GetPlayersInSegmentRequest : public PlayFabRequestCommon
         {
             std::string ContinuationToken;
+            std::map<std::string, std::string> CustomTags;
             Boxed<Uint32> MaxBatchSize;
             Boxed<Uint32> SecondsToLive;
             std::string SegmentId;
@@ -17449,6 +17536,7 @@ namespace PlayFab
             GetPlayersInSegmentRequest() :
                 PlayFabRequestCommon(),
                 ContinuationToken(),
+                CustomTags(),
                 MaxBatchSize(),
                 SecondsToLive(),
                 SegmentId()
@@ -17457,6 +17545,7 @@ namespace PlayFab
             GetPlayersInSegmentRequest(const GetPlayersInSegmentRequest& src) :
                 PlayFabRequestCommon(),
                 ContinuationToken(src.ContinuationToken),
+                CustomTags(src.CustomTags),
                 MaxBatchSize(src.MaxBatchSize),
                 SecondsToLive(src.SecondsToLive),
                 SegmentId(src.SegmentId)
@@ -17467,6 +17556,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["ContinuationToken"], ContinuationToken);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilP(input["MaxBatchSize"], MaxBatchSize);
                 FromJsonUtilP(input["SecondsToLive"], SecondsToLive);
                 FromJsonUtilS(input["SegmentId"], SegmentId);
@@ -17476,6 +17566,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_ContinuationToken; ToJsonUtilS(ContinuationToken, each_ContinuationToken); output["ContinuationToken"] = each_ContinuationToken;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_MaxBatchSize; ToJsonUtilP(MaxBatchSize, each_MaxBatchSize); output["MaxBatchSize"] = each_MaxBatchSize;
                 Json::Value each_SecondsToLive; ToJsonUtilP(SecondsToLive, each_SecondsToLive); output["SecondsToLive"] = each_SecondsToLive;
                 Json::Value each_SegmentId; ToJsonUtilS(SegmentId, each_SegmentId); output["SegmentId"] = each_SegmentId;
@@ -17824,15 +17915,18 @@ namespace PlayFab
 
         struct GetPlayersSegmentsRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::string PlayFabId;
 
             GetPlayersSegmentsRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 PlayFabId()
             {}
 
             GetPlayersSegmentsRequest(const GetPlayersSegmentsRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 PlayFabId(src.PlayFabId)
             {}
 
@@ -17840,12 +17934,14 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 return output;
             }
@@ -17887,12 +17983,14 @@ namespace PlayFab
 
         struct GetPlayerStatisticsRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::string PlayFabId;
             std::list<std::string> StatisticNames;
             std::list<StatisticNameVersion> StatisticNameVersions;
 
             GetPlayerStatisticsRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 PlayFabId(),
                 StatisticNames(),
                 StatisticNameVersions()
@@ -17900,6 +17998,7 @@ namespace PlayFab
 
             GetPlayerStatisticsRequest(const GetPlayerStatisticsRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 PlayFabId(src.PlayFabId),
                 StatisticNames(src.StatisticNames),
                 StatisticNameVersions(src.StatisticNameVersions)
@@ -17909,6 +18008,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["StatisticNames"], StatisticNames);
                 FromJsonUtilO(input["StatisticNameVersions"], StatisticNameVersions);
@@ -17917,6 +18017,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_StatisticNames; ToJsonUtilS(StatisticNames, each_StatisticNames); output["StatisticNames"] = each_StatisticNames;
                 Json::Value each_StatisticNameVersions; ToJsonUtilO(StatisticNameVersions, each_StatisticNameVersions); output["StatisticNameVersions"] = each_StatisticNameVersions;
@@ -17960,15 +18061,18 @@ namespace PlayFab
 
         struct GetPlayerStatisticVersionsRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::string StatisticName;
 
             GetPlayerStatisticVersionsRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 StatisticName()
             {}
 
             GetPlayerStatisticVersionsRequest(const GetPlayerStatisticVersionsRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 StatisticName(src.StatisticName)
             {}
 
@@ -17976,12 +18080,14 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["StatisticName"], StatisticName);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_StatisticName; ToJsonUtilS(StatisticName, each_StatisticName); output["StatisticName"] = each_StatisticName;
                 return output;
             }
@@ -18072,17 +18178,20 @@ namespace PlayFab
 
         struct GetPlayerTagsRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::string Namespace;
             std::string PlayFabId;
 
             GetPlayerTagsRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 Namespace(),
                 PlayFabId()
             {}
 
             GetPlayerTagsRequest(const GetPlayerTagsRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 Namespace(src.Namespace),
                 PlayFabId(src.PlayFabId)
             {}
@@ -18091,6 +18200,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["Namespace"], Namespace);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
             }
@@ -18098,6 +18208,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Namespace; ToJsonUtilS(Namespace, each_Namespace); output["Namespace"] = each_Namespace;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 return output;
@@ -19238,12 +19349,14 @@ namespace PlayFab
         struct GetStoreItemsServerRequest : public PlayFabRequestCommon
         {
             std::string CatalogVersion;
+            std::map<std::string, std::string> CustomTags;
             std::string PlayFabId;
             std::string StoreId;
 
             GetStoreItemsServerRequest() :
                 PlayFabRequestCommon(),
                 CatalogVersion(),
+                CustomTags(),
                 PlayFabId(),
                 StoreId()
             {}
@@ -19251,6 +19364,7 @@ namespace PlayFab
             GetStoreItemsServerRequest(const GetStoreItemsServerRequest& src) :
                 PlayFabRequestCommon(),
                 CatalogVersion(src.CatalogVersion),
+                CustomTags(src.CustomTags),
                 PlayFabId(src.PlayFabId),
                 StoreId(src.StoreId)
             {}
@@ -19260,6 +19374,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["StoreId"], StoreId);
             }
@@ -19268,6 +19383,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_CatalogVersion; ToJsonUtilS(CatalogVersion, each_CatalogVersion); output["CatalogVersion"] = each_CatalogVersion;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_StoreId; ToJsonUtilS(StoreId, each_StoreId); output["StoreId"] = each_StoreId;
                 return output;
@@ -19688,15 +19804,18 @@ namespace PlayFab
 
         struct GetUserInventoryRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::string PlayFabId;
 
             GetUserInventoryRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 PlayFabId()
             {}
 
             GetUserInventoryRequest(const GetUserInventoryRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 PlayFabId(src.PlayFabId)
             {}
 
@@ -19704,12 +19823,14 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 return output;
             }
@@ -19763,12 +19884,14 @@ namespace PlayFab
         {
             std::string CharacterName;
             std::string CharacterType;
+            std::map<std::string, std::string> CustomTags;
             std::string PlayFabId;
 
             GrantCharacterToUserRequest() :
                 PlayFabRequestCommon(),
                 CharacterName(),
                 CharacterType(),
+                CustomTags(),
                 PlayFabId()
             {}
 
@@ -19776,6 +19899,7 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 CharacterName(src.CharacterName),
                 CharacterType(src.CharacterType),
+                CustomTags(src.CustomTags),
                 PlayFabId(src.PlayFabId)
             {}
 
@@ -19785,6 +19909,7 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["CharacterName"], CharacterName);
                 FromJsonUtilS(input["CharacterType"], CharacterType);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
             }
 
@@ -19793,6 +19918,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_CharacterName; ToJsonUtilS(CharacterName, each_CharacterName); output["CharacterName"] = each_CharacterName;
                 Json::Value each_CharacterType; ToJsonUtilS(CharacterType, each_CharacterType); output["CharacterType"] = each_CharacterType;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 return output;
             }
@@ -19946,6 +20072,7 @@ namespace PlayFab
             std::string Annotation;
             std::string CatalogVersion;
             std::string CharacterId;
+            std::map<std::string, std::string> CustomTags;
             std::list<std::string> ItemIds;
             std::string PlayFabId;
 
@@ -19954,6 +20081,7 @@ namespace PlayFab
                 Annotation(),
                 CatalogVersion(),
                 CharacterId(),
+                CustomTags(),
                 ItemIds(),
                 PlayFabId()
             {}
@@ -19963,6 +20091,7 @@ namespace PlayFab
                 Annotation(src.Annotation),
                 CatalogVersion(src.CatalogVersion),
                 CharacterId(src.CharacterId),
+                CustomTags(src.CustomTags),
                 ItemIds(src.ItemIds),
                 PlayFabId(src.PlayFabId)
             {}
@@ -19974,6 +20103,7 @@ namespace PlayFab
                 FromJsonUtilS(input["Annotation"], Annotation);
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
                 FromJsonUtilS(input["CharacterId"], CharacterId);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["ItemIds"], ItemIds);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
             }
@@ -19984,6 +20114,7 @@ namespace PlayFab
                 Json::Value each_Annotation; ToJsonUtilS(Annotation, each_Annotation); output["Annotation"] = each_Annotation;
                 Json::Value each_CatalogVersion; ToJsonUtilS(CatalogVersion, each_CatalogVersion); output["CatalogVersion"] = each_CatalogVersion;
                 Json::Value each_CharacterId; ToJsonUtilS(CharacterId, each_CharacterId); output["CharacterId"] = each_CharacterId;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_ItemIds; ToJsonUtilS(ItemIds, each_ItemIds); output["ItemIds"] = each_ItemIds;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 return output;
@@ -20023,6 +20154,7 @@ namespace PlayFab
         {
             std::string Annotation;
             std::string CatalogVersion;
+            std::map<std::string, std::string> CustomTags;
             std::list<std::string> ItemIds;
             std::string PlayFabId;
 
@@ -20030,6 +20162,7 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 Annotation(),
                 CatalogVersion(),
+                CustomTags(),
                 ItemIds(),
                 PlayFabId()
             {}
@@ -20038,6 +20171,7 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 Annotation(src.Annotation),
                 CatalogVersion(src.CatalogVersion),
+                CustomTags(src.CustomTags),
                 ItemIds(src.ItemIds),
                 PlayFabId(src.PlayFabId)
             {}
@@ -20048,6 +20182,7 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["Annotation"], Annotation);
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["ItemIds"], ItemIds);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
             }
@@ -20057,6 +20192,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_Annotation; ToJsonUtilS(Annotation, each_Annotation); output["Annotation"] = each_Annotation;
                 Json::Value each_CatalogVersion; ToJsonUtilS(CatalogVersion, each_CatalogVersion); output["CatalogVersion"] = each_CatalogVersion;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_ItemIds; ToJsonUtilS(ItemIds, each_ItemIds); output["ItemIds"] = each_ItemIds;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 return output;
@@ -20149,17 +20285,20 @@ namespace PlayFab
         struct GrantItemsToUsersRequest : public PlayFabRequestCommon
         {
             std::string CatalogVersion;
+            std::map<std::string, std::string> CustomTags;
             std::list<ItemGrant> ItemGrants;
 
             GrantItemsToUsersRequest() :
                 PlayFabRequestCommon(),
                 CatalogVersion(),
+                CustomTags(),
                 ItemGrants()
             {}
 
             GrantItemsToUsersRequest(const GrantItemsToUsersRequest& src) :
                 PlayFabRequestCommon(),
                 CatalogVersion(src.CatalogVersion),
+                CustomTags(src.CustomTags),
                 ItemGrants(src.ItemGrants)
             {}
 
@@ -20168,6 +20307,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["ItemGrants"], ItemGrants);
             }
 
@@ -20175,6 +20315,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_CatalogVersion; ToJsonUtilS(CatalogVersion, each_CatalogVersion); output["CatalogVersion"] = each_CatalogVersion;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_ItemGrants; ToJsonUtilO(ItemGrants, each_ItemGrants); output["ItemGrants"] = each_ItemGrants;
                 return output;
             }
@@ -20212,6 +20353,7 @@ namespace PlayFab
         struct LinkPSNAccountRequest : public PlayFabRequestCommon
         {
             std::string AuthCode;
+            std::map<std::string, std::string> CustomTags;
             Boxed<bool> ForceLink;
             Boxed<Int32> IssuerId;
             std::string PlayFabId;
@@ -20220,6 +20362,7 @@ namespace PlayFab
             LinkPSNAccountRequest() :
                 PlayFabRequestCommon(),
                 AuthCode(),
+                CustomTags(),
                 ForceLink(),
                 IssuerId(),
                 PlayFabId(),
@@ -20229,6 +20372,7 @@ namespace PlayFab
             LinkPSNAccountRequest(const LinkPSNAccountRequest& src) :
                 PlayFabRequestCommon(),
                 AuthCode(src.AuthCode),
+                CustomTags(src.CustomTags),
                 ForceLink(src.ForceLink),
                 IssuerId(src.IssuerId),
                 PlayFabId(src.PlayFabId),
@@ -20240,6 +20384,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AuthCode"], AuthCode);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilP(input["ForceLink"], ForceLink);
                 FromJsonUtilP(input["IssuerId"], IssuerId);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
@@ -20250,6 +20395,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_AuthCode; ToJsonUtilS(AuthCode, each_AuthCode); output["AuthCode"] = each_AuthCode;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_ForceLink; ToJsonUtilP(ForceLink, each_ForceLink); output["ForceLink"] = each_ForceLink;
                 Json::Value each_IssuerId; ToJsonUtilP(IssuerId, each_IssuerId); output["IssuerId"] = each_IssuerId;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
@@ -20284,12 +20430,14 @@ namespace PlayFab
 
         struct LinkServerCustomIdRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             Boxed<bool> ForceLink;
             std::string PlayFabId;
             std::string ServerCustomId;
 
             LinkServerCustomIdRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 ForceLink(),
                 PlayFabId(),
                 ServerCustomId()
@@ -20297,6 +20445,7 @@ namespace PlayFab
 
             LinkServerCustomIdRequest(const LinkServerCustomIdRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 ForceLink(src.ForceLink),
                 PlayFabId(src.PlayFabId),
                 ServerCustomId(src.ServerCustomId)
@@ -20306,6 +20455,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilP(input["ForceLink"], ForceLink);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["ServerCustomId"], ServerCustomId);
@@ -20314,6 +20464,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_ForceLink; ToJsonUtilP(ForceLink, each_ForceLink); output["ForceLink"] = each_ForceLink;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_ServerCustomId; ToJsonUtilS(ServerCustomId, each_ServerCustomId); output["ServerCustomId"] = each_ServerCustomId;
@@ -20347,12 +20498,14 @@ namespace PlayFab
 
         struct LinkXboxAccountRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             Boxed<bool> ForceLink;
             std::string PlayFabId;
             std::string XboxToken;
 
             LinkXboxAccountRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 ForceLink(),
                 PlayFabId(),
                 XboxToken()
@@ -20360,6 +20513,7 @@ namespace PlayFab
 
             LinkXboxAccountRequest(const LinkXboxAccountRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 ForceLink(src.ForceLink),
                 PlayFabId(src.PlayFabId),
                 XboxToken(src.XboxToken)
@@ -20369,6 +20523,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilP(input["ForceLink"], ForceLink);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["XboxToken"], XboxToken);
@@ -20377,6 +20532,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_ForceLink; ToJsonUtilP(ForceLink, each_ForceLink); output["ForceLink"] = each_ForceLink;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_XboxToken; ToJsonUtilS(XboxToken, each_XboxToken); output["XboxToken"] = each_XboxToken;
@@ -20503,6 +20659,7 @@ namespace PlayFab
         struct LoginWithServerCustomIdRequest : public PlayFabRequestCommon
         {
             Boxed<bool> CreateAccount;
+            std::map<std::string, std::string> CustomTags;
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
             std::string PlayerSecret;
             std::string ServerCustomId;
@@ -20510,6 +20667,7 @@ namespace PlayFab
             LoginWithServerCustomIdRequest() :
                 PlayFabRequestCommon(),
                 CreateAccount(),
+                CustomTags(),
                 InfoRequestParameters(),
                 PlayerSecret(),
                 ServerCustomId()
@@ -20518,6 +20676,7 @@ namespace PlayFab
             LoginWithServerCustomIdRequest(const LoginWithServerCustomIdRequest& src) :
                 PlayFabRequestCommon(),
                 CreateAccount(src.CreateAccount),
+                CustomTags(src.CustomTags),
                 InfoRequestParameters(src.InfoRequestParameters),
                 PlayerSecret(src.PlayerSecret),
                 ServerCustomId(src.ServerCustomId)
@@ -20528,6 +20687,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
                 FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
                 FromJsonUtilS(input["ServerCustomId"], ServerCustomId);
@@ -20537,6 +20697,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
                 Json::Value each_ServerCustomId; ToJsonUtilS(ServerCustomId, each_ServerCustomId); output["ServerCustomId"] = each_ServerCustomId;
@@ -20547,6 +20708,7 @@ namespace PlayFab
         struct LoginWithXboxIdRequest : public PlayFabRequestCommon
         {
             Boxed<bool> CreateAccount;
+            std::map<std::string, std::string> CustomTags;
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
             std::string Sandbox;
             std::string XboxId;
@@ -20554,6 +20716,7 @@ namespace PlayFab
             LoginWithXboxIdRequest() :
                 PlayFabRequestCommon(),
                 CreateAccount(),
+                CustomTags(),
                 InfoRequestParameters(),
                 Sandbox(),
                 XboxId()
@@ -20562,6 +20725,7 @@ namespace PlayFab
             LoginWithXboxIdRequest(const LoginWithXboxIdRequest& src) :
                 PlayFabRequestCommon(),
                 CreateAccount(src.CreateAccount),
+                CustomTags(src.CustomTags),
                 InfoRequestParameters(src.InfoRequestParameters),
                 Sandbox(src.Sandbox),
                 XboxId(src.XboxId)
@@ -20572,6 +20736,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
                 FromJsonUtilS(input["Sandbox"], Sandbox);
                 FromJsonUtilS(input["XboxId"], XboxId);
@@ -20581,6 +20746,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
                 Json::Value each_Sandbox; ToJsonUtilS(Sandbox, each_Sandbox); output["Sandbox"] = each_Sandbox;
                 Json::Value each_XboxId; ToJsonUtilS(XboxId, each_XboxId); output["XboxId"] = each_XboxId;
@@ -20591,12 +20757,14 @@ namespace PlayFab
         struct LoginWithXboxRequest : public PlayFabRequestCommon
         {
             Boxed<bool> CreateAccount;
+            std::map<std::string, std::string> CustomTags;
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
             std::string XboxToken;
 
             LoginWithXboxRequest() :
                 PlayFabRequestCommon(),
                 CreateAccount(),
+                CustomTags(),
                 InfoRequestParameters(),
                 XboxToken()
             {}
@@ -20604,6 +20772,7 @@ namespace PlayFab
             LoginWithXboxRequest(const LoginWithXboxRequest& src) :
                 PlayFabRequestCommon(),
                 CreateAccount(src.CreateAccount),
+                CustomTags(src.CustomTags),
                 InfoRequestParameters(src.InfoRequestParameters),
                 XboxToken(src.XboxToken)
             {}
@@ -20613,6 +20782,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
                 FromJsonUtilS(input["XboxToken"], XboxToken);
             }
@@ -20621,6 +20791,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
                 Json::Value each_XboxToken; ToJsonUtilS(XboxToken, each_XboxToken); output["XboxToken"] = each_XboxToken;
                 return output;
@@ -20663,12 +20834,14 @@ namespace PlayFab
 
         struct ModifyItemUsesRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::string ItemInstanceId;
             std::string PlayFabId;
             Int32 UsesToAdd;
 
             ModifyItemUsesRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 ItemInstanceId(),
                 PlayFabId(),
                 UsesToAdd()
@@ -20676,6 +20849,7 @@ namespace PlayFab
 
             ModifyItemUsesRequest(const ModifyItemUsesRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 ItemInstanceId(src.ItemInstanceId),
                 PlayFabId(src.PlayFabId),
                 UsesToAdd(src.UsesToAdd)
@@ -20685,6 +20859,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["ItemInstanceId"], ItemInstanceId);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilP(input["UsesToAdd"], UsesToAdd);
@@ -20693,6 +20868,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_ItemInstanceId; ToJsonUtilS(ItemInstanceId, each_ItemInstanceId); output["ItemInstanceId"] = each_ItemInstanceId;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_UsesToAdd; ToJsonUtilP(UsesToAdd, each_UsesToAdd); output["UsesToAdd"] = each_UsesToAdd;
@@ -20974,17 +21150,20 @@ namespace PlayFab
 
         struct NotifyMatchmakerPlayerLeftRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::string LobbyId;
             std::string PlayFabId;
 
             NotifyMatchmakerPlayerLeftRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 LobbyId(),
                 PlayFabId()
             {}
 
             NotifyMatchmakerPlayerLeftRequest(const NotifyMatchmakerPlayerLeftRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 LobbyId(src.LobbyId),
                 PlayFabId(src.PlayFabId)
             {}
@@ -20993,6 +21172,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["LobbyId"], LobbyId);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
             }
@@ -21000,6 +21180,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 return output;
@@ -21094,6 +21275,7 @@ namespace PlayFab
             std::string CatalogVersion;
             std::string CharacterId;
             std::string CouponCode;
+            std::map<std::string, std::string> CustomTags;
             std::string PlayFabId;
 
             RedeemCouponRequest() :
@@ -21101,6 +21283,7 @@ namespace PlayFab
                 CatalogVersion(),
                 CharacterId(),
                 CouponCode(),
+                CustomTags(),
                 PlayFabId()
             {}
 
@@ -21109,6 +21292,7 @@ namespace PlayFab
                 CatalogVersion(src.CatalogVersion),
                 CharacterId(src.CharacterId),
                 CouponCode(src.CouponCode),
+                CustomTags(src.CustomTags),
                 PlayFabId(src.PlayFabId)
             {}
 
@@ -21119,6 +21303,7 @@ namespace PlayFab
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
                 FromJsonUtilS(input["CharacterId"], CharacterId);
                 FromJsonUtilS(input["CouponCode"], CouponCode);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
             }
 
@@ -21128,6 +21313,7 @@ namespace PlayFab
                 Json::Value each_CatalogVersion; ToJsonUtilS(CatalogVersion, each_CatalogVersion); output["CatalogVersion"] = each_CatalogVersion;
                 Json::Value each_CharacterId; ToJsonUtilS(CharacterId, each_CharacterId); output["CharacterId"] = each_CharacterId;
                 Json::Value each_CouponCode; ToJsonUtilS(CouponCode, each_CouponCode); output["CouponCode"] = each_CouponCode;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 return output;
             }
@@ -21164,17 +21350,20 @@ namespace PlayFab
 
         struct RedeemMatchmakerTicketRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::string LobbyId;
             std::string Ticket;
 
             RedeemMatchmakerTicketRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 LobbyId(),
                 Ticket()
             {}
 
             RedeemMatchmakerTicketRequest(const RedeemMatchmakerTicketRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 LobbyId(src.LobbyId),
                 Ticket(src.Ticket)
             {}
@@ -21183,6 +21372,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["LobbyId"], LobbyId);
                 FromJsonUtilS(input["Ticket"], Ticket);
             }
@@ -21190,6 +21380,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
                 Json::Value each_Ticket; ToJsonUtilS(Ticket, each_Ticket); output["Ticket"] = each_Ticket;
                 return output;
@@ -21291,6 +21482,7 @@ namespace PlayFab
         struct RegisterGameRequest : public PlayFabRequestCommon
         {
             std::string Build;
+            std::map<std::string, std::string> CustomTags;
             std::string GameMode;
             std::string LobbyId;
             Region pfRegion;
@@ -21303,6 +21495,7 @@ namespace PlayFab
             RegisterGameRequest() :
                 PlayFabRequestCommon(),
                 Build(),
+                CustomTags(),
                 GameMode(),
                 LobbyId(),
                 pfRegion(),
@@ -21316,6 +21509,7 @@ namespace PlayFab
             RegisterGameRequest(const RegisterGameRequest& src) :
                 PlayFabRequestCommon(),
                 Build(src.Build),
+                CustomTags(src.CustomTags),
                 GameMode(src.GameMode),
                 LobbyId(src.LobbyId),
                 pfRegion(src.pfRegion),
@@ -21331,6 +21525,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Build"], Build);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["GameMode"], GameMode);
                 FromJsonUtilS(input["LobbyId"], LobbyId);
                 FromJsonEnum(input["Region"], pfRegion);
@@ -21345,6 +21540,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_Build; ToJsonUtilS(Build, each_Build); output["Build"] = each_Build;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_GameMode; ToJsonUtilS(GameMode, each_GameMode); output["GameMode"] = each_GameMode;
                 Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
                 Json::Value each_pfRegion; ToJsonEnum(pfRegion, each_pfRegion); output["Region"] = each_pfRegion;
@@ -21456,17 +21652,20 @@ namespace PlayFab
 
         struct RemovePlayerTagRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::string PlayFabId;
             std::string TagName;
 
             RemovePlayerTagRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 PlayFabId(),
                 TagName()
             {}
 
             RemovePlayerTagRequest(const RemovePlayerTagRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 PlayFabId(src.PlayFabId),
                 TagName(src.TagName)
             {}
@@ -21475,6 +21674,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["TagName"], TagName);
             }
@@ -21482,6 +21682,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_TagName; ToJsonUtilS(TagName, each_TagName); output["TagName"] = each_TagName;
                 return output;
@@ -21573,12 +21774,14 @@ namespace PlayFab
         struct ReportPlayerServerRequest : public PlayFabRequestCommon
         {
             std::string Comment;
+            std::map<std::string, std::string> CustomTags;
             std::string ReporteeId;
             std::string ReporterId;
 
             ReportPlayerServerRequest() :
                 PlayFabRequestCommon(),
                 Comment(),
+                CustomTags(),
                 ReporteeId(),
                 ReporterId()
             {}
@@ -21586,6 +21789,7 @@ namespace PlayFab
             ReportPlayerServerRequest(const ReportPlayerServerRequest& src) :
                 PlayFabRequestCommon(),
                 Comment(src.Comment),
+                CustomTags(src.CustomTags),
                 ReporteeId(src.ReporteeId),
                 ReporterId(src.ReporterId)
             {}
@@ -21595,6 +21799,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Comment"], Comment);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["ReporteeId"], ReporteeId);
                 FromJsonUtilS(input["ReporterId"], ReporterId);
             }
@@ -21603,6 +21808,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_Comment; ToJsonUtilS(Comment, each_Comment); output["Comment"] = each_Comment;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_ReporteeId; ToJsonUtilS(ReporteeId, each_ReporteeId); output["ReporteeId"] = each_ReporteeId;
                 Json::Value each_ReporterId; ToJsonUtilS(ReporterId, each_ReporterId); output["ReporterId"] = each_ReporterId;
                 return output;
@@ -22028,12 +22234,14 @@ namespace PlayFab
 
         struct SendCustomAccountRecoveryEmailRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::string Email;
             std::string EmailTemplateId;
             std::string Username;
 
             SendCustomAccountRecoveryEmailRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 Email(),
                 EmailTemplateId(),
                 Username()
@@ -22041,6 +22249,7 @@ namespace PlayFab
 
             SendCustomAccountRecoveryEmailRequest(const SendCustomAccountRecoveryEmailRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 Email(src.Email),
                 EmailTemplateId(src.EmailTemplateId),
                 Username(src.Username)
@@ -22050,6 +22259,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["Email"], Email);
                 FromJsonUtilS(input["EmailTemplateId"], EmailTemplateId);
                 FromJsonUtilS(input["Username"], Username);
@@ -22058,6 +22268,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Email; ToJsonUtilS(Email, each_Email); output["Email"] = each_Email;
                 Json::Value each_EmailTemplateId; ToJsonUtilS(EmailTemplateId, each_EmailTemplateId); output["EmailTemplateId"] = each_EmailTemplateId;
                 Json::Value each_Username; ToJsonUtilS(Username, each_Username); output["Username"] = each_Username;
@@ -22091,17 +22302,20 @@ namespace PlayFab
 
         struct SendEmailFromTemplateRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::string EmailTemplateId;
             std::string PlayFabId;
 
             SendEmailFromTemplateRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 EmailTemplateId(),
                 PlayFabId()
             {}
 
             SendEmailFromTemplateRequest(const SendEmailFromTemplateRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 EmailTemplateId(src.EmailTemplateId),
                 PlayFabId(src.PlayFabId)
             {}
@@ -22110,6 +22324,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["EmailTemplateId"], EmailTemplateId);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
             }
@@ -22117,6 +22332,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_EmailTemplateId; ToJsonUtilS(EmailTemplateId, each_EmailTemplateId); output["EmailTemplateId"] = each_EmailTemplateId;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 return output;
@@ -22149,17 +22365,20 @@ namespace PlayFab
 
         struct SendPushNotificationFromTemplateRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::string PushNotificationTemplateId;
             std::string Recipient;
 
             SendPushNotificationFromTemplateRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 PushNotificationTemplateId(),
                 Recipient()
             {}
 
             SendPushNotificationFromTemplateRequest(const SendPushNotificationFromTemplateRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 PushNotificationTemplateId(src.PushNotificationTemplateId),
                 Recipient(src.Recipient)
             {}
@@ -22168,6 +22387,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["PushNotificationTemplateId"], PushNotificationTemplateId);
                 FromJsonUtilS(input["Recipient"], Recipient);
             }
@@ -22175,6 +22395,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_PushNotificationTemplateId; ToJsonUtilS(PushNotificationTemplateId, each_PushNotificationTemplateId); output["PushNotificationTemplateId"] = each_PushNotificationTemplateId;
                 Json::Value each_Recipient; ToJsonUtilS(Recipient, each_Recipient); output["Recipient"] = each_Recipient;
                 return output;
@@ -22184,6 +22405,7 @@ namespace PlayFab
         struct SendPushNotificationRequest : public PlayFabRequestCommon
         {
             std::list<AdvancedPushPlatformMsg> AdvancedPlatformDelivery;
+            std::map<std::string, std::string> CustomTags;
             std::string Message;
             Boxed<PushNotificationPackage> Package;
             std::string Recipient;
@@ -22193,6 +22415,7 @@ namespace PlayFab
             SendPushNotificationRequest() :
                 PlayFabRequestCommon(),
                 AdvancedPlatformDelivery(),
+                CustomTags(),
                 Message(),
                 Package(),
                 Recipient(),
@@ -22203,6 +22426,7 @@ namespace PlayFab
             SendPushNotificationRequest(const SendPushNotificationRequest& src) :
                 PlayFabRequestCommon(),
                 AdvancedPlatformDelivery(src.AdvancedPlatformDelivery),
+                CustomTags(src.CustomTags),
                 Message(src.Message),
                 Package(src.Package),
                 Recipient(src.Recipient),
@@ -22215,6 +22439,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["AdvancedPlatformDelivery"], AdvancedPlatformDelivery);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["Message"], Message);
                 FromJsonUtilO(input["Package"], Package);
                 FromJsonUtilS(input["Recipient"], Recipient);
@@ -22226,6 +22451,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_AdvancedPlatformDelivery; ToJsonUtilO(AdvancedPlatformDelivery, each_AdvancedPlatformDelivery); output["AdvancedPlatformDelivery"] = each_AdvancedPlatformDelivery;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Message; ToJsonUtilS(Message, each_Message); output["Message"] = each_Message;
                 Json::Value each_Package; ToJsonUtilO(Package, each_Package); output["Package"] = each_Package;
                 Json::Value each_Recipient; ToJsonUtilS(Recipient, each_Recipient); output["Recipient"] = each_Recipient;
@@ -22860,6 +23086,7 @@ namespace PlayFab
         {
             Int32 Amount;
             std::string CharacterId;
+            std::map<std::string, std::string> CustomTags;
             std::string PlayFabId;
             std::string VirtualCurrency;
 
@@ -22867,6 +23094,7 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 Amount(),
                 CharacterId(),
+                CustomTags(),
                 PlayFabId(),
                 VirtualCurrency()
             {}
@@ -22875,6 +23103,7 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 Amount(src.Amount),
                 CharacterId(src.CharacterId),
+                CustomTags(src.CustomTags),
                 PlayFabId(src.PlayFabId),
                 VirtualCurrency(src.VirtualCurrency)
             {}
@@ -22885,6 +23114,7 @@ namespace PlayFab
             {
                 FromJsonUtilP(input["Amount"], Amount);
                 FromJsonUtilS(input["CharacterId"], CharacterId);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["VirtualCurrency"], VirtualCurrency);
             }
@@ -22894,6 +23124,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_Amount; ToJsonUtilP(Amount, each_Amount); output["Amount"] = each_Amount;
                 Json::Value each_CharacterId; ToJsonUtilS(CharacterId, each_CharacterId); output["CharacterId"] = each_CharacterId;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_VirtualCurrency; ToJsonUtilS(VirtualCurrency, each_VirtualCurrency); output["VirtualCurrency"] = each_VirtualCurrency;
                 return output;
@@ -22903,12 +23134,14 @@ namespace PlayFab
         struct SubtractUserVirtualCurrencyRequest : public PlayFabRequestCommon
         {
             Int32 Amount;
+            std::map<std::string, std::string> CustomTags;
             std::string PlayFabId;
             std::string VirtualCurrency;
 
             SubtractUserVirtualCurrencyRequest() :
                 PlayFabRequestCommon(),
                 Amount(),
+                CustomTags(),
                 PlayFabId(),
                 VirtualCurrency()
             {}
@@ -22916,6 +23149,7 @@ namespace PlayFab
             SubtractUserVirtualCurrencyRequest(const SubtractUserVirtualCurrencyRequest& src) :
                 PlayFabRequestCommon(),
                 Amount(src.Amount),
+                CustomTags(src.CustomTags),
                 PlayFabId(src.PlayFabId),
                 VirtualCurrency(src.VirtualCurrency)
             {}
@@ -22925,6 +23159,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["Amount"], Amount);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["VirtualCurrency"], VirtualCurrency);
             }
@@ -22933,6 +23168,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_Amount; ToJsonUtilP(Amount, each_Amount); output["Amount"] = each_Amount;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_VirtualCurrency; ToJsonUtilS(VirtualCurrency, each_VirtualCurrency); output["VirtualCurrency"] = each_VirtualCurrency;
                 return output;
@@ -22941,15 +23177,18 @@ namespace PlayFab
 
         struct UnlinkPSNAccountRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::string PlayFabId;
 
             UnlinkPSNAccountRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 PlayFabId()
             {}
 
             UnlinkPSNAccountRequest(const UnlinkPSNAccountRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 PlayFabId(src.PlayFabId)
             {}
 
@@ -22957,12 +23196,14 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 return output;
             }
@@ -22994,17 +23235,20 @@ namespace PlayFab
 
         struct UnlinkServerCustomIdRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::string PlayFabId;
             std::string ServerCustomId;
 
             UnlinkServerCustomIdRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 PlayFabId(),
                 ServerCustomId()
             {}
 
             UnlinkServerCustomIdRequest(const UnlinkServerCustomIdRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 PlayFabId(src.PlayFabId),
                 ServerCustomId(src.ServerCustomId)
             {}
@@ -23013,6 +23257,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["ServerCustomId"], ServerCustomId);
             }
@@ -23020,6 +23265,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_ServerCustomId; ToJsonUtilS(ServerCustomId, each_ServerCustomId); output["ServerCustomId"] = each_ServerCustomId;
                 return output;
@@ -23052,15 +23298,18 @@ namespace PlayFab
 
         struct UnlinkXboxAccountRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::string PlayFabId;
 
             UnlinkXboxAccountRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 PlayFabId()
             {}
 
             UnlinkXboxAccountRequest(const UnlinkXboxAccountRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 PlayFabId(src.PlayFabId)
             {}
 
@@ -23068,12 +23317,14 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 return output;
             }
@@ -23108,6 +23359,7 @@ namespace PlayFab
             std::string CatalogVersion;
             std::string CharacterId;
             std::string ContainerItemInstanceId;
+            std::map<std::string, std::string> CustomTags;
             std::string KeyItemInstanceId;
             std::string PlayFabId;
 
@@ -23116,6 +23368,7 @@ namespace PlayFab
                 CatalogVersion(),
                 CharacterId(),
                 ContainerItemInstanceId(),
+                CustomTags(),
                 KeyItemInstanceId(),
                 PlayFabId()
             {}
@@ -23125,6 +23378,7 @@ namespace PlayFab
                 CatalogVersion(src.CatalogVersion),
                 CharacterId(src.CharacterId),
                 ContainerItemInstanceId(src.ContainerItemInstanceId),
+                CustomTags(src.CustomTags),
                 KeyItemInstanceId(src.KeyItemInstanceId),
                 PlayFabId(src.PlayFabId)
             {}
@@ -23136,6 +23390,7 @@ namespace PlayFab
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
                 FromJsonUtilS(input["CharacterId"], CharacterId);
                 FromJsonUtilS(input["ContainerItemInstanceId"], ContainerItemInstanceId);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["KeyItemInstanceId"], KeyItemInstanceId);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
             }
@@ -23146,6 +23401,7 @@ namespace PlayFab
                 Json::Value each_CatalogVersion; ToJsonUtilS(CatalogVersion, each_CatalogVersion); output["CatalogVersion"] = each_CatalogVersion;
                 Json::Value each_CharacterId; ToJsonUtilS(CharacterId, each_CharacterId); output["CharacterId"] = each_CharacterId;
                 Json::Value each_ContainerItemInstanceId; ToJsonUtilS(ContainerItemInstanceId, each_ContainerItemInstanceId); output["ContainerItemInstanceId"] = each_ContainerItemInstanceId;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_KeyItemInstanceId; ToJsonUtilS(KeyItemInstanceId, each_KeyItemInstanceId); output["KeyItemInstanceId"] = each_KeyItemInstanceId;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 return output;
@@ -23157,6 +23413,7 @@ namespace PlayFab
             std::string CatalogVersion;
             std::string CharacterId;
             std::string ContainerItemId;
+            std::map<std::string, std::string> CustomTags;
             std::string PlayFabId;
 
             UnlockContainerItemRequest() :
@@ -23164,6 +23421,7 @@ namespace PlayFab
                 CatalogVersion(),
                 CharacterId(),
                 ContainerItemId(),
+                CustomTags(),
                 PlayFabId()
             {}
 
@@ -23172,6 +23430,7 @@ namespace PlayFab
                 CatalogVersion(src.CatalogVersion),
                 CharacterId(src.CharacterId),
                 ContainerItemId(src.ContainerItemId),
+                CustomTags(src.CustomTags),
                 PlayFabId(src.PlayFabId)
             {}
 
@@ -23182,6 +23441,7 @@ namespace PlayFab
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
                 FromJsonUtilS(input["CharacterId"], CharacterId);
                 FromJsonUtilS(input["ContainerItemId"], ContainerItemId);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
             }
 
@@ -23191,6 +23451,7 @@ namespace PlayFab
                 Json::Value each_CatalogVersion; ToJsonUtilS(CatalogVersion, each_CatalogVersion); output["CatalogVersion"] = each_CatalogVersion;
                 Json::Value each_CharacterId; ToJsonUtilS(CharacterId, each_CharacterId); output["CharacterId"] = each_CharacterId;
                 Json::Value each_ContainerItemId; ToJsonUtilS(ContainerItemId, each_ContainerItemId); output["ContainerItemId"] = each_ContainerItemId;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 return output;
             }
@@ -23394,6 +23655,7 @@ namespace PlayFab
         struct UpdateCharacterDataRequest : public PlayFabRequestCommon
         {
             std::string CharacterId;
+            std::map<std::string, std::string> CustomTags;
             std::map<std::string, std::string> Data;
             std::list<std::string> KeysToRemove;
             Boxed<UserDataPermission> Permission;
@@ -23402,6 +23664,7 @@ namespace PlayFab
             UpdateCharacterDataRequest() :
                 PlayFabRequestCommon(),
                 CharacterId(),
+                CustomTags(),
                 Data(),
                 KeysToRemove(),
                 Permission(),
@@ -23411,6 +23674,7 @@ namespace PlayFab
             UpdateCharacterDataRequest(const UpdateCharacterDataRequest& src) :
                 PlayFabRequestCommon(),
                 CharacterId(src.CharacterId),
+                CustomTags(src.CustomTags),
                 Data(src.Data),
                 KeysToRemove(src.KeysToRemove),
                 Permission(src.Permission),
@@ -23422,6 +23686,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CharacterId"], CharacterId);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["Data"], Data);
                 FromJsonUtilS(input["KeysToRemove"], KeysToRemove);
                 FromJsonUtilE(input["Permission"], Permission);
@@ -23432,6 +23697,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_CharacterId; ToJsonUtilS(CharacterId, each_CharacterId); output["CharacterId"] = each_CharacterId;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Data; ToJsonUtilS(Data, each_Data); output["Data"] = each_Data;
                 Json::Value each_KeysToRemove; ToJsonUtilS(KeysToRemove, each_KeysToRemove); output["KeysToRemove"] = each_KeysToRemove;
                 Json::Value each_Permission; ToJsonUtilE(Permission, each_Permission); output["Permission"] = each_Permission;
@@ -23473,12 +23739,14 @@ namespace PlayFab
         {
             std::string CharacterId;
             std::map<std::string, Int32> CharacterStatistics;
+            std::map<std::string, std::string> CustomTags;
             std::string PlayFabId;
 
             UpdateCharacterStatisticsRequest() :
                 PlayFabRequestCommon(),
                 CharacterId(),
                 CharacterStatistics(),
+                CustomTags(),
                 PlayFabId()
             {}
 
@@ -23486,6 +23754,7 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 CharacterId(src.CharacterId),
                 CharacterStatistics(src.CharacterStatistics),
+                CustomTags(src.CustomTags),
                 PlayFabId(src.PlayFabId)
             {}
 
@@ -23495,6 +23764,7 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["CharacterId"], CharacterId);
                 FromJsonUtilP(input["CharacterStatistics"], CharacterStatistics);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
             }
 
@@ -23503,6 +23773,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_CharacterId; ToJsonUtilS(CharacterId, each_CharacterId); output["CharacterId"] = each_CharacterId;
                 Json::Value each_CharacterStatistics; ToJsonUtilP(CharacterStatistics, each_CharacterStatistics); output["CharacterStatistics"] = each_CharacterStatistics;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 return output;
             }
@@ -23534,12 +23805,14 @@ namespace PlayFab
 
         struct UpdatePlayerStatisticsRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             Boxed<bool> ForceUpdate;
             std::string PlayFabId;
             std::list<StatisticUpdate> Statistics;
 
             UpdatePlayerStatisticsRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 ForceUpdate(),
                 PlayFabId(),
                 Statistics()
@@ -23547,6 +23820,7 @@ namespace PlayFab
 
             UpdatePlayerStatisticsRequest(const UpdatePlayerStatisticsRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 ForceUpdate(src.ForceUpdate),
                 PlayFabId(src.PlayFabId),
                 Statistics(src.Statistics)
@@ -23556,6 +23830,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilP(input["ForceUpdate"], ForceUpdate);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilO(input["Statistics"], Statistics);
@@ -23564,6 +23839,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_ForceUpdate; ToJsonUtilP(ForceUpdate, each_ForceUpdate); output["ForceUpdate"] = each_ForceUpdate;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_Statistics; ToJsonUtilO(Statistics, each_Statistics); output["Statistics"] = each_Statistics;
@@ -23597,6 +23873,7 @@ namespace PlayFab
 
         struct UpdateSharedGroupDataRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::map<std::string, std::string> Data;
             std::list<std::string> KeysToRemove;
             Boxed<UserDataPermission> Permission;
@@ -23604,6 +23881,7 @@ namespace PlayFab
 
             UpdateSharedGroupDataRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 Data(),
                 KeysToRemove(),
                 Permission(),
@@ -23612,6 +23890,7 @@ namespace PlayFab
 
             UpdateSharedGroupDataRequest(const UpdateSharedGroupDataRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 Data(src.Data),
                 KeysToRemove(src.KeysToRemove),
                 Permission(src.Permission),
@@ -23622,6 +23901,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["Data"], Data);
                 FromJsonUtilS(input["KeysToRemove"], KeysToRemove);
                 FromJsonUtilE(input["Permission"], Permission);
@@ -23631,6 +23911,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Data; ToJsonUtilS(Data, each_Data); output["Data"] = each_Data;
                 Json::Value each_KeysToRemove; ToJsonUtilS(KeysToRemove, each_KeysToRemove); output["KeysToRemove"] = each_KeysToRemove;
                 Json::Value each_Permission; ToJsonUtilE(Permission, each_Permission); output["Permission"] = each_Permission;
@@ -23665,6 +23946,7 @@ namespace PlayFab
 
         struct UpdateUserDataRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::map<std::string, std::string> Data;
             std::list<std::string> KeysToRemove;
             Boxed<UserDataPermission> Permission;
@@ -23672,6 +23954,7 @@ namespace PlayFab
 
             UpdateUserDataRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 Data(),
                 KeysToRemove(),
                 Permission(),
@@ -23680,6 +23963,7 @@ namespace PlayFab
 
             UpdateUserDataRequest(const UpdateUserDataRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 Data(src.Data),
                 KeysToRemove(src.KeysToRemove),
                 Permission(src.Permission),
@@ -23690,6 +23974,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["Data"], Data);
                 FromJsonUtilS(input["KeysToRemove"], KeysToRemove);
                 FromJsonUtilE(input["Permission"], Permission);
@@ -23699,6 +23984,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Data; ToJsonUtilS(Data, each_Data); output["Data"] = each_Data;
                 Json::Value each_KeysToRemove; ToJsonUtilS(KeysToRemove, each_KeysToRemove); output["KeysToRemove"] = each_KeysToRemove;
                 Json::Value each_Permission; ToJsonUtilE(Permission, each_Permission); output["Permission"] = each_Permission;
@@ -23738,12 +24024,14 @@ namespace PlayFab
 
         struct UpdateUserInternalDataRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::map<std::string, std::string> Data;
             std::list<std::string> KeysToRemove;
             std::string PlayFabId;
 
             UpdateUserInternalDataRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 Data(),
                 KeysToRemove(),
                 PlayFabId()
@@ -23751,6 +24039,7 @@ namespace PlayFab
 
             UpdateUserInternalDataRequest(const UpdateUserInternalDataRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 Data(src.Data),
                 KeysToRemove(src.KeysToRemove),
                 PlayFabId(src.PlayFabId)
@@ -23760,6 +24049,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["Data"], Data);
                 FromJsonUtilS(input["KeysToRemove"], KeysToRemove);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
@@ -23768,6 +24058,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Data; ToJsonUtilS(Data, each_Data); output["Data"] = each_Data;
                 Json::Value each_KeysToRemove; ToJsonUtilS(KeysToRemove, each_KeysToRemove); output["KeysToRemove"] = each_KeysToRemove;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
@@ -23778,6 +24069,7 @@ namespace PlayFab
         struct UpdateUserInventoryItemDataRequest : public PlayFabRequestCommon
         {
             std::string CharacterId;
+            std::map<std::string, std::string> CustomTags;
             std::map<std::string, std::string> Data;
             std::string ItemInstanceId;
             std::list<std::string> KeysToRemove;
@@ -23786,6 +24078,7 @@ namespace PlayFab
             UpdateUserInventoryItemDataRequest() :
                 PlayFabRequestCommon(),
                 CharacterId(),
+                CustomTags(),
                 Data(),
                 ItemInstanceId(),
                 KeysToRemove(),
@@ -23795,6 +24088,7 @@ namespace PlayFab
             UpdateUserInventoryItemDataRequest(const UpdateUserInventoryItemDataRequest& src) :
                 PlayFabRequestCommon(),
                 CharacterId(src.CharacterId),
+                CustomTags(src.CustomTags),
                 Data(src.Data),
                 ItemInstanceId(src.ItemInstanceId),
                 KeysToRemove(src.KeysToRemove),
@@ -23806,6 +24100,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CharacterId"], CharacterId);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["Data"], Data);
                 FromJsonUtilS(input["ItemInstanceId"], ItemInstanceId);
                 FromJsonUtilS(input["KeysToRemove"], KeysToRemove);
@@ -23816,6 +24111,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_CharacterId; ToJsonUtilS(CharacterId, each_CharacterId); output["CharacterId"] = each_CharacterId;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Data; ToJsonUtilS(Data, each_Data); output["Data"] = each_Data;
                 Json::Value each_ItemInstanceId; ToJsonUtilS(ItemInstanceId, each_ItemInstanceId); output["ItemInstanceId"] = each_ItemInstanceId;
                 Json::Value each_KeysToRemove; ToJsonUtilS(KeysToRemove, each_KeysToRemove); output["KeysToRemove"] = each_KeysToRemove;
@@ -23857,6 +24153,7 @@ namespace PlayFab
         {
             Json::Value Body; // Not truly arbitrary. See documentation for restrictions on format
             std::string CharacterId;
+            std::map<std::string, std::string> CustomTags;
             std::string EventName;
             std::string PlayFabId;
             Boxed<time_t> Timestamp;
@@ -23865,6 +24162,7 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 Body(),
                 CharacterId(),
+                CustomTags(),
                 EventName(),
                 PlayFabId(),
                 Timestamp()
@@ -23874,6 +24172,7 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 Body(src.Body),
                 CharacterId(src.CharacterId),
+                CustomTags(src.CustomTags),
                 EventName(src.EventName),
                 PlayFabId(src.PlayFabId),
                 Timestamp(src.Timestamp)
@@ -23885,6 +24184,7 @@ namespace PlayFab
             {
                 Body = input["Body"];
                 FromJsonUtilS(input["CharacterId"], CharacterId);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["EventName"], EventName);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilT(input["Timestamp"], Timestamp);
@@ -23895,6 +24195,7 @@ namespace PlayFab
                 Json::Value output;
                 output["Body"] = Body;
                 Json::Value each_CharacterId; ToJsonUtilS(CharacterId, each_CharacterId); output["CharacterId"] = each_CharacterId;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_EventName; ToJsonUtilS(EventName, each_EventName); output["EventName"] = each_EventName;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_Timestamp; ToJsonUtilT(Timestamp, each_Timestamp); output["Timestamp"] = each_Timestamp;
@@ -23905,6 +24206,7 @@ namespace PlayFab
         struct WriteServerPlayerEventRequest : public PlayFabRequestCommon
         {
             Json::Value Body; // Not truly arbitrary. See documentation for restrictions on format
+            std::map<std::string, std::string> CustomTags;
             std::string EventName;
             std::string PlayFabId;
             Boxed<time_t> Timestamp;
@@ -23912,6 +24214,7 @@ namespace PlayFab
             WriteServerPlayerEventRequest() :
                 PlayFabRequestCommon(),
                 Body(),
+                CustomTags(),
                 EventName(),
                 PlayFabId(),
                 Timestamp()
@@ -23920,6 +24223,7 @@ namespace PlayFab
             WriteServerPlayerEventRequest(const WriteServerPlayerEventRequest& src) :
                 PlayFabRequestCommon(),
                 Body(src.Body),
+                CustomTags(src.CustomTags),
                 EventName(src.EventName),
                 PlayFabId(src.PlayFabId),
                 Timestamp(src.Timestamp)
@@ -23930,6 +24234,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 Body = input["Body"];
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["EventName"], EventName);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilT(input["Timestamp"], Timestamp);
@@ -23939,6 +24244,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 output["Body"] = Body;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_EventName; ToJsonUtilS(EventName, each_EventName); output["EventName"] = each_EventName;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_Timestamp; ToJsonUtilT(Timestamp, each_Timestamp); output["Timestamp"] = each_Timestamp;
@@ -23949,12 +24255,14 @@ namespace PlayFab
         struct WriteTitleEventRequest : public PlayFabRequestCommon
         {
             Json::Value Body; // Not truly arbitrary. See documentation for restrictions on format
+            std::map<std::string, std::string> CustomTags;
             std::string EventName;
             Boxed<time_t> Timestamp;
 
             WriteTitleEventRequest() :
                 PlayFabRequestCommon(),
                 Body(),
+                CustomTags(),
                 EventName(),
                 Timestamp()
             {}
@@ -23962,6 +24270,7 @@ namespace PlayFab
             WriteTitleEventRequest(const WriteTitleEventRequest& src) :
                 PlayFabRequestCommon(),
                 Body(src.Body),
+                CustomTags(src.CustomTags),
                 EventName(src.EventName),
                 Timestamp(src.Timestamp)
             {}
@@ -23971,6 +24280,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 Body = input["Body"];
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["EventName"], EventName);
                 FromJsonUtilT(input["Timestamp"], Timestamp);
             }
@@ -23979,6 +24289,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 output["Body"] = Body;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_EventName; ToJsonUtilS(EventName, each_EventName); output["EventName"] = each_EventName;
                 Json::Value each_Timestamp; ToJsonUtilT(Timestamp, each_Timestamp); output["Timestamp"] = each_Timestamp;
                 return output;

@@ -13,24 +13,29 @@ namespace PlayFab
         // Insights Classes
         struct InsightsEmptyRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
 
             InsightsEmptyRequest() :
-                PlayFabRequestCommon()
+                PlayFabRequestCommon(),
+                CustomTags()
             {}
 
-            InsightsEmptyRequest(const InsightsEmptyRequest&) :
-                PlayFabRequestCommon()
+            InsightsEmptyRequest(const InsightsEmptyRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags)
             {}
 
             ~InsightsEmptyRequest() = default;
 
-            void FromJson(const Json::Value&) override
+            void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 return output;
             }
         };
@@ -268,15 +273,18 @@ namespace PlayFab
 
         struct InsightsGetOperationStatusRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::string OperationId;
 
             InsightsGetOperationStatusRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 OperationId()
             {}
 
             InsightsGetOperationStatusRequest(const InsightsGetOperationStatusRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 OperationId(src.OperationId)
             {}
 
@@ -284,12 +292,14 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["OperationId"], OperationId);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_OperationId; ToJsonUtilS(OperationId, each_OperationId); output["OperationId"] = each_OperationId;
                 return output;
             }
@@ -297,15 +307,18 @@ namespace PlayFab
 
         struct InsightsGetPendingOperationsRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::string OperationType;
 
             InsightsGetPendingOperationsRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 OperationType()
             {}
 
             InsightsGetPendingOperationsRequest(const InsightsGetPendingOperationsRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 OperationType(src.OperationType)
             {}
 
@@ -313,12 +326,14 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["OperationType"], OperationType);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_OperationType; ToJsonUtilS(OperationType, each_OperationType); output["OperationType"] = each_OperationType;
                 return output;
             }
@@ -394,15 +409,18 @@ namespace PlayFab
 
         struct InsightsSetPerformanceRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             Int32 PerformanceLevel;
 
             InsightsSetPerformanceRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 PerformanceLevel()
             {}
 
             InsightsSetPerformanceRequest(const InsightsSetPerformanceRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 PerformanceLevel(src.PerformanceLevel)
             {}
 
@@ -410,12 +428,14 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilP(input["PerformanceLevel"], PerformanceLevel);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_PerformanceLevel; ToJsonUtilP(PerformanceLevel, each_PerformanceLevel); output["PerformanceLevel"] = each_PerformanceLevel;
                 return output;
             }
@@ -423,15 +443,18 @@ namespace PlayFab
 
         struct InsightsSetStorageRetentionRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             Int32 RetentionDays;
 
             InsightsSetStorageRetentionRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 RetentionDays()
             {}
 
             InsightsSetStorageRetentionRequest(const InsightsSetStorageRetentionRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 RetentionDays(src.RetentionDays)
             {}
 
@@ -439,12 +462,14 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilP(input["RetentionDays"], RetentionDays);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_RetentionDays; ToJsonUtilP(RetentionDays, each_RetentionDays); output["RetentionDays"] = each_RetentionDays;
                 return output;
             }

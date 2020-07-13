@@ -13,6 +13,7 @@
 #if !defined(DISABLE_PLAYFABCLIENT_API)
 #include <playfab/PlayFabSettings.h>
 
+#include "PlatformLoginTest.h"
 #include "PlayFabApiTest.h"
 #include "PlayFabEventTest.h"
 #include "PlayFabTestMultiUserStatic.h"
@@ -75,6 +76,13 @@ namespace PlayFabUnit
 #if !defined(DISABLE_PLAYFABCLIENT_API)
         // Set this up for use when the tests finish
         this->clientApi = std::make_shared<PlayFab::PlayFabClientInstanceAPI>(PlayFab::PlayFabSettings::staticPlayer);
+
+#if !defined(PLAYFAB_PLATFORM_IOS) // IOS isn't implemented yet
+        // Add PlayFab API tests.
+        PlatformLoginTest loginTest;
+        loginTest.SetTitleInfo(testTitleData);
+        testRunner.Add(loginTest);
+#endif
 
         // Add PlayFab API tests.
         PlayFabApiTest pfApiTest;
