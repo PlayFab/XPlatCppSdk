@@ -195,6 +195,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="$(TestSourceDir)\TestApp\PlayFabApiTest.h" />
+    <ClInclude Include="$(TestSourceDir)\TestApp\PlatformLoginTest.h" />
     <ClInclude Include="$(TestSourceDir)\TestApp\PlayFabEventTest.h" />
     <ClInclude Include="$(TestSourceDir)\TestApp\PlayFabTestMultiUserInstance.h" />
     <ClInclude Include="$(TestSourceDir)\TestApp\PlayFabTestMultiUserStatic.h" />
@@ -210,6 +211,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(TestSourceDir)\TestApp\PlayFabApiTest.cpp" />
+    <ClCompile Include="$(TestSourceDir)\TestApp\PlatformLoginTest.cpp" />
     <ClCompile Include="$(TestSourceDir)\TestApp\PlayFabEventTest.cpp" />
     <ClCompile Include="$(TestSourceDir)\TestApp\PlayFabTestMultiUserInstance.cpp" />
     <ClCompile Include="$(TestSourceDir)\TestApp\PlayFabTestMultiUserStatic.cpp" />

@@ -348,15 +348,18 @@ namespace PlayFab
 
         struct GetEntityTokenRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             Boxed<EntityKey> Entity;
 
             GetEntityTokenRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 Entity()
             {}
 
             GetEntityTokenRequest(const GetEntityTokenRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 Entity(src.Entity)
             {}
 
@@ -364,12 +367,14 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["Entity"], Entity);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
                 return output;
             }
@@ -416,15 +421,18 @@ namespace PlayFab
 
         struct ValidateEntityTokenRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::string EntityToken;
 
             ValidateEntityTokenRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 EntityToken()
             {}
 
             ValidateEntityTokenRequest(const ValidateEntityTokenRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 EntityToken(src.EntityToken)
             {}
 
@@ -432,12 +440,14 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["EntityToken"], EntityToken);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_EntityToken; ToJsonUtilS(EntityToken, each_EntityToken); output["EntityToken"] = each_EntityToken;
                 return output;
             }
