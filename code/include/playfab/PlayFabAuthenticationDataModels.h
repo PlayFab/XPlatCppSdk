@@ -10,6 +10,55 @@ namespace PlayFab
     namespace AuthenticationModels
     {
         // Authentication Enums
+        enum class IdentifiedDeviceType
+        {
+            IdentifiedDeviceTypeUnknown,
+            IdentifiedDeviceTypeXboxOne,
+            IdentifiedDeviceTypeScarlett
+        };
+
+        inline void ToJsonEnum(const IdentifiedDeviceType input, Json::Value& output)
+        {
+            if (input == IdentifiedDeviceType::IdentifiedDeviceTypeUnknown)
+            {
+                output = Json::Value("Unknown");
+                return;
+            }
+            if (input == IdentifiedDeviceType::IdentifiedDeviceTypeXboxOne)
+            {
+                output = Json::Value("XboxOne");
+                return;
+            }
+            if (input == IdentifiedDeviceType::IdentifiedDeviceTypeScarlett)
+            {
+                output = Json::Value("Scarlett");
+                return;
+            }
+        }
+        inline void FromJsonEnum(const Json::Value& input, IdentifiedDeviceType& output)
+        {
+            if (!input.isString())
+            {
+                return;
+            }
+            const std::string& inputStr = input.asString();
+            if (inputStr == "Unknown")
+            {
+                output = IdentifiedDeviceType::IdentifiedDeviceTypeUnknown;
+                return;
+            }
+            if (inputStr == "XboxOne")
+            {
+                output = IdentifiedDeviceType::IdentifiedDeviceTypeXboxOne;
+                return;
+            }
+            if (inputStr == "Scarlett")
+            {
+                output = IdentifiedDeviceType::IdentifiedDeviceTypeScarlett;
+                return;
+            }
+        }
+
         enum class LoginIdentityProvider
         {
             LoginIdentityProviderUnknown,
@@ -456,12 +505,14 @@ namespace PlayFab
         struct ValidateEntityTokenResponse : public PlayFabResultCommon
         {
             Boxed<EntityKey> Entity;
+            Boxed<IdentifiedDeviceType> pfIdentifiedDeviceType;
             Boxed<LoginIdentityProvider> IdentityProvider;
             Boxed<EntityLineage> Lineage;
 
             ValidateEntityTokenResponse() :
                 PlayFabResultCommon(),
                 Entity(),
+                pfIdentifiedDeviceType(),
                 IdentityProvider(),
                 Lineage()
             {}
@@ -469,6 +520,7 @@ namespace PlayFab
             ValidateEntityTokenResponse(const ValidateEntityTokenResponse& src) :
                 PlayFabResultCommon(),
                 Entity(src.Entity),
+                pfIdentifiedDeviceType(src.pfIdentifiedDeviceType),
                 IdentityProvider(src.IdentityProvider),
                 Lineage(src.Lineage)
             {}
@@ -478,6 +530,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Entity"], Entity);
+                FromJsonUtilE(input["IdentifiedDeviceType"], pfIdentifiedDeviceType);
                 FromJsonUtilE(input["IdentityProvider"], IdentityProvider);
                 FromJsonUtilO(input["Lineage"], Lineage);
             }
@@ -486,6 +539,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                Json::Value each_pfIdentifiedDeviceType; ToJsonUtilE(pfIdentifiedDeviceType, each_pfIdentifiedDeviceType); output["IdentifiedDeviceType"] = each_pfIdentifiedDeviceType;
                 Json::Value each_IdentityProvider; ToJsonUtilE(IdentityProvider, each_IdentityProvider); output["IdentityProvider"] = each_IdentityProvider;
                 Json::Value each_Lineage; ToJsonUtilO(Lineage, each_Lineage); output["Lineage"] = each_Lineage;
                 return output;

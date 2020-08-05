@@ -5374,7 +5374,6 @@ namespace PlayFab
             GenericErrorCodesExperimentationInvalidDuration,
             GenericErrorCodesExperimentationMaxExperimentsReached,
             GenericErrorCodesExperimentationExperimentSchedulingInProgress,
-            GenericErrorCodesExperimentationExistingCodelessScheduled,
             GenericErrorCodesMaxActionDepthExceeded,
             GenericErrorCodesTitleNotOnUpdatedPricingPlan,
             GenericErrorCodesSnapshotNotFound
@@ -8280,11 +8279,6 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesExperimentationExperimentSchedulingInProgress)
             {
                 output = Json::Value("ExperimentationExperimentSchedulingInProgress");
-                return;
-            }
-            if (input == GenericErrorCodes::GenericErrorCodesExperimentationExistingCodelessScheduled)
-            {
-                output = Json::Value("ExperimentationExistingCodelessScheduled");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMaxActionDepthExceeded)
@@ -11208,11 +11202,6 @@ namespace PlayFab
             if (inputStr == "ExperimentationExperimentSchedulingInProgress")
             {
                 output = GenericErrorCodes::GenericErrorCodesExperimentationExperimentSchedulingInProgress;
-                return;
-            }
-            if (inputStr == "ExperimentationExistingCodelessScheduled")
-            {
-                output = GenericErrorCodes::GenericErrorCodesExperimentationExistingCodelessScheduled;
                 return;
             }
             if (inputStr == "MaxActionDepthExceeded")
