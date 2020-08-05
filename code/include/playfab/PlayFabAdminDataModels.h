@@ -5472,7 +5472,6 @@ namespace PlayFab
             GenericErrorCodesExperimentationInvalidDuration,
             GenericErrorCodesExperimentationMaxExperimentsReached,
             GenericErrorCodesExperimentationExperimentSchedulingInProgress,
-            GenericErrorCodesExperimentationExistingCodelessScheduled,
             GenericErrorCodesMaxActionDepthExceeded,
             GenericErrorCodesTitleNotOnUpdatedPricingPlan,
             GenericErrorCodesSnapshotNotFound
@@ -8378,11 +8377,6 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesExperimentationExperimentSchedulingInProgress)
             {
                 output = Json::Value("ExperimentationExperimentSchedulingInProgress");
-                return;
-            }
-            if (input == GenericErrorCodes::GenericErrorCodesExperimentationExistingCodelessScheduled)
-            {
-                output = Json::Value("ExperimentationExistingCodelessScheduled");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMaxActionDepthExceeded)
@@ -11306,11 +11300,6 @@ namespace PlayFab
             if (inputStr == "ExperimentationExperimentSchedulingInProgress")
             {
                 output = GenericErrorCodes::GenericErrorCodesExperimentationExperimentSchedulingInProgress;
-                return;
-            }
-            if (inputStr == "ExperimentationExistingCodelessScheduled")
-            {
-                output = GenericErrorCodes::GenericErrorCodesExperimentationExistingCodelessScheduled;
                 return;
             }
             if (inputStr == "MaxActionDepthExceeded")
@@ -15370,6 +15359,59 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_Identifier; ToJsonUtilO(Identifier, each_Identifier); output["Identifier"] = each_Identifier;
+                return output;
+            }
+        };
+
+        struct DeleteTitleDataOverrideRequest : public PlayFabRequestCommon
+        {
+            std::string OverrideLabel;
+
+            DeleteTitleDataOverrideRequest() :
+                PlayFabRequestCommon(),
+                OverrideLabel()
+            {}
+
+            DeleteTitleDataOverrideRequest(const DeleteTitleDataOverrideRequest& src) :
+                PlayFabRequestCommon(),
+                OverrideLabel(src.OverrideLabel)
+            {}
+
+            ~DeleteTitleDataOverrideRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["OverrideLabel"], OverrideLabel);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_OverrideLabel; ToJsonUtilS(OverrideLabel, each_OverrideLabel); output["OverrideLabel"] = each_OverrideLabel;
+                return output;
+            }
+        };
+
+        struct DeleteTitleDataOverrideResult : public PlayFabResultCommon
+        {
+
+            DeleteTitleDataOverrideResult() :
+                PlayFabResultCommon()
+            {}
+
+            DeleteTitleDataOverrideResult(const DeleteTitleDataOverrideResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~DeleteTitleDataOverrideResult() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
                 return output;
             }
         };
@@ -22061,6 +22103,98 @@ namespace PlayFab
             {}
 
             ~SetPublisherDataResult() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
+        struct TitleDataKeyValue : public PlayFabBaseModel
+        {
+            std::string Key;
+            std::string Value;
+
+            TitleDataKeyValue() :
+                PlayFabBaseModel(),
+                Key(),
+                Value()
+            {}
+
+            TitleDataKeyValue(const TitleDataKeyValue& src) :
+                PlayFabBaseModel(),
+                Key(src.Key),
+                Value(src.Value)
+            {}
+
+            ~TitleDataKeyValue() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["Key"], Key);
+                FromJsonUtilS(input["Value"], Value);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Key; ToJsonUtilS(Key, each_Key); output["Key"] = each_Key;
+                Json::Value each_Value; ToJsonUtilS(Value, each_Value); output["Value"] = each_Value;
+                return output;
+            }
+        };
+
+        struct SetTitleDataAndOverridesRequest : public PlayFabRequestCommon
+        {
+            std::list<TitleDataKeyValue> KeyValues;
+            std::string OverrideLabel;
+
+            SetTitleDataAndOverridesRequest() :
+                PlayFabRequestCommon(),
+                KeyValues(),
+                OverrideLabel()
+            {}
+
+            SetTitleDataAndOverridesRequest(const SetTitleDataAndOverridesRequest& src) :
+                PlayFabRequestCommon(),
+                KeyValues(src.KeyValues),
+                OverrideLabel(src.OverrideLabel)
+            {}
+
+            ~SetTitleDataAndOverridesRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["KeyValues"], KeyValues);
+                FromJsonUtilS(input["OverrideLabel"], OverrideLabel);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_KeyValues; ToJsonUtilO(KeyValues, each_KeyValues); output["KeyValues"] = each_KeyValues;
+                Json::Value each_OverrideLabel; ToJsonUtilS(OverrideLabel, each_OverrideLabel); output["OverrideLabel"] = each_OverrideLabel;
+                return output;
+            }
+        };
+
+        struct SetTitleDataAndOverridesResult : public PlayFabResultCommon
+        {
+
+            SetTitleDataAndOverridesResult() :
+                PlayFabResultCommon()
+            {}
+
+            SetTitleDataAndOverridesResult(const SetTitleDataAndOverridesResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~SetTitleDataAndOverridesResult() = default;
 
             void FromJson(const Json::Value&) override
             {
