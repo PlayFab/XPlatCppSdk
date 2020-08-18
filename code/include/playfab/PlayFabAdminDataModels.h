@@ -5392,6 +5392,7 @@ namespace PlayFab
             GenericErrorCodesTitleDataOverrideNotFound,
             GenericErrorCodesDuplicateKeys,
             GenericErrorCodesWasNotCreatedWithCloudRoot,
+            GenericErrorCodesLegacyMultiplayerServersDeprecated,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -7977,6 +7978,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesWasNotCreatedWithCloudRoot)
             {
                 output = Json::Value("WasNotCreatedWithCloudRoot");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLegacyMultiplayerServersDeprecated)
+            {
+                output = Json::Value("LegacyMultiplayerServersDeprecated");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -10900,6 +10906,11 @@ namespace PlayFab
             if (inputStr == "WasNotCreatedWithCloudRoot")
             {
                 output = GenericErrorCodes::GenericErrorCodesWasNotCreatedWithCloudRoot;
+                return;
+            }
+            if (inputStr == "LegacyMultiplayerServersDeprecated")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLegacyMultiplayerServersDeprecated;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
