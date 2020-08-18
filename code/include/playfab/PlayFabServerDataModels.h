@@ -5294,6 +5294,7 @@ namespace PlayFab
             GenericErrorCodesTitleDataOverrideNotFound,
             GenericErrorCodesDuplicateKeys,
             GenericErrorCodesWasNotCreatedWithCloudRoot,
+            GenericErrorCodesLegacyMultiplayerServersDeprecated,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -7879,6 +7880,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesWasNotCreatedWithCloudRoot)
             {
                 output = Json::Value("WasNotCreatedWithCloudRoot");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLegacyMultiplayerServersDeprecated)
+            {
+                output = Json::Value("LegacyMultiplayerServersDeprecated");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -10804,6 +10810,11 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesWasNotCreatedWithCloudRoot;
                 return;
             }
+            if (inputStr == "LegacyMultiplayerServersDeprecated")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLegacyMultiplayerServersDeprecated;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -13587,15 +13598,18 @@ namespace PlayFab
 
         struct AuthenticateSessionTicketResult : public PlayFabResultCommon
         {
+            Boxed<bool> IsSessionTicketExpired;
             Boxed<UserAccountInfo> UserInfo;
 
             AuthenticateSessionTicketResult() :
                 PlayFabResultCommon(),
+                IsSessionTicketExpired(),
                 UserInfo()
             {}
 
             AuthenticateSessionTicketResult(const AuthenticateSessionTicketResult& src) :
                 PlayFabResultCommon(),
+                IsSessionTicketExpired(src.IsSessionTicketExpired),
                 UserInfo(src.UserInfo)
             {}
 
@@ -13603,12 +13617,14 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilP(input["IsSessionTicketExpired"], IsSessionTicketExpired);
                 FromJsonUtilO(input["UserInfo"], UserInfo);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_IsSessionTicketExpired; ToJsonUtilP(IsSessionTicketExpired, each_IsSessionTicketExpired); output["IsSessionTicketExpired"] = each_IsSessionTicketExpired;
                 Json::Value each_UserInfo; ToJsonUtilO(UserInfo, each_UserInfo); output["UserInfo"] = each_UserInfo;
                 return output;
             }

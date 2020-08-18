@@ -30,7 +30,8 @@ namespace PlayFab
             AzureRegionChinaEast2,
             AzureRegionChinaNorth2,
             AzureRegionSouthAfricaNorth,
-            AzureRegionCentralUsEuap
+            AzureRegionCentralUsEuap,
+            AzureRegionWestCentralUs
         };
 
         inline void ToJsonEnum(const AzureRegion input, Json::Value& output)
@@ -128,6 +129,11 @@ namespace PlayFab
             if (input == AzureRegion::AzureRegionCentralUsEuap)
             {
                 output = Json::Value("CentralUsEuap");
+                return;
+            }
+            if (input == AzureRegion::AzureRegionWestCentralUs)
+            {
+                output = Json::Value("WestCentralUs");
                 return;
             }
         }
@@ -231,6 +237,11 @@ namespace PlayFab
             if (inputStr == "CentralUsEuap")
             {
                 output = AzureRegion::AzureRegionCentralUsEuap;
+                return;
+            }
+            if (inputStr == "WestCentralUs")
+            {
+                output = AzureRegion::AzureRegionWestCentralUs;
                 return;
             }
         }
@@ -5400,18 +5411,15 @@ namespace PlayFab
         struct ListPartyQosServersRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
-            std::string Version;
 
             ListPartyQosServersRequest() :
                 PlayFabRequestCommon(),
-                CustomTags(),
-                Version()
+                CustomTags()
             {}
 
             ListPartyQosServersRequest(const ListPartyQosServersRequest& src) :
                 PlayFabRequestCommon(),
-                CustomTags(src.CustomTags),
-                Version(src.Version)
+                CustomTags(src.CustomTags)
             {}
 
             ~ListPartyQosServersRequest() = default;
@@ -5419,14 +5427,12 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
-                FromJsonUtilS(input["Version"], Version);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
-                Json::Value each_Version; ToJsonUtilS(Version, each_Version); output["Version"] = each_Version;
                 return output;
             }
         };
@@ -5507,15 +5513,18 @@ namespace PlayFab
         struct ListQosServersForTitleRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
+            bool IncludeAllRegions;
 
             ListQosServersForTitleRequest() :
                 PlayFabRequestCommon(),
-                CustomTags()
+                CustomTags(),
+                IncludeAllRegions()
             {}
 
             ListQosServersForTitleRequest(const ListQosServersForTitleRequest& src) :
                 PlayFabRequestCommon(),
-                CustomTags(src.CustomTags)
+                CustomTags(src.CustomTags),
+                IncludeAllRegions(src.IncludeAllRegions)
             {}
 
             ~ListQosServersForTitleRequest() = default;
@@ -5523,12 +5532,14 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilP(input["IncludeAllRegions"], IncludeAllRegions);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_IncludeAllRegions; ToJsonUtilP(IncludeAllRegions, each_IncludeAllRegions); output["IncludeAllRegions"] = each_IncludeAllRegions;
                 return output;
             }
         };
@@ -5554,74 +5565,6 @@ namespace PlayFab
             {}
 
             ~ListQosServersForTitleResponse() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilP(input["PageSize"], PageSize);
-                FromJsonUtilO(input["QosServers"], QosServers);
-                FromJsonUtilS(input["SkipToken"], SkipToken);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_PageSize; ToJsonUtilP(PageSize, each_PageSize); output["PageSize"] = each_PageSize;
-                Json::Value each_QosServers; ToJsonUtilO(QosServers, each_QosServers); output["QosServers"] = each_QosServers;
-                Json::Value each_SkipToken; ToJsonUtilS(SkipToken, each_SkipToken); output["SkipToken"] = each_SkipToken;
-                return output;
-            }
-        };
-
-        struct ListQosServersRequest : public PlayFabRequestCommon
-        {
-            std::map<std::string, std::string> CustomTags;
-
-            ListQosServersRequest() :
-                PlayFabRequestCommon(),
-                CustomTags()
-            {}
-
-            ListQosServersRequest(const ListQosServersRequest& src) :
-                PlayFabRequestCommon(),
-                CustomTags(src.CustomTags)
-            {}
-
-            ~ListQosServersRequest() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilS(input["CustomTags"], CustomTags);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
-                return output;
-            }
-        };
-
-        struct ListQosServersResponse : public PlayFabResultCommon
-        {
-            Int32 PageSize;
-            std::list<QosServer> QosServers;
-            std::string SkipToken;
-
-            ListQosServersResponse() :
-                PlayFabResultCommon(),
-                PageSize(),
-                QosServers(),
-                SkipToken()
-            {}
-
-            ListQosServersResponse(const ListQosServersResponse& src) :
-                PlayFabResultCommon(),
-                PageSize(src.PageSize),
-                QosServers(src.QosServers),
-                SkipToken(src.SkipToken)
-            {}
-
-            ~ListQosServersResponse() = default;
 
             void FromJson(const Json::Value& input) override
             {
