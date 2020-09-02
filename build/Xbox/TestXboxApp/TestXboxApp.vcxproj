@@ -211,7 +211,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(TestSourceDir)\TestApp\PlayFabApiTest.cpp" />
-    <ClCompile Include="$(TestSourceDir)\TestApp\PlatformLoginTest.cpp" />
+    <ClCompile Include="$(TestSourceDir)\TestApp\PlatformLoginTest_default.cpp" />
     <ClCompile Include="$(TestSourceDir)\TestApp\PlayFabEventTest.cpp" />
     <ClCompile Include="$(TestSourceDir)\TestApp\PlayFabTestMultiUserInstance.cpp" />
     <ClCompile Include="$(TestSourceDir)\TestApp\PlayFabTestMultiUserStatic.cpp" />

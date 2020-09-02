@@ -27,7 +27,7 @@ add_library( # Sets the name of the library.
 
              # Provides a relative path to your source file(s).
              ../../../test/TestApp/PlayFabApiTest.cpp
-             ../../../test/TestApp/PlatformLoginTest.cpp
+             ../../../test/TestApp/PlatformLoginTest_default.cpp
              ../../../test/TestApp/PlayFabEventTest.cpp
              ../../../test/TestApp/PlayFabTestMultiUserInstance.cpp
              ../../../test/TestApp/PlayFabTestMultiUserStatic.cpp

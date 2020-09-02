@@ -5377,6 +5377,10 @@ namespace PlayFab
             GenericErrorCodesExperimentationExperimentSchedulingInProgress,
             GenericErrorCodesMaxActionDepthExceeded,
             GenericErrorCodesTitleNotOnUpdatedPricingPlan,
+            GenericErrorCodesSegmentManagementTitleNotInFlight,
+            GenericErrorCodesSegmentManagementNoExpressionTree,
+            GenericErrorCodesSegmentManagementTriggerActionCountOverLimit,
+            GenericErrorCodesSegmentManagementSegmentCountOverLimit,
             GenericErrorCodesSnapshotNotFound
         };
 
@@ -8295,6 +8299,26 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesTitleNotOnUpdatedPricingPlan)
             {
                 output = Json::Value("TitleNotOnUpdatedPricingPlan");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesSegmentManagementTitleNotInFlight)
+            {
+                output = Json::Value("SegmentManagementTitleNotInFlight");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesSegmentManagementNoExpressionTree)
+            {
+                output = Json::Value("SegmentManagementNoExpressionTree");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesSegmentManagementTriggerActionCountOverLimit)
+            {
+                output = Json::Value("SegmentManagementTriggerActionCountOverLimit");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesSegmentManagementSegmentCountOverLimit)
+            {
+                output = Json::Value("SegmentManagementSegmentCountOverLimit");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesSnapshotNotFound)
@@ -11223,6 +11247,26 @@ namespace PlayFab
             if (inputStr == "TitleNotOnUpdatedPricingPlan")
             {
                 output = GenericErrorCodes::GenericErrorCodesTitleNotOnUpdatedPricingPlan;
+                return;
+            }
+            if (inputStr == "SegmentManagementTitleNotInFlight")
+            {
+                output = GenericErrorCodes::GenericErrorCodesSegmentManagementTitleNotInFlight;
+                return;
+            }
+            if (inputStr == "SegmentManagementNoExpressionTree")
+            {
+                output = GenericErrorCodes::GenericErrorCodesSegmentManagementNoExpressionTree;
+                return;
+            }
+            if (inputStr == "SegmentManagementTriggerActionCountOverLimit")
+            {
+                output = GenericErrorCodes::GenericErrorCodesSegmentManagementTriggerActionCountOverLimit;
+                return;
+            }
+            if (inputStr == "SegmentManagementSegmentCountOverLimit")
+            {
+                output = GenericErrorCodes::GenericErrorCodesSegmentManagementSegmentCountOverLimit;
                 return;
             }
             if (inputStr == "SnapshotNotFound")
