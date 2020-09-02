@@ -70,7 +70,7 @@
     <ClCompile Include="$(TestSourceDir)\TestApp\PlayFabApiTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="$(TestSourceDir)\TestApp\PlatformLoginTest.cpp">
+    <ClCompile Include="$(TestSourceDir)\TestApp\PlatformLoginTest_default.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="$(TestSourceDir)\TestApp\PlayFabEventTest.cpp">

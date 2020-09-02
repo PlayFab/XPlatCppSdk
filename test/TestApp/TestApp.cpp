@@ -18,7 +18,6 @@
 #include "PlayFabEventTest.h"
 #include "PlayFabTestMultiUserStatic.h"
 #include "PlayFabTestMultiUserInstance.h"
-#include "PlayFabPlatformSpecificTest.h"
 #endif
 
 #include <playfab/PlayFabJsonHeaders.h>
@@ -77,8 +76,7 @@ namespace PlayFabUnit
         // Set this up for use when the tests finish
         this->clientApi = std::make_shared<PlayFab::PlayFabClientInstanceAPI>(PlayFab::PlayFabSettings::staticPlayer);
 
-#if !defined(PLAYFAB_PLATFORM_IOS) // IOS isn't implemented yet
-        // Add PlayFab API tests.
+#if !defined(PLAYFAB_PLATFORM_IOS) // IOS proj doesn't include PlatformLoginTest files yet
         PlatformLoginTest loginTest;
         loginTest.SetTitleInfo(testTitleData);
         testRunner.Add(loginTest);
@@ -88,12 +86,6 @@ namespace PlayFabUnit
         PlayFabApiTest pfApiTest;
         pfApiTest.SetTitleInfo(testTitleData);
         testRunner.Add(pfApiTest);
-
-#if defined(PLAYFAB_PLATFORM_SWITCH) // TODO: hook this up to all the platforms with a platform-specific login
-        PlayFabPlatformSpecificTest platformSpecificTest;
-        platformSpecificTest.SetTitleInfo(testTitleData);
-        testRunner.Add(platformSpecificTest);
-#endif
 
 #if false // These tests are still too unstable, and despite passing nearly 100% in debug, still fail 100% in release
         PlayFabEventTest pfEventTest;

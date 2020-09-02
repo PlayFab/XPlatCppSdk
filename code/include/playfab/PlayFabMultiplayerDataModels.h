@@ -1284,12 +1284,101 @@ namespace PlayFab
             }
         };
 
+        struct Schedule : public PlayFabBaseModel
+        {
+            std::string Description;
+            time_t EndTime;
+            bool IsDisabled;
+            bool IsRecurringWeekly;
+            time_t StartTime;
+            Int32 TargetStandby;
+
+            Schedule() :
+                PlayFabBaseModel(),
+                Description(),
+                EndTime(),
+                IsDisabled(),
+                IsRecurringWeekly(),
+                StartTime(),
+                TargetStandby()
+            {}
+
+            Schedule(const Schedule& src) :
+                PlayFabBaseModel(),
+                Description(src.Description),
+                EndTime(src.EndTime),
+                IsDisabled(src.IsDisabled),
+                IsRecurringWeekly(src.IsRecurringWeekly),
+                StartTime(src.StartTime),
+                TargetStandby(src.TargetStandby)
+            {}
+
+            ~Schedule() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["Description"], Description);
+                FromJsonUtilT(input["EndTime"], EndTime);
+                FromJsonUtilP(input["IsDisabled"], IsDisabled);
+                FromJsonUtilP(input["IsRecurringWeekly"], IsRecurringWeekly);
+                FromJsonUtilT(input["StartTime"], StartTime);
+                FromJsonUtilP(input["TargetStandby"], TargetStandby);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Description; ToJsonUtilS(Description, each_Description); output["Description"] = each_Description;
+                Json::Value each_EndTime; ToJsonUtilT(EndTime, each_EndTime); output["EndTime"] = each_EndTime;
+                Json::Value each_IsDisabled; ToJsonUtilP(IsDisabled, each_IsDisabled); output["IsDisabled"] = each_IsDisabled;
+                Json::Value each_IsRecurringWeekly; ToJsonUtilP(IsRecurringWeekly, each_IsRecurringWeekly); output["IsRecurringWeekly"] = each_IsRecurringWeekly;
+                Json::Value each_StartTime; ToJsonUtilT(StartTime, each_StartTime); output["StartTime"] = each_StartTime;
+                Json::Value each_TargetStandby; ToJsonUtilP(TargetStandby, each_TargetStandby); output["TargetStandby"] = each_TargetStandby;
+                return output;
+            }
+        };
+
+        struct ScheduledStandbySettings : public PlayFabBaseModel
+        {
+            bool IsEnabled;
+            std::list<Schedule> ScheduleList;
+
+            ScheduledStandbySettings() :
+                PlayFabBaseModel(),
+                IsEnabled(),
+                ScheduleList()
+            {}
+
+            ScheduledStandbySettings(const ScheduledStandbySettings& src) :
+                PlayFabBaseModel(),
+                IsEnabled(src.IsEnabled),
+                ScheduleList(src.ScheduleList)
+            {}
+
+            ~ScheduledStandbySettings() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["IsEnabled"], IsEnabled);
+                FromJsonUtilO(input["ScheduleList"], ScheduleList);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_IsEnabled; ToJsonUtilP(IsEnabled, each_IsEnabled); output["IsEnabled"] = each_IsEnabled;
+                Json::Value each_ScheduleList; ToJsonUtilO(ScheduleList, each_ScheduleList); output["ScheduleList"] = each_ScheduleList;
+                return output;
+            }
+        };
+
         struct BuildRegion : public PlayFabBaseModel
         {
             Boxed<CurrentServerStats> pfCurrentServerStats;
             Boxed<DynamicStandbySettings> pfDynamicStandbySettings;
             Int32 MaxServers;
             std::string Region;
+            Boxed<ScheduledStandbySettings> pfScheduledStandbySettings;
             Int32 StandbyServers;
             std::string Status;
 
@@ -1299,6 +1388,7 @@ namespace PlayFab
                 pfDynamicStandbySettings(),
                 MaxServers(),
                 Region(),
+                pfScheduledStandbySettings(),
                 StandbyServers(),
                 Status()
             {}
@@ -1309,6 +1399,7 @@ namespace PlayFab
                 pfDynamicStandbySettings(src.pfDynamicStandbySettings),
                 MaxServers(src.MaxServers),
                 Region(src.Region),
+                pfScheduledStandbySettings(src.pfScheduledStandbySettings),
                 StandbyServers(src.StandbyServers),
                 Status(src.Status)
             {}
@@ -1321,6 +1412,7 @@ namespace PlayFab
                 FromJsonUtilO(input["DynamicStandbySettings"], pfDynamicStandbySettings);
                 FromJsonUtilP(input["MaxServers"], MaxServers);
                 FromJsonUtilS(input["Region"], Region);
+                FromJsonUtilO(input["ScheduledStandbySettings"], pfScheduledStandbySettings);
                 FromJsonUtilP(input["StandbyServers"], StandbyServers);
                 FromJsonUtilS(input["Status"], Status);
             }
@@ -1332,6 +1424,7 @@ namespace PlayFab
                 Json::Value each_pfDynamicStandbySettings; ToJsonUtilO(pfDynamicStandbySettings, each_pfDynamicStandbySettings); output["DynamicStandbySettings"] = each_pfDynamicStandbySettings;
                 Json::Value each_MaxServers; ToJsonUtilP(MaxServers, each_MaxServers); output["MaxServers"] = each_MaxServers;
                 Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
+                Json::Value each_pfScheduledStandbySettings; ToJsonUtilO(pfScheduledStandbySettings, each_pfScheduledStandbySettings); output["ScheduledStandbySettings"] = each_pfScheduledStandbySettings;
                 Json::Value each_StandbyServers; ToJsonUtilP(StandbyServers, each_StandbyServers); output["StandbyServers"] = each_StandbyServers;
                 Json::Value each_Status; ToJsonUtilS(Status, each_Status); output["Status"] = each_Status;
                 return output;
@@ -1343,6 +1436,7 @@ namespace PlayFab
             Boxed<DynamicStandbySettings> pfDynamicStandbySettings;
             Int32 MaxServers;
             std::string Region;
+            Boxed<ScheduledStandbySettings> pfScheduledStandbySettings;
             Int32 StandbyServers;
 
             BuildRegionParams() :
@@ -1350,6 +1444,7 @@ namespace PlayFab
                 pfDynamicStandbySettings(),
                 MaxServers(),
                 Region(),
+                pfScheduledStandbySettings(),
                 StandbyServers()
             {}
 
@@ -1358,6 +1453,7 @@ namespace PlayFab
                 pfDynamicStandbySettings(src.pfDynamicStandbySettings),
                 MaxServers(src.MaxServers),
                 Region(src.Region),
+                pfScheduledStandbySettings(src.pfScheduledStandbySettings),
                 StandbyServers(src.StandbyServers)
             {}
 
@@ -1368,6 +1464,7 @@ namespace PlayFab
                 FromJsonUtilO(input["DynamicStandbySettings"], pfDynamicStandbySettings);
                 FromJsonUtilP(input["MaxServers"], MaxServers);
                 FromJsonUtilS(input["Region"], Region);
+                FromJsonUtilO(input["ScheduledStandbySettings"], pfScheduledStandbySettings);
                 FromJsonUtilP(input["StandbyServers"], StandbyServers);
             }
 
@@ -1377,6 +1474,7 @@ namespace PlayFab
                 Json::Value each_pfDynamicStandbySettings; ToJsonUtilO(pfDynamicStandbySettings, each_pfDynamicStandbySettings); output["DynamicStandbySettings"] = each_pfDynamicStandbySettings;
                 Json::Value each_MaxServers; ToJsonUtilP(MaxServers, each_MaxServers); output["MaxServers"] = each_MaxServers;
                 Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
+                Json::Value each_pfScheduledStandbySettings; ToJsonUtilO(pfScheduledStandbySettings, each_pfScheduledStandbySettings); output["ScheduledStandbySettings"] = each_pfScheduledStandbySettings;
                 Json::Value each_StandbyServers; ToJsonUtilP(StandbyServers, each_StandbyServers); output["StandbyServers"] = each_StandbyServers;
                 return output;
             }
@@ -5513,7 +5611,7 @@ namespace PlayFab
         struct ListQosServersForTitleRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
-            bool IncludeAllRegions;
+            Boxed<bool> IncludeAllRegions;
 
             ListQosServersForTitleRequest() :
                 PlayFabRequestCommon(),

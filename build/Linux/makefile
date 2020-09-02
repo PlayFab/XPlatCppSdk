@@ -77,7 +77,7 @@ OBJS = stdafx.o \
     TestReport.o \
     TestRunner.o \
     PlayFabApiTest.o \
-    PlatformLoginTest.o \
+    PlatformLoginTest_default.o \
     TestApp.o \
 	main.o
 
