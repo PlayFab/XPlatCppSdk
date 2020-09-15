@@ -5381,6 +5381,7 @@ namespace PlayFab
             GenericErrorCodesSegmentManagementNoExpressionTree,
             GenericErrorCodesSegmentManagementTriggerActionCountOverLimit,
             GenericErrorCodesSegmentManagementSegmentCountOverLimit,
+            GenericErrorCodesSegmentManagementInvalidSegmentId,
             GenericErrorCodesSnapshotNotFound
         };
 
@@ -8319,6 +8320,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesSegmentManagementSegmentCountOverLimit)
             {
                 output = Json::Value("SegmentManagementSegmentCountOverLimit");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesSegmentManagementInvalidSegmentId)
+            {
+                output = Json::Value("SegmentManagementInvalidSegmentId");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesSnapshotNotFound)
@@ -11267,6 +11273,11 @@ namespace PlayFab
             if (inputStr == "SegmentManagementSegmentCountOverLimit")
             {
                 output = GenericErrorCodes::GenericErrorCodesSegmentManagementSegmentCountOverLimit;
+                return;
+            }
+            if (inputStr == "SegmentManagementInvalidSegmentId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesSegmentManagementInvalidSegmentId;
                 return;
             }
             if (inputStr == "SnapshotNotFound")
