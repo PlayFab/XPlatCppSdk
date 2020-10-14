@@ -2634,6 +2634,7 @@ namespace PlayFab
             std::list<GameCertificateReferenceParams> GameCertificateReferences;
             std::string GameWorkingDirectory;
             Boxed<InstrumentationConfiguration> pfInstrumentationConfiguration;
+            Boxed<bool> IsOSPreview;
             std::map<std::string, std::string> Metadata;
             Int32 MultiplayerServerCountPerVm;
             std::string OsPlatform;
@@ -2652,6 +2653,7 @@ namespace PlayFab
                 GameCertificateReferences(),
                 GameWorkingDirectory(),
                 pfInstrumentationConfiguration(),
+                IsOSPreview(),
                 Metadata(),
                 MultiplayerServerCountPerVm(),
                 OsPlatform(),
@@ -2671,6 +2673,7 @@ namespace PlayFab
                 GameCertificateReferences(src.GameCertificateReferences),
                 GameWorkingDirectory(src.GameWorkingDirectory),
                 pfInstrumentationConfiguration(src.pfInstrumentationConfiguration),
+                IsOSPreview(src.IsOSPreview),
                 Metadata(src.Metadata),
                 MultiplayerServerCountPerVm(src.MultiplayerServerCountPerVm),
                 OsPlatform(src.OsPlatform),
@@ -2692,6 +2695,7 @@ namespace PlayFab
                 FromJsonUtilO(input["GameCertificateReferences"], GameCertificateReferences);
                 FromJsonUtilS(input["GameWorkingDirectory"], GameWorkingDirectory);
                 FromJsonUtilO(input["InstrumentationConfiguration"], pfInstrumentationConfiguration);
+                FromJsonUtilP(input["IsOSPreview"], IsOSPreview);
                 FromJsonUtilS(input["Metadata"], Metadata);
                 FromJsonUtilP(input["MultiplayerServerCountPerVm"], MultiplayerServerCountPerVm);
                 FromJsonUtilS(input["OsPlatform"], OsPlatform);
@@ -2712,6 +2716,7 @@ namespace PlayFab
                 Json::Value each_GameCertificateReferences; ToJsonUtilO(GameCertificateReferences, each_GameCertificateReferences); output["GameCertificateReferences"] = each_GameCertificateReferences;
                 Json::Value each_GameWorkingDirectory; ToJsonUtilS(GameWorkingDirectory, each_GameWorkingDirectory); output["GameWorkingDirectory"] = each_GameWorkingDirectory;
                 Json::Value each_pfInstrumentationConfiguration; ToJsonUtilO(pfInstrumentationConfiguration, each_pfInstrumentationConfiguration); output["InstrumentationConfiguration"] = each_pfInstrumentationConfiguration;
+                Json::Value each_IsOSPreview; ToJsonUtilP(IsOSPreview, each_IsOSPreview); output["IsOSPreview"] = each_IsOSPreview;
                 Json::Value each_Metadata; ToJsonUtilS(Metadata, each_Metadata); output["Metadata"] = each_Metadata;
                 Json::Value each_MultiplayerServerCountPerVm; ToJsonUtilP(MultiplayerServerCountPerVm, each_MultiplayerServerCountPerVm); output["MultiplayerServerCountPerVm"] = each_MultiplayerServerCountPerVm;
                 Json::Value each_OsPlatform; ToJsonUtilS(OsPlatform, each_OsPlatform); output["OsPlatform"] = each_OsPlatform;
@@ -2735,6 +2740,7 @@ namespace PlayFab
             std::list<GameCertificateReference> GameCertificateReferences;
             std::string GameWorkingDirectory;
             Boxed<InstrumentationConfiguration> pfInstrumentationConfiguration;
+            Boxed<bool> IsOSPreview;
             std::map<std::string, std::string> Metadata;
             Int32 MultiplayerServerCountPerVm;
             std::string OsPlatform;
@@ -2756,6 +2762,7 @@ namespace PlayFab
                 GameCertificateReferences(),
                 GameWorkingDirectory(),
                 pfInstrumentationConfiguration(),
+                IsOSPreview(),
                 Metadata(),
                 MultiplayerServerCountPerVm(),
                 OsPlatform(),
@@ -2778,6 +2785,7 @@ namespace PlayFab
                 GameCertificateReferences(src.GameCertificateReferences),
                 GameWorkingDirectory(src.GameWorkingDirectory),
                 pfInstrumentationConfiguration(src.pfInstrumentationConfiguration),
+                IsOSPreview(src.IsOSPreview),
                 Metadata(src.Metadata),
                 MultiplayerServerCountPerVm(src.MultiplayerServerCountPerVm),
                 OsPlatform(src.OsPlatform),
@@ -2802,6 +2810,7 @@ namespace PlayFab
                 FromJsonUtilO(input["GameCertificateReferences"], GameCertificateReferences);
                 FromJsonUtilS(input["GameWorkingDirectory"], GameWorkingDirectory);
                 FromJsonUtilO(input["InstrumentationConfiguration"], pfInstrumentationConfiguration);
+                FromJsonUtilP(input["IsOSPreview"], IsOSPreview);
                 FromJsonUtilS(input["Metadata"], Metadata);
                 FromJsonUtilP(input["MultiplayerServerCountPerVm"], MultiplayerServerCountPerVm);
                 FromJsonUtilS(input["OsPlatform"], OsPlatform);
@@ -2825,6 +2834,7 @@ namespace PlayFab
                 Json::Value each_GameCertificateReferences; ToJsonUtilO(GameCertificateReferences, each_GameCertificateReferences); output["GameCertificateReferences"] = each_GameCertificateReferences;
                 Json::Value each_GameWorkingDirectory; ToJsonUtilS(GameWorkingDirectory, each_GameWorkingDirectory); output["GameWorkingDirectory"] = each_GameWorkingDirectory;
                 Json::Value each_pfInstrumentationConfiguration; ToJsonUtilO(pfInstrumentationConfiguration, each_pfInstrumentationConfiguration); output["InstrumentationConfiguration"] = each_pfInstrumentationConfiguration;
+                Json::Value each_IsOSPreview; ToJsonUtilP(IsOSPreview, each_IsOSPreview); output["IsOSPreview"] = each_IsOSPreview;
                 Json::Value each_Metadata; ToJsonUtilS(Metadata, each_Metadata); output["Metadata"] = each_Metadata;
                 Json::Value each_MultiplayerServerCountPerVm; ToJsonUtilP(MultiplayerServerCountPerVm, each_MultiplayerServerCountPerVm); output["MultiplayerServerCountPerVm"] = each_MultiplayerServerCountPerVm;
                 Json::Value each_OsPlatform; ToJsonUtilS(OsPlatform, each_OsPlatform); output["OsPlatform"] = each_OsPlatform;

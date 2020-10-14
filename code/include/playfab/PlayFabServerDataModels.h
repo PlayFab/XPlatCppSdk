@@ -5375,6 +5375,13 @@ namespace PlayFab
             GenericErrorCodesExperimentationInvalidDuration,
             GenericErrorCodesExperimentationMaxExperimentsReached,
             GenericErrorCodesExperimentationExperimentSchedulingInProgress,
+            GenericErrorCodesExperimentationInvalidEndDate,
+            GenericErrorCodesExperimentationInvalidStartDate,
+            GenericErrorCodesExperimentationMaxDurationExceeded,
+            GenericErrorCodesExperimentationExclusionGroupNotFound,
+            GenericErrorCodesExperimentationExclusionGroupInsufficientCapacity,
+            GenericErrorCodesExperimentationExclusionGroupCannotDelete,
+            GenericErrorCodesExperimentationExclusionGroupInvalidTrafficAllocation,
             GenericErrorCodesMaxActionDepthExceeded,
             GenericErrorCodesTitleNotOnUpdatedPricingPlan,
             GenericErrorCodesSegmentManagementTitleNotInFlight,
@@ -5382,6 +5389,8 @@ namespace PlayFab
             GenericErrorCodesSegmentManagementTriggerActionCountOverLimit,
             GenericErrorCodesSegmentManagementSegmentCountOverLimit,
             GenericErrorCodesSegmentManagementInvalidSegmentId,
+            GenericErrorCodesSegmentManagementInvalidInput,
+            GenericErrorCodesSegmentManagementInvalidSegmentName,
             GenericErrorCodesSnapshotNotFound
         };
 
@@ -8292,6 +8301,41 @@ namespace PlayFab
                 output = Json::Value("ExperimentationExperimentSchedulingInProgress");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentationInvalidEndDate)
+            {
+                output = Json::Value("ExperimentationInvalidEndDate");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentationInvalidStartDate)
+            {
+                output = Json::Value("ExperimentationInvalidStartDate");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentationMaxDurationExceeded)
+            {
+                output = Json::Value("ExperimentationMaxDurationExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentationExclusionGroupNotFound)
+            {
+                output = Json::Value("ExperimentationExclusionGroupNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentationExclusionGroupInsufficientCapacity)
+            {
+                output = Json::Value("ExperimentationExclusionGroupInsufficientCapacity");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentationExclusionGroupCannotDelete)
+            {
+                output = Json::Value("ExperimentationExclusionGroupCannotDelete");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentationExclusionGroupInvalidTrafficAllocation)
+            {
+                output = Json::Value("ExperimentationExclusionGroupInvalidTrafficAllocation");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMaxActionDepthExceeded)
             {
                 output = Json::Value("MaxActionDepthExceeded");
@@ -8325,6 +8369,16 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesSegmentManagementInvalidSegmentId)
             {
                 output = Json::Value("SegmentManagementInvalidSegmentId");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesSegmentManagementInvalidInput)
+            {
+                output = Json::Value("SegmentManagementInvalidInput");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesSegmentManagementInvalidSegmentName)
+            {
+                output = Json::Value("SegmentManagementInvalidSegmentName");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesSnapshotNotFound)
@@ -11245,6 +11299,41 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesExperimentationExperimentSchedulingInProgress;
                 return;
             }
+            if (inputStr == "ExperimentationInvalidEndDate")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentationInvalidEndDate;
+                return;
+            }
+            if (inputStr == "ExperimentationInvalidStartDate")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentationInvalidStartDate;
+                return;
+            }
+            if (inputStr == "ExperimentationMaxDurationExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentationMaxDurationExceeded;
+                return;
+            }
+            if (inputStr == "ExperimentationExclusionGroupNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentationExclusionGroupNotFound;
+                return;
+            }
+            if (inputStr == "ExperimentationExclusionGroupInsufficientCapacity")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentationExclusionGroupInsufficientCapacity;
+                return;
+            }
+            if (inputStr == "ExperimentationExclusionGroupCannotDelete")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentationExclusionGroupCannotDelete;
+                return;
+            }
+            if (inputStr == "ExperimentationExclusionGroupInvalidTrafficAllocation")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentationExclusionGroupInvalidTrafficAllocation;
+                return;
+            }
             if (inputStr == "MaxActionDepthExceeded")
             {
                 output = GenericErrorCodes::GenericErrorCodesMaxActionDepthExceeded;
@@ -11278,6 +11367,16 @@ namespace PlayFab
             if (inputStr == "SegmentManagementInvalidSegmentId")
             {
                 output = GenericErrorCodes::GenericErrorCodesSegmentManagementInvalidSegmentId;
+                return;
+            }
+            if (inputStr == "SegmentManagementInvalidInput")
+            {
+                output = GenericErrorCodes::GenericErrorCodesSegmentManagementInvalidInput;
+                return;
+            }
+            if (inputStr == "SegmentManagementInvalidSegmentName")
+            {
+                output = GenericErrorCodes::GenericErrorCodesSegmentManagementInvalidSegmentName;
                 return;
             }
             if (inputStr == "SnapshotNotFound")
@@ -12761,17 +12860,20 @@ namespace PlayFab
 
         struct AdvancedPushPlatformMsg : public PlayFabBaseModel
         {
+            Boxed<bool> GCMDataOnly;
             std::string Json;
             PushNotificationPlatform Platform;
 
             AdvancedPushPlatformMsg() :
                 PlayFabBaseModel(),
+                GCMDataOnly(),
                 Json(),
                 Platform()
             {}
 
             AdvancedPushPlatformMsg(const AdvancedPushPlatformMsg& src) :
                 PlayFabBaseModel(),
+                GCMDataOnly(src.GCMDataOnly),
                 Json(src.Json),
                 Platform(src.Platform)
             {}
@@ -12780,6 +12882,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilP(input["GCMDataOnly"], GCMDataOnly);
                 FromJsonUtilS(input["Json"], Json);
                 FromJsonEnum(input["Platform"], Platform);
             }
@@ -12787,6 +12890,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_GCMDataOnly; ToJsonUtilP(GCMDataOnly, each_GCMDataOnly); output["GCMDataOnly"] = each_GCMDataOnly;
                 Json::Value each_Json; ToJsonUtilS(Json, each_Json); output["Json"] = each_Json;
                 Json::Value each_Platform; ToJsonEnum(Platform, each_Platform); output["Platform"] = each_Platform;
                 return output;

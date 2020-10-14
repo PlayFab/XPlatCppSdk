@@ -26,8 +26,10 @@
 
 namespace PlayFabUnit
 {
+#if !defined(DISABLE_PLAYFABCLIENT_API)
     // Time out if waiting for the final cloudscript submission longer than this
     constexpr int CLOUDSCRIPT_TIMEOUT_MS = 30000;
+#endif
 
     void TestApp::Log(const char* format, ...)
     {

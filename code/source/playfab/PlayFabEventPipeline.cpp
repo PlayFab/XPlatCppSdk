@@ -84,6 +84,12 @@ namespace PlayFab
 
     void PlayFabEventPipeline::Stop()
     {
+        // flush remaining events
+        if (this->batch.size() > 0)
+        {
+            this->SendBatch(this->batch);
+        }
+
         if (!this->settings->useBackgroundThread)
         {
             LOG_PIPELINE("PlayFabEventPipeline is set to NOT use background threads. Stop() is not needed to be called then, but Update() is required to be manually called every tick in this case.");
@@ -207,14 +213,22 @@ namespace PlayFab
 
     void PlayFabEventPipeline::WorkerThread()
     {
+        using clock = std::chrono::steady_clock;
+
         while (this->isWorkerThreadRunning)
         {
             bool hasMoreWorkToProcess = DoWork();
+
             if (!hasMoreWorkToProcess)
             {
                 // give some time for batches in flight to deflate
                 std::this_thread::sleep_for(std::chrono::milliseconds(this->settings->readBufferWaitTime));
             }
+        }
+        if( this->batch.size() > 0)
+        {
+            // Flush remaining events on shutdown
+            this->SendBatch(this->batch);            
         }
     }
 
@@ -223,11 +237,10 @@ namespace PlayFab
         using clock = std::chrono::steady_clock;
         using Result = PlayFabEventBuffer::EventConsumingResult;
         std::shared_ptr<const IPlayFabEmitEventRequest> request;
-        std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>> batch;
 
         try
         {
-            batch.reserve(this->settings->maximalNumberOfItemsInBatch);
+            this->batch.reserve(this->settings->maximalNumberOfItemsInBatch);
         
             while (this->isWorkerThreadRunning)
             {
@@ -259,17 +272,18 @@ namespace PlayFab
                 case Result::Success:
                 {
                     // add an event to batch
-                    batch.push_back(std::move(request));
+                    this->batch.push_back(std::move(request));
 
-                    // if batch is full
-                    if (batch.size() >= this->settings->maximalNumberOfItemsInBatch)
-                    {
-                        this->SendBatch(batch);
-                    }
-                    else if (batch.size() == 1)
+                    if (this->batch.size() == 1)
                     {
                         // if it is the first event in an incomplete batch then set the batch creation moment
-                        momentBatchStarted = clock::now();
+                        this->momentBatchStarted = clock::now();
+                    }
+                    
+                    if (this->batch.size() >= this->settings->maximalNumberOfItemsInBatch)
+                    {
+                        // if batch is full
+                        this->SendBatch(this->batch);
                     }
                     return true;
                 }
@@ -281,19 +295,19 @@ namespace PlayFab
                 }
 
                 // if batch was started
-                if (batch.size() > 0)
+                if (this->batch.size() > 0)
                 {
                     // check if the batch wait time expired
-                    std::chrono::seconds batchAge = std::chrono::duration_cast<std::chrono::seconds>(clock::now() - momentBatchStarted);
+                    std::chrono::seconds batchAge = std::chrono::duration_cast<std::chrono::seconds>(clock::now() - this->momentBatchStarted);
                     if (batchAge.count() >= (int32_t)this->settings->maximalBatchWaitTime)
                     {
                         // batch wait time expired, send incomplete batch
-                        this->SendBatch(batch);
+                        this->SendBatch(this->batch);
                         return true;
                     }
                 }
                 return false;
-                }
+            }
         }
         catch (const std::exception& ex)
         {
@@ -315,7 +329,7 @@ namespace PlayFab
         return false;
     }
 
-    void PlayFabEventPipeline::SendBatch(std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>>& batch)
+    void PlayFabEventPipeline::SendBatch(std::vector<std::shared_ptr<const IPlayFabEmitEventRequest>>& localbatch)
     {
         // create a WriteEvents API request to send the batch
         EventsModels::WriteEventsRequest batchReq;
@@ -324,7 +338,7 @@ namespace PlayFab
             batchReq.authenticationContext = this->settings->authenticationContext;
         }
 
-        for (const auto& eventEmitRequest : batch)
+        for (const auto& eventEmitRequest : localbatch)
         {
             const auto& playFabEmitRequest = std::dynamic_pointer_cast<const PlayFabEmitEventRequest>(eventEmitRequest);
             batchReq.Events.push_back(playFabEmitRequest->event->eventContents);
@@ -335,11 +349,11 @@ namespace PlayFab
 
         { // LOCK batchesInFlight mutex
             std::unique_lock<std::mutex> lock(inFlightMutex);
-            this->batchesInFlight[customData] = std::move(batch);
+            this->batchesInFlight[customData] = std::move(localbatch);
         } // UNLOCK batchesInFlight
 
-        batch.clear(); // batch vector will be reused
-        batch.reserve(this->settings->maximalNumberOfItemsInBatch);
+        localbatch.clear(); // batch vector will be reused
+        localbatch.reserve(this->settings->maximalNumberOfItemsInBatch);
         if (this->settings->emitType == PlayFabEventPipelineType::PlayFabPlayStream)
         {
             // call Events API to send the batch
