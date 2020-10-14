@@ -426,7 +426,7 @@ namespace PlayFab
                 return false;
             }
 
-            auto urlJstr = jniEnv->NewStringUTF("POST");
+            jstring urlJstr = jniEnv->NewStringUTF("POST");
             if (urlJstr == nullptr)
             {
                 return false;
@@ -446,7 +446,7 @@ namespace PlayFab
                 return false;
             }
 
-            auto urlJstr = jniEnv->NewStringUTF(requestUrl.c_str());
+            jstring urlJstr = jniEnv->NewStringUTF(requestUrl.c_str());
             if (urlJstr == nullptr)
             {
                 return false;

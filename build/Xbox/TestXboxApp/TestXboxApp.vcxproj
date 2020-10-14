@@ -120,7 +120,7 @@
       <ShaderModel>5.0</ShaderModel>
     </FXCompile>
     <CustomBuildStep>
-      <Command>copy $(PF_TEST_TITLE_DATA_JSON) $(Platform)\Layout\Image\Loose /Y</Command>
+      <Command>powershell "cp '$(PF_TEST_TITLE_DATA_JSON)' '$(ProjectDir)/$(Platform)/Layout/Image/Loose/testTitleData.json'"</Command>
     </CustomBuildStep>
     <CustomBuildStep>
       <Message>Copying testTitleData.json for packaging</Message>
@@ -155,7 +155,7 @@
       <ShaderModel>5.0</ShaderModel>
     </FXCompile>
     <CustomBuildStep>
-      <Command>copy $(PF_TEST_TITLE_DATA_JSON) $(Platform)\Layout\Image\Loose /Y</Command>
+      <Command>powershell "cp '$(PF_TEST_TITLE_DATA_JSON)' '$(ProjectDir)/$(Platform)/Layout/Image/Loose/testTitleData.json'"</Command>
     </CustomBuildStep>
     <CustomBuildStep>
       <Message>Copying testTitleData.json for packaging</Message>
@@ -185,7 +185,7 @@
       <ShaderModel>5.0</ShaderModel>
     </FXCompile>
     <CustomBuildStep>
-      <Command>copy $(PF_TEST_TITLE_DATA_JSON) $(Platform)\Layout\Image\Loose /Y</Command>
+      <Command>powershell "cp '$(PF_TEST_TITLE_DATA_JSON)' '$(ProjectDir)/$(Platform)/Layout/Image/Loose/testTitleData.json'"</Command>
     </CustomBuildStep>
     <CustomBuildStep>
       <Message>Copying testTitleData.json for packaging</Message>

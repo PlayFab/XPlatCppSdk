@@ -29,6 +29,55 @@ namespace PlayFab
 
     // PlayFabExperimentation APIs
 
+    void PlayFabExperimentationAPI::CreateExclusionGroup(
+        CreateExclusionGroupRequest& request,
+        const ProcessApiCallback<CreateExclusionGroupResult> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
+        std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", context->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Experimentation/CreateExclusionGroup",
+            headers,
+            jsonAsString,
+            OnCreateExclusionGroupResult,
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateExclusionGroupResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabExperimentationAPI::OnCreateExclusionGroupResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        CreateExclusionGroupResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = (*static_cast<ProcessApiCallback<CreateExclusionGroupResult> *>(internalPtr.get()));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
     void PlayFabExperimentationAPI::CreateExperiment(
         CreateExperimentRequest& request,
         const ProcessApiCallback<CreateExperimentResult> callback,
@@ -78,6 +127,55 @@ namespace PlayFab
         }
     }
 
+    void PlayFabExperimentationAPI::DeleteExclusionGroup(
+        DeleteExclusionGroupRequest& request,
+        const ProcessApiCallback<EmptyResponse> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
+        std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", context->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Experimentation/DeleteExclusionGroup",
+            headers,
+            jsonAsString,
+            OnDeleteExclusionGroupResult,
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabExperimentationAPI::OnDeleteExclusionGroupResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        EmptyResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr.get()));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
     void PlayFabExperimentationAPI::DeleteExperiment(
         DeleteExperimentRequest& request,
         const ProcessApiCallback<EmptyResponse> callback,
@@ -122,6 +220,104 @@ namespace PlayFab
             if (internalPtr.get() != nullptr)
             {
                 const auto& callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr.get()));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabExperimentationAPI::GetExclusionGroups(
+        GetExclusionGroupsRequest& request,
+        const ProcessApiCallback<GetExclusionGroupsResult> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
+        std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", context->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Experimentation/GetExclusionGroups",
+            headers,
+            jsonAsString,
+            OnGetExclusionGroupsResult,
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetExclusionGroupsResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabExperimentationAPI::OnGetExclusionGroupsResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        GetExclusionGroupsResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = (*static_cast<ProcessApiCallback<GetExclusionGroupsResult> *>(internalPtr.get()));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabExperimentationAPI::GetExclusionGroupTraffic(
+        GetExclusionGroupTrafficRequest& request,
+        const ProcessApiCallback<GetExclusionGroupTrafficResult> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
+        std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", context->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Experimentation/GetExclusionGroupTraffic",
+            headers,
+            jsonAsString,
+            OnGetExclusionGroupTrafficResult,
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetExclusionGroupTrafficResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabExperimentationAPI::OnGetExclusionGroupTrafficResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        GetExclusionGroupTrafficResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = (*static_cast<ProcessApiCallback<GetExclusionGroupTrafficResult> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -356,6 +552,55 @@ namespace PlayFab
     }
 
     void PlayFabExperimentationAPI::OnStopExperimentResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        EmptyResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr.get()));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabExperimentationAPI::UpdateExclusionGroup(
+        UpdateExclusionGroupRequest& request,
+        const ProcessApiCallback<EmptyResponse> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
+        std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", context->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Experimentation/UpdateExclusionGroup",
+            headers,
+            jsonAsString,
+            OnUpdateExclusionGroupResult,
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabExperimentationAPI::OnUpdateExclusionGroupResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
