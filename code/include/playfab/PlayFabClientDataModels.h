@@ -7872,6 +7872,113 @@ namespace PlayFab
             }
         };
 
+        struct MicrosoftStorePayload : public PlayFabBaseModel
+        {
+            std::string CollectionsMsIdKey;
+            std::string UserId;
+            std::string XboxToken;
+
+            MicrosoftStorePayload() :
+                PlayFabBaseModel(),
+                CollectionsMsIdKey(),
+                UserId(),
+                XboxToken()
+            {}
+
+            MicrosoftStorePayload(const MicrosoftStorePayload& src) :
+                PlayFabBaseModel(),
+                CollectionsMsIdKey(src.CollectionsMsIdKey),
+                UserId(src.UserId),
+                XboxToken(src.XboxToken)
+            {}
+
+            ~MicrosoftStorePayload() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CollectionsMsIdKey"], CollectionsMsIdKey);
+                FromJsonUtilS(input["UserId"], UserId);
+                FromJsonUtilS(input["XboxToken"], XboxToken);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CollectionsMsIdKey; ToJsonUtilS(CollectionsMsIdKey, each_CollectionsMsIdKey); output["CollectionsMsIdKey"] = each_CollectionsMsIdKey;
+                Json::Value each_UserId; ToJsonUtilS(UserId, each_UserId); output["UserId"] = each_UserId;
+                Json::Value each_XboxToken; ToJsonUtilS(XboxToken, each_XboxToken); output["XboxToken"] = each_XboxToken;
+                return output;
+            }
+        };
+
+        struct ConsumeMicrosoftStoreEntitlementsRequest : public PlayFabRequestCommon
+        {
+            std::string CatalogVersion;
+            std::map<std::string, std::string> CustomTags;
+            MicrosoftStorePayload MarketplaceSpecificData;
+
+            ConsumeMicrosoftStoreEntitlementsRequest() :
+                PlayFabRequestCommon(),
+                CatalogVersion(),
+                CustomTags(),
+                MarketplaceSpecificData()
+            {}
+
+            ConsumeMicrosoftStoreEntitlementsRequest(const ConsumeMicrosoftStoreEntitlementsRequest& src) :
+                PlayFabRequestCommon(),
+                CatalogVersion(src.CatalogVersion),
+                CustomTags(src.CustomTags),
+                MarketplaceSpecificData(src.MarketplaceSpecificData)
+            {}
+
+            ~ConsumeMicrosoftStoreEntitlementsRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilO(input["MarketplaceSpecificData"], MarketplaceSpecificData);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CatalogVersion; ToJsonUtilS(CatalogVersion, each_CatalogVersion); output["CatalogVersion"] = each_CatalogVersion;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_MarketplaceSpecificData; ToJsonUtilO(MarketplaceSpecificData, each_MarketplaceSpecificData); output["MarketplaceSpecificData"] = each_MarketplaceSpecificData;
+                return output;
+            }
+        };
+
+        struct ConsumeMicrosoftStoreEntitlementsResponse : public PlayFabResultCommon
+        {
+            std::list<ItemInstance> Items;
+
+            ConsumeMicrosoftStoreEntitlementsResponse() :
+                PlayFabResultCommon(),
+                Items()
+            {}
+
+            ConsumeMicrosoftStoreEntitlementsResponse(const ConsumeMicrosoftStoreEntitlementsResponse& src) :
+                PlayFabResultCommon(),
+                Items(src.Items)
+            {}
+
+            ~ConsumeMicrosoftStoreEntitlementsResponse() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["Items"], Items);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Items; ToJsonUtilO(Items, each_Items); output["Items"] = each_Items;
+                return output;
+            }
+        };
+
         struct ConsumePSNEntitlementsRequest : public PlayFabRequestCommon
         {
             std::string CatalogVersion;
