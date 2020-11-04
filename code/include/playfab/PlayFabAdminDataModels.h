@@ -5427,7 +5427,6 @@ namespace PlayFab
             GenericErrorCodesCatalogSearchParameterInvalid,
             GenericErrorCodesCatalogFeatureDisabled,
             GenericErrorCodesCatalogConfigInvalid,
-            GenericErrorCodesCatalogUnauthorized,
             GenericErrorCodesCatalogItemTypeInvalid,
             GenericErrorCodesCatalogBadRequest,
             GenericErrorCodesCatalogTooManyRequests,
@@ -5489,6 +5488,10 @@ namespace PlayFab
             GenericErrorCodesSegmentManagementInvalidSegmentId,
             GenericErrorCodesSegmentManagementInvalidInput,
             GenericErrorCodesSegmentManagementInvalidSegmentName,
+            GenericErrorCodesDeleteSegmentRateLimitExceeded,
+            GenericErrorCodesCreateSegmentRateLimitExceeded,
+            GenericErrorCodesUpdateSegmentRateLimitExceeded,
+            GenericErrorCodesGetSegmentsRateLimitExceeded,
             GenericErrorCodesSnapshotNotFound
         };
 
@@ -8169,11 +8172,6 @@ namespace PlayFab
                 output = Json::Value("CatalogConfigInvalid");
                 return;
             }
-            if (input == GenericErrorCodes::GenericErrorCodesCatalogUnauthorized)
-            {
-                output = Json::Value("CatalogUnauthorized");
-                return;
-            }
             if (input == GenericErrorCodes::GenericErrorCodesCatalogItemTypeInvalid)
             {
                 output = Json::Value("CatalogItemTypeInvalid");
@@ -8477,6 +8475,26 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesSegmentManagementInvalidSegmentName)
             {
                 output = Json::Value("SegmentManagementInvalidSegmentName");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesDeleteSegmentRateLimitExceeded)
+            {
+                output = Json::Value("DeleteSegmentRateLimitExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCreateSegmentRateLimitExceeded)
+            {
+                output = Json::Value("CreateSegmentRateLimitExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesUpdateSegmentRateLimitExceeded)
+            {
+                output = Json::Value("UpdateSegmentRateLimitExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGetSegmentsRateLimitExceeded)
+            {
+                output = Json::Value("GetSegmentsRateLimitExceeded");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesSnapshotNotFound)
@@ -11167,11 +11185,6 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesCatalogConfigInvalid;
                 return;
             }
-            if (inputStr == "CatalogUnauthorized")
-            {
-                output = GenericErrorCodes::GenericErrorCodesCatalogUnauthorized;
-                return;
-            }
             if (inputStr == "CatalogItemTypeInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesCatalogItemTypeInvalid;
@@ -11475,6 +11488,26 @@ namespace PlayFab
             if (inputStr == "SegmentManagementInvalidSegmentName")
             {
                 output = GenericErrorCodes::GenericErrorCodesSegmentManagementInvalidSegmentName;
+                return;
+            }
+            if (inputStr == "DeleteSegmentRateLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesDeleteSegmentRateLimitExceeded;
+                return;
+            }
+            if (inputStr == "CreateSegmentRateLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCreateSegmentRateLimitExceeded;
+                return;
+            }
+            if (inputStr == "UpdateSegmentRateLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesUpdateSegmentRateLimitExceeded;
+                return;
+            }
+            if (inputStr == "GetSegmentsRateLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGetSegmentsRateLimitExceeded;
                 return;
             }
             if (inputStr == "SnapshotNotFound")
