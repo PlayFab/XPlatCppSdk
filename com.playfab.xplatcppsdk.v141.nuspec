@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>com.playfab.xplatcppsdk.v141</id>
-        <version>3.41.201027</version>
+        <version>3.42.201119</version>
         <authors>Microsoft</authors>
         <owners>pgilmore, toddbellMSFT</owners>
         <projectUrl>http://github.com/PlayFab/XPlatCppSdk</projectUrl>

@@ -120,6 +120,7 @@
     <ClInclude Include="$(TestSourceDir)\TestApp\TestReport.h" />
     <ClInclude Include="$(TestSourceDir)\TestApp\TestRunner.h" />
     <ClInclude Include="$(TestSourceDir)\TestApp\TestUtils.h" />
+    <ClInclude Include="$(TestSourceDir\TestApp\PlayFabQoSTest.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabApiSettings.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabAuthenticationContext.h" />
   </ItemGroup>
@@ -138,6 +139,7 @@
     <ClCompile Include="$(TestSourceDir)\TestApp\TestReport.cpp" />
     <ClCompile Include="$(TestSourceDir)\TestApp\TestRunner.cpp" />
     <ClCompile Include="$(TestSourceDir)\TestApp\TestUtils.cpp" />
+    <ClCompile Include="$(TestSourceDir)\TestApp\PlayFabQoSTest.cpp" />
     <ClCompile Include="MainWin32.cpp" />
     <ClCompile Include="TestAppWin32.cpp" />
   </ItemGroup>

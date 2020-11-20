@@ -20,6 +20,9 @@
 #include "PlayFabTestMultiUserInstance.h"
 #endif
 
+// possible disable qos thing
+#include "PlayFabQoSTest.h"
+
 #include <playfab/PlayFabJsonHeaders.h>
 
 #include "PlayFabTestAlloc.h"
@@ -29,7 +32,7 @@ namespace PlayFabUnit
 #if !defined(DISABLE_PLAYFABCLIENT_API)
     // Time out if waiting for the final cloudscript submission longer than this
     constexpr int CLOUDSCRIPT_TIMEOUT_MS = 30000;
-#endif
+#endif // !defined(DISABLE_PLAYFABCLIENT_API)
 
     void TestApp::Log(const char* format, ...)
     {
@@ -43,7 +46,7 @@ namespace PlayFabUnit
         vsnprintf(message, sizeof(message), format, args);
 #else
         _vsnprintf_s(message, sizeof(message), format, args);
-#endif
+#endif // defined(PLAYFAB_PLATFORM_PLAYSTATION)
         va_end(args);
 
         // Output the message in a platform-dependent way.
@@ -82,7 +85,7 @@ namespace PlayFabUnit
         PlatformLoginTest loginTest;
         loginTest.SetTitleInfo(testTitleData);
         testRunner.Add(loginTest);
-#endif
+#endif // !defined(PLAYFAB_PLATFORM_IOS)
 
         // Add PlayFab API tests.
         PlayFabApiTest pfApiTest;
@@ -93,7 +96,7 @@ namespace PlayFabUnit
         PlayFabEventTest pfEventTest;
         pfEventTest.SetTitleInfo(testTitleData);
         testRunner.Add(pfEventTest);
-#endif
+#endif // false, tests are too unstable
 
         PlayFabTestMultiUserStatic pfMultiUserStaticTest;
         pfMultiUserStaticTest.SetTitleInfo(testTitleData);
@@ -102,7 +105,14 @@ namespace PlayFabUnit
         PlayFabTestMultiUserInstance pfMultiUserInstanceTest;
         pfMultiUserInstanceTest.SetTitleInfo(testTitleData);
         testRunner.Add(pfMultiUserInstanceTest);
-#endif
+
+#if defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX)
+        PlayFabQoSTest pfQosTest;
+        pfQosTest.SetTitleInfo(testTitleData);
+        testRunner.Add(pfQosTest);
+#endif //defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX)
+
+#endif // !defined(DISABLE_PLAYFABCLIENT_API)
 
         // Run the tests (blocks until all tests have finished).
         testRunner.Run();
@@ -131,13 +141,13 @@ namespace PlayFabUnit
 
         // Publish the cloud script response to STDOUT.
         Log("Cloud Response: %s\n", cloudResponse.c_str());
-#endif
+#endif //!defined(DISABLE_PLAYFABCLIENT_API)
 
         // Return 0 (success) if all tests passed. Otherwise, return 1 (error).
         return testRunner.AllTestsPassed()
 #if !defined(DISABLE_PLAYFABCLIENT_API)
             && !cloudResponse.empty() ? 0 : 1
-#endif
+#endif // !defined(DISABLE_PLAYFABCLIENT_API)
             ;
     }
 
@@ -214,5 +224,5 @@ namespace PlayFabUnit
         cloudResponse = "Failed to report results via cloud script: " + error.GenerateErrorReport();
         cloudResponseConditionVar.notify_one();
     }
-#endif
+#endif // !defined(DISABLE_PLAYFABCLIENT_API)
 }
