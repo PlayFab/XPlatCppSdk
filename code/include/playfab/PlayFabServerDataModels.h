@@ -5295,6 +5295,7 @@ namespace PlayFab
             GenericErrorCodesDuplicateKeys,
             GenericErrorCodesWasNotCreatedWithCloudRoot,
             GenericErrorCodesLegacyMultiplayerServersDeprecated,
+            GenericErrorCodesVirtualCurrencyCurrentlyUnavailable,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5356,6 +5357,20 @@ namespace PlayFab
             GenericErrorCodesExportCannotParseQuery,
             GenericErrorCodesExportControlCommandsNotAllowed,
             GenericErrorCodesExportQueryMissingTableReference,
+            GenericErrorCodesExplorerBasicInvalidQueryName,
+            GenericErrorCodesExplorerBasicInvalidQueryDescription,
+            GenericErrorCodesExplorerBasicInvalidQueryConditions,
+            GenericErrorCodesExplorerBasicInvalidQueryStartDate,
+            GenericErrorCodesExplorerBasicInvalidQueryEndDate,
+            GenericErrorCodesExplorerBasicInvalidQueryGroupBy,
+            GenericErrorCodesExplorerBasicInvalidQueryAggregateType,
+            GenericErrorCodesExplorerBasicInvalidQueryAggregateProperty,
+            GenericErrorCodesExplorerBasicLoadQueriesError,
+            GenericErrorCodesExplorerBasicLoadQueryError,
+            GenericErrorCodesExplorerBasicCreateQueryError,
+            GenericErrorCodesExplorerBasicDeleteQueryError,
+            GenericErrorCodesExplorerBasicUpdateQueryError,
+            GenericErrorCodesExplorerBasicSavedQueriesLimit,
             GenericErrorCodesTitleNotEnabledForParty,
             GenericErrorCodesPartyVersionNotFound,
             GenericErrorCodesMultiplayerServerBuildReferencedByMatchmakingQueue,
@@ -7904,6 +7919,11 @@ namespace PlayFab
                 output = Json::Value("LegacyMultiplayerServersDeprecated");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesVirtualCurrencyCurrentlyUnavailable)
+            {
+                output = Json::Value("VirtualCurrencyCurrentlyUnavailable");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
             {
                 output = Json::Value("MatchmakingEntityInvalid");
@@ -8207,6 +8227,76 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesExportQueryMissingTableReference)
             {
                 output = Json::Value("ExportQueryMissingTableReference");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExplorerBasicInvalidQueryName)
+            {
+                output = Json::Value("ExplorerBasicInvalidQueryName");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExplorerBasicInvalidQueryDescription)
+            {
+                output = Json::Value("ExplorerBasicInvalidQueryDescription");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExplorerBasicInvalidQueryConditions)
+            {
+                output = Json::Value("ExplorerBasicInvalidQueryConditions");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExplorerBasicInvalidQueryStartDate)
+            {
+                output = Json::Value("ExplorerBasicInvalidQueryStartDate");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExplorerBasicInvalidQueryEndDate)
+            {
+                output = Json::Value("ExplorerBasicInvalidQueryEndDate");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExplorerBasicInvalidQueryGroupBy)
+            {
+                output = Json::Value("ExplorerBasicInvalidQueryGroupBy");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExplorerBasicInvalidQueryAggregateType)
+            {
+                output = Json::Value("ExplorerBasicInvalidQueryAggregateType");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExplorerBasicInvalidQueryAggregateProperty)
+            {
+                output = Json::Value("ExplorerBasicInvalidQueryAggregateProperty");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExplorerBasicLoadQueriesError)
+            {
+                output = Json::Value("ExplorerBasicLoadQueriesError");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExplorerBasicLoadQueryError)
+            {
+                output = Json::Value("ExplorerBasicLoadQueryError");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExplorerBasicCreateQueryError)
+            {
+                output = Json::Value("ExplorerBasicCreateQueryError");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExplorerBasicDeleteQueryError)
+            {
+                output = Json::Value("ExplorerBasicDeleteQueryError");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExplorerBasicUpdateQueryError)
+            {
+                output = Json::Value("ExplorerBasicUpdateQueryError");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExplorerBasicSavedQueriesLimit)
+            {
+                output = Json::Value("ExplorerBasicSavedQueriesLimit");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesTitleNotEnabledForParty)
@@ -10917,6 +11007,11 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesLegacyMultiplayerServersDeprecated;
                 return;
             }
+            if (inputStr == "VirtualCurrencyCurrentlyUnavailable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyCurrentlyUnavailable;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -11220,6 +11315,76 @@ namespace PlayFab
             if (inputStr == "ExportQueryMissingTableReference")
             {
                 output = GenericErrorCodes::GenericErrorCodesExportQueryMissingTableReference;
+                return;
+            }
+            if (inputStr == "ExplorerBasicInvalidQueryName")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExplorerBasicInvalidQueryName;
+                return;
+            }
+            if (inputStr == "ExplorerBasicInvalidQueryDescription")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExplorerBasicInvalidQueryDescription;
+                return;
+            }
+            if (inputStr == "ExplorerBasicInvalidQueryConditions")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExplorerBasicInvalidQueryConditions;
+                return;
+            }
+            if (inputStr == "ExplorerBasicInvalidQueryStartDate")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExplorerBasicInvalidQueryStartDate;
+                return;
+            }
+            if (inputStr == "ExplorerBasicInvalidQueryEndDate")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExplorerBasicInvalidQueryEndDate;
+                return;
+            }
+            if (inputStr == "ExplorerBasicInvalidQueryGroupBy")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExplorerBasicInvalidQueryGroupBy;
+                return;
+            }
+            if (inputStr == "ExplorerBasicInvalidQueryAggregateType")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExplorerBasicInvalidQueryAggregateType;
+                return;
+            }
+            if (inputStr == "ExplorerBasicInvalidQueryAggregateProperty")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExplorerBasicInvalidQueryAggregateProperty;
+                return;
+            }
+            if (inputStr == "ExplorerBasicLoadQueriesError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExplorerBasicLoadQueriesError;
+                return;
+            }
+            if (inputStr == "ExplorerBasicLoadQueryError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExplorerBasicLoadQueryError;
+                return;
+            }
+            if (inputStr == "ExplorerBasicCreateQueryError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExplorerBasicCreateQueryError;
+                return;
+            }
+            if (inputStr == "ExplorerBasicDeleteQueryError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExplorerBasicDeleteQueryError;
+                return;
+            }
+            if (inputStr == "ExplorerBasicUpdateQueryError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExplorerBasicUpdateQueryError;
+                return;
+            }
+            if (inputStr == "ExplorerBasicSavedQueriesLimit")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExplorerBasicSavedQueriesLimit;
                 return;
             }
             if (inputStr == "TitleNotEnabledForParty")
