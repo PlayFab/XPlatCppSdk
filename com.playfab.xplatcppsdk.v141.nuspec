@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>com.playfab.xplatcppsdk.v141</id>
-        <version>3.42.201119</version>
+        <version>3.43.201207</version>
         <authors>Microsoft</authors>
         <owners>pgilmore, toddbellMSFT</owners>
         <projectUrl>http://github.com/PlayFab/XPlatCppSdk</projectUrl>
@@ -16,12 +16,9 @@
     </metadata>
     <files>
         <file src=".\com.playfab.xplatcppsdk.v141.targets" target="build\native\com.playfab.xplatcppsdk.v141.targets" />
-        <file src=".\external\jsoncpp-build\x64\Debug\lib_json.lib" target="build\native\lib\x64\Debug\lib_json.lib" />
-        <file src=".\build\Windows\x64\Debug\XPlatCppWindows\XPlatCppWindows.pdb" target="build\native\lib\x64\Debug\XPlatCppWindows.pdb" />
-        <file src=".\build\Windows\x64\Debug\XPlatCppWindows\XPlatCppWindows.lib" target="build\native\lib\x64\Debug\XPlatCppWindows.lib" />
-        <file src=".\external\jsoncpp-build\x64\Release\lib_json.lib" target="build\native\lib\x64\Release\lib_json.lib" />
-        <file src=".\build\Windows\x64\Release\XPlatCppWindows\XPlatCppWindows.pdb" target="build\native\lib\x64\Release\XPlatCppWindows.pdb" />
-        <file src=".\build\Windows\x64\Release\XPlatCppWindows\XPlatCppWindows.lib" target="build\native\lib\x64\Release\XPlatCppWindows.lib" />
+        <file src=".\external\jsoncpp-build\$configuration$\lib_json.lib" target="build\native\lib\$configuration$\lib_json.lib" />
+        <file src=".\build\Windows\$configuration$\XPlatCppWindows\XPlatCppWindows.pdb" target="build\native\lib\$configuration$\XPlatCppWindows.pdb" />
+        <file src=".\build\Windows\$configuration$\XPlatCppWindows\XPlatCppWindows.lib" target="build\native\lib\$configuration$\XPlatCppWindows.lib" />
         <file src=".\code\include\playfab\**\*.h" target="build\native\include\playfab" />
         <file src=".\external\jsoncpp\include\json\**\*.h" target="build\native\include\json" />
     </files>

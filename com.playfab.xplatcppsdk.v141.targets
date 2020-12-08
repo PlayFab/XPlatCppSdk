@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -12,8 +12,24 @@
         %(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)lib\x64\Release\lib_json.lib" />
-    <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)lib\x64\Release\XPlatCppWindows.lib" />
+  <ItemGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)lib\x64\Debug\lib_json.lib" />
+    <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)lib\x64\Debug\XPlatCppWindows.lib" />
+  </ItemGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(MSBuildThisFileDirectory)lib\x64\Debug\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>
+        $(MSBuildThisFileDirectory)lib\x64\Debug\lib_json.lib;
+        $(MSBuildThisFileDirectory)lib\x64\Debug\XPlatCppWindows.lib;
+        %(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)lib\x64\Debug\lib_json.lib" />
+    <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)lib\x64\Debug\XPlatCppWindows.lib" />
   </ItemGroup>
 </Project>
