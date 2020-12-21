@@ -87,12 +87,12 @@ steps:
     . ./shared_build.sh
   displayName: 'SDKGenerate'
 
-- powershell:
+- powershell: |
     cd %WORKSPACE%\\JenkinsSdkSetupScripts\\JenkinsScripts\\Piepline\'
     SyncSdkRepoSubmodules.bat'
   displayName: 'SDK Submodule check'
 
-- bash:
+- bash: |
     set -e
     echo alias the ADO variables into local variables
     ApiSpecSource="${{ parameters.ApiSpecSource }}"
