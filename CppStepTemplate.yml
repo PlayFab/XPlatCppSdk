@@ -70,7 +70,6 @@ steps:
   persistCredentials: true
 - bash: |
     set -e
-    
     echo alias the ADO variables into local variables
     ApiSpecSource="${{ parameters.ApiSpecSource }}"
     CommitMessage="${{ parameters.CommitMessage }}"
@@ -83,28 +82,18 @@ steps:
     # Hack attempt to get WORKSPACE into a sub-environment
     export WORKSPACE="$WORKSPACE"
     
-    cd "$WORKSPACE/sdks/$SdkName"
-    
     . "$WORKSPACE/JenkinsSdkSetupScripts/JenkinsScripts/Pipeline/testInit.sh"
-    
     cd "$WORKSPACE/SDKGenerator/SDKBuildScripts"
-    export PF_TEST_TITLE_DATA_JSON="$WORKSPACE\JenkinsSdkSetupScripts\Creds\testTitleData.json"
     . ./shared_build.sh
-    
-    . "$WORKSPACE/JenkinsSdkSetupScripts/JenkinsScripts/Pipeline/util.sh"
-    
-    Find2019MsBuild || Find2017MsBuild
+  displayName: 'SDKGenerate'
 
-  displayName: 'Generate'
-
-  - powershell:
-    cd %WORKSPACE%\JenkinsSdkSetupScripts\\JenkinsScripts\\Piepline\'
+- powershell:
+    cd %WORKSPACE%\\JenkinsSdkSetupScripts\\JenkinsScripts\\Piepline\'
     SyncSdkRepoSubmodules.bat'
-  displayName: 'Submodule check'
+  displayName: 'SDK Submodule check'
 
 - bash:
-  set -e
-    
+    set -e
     echo alias the ADO variables into local variables
     ApiSpecSource="${{ parameters.ApiSpecSource }}"
     CommitMessage="${{ parameters.CommitMessage }}"
@@ -117,13 +106,10 @@ steps:
     # Hack attempt to get WORKSPACE into a sub-environment
     export WORKSPACE="$WORKSPACE"
     
-    cd "$WORKSPACE/sdks/$SdkName"
-    
     . "$WORKSPACE/JenkinsSdkSetupScripts/JenkinsScripts/Pipeline/testInit.sh"
     
     cd "$WORKSPACE/SDKGenerator/SDKBuildScripts"
     export PF_TEST_TITLE_DATA_JSON="$WORKSPACE\JenkinsSdkSetupScripts\Creds\testTitleData.json"
-
 
     if [ $BuildWindows = true ] ;
     then
@@ -136,7 +122,7 @@ steps:
     nuget restore "$WORKSPACE//SDKGenerator//JenkinsConsoleUtility//JenkinsConsoleUtility.sln"
     "$MSBUILD_EXE" "$WORKSPACE//SDKGenerator//JenkinsConsoleUtility//JenkinsConsoleUtility.sln" //p:configuration="Debug" //p:platform="Any CPU" //t:Rebuild 
 
-    if [ $TestWindows = true ] ;
+    if [ $TestWindows = true ] && [ $BuildWindows = true ] ;
     then
       echo === Test the Cpp Project === 
       "$WORKSPACE//sdks//$SdkName//build//Windows//x64//Release//TestClientApp//TestClientApp.exe"
