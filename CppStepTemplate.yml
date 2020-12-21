@@ -90,7 +90,7 @@ steps:
 - powershell: |
 
     cd "JenkinsSdkSetupScripts\\JenkinsScripts\\Pipeline\"
-    SyncSdkRepoSubmodules.bat'
+    SyncSdkRepoSubmodules.bat
   displayName: 'SDK Submodule check'
 
 - bash: |
