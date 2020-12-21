@@ -82,9 +82,9 @@ steps:
     # Hack attempt to get WORKSPACE into a sub-environment
     export WORKSPACE="$WORKSPACE"
     
-    . "$WORKSPACE/JenkinsSdkSetupScripts/JenkinsScripts/Pipeline/testInit.sh"
-    cd "$WORKSPACE/SDKGenerator/SDKBuildScripts"
-    . ./shared_build.sh
+    #  . "$WORKSPACE/JenkinsSdkSetupScripts/JenkinsScripts/Pipeline/testInit.sh"
+    # cd "$WORKSPACE/SDKGenerator/SDKBuildScripts"
+    # . ./shared_build.sh
   displayName: 'SDKGenerate'
 
 - powershell: |
