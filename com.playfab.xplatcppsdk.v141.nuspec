@@ -2,23 +2,23 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>com.playfab.xplatcppsdk.v141</id>
-        <version>3.43.201207</version>
+        <version>3.44.201217</version>
         <authors>Microsoft</authors>
         <owners>pgilmore, toddbellMSFT</owners>
         <projectUrl>http://github.com/PlayFab/XPlatCppSdk</projectUrl>
         <license type="expression">Apache-2.0</license>
         <iconUrl>https://playfab.com/assets/img/logo/azure-playfab-logo.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <releaseNotes>https://api.playfab.com/releaseNotes/#201014</releaseNotes>
+        <releaseNotes>https://api.playfab.com/releaseNotes/#3.44.201217</releaseNotes>
         <description>Microsoft Azure PlayFab XPlatCppSdk</description>
         <copyright>Copyright ©2020 Microsoft Corp</copyright>
         <tags>Microsoft Azure PlayFab Baas Paas JSON REST HTTP SSL API cloud liveops game gamedev native nativepackage</tags>
     </metadata>
     <files>
         <file src=".\com.playfab.xplatcppsdk.v141.targets" target="build\native\com.playfab.xplatcppsdk.v141.targets" />
-        <file src=".\external\jsoncpp-build\$configuration$\lib_json.lib" target="build\native\lib\$configuration$\lib_json.lib" />
-        <file src=".\build\Windows\$configuration$\XPlatCppWindows\XPlatCppWindows.pdb" target="build\native\lib\$configuration$\XPlatCppWindows.pdb" />
-        <file src=".\build\Windows\$configuration$\XPlatCppWindows\XPlatCppWindows.lib" target="build\native\lib\$configuration$\XPlatCppWindows.lib" />
+        <file src=".\external\jsoncpp-build\x64\$configuration$\lib_json.lib" target="build\native\lib\$configuration$\lib_json.lib" />
+        <file src=".\build\Windows\x64\$configuration$\XPlatCppWindows\XPlatCppWindows.pdb" target="build\native\lib\$configuration$\XPlatCppWindows.pdb" />
+        <file src=".\build\Windows\x64\$configuration$\XPlatCppWindows\XPlatCppWindows.lib" target="build\native\lib\$configuration$\XPlatCppWindows.lib" />
         <file src=".\code\include\playfab\**\*.h" target="build\native\include\playfab" />
         <file src=".\external\jsoncpp\include\json\**\*.h" target="build\native\include\json" />
     </files>

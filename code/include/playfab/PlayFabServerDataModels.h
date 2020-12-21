@@ -5371,6 +5371,7 @@ namespace PlayFab
             GenericErrorCodesExplorerBasicDeleteQueryError,
             GenericErrorCodesExplorerBasicUpdateQueryError,
             GenericErrorCodesExplorerBasicSavedQueriesLimit,
+            GenericErrorCodesExplorerBasicSavedQueryNotFound,
             GenericErrorCodesTitleNotEnabledForParty,
             GenericErrorCodesPartyVersionNotFound,
             GenericErrorCodesMultiplayerServerBuildReferencedByMatchmakingQueue,
@@ -8297,6 +8298,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesExplorerBasicSavedQueriesLimit)
             {
                 output = Json::Value("ExplorerBasicSavedQueriesLimit");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExplorerBasicSavedQueryNotFound)
+            {
+                output = Json::Value("ExplorerBasicSavedQueryNotFound");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesTitleNotEnabledForParty)
@@ -11385,6 +11391,11 @@ namespace PlayFab
             if (inputStr == "ExplorerBasicSavedQueriesLimit")
             {
                 output = GenericErrorCodes::GenericErrorCodesExplorerBasicSavedQueriesLimit;
+                return;
+            }
+            if (inputStr == "ExplorerBasicSavedQueryNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExplorerBasicSavedQueryNotFound;
                 return;
             }
             if (inputStr == "TitleNotEnabledForParty")
