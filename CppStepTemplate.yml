@@ -90,9 +90,7 @@ steps:
 - powershell: |
 
     cd "JenkinsSdkSetupScripts\\JenkinsScripts\\Pipeline\"
-    echo jumped to pipe line at pwd
-    pwd
-    echo dir contents
+    Get-Location
     dir
     SyncSdkRepoSubmodules.bat
   displayName: 'SDK Submodule check'
