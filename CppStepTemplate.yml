@@ -83,12 +83,13 @@ steps:
     export WORKSPACE="$WORKSPACE"
     
     #  . "$WORKSPACE/JenkinsSdkSetupScripts/JenkinsScripts/Pipeline/testInit.sh"
-    # cd "$WORKSPACE/SDKGenerator/SDKBuildScripts"
-    # . ./shared_build.sh
+    cd "$WORKSPACE/SDKGenerator/SDKBuildScripts"
+    . ./shared_build.sh
   displayName: 'SDKGenerate'
 
 - powershell: |
-    cd %WORKSPACE%\\JenkinsSdkSetupScripts\\JenkinsScripts\\Piepline\'
+
+    cd "JenkinsSdkSetupScripts\\JenkinsScripts\\Pipeline\"
     SyncSdkRepoSubmodules.bat'
   displayName: 'SDK Submodule check'
 
