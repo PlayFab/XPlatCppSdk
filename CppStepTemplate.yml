@@ -96,6 +96,9 @@ steps:
     cd "$WORKSPACE/SDKGenerator/SDKBuildScripts"
     export PF_TEST_TITLE_DATA_JSON="$WORKSPACE\JenkinsSdkSetupScripts\Creds\testTitleData.json"
 
+    . "$WORKSPACE/JenkinsSdkSetupScripts/JenkinsScripts/Pipeline/util.sh"
+    Find2019MsBuild || Find2017MsBuild
+
     if [ $BuildWindows = true ] ;
     then
       echo === Build the XPlatCpp Project === 
