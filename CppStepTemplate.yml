@@ -86,28 +86,12 @@ steps:
     cd "$WORKSPACE/SDKGenerator/SDKBuildScripts"
     . ./shared_build.sh
 
-    pushd "$WORKSPACE\sdks\$SdkName\"
+    cd "$WORKSPACE\\sdks\\$SdkName"
     if [ -f set-gitmodules.bat ] ;
     then
       echo set-gitmodules.bat file detected, running it...
       cmd <<< call set-gitmodules.bat
     fi
-    popd
-
-    set -e
-    echo alias the ADO variables into local variables
-    ApiSpecSource="${{ parameters.ApiSpecSource }}"
-    CommitMessage="${{ parameters.CommitMessage }}"
-    GitDestBranch="${{ parameters.GitDestBranch }}"
-    SdkGenPrvTmplRepo="${{ parameters.SdkGenPrvTmplRepo }}""
-    SdkName="${{ parameters.SdkName }}"
-    BuildWindows="${{ parameters.BuildWindows }}"
-    TestWindows="${{ parameters.TestWindows }}"
-    WORKSPACE=$(pwd -W)
-    # Hack attempt to get WORKSPACE into a sub-environment
-    export WORKSPACE="$WORKSPACE"
-    
-    . "$WORKSPACE/JenkinsSdkSetupScripts/JenkinsScripts/Pipeline/testInit.sh"
     
     cd "$WORKSPACE/SDKGenerator/SDKBuildScripts"
     export PF_TEST_TITLE_DATA_JSON="$WORKSPACE\JenkinsSdkSetupScripts\Creds\testTitleData.json"
