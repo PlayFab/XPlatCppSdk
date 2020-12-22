@@ -85,17 +85,15 @@ steps:
     #  . "$WORKSPACE/JenkinsSdkSetupScripts/JenkinsScripts/Pipeline/testInit.sh"
     cd "$WORKSPACE/SDKGenerator/SDKBuildScripts"
     . ./shared_build.sh
-  displayName: 'SDKGenerate'
 
-- powershell: |
+    pushd "$WORKSPACE\sdks\$SdkName\"
+    if [ -f set-gitmodules.bat ] ;
+    then
+      echo set-gitmodules.bat file detected, running it...
+      cmd <<< call set-gitmodules.bat
+    fi
+    popd
 
-    cd "JenkinsSdkSetupScripts\\JenkinsScripts\\Pipeline\"
-    Get-Location
-    dir
-    SyncSdkRepoSubmodules.bat
-  displayName: 'SDK Submodule check'
-
-- bash: |
     set -e
     echo alias the ADO variables into local variables
     ApiSpecSource="${{ parameters.ApiSpecSource }}"
