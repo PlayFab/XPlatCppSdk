@@ -6342,6 +6342,45 @@ namespace PlayFab
             }
         };
 
+        struct UpdateBuildNameRequest : public PlayFabRequestCommon
+        {
+            std::string BuildId;
+            std::string BuildName;
+            std::map<std::string, std::string> CustomTags;
+
+            UpdateBuildNameRequest() :
+                PlayFabRequestCommon(),
+                BuildId(),
+                BuildName(),
+                CustomTags()
+            {}
+
+            UpdateBuildNameRequest(const UpdateBuildNameRequest& src) :
+                PlayFabRequestCommon(),
+                BuildId(src.BuildId),
+                BuildName(src.BuildName),
+                CustomTags(src.CustomTags)
+            {}
+
+            ~UpdateBuildNameRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["BuildId"], BuildId);
+                FromJsonUtilS(input["BuildName"], BuildName);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
+                Json::Value each_BuildName; ToJsonUtilS(BuildName, each_BuildName); output["BuildName"] = each_BuildName;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                return output;
+            }
+        };
+
         struct UpdateBuildRegionRequest : public PlayFabRequestCommon
         {
             std::string BuildId;

@@ -5397,6 +5397,7 @@ namespace PlayFab
             GenericErrorCodesExperimentationExclusionGroupInsufficientCapacity,
             GenericErrorCodesExperimentationExclusionGroupCannotDelete,
             GenericErrorCodesExperimentationExclusionGroupInvalidTrafficAllocation,
+            GenericErrorCodesExperimentationExclusionGroupInvalidName,
             GenericErrorCodesMaxActionDepthExceeded,
             GenericErrorCodesTitleNotOnUpdatedPricingPlan,
             GenericErrorCodesSegmentManagementTitleNotInFlight,
@@ -8428,6 +8429,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesExperimentationExclusionGroupInvalidTrafficAllocation)
             {
                 output = Json::Value("ExperimentationExclusionGroupInvalidTrafficAllocation");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentationExclusionGroupInvalidName)
+            {
+                output = Json::Value("ExperimentationExclusionGroupInvalidName");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMaxActionDepthExceeded)
@@ -11521,6 +11527,11 @@ namespace PlayFab
             if (inputStr == "ExperimentationExclusionGroupInvalidTrafficAllocation")
             {
                 output = GenericErrorCodes::GenericErrorCodesExperimentationExclusionGroupInvalidTrafficAllocation;
+                return;
+            }
+            if (inputStr == "ExperimentationExclusionGroupInvalidName")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentationExclusionGroupInvalidName;
                 return;
             }
             if (inputStr == "MaxActionDepthExceeded")

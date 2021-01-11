@@ -7979,6 +7979,108 @@ namespace PlayFab
             }
         };
 
+        struct PlayStation5Payload : public PlayFabBaseModel
+        {
+            std::list<std::string> Ids;
+            std::string ServiceLabel;
+
+            PlayStation5Payload() :
+                PlayFabBaseModel(),
+                Ids(),
+                ServiceLabel()
+            {}
+
+            PlayStation5Payload(const PlayStation5Payload& src) :
+                PlayFabBaseModel(),
+                Ids(src.Ids),
+                ServiceLabel(src.ServiceLabel)
+            {}
+
+            ~PlayStation5Payload() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["Ids"], Ids);
+                FromJsonUtilS(input["ServiceLabel"], ServiceLabel);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Ids; ToJsonUtilS(Ids, each_Ids); output["Ids"] = each_Ids;
+                Json::Value each_ServiceLabel; ToJsonUtilS(ServiceLabel, each_ServiceLabel); output["ServiceLabel"] = each_ServiceLabel;
+                return output;
+            }
+        };
+
+        struct ConsumePS5EntitlementsRequest : public PlayFabRequestCommon
+        {
+            std::string CatalogVersion;
+            std::map<std::string, std::string> CustomTags;
+            PlayStation5Payload MarketplaceSpecificData;
+
+            ConsumePS5EntitlementsRequest() :
+                PlayFabRequestCommon(),
+                CatalogVersion(),
+                CustomTags(),
+                MarketplaceSpecificData()
+            {}
+
+            ConsumePS5EntitlementsRequest(const ConsumePS5EntitlementsRequest& src) :
+                PlayFabRequestCommon(),
+                CatalogVersion(src.CatalogVersion),
+                CustomTags(src.CustomTags),
+                MarketplaceSpecificData(src.MarketplaceSpecificData)
+            {}
+
+            ~ConsumePS5EntitlementsRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilO(input["MarketplaceSpecificData"], MarketplaceSpecificData);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CatalogVersion; ToJsonUtilS(CatalogVersion, each_CatalogVersion); output["CatalogVersion"] = each_CatalogVersion;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_MarketplaceSpecificData; ToJsonUtilO(MarketplaceSpecificData, each_MarketplaceSpecificData); output["MarketplaceSpecificData"] = each_MarketplaceSpecificData;
+                return output;
+            }
+        };
+
+        struct ConsumePS5EntitlementsResult : public PlayFabResultCommon
+        {
+            std::list<ItemInstance> Items;
+
+            ConsumePS5EntitlementsResult() :
+                PlayFabResultCommon(),
+                Items()
+            {}
+
+            ConsumePS5EntitlementsResult(const ConsumePS5EntitlementsResult& src) :
+                PlayFabResultCommon(),
+                Items(src.Items)
+            {}
+
+            ~ConsumePS5EntitlementsResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["Items"], Items);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Items; ToJsonUtilO(Items, each_Items); output["Items"] = each_Items;
+                return output;
+            }
+        };
+
         struct ConsumePSNEntitlementsRequest : public PlayFabRequestCommon
         {
             std::string CatalogVersion;
