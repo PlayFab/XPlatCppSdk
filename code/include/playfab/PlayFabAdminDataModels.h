@@ -5495,6 +5495,7 @@ namespace PlayFab
             GenericErrorCodesExperimentationExclusionGroupInsufficientCapacity,
             GenericErrorCodesExperimentationExclusionGroupCannotDelete,
             GenericErrorCodesExperimentationExclusionGroupInvalidTrafficAllocation,
+            GenericErrorCodesExperimentationExclusionGroupInvalidName,
             GenericErrorCodesMaxActionDepthExceeded,
             GenericErrorCodesTitleNotOnUpdatedPricingPlan,
             GenericErrorCodesSegmentManagementTitleNotInFlight,
@@ -8526,6 +8527,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesExperimentationExclusionGroupInvalidTrafficAllocation)
             {
                 output = Json::Value("ExperimentationExclusionGroupInvalidTrafficAllocation");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentationExclusionGroupInvalidName)
+            {
+                output = Json::Value("ExperimentationExclusionGroupInvalidName");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMaxActionDepthExceeded)
@@ -11619,6 +11625,11 @@ namespace PlayFab
             if (inputStr == "ExperimentationExclusionGroupInvalidTrafficAllocation")
             {
                 output = GenericErrorCodes::GenericErrorCodesExperimentationExclusionGroupInvalidTrafficAllocation;
+                return;
+            }
+            if (inputStr == "ExperimentationExclusionGroupInvalidName")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentationExclusionGroupInvalidName;
                 return;
             }
             if (inputStr == "MaxActionDepthExceeded")
@@ -20957,18 +20968,15 @@ namespace PlayFab
 
         struct LinkedUserAccountSegmentFilter : public PlayFabBaseModel
         {
-            Boxed<SegmentFilterComparison> Comparison;
             Boxed<SegmentLoginIdentityProvider> LoginProvider;
 
             LinkedUserAccountSegmentFilter() :
                 PlayFabBaseModel(),
-                Comparison(),
                 LoginProvider()
             {}
 
             LinkedUserAccountSegmentFilter(const LinkedUserAccountSegmentFilter& src) :
                 PlayFabBaseModel(),
-                Comparison(src.Comparison),
                 LoginProvider(src.LoginProvider)
             {}
 
@@ -20976,14 +20984,12 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
-                FromJsonUtilE(input["Comparison"], Comparison);
                 FromJsonUtilE(input["LoginProvider"], LoginProvider);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                Json::Value each_Comparison; ToJsonUtilE(Comparison, each_Comparison); output["Comparison"] = each_Comparison;
                 Json::Value each_LoginProvider; ToJsonUtilE(LoginProvider, each_LoginProvider); output["LoginProvider"] = each_LoginProvider;
                 return output;
             }

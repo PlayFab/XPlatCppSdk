@@ -63,6 +63,7 @@ namespace PlayFab
         void ConfirmPurchase(ClientModels::ConfirmPurchaseRequest& request, const ProcessApiCallback<ClientModels::ConfirmPurchaseResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void ConsumeItem(ClientModels::ConsumeItemRequest& request, const ProcessApiCallback<ClientModels::ConsumeItemResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void ConsumeMicrosoftStoreEntitlements(ClientModels::ConsumeMicrosoftStoreEntitlementsRequest& request, const ProcessApiCallback<ClientModels::ConsumeMicrosoftStoreEntitlementsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void ConsumePS5Entitlements(ClientModels::ConsumePS5EntitlementsRequest& request, const ProcessApiCallback<ClientModels::ConsumePS5EntitlementsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void ConsumePSNEntitlements(ClientModels::ConsumePSNEntitlementsRequest& request, const ProcessApiCallback<ClientModels::ConsumePSNEntitlementsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void ConsumeXboxEntitlements(ClientModels::ConsumeXboxEntitlementsRequest& request, const ProcessApiCallback<ClientModels::ConsumeXboxEntitlementsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void CreateSharedGroup(ClientModels::CreateSharedGroupRequest& request, const ProcessApiCallback<ClientModels::CreateSharedGroupResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -231,6 +232,7 @@ namespace PlayFab
         void OnConfirmPurchaseResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnConsumeItemResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnConsumeMicrosoftStoreEntitlementsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnConsumePS5EntitlementsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnConsumePSNEntitlementsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnConsumeXboxEntitlementsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnCreateSharedGroupResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
