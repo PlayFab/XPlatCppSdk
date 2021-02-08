@@ -5394,6 +5394,8 @@ namespace PlayFab
             GenericErrorCodesWasNotCreatedWithCloudRoot,
             GenericErrorCodesLegacyMultiplayerServersDeprecated,
             GenericErrorCodesVirtualCurrencyCurrentlyUnavailable,
+            GenericErrorCodesSteamUserNotFound,
+            GenericErrorCodesElasticSearchOperationFailed,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5418,6 +5420,7 @@ namespace PlayFab
             GenericErrorCodesTitleConfigNotFound,
             GenericErrorCodesTitleConfigUpdateConflict,
             GenericErrorCodesTitleConfigSerializationError,
+            GenericErrorCodesCatalogApiNotImplemented,
             GenericErrorCodesCatalogEntityInvalid,
             GenericErrorCodesCatalogTitleIdMissing,
             GenericErrorCodesCatalogPlayerIdMissing,
@@ -5509,7 +5512,8 @@ namespace PlayFab
             GenericErrorCodesCreateSegmentRateLimitExceeded,
             GenericErrorCodesUpdateSegmentRateLimitExceeded,
             GenericErrorCodesGetSegmentsRateLimitExceeded,
-            GenericErrorCodesSnapshotNotFound
+            GenericErrorCodesSnapshotNotFound,
+            GenericErrorCodesInventoryApiNotImplemented
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -8024,6 +8028,16 @@ namespace PlayFab
                 output = Json::Value("VirtualCurrencyCurrentlyUnavailable");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesSteamUserNotFound)
+            {
+                output = Json::Value("SteamUserNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesElasticSearchOperationFailed)
+            {
+                output = Json::Value("ElasticSearchOperationFailed");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
             {
                 output = Json::Value("MatchmakingEntityInvalid");
@@ -8142,6 +8156,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesTitleConfigSerializationError)
             {
                 output = Json::Value("TitleConfigSerializationError");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCatalogApiNotImplemented)
+            {
+                output = Json::Value("CatalogApiNotImplemented");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesCatalogEntityInvalid)
@@ -8602,6 +8621,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesSnapshotNotFound)
             {
                 output = Json::Value("SnapshotNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInventoryApiNotImplemented)
+            {
+                output = Json::Value("InventoryApiNotImplemented");
                 return;
             }
         }
@@ -11122,6 +11146,16 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyCurrentlyUnavailable;
                 return;
             }
+            if (inputStr == "SteamUserNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesSteamUserNotFound;
+                return;
+            }
+            if (inputStr == "ElasticSearchOperationFailed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesElasticSearchOperationFailed;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -11240,6 +11274,11 @@ namespace PlayFab
             if (inputStr == "TitleConfigSerializationError")
             {
                 output = GenericErrorCodes::GenericErrorCodesTitleConfigSerializationError;
+                return;
+            }
+            if (inputStr == "CatalogApiNotImplemented")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCatalogApiNotImplemented;
                 return;
             }
             if (inputStr == "CatalogEntityInvalid")
@@ -11700,6 +11739,11 @@ namespace PlayFab
             if (inputStr == "SnapshotNotFound")
             {
                 output = GenericErrorCodes::GenericErrorCodesSnapshotNotFound;
+                return;
+            }
+            if (inputStr == "InventoryApiNotImplemented")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInventoryApiNotImplemented;
                 return;
             }
         }

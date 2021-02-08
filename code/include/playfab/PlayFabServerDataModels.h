@@ -5296,6 +5296,8 @@ namespace PlayFab
             GenericErrorCodesWasNotCreatedWithCloudRoot,
             GenericErrorCodesLegacyMultiplayerServersDeprecated,
             GenericErrorCodesVirtualCurrencyCurrentlyUnavailable,
+            GenericErrorCodesSteamUserNotFound,
+            GenericErrorCodesElasticSearchOperationFailed,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5320,6 +5322,7 @@ namespace PlayFab
             GenericErrorCodesTitleConfigNotFound,
             GenericErrorCodesTitleConfigUpdateConflict,
             GenericErrorCodesTitleConfigSerializationError,
+            GenericErrorCodesCatalogApiNotImplemented,
             GenericErrorCodesCatalogEntityInvalid,
             GenericErrorCodesCatalogTitleIdMissing,
             GenericErrorCodesCatalogPlayerIdMissing,
@@ -5411,7 +5414,8 @@ namespace PlayFab
             GenericErrorCodesCreateSegmentRateLimitExceeded,
             GenericErrorCodesUpdateSegmentRateLimitExceeded,
             GenericErrorCodesGetSegmentsRateLimitExceeded,
-            GenericErrorCodesSnapshotNotFound
+            GenericErrorCodesSnapshotNotFound,
+            GenericErrorCodesInventoryApiNotImplemented
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -7926,6 +7930,16 @@ namespace PlayFab
                 output = Json::Value("VirtualCurrencyCurrentlyUnavailable");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesSteamUserNotFound)
+            {
+                output = Json::Value("SteamUserNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesElasticSearchOperationFailed)
+            {
+                output = Json::Value("ElasticSearchOperationFailed");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
             {
                 output = Json::Value("MatchmakingEntityInvalid");
@@ -8044,6 +8058,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesTitleConfigSerializationError)
             {
                 output = Json::Value("TitleConfigSerializationError");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCatalogApiNotImplemented)
+            {
+                output = Json::Value("CatalogApiNotImplemented");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesCatalogEntityInvalid)
@@ -8504,6 +8523,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesSnapshotNotFound)
             {
                 output = Json::Value("SnapshotNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInventoryApiNotImplemented)
+            {
+                output = Json::Value("InventoryApiNotImplemented");
                 return;
             }
         }
@@ -11024,6 +11048,16 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesVirtualCurrencyCurrentlyUnavailable;
                 return;
             }
+            if (inputStr == "SteamUserNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesSteamUserNotFound;
+                return;
+            }
+            if (inputStr == "ElasticSearchOperationFailed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesElasticSearchOperationFailed;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -11142,6 +11176,11 @@ namespace PlayFab
             if (inputStr == "TitleConfigSerializationError")
             {
                 output = GenericErrorCodes::GenericErrorCodesTitleConfigSerializationError;
+                return;
+            }
+            if (inputStr == "CatalogApiNotImplemented")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCatalogApiNotImplemented;
                 return;
             }
             if (inputStr == "CatalogEntityInvalid")
@@ -11602,6 +11641,11 @@ namespace PlayFab
             if (inputStr == "SnapshotNotFound")
             {
                 output = GenericErrorCodes::GenericErrorCodesSnapshotNotFound;
+                return;
+            }
+            if (inputStr == "InventoryApiNotImplemented")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInventoryApiNotImplemented;
                 return;
             }
         }
@@ -21085,6 +21129,50 @@ namespace PlayFab
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
                 Json::Value each_ServerCustomId; ToJsonUtilS(ServerCustomId, each_ServerCustomId); output["ServerCustomId"] = each_ServerCustomId;
+                return output;
+            }
+        };
+
+        struct LoginWithSteamIdRequest : public PlayFabRequestCommon
+        {
+            Boxed<bool> CreateAccount;
+            std::map<std::string, std::string> CustomTags;
+            Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
+            std::string SteamId;
+
+            LoginWithSteamIdRequest() :
+                PlayFabRequestCommon(),
+                CreateAccount(),
+                CustomTags(),
+                InfoRequestParameters(),
+                SteamId()
+            {}
+
+            LoginWithSteamIdRequest(const LoginWithSteamIdRequest& src) :
+                PlayFabRequestCommon(),
+                CreateAccount(src.CreateAccount),
+                CustomTags(src.CustomTags),
+                InfoRequestParameters(src.InfoRequestParameters),
+                SteamId(src.SteamId)
+            {}
+
+            ~LoginWithSteamIdRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["CreateAccount"], CreateAccount);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
+                FromJsonUtilS(input["SteamId"], SteamId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
+                Json::Value each_SteamId; ToJsonUtilS(SteamId, each_SteamId); output["SteamId"] = each_SteamId;
                 return output;
             }
         };
