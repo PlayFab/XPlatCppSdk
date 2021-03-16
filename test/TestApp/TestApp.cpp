@@ -81,7 +81,7 @@ namespace PlayFabUnit
         // Set this up for use when the tests finish
         this->clientApi = std::make_shared<PlayFab::PlayFabClientInstanceAPI>(PlayFab::PlayFabSettings::staticPlayer);
 
-#if !defined(PLAYFAB_PLATFORM_IOS) // IOS proj doesn't include PlatformLoginTest files yet
+#if !defined(PLAYFAB_PLATFORM_GDK) && !defined(PLAYFAB_PLATFORM_IOS) // IOS proj doesn't include PlatformLoginTest files yet
         PlatformLoginTest loginTest;
         loginTest.SetTitleInfo(testTitleData);
         testRunner.Add(loginTest);
@@ -105,13 +105,11 @@ namespace PlayFabUnit
         PlayFabTestMultiUserInstance pfMultiUserInstanceTest;
         pfMultiUserInstanceTest.SetTitleInfo(testTitleData);
         testRunner.Add(pfMultiUserInstanceTest);
-
-#if defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX)
+#if !defined(PLAYFAB_PLATFORM_GDK) && (defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX))
         PlayFabQoSTest pfQosTest;
         pfQosTest.SetTitleInfo(testTitleData);
         testRunner.Add(pfQosTest);
 #endif //defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX)
-
 #endif // !defined(DISABLE_PLAYFABCLIENT_API)
 
         // Run the tests (blocks until all tests have finished).

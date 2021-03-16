@@ -5396,6 +5396,7 @@ namespace PlayFab
             GenericErrorCodesVirtualCurrencyCurrentlyUnavailable,
             GenericErrorCodesSteamUserNotFound,
             GenericErrorCodesElasticSearchOperationFailed,
+            GenericErrorCodesNotImplemented,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8036,6 +8037,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesElasticSearchOperationFailed)
             {
                 output = Json::Value("ElasticSearchOperationFailed");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNotImplemented)
+            {
+                output = Json::Value("NotImplemented");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -11154,6 +11160,11 @@ namespace PlayFab
             if (inputStr == "ElasticSearchOperationFailed")
             {
                 output = GenericErrorCodes::GenericErrorCodesElasticSearchOperationFailed;
+                return;
+            }
+            if (inputStr == "NotImplemented")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNotImplemented;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
@@ -24657,17 +24668,20 @@ namespace PlayFab
         struct GetPolicyResponse : public PlayFabResultCommon
         {
             std::string PolicyName;
+            Int32 PolicyVersion;
             std::list<PermissionStatement> Statements;
 
             GetPolicyResponse() :
                 PlayFabResultCommon(),
                 PolicyName(),
+                PolicyVersion(),
                 Statements()
             {}
 
             GetPolicyResponse(const GetPolicyResponse& src) :
                 PlayFabResultCommon(),
                 PolicyName(src.PolicyName),
+                PolicyVersion(src.PolicyVersion),
                 Statements(src.Statements)
             {}
 
@@ -24676,6 +24690,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["PolicyName"], PolicyName);
+                FromJsonUtilP(input["PolicyVersion"], PolicyVersion);
                 FromJsonUtilO(input["Statements"], Statements);
             }
 
@@ -24683,6 +24698,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_PolicyName; ToJsonUtilS(PolicyName, each_PolicyName); output["PolicyName"] = each_PolicyName;
+                Json::Value each_PolicyVersion; ToJsonUtilP(PolicyVersion, each_PolicyVersion); output["PolicyVersion"] = each_PolicyVersion;
                 Json::Value each_Statements; ToJsonUtilO(Statements, each_Statements); output["Statements"] = each_Statements;
                 return output;
             }
@@ -29555,12 +29571,14 @@ namespace PlayFab
         {
             bool OverwritePolicy;
             std::string PolicyName;
+            Int32 PolicyVersion;
             std::list<PermissionStatement> Statements;
 
             UpdatePolicyRequest() :
                 PlayFabRequestCommon(),
                 OverwritePolicy(),
                 PolicyName(),
+                PolicyVersion(),
                 Statements()
             {}
 
@@ -29568,6 +29586,7 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 OverwritePolicy(src.OverwritePolicy),
                 PolicyName(src.PolicyName),
+                PolicyVersion(src.PolicyVersion),
                 Statements(src.Statements)
             {}
 
@@ -29577,6 +29596,7 @@ namespace PlayFab
             {
                 FromJsonUtilP(input["OverwritePolicy"], OverwritePolicy);
                 FromJsonUtilS(input["PolicyName"], PolicyName);
+                FromJsonUtilP(input["PolicyVersion"], PolicyVersion);
                 FromJsonUtilO(input["Statements"], Statements);
             }
 
@@ -29585,6 +29605,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_OverwritePolicy; ToJsonUtilP(OverwritePolicy, each_OverwritePolicy); output["OverwritePolicy"] = each_OverwritePolicy;
                 Json::Value each_PolicyName; ToJsonUtilS(PolicyName, each_PolicyName); output["PolicyName"] = each_PolicyName;
+                Json::Value each_PolicyVersion; ToJsonUtilP(PolicyVersion, each_PolicyVersion); output["PolicyVersion"] = each_PolicyVersion;
                 Json::Value each_Statements; ToJsonUtilO(Statements, each_Statements); output["Statements"] = each_Statements;
                 return output;
             }
