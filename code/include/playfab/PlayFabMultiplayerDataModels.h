@@ -36,7 +36,8 @@ namespace PlayFab
             AzureRegionFranceCentral,
             AzureRegionWestUs2,
             AzureRegionCentralIndia,
-            AzureRegionUaeNorth
+            AzureRegionUaeNorth,
+            AzureRegionUkSouth
         };
 
         inline void ToJsonEnum(const AzureRegion input, Json::Value& output)
@@ -164,6 +165,11 @@ namespace PlayFab
             if (input == AzureRegion::AzureRegionUaeNorth)
             {
                 output = Json::Value("UaeNorth");
+                return;
+            }
+            if (input == AzureRegion::AzureRegionUkSouth)
+            {
+                output = Json::Value("UkSouth");
                 return;
             }
         }
@@ -297,6 +303,11 @@ namespace PlayFab
             if (inputStr == "UaeNorth")
             {
                 output = AzureRegion::AzureRegionUaeNorth;
+                return;
+            }
+            if (inputStr == "UkSouth")
+            {
+                output = AzureRegion::AzureRegionUkSouth;
                 return;
             }
         }

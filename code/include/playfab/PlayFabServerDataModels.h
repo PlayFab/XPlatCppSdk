@@ -5298,6 +5298,7 @@ namespace PlayFab
             GenericErrorCodesVirtualCurrencyCurrentlyUnavailable,
             GenericErrorCodesSteamUserNotFound,
             GenericErrorCodesElasticSearchOperationFailed,
+            GenericErrorCodesNotImplemented,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -7938,6 +7939,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesElasticSearchOperationFailed)
             {
                 output = Json::Value("ElasticSearchOperationFailed");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNotImplemented)
+            {
+                output = Json::Value("NotImplemented");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -11056,6 +11062,11 @@ namespace PlayFab
             if (inputStr == "ElasticSearchOperationFailed")
             {
                 output = GenericErrorCodes::GenericErrorCodesElasticSearchOperationFailed;
+                return;
+            }
+            if (inputStr == "NotImplemented")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNotImplemented;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")

@@ -367,7 +367,6 @@ namespace PlayFab
         {
             std::map<std::string, std::string> CustomTags;
             std::string Description;
-            Boxed<Uint32> Duration;
             Boxed<time_t> EndDate;
             std::string ExclusionGroupId;
             Boxed<Uint32> ExclusionGroupTrafficAllocation;
@@ -382,7 +381,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 CustomTags(),
                 Description(),
-                Duration(),
                 EndDate(),
                 ExclusionGroupId(),
                 ExclusionGroupTrafficAllocation(),
@@ -398,7 +396,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
                 Description(src.Description),
-                Duration(src.Duration),
                 EndDate(src.EndDate),
                 ExclusionGroupId(src.ExclusionGroupId),
                 ExclusionGroupTrafficAllocation(src.ExclusionGroupTrafficAllocation),
@@ -416,7 +413,6 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["Description"], Description);
-                FromJsonUtilP(input["Duration"], Duration);
                 FromJsonUtilT(input["EndDate"], EndDate);
                 FromJsonUtilS(input["ExclusionGroupId"], ExclusionGroupId);
                 FromJsonUtilP(input["ExclusionGroupTrafficAllocation"], ExclusionGroupTrafficAllocation);
@@ -433,7 +429,6 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Description; ToJsonUtilS(Description, each_Description); output["Description"] = each_Description;
-                Json::Value each_Duration; ToJsonUtilP(Duration, each_Duration); output["Duration"] = each_Duration;
                 Json::Value each_EndDate; ToJsonUtilT(EndDate, each_EndDate); output["EndDate"] = each_EndDate;
                 Json::Value each_ExclusionGroupId; ToJsonUtilS(ExclusionGroupId, each_ExclusionGroupId); output["ExclusionGroupId"] = each_ExclusionGroupId;
                 Json::Value each_ExclusionGroupTrafficAllocation; ToJsonUtilP(ExclusionGroupTrafficAllocation, each_ExclusionGroupTrafficAllocation); output["ExclusionGroupTrafficAllocation"] = each_ExclusionGroupTrafficAllocation;
@@ -639,7 +634,6 @@ namespace PlayFab
         struct Experiment : public PlayFabBaseModel
         {
             std::string Description;
-            Boxed<Uint32> Duration;
             Boxed<time_t> EndDate;
             std::string ExclusionGroupId;
             Boxed<Uint32> ExclusionGroupTrafficAllocation;
@@ -655,7 +649,6 @@ namespace PlayFab
             Experiment() :
                 PlayFabBaseModel(),
                 Description(),
-                Duration(),
                 EndDate(),
                 ExclusionGroupId(),
                 ExclusionGroupTrafficAllocation(),
@@ -672,7 +665,6 @@ namespace PlayFab
             Experiment(const Experiment& src) :
                 PlayFabBaseModel(),
                 Description(src.Description),
-                Duration(src.Duration),
                 EndDate(src.EndDate),
                 ExclusionGroupId(src.ExclusionGroupId),
                 ExclusionGroupTrafficAllocation(src.ExclusionGroupTrafficAllocation),
@@ -691,7 +683,6 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Description"], Description);
-                FromJsonUtilP(input["Duration"], Duration);
                 FromJsonUtilT(input["EndDate"], EndDate);
                 FromJsonUtilS(input["ExclusionGroupId"], ExclusionGroupId);
                 FromJsonUtilP(input["ExclusionGroupTrafficAllocation"], ExclusionGroupTrafficAllocation);
@@ -709,7 +700,6 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_Description; ToJsonUtilS(Description, each_Description); output["Description"] = each_Description;
-                Json::Value each_Duration; ToJsonUtilP(Duration, each_Duration); output["Duration"] = each_Duration;
                 Json::Value each_EndDate; ToJsonUtilT(EndDate, each_EndDate); output["EndDate"] = each_EndDate;
                 Json::Value each_ExclusionGroupId; ToJsonUtilS(ExclusionGroupId, each_ExclusionGroupId); output["ExclusionGroupId"] = each_ExclusionGroupId;
                 Json::Value each_ExclusionGroupTrafficAllocation; ToJsonUtilP(ExclusionGroupTrafficAllocation, each_ExclusionGroupTrafficAllocation); output["ExclusionGroupTrafficAllocation"] = each_ExclusionGroupTrafficAllocation;
@@ -1416,7 +1406,6 @@ namespace PlayFab
         {
             std::map<std::string, std::string> CustomTags;
             std::string Description;
-            Boxed<Uint32> Duration;
             Boxed<time_t> EndDate;
             std::string ExclusionGroupId;
             Boxed<Uint32> ExclusionGroupTrafficAllocation;
@@ -1432,7 +1421,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 CustomTags(),
                 Description(),
-                Duration(),
                 EndDate(),
                 ExclusionGroupId(),
                 ExclusionGroupTrafficAllocation(),
@@ -1449,7 +1437,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
                 Description(src.Description),
-                Duration(src.Duration),
                 EndDate(src.EndDate),
                 ExclusionGroupId(src.ExclusionGroupId),
                 ExclusionGroupTrafficAllocation(src.ExclusionGroupTrafficAllocation),
@@ -1468,7 +1455,6 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["Description"], Description);
-                FromJsonUtilP(input["Duration"], Duration);
                 FromJsonUtilT(input["EndDate"], EndDate);
                 FromJsonUtilS(input["ExclusionGroupId"], ExclusionGroupId);
                 FromJsonUtilP(input["ExclusionGroupTrafficAllocation"], ExclusionGroupTrafficAllocation);
@@ -1486,7 +1472,6 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Description; ToJsonUtilS(Description, each_Description); output["Description"] = each_Description;
-                Json::Value each_Duration; ToJsonUtilP(Duration, each_Duration); output["Duration"] = each_Duration;
                 Json::Value each_EndDate; ToJsonUtilT(EndDate, each_EndDate); output["EndDate"] = each_EndDate;
                 Json::Value each_ExclusionGroupId; ToJsonUtilS(ExclusionGroupId, each_ExclusionGroupId); output["ExclusionGroupId"] = each_ExclusionGroupId;
                 Json::Value each_ExclusionGroupTrafficAllocation; ToJsonUtilP(ExclusionGroupTrafficAllocation, each_ExclusionGroupTrafficAllocation); output["ExclusionGroupTrafficAllocation"] = each_ExclusionGroupTrafficAllocation;
