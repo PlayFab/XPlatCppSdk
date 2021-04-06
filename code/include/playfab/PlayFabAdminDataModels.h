@@ -5374,7 +5374,7 @@ namespace PlayFab
             GenericErrorCodesEvaluationModePlayerCountExceeded,
             GenericErrorCodesGetPlayersInSegmentRateLimitExceeded,
             GenericErrorCodesCloudScriptFunctionNameSizeExceeded,
-            GenericErrorCodesInsightsManagementTitleInEvaluationMode,
+            GenericErrorCodesPaidInsightsFeaturesNotEnabled,
             GenericErrorCodesCloudScriptAzureFunctionsQueueRequestError,
             GenericErrorCodesEvaluationModeTitleCountExceeded,
             GenericErrorCodesInsightsManagementTitleNotInFlight,
@@ -5513,6 +5513,7 @@ namespace PlayFab
             GenericErrorCodesCreateSegmentRateLimitExceeded,
             GenericErrorCodesUpdateSegmentRateLimitExceeded,
             GenericErrorCodesGetSegmentsRateLimitExceeded,
+            GenericErrorCodesAsyncExportNotInFlight,
             GenericErrorCodesSnapshotNotFound,
             GenericErrorCodesInventoryApiNotImplemented
         };
@@ -7929,9 +7930,9 @@ namespace PlayFab
                 output = Json::Value("CloudScriptFunctionNameSizeExceeded");
                 return;
             }
-            if (input == GenericErrorCodes::GenericErrorCodesInsightsManagementTitleInEvaluationMode)
+            if (input == GenericErrorCodes::GenericErrorCodesPaidInsightsFeaturesNotEnabled)
             {
-                output = Json::Value("InsightsManagementTitleInEvaluationMode");
+                output = Json::Value("PaidInsightsFeaturesNotEnabled");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesCloudScriptAzureFunctionsQueueRequestError)
@@ -8622,6 +8623,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesGetSegmentsRateLimitExceeded)
             {
                 output = Json::Value("GetSegmentsRateLimitExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAsyncExportNotInFlight)
+            {
+                output = Json::Value("AsyncExportNotInFlight");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesSnapshotNotFound)
@@ -11052,9 +11058,9 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesCloudScriptFunctionNameSizeExceeded;
                 return;
             }
-            if (inputStr == "InsightsManagementTitleInEvaluationMode")
+            if (inputStr == "PaidInsightsFeaturesNotEnabled")
             {
-                output = GenericErrorCodes::GenericErrorCodesInsightsManagementTitleInEvaluationMode;
+                output = GenericErrorCodes::GenericErrorCodesPaidInsightsFeaturesNotEnabled;
                 return;
             }
             if (inputStr == "CloudScriptAzureFunctionsQueueRequestError")
@@ -11745,6 +11751,11 @@ namespace PlayFab
             if (inputStr == "GetSegmentsRateLimitExceeded")
             {
                 output = GenericErrorCodes::GenericErrorCodesGetSegmentsRateLimitExceeded;
+                return;
+            }
+            if (inputStr == "AsyncExportNotInFlight")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAsyncExportNotInFlight;
                 return;
             }
             if (inputStr == "SnapshotNotFound")

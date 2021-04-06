@@ -1468,25 +1468,19 @@ namespace PlayFab
             std::string AliasId;
             std::string AliasName;
             std::list<BuildSelectionCriterion> BuildSelectionCriteria;
-            Int32 PageSize;
-            std::string SkipToken;
 
             BuildAliasDetailsResponse() :
                 PlayFabResultCommon(),
                 AliasId(),
                 AliasName(),
-                BuildSelectionCriteria(),
-                PageSize(),
-                SkipToken()
+                BuildSelectionCriteria()
             {}
 
             BuildAliasDetailsResponse(const BuildAliasDetailsResponse& src) :
                 PlayFabResultCommon(),
                 AliasId(src.AliasId),
                 AliasName(src.AliasName),
-                BuildSelectionCriteria(src.BuildSelectionCriteria),
-                PageSize(src.PageSize),
-                SkipToken(src.SkipToken)
+                BuildSelectionCriteria(src.BuildSelectionCriteria)
             {}
 
             ~BuildAliasDetailsResponse() = default;
@@ -1496,8 +1490,6 @@ namespace PlayFab
                 FromJsonUtilS(input["AliasId"], AliasId);
                 FromJsonUtilS(input["AliasName"], AliasName);
                 FromJsonUtilO(input["BuildSelectionCriteria"], BuildSelectionCriteria);
-                FromJsonUtilP(input["PageSize"], PageSize);
-                FromJsonUtilS(input["SkipToken"], SkipToken);
             }
 
             Json::Value ToJson() const override
@@ -1506,8 +1498,6 @@ namespace PlayFab
                 Json::Value each_AliasId; ToJsonUtilS(AliasId, each_AliasId); output["AliasId"] = each_AliasId;
                 Json::Value each_AliasName; ToJsonUtilS(AliasName, each_AliasName); output["AliasName"] = each_AliasName;
                 Json::Value each_BuildSelectionCriteria; ToJsonUtilO(BuildSelectionCriteria, each_BuildSelectionCriteria); output["BuildSelectionCriteria"] = each_BuildSelectionCriteria;
-                Json::Value each_PageSize; ToJsonUtilP(PageSize, each_PageSize); output["PageSize"] = each_PageSize;
-                Json::Value each_SkipToken; ToJsonUtilS(SkipToken, each_SkipToken); output["SkipToken"] = each_SkipToken;
                 return output;
             }
         };
@@ -3541,12 +3531,14 @@ namespace PlayFab
 
         struct ServerDetails : public PlayFabBaseModel
         {
+            std::string Fqdn;
             std::string IPV4Address;
             std::list<Port> Ports;
             std::string Region;
 
             ServerDetails() :
                 PlayFabBaseModel(),
+                Fqdn(),
                 IPV4Address(),
                 Ports(),
                 Region()
@@ -3554,6 +3546,7 @@ namespace PlayFab
 
             ServerDetails(const ServerDetails& src) :
                 PlayFabBaseModel(),
+                Fqdn(src.Fqdn),
                 IPV4Address(src.IPV4Address),
                 Ports(src.Ports),
                 Region(src.Region)
@@ -3563,6 +3556,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["Fqdn"], Fqdn);
                 FromJsonUtilS(input["IPV4Address"], IPV4Address);
                 FromJsonUtilO(input["Ports"], Ports);
                 FromJsonUtilS(input["Region"], Region);
@@ -3571,6 +3565,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_Fqdn; ToJsonUtilS(Fqdn, each_Fqdn); output["Fqdn"] = each_Fqdn;
                 Json::Value each_IPV4Address; ToJsonUtilS(IPV4Address, each_IPV4Address); output["IPV4Address"] = each_IPV4Address;
                 Json::Value each_Ports; ToJsonUtilO(Ports, each_Ports); output["Ports"] = each_Ports;
                 Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
@@ -4713,6 +4708,7 @@ namespace PlayFab
 
         struct GetMultiplayerServerDetailsResponse : public PlayFabResultCommon
         {
+            std::string BuildId;
             std::list<ConnectedPlayer> ConnectedPlayers;
             std::string FQDN;
             std::string IPV4Address;
@@ -4726,6 +4722,7 @@ namespace PlayFab
 
             GetMultiplayerServerDetailsResponse() :
                 PlayFabResultCommon(),
+                BuildId(),
                 ConnectedPlayers(),
                 FQDN(),
                 IPV4Address(),
@@ -4740,6 +4737,7 @@ namespace PlayFab
 
             GetMultiplayerServerDetailsResponse(const GetMultiplayerServerDetailsResponse& src) :
                 PlayFabResultCommon(),
+                BuildId(src.BuildId),
                 ConnectedPlayers(src.ConnectedPlayers),
                 FQDN(src.FQDN),
                 IPV4Address(src.IPV4Address),
@@ -4756,6 +4754,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["BuildId"], BuildId);
                 FromJsonUtilO(input["ConnectedPlayers"], ConnectedPlayers);
                 FromJsonUtilS(input["FQDN"], FQDN);
                 FromJsonUtilS(input["IPV4Address"], IPV4Address);
@@ -4771,6 +4770,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
                 Json::Value each_ConnectedPlayers; ToJsonUtilO(ConnectedPlayers, each_ConnectedPlayers); output["ConnectedPlayers"] = each_ConnectedPlayers;
                 Json::Value each_FQDN; ToJsonUtilS(FQDN, each_FQDN); output["FQDN"] = each_FQDN;
                 Json::Value each_IPV4Address; ToJsonUtilS(IPV4Address, each_IPV4Address); output["IPV4Address"] = each_IPV4Address;
@@ -5598,31 +5598,80 @@ namespace PlayFab
             }
         };
 
-        struct ListBuildAliasesForTitleResponse : public PlayFabResultCommon
+        struct ListBuildAliasesRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            Boxed<Int32> PageSize;
+            std::string SkipToken;
+
+            ListBuildAliasesRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                PageSize(),
+                SkipToken()
+            {}
+
+            ListBuildAliasesRequest(const ListBuildAliasesRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                PageSize(src.PageSize),
+                SkipToken(src.SkipToken)
+            {}
+
+            ~ListBuildAliasesRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilP(input["PageSize"], PageSize);
+                FromJsonUtilS(input["SkipToken"], SkipToken);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_PageSize; ToJsonUtilP(PageSize, each_PageSize); output["PageSize"] = each_PageSize;
+                Json::Value each_SkipToken; ToJsonUtilS(SkipToken, each_SkipToken); output["SkipToken"] = each_SkipToken;
+                return output;
+            }
+        };
+
+        struct ListBuildAliasesResponse : public PlayFabResultCommon
         {
             std::list<BuildAliasDetailsResponse> BuildAliases;
+            Int32 PageSize;
+            std::string SkipToken;
 
-            ListBuildAliasesForTitleResponse() :
+            ListBuildAliasesResponse() :
                 PlayFabResultCommon(),
-                BuildAliases()
+                BuildAliases(),
+                PageSize(),
+                SkipToken()
             {}
 
-            ListBuildAliasesForTitleResponse(const ListBuildAliasesForTitleResponse& src) :
+            ListBuildAliasesResponse(const ListBuildAliasesResponse& src) :
                 PlayFabResultCommon(),
-                BuildAliases(src.BuildAliases)
+                BuildAliases(src.BuildAliases),
+                PageSize(src.PageSize),
+                SkipToken(src.SkipToken)
             {}
 
-            ~ListBuildAliasesForTitleResponse() = default;
+            ~ListBuildAliasesResponse() = default;
 
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["BuildAliases"], BuildAliases);
+                FromJsonUtilP(input["PageSize"], PageSize);
+                FromJsonUtilS(input["SkipToken"], SkipToken);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
                 Json::Value each_BuildAliases; ToJsonUtilO(BuildAliases, each_BuildAliases); output["BuildAliases"] = each_BuildAliases;
+                Json::Value each_PageSize; ToJsonUtilP(PageSize, each_PageSize); output["PageSize"] = each_PageSize;
+                Json::Value each_SkipToken; ToJsonUtilS(SkipToken, each_SkipToken); output["SkipToken"] = each_SkipToken;
                 return output;
             }
         };
@@ -6567,35 +6616,6 @@ namespace PlayFab
             }
         };
 
-        struct MultiplayerEmptyRequest : public PlayFabRequestCommon
-        {
-            std::map<std::string, std::string> CustomTags;
-
-            MultiplayerEmptyRequest() :
-                PlayFabRequestCommon(),
-                CustomTags()
-            {}
-
-            MultiplayerEmptyRequest(const MultiplayerEmptyRequest& src) :
-                PlayFabRequestCommon(),
-                CustomTags(src.CustomTags)
-            {}
-
-            ~MultiplayerEmptyRequest() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilS(input["CustomTags"], CustomTags);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
-                return output;
-            }
-        };
-
         struct RequestMultiplayerServerRequest : public PlayFabRequestCommon
         {
             Boxed<BuildAliasParams> pfBuildAliasParams;
@@ -6657,6 +6677,7 @@ namespace PlayFab
 
         struct RequestMultiplayerServerResponse : public PlayFabResultCommon
         {
+            std::string BuildId;
             std::list<ConnectedPlayer> ConnectedPlayers;
             std::string FQDN;
             std::string IPV4Address;
@@ -6670,6 +6691,7 @@ namespace PlayFab
 
             RequestMultiplayerServerResponse() :
                 PlayFabResultCommon(),
+                BuildId(),
                 ConnectedPlayers(),
                 FQDN(),
                 IPV4Address(),
@@ -6684,6 +6706,7 @@ namespace PlayFab
 
             RequestMultiplayerServerResponse(const RequestMultiplayerServerResponse& src) :
                 PlayFabResultCommon(),
+                BuildId(src.BuildId),
                 ConnectedPlayers(src.ConnectedPlayers),
                 FQDN(src.FQDN),
                 IPV4Address(src.IPV4Address),
@@ -6700,6 +6723,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["BuildId"], BuildId);
                 FromJsonUtilO(input["ConnectedPlayers"], ConnectedPlayers);
                 FromJsonUtilS(input["FQDN"], FQDN);
                 FromJsonUtilS(input["IPV4Address"], IPV4Address);
@@ -6715,6 +6739,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
                 Json::Value each_ConnectedPlayers; ToJsonUtilO(ConnectedPlayers, each_ConnectedPlayers); output["ConnectedPlayers"] = each_ConnectedPlayers;
                 Json::Value each_FQDN; ToJsonUtilS(FQDN, each_FQDN); output["FQDN"] = each_FQDN;
                 Json::Value each_IPV4Address; ToJsonUtilS(IPV4Address, each_IPV4Address); output["IPV4Address"] = each_IPV4Address;

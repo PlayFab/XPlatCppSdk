@@ -1941,8 +1941,8 @@ namespace PlayFab
     }
 
     void PlayFabMultiplayerAPI::ListBuildAliases(
-        MultiplayerEmptyRequest& request,
-        const ProcessApiCallback<ListBuildAliasesForTitleResponse> callback,
+        ListBuildAliasesRequest& request,
+        const ProcessApiCallback<ListBuildAliasesResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
     )
@@ -1966,7 +1966,7 @@ namespace PlayFab
             context,
             customData));
 
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListBuildAliasesForTitleResponse>(callback));
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListBuildAliasesResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
@@ -1977,13 +1977,13 @@ namespace PlayFab
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
-        ListBuildAliasesForTitleResponse outResult;
+        ListBuildAliasesResponse outResult;
         if (ValidateResult(outResult, container))
         {
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
             {
-                const auto& callback = (*static_cast<ProcessApiCallback<ListBuildAliasesForTitleResponse> *>(internalPtr.get()));
+                const auto& callback = (*static_cast<ProcessApiCallback<ListBuildAliasesResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }

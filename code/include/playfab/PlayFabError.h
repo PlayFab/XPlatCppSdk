@@ -493,7 +493,7 @@ namespace PlayFab
         PlayFabErrorEvaluationModePlayerCountExceeded = 1490,
         PlayFabErrorGetPlayersInSegmentRateLimitExceeded = 1491,
         PlayFabErrorCloudScriptFunctionNameSizeExceeded = 1492,
-        PlayFabErrorInsightsManagementTitleInEvaluationMode = 1493,
+        PlayFabErrorPaidInsightsFeaturesNotEnabled = 1493,
         PlayFabErrorCloudScriptAzureFunctionsQueueRequestError = 1494,
         PlayFabErrorEvaluationModeTitleCountExceeded = 1495,
         PlayFabErrorInsightsManagementTitleNotInFlight = 1496,
@@ -632,6 +632,7 @@ namespace PlayFab
         PlayFabErrorCreateSegmentRateLimitExceeded = 10008,
         PlayFabErrorUpdateSegmentRateLimitExceeded = 10009,
         PlayFabErrorGetSegmentsRateLimitExceeded = 10010,
+        PlayFabErrorAsyncExportNotInFlight = 10011,
         PlayFabErrorSnapshotNotFound = 11000,
         PlayFabErrorInventoryApiNotImplemented = 12000,
     };
