@@ -27,10 +27,7 @@ namespace PlayFab
             AzureRegionSoutheastAsia,
             AzureRegionWestEurope,
             AzureRegionWestUs,
-            AzureRegionChinaEast2,
-            AzureRegionChinaNorth2,
             AzureRegionSouthAfricaNorth,
-            AzureRegionCentralUsEuap,
             AzureRegionWestCentralUs,
             AzureRegionKoreaCentral,
             AzureRegionFranceCentral,
@@ -117,24 +114,9 @@ namespace PlayFab
                 output = Json::Value("WestUs");
                 return;
             }
-            if (input == AzureRegion::AzureRegionChinaEast2)
-            {
-                output = Json::Value("ChinaEast2");
-                return;
-            }
-            if (input == AzureRegion::AzureRegionChinaNorth2)
-            {
-                output = Json::Value("ChinaNorth2");
-                return;
-            }
             if (input == AzureRegion::AzureRegionSouthAfricaNorth)
             {
                 output = Json::Value("SouthAfricaNorth");
-                return;
-            }
-            if (input == AzureRegion::AzureRegionCentralUsEuap)
-            {
-                output = Json::Value("CentralUsEuap");
                 return;
             }
             if (input == AzureRegion::AzureRegionWestCentralUs)
@@ -255,24 +237,9 @@ namespace PlayFab
                 output = AzureRegion::AzureRegionWestUs;
                 return;
             }
-            if (inputStr == "ChinaEast2")
-            {
-                output = AzureRegion::AzureRegionChinaEast2;
-                return;
-            }
-            if (inputStr == "ChinaNorth2")
-            {
-                output = AzureRegion::AzureRegionChinaNorth2;
-                return;
-            }
             if (inputStr == "SouthAfricaNorth")
             {
                 output = AzureRegion::AzureRegionSouthAfricaNorth;
-                return;
-            }
-            if (inputStr == "CentralUsEuap")
-            {
-                output = AzureRegion::AzureRegionCentralUsEuap;
                 return;
             }
             if (inputStr == "WestCentralUs")

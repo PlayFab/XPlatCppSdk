@@ -20017,7 +20017,7 @@ namespace PlayFab
         {
             std::string Key;
             time_t LastModified;
-            Uint32 Size;
+            double Size;
 
             ContentInfo() :
                 PlayFabBaseModel(),
