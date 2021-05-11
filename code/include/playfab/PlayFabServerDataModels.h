@@ -5379,6 +5379,7 @@ namespace PlayFab
             GenericErrorCodesTitleNotEnabledForParty,
             GenericErrorCodesPartyVersionNotFound,
             GenericErrorCodesMultiplayerServerBuildReferencedByMatchmakingQueue,
+            GenericErrorCodesMultiplayerServerBuildReferencedByBuildAlias,
             GenericErrorCodesExperimentationExperimentStopped,
             GenericErrorCodesExperimentationExperimentRunning,
             GenericErrorCodesExperimentationExperimentNotFound,
@@ -8345,6 +8346,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerBuildReferencedByMatchmakingQueue)
             {
                 output = Json::Value("MultiplayerServerBuildReferencedByMatchmakingQueue");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerBuildReferencedByBuildAlias)
+            {
+                output = Json::Value("MultiplayerServerBuildReferencedByBuildAlias");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesExperimentationExperimentStopped)
@@ -11473,6 +11479,11 @@ namespace PlayFab
             if (inputStr == "MultiplayerServerBuildReferencedByMatchmakingQueue")
             {
                 output = GenericErrorCodes::GenericErrorCodesMultiplayerServerBuildReferencedByMatchmakingQueue;
+                return;
+            }
+            if (inputStr == "MultiplayerServerBuildReferencedByBuildAlias")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMultiplayerServerBuildReferencedByBuildAlias;
                 return;
             }
             if (inputStr == "ExperimentationExperimentStopped")
