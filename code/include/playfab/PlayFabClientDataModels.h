@@ -14587,69 +14587,6 @@ namespace PlayFab
             }
         };
 
-        struct GetWindowsHelloChallengeRequest : public PlayFabRequestCommon
-        {
-            std::string PublicKeyHint;
-            std::string TitleId;
-
-            GetWindowsHelloChallengeRequest() :
-                PlayFabRequestCommon(),
-                PublicKeyHint(),
-                TitleId()
-            {}
-
-            GetWindowsHelloChallengeRequest(const GetWindowsHelloChallengeRequest& src) :
-                PlayFabRequestCommon(),
-                PublicKeyHint(src.PublicKeyHint),
-                TitleId(src.TitleId)
-            {}
-
-            ~GetWindowsHelloChallengeRequest() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilS(input["PublicKeyHint"], PublicKeyHint);
-                FromJsonUtilS(input["TitleId"], TitleId);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_PublicKeyHint; ToJsonUtilS(PublicKeyHint, each_PublicKeyHint); output["PublicKeyHint"] = each_PublicKeyHint;
-                Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
-                return output;
-            }
-        };
-
-        struct GetWindowsHelloChallengeResponse : public PlayFabResultCommon
-        {
-            std::string Challenge;
-
-            GetWindowsHelloChallengeResponse() :
-                PlayFabResultCommon(),
-                Challenge()
-            {}
-
-            GetWindowsHelloChallengeResponse(const GetWindowsHelloChallengeResponse& src) :
-                PlayFabResultCommon(),
-                Challenge(src.Challenge)
-            {}
-
-            ~GetWindowsHelloChallengeResponse() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilS(input["Challenge"], Challenge);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_Challenge; ToJsonUtilS(Challenge, each_Challenge); output["Challenge"] = each_Challenge;
-                return output;
-            }
-        };
-
         struct GrantCharacterToUserRequest : public PlayFabRequestCommon
         {
             std::string CatalogVersion;
@@ -15698,79 +15635,6 @@ namespace PlayFab
             {}
 
             ~LinkTwitchAccountResult() = default;
-
-            void FromJson(const Json::Value&) override
-            {
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                return output;
-            }
-        };
-
-        struct LinkWindowsHelloAccountRequest : public PlayFabRequestCommon
-        {
-            std::map<std::string, std::string> CustomTags;
-            std::string DeviceName;
-            Boxed<bool> ForceLink;
-            std::string PublicKey;
-            std::string UserName;
-
-            LinkWindowsHelloAccountRequest() :
-                PlayFabRequestCommon(),
-                CustomTags(),
-                DeviceName(),
-                ForceLink(),
-                PublicKey(),
-                UserName()
-            {}
-
-            LinkWindowsHelloAccountRequest(const LinkWindowsHelloAccountRequest& src) :
-                PlayFabRequestCommon(),
-                CustomTags(src.CustomTags),
-                DeviceName(src.DeviceName),
-                ForceLink(src.ForceLink),
-                PublicKey(src.PublicKey),
-                UserName(src.UserName)
-            {}
-
-            ~LinkWindowsHelloAccountRequest() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilS(input["CustomTags"], CustomTags);
-                FromJsonUtilS(input["DeviceName"], DeviceName);
-                FromJsonUtilP(input["ForceLink"], ForceLink);
-                FromJsonUtilS(input["PublicKey"], PublicKey);
-                FromJsonUtilS(input["UserName"], UserName);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
-                Json::Value each_DeviceName; ToJsonUtilS(DeviceName, each_DeviceName); output["DeviceName"] = each_DeviceName;
-                Json::Value each_ForceLink; ToJsonUtilP(ForceLink, each_ForceLink); output["ForceLink"] = each_ForceLink;
-                Json::Value each_PublicKey; ToJsonUtilS(PublicKey, each_PublicKey); output["PublicKey"] = each_PublicKey;
-                Json::Value each_UserName; ToJsonUtilS(UserName, each_UserName); output["UserName"] = each_UserName;
-                return output;
-            }
-        };
-
-        struct LinkWindowsHelloAccountResponse : public PlayFabResultCommon
-        {
-
-            LinkWindowsHelloAccountResponse() :
-                PlayFabResultCommon()
-            {}
-
-            LinkWindowsHelloAccountResponse(const LinkWindowsHelloAccountResponse&) :
-                PlayFabResultCommon()
-            {}
-
-            ~LinkWindowsHelloAccountResponse() = default;
 
             void FromJson(const Json::Value&) override
             {
@@ -17118,55 +16982,6 @@ namespace PlayFab
             }
         };
 
-        struct LoginWithWindowsHelloRequest : public PlayFabRequestCommon
-        {
-            std::string ChallengeSignature;
-            std::map<std::string, std::string> CustomTags;
-            Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
-            std::string PublicKeyHint;
-            std::string TitleId;
-
-            LoginWithWindowsHelloRequest() :
-                PlayFabRequestCommon(),
-                ChallengeSignature(),
-                CustomTags(),
-                InfoRequestParameters(),
-                PublicKeyHint(),
-                TitleId()
-            {}
-
-            LoginWithWindowsHelloRequest(const LoginWithWindowsHelloRequest& src) :
-                PlayFabRequestCommon(),
-                ChallengeSignature(src.ChallengeSignature),
-                CustomTags(src.CustomTags),
-                InfoRequestParameters(src.InfoRequestParameters),
-                PublicKeyHint(src.PublicKeyHint),
-                TitleId(src.TitleId)
-            {}
-
-            ~LoginWithWindowsHelloRequest() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilS(input["ChallengeSignature"], ChallengeSignature);
-                FromJsonUtilS(input["CustomTags"], CustomTags);
-                FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
-                FromJsonUtilS(input["PublicKeyHint"], PublicKeyHint);
-                FromJsonUtilS(input["TitleId"], TitleId);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_ChallengeSignature; ToJsonUtilS(ChallengeSignature, each_ChallengeSignature); output["ChallengeSignature"] = each_ChallengeSignature;
-                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
-                Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
-                Json::Value each_PublicKeyHint; ToJsonUtilS(PublicKeyHint, each_PublicKeyHint); output["PublicKeyHint"] = each_PublicKeyHint;
-                Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
-                return output;
-            }
-        };
-
         struct LoginWithXboxRequest : public PlayFabRequestCommon
         {
             Boxed<bool> CreateAccount;
@@ -18069,70 +17884,6 @@ namespace PlayFab
                 Json::Value each_SessionTicket; ToJsonUtilS(SessionTicket, each_SessionTicket); output["SessionTicket"] = each_SessionTicket;
                 Json::Value each_SettingsForUser; ToJsonUtilO(SettingsForUser, each_SettingsForUser); output["SettingsForUser"] = each_SettingsForUser;
                 Json::Value each_Username; ToJsonUtilS(Username, each_Username); output["Username"] = each_Username;
-                return output;
-            }
-        };
-
-        struct RegisterWithWindowsHelloRequest : public PlayFabRequestCommon
-        {
-            std::map<std::string, std::string> CustomTags;
-            std::string DeviceName;
-            std::string EncryptedRequest;
-            Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
-            std::string PlayerSecret;
-            std::string PublicKey;
-            std::string TitleId;
-            std::string UserName;
-
-            RegisterWithWindowsHelloRequest() :
-                PlayFabRequestCommon(),
-                CustomTags(),
-                DeviceName(),
-                EncryptedRequest(),
-                InfoRequestParameters(),
-                PlayerSecret(),
-                PublicKey(),
-                TitleId(),
-                UserName()
-            {}
-
-            RegisterWithWindowsHelloRequest(const RegisterWithWindowsHelloRequest& src) :
-                PlayFabRequestCommon(),
-                CustomTags(src.CustomTags),
-                DeviceName(src.DeviceName),
-                EncryptedRequest(src.EncryptedRequest),
-                InfoRequestParameters(src.InfoRequestParameters),
-                PlayerSecret(src.PlayerSecret),
-                PublicKey(src.PublicKey),
-                TitleId(src.TitleId),
-                UserName(src.UserName)
-            {}
-
-            ~RegisterWithWindowsHelloRequest() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilS(input["CustomTags"], CustomTags);
-                FromJsonUtilS(input["DeviceName"], DeviceName);
-                FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
-                FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
-                FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
-                FromJsonUtilS(input["PublicKey"], PublicKey);
-                FromJsonUtilS(input["TitleId"], TitleId);
-                FromJsonUtilS(input["UserName"], UserName);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
-                Json::Value each_DeviceName; ToJsonUtilS(DeviceName, each_DeviceName); output["DeviceName"] = each_DeviceName;
-                Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
-                Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
-                Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
-                Json::Value each_PublicKey; ToJsonUtilS(PublicKey, each_PublicKey); output["PublicKey"] = each_PublicKey;
-                Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
-                Json::Value each_UserName; ToJsonUtilS(UserName, each_UserName); output["UserName"] = each_UserName;
                 return output;
             }
         };
@@ -19875,64 +19626,6 @@ namespace PlayFab
             {}
 
             ~UnlinkTwitchAccountResult() = default;
-
-            void FromJson(const Json::Value&) override
-            {
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                return output;
-            }
-        };
-
-        struct UnlinkWindowsHelloAccountRequest : public PlayFabRequestCommon
-        {
-            std::map<std::string, std::string> CustomTags;
-            std::string PublicKeyHint;
-
-            UnlinkWindowsHelloAccountRequest() :
-                PlayFabRequestCommon(),
-                CustomTags(),
-                PublicKeyHint()
-            {}
-
-            UnlinkWindowsHelloAccountRequest(const UnlinkWindowsHelloAccountRequest& src) :
-                PlayFabRequestCommon(),
-                CustomTags(src.CustomTags),
-                PublicKeyHint(src.PublicKeyHint)
-            {}
-
-            ~UnlinkWindowsHelloAccountRequest() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilS(input["CustomTags"], CustomTags);
-                FromJsonUtilS(input["PublicKeyHint"], PublicKeyHint);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
-                Json::Value each_PublicKeyHint; ToJsonUtilS(PublicKeyHint, each_PublicKeyHint); output["PublicKeyHint"] = each_PublicKeyHint;
-                return output;
-            }
-        };
-
-        struct UnlinkWindowsHelloAccountResponse : public PlayFabResultCommon
-        {
-
-            UnlinkWindowsHelloAccountResponse() :
-                PlayFabResultCommon()
-            {}
-
-            UnlinkWindowsHelloAccountResponse(const UnlinkWindowsHelloAccountResponse&) :
-                PlayFabResultCommon()
-            {}
-
-            ~UnlinkWindowsHelloAccountResponse() = default;
 
             void FromJson(const Json::Value&) override
             {

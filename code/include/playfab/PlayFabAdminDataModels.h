@@ -5515,6 +5515,8 @@ namespace PlayFab
             GenericErrorCodesUpdateSegmentRateLimitExceeded,
             GenericErrorCodesGetSegmentsRateLimitExceeded,
             GenericErrorCodesAsyncExportNotInFlight,
+            GenericErrorCodesAsyncExportNotFound,
+            GenericErrorCodesAsyncExportRateLimitExceeded,
             GenericErrorCodesSnapshotNotFound,
             GenericErrorCodesInventoryApiNotImplemented
         };
@@ -8634,6 +8636,16 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesAsyncExportNotInFlight)
             {
                 output = Json::Value("AsyncExportNotInFlight");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAsyncExportNotFound)
+            {
+                output = Json::Value("AsyncExportNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAsyncExportRateLimitExceeded)
+            {
+                output = Json::Value("AsyncExportRateLimitExceeded");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesSnapshotNotFound)
@@ -11767,6 +11779,16 @@ namespace PlayFab
             if (inputStr == "AsyncExportNotInFlight")
             {
                 output = GenericErrorCodes::GenericErrorCodesAsyncExportNotInFlight;
+                return;
+            }
+            if (inputStr == "AsyncExportNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAsyncExportNotFound;
+                return;
+            }
+            if (inputStr == "AsyncExportRateLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAsyncExportRateLimitExceeded;
                 return;
             }
             if (inputStr == "SnapshotNotFound")
