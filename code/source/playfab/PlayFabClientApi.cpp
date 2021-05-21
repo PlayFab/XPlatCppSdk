@@ -3508,54 +3508,6 @@ namespace PlayFab
         }
     }
 
-    void PlayFabClientAPI::GetWindowsHelloChallenge(
-        GetWindowsHelloChallengeRequest& request,
-        const ProcessApiCallback<GetWindowsHelloChallengeResponse> callback,
-        const ErrorCallback errorCallback,
-        void* customData
-    )
-    {
-        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
-        std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
-        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const Json::Value requestJson = request.ToJson();
-        std::string jsonAsString = requestJson.toStyledString();
-
-        std::unordered_map<std::string, std::string> headers;
-
-        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Client/GetWindowsHelloChallenge",
-            headers,
-            jsonAsString,
-            OnGetWindowsHelloChallengeResult,
-            settings,
-            context,
-            customData));
-
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetWindowsHelloChallengeResponse>(callback));
-        reqContainer->errorCallback = errorCallback;
-
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
-    }
-
-    void PlayFabClientAPI::OnGetWindowsHelloChallengeResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
-    {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
-        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
-
-        GetWindowsHelloChallengeResponse outResult;
-        if (ValidateResult(outResult, container))
-        {
-            std::shared_ptr<void> internalPtr = container.successCallback;
-            if (internalPtr.get() != nullptr)
-            {
-                const auto& callback = (*static_cast<ProcessApiCallback<GetWindowsHelloChallengeResponse> *>(internalPtr.get()));
-                callback(outResult, container.GetCustomData());
-            }
-        }
-    }
-
     void PlayFabClientAPI::GrantCharacterToUser(
         GrantCharacterToUserRequest& request,
         const ProcessApiCallback<GrantCharacterToUserResult> callback,
@@ -4335,55 +4287,6 @@ namespace PlayFab
             if (internalPtr.get() != nullptr)
             {
                 const auto& callback = (*static_cast<ProcessApiCallback<LinkTwitchAccountResult> *>(internalPtr.get()));
-                callback(outResult, container.GetCustomData());
-            }
-        }
-    }
-
-    void PlayFabClientAPI::LinkWindowsHello(
-        LinkWindowsHelloAccountRequest& request,
-        const ProcessApiCallback<LinkWindowsHelloAccountResponse> callback,
-        const ErrorCallback errorCallback,
-        void* customData
-    )
-    {
-        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
-        std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
-        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const Json::Value requestJson = request.ToJson();
-        std::string jsonAsString = requestJson.toStyledString();
-
-        std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", context->clientSessionTicket);
-
-        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Client/LinkWindowsHello",
-            headers,
-            jsonAsString,
-            OnLinkWindowsHelloResult,
-            settings,
-            context,
-            customData));
-
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkWindowsHelloAccountResponse>(callback));
-        reqContainer->errorCallback = errorCallback;
-
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
-    }
-
-    void PlayFabClientAPI::OnLinkWindowsHelloResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
-    {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
-        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
-
-        LinkWindowsHelloAccountResponse outResult;
-        if (ValidateResult(outResult, container))
-        {
-            std::shared_ptr<void> internalPtr = container.successCallback;
-            if (internalPtr.get() != nullptr)
-            {
-                const auto& callback = (*static_cast<ProcessApiCallback<LinkWindowsHelloAccountResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -5390,62 +5293,6 @@ namespace PlayFab
         }
     }
 
-    void PlayFabClientAPI::LoginWithWindowsHello(
-        LoginWithWindowsHelloRequest& request,
-        const ProcessApiCallback<LoginResult> callback,
-        const ErrorCallback errorCallback,
-        void* customData
-    )
-    {
-        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
-        std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-        if (request.TitleId.empty())
-        {
-            request.TitleId = settings->titleId;
-        }
-
-        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const Json::Value requestJson = request.ToJson();
-        std::string jsonAsString = requestJson.toStyledString();
-
-        std::unordered_map<std::string, std::string> headers;
-
-        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Client/LoginWithWindowsHello",
-            headers,
-            jsonAsString,
-            OnLoginWithWindowsHelloResult,
-            settings,
-            context,
-            customData));
-
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback));
-        reqContainer->errorCallback = errorCallback;
-
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
-    }
-
-    void PlayFabClientAPI::OnLoginWithWindowsHelloResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
-    {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
-        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
-
-        LoginResult outResult;
-        if (ValidateResult(outResult, container))
-        {            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
-
-            std::shared_ptr<void> internalPtr = container.successCallback;
-            if (internalPtr.get() != nullptr)
-            {
-                const auto& callback = (*static_cast<ProcessApiCallback<LoginResult> *>(internalPtr.get()));
-                callback(outResult, container.GetCustomData());
-            }
-        }
-    }
-
     void PlayFabClientAPI::LoginWithXbox(
         LoginWithXboxRequest& request,
         const ProcessApiCallback<LoginResult> callback,
@@ -5894,62 +5741,6 @@ namespace PlayFab
             if (internalPtr.get() != nullptr)
             {
                 const auto& callback = (*static_cast<ProcessApiCallback<RegisterPlayFabUserResult> *>(internalPtr.get()));
-                callback(outResult, container.GetCustomData());
-            }
-        }
-    }
-
-    void PlayFabClientAPI::RegisterWithWindowsHello(
-        RegisterWithWindowsHelloRequest& request,
-        const ProcessApiCallback<LoginResult> callback,
-        const ErrorCallback errorCallback,
-        void* customData
-    )
-    {
-        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
-        std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-        if (request.TitleId.empty())
-        {
-            request.TitleId = settings->titleId;
-        }
-
-        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const Json::Value requestJson = request.ToJson();
-        std::string jsonAsString = requestJson.toStyledString();
-
-        std::unordered_map<std::string, std::string> headers;
-
-        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Client/RegisterWithWindowsHello",
-            headers,
-            jsonAsString,
-            OnRegisterWithWindowsHelloResult,
-            settings,
-            context,
-            customData));
-
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LoginResult>(callback));
-        reqContainer->errorCallback = errorCallback;
-
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
-    }
-
-    void PlayFabClientAPI::OnRegisterWithWindowsHelloResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
-    {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
-        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
-
-        LoginResult outResult;
-        if (ValidateResult(outResult, container))
-        {            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
-
-            std::shared_ptr<void> internalPtr = container.successCallback;
-            if (internalPtr.get() != nullptr)
-            {
-                const auto& callback = (*static_cast<ProcessApiCallback<LoginResult> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -7419,55 +7210,6 @@ namespace PlayFab
             if (internalPtr.get() != nullptr)
             {
                 const auto& callback = (*static_cast<ProcessApiCallback<UnlinkTwitchAccountResult> *>(internalPtr.get()));
-                callback(outResult, container.GetCustomData());
-            }
-        }
-    }
-
-    void PlayFabClientAPI::UnlinkWindowsHello(
-        UnlinkWindowsHelloAccountRequest& request,
-        const ProcessApiCallback<UnlinkWindowsHelloAccountResponse> callback,
-        const ErrorCallback errorCallback,
-        void* customData
-    )
-    {
-        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
-        std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
-
-        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
-        const Json::Value requestJson = request.ToJson();
-        std::string jsonAsString = requestJson.toStyledString();
-
-        std::unordered_map<std::string, std::string> headers;
-        headers.emplace("X-Authorization", context->clientSessionTicket);
-
-        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Client/UnlinkWindowsHello",
-            headers,
-            jsonAsString,
-            OnUnlinkWindowsHelloResult,
-            settings,
-            context,
-            customData));
-
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkWindowsHelloAccountResponse>(callback));
-        reqContainer->errorCallback = errorCallback;
-
-        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
-    }
-
-    void PlayFabClientAPI::OnUnlinkWindowsHelloResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
-    {
-        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
-        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
-
-        UnlinkWindowsHelloAccountResponse outResult;
-        if (ValidateResult(outResult, container))
-        {
-            std::shared_ptr<void> internalPtr = container.successCallback;
-            if (internalPtr.get() != nullptr)
-            {
-                const auto& callback = (*static_cast<ProcessApiCallback<UnlinkWindowsHelloAccountResponse> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }
