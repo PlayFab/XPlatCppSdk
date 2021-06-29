@@ -14,8 +14,6 @@ namespace PlayFab
 #if !defined(DISABLE_PLAYFABCLIENT_API)
         playFabId.clear();
         clientSessionTicket.clear();
-        advertisingIdType.clear();
-        advertisingIdValue.clear();
 #endif
         entityId.clear();
         entityType.clear();

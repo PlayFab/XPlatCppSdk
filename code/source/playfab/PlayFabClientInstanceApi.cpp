@@ -502,8 +502,7 @@ namespace PlayFab
 
         AttributeInstallResult outResult;
         if (ValidateResult(outResult, container))
-        {            context->advertisingIdType += "_Successful";
-
+        {
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
             {
@@ -4505,10 +4504,24 @@ namespace PlayFab
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
-        {            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
+        {            
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            if (outResult.EntityToken.notNull())
+            {
+                outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+                context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            }
+            else
+            {
+                if (container.errorCallback != nullptr)
+                {
+                     PlayFabError error;
+                     error.ErrorCode = PlayFabErrorCode::PlayFabErrorEntityTokenMissing;
+                     error.ErrorMessage = "The Login Attempt returned a null EntityToken. This was a mistake. Please try the login again in a moment.";
+                     container.errorCallback(error, container.GetCustomData());
+                     return;
+                }
+            }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -4562,10 +4575,24 @@ namespace PlayFab
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
-        {            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
+        {            
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            if (outResult.EntityToken.notNull())
+            {
+                outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+                context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            }
+            else
+            {
+                if (container.errorCallback != nullptr)
+                {
+                     PlayFabError error;
+                     error.ErrorCode = PlayFabErrorCode::PlayFabErrorEntityTokenMissing;
+                     error.ErrorMessage = "The Login Attempt returned a null EntityToken. This was a mistake. Please try the login again in a moment.";
+                     container.errorCallback(error, container.GetCustomData());
+                     return;
+                }
+            }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -4619,10 +4646,24 @@ namespace PlayFab
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
-        {            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
+        {            
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            if (outResult.EntityToken.notNull())
+            {
+                outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+                context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            }
+            else
+            {
+                if (container.errorCallback != nullptr)
+                {
+                     PlayFabError error;
+                     error.ErrorCode = PlayFabErrorCode::PlayFabErrorEntityTokenMissing;
+                     error.ErrorMessage = "The Login Attempt returned a null EntityToken. This was a mistake. Please try the login again in a moment.";
+                     container.errorCallback(error, container.GetCustomData());
+                     return;
+                }
+            }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -4676,10 +4717,24 @@ namespace PlayFab
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
-        {            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
+        {            
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            if (outResult.EntityToken.notNull())
+            {
+                outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+                context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            }
+            else
+            {
+                if (container.errorCallback != nullptr)
+                {
+                     PlayFabError error;
+                     error.ErrorCode = PlayFabErrorCode::PlayFabErrorEntityTokenMissing;
+                     error.ErrorMessage = "The Login Attempt returned a null EntityToken. This was a mistake. Please try the login again in a moment.";
+                     container.errorCallback(error, container.GetCustomData());
+                     return;
+                }
+            }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -4733,10 +4788,24 @@ namespace PlayFab
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
-        {            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
+        {            
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            if (outResult.EntityToken.notNull())
+            {
+                outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+                context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            }
+            else
+            {
+                if (container.errorCallback != nullptr)
+                {
+                     PlayFabError error;
+                     error.ErrorCode = PlayFabErrorCode::PlayFabErrorEntityTokenMissing;
+                     error.ErrorMessage = "The Login Attempt returned a null EntityToken. This was a mistake. Please try the login again in a moment.";
+                     container.errorCallback(error, container.GetCustomData());
+                     return;
+                }
+            }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -4790,10 +4859,24 @@ namespace PlayFab
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
-        {            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
+        {            
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            if (outResult.EntityToken.notNull())
+            {
+                outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+                context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            }
+            else
+            {
+                if (container.errorCallback != nullptr)
+                {
+                     PlayFabError error;
+                     error.ErrorCode = PlayFabErrorCode::PlayFabErrorEntityTokenMissing;
+                     error.ErrorMessage = "The Login Attempt returned a null EntityToken. This was a mistake. Please try the login again in a moment.";
+                     container.errorCallback(error, container.GetCustomData());
+                     return;
+                }
+            }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -4847,10 +4930,24 @@ namespace PlayFab
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
-        {            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
+        {            
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            if (outResult.EntityToken.notNull())
+            {
+                outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+                context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            }
+            else
+            {
+                if (container.errorCallback != nullptr)
+                {
+                     PlayFabError error;
+                     error.ErrorCode = PlayFabErrorCode::PlayFabErrorEntityTokenMissing;
+                     error.ErrorMessage = "The Login Attempt returned a null EntityToken. This was a mistake. Please try the login again in a moment.";
+                     container.errorCallback(error, container.GetCustomData());
+                     return;
+                }
+            }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -4904,10 +5001,24 @@ namespace PlayFab
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
-        {            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
+        {            
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            if (outResult.EntityToken.notNull())
+            {
+                outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+                context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            }
+            else
+            {
+                if (container.errorCallback != nullptr)
+                {
+                     PlayFabError error;
+                     error.ErrorCode = PlayFabErrorCode::PlayFabErrorEntityTokenMissing;
+                     error.ErrorMessage = "The Login Attempt returned a null EntityToken. This was a mistake. Please try the login again in a moment.";
+                     container.errorCallback(error, container.GetCustomData());
+                     return;
+                }
+            }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -4961,10 +5072,24 @@ namespace PlayFab
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
-        {            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
+        {            
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            if (outResult.EntityToken.notNull())
+            {
+                outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+                context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            }
+            else
+            {
+                if (container.errorCallback != nullptr)
+                {
+                     PlayFabError error;
+                     error.ErrorCode = PlayFabErrorCode::PlayFabErrorEntityTokenMissing;
+                     error.ErrorMessage = "The Login Attempt returned a null EntityToken. This was a mistake. Please try the login again in a moment.";
+                     container.errorCallback(error, container.GetCustomData());
+                     return;
+                }
+            }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -5018,10 +5143,24 @@ namespace PlayFab
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
-        {            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
+        {            
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            if (outResult.EntityToken.notNull())
+            {
+                outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+                context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            }
+            else
+            {
+                if (container.errorCallback != nullptr)
+                {
+                     PlayFabError error;
+                     error.ErrorCode = PlayFabErrorCode::PlayFabErrorEntityTokenMissing;
+                     error.ErrorMessage = "The Login Attempt returned a null EntityToken. This was a mistake. Please try the login again in a moment.";
+                     container.errorCallback(error, container.GetCustomData());
+                     return;
+                }
+            }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -5075,10 +5214,24 @@ namespace PlayFab
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
-        {            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
+        {            
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            if (outResult.EntityToken.notNull())
+            {
+                outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+                context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            }
+            else
+            {
+                if (container.errorCallback != nullptr)
+                {
+                     PlayFabError error;
+                     error.ErrorCode = PlayFabErrorCode::PlayFabErrorEntityTokenMissing;
+                     error.ErrorMessage = "The Login Attempt returned a null EntityToken. This was a mistake. Please try the login again in a moment.";
+                     container.errorCallback(error, container.GetCustomData());
+                     return;
+                }
+            }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -5132,10 +5285,24 @@ namespace PlayFab
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
-        {            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
+        {            
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            if (outResult.EntityToken.notNull())
+            {
+                outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+                context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            }
+            else
+            {
+                if (container.errorCallback != nullptr)
+                {
+                     PlayFabError error;
+                     error.ErrorCode = PlayFabErrorCode::PlayFabErrorEntityTokenMissing;
+                     error.ErrorMessage = "The Login Attempt returned a null EntityToken. This was a mistake. Please try the login again in a moment.";
+                     container.errorCallback(error, container.GetCustomData());
+                     return;
+                }
+            }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -5189,10 +5356,24 @@ namespace PlayFab
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
-        {            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
+        {            
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            if (outResult.EntityToken.notNull())
+            {
+                outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+                context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            }
+            else
+            {
+                if (container.errorCallback != nullptr)
+                {
+                     PlayFabError error;
+                     error.ErrorCode = PlayFabErrorCode::PlayFabErrorEntityTokenMissing;
+                     error.ErrorMessage = "The Login Attempt returned a null EntityToken. This was a mistake. Please try the login again in a moment.";
+                     container.errorCallback(error, container.GetCustomData());
+                     return;
+                }
+            }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -5246,10 +5427,24 @@ namespace PlayFab
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
-        {            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
+        {            
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            if (outResult.EntityToken.notNull())
+            {
+                outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+                context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            }
+            else
+            {
+                if (container.errorCallback != nullptr)
+                {
+                     PlayFabError error;
+                     error.ErrorCode = PlayFabErrorCode::PlayFabErrorEntityTokenMissing;
+                     error.ErrorMessage = "The Login Attempt returned a null EntityToken. This was a mistake. Please try the login again in a moment.";
+                     container.errorCallback(error, container.GetCustomData());
+                     return;
+                }
+            }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -5303,10 +5498,24 @@ namespace PlayFab
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
-        {            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
+        {            
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            if (outResult.EntityToken.notNull())
+            {
+                outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+                context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            }
+            else
+            {
+                if (container.errorCallback != nullptr)
+                {
+                     PlayFabError error;
+                     error.ErrorCode = PlayFabErrorCode::PlayFabErrorEntityTokenMissing;
+                     error.ErrorMessage = "The Login Attempt returned a null EntityToken. This was a mistake. Please try the login again in a moment.";
+                     container.errorCallback(error, container.GetCustomData());
+                     return;
+                }
+            }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -5360,10 +5569,24 @@ namespace PlayFab
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
-        {            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
+        {            
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            if (outResult.EntityToken.notNull())
+            {
+                outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+                context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            }
+            else
+            {
+                if (container.errorCallback != nullptr)
+                {
+                     PlayFabError error;
+                     error.ErrorCode = PlayFabErrorCode::PlayFabErrorEntityTokenMissing;
+                     error.ErrorMessage = "The Login Attempt returned a null EntityToken. This was a mistake. Please try the login again in a moment.";
+                     container.errorCallback(error, container.GetCustomData());
+                     return;
+                }
+            }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -5417,10 +5640,24 @@ namespace PlayFab
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
-        {            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
+        {            
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            if (outResult.EntityToken.notNull())
+            {
+                outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+                context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            }
+            else
+            {
+                if (container.errorCallback != nullptr)
+                {
+                     PlayFabError error;
+                     error.ErrorCode = PlayFabErrorCode::PlayFabErrorEntityTokenMissing;
+                     error.ErrorMessage = "The Login Attempt returned a null EntityToken. This was a mistake. Please try the login again in a moment.";
+                     container.errorCallback(error, container.GetCustomData());
+                     return;
+                }
+            }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -5474,10 +5711,24 @@ namespace PlayFab
 
         LoginResult outResult;
         if (ValidateResult(outResult, container))
-        {            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
-            outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
+        {            
+            outResult.authenticationContext = std::make_shared<PlayFabAuthenticationContext>();
+            if (outResult.EntityToken.notNull())
+            {
+                outResult.authenticationContext->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+                context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+            }
+            else
+            {
+                if (container.errorCallback != nullptr)
+                {
+                     PlayFabError error;
+                     error.ErrorCode = PlayFabErrorCode::PlayFabErrorEntityTokenMissing;
+                     error.ErrorMessage = "The Login Attempt returned a null EntityToken. This was a mistake. Please try the login again in a moment.";
+                     container.errorCallback(error, container.GetCustomData());
+                     return;
+                }
+            }
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -5882,7 +6133,6 @@ namespace PlayFab
         RegisterPlayFabUserResult outResult;
         if (ValidateResult(outResult, container))
         {            context->HandlePlayFabLogin(outResult.PlayFabId, outResult.SessionTicket, outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
-            MultiStepClientLogin(context, outResult.SettingsForUser->NeedsAttribution);
 
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
@@ -8298,23 +8548,6 @@ namespace PlayFab
         return !this->m_context->clientSessionTicket.empty();
     }
 
-    void PlayFabClientInstanceAPI::MultiStepClientLogin(std::shared_ptr<PlayFabAuthenticationContext> context, bool needsAttribution)
-    {
-        if (needsAttribution && !context->disableAdvertising && context->advertisingIdType.length() > 0 && context->advertisingIdValue.length() > 0)
-        {
-            AttributeInstallRequest request;
-            if (context->advertisingIdType == PlayFabSettings::AD_TYPE_IDFA)
-            {
-                request.Idfa = context->advertisingIdValue;
-                AttributeInstall(request, nullptr, nullptr);
-            }
-            else if (context->advertisingIdType == PlayFabSettings::AD_TYPE_ANDROID_ID)
-            {
-                request.Adid = context->advertisingIdValue;
-                AttributeInstall(request, nullptr, nullptr);
-            }
-        }
-    }
 
     bool PlayFabClientInstanceAPI::ValidateResult(PlayFabResultCommon& resultCommon, const CallRequestContainer& container)
     {

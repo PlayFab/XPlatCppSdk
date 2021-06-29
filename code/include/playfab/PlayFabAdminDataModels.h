@@ -5474,6 +5474,7 @@ namespace PlayFab
             GenericErrorCodesExplorerBasicUpdateQueryError,
             GenericErrorCodesExplorerBasicSavedQueriesLimit,
             GenericErrorCodesExplorerBasicSavedQueryNotFound,
+            GenericErrorCodesTenantShardMapperShardNotFound,
             GenericErrorCodesTitleNotEnabledForParty,
             GenericErrorCodesPartyVersionNotFound,
             GenericErrorCodesMultiplayerServerBuildReferencedByMatchmakingQueue,
@@ -8431,6 +8432,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesExplorerBasicSavedQueryNotFound)
             {
                 output = Json::Value("ExplorerBasicSavedQueryNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTenantShardMapperShardNotFound)
+            {
+                output = Json::Value("TenantShardMapperShardNotFound");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesTitleNotEnabledForParty)
@@ -11574,6 +11580,11 @@ namespace PlayFab
             if (inputStr == "ExplorerBasicSavedQueryNotFound")
             {
                 output = GenericErrorCodes::GenericErrorCodesExplorerBasicSavedQueryNotFound;
+                return;
+            }
+            if (inputStr == "TenantShardMapperShardNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTenantShardMapperShardNotFound;
                 return;
             }
             if (inputStr == "TitleNotEnabledForParty")
