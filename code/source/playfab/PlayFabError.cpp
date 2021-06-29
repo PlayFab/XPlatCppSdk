@@ -38,6 +38,7 @@ namespace PlayFab
 
         ErrorDetails = input["errorDetails"];
         Data = input["data"];
+        RetryAfterSeconds = input["retryAfterSeconds"];
     }
 
     Json::Value PlayFabError::ToJson() const
@@ -51,6 +52,7 @@ namespace PlayFab
         output["errorMessage"] = Json::Value(ErrorMessage);
         output["errorDetails"] = ErrorDetails;
         output["data"] = Data;
+        output["retryAfterSeconds"] = RetryAfterSeconds;
         return output;
     }
 

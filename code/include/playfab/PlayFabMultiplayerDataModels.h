@@ -4112,6 +4112,74 @@ namespace PlayFab
             }
         };
 
+        struct GetAssetDownloadUrlRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            std::string FileName;
+
+            GetAssetDownloadUrlRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                FileName()
+            {}
+
+            GetAssetDownloadUrlRequest(const GetAssetDownloadUrlRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                FileName(src.FileName)
+            {}
+
+            ~GetAssetDownloadUrlRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["FileName"], FileName);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_FileName; ToJsonUtilS(FileName, each_FileName); output["FileName"] = each_FileName;
+                return output;
+            }
+        };
+
+        struct GetAssetDownloadUrlResponse : public PlayFabResultCommon
+        {
+            std::string AssetDownloadUrl;
+            std::string FileName;
+
+            GetAssetDownloadUrlResponse() :
+                PlayFabResultCommon(),
+                AssetDownloadUrl(),
+                FileName()
+            {}
+
+            GetAssetDownloadUrlResponse(const GetAssetDownloadUrlResponse& src) :
+                PlayFabResultCommon(),
+                AssetDownloadUrl(src.AssetDownloadUrl),
+                FileName(src.FileName)
+            {}
+
+            ~GetAssetDownloadUrlResponse() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["AssetDownloadUrl"], AssetDownloadUrl);
+                FromJsonUtilS(input["FileName"], FileName);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_AssetDownloadUrl; ToJsonUtilS(AssetDownloadUrl, each_AssetDownloadUrl); output["AssetDownloadUrl"] = each_AssetDownloadUrl;
+                Json::Value each_FileName; ToJsonUtilS(FileName, each_FileName); output["FileName"] = each_FileName;
+                return output;
+            }
+        };
+
         struct GetAssetUploadUrlRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;

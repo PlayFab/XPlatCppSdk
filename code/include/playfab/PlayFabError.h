@@ -593,6 +593,7 @@ namespace PlayFab
         PlayFabErrorExplorerBasicUpdateQueryError = 5112,
         PlayFabErrorExplorerBasicSavedQueriesLimit = 5113,
         PlayFabErrorExplorerBasicSavedQueryNotFound = 5114,
+        PlayFabErrorTenantShardMapperShardNotFound = 5500,
         PlayFabErrorTitleNotEnabledForParty = 6000,
         PlayFabErrorPartyVersionNotFound = 6001,
         PlayFabErrorMultiplayerServerBuildReferencedByMatchmakingQueue = 6002,
@@ -653,6 +654,7 @@ namespace PlayFab
         std::string ErrorMessage;
         Json::Value ErrorDetails;
         Json::Value Data;
+        Json::Value RetryAfterSeconds;
         std::string RequestId;
         // Non-serialized fields
         std::string UrlPath;

@@ -95,11 +95,6 @@ namespace PlayFabUnit
         void OnLoginOrRegister(const PlayFab::ClientModels::LoginResult& result, void* customData);
 
         // CLIENT API
-        // Test that the login call sequence sends the AdvertisingId when set
-        void LoginWithAdvertisingId(TestContext& testContext);
-        void OnLoginWithAdvertisingId(const PlayFab::ClientModels::LoginResult&, void* customData);
-
-        // CLIENT API
         // Test a sequence of calls that modifies saved data,
         //   and verifies that the next sequential API call contains updated data.
         // Verify that the data is correctly modified on the next call.

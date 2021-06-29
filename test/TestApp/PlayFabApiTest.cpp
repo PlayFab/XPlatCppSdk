@@ -184,30 +184,6 @@ namespace PlayFabUnit
     }
 
     // CLIENT API
-    // Test that the login call sequence sends the AdvertisingId when set
-    void PlayFabApiTest::LoginWithAdvertisingId(TestContext& testContext)
-    {
-        PlayFabSettings::staticPlayer->advertisingIdType = PlayFabSettings::AD_TYPE_ANDROID_ID;
-        PlayFabSettings::staticPlayer->advertisingIdValue = "PlayFabTestId";
-
-        LoginWithCustomIDRequest request;
-        request.CustomId = PlayFabSettings::buildIdentifier;
-        request.CreateAccount = true;
-
-        clientApi->LoginWithCustomID(request,
-            Callback(&PlayFabApiTest::OnLoginWithAdvertisingId),
-            Callback(&PlayFabApiTest::OnErrorSharedCallback),
-            &testContext);
-    }
-
-    void PlayFabApiTest::OnLoginWithAdvertisingId(const LoginResult&, void* customData)
-    {
-        // TODO: Need to wait for the NEXT api call to complete, and then test PlayFabSettings::staticPlayer->advertisingIdType
-        TestContext* testContext = static_cast<TestContext*>(customData);
-        testContext->Pass();
-    }
-
-    // CLIENT API
     // Test a sequence of calls that modifies saved data,
     //   and verifies that the next sequential API call contains updated data.
     // Verify that the data is correctly modified on the next call.
@@ -742,7 +718,6 @@ namespace PlayFabUnit
         AddTest("InvalidLoginLambda", &PlayFabApiTest::InvalidLoginLambda);
         AddTest("InvalidRegistration", &PlayFabApiTest::InvalidRegistration);
         AddTest("LoginOrRegister", &PlayFabApiTest::LoginOrRegister);
-        AddTest("LoginWithAdvertisingId", &PlayFabApiTest::LoginWithAdvertisingId);
         AddTest("UserDataApi", &PlayFabApiTest::UserDataApi);
         AddTest("PlayerStatisticsApi", &PlayFabApiTest::PlayerStatisticsApi);
         AddTest("GetServerTime", &PlayFabApiTest::GetServerTime);

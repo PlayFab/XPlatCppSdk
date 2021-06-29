@@ -240,6 +240,7 @@ namespace PlayFab
                 reqContainer.errorWrapper.ErrorCode = static_cast<PlayFabErrorCode>(reqContainer.responseJson.get("errorCode", Json::Value::null).asInt());
                 reqContainer.errorWrapper.ErrorMessage = reqContainer.responseJson.get("errorMessage", Json::Value::null).asString();
                 reqContainer.errorWrapper.ErrorDetails = reqContainer.responseJson.get("errorDetails", Json::Value::null);
+                reqContainer.errorWrapper.RetryAfterSeconds = reqContainer.responseJson.get("retryAfterSeconds", Json::Value::null);
             }
             else
             {

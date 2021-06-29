@@ -50,6 +50,7 @@ namespace PlayFab
         static void DeleteContainerImageRepository(MultiplayerModels::DeleteContainerImageRequest& request, const ProcessApiCallback<MultiplayerModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeleteRemoteUser(MultiplayerModels::DeleteRemoteUserRequest& request, const ProcessApiCallback<MultiplayerModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void EnableMultiplayerServersForTitle(MultiplayerModels::EnableMultiplayerServersForTitleRequest& request, const ProcessApiCallback<MultiplayerModels::EnableMultiplayerServersForTitleResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void GetAssetDownloadUrl(MultiplayerModels::GetAssetDownloadUrlRequest& request, const ProcessApiCallback<MultiplayerModels::GetAssetDownloadUrlResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetAssetUploadUrl(MultiplayerModels::GetAssetUploadUrlRequest& request, const ProcessApiCallback<MultiplayerModels::GetAssetUploadUrlResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetBuild(MultiplayerModels::GetBuildRequest& request, const ProcessApiCallback<MultiplayerModels::GetBuildResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetBuildAlias(MultiplayerModels::GetBuildAliasRequest& request, const ProcessApiCallback<MultiplayerModels::BuildAliasDetailsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -116,6 +117,7 @@ namespace PlayFab
         static void OnDeleteContainerImageRepositoryResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnDeleteRemoteUserResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnEnableMultiplayerServersForTitleResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnGetAssetDownloadUrlResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetAssetUploadUrlResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetBuildResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetBuildAliasResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);

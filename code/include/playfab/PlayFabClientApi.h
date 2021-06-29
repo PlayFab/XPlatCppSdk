@@ -363,9 +363,6 @@ namespace PlayFab
         static void OnWritePlayerEventResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnWriteTitleEventResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
 
-
-        // Private, Client-Specific
-        static void MultiStepClientLogin(std::shared_ptr<PlayFabAuthenticationContext> context, bool needsAttribution);
         static bool ValidateResult(PlayFabResultCommon& resultCommon, const CallRequestContainer& container);
     };
 }
