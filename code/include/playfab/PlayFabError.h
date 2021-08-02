@@ -639,6 +639,21 @@ namespace PlayFab
         PlayFabErrorAsyncExportRateLimitExceeded = 10013,
         PlayFabErrorSnapshotNotFound = 11000,
         PlayFabErrorInventoryApiNotImplemented = 12000,
+        PlayFabErrorLobbyDoesNotExist = 13000,
+        PlayFabErrorLobbyRateLimitExceeded = 13001,
+        PlayFabErrorLobbyPlayerAlreadyJoined = 13002,
+        PlayFabErrorLobbyNotJoinable = 13003,
+        PlayFabErrorLobbyMemberCannotRejoin = 13004,
+        PlayFabErrorLobbyCurrentPlayersMoreThanMaxPlayers = 13005,
+        PlayFabErrorLobbyPlayerNotPresent = 13006,
+        PlayFabErrorLobbyBadRequest = 13007,
+        PlayFabErrorLobbyPlayerMaxLobbyLimitExceeded = 13008,
+        PlayFabErrorLobbyNewOwnerMustBeConnected = 13009,
+        PlayFabErrorLobbyCurrentOwnerStillConnected = 13010,
+        PlayFabErrorLobbyMemberIsNotOwner = 13011,
+        PlayFabErrorEventSamplingInvalidRatio = 14000,
+        PlayFabErrorEventSamplingInvalidEventName = 14001,
+        PlayFabErrorEventSamplingRatioNotFound = 14002,
     };
 
     /// <summary>
