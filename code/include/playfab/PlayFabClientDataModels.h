@@ -5955,7 +5955,6 @@ namespace PlayFab
             UserOriginationXboxLive,
             UserOriginationParse,
             UserOriginationTwitch,
-            UserOriginationWindowsHello,
             UserOriginationServerCustomId,
             UserOriginationNintendoSwitchDeviceId,
             UserOriginationFacebookInstantGamesId,
@@ -6049,11 +6048,6 @@ namespace PlayFab
             if (input == UserOrigination::UserOriginationTwitch)
             {
                 output = Json::Value("Twitch");
-                return;
-            }
-            if (input == UserOrigination::UserOriginationWindowsHello)
-            {
-                output = Json::Value("WindowsHello");
                 return;
             }
             if (input == UserOrigination::UserOriginationServerCustomId)
@@ -6177,11 +6171,6 @@ namespace PlayFab
             if (inputStr == "Twitch")
             {
                 output = UserOrigination::UserOriginationTwitch;
-                return;
-            }
-            if (inputStr == "WindowsHello")
-            {
-                output = UserOrigination::UserOriginationWindowsHello;
                 return;
             }
             if (inputStr == "ServerCustomId")
@@ -10326,40 +10315,6 @@ namespace PlayFab
             }
         };
 
-        struct UserWindowsHelloInfo : public PlayFabBaseModel
-        {
-            std::string WindowsHelloDeviceName;
-            std::string WindowsHelloPublicKeyHash;
-
-            UserWindowsHelloInfo() :
-                PlayFabBaseModel(),
-                WindowsHelloDeviceName(),
-                WindowsHelloPublicKeyHash()
-            {}
-
-            UserWindowsHelloInfo(const UserWindowsHelloInfo& src) :
-                PlayFabBaseModel(),
-                WindowsHelloDeviceName(src.WindowsHelloDeviceName),
-                WindowsHelloPublicKeyHash(src.WindowsHelloPublicKeyHash)
-            {}
-
-            ~UserWindowsHelloInfo() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilS(input["WindowsHelloDeviceName"], WindowsHelloDeviceName);
-                FromJsonUtilS(input["WindowsHelloPublicKeyHash"], WindowsHelloPublicKeyHash);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_WindowsHelloDeviceName; ToJsonUtilS(WindowsHelloDeviceName, each_WindowsHelloDeviceName); output["WindowsHelloDeviceName"] = each_WindowsHelloDeviceName;
-                Json::Value each_WindowsHelloPublicKeyHash; ToJsonUtilS(WindowsHelloPublicKeyHash, each_WindowsHelloPublicKeyHash); output["WindowsHelloPublicKeyHash"] = each_WindowsHelloPublicKeyHash;
-                return output;
-            }
-        };
-
         struct UserAccountInfo : public PlayFabBaseModel
         {
             Boxed<UserAndroidDeviceInfo> AndroidDeviceInfo;
@@ -10382,7 +10337,6 @@ namespace PlayFab
             Boxed<UserTitleInfo> TitleInfo;
             Boxed<UserTwitchInfo> TwitchInfo;
             std::string Username;
-            Boxed<UserWindowsHelloInfo> WindowsHelloInfo;
             Boxed<UserXboxInfo> XboxInfo;
 
             UserAccountInfo() :
@@ -10407,7 +10361,6 @@ namespace PlayFab
                 TitleInfo(),
                 TwitchInfo(),
                 Username(),
-                WindowsHelloInfo(),
                 XboxInfo()
             {}
 
@@ -10433,7 +10386,6 @@ namespace PlayFab
                 TitleInfo(src.TitleInfo),
                 TwitchInfo(src.TwitchInfo),
                 Username(src.Username),
-                WindowsHelloInfo(src.WindowsHelloInfo),
                 XboxInfo(src.XboxInfo)
             {}
 
@@ -10461,7 +10413,6 @@ namespace PlayFab
                 FromJsonUtilO(input["TitleInfo"], TitleInfo);
                 FromJsonUtilO(input["TwitchInfo"], TwitchInfo);
                 FromJsonUtilS(input["Username"], Username);
-                FromJsonUtilO(input["WindowsHelloInfo"], WindowsHelloInfo);
                 FromJsonUtilO(input["XboxInfo"], XboxInfo);
             }
 
@@ -10488,7 +10439,6 @@ namespace PlayFab
                 Json::Value each_TitleInfo; ToJsonUtilO(TitleInfo, each_TitleInfo); output["TitleInfo"] = each_TitleInfo;
                 Json::Value each_TwitchInfo; ToJsonUtilO(TwitchInfo, each_TwitchInfo); output["TwitchInfo"] = each_TwitchInfo;
                 Json::Value each_Username; ToJsonUtilS(Username, each_Username); output["Username"] = each_Username;
-                Json::Value each_WindowsHelloInfo; ToJsonUtilO(WindowsHelloInfo, each_WindowsHelloInfo); output["WindowsHelloInfo"] = each_WindowsHelloInfo;
                 Json::Value each_XboxInfo; ToJsonUtilO(XboxInfo, each_XboxInfo); output["XboxInfo"] = each_XboxInfo;
                 return output;
             }
@@ -11702,7 +11652,7 @@ namespace PlayFab
 
         struct GetLeaderboardForUsersCharactersRequest : public PlayFabRequestCommon
         {
-            Int32 MaxResultsCount;
+            Boxed<Int32> MaxResultsCount;
             std::string StatisticName;
 
             GetLeaderboardForUsersCharactersRequest() :

@@ -295,7 +295,9 @@ namespace PlayFab
             AzureVmFamilyEsv4,
             AzureVmFamilyDsv3,
             AzureVmFamilyDsv2,
-            AzureVmFamilyNCasT4_v3
+            AzureVmFamilyNCasT4_v3,
+            AzureVmFamilyDdv4,
+            AzureVmFamilyDdsv4
         };
 
         inline void ToJsonEnum(const AzureVmFamily input, Json::Value& output)
@@ -373,6 +375,16 @@ namespace PlayFab
             if (input == AzureVmFamily::AzureVmFamilyNCasT4_v3)
             {
                 output = Json::Value("NCasT4_v3");
+                return;
+            }
+            if (input == AzureVmFamily::AzureVmFamilyDdv4)
+            {
+                output = Json::Value("Ddv4");
+                return;
+            }
+            if (input == AzureVmFamily::AzureVmFamilyDdsv4)
+            {
+                output = Json::Value("Ddsv4");
                 return;
             }
         }
@@ -458,6 +470,16 @@ namespace PlayFab
                 output = AzureVmFamily::AzureVmFamilyNCasT4_v3;
                 return;
             }
+            if (inputStr == "Ddv4")
+            {
+                output = AzureVmFamily::AzureVmFamilyDdv4;
+                return;
+            }
+            if (inputStr == "Ddsv4")
+            {
+                output = AzureVmFamily::AzureVmFamilyDdsv4;
+                return;
+            }
         }
 
         enum class AzureVmSize
@@ -513,7 +535,15 @@ namespace PlayFab
             AzureVmSizeStandard_DS3_v2,
             AzureVmSizeStandard_DS4_v2,
             AzureVmSizeStandard_DS5_v2,
-            AzureVmSizeStandard_NC4as_T4_v3
+            AzureVmSizeStandard_NC4as_T4_v3,
+            AzureVmSizeStandard_D2d_v4,
+            AzureVmSizeStandard_D4d_v4,
+            AzureVmSizeStandard_D8d_v4,
+            AzureVmSizeStandard_D16d_v4,
+            AzureVmSizeStandard_D2ds_v4,
+            AzureVmSizeStandard_D4ds_v4,
+            AzureVmSizeStandard_D8ds_v4,
+            AzureVmSizeStandard_D16ds_v4
         };
 
         inline void ToJsonEnum(const AzureVmSize input, Json::Value& output)
@@ -776,6 +806,46 @@ namespace PlayFab
             if (input == AzureVmSize::AzureVmSizeStandard_NC4as_T4_v3)
             {
                 output = Json::Value("Standard_NC4as_T4_v3");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D2d_v4)
+            {
+                output = Json::Value("Standard_D2d_v4");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D4d_v4)
+            {
+                output = Json::Value("Standard_D4d_v4");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D8d_v4)
+            {
+                output = Json::Value("Standard_D8d_v4");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D16d_v4)
+            {
+                output = Json::Value("Standard_D16d_v4");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D2ds_v4)
+            {
+                output = Json::Value("Standard_D2ds_v4");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D4ds_v4)
+            {
+                output = Json::Value("Standard_D4ds_v4");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D8ds_v4)
+            {
+                output = Json::Value("Standard_D8ds_v4");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D16ds_v4)
+            {
+                output = Json::Value("Standard_D16ds_v4");
                 return;
             }
         }
@@ -1044,6 +1114,46 @@ namespace PlayFab
             if (inputStr == "Standard_NC4as_T4_v3")
             {
                 output = AzureVmSize::AzureVmSizeStandard_NC4as_T4_v3;
+                return;
+            }
+            if (inputStr == "Standard_D2d_v4")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D2d_v4;
+                return;
+            }
+            if (inputStr == "Standard_D4d_v4")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D4d_v4;
+                return;
+            }
+            if (inputStr == "Standard_D8d_v4")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D8d_v4;
+                return;
+            }
+            if (inputStr == "Standard_D16d_v4")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D16d_v4;
+                return;
+            }
+            if (inputStr == "Standard_D2ds_v4")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D2ds_v4;
+                return;
+            }
+            if (inputStr == "Standard_D4ds_v4")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D4ds_v4;
+                return;
+            }
+            if (inputStr == "Standard_D8ds_v4")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D8ds_v4;
+                return;
+            }
+            if (inputStr == "Standard_D16ds_v4")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D16ds_v4;
                 return;
             }
         }
@@ -2777,15 +2887,18 @@ namespace PlayFab
 
         struct InstrumentationConfiguration : public PlayFabBaseModel
         {
+            Boxed<bool> IsEnabled;
             std::list<std::string> ProcessesToMonitor;
 
             InstrumentationConfiguration() :
                 PlayFabBaseModel(),
+                IsEnabled(),
                 ProcessesToMonitor()
             {}
 
             InstrumentationConfiguration(const InstrumentationConfiguration& src) :
                 PlayFabBaseModel(),
+                IsEnabled(src.IsEnabled),
                 ProcessesToMonitor(src.ProcessesToMonitor)
             {}
 
@@ -2793,12 +2906,14 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilP(input["IsEnabled"], IsEnabled);
                 FromJsonUtilS(input["ProcessesToMonitor"], ProcessesToMonitor);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_IsEnabled; ToJsonUtilP(IsEnabled, each_IsEnabled); output["IsEnabled"] = each_IsEnabled;
                 Json::Value each_ProcessesToMonitor; ToJsonUtilS(ProcessesToMonitor, each_ProcessesToMonitor); output["ProcessesToMonitor"] = each_ProcessesToMonitor;
                 return output;
             }

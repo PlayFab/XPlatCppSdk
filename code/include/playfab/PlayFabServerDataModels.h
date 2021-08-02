@@ -5421,7 +5421,22 @@ namespace PlayFab
             GenericErrorCodesAsyncExportNotFound,
             GenericErrorCodesAsyncExportRateLimitExceeded,
             GenericErrorCodesSnapshotNotFound,
-            GenericErrorCodesInventoryApiNotImplemented
+            GenericErrorCodesInventoryApiNotImplemented,
+            GenericErrorCodesLobbyDoesNotExist,
+            GenericErrorCodesLobbyRateLimitExceeded,
+            GenericErrorCodesLobbyPlayerAlreadyJoined,
+            GenericErrorCodesLobbyNotJoinable,
+            GenericErrorCodesLobbyMemberCannotRejoin,
+            GenericErrorCodesLobbyCurrentPlayersMoreThanMaxPlayers,
+            GenericErrorCodesLobbyPlayerNotPresent,
+            GenericErrorCodesLobbyBadRequest,
+            GenericErrorCodesLobbyPlayerMaxLobbyLimitExceeded,
+            GenericErrorCodesLobbyNewOwnerMustBeConnected,
+            GenericErrorCodesLobbyCurrentOwnerStillConnected,
+            GenericErrorCodesLobbyMemberIsNotOwner,
+            GenericErrorCodesEventSamplingInvalidRatio,
+            GenericErrorCodesEventSamplingInvalidEventName,
+            GenericErrorCodesEventSamplingRatioNotFound
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -8564,6 +8579,81 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesInventoryApiNotImplemented)
             {
                 output = Json::Value("InventoryApiNotImplemented");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyDoesNotExist)
+            {
+                output = Json::Value("LobbyDoesNotExist");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyRateLimitExceeded)
+            {
+                output = Json::Value("LobbyRateLimitExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyPlayerAlreadyJoined)
+            {
+                output = Json::Value("LobbyPlayerAlreadyJoined");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyNotJoinable)
+            {
+                output = Json::Value("LobbyNotJoinable");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyMemberCannotRejoin)
+            {
+                output = Json::Value("LobbyMemberCannotRejoin");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyCurrentPlayersMoreThanMaxPlayers)
+            {
+                output = Json::Value("LobbyCurrentPlayersMoreThanMaxPlayers");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyPlayerNotPresent)
+            {
+                output = Json::Value("LobbyPlayerNotPresent");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyBadRequest)
+            {
+                output = Json::Value("LobbyBadRequest");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyPlayerMaxLobbyLimitExceeded)
+            {
+                output = Json::Value("LobbyPlayerMaxLobbyLimitExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyNewOwnerMustBeConnected)
+            {
+                output = Json::Value("LobbyNewOwnerMustBeConnected");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyCurrentOwnerStillConnected)
+            {
+                output = Json::Value("LobbyCurrentOwnerStillConnected");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyMemberIsNotOwner)
+            {
+                output = Json::Value("LobbyMemberIsNotOwner");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSamplingInvalidRatio)
+            {
+                output = Json::Value("EventSamplingInvalidRatio");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSamplingInvalidEventName)
+            {
+                output = Json::Value("EventSamplingInvalidEventName");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSamplingRatioNotFound)
+            {
+                output = Json::Value("EventSamplingRatioNotFound");
                 return;
             }
         }
@@ -11714,6 +11804,81 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesInventoryApiNotImplemented;
                 return;
             }
+            if (inputStr == "LobbyDoesNotExist")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLobbyDoesNotExist;
+                return;
+            }
+            if (inputStr == "LobbyRateLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLobbyRateLimitExceeded;
+                return;
+            }
+            if (inputStr == "LobbyPlayerAlreadyJoined")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLobbyPlayerAlreadyJoined;
+                return;
+            }
+            if (inputStr == "LobbyNotJoinable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLobbyNotJoinable;
+                return;
+            }
+            if (inputStr == "LobbyMemberCannotRejoin")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLobbyMemberCannotRejoin;
+                return;
+            }
+            if (inputStr == "LobbyCurrentPlayersMoreThanMaxPlayers")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLobbyCurrentPlayersMoreThanMaxPlayers;
+                return;
+            }
+            if (inputStr == "LobbyPlayerNotPresent")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLobbyPlayerNotPresent;
+                return;
+            }
+            if (inputStr == "LobbyBadRequest")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLobbyBadRequest;
+                return;
+            }
+            if (inputStr == "LobbyPlayerMaxLobbyLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLobbyPlayerMaxLobbyLimitExceeded;
+                return;
+            }
+            if (inputStr == "LobbyNewOwnerMustBeConnected")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLobbyNewOwnerMustBeConnected;
+                return;
+            }
+            if (inputStr == "LobbyCurrentOwnerStillConnected")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLobbyCurrentOwnerStillConnected;
+                return;
+            }
+            if (inputStr == "LobbyMemberIsNotOwner")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLobbyMemberIsNotOwner;
+                return;
+            }
+            if (inputStr == "EventSamplingInvalidRatio")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSamplingInvalidRatio;
+                return;
+            }
+            if (inputStr == "EventSamplingInvalidEventName")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSamplingInvalidEventName;
+                return;
+            }
+            if (inputStr == "EventSamplingRatioNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSamplingRatioNotFound;
+                return;
+            }
         }
 
         enum class LoginIdentityProvider
@@ -12517,7 +12682,6 @@ namespace PlayFab
             UserOriginationXboxLive,
             UserOriginationParse,
             UserOriginationTwitch,
-            UserOriginationWindowsHello,
             UserOriginationServerCustomId,
             UserOriginationNintendoSwitchDeviceId,
             UserOriginationFacebookInstantGamesId,
@@ -12611,11 +12775,6 @@ namespace PlayFab
             if (input == UserOrigination::UserOriginationTwitch)
             {
                 output = Json::Value("Twitch");
-                return;
-            }
-            if (input == UserOrigination::UserOriginationWindowsHello)
-            {
-                output = Json::Value("WindowsHello");
                 return;
             }
             if (input == UserOrigination::UserOriginationServerCustomId)
@@ -12739,11 +12898,6 @@ namespace PlayFab
             if (inputStr == "Twitch")
             {
                 output = UserOrigination::UserOriginationTwitch;
-                return;
-            }
-            if (inputStr == "WindowsHello")
-            {
-                output = UserOrigination::UserOriginationWindowsHello;
                 return;
             }
             if (inputStr == "ServerCustomId")
@@ -13888,40 +14042,6 @@ namespace PlayFab
             }
         };
 
-        struct UserWindowsHelloInfo : public PlayFabBaseModel
-        {
-            std::string WindowsHelloDeviceName;
-            std::string WindowsHelloPublicKeyHash;
-
-            UserWindowsHelloInfo() :
-                PlayFabBaseModel(),
-                WindowsHelloDeviceName(),
-                WindowsHelloPublicKeyHash()
-            {}
-
-            UserWindowsHelloInfo(const UserWindowsHelloInfo& src) :
-                PlayFabBaseModel(),
-                WindowsHelloDeviceName(src.WindowsHelloDeviceName),
-                WindowsHelloPublicKeyHash(src.WindowsHelloPublicKeyHash)
-            {}
-
-            ~UserWindowsHelloInfo() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilS(input["WindowsHelloDeviceName"], WindowsHelloDeviceName);
-                FromJsonUtilS(input["WindowsHelloPublicKeyHash"], WindowsHelloPublicKeyHash);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_WindowsHelloDeviceName; ToJsonUtilS(WindowsHelloDeviceName, each_WindowsHelloDeviceName); output["WindowsHelloDeviceName"] = each_WindowsHelloDeviceName;
-                Json::Value each_WindowsHelloPublicKeyHash; ToJsonUtilS(WindowsHelloPublicKeyHash, each_WindowsHelloPublicKeyHash); output["WindowsHelloPublicKeyHash"] = each_WindowsHelloPublicKeyHash;
-                return output;
-            }
-        };
-
         struct UserXboxInfo : public PlayFabBaseModel
         {
             std::string XboxUserId;
@@ -13973,7 +14093,6 @@ namespace PlayFab
             Boxed<UserTitleInfo> TitleInfo;
             Boxed<UserTwitchInfo> TwitchInfo;
             std::string Username;
-            Boxed<UserWindowsHelloInfo> WindowsHelloInfo;
             Boxed<UserXboxInfo> XboxInfo;
 
             UserAccountInfo() :
@@ -13998,7 +14117,6 @@ namespace PlayFab
                 TitleInfo(),
                 TwitchInfo(),
                 Username(),
-                WindowsHelloInfo(),
                 XboxInfo()
             {}
 
@@ -14024,7 +14142,6 @@ namespace PlayFab
                 TitleInfo(src.TitleInfo),
                 TwitchInfo(src.TwitchInfo),
                 Username(src.Username),
-                WindowsHelloInfo(src.WindowsHelloInfo),
                 XboxInfo(src.XboxInfo)
             {}
 
@@ -14052,7 +14169,6 @@ namespace PlayFab
                 FromJsonUtilO(input["TitleInfo"], TitleInfo);
                 FromJsonUtilO(input["TwitchInfo"], TwitchInfo);
                 FromJsonUtilS(input["Username"], Username);
-                FromJsonUtilO(input["WindowsHelloInfo"], WindowsHelloInfo);
                 FromJsonUtilO(input["XboxInfo"], XboxInfo);
             }
 
@@ -14079,7 +14195,6 @@ namespace PlayFab
                 Json::Value each_TitleInfo; ToJsonUtilO(TitleInfo, each_TitleInfo); output["TitleInfo"] = each_TitleInfo;
                 Json::Value each_TwitchInfo; ToJsonUtilO(TwitchInfo, each_TwitchInfo); output["TwitchInfo"] = each_TwitchInfo;
                 Json::Value each_Username; ToJsonUtilS(Username, each_Username); output["Username"] = each_Username;
-                Json::Value each_WindowsHelloInfo; ToJsonUtilO(WindowsHelloInfo, each_WindowsHelloInfo); output["WindowsHelloInfo"] = each_WindowsHelloInfo;
                 Json::Value each_XboxInfo; ToJsonUtilO(XboxInfo, each_XboxInfo); output["XboxInfo"] = each_XboxInfo;
                 return output;
             }
@@ -17463,7 +17578,7 @@ namespace PlayFab
 
         struct GetLeaderboardForUsersCharactersRequest : public PlayFabRequestCommon
         {
-            Int32 MaxResultsCount;
+            Boxed<Int32> MaxResultsCount;
             std::string PlayFabId;
             std::string StatisticName;
 
