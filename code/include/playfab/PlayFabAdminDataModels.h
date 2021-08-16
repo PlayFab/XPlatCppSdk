@@ -5397,6 +5397,8 @@ namespace PlayFab
             GenericErrorCodesSteamUserNotFound,
             GenericErrorCodesElasticSearchOperationFailed,
             GenericErrorCodesNotImplemented,
+            GenericErrorCodesPublisherNotFound,
+            GenericErrorCodesPublisherDeleted,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5418,6 +5420,8 @@ namespace PlayFab
             GenericErrorCodesMatchmakingQueueLimitExceeded,
             GenericErrorCodesMatchmakingRequestTypeMismatch,
             GenericErrorCodesMatchmakingBadRequest,
+            GenericErrorCodesPubSubFeatureNotEnabledForTitle,
+            GenericErrorCodesPubSubTooManyRequests,
             GenericErrorCodesTitleConfigNotFound,
             GenericErrorCodesTitleConfigUpdateConflict,
             GenericErrorCodesTitleConfigSerializationError,
@@ -8064,6 +8068,16 @@ namespace PlayFab
                 output = Json::Value("NotImplemented");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesPublisherNotFound)
+            {
+                output = Json::Value("PublisherNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPublisherDeleted)
+            {
+                output = Json::Value("PublisherDeleted");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
             {
                 output = Json::Value("MatchmakingEntityInvalid");
@@ -8167,6 +8181,16 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingBadRequest)
             {
                 output = Json::Value("MatchmakingBadRequest");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPubSubFeatureNotEnabledForTitle)
+            {
+                output = Json::Value("PubSubFeatureNotEnabledForTitle");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPubSubTooManyRequests)
+            {
+                output = Json::Value("PubSubTooManyRequests");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesTitleConfigNotFound)
@@ -11287,6 +11311,16 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesNotImplemented;
                 return;
             }
+            if (inputStr == "PublisherNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPublisherNotFound;
+                return;
+            }
+            if (inputStr == "PublisherDeleted")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPublisherDeleted;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -11390,6 +11424,16 @@ namespace PlayFab
             if (inputStr == "MatchmakingBadRequest")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingBadRequest;
+                return;
+            }
+            if (inputStr == "PubSubFeatureNotEnabledForTitle")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPubSubFeatureNotEnabledForTitle;
+                return;
+            }
+            if (inputStr == "PubSubTooManyRequests")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPubSubTooManyRequests;
                 return;
             }
             if (inputStr == "TitleConfigNotFound")
