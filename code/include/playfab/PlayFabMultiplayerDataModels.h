@@ -297,7 +297,8 @@ namespace PlayFab
             AzureVmFamilyDsv2,
             AzureVmFamilyNCasT4_v3,
             AzureVmFamilyDdv4,
-            AzureVmFamilyDdsv4
+            AzureVmFamilyDdsv4,
+            AzureVmFamilyHBv3
         };
 
         inline void ToJsonEnum(const AzureVmFamily input, Json::Value& output)
@@ -385,6 +386,11 @@ namespace PlayFab
             if (input == AzureVmFamily::AzureVmFamilyDdsv4)
             {
                 output = Json::Value("Ddsv4");
+                return;
+            }
+            if (input == AzureVmFamily::AzureVmFamilyHBv3)
+            {
+                output = Json::Value("HBv3");
                 return;
             }
         }
@@ -480,6 +486,11 @@ namespace PlayFab
                 output = AzureVmFamily::AzureVmFamilyDdsv4;
                 return;
             }
+            if (inputStr == "HBv3")
+            {
+                output = AzureVmFamily::AzureVmFamilyHBv3;
+                return;
+            }
         }
 
         enum class AzureVmSize
@@ -543,7 +554,12 @@ namespace PlayFab
             AzureVmSizeStandard_D2ds_v4,
             AzureVmSizeStandard_D4ds_v4,
             AzureVmSizeStandard_D8ds_v4,
-            AzureVmSizeStandard_D16ds_v4
+            AzureVmSizeStandard_D16ds_v4,
+            AzureVmSizeStandard_HB120_16rs_v3,
+            AzureVmSizeStandard_HB120_32rs_v3,
+            AzureVmSizeStandard_HB120_64rs_v3,
+            AzureVmSizeStandard_HB120_96rs_v3,
+            AzureVmSizeStandard_HB120rs_v3
         };
 
         inline void ToJsonEnum(const AzureVmSize input, Json::Value& output)
@@ -846,6 +862,31 @@ namespace PlayFab
             if (input == AzureVmSize::AzureVmSizeStandard_D16ds_v4)
             {
                 output = Json::Value("Standard_D16ds_v4");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_HB120_16rs_v3)
+            {
+                output = Json::Value("Standard_HB120_16rs_v3");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_HB120_32rs_v3)
+            {
+                output = Json::Value("Standard_HB120_32rs_v3");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_HB120_64rs_v3)
+            {
+                output = Json::Value("Standard_HB120_64rs_v3");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_HB120_96rs_v3)
+            {
+                output = Json::Value("Standard_HB120_96rs_v3");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_HB120rs_v3)
+            {
+                output = Json::Value("Standard_HB120rs_v3");
                 return;
             }
         }
@@ -1154,6 +1195,31 @@ namespace PlayFab
             if (inputStr == "Standard_D16ds_v4")
             {
                 output = AzureVmSize::AzureVmSizeStandard_D16ds_v4;
+                return;
+            }
+            if (inputStr == "Standard_HB120_16rs_v3")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_HB120_16rs_v3;
+                return;
+            }
+            if (inputStr == "Standard_HB120_32rs_v3")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_HB120_32rs_v3;
+                return;
+            }
+            if (inputStr == "Standard_HB120_64rs_v3")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_HB120_64rs_v3;
+                return;
+            }
+            if (inputStr == "Standard_HB120_96rs_v3")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_HB120_96rs_v3;
+                return;
+            }
+            if (inputStr == "Standard_HB120rs_v3")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_HB120rs_v3;
                 return;
             }
         }

@@ -5399,6 +5399,8 @@ namespace PlayFab
             GenericErrorCodesNotImplemented,
             GenericErrorCodesPublisherNotFound,
             GenericErrorCodesPublisherDeleted,
+            GenericErrorCodesApiDisabledForMigration,
+            GenericErrorCodesResourceNameUpdateNotAllowed,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5537,6 +5539,7 @@ namespace PlayFab
             GenericErrorCodesLobbyCurrentOwnerStillConnected,
             GenericErrorCodesLobbyMemberIsNotOwner,
             GenericErrorCodesEventSamplingInvalidRatio,
+            GenericErrorCodesEventSamplingInvalidEventNamespace,
             GenericErrorCodesEventSamplingInvalidEventName,
             GenericErrorCodesEventSamplingRatioNotFound
         };
@@ -8078,6 +8081,16 @@ namespace PlayFab
                 output = Json::Value("PublisherDeleted");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesApiDisabledForMigration)
+            {
+                output = Json::Value("ApiDisabledForMigration");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesResourceNameUpdateNotAllowed)
+            {
+                output = Json::Value("ResourceNameUpdateNotAllowed");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
             {
                 output = Json::Value("MatchmakingEntityInvalid");
@@ -8766,6 +8779,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesEventSamplingInvalidRatio)
             {
                 output = Json::Value("EventSamplingInvalidRatio");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSamplingInvalidEventNamespace)
+            {
+                output = Json::Value("EventSamplingInvalidEventNamespace");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesEventSamplingInvalidEventName)
@@ -11321,6 +11339,16 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesPublisherDeleted;
                 return;
             }
+            if (inputStr == "ApiDisabledForMigration")
+            {
+                output = GenericErrorCodes::GenericErrorCodesApiDisabledForMigration;
+                return;
+            }
+            if (inputStr == "ResourceNameUpdateNotAllowed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesResourceNameUpdateNotAllowed;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -12009,6 +12037,11 @@ namespace PlayFab
             if (inputStr == "EventSamplingInvalidRatio")
             {
                 output = GenericErrorCodes::GenericErrorCodesEventSamplingInvalidRatio;
+                return;
+            }
+            if (inputStr == "EventSamplingInvalidEventNamespace")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSamplingInvalidEventNamespace;
                 return;
             }
             if (inputStr == "EventSamplingInvalidEventName")
