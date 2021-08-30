@@ -11652,18 +11652,15 @@ namespace PlayFab
 
         struct GetLeaderboardForUsersCharactersRequest : public PlayFabRequestCommon
         {
-            Boxed<Int32> MaxResultsCount;
             std::string StatisticName;
 
             GetLeaderboardForUsersCharactersRequest() :
                 PlayFabRequestCommon(),
-                MaxResultsCount(),
                 StatisticName()
             {}
 
             GetLeaderboardForUsersCharactersRequest(const GetLeaderboardForUsersCharactersRequest& src) :
                 PlayFabRequestCommon(),
-                MaxResultsCount(src.MaxResultsCount),
                 StatisticName(src.StatisticName)
             {}
 
@@ -11671,14 +11668,12 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
-                FromJsonUtilP(input["MaxResultsCount"], MaxResultsCount);
                 FromJsonUtilS(input["StatisticName"], StatisticName);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                Json::Value each_MaxResultsCount; ToJsonUtilP(MaxResultsCount, each_MaxResultsCount); output["MaxResultsCount"] = each_MaxResultsCount;
                 Json::Value each_StatisticName; ToJsonUtilS(StatisticName, each_StatisticName); output["StatisticName"] = each_StatisticName;
                 return output;
             }
