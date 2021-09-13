@@ -5401,6 +5401,10 @@ namespace PlayFab
             GenericErrorCodesPublisherDeleted,
             GenericErrorCodesApiDisabledForMigration,
             GenericErrorCodesResourceNameUpdateNotAllowed,
+            GenericErrorCodesApiNotEnabledForTitle,
+            GenericErrorCodesDuplicateTitleNameForPublisher,
+            GenericErrorCodesAzureTitleCreationInProgress,
+            GenericErrorCodesDuplicateAzureResourceId,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8089,6 +8093,26 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesResourceNameUpdateNotAllowed)
             {
                 output = Json::Value("ResourceNameUpdateNotAllowed");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesApiNotEnabledForTitle)
+            {
+                output = Json::Value("ApiNotEnabledForTitle");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesDuplicateTitleNameForPublisher)
+            {
+                output = Json::Value("DuplicateTitleNameForPublisher");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAzureTitleCreationInProgress)
+            {
+                output = Json::Value("AzureTitleCreationInProgress");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesDuplicateAzureResourceId)
+            {
+                output = Json::Value("DuplicateAzureResourceId");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -11347,6 +11371,26 @@ namespace PlayFab
             if (inputStr == "ResourceNameUpdateNotAllowed")
             {
                 output = GenericErrorCodes::GenericErrorCodesResourceNameUpdateNotAllowed;
+                return;
+            }
+            if (inputStr == "ApiNotEnabledForTitle")
+            {
+                output = GenericErrorCodes::GenericErrorCodesApiNotEnabledForTitle;
+                return;
+            }
+            if (inputStr == "DuplicateTitleNameForPublisher")
+            {
+                output = GenericErrorCodes::GenericErrorCodesDuplicateTitleNameForPublisher;
+                return;
+            }
+            if (inputStr == "AzureTitleCreationInProgress")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAzureTitleCreationInProgress;
+                return;
+            }
+            if (inputStr == "DuplicateAzureResourceId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesDuplicateAzureResourceId;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
