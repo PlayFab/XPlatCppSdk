@@ -1906,20 +1906,24 @@ namespace PlayFab
             Boxed<CurrentServerStats> pfCurrentServerStats;
             Boxed<DynamicStandbySettings> pfDynamicStandbySettings;
             Int32 MaxServers;
+            Boxed<Int32> MultiplayerServerCountPerVm;
             std::string Region;
             Boxed<ScheduledStandbySettings> pfScheduledStandbySettings;
             Int32 StandbyServers;
             std::string Status;
+            Boxed<AzureVmSize> VmSize;
 
             BuildRegion() :
                 PlayFabBaseModel(),
                 pfCurrentServerStats(),
                 pfDynamicStandbySettings(),
                 MaxServers(),
+                MultiplayerServerCountPerVm(),
                 Region(),
                 pfScheduledStandbySettings(),
                 StandbyServers(),
-                Status()
+                Status(),
+                VmSize()
             {}
 
             BuildRegion(const BuildRegion& src) :
@@ -1927,10 +1931,12 @@ namespace PlayFab
                 pfCurrentServerStats(src.pfCurrentServerStats),
                 pfDynamicStandbySettings(src.pfDynamicStandbySettings),
                 MaxServers(src.MaxServers),
+                MultiplayerServerCountPerVm(src.MultiplayerServerCountPerVm),
                 Region(src.Region),
                 pfScheduledStandbySettings(src.pfScheduledStandbySettings),
                 StandbyServers(src.StandbyServers),
-                Status(src.Status)
+                Status(src.Status),
+                VmSize(src.VmSize)
             {}
 
             ~BuildRegion() = default;
@@ -1940,10 +1946,12 @@ namespace PlayFab
                 FromJsonUtilO(input["CurrentServerStats"], pfCurrentServerStats);
                 FromJsonUtilO(input["DynamicStandbySettings"], pfDynamicStandbySettings);
                 FromJsonUtilP(input["MaxServers"], MaxServers);
+                FromJsonUtilP(input["MultiplayerServerCountPerVm"], MultiplayerServerCountPerVm);
                 FromJsonUtilS(input["Region"], Region);
                 FromJsonUtilO(input["ScheduledStandbySettings"], pfScheduledStandbySettings);
                 FromJsonUtilP(input["StandbyServers"], StandbyServers);
                 FromJsonUtilS(input["Status"], Status);
+                FromJsonUtilE(input["VmSize"], VmSize);
             }
 
             Json::Value ToJson() const override
@@ -1952,10 +1960,12 @@ namespace PlayFab
                 Json::Value each_pfCurrentServerStats; ToJsonUtilO(pfCurrentServerStats, each_pfCurrentServerStats); output["CurrentServerStats"] = each_pfCurrentServerStats;
                 Json::Value each_pfDynamicStandbySettings; ToJsonUtilO(pfDynamicStandbySettings, each_pfDynamicStandbySettings); output["DynamicStandbySettings"] = each_pfDynamicStandbySettings;
                 Json::Value each_MaxServers; ToJsonUtilP(MaxServers, each_MaxServers); output["MaxServers"] = each_MaxServers;
+                Json::Value each_MultiplayerServerCountPerVm; ToJsonUtilP(MultiplayerServerCountPerVm, each_MultiplayerServerCountPerVm); output["MultiplayerServerCountPerVm"] = each_MultiplayerServerCountPerVm;
                 Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
                 Json::Value each_pfScheduledStandbySettings; ToJsonUtilO(pfScheduledStandbySettings, each_pfScheduledStandbySettings); output["ScheduledStandbySettings"] = each_pfScheduledStandbySettings;
                 Json::Value each_StandbyServers; ToJsonUtilP(StandbyServers, each_StandbyServers); output["StandbyServers"] = each_StandbyServers;
                 Json::Value each_Status; ToJsonUtilS(Status, each_Status); output["Status"] = each_Status;
+                Json::Value each_VmSize; ToJsonUtilE(VmSize, each_VmSize); output["VmSize"] = each_VmSize;
                 return output;
             }
         };
@@ -1964,26 +1974,32 @@ namespace PlayFab
         {
             Boxed<DynamicStandbySettings> pfDynamicStandbySettings;
             Int32 MaxServers;
+            Boxed<Int32> MultiplayerServerCountPerVm;
             std::string Region;
             Boxed<ScheduledStandbySettings> pfScheduledStandbySettings;
             Int32 StandbyServers;
+            Boxed<AzureVmSize> VmSize;
 
             BuildRegionParams() :
                 PlayFabBaseModel(),
                 pfDynamicStandbySettings(),
                 MaxServers(),
+                MultiplayerServerCountPerVm(),
                 Region(),
                 pfScheduledStandbySettings(),
-                StandbyServers()
+                StandbyServers(),
+                VmSize()
             {}
 
             BuildRegionParams(const BuildRegionParams& src) :
                 PlayFabBaseModel(),
                 pfDynamicStandbySettings(src.pfDynamicStandbySettings),
                 MaxServers(src.MaxServers),
+                MultiplayerServerCountPerVm(src.MultiplayerServerCountPerVm),
                 Region(src.Region),
                 pfScheduledStandbySettings(src.pfScheduledStandbySettings),
-                StandbyServers(src.StandbyServers)
+                StandbyServers(src.StandbyServers),
+                VmSize(src.VmSize)
             {}
 
             ~BuildRegionParams() = default;
@@ -1992,9 +2008,11 @@ namespace PlayFab
             {
                 FromJsonUtilO(input["DynamicStandbySettings"], pfDynamicStandbySettings);
                 FromJsonUtilP(input["MaxServers"], MaxServers);
+                FromJsonUtilP(input["MultiplayerServerCountPerVm"], MultiplayerServerCountPerVm);
                 FromJsonUtilS(input["Region"], Region);
                 FromJsonUtilO(input["ScheduledStandbySettings"], pfScheduledStandbySettings);
                 FromJsonUtilP(input["StandbyServers"], StandbyServers);
+                FromJsonUtilE(input["VmSize"], VmSize);
             }
 
             Json::Value ToJson() const override
@@ -2002,9 +2020,11 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_pfDynamicStandbySettings; ToJsonUtilO(pfDynamicStandbySettings, each_pfDynamicStandbySettings); output["DynamicStandbySettings"] = each_pfDynamicStandbySettings;
                 Json::Value each_MaxServers; ToJsonUtilP(MaxServers, each_MaxServers); output["MaxServers"] = each_MaxServers;
+                Json::Value each_MultiplayerServerCountPerVm; ToJsonUtilP(MultiplayerServerCountPerVm, each_MultiplayerServerCountPerVm); output["MultiplayerServerCountPerVm"] = each_MultiplayerServerCountPerVm;
                 Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
                 Json::Value each_pfScheduledStandbySettings; ToJsonUtilO(pfScheduledStandbySettings, each_pfScheduledStandbySettings); output["ScheduledStandbySettings"] = each_pfScheduledStandbySettings;
                 Json::Value each_StandbyServers; ToJsonUtilP(StandbyServers, each_StandbyServers); output["StandbyServers"] = each_StandbyServers;
+                Json::Value each_VmSize; ToJsonUtilE(VmSize, each_VmSize); output["VmSize"] = each_VmSize;
                 return output;
             }
         };
