@@ -5307,6 +5307,7 @@ namespace PlayFab
             GenericErrorCodesDuplicateTitleNameForPublisher,
             GenericErrorCodesAzureTitleCreationInProgress,
             GenericErrorCodesDuplicateAzureResourceId,
+            GenericErrorCodesTitleContraintsPublisherDeletion,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8015,6 +8016,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesDuplicateAzureResourceId)
             {
                 output = Json::Value("DuplicateAzureResourceId");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleContraintsPublisherDeletion)
+            {
+                output = Json::Value("TitleContraintsPublisherDeletion");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -11293,6 +11299,11 @@ namespace PlayFab
             if (inputStr == "DuplicateAzureResourceId")
             {
                 output = GenericErrorCodes::GenericErrorCodesDuplicateAzureResourceId;
+                return;
+            }
+            if (inputStr == "TitleContraintsPublisherDeletion")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleContraintsPublisherDeletion;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
