@@ -197,6 +197,9 @@
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabDataApi.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabDataInstanceApi.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabDataDataModels.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEconomyApi.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEconomyInstanceApi.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEconomyDataModels.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEventsApi.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEventsInstanceApi.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabEventsDataModels.h" />
@@ -260,6 +263,8 @@
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabCloudScriptInstanceApi.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabDataApi.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabDataInstanceApi.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabEconomyApi.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabEconomyInstanceApi.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabEventsApi.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabEventsInstanceApi.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabExperimentationApi.cpp" />

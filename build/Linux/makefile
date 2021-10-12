@@ -37,6 +37,8 @@ OBJS = stdafx.o \
 	PlayFabCloudScriptInstanceApi.o \
 	PlayFabDataApi.o \
 	PlayFabDataInstanceApi.o \
+	PlayFabEconomyApi.o \
+	PlayFabEconomyInstanceApi.o \
 	PlayFabEventsApi.o \
 	PlayFabEventsInstanceApi.o \
 	PlayFabExperimentationApi.o \

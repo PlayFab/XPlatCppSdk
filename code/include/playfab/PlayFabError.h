@@ -525,6 +525,7 @@ namespace PlayFab
         PlayFabErrorAzureTitleCreationInProgress = 1522,
         PlayFabErrorDuplicateAzureResourceId = 1523,
         PlayFabErrorTitleContraintsPublisherDeletion = 1524,
+        PlayFabErrorInvalidPlayerAccountPoolId = 1525,
         PlayFabErrorMatchmakingEntityInvalid = 2001,
         PlayFabErrorMatchmakingPlayerAttributesInvalid = 2002,
         PlayFabErrorMatchmakingQueueNotFound = 2016,
@@ -548,6 +549,9 @@ namespace PlayFab
         PlayFabErrorMatchmakingBadRequest = 2059,
         PlayFabErrorPubSubFeatureNotEnabledForTitle = 2500,
         PlayFabErrorPubSubTooManyRequests = 2501,
+        PlayFabErrorPubSubConnectionHandleAccessDenied = 2502,
+        PlayFabErrorPubSubConnectionHandleInvalid = 2503,
+        PlayFabErrorPubSubSubscriptionLimitExceeded = 2504,
         PlayFabErrorTitleConfigNotFound = 3001,
         PlayFabErrorTitleConfigUpdateConflict = 3002,
         PlayFabErrorTitleConfigSerializationError = 3003,
@@ -666,6 +670,10 @@ namespace PlayFab
         PlayFabErrorEventSamplingInvalidEventNamespace = 14001,
         PlayFabErrorEventSamplingInvalidEventName = 14002,
         PlayFabErrorEventSamplingRatioNotFound = 14003,
+        PlayFabErrorEventSinkConnectionInvalid = 15000,
+        PlayFabErrorEventSinkConnectionUnauthorized = 15001,
+        PlayFabErrorEventSinkRegionInvalid = 15002,
+        PlayFabErrorOperationCanceled = 16000,
     };
 
     /// <summary>

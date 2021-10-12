@@ -5406,6 +5406,7 @@ namespace PlayFab
             GenericErrorCodesAzureTitleCreationInProgress,
             GenericErrorCodesDuplicateAzureResourceId,
             GenericErrorCodesTitleContraintsPublisherDeletion,
+            GenericErrorCodesInvalidPlayerAccountPoolId,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5429,6 +5430,9 @@ namespace PlayFab
             GenericErrorCodesMatchmakingBadRequest,
             GenericErrorCodesPubSubFeatureNotEnabledForTitle,
             GenericErrorCodesPubSubTooManyRequests,
+            GenericErrorCodesPubSubConnectionHandleAccessDenied,
+            GenericErrorCodesPubSubConnectionHandleInvalid,
+            GenericErrorCodesPubSubSubscriptionLimitExceeded,
             GenericErrorCodesTitleConfigNotFound,
             GenericErrorCodesTitleConfigUpdateConflict,
             GenericErrorCodesTitleConfigSerializationError,
@@ -5546,7 +5550,11 @@ namespace PlayFab
             GenericErrorCodesEventSamplingInvalidRatio,
             GenericErrorCodesEventSamplingInvalidEventNamespace,
             GenericErrorCodesEventSamplingInvalidEventName,
-            GenericErrorCodesEventSamplingRatioNotFound
+            GenericErrorCodesEventSamplingRatioNotFound,
+            GenericErrorCodesEventSinkConnectionInvalid,
+            GenericErrorCodesEventSinkConnectionUnauthorized,
+            GenericErrorCodesEventSinkRegionInvalid,
+            GenericErrorCodesOperationCanceled
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -8121,6 +8129,11 @@ namespace PlayFab
                 output = Json::Value("TitleContraintsPublisherDeletion");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidPlayerAccountPoolId)
+            {
+                output = Json::Value("InvalidPlayerAccountPoolId");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
             {
                 output = Json::Value("MatchmakingEntityInvalid");
@@ -8234,6 +8247,21 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesPubSubTooManyRequests)
             {
                 output = Json::Value("PubSubTooManyRequests");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPubSubConnectionHandleAccessDenied)
+            {
+                output = Json::Value("PubSubConnectionHandleAccessDenied");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPubSubConnectionHandleInvalid)
+            {
+                output = Json::Value("PubSubConnectionHandleInvalid");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPubSubSubscriptionLimitExceeded)
+            {
+                output = Json::Value("PubSubSubscriptionLimitExceeded");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesTitleConfigNotFound)
@@ -8824,6 +8852,26 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesEventSamplingRatioNotFound)
             {
                 output = Json::Value("EventSamplingRatioNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkConnectionInvalid)
+            {
+                output = Json::Value("EventSinkConnectionInvalid");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkConnectionUnauthorized)
+            {
+                output = Json::Value("EventSinkConnectionUnauthorized");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkRegionInvalid)
+            {
+                output = Json::Value("EventSinkRegionInvalid");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesOperationCanceled)
+            {
+                output = Json::Value("OperationCanceled");
                 return;
             }
         }
@@ -11404,6 +11452,11 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesTitleContraintsPublisherDeletion;
                 return;
             }
+            if (inputStr == "InvalidPlayerAccountPoolId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidPlayerAccountPoolId;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -11517,6 +11570,21 @@ namespace PlayFab
             if (inputStr == "PubSubTooManyRequests")
             {
                 output = GenericErrorCodes::GenericErrorCodesPubSubTooManyRequests;
+                return;
+            }
+            if (inputStr == "PubSubConnectionHandleAccessDenied")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPubSubConnectionHandleAccessDenied;
+                return;
+            }
+            if (inputStr == "PubSubConnectionHandleInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPubSubConnectionHandleInvalid;
+                return;
+            }
+            if (inputStr == "PubSubSubscriptionLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPubSubSubscriptionLimitExceeded;
                 return;
             }
             if (inputStr == "TitleConfigNotFound")
@@ -12107,6 +12175,26 @@ namespace PlayFab
             if (inputStr == "EventSamplingRatioNotFound")
             {
                 output = GenericErrorCodes::GenericErrorCodesEventSamplingRatioNotFound;
+                return;
+            }
+            if (inputStr == "EventSinkConnectionInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkConnectionInvalid;
+                return;
+            }
+            if (inputStr == "EventSinkConnectionUnauthorized")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkConnectionUnauthorized;
+                return;
+            }
+            if (inputStr == "EventSinkRegionInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkRegionInvalid;
+                return;
+            }
+            if (inputStr == "OperationCanceled")
+            {
+                output = GenericErrorCodes::GenericErrorCodesOperationCanceled;
                 return;
             }
         }
@@ -21842,6 +21930,7 @@ namespace PlayFab
 
         struct SegmentModel : public PlayFabBaseModel
         {
+            std::string AzureResourceId;
             std::string Description;
             std::list<SegmentTrigger> EnteredSegmentActions;
             time_t LastUpdateTime;
@@ -21852,6 +21941,7 @@ namespace PlayFab
 
             SegmentModel() :
                 PlayFabBaseModel(),
+                AzureResourceId(),
                 Description(),
                 EnteredSegmentActions(),
                 LastUpdateTime(),
@@ -21863,6 +21953,7 @@ namespace PlayFab
 
             SegmentModel(const SegmentModel& src) :
                 PlayFabBaseModel(),
+                AzureResourceId(src.AzureResourceId),
                 Description(src.Description),
                 EnteredSegmentActions(src.EnteredSegmentActions),
                 LastUpdateTime(src.LastUpdateTime),
@@ -21876,6 +21967,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["AzureResourceId"], AzureResourceId);
                 FromJsonUtilS(input["Description"], Description);
                 FromJsonUtilO(input["EnteredSegmentActions"], EnteredSegmentActions);
                 FromJsonUtilT(input["LastUpdateTime"], LastUpdateTime);
@@ -21888,6 +21980,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_AzureResourceId; ToJsonUtilS(AzureResourceId, each_AzureResourceId); output["AzureResourceId"] = each_AzureResourceId;
                 Json::Value each_Description; ToJsonUtilS(Description, each_Description); output["Description"] = each_Description;
                 Json::Value each_EnteredSegmentActions; ToJsonUtilO(EnteredSegmentActions, each_EnteredSegmentActions); output["EnteredSegmentActions"] = each_EnteredSegmentActions;
                 Json::Value each_LastUpdateTime; ToJsonUtilT(LastUpdateTime, each_LastUpdateTime); output["LastUpdateTime"] = each_LastUpdateTime;
@@ -22084,6 +22177,74 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_JobReceiptId; ToJsonUtilS(JobReceiptId, each_JobReceiptId); output["JobReceiptId"] = each_JobReceiptId;
                 Json::Value each_TitleIds; ToJsonUtilS(TitleIds, each_TitleIds); output["TitleIds"] = each_TitleIds;
+                return output;
+            }
+        };
+
+        struct DeleteMembershipSubscriptionRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            std::string MembershipId;
+            std::string PlayFabId;
+            std::string SubscriptionId;
+
+            DeleteMembershipSubscriptionRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                MembershipId(),
+                PlayFabId(),
+                SubscriptionId()
+            {}
+
+            DeleteMembershipSubscriptionRequest(const DeleteMembershipSubscriptionRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                MembershipId(src.MembershipId),
+                PlayFabId(src.PlayFabId),
+                SubscriptionId(src.SubscriptionId)
+            {}
+
+            ~DeleteMembershipSubscriptionRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["MembershipId"], MembershipId);
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+                FromJsonUtilS(input["SubscriptionId"], SubscriptionId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_MembershipId; ToJsonUtilS(MembershipId, each_MembershipId); output["MembershipId"] = each_MembershipId;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                Json::Value each_SubscriptionId; ToJsonUtilS(SubscriptionId, each_SubscriptionId); output["SubscriptionId"] = each_SubscriptionId;
+                return output;
+            }
+        };
+
+        struct DeleteMembershipSubscriptionResult : public PlayFabResultCommon
+        {
+
+            DeleteMembershipSubscriptionResult() :
+                PlayFabResultCommon()
+            {}
+
+            DeleteMembershipSubscriptionResult(const DeleteMembershipSubscriptionResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~DeleteMembershipSubscriptionResult() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
                 return output;
             }
         };
@@ -28975,6 +29136,74 @@ namespace PlayFab
             }
         };
 
+        struct SetMembershipOverrideRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            time_t ExpirationTime;
+            std::string MembershipId;
+            std::string PlayFabId;
+
+            SetMembershipOverrideRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                ExpirationTime(),
+                MembershipId(),
+                PlayFabId()
+            {}
+
+            SetMembershipOverrideRequest(const SetMembershipOverrideRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                ExpirationTime(src.ExpirationTime),
+                MembershipId(src.MembershipId),
+                PlayFabId(src.PlayFabId)
+            {}
+
+            ~SetMembershipOverrideRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilT(input["ExpirationTime"], ExpirationTime);
+                FromJsonUtilS(input["MembershipId"], MembershipId);
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_ExpirationTime; ToJsonUtilT(ExpirationTime, each_ExpirationTime); output["ExpirationTime"] = each_ExpirationTime;
+                Json::Value each_MembershipId; ToJsonUtilS(MembershipId, each_MembershipId); output["MembershipId"] = each_MembershipId;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                return output;
+            }
+        };
+
+        struct SetMembershipOverrideResult : public PlayFabResultCommon
+        {
+
+            SetMembershipOverrideResult() :
+                PlayFabResultCommon()
+            {}
+
+            SetMembershipOverrideResult(const SetMembershipOverrideResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~SetMembershipOverrideResult() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
         struct SetPlayerSecretRequest : public PlayFabRequestCommon
         {
             std::string PlayerSecret;
@@ -29248,18 +29477,27 @@ namespace PlayFab
 
         struct SetTitleDataRequest : public PlayFabRequestCommon
         {
+            std::string AzureResourceId;
+            std::map<std::string, std::string> CustomTags;
             std::string Key;
+            std::string TitleId;
             std::string Value;
 
             SetTitleDataRequest() :
                 PlayFabRequestCommon(),
+                AzureResourceId(),
+                CustomTags(),
                 Key(),
+                TitleId(),
                 Value()
             {}
 
             SetTitleDataRequest(const SetTitleDataRequest& src) :
                 PlayFabRequestCommon(),
+                AzureResourceId(src.AzureResourceId),
+                CustomTags(src.CustomTags),
                 Key(src.Key),
+                TitleId(src.TitleId),
                 Value(src.Value)
             {}
 
@@ -29267,14 +29505,20 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["AzureResourceId"], AzureResourceId);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["Key"], Key);
+                FromJsonUtilS(input["TitleId"], TitleId);
                 FromJsonUtilS(input["Value"], Value);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_AzureResourceId; ToJsonUtilS(AzureResourceId, each_AzureResourceId); output["AzureResourceId"] = each_AzureResourceId;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Key; ToJsonUtilS(Key, each_Key); output["Key"] = each_Key;
+                Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 Json::Value each_Value; ToJsonUtilS(Value, each_Value); output["Value"] = each_Value;
                 return output;
             }
@@ -29282,24 +29526,29 @@ namespace PlayFab
 
         struct SetTitleDataResult : public PlayFabResultCommon
         {
+            std::string AzureResourceId;
 
             SetTitleDataResult() :
-                PlayFabResultCommon()
+                PlayFabResultCommon(),
+                AzureResourceId()
             {}
 
-            SetTitleDataResult(const SetTitleDataResult&) :
-                PlayFabResultCommon()
+            SetTitleDataResult(const SetTitleDataResult& src) :
+                PlayFabResultCommon(),
+                AzureResourceId(src.AzureResourceId)
             {}
 
             ~SetTitleDataResult() = default;
 
-            void FromJson(const Json::Value&) override
+            void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["AzureResourceId"], AzureResourceId);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_AzureResourceId; ToJsonUtilS(AzureResourceId, each_AzureResourceId); output["AzureResourceId"] = each_AzureResourceId;
                 return output;
             }
         };
