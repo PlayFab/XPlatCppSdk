@@ -5307,7 +5307,12 @@ namespace PlayFab
             GenericErrorCodesDuplicateTitleNameForPublisher,
             GenericErrorCodesAzureTitleCreationInProgress,
             GenericErrorCodesDuplicateAzureResourceId,
-            GenericErrorCodesTitleContraintsPublisherDeletion,
+            GenericErrorCodesTitleConstraintsPublisherDeletion,
+            GenericErrorCodesInvalidPlayerAccountPoolId,
+            GenericErrorCodesPlayerAccountPoolNotFound,
+            GenericErrorCodesPlayerAccountPoolDeleted,
+            GenericErrorCodesTitleCleanupInProgress,
+            GenericErrorCodesAzureResourceManagerNotSupportedInStamp,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5331,6 +5336,9 @@ namespace PlayFab
             GenericErrorCodesMatchmakingBadRequest,
             GenericErrorCodesPubSubFeatureNotEnabledForTitle,
             GenericErrorCodesPubSubTooManyRequests,
+            GenericErrorCodesPubSubConnectionHandleAccessDenied,
+            GenericErrorCodesPubSubConnectionHandleInvalid,
+            GenericErrorCodesPubSubSubscriptionLimitExceeded,
             GenericErrorCodesTitleConfigNotFound,
             GenericErrorCodesTitleConfigUpdateConflict,
             GenericErrorCodesTitleConfigSerializationError,
@@ -5448,7 +5456,11 @@ namespace PlayFab
             GenericErrorCodesEventSamplingInvalidRatio,
             GenericErrorCodesEventSamplingInvalidEventNamespace,
             GenericErrorCodesEventSamplingInvalidEventName,
-            GenericErrorCodesEventSamplingRatioNotFound
+            GenericErrorCodesEventSamplingRatioNotFound,
+            GenericErrorCodesEventSinkConnectionInvalid,
+            GenericErrorCodesEventSinkConnectionUnauthorized,
+            GenericErrorCodesEventSinkRegionInvalid,
+            GenericErrorCodesOperationCanceled
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -8018,9 +8030,34 @@ namespace PlayFab
                 output = Json::Value("DuplicateAzureResourceId");
                 return;
             }
-            if (input == GenericErrorCodes::GenericErrorCodesTitleContraintsPublisherDeletion)
+            if (input == GenericErrorCodes::GenericErrorCodesTitleConstraintsPublisherDeletion)
             {
-                output = Json::Value("TitleContraintsPublisherDeletion");
+                output = Json::Value("TitleConstraintsPublisherDeletion");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidPlayerAccountPoolId)
+            {
+                output = Json::Value("InvalidPlayerAccountPoolId");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerAccountPoolNotFound)
+            {
+                output = Json::Value("PlayerAccountPoolNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerAccountPoolDeleted)
+            {
+                output = Json::Value("PlayerAccountPoolDeleted");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleCleanupInProgress)
+            {
+                output = Json::Value("TitleCleanupInProgress");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAzureResourceManagerNotSupportedInStamp)
+            {
+                output = Json::Value("AzureResourceManagerNotSupportedInStamp");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -8136,6 +8173,21 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesPubSubTooManyRequests)
             {
                 output = Json::Value("PubSubTooManyRequests");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPubSubConnectionHandleAccessDenied)
+            {
+                output = Json::Value("PubSubConnectionHandleAccessDenied");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPubSubConnectionHandleInvalid)
+            {
+                output = Json::Value("PubSubConnectionHandleInvalid");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPubSubSubscriptionLimitExceeded)
+            {
+                output = Json::Value("PubSubSubscriptionLimitExceeded");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesTitleConfigNotFound)
@@ -8726,6 +8778,26 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesEventSamplingRatioNotFound)
             {
                 output = Json::Value("EventSamplingRatioNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkConnectionInvalid)
+            {
+                output = Json::Value("EventSinkConnectionInvalid");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkConnectionUnauthorized)
+            {
+                output = Json::Value("EventSinkConnectionUnauthorized");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkRegionInvalid)
+            {
+                output = Json::Value("EventSinkRegionInvalid");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesOperationCanceled)
+            {
+                output = Json::Value("OperationCanceled");
                 return;
             }
         }
@@ -11301,9 +11373,34 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesDuplicateAzureResourceId;
                 return;
             }
-            if (inputStr == "TitleContraintsPublisherDeletion")
+            if (inputStr == "TitleConstraintsPublisherDeletion")
             {
-                output = GenericErrorCodes::GenericErrorCodesTitleContraintsPublisherDeletion;
+                output = GenericErrorCodes::GenericErrorCodesTitleConstraintsPublisherDeletion;
+                return;
+            }
+            if (inputStr == "InvalidPlayerAccountPoolId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidPlayerAccountPoolId;
+                return;
+            }
+            if (inputStr == "PlayerAccountPoolNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerAccountPoolNotFound;
+                return;
+            }
+            if (inputStr == "PlayerAccountPoolDeleted")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerAccountPoolDeleted;
+                return;
+            }
+            if (inputStr == "TitleCleanupInProgress")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleCleanupInProgress;
+                return;
+            }
+            if (inputStr == "AzureResourceManagerNotSupportedInStamp")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAzureResourceManagerNotSupportedInStamp;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
@@ -11419,6 +11516,21 @@ namespace PlayFab
             if (inputStr == "PubSubTooManyRequests")
             {
                 output = GenericErrorCodes::GenericErrorCodesPubSubTooManyRequests;
+                return;
+            }
+            if (inputStr == "PubSubConnectionHandleAccessDenied")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPubSubConnectionHandleAccessDenied;
+                return;
+            }
+            if (inputStr == "PubSubConnectionHandleInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPubSubConnectionHandleInvalid;
+                return;
+            }
+            if (inputStr == "PubSubSubscriptionLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPubSubSubscriptionLimitExceeded;
                 return;
             }
             if (inputStr == "TitleConfigNotFound")
@@ -12009,6 +12121,26 @@ namespace PlayFab
             if (inputStr == "EventSamplingRatioNotFound")
             {
                 output = GenericErrorCodes::GenericErrorCodesEventSamplingRatioNotFound;
+                return;
+            }
+            if (inputStr == "EventSinkConnectionInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkConnectionInvalid;
+                return;
+            }
+            if (inputStr == "EventSinkConnectionUnauthorized")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkConnectionUnauthorized;
+                return;
+            }
+            if (inputStr == "EventSinkRegionInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkRegionInvalid;
+                return;
+            }
+            if (inputStr == "OperationCanceled")
+            {
+                output = GenericErrorCodes::GenericErrorCodesOperationCanceled;
                 return;
             }
         }
@@ -23767,18 +23899,27 @@ namespace PlayFab
 
         struct SetTitleDataRequest : public PlayFabRequestCommon
         {
+            std::string AzureResourceId;
+            std::map<std::string, std::string> CustomTags;
             std::string Key;
+            std::string TitleId;
             std::string Value;
 
             SetTitleDataRequest() :
                 PlayFabRequestCommon(),
+                AzureResourceId(),
+                CustomTags(),
                 Key(),
+                TitleId(),
                 Value()
             {}
 
             SetTitleDataRequest(const SetTitleDataRequest& src) :
                 PlayFabRequestCommon(),
+                AzureResourceId(src.AzureResourceId),
+                CustomTags(src.CustomTags),
                 Key(src.Key),
+                TitleId(src.TitleId),
                 Value(src.Value)
             {}
 
@@ -23786,14 +23927,20 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["AzureResourceId"], AzureResourceId);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["Key"], Key);
+                FromJsonUtilS(input["TitleId"], TitleId);
                 FromJsonUtilS(input["Value"], Value);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_AzureResourceId; ToJsonUtilS(AzureResourceId, each_AzureResourceId); output["AzureResourceId"] = each_AzureResourceId;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Key; ToJsonUtilS(Key, each_Key); output["Key"] = each_Key;
+                Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 Json::Value each_Value; ToJsonUtilS(Value, each_Value); output["Value"] = each_Value;
                 return output;
             }
@@ -23801,24 +23948,29 @@ namespace PlayFab
 
         struct SetTitleDataResult : public PlayFabResultCommon
         {
+            std::string AzureResourceId;
 
             SetTitleDataResult() :
-                PlayFabResultCommon()
+                PlayFabResultCommon(),
+                AzureResourceId()
             {}
 
-            SetTitleDataResult(const SetTitleDataResult&) :
-                PlayFabResultCommon()
+            SetTitleDataResult(const SetTitleDataResult& src) :
+                PlayFabResultCommon(),
+                AzureResourceId(src.AzureResourceId)
             {}
 
             ~SetTitleDataResult() = default;
 
-            void FromJson(const Json::Value&) override
+            void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["AzureResourceId"], AzureResourceId);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_AzureResourceId; ToJsonUtilS(AzureResourceId, each_AzureResourceId); output["AzureResourceId"] = each_AzureResourceId;
                 return output;
             }
         };

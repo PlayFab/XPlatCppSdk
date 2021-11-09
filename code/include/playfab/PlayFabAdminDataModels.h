@@ -5405,8 +5405,12 @@ namespace PlayFab
             GenericErrorCodesDuplicateTitleNameForPublisher,
             GenericErrorCodesAzureTitleCreationInProgress,
             GenericErrorCodesDuplicateAzureResourceId,
-            GenericErrorCodesTitleContraintsPublisherDeletion,
+            GenericErrorCodesTitleConstraintsPublisherDeletion,
             GenericErrorCodesInvalidPlayerAccountPoolId,
+            GenericErrorCodesPlayerAccountPoolNotFound,
+            GenericErrorCodesPlayerAccountPoolDeleted,
+            GenericErrorCodesTitleCleanupInProgress,
+            GenericErrorCodesAzureResourceManagerNotSupportedInStamp,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8124,14 +8128,34 @@ namespace PlayFab
                 output = Json::Value("DuplicateAzureResourceId");
                 return;
             }
-            if (input == GenericErrorCodes::GenericErrorCodesTitleContraintsPublisherDeletion)
+            if (input == GenericErrorCodes::GenericErrorCodesTitleConstraintsPublisherDeletion)
             {
-                output = Json::Value("TitleContraintsPublisherDeletion");
+                output = Json::Value("TitleConstraintsPublisherDeletion");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesInvalidPlayerAccountPoolId)
             {
                 output = Json::Value("InvalidPlayerAccountPoolId");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerAccountPoolNotFound)
+            {
+                output = Json::Value("PlayerAccountPoolNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerAccountPoolDeleted)
+            {
+                output = Json::Value("PlayerAccountPoolDeleted");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitleCleanupInProgress)
+            {
+                output = Json::Value("TitleCleanupInProgress");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAzureResourceManagerNotSupportedInStamp)
+            {
+                output = Json::Value("AzureResourceManagerNotSupportedInStamp");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -11447,14 +11471,34 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesDuplicateAzureResourceId;
                 return;
             }
-            if (inputStr == "TitleContraintsPublisherDeletion")
+            if (inputStr == "TitleConstraintsPublisherDeletion")
             {
-                output = GenericErrorCodes::GenericErrorCodesTitleContraintsPublisherDeletion;
+                output = GenericErrorCodes::GenericErrorCodesTitleConstraintsPublisherDeletion;
                 return;
             }
             if (inputStr == "InvalidPlayerAccountPoolId")
             {
                 output = GenericErrorCodes::GenericErrorCodesInvalidPlayerAccountPoolId;
+                return;
+            }
+            if (inputStr == "PlayerAccountPoolNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerAccountPoolNotFound;
+                return;
+            }
+            if (inputStr == "PlayerAccountPoolDeleted")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerAccountPoolDeleted;
+                return;
+            }
+            if (inputStr == "TitleCleanupInProgress")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitleCleanupInProgress;
+                return;
+            }
+            if (inputStr == "AzureResourceManagerNotSupportedInStamp")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAzureResourceManagerNotSupportedInStamp;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
