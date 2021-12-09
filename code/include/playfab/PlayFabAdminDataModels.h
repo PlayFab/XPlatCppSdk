@@ -5410,7 +5410,13 @@ namespace PlayFab
             GenericErrorCodesPlayerAccountPoolNotFound,
             GenericErrorCodesPlayerAccountPoolDeleted,
             GenericErrorCodesTitleCleanupInProgress,
+            GenericErrorCodesAzureResourceConcurrentOperationInProgress,
+            GenericErrorCodesTitlePublisherUpdateNotAllowed,
             GenericErrorCodesAzureResourceManagerNotSupportedInStamp,
+            GenericErrorCodesApiNotIncludedInAzurePlayFabFeatureSet,
+            GenericErrorCodesGoogleServiceAccountFailedAuth,
+            GenericErrorCodesGoogleAPIServiceUnavailable,
+            GenericErrorCodesGoogleAPIServiceUnknownError,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8153,9 +8159,39 @@ namespace PlayFab
                 output = Json::Value("TitleCleanupInProgress");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesAzureResourceConcurrentOperationInProgress)
+            {
+                output = Json::Value("AzureResourceConcurrentOperationInProgress");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTitlePublisherUpdateNotAllowed)
+            {
+                output = Json::Value("TitlePublisherUpdateNotAllowed");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesAzureResourceManagerNotSupportedInStamp)
             {
                 output = Json::Value("AzureResourceManagerNotSupportedInStamp");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesApiNotIncludedInAzurePlayFabFeatureSet)
+            {
+                output = Json::Value("ApiNotIncludedInAzurePlayFabFeatureSet");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGoogleServiceAccountFailedAuth)
+            {
+                output = Json::Value("GoogleServiceAccountFailedAuth");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGoogleAPIServiceUnavailable)
+            {
+                output = Json::Value("GoogleAPIServiceUnavailable");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGoogleAPIServiceUnknownError)
+            {
+                output = Json::Value("GoogleAPIServiceUnknownError");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -11496,9 +11532,39 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesTitleCleanupInProgress;
                 return;
             }
+            if (inputStr == "AzureResourceConcurrentOperationInProgress")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAzureResourceConcurrentOperationInProgress;
+                return;
+            }
+            if (inputStr == "TitlePublisherUpdateNotAllowed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTitlePublisherUpdateNotAllowed;
+                return;
+            }
             if (inputStr == "AzureResourceManagerNotSupportedInStamp")
             {
                 output = GenericErrorCodes::GenericErrorCodesAzureResourceManagerNotSupportedInStamp;
+                return;
+            }
+            if (inputStr == "ApiNotIncludedInAzurePlayFabFeatureSet")
+            {
+                output = GenericErrorCodes::GenericErrorCodesApiNotIncludedInAzurePlayFabFeatureSet;
+                return;
+            }
+            if (inputStr == "GoogleServiceAccountFailedAuth")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGoogleServiceAccountFailedAuth;
+                return;
+            }
+            if (inputStr == "GoogleAPIServiceUnavailable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGoogleAPIServiceUnavailable;
+                return;
+            }
+            if (inputStr == "GoogleAPIServiceUnknownError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGoogleAPIServiceUnknownError;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
@@ -19522,6 +19588,60 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_HasSignatureOrEncryption; ToJsonUtilE(HasSignatureOrEncryption, each_HasSignatureOrEncryption); output["HasSignatureOrEncryption"] = each_HasSignatureOrEncryption;
+                return output;
+            }
+        };
+
+        struct AzureResourceSystemData : public PlayFabBaseModel
+        {
+            Boxed<time_t> CreatedAt;
+            std::string CreatedBy;
+            std::string CreatedByType;
+            Boxed<time_t> LastModifiedAt;
+            std::string LastModifiedBy;
+            std::string LastModifiedByType;
+
+            AzureResourceSystemData() :
+                PlayFabBaseModel(),
+                CreatedAt(),
+                CreatedBy(),
+                CreatedByType(),
+                LastModifiedAt(),
+                LastModifiedBy(),
+                LastModifiedByType()
+            {}
+
+            AzureResourceSystemData(const AzureResourceSystemData& src) :
+                PlayFabBaseModel(),
+                CreatedAt(src.CreatedAt),
+                CreatedBy(src.CreatedBy),
+                CreatedByType(src.CreatedByType),
+                LastModifiedAt(src.LastModifiedAt),
+                LastModifiedBy(src.LastModifiedBy),
+                LastModifiedByType(src.LastModifiedByType)
+            {}
+
+            ~AzureResourceSystemData() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilT(input["CreatedAt"], CreatedAt);
+                FromJsonUtilS(input["CreatedBy"], CreatedBy);
+                FromJsonUtilS(input["CreatedByType"], CreatedByType);
+                FromJsonUtilT(input["LastModifiedAt"], LastModifiedAt);
+                FromJsonUtilS(input["LastModifiedBy"], LastModifiedBy);
+                FromJsonUtilS(input["LastModifiedByType"], LastModifiedByType);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CreatedAt; ToJsonUtilT(CreatedAt, each_CreatedAt); output["CreatedAt"] = each_CreatedAt;
+                Json::Value each_CreatedBy; ToJsonUtilS(CreatedBy, each_CreatedBy); output["CreatedBy"] = each_CreatedBy;
+                Json::Value each_CreatedByType; ToJsonUtilS(CreatedByType, each_CreatedByType); output["CreatedByType"] = each_CreatedByType;
+                Json::Value each_LastModifiedAt; ToJsonUtilT(LastModifiedAt, each_LastModifiedAt); output["LastModifiedAt"] = each_LastModifiedAt;
+                Json::Value each_LastModifiedBy; ToJsonUtilS(LastModifiedBy, each_LastModifiedBy); output["LastModifiedBy"] = each_LastModifiedBy;
+                Json::Value each_LastModifiedByType; ToJsonUtilS(LastModifiedByType, each_LastModifiedByType); output["LastModifiedByType"] = each_LastModifiedByType;
                 return output;
             }
         };
@@ -29524,6 +29644,7 @@ namespace PlayFab
             std::string AzureResourceId;
             std::map<std::string, std::string> CustomTags;
             std::string Key;
+            Boxed<AzureResourceSystemData> SystemData;
             std::string TitleId;
             std::string Value;
 
@@ -29532,6 +29653,7 @@ namespace PlayFab
                 AzureResourceId(),
                 CustomTags(),
                 Key(),
+                SystemData(),
                 TitleId(),
                 Value()
             {}
@@ -29541,6 +29663,7 @@ namespace PlayFab
                 AzureResourceId(src.AzureResourceId),
                 CustomTags(src.CustomTags),
                 Key(src.Key),
+                SystemData(src.SystemData),
                 TitleId(src.TitleId),
                 Value(src.Value)
             {}
@@ -29552,6 +29675,7 @@ namespace PlayFab
                 FromJsonUtilS(input["AzureResourceId"], AzureResourceId);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["Key"], Key);
+                FromJsonUtilO(input["SystemData"], SystemData);
                 FromJsonUtilS(input["TitleId"], TitleId);
                 FromJsonUtilS(input["Value"], Value);
             }
@@ -29562,6 +29686,7 @@ namespace PlayFab
                 Json::Value each_AzureResourceId; ToJsonUtilS(AzureResourceId, each_AzureResourceId); output["AzureResourceId"] = each_AzureResourceId;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Key; ToJsonUtilS(Key, each_Key); output["Key"] = each_Key;
+                Json::Value each_SystemData; ToJsonUtilO(SystemData, each_SystemData); output["SystemData"] = each_SystemData;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 Json::Value each_Value; ToJsonUtilS(Value, each_Value); output["Value"] = each_Value;
                 return output;

@@ -20,11 +20,26 @@ namespace PlayFab
     std::string PlayFabApiSettings::GetUrl(const std::string& urlPath) const
     {
         std::string fullUrl;
-        fullUrl.reserve(1000);
+        const size_t kDefaultUrlCharSize = 1000;
+        if(connectionString != "")
+        {
+            fullUrl.reserve(connectionString.size() + kDefaultUrlCharSize);
+            fullUrl = connectionString;
+        }
+        else if(PlayFabSettings::staticSettings->connectionString != "")
+        {
+            fullUrl.reserve(PlayFabSettings::staticSettings->connectionString.size() + kDefaultUrlCharSize);
+            fullUrl = PlayFabSettings::staticSettings->connectionString;
+        }
+        else
+        {
+            fullUrl.reserve(kDefaultUrlCharSize);
 
-        fullUrl += "https://";
-        fullUrl += titleId;
-        fullUrl += baseServiceHost;
+            fullUrl += "https://";
+            fullUrl += titleId;
+            fullUrl += baseServiceHost;
+        }
+        
         fullUrl += urlPath;
 
         bool firstParam = true;

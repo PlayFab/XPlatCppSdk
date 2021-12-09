@@ -2110,6 +2110,79 @@ namespace PlayFab
             }
         };
 
+        struct GetItemsRequest : public PlayFabRequestCommon
+        {
+            std::list<CatalogAlternateId> AlternateIds;
+            std::map<std::string, std::string> CustomTags;
+            Boxed<EntityKey> Entity;
+            std::list<std::string> Ids;
+
+            GetItemsRequest() :
+                PlayFabRequestCommon(),
+                AlternateIds(),
+                CustomTags(),
+                Entity(),
+                Ids()
+            {}
+
+            GetItemsRequest(const GetItemsRequest& src) :
+                PlayFabRequestCommon(),
+                AlternateIds(src.AlternateIds),
+                CustomTags(src.CustomTags),
+                Entity(src.Entity),
+                Ids(src.Ids)
+            {}
+
+            ~GetItemsRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["AlternateIds"], AlternateIds);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilO(input["Entity"], Entity);
+                FromJsonUtilS(input["Ids"], Ids);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_AlternateIds; ToJsonUtilO(AlternateIds, each_AlternateIds); output["AlternateIds"] = each_AlternateIds;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                Json::Value each_Ids; ToJsonUtilS(Ids, each_Ids); output["Ids"] = each_Ids;
+                return output;
+            }
+        };
+
+        struct GetItemsResponse : public PlayFabResultCommon
+        {
+            std::list<CatalogItem> Items;
+
+            GetItemsResponse() :
+                PlayFabResultCommon(),
+                Items()
+            {}
+
+            GetItemsResponse(const GetItemsResponse& src) :
+                PlayFabResultCommon(),
+                Items(src.Items)
+            {}
+
+            ~GetItemsResponse() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["Items"], Items);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Items; ToJsonUtilO(Items, each_Items); output["Items"] = each_Items;
+                return output;
+            }
+        };
+
         struct PublishDraftItemRequest : public PlayFabRequestCommon
         {
             Boxed<CatalogAlternateId> AlternateId;
