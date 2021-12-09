@@ -22,6 +22,7 @@ namespace PlayFab
 
         std::string baseServiceHost; // The base for a PlayFab service host
         std::string titleId; // You must set this value for PlayFabSdk to work properly (found in the Game Manager for your title, at the PlayFab Website)
+        std::string connectionString; // set to override minimal string building from the client. Produced directly from the game manager.
 
         PlayFabApiSettings();
         PlayFabApiSettings(const PlayFabApiSettings& other) = delete;

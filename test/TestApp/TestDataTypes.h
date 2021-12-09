@@ -12,6 +12,7 @@ namespace PlayFabUnit
         std::string titleId;
         std::string developerSecretKey;
         std::string userEmail;
+        std::string connectionString;
     };
 
     enum class TestActiveState

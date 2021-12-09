@@ -15,6 +15,7 @@
 
 #include "PlatformLoginTest.h"
 #include "PlayFabApiTest.h"
+#include "PlayFabConnectionStringTest.h"
 #include "PlayFabEventTest.h"
 #include "PlayFabTestMultiUserStatic.h"
 #include "PlayFabTestMultiUserInstance.h"
@@ -112,6 +113,10 @@ namespace PlayFabUnit
 #endif //defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX)
 #endif // !defined(DISABLE_PLAYFABCLIENT_API)
 
+        PlayFabConnectionStringTest pfConnectionStrTest;
+        pfConnectionStrTest.SetTitleInfo(testTitleData);
+        testRunner.Add(pfConnectionStrTest);
+
         // Run the tests (blocks until all tests have finished).
         testRunner.Run();
 
@@ -173,6 +178,7 @@ namespace PlayFabUnit
             titleData.titleId = titleDataJson["titleId"].asString();
             titleData.userEmail = titleDataJson["userEmail"].asString();
             titleData.developerSecretKey = titleDataJson["developerSecretKey"].asString();
+            titleData.connectionString = titleDataJson["connectionString"].asString();
         }
 
         return parsedSuccessfully;

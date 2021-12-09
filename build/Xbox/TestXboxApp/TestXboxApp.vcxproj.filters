@@ -22,6 +22,9 @@
     <ClInclude Include="$(TestSourceDir)\TestApp\PlayFabEventTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="$(TestSourceDir)\TestApp\PlayFabConnectionStringTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="$(TestSourceDir)\TestApp\PlayFabTestMultiUserInstance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -64,6 +67,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="$(TestSourceDir)\TestApp\PlayFabEventTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(TestSourceDir)\TestApp\PlayFabConnectionStringTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="$(TestSourceDir)\TestApp\PlayFabTestMultiUserInstance.cpp">
