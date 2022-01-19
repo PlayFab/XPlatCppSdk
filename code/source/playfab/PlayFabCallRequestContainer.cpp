@@ -77,7 +77,7 @@ namespace PlayFab
 
     void CallRequestContainer::ThrowIfSettingsInvalid()
     {
-        if (m_settings->titleId.empty())
+        if (m_settings->titleId.empty() && m_settings->connectionString.empty() && PlayFabSettings::staticSettings->connectionString.empty())
         {
             throw new PlayFabException(PlayFabExceptionCode::TitleNotSet, "PlayFabSettings::staticSettings->titleId has not been set properly. It must not be empty.");
         }
