@@ -5306,7 +5306,6 @@ namespace PlayFab
             GenericErrorCodesApiNotEnabledForTitle,
             GenericErrorCodesDuplicateTitleNameForPublisher,
             GenericErrorCodesAzureTitleCreationInProgress,
-            GenericErrorCodesDuplicateAzureResourceId,
             GenericErrorCodesTitleConstraintsPublisherDeletion,
             GenericErrorCodesInvalidPlayerAccountPoolId,
             GenericErrorCodesPlayerAccountPoolNotFound,
@@ -5342,7 +5341,7 @@ namespace PlayFab
             GenericErrorCodesMatchmakingBadRequest,
             GenericErrorCodesPubSubFeatureNotEnabledForTitle,
             GenericErrorCodesPubSubTooManyRequests,
-            GenericErrorCodesPubSubConnectionHandleAccessDenied,
+            GenericErrorCodesPubSubConnectionNotFoundForEntity,
             GenericErrorCodesPubSubConnectionHandleInvalid,
             GenericErrorCodesPubSubSubscriptionLimitExceeded,
             GenericErrorCodesTitleConfigNotFound,
@@ -5466,7 +5465,9 @@ namespace PlayFab
             GenericErrorCodesEventSinkConnectionInvalid,
             GenericErrorCodesEventSinkConnectionUnauthorized,
             GenericErrorCodesEventSinkRegionInvalid,
-            GenericErrorCodesOperationCanceled
+            GenericErrorCodesOperationCanceled,
+            GenericErrorCodesInvalidDisplayNameRandomSuffixLength,
+            GenericErrorCodesAllowNonUniquePlayerDisplayNamesDisableNotAllowed
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -8031,11 +8032,6 @@ namespace PlayFab
                 output = Json::Value("AzureTitleCreationInProgress");
                 return;
             }
-            if (input == GenericErrorCodes::GenericErrorCodesDuplicateAzureResourceId)
-            {
-                output = Json::Value("DuplicateAzureResourceId");
-                return;
-            }
             if (input == GenericErrorCodes::GenericErrorCodesTitleConstraintsPublisherDeletion)
             {
                 output = Json::Value("TitleConstraintsPublisherDeletion");
@@ -8211,9 +8207,9 @@ namespace PlayFab
                 output = Json::Value("PubSubTooManyRequests");
                 return;
             }
-            if (input == GenericErrorCodes::GenericErrorCodesPubSubConnectionHandleAccessDenied)
+            if (input == GenericErrorCodes::GenericErrorCodesPubSubConnectionNotFoundForEntity)
             {
-                output = Json::Value("PubSubConnectionHandleAccessDenied");
+                output = Json::Value("PubSubConnectionNotFoundForEntity");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesPubSubConnectionHandleInvalid)
@@ -8834,6 +8830,16 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesOperationCanceled)
             {
                 output = Json::Value("OperationCanceled");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidDisplayNameRandomSuffixLength)
+            {
+                output = Json::Value("InvalidDisplayNameRandomSuffixLength");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAllowNonUniquePlayerDisplayNamesDisableNotAllowed)
+            {
+                output = Json::Value("AllowNonUniquePlayerDisplayNamesDisableNotAllowed");
                 return;
             }
         }
@@ -11404,11 +11410,6 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesAzureTitleCreationInProgress;
                 return;
             }
-            if (inputStr == "DuplicateAzureResourceId")
-            {
-                output = GenericErrorCodes::GenericErrorCodesDuplicateAzureResourceId;
-                return;
-            }
             if (inputStr == "TitleConstraintsPublisherDeletion")
             {
                 output = GenericErrorCodes::GenericErrorCodesTitleConstraintsPublisherDeletion;
@@ -11584,9 +11585,9 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesPubSubTooManyRequests;
                 return;
             }
-            if (inputStr == "PubSubConnectionHandleAccessDenied")
+            if (inputStr == "PubSubConnectionNotFoundForEntity")
             {
-                output = GenericErrorCodes::GenericErrorCodesPubSubConnectionHandleAccessDenied;
+                output = GenericErrorCodes::GenericErrorCodesPubSubConnectionNotFoundForEntity;
                 return;
             }
             if (inputStr == "PubSubConnectionHandleInvalid")
@@ -12207,6 +12208,16 @@ namespace PlayFab
             if (inputStr == "OperationCanceled")
             {
                 output = GenericErrorCodes::GenericErrorCodesOperationCanceled;
+                return;
+            }
+            if (inputStr == "InvalidDisplayNameRandomSuffixLength")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidDisplayNameRandomSuffixLength;
+                return;
+            }
+            if (inputStr == "AllowNonUniquePlayerDisplayNamesDisableNotAllowed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAllowNonUniquePlayerDisplayNamesDisableNotAllowed;
                 return;
             }
         }
@@ -14722,7 +14733,6 @@ namespace PlayFab
             Boxed<time_t> Created;
             Boxed<time_t> Expires;
             std::string IPAddress;
-            std::string MACAddress;
             std::string PlayFabId;
             std::string Reason;
 
@@ -14733,7 +14743,6 @@ namespace PlayFab
                 Created(),
                 Expires(),
                 IPAddress(),
-                MACAddress(),
                 PlayFabId(),
                 Reason()
             {}
@@ -14745,7 +14754,6 @@ namespace PlayFab
                 Created(src.Created),
                 Expires(src.Expires),
                 IPAddress(src.IPAddress),
-                MACAddress(src.MACAddress),
                 PlayFabId(src.PlayFabId),
                 Reason(src.Reason)
             {}
@@ -14759,7 +14767,6 @@ namespace PlayFab
                 FromJsonUtilT(input["Created"], Created);
                 FromJsonUtilT(input["Expires"], Expires);
                 FromJsonUtilS(input["IPAddress"], IPAddress);
-                FromJsonUtilS(input["MACAddress"], MACAddress);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["Reason"], Reason);
             }
@@ -14772,7 +14779,6 @@ namespace PlayFab
                 Json::Value each_Created; ToJsonUtilT(Created, each_Created); output["Created"] = each_Created;
                 Json::Value each_Expires; ToJsonUtilT(Expires, each_Expires); output["Expires"] = each_Expires;
                 Json::Value each_IPAddress; ToJsonUtilS(IPAddress, each_IPAddress); output["IPAddress"] = each_IPAddress;
-                Json::Value each_MACAddress; ToJsonUtilS(MACAddress, each_MACAddress); output["MACAddress"] = each_MACAddress;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_Reason; ToJsonUtilS(Reason, each_Reason); output["Reason"] = each_Reason;
                 return output;

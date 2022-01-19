@@ -4351,7 +4351,17 @@ namespace PlayFab
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
         if (request.TitleId.empty())
         {
-            request.TitleId = settings->titleId;
+                if (!settings->titleId.empty())
+                {
+                        request.TitleId = settings->titleId;
+                }
+                else
+                {
+                        if (!PlayFabSettings::staticSettings->connectionString.empty())
+                        {
+                                request.TitleId = PlayFabSettings::staticSettings->connectionString.substr(8,4);
+                        }
+                }
         }
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
@@ -4421,7 +4431,17 @@ namespace PlayFab
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
         if (request.TitleId.empty())
         {
-            request.TitleId = settings->titleId;
+                if (!settings->titleId.empty())
+                {
+                        request.TitleId = settings->titleId;
+                }
+                else
+                {
+                        if (!PlayFabSettings::staticSettings->connectionString.empty())
+                        {
+                                request.TitleId = PlayFabSettings::staticSettings->connectionString.substr(8,4);
+                        }
+                }
         }
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
@@ -4491,7 +4511,17 @@ namespace PlayFab
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
         if (request.TitleId.empty())
         {
-            request.TitleId = settings->titleId;
+                if (!settings->titleId.empty())
+                {
+                        request.TitleId = settings->titleId;
+                }
+                else
+                {
+                        if (!PlayFabSettings::staticSettings->connectionString.empty())
+                        {
+                                request.TitleId = PlayFabSettings::staticSettings->connectionString.substr(8,4);
+                        }
+                }
         }
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
@@ -4561,7 +4591,17 @@ namespace PlayFab
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
         if (request.TitleId.empty())
         {
-            request.TitleId = settings->titleId;
+                if (!settings->titleId.empty())
+                {
+                        request.TitleId = settings->titleId;
+                }
+                else
+                {
+                        if (!PlayFabSettings::staticSettings->connectionString.empty())
+                        {
+                                request.TitleId = PlayFabSettings::staticSettings->connectionString.substr(8,4);
+                        }
+                }
         }
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
@@ -4631,7 +4671,17 @@ namespace PlayFab
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
         if (request.TitleId.empty())
         {
-            request.TitleId = settings->titleId;
+                if (!settings->titleId.empty())
+                {
+                        request.TitleId = settings->titleId;
+                }
+                else
+                {
+                        if (!PlayFabSettings::staticSettings->connectionString.empty())
+                        {
+                                request.TitleId = PlayFabSettings::staticSettings->connectionString.substr(8,4);
+                        }
+                }
         }
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
@@ -4701,7 +4751,17 @@ namespace PlayFab
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
         if (request.TitleId.empty())
         {
-            request.TitleId = settings->titleId;
+                if (!settings->titleId.empty())
+                {
+                        request.TitleId = settings->titleId;
+                }
+                else
+                {
+                        if (!PlayFabSettings::staticSettings->connectionString.empty())
+                        {
+                                request.TitleId = PlayFabSettings::staticSettings->connectionString.substr(8,4);
+                        }
+                }
         }
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
@@ -4771,7 +4831,17 @@ namespace PlayFab
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
         if (request.TitleId.empty())
         {
-            request.TitleId = settings->titleId;
+                if (!settings->titleId.empty())
+                {
+                        request.TitleId = settings->titleId;
+                }
+                else
+                {
+                        if (!PlayFabSettings::staticSettings->connectionString.empty())
+                        {
+                                request.TitleId = PlayFabSettings::staticSettings->connectionString.substr(8,4);
+                        }
+                }
         }
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
@@ -4841,7 +4911,17 @@ namespace PlayFab
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
         if (request.TitleId.empty())
         {
-            request.TitleId = settings->titleId;
+                if (!settings->titleId.empty())
+                {
+                        request.TitleId = settings->titleId;
+                }
+                else
+                {
+                        if (!PlayFabSettings::staticSettings->connectionString.empty())
+                        {
+                                request.TitleId = PlayFabSettings::staticSettings->connectionString.substr(8,4);
+                        }
+                }
         }
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
@@ -4911,7 +4991,17 @@ namespace PlayFab
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
         if (request.TitleId.empty())
         {
-            request.TitleId = settings->titleId;
+                if (!settings->titleId.empty())
+                {
+                        request.TitleId = settings->titleId;
+                }
+                else
+                {
+                        if (!PlayFabSettings::staticSettings->connectionString.empty())
+                        {
+                                request.TitleId = PlayFabSettings::staticSettings->connectionString.substr(8,4);
+                        }
+                }
         }
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
@@ -4981,7 +5071,17 @@ namespace PlayFab
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
         if (request.TitleId.empty())
         {
-            request.TitleId = settings->titleId;
+                if (!settings->titleId.empty())
+                {
+                        request.TitleId = settings->titleId;
+                }
+                else
+                {
+                        if (!PlayFabSettings::staticSettings->connectionString.empty())
+                        {
+                                request.TitleId = PlayFabSettings::staticSettings->connectionString.substr(8,4);
+                        }
+                }
         }
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
@@ -5051,7 +5151,17 @@ namespace PlayFab
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
         if (request.TitleId.empty())
         {
-            request.TitleId = settings->titleId;
+                if (!settings->titleId.empty())
+                {
+                        request.TitleId = settings->titleId;
+                }
+                else
+                {
+                        if (!PlayFabSettings::staticSettings->connectionString.empty())
+                        {
+                                request.TitleId = PlayFabSettings::staticSettings->connectionString.substr(8,4);
+                        }
+                }
         }
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
@@ -5121,7 +5231,17 @@ namespace PlayFab
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
         if (request.TitleId.empty())
         {
-            request.TitleId = settings->titleId;
+                if (!settings->titleId.empty())
+                {
+                        request.TitleId = settings->titleId;
+                }
+                else
+                {
+                        if (!PlayFabSettings::staticSettings->connectionString.empty())
+                        {
+                                request.TitleId = PlayFabSettings::staticSettings->connectionString.substr(8,4);
+                        }
+                }
         }
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
@@ -5191,7 +5311,17 @@ namespace PlayFab
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
         if (request.TitleId.empty())
         {
-            request.TitleId = settings->titleId;
+                if (!settings->titleId.empty())
+                {
+                        request.TitleId = settings->titleId;
+                }
+                else
+                {
+                        if (!PlayFabSettings::staticSettings->connectionString.empty())
+                        {
+                                request.TitleId = PlayFabSettings::staticSettings->connectionString.substr(8,4);
+                        }
+                }
         }
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
@@ -5261,7 +5391,17 @@ namespace PlayFab
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
         if (request.TitleId.empty())
         {
-            request.TitleId = settings->titleId;
+                if (!settings->titleId.empty())
+                {
+                        request.TitleId = settings->titleId;
+                }
+                else
+                {
+                        if (!PlayFabSettings::staticSettings->connectionString.empty())
+                        {
+                                request.TitleId = PlayFabSettings::staticSettings->connectionString.substr(8,4);
+                        }
+                }
         }
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
@@ -5331,7 +5471,17 @@ namespace PlayFab
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
         if (request.TitleId.empty())
         {
-            request.TitleId = settings->titleId;
+                if (!settings->titleId.empty())
+                {
+                        request.TitleId = settings->titleId;
+                }
+                else
+                {
+                        if (!PlayFabSettings::staticSettings->connectionString.empty())
+                        {
+                                request.TitleId = PlayFabSettings::staticSettings->connectionString.substr(8,4);
+                        }
+                }
         }
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
@@ -5401,7 +5551,17 @@ namespace PlayFab
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
         if (request.TitleId.empty())
         {
-            request.TitleId = settings->titleId;
+                if (!settings->titleId.empty())
+                {
+                        request.TitleId = settings->titleId;
+                }
+                else
+                {
+                        if (!PlayFabSettings::staticSettings->connectionString.empty())
+                        {
+                                request.TitleId = PlayFabSettings::staticSettings->connectionString.substr(8,4);
+                        }
+                }
         }
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
@@ -5471,7 +5631,17 @@ namespace PlayFab
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
         if (request.TitleId.empty())
         {
-            request.TitleId = settings->titleId;
+                if (!settings->titleId.empty())
+                {
+                        request.TitleId = settings->titleId;
+                }
+                else
+                {
+                        if (!PlayFabSettings::staticSettings->connectionString.empty())
+                        {
+                                request.TitleId = PlayFabSettings::staticSettings->connectionString.substr(8,4);
+                        }
+                }
         }
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
@@ -5541,7 +5711,17 @@ namespace PlayFab
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
         if (request.TitleId.empty())
         {
-            request.TitleId = settings->titleId;
+                if (!settings->titleId.empty())
+                {
+                        request.TitleId = settings->titleId;
+                }
+                else
+                {
+                        if (!PlayFabSettings::staticSettings->connectionString.empty())
+                        {
+                                request.TitleId = PlayFabSettings::staticSettings->connectionString.substr(8,4);
+                        }
+                }
         }
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
@@ -5954,7 +6134,17 @@ namespace PlayFab
         std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
         if (request.TitleId.empty())
         {
-            request.TitleId = settings->titleId;
+                if (!settings->titleId.empty())
+                {
+                        request.TitleId = settings->titleId;
+                }
+                else
+                {
+                        if (!PlayFabSettings::staticSettings->connectionString.empty())
+                        {
+                                request.TitleId = PlayFabSettings::staticSettings->connectionString.substr(8,4);
+                        }
+                }
         }
 
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);

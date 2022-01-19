@@ -3103,6 +3103,45 @@ namespace PlayFab
             }
         };
 
+        struct WindowsCrashDumpConfiguration : public PlayFabBaseModel
+        {
+            Boxed<Int32> CustomDumpFlags;
+            Boxed<Int32> DumpType;
+            bool IsEnabled;
+
+            WindowsCrashDumpConfiguration() :
+                PlayFabBaseModel(),
+                CustomDumpFlags(),
+                DumpType(),
+                IsEnabled()
+            {}
+
+            WindowsCrashDumpConfiguration(const WindowsCrashDumpConfiguration& src) :
+                PlayFabBaseModel(),
+                CustomDumpFlags(src.CustomDumpFlags),
+                DumpType(src.DumpType),
+                IsEnabled(src.IsEnabled)
+            {}
+
+            ~WindowsCrashDumpConfiguration() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["CustomDumpFlags"], CustomDumpFlags);
+                FromJsonUtilP(input["DumpType"], DumpType);
+                FromJsonUtilP(input["IsEnabled"], IsEnabled);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomDumpFlags; ToJsonUtilP(CustomDumpFlags, each_CustomDumpFlags); output["CustomDumpFlags"] = each_CustomDumpFlags;
+                Json::Value each_DumpType; ToJsonUtilP(DumpType, each_DumpType); output["DumpType"] = each_DumpType;
+                Json::Value each_IsEnabled; ToJsonUtilP(IsEnabled, each_IsEnabled); output["IsEnabled"] = each_IsEnabled;
+                return output;
+            }
+        };
+
         struct CreateBuildWithManagedContainerRequest : public PlayFabRequestCommon
         {
             Boxed<bool> AreAssetsReadonly;
@@ -3121,6 +3160,7 @@ namespace PlayFab
             std::string StartMultiplayerServerCommand;
             Boxed<bool> UseStreamingForAssetDownloads;
             Boxed<AzureVmSize> VmSize;
+            Boxed<WindowsCrashDumpConfiguration> pfWindowsCrashDumpConfiguration;
 
             CreateBuildWithManagedContainerRequest() :
                 PlayFabRequestCommon(),
@@ -3139,7 +3179,8 @@ namespace PlayFab
                 RegionConfigurations(),
                 StartMultiplayerServerCommand(),
                 UseStreamingForAssetDownloads(),
-                VmSize()
+                VmSize(),
+                pfWindowsCrashDumpConfiguration()
             {}
 
             CreateBuildWithManagedContainerRequest(const CreateBuildWithManagedContainerRequest& src) :
@@ -3159,7 +3200,8 @@ namespace PlayFab
                 RegionConfigurations(src.RegionConfigurations),
                 StartMultiplayerServerCommand(src.StartMultiplayerServerCommand),
                 UseStreamingForAssetDownloads(src.UseStreamingForAssetDownloads),
-                VmSize(src.VmSize)
+                VmSize(src.VmSize),
+                pfWindowsCrashDumpConfiguration(src.pfWindowsCrashDumpConfiguration)
             {}
 
             ~CreateBuildWithManagedContainerRequest() = default;
@@ -3182,6 +3224,7 @@ namespace PlayFab
                 FromJsonUtilS(input["StartMultiplayerServerCommand"], StartMultiplayerServerCommand);
                 FromJsonUtilP(input["UseStreamingForAssetDownloads"], UseStreamingForAssetDownloads);
                 FromJsonUtilE(input["VmSize"], VmSize);
+                FromJsonUtilO(input["WindowsCrashDumpConfiguration"], pfWindowsCrashDumpConfiguration);
             }
 
             Json::Value ToJson() const override
@@ -3203,6 +3246,7 @@ namespace PlayFab
                 Json::Value each_StartMultiplayerServerCommand; ToJsonUtilS(StartMultiplayerServerCommand, each_StartMultiplayerServerCommand); output["StartMultiplayerServerCommand"] = each_StartMultiplayerServerCommand;
                 Json::Value each_UseStreamingForAssetDownloads; ToJsonUtilP(UseStreamingForAssetDownloads, each_UseStreamingForAssetDownloads); output["UseStreamingForAssetDownloads"] = each_UseStreamingForAssetDownloads;
                 Json::Value each_VmSize; ToJsonUtilE(VmSize, each_VmSize); output["VmSize"] = each_VmSize;
+                Json::Value each_pfWindowsCrashDumpConfiguration; ToJsonUtilO(pfWindowsCrashDumpConfiguration, each_pfWindowsCrashDumpConfiguration); output["WindowsCrashDumpConfiguration"] = each_pfWindowsCrashDumpConfiguration;
                 return output;
             }
         };
