@@ -1300,6 +1300,7 @@ namespace PlayFab
             Boxed<CatalogAlternateId> AlternateId;
             std::map<std::string, std::string> CustomTags;
             Boxed<EntityKey> Entity;
+            Boxed<bool> ExpandScanningStatus;
             std::string Id;
 
             GetDraftItemRequest() :
@@ -1307,6 +1308,7 @@ namespace PlayFab
                 AlternateId(),
                 CustomTags(),
                 Entity(),
+                ExpandScanningStatus(),
                 Id()
             {}
 
@@ -1315,6 +1317,7 @@ namespace PlayFab
                 AlternateId(src.AlternateId),
                 CustomTags(src.CustomTags),
                 Entity(src.Entity),
+                ExpandScanningStatus(src.ExpandScanningStatus),
                 Id(src.Id)
             {}
 
@@ -1325,6 +1328,7 @@ namespace PlayFab
                 FromJsonUtilO(input["AlternateId"], AlternateId);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["Entity"], Entity);
+                FromJsonUtilP(input["ExpandScanningStatus"], ExpandScanningStatus);
                 FromJsonUtilS(input["Id"], Id);
             }
 
@@ -1334,6 +1338,7 @@ namespace PlayFab
                 Json::Value each_AlternateId; ToJsonUtilO(AlternateId, each_AlternateId); output["AlternateId"] = each_AlternateId;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                Json::Value each_ExpandScanningStatus; ToJsonUtilP(ExpandScanningStatus, each_ExpandScanningStatus); output["ExpandScanningStatus"] = each_ExpandScanningStatus;
                 Json::Value each_Id; ToJsonUtilS(Id, each_Id); output["Id"] = each_Id;
                 return output;
             }
