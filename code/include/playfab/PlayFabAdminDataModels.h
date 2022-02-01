@@ -5416,6 +5416,8 @@ namespace PlayFab
             GenericErrorCodesGoogleServiceAccountFailedAuth,
             GenericErrorCodesGoogleAPIServiceUnavailable,
             GenericErrorCodesGoogleAPIServiceUnknownError,
+            GenericErrorCodesNoValidIdentityForAad,
+            GenericErrorCodesPlayerIdentityLinkNotFound,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8188,6 +8190,16 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesGoogleAPIServiceUnknownError)
             {
                 output = Json::Value("GoogleAPIServiceUnknownError");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNoValidIdentityForAad)
+            {
+                output = Json::Value("NoValidIdentityForAad");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerIdentityLinkNotFound)
+            {
+                output = Json::Value("PlayerIdentityLinkNotFound");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -11566,6 +11578,16 @@ namespace PlayFab
             if (inputStr == "GoogleAPIServiceUnknownError")
             {
                 output = GenericErrorCodes::GenericErrorCodesGoogleAPIServiceUnknownError;
+                return;
+            }
+            if (inputStr == "NoValidIdentityForAad")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNoValidIdentityForAad;
+                return;
+            }
+            if (inputStr == "PlayerIdentityLinkNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerIdentityLinkNotFound;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
