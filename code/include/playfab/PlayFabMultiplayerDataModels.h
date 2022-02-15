@@ -1905,6 +1905,7 @@ namespace PlayFab
         {
             Boxed<CurrentServerStats> pfCurrentServerStats;
             Boxed<DynamicStandbySettings> pfDynamicStandbySettings;
+            bool IsAssetReplicationComplete;
             Int32 MaxServers;
             Boxed<Int32> MultiplayerServerCountPerVm;
             std::string Region;
@@ -1917,6 +1918,7 @@ namespace PlayFab
                 PlayFabBaseModel(),
                 pfCurrentServerStats(),
                 pfDynamicStandbySettings(),
+                IsAssetReplicationComplete(),
                 MaxServers(),
                 MultiplayerServerCountPerVm(),
                 Region(),
@@ -1930,6 +1932,7 @@ namespace PlayFab
                 PlayFabBaseModel(),
                 pfCurrentServerStats(src.pfCurrentServerStats),
                 pfDynamicStandbySettings(src.pfDynamicStandbySettings),
+                IsAssetReplicationComplete(src.IsAssetReplicationComplete),
                 MaxServers(src.MaxServers),
                 MultiplayerServerCountPerVm(src.MultiplayerServerCountPerVm),
                 Region(src.Region),
@@ -1945,6 +1948,7 @@ namespace PlayFab
             {
                 FromJsonUtilO(input["CurrentServerStats"], pfCurrentServerStats);
                 FromJsonUtilO(input["DynamicStandbySettings"], pfDynamicStandbySettings);
+                FromJsonUtilP(input["IsAssetReplicationComplete"], IsAssetReplicationComplete);
                 FromJsonUtilP(input["MaxServers"], MaxServers);
                 FromJsonUtilP(input["MultiplayerServerCountPerVm"], MultiplayerServerCountPerVm);
                 FromJsonUtilS(input["Region"], Region);
@@ -1959,6 +1963,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_pfCurrentServerStats; ToJsonUtilO(pfCurrentServerStats, each_pfCurrentServerStats); output["CurrentServerStats"] = each_pfCurrentServerStats;
                 Json::Value each_pfDynamicStandbySettings; ToJsonUtilO(pfDynamicStandbySettings, each_pfDynamicStandbySettings); output["DynamicStandbySettings"] = each_pfDynamicStandbySettings;
+                Json::Value each_IsAssetReplicationComplete; ToJsonUtilP(IsAssetReplicationComplete, each_IsAssetReplicationComplete); output["IsAssetReplicationComplete"] = each_IsAssetReplicationComplete;
                 Json::Value each_MaxServers; ToJsonUtilP(MaxServers, each_MaxServers); output["MaxServers"] = each_MaxServers;
                 Json::Value each_MultiplayerServerCountPerVm; ToJsonUtilP(MultiplayerServerCountPerVm, each_MultiplayerServerCountPerVm); output["MultiplayerServerCountPerVm"] = each_MultiplayerServerCountPerVm;
                 Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;

@@ -4015,7 +4015,6 @@ namespace PlayFab
             std::string ConnectionString;
             std::string FunctionUrl;
             std::string QueueName;
-            Boxed<AzureResourceSystemData> SystemData;
             std::string TriggerType;
 
             GetFunctionResult() :
@@ -4023,7 +4022,6 @@ namespace PlayFab
                 ConnectionString(),
                 FunctionUrl(),
                 QueueName(),
-                SystemData(),
                 TriggerType()
             {}
 
@@ -4032,7 +4030,6 @@ namespace PlayFab
                 ConnectionString(src.ConnectionString),
                 FunctionUrl(src.FunctionUrl),
                 QueueName(src.QueueName),
-                SystemData(src.SystemData),
                 TriggerType(src.TriggerType)
             {}
 
@@ -4043,7 +4040,6 @@ namespace PlayFab
                 FromJsonUtilS(input["ConnectionString"], ConnectionString);
                 FromJsonUtilS(input["FunctionUrl"], FunctionUrl);
                 FromJsonUtilS(input["QueueName"], QueueName);
-                FromJsonUtilO(input["SystemData"], SystemData);
                 FromJsonUtilS(input["TriggerType"], TriggerType);
             }
 
@@ -4053,7 +4049,6 @@ namespace PlayFab
                 Json::Value each_ConnectionString; ToJsonUtilS(ConnectionString, each_ConnectionString); output["ConnectionString"] = each_ConnectionString;
                 Json::Value each_FunctionUrl; ToJsonUtilS(FunctionUrl, each_FunctionUrl); output["FunctionUrl"] = each_FunctionUrl;
                 Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
-                Json::Value each_SystemData; ToJsonUtilO(SystemData, each_SystemData); output["SystemData"] = each_SystemData;
                 Json::Value each_TriggerType; ToJsonUtilS(TriggerType, each_TriggerType); output["TriggerType"] = each_TriggerType;
                 return output;
             }
@@ -4063,20 +4058,17 @@ namespace PlayFab
         {
             std::string FunctionName;
             std::string FunctionUrl;
-            Boxed<AzureResourceSystemData> SystemData;
 
             HttpFunctionModel() :
                 PlayFabBaseModel(),
                 FunctionName(),
-                FunctionUrl(),
-                SystemData()
+                FunctionUrl()
             {}
 
             HttpFunctionModel(const HttpFunctionModel& src) :
                 PlayFabBaseModel(),
                 FunctionName(src.FunctionName),
-                FunctionUrl(src.FunctionUrl),
-                SystemData(src.SystemData)
+                FunctionUrl(src.FunctionUrl)
             {}
 
             ~HttpFunctionModel() = default;
@@ -4085,7 +4077,6 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["FunctionName"], FunctionName);
                 FromJsonUtilS(input["FunctionUrl"], FunctionUrl);
-                FromJsonUtilO(input["SystemData"], SystemData);
             }
 
             Json::Value ToJson() const override
@@ -4093,7 +4084,6 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_FunctionName; ToJsonUtilS(FunctionName, each_FunctionName); output["FunctionName"] = each_FunctionName;
                 Json::Value each_FunctionUrl; ToJsonUtilS(FunctionUrl, each_FunctionUrl); output["FunctionUrl"] = each_FunctionUrl;
-                Json::Value each_SystemData; ToJsonUtilO(SystemData, each_SystemData); output["SystemData"] = each_SystemData;
                 return output;
             }
         };
@@ -4239,22 +4229,19 @@ namespace PlayFab
             std::string ConnectionString;
             std::string FunctionName;
             std::string QueueName;
-            Boxed<AzureResourceSystemData> SystemData;
 
             QueuedFunctionModel() :
                 PlayFabBaseModel(),
                 ConnectionString(),
                 FunctionName(),
-                QueueName(),
-                SystemData()
+                QueueName()
             {}
 
             QueuedFunctionModel(const QueuedFunctionModel& src) :
                 PlayFabBaseModel(),
                 ConnectionString(src.ConnectionString),
                 FunctionName(src.FunctionName),
-                QueueName(src.QueueName),
-                SystemData(src.SystemData)
+                QueueName(src.QueueName)
             {}
 
             ~QueuedFunctionModel() = default;
@@ -4264,7 +4251,6 @@ namespace PlayFab
                 FromJsonUtilS(input["ConnectionString"], ConnectionString);
                 FromJsonUtilS(input["FunctionName"], FunctionName);
                 FromJsonUtilS(input["QueueName"], QueueName);
-                FromJsonUtilO(input["SystemData"], SystemData);
             }
 
             Json::Value ToJson() const override
@@ -4273,7 +4259,6 @@ namespace PlayFab
                 Json::Value each_ConnectionString; ToJsonUtilS(ConnectionString, each_ConnectionString); output["ConnectionString"] = each_ConnectionString;
                 Json::Value each_FunctionName; ToJsonUtilS(FunctionName, each_FunctionName); output["FunctionName"] = each_FunctionName;
                 Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
-                Json::Value each_SystemData; ToJsonUtilO(SystemData, each_SystemData); output["SystemData"] = each_SystemData;
                 return output;
             }
         };
@@ -4990,30 +4975,24 @@ namespace PlayFab
 
         struct RegisterHttpFunctionRequest : public PlayFabRequestCommon
         {
-            std::string AzureResourceId;
             std::map<std::string, std::string> CustomTags;
             std::string FunctionName;
             std::string FunctionUrl;
-            Boxed<AzureResourceSystemData> SystemData;
             std::string TitleId;
 
             RegisterHttpFunctionRequest() :
                 PlayFabRequestCommon(),
-                AzureResourceId(),
                 CustomTags(),
                 FunctionName(),
                 FunctionUrl(),
-                SystemData(),
                 TitleId()
             {}
 
             RegisterHttpFunctionRequest(const RegisterHttpFunctionRequest& src) :
                 PlayFabRequestCommon(),
-                AzureResourceId(src.AzureResourceId),
                 CustomTags(src.CustomTags),
                 FunctionName(src.FunctionName),
                 FunctionUrl(src.FunctionUrl),
-                SystemData(src.SystemData),
                 TitleId(src.TitleId)
             {}
 
@@ -5021,22 +5000,18 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
-                FromJsonUtilS(input["AzureResourceId"], AzureResourceId);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["FunctionName"], FunctionName);
                 FromJsonUtilS(input["FunctionUrl"], FunctionUrl);
-                FromJsonUtilO(input["SystemData"], SystemData);
                 FromJsonUtilS(input["TitleId"], TitleId);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                Json::Value each_AzureResourceId; ToJsonUtilS(AzureResourceId, each_AzureResourceId); output["AzureResourceId"] = each_AzureResourceId;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_FunctionName; ToJsonUtilS(FunctionName, each_FunctionName); output["FunctionName"] = each_FunctionName;
                 Json::Value each_FunctionUrl; ToJsonUtilS(FunctionUrl, each_FunctionUrl); output["FunctionUrl"] = each_FunctionUrl;
-                Json::Value each_SystemData; ToJsonUtilO(SystemData, each_SystemData); output["SystemData"] = each_SystemData;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 return output;
             }
@@ -5044,33 +5019,27 @@ namespace PlayFab
 
         struct RegisterQueuedFunctionRequest : public PlayFabRequestCommon
         {
-            std::string AzureResourceId;
             std::string ConnectionString;
             std::map<std::string, std::string> CustomTags;
             std::string FunctionName;
             std::string QueueName;
-            Boxed<AzureResourceSystemData> SystemData;
             std::string TitleId;
 
             RegisterQueuedFunctionRequest() :
                 PlayFabRequestCommon(),
-                AzureResourceId(),
                 ConnectionString(),
                 CustomTags(),
                 FunctionName(),
                 QueueName(),
-                SystemData(),
                 TitleId()
             {}
 
             RegisterQueuedFunctionRequest(const RegisterQueuedFunctionRequest& src) :
                 PlayFabRequestCommon(),
-                AzureResourceId(src.AzureResourceId),
                 ConnectionString(src.ConnectionString),
                 CustomTags(src.CustomTags),
                 FunctionName(src.FunctionName),
                 QueueName(src.QueueName),
-                SystemData(src.SystemData),
                 TitleId(src.TitleId)
             {}
 
@@ -5078,24 +5047,20 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
-                FromJsonUtilS(input["AzureResourceId"], AzureResourceId);
                 FromJsonUtilS(input["ConnectionString"], ConnectionString);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["FunctionName"], FunctionName);
                 FromJsonUtilS(input["QueueName"], QueueName);
-                FromJsonUtilO(input["SystemData"], SystemData);
                 FromJsonUtilS(input["TitleId"], TitleId);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                Json::Value each_AzureResourceId; ToJsonUtilS(AzureResourceId, each_AzureResourceId); output["AzureResourceId"] = each_AzureResourceId;
                 Json::Value each_ConnectionString; ToJsonUtilS(ConnectionString, each_ConnectionString); output["ConnectionString"] = each_ConnectionString;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_FunctionName; ToJsonUtilS(FunctionName, each_FunctionName); output["FunctionName"] = each_FunctionName;
                 Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
-                Json::Value each_SystemData; ToJsonUtilO(SystemData, each_SystemData); output["SystemData"] = each_SystemData;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 return output;
             }

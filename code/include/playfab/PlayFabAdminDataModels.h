@@ -37,6 +37,66 @@ namespace PlayFab
             }
         }
 
+        enum class ChurnRiskLevel
+        {
+            ChurnRiskLevelNoData,
+            ChurnRiskLevelLowRisk,
+            ChurnRiskLevelMediumRisk,
+            ChurnRiskLevelHighRisk
+        };
+
+        inline void ToJsonEnum(const ChurnRiskLevel input, Json::Value& output)
+        {
+            if (input == ChurnRiskLevel::ChurnRiskLevelNoData)
+            {
+                output = Json::Value("NoData");
+                return;
+            }
+            if (input == ChurnRiskLevel::ChurnRiskLevelLowRisk)
+            {
+                output = Json::Value("LowRisk");
+                return;
+            }
+            if (input == ChurnRiskLevel::ChurnRiskLevelMediumRisk)
+            {
+                output = Json::Value("MediumRisk");
+                return;
+            }
+            if (input == ChurnRiskLevel::ChurnRiskLevelHighRisk)
+            {
+                output = Json::Value("HighRisk");
+                return;
+            }
+        }
+        inline void FromJsonEnum(const Json::Value& input, ChurnRiskLevel& output)
+        {
+            if (!input.isString())
+            {
+                return;
+            }
+            const std::string& inputStr = input.asString();
+            if (inputStr == "NoData")
+            {
+                output = ChurnRiskLevel::ChurnRiskLevelNoData;
+                return;
+            }
+            if (inputStr == "LowRisk")
+            {
+                output = ChurnRiskLevel::ChurnRiskLevelLowRisk;
+                return;
+            }
+            if (inputStr == "MediumRisk")
+            {
+                output = ChurnRiskLevel::ChurnRiskLevelMediumRisk;
+                return;
+            }
+            if (inputStr == "HighRisk")
+            {
+                output = ChurnRiskLevel::ChurnRiskLevelHighRisk;
+                return;
+            }
+        }
+
         enum class Conditionals
         {
             ConditionalsAny,
@@ -21734,6 +21794,108 @@ namespace PlayFab
             }
         };
 
+        struct PlayerChurnPredictionSegmentFilter : public PlayFabBaseModel
+        {
+            Boxed<SegmentFilterComparison> Comparison;
+            Boxed<ChurnRiskLevel> RiskLevel;
+
+            PlayerChurnPredictionSegmentFilter() :
+                PlayFabBaseModel(),
+                Comparison(),
+                RiskLevel()
+            {}
+
+            PlayerChurnPredictionSegmentFilter(const PlayerChurnPredictionSegmentFilter& src) :
+                PlayFabBaseModel(),
+                Comparison(src.Comparison),
+                RiskLevel(src.RiskLevel)
+            {}
+
+            ~PlayerChurnPredictionSegmentFilter() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilE(input["Comparison"], Comparison);
+                FromJsonUtilE(input["RiskLevel"], RiskLevel);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Comparison; ToJsonUtilE(Comparison, each_Comparison); output["Comparison"] = each_Comparison;
+                Json::Value each_RiskLevel; ToJsonUtilE(RiskLevel, each_RiskLevel); output["RiskLevel"] = each_RiskLevel;
+                return output;
+            }
+        };
+
+        struct PlayerChurnPredictionTimeSegmentFilter : public PlayFabBaseModel
+        {
+            Boxed<SegmentFilterComparison> Comparison;
+            double DurationInDays;
+
+            PlayerChurnPredictionTimeSegmentFilter() :
+                PlayFabBaseModel(),
+                Comparison(),
+                DurationInDays()
+            {}
+
+            PlayerChurnPredictionTimeSegmentFilter(const PlayerChurnPredictionTimeSegmentFilter& src) :
+                PlayFabBaseModel(),
+                Comparison(src.Comparison),
+                DurationInDays(src.DurationInDays)
+            {}
+
+            ~PlayerChurnPredictionTimeSegmentFilter() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilE(input["Comparison"], Comparison);
+                FromJsonUtilP(input["DurationInDays"], DurationInDays);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Comparison; ToJsonUtilE(Comparison, each_Comparison); output["Comparison"] = each_Comparison;
+                Json::Value each_DurationInDays; ToJsonUtilP(DurationInDays, each_DurationInDays); output["DurationInDays"] = each_DurationInDays;
+                return output;
+            }
+        };
+
+        struct PlayerChurnPreviousPredictionSegmentFilter : public PlayFabBaseModel
+        {
+            Boxed<SegmentFilterComparison> Comparison;
+            Boxed<ChurnRiskLevel> RiskLevel;
+
+            PlayerChurnPreviousPredictionSegmentFilter() :
+                PlayFabBaseModel(),
+                Comparison(),
+                RiskLevel()
+            {}
+
+            PlayerChurnPreviousPredictionSegmentFilter(const PlayerChurnPreviousPredictionSegmentFilter& src) :
+                PlayFabBaseModel(),
+                Comparison(src.Comparison),
+                RiskLevel(src.RiskLevel)
+            {}
+
+            ~PlayerChurnPreviousPredictionSegmentFilter() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilE(input["Comparison"], Comparison);
+                FromJsonUtilE(input["RiskLevel"], RiskLevel);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Comparison; ToJsonUtilE(Comparison, each_Comparison); output["Comparison"] = each_Comparison;
+                Json::Value each_RiskLevel; ToJsonUtilE(RiskLevel, each_RiskLevel); output["RiskLevel"] = each_RiskLevel;
+                return output;
+            }
+        };
+
         struct PushNotificationSegmentFilter : public PlayFabBaseModel
         {
             Boxed<SegmentPushNotificationDevicePlatform> PushNotificationDevicePlatform;
@@ -21998,6 +22160,9 @@ namespace PlayFab
             Boxed<LinkedUserAccountSegmentFilter> LinkedUserAccountFilter;
             Boxed<LinkedUserAccountHasEmailSegmentFilter> LinkedUserAccountHasEmailFilter;
             Boxed<LocationSegmentFilter> LocationFilter;
+            Boxed<PlayerChurnPredictionSegmentFilter> PlayerChurnPredictionFilter;
+            Boxed<PlayerChurnPredictionTimeSegmentFilter> PlayerChurnPredictionTimeFilter;
+            Boxed<PlayerChurnPreviousPredictionSegmentFilter> PlayerChurnPreviousPredictionFilter;
             Boxed<PushNotificationSegmentFilter> PushNotificationFilter;
             Boxed<StatisticSegmentFilter> StatisticFilter;
             Boxed<TagSegmentFilter> TagFilter;
@@ -22017,6 +22182,9 @@ namespace PlayFab
                 LinkedUserAccountFilter(),
                 LinkedUserAccountHasEmailFilter(),
                 LocationFilter(),
+                PlayerChurnPredictionFilter(),
+                PlayerChurnPredictionTimeFilter(),
+                PlayerChurnPreviousPredictionFilter(),
                 PushNotificationFilter(),
                 StatisticFilter(),
                 TagFilter(),
@@ -22037,6 +22205,9 @@ namespace PlayFab
                 LinkedUserAccountFilter(src.LinkedUserAccountFilter),
                 LinkedUserAccountHasEmailFilter(src.LinkedUserAccountHasEmailFilter),
                 LocationFilter(src.LocationFilter),
+                PlayerChurnPredictionFilter(src.PlayerChurnPredictionFilter),
+                PlayerChurnPredictionTimeFilter(src.PlayerChurnPredictionTimeFilter),
+                PlayerChurnPreviousPredictionFilter(src.PlayerChurnPreviousPredictionFilter),
                 PushNotificationFilter(src.PushNotificationFilter),
                 StatisticFilter(src.StatisticFilter),
                 TagFilter(src.TagFilter),
@@ -22059,6 +22230,9 @@ namespace PlayFab
                 FromJsonUtilO(input["LinkedUserAccountFilter"], LinkedUserAccountFilter);
                 FromJsonUtilO(input["LinkedUserAccountHasEmailFilter"], LinkedUserAccountHasEmailFilter);
                 FromJsonUtilO(input["LocationFilter"], LocationFilter);
+                FromJsonUtilO(input["PlayerChurnPredictionFilter"], PlayerChurnPredictionFilter);
+                FromJsonUtilO(input["PlayerChurnPredictionTimeFilter"], PlayerChurnPredictionTimeFilter);
+                FromJsonUtilO(input["PlayerChurnPreviousPredictionFilter"], PlayerChurnPreviousPredictionFilter);
                 FromJsonUtilO(input["PushNotificationFilter"], PushNotificationFilter);
                 FromJsonUtilO(input["StatisticFilter"], StatisticFilter);
                 FromJsonUtilO(input["TagFilter"], TagFilter);
@@ -22080,6 +22254,9 @@ namespace PlayFab
                 Json::Value each_LinkedUserAccountFilter; ToJsonUtilO(LinkedUserAccountFilter, each_LinkedUserAccountFilter); output["LinkedUserAccountFilter"] = each_LinkedUserAccountFilter;
                 Json::Value each_LinkedUserAccountHasEmailFilter; ToJsonUtilO(LinkedUserAccountHasEmailFilter, each_LinkedUserAccountHasEmailFilter); output["LinkedUserAccountHasEmailFilter"] = each_LinkedUserAccountHasEmailFilter;
                 Json::Value each_LocationFilter; ToJsonUtilO(LocationFilter, each_LocationFilter); output["LocationFilter"] = each_LocationFilter;
+                Json::Value each_PlayerChurnPredictionFilter; ToJsonUtilO(PlayerChurnPredictionFilter, each_PlayerChurnPredictionFilter); output["PlayerChurnPredictionFilter"] = each_PlayerChurnPredictionFilter;
+                Json::Value each_PlayerChurnPredictionTimeFilter; ToJsonUtilO(PlayerChurnPredictionTimeFilter, each_PlayerChurnPredictionTimeFilter); output["PlayerChurnPredictionTimeFilter"] = each_PlayerChurnPredictionTimeFilter;
+                Json::Value each_PlayerChurnPreviousPredictionFilter; ToJsonUtilO(PlayerChurnPreviousPredictionFilter, each_PlayerChurnPreviousPredictionFilter); output["PlayerChurnPreviousPredictionFilter"] = each_PlayerChurnPreviousPredictionFilter;
                 Json::Value each_PushNotificationFilter; ToJsonUtilO(PushNotificationFilter, each_PushNotificationFilter); output["PushNotificationFilter"] = each_PushNotificationFilter;
                 Json::Value each_StatisticFilter; ToJsonUtilO(StatisticFilter, each_StatisticFilter); output["StatisticFilter"] = each_StatisticFilter;
                 Json::Value each_TagFilter; ToJsonUtilO(TagFilter, each_TagFilter); output["TagFilter"] = each_TagFilter;
@@ -22122,7 +22299,6 @@ namespace PlayFab
 
         struct SegmentModel : public PlayFabBaseModel
         {
-            std::string AzureResourceId;
             std::string Description;
             std::list<SegmentTrigger> EnteredSegmentActions;
             time_t LastUpdateTime;
@@ -22133,7 +22309,6 @@ namespace PlayFab
 
             SegmentModel() :
                 PlayFabBaseModel(),
-                AzureResourceId(),
                 Description(),
                 EnteredSegmentActions(),
                 LastUpdateTime(),
@@ -22145,7 +22320,6 @@ namespace PlayFab
 
             SegmentModel(const SegmentModel& src) :
                 PlayFabBaseModel(),
-                AzureResourceId(src.AzureResourceId),
                 Description(src.Description),
                 EnteredSegmentActions(src.EnteredSegmentActions),
                 LastUpdateTime(src.LastUpdateTime),
@@ -22159,7 +22333,6 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
-                FromJsonUtilS(input["AzureResourceId"], AzureResourceId);
                 FromJsonUtilS(input["Description"], Description);
                 FromJsonUtilO(input["EnteredSegmentActions"], EnteredSegmentActions);
                 FromJsonUtilT(input["LastUpdateTime"], LastUpdateTime);
@@ -22172,7 +22345,6 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                Json::Value each_AzureResourceId; ToJsonUtilS(AzureResourceId, each_AzureResourceId); output["AzureResourceId"] = each_AzureResourceId;
                 Json::Value each_Description; ToJsonUtilS(Description, each_Description); output["Description"] = each_Description;
                 Json::Value each_EnteredSegmentActions; ToJsonUtilO(EnteredSegmentActions, each_EnteredSegmentActions); output["EnteredSegmentActions"] = each_EnteredSegmentActions;
                 Json::Value each_LastUpdateTime; ToJsonUtilT(LastUpdateTime, each_LastUpdateTime); output["LastUpdateTime"] = each_LastUpdateTime;
@@ -29669,29 +29841,23 @@ namespace PlayFab
 
         struct SetTitleDataRequest : public PlayFabRequestCommon
         {
-            std::string AzureResourceId;
             std::map<std::string, std::string> CustomTags;
             std::string Key;
-            Boxed<AzureResourceSystemData> SystemData;
             std::string TitleId;
             std::string Value;
 
             SetTitleDataRequest() :
                 PlayFabRequestCommon(),
-                AzureResourceId(),
                 CustomTags(),
                 Key(),
-                SystemData(),
                 TitleId(),
                 Value()
             {}
 
             SetTitleDataRequest(const SetTitleDataRequest& src) :
                 PlayFabRequestCommon(),
-                AzureResourceId(src.AzureResourceId),
                 CustomTags(src.CustomTags),
                 Key(src.Key),
-                SystemData(src.SystemData),
                 TitleId(src.TitleId),
                 Value(src.Value)
             {}
@@ -29700,10 +29866,8 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
-                FromJsonUtilS(input["AzureResourceId"], AzureResourceId);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["Key"], Key);
-                FromJsonUtilO(input["SystemData"], SystemData);
                 FromJsonUtilS(input["TitleId"], TitleId);
                 FromJsonUtilS(input["Value"], Value);
             }
@@ -29711,10 +29875,8 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                Json::Value each_AzureResourceId; ToJsonUtilS(AzureResourceId, each_AzureResourceId); output["AzureResourceId"] = each_AzureResourceId;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Key; ToJsonUtilS(Key, each_Key); output["Key"] = each_Key;
-                Json::Value each_SystemData; ToJsonUtilO(SystemData, each_SystemData); output["SystemData"] = each_SystemData;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 Json::Value each_Value; ToJsonUtilS(Value, each_Value); output["Value"] = each_Value;
                 return output;
@@ -29723,29 +29885,24 @@ namespace PlayFab
 
         struct SetTitleDataResult : public PlayFabResultCommon
         {
-            std::string AzureResourceId;
 
             SetTitleDataResult() :
-                PlayFabResultCommon(),
-                AzureResourceId()
+                PlayFabResultCommon()
             {}
 
-            SetTitleDataResult(const SetTitleDataResult& src) :
-                PlayFabResultCommon(),
-                AzureResourceId(src.AzureResourceId)
+            SetTitleDataResult(const SetTitleDataResult&) :
+                PlayFabResultCommon()
             {}
 
             ~SetTitleDataResult() = default;
 
-            void FromJson(const Json::Value& input) override
+            void FromJson(const Json::Value&) override
             {
-                FromJsonUtilS(input["AzureResourceId"], AzureResourceId);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                Json::Value each_AzureResourceId; ToJsonUtilS(AzureResourceId, each_AzureResourceId); output["AzureResourceId"] = each_AzureResourceId;
                 return output;
             }
         };
