@@ -24047,29 +24047,23 @@ namespace PlayFab
 
         struct SetTitleDataRequest : public PlayFabRequestCommon
         {
-            std::string AzureResourceId;
             std::map<std::string, std::string> CustomTags;
             std::string Key;
-            Boxed<AzureResourceSystemData> SystemData;
             std::string TitleId;
             std::string Value;
 
             SetTitleDataRequest() :
                 PlayFabRequestCommon(),
-                AzureResourceId(),
                 CustomTags(),
                 Key(),
-                SystemData(),
                 TitleId(),
                 Value()
             {}
 
             SetTitleDataRequest(const SetTitleDataRequest& src) :
                 PlayFabRequestCommon(),
-                AzureResourceId(src.AzureResourceId),
                 CustomTags(src.CustomTags),
                 Key(src.Key),
-                SystemData(src.SystemData),
                 TitleId(src.TitleId),
                 Value(src.Value)
             {}
@@ -24078,10 +24072,8 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
-                FromJsonUtilS(input["AzureResourceId"], AzureResourceId);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["Key"], Key);
-                FromJsonUtilO(input["SystemData"], SystemData);
                 FromJsonUtilS(input["TitleId"], TitleId);
                 FromJsonUtilS(input["Value"], Value);
             }
@@ -24089,10 +24081,8 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                Json::Value each_AzureResourceId; ToJsonUtilS(AzureResourceId, each_AzureResourceId); output["AzureResourceId"] = each_AzureResourceId;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Key; ToJsonUtilS(Key, each_Key); output["Key"] = each_Key;
-                Json::Value each_SystemData; ToJsonUtilO(SystemData, each_SystemData); output["SystemData"] = each_SystemData;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 Json::Value each_Value; ToJsonUtilS(Value, each_Value); output["Value"] = each_Value;
                 return output;
@@ -24101,29 +24091,24 @@ namespace PlayFab
 
         struct SetTitleDataResult : public PlayFabResultCommon
         {
-            std::string AzureResourceId;
 
             SetTitleDataResult() :
-                PlayFabResultCommon(),
-                AzureResourceId()
+                PlayFabResultCommon()
             {}
 
-            SetTitleDataResult(const SetTitleDataResult& src) :
-                PlayFabResultCommon(),
-                AzureResourceId(src.AzureResourceId)
+            SetTitleDataResult(const SetTitleDataResult&) :
+                PlayFabResultCommon()
             {}
 
             ~SetTitleDataResult() = default;
 
-            void FromJson(const Json::Value& input) override
+            void FromJson(const Json::Value&) override
             {
-                FromJsonUtilS(input["AzureResourceId"], AzureResourceId);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                Json::Value each_AzureResourceId; ToJsonUtilS(AzureResourceId, each_AzureResourceId); output["AzureResourceId"] = each_AzureResourceId;
                 return output;
             }
         };
