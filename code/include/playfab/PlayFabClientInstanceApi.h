@@ -176,7 +176,6 @@ namespace PlayFab
         void SendAccountRecoveryEmail(ClientModels::SendAccountRecoveryEmailRequest& request, const ProcessApiCallback<ClientModels::SendAccountRecoveryEmailResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void SetFriendTags(ClientModels::SetFriendTagsRequest& request, const ProcessApiCallback<ClientModels::SetFriendTagsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void SetPlayerSecret(ClientModels::SetPlayerSecretRequest& request, const ProcessApiCallback<ClientModels::SetPlayerSecretResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
-        void StartGame(ClientModels::StartGameRequest& request, const ProcessApiCallback<ClientModels::StartGameResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void StartPurchase(ClientModels::StartPurchaseRequest& request, const ProcessApiCallback<ClientModels::StartPurchaseResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void SubtractUserVirtualCurrency(ClientModels::SubtractUserVirtualCurrencyRequest& request, const ProcessApiCallback<ClientModels::ModifyUserVirtualCurrencyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UnlinkAndroidDeviceID(ClientModels::UnlinkAndroidDeviceIDRequest& request, const ProcessApiCallback<ClientModels::UnlinkAndroidDeviceIDResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -340,7 +339,6 @@ namespace PlayFab
         void OnSendAccountRecoveryEmailResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnSetFriendTagsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnSetPlayerSecretResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
-        void OnStartGameResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnStartPurchaseResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnSubtractUserVirtualCurrencyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUnlinkAndroidDeviceIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);

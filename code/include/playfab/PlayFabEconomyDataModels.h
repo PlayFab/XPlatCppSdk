@@ -490,6 +490,69 @@ namespace PlayFab
             }
         };
 
+        struct FileConfig : public PlayFabBaseModel
+        {
+            std::list<std::string> ContentTypes;
+            std::list<std::string> Tags;
+
+            FileConfig() :
+                PlayFabBaseModel(),
+                ContentTypes(),
+                Tags()
+            {}
+
+            FileConfig(const FileConfig& src) :
+                PlayFabBaseModel(),
+                ContentTypes(src.ContentTypes),
+                Tags(src.Tags)
+            {}
+
+            ~FileConfig() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["ContentTypes"], ContentTypes);
+                FromJsonUtilS(input["Tags"], Tags);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ContentTypes; ToJsonUtilS(ContentTypes, each_ContentTypes); output["ContentTypes"] = each_ContentTypes;
+                Json::Value each_Tags; ToJsonUtilS(Tags, each_Tags); output["Tags"] = each_Tags;
+                return output;
+            }
+        };
+
+        struct ImageConfig : public PlayFabBaseModel
+        {
+            std::list<std::string> Tags;
+
+            ImageConfig() :
+                PlayFabBaseModel(),
+                Tags()
+            {}
+
+            ImageConfig(const ImageConfig& src) :
+                PlayFabBaseModel(),
+                Tags(src.Tags)
+            {}
+
+            ~ImageConfig() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["Tags"], Tags);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Tags; ToJsonUtilS(Tags, each_Tags); output["Tags"] = each_Tags;
+                return output;
+            }
+        };
+
         struct UserGeneratedContentSpecificConfig : public PlayFabBaseModel
         {
             std::list<std::string> ContentTypes;
@@ -528,6 +591,8 @@ namespace PlayFab
         {
             std::list<EntityKey> AdminEntities;
             std::list<DisplayPropertyIndexInfo> DisplayPropertyIndexInfos;
+            Boxed<FileConfig> File;
+            Boxed<ImageConfig> Image;
             bool IsCatalogEnabled;
             std::list<EntityKey> ReviewerEntities;
             Boxed<UserGeneratedContentSpecificConfig> UserGeneratedContent;
@@ -536,6 +601,8 @@ namespace PlayFab
                 PlayFabBaseModel(),
                 AdminEntities(),
                 DisplayPropertyIndexInfos(),
+                File(),
+                Image(),
                 IsCatalogEnabled(),
                 ReviewerEntities(),
                 UserGeneratedContent()
@@ -545,6 +612,8 @@ namespace PlayFab
                 PlayFabBaseModel(),
                 AdminEntities(src.AdminEntities),
                 DisplayPropertyIndexInfos(src.DisplayPropertyIndexInfos),
+                File(src.File),
+                Image(src.Image),
                 IsCatalogEnabled(src.IsCatalogEnabled),
                 ReviewerEntities(src.ReviewerEntities),
                 UserGeneratedContent(src.UserGeneratedContent)
@@ -556,6 +625,8 @@ namespace PlayFab
             {
                 FromJsonUtilO(input["AdminEntities"], AdminEntities);
                 FromJsonUtilO(input["DisplayPropertyIndexInfos"], DisplayPropertyIndexInfos);
+                FromJsonUtilO(input["File"], File);
+                FromJsonUtilO(input["Image"], Image);
                 FromJsonUtilP(input["IsCatalogEnabled"], IsCatalogEnabled);
                 FromJsonUtilO(input["ReviewerEntities"], ReviewerEntities);
                 FromJsonUtilO(input["UserGeneratedContent"], UserGeneratedContent);
@@ -566,6 +637,8 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_AdminEntities; ToJsonUtilO(AdminEntities, each_AdminEntities); output["AdminEntities"] = each_AdminEntities;
                 Json::Value each_DisplayPropertyIndexInfos; ToJsonUtilO(DisplayPropertyIndexInfos, each_DisplayPropertyIndexInfos); output["DisplayPropertyIndexInfos"] = each_DisplayPropertyIndexInfos;
+                Json::Value each_File; ToJsonUtilO(File, each_File); output["File"] = each_File;
+                Json::Value each_Image; ToJsonUtilO(Image, each_Image); output["Image"] = each_Image;
                 Json::Value each_IsCatalogEnabled; ToJsonUtilP(IsCatalogEnabled, each_IsCatalogEnabled); output["IsCatalogEnabled"] = each_IsCatalogEnabled;
                 Json::Value each_ReviewerEntities; ToJsonUtilO(ReviewerEntities, each_ReviewerEntities); output["ReviewerEntities"] = each_ReviewerEntities;
                 Json::Value each_UserGeneratedContent; ToJsonUtilO(UserGeneratedContent, each_UserGeneratedContent); output["UserGeneratedContent"] = each_UserGeneratedContent;
@@ -578,6 +651,8 @@ namespace PlayFab
             std::string Id;
             std::string MaxClientVersion;
             std::string MinClientVersion;
+            std::list<std::string> Tags;
+            std::string Type;
             std::string Url;
 
             Content() :
@@ -585,6 +660,8 @@ namespace PlayFab
                 Id(),
                 MaxClientVersion(),
                 MinClientVersion(),
+                Tags(),
+                Type(),
                 Url()
             {}
 
@@ -593,6 +670,8 @@ namespace PlayFab
                 Id(src.Id),
                 MaxClientVersion(src.MaxClientVersion),
                 MinClientVersion(src.MinClientVersion),
+                Tags(src.Tags),
+                Type(src.Type),
                 Url(src.Url)
             {}
 
@@ -603,6 +682,8 @@ namespace PlayFab
                 FromJsonUtilS(input["Id"], Id);
                 FromJsonUtilS(input["MaxClientVersion"], MaxClientVersion);
                 FromJsonUtilS(input["MinClientVersion"], MinClientVersion);
+                FromJsonUtilS(input["Tags"], Tags);
+                FromJsonUtilS(input["Type"], Type);
                 FromJsonUtilS(input["Url"], Url);
             }
 
@@ -612,6 +693,8 @@ namespace PlayFab
                 Json::Value each_Id; ToJsonUtilS(Id, each_Id); output["Id"] = each_Id;
                 Json::Value each_MaxClientVersion; ToJsonUtilS(MaxClientVersion, each_MaxClientVersion); output["MaxClientVersion"] = each_MaxClientVersion;
                 Json::Value each_MinClientVersion; ToJsonUtilS(MinClientVersion, each_MinClientVersion); output["MinClientVersion"] = each_MinClientVersion;
+                Json::Value each_Tags; ToJsonUtilS(Tags, each_Tags); output["Tags"] = each_Tags;
+                Json::Value each_Type; ToJsonUtilS(Type, each_Type); output["Type"] = each_Type;
                 Json::Value each_Url; ToJsonUtilS(Url, each_Url); output["Url"] = each_Url;
                 return output;
             }
@@ -620,12 +703,14 @@ namespace PlayFab
         struct Image : public PlayFabBaseModel
         {
             std::string Id;
+            std::string Tag;
             std::string Type;
             std::string Url;
 
             Image() :
                 PlayFabBaseModel(),
                 Id(),
+                Tag(),
                 Type(),
                 Url()
             {}
@@ -633,6 +718,7 @@ namespace PlayFab
             Image(const Image& src) :
                 PlayFabBaseModel(),
                 Id(src.Id),
+                Tag(src.Tag),
                 Type(src.Type),
                 Url(src.Url)
             {}
@@ -642,6 +728,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["Id"], Id);
+                FromJsonUtilS(input["Tag"], Tag);
                 FromJsonUtilS(input["Type"], Type);
                 FromJsonUtilS(input["Url"], Url);
             }
@@ -650,6 +737,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_Id; ToJsonUtilS(Id, each_Id); output["Id"] = each_Id;
+                Json::Value each_Tag; ToJsonUtilS(Tag, each_Tag); output["Tag"] = each_Tag;
                 Json::Value each_Type; ToJsonUtilS(Type, each_Type); output["Type"] = each_Type;
                 Json::Value each_Url; ToJsonUtilS(Url, each_Url); output["Url"] = each_Url;
                 return output;

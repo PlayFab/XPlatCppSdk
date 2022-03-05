@@ -33,7 +33,6 @@ namespace PlayFab
         static void AddLocalizedNews(AdminModels::AddLocalizedNewsRequest& request, const ProcessApiCallback<AdminModels::AddLocalizedNewsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void AddNews(AdminModels::AddNewsRequest& request, const ProcessApiCallback<AdminModels::AddNewsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void AddPlayerTag(AdminModels::AddPlayerTagRequest& request, const ProcessApiCallback<AdminModels::AddPlayerTagResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
-        static void AddServerBuild(AdminModels::AddServerBuildRequest& request, const ProcessApiCallback<AdminModels::AddServerBuildResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void AddUserVirtualCurrency(AdminModels::AddUserVirtualCurrencyRequest& request, const ProcessApiCallback<AdminModels::ModifyUserVirtualCurrencyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void AddVirtualCurrencyTypes(AdminModels::AddVirtualCurrencyTypesRequest& request, const ProcessApiCallback<AdminModels::BlankResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void BanUsers(AdminModels::BanUsersRequest& request, const ProcessApiCallback<AdminModels::BanUsersResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -82,7 +81,6 @@ namespace PlayFab
         static void GetRandomResultTables(AdminModels::GetRandomResultTablesRequest& request, const ProcessApiCallback<AdminModels::GetRandomResultTablesResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetSegments(AdminModels::GetSegmentsRequest& request, const ProcessApiCallback<AdminModels::GetSegmentsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetServerBuildInfo(AdminModels::GetServerBuildInfoRequest& request, const ProcessApiCallback<AdminModels::GetServerBuildInfoResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
-        static void GetServerBuildUploadUrl(AdminModels::GetServerBuildUploadURLRequest& request, const ProcessApiCallback<AdminModels::GetServerBuildUploadURLResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetStoreItems(AdminModels::GetStoreItemsRequest& request, const ProcessApiCallback<AdminModels::GetStoreItemsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetTaskInstances(AdminModels::GetTaskInstancesRequest& request, const ProcessApiCallback<AdminModels::GetTaskInstancesResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetTasks(AdminModels::GetTasksRequest& request, const ProcessApiCallback<AdminModels::GetTasksResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -103,7 +101,6 @@ namespace PlayFab
         static void ListOpenIdConnection(AdminModels::ListOpenIdConnectionRequest& request, const ProcessApiCallback<AdminModels::ListOpenIdConnectionResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void ListServerBuilds(AdminModels::ListBuildsRequest& request, const ProcessApiCallback<AdminModels::ListBuildsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void ListVirtualCurrencyTypes(AdminModels::ListVirtualCurrencyTypesRequest& request, const ProcessApiCallback<AdminModels::ListVirtualCurrencyTypesResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
-        static void ModifyMatchmakerGameModes(AdminModels::ModifyMatchmakerGameModesRequest& request, const ProcessApiCallback<AdminModels::ModifyMatchmakerGameModesResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void ModifyServerBuild(AdminModels::ModifyServerBuildRequest& request, const ProcessApiCallback<AdminModels::ModifyServerBuildResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void RefundPurchase(AdminModels::RefundPurchaseRequest& request, const ProcessApiCallback<AdminModels::RefundPurchaseResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void RemovePlayerTag(AdminModels::RemovePlayerTagRequest& request, const ProcessApiCallback<AdminModels::RemovePlayerTagResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -158,7 +155,6 @@ namespace PlayFab
         static void OnAddLocalizedNewsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnAddNewsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnAddPlayerTagResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
-        static void OnAddServerBuildResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnAddUserVirtualCurrencyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnAddVirtualCurrencyTypesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnBanUsersResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -207,7 +203,6 @@ namespace PlayFab
         static void OnGetRandomResultTablesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetSegmentsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetServerBuildInfoResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
-        static void OnGetServerBuildUploadUrlResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetStoreItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetTaskInstancesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetTasksResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -228,7 +223,6 @@ namespace PlayFab
         static void OnListOpenIdConnectionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnListServerBuildsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnListVirtualCurrencyTypesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
-        static void OnModifyMatchmakerGameModesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnModifyServerBuildResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnRefundPurchaseResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnRemovePlayerTagResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);

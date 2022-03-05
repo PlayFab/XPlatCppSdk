@@ -5320,6 +5320,7 @@ namespace PlayFab
             GenericErrorCodesGoogleAPIServiceUnknownError,
             GenericErrorCodesNoValidIdentityForAad,
             GenericErrorCodesPlayerIdentityLinkNotFound,
+            GenericErrorCodesPhotonApplicationIdAlreadyInUse,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8102,6 +8103,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesPlayerIdentityLinkNotFound)
             {
                 output = Json::Value("PlayerIdentityLinkNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPhotonApplicationIdAlreadyInUse)
+            {
+                output = Json::Value("PhotonApplicationIdAlreadyInUse");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -11492,6 +11498,11 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesPlayerIdentityLinkNotFound;
                 return;
             }
+            if (inputStr == "PhotonApplicationIdAlreadyInUse")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPhotonApplicationIdAlreadyInUse;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -12585,99 +12596,6 @@ namespace PlayFab
             if (inputStr == "GoogleCloudMessaging")
             {
                 output = PushNotificationPlatform::PushNotificationPlatformGoogleCloudMessaging;
-                return;
-            }
-        }
-
-        enum class Region
-        {
-            RegionUSCentral,
-            RegionUSEast,
-            RegionEUWest,
-            RegionSingapore,
-            RegionJapan,
-            RegionBrazil,
-            RegionAustralia
-        };
-
-        inline void ToJsonEnum(const Region input, Json::Value& output)
-        {
-            if (input == Region::RegionUSCentral)
-            {
-                output = Json::Value("USCentral");
-                return;
-            }
-            if (input == Region::RegionUSEast)
-            {
-                output = Json::Value("USEast");
-                return;
-            }
-            if (input == Region::RegionEUWest)
-            {
-                output = Json::Value("EUWest");
-                return;
-            }
-            if (input == Region::RegionSingapore)
-            {
-                output = Json::Value("Singapore");
-                return;
-            }
-            if (input == Region::RegionJapan)
-            {
-                output = Json::Value("Japan");
-                return;
-            }
-            if (input == Region::RegionBrazil)
-            {
-                output = Json::Value("Brazil");
-                return;
-            }
-            if (input == Region::RegionAustralia)
-            {
-                output = Json::Value("Australia");
-                return;
-            }
-        }
-        inline void FromJsonEnum(const Json::Value& input, Region& output)
-        {
-            if (!input.isString())
-            {
-                return;
-            }
-            const std::string& inputStr = input.asString();
-            if (inputStr == "USCentral")
-            {
-                output = Region::RegionUSCentral;
-                return;
-            }
-            if (inputStr == "USEast")
-            {
-                output = Region::RegionUSEast;
-                return;
-            }
-            if (inputStr == "EUWest")
-            {
-                output = Region::RegionEUWest;
-                return;
-            }
-            if (inputStr == "Singapore")
-            {
-                output = Region::RegionSingapore;
-                return;
-            }
-            if (inputStr == "Japan")
-            {
-                output = Region::RegionJapan;
-                return;
-            }
-            if (inputStr == "Brazil")
-            {
-                output = Region::RegionBrazil;
-                return;
-            }
-            if (inputStr == "Australia")
-            {
-                output = Region::RegionAustralia;
                 return;
             }
         }
@@ -14690,60 +14608,6 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_AchievementResults; ToJsonUtilO(AchievementResults, each_AchievementResults); output["AchievementResults"] = each_AchievementResults;
-                return output;
-            }
-        };
-
-        struct AzureResourceSystemData : public PlayFabBaseModel
-        {
-            Boxed<time_t> CreatedAt;
-            std::string CreatedBy;
-            std::string CreatedByType;
-            Boxed<time_t> LastModifiedAt;
-            std::string LastModifiedBy;
-            std::string LastModifiedByType;
-
-            AzureResourceSystemData() :
-                PlayFabBaseModel(),
-                CreatedAt(),
-                CreatedBy(),
-                CreatedByType(),
-                LastModifiedAt(),
-                LastModifiedBy(),
-                LastModifiedByType()
-            {}
-
-            AzureResourceSystemData(const AzureResourceSystemData& src) :
-                PlayFabBaseModel(),
-                CreatedAt(src.CreatedAt),
-                CreatedBy(src.CreatedBy),
-                CreatedByType(src.CreatedByType),
-                LastModifiedAt(src.LastModifiedAt),
-                LastModifiedBy(src.LastModifiedBy),
-                LastModifiedByType(src.LastModifiedByType)
-            {}
-
-            ~AzureResourceSystemData() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilT(input["CreatedAt"], CreatedAt);
-                FromJsonUtilS(input["CreatedBy"], CreatedBy);
-                FromJsonUtilS(input["CreatedByType"], CreatedByType);
-                FromJsonUtilT(input["LastModifiedAt"], LastModifiedAt);
-                FromJsonUtilS(input["LastModifiedBy"], LastModifiedBy);
-                FromJsonUtilS(input["LastModifiedByType"], LastModifiedByType);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_CreatedAt; ToJsonUtilT(CreatedAt, each_CreatedAt); output["CreatedAt"] = each_CreatedAt;
-                Json::Value each_CreatedBy; ToJsonUtilS(CreatedBy, each_CreatedBy); output["CreatedBy"] = each_CreatedBy;
-                Json::Value each_CreatedByType; ToJsonUtilS(CreatedByType, each_CreatedByType); output["CreatedByType"] = each_CreatedByType;
-                Json::Value each_LastModifiedAt; ToJsonUtilT(LastModifiedAt, each_LastModifiedAt); output["LastModifiedAt"] = each_LastModifiedAt;
-                Json::Value each_LastModifiedBy; ToJsonUtilS(LastModifiedBy, each_LastModifiedBy); output["LastModifiedBy"] = each_LastModifiedBy;
-                Json::Value each_LastModifiedByType; ToJsonUtilS(LastModifiedByType, each_LastModifiedByType); output["LastModifiedByType"] = each_LastModifiedByType;
                 return output;
             }
         };
@@ -22535,109 +22399,6 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                return output;
-            }
-        };
-
-        struct RegisterGameRequest : public PlayFabRequestCommon
-        {
-            std::string Build;
-            std::map<std::string, std::string> CustomTags;
-            std::string GameMode;
-            std::string LobbyId;
-            Region pfRegion;
-            std::string ServerIPV4Address;
-            std::string ServerIPV6Address;
-            std::string ServerPort;
-            std::string ServerPublicDNSName;
-            std::map<std::string, std::string> Tags;
-
-            RegisterGameRequest() :
-                PlayFabRequestCommon(),
-                Build(),
-                CustomTags(),
-                GameMode(),
-                LobbyId(),
-                pfRegion(),
-                ServerIPV4Address(),
-                ServerIPV6Address(),
-                ServerPort(),
-                ServerPublicDNSName(),
-                Tags()
-            {}
-
-            RegisterGameRequest(const RegisterGameRequest& src) :
-                PlayFabRequestCommon(),
-                Build(src.Build),
-                CustomTags(src.CustomTags),
-                GameMode(src.GameMode),
-                LobbyId(src.LobbyId),
-                pfRegion(src.pfRegion),
-                ServerIPV4Address(src.ServerIPV4Address),
-                ServerIPV6Address(src.ServerIPV6Address),
-                ServerPort(src.ServerPort),
-                ServerPublicDNSName(src.ServerPublicDNSName),
-                Tags(src.Tags)
-            {}
-
-            ~RegisterGameRequest() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilS(input["Build"], Build);
-                FromJsonUtilS(input["CustomTags"], CustomTags);
-                FromJsonUtilS(input["GameMode"], GameMode);
-                FromJsonUtilS(input["LobbyId"], LobbyId);
-                FromJsonEnum(input["Region"], pfRegion);
-                FromJsonUtilS(input["ServerIPV4Address"], ServerIPV4Address);
-                FromJsonUtilS(input["ServerIPV6Address"], ServerIPV6Address);
-                FromJsonUtilS(input["ServerPort"], ServerPort);
-                FromJsonUtilS(input["ServerPublicDNSName"], ServerPublicDNSName);
-                FromJsonUtilS(input["Tags"], Tags);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_Build; ToJsonUtilS(Build, each_Build); output["Build"] = each_Build;
-                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
-                Json::Value each_GameMode; ToJsonUtilS(GameMode, each_GameMode); output["GameMode"] = each_GameMode;
-                Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
-                Json::Value each_pfRegion; ToJsonEnum(pfRegion, each_pfRegion); output["Region"] = each_pfRegion;
-                Json::Value each_ServerIPV4Address; ToJsonUtilS(ServerIPV4Address, each_ServerIPV4Address); output["ServerIPV4Address"] = each_ServerIPV4Address;
-                Json::Value each_ServerIPV6Address; ToJsonUtilS(ServerIPV6Address, each_ServerIPV6Address); output["ServerIPV6Address"] = each_ServerIPV6Address;
-                Json::Value each_ServerPort; ToJsonUtilS(ServerPort, each_ServerPort); output["ServerPort"] = each_ServerPort;
-                Json::Value each_ServerPublicDNSName; ToJsonUtilS(ServerPublicDNSName, each_ServerPublicDNSName); output["ServerPublicDNSName"] = each_ServerPublicDNSName;
-                Json::Value each_Tags; ToJsonUtilS(Tags, each_Tags); output["Tags"] = each_Tags;
-                return output;
-            }
-        };
-
-        struct RegisterGameResponse : public PlayFabResultCommon
-        {
-            std::string LobbyId;
-
-            RegisterGameResponse() :
-                PlayFabResultCommon(),
-                LobbyId()
-            {}
-
-            RegisterGameResponse(const RegisterGameResponse& src) :
-                PlayFabResultCommon(),
-                LobbyId(src.LobbyId)
-            {}
-
-            ~RegisterGameResponse() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilS(input["LobbyId"], LobbyId);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
                 return output;
             }
         };
