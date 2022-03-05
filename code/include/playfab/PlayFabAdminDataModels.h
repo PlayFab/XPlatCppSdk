@@ -5478,6 +5478,7 @@ namespace PlayFab
             GenericErrorCodesGoogleAPIServiceUnknownError,
             GenericErrorCodesNoValidIdentityForAad,
             GenericErrorCodesPlayerIdentityLinkNotFound,
+            GenericErrorCodesPhotonApplicationIdAlreadyInUse,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8260,6 +8261,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesPlayerIdentityLinkNotFound)
             {
                 output = Json::Value("PlayerIdentityLinkNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPhotonApplicationIdAlreadyInUse)
+            {
+                output = Json::Value("PhotonApplicationIdAlreadyInUse");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -11648,6 +11654,11 @@ namespace PlayFab
             if (inputStr == "PlayerIdentityLinkNotFound")
             {
                 output = GenericErrorCodes::GenericErrorCodesPlayerIdentityLinkNotFound;
+                return;
+            }
+            if (inputStr == "PhotonApplicationIdAlreadyInUse")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPhotonApplicationIdAlreadyInUse;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
@@ -19372,144 +19383,6 @@ namespace PlayFab
             }
         };
 
-        struct AddServerBuildRequest : public PlayFabRequestCommon
-        {
-            std::list<Region> ActiveRegions;
-            std::string BuildId;
-            std::string CommandLineTemplate;
-            std::string Comment;
-            std::map<std::string, std::string> CustomTags;
-            std::string ExecutablePath;
-            Int32 MaxGamesPerHost;
-            Int32 MinFreeGameSlots;
-
-            AddServerBuildRequest() :
-                PlayFabRequestCommon(),
-                ActiveRegions(),
-                BuildId(),
-                CommandLineTemplate(),
-                Comment(),
-                CustomTags(),
-                ExecutablePath(),
-                MaxGamesPerHost(),
-                MinFreeGameSlots()
-            {}
-
-            AddServerBuildRequest(const AddServerBuildRequest& src) :
-                PlayFabRequestCommon(),
-                ActiveRegions(src.ActiveRegions),
-                BuildId(src.BuildId),
-                CommandLineTemplate(src.CommandLineTemplate),
-                Comment(src.Comment),
-                CustomTags(src.CustomTags),
-                ExecutablePath(src.ExecutablePath),
-                MaxGamesPerHost(src.MaxGamesPerHost),
-                MinFreeGameSlots(src.MinFreeGameSlots)
-            {}
-
-            ~AddServerBuildRequest() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilE(input["ActiveRegions"], ActiveRegions);
-                FromJsonUtilS(input["BuildId"], BuildId);
-                FromJsonUtilS(input["CommandLineTemplate"], CommandLineTemplate);
-                FromJsonUtilS(input["Comment"], Comment);
-                FromJsonUtilS(input["CustomTags"], CustomTags);
-                FromJsonUtilS(input["ExecutablePath"], ExecutablePath);
-                FromJsonUtilP(input["MaxGamesPerHost"], MaxGamesPerHost);
-                FromJsonUtilP(input["MinFreeGameSlots"], MinFreeGameSlots);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_ActiveRegions; ToJsonUtilE(ActiveRegions, each_ActiveRegions); output["ActiveRegions"] = each_ActiveRegions;
-                Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
-                Json::Value each_CommandLineTemplate; ToJsonUtilS(CommandLineTemplate, each_CommandLineTemplate); output["CommandLineTemplate"] = each_CommandLineTemplate;
-                Json::Value each_Comment; ToJsonUtilS(Comment, each_Comment); output["Comment"] = each_Comment;
-                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
-                Json::Value each_ExecutablePath; ToJsonUtilS(ExecutablePath, each_ExecutablePath); output["ExecutablePath"] = each_ExecutablePath;
-                Json::Value each_MaxGamesPerHost; ToJsonUtilP(MaxGamesPerHost, each_MaxGamesPerHost); output["MaxGamesPerHost"] = each_MaxGamesPerHost;
-                Json::Value each_MinFreeGameSlots; ToJsonUtilP(MinFreeGameSlots, each_MinFreeGameSlots); output["MinFreeGameSlots"] = each_MinFreeGameSlots;
-                return output;
-            }
-        };
-
-        struct AddServerBuildResult : public PlayFabResultCommon
-        {
-            std::list<Region> ActiveRegions;
-            std::string BuildId;
-            std::string CommandLineTemplate;
-            std::string Comment;
-            std::string ExecutablePath;
-            Int32 MaxGamesPerHost;
-            Int32 MinFreeGameSlots;
-            Boxed<GameBuildStatus> Status;
-            time_t Timestamp;
-            std::string TitleId;
-
-            AddServerBuildResult() :
-                PlayFabResultCommon(),
-                ActiveRegions(),
-                BuildId(),
-                CommandLineTemplate(),
-                Comment(),
-                ExecutablePath(),
-                MaxGamesPerHost(),
-                MinFreeGameSlots(),
-                Status(),
-                Timestamp(),
-                TitleId()
-            {}
-
-            AddServerBuildResult(const AddServerBuildResult& src) :
-                PlayFabResultCommon(),
-                ActiveRegions(src.ActiveRegions),
-                BuildId(src.BuildId),
-                CommandLineTemplate(src.CommandLineTemplate),
-                Comment(src.Comment),
-                ExecutablePath(src.ExecutablePath),
-                MaxGamesPerHost(src.MaxGamesPerHost),
-                MinFreeGameSlots(src.MinFreeGameSlots),
-                Status(src.Status),
-                Timestamp(src.Timestamp),
-                TitleId(src.TitleId)
-            {}
-
-            ~AddServerBuildResult() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilE(input["ActiveRegions"], ActiveRegions);
-                FromJsonUtilS(input["BuildId"], BuildId);
-                FromJsonUtilS(input["CommandLineTemplate"], CommandLineTemplate);
-                FromJsonUtilS(input["Comment"], Comment);
-                FromJsonUtilS(input["ExecutablePath"], ExecutablePath);
-                FromJsonUtilP(input["MaxGamesPerHost"], MaxGamesPerHost);
-                FromJsonUtilP(input["MinFreeGameSlots"], MinFreeGameSlots);
-                FromJsonUtilE(input["Status"], Status);
-                FromJsonUtilT(input["Timestamp"], Timestamp);
-                FromJsonUtilS(input["TitleId"], TitleId);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_ActiveRegions; ToJsonUtilE(ActiveRegions, each_ActiveRegions); output["ActiveRegions"] = each_ActiveRegions;
-                Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
-                Json::Value each_CommandLineTemplate; ToJsonUtilS(CommandLineTemplate, each_CommandLineTemplate); output["CommandLineTemplate"] = each_CommandLineTemplate;
-                Json::Value each_Comment; ToJsonUtilS(Comment, each_Comment); output["Comment"] = each_Comment;
-                Json::Value each_ExecutablePath; ToJsonUtilS(ExecutablePath, each_ExecutablePath); output["ExecutablePath"] = each_ExecutablePath;
-                Json::Value each_MaxGamesPerHost; ToJsonUtilP(MaxGamesPerHost, each_MaxGamesPerHost); output["MaxGamesPerHost"] = each_MaxGamesPerHost;
-                Json::Value each_MinFreeGameSlots; ToJsonUtilP(MinFreeGameSlots, each_MinFreeGameSlots); output["MinFreeGameSlots"] = each_MinFreeGameSlots;
-                Json::Value each_Status; ToJsonUtilE(Status, each_Status); output["Status"] = each_Status;
-                Json::Value each_Timestamp; ToJsonUtilT(Timestamp, each_Timestamp); output["Timestamp"] = each_Timestamp;
-                Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
-                return output;
-            }
-        };
-
         struct AddUserVirtualCurrencyRequest : public PlayFabRequestCommon
         {
             Int32 Amount;
@@ -19681,60 +19554,6 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_HasSignatureOrEncryption; ToJsonUtilE(HasSignatureOrEncryption, each_HasSignatureOrEncryption); output["HasSignatureOrEncryption"] = each_HasSignatureOrEncryption;
-                return output;
-            }
-        };
-
-        struct AzureResourceSystemData : public PlayFabBaseModel
-        {
-            Boxed<time_t> CreatedAt;
-            std::string CreatedBy;
-            std::string CreatedByType;
-            Boxed<time_t> LastModifiedAt;
-            std::string LastModifiedBy;
-            std::string LastModifiedByType;
-
-            AzureResourceSystemData() :
-                PlayFabBaseModel(),
-                CreatedAt(),
-                CreatedBy(),
-                CreatedByType(),
-                LastModifiedAt(),
-                LastModifiedBy(),
-                LastModifiedByType()
-            {}
-
-            AzureResourceSystemData(const AzureResourceSystemData& src) :
-                PlayFabBaseModel(),
-                CreatedAt(src.CreatedAt),
-                CreatedBy(src.CreatedBy),
-                CreatedByType(src.CreatedByType),
-                LastModifiedAt(src.LastModifiedAt),
-                LastModifiedBy(src.LastModifiedBy),
-                LastModifiedByType(src.LastModifiedByType)
-            {}
-
-            ~AzureResourceSystemData() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilT(input["CreatedAt"], CreatedAt);
-                FromJsonUtilS(input["CreatedBy"], CreatedBy);
-                FromJsonUtilS(input["CreatedByType"], CreatedByType);
-                FromJsonUtilT(input["LastModifiedAt"], LastModifiedAt);
-                FromJsonUtilS(input["LastModifiedBy"], LastModifiedBy);
-                FromJsonUtilS(input["LastModifiedByType"], LastModifiedByType);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_CreatedAt; ToJsonUtilT(CreatedAt, each_CreatedAt); output["CreatedAt"] = each_CreatedAt;
-                Json::Value each_CreatedBy; ToJsonUtilS(CreatedBy, each_CreatedBy); output["CreatedBy"] = each_CreatedBy;
-                Json::Value each_CreatedByType; ToJsonUtilS(CreatedByType, each_CreatedByType); output["CreatedByType"] = each_CreatedByType;
-                Json::Value each_LastModifiedAt; ToJsonUtilT(LastModifiedAt, each_LastModifiedAt); output["LastModifiedAt"] = each_LastModifiedAt;
-                Json::Value each_LastModifiedBy; ToJsonUtilS(LastModifiedBy, each_LastModifiedBy); output["LastModifiedBy"] = each_LastModifiedBy;
-                Json::Value each_LastModifiedByType; ToJsonUtilS(LastModifiedByType, each_LastModifiedByType); output["LastModifiedByType"] = each_LastModifiedByType;
                 return output;
             }
         };
@@ -25925,64 +25744,6 @@ namespace PlayFab
             }
         };
 
-        struct GetServerBuildUploadURLRequest : public PlayFabRequestCommon
-        {
-            std::string BuildId;
-
-            GetServerBuildUploadURLRequest() :
-                PlayFabRequestCommon(),
-                BuildId()
-            {}
-
-            GetServerBuildUploadURLRequest(const GetServerBuildUploadURLRequest& src) :
-                PlayFabRequestCommon(),
-                BuildId(src.BuildId)
-            {}
-
-            ~GetServerBuildUploadURLRequest() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilS(input["BuildId"], BuildId);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
-                return output;
-            }
-        };
-
-        struct GetServerBuildUploadURLResult : public PlayFabResultCommon
-        {
-            std::string URL;
-
-            GetServerBuildUploadURLResult() :
-                PlayFabResultCommon(),
-                URL()
-            {}
-
-            GetServerBuildUploadURLResult(const GetServerBuildUploadURLResult& src) :
-                PlayFabResultCommon(),
-                URL(src.URL)
-            {}
-
-            ~GetServerBuildUploadURLResult() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilS(input["URL"], URL);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_URL; ToJsonUtilS(URL, each_URL); output["URL"] = each_URL;
-                return output;
-            }
-        };
-
         struct GetStoreItemsRequest : public PlayFabRequestCommon
         {
             std::string CatalogVersion;
@@ -28311,64 +28072,6 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_UserInfo; ToJsonUtilO(UserInfo, each_UserInfo); output["UserInfo"] = each_UserInfo;
-                return output;
-            }
-        };
-
-        struct ModifyMatchmakerGameModesRequest : public PlayFabRequestCommon
-        {
-            std::string BuildVersion;
-            std::list<GameModeInfo> GameModes;
-
-            ModifyMatchmakerGameModesRequest() :
-                PlayFabRequestCommon(),
-                BuildVersion(),
-                GameModes()
-            {}
-
-            ModifyMatchmakerGameModesRequest(const ModifyMatchmakerGameModesRequest& src) :
-                PlayFabRequestCommon(),
-                BuildVersion(src.BuildVersion),
-                GameModes(src.GameModes)
-            {}
-
-            ~ModifyMatchmakerGameModesRequest() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilS(input["BuildVersion"], BuildVersion);
-                FromJsonUtilO(input["GameModes"], GameModes);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_BuildVersion; ToJsonUtilS(BuildVersion, each_BuildVersion); output["BuildVersion"] = each_BuildVersion;
-                Json::Value each_GameModes; ToJsonUtilO(GameModes, each_GameModes); output["GameModes"] = each_GameModes;
-                return output;
-            }
-        };
-
-        struct ModifyMatchmakerGameModesResult : public PlayFabResultCommon
-        {
-
-            ModifyMatchmakerGameModesResult() :
-                PlayFabResultCommon()
-            {}
-
-            ModifyMatchmakerGameModesResult(const ModifyMatchmakerGameModesResult&) :
-                PlayFabResultCommon()
-            {}
-
-            ~ModifyMatchmakerGameModesResult() = default;
-
-            void FromJson(const Json::Value&) override
-            {
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
                 return output;
             }
         };
