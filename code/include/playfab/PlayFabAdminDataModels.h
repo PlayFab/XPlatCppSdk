@@ -5626,6 +5626,10 @@ namespace PlayFab
             GenericErrorCodesEventSinkConnectionInvalid,
             GenericErrorCodesEventSinkConnectionUnauthorized,
             GenericErrorCodesEventSinkRegionInvalid,
+            GenericErrorCodesEventSinkLimitExceeded,
+            GenericErrorCodesEventSinkSasTokenInvalid,
+            GenericErrorCodesEventSinkNotFound,
+            GenericErrorCodesEventSinkNameInvalid,
             GenericErrorCodesOperationCanceled,
             GenericErrorCodesInvalidDisplayNameRandomSuffixLength,
             GenericErrorCodesAllowNonUniquePlayerDisplayNamesDisableNotAllowed
@@ -9001,6 +9005,26 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesEventSinkRegionInvalid)
             {
                 output = Json::Value("EventSinkRegionInvalid");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkLimitExceeded)
+            {
+                output = Json::Value("EventSinkLimitExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkSasTokenInvalid)
+            {
+                output = Json::Value("EventSinkSasTokenInvalid");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkNotFound)
+            {
+                output = Json::Value("EventSinkNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkNameInvalid)
+            {
+                output = Json::Value("EventSinkNameInvalid");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesOperationCanceled)
@@ -12394,6 +12418,26 @@ namespace PlayFab
             if (inputStr == "EventSinkRegionInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesEventSinkRegionInvalid;
+                return;
+            }
+            if (inputStr == "EventSinkLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkLimitExceeded;
+                return;
+            }
+            if (inputStr == "EventSinkSasTokenInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkSasTokenInvalid;
+                return;
+            }
+            if (inputStr == "EventSinkNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkNotFound;
+                return;
+            }
+            if (inputStr == "EventSinkNameInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkNameInvalid;
                 return;
             }
             if (inputStr == "OperationCanceled")
@@ -25646,104 +25690,6 @@ namespace PlayFab
             }
         };
 
-        struct GetServerBuildInfoRequest : public PlayFabRequestCommon
-        {
-            std::string BuildId;
-
-            GetServerBuildInfoRequest() :
-                PlayFabRequestCommon(),
-                BuildId()
-            {}
-
-            GetServerBuildInfoRequest(const GetServerBuildInfoRequest& src) :
-                PlayFabRequestCommon(),
-                BuildId(src.BuildId)
-            {}
-
-            ~GetServerBuildInfoRequest() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilS(input["BuildId"], BuildId);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
-                return output;
-            }
-        };
-
-        struct GetServerBuildInfoResult : public PlayFabResultCommon
-        {
-            std::list<Region> ActiveRegions;
-            std::string BuildId;
-            std::string Comment;
-            std::string ErrorMessage;
-            Int32 MaxGamesPerHost;
-            Int32 MinFreeGameSlots;
-            Boxed<GameBuildStatus> Status;
-            time_t Timestamp;
-            std::string TitleId;
-
-            GetServerBuildInfoResult() :
-                PlayFabResultCommon(),
-                ActiveRegions(),
-                BuildId(),
-                Comment(),
-                ErrorMessage(),
-                MaxGamesPerHost(),
-                MinFreeGameSlots(),
-                Status(),
-                Timestamp(),
-                TitleId()
-            {}
-
-            GetServerBuildInfoResult(const GetServerBuildInfoResult& src) :
-                PlayFabResultCommon(),
-                ActiveRegions(src.ActiveRegions),
-                BuildId(src.BuildId),
-                Comment(src.Comment),
-                ErrorMessage(src.ErrorMessage),
-                MaxGamesPerHost(src.MaxGamesPerHost),
-                MinFreeGameSlots(src.MinFreeGameSlots),
-                Status(src.Status),
-                Timestamp(src.Timestamp),
-                TitleId(src.TitleId)
-            {}
-
-            ~GetServerBuildInfoResult() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilE(input["ActiveRegions"], ActiveRegions);
-                FromJsonUtilS(input["BuildId"], BuildId);
-                FromJsonUtilS(input["Comment"], Comment);
-                FromJsonUtilS(input["ErrorMessage"], ErrorMessage);
-                FromJsonUtilP(input["MaxGamesPerHost"], MaxGamesPerHost);
-                FromJsonUtilP(input["MinFreeGameSlots"], MinFreeGameSlots);
-                FromJsonUtilE(input["Status"], Status);
-                FromJsonUtilT(input["Timestamp"], Timestamp);
-                FromJsonUtilS(input["TitleId"], TitleId);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_ActiveRegions; ToJsonUtilE(ActiveRegions, each_ActiveRegions); output["ActiveRegions"] = each_ActiveRegions;
-                Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
-                Json::Value each_Comment; ToJsonUtilS(Comment, each_Comment); output["Comment"] = each_Comment;
-                Json::Value each_ErrorMessage; ToJsonUtilS(ErrorMessage, each_ErrorMessage); output["ErrorMessage"] = each_ErrorMessage;
-                Json::Value each_MaxGamesPerHost; ToJsonUtilP(MaxGamesPerHost, each_MaxGamesPerHost); output["MaxGamesPerHost"] = each_MaxGamesPerHost;
-                Json::Value each_MinFreeGameSlots; ToJsonUtilP(MinFreeGameSlots, each_MinFreeGameSlots); output["MinFreeGameSlots"] = each_MinFreeGameSlots;
-                Json::Value each_Status; ToJsonUtilE(Status, each_Status); output["Status"] = each_Status;
-                Json::Value each_Timestamp; ToJsonUtilT(Timestamp, each_Timestamp); output["Timestamp"] = each_Timestamp;
-                Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
-                return output;
-            }
-        };
-
         struct GetStoreItemsRequest : public PlayFabRequestCommon
         {
             std::string CatalogVersion;
@@ -27035,59 +26981,6 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_StatisticVersion; ToJsonUtilO(StatisticVersion, each_StatisticVersion); output["StatisticVersion"] = each_StatisticVersion;
-                return output;
-            }
-        };
-
-        struct ListBuildsRequest : public PlayFabRequestCommon
-        {
-
-            ListBuildsRequest() :
-                PlayFabRequestCommon()
-            {}
-
-            ListBuildsRequest(const ListBuildsRequest&) :
-                PlayFabRequestCommon()
-            {}
-
-            ~ListBuildsRequest() = default;
-
-            void FromJson(const Json::Value&) override
-            {
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                return output;
-            }
-        };
-
-        struct ListBuildsResult : public PlayFabResultCommon
-        {
-            std::list<GetServerBuildInfoResult> Builds;
-
-            ListBuildsResult() :
-                PlayFabResultCommon(),
-                Builds()
-            {}
-
-            ListBuildsResult(const ListBuildsResult& src) :
-                PlayFabResultCommon(),
-                Builds(src.Builds)
-            {}
-
-            ~ListBuildsResult() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilO(input["Builds"], Builds);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_Builds; ToJsonUtilO(Builds, each_Builds); output["Builds"] = each_Builds;
                 return output;
             }
         };
@@ -28416,59 +28309,6 @@ namespace PlayFab
             {}
 
             ~RemovePlayerTagResult() = default;
-
-            void FromJson(const Json::Value&) override
-            {
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                return output;
-            }
-        };
-
-        struct RemoveServerBuildRequest : public PlayFabRequestCommon
-        {
-            std::string BuildId;
-
-            RemoveServerBuildRequest() :
-                PlayFabRequestCommon(),
-                BuildId()
-            {}
-
-            RemoveServerBuildRequest(const RemoveServerBuildRequest& src) :
-                PlayFabRequestCommon(),
-                BuildId(src.BuildId)
-            {}
-
-            ~RemoveServerBuildRequest() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilS(input["BuildId"], BuildId);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
-                return output;
-            }
-        };
-
-        struct RemoveServerBuildResult : public PlayFabResultCommon
-        {
-
-            RemoveServerBuildResult() :
-                PlayFabResultCommon()
-            {}
-
-            RemoveServerBuildResult(const RemoveServerBuildResult&) :
-                PlayFabResultCommon()
-            {}
-
-            ~RemoveServerBuildResult() = default;
 
             void FromJson(const Json::Value&) override
             {

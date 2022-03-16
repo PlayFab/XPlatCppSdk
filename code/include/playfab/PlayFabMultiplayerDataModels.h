@@ -10,6 +10,55 @@ namespace PlayFab
     namespace MultiplayerModels
     {
         // Multiplayer Enums
+        enum class AccessPolicy
+        {
+            AccessPolicyPublic,
+            AccessPolicyFriends,
+            AccessPolicyPrivate
+        };
+
+        inline void ToJsonEnum(const AccessPolicy input, Json::Value& output)
+        {
+            if (input == AccessPolicy::AccessPolicyPublic)
+            {
+                output = Json::Value("Public");
+                return;
+            }
+            if (input == AccessPolicy::AccessPolicyFriends)
+            {
+                output = Json::Value("Friends");
+                return;
+            }
+            if (input == AccessPolicy::AccessPolicyPrivate)
+            {
+                output = Json::Value("Private");
+                return;
+            }
+        }
+        inline void FromJsonEnum(const Json::Value& input, AccessPolicy& output)
+        {
+            if (!input.isString())
+            {
+                return;
+            }
+            const std::string& inputStr = input.asString();
+            if (inputStr == "Public")
+            {
+                output = AccessPolicy::AccessPolicyPublic;
+                return;
+            }
+            if (inputStr == "Friends")
+            {
+                output = AccessPolicy::AccessPolicyFriends;
+                return;
+            }
+            if (inputStr == "Private")
+            {
+                output = AccessPolicy::AccessPolicyPrivate;
+                return;
+            }
+        }
+
         enum class AzureRegion
         {
             AzureRegionAustraliaEast,
@@ -1333,6 +1382,44 @@ namespace PlayFab
             }
         }
 
+        enum class MembershipLock
+        {
+            MembershipLockUnlocked,
+            MembershipLockLocked
+        };
+
+        inline void ToJsonEnum(const MembershipLock input, Json::Value& output)
+        {
+            if (input == MembershipLock::MembershipLockUnlocked)
+            {
+                output = Json::Value("Unlocked");
+                return;
+            }
+            if (input == MembershipLock::MembershipLockLocked)
+            {
+                output = Json::Value("Locked");
+                return;
+            }
+        }
+        inline void FromJsonEnum(const Json::Value& input, MembershipLock& output)
+        {
+            if (!input.isString())
+            {
+                return;
+            }
+            const std::string& inputStr = input.asString();
+            if (inputStr == "Unlocked")
+            {
+                output = MembershipLock::MembershipLockUnlocked;
+                return;
+            }
+            if (inputStr == "Locked")
+            {
+                output = MembershipLock::MembershipLockLocked;
+                return;
+            }
+        }
+
         enum class OsPlatform
         {
             OsPlatformWindows,
@@ -1367,6 +1454,66 @@ namespace PlayFab
             if (inputStr == "Linux")
             {
                 output = OsPlatform::OsPlatformLinux;
+                return;
+            }
+        }
+
+        enum class OwnerMigrationPolicy
+        {
+            OwnerMigrationPolicyNone,
+            OwnerMigrationPolicyAutomatic,
+            OwnerMigrationPolicyManual,
+            OwnerMigrationPolicyServer
+        };
+
+        inline void ToJsonEnum(const OwnerMigrationPolicy input, Json::Value& output)
+        {
+            if (input == OwnerMigrationPolicy::OwnerMigrationPolicyNone)
+            {
+                output = Json::Value("None");
+                return;
+            }
+            if (input == OwnerMigrationPolicy::OwnerMigrationPolicyAutomatic)
+            {
+                output = Json::Value("Automatic");
+                return;
+            }
+            if (input == OwnerMigrationPolicy::OwnerMigrationPolicyManual)
+            {
+                output = Json::Value("Manual");
+                return;
+            }
+            if (input == OwnerMigrationPolicy::OwnerMigrationPolicyServer)
+            {
+                output = Json::Value("Server");
+                return;
+            }
+        }
+        inline void FromJsonEnum(const Json::Value& input, OwnerMigrationPolicy& output)
+        {
+            if (!input.isString())
+            {
+                return;
+            }
+            const std::string& inputStr = input.asString();
+            if (inputStr == "None")
+            {
+                output = OwnerMigrationPolicy::OwnerMigrationPolicyNone;
+                return;
+            }
+            if (inputStr == "Automatic")
+            {
+                output = OwnerMigrationPolicy::OwnerMigrationPolicyAutomatic;
+                return;
+            }
+            if (inputStr == "Manual")
+            {
+                output = OwnerMigrationPolicy::OwnerMigrationPolicyManual;
+                return;
+            }
+            if (inputStr == "Server")
+            {
+                output = OwnerMigrationPolicy::OwnerMigrationPolicyServer;
                 return;
             }
         }
@@ -1443,6 +1590,44 @@ namespace PlayFab
             if (inputStr == "Process")
             {
                 output = ServerType::ServerTypeProcess;
+                return;
+            }
+        }
+
+        enum class SubscriptionType
+        {
+            SubscriptionTypeLobbyChange,
+            SubscriptionTypeLobbyInvite
+        };
+
+        inline void ToJsonEnum(const SubscriptionType input, Json::Value& output)
+        {
+            if (input == SubscriptionType::SubscriptionTypeLobbyChange)
+            {
+                output = Json::Value("LobbyChange");
+                return;
+            }
+            if (input == SubscriptionType::SubscriptionTypeLobbyInvite)
+            {
+                output = Json::Value("LobbyInvite");
+                return;
+            }
+        }
+        inline void FromJsonEnum(const Json::Value& input, SubscriptionType& output)
+        {
+            if (!input.isString())
+            {
+                return;
+            }
+            const std::string& inputStr = input.asString();
+            if (inputStr == "LobbyChange")
+            {
+                output = SubscriptionType::SubscriptionTypeLobbyChange;
+                return;
+            }
+            if (inputStr == "LobbyInvite")
+            {
+                output = SubscriptionType::SubscriptionTypeLobbyInvite;
                 return;
             }
         }
@@ -3608,6 +3793,148 @@ namespace PlayFab
             }
         };
 
+        struct Member : public PlayFabBaseModel
+        {
+            std::map<std::string, std::string> MemberData;
+            Boxed<EntityKey> MemberEntity;
+            std::string PubSubConnectionHandle;
+
+            Member() :
+                PlayFabBaseModel(),
+                MemberData(),
+                MemberEntity(),
+                PubSubConnectionHandle()
+            {}
+
+            Member(const Member& src) :
+                PlayFabBaseModel(),
+                MemberData(src.MemberData),
+                MemberEntity(src.MemberEntity),
+                PubSubConnectionHandle(src.PubSubConnectionHandle)
+            {}
+
+            ~Member() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["MemberData"], MemberData);
+                FromJsonUtilO(input["MemberEntity"], MemberEntity);
+                FromJsonUtilS(input["PubSubConnectionHandle"], PubSubConnectionHandle);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_MemberData; ToJsonUtilS(MemberData, each_MemberData); output["MemberData"] = each_MemberData;
+                Json::Value each_MemberEntity; ToJsonUtilO(MemberEntity, each_MemberEntity); output["MemberEntity"] = each_MemberEntity;
+                Json::Value each_PubSubConnectionHandle; ToJsonUtilS(PubSubConnectionHandle, each_PubSubConnectionHandle); output["PubSubConnectionHandle"] = each_PubSubConnectionHandle;
+                return output;
+            }
+        };
+
+        struct CreateLobbyRequest : public PlayFabRequestCommon
+        {
+            Boxed<AccessPolicy> pfAccessPolicy;
+            std::map<std::string, std::string> CustomTags;
+            std::map<std::string, std::string> LobbyData;
+            Uint32 MaxPlayers;
+            std::list<Member> Members;
+            EntityKey Owner;
+            Boxed<OwnerMigrationPolicy> pfOwnerMigrationPolicy;
+            std::map<std::string, std::string> SearchData;
+            bool UseConnections;
+
+            CreateLobbyRequest() :
+                PlayFabRequestCommon(),
+                pfAccessPolicy(),
+                CustomTags(),
+                LobbyData(),
+                MaxPlayers(),
+                Members(),
+                Owner(),
+                pfOwnerMigrationPolicy(),
+                SearchData(),
+                UseConnections()
+            {}
+
+            CreateLobbyRequest(const CreateLobbyRequest& src) :
+                PlayFabRequestCommon(),
+                pfAccessPolicy(src.pfAccessPolicy),
+                CustomTags(src.CustomTags),
+                LobbyData(src.LobbyData),
+                MaxPlayers(src.MaxPlayers),
+                Members(src.Members),
+                Owner(src.Owner),
+                pfOwnerMigrationPolicy(src.pfOwnerMigrationPolicy),
+                SearchData(src.SearchData),
+                UseConnections(src.UseConnections)
+            {}
+
+            ~CreateLobbyRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilE(input["AccessPolicy"], pfAccessPolicy);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["LobbyData"], LobbyData);
+                FromJsonUtilP(input["MaxPlayers"], MaxPlayers);
+                FromJsonUtilO(input["Members"], Members);
+                FromJsonUtilO(input["Owner"], Owner);
+                FromJsonUtilE(input["OwnerMigrationPolicy"], pfOwnerMigrationPolicy);
+                FromJsonUtilS(input["SearchData"], SearchData);
+                FromJsonUtilP(input["UseConnections"], UseConnections);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_pfAccessPolicy; ToJsonUtilE(pfAccessPolicy, each_pfAccessPolicy); output["AccessPolicy"] = each_pfAccessPolicy;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_LobbyData; ToJsonUtilS(LobbyData, each_LobbyData); output["LobbyData"] = each_LobbyData;
+                Json::Value each_MaxPlayers; ToJsonUtilP(MaxPlayers, each_MaxPlayers); output["MaxPlayers"] = each_MaxPlayers;
+                Json::Value each_Members; ToJsonUtilO(Members, each_Members); output["Members"] = each_Members;
+                Json::Value each_Owner; ToJsonUtilO(Owner, each_Owner); output["Owner"] = each_Owner;
+                Json::Value each_pfOwnerMigrationPolicy; ToJsonUtilE(pfOwnerMigrationPolicy, each_pfOwnerMigrationPolicy); output["OwnerMigrationPolicy"] = each_pfOwnerMigrationPolicy;
+                Json::Value each_SearchData; ToJsonUtilS(SearchData, each_SearchData); output["SearchData"] = each_SearchData;
+                Json::Value each_UseConnections; ToJsonUtilP(UseConnections, each_UseConnections); output["UseConnections"] = each_UseConnections;
+                return output;
+            }
+        };
+
+        struct CreateLobbyResult : public PlayFabResultCommon
+        {
+            std::string ConnectionString;
+            std::string LobbyId;
+
+            CreateLobbyResult() :
+                PlayFabResultCommon(),
+                ConnectionString(),
+                LobbyId()
+            {}
+
+            CreateLobbyResult(const CreateLobbyResult& src) :
+                PlayFabResultCommon(),
+                ConnectionString(src.ConnectionString),
+                LobbyId(src.LobbyId)
+            {}
+
+            ~CreateLobbyResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["ConnectionString"], ConnectionString);
+                FromJsonUtilS(input["LobbyId"], LobbyId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ConnectionString; ToJsonUtilS(ConnectionString, each_ConnectionString); output["ConnectionString"] = each_ConnectionString;
+                Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
+                return output;
+            }
+        };
+
         struct MatchmakingPlayerAttributes : public PlayFabBaseModel
         {
             Json::Value DataObject;
@@ -4349,6 +4676,40 @@ namespace PlayFab
             }
         };
 
+        struct DeleteLobbyRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            std::string LobbyId;
+
+            DeleteLobbyRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                LobbyId()
+            {}
+
+            DeleteLobbyRequest(const DeleteLobbyRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                LobbyId(src.LobbyId)
+            {}
+
+            ~DeleteLobbyRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["LobbyId"], LobbyId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
+                return output;
+            }
+        };
+
         struct DeleteRemoteUserRequest : public PlayFabRequestCommon
         {
             std::string BuildId;
@@ -4476,6 +4837,358 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_Status; ToJsonUtilE(Status, each_Status); output["Status"] = each_Status;
+                return output;
+            }
+        };
+
+        struct PaginationRequest : public PlayFabRequestCommon
+        {
+            std::string ContinuationToken;
+            Boxed<Uint32> PageSizeRequested;
+
+            PaginationRequest() :
+                PlayFabRequestCommon(),
+                ContinuationToken(),
+                PageSizeRequested()
+            {}
+
+            PaginationRequest(const PaginationRequest& src) :
+                PlayFabRequestCommon(),
+                ContinuationToken(src.ContinuationToken),
+                PageSizeRequested(src.PageSizeRequested)
+            {}
+
+            ~PaginationRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["ContinuationToken"], ContinuationToken);
+                FromJsonUtilP(input["PageSizeRequested"], PageSizeRequested);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ContinuationToken; ToJsonUtilS(ContinuationToken, each_ContinuationToken); output["ContinuationToken"] = each_ContinuationToken;
+                Json::Value each_PageSizeRequested; ToJsonUtilP(PageSizeRequested, each_PageSizeRequested); output["PageSizeRequested"] = each_PageSizeRequested;
+                return output;
+            }
+        };
+
+        struct FindFriendLobbiesRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            bool ExcludeFacebookFriends;
+            bool ExcludeSteamFriends;
+            std::string Filter;
+            std::string OrderBy;
+            Boxed<PaginationRequest> Pagination;
+            std::string XboxToken;
+
+            FindFriendLobbiesRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                ExcludeFacebookFriends(),
+                ExcludeSteamFriends(),
+                Filter(),
+                OrderBy(),
+                Pagination(),
+                XboxToken()
+            {}
+
+            FindFriendLobbiesRequest(const FindFriendLobbiesRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                ExcludeFacebookFriends(src.ExcludeFacebookFriends),
+                ExcludeSteamFriends(src.ExcludeSteamFriends),
+                Filter(src.Filter),
+                OrderBy(src.OrderBy),
+                Pagination(src.Pagination),
+                XboxToken(src.XboxToken)
+            {}
+
+            ~FindFriendLobbiesRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilP(input["ExcludeFacebookFriends"], ExcludeFacebookFriends);
+                FromJsonUtilP(input["ExcludeSteamFriends"], ExcludeSteamFriends);
+                FromJsonUtilS(input["Filter"], Filter);
+                FromJsonUtilS(input["OrderBy"], OrderBy);
+                FromJsonUtilO(input["Pagination"], Pagination);
+                FromJsonUtilS(input["XboxToken"], XboxToken);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_ExcludeFacebookFriends; ToJsonUtilP(ExcludeFacebookFriends, each_ExcludeFacebookFriends); output["ExcludeFacebookFriends"] = each_ExcludeFacebookFriends;
+                Json::Value each_ExcludeSteamFriends; ToJsonUtilP(ExcludeSteamFriends, each_ExcludeSteamFriends); output["ExcludeSteamFriends"] = each_ExcludeSteamFriends;
+                Json::Value each_Filter; ToJsonUtilS(Filter, each_Filter); output["Filter"] = each_Filter;
+                Json::Value each_OrderBy; ToJsonUtilS(OrderBy, each_OrderBy); output["OrderBy"] = each_OrderBy;
+                Json::Value each_Pagination; ToJsonUtilO(Pagination, each_Pagination); output["Pagination"] = each_Pagination;
+                Json::Value each_XboxToken; ToJsonUtilS(XboxToken, each_XboxToken); output["XboxToken"] = each_XboxToken;
+                return output;
+            }
+        };
+
+        struct FriendLobbySummary : public PlayFabBaseModel
+        {
+            std::string ConnectionString;
+            Uint32 CurrentPlayers;
+            std::list<EntityKey> Friends;
+            std::string LobbyId;
+            Uint32 MaxPlayers;
+            EntityKey Owner;
+            std::map<std::string, std::string> SearchData;
+
+            FriendLobbySummary() :
+                PlayFabBaseModel(),
+                ConnectionString(),
+                CurrentPlayers(),
+                Friends(),
+                LobbyId(),
+                MaxPlayers(),
+                Owner(),
+                SearchData()
+            {}
+
+            FriendLobbySummary(const FriendLobbySummary& src) :
+                PlayFabBaseModel(),
+                ConnectionString(src.ConnectionString),
+                CurrentPlayers(src.CurrentPlayers),
+                Friends(src.Friends),
+                LobbyId(src.LobbyId),
+                MaxPlayers(src.MaxPlayers),
+                Owner(src.Owner),
+                SearchData(src.SearchData)
+            {}
+
+            ~FriendLobbySummary() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["ConnectionString"], ConnectionString);
+                FromJsonUtilP(input["CurrentPlayers"], CurrentPlayers);
+                FromJsonUtilO(input["Friends"], Friends);
+                FromJsonUtilS(input["LobbyId"], LobbyId);
+                FromJsonUtilP(input["MaxPlayers"], MaxPlayers);
+                FromJsonUtilO(input["Owner"], Owner);
+                FromJsonUtilS(input["SearchData"], SearchData);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ConnectionString; ToJsonUtilS(ConnectionString, each_ConnectionString); output["ConnectionString"] = each_ConnectionString;
+                Json::Value each_CurrentPlayers; ToJsonUtilP(CurrentPlayers, each_CurrentPlayers); output["CurrentPlayers"] = each_CurrentPlayers;
+                Json::Value each_Friends; ToJsonUtilO(Friends, each_Friends); output["Friends"] = each_Friends;
+                Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
+                Json::Value each_MaxPlayers; ToJsonUtilP(MaxPlayers, each_MaxPlayers); output["MaxPlayers"] = each_MaxPlayers;
+                Json::Value each_Owner; ToJsonUtilO(Owner, each_Owner); output["Owner"] = each_Owner;
+                Json::Value each_SearchData; ToJsonUtilS(SearchData, each_SearchData); output["SearchData"] = each_SearchData;
+                return output;
+            }
+        };
+
+        struct PaginationResponse : public PlayFabResultCommon
+        {
+            std::string ContinuationToken;
+            Boxed<Uint32> TotalMatchedLobbyCount;
+
+            PaginationResponse() :
+                PlayFabResultCommon(),
+                ContinuationToken(),
+                TotalMatchedLobbyCount()
+            {}
+
+            PaginationResponse(const PaginationResponse& src) :
+                PlayFabResultCommon(),
+                ContinuationToken(src.ContinuationToken),
+                TotalMatchedLobbyCount(src.TotalMatchedLobbyCount)
+            {}
+
+            ~PaginationResponse() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["ContinuationToken"], ContinuationToken);
+                FromJsonUtilP(input["TotalMatchedLobbyCount"], TotalMatchedLobbyCount);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ContinuationToken; ToJsonUtilS(ContinuationToken, each_ContinuationToken); output["ContinuationToken"] = each_ContinuationToken;
+                Json::Value each_TotalMatchedLobbyCount; ToJsonUtilP(TotalMatchedLobbyCount, each_TotalMatchedLobbyCount); output["TotalMatchedLobbyCount"] = each_TotalMatchedLobbyCount;
+                return output;
+            }
+        };
+
+        struct FindFriendLobbiesResult : public PlayFabResultCommon
+        {
+            std::list<FriendLobbySummary> Lobbies;
+            PaginationResponse Pagination;
+
+            FindFriendLobbiesResult() :
+                PlayFabResultCommon(),
+                Lobbies(),
+                Pagination()
+            {}
+
+            FindFriendLobbiesResult(const FindFriendLobbiesResult& src) :
+                PlayFabResultCommon(),
+                Lobbies(src.Lobbies),
+                Pagination(src.Pagination)
+            {}
+
+            ~FindFriendLobbiesResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["Lobbies"], Lobbies);
+                FromJsonUtilO(input["Pagination"], Pagination);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Lobbies; ToJsonUtilO(Lobbies, each_Lobbies); output["Lobbies"] = each_Lobbies;
+                Json::Value each_Pagination; ToJsonUtilO(Pagination, each_Pagination); output["Pagination"] = each_Pagination;
+                return output;
+            }
+        };
+
+        struct FindLobbiesRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            std::string Filter;
+            std::string OrderBy;
+            Boxed<PaginationRequest> Pagination;
+
+            FindLobbiesRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                Filter(),
+                OrderBy(),
+                Pagination()
+            {}
+
+            FindLobbiesRequest(const FindLobbiesRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                Filter(src.Filter),
+                OrderBy(src.OrderBy),
+                Pagination(src.Pagination)
+            {}
+
+            ~FindLobbiesRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["Filter"], Filter);
+                FromJsonUtilS(input["OrderBy"], OrderBy);
+                FromJsonUtilO(input["Pagination"], Pagination);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_Filter; ToJsonUtilS(Filter, each_Filter); output["Filter"] = each_Filter;
+                Json::Value each_OrderBy; ToJsonUtilS(OrderBy, each_OrderBy); output["OrderBy"] = each_OrderBy;
+                Json::Value each_Pagination; ToJsonUtilO(Pagination, each_Pagination); output["Pagination"] = each_Pagination;
+                return output;
+            }
+        };
+
+        struct LobbySummary : public PlayFabBaseModel
+        {
+            std::string ConnectionString;
+            Uint32 CurrentPlayers;
+            std::string LobbyId;
+            Uint32 MaxPlayers;
+            EntityKey Owner;
+            std::map<std::string, std::string> SearchData;
+
+            LobbySummary() :
+                PlayFabBaseModel(),
+                ConnectionString(),
+                CurrentPlayers(),
+                LobbyId(),
+                MaxPlayers(),
+                Owner(),
+                SearchData()
+            {}
+
+            LobbySummary(const LobbySummary& src) :
+                PlayFabBaseModel(),
+                ConnectionString(src.ConnectionString),
+                CurrentPlayers(src.CurrentPlayers),
+                LobbyId(src.LobbyId),
+                MaxPlayers(src.MaxPlayers),
+                Owner(src.Owner),
+                SearchData(src.SearchData)
+            {}
+
+            ~LobbySummary() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["ConnectionString"], ConnectionString);
+                FromJsonUtilP(input["CurrentPlayers"], CurrentPlayers);
+                FromJsonUtilS(input["LobbyId"], LobbyId);
+                FromJsonUtilP(input["MaxPlayers"], MaxPlayers);
+                FromJsonUtilO(input["Owner"], Owner);
+                FromJsonUtilS(input["SearchData"], SearchData);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ConnectionString; ToJsonUtilS(ConnectionString, each_ConnectionString); output["ConnectionString"] = each_ConnectionString;
+                Json::Value each_CurrentPlayers; ToJsonUtilP(CurrentPlayers, each_CurrentPlayers); output["CurrentPlayers"] = each_CurrentPlayers;
+                Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
+                Json::Value each_MaxPlayers; ToJsonUtilP(MaxPlayers, each_MaxPlayers); output["MaxPlayers"] = each_MaxPlayers;
+                Json::Value each_Owner; ToJsonUtilO(Owner, each_Owner); output["Owner"] = each_Owner;
+                Json::Value each_SearchData; ToJsonUtilS(SearchData, each_SearchData); output["SearchData"] = each_SearchData;
+                return output;
+            }
+        };
+
+        struct FindLobbiesResult : public PlayFabResultCommon
+        {
+            std::list<LobbySummary> Lobbies;
+            PaginationResponse Pagination;
+
+            FindLobbiesResult() :
+                PlayFabResultCommon(),
+                Lobbies(),
+                Pagination()
+            {}
+
+            FindLobbiesResult(const FindLobbiesResult& src) :
+                PlayFabResultCommon(),
+                Lobbies(src.Lobbies),
+                Pagination(src.Pagination)
+            {}
+
+            ~FindLobbiesResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["Lobbies"], Lobbies);
+                FromJsonUtilO(input["Pagination"], Pagination);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Lobbies; ToJsonUtilO(Lobbies, each_Lobbies); output["Lobbies"] = each_Lobbies;
+                Json::Value each_Pagination; ToJsonUtilO(Pagination, each_Pagination); output["Pagination"] = each_Pagination;
                 return output;
             }
         };
@@ -4872,6 +5585,158 @@ namespace PlayFab
                 Json::Value each_DnsName; ToJsonUtilS(DnsName, each_DnsName); output["DnsName"] = each_DnsName;
                 Json::Value each_Password; ToJsonUtilS(Password, each_Password); output["Password"] = each_Password;
                 Json::Value each_Username; ToJsonUtilS(Username, each_Username); output["Username"] = each_Username;
+                return output;
+            }
+        };
+
+        struct GetLobbyRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            std::string LobbyId;
+
+            GetLobbyRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                LobbyId()
+            {}
+
+            GetLobbyRequest(const GetLobbyRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                LobbyId(src.LobbyId)
+            {}
+
+            ~GetLobbyRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["LobbyId"], LobbyId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
+                return output;
+            }
+        };
+
+        struct Lobby : public PlayFabBaseModel
+        {
+            AccessPolicy pfAccessPolicy;
+            Uint32 ChangeNumber;
+            std::string ConnectionString;
+            std::map<std::string, std::string> LobbyData;
+            std::string LobbyId;
+            Uint32 MaxPlayers;
+            std::list<Member> Members;
+            MembershipLock pfMembershipLock;
+            Boxed<EntityKey> Owner;
+            Boxed<OwnerMigrationPolicy> pfOwnerMigrationPolicy;
+            std::string PubSubConnectionHandle;
+            std::map<std::string, std::string> SearchData;
+            bool UseConnections;
+
+            Lobby() :
+                PlayFabBaseModel(),
+                pfAccessPolicy(),
+                ChangeNumber(),
+                ConnectionString(),
+                LobbyData(),
+                LobbyId(),
+                MaxPlayers(),
+                Members(),
+                pfMembershipLock(),
+                Owner(),
+                pfOwnerMigrationPolicy(),
+                PubSubConnectionHandle(),
+                SearchData(),
+                UseConnections()
+            {}
+
+            Lobby(const Lobby& src) :
+                PlayFabBaseModel(),
+                pfAccessPolicy(src.pfAccessPolicy),
+                ChangeNumber(src.ChangeNumber),
+                ConnectionString(src.ConnectionString),
+                LobbyData(src.LobbyData),
+                LobbyId(src.LobbyId),
+                MaxPlayers(src.MaxPlayers),
+                Members(src.Members),
+                pfMembershipLock(src.pfMembershipLock),
+                Owner(src.Owner),
+                pfOwnerMigrationPolicy(src.pfOwnerMigrationPolicy),
+                PubSubConnectionHandle(src.PubSubConnectionHandle),
+                SearchData(src.SearchData),
+                UseConnections(src.UseConnections)
+            {}
+
+            ~Lobby() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonEnum(input["AccessPolicy"], pfAccessPolicy);
+                FromJsonUtilP(input["ChangeNumber"], ChangeNumber);
+                FromJsonUtilS(input["ConnectionString"], ConnectionString);
+                FromJsonUtilS(input["LobbyData"], LobbyData);
+                FromJsonUtilS(input["LobbyId"], LobbyId);
+                FromJsonUtilP(input["MaxPlayers"], MaxPlayers);
+                FromJsonUtilO(input["Members"], Members);
+                FromJsonEnum(input["MembershipLock"], pfMembershipLock);
+                FromJsonUtilO(input["Owner"], Owner);
+                FromJsonUtilE(input["OwnerMigrationPolicy"], pfOwnerMigrationPolicy);
+                FromJsonUtilS(input["PubSubConnectionHandle"], PubSubConnectionHandle);
+                FromJsonUtilS(input["SearchData"], SearchData);
+                FromJsonUtilP(input["UseConnections"], UseConnections);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_pfAccessPolicy; ToJsonEnum(pfAccessPolicy, each_pfAccessPolicy); output["AccessPolicy"] = each_pfAccessPolicy;
+                Json::Value each_ChangeNumber; ToJsonUtilP(ChangeNumber, each_ChangeNumber); output["ChangeNumber"] = each_ChangeNumber;
+                Json::Value each_ConnectionString; ToJsonUtilS(ConnectionString, each_ConnectionString); output["ConnectionString"] = each_ConnectionString;
+                Json::Value each_LobbyData; ToJsonUtilS(LobbyData, each_LobbyData); output["LobbyData"] = each_LobbyData;
+                Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
+                Json::Value each_MaxPlayers; ToJsonUtilP(MaxPlayers, each_MaxPlayers); output["MaxPlayers"] = each_MaxPlayers;
+                Json::Value each_Members; ToJsonUtilO(Members, each_Members); output["Members"] = each_Members;
+                Json::Value each_pfMembershipLock; ToJsonEnum(pfMembershipLock, each_pfMembershipLock); output["MembershipLock"] = each_pfMembershipLock;
+                Json::Value each_Owner; ToJsonUtilO(Owner, each_Owner); output["Owner"] = each_Owner;
+                Json::Value each_pfOwnerMigrationPolicy; ToJsonUtilE(pfOwnerMigrationPolicy, each_pfOwnerMigrationPolicy); output["OwnerMigrationPolicy"] = each_pfOwnerMigrationPolicy;
+                Json::Value each_PubSubConnectionHandle; ToJsonUtilS(PubSubConnectionHandle, each_PubSubConnectionHandle); output["PubSubConnectionHandle"] = each_PubSubConnectionHandle;
+                Json::Value each_SearchData; ToJsonUtilS(SearchData, each_SearchData); output["SearchData"] = each_SearchData;
+                Json::Value each_UseConnections; ToJsonUtilP(UseConnections, each_UseConnections); output["UseConnections"] = each_UseConnections;
+                return output;
+            }
+        };
+
+        struct GetLobbyResult : public PlayFabResultCommon
+        {
+            Lobby pfLobby;
+
+            GetLobbyResult() :
+                PlayFabResultCommon(),
+                pfLobby()
+            {}
+
+            GetLobbyResult(const GetLobbyResult& src) :
+                PlayFabResultCommon(),
+                pfLobby(src.pfLobby)
+            {}
+
+            ~GetLobbyResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["Lobby"], pfLobby);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_pfLobby; ToJsonUtilO(pfLobby, each_pfLobby); output["Lobby"] = each_pfLobby;
                 return output;
             }
         };
@@ -5877,6 +6742,187 @@ namespace PlayFab
             }
         };
 
+        struct InviteToLobbyRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            Boxed<EntityKey> InviteeEntity;
+            std::string LobbyId;
+            Boxed<EntityKey> MemberEntity;
+
+            InviteToLobbyRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                InviteeEntity(),
+                LobbyId(),
+                MemberEntity()
+            {}
+
+            InviteToLobbyRequest(const InviteToLobbyRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                InviteeEntity(src.InviteeEntity),
+                LobbyId(src.LobbyId),
+                MemberEntity(src.MemberEntity)
+            {}
+
+            ~InviteToLobbyRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilO(input["InviteeEntity"], InviteeEntity);
+                FromJsonUtilS(input["LobbyId"], LobbyId);
+                FromJsonUtilO(input["MemberEntity"], MemberEntity);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_InviteeEntity; ToJsonUtilO(InviteeEntity, each_InviteeEntity); output["InviteeEntity"] = each_InviteeEntity;
+                Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
+                Json::Value each_MemberEntity; ToJsonUtilO(MemberEntity, each_MemberEntity); output["MemberEntity"] = each_MemberEntity;
+                return output;
+            }
+        };
+
+        struct JoinArrangedLobbyRequest : public PlayFabRequestCommon
+        {
+            Boxed<AccessPolicy> pfAccessPolicy;
+            std::string ArrangementString;
+            std::map<std::string, std::string> CustomTags;
+            Uint32 MaxPlayers;
+            std::map<std::string, std::string> MemberData;
+            EntityKey MemberEntity;
+            Boxed<OwnerMigrationPolicy> pfOwnerMigrationPolicy;
+            bool UseConnections;
+
+            JoinArrangedLobbyRequest() :
+                PlayFabRequestCommon(),
+                pfAccessPolicy(),
+                ArrangementString(),
+                CustomTags(),
+                MaxPlayers(),
+                MemberData(),
+                MemberEntity(),
+                pfOwnerMigrationPolicy(),
+                UseConnections()
+            {}
+
+            JoinArrangedLobbyRequest(const JoinArrangedLobbyRequest& src) :
+                PlayFabRequestCommon(),
+                pfAccessPolicy(src.pfAccessPolicy),
+                ArrangementString(src.ArrangementString),
+                CustomTags(src.CustomTags),
+                MaxPlayers(src.MaxPlayers),
+                MemberData(src.MemberData),
+                MemberEntity(src.MemberEntity),
+                pfOwnerMigrationPolicy(src.pfOwnerMigrationPolicy),
+                UseConnections(src.UseConnections)
+            {}
+
+            ~JoinArrangedLobbyRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilE(input["AccessPolicy"], pfAccessPolicy);
+                FromJsonUtilS(input["ArrangementString"], ArrangementString);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilP(input["MaxPlayers"], MaxPlayers);
+                FromJsonUtilS(input["MemberData"], MemberData);
+                FromJsonUtilO(input["MemberEntity"], MemberEntity);
+                FromJsonUtilE(input["OwnerMigrationPolicy"], pfOwnerMigrationPolicy);
+                FromJsonUtilP(input["UseConnections"], UseConnections);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_pfAccessPolicy; ToJsonUtilE(pfAccessPolicy, each_pfAccessPolicy); output["AccessPolicy"] = each_pfAccessPolicy;
+                Json::Value each_ArrangementString; ToJsonUtilS(ArrangementString, each_ArrangementString); output["ArrangementString"] = each_ArrangementString;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_MaxPlayers; ToJsonUtilP(MaxPlayers, each_MaxPlayers); output["MaxPlayers"] = each_MaxPlayers;
+                Json::Value each_MemberData; ToJsonUtilS(MemberData, each_MemberData); output["MemberData"] = each_MemberData;
+                Json::Value each_MemberEntity; ToJsonUtilO(MemberEntity, each_MemberEntity); output["MemberEntity"] = each_MemberEntity;
+                Json::Value each_pfOwnerMigrationPolicy; ToJsonUtilE(pfOwnerMigrationPolicy, each_pfOwnerMigrationPolicy); output["OwnerMigrationPolicy"] = each_pfOwnerMigrationPolicy;
+                Json::Value each_UseConnections; ToJsonUtilP(UseConnections, each_UseConnections); output["UseConnections"] = each_UseConnections;
+                return output;
+            }
+        };
+
+        struct JoinLobbyRequest : public PlayFabRequestCommon
+        {
+            std::string ConnectionString;
+            std::map<std::string, std::string> CustomTags;
+            std::map<std::string, std::string> MemberData;
+            Boxed<EntityKey> MemberEntity;
+
+            JoinLobbyRequest() :
+                PlayFabRequestCommon(),
+                ConnectionString(),
+                CustomTags(),
+                MemberData(),
+                MemberEntity()
+            {}
+
+            JoinLobbyRequest(const JoinLobbyRequest& src) :
+                PlayFabRequestCommon(),
+                ConnectionString(src.ConnectionString),
+                CustomTags(src.CustomTags),
+                MemberData(src.MemberData),
+                MemberEntity(src.MemberEntity)
+            {}
+
+            ~JoinLobbyRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["ConnectionString"], ConnectionString);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["MemberData"], MemberData);
+                FromJsonUtilO(input["MemberEntity"], MemberEntity);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ConnectionString; ToJsonUtilS(ConnectionString, each_ConnectionString); output["ConnectionString"] = each_ConnectionString;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_MemberData; ToJsonUtilS(MemberData, each_MemberData); output["MemberData"] = each_MemberData;
+                Json::Value each_MemberEntity; ToJsonUtilO(MemberEntity, each_MemberEntity); output["MemberEntity"] = each_MemberEntity;
+                return output;
+            }
+        };
+
+        struct JoinLobbyResult : public PlayFabResultCommon
+        {
+            std::string LobbyId;
+
+            JoinLobbyResult() :
+                PlayFabResultCommon(),
+                LobbyId()
+            {}
+
+            JoinLobbyResult(const JoinLobbyResult& src) :
+                PlayFabResultCommon(),
+                LobbyId(src.LobbyId)
+            {}
+
+            ~JoinLobbyResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["LobbyId"], LobbyId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
+                return output;
+            }
+        };
+
         struct JoinMatchmakingTicketRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
@@ -5941,6 +6987,45 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                return output;
+            }
+        };
+
+        struct LeaveLobbyRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            std::string LobbyId;
+            Boxed<EntityKey> MemberEntity;
+
+            LeaveLobbyRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                LobbyId(),
+                MemberEntity()
+            {}
+
+            LeaveLobbyRequest(const LeaveLobbyRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                LobbyId(src.LobbyId),
+                MemberEntity(src.MemberEntity)
+            {}
+
+            ~LeaveLobbyRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["LobbyId"], LobbyId);
+                FromJsonUtilO(input["MemberEntity"], MemberEntity);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
+                Json::Value each_MemberEntity; ToJsonUtilO(MemberEntity, each_MemberEntity); output["MemberEntity"] = each_MemberEntity;
                 return output;
             }
         };
@@ -7041,6 +8126,74 @@ namespace PlayFab
             }
         };
 
+        struct LobbyEmptyResult : public PlayFabResultCommon
+        {
+
+            LobbyEmptyResult() :
+                PlayFabResultCommon()
+            {}
+
+            LobbyEmptyResult(const LobbyEmptyResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~LobbyEmptyResult() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
+        struct RemoveMemberFromLobbyRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            std::string LobbyId;
+            Boxed<EntityKey> MemberEntity;
+            bool PreventRejoin;
+
+            RemoveMemberFromLobbyRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                LobbyId(),
+                MemberEntity(),
+                PreventRejoin()
+            {}
+
+            RemoveMemberFromLobbyRequest(const RemoveMemberFromLobbyRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                LobbyId(src.LobbyId),
+                MemberEntity(src.MemberEntity),
+                PreventRejoin(src.PreventRejoin)
+            {}
+
+            ~RemoveMemberFromLobbyRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["LobbyId"], LobbyId);
+                FromJsonUtilO(input["MemberEntity"], MemberEntity);
+                FromJsonUtilP(input["PreventRejoin"], PreventRejoin);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
+                Json::Value each_MemberEntity; ToJsonUtilO(MemberEntity, each_MemberEntity); output["MemberEntity"] = each_MemberEntity;
+                Json::Value each_PreventRejoin; ToJsonUtilP(PreventRejoin, each_PreventRejoin); output["PreventRejoin"] = each_PreventRejoin;
+                return output;
+            }
+        };
+
         struct RequestMultiplayerServerRequest : public PlayFabRequestCommon
         {
             Boxed<BuildAliasParams> pfBuildAliasParams;
@@ -7281,6 +8434,143 @@ namespace PlayFab
             }
         };
 
+        struct SubscribeToLobbyResourceRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            EntityKey pfEntityKey;
+            std::string PubSubConnectionHandle;
+            std::string ResourceId;
+            Uint32 SubscriptionVersion;
+            SubscriptionType Type;
+
+            SubscribeToLobbyResourceRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                pfEntityKey(),
+                PubSubConnectionHandle(),
+                ResourceId(),
+                SubscriptionVersion(),
+                Type()
+            {}
+
+            SubscribeToLobbyResourceRequest(const SubscribeToLobbyResourceRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                pfEntityKey(src.pfEntityKey),
+                PubSubConnectionHandle(src.PubSubConnectionHandle),
+                ResourceId(src.ResourceId),
+                SubscriptionVersion(src.SubscriptionVersion),
+                Type(src.Type)
+            {}
+
+            ~SubscribeToLobbyResourceRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilO(input["EntityKey"], pfEntityKey);
+                FromJsonUtilS(input["PubSubConnectionHandle"], PubSubConnectionHandle);
+                FromJsonUtilS(input["ResourceId"], ResourceId);
+                FromJsonUtilP(input["SubscriptionVersion"], SubscriptionVersion);
+                FromJsonEnum(input["Type"], Type);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_pfEntityKey; ToJsonUtilO(pfEntityKey, each_pfEntityKey); output["EntityKey"] = each_pfEntityKey;
+                Json::Value each_PubSubConnectionHandle; ToJsonUtilS(PubSubConnectionHandle, each_PubSubConnectionHandle); output["PubSubConnectionHandle"] = each_PubSubConnectionHandle;
+                Json::Value each_ResourceId; ToJsonUtilS(ResourceId, each_ResourceId); output["ResourceId"] = each_ResourceId;
+                Json::Value each_SubscriptionVersion; ToJsonUtilP(SubscriptionVersion, each_SubscriptionVersion); output["SubscriptionVersion"] = each_SubscriptionVersion;
+                Json::Value each_Type; ToJsonEnum(Type, each_Type); output["Type"] = each_Type;
+                return output;
+            }
+        };
+
+        struct SubscribeToLobbyResourceResult : public PlayFabResultCommon
+        {
+            std::string Topic;
+
+            SubscribeToLobbyResourceResult() :
+                PlayFabResultCommon(),
+                Topic()
+            {}
+
+            SubscribeToLobbyResourceResult(const SubscribeToLobbyResourceResult& src) :
+                PlayFabResultCommon(),
+                Topic(src.Topic)
+            {}
+
+            ~SubscribeToLobbyResourceResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["Topic"], Topic);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Topic; ToJsonUtilS(Topic, each_Topic); output["Topic"] = each_Topic;
+                return output;
+            }
+        };
+
+        struct UnsubscribeFromLobbyResourceRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            EntityKey pfEntityKey;
+            std::string PubSubConnectionHandle;
+            std::string ResourceId;
+            Uint32 SubscriptionVersion;
+            SubscriptionType Type;
+
+            UnsubscribeFromLobbyResourceRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                pfEntityKey(),
+                PubSubConnectionHandle(),
+                ResourceId(),
+                SubscriptionVersion(),
+                Type()
+            {}
+
+            UnsubscribeFromLobbyResourceRequest(const UnsubscribeFromLobbyResourceRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                pfEntityKey(src.pfEntityKey),
+                PubSubConnectionHandle(src.PubSubConnectionHandle),
+                ResourceId(src.ResourceId),
+                SubscriptionVersion(src.SubscriptionVersion),
+                Type(src.Type)
+            {}
+
+            ~UnsubscribeFromLobbyResourceRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilO(input["EntityKey"], pfEntityKey);
+                FromJsonUtilS(input["PubSubConnectionHandle"], PubSubConnectionHandle);
+                FromJsonUtilS(input["ResourceId"], ResourceId);
+                FromJsonUtilP(input["SubscriptionVersion"], SubscriptionVersion);
+                FromJsonEnum(input["Type"], Type);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_pfEntityKey; ToJsonUtilO(pfEntityKey, each_pfEntityKey); output["EntityKey"] = each_pfEntityKey;
+                Json::Value each_PubSubConnectionHandle; ToJsonUtilS(PubSubConnectionHandle, each_PubSubConnectionHandle); output["PubSubConnectionHandle"] = each_PubSubConnectionHandle;
+                Json::Value each_ResourceId; ToJsonUtilS(ResourceId, each_ResourceId); output["ResourceId"] = each_ResourceId;
+                Json::Value each_SubscriptionVersion; ToJsonUtilP(SubscriptionVersion, each_SubscriptionVersion); output["SubscriptionVersion"] = each_SubscriptionVersion;
+                Json::Value each_Type; ToJsonEnum(Type, each_Type); output["Type"] = each_Type;
+                return output;
+            }
+        };
+
         struct UntagContainerImageRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
@@ -7477,6 +8767,95 @@ namespace PlayFab
                 Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
                 Json::Value each_BuildRegions; ToJsonUtilO(BuildRegions, each_BuildRegions); output["BuildRegions"] = each_BuildRegions;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                return output;
+            }
+        };
+
+        struct UpdateLobbyRequest : public PlayFabRequestCommon
+        {
+            Boxed<AccessPolicy> pfAccessPolicy;
+            std::map<std::string, std::string> CustomTags;
+            std::map<std::string, std::string> LobbyData;
+            std::list<std::string> LobbyDataToDelete;
+            std::string LobbyId;
+            Boxed<Uint32> MaxPlayers;
+            std::map<std::string, std::string> MemberData;
+            std::list<std::string> MemberDataToDelete;
+            Boxed<EntityKey> MemberEntity;
+            Boxed<MembershipLock> pfMembershipLock;
+            Boxed<EntityKey> Owner;
+            std::map<std::string, std::string> SearchData;
+            std::list<std::string> SearchDataToDelete;
+
+            UpdateLobbyRequest() :
+                PlayFabRequestCommon(),
+                pfAccessPolicy(),
+                CustomTags(),
+                LobbyData(),
+                LobbyDataToDelete(),
+                LobbyId(),
+                MaxPlayers(),
+                MemberData(),
+                MemberDataToDelete(),
+                MemberEntity(),
+                pfMembershipLock(),
+                Owner(),
+                SearchData(),
+                SearchDataToDelete()
+            {}
+
+            UpdateLobbyRequest(const UpdateLobbyRequest& src) :
+                PlayFabRequestCommon(),
+                pfAccessPolicy(src.pfAccessPolicy),
+                CustomTags(src.CustomTags),
+                LobbyData(src.LobbyData),
+                LobbyDataToDelete(src.LobbyDataToDelete),
+                LobbyId(src.LobbyId),
+                MaxPlayers(src.MaxPlayers),
+                MemberData(src.MemberData),
+                MemberDataToDelete(src.MemberDataToDelete),
+                MemberEntity(src.MemberEntity),
+                pfMembershipLock(src.pfMembershipLock),
+                Owner(src.Owner),
+                SearchData(src.SearchData),
+                SearchDataToDelete(src.SearchDataToDelete)
+            {}
+
+            ~UpdateLobbyRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilE(input["AccessPolicy"], pfAccessPolicy);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["LobbyData"], LobbyData);
+                FromJsonUtilS(input["LobbyDataToDelete"], LobbyDataToDelete);
+                FromJsonUtilS(input["LobbyId"], LobbyId);
+                FromJsonUtilP(input["MaxPlayers"], MaxPlayers);
+                FromJsonUtilS(input["MemberData"], MemberData);
+                FromJsonUtilS(input["MemberDataToDelete"], MemberDataToDelete);
+                FromJsonUtilO(input["MemberEntity"], MemberEntity);
+                FromJsonUtilE(input["MembershipLock"], pfMembershipLock);
+                FromJsonUtilO(input["Owner"], Owner);
+                FromJsonUtilS(input["SearchData"], SearchData);
+                FromJsonUtilS(input["SearchDataToDelete"], SearchDataToDelete);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_pfAccessPolicy; ToJsonUtilE(pfAccessPolicy, each_pfAccessPolicy); output["AccessPolicy"] = each_pfAccessPolicy;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_LobbyData; ToJsonUtilS(LobbyData, each_LobbyData); output["LobbyData"] = each_LobbyData;
+                Json::Value each_LobbyDataToDelete; ToJsonUtilS(LobbyDataToDelete, each_LobbyDataToDelete); output["LobbyDataToDelete"] = each_LobbyDataToDelete;
+                Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
+                Json::Value each_MaxPlayers; ToJsonUtilP(MaxPlayers, each_MaxPlayers); output["MaxPlayers"] = each_MaxPlayers;
+                Json::Value each_MemberData; ToJsonUtilS(MemberData, each_MemberData); output["MemberData"] = each_MemberData;
+                Json::Value each_MemberDataToDelete; ToJsonUtilS(MemberDataToDelete, each_MemberDataToDelete); output["MemberDataToDelete"] = each_MemberDataToDelete;
+                Json::Value each_MemberEntity; ToJsonUtilO(MemberEntity, each_MemberEntity); output["MemberEntity"] = each_MemberEntity;
+                Json::Value each_pfMembershipLock; ToJsonUtilE(pfMembershipLock, each_pfMembershipLock); output["MembershipLock"] = each_pfMembershipLock;
+                Json::Value each_Owner; ToJsonUtilO(Owner, each_Owner); output["Owner"] = each_Owner;
+                Json::Value each_SearchData; ToJsonUtilS(SearchData, each_SearchData); output["SearchData"] = each_SearchData;
+                Json::Value each_SearchDataToDelete; ToJsonUtilS(SearchDataToDelete, each_SearchDataToDelete); output["SearchDataToDelete"] = each_SearchDataToDelete;
                 return output;
             }
         };
