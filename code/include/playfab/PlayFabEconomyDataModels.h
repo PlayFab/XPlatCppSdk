@@ -594,6 +594,7 @@ namespace PlayFab
             Boxed<FileConfig> File;
             Boxed<ImageConfig> Image;
             bool IsCatalogEnabled;
+            std::list<std::string> Platforms;
             std::list<EntityKey> ReviewerEntities;
             Boxed<UserGeneratedContentSpecificConfig> UserGeneratedContent;
 
@@ -604,6 +605,7 @@ namespace PlayFab
                 File(),
                 Image(),
                 IsCatalogEnabled(),
+                Platforms(),
                 ReviewerEntities(),
                 UserGeneratedContent()
             {}
@@ -615,6 +617,7 @@ namespace PlayFab
                 File(src.File),
                 Image(src.Image),
                 IsCatalogEnabled(src.IsCatalogEnabled),
+                Platforms(src.Platforms),
                 ReviewerEntities(src.ReviewerEntities),
                 UserGeneratedContent(src.UserGeneratedContent)
             {}
@@ -628,6 +631,7 @@ namespace PlayFab
                 FromJsonUtilO(input["File"], File);
                 FromJsonUtilO(input["Image"], Image);
                 FromJsonUtilP(input["IsCatalogEnabled"], IsCatalogEnabled);
+                FromJsonUtilS(input["Platforms"], Platforms);
                 FromJsonUtilO(input["ReviewerEntities"], ReviewerEntities);
                 FromJsonUtilO(input["UserGeneratedContent"], UserGeneratedContent);
             }
@@ -640,6 +644,7 @@ namespace PlayFab
                 Json::Value each_File; ToJsonUtilO(File, each_File); output["File"] = each_File;
                 Json::Value each_Image; ToJsonUtilO(Image, each_Image); output["Image"] = each_Image;
                 Json::Value each_IsCatalogEnabled; ToJsonUtilP(IsCatalogEnabled, each_IsCatalogEnabled); output["IsCatalogEnabled"] = each_IsCatalogEnabled;
+                Json::Value each_Platforms; ToJsonUtilS(Platforms, each_Platforms); output["Platforms"] = each_Platforms;
                 Json::Value each_ReviewerEntities; ToJsonUtilO(ReviewerEntities, each_ReviewerEntities); output["ReviewerEntities"] = each_ReviewerEntities;
                 Json::Value each_UserGeneratedContent; ToJsonUtilO(UserGeneratedContent, each_UserGeneratedContent); output["UserGeneratedContent"] = each_UserGeneratedContent;
                 return output;
@@ -1000,6 +1005,181 @@ namespace PlayFab
             }
         };
 
+        struct CatalogPriceAmount : public PlayFabBaseModel
+        {
+            Int32 Amount;
+            std::string Id;
+
+            CatalogPriceAmount() :
+                PlayFabBaseModel(),
+                Amount(),
+                Id()
+            {}
+
+            CatalogPriceAmount(const CatalogPriceAmount& src) :
+                PlayFabBaseModel(),
+                Amount(src.Amount),
+                Id(src.Id)
+            {}
+
+            ~CatalogPriceAmount() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["Amount"], Amount);
+                FromJsonUtilS(input["Id"], Id);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Amount; ToJsonUtilP(Amount, each_Amount); output["Amount"] = each_Amount;
+                Json::Value each_Id; ToJsonUtilS(Id, each_Id); output["Id"] = each_Id;
+                return output;
+            }
+        };
+
+        struct CatalogPriceInstance : public PlayFabBaseModel
+        {
+            std::list<CatalogPriceAmount> Amounts;
+
+            CatalogPriceInstance() :
+                PlayFabBaseModel(),
+                Amounts()
+            {}
+
+            CatalogPriceInstance(const CatalogPriceInstance& src) :
+                PlayFabBaseModel(),
+                Amounts(src.Amounts)
+            {}
+
+            ~CatalogPriceInstance() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["Amounts"], Amounts);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Amounts; ToJsonUtilO(Amounts, each_Amounts); output["Amounts"] = each_Amounts;
+                return output;
+            }
+        };
+
+        struct CatalogPrice : public PlayFabBaseModel
+        {
+            std::list<CatalogPriceInstance> Prices;
+            std::list<CatalogPriceInstance> RealPrices;
+            Boxed<Int32> Sort;
+
+            CatalogPrice() :
+                PlayFabBaseModel(),
+                Prices(),
+                RealPrices(),
+                Sort()
+            {}
+
+            CatalogPrice(const CatalogPrice& src) :
+                PlayFabBaseModel(),
+                Prices(src.Prices),
+                RealPrices(src.RealPrices),
+                Sort(src.Sort)
+            {}
+
+            ~CatalogPrice() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["Prices"], Prices);
+                FromJsonUtilO(input["RealPrices"], RealPrices);
+                FromJsonUtilP(input["Sort"], Sort);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Prices; ToJsonUtilO(Prices, each_Prices); output["Prices"] = each_Prices;
+                Json::Value each_RealPrices; ToJsonUtilO(RealPrices, each_RealPrices); output["RealPrices"] = each_RealPrices;
+                Json::Value each_Sort; ToJsonUtilP(Sort, each_Sort); output["Sort"] = each_Sort;
+                return output;
+            }
+        };
+
+        struct CatalogItemReference : public PlayFabBaseModel
+        {
+            Boxed<Int32> Amount;
+            std::string Id;
+            Boxed<CatalogPrice> Price;
+
+            CatalogItemReference() :
+                PlayFabBaseModel(),
+                Amount(),
+                Id(),
+                Price()
+            {}
+
+            CatalogItemReference(const CatalogItemReference& src) :
+                PlayFabBaseModel(),
+                Amount(src.Amount),
+                Id(src.Id),
+                Price(src.Price)
+            {}
+
+            ~CatalogItemReference() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["Amount"], Amount);
+                FromJsonUtilS(input["Id"], Id);
+                FromJsonUtilO(input["Price"], Price);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Amount; ToJsonUtilP(Amount, each_Amount); output["Amount"] = each_Amount;
+                Json::Value each_Id; ToJsonUtilS(Id, each_Id); output["Id"] = each_Id;
+                Json::Value each_Price; ToJsonUtilO(Price, each_Price); output["Price"] = each_Price;
+                return output;
+            }
+        };
+
+        struct CatalogSpecificConfig : public PlayFabBaseModel
+        {
+            std::list<std::string> ContentTypes;
+            std::list<std::string> Tags;
+
+            CatalogSpecificConfig() :
+                PlayFabBaseModel(),
+                ContentTypes(),
+                Tags()
+            {}
+
+            CatalogSpecificConfig(const CatalogSpecificConfig& src) :
+                PlayFabBaseModel(),
+                ContentTypes(src.ContentTypes),
+                Tags(src.Tags)
+            {}
+
+            ~CatalogSpecificConfig() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["ContentTypes"], ContentTypes);
+                FromJsonUtilS(input["Tags"], Tags);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ContentTypes; ToJsonUtilS(ContentTypes, each_ContentTypes); output["ContentTypes"] = each_ContentTypes;
+                Json::Value each_Tags; ToJsonUtilS(Tags, each_Tags); output["Tags"] = each_Tags;
+                return output;
+            }
+        };
+
         struct CreateDraftItemRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
@@ -1199,6 +1379,40 @@ namespace PlayFab
             }
         };
 
+        struct DeepLinkFormat : public PlayFabBaseModel
+        {
+            std::string Format;
+            std::string Platform;
+
+            DeepLinkFormat() :
+                PlayFabBaseModel(),
+                Format(),
+                Platform()
+            {}
+
+            DeepLinkFormat(const DeepLinkFormat& src) :
+                PlayFabBaseModel(),
+                Format(src.Format),
+                Platform(src.Platform)
+            {}
+
+            ~DeepLinkFormat() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["Format"], Format);
+                FromJsonUtilS(input["Platform"], Platform);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Format; ToJsonUtilS(Format, each_Format); output["Format"] = each_Format;
+                Json::Value each_Platform; ToJsonUtilS(Platform, each_Platform); output["Platform"] = each_Platform;
+                return output;
+            }
+        };
+
         struct DeleteEntityItemReviewsRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
@@ -1388,7 +1602,6 @@ namespace PlayFab
             Boxed<CatalogAlternateId> AlternateId;
             std::map<std::string, std::string> CustomTags;
             Boxed<EntityKey> Entity;
-            Boxed<bool> ExpandScanningStatus;
             std::string Id;
 
             GetDraftItemRequest() :
@@ -1396,7 +1609,6 @@ namespace PlayFab
                 AlternateId(),
                 CustomTags(),
                 Entity(),
-                ExpandScanningStatus(),
                 Id()
             {}
 
@@ -1405,7 +1617,6 @@ namespace PlayFab
                 AlternateId(src.AlternateId),
                 CustomTags(src.CustomTags),
                 Entity(src.Entity),
-                ExpandScanningStatus(src.ExpandScanningStatus),
                 Id(src.Id)
             {}
 
@@ -1416,7 +1627,6 @@ namespace PlayFab
                 FromJsonUtilO(input["AlternateId"], AlternateId);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["Entity"], Entity);
-                FromJsonUtilP(input["ExpandScanningStatus"], ExpandScanningStatus);
                 FromJsonUtilS(input["Id"], Id);
             }
 
@@ -1426,7 +1636,6 @@ namespace PlayFab
                 Json::Value each_AlternateId; ToJsonUtilO(AlternateId, each_AlternateId); output["AlternateId"] = each_AlternateId;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
-                Json::Value each_ExpandScanningStatus; ToJsonUtilP(ExpandScanningStatus, each_ExpandScanningStatus); output["ExpandScanningStatus"] = each_ExpandScanningStatus;
                 Json::Value each_Id; ToJsonUtilS(Id, each_Id); output["Id"] = each_Id;
                 return output;
             }
@@ -1664,7 +1873,6 @@ namespace PlayFab
         struct Review : public PlayFabBaseModel
         {
             Int32 HelpfulNegative;
-            Int32 HelpfulnessVotes;
             Int32 HelpfulPositive;
             bool IsInstalled;
             std::string ItemId;
@@ -1680,7 +1888,6 @@ namespace PlayFab
             Review() :
                 PlayFabBaseModel(),
                 HelpfulNegative(),
-                HelpfulnessVotes(),
                 HelpfulPositive(),
                 IsInstalled(),
                 ItemId(),
@@ -1697,7 +1904,6 @@ namespace PlayFab
             Review(const Review& src) :
                 PlayFabBaseModel(),
                 HelpfulNegative(src.HelpfulNegative),
-                HelpfulnessVotes(src.HelpfulnessVotes),
                 HelpfulPositive(src.HelpfulPositive),
                 IsInstalled(src.IsInstalled),
                 ItemId(src.ItemId),
@@ -1716,7 +1922,6 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["HelpfulNegative"], HelpfulNegative);
-                FromJsonUtilP(input["HelpfulnessVotes"], HelpfulnessVotes);
                 FromJsonUtilP(input["HelpfulPositive"], HelpfulPositive);
                 FromJsonUtilP(input["IsInstalled"], IsInstalled);
                 FromJsonUtilS(input["ItemId"], ItemId);
@@ -1734,7 +1939,6 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_HelpfulNegative; ToJsonUtilP(HelpfulNegative, each_HelpfulNegative); output["HelpfulNegative"] = each_HelpfulNegative;
-                Json::Value each_HelpfulnessVotes; ToJsonUtilP(HelpfulnessVotes, each_HelpfulnessVotes); output["HelpfulnessVotes"] = each_HelpfulnessVotes;
                 Json::Value each_HelpfulPositive; ToJsonUtilP(HelpfulPositive, each_HelpfulPositive); output["HelpfulPositive"] = each_HelpfulPositive;
                 Json::Value each_IsInstalled; ToJsonUtilP(IsInstalled, each_IsInstalled); output["IsInstalled"] = each_IsInstalled;
                 Json::Value each_ItemId; ToJsonUtilS(ItemId, each_ItemId); output["ItemId"] = each_ItemId;
@@ -1891,51 +2095,19 @@ namespace PlayFab
             }
         };
 
-        struct ScanResult : public PlayFabResultCommon
-        {
-            std::string Url;
-
-            ScanResult() :
-                PlayFabResultCommon(),
-                Url()
-            {}
-
-            ScanResult(const ScanResult& src) :
-                PlayFabResultCommon(),
-                Url(src.Url)
-            {}
-
-            ~ScanResult() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilS(input["Url"], Url);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_Url; ToJsonUtilS(Url, each_Url); output["Url"] = each_Url;
-                return output;
-            }
-        };
-
         struct GetItemPublishStatusResponse : public PlayFabResultCommon
         {
-            std::list<ScanResult> FailedScanResults;
             Boxed<PublishResult> Result;
             std::string StatusMessage;
 
             GetItemPublishStatusResponse() :
                 PlayFabResultCommon(),
-                FailedScanResults(),
                 Result(),
                 StatusMessage()
             {}
 
             GetItemPublishStatusResponse(const GetItemPublishStatusResponse& src) :
                 PlayFabResultCommon(),
-                FailedScanResults(src.FailedScanResults),
                 Result(src.Result),
                 StatusMessage(src.StatusMessage)
             {}
@@ -1944,7 +2116,6 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
-                FromJsonUtilO(input["FailedScanResults"], FailedScanResults);
                 FromJsonUtilE(input["Result"], Result);
                 FromJsonUtilS(input["StatusMessage"], StatusMessage);
             }
@@ -1952,7 +2123,6 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                Json::Value each_FailedScanResults; ToJsonUtilO(FailedScanResults, each_FailedScanResults); output["FailedScanResults"] = each_FailedScanResults;
                 Json::Value each_Result; ToJsonUtilE(Result, each_Result); output["Result"] = each_Result;
                 Json::Value each_StatusMessage; ToJsonUtilS(StatusMessage, each_StatusMessage); output["StatusMessage"] = each_StatusMessage;
                 return output;
@@ -2272,6 +2442,45 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_Items; ToJsonUtilO(Items, each_Items); output["Items"] = each_Items;
+                return output;
+            }
+        };
+
+        struct PayoutDetails : public PlayFabBaseModel
+        {
+            std::string AccountSellerId;
+            std::string TaxCode;
+            std::string Uaid;
+
+            PayoutDetails() :
+                PlayFabBaseModel(),
+                AccountSellerId(),
+                TaxCode(),
+                Uaid()
+            {}
+
+            PayoutDetails(const PayoutDetails& src) :
+                PlayFabBaseModel(),
+                AccountSellerId(src.AccountSellerId),
+                TaxCode(src.TaxCode),
+                Uaid(src.Uaid)
+            {}
+
+            ~PayoutDetails() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["AccountSellerId"], AccountSellerId);
+                FromJsonUtilS(input["TaxCode"], TaxCode);
+                FromJsonUtilS(input["Uaid"], Uaid);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_AccountSellerId; ToJsonUtilS(AccountSellerId, each_AccountSellerId); output["AccountSellerId"] = each_AccountSellerId;
+                Json::Value each_TaxCode; ToJsonUtilS(TaxCode, each_TaxCode); output["TaxCode"] = each_TaxCode;
+                Json::Value each_Uaid; ToJsonUtilS(Uaid, each_Uaid); output["Uaid"] = each_Uaid;
                 return output;
             }
         };
@@ -2622,6 +2831,35 @@ namespace PlayFab
             }
         };
 
+        struct ScanResult : public PlayFabResultCommon
+        {
+            std::string Url;
+
+            ScanResult() :
+                PlayFabResultCommon(),
+                Url()
+            {}
+
+            ScanResult(const ScanResult& src) :
+                PlayFabResultCommon(),
+                Url(src.Url)
+            {}
+
+            ~ScanResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["Url"], Url);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Url; ToJsonUtilS(Url, each_Url); output["Url"] = each_Url;
+                return output;
+            }
+        };
+
         struct SearchItemsRequest : public PlayFabRequestCommon
         {
             std::string ContinuationToken;
@@ -2793,6 +3031,40 @@ namespace PlayFab
             }
         };
 
+        struct StoreInfo : public PlayFabBaseModel
+        {
+            Boxed<CatalogAlternateId> AlternateId;
+            std::string Id;
+
+            StoreInfo() :
+                PlayFabBaseModel(),
+                AlternateId(),
+                Id()
+            {}
+
+            StoreInfo(const StoreInfo& src) :
+                PlayFabBaseModel(),
+                AlternateId(src.AlternateId),
+                Id(src.Id)
+            {}
+
+            ~StoreInfo() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["AlternateId"], AlternateId);
+                FromJsonUtilS(input["Id"], Id);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_AlternateId; ToJsonUtilO(AlternateId, each_AlternateId); output["AlternateId"] = each_AlternateId;
+                Json::Value each_Id; ToJsonUtilS(Id, each_Id); output["Id"] = each_Id;
+                return output;
+            }
+        };
+
         struct SubmitItemReviewVoteRequest : public PlayFabRequestCommon
         {
             Boxed<CatalogAlternateId> AlternateId;
@@ -2867,6 +3139,35 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                return output;
+            }
+        };
+
+        struct SubscriptionDetails : public PlayFabBaseModel
+        {
+            double DurationInSeconds;
+
+            SubscriptionDetails() :
+                PlayFabBaseModel(),
+                DurationInSeconds()
+            {}
+
+            SubscriptionDetails(const SubscriptionDetails& src) :
+                PlayFabBaseModel(),
+                DurationInSeconds(src.DurationInSeconds)
+            {}
+
+            ~SubscriptionDetails() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["DurationInSeconds"], DurationInSeconds);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_DurationInSeconds; ToJsonUtilP(DurationInSeconds, each_DurationInSeconds); output["DurationInSeconds"] = each_DurationInSeconds;
                 return output;
             }
         };

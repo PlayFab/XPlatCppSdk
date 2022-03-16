@@ -5468,6 +5468,10 @@ namespace PlayFab
             GenericErrorCodesEventSinkConnectionInvalid,
             GenericErrorCodesEventSinkConnectionUnauthorized,
             GenericErrorCodesEventSinkRegionInvalid,
+            GenericErrorCodesEventSinkLimitExceeded,
+            GenericErrorCodesEventSinkSasTokenInvalid,
+            GenericErrorCodesEventSinkNotFound,
+            GenericErrorCodesEventSinkNameInvalid,
             GenericErrorCodesOperationCanceled,
             GenericErrorCodesInvalidDisplayNameRandomSuffixLength,
             GenericErrorCodesAllowNonUniquePlayerDisplayNamesDisableNotAllowed
@@ -8843,6 +8847,26 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesEventSinkRegionInvalid)
             {
                 output = Json::Value("EventSinkRegionInvalid");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkLimitExceeded)
+            {
+                output = Json::Value("EventSinkLimitExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkSasTokenInvalid)
+            {
+                output = Json::Value("EventSinkSasTokenInvalid");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkNotFound)
+            {
+                output = Json::Value("EventSinkNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkNameInvalid)
+            {
+                output = Json::Value("EventSinkNameInvalid");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesOperationCanceled)
@@ -12238,6 +12262,26 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesEventSinkRegionInvalid;
                 return;
             }
+            if (inputStr == "EventSinkLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkLimitExceeded;
+                return;
+            }
+            if (inputStr == "EventSinkSasTokenInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkSasTokenInvalid;
+                return;
+            }
+            if (inputStr == "EventSinkNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkNotFound;
+                return;
+            }
+            if (inputStr == "EventSinkNameInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkNameInvalid;
+                return;
+            }
             if (inputStr == "OperationCanceled")
             {
                 output = GenericErrorCodes::GenericErrorCodesOperationCanceled;
@@ -12596,6 +12640,99 @@ namespace PlayFab
             if (inputStr == "GoogleCloudMessaging")
             {
                 output = PushNotificationPlatform::PushNotificationPlatformGoogleCloudMessaging;
+                return;
+            }
+        }
+
+        enum class Region
+        {
+            RegionUSCentral,
+            RegionUSEast,
+            RegionEUWest,
+            RegionSingapore,
+            RegionJapan,
+            RegionBrazil,
+            RegionAustralia
+        };
+
+        inline void ToJsonEnum(const Region input, Json::Value& output)
+        {
+            if (input == Region::RegionUSCentral)
+            {
+                output = Json::Value("USCentral");
+                return;
+            }
+            if (input == Region::RegionUSEast)
+            {
+                output = Json::Value("USEast");
+                return;
+            }
+            if (input == Region::RegionEUWest)
+            {
+                output = Json::Value("EUWest");
+                return;
+            }
+            if (input == Region::RegionSingapore)
+            {
+                output = Json::Value("Singapore");
+                return;
+            }
+            if (input == Region::RegionJapan)
+            {
+                output = Json::Value("Japan");
+                return;
+            }
+            if (input == Region::RegionBrazil)
+            {
+                output = Json::Value("Brazil");
+                return;
+            }
+            if (input == Region::RegionAustralia)
+            {
+                output = Json::Value("Australia");
+                return;
+            }
+        }
+        inline void FromJsonEnum(const Json::Value& input, Region& output)
+        {
+            if (!input.isString())
+            {
+                return;
+            }
+            const std::string& inputStr = input.asString();
+            if (inputStr == "USCentral")
+            {
+                output = Region::RegionUSCentral;
+                return;
+            }
+            if (inputStr == "USEast")
+            {
+                output = Region::RegionUSEast;
+                return;
+            }
+            if (inputStr == "EUWest")
+            {
+                output = Region::RegionEUWest;
+                return;
+            }
+            if (inputStr == "Singapore")
+            {
+                output = Region::RegionSingapore;
+                return;
+            }
+            if (inputStr == "Japan")
+            {
+                output = Region::RegionJapan;
+                return;
+            }
+            if (inputStr == "Brazil")
+            {
+                output = Region::RegionBrazil;
+                return;
+            }
+            if (inputStr == "Australia")
+            {
+                output = Region::RegionAustralia;
                 return;
             }
         }
@@ -22399,6 +22536,109 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                return output;
+            }
+        };
+
+        struct RegisterGameRequest : public PlayFabRequestCommon
+        {
+            std::string Build;
+            std::map<std::string, std::string> CustomTags;
+            std::string GameMode;
+            std::string LobbyId;
+            Region pfRegion;
+            std::string ServerIPV4Address;
+            std::string ServerIPV6Address;
+            std::string ServerPort;
+            std::string ServerPublicDNSName;
+            std::map<std::string, std::string> Tags;
+
+            RegisterGameRequest() :
+                PlayFabRequestCommon(),
+                Build(),
+                CustomTags(),
+                GameMode(),
+                LobbyId(),
+                pfRegion(),
+                ServerIPV4Address(),
+                ServerIPV6Address(),
+                ServerPort(),
+                ServerPublicDNSName(),
+                Tags()
+            {}
+
+            RegisterGameRequest(const RegisterGameRequest& src) :
+                PlayFabRequestCommon(),
+                Build(src.Build),
+                CustomTags(src.CustomTags),
+                GameMode(src.GameMode),
+                LobbyId(src.LobbyId),
+                pfRegion(src.pfRegion),
+                ServerIPV4Address(src.ServerIPV4Address),
+                ServerIPV6Address(src.ServerIPV6Address),
+                ServerPort(src.ServerPort),
+                ServerPublicDNSName(src.ServerPublicDNSName),
+                Tags(src.Tags)
+            {}
+
+            ~RegisterGameRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["Build"], Build);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["GameMode"], GameMode);
+                FromJsonUtilS(input["LobbyId"], LobbyId);
+                FromJsonEnum(input["Region"], pfRegion);
+                FromJsonUtilS(input["ServerIPV4Address"], ServerIPV4Address);
+                FromJsonUtilS(input["ServerIPV6Address"], ServerIPV6Address);
+                FromJsonUtilS(input["ServerPort"], ServerPort);
+                FromJsonUtilS(input["ServerPublicDNSName"], ServerPublicDNSName);
+                FromJsonUtilS(input["Tags"], Tags);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Build; ToJsonUtilS(Build, each_Build); output["Build"] = each_Build;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_GameMode; ToJsonUtilS(GameMode, each_GameMode); output["GameMode"] = each_GameMode;
+                Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
+                Json::Value each_pfRegion; ToJsonEnum(pfRegion, each_pfRegion); output["Region"] = each_pfRegion;
+                Json::Value each_ServerIPV4Address; ToJsonUtilS(ServerIPV4Address, each_ServerIPV4Address); output["ServerIPV4Address"] = each_ServerIPV4Address;
+                Json::Value each_ServerIPV6Address; ToJsonUtilS(ServerIPV6Address, each_ServerIPV6Address); output["ServerIPV6Address"] = each_ServerIPV6Address;
+                Json::Value each_ServerPort; ToJsonUtilS(ServerPort, each_ServerPort); output["ServerPort"] = each_ServerPort;
+                Json::Value each_ServerPublicDNSName; ToJsonUtilS(ServerPublicDNSName, each_ServerPublicDNSName); output["ServerPublicDNSName"] = each_ServerPublicDNSName;
+                Json::Value each_Tags; ToJsonUtilS(Tags, each_Tags); output["Tags"] = each_Tags;
+                return output;
+            }
+        };
+
+        struct RegisterGameResponse : public PlayFabResultCommon
+        {
+            std::string LobbyId;
+
+            RegisterGameResponse() :
+                PlayFabResultCommon(),
+                LobbyId()
+            {}
+
+            RegisterGameResponse(const RegisterGameResponse& src) :
+                PlayFabResultCommon(),
+                LobbyId(src.LobbyId)
+            {}
+
+            ~RegisterGameResponse() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["LobbyId"], LobbyId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
                 return output;
             }
         };

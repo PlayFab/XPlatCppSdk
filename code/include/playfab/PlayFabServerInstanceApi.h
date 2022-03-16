@@ -132,6 +132,7 @@ namespace PlayFab
         void RedeemCoupon(ServerModels::RedeemCouponRequest& request, const ProcessApiCallback<ServerModels::RedeemCouponResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void RedeemMatchmakerTicket(ServerModels::RedeemMatchmakerTicketRequest& request, const ProcessApiCallback<ServerModels::RedeemMatchmakerTicketResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void RefreshGameServerInstanceHeartbeat(ServerModels::RefreshGameServerInstanceHeartbeatRequest& request, const ProcessApiCallback<ServerModels::RefreshGameServerInstanceHeartbeatResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void RegisterGame(ServerModels::RegisterGameRequest& request, const ProcessApiCallback<ServerModels::RegisterGameResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void RemoveFriend(ServerModels::RemoveFriendRequest& request, const ProcessApiCallback<ServerModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void RemoveGenericID(ServerModels::RemoveGenericIDRequest& request, const ProcessApiCallback<ServerModels::EmptyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void RemovePlayerTag(ServerModels::RemovePlayerTagRequest& request, const ProcessApiCallback<ServerModels::RemovePlayerTagResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -266,6 +267,7 @@ namespace PlayFab
         void OnRedeemCouponResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnRedeemMatchmakerTicketResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnRefreshGameServerInstanceHeartbeatResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnRegisterGameResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnRemoveFriendResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnRemoveGenericIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnRemovePlayerTagResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
