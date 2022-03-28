@@ -1539,6 +1539,30 @@ namespace PlayFab
             }
         };
 
+        struct FilterOptions : public PlayFabBaseModel
+        {
+
+            FilterOptions() :
+                PlayFabBaseModel()
+            {}
+
+            FilterOptions(const FilterOptions&) :
+                PlayFabBaseModel()
+            {}
+
+            ~FilterOptions() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
         struct GetCatalogConfigRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
@@ -2485,6 +2509,54 @@ namespace PlayFab
             }
         };
 
+        struct PriceOverride : public PlayFabBaseModel
+        {
+
+            PriceOverride() :
+                PlayFabBaseModel()
+            {}
+
+            PriceOverride(const PriceOverride&) :
+                PlayFabBaseModel()
+            {}
+
+            ~PriceOverride() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
+        struct PricesOverride : public PlayFabBaseModel
+        {
+
+            PricesOverride() :
+                PlayFabBaseModel()
+            {}
+
+            PricesOverride(const PricesOverride&) :
+                PlayFabBaseModel()
+            {}
+
+            ~PricesOverride() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
         struct PublishDraftItemRequest : public PlayFabRequestCommon
         {
             Boxed<CatalogAlternateId> AlternateId;
@@ -2546,6 +2618,30 @@ namespace PlayFab
             {}
 
             ~PublishDraftItemResponse() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
+        struct PurchaseOverride : public PlayFabBaseModel
+        {
+
+            PurchaseOverride() :
+                PlayFabBaseModel()
+            {}
+
+            PurchaseOverride(const PurchaseOverride&) :
+                PlayFabBaseModel()
+            {}
+
+            ~PurchaseOverride() = default;
 
             void FromJson(const Json::Value&) override
             {
@@ -3019,6 +3115,30 @@ namespace PlayFab
             {}
 
             ~SetItemModerationStateResponse() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
+        struct StoreDetails : public PlayFabBaseModel
+        {
+
+            StoreDetails() :
+                PlayFabBaseModel()
+            {}
+
+            StoreDetails(const StoreDetails&) :
+                PlayFabBaseModel()
+            {}
+
+            ~StoreDetails() = default;
 
             void FromJson(const Json::Value&) override
             {

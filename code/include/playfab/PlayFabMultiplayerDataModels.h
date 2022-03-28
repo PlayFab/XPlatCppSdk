@@ -5417,7 +5417,6 @@ namespace PlayFab
             std::list<BuildRegion> RegionConfigurations;
             std::string ServerType;
             std::string StartMultiplayerServerCommand;
-            Boxed<bool> UseStreamingForAssetDownloads;
             Boxed<AzureVmSize> VmSize;
 
             GetBuildResponse() :
@@ -5440,7 +5439,6 @@ namespace PlayFab
                 RegionConfigurations(),
                 ServerType(),
                 StartMultiplayerServerCommand(),
-                UseStreamingForAssetDownloads(),
                 VmSize()
             {}
 
@@ -5464,7 +5462,6 @@ namespace PlayFab
                 RegionConfigurations(src.RegionConfigurations),
                 ServerType(src.ServerType),
                 StartMultiplayerServerCommand(src.StartMultiplayerServerCommand),
-                UseStreamingForAssetDownloads(src.UseStreamingForAssetDownloads),
                 VmSize(src.VmSize)
             {}
 
@@ -5490,7 +5487,6 @@ namespace PlayFab
                 FromJsonUtilO(input["RegionConfigurations"], RegionConfigurations);
                 FromJsonUtilS(input["ServerType"], ServerType);
                 FromJsonUtilS(input["StartMultiplayerServerCommand"], StartMultiplayerServerCommand);
-                FromJsonUtilP(input["UseStreamingForAssetDownloads"], UseStreamingForAssetDownloads);
                 FromJsonUtilE(input["VmSize"], VmSize);
             }
 
@@ -5515,7 +5511,6 @@ namespace PlayFab
                 Json::Value each_RegionConfigurations; ToJsonUtilO(RegionConfigurations, each_RegionConfigurations); output["RegionConfigurations"] = each_RegionConfigurations;
                 Json::Value each_ServerType; ToJsonUtilS(ServerType, each_ServerType); output["ServerType"] = each_ServerType;
                 Json::Value each_StartMultiplayerServerCommand; ToJsonUtilS(StartMultiplayerServerCommand, each_StartMultiplayerServerCommand); output["StartMultiplayerServerCommand"] = each_StartMultiplayerServerCommand;
-                Json::Value each_UseStreamingForAssetDownloads; ToJsonUtilP(UseStreamingForAssetDownloads, each_UseStreamingForAssetDownloads); output["UseStreamingForAssetDownloads"] = each_UseStreamingForAssetDownloads;
                 Json::Value each_VmSize; ToJsonUtilE(VmSize, each_VmSize); output["VmSize"] = each_VmSize;
                 return output;
             }
@@ -5788,6 +5783,7 @@ namespace PlayFab
         struct GetMatchmakingTicketResult : public PlayFabResultCommon
         {
             std::string CancellationReasonString;
+            Boxed<Uint32> ChangeNumber;
             time_t Created;
             EntityKey Creator;
             Int32 GiveUpAfterSeconds;
@@ -5801,6 +5797,7 @@ namespace PlayFab
             GetMatchmakingTicketResult() :
                 PlayFabResultCommon(),
                 CancellationReasonString(),
+                ChangeNumber(),
                 Created(),
                 Creator(),
                 GiveUpAfterSeconds(),
@@ -5815,6 +5812,7 @@ namespace PlayFab
             GetMatchmakingTicketResult(const GetMatchmakingTicketResult& src) :
                 PlayFabResultCommon(),
                 CancellationReasonString(src.CancellationReasonString),
+                ChangeNumber(src.ChangeNumber),
                 Created(src.Created),
                 Creator(src.Creator),
                 GiveUpAfterSeconds(src.GiveUpAfterSeconds),
@@ -5831,6 +5829,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CancellationReasonString"], CancellationReasonString);
+                FromJsonUtilP(input["ChangeNumber"], ChangeNumber);
                 FromJsonUtilT(input["Created"], Created);
                 FromJsonUtilO(input["Creator"], Creator);
                 FromJsonUtilP(input["GiveUpAfterSeconds"], GiveUpAfterSeconds);
@@ -5846,6 +5845,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_CancellationReasonString; ToJsonUtilS(CancellationReasonString, each_CancellationReasonString); output["CancellationReasonString"] = each_CancellationReasonString;
+                Json::Value each_ChangeNumber; ToJsonUtilP(ChangeNumber, each_ChangeNumber); output["ChangeNumber"] = each_ChangeNumber;
                 Json::Value each_Created; ToJsonUtilT(Created, each_Created); output["Created"] = each_Created;
                 Json::Value each_Creator; ToJsonUtilO(Creator, each_Creator); output["Creator"] = each_Creator;
                 Json::Value each_GiveUpAfterSeconds; ToJsonUtilP(GiveUpAfterSeconds, each_GiveUpAfterSeconds); output["GiveUpAfterSeconds"] = each_GiveUpAfterSeconds;
@@ -5910,6 +5910,7 @@ namespace PlayFab
 
         struct GetMatchResult : public PlayFabResultCommon
         {
+            std::string ArrangementString;
             std::string MatchId;
             std::list<MatchmakingPlayerWithTeamAssignment> Members;
             std::list<std::string> RegionPreferences;
@@ -5917,6 +5918,7 @@ namespace PlayFab
 
             GetMatchResult() :
                 PlayFabResultCommon(),
+                ArrangementString(),
                 MatchId(),
                 Members(),
                 RegionPreferences(),
@@ -5925,6 +5927,7 @@ namespace PlayFab
 
             GetMatchResult(const GetMatchResult& src) :
                 PlayFabResultCommon(),
+                ArrangementString(src.ArrangementString),
                 MatchId(src.MatchId),
                 Members(src.Members),
                 RegionPreferences(src.RegionPreferences),
@@ -5935,6 +5938,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["ArrangementString"], ArrangementString);
                 FromJsonUtilS(input["MatchId"], MatchId);
                 FromJsonUtilO(input["Members"], Members);
                 FromJsonUtilS(input["RegionPreferences"], RegionPreferences);
@@ -5944,6 +5948,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_ArrangementString; ToJsonUtilS(ArrangementString, each_ArrangementString); output["ArrangementString"] = each_ArrangementString;
                 Json::Value each_MatchId; ToJsonUtilS(MatchId, each_MatchId); output["MatchId"] = each_MatchId;
                 Json::Value each_Members; ToJsonUtilO(Members, each_Members); output["Members"] = each_Members;
                 Json::Value each_RegionPreferences; ToJsonUtilS(RegionPreferences, each_RegionPreferences); output["RegionPreferences"] = each_RegionPreferences;
