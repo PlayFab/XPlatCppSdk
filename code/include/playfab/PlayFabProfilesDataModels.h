@@ -655,15 +655,18 @@ namespace PlayFab
         struct GetGlobalPolicyRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
+            Boxed<EntityKey> Entity;
 
             GetGlobalPolicyRequest() :
                 PlayFabRequestCommon(),
-                CustomTags()
+                CustomTags(),
+                Entity()
             {}
 
             GetGlobalPolicyRequest(const GetGlobalPolicyRequest& src) :
                 PlayFabRequestCommon(),
-                CustomTags(src.CustomTags)
+                CustomTags(src.CustomTags),
+                Entity(src.Entity)
             {}
 
             ~GetGlobalPolicyRequest() = default;
@@ -671,12 +674,14 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilO(input["Entity"], Entity);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
                 return output;
             }
         };

@@ -5480,6 +5480,7 @@ namespace PlayFab
             GenericErrorCodesPlayerIdentityLinkNotFound,
             GenericErrorCodesPhotonApplicationIdAlreadyInUse,
             GenericErrorCodesCloudScriptUnableToDeleteProductionRevision,
+            GenericErrorCodesCustomIdNotFound,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8276,6 +8277,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesCloudScriptUnableToDeleteProductionRevision)
             {
                 output = Json::Value("CloudScriptUnableToDeleteProductionRevision");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCustomIdNotFound)
+            {
+                output = Json::Value("CustomIdNotFound");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -11694,6 +11700,11 @@ namespace PlayFab
             if (inputStr == "CloudScriptUnableToDeleteProductionRevision")
             {
                 output = GenericErrorCodes::GenericErrorCodesCloudScriptUnableToDeleteProductionRevision;
+                return;
+            }
+            if (inputStr == "CustomIdNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCustomIdNotFound;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
