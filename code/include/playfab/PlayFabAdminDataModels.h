@@ -5632,6 +5632,8 @@ namespace PlayFab
             GenericErrorCodesEventSinkSasTokenInvalid,
             GenericErrorCodesEventSinkNotFound,
             GenericErrorCodesEventSinkNameInvalid,
+            GenericErrorCodesEventSinkSasTokenPermissionInvalid,
+            GenericErrorCodesEventSinkSecretInvalid,
             GenericErrorCodesOperationCanceled,
             GenericErrorCodesInvalidDisplayNameRandomSuffixLength,
             GenericErrorCodesAllowNonUniquePlayerDisplayNamesDisableNotAllowed
@@ -9037,6 +9039,16 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesEventSinkNameInvalid)
             {
                 output = Json::Value("EventSinkNameInvalid");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkSasTokenPermissionInvalid)
+            {
+                output = Json::Value("EventSinkSasTokenPermissionInvalid");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkSecretInvalid)
+            {
+                output = Json::Value("EventSinkSecretInvalid");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesOperationCanceled)
@@ -12460,6 +12472,16 @@ namespace PlayFab
             if (inputStr == "EventSinkNameInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesEventSinkNameInvalid;
+                return;
+            }
+            if (inputStr == "EventSinkSasTokenPermissionInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkSasTokenPermissionInvalid;
+                return;
+            }
+            if (inputStr == "EventSinkSecretInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkSecretInvalid;
                 return;
             }
             if (inputStr == "OperationCanceled")
@@ -23000,6 +23022,69 @@ namespace PlayFab
             }
         };
 
+        struct ExportPlayersInSegmentRequest : public PlayFabRequestCommon
+        {
+            std::string SegmentId;
+
+            ExportPlayersInSegmentRequest() :
+                PlayFabRequestCommon(),
+                SegmentId()
+            {}
+
+            ExportPlayersInSegmentRequest(const ExportPlayersInSegmentRequest& src) :
+                PlayFabRequestCommon(),
+                SegmentId(src.SegmentId)
+            {}
+
+            ~ExportPlayersInSegmentRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["SegmentId"], SegmentId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_SegmentId; ToJsonUtilS(SegmentId, each_SegmentId); output["SegmentId"] = each_SegmentId;
+                return output;
+            }
+        };
+
+        struct ExportPlayersInSegmentResult : public PlayFabResultCommon
+        {
+            std::string ExportId;
+            std::string SegmentId;
+
+            ExportPlayersInSegmentResult() :
+                PlayFabResultCommon(),
+                ExportId(),
+                SegmentId()
+            {}
+
+            ExportPlayersInSegmentResult(const ExportPlayersInSegmentResult& src) :
+                PlayFabResultCommon(),
+                ExportId(src.ExportId),
+                SegmentId(src.SegmentId)
+            {}
+
+            ~ExportPlayersInSegmentResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["ExportId"], ExportId);
+                FromJsonUtilS(input["SegmentId"], SegmentId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ExportId; ToJsonUtilS(ExportId, each_ExportId); output["ExportId"] = each_ExportId;
+                Json::Value each_SegmentId; ToJsonUtilS(SegmentId, each_SegmentId); output["SegmentId"] = each_SegmentId;
+                return output;
+            }
+        };
+
         struct GameModeInfo : public PlayFabBaseModel
         {
             std::string Gamemode;
@@ -24654,6 +24739,69 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_SharedSecrets; ToJsonUtilO(SharedSecrets, each_SharedSecrets); output["SharedSecrets"] = each_SharedSecrets;
+                return output;
+            }
+        };
+
+        struct GetPlayersInSegmentExportRequest : public PlayFabRequestCommon
+        {
+            std::string ExportId;
+
+            GetPlayersInSegmentExportRequest() :
+                PlayFabRequestCommon(),
+                ExportId()
+            {}
+
+            GetPlayersInSegmentExportRequest(const GetPlayersInSegmentExportRequest& src) :
+                PlayFabRequestCommon(),
+                ExportId(src.ExportId)
+            {}
+
+            ~GetPlayersInSegmentExportRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["ExportId"], ExportId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ExportId; ToJsonUtilS(ExportId, each_ExportId); output["ExportId"] = each_ExportId;
+                return output;
+            }
+        };
+
+        struct GetPlayersInSegmentExportResponse : public PlayFabResultCommon
+        {
+            std::string IndexUrl;
+            std::string State;
+
+            GetPlayersInSegmentExportResponse() :
+                PlayFabResultCommon(),
+                IndexUrl(),
+                State()
+            {}
+
+            GetPlayersInSegmentExportResponse(const GetPlayersInSegmentExportResponse& src) :
+                PlayFabResultCommon(),
+                IndexUrl(src.IndexUrl),
+                State(src.State)
+            {}
+
+            ~GetPlayersInSegmentExportResponse() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["IndexUrl"], IndexUrl);
+                FromJsonUtilS(input["State"], State);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_IndexUrl; ToJsonUtilS(IndexUrl, each_IndexUrl); output["IndexUrl"] = each_IndexUrl;
+                Json::Value each_State; ToJsonUtilS(State, each_State); output["State"] = each_State;
                 return output;
             }
         };
@@ -27807,15 +27955,18 @@ namespace PlayFab
         struct UserXboxInfo : public PlayFabBaseModel
         {
             std::string XboxUserId;
+            std::string XboxUserSandbox;
 
             UserXboxInfo() :
                 PlayFabBaseModel(),
-                XboxUserId()
+                XboxUserId(),
+                XboxUserSandbox()
             {}
 
             UserXboxInfo(const UserXboxInfo& src) :
                 PlayFabBaseModel(),
-                XboxUserId(src.XboxUserId)
+                XboxUserId(src.XboxUserId),
+                XboxUserSandbox(src.XboxUserSandbox)
             {}
 
             ~UserXboxInfo() = default;
@@ -27823,12 +27974,14 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["XboxUserId"], XboxUserId);
+                FromJsonUtilS(input["XboxUserSandbox"], XboxUserSandbox);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
                 Json::Value each_XboxUserId; ToJsonUtilS(XboxUserId, each_XboxUserId); output["XboxUserId"] = each_XboxUserId;
+                Json::Value each_XboxUserSandbox; ToJsonUtilS(XboxUserSandbox, each_XboxUserSandbox); output["XboxUserSandbox"] = each_XboxUserSandbox;
                 return output;
             }
         };

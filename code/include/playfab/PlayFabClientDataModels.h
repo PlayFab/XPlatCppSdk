@@ -9544,15 +9544,18 @@ namespace PlayFab
         struct UserXboxInfo : public PlayFabBaseModel
         {
             std::string XboxUserId;
+            std::string XboxUserSandbox;
 
             UserXboxInfo() :
                 PlayFabBaseModel(),
-                XboxUserId()
+                XboxUserId(),
+                XboxUserSandbox()
             {}
 
             UserXboxInfo(const UserXboxInfo& src) :
                 PlayFabBaseModel(),
-                XboxUserId(src.XboxUserId)
+                XboxUserId(src.XboxUserId),
+                XboxUserSandbox(src.XboxUserSandbox)
             {}
 
             ~UserXboxInfo() = default;
@@ -9560,12 +9563,14 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["XboxUserId"], XboxUserId);
+                FromJsonUtilS(input["XboxUserSandbox"], XboxUserSandbox);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
                 Json::Value each_XboxUserId; ToJsonUtilS(XboxUserId, each_XboxUserId); output["XboxUserId"] = each_XboxUserId;
+                Json::Value each_XboxUserSandbox; ToJsonUtilS(XboxUserSandbox, each_XboxUserSandbox); output["XboxUserSandbox"] = each_XboxUserSandbox;
                 return output;
             }
         };
@@ -13139,6 +13144,98 @@ namespace PlayFab
             {}
 
             ~GetPlayFabIDsFromKongregateIDsResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["Data"], Data);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Data; ToJsonUtilO(Data, each_Data); output["Data"] = each_Data;
+                return output;
+            }
+        };
+
+        struct GetPlayFabIDsFromNintendoServiceAccountIdsRequest : public PlayFabRequestCommon
+        {
+            std::list<std::string> NintendoAccountIds;
+
+            GetPlayFabIDsFromNintendoServiceAccountIdsRequest() :
+                PlayFabRequestCommon(),
+                NintendoAccountIds()
+            {}
+
+            GetPlayFabIDsFromNintendoServiceAccountIdsRequest(const GetPlayFabIDsFromNintendoServiceAccountIdsRequest& src) :
+                PlayFabRequestCommon(),
+                NintendoAccountIds(src.NintendoAccountIds)
+            {}
+
+            ~GetPlayFabIDsFromNintendoServiceAccountIdsRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["NintendoAccountIds"], NintendoAccountIds);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_NintendoAccountIds; ToJsonUtilS(NintendoAccountIds, each_NintendoAccountIds); output["NintendoAccountIds"] = each_NintendoAccountIds;
+                return output;
+            }
+        };
+
+        struct NintendoServiceAccountPlayFabIdPair : public PlayFabBaseModel
+        {
+            std::string NintendoServiceAccountId;
+            std::string PlayFabId;
+
+            NintendoServiceAccountPlayFabIdPair() :
+                PlayFabBaseModel(),
+                NintendoServiceAccountId(),
+                PlayFabId()
+            {}
+
+            NintendoServiceAccountPlayFabIdPair(const NintendoServiceAccountPlayFabIdPair& src) :
+                PlayFabBaseModel(),
+                NintendoServiceAccountId(src.NintendoServiceAccountId),
+                PlayFabId(src.PlayFabId)
+            {}
+
+            ~NintendoServiceAccountPlayFabIdPair() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["NintendoServiceAccountId"], NintendoServiceAccountId);
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_NintendoServiceAccountId; ToJsonUtilS(NintendoServiceAccountId, each_NintendoServiceAccountId); output["NintendoServiceAccountId"] = each_NintendoServiceAccountId;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                return output;
+            }
+        };
+
+        struct GetPlayFabIDsFromNintendoServiceAccountIdsResult : public PlayFabResultCommon
+        {
+            std::list<NintendoServiceAccountPlayFabIdPair> Data;
+
+            GetPlayFabIDsFromNintendoServiceAccountIdsResult() :
+                PlayFabResultCommon(),
+                Data()
+            {}
+
+            GetPlayFabIDsFromNintendoServiceAccountIdsResult(const GetPlayFabIDsFromNintendoServiceAccountIdsResult& src) :
+                PlayFabResultCommon(),
+                Data(src.Data)
+            {}
+
+            ~GetPlayFabIDsFromNintendoServiceAccountIdsResult() = default;
 
             void FromJson(const Json::Value& input) override
             {
