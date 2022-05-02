@@ -56,6 +56,7 @@ namespace PlayFab
         static void DeleteTitle(AdminModels::DeleteTitleRequest& request, const ProcessApiCallback<AdminModels::DeleteTitleResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeleteTitleDataOverride(AdminModels::DeleteTitleDataOverrideRequest& request, const ProcessApiCallback<AdminModels::DeleteTitleDataOverrideResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void ExportMasterPlayerData(AdminModels::ExportMasterPlayerDataRequest& request, const ProcessApiCallback<AdminModels::ExportMasterPlayerDataResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void ExportPlayersInSegment(AdminModels::ExportPlayersInSegmentRequest& request, const ProcessApiCallback<AdminModels::ExportPlayersInSegmentResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetActionsOnPlayersInSegmentTaskInstance(AdminModels::GetTaskInstanceRequest& request, const ProcessApiCallback<AdminModels::GetActionsOnPlayersInSegmentTaskInstanceResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetAllSegments(AdminModels::GetAllSegmentsRequest& request, const ProcessApiCallback<AdminModels::GetAllSegmentsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetCatalogItems(AdminModels::GetCatalogItemsRequest& request, const ProcessApiCallback<AdminModels::GetCatalogItemsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -79,6 +80,7 @@ namespace PlayFab
         static void GetPolicy(AdminModels::GetPolicyRequest& request, const ProcessApiCallback<AdminModels::GetPolicyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetPublisherData(AdminModels::GetPublisherDataRequest& request, const ProcessApiCallback<AdminModels::GetPublisherDataResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetRandomResultTables(AdminModels::GetRandomResultTablesRequest& request, const ProcessApiCallback<AdminModels::GetRandomResultTablesResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void GetSegmentExport(AdminModels::GetPlayersInSegmentExportRequest& request, const ProcessApiCallback<AdminModels::GetPlayersInSegmentExportResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetSegments(AdminModels::GetSegmentsRequest& request, const ProcessApiCallback<AdminModels::GetSegmentsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetStoreItems(AdminModels::GetStoreItemsRequest& request, const ProcessApiCallback<AdminModels::GetStoreItemsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetTaskInstances(AdminModels::GetTaskInstancesRequest& request, const ProcessApiCallback<AdminModels::GetTaskInstancesResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -175,6 +177,7 @@ namespace PlayFab
         static void OnDeleteTitleResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnDeleteTitleDataOverrideResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnExportMasterPlayerDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnExportPlayersInSegmentResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetActionsOnPlayersInSegmentTaskInstanceResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetAllSegmentsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetCatalogItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -198,6 +201,7 @@ namespace PlayFab
         static void OnGetPolicyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetPublisherDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetRandomResultTablesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnGetSegmentExportResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetSegmentsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetStoreItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetTaskInstancesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
