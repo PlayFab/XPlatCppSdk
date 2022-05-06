@@ -4,14 +4,14 @@
         <id>com.playfab.xplatcppsdk.v141</id>
         <version>3.76.220502</version>
         <authors>Microsoft</authors>
-        <owners>Microsoft</owners>
+        <owners>pgilmore, toddbellMSFT</owners>
         <projectUrl>http://github.com/PlayFab/XPlatCppSdk</projectUrl>
         <license type="expression">Apache-2.0</license>
-        <PackageIcon>images/icon.png</PackageIcon>
+        <iconUrl>https://playfab.com/assets/img/logo/azure-playfab-logo.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <releaseNotes>https://api.playfab.com/releaseNotes/#3.76.220502</releaseNotes>
         <description>Microsoft Azure PlayFab XPlatCppSdk</description>
-        <copyright>&#169; Microsoft Corporation. All rights reserved.</copyright>
+        <copyright>Copyright ©2020 Microsoft Corp</copyright>
         <tags>Microsoft Azure PlayFab Baas Paas JSON REST HTTP SSL API cloud liveops game gamedev native nativepackage</tags>
     </metadata>
     <files>
