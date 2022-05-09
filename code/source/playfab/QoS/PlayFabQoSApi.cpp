@@ -182,7 +182,7 @@ namespace PlayFab
             eventContents.Payload = value;
             request.Events.push_back(eventContents);
 
-            eventsApi->WriteTelemetryEvents(request, WriteEventsSuccessCallBack, WriteEventsFailureCallBack);
+            eventsApi->WriteEvents(request, WriteEventsSuccessCallBack, WriteEventsFailureCallBack);
         }
 
         void PlayFabQoSApi::WriteEventsSuccessCallBack(const WriteEventsResponse&, void*)
