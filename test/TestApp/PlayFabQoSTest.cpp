@@ -2,7 +2,7 @@
 
 #include "TestAppPch.h"
 
-#if defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX)
+#if (defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX)) && !defined(DISABLE_PLAYFABCLIENT_API)
 
 #include <thread>
 #include <chrono>

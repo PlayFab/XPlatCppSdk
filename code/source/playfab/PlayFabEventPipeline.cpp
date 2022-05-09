@@ -354,24 +354,12 @@ namespace PlayFab
 
         localbatch.clear(); // batch vector will be reused
         localbatch.reserve(this->settings->maximalNumberOfItemsInBatch);
-        if (this->settings->emitType == PlayFabEventPipelineType::PlayFabPlayStream)
-        {
-            // call Events API to send the batch
-            eventsApi->WriteEvents(
-                batchReq,
-                std::bind(&PlayFabEventPipeline::WriteEventsApiCallback, this, std::placeholders::_1, std::placeholders::_2),
-                std::bind(&PlayFabEventPipeline::WriteEventsApiErrorCallback, this, std::placeholders::_1, std::placeholders::_2),
-                customData);
-        }
-        else
-        {
-            // call Events API to send the batch, bypassing Playstream
-            eventsApi->WriteTelemetryEvents(
-                batchReq,
-                std::bind(&PlayFabEventPipeline::WriteEventsApiCallback, this, std::placeholders::_1, std::placeholders::_2),
-                std::bind(&PlayFabEventPipeline::WriteEventsApiErrorCallback, this, std::placeholders::_1, std::placeholders::_2),
-                customData);
-        }
+        // call Events API to send the batch
+        eventsApi->WriteEvents(
+            batchReq,
+            std::bind(&PlayFabEventPipeline::WriteEventsApiCallback, this, std::placeholders::_1, std::placeholders::_2),
+            std::bind(&PlayFabEventPipeline::WriteEventsApiErrorCallback, this, std::placeholders::_1, std::placeholders::_2),
+            customData);
     }
 
     void PlayFabEventPipeline::WriteEventsApiCallback(const EventsModels::WriteEventsResponse& result, void* customData)
