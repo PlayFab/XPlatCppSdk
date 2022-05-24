@@ -65,9 +65,11 @@ namespace PlayFab
         this->eventContents.Payload[name] = (Int64)value;
 #elif defined(JSON_HAS_INT64)
         this->eventContents.Payload[name] = (Json::Int64)value;
+#elif defined(PLAYFAB_PLATFORM_GDK)
+        this->eventContents.Payload[name] = (Json::Int)value;
 #else // PLAYFAB_PLATFORM_ANDROID
         this->eventContents.Payload[name] = (long long int)value;
-#endif // PLAYFAB_PLATFORM_ANDROID
+#endif
     }
 
     void PlayFabEvent::SetProperty(const std::string& name, const uint8_t value)
@@ -93,9 +95,11 @@ namespace PlayFab
         this->eventContents.Payload[name] = (Uint64)value;
 #elif defined(JSON_HAS_INT64)
         this->eventContents.Payload[name] = (Json::UInt64)value;
+#elif defined(PLAYFAB_PLATFORM_GDK)
+        this->eventContents.Payload[name] = (Json::UInt)value;
 #else // PLAYFAB_PLATFORM_ANDROID
         this->eventContents.Payload[name] = (long long unsigned int)value;
-#endif // PLAYFAB_PLATFORM_ANDROID
+#endif
     }
 
     void PlayFabEvent::SetProperty(const std::string& name, const double value)

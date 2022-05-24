@@ -2,14 +2,14 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>com.playfab.xplatcppsdk.v141</id>
-        <version>3.78.220509</version>
+        <version>3.79.220523</version>
         <authors>Microsoft</authors>
         <owners>Microsoft</owners>
         <projectUrl>http://github.com/PlayFab/XPlatCppSdk</projectUrl>
         <license type="expression">Apache-2.0</license>
         <PackageIcon>images/icon.png</PackageIcon>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <releaseNotes>https://api.playfab.com/releaseNotes/#3.78.220509</releaseNotes>
+        <releaseNotes>https://api.playfab.com/releaseNotes/#3.79.220523</releaseNotes>
         <description>Microsoft Azure PlayFab XPlatCppSdk</description>
         <copyright>&#169; Microsoft Corporation. All rights reserved.</copyright>
         <tags>Microsoft Azure PlayFab Baas Paas JSON REST HTTP SSL API cloud liveops game gamedev native nativepackage</tags>
