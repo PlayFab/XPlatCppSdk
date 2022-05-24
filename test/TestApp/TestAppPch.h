@@ -38,6 +38,8 @@ namespace DX
 
 #elif defined (_WIN32)
 #include <SDKDDKVer.h>
+#if !defined(PLAYFAB_PLATFORM_XBOX)
 #define WIN32_LEAN_AND_MEAN
+#endif
 
 #endif

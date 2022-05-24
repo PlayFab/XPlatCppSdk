@@ -12,6 +12,8 @@ char(*__countof_helper(_CountofType(&_Array)[_SizeOfArray]))[_SizeOfArray];
 #define _countof(_Array) (sizeof(*__countof_helper(_Array)) + 0)
 #endif
 
+#define strncasecmp(x,y,z) _strnicmp(x,y,z)
+
 namespace PlayFab
 {
     PlayFabCurlHttpPlugin::PlayFabCurlHttpPlugin()
@@ -19,6 +21,12 @@ namespace PlayFab
         activeRequestCount = 0;
         threadRunning = true;
         workerThread = std::thread(&PlayFabCurlHttpPlugin::WorkerThread, this);
+        
+#if defined(PLAYFAB_PLATFORM_GDK)
+        // BUG: This will not be required after the next GDK update 
+        // (curl_easy_perform or easy_init should call this global function with appropriate flags upon the first time called)
+        curl_global_init(CURL_GLOBAL_DEFAULT);
+#endif
     };
 
     PlayFabCurlHttpPlugin::~PlayFabCurlHttpPlugin()

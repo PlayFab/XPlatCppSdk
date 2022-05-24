@@ -5476,6 +5476,9 @@ namespace PlayFab
             GenericErrorCodesEventSinkNameInvalid,
             GenericErrorCodesEventSinkSasTokenPermissionInvalid,
             GenericErrorCodesEventSinkSecretInvalid,
+            GenericErrorCodesEventSinkTenantNotFound,
+            GenericErrorCodesEventSinkAadNotFound,
+            GenericErrorCodesEventSinkDatabaseNotFound,
             GenericErrorCodesOperationCanceled,
             GenericErrorCodesInvalidDisplayNameRandomSuffixLength,
             GenericErrorCodesAllowNonUniquePlayerDisplayNamesDisableNotAllowed
@@ -8891,6 +8894,21 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesEventSinkSecretInvalid)
             {
                 output = Json::Value("EventSinkSecretInvalid");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkTenantNotFound)
+            {
+                output = Json::Value("EventSinkTenantNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkAadNotFound)
+            {
+                output = Json::Value("EventSinkAadNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkDatabaseNotFound)
+            {
+                output = Json::Value("EventSinkDatabaseNotFound");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesOperationCanceled)
@@ -12324,6 +12342,21 @@ namespace PlayFab
             if (inputStr == "EventSinkSecretInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesEventSinkSecretInvalid;
+                return;
+            }
+            if (inputStr == "EventSinkTenantNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkTenantNotFound;
+                return;
+            }
+            if (inputStr == "EventSinkAadNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkAadNotFound;
+                return;
+            }
+            if (inputStr == "EventSinkDatabaseNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkDatabaseNotFound;
                 return;
             }
             if (inputStr == "OperationCanceled")

@@ -3,7 +3,11 @@
 #include <playfab/PlayFabCallRequestContainer.h>
 #include <playfab/PlayFabPluginManager.h>
 #include <playfab/PlayFabError.h>
+#ifdef PLAYFAB_PLATFORM_GDK
+#include <xcurl.h>
+#else
 #include <curl/curl.h>
+#endif
 #include <functional>
 #include <deque>
 #include <memory>

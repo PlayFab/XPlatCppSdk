@@ -43,7 +43,7 @@ namespace PlayFab
         tm timeInfo{ 0 };
 #if defined(PLAYFAB_PLATFORM_PLAYSTATION)
         gmtime_s(&input, &timeInfo);
-#elif defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX)
+#elif defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX) || defined(PLAYFAB_PLATFORM_GDK)
         gmtime_s(&timeInfo, &input);
 #else
         gmtime_r(&input, &timeInfo);
@@ -55,7 +55,7 @@ namespace PlayFab
     {
 #if defined(PLAYFAB_PLATFORM_PLAYSTATION)
         return mktime(&input);
-#elif defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX)
+#elif defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX) || defined (PLAYFAB_PLATFORM_GDK)
         return _mkgmtime(&input);
 #else
         return timegm(&input);

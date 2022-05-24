@@ -83,7 +83,7 @@ namespace PlayFab
     {
 #ifdef PLAYFAB_PLATFORM_XBOX
         return std::make_shared<PlayFabIXHR2HttpPlugin>();
-#elif defined(PLAYFAB_PLATFORM_WINDOWS)
+#elif defined(PLAYFAB_PLATFORM_WINDOWS) && !defined(PLAYFAB_PLATFORM_GDK)
         return std::make_shared<PlayFabWinHttpPlugin>();
 #elif defined(PLAYFAB_PLATFORM_IOS)
         return std::make_shared<PlayFabIOSHttpPlugin>();

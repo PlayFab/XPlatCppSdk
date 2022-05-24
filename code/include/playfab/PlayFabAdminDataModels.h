@@ -5634,6 +5634,9 @@ namespace PlayFab
             GenericErrorCodesEventSinkNameInvalid,
             GenericErrorCodesEventSinkSasTokenPermissionInvalid,
             GenericErrorCodesEventSinkSecretInvalid,
+            GenericErrorCodesEventSinkTenantNotFound,
+            GenericErrorCodesEventSinkAadNotFound,
+            GenericErrorCodesEventSinkDatabaseNotFound,
             GenericErrorCodesOperationCanceled,
             GenericErrorCodesInvalidDisplayNameRandomSuffixLength,
             GenericErrorCodesAllowNonUniquePlayerDisplayNamesDisableNotAllowed
@@ -9049,6 +9052,21 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesEventSinkSecretInvalid)
             {
                 output = Json::Value("EventSinkSecretInvalid");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkTenantNotFound)
+            {
+                output = Json::Value("EventSinkTenantNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkAadNotFound)
+            {
+                output = Json::Value("EventSinkAadNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkDatabaseNotFound)
+            {
+                output = Json::Value("EventSinkDatabaseNotFound");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesOperationCanceled)
@@ -12482,6 +12500,21 @@ namespace PlayFab
             if (inputStr == "EventSinkSecretInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesEventSinkSecretInvalid;
+                return;
+            }
+            if (inputStr == "EventSinkTenantNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkTenantNotFound;
+                return;
+            }
+            if (inputStr == "EventSinkAadNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkAadNotFound;
+                return;
+            }
+            if (inputStr == "EventSinkDatabaseNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkDatabaseNotFound;
                 return;
             }
             if (inputStr == "OperationCanceled")
@@ -29501,34 +29534,44 @@ namespace PlayFab
 
         struct SetTitleDataAndOverridesRequest : public PlayFabRequestCommon
         {
+            std::map<std::string, std::string> CustomTags;
             std::list<TitleDataKeyValue> KeyValues;
             std::string OverrideLabel;
+            std::string TitleId;
 
             SetTitleDataAndOverridesRequest() :
                 PlayFabRequestCommon(),
+                CustomTags(),
                 KeyValues(),
-                OverrideLabel()
+                OverrideLabel(),
+                TitleId()
             {}
 
             SetTitleDataAndOverridesRequest(const SetTitleDataAndOverridesRequest& src) :
                 PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
                 KeyValues(src.KeyValues),
-                OverrideLabel(src.OverrideLabel)
+                OverrideLabel(src.OverrideLabel),
+                TitleId(src.TitleId)
             {}
 
             ~SetTitleDataAndOverridesRequest() = default;
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["KeyValues"], KeyValues);
                 FromJsonUtilS(input["OverrideLabel"], OverrideLabel);
+                FromJsonUtilS(input["TitleId"], TitleId);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_KeyValues; ToJsonUtilO(KeyValues, each_KeyValues); output["KeyValues"] = each_KeyValues;
                 Json::Value each_OverrideLabel; ToJsonUtilS(OverrideLabel, each_OverrideLabel); output["OverrideLabel"] = each_OverrideLabel;
+                Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 return output;
             }
         };
