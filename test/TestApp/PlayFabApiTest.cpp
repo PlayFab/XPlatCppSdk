@@ -93,7 +93,7 @@ namespace PlayFabUnit
         TestContext* testContext = static_cast<TestContext*>(customData);
 
         // TODO: Bug 45560 - remove this platform specific check when fixed.
-#if !defined(PLAYFAB_PLATFORM_IOS)
+#if !defined(PLAYFAB_PLATFORM_IOS) && !defined(PLAYFAB_PLATFORM_GDK)
         if (error.RequestId.empty())
         {
             testContext->Fail("The requestId should be set on a failure.");
