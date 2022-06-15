@@ -4,7 +4,7 @@ Cross-Platform C++ PlayFab SDK.
 It currently supports the following platforms:
 - Windows (Win32) x64
 - Linux
-- Xbox Series X|S & Xbox One (**XDK Only**)
+- Xbox Series X|S & Xbox One (XDK or GDK)
 
 For GDK support on Windows and Xbox please contact your Xbox representative.
 

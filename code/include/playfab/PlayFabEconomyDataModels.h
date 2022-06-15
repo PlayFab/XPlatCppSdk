@@ -1180,6 +1180,30 @@ namespace PlayFab
             }
         };
 
+        struct ContentFeed : public PlayFabBaseModel
+        {
+
+            ContentFeed() :
+                PlayFabBaseModel()
+            {}
+
+            ContentFeed(const ContentFeed&) :
+                PlayFabBaseModel()
+            {}
+
+            ~ContentFeed() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
         struct CreateDraftItemRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
