@@ -110,11 +110,11 @@ namespace PlayFabUnit
         PlayFabQoSTest pfQosTest;
         pfQosTest.SetTitleInfo(testTitleData);
         testRunner.Add(pfQosTest);
-#endif //defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX)
 
         PlayFabConnectionStringTest pfConnectionStrTest;
         pfConnectionStrTest.SetTitleInfo(testTitleData);
         testRunner.Add(pfConnectionStrTest);
+#endif //defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX)
 #endif // !defined(DISABLE_PLAYFABCLIENT_API)
 
         // Run the tests (blocks until all tests have finished).

@@ -100,17 +100,19 @@ namespace PlayFab
                 return -1;
             }
 
+            struct addrinfo hints = { 0 }, *addr;
+            
             // TODO : Optimization
             //	Find a way to cache the hostent as we can have the same address being set again.
             //	Might look into using an unordered_map<socketAddr, hostent> but that might be expensive.
-            struct hostent *he = gethostbyname(socketAddr);
+            int status = getaddrinfo(socketAddr, NULL, &hints, &addr);
 
-            if (he == NULL)
+            if (status != 0)
             {
                 return GetLastErrorCode();
             }
 
-            in_addr* inAddr = reinterpret_cast<in_addr*>(he->h_addr_list[0]);
+            in_addr* inAddr = &reinterpret_cast<sockaddr_in*>(addr->ai_addr)->sin_addr;
 
 #if defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX)
             if (inAddr->S_un.S_addr == 0)

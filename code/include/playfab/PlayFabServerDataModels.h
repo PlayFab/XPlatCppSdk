@@ -5390,6 +5390,7 @@ namespace PlayFab
             GenericErrorCodesExportCannotParseQuery,
             GenericErrorCodesExportControlCommandsNotAllowed,
             GenericErrorCodesExportQueryMissingTableReference,
+            GenericErrorCodesExportInsightsV1Deprecated,
             GenericErrorCodesExplorerBasicInvalidQueryName,
             GenericErrorCodesExplorerBasicInvalidQueryDescription,
             GenericErrorCodesExplorerBasicInvalidQueryConditions,
@@ -8464,6 +8465,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesExportQueryMissingTableReference)
             {
                 output = Json::Value("ExportQueryMissingTableReference");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesExportInsightsV1Deprecated)
+            {
+                output = Json::Value("ExportInsightsV1Deprecated");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesExplorerBasicInvalidQueryName)
@@ -11912,6 +11918,11 @@ namespace PlayFab
             if (inputStr == "ExportQueryMissingTableReference")
             {
                 output = GenericErrorCodes::GenericErrorCodesExportQueryMissingTableReference;
+                return;
+            }
+            if (inputStr == "ExportInsightsV1Deprecated")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExportInsightsV1Deprecated;
                 return;
             }
             if (inputStr == "ExplorerBasicInvalidQueryName")
