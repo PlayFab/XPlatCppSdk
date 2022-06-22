@@ -142,7 +142,6 @@ namespace PlayFab
         void SetTitleData(AdminModels::SetTitleDataRequest& request, const ProcessApiCallback<AdminModels::SetTitleDataResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void SetTitleDataAndOverrides(AdminModels::SetTitleDataAndOverridesRequest& request, const ProcessApiCallback<AdminModels::SetTitleDataAndOverridesResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void SetTitleInternalData(AdminModels::SetTitleDataRequest& request, const ProcessApiCallback<AdminModels::SetTitleDataResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
-        void SetTitleInternalDataAndOverrides(AdminModels::SetTitleDataAndOverridesRequest& request, const ProcessApiCallback<AdminModels::SetTitleDataAndOverridesResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void SetupPushNotification(AdminModels::SetupPushNotificationRequest& request, const ProcessApiCallback<AdminModels::SetupPushNotificationResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void SubtractUserVirtualCurrency(AdminModels::SubtractUserVirtualCurrencyRequest& request, const ProcessApiCallback<AdminModels::ModifyUserVirtualCurrencyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UpdateBans(AdminModels::UpdateBansRequest& request, const ProcessApiCallback<AdminModels::UpdateBansResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -260,7 +259,6 @@ namespace PlayFab
         void OnSetTitleDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnSetTitleDataAndOverridesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnSetTitleInternalDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
-        void OnSetTitleInternalDataAndOverridesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnSetupPushNotificationResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnSubtractUserVirtualCurrencyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUpdateBansResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
