@@ -5323,6 +5323,9 @@ namespace PlayFab
             GenericErrorCodesPhotonApplicationIdAlreadyInUse,
             GenericErrorCodesCloudScriptUnableToDeleteProductionRevision,
             GenericErrorCodesCustomIdNotFound,
+            GenericErrorCodesAutomationInvalidInput,
+            GenericErrorCodesAutomationInvalidRuleName,
+            GenericErrorCodesAutomationRuleAlreadyExists,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8130,6 +8133,21 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesCustomIdNotFound)
             {
                 output = Json::Value("CustomIdNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAutomationInvalidInput)
+            {
+                output = Json::Value("AutomationInvalidInput");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAutomationInvalidRuleName)
+            {
+                output = Json::Value("AutomationInvalidRuleName");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAutomationRuleAlreadyExists)
+            {
+                output = Json::Value("AutomationRuleAlreadyExists");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -11583,6 +11601,21 @@ namespace PlayFab
             if (inputStr == "CustomIdNotFound")
             {
                 output = GenericErrorCodes::GenericErrorCodesCustomIdNotFound;
+                return;
+            }
+            if (inputStr == "AutomationInvalidInput")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAutomationInvalidInput;
+                return;
+            }
+            if (inputStr == "AutomationInvalidRuleName")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAutomationInvalidRuleName;
+                return;
+            }
+            if (inputStr == "AutomationRuleAlreadyExists")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAutomationRuleAlreadyExists;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
