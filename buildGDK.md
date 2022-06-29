@@ -3,7 +3,7 @@ Cross-Platform C++ PlayFab SDK, compatible with [GDK](https://github.com/microso
 
 It currently supports the following platforms:
 - Windows (Win32) x64
-- Xbox Series X|S & Xbox One (XDK or GDK)
+- Xbox Series X|S & Xbox One
 
 
 This SDK lets you make REST API calls to the PlayFab service. It depends on some external third-party open source libraries referenced as git submodules in directory `/external`. Please make sure to use `--recurse-submodules` command line parameter when cloning SDK's git repo:
