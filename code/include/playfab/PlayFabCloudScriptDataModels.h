@@ -3921,20 +3921,17 @@ namespace PlayFab
         {
             std::map<std::string, std::string> CustomTags;
             std::string FunctionName;
-            std::string TitleId;
 
             GetFunctionRequest() :
                 PlayFabRequestCommon(),
                 CustomTags(),
-                FunctionName(),
-                TitleId()
+                FunctionName()
             {}
 
             GetFunctionRequest(const GetFunctionRequest& src) :
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
-                FunctionName(src.FunctionName),
-                TitleId(src.TitleId)
+                FunctionName(src.FunctionName)
             {}
 
             ~GetFunctionRequest() = default;
@@ -3943,7 +3940,6 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["FunctionName"], FunctionName);
-                FromJsonUtilS(input["TitleId"], TitleId);
             }
 
             Json::Value ToJson() const override
@@ -3951,7 +3947,6 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_FunctionName; ToJsonUtilS(FunctionName, each_FunctionName); output["FunctionName"] = each_FunctionName;
-                Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 return output;
             }
         };
@@ -4081,18 +4076,15 @@ namespace PlayFab
         struct ListFunctionsRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
-            std::string TitleId;
 
             ListFunctionsRequest() :
                 PlayFabRequestCommon(),
-                CustomTags(),
-                TitleId()
+                CustomTags()
             {}
 
             ListFunctionsRequest(const ListFunctionsRequest& src) :
                 PlayFabRequestCommon(),
-                CustomTags(src.CustomTags),
-                TitleId(src.TitleId)
+                CustomTags(src.CustomTags)
             {}
 
             ~ListFunctionsRequest() = default;
@@ -4100,14 +4092,12 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
-                FromJsonUtilS(input["TitleId"], TitleId);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
-                Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 return output;
             }
         };
@@ -4924,22 +4914,19 @@ namespace PlayFab
             std::map<std::string, std::string> CustomTags;
             std::string FunctionName;
             std::string FunctionUrl;
-            std::string TitleId;
 
             RegisterHttpFunctionRequest() :
                 PlayFabRequestCommon(),
                 CustomTags(),
                 FunctionName(),
-                FunctionUrl(),
-                TitleId()
+                FunctionUrl()
             {}
 
             RegisterHttpFunctionRequest(const RegisterHttpFunctionRequest& src) :
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
                 FunctionName(src.FunctionName),
-                FunctionUrl(src.FunctionUrl),
-                TitleId(src.TitleId)
+                FunctionUrl(src.FunctionUrl)
             {}
 
             ~RegisterHttpFunctionRequest() = default;
@@ -4949,7 +4936,6 @@ namespace PlayFab
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["FunctionName"], FunctionName);
                 FromJsonUtilS(input["FunctionUrl"], FunctionUrl);
-                FromJsonUtilS(input["TitleId"], TitleId);
             }
 
             Json::Value ToJson() const override
@@ -4958,7 +4944,6 @@ namespace PlayFab
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_FunctionName; ToJsonUtilS(FunctionName, each_FunctionName); output["FunctionName"] = each_FunctionName;
                 Json::Value each_FunctionUrl; ToJsonUtilS(FunctionUrl, each_FunctionUrl); output["FunctionUrl"] = each_FunctionUrl;
-                Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 return output;
             }
         };
@@ -4969,15 +4954,13 @@ namespace PlayFab
             std::map<std::string, std::string> CustomTags;
             std::string FunctionName;
             std::string QueueName;
-            std::string TitleId;
 
             RegisterQueuedFunctionRequest() :
                 PlayFabRequestCommon(),
                 ConnectionString(),
                 CustomTags(),
                 FunctionName(),
-                QueueName(),
-                TitleId()
+                QueueName()
             {}
 
             RegisterQueuedFunctionRequest(const RegisterQueuedFunctionRequest& src) :
@@ -4985,8 +4968,7 @@ namespace PlayFab
                 ConnectionString(src.ConnectionString),
                 CustomTags(src.CustomTags),
                 FunctionName(src.FunctionName),
-                QueueName(src.QueueName),
-                TitleId(src.TitleId)
+                QueueName(src.QueueName)
             {}
 
             ~RegisterQueuedFunctionRequest() = default;
@@ -4997,7 +4979,6 @@ namespace PlayFab
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["FunctionName"], FunctionName);
                 FromJsonUtilS(input["QueueName"], QueueName);
-                FromJsonUtilS(input["TitleId"], TitleId);
             }
 
             Json::Value ToJson() const override
@@ -5007,7 +4988,6 @@ namespace PlayFab
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_FunctionName; ToJsonUtilS(FunctionName, each_FunctionName); output["FunctionName"] = each_FunctionName;
                 Json::Value each_QueueName; ToJsonUtilS(QueueName, each_QueueName); output["QueueName"] = each_QueueName;
-                Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 return output;
             }
         };
@@ -5016,20 +4996,17 @@ namespace PlayFab
         {
             std::map<std::string, std::string> CustomTags;
             std::string FunctionName;
-            std::string TitleId;
 
             UnregisterFunctionRequest() :
                 PlayFabRequestCommon(),
                 CustomTags(),
-                FunctionName(),
-                TitleId()
+                FunctionName()
             {}
 
             UnregisterFunctionRequest(const UnregisterFunctionRequest& src) :
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
-                FunctionName(src.FunctionName),
-                TitleId(src.TitleId)
+                FunctionName(src.FunctionName)
             {}
 
             ~UnregisterFunctionRequest() = default;
@@ -5038,7 +5015,6 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["FunctionName"], FunctionName);
-                FromJsonUtilS(input["TitleId"], TitleId);
             }
 
             Json::Value ToJson() const override
@@ -5046,7 +5022,6 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_FunctionName; ToJsonUtilS(FunctionName, each_FunctionName); output["FunctionName"] = each_FunctionName;
-                Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 return output;
             }
         };

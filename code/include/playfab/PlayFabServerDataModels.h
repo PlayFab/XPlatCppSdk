@@ -5326,6 +5326,7 @@ namespace PlayFab
             GenericErrorCodesAutomationInvalidInput,
             GenericErrorCodesAutomationInvalidRuleName,
             GenericErrorCodesAutomationRuleAlreadyExists,
+            GenericErrorCodesAutomationRuleLimitExceeded,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8148,6 +8149,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesAutomationRuleAlreadyExists)
             {
                 output = Json::Value("AutomationRuleAlreadyExists");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAutomationRuleLimitExceeded)
+            {
+                output = Json::Value("AutomationRuleLimitExceeded");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -11616,6 +11622,11 @@ namespace PlayFab
             if (inputStr == "AutomationRuleAlreadyExists")
             {
                 output = GenericErrorCodes::GenericErrorCodesAutomationRuleAlreadyExists;
+                return;
+            }
+            if (inputStr == "AutomationRuleLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAutomationRuleLimitExceeded;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
@@ -24268,14 +24279,12 @@ namespace PlayFab
         {
             std::map<std::string, std::string> CustomTags;
             std::string Key;
-            std::string TitleId;
             std::string Value;
 
             SetTitleDataRequest() :
                 PlayFabRequestCommon(),
                 CustomTags(),
                 Key(),
-                TitleId(),
                 Value()
             {}
 
@@ -24283,7 +24292,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
                 Key(src.Key),
-                TitleId(src.TitleId),
                 Value(src.Value)
             {}
 
@@ -24293,7 +24301,6 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["Key"], Key);
-                FromJsonUtilS(input["TitleId"], TitleId);
                 FromJsonUtilS(input["Value"], Value);
             }
 
@@ -24302,7 +24309,6 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Key; ToJsonUtilS(Key, each_Key); output["Key"] = each_Key;
-                Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 Json::Value each_Value; ToJsonUtilS(Value, each_Value); output["Value"] = each_Value;
                 return output;
             }

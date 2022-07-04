@@ -4941,6 +4941,7 @@ namespace PlayFab
             std::list<EntityKey> Friends;
             std::string LobbyId;
             Uint32 MaxPlayers;
+            Boxed<MembershipLock> pfMembershipLock;
             EntityKey Owner;
             std::map<std::string, std::string> SearchData;
 
@@ -4951,6 +4952,7 @@ namespace PlayFab
                 Friends(),
                 LobbyId(),
                 MaxPlayers(),
+                pfMembershipLock(),
                 Owner(),
                 SearchData()
             {}
@@ -4962,6 +4964,7 @@ namespace PlayFab
                 Friends(src.Friends),
                 LobbyId(src.LobbyId),
                 MaxPlayers(src.MaxPlayers),
+                pfMembershipLock(src.pfMembershipLock),
                 Owner(src.Owner),
                 SearchData(src.SearchData)
             {}
@@ -4975,6 +4978,7 @@ namespace PlayFab
                 FromJsonUtilO(input["Friends"], Friends);
                 FromJsonUtilS(input["LobbyId"], LobbyId);
                 FromJsonUtilP(input["MaxPlayers"], MaxPlayers);
+                FromJsonUtilE(input["MembershipLock"], pfMembershipLock);
                 FromJsonUtilO(input["Owner"], Owner);
                 FromJsonUtilS(input["SearchData"], SearchData);
             }
@@ -4987,6 +4991,7 @@ namespace PlayFab
                 Json::Value each_Friends; ToJsonUtilO(Friends, each_Friends); output["Friends"] = each_Friends;
                 Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
                 Json::Value each_MaxPlayers; ToJsonUtilP(MaxPlayers, each_MaxPlayers); output["MaxPlayers"] = each_MaxPlayers;
+                Json::Value each_pfMembershipLock; ToJsonUtilE(pfMembershipLock, each_pfMembershipLock); output["MembershipLock"] = each_pfMembershipLock;
                 Json::Value each_Owner; ToJsonUtilO(Owner, each_Owner); output["Owner"] = each_Owner;
                 Json::Value each_SearchData; ToJsonUtilS(SearchData, each_SearchData); output["SearchData"] = each_SearchData;
                 return output;
@@ -5111,6 +5116,7 @@ namespace PlayFab
             Uint32 CurrentPlayers;
             std::string LobbyId;
             Uint32 MaxPlayers;
+            Boxed<MembershipLock> pfMembershipLock;
             EntityKey Owner;
             std::map<std::string, std::string> SearchData;
 
@@ -5120,6 +5126,7 @@ namespace PlayFab
                 CurrentPlayers(),
                 LobbyId(),
                 MaxPlayers(),
+                pfMembershipLock(),
                 Owner(),
                 SearchData()
             {}
@@ -5130,6 +5137,7 @@ namespace PlayFab
                 CurrentPlayers(src.CurrentPlayers),
                 LobbyId(src.LobbyId),
                 MaxPlayers(src.MaxPlayers),
+                pfMembershipLock(src.pfMembershipLock),
                 Owner(src.Owner),
                 SearchData(src.SearchData)
             {}
@@ -5142,6 +5150,7 @@ namespace PlayFab
                 FromJsonUtilP(input["CurrentPlayers"], CurrentPlayers);
                 FromJsonUtilS(input["LobbyId"], LobbyId);
                 FromJsonUtilP(input["MaxPlayers"], MaxPlayers);
+                FromJsonUtilE(input["MembershipLock"], pfMembershipLock);
                 FromJsonUtilO(input["Owner"], Owner);
                 FromJsonUtilS(input["SearchData"], SearchData);
             }
@@ -5153,6 +5162,7 @@ namespace PlayFab
                 Json::Value each_CurrentPlayers; ToJsonUtilP(CurrentPlayers, each_CurrentPlayers); output["CurrentPlayers"] = each_CurrentPlayers;
                 Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
                 Json::Value each_MaxPlayers; ToJsonUtilP(MaxPlayers, each_MaxPlayers); output["MaxPlayers"] = each_MaxPlayers;
+                Json::Value each_pfMembershipLock; ToJsonUtilE(pfMembershipLock, each_pfMembershipLock); output["MembershipLock"] = each_pfMembershipLock;
                 Json::Value each_Owner; ToJsonUtilO(Owner, each_Owner); output["Owner"] = each_Owner;
                 Json::Value each_SearchData; ToJsonUtilS(SearchData, each_SearchData); output["SearchData"] = each_SearchData;
                 return output;

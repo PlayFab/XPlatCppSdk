@@ -10,7 +10,7 @@ namespace PlayFab
     /// </summary>
     class PlayFabApiSettings
     {
-#if defined(ENABLE_PLAYFABSERVER_API) || defined(ENABLE_PLAYFABADMIN_API)
+#if defined(ENABLE_PLAYFABSERVER_API) || defined(ENABLE_PLAYFABADMIN_API) || defined(ENABLE_PLAYFAB_SECRETKEY)
     public: // Server-only variables should only be visible when appropriate
 #else
     private: // But, static library memory size and alloc issues mean it always needs to exist
