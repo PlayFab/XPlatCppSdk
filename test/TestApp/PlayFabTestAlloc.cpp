@@ -17,21 +17,21 @@ namespace PlayFabUnit
         // Settings
         PlayFab::PlayFabApiSettings* testPtrSettings = new PlayFab::PlayFabApiSettings();
         testPtrSettings->titleId = "this should succeed";
-#if defined(ENABLE_PLAYFABSERVER_API) || defined(ENABLE_PLAYFABADMIN_API)
+#if defined(ENABLE_PLAYFABSERVER_API) || defined(ENABLE_PLAYFABADMIN_API) || defined(ENABLE_PLAYFAB_SECRETKEY)
         testPtrSettings->developerSecretKey = "this is conditional";
 #endif
         delete testPtrSettings;
 
         std::shared_ptr<PlayFab::PlayFabApiSettings> testMSpSettings = std::make_shared<PlayFab::PlayFabApiSettings>();
         testMSpSettings->titleId = "this should succeed";
-#if defined(ENABLE_PLAYFABSERVER_API) || defined(ENABLE_PLAYFABADMIN_API)
+#if defined(ENABLE_PLAYFABSERVER_API) || defined(ENABLE_PLAYFABADMIN_API) || defined(ENABLE_PLAYFAB_SECRETKEY)
         testMSpSettings->developerSecretKey = "this is conditional";
 #endif
         testMSpSettings.reset();
 
         std::shared_ptr<PlayFab::PlayFabApiSettings> testNSpSettings = std::shared_ptr<PlayFab::PlayFabApiSettings>(new PlayFab::PlayFabApiSettings());
         testNSpSettings->titleId = "this should succeed";
-#if defined(ENABLE_PLAYFABSERVER_API) || defined(ENABLE_PLAYFABADMIN_API)
+#if defined(ENABLE_PLAYFABSERVER_API) || defined(ENABLE_PLAYFABADMIN_API) || defined(ENABLE_PLAYFAB_SECRETKEY)
         testNSpSettings->developerSecretKey = "this is conditional";
 #endif
         testNSpSettings.reset();

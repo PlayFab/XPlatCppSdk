@@ -80,7 +80,7 @@ namespace PlayFab
         {
             authKey = "X-Authorization"; authValue = context->clientSessionTicket;
         }
-#if defined(ENABLE_PLAYFABSERVER_API) || defined(ENABLE_PLAYFABADMIN_API)
+#if defined(ENABLE_PLAYFABSERVER_API) || defined(ENABLE_PLAYFABADMIN_API) || defined(ENABLE_PLAYFAB_SECRETKEY)
         else if (settings->developerSecretKey.length() > 0)
         {
             authKey = "X-SecretKey"; authValue = settings->developerSecretKey;
