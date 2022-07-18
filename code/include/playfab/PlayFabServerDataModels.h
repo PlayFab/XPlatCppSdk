@@ -19950,6 +19950,98 @@ namespace PlayFab
             }
         };
 
+        struct GetPlayFabIDsFromTwitchIDsRequest : public PlayFabRequestCommon
+        {
+            std::list<std::string> TwitchIds;
+
+            GetPlayFabIDsFromTwitchIDsRequest() :
+                PlayFabRequestCommon(),
+                TwitchIds()
+            {}
+
+            GetPlayFabIDsFromTwitchIDsRequest(const GetPlayFabIDsFromTwitchIDsRequest& src) :
+                PlayFabRequestCommon(),
+                TwitchIds(src.TwitchIds)
+            {}
+
+            ~GetPlayFabIDsFromTwitchIDsRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["TwitchIds"], TwitchIds);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_TwitchIds; ToJsonUtilS(TwitchIds, each_TwitchIds); output["TwitchIds"] = each_TwitchIds;
+                return output;
+            }
+        };
+
+        struct TwitchPlayFabIdPair : public PlayFabBaseModel
+        {
+            std::string PlayFabId;
+            std::string TwitchId;
+
+            TwitchPlayFabIdPair() :
+                PlayFabBaseModel(),
+                PlayFabId(),
+                TwitchId()
+            {}
+
+            TwitchPlayFabIdPair(const TwitchPlayFabIdPair& src) :
+                PlayFabBaseModel(),
+                PlayFabId(src.PlayFabId),
+                TwitchId(src.TwitchId)
+            {}
+
+            ~TwitchPlayFabIdPair() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+                FromJsonUtilS(input["TwitchId"], TwitchId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                Json::Value each_TwitchId; ToJsonUtilS(TwitchId, each_TwitchId); output["TwitchId"] = each_TwitchId;
+                return output;
+            }
+        };
+
+        struct GetPlayFabIDsFromTwitchIDsResult : public PlayFabResultCommon
+        {
+            std::list<TwitchPlayFabIdPair> Data;
+
+            GetPlayFabIDsFromTwitchIDsResult() :
+                PlayFabResultCommon(),
+                Data()
+            {}
+
+            GetPlayFabIDsFromTwitchIDsResult(const GetPlayFabIDsFromTwitchIDsResult& src) :
+                PlayFabResultCommon(),
+                Data(src.Data)
+            {}
+
+            ~GetPlayFabIDsFromTwitchIDsResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["Data"], Data);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Data; ToJsonUtilO(Data, each_Data); output["Data"] = each_Data;
+                return output;
+            }
+        };
+
         struct GetPlayFabIDsFromXboxLiveIDsRequest : public PlayFabRequestCommon
         {
             std::string Sandbox;
