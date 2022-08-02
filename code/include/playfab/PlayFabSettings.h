@@ -23,8 +23,7 @@ namespace PlayFab
         static std::string productionEnvironmentURL;
         // Used to receive a callback for every failed PlayFab API call - Parallel to the individual error callbacks
         static ErrorCallback globalErrorHandler;
-        // Used to directly target a title resource
-        static std::string connectionString;
+
 
         // The pointers to these objects should be const as they should always be fixed, but the contents are still mutable
         static const std::shared_ptr<PlayFabApiSettings> staticSettings;

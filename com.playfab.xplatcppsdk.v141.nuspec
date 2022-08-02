@@ -2,26 +2,33 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>com.playfab.xplatcppsdk.v141</id>
-        <version>3.83.220718</version>
+        <version>3.84.220801</version>
         <authors>Microsoft</authors>
         <owners>Microsoft</owners>
         <projectUrl>http://github.com/PlayFab/XPlatCppSdk</projectUrl>
         <license type="expression">Apache-2.0</license>
-        <PackageIcon>images/icon.png</PackageIcon>
+        <icon>./images/icon.png</icon>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <releaseNotes>https://api.playfab.com/releaseNotes/#3.83.220718</releaseNotes>
+        <releaseNotes>https://api.playfab.com/releaseNotes/#3.84.220801</releaseNotes>
         <description>Microsoft Azure PlayFab XPlatCppSdk</description>
         <copyright>&#169; Microsoft Corporation. All rights reserved.</copyright>
         <tags>Microsoft Azure PlayFab Baas Paas JSON REST HTTP SSL API cloud liveops game gamedev native nativepackage</tags>
     </metadata>
     <files>
+        <file src=".\images\icon.png" target="images\icon.png" />
         <file src=".\com.playfab.xplatcppsdk.v141.targets" target="build\native\com.playfab.xplatcppsdk.v141.targets" />
-        <file src=".\external\jsoncpp-build\x64\$configuration$\lib_json.lib" target="build\native\lib\x64\$configuration$\lib_json.lib" />
+        <file src=".\external\jsoncpp-build\x64\Release\lib_json.lib" target="build\native\lib\x64\Release\lib_json.lib" />
         <file src=".\external\jsoncpp-build\x64\Debug\lib_json.lib" target="build\native\lib\x64\Debug\lib_json.lib" />
-        <file src=".\build\Windows\x64\$configuration$\XPlatCppWindows\XPlatCppWindows.pdb" target="build\native\lib\x64\$configuration$\XPlatCppWindows.pdb" />
-        <file src=".\build\Windows\x64\$configuration$\XPlatCppWindows\XPlatCppWindows.lib" target="build\native\lib\x64\$configuration$\XPlatCppWindows.lib" />
+        <file src=".\build\Windows\x64\Release\XPlatCppWindows\XPlatCppWindows.pdb" target="build\native\lib\x64\Release\XPlatCppWindows.pdb" />
+        <file src=".\build\Windows\x64\Release\XPlatCppWindows\XPlatCppWindows.lib" target="build\native\lib\x64\Release\XPlatCppWindows.lib" />
         <file src=".\build\Windows\x64\Debug\XPlatCppWindows\XPlatCppWindows.pdb" target="build\native\lib\x64\Debug\XPlatCppWindows.pdb" />
         <file src=".\build\Windows\x64\Debug\XPlatCppWindows\XPlatCppWindows.lib" target="build\native\lib\x64\Debug\XPlatCppWindows.lib" />
+        <file src=".\external\jsoncpp-gdk-build\Gaming.Desktop.x64\Release\lib_json.lib" target="build\native\lib\Gaming.Desktop.x64\Release\lib_json.lib" />
+        <file src=".\external\jsoncpp-gdk-build\Gaming.Desktop.x64\Debug\lib_json.lib" target="build\native\lib\Gaming.Desktop.x64\Debug\lib_json.lib" />
+        <file src=".\build\GDK\Gaming.Desktop.x64\Release\XPlatCppGdk\XPlatCppGdk.pdb" target="build\native\lib\Gaming.Desktop.x64\Release\XPlatCppGdk.pdb" />
+        <file src=".\build\GDK\Gaming.Desktop.x64\Release\XPlatCppGdk\Lib\XPlatCppGdk.lib" target="build\native\lib\Gaming.Desktop.x64\Release\XPlatCppGdk.lib" />
+        <file src=".\build\GDK\Gaming.Desktop.x64\Debug\XPlatCppGdk\Lib\XPlatCppGdk.pdb" target="build\native\lib\Gaming.Desktop.x64\Debug\XPlatCppGdk.pdb" />
+        <file src=".\build\GDK\Gaming.Desktop.x64\Debug\XPlatCppGdk\Lib\XPlatCppGdk.lib" target="build\native\lib\Gaming.Desktop.x64\Debug\XPlatCppGdk.lib" />
         <file src=".\code\include\playfab\**\*.h" target="build\native\include\playfab" />
         <file src=".\external\jsoncpp\include\json\**\*.h" target="build\native\include\json" />
     </files>
