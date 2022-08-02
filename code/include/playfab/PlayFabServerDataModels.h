@@ -5327,6 +5327,7 @@ namespace PlayFab
             GenericErrorCodesAutomationInvalidRuleName,
             GenericErrorCodesAutomationRuleAlreadyExists,
             GenericErrorCodesAutomationRuleLimitExceeded,
+            GenericErrorCodesInvalidGooglePlayGamesServerAuthCode,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8154,6 +8155,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesAutomationRuleLimitExceeded)
             {
                 output = Json::Value("AutomationRuleLimitExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidGooglePlayGamesServerAuthCode)
+            {
+                output = Json::Value("InvalidGooglePlayGamesServerAuthCode");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -11629,6 +11635,11 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesAutomationRuleLimitExceeded;
                 return;
             }
+            if (inputStr == "InvalidGooglePlayGamesServerAuthCode")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidGooglePlayGamesServerAuthCode;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -12453,7 +12464,8 @@ namespace PlayFab
             LoginIdentityProviderFacebookInstantGames,
             LoginIdentityProviderOpenIdConnect,
             LoginIdentityProviderApple,
-            LoginIdentityProviderNintendoSwitchAccount
+            LoginIdentityProviderNintendoSwitchAccount,
+            LoginIdentityProviderGooglePlayGames
         };
 
         inline void ToJsonEnum(const LoginIdentityProvider input, Json::Value& output)
@@ -12561,6 +12573,11 @@ namespace PlayFab
             if (input == LoginIdentityProvider::LoginIdentityProviderNintendoSwitchAccount)
             {
                 output = Json::Value("NintendoSwitchAccount");
+                return;
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderGooglePlayGames)
+            {
+                output = Json::Value("GooglePlayGames");
                 return;
             }
         }
@@ -12674,6 +12691,11 @@ namespace PlayFab
             if (inputStr == "NintendoSwitchAccount")
             {
                 output = LoginIdentityProvider::LoginIdentityProviderNintendoSwitchAccount;
+                return;
+            }
+            if (inputStr == "GooglePlayGames")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderGooglePlayGames;
                 return;
             }
         }
@@ -13237,7 +13259,8 @@ namespace PlayFab
             UserOriginationFacebookInstantGamesId,
             UserOriginationOpenIdConnect,
             UserOriginationApple,
-            UserOriginationNintendoSwitchAccount
+            UserOriginationNintendoSwitchAccount,
+            UserOriginationGooglePlayGames
         };
 
         inline void ToJsonEnum(const UserOrigination input, Json::Value& output)
@@ -13355,6 +13378,11 @@ namespace PlayFab
             if (input == UserOrigination::UserOriginationNintendoSwitchAccount)
             {
                 output = Json::Value("NintendoSwitchAccount");
+                return;
+            }
+            if (input == UserOrigination::UserOriginationGooglePlayGames)
+            {
+                output = Json::Value("GooglePlayGames");
                 return;
             }
         }
@@ -13478,6 +13506,11 @@ namespace PlayFab
             if (inputStr == "NintendoSwitchAccount")
             {
                 output = UserOrigination::UserOriginationNintendoSwitchAccount;
+                return;
+            }
+            if (inputStr == "GooglePlayGames")
+            {
+                output = UserOrigination::UserOriginationGooglePlayGames;
                 return;
             }
         }
@@ -14188,6 +14221,45 @@ namespace PlayFab
             }
         };
 
+        struct UserGooglePlayGamesInfo : public PlayFabBaseModel
+        {
+            std::string GooglePlayGamesPlayerAvatarImageUrl;
+            std::string GooglePlayGamesPlayerDisplayName;
+            std::string GooglePlayGamesPlayerId;
+
+            UserGooglePlayGamesInfo() :
+                PlayFabBaseModel(),
+                GooglePlayGamesPlayerAvatarImageUrl(),
+                GooglePlayGamesPlayerDisplayName(),
+                GooglePlayGamesPlayerId()
+            {}
+
+            UserGooglePlayGamesInfo(const UserGooglePlayGamesInfo& src) :
+                PlayFabBaseModel(),
+                GooglePlayGamesPlayerAvatarImageUrl(src.GooglePlayGamesPlayerAvatarImageUrl),
+                GooglePlayGamesPlayerDisplayName(src.GooglePlayGamesPlayerDisplayName),
+                GooglePlayGamesPlayerId(src.GooglePlayGamesPlayerId)
+            {}
+
+            ~UserGooglePlayGamesInfo() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["GooglePlayGamesPlayerAvatarImageUrl"], GooglePlayGamesPlayerAvatarImageUrl);
+                FromJsonUtilS(input["GooglePlayGamesPlayerDisplayName"], GooglePlayGamesPlayerDisplayName);
+                FromJsonUtilS(input["GooglePlayGamesPlayerId"], GooglePlayGamesPlayerId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_GooglePlayGamesPlayerAvatarImageUrl; ToJsonUtilS(GooglePlayGamesPlayerAvatarImageUrl, each_GooglePlayGamesPlayerAvatarImageUrl); output["GooglePlayGamesPlayerAvatarImageUrl"] = each_GooglePlayGamesPlayerAvatarImageUrl;
+                Json::Value each_GooglePlayGamesPlayerDisplayName; ToJsonUtilS(GooglePlayGamesPlayerDisplayName, each_GooglePlayGamesPlayerDisplayName); output["GooglePlayGamesPlayerDisplayName"] = each_GooglePlayGamesPlayerDisplayName;
+                Json::Value each_GooglePlayGamesPlayerId; ToJsonUtilS(GooglePlayGamesPlayerId, each_GooglePlayGamesPlayerId); output["GooglePlayGamesPlayerId"] = each_GooglePlayGamesPlayerId;
+                return output;
+            }
+        };
+
         struct UserIosDeviceInfo : public PlayFabBaseModel
         {
             std::string IosDeviceId;
@@ -14636,6 +14708,7 @@ namespace PlayFab
             Boxed<UserFacebookInstantGamesIdInfo> FacebookInstantGamesIdInfo;
             Boxed<UserGameCenterInfo> GameCenterInfo;
             Boxed<UserGoogleInfo> GoogleInfo;
+            Boxed<UserGooglePlayGamesInfo> GooglePlayGamesInfo;
             Boxed<UserIosDeviceInfo> IosDeviceInfo;
             Boxed<UserKongregateInfo> KongregateInfo;
             Boxed<UserNintendoSwitchAccountIdInfo> NintendoSwitchAccountInfo;
@@ -14660,6 +14733,7 @@ namespace PlayFab
                 FacebookInstantGamesIdInfo(),
                 GameCenterInfo(),
                 GoogleInfo(),
+                GooglePlayGamesInfo(),
                 IosDeviceInfo(),
                 KongregateInfo(),
                 NintendoSwitchAccountInfo(),
@@ -14685,6 +14759,7 @@ namespace PlayFab
                 FacebookInstantGamesIdInfo(src.FacebookInstantGamesIdInfo),
                 GameCenterInfo(src.GameCenterInfo),
                 GoogleInfo(src.GoogleInfo),
+                GooglePlayGamesInfo(src.GooglePlayGamesInfo),
                 IosDeviceInfo(src.IosDeviceInfo),
                 KongregateInfo(src.KongregateInfo),
                 NintendoSwitchAccountInfo(src.NintendoSwitchAccountInfo),
@@ -14712,6 +14787,7 @@ namespace PlayFab
                 FromJsonUtilO(input["FacebookInstantGamesIdInfo"], FacebookInstantGamesIdInfo);
                 FromJsonUtilO(input["GameCenterInfo"], GameCenterInfo);
                 FromJsonUtilO(input["GoogleInfo"], GoogleInfo);
+                FromJsonUtilO(input["GooglePlayGamesInfo"], GooglePlayGamesInfo);
                 FromJsonUtilO(input["IosDeviceInfo"], IosDeviceInfo);
                 FromJsonUtilO(input["KongregateInfo"], KongregateInfo);
                 FromJsonUtilO(input["NintendoSwitchAccountInfo"], NintendoSwitchAccountInfo);
@@ -14738,6 +14814,7 @@ namespace PlayFab
                 Json::Value each_FacebookInstantGamesIdInfo; ToJsonUtilO(FacebookInstantGamesIdInfo, each_FacebookInstantGamesIdInfo); output["FacebookInstantGamesIdInfo"] = each_FacebookInstantGamesIdInfo;
                 Json::Value each_GameCenterInfo; ToJsonUtilO(GameCenterInfo, each_GameCenterInfo); output["GameCenterInfo"] = each_GameCenterInfo;
                 Json::Value each_GoogleInfo; ToJsonUtilO(GoogleInfo, each_GoogleInfo); output["GoogleInfo"] = each_GoogleInfo;
+                Json::Value each_GooglePlayGamesInfo; ToJsonUtilO(GooglePlayGamesInfo, each_GooglePlayGamesInfo); output["GooglePlayGamesInfo"] = each_GooglePlayGamesInfo;
                 Json::Value each_IosDeviceInfo; ToJsonUtilO(IosDeviceInfo, each_IosDeviceInfo); output["IosDeviceInfo"] = each_IosDeviceInfo;
                 Json::Value each_KongregateInfo; ToJsonUtilO(KongregateInfo, each_KongregateInfo); output["KongregateInfo"] = each_KongregateInfo;
                 Json::Value each_NintendoSwitchAccountInfo; ToJsonUtilO(NintendoSwitchAccountInfo, each_NintendoSwitchAccountInfo); output["NintendoSwitchAccountInfo"] = each_NintendoSwitchAccountInfo;
