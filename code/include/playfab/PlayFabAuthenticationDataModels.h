@@ -352,6 +352,64 @@ namespace PlayFab
             }
         };
 
+        struct DeleteRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            EntityKey Entity;
+
+            DeleteRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                Entity()
+            {}
+
+            DeleteRequest(const DeleteRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                Entity(src.Entity)
+            {}
+
+            ~DeleteRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilO(input["Entity"], Entity);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                return output;
+            }
+        };
+
+        struct EmptyResponse : public PlayFabResultCommon
+        {
+
+            EmptyResponse() :
+                PlayFabResultCommon()
+            {}
+
+            EmptyResponse(const EmptyResponse&) :
+                PlayFabResultCommon()
+            {}
+
+            ~EmptyResponse() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
         struct EntityLineage : public PlayFabBaseModel
         {
             std::string CharacterId;
