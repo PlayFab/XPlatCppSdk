@@ -40,7 +40,7 @@ namespace PlayFab
 
     inline tm TimeTToUtcTm(time_t input)
     {
-        tm timeInfo{ 0 };
+        tm timeInfo = tm();
 #if defined(PLAYFAB_PLATFORM_PLAYSTATION)
         gmtime_s(&input, &timeInfo);
 #elif defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_XBOX) || defined(PLAYFAB_PLATFORM_GDK)
@@ -105,7 +105,7 @@ namespace PlayFab
 
     inline tm Iso8601StringToTm(const std::string& utcString)
     {
-        tm timeInfo{ 0 };
+        tm timeInfo = tm();
         std::istringstream iss(utcString);
         iss >> std::get_time(&timeInfo, TIMESTAMP_READ_FORMAT);
         return timeInfo;
