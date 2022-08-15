@@ -5486,6 +5486,7 @@ namespace PlayFab
             GenericErrorCodesAutomationRuleAlreadyExists,
             GenericErrorCodesAutomationRuleLimitExceeded,
             GenericErrorCodesInvalidGooglePlayGamesServerAuthCode,
+            GenericErrorCodesStorageAccountNotFound,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8318,6 +8319,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesInvalidGooglePlayGamesServerAuthCode)
             {
                 output = Json::Value("InvalidGooglePlayGamesServerAuthCode");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStorageAccountNotFound)
+            {
+                output = Json::Value("StorageAccountNotFound");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -11796,6 +11802,11 @@ namespace PlayFab
             if (inputStr == "InvalidGooglePlayGamesServerAuthCode")
             {
                 output = GenericErrorCodes::GenericErrorCodesInvalidGooglePlayGamesServerAuthCode;
+                return;
+            }
+            if (inputStr == "StorageAccountNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStorageAccountNotFound;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
