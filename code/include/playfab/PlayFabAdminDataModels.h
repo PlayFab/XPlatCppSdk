@@ -5575,6 +5575,7 @@ namespace PlayFab
             GenericErrorCodesPartyVersionNotFound,
             GenericErrorCodesMultiplayerServerBuildReferencedByMatchmakingQueue,
             GenericErrorCodesMultiplayerServerBuildReferencedByBuildAlias,
+            GenericErrorCodesMultiplayerServerBuildAliasReferencedByMatchmakingQueue,
             GenericErrorCodesExperimentationExperimentStopped,
             GenericErrorCodesExperimentationExperimentRunning,
             GenericErrorCodesExperimentationExperimentNotFound,
@@ -8764,6 +8765,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerBuildReferencedByBuildAlias)
             {
                 output = Json::Value("MultiplayerServerBuildReferencedByBuildAlias");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMultiplayerServerBuildAliasReferencedByMatchmakingQueue)
+            {
+                output = Json::Value("MultiplayerServerBuildAliasReferencedByMatchmakingQueue");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesExperimentationExperimentStopped)
@@ -12247,6 +12253,11 @@ namespace PlayFab
             if (inputStr == "MultiplayerServerBuildReferencedByBuildAlias")
             {
                 output = GenericErrorCodes::GenericErrorCodesMultiplayerServerBuildReferencedByBuildAlias;
+                return;
+            }
+            if (inputStr == "MultiplayerServerBuildAliasReferencedByMatchmakingQueue")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMultiplayerServerBuildAliasReferencedByMatchmakingQueue;
                 return;
             }
             if (inputStr == "ExperimentationExperimentStopped")
@@ -19875,7 +19886,6 @@ namespace PlayFab
         {
             Boxed<Uint32> DurationInHours;
             std::string IPAddress;
-            std::string MACAddress;
             std::string PlayFabId;
             std::string Reason;
 
@@ -19883,7 +19893,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 DurationInHours(),
                 IPAddress(),
-                MACAddress(),
                 PlayFabId(),
                 Reason()
             {}
@@ -19892,7 +19901,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 DurationInHours(src.DurationInHours),
                 IPAddress(src.IPAddress),
-                MACAddress(src.MACAddress),
                 PlayFabId(src.PlayFabId),
                 Reason(src.Reason)
             {}
@@ -19903,7 +19911,6 @@ namespace PlayFab
             {
                 FromJsonUtilP(input["DurationInHours"], DurationInHours);
                 FromJsonUtilS(input["IPAddress"], IPAddress);
-                FromJsonUtilS(input["MACAddress"], MACAddress);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["Reason"], Reason);
             }
@@ -19913,7 +19920,6 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_DurationInHours; ToJsonUtilP(DurationInHours, each_DurationInHours); output["DurationInHours"] = each_DurationInHours;
                 Json::Value each_IPAddress; ToJsonUtilS(IPAddress, each_IPAddress); output["IPAddress"] = each_IPAddress;
-                Json::Value each_MACAddress; ToJsonUtilS(MACAddress, each_MACAddress); output["MACAddress"] = each_MACAddress;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_Reason; ToJsonUtilS(Reason, each_Reason); output["Reason"] = each_Reason;
                 return output;
@@ -29929,7 +29935,6 @@ namespace PlayFab
             std::string BanId;
             Boxed<time_t> Expires;
             std::string IPAddress;
-            std::string MACAddress;
             Boxed<bool> Permanent;
             std::string Reason;
 
@@ -29939,7 +29944,6 @@ namespace PlayFab
                 BanId(),
                 Expires(),
                 IPAddress(),
-                MACAddress(),
                 Permanent(),
                 Reason()
             {}
@@ -29950,7 +29954,6 @@ namespace PlayFab
                 BanId(src.BanId),
                 Expires(src.Expires),
                 IPAddress(src.IPAddress),
-                MACAddress(src.MACAddress),
                 Permanent(src.Permanent),
                 Reason(src.Reason)
             {}
@@ -29963,7 +29966,6 @@ namespace PlayFab
                 FromJsonUtilS(input["BanId"], BanId);
                 FromJsonUtilT(input["Expires"], Expires);
                 FromJsonUtilS(input["IPAddress"], IPAddress);
-                FromJsonUtilS(input["MACAddress"], MACAddress);
                 FromJsonUtilP(input["Permanent"], Permanent);
                 FromJsonUtilS(input["Reason"], Reason);
             }
@@ -29975,7 +29977,6 @@ namespace PlayFab
                 Json::Value each_BanId; ToJsonUtilS(BanId, each_BanId); output["BanId"] = each_BanId;
                 Json::Value each_Expires; ToJsonUtilT(Expires, each_Expires); output["Expires"] = each_Expires;
                 Json::Value each_IPAddress; ToJsonUtilS(IPAddress, each_IPAddress); output["IPAddress"] = each_IPAddress;
-                Json::Value each_MACAddress; ToJsonUtilS(MACAddress, each_MACAddress); output["MACAddress"] = each_MACAddress;
                 Json::Value each_Permanent; ToJsonUtilP(Permanent, each_Permanent); output["Permanent"] = each_Permanent;
                 Json::Value each_Reason; ToJsonUtilS(Reason, each_Reason); output["Reason"] = each_Reason;
                 return output;
