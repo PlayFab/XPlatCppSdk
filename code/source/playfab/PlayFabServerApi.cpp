@@ -3557,6 +3557,104 @@ namespace PlayFab
         }
     }
 
+    void PlayFabServerAPI::LinkNintendoServiceAccount(
+        LinkNintendoServiceAccountRequest& request,
+        const ProcessApiCallback<EmptyResult> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
+        std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-SecretKey", settings->developerSecretKey);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Server/LinkNintendoServiceAccount",
+            headers,
+            jsonAsString,
+            OnLinkNintendoServiceAccountResult,
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabServerAPI::OnLinkNintendoServiceAccountResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        EmptyResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = (*static_cast<ProcessApiCallback<EmptyResult> *>(internalPtr.get()));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabServerAPI::LinkNintendoSwitchDeviceId(
+        LinkNintendoSwitchDeviceIdRequest& request,
+        const ProcessApiCallback<LinkNintendoSwitchDeviceIdResult> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
+        std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-SecretKey", settings->developerSecretKey);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Server/LinkNintendoSwitchDeviceId",
+            headers,
+            jsonAsString,
+            OnLinkNintendoSwitchDeviceIdResult,
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LinkNintendoSwitchDeviceIdResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabServerAPI::OnLinkNintendoSwitchDeviceIdResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        LinkNintendoSwitchDeviceIdResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = (*static_cast<ProcessApiCallback<LinkNintendoSwitchDeviceIdResult> *>(internalPtr.get()));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
     void PlayFabServerAPI::LinkPSNAccount(
         LinkPSNAccountRequest& request,
         const ProcessApiCallback<LinkPSNAccountResult> callback,
@@ -5512,6 +5610,104 @@ namespace PlayFab
             if (internalPtr.get() != nullptr)
             {
                 const auto& callback = (*static_cast<ProcessApiCallback<ModifyUserVirtualCurrencyResult> *>(internalPtr.get()));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabServerAPI::UnlinkNintendoServiceAccount(
+        UnlinkNintendoServiceAccountRequest& request,
+        const ProcessApiCallback<EmptyResponse> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
+        std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-SecretKey", settings->developerSecretKey);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Server/UnlinkNintendoServiceAccount",
+            headers,
+            jsonAsString,
+            OnUnlinkNintendoServiceAccountResult,
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabServerAPI::OnUnlinkNintendoServiceAccountResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        EmptyResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = (*static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr.get()));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabServerAPI::UnlinkNintendoSwitchDeviceId(
+        UnlinkNintendoSwitchDeviceIdRequest& request,
+        const ProcessApiCallback<UnlinkNintendoSwitchDeviceIdResult> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
+        std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-SecretKey", settings->developerSecretKey);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Server/UnlinkNintendoSwitchDeviceId",
+            headers,
+            jsonAsString,
+            OnUnlinkNintendoSwitchDeviceIdResult,
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UnlinkNintendoSwitchDeviceIdResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabServerAPI::OnUnlinkNintendoSwitchDeviceIdResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        UnlinkNintendoSwitchDeviceIdResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = (*static_cast<ProcessApiCallback<UnlinkNintendoSwitchDeviceIdResult> *>(internalPtr.get()));
                 callback(outResult, container.GetCustomData());
             }
         }

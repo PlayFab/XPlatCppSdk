@@ -6028,24 +6028,18 @@ namespace PlayFab
 
         struct GetMultiplayerServerDetailsRequest : public PlayFabRequestCommon
         {
-            std::string BuildId;
             std::map<std::string, std::string> CustomTags;
-            std::string Region;
             std::string SessionId;
 
             GetMultiplayerServerDetailsRequest() :
                 PlayFabRequestCommon(),
-                BuildId(),
                 CustomTags(),
-                Region(),
                 SessionId()
             {}
 
             GetMultiplayerServerDetailsRequest(const GetMultiplayerServerDetailsRequest& src) :
                 PlayFabRequestCommon(),
-                BuildId(src.BuildId),
                 CustomTags(src.CustomTags),
-                Region(src.Region),
                 SessionId(src.SessionId)
             {}
 
@@ -6053,18 +6047,14 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
-                FromJsonUtilS(input["BuildId"], BuildId);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
-                FromJsonUtilS(input["Region"], Region);
                 FromJsonUtilS(input["SessionId"], SessionId);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
-                Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
                 Json::Value each_SessionId; ToJsonUtilS(SessionId, each_SessionId); output["SessionId"] = each_SessionId;
                 return output;
             }
