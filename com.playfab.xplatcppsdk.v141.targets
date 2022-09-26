@@ -12,9 +12,9 @@
         %(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)lib\x64\Debug\lib_json.lib" />
-    <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)lib\x64\Debug\XPlatCppWindows.lib" />
+  <ItemGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)lib\x64\Release\lib_json.lib" />
+    <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)lib\x64\Release\XPlatCppWindows.lib" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
