@@ -1,18 +1,18 @@
 configurations {
     Toolset {
         key : "PlatformToolset";
-        choices: { v141 };
+        choices: { v142 };
     };
 }
 
 nuget {
     nuspec {
-        id = "com.playfab.xplatcppsdk.v141";
+        id = "Azure.PlayFab.XPlatCppSdk";
         version : 3.94.220926;
-        title: "PlayFab Cross Platform C++ Sdk for Visual Studio 2017";
+        title: "PlayFab Cross Platform C++ Sdk for Visual Studio 2019+";
         summary: "PlayFab is the unified backend platform for games and everything you need to build and operate your game, all in one place, so you can focus on creating and delivering a great player experience.";
         authors: "PlayFab";
-        owners: "PlayFab";
+        owners: "Microsoft Corp";
         licenseUrl: "https://raw.githubusercontent.com/PlayFab/XPlatCppSdk/master/LICENSE";
         projectUrl: "https://github.com/PlayFab/XPlatCppSdk";
         iconUrl: "https://playfab.com/assets/img/playfab-mark.png";
@@ -35,24 +35,30 @@ nuget {
             "code\include\playfab\**\*.h";
         };
 
-        [x64,v141,release] {
+        [x64,v142,release] {
             lib: {
                 build\Windows\x64\Release\XPlatCppWindows\XPlatCppWindows.lib; 
                 external\jsoncpp-build\x64\Release\lib_json.lib;
+                build\GDK\Gaming.Desktop.x64\Release\XPlatCppGdk\Lib\XPlatCppGdk.lib;
+                external\jsoncpp-gdk-build\Gaming.Desktop.x64\Release\lib_json.lib
             }
         };
 
-        [x64,v141,debug] {
+        [x64,v142,debug] {
             lib: {
                 build\Windows\x64\Debug\XPlatCppWindows\XPlatCppWindows.lib;
                 external\jsoncpp-build\x64\Debug\lib_json.lib;
+                build\GDK\Gaming.Desktop.x64\Debug\XPlatCppGdk\Lib\XPlatCppGdk.lib;
+                external\jsoncpp-gdk-build\Gaming.Desktop.x64\Debug\lib_json.lib
             }
         };
 
         other: {
             #destination: ${d_lib};
             build\Windows\x64\Debug\XPlatCppWindows\XPlatCppWindows.pdb;
+            build\GDK\Gaming.Desktop.x64\Debug\XPlatCppGdk\XPlatCppGdk.pdb;
             external\jsoncpp-build\x64\Debug\lib_json.pdb;
+            external\jsoncpp-gdk-build\Gaming.Desktop.x64\Debug\lib_json.pdb
         };
     };
 
