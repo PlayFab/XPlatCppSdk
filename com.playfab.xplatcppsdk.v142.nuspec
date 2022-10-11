@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>com.playfab.xplatcppsdk.v142</id>
+        <version>3.95.221010</version>
+        <authors>Microsoft</authors>
+        <owners>Microsoft</owners>
+        <projectUrl>http://github.com/PlayFab/XPlatCppSdk</projectUrl>
+        <license type="expression">Apache-2.0</license>
+        <icon>./images/icon.png</icon>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <releaseNotes>https://api.playfab.com/releaseNotes/#3.95.221010</releaseNotes>
+        <description>Microsoft Azure PlayFab XPlatCppSdk</description>
+        <copyright>&#169; Microsoft Corporation. All rights reserved.</copyright>
+        <tags>Microsoft Azure PlayFab Baas Paas JSON REST HTTP SSL API cloud liveops game gamedev native nativepackage</tags>
+    </metadata>
+    <files>
+        <file src=".\images\icon.png" target="images\icon.png" />
+        <file src=".\com.playfab.xplatcppsdk.v142.targets" target="build\native\com.playfab.xplatcppsdk.v142.targets" />
+        <file src=".\external\jsoncpp-build\x64\Release\lib_json.pdb" target="build\native\lib\x64\Release\lib_json.pdb" />
+        <file src=".\external\jsoncpp-build\x64\Release\lib_json.lib" target="build\native\lib\x64\Release\lib_json.lib" />
+        <file src=".\external\jsoncpp-build\x64\Debug\lib_json.pdb" target="build\native\lib\x64\Debug\lib_json.pdb" />
+        <file src=".\external\jsoncpp-build\x64\Debug\lib_json.lib" target="build\native\lib\x64\Debug\lib_json.lib" />
+        <file src=".\build\Windows\x64\Release\XPlatCppWindows\XPlatCppWindows.pdb" target="build\native\lib\x64\Release\XPlatCppWindows.pdb" />
+        <file src=".\build\Windows\x64\Release\XPlatCppWindows\XPlatCppWindows.lib" target="build\native\lib\x64\Release\XPlatCppWindows.lib" />
+        <file src=".\build\Windows\x64\Debug\XPlatCppWindows\XPlatCppWindows.pdb" target="build\native\lib\x64\Debug\XPlatCppWindows.pdb" />
+        <file src=".\build\Windows\x64\Debug\XPlatCppWindows\XPlatCppWindows.lib" target="build\native\lib\x64\Debug\XPlatCppWindows.lib" />
+        <file src=".\external\jsoncpp-gdk-build\Gaming.Desktop.x64\Release\lib_json.pdb" target="build\native\lib\Gaming.Desktop.x64\Release\lib_json.pdb" />
+        <file src=".\external\jsoncpp-gdk-build\Gaming.Desktop.x64\Release\lib_json.lib" target="build\native\lib\Gaming.Desktop.x64\Release\lib_json.lib" />
+        <file src=".\external\jsoncpp-gdk-build\Gaming.Desktop.x64\Debug\lib_json.lib" target="build\native\lib\Gaming.Desktop.x64\Debug\lib_json.lib" />
+        <file src=".\external\jsoncpp-gdk-build\Gaming.Desktop.x64\Debug\lib_json.pdb" target="build\native\lib\Gaming.Desktop.x64\Debug\lib_json.pdb" />
+        <file src=".\external\jsoncpp-gdk-build\Gaming.Xbox.Scarlett.x64\Release\lib_json.lib" target="build\native\lib\Gaming.Xbox.Scarlett.x64\Release\lib_json.lib" />
+        <file src=".\external\jsoncpp-gdk-build\Gaming.Xbox.Scarlett.x64\Release\lib_json.pdb" target="build\native\lib\Gaming.Xbox.Scarlett.x64\Release\lib_json.pdb" />
+        <file src=".\external\jsoncpp-gdk-build\Gaming.Xbox.Scarlett.x64\Debug\lib_json.lib" target="build\native\lib\Gaming.Xbox.Scarlett.x64\Debug\lib_json.lib" />
+        <file src=".\external\jsoncpp-gdk-build\Gaming.Xbox.Scarlett.x64\Debug\lib_json.pdb" target="build\native\lib\Gaming.Xbox.Scarlett.x64\Debug\lib_json.pdb" />
+        <file src=".\external\jsoncpp-gdk-build\Gaming.Xbox.XboxOne.x64\Release\lib_json.lib" target="build\native\lib\Gaming.Xbox.XboxOne.x64\Release\lib_json.lib" />
+        <file src=".\external\jsoncpp-gdk-build\Gaming.Xbox.XboxOne.x64\Release\lib_json.pdb" target="build\native\lib\Gaming.Xbox.XboxOne.x64\Release\lib_json.pdb" />
+        <file src=".\external\jsoncpp-gdk-build\Gaming.Xbox.XboxOne.x64\Debug\lib_json.lib" target="build\native\lib\Gaming.Xbox.XboxOne.x64\Debug\lib_json.lib" />
+        <file src=".\external\jsoncpp-gdk-build\Gaming.Xbox.XboxOne.x64\Debug\lib_json.pdb" target="build\native\lib\Gaming.Xbox.XboxOne.x64\Debug\lib_json.pdb" />
+        <file src=".\build\GDK\Gaming.Desktop.x64\Release\XPlatCppGdk\Lib\XPlatCppGdk.pdb" target="build\native\lib\Gaming.Desktop.x64\Release\XPlatCppGdk.pdb" />
+        <file src=".\build\GDK\Gaming.Desktop.x64\Release\XPlatCppGdk\Lib\XPlatCppGdk.lib" target="build\native\lib\Gaming.Desktop.x64\Release\XPlatCppGdk.lib" />
+        <file src=".\build\GDK\Gaming.Xbox.Scarlett.x64\Release\XPlatCppGdk\Lib\XPlatCppGdk.pdb" target="build\native\lib\Gaming.Xbox.Scarlett.x64\Release\XPlatCppGdk.pdb" />
+        <file src=".\build\GDK\Gaming.Xbox.Scarlett.x64\Release\XPlatCppGdk\Lib\XPlatCppGdk.lib" target="build\native\lib\Gaming.Xbox.Scarlett.x64\Release\XPlatCppGdk.lib" />
+        <file src=".\build\GDK\Gaming.Xbox.XboxOne.x64\Release\XPlatCppGdk\Lib\XPlatCppGdk.pdb" target="build\native\lib\Gaming.Xbox.XboxOne.x64\Release\XPlatCppGdk.pdb" />
+        <file src=".\build\GDK\Gaming.Xbox.XboxOne.x64\Release\XPlatCppGdk\Lib\XPlatCppGdk.lib" target="build\native\lib\Gaming.Xbox.XboxOne.x64\Release\XPlatCppGdk.lib" />
+        <file src=".\build\GDK\Gaming.Desktop.x64\Debug\XPlatCppGdk\Lib\XPlatCppGdk.pdb" target="build\native\lib\Gaming.Desktop.x64\Debug\XPlatCppGdk.pdb" />
+        <file src=".\build\GDK\Gaming.Desktop.x64\Debug\XPlatCppGdk\Lib\XPlatCppGdk.lib" target="build\native\lib\Gaming.Desktop.x64\Debug\XPlatCppGdk.lib" />
+        <file src=".\build\GDK\Gaming.Xbox.Scarlett.x64\Debug\XPlatCppGdk\Lib\XPlatCppGdk.pdb" target="build\native\lib\Gaming.Xbox.Scarlett.x64\Debug\XPlatCppGdk.pdb" />
+        <file src=".\build\GDK\Gaming.Xbox.Scarlett.x64\Debug\XPlatCppGdk\Lib\XPlatCppGdk.lib" target="build\native\lib\Gaming.Xbox.Scarlett.x64\Debug\XPlatCppGdk.lib" />
+        <file src=".\build\GDK\Gaming.Xbox.XboxOne.x64\Debug\XPlatCppGdk\Lib\XPlatCppGdk.pdb" target="build\native\lib\Gaming.Xbox.XboxOne.x64\Debug\XPlatCppGdk.pdb" />
+        <file src=".\build\GDK\Gaming.Xbox.XboxOne.x64\Debug\XPlatCppGdk\Lib\XPlatCppGdk.lib" target="build\native\lib\Gaming.Xbox.XboxOne.x64\Debug\XPlatCppGdk.lib" />
+        <file src=".\code\include\playfab\**\*.h" target="build\native\include\playfab" />
+        <file src=".\external\jsoncpp\include\json\**\*.h" target="build\native\include\json" />
+    </files>
+</package>
