@@ -5487,6 +5487,8 @@ namespace PlayFab
             GenericErrorCodesAutomationRuleLimitExceeded,
             GenericErrorCodesInvalidGooglePlayGamesServerAuthCode,
             GenericErrorCodesStorageAccountNotFound,
+            GenericErrorCodesPlayStreamConnectionFailed,
+            GenericErrorCodesInvalidEventContents,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8325,6 +8327,16 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesStorageAccountNotFound)
             {
                 output = Json::Value("StorageAccountNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayStreamConnectionFailed)
+            {
+                output = Json::Value("PlayStreamConnectionFailed");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidEventContents)
+            {
+                output = Json::Value("InvalidEventContents");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -11813,6 +11825,16 @@ namespace PlayFab
             if (inputStr == "StorageAccountNotFound")
             {
                 output = GenericErrorCodes::GenericErrorCodesStorageAccountNotFound;
+                return;
+            }
+            if (inputStr == "PlayStreamConnectionFailed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayStreamConnectionFailed;
+                return;
+            }
+            if (inputStr == "InvalidEventContents")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidEventContents;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
@@ -29683,20 +29705,17 @@ namespace PlayFab
 
         struct SetTitleDataAndOverridesRequest : public PlayFabRequestCommon
         {
-            std::map<std::string, std::string> CustomTags;
             std::list<TitleDataKeyValue> KeyValues;
             std::string OverrideLabel;
 
             SetTitleDataAndOverridesRequest() :
                 PlayFabRequestCommon(),
-                CustomTags(),
                 KeyValues(),
                 OverrideLabel()
             {}
 
             SetTitleDataAndOverridesRequest(const SetTitleDataAndOverridesRequest& src) :
                 PlayFabRequestCommon(),
-                CustomTags(src.CustomTags),
                 KeyValues(src.KeyValues),
                 OverrideLabel(src.OverrideLabel)
             {}
@@ -29705,7 +29724,6 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
-                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["KeyValues"], KeyValues);
                 FromJsonUtilS(input["OverrideLabel"], OverrideLabel);
             }
@@ -29713,7 +29731,6 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_KeyValues; ToJsonUtilO(KeyValues, each_KeyValues); output["KeyValues"] = each_KeyValues;
                 Json::Value each_OverrideLabel; ToJsonUtilS(OverrideLabel, each_OverrideLabel); output["OverrideLabel"] = each_OverrideLabel;
                 return output;
@@ -29746,20 +29763,17 @@ namespace PlayFab
 
         struct SetTitleDataRequest : public PlayFabRequestCommon
         {
-            std::map<std::string, std::string> CustomTags;
             std::string Key;
             std::string Value;
 
             SetTitleDataRequest() :
                 PlayFabRequestCommon(),
-                CustomTags(),
                 Key(),
                 Value()
             {}
 
             SetTitleDataRequest(const SetTitleDataRequest& src) :
                 PlayFabRequestCommon(),
-                CustomTags(src.CustomTags),
                 Key(src.Key),
                 Value(src.Value)
             {}
@@ -29768,7 +29782,6 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
-                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["Key"], Key);
                 FromJsonUtilS(input["Value"], Value);
             }
@@ -29776,7 +29789,6 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Key; ToJsonUtilS(Key, each_Key); output["Key"] = each_Key;
                 Json::Value each_Value; ToJsonUtilS(Value, each_Value); output["Value"] = each_Value;
                 return output;

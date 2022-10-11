@@ -1,0 +1,111 @@
+configurations {
+    Toolset {
+        key : "PlatformToolset";
+        choices: { v142 };
+    };
+}
+
+nuget {
+    nuspec {
+        id = "com.playfab.xplatcppsdk.v142";
+        version : 3.95.221010;
+        title: "PlayFab Cross Platform C++ Sdk for Visual Studio 2019+";
+        summary: "PlayFab is the unified backend platform for games and everything you need to build and operate your game, all in one place, so you can focus on creating and delivering a great player experience.";
+        authors: "PlayFab";
+        owners: "Microsoft Corp";
+        licenseUrl: "https://raw.githubusercontent.com/PlayFab/XPlatCppSdk/master/LICENSE";
+        projectUrl: "https://github.com/PlayFab/XPlatCppSdk";
+        iconUrl: "https://playfab.com/assets/img/playfab-mark.png";
+        requireLicenseAcceptance: false;
+        description: "Authentication, in-game commerce, player data, title data, inventory, characters, statistics, leaderboards, analytics and reporting, friends, multiplayer, matchmaking, tournaments, cloud script, trading, real-time event handling, player management, live ops, and server hosting for all major platforms/devices and games of any scale. This sdk gives your game the ability log into PlayFab and access cloud data and services.";
+        releaseNotes: "https://api.playfab.com/releaseNotes/#221010";
+        copyright: "Copyright 2022";
+        language: "C++";
+        tags: { PlayFab, Baas, Paas, JSON, REST, HTTP, SSL, API, cloud, liveops, game, gamedev, native };
+    };
+    
+    files {
+        json += {
+            #destination = ${d_include}json;
+            "external\jsoncpp\include\json\**\*.h";
+        };
+
+        inc += {
+            #destination = ${d_include}playfab;
+            "code\include\playfab\**\*.h";
+        };
+
+        [x64,v142,release] {
+            lib: {
+                build\Windows\x64\Release\XPlatCppWindows\XPlatCppWindows.lib; 
+                external\jsoncpp-build\x64\Release\lib_json.lib;
+            }
+        };
+
+        [x64,v142,debug] {
+            lib: {
+                build\Windows\x64\Debug\XPlatCppWindows\XPlatCppWindows.lib;
+                external\jsoncpp-build\x64\Debug\lib_json.lib;
+            }
+        };
+
+        [Gaming.Desktop.x64,v142,release] {
+            lib: {
+                build\GDK\Gaming.Desktop.x64\Release\XPlatCppGdk\Lib\XPlatCppGdk.lib;
+                external\jsoncpp-gdk-build\Gaming.Desktop.x64\Release\lib_json.lib;
+            }
+        };
+
+        [Gaming.Desktop.x64,v142,debug] {
+            lib: {
+                build\GDK\Gaming.Desktop.x64\Debug\XPlatCppGdk\Lib\XPlatCppGdk.lib;
+                external\jsoncpp-gdk-build\Gaming.Desktop.x64\Debug\lib_json.lib
+            }
+        };
+
+        [Gaming.Xbox.Scarlett.x64,v142,release] {
+            lib: {
+                build\GDK\Gaming.Xbox.Scarlett.x64\Release\XPlatCppGdk\Lib\XPlatCppGdk.lib;
+                external\jsoncpp-gdk-build\Gaming.Xbox.Scarlett.x64\Release\lib_json.lib;
+            }
+        };
+
+        [Gaming.Xbox.Scarlett.x64,v142,debug] {
+            lib: {
+                build\GDK\Gaming.Xbox.Scarlett.x64\Debug\XPlatCppGdk\Lib\XPlatCppGdk.lib;
+                external\jsoncpp-gdk-build\Gaming.Xbox.Scarlett.x64\Debug\lib_json.lib
+            }
+        };
+
+        [Gaming.Xbox.XboxOne.x64,v142,release] {
+            lib: {
+                build\GDK\Gaming.Xbox.XboxOne.x64\Release\XPlatCppGdk\Lib\XPlatCppGdk.lib;
+                external\jsoncpp-gdk-build\Gaming.Xbox.XboxOne.x64\Release\lib_json.lib;
+            }
+        };
+
+        [Gaming.Xbox.XboxOne.x64,v142,debug] {
+            lib: {
+                build\GDK\Gaming.Xbox.XboxOne.x64\Debug\XPlatCppGdk\Lib\XPlatCppGdk.lib;
+                external\jsoncpp-gdk-build\Gaming.Xbox.XboxOne.x64\Debug\lib_json.lib
+            }
+        };
+
+        other: {
+            #destination: ${d_lib};
+            build\Windows\x64\Debug\XPlatCppWindows\XPlatCppWindows.pdb;
+            build\GDK\Gaming.Desktop.x64\Debug\XPlatCppGdk\XPlatCppGdk.pdb;
+            build\GDK\Gaming.Xbox.Scarlett.x64\Debug\XPlatCppGdk\XPlatCppGdk.pdb;
+            build\GDK\Gaming.Xbox.XboxOne.x64\Debug\XPlatCppGdk\XPlatCppGdk.pdb;
+            external\jsoncpp-build\x64\Debug\lib_json.pdb;
+            external\jsoncpp-gdk-build\Gaming.Desktop.x64\Debug\lib_json.pdb;
+            external\jsoncpp-gdk-build\Gaming.Xbox.Scarlett.x64\Debug\lib_json.pdb;
+            external\jsoncpp-gdk-build\Gaming.Xbox.XboxOne.x64\Debug\lib_json.pdb;
+        };
+    };
+
+    targets {
+        Libraries += ws2_32.lib;
+        Libraries += winhttp.lib;
+    }
+}

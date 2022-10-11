@@ -68,7 +68,8 @@ namespace PlayFab
 
         AuthenticateCustomIdResult outResult;
         if (ValidateResult(outResult, container))
-        {
+        {            context->HandlePlayFabLogin("", "", outResult.EntityToken->Entity->Id, outResult.EntityToken->Entity->Type, outResult.EntityToken->EntityToken);
+
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
             {
