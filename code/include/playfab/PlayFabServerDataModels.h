@@ -18799,6 +18799,7 @@ namespace PlayFab
         {
             std::string ContinuationToken;
             std::map<std::string, std::string> CustomTags;
+            Boxed<bool> GetProfilesAsync;
             Boxed<Uint32> MaxBatchSize;
             Boxed<Uint32> SecondsToLive;
             std::string SegmentId;
@@ -18807,6 +18808,7 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 ContinuationToken(),
                 CustomTags(),
+                GetProfilesAsync(),
                 MaxBatchSize(),
                 SecondsToLive(),
                 SegmentId()
@@ -18816,6 +18818,7 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 ContinuationToken(src.ContinuationToken),
                 CustomTags(src.CustomTags),
+                GetProfilesAsync(src.GetProfilesAsync),
                 MaxBatchSize(src.MaxBatchSize),
                 SecondsToLive(src.SecondsToLive),
                 SegmentId(src.SegmentId)
@@ -18827,6 +18830,7 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["ContinuationToken"], ContinuationToken);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilP(input["GetProfilesAsync"], GetProfilesAsync);
                 FromJsonUtilP(input["MaxBatchSize"], MaxBatchSize);
                 FromJsonUtilP(input["SecondsToLive"], SecondsToLive);
                 FromJsonUtilS(input["SegmentId"], SegmentId);
@@ -18837,6 +18841,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_ContinuationToken; ToJsonUtilS(ContinuationToken, each_ContinuationToken); output["ContinuationToken"] = each_ContinuationToken;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_GetProfilesAsync; ToJsonUtilP(GetProfilesAsync, each_GetProfilesAsync); output["GetProfilesAsync"] = each_GetProfilesAsync;
                 Json::Value each_MaxBatchSize; ToJsonUtilP(MaxBatchSize, each_MaxBatchSize); output["MaxBatchSize"] = each_MaxBatchSize;
                 Json::Value each_SecondsToLive; ToJsonUtilP(SecondsToLive, each_SecondsToLive); output["SecondsToLive"] = each_SecondsToLive;
                 Json::Value each_SegmentId; ToJsonUtilS(SegmentId, each_SegmentId); output["SegmentId"] = each_SegmentId;
