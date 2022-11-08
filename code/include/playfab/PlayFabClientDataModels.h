@@ -4814,6 +4814,209 @@ namespace PlayFab
             }
         }
 
+        enum class ExternalFriendSources
+        {
+            ExternalFriendSourcesNone,
+            ExternalFriendSourcesSteam,
+            ExternalFriendSourcesFacebook,
+            ExternalFriendSourcesSteamOrFacebook,
+            ExternalFriendSourcesXbox,
+            ExternalFriendSourcesSteamOrXbox,
+            ExternalFriendSourcesFacebookOrXbox,
+            ExternalFriendSourcesSteamOrFacebookOrXbox,
+            ExternalFriendSourcesPsn,
+            ExternalFriendSourcesSteamOrPsn,
+            ExternalFriendSourcesFacebookOrPsn,
+            ExternalFriendSourcesSteamOrFacebookOrPsn,
+            ExternalFriendSourcesXboxOrPsn,
+            ExternalFriendSourcesSteamOrXboxOrPsn,
+            ExternalFriendSourcesFacebookOrXboxOrPsn,
+            ExternalFriendSourcesSteamOrFacebookOrXboxOrPsn,
+            ExternalFriendSourcesAll
+        };
+
+        inline void ToJsonEnum(const ExternalFriendSources input, Json::Value& output)
+        {
+            if (input == ExternalFriendSources::ExternalFriendSourcesNone)
+            {
+                output = Json::Value("None");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesSteam)
+            {
+                output = Json::Value("Steam");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesFacebook)
+            {
+                output = Json::Value("Facebook");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrFacebook)
+            {
+                output = Json::Value("SteamOrFacebook");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesXbox)
+            {
+                output = Json::Value("Xbox");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrXbox)
+            {
+                output = Json::Value("SteamOrXbox");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesFacebookOrXbox)
+            {
+                output = Json::Value("FacebookOrXbox");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrFacebookOrXbox)
+            {
+                output = Json::Value("SteamOrFacebookOrXbox");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesPsn)
+            {
+                output = Json::Value("Psn");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrPsn)
+            {
+                output = Json::Value("SteamOrPsn");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesFacebookOrPsn)
+            {
+                output = Json::Value("FacebookOrPsn");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrFacebookOrPsn)
+            {
+                output = Json::Value("SteamOrFacebookOrPsn");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesXboxOrPsn)
+            {
+                output = Json::Value("XboxOrPsn");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrXboxOrPsn)
+            {
+                output = Json::Value("SteamOrXboxOrPsn");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesFacebookOrXboxOrPsn)
+            {
+                output = Json::Value("FacebookOrXboxOrPsn");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrFacebookOrXboxOrPsn)
+            {
+                output = Json::Value("SteamOrFacebookOrXboxOrPsn");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesAll)
+            {
+                output = Json::Value("All");
+                return;
+            }
+        }
+        inline void FromJsonEnum(const Json::Value& input, ExternalFriendSources& output)
+        {
+            if (!input.isString())
+            {
+                return;
+            }
+            const std::string& inputStr = input.asString();
+            if (inputStr == "None")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesNone;
+                return;
+            }
+            if (inputStr == "Steam")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesSteam;
+                return;
+            }
+            if (inputStr == "Facebook")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesFacebook;
+                return;
+            }
+            if (inputStr == "SteamOrFacebook")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesSteamOrFacebook;
+                return;
+            }
+            if (inputStr == "Xbox")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesXbox;
+                return;
+            }
+            if (inputStr == "SteamOrXbox")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesSteamOrXbox;
+                return;
+            }
+            if (inputStr == "FacebookOrXbox")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesFacebookOrXbox;
+                return;
+            }
+            if (inputStr == "SteamOrFacebookOrXbox")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesSteamOrFacebookOrXbox;
+                return;
+            }
+            if (inputStr == "Psn")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesPsn;
+                return;
+            }
+            if (inputStr == "SteamOrPsn")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesSteamOrPsn;
+                return;
+            }
+            if (inputStr == "FacebookOrPsn")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesFacebookOrPsn;
+                return;
+            }
+            if (inputStr == "SteamOrFacebookOrPsn")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesSteamOrFacebookOrPsn;
+                return;
+            }
+            if (inputStr == "XboxOrPsn")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesXboxOrPsn;
+                return;
+            }
+            if (inputStr == "SteamOrXboxOrPsn")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesSteamOrXboxOrPsn;
+                return;
+            }
+            if (inputStr == "FacebookOrXboxOrPsn")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesFacebookOrXboxOrPsn;
+                return;
+            }
+            if (inputStr == "SteamOrFacebookOrXboxOrPsn")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesSteamOrFacebookOrXboxOrPsn;
+                return;
+            }
+            if (inputStr == "All")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesAll;
+                return;
+            }
+        }
+
         enum class GameInstanceState
         {
             GameInstanceStateOpen,
@@ -10945,14 +11148,12 @@ namespace PlayFab
 
         struct GetCharacterLeaderboardRequest : public PlayFabRequestCommon
         {
-            std::string CharacterType;
             Boxed<Int32> MaxResultsCount;
             Int32 StartPosition;
             std::string StatisticName;
 
             GetCharacterLeaderboardRequest() :
                 PlayFabRequestCommon(),
-                CharacterType(),
                 MaxResultsCount(),
                 StartPosition(),
                 StatisticName()
@@ -10960,7 +11161,6 @@ namespace PlayFab
 
             GetCharacterLeaderboardRequest(const GetCharacterLeaderboardRequest& src) :
                 PlayFabRequestCommon(),
-                CharacterType(src.CharacterType),
                 MaxResultsCount(src.MaxResultsCount),
                 StartPosition(src.StartPosition),
                 StatisticName(src.StatisticName)
@@ -10970,7 +11170,6 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
-                FromJsonUtilS(input["CharacterType"], CharacterType);
                 FromJsonUtilP(input["MaxResultsCount"], MaxResultsCount);
                 FromJsonUtilP(input["StartPosition"], StartPosition);
                 FromJsonUtilS(input["StatisticName"], StatisticName);
@@ -10979,7 +11178,6 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                Json::Value each_CharacterType; ToJsonUtilS(CharacterType, each_CharacterType); output["CharacterType"] = each_CharacterType;
                 Json::Value each_MaxResultsCount; ToJsonUtilP(MaxResultsCount, each_MaxResultsCount); output["MaxResultsCount"] = each_MaxResultsCount;
                 Json::Value each_StartPosition; ToJsonUtilP(StartPosition, each_StartPosition); output["StartPosition"] = each_StartPosition;
                 Json::Value each_StatisticName; ToJsonUtilS(StatisticName, each_StatisticName); output["StatisticName"] = each_StatisticName;
@@ -11254,6 +11452,7 @@ namespace PlayFab
         struct GetFriendLeaderboardAroundPlayerRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
+            Boxed<ExternalFriendSources> ExternalPlatformFriends;
             Boxed<bool> IncludeFacebookFriends;
             Boxed<bool> IncludeSteamFriends;
             Boxed<Int32> MaxResultsCount;
@@ -11266,6 +11465,7 @@ namespace PlayFab
             GetFriendLeaderboardAroundPlayerRequest() :
                 PlayFabRequestCommon(),
                 CustomTags(),
+                ExternalPlatformFriends(),
                 IncludeFacebookFriends(),
                 IncludeSteamFriends(),
                 MaxResultsCount(),
@@ -11279,6 +11479,7 @@ namespace PlayFab
             GetFriendLeaderboardAroundPlayerRequest(const GetFriendLeaderboardAroundPlayerRequest& src) :
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
+                ExternalPlatformFriends(src.ExternalPlatformFriends),
                 IncludeFacebookFriends(src.IncludeFacebookFriends),
                 IncludeSteamFriends(src.IncludeSteamFriends),
                 MaxResultsCount(src.MaxResultsCount),
@@ -11294,6 +11495,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilE(input["ExternalPlatformFriends"], ExternalPlatformFriends);
                 FromJsonUtilP(input["IncludeFacebookFriends"], IncludeFacebookFriends);
                 FromJsonUtilP(input["IncludeSteamFriends"], IncludeSteamFriends);
                 FromJsonUtilP(input["MaxResultsCount"], MaxResultsCount);
@@ -11308,6 +11510,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_ExternalPlatformFriends; ToJsonUtilE(ExternalPlatformFriends, each_ExternalPlatformFriends); output["ExternalPlatformFriends"] = each_ExternalPlatformFriends;
                 Json::Value each_IncludeFacebookFriends; ToJsonUtilP(IncludeFacebookFriends, each_IncludeFacebookFriends); output["IncludeFacebookFriends"] = each_IncludeFacebookFriends;
                 Json::Value each_IncludeSteamFriends; ToJsonUtilP(IncludeSteamFriends, each_IncludeSteamFriends); output["IncludeSteamFriends"] = each_IncludeSteamFriends;
                 Json::Value each_MaxResultsCount; ToJsonUtilP(MaxResultsCount, each_MaxResultsCount); output["MaxResultsCount"] = each_MaxResultsCount;
@@ -11411,6 +11614,7 @@ namespace PlayFab
         struct GetFriendLeaderboardRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
+            Boxed<ExternalFriendSources> ExternalPlatformFriends;
             Boxed<bool> IncludeFacebookFriends;
             Boxed<bool> IncludeSteamFriends;
             Boxed<Int32> MaxResultsCount;
@@ -11423,6 +11627,7 @@ namespace PlayFab
             GetFriendLeaderboardRequest() :
                 PlayFabRequestCommon(),
                 CustomTags(),
+                ExternalPlatformFriends(),
                 IncludeFacebookFriends(),
                 IncludeSteamFriends(),
                 MaxResultsCount(),
@@ -11436,6 +11641,7 @@ namespace PlayFab
             GetFriendLeaderboardRequest(const GetFriendLeaderboardRequest& src) :
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
+                ExternalPlatformFriends(src.ExternalPlatformFriends),
                 IncludeFacebookFriends(src.IncludeFacebookFriends),
                 IncludeSteamFriends(src.IncludeSteamFriends),
                 MaxResultsCount(src.MaxResultsCount),
@@ -11451,6 +11657,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilE(input["ExternalPlatformFriends"], ExternalPlatformFriends);
                 FromJsonUtilP(input["IncludeFacebookFriends"], IncludeFacebookFriends);
                 FromJsonUtilP(input["IncludeSteamFriends"], IncludeSteamFriends);
                 FromJsonUtilP(input["MaxResultsCount"], MaxResultsCount);
@@ -11465,6 +11672,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_ExternalPlatformFriends; ToJsonUtilE(ExternalPlatformFriends, each_ExternalPlatformFriends); output["ExternalPlatformFriends"] = each_ExternalPlatformFriends;
                 Json::Value each_IncludeFacebookFriends; ToJsonUtilP(IncludeFacebookFriends, each_IncludeFacebookFriends); output["IncludeFacebookFriends"] = each_IncludeFacebookFriends;
                 Json::Value each_IncludeSteamFriends; ToJsonUtilP(IncludeSteamFriends, each_IncludeSteamFriends); output["IncludeSteamFriends"] = each_IncludeSteamFriends;
                 Json::Value each_MaxResultsCount; ToJsonUtilP(MaxResultsCount, each_MaxResultsCount); output["MaxResultsCount"] = each_MaxResultsCount;
@@ -11480,6 +11688,7 @@ namespace PlayFab
         struct GetFriendsListRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
+            Boxed<ExternalFriendSources> ExternalPlatformFriends;
             Boxed<bool> IncludeFacebookFriends;
             Boxed<bool> IncludeSteamFriends;
             Boxed<PlayerProfileViewConstraints> ProfileConstraints;
@@ -11488,6 +11697,7 @@ namespace PlayFab
             GetFriendsListRequest() :
                 PlayFabRequestCommon(),
                 CustomTags(),
+                ExternalPlatformFriends(),
                 IncludeFacebookFriends(),
                 IncludeSteamFriends(),
                 ProfileConstraints(),
@@ -11497,6 +11707,7 @@ namespace PlayFab
             GetFriendsListRequest(const GetFriendsListRequest& src) :
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
+                ExternalPlatformFriends(src.ExternalPlatformFriends),
                 IncludeFacebookFriends(src.IncludeFacebookFriends),
                 IncludeSteamFriends(src.IncludeSteamFriends),
                 ProfileConstraints(src.ProfileConstraints),
@@ -11508,6 +11719,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilE(input["ExternalPlatformFriends"], ExternalPlatformFriends);
                 FromJsonUtilP(input["IncludeFacebookFriends"], IncludeFacebookFriends);
                 FromJsonUtilP(input["IncludeSteamFriends"], IncludeSteamFriends);
                 FromJsonUtilO(input["ProfileConstraints"], ProfileConstraints);
@@ -11518,6 +11730,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_ExternalPlatformFriends; ToJsonUtilE(ExternalPlatformFriends, each_ExternalPlatformFriends); output["ExternalPlatformFriends"] = each_ExternalPlatformFriends;
                 Json::Value each_IncludeFacebookFriends; ToJsonUtilP(IncludeFacebookFriends, each_IncludeFacebookFriends); output["IncludeFacebookFriends"] = each_IncludeFacebookFriends;
                 Json::Value each_IncludeSteamFriends; ToJsonUtilP(IncludeSteamFriends, each_IncludeSteamFriends); output["IncludeSteamFriends"] = each_IncludeSteamFriends;
                 Json::Value each_ProfileConstraints; ToJsonUtilO(ProfileConstraints, each_ProfileConstraints); output["ProfileConstraints"] = each_ProfileConstraints;
@@ -11558,14 +11771,12 @@ namespace PlayFab
         struct GetLeaderboardAroundCharacterRequest : public PlayFabRequestCommon
         {
             std::string CharacterId;
-            std::string CharacterType;
             Boxed<Int32> MaxResultsCount;
             std::string StatisticName;
 
             GetLeaderboardAroundCharacterRequest() :
                 PlayFabRequestCommon(),
                 CharacterId(),
-                CharacterType(),
                 MaxResultsCount(),
                 StatisticName()
             {}
@@ -11573,7 +11784,6 @@ namespace PlayFab
             GetLeaderboardAroundCharacterRequest(const GetLeaderboardAroundCharacterRequest& src) :
                 PlayFabRequestCommon(),
                 CharacterId(src.CharacterId),
-                CharacterType(src.CharacterType),
                 MaxResultsCount(src.MaxResultsCount),
                 StatisticName(src.StatisticName)
             {}
@@ -11583,7 +11793,6 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CharacterId"], CharacterId);
-                FromJsonUtilS(input["CharacterType"], CharacterType);
                 FromJsonUtilP(input["MaxResultsCount"], MaxResultsCount);
                 FromJsonUtilS(input["StatisticName"], StatisticName);
             }
@@ -11592,7 +11801,6 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_CharacterId; ToJsonUtilS(CharacterId, each_CharacterId); output["CharacterId"] = each_CharacterId;
-                Json::Value each_CharacterType; ToJsonUtilS(CharacterType, each_CharacterType); output["CharacterType"] = each_CharacterType;
                 Json::Value each_MaxResultsCount; ToJsonUtilP(MaxResultsCount, each_MaxResultsCount); output["MaxResultsCount"] = each_MaxResultsCount;
                 Json::Value each_StatisticName; ToJsonUtilS(StatisticName, each_StatisticName); output["StatisticName"] = each_StatisticName;
                 return output;

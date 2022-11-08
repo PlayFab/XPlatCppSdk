@@ -1382,6 +1382,209 @@ namespace PlayFab
             }
         }
 
+        enum class ExternalFriendSources
+        {
+            ExternalFriendSourcesNone,
+            ExternalFriendSourcesSteam,
+            ExternalFriendSourcesFacebook,
+            ExternalFriendSourcesSteamOrFacebook,
+            ExternalFriendSourcesXbox,
+            ExternalFriendSourcesSteamOrXbox,
+            ExternalFriendSourcesFacebookOrXbox,
+            ExternalFriendSourcesSteamOrFacebookOrXbox,
+            ExternalFriendSourcesPsn,
+            ExternalFriendSourcesSteamOrPsn,
+            ExternalFriendSourcesFacebookOrPsn,
+            ExternalFriendSourcesSteamOrFacebookOrPsn,
+            ExternalFriendSourcesXboxOrPsn,
+            ExternalFriendSourcesSteamOrXboxOrPsn,
+            ExternalFriendSourcesFacebookOrXboxOrPsn,
+            ExternalFriendSourcesSteamOrFacebookOrXboxOrPsn,
+            ExternalFriendSourcesAll
+        };
+
+        inline void ToJsonEnum(const ExternalFriendSources input, Json::Value& output)
+        {
+            if (input == ExternalFriendSources::ExternalFriendSourcesNone)
+            {
+                output = Json::Value("None");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesSteam)
+            {
+                output = Json::Value("Steam");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesFacebook)
+            {
+                output = Json::Value("Facebook");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrFacebook)
+            {
+                output = Json::Value("SteamOrFacebook");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesXbox)
+            {
+                output = Json::Value("Xbox");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrXbox)
+            {
+                output = Json::Value("SteamOrXbox");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesFacebookOrXbox)
+            {
+                output = Json::Value("FacebookOrXbox");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrFacebookOrXbox)
+            {
+                output = Json::Value("SteamOrFacebookOrXbox");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesPsn)
+            {
+                output = Json::Value("Psn");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrPsn)
+            {
+                output = Json::Value("SteamOrPsn");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesFacebookOrPsn)
+            {
+                output = Json::Value("FacebookOrPsn");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrFacebookOrPsn)
+            {
+                output = Json::Value("SteamOrFacebookOrPsn");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesXboxOrPsn)
+            {
+                output = Json::Value("XboxOrPsn");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrXboxOrPsn)
+            {
+                output = Json::Value("SteamOrXboxOrPsn");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesFacebookOrXboxOrPsn)
+            {
+                output = Json::Value("FacebookOrXboxOrPsn");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrFacebookOrXboxOrPsn)
+            {
+                output = Json::Value("SteamOrFacebookOrXboxOrPsn");
+                return;
+            }
+            if (input == ExternalFriendSources::ExternalFriendSourcesAll)
+            {
+                output = Json::Value("All");
+                return;
+            }
+        }
+        inline void FromJsonEnum(const Json::Value& input, ExternalFriendSources& output)
+        {
+            if (!input.isString())
+            {
+                return;
+            }
+            const std::string& inputStr = input.asString();
+            if (inputStr == "None")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesNone;
+                return;
+            }
+            if (inputStr == "Steam")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesSteam;
+                return;
+            }
+            if (inputStr == "Facebook")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesFacebook;
+                return;
+            }
+            if (inputStr == "SteamOrFacebook")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesSteamOrFacebook;
+                return;
+            }
+            if (inputStr == "Xbox")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesXbox;
+                return;
+            }
+            if (inputStr == "SteamOrXbox")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesSteamOrXbox;
+                return;
+            }
+            if (inputStr == "FacebookOrXbox")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesFacebookOrXbox;
+                return;
+            }
+            if (inputStr == "SteamOrFacebookOrXbox")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesSteamOrFacebookOrXbox;
+                return;
+            }
+            if (inputStr == "Psn")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesPsn;
+                return;
+            }
+            if (inputStr == "SteamOrPsn")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesSteamOrPsn;
+                return;
+            }
+            if (inputStr == "FacebookOrPsn")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesFacebookOrPsn;
+                return;
+            }
+            if (inputStr == "SteamOrFacebookOrPsn")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesSteamOrFacebookOrPsn;
+                return;
+            }
+            if (inputStr == "XboxOrPsn")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesXboxOrPsn;
+                return;
+            }
+            if (inputStr == "SteamOrXboxOrPsn")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesSteamOrXboxOrPsn;
+                return;
+            }
+            if (inputStr == "FacebookOrXboxOrPsn")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesFacebookOrXboxOrPsn;
+                return;
+            }
+            if (inputStr == "SteamOrFacebookOrXboxOrPsn")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesSteamOrFacebookOrXboxOrPsn;
+                return;
+            }
+            if (inputStr == "All")
+            {
+                output = ExternalFriendSources::ExternalFriendSourcesAll;
+                return;
+            }
+        }
+
         enum class MembershipLock
         {
             MembershipLockUnlocked,
@@ -4932,8 +5135,9 @@ namespace PlayFab
         struct FindFriendLobbiesRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
-            bool ExcludeFacebookFriends;
-            bool ExcludeSteamFriends;
+            Boxed<bool> ExcludeFacebookFriends;
+            Boxed<bool> ExcludeSteamFriends;
+            Boxed<ExternalFriendSources> ExternalPlatformFriends;
             std::string Filter;
             std::string OrderBy;
             Boxed<PaginationRequest> Pagination;
@@ -4944,6 +5148,7 @@ namespace PlayFab
                 CustomTags(),
                 ExcludeFacebookFriends(),
                 ExcludeSteamFriends(),
+                ExternalPlatformFriends(),
                 Filter(),
                 OrderBy(),
                 Pagination(),
@@ -4955,6 +5160,7 @@ namespace PlayFab
                 CustomTags(src.CustomTags),
                 ExcludeFacebookFriends(src.ExcludeFacebookFriends),
                 ExcludeSteamFriends(src.ExcludeSteamFriends),
+                ExternalPlatformFriends(src.ExternalPlatformFriends),
                 Filter(src.Filter),
                 OrderBy(src.OrderBy),
                 Pagination(src.Pagination),
@@ -4968,6 +5174,7 @@ namespace PlayFab
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilP(input["ExcludeFacebookFriends"], ExcludeFacebookFriends);
                 FromJsonUtilP(input["ExcludeSteamFriends"], ExcludeSteamFriends);
+                FromJsonUtilE(input["ExternalPlatformFriends"], ExternalPlatformFriends);
                 FromJsonUtilS(input["Filter"], Filter);
                 FromJsonUtilS(input["OrderBy"], OrderBy);
                 FromJsonUtilO(input["Pagination"], Pagination);
@@ -4980,6 +5187,7 @@ namespace PlayFab
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_ExcludeFacebookFriends; ToJsonUtilP(ExcludeFacebookFriends, each_ExcludeFacebookFriends); output["ExcludeFacebookFriends"] = each_ExcludeFacebookFriends;
                 Json::Value each_ExcludeSteamFriends; ToJsonUtilP(ExcludeSteamFriends, each_ExcludeSteamFriends); output["ExcludeSteamFriends"] = each_ExcludeSteamFriends;
+                Json::Value each_ExternalPlatformFriends; ToJsonUtilE(ExternalPlatformFriends, each_ExternalPlatformFriends); output["ExternalPlatformFriends"] = each_ExternalPlatformFriends;
                 Json::Value each_Filter; ToJsonUtilS(Filter, each_Filter); output["Filter"] = each_Filter;
                 Json::Value each_OrderBy; ToJsonUtilS(OrderBy, each_OrderBy); output["OrderBy"] = each_OrderBy;
                 Json::Value each_Pagination; ToJsonUtilO(Pagination, each_Pagination); output["Pagination"] = each_Pagination;
