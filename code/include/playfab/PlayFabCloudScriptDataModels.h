@@ -4879,7 +4879,7 @@ namespace PlayFab
         struct PostFunctionResultForScheduledTaskRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
-            EntityKey Entity;
+            Boxed<EntityKey> Entity;
             ExecuteFunctionResult FunctionResult;
             NameIdentifier ScheduledTaskId;
 

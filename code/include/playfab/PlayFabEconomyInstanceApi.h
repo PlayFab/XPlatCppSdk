@@ -68,6 +68,7 @@ namespace PlayFab
         void GetItemReviewSummary(EconomyModels::GetItemReviewSummaryRequest& request, const ProcessApiCallback<EconomyModels::GetItemReviewSummaryResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void GetItems(EconomyModels::GetItemsRequest& request, const ProcessApiCallback<EconomyModels::GetItemsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void GetMicrosoftStoreAccessTokens(EconomyModels::GetMicrosoftStoreAccessTokensRequest& request, const ProcessApiCallback<EconomyModels::GetMicrosoftStoreAccessTokensResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void GetTransactionHistory(EconomyModels::GetTransactionHistoryRequest& request, const ProcessApiCallback<EconomyModels::GetTransactionHistoryResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void PublishDraftItem(EconomyModels::PublishDraftItemRequest& request, const ProcessApiCallback<EconomyModels::PublishDraftItemResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void PurchaseInventoryItems(EconomyModels::PurchaseInventoryItemsRequest& request, const ProcessApiCallback<EconomyModels::PurchaseInventoryItemsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void RedeemAppleAppStoreInventoryItems(EconomyModels::RedeemAppleAppStoreInventoryItemsRequest& request, const ProcessApiCallback<EconomyModels::RedeemAppleAppStoreInventoryItemsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -113,6 +114,7 @@ namespace PlayFab
         void OnGetItemReviewSummaryResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnGetItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnGetMicrosoftStoreAccessTokensResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnGetTransactionHistoryResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnPublishDraftItemResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnPurchaseInventoryItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnRedeemAppleAppStoreInventoryItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);

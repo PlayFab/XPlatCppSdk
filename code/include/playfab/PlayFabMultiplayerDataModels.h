@@ -1387,19 +1387,8 @@ namespace PlayFab
             ExternalFriendSourcesNone,
             ExternalFriendSourcesSteam,
             ExternalFriendSourcesFacebook,
-            ExternalFriendSourcesSteamOrFacebook,
             ExternalFriendSourcesXbox,
-            ExternalFriendSourcesSteamOrXbox,
-            ExternalFriendSourcesFacebookOrXbox,
-            ExternalFriendSourcesSteamOrFacebookOrXbox,
             ExternalFriendSourcesPsn,
-            ExternalFriendSourcesSteamOrPsn,
-            ExternalFriendSourcesFacebookOrPsn,
-            ExternalFriendSourcesSteamOrFacebookOrPsn,
-            ExternalFriendSourcesXboxOrPsn,
-            ExternalFriendSourcesSteamOrXboxOrPsn,
-            ExternalFriendSourcesFacebookOrXboxOrPsn,
-            ExternalFriendSourcesSteamOrFacebookOrXboxOrPsn,
             ExternalFriendSourcesAll
         };
 
@@ -1420,69 +1409,14 @@ namespace PlayFab
                 output = Json::Value("Facebook");
                 return;
             }
-            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrFacebook)
-            {
-                output = Json::Value("SteamOrFacebook");
-                return;
-            }
             if (input == ExternalFriendSources::ExternalFriendSourcesXbox)
             {
                 output = Json::Value("Xbox");
                 return;
             }
-            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrXbox)
-            {
-                output = Json::Value("SteamOrXbox");
-                return;
-            }
-            if (input == ExternalFriendSources::ExternalFriendSourcesFacebookOrXbox)
-            {
-                output = Json::Value("FacebookOrXbox");
-                return;
-            }
-            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrFacebookOrXbox)
-            {
-                output = Json::Value("SteamOrFacebookOrXbox");
-                return;
-            }
             if (input == ExternalFriendSources::ExternalFriendSourcesPsn)
             {
                 output = Json::Value("Psn");
-                return;
-            }
-            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrPsn)
-            {
-                output = Json::Value("SteamOrPsn");
-                return;
-            }
-            if (input == ExternalFriendSources::ExternalFriendSourcesFacebookOrPsn)
-            {
-                output = Json::Value("FacebookOrPsn");
-                return;
-            }
-            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrFacebookOrPsn)
-            {
-                output = Json::Value("SteamOrFacebookOrPsn");
-                return;
-            }
-            if (input == ExternalFriendSources::ExternalFriendSourcesXboxOrPsn)
-            {
-                output = Json::Value("XboxOrPsn");
-                return;
-            }
-            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrXboxOrPsn)
-            {
-                output = Json::Value("SteamOrXboxOrPsn");
-                return;
-            }
-            if (input == ExternalFriendSources::ExternalFriendSourcesFacebookOrXboxOrPsn)
-            {
-                output = Json::Value("FacebookOrXboxOrPsn");
-                return;
-            }
-            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrFacebookOrXboxOrPsn)
-            {
-                output = Json::Value("SteamOrFacebookOrXboxOrPsn");
                 return;
             }
             if (input == ExternalFriendSources::ExternalFriendSourcesAll)
@@ -1513,69 +1447,14 @@ namespace PlayFab
                 output = ExternalFriendSources::ExternalFriendSourcesFacebook;
                 return;
             }
-            if (inputStr == "SteamOrFacebook")
-            {
-                output = ExternalFriendSources::ExternalFriendSourcesSteamOrFacebook;
-                return;
-            }
             if (inputStr == "Xbox")
             {
                 output = ExternalFriendSources::ExternalFriendSourcesXbox;
                 return;
             }
-            if (inputStr == "SteamOrXbox")
-            {
-                output = ExternalFriendSources::ExternalFriendSourcesSteamOrXbox;
-                return;
-            }
-            if (inputStr == "FacebookOrXbox")
-            {
-                output = ExternalFriendSources::ExternalFriendSourcesFacebookOrXbox;
-                return;
-            }
-            if (inputStr == "SteamOrFacebookOrXbox")
-            {
-                output = ExternalFriendSources::ExternalFriendSourcesSteamOrFacebookOrXbox;
-                return;
-            }
             if (inputStr == "Psn")
             {
                 output = ExternalFriendSources::ExternalFriendSourcesPsn;
-                return;
-            }
-            if (inputStr == "SteamOrPsn")
-            {
-                output = ExternalFriendSources::ExternalFriendSourcesSteamOrPsn;
-                return;
-            }
-            if (inputStr == "FacebookOrPsn")
-            {
-                output = ExternalFriendSources::ExternalFriendSourcesFacebookOrPsn;
-                return;
-            }
-            if (inputStr == "SteamOrFacebookOrPsn")
-            {
-                output = ExternalFriendSources::ExternalFriendSourcesSteamOrFacebookOrPsn;
-                return;
-            }
-            if (inputStr == "XboxOrPsn")
-            {
-                output = ExternalFriendSources::ExternalFriendSourcesXboxOrPsn;
-                return;
-            }
-            if (inputStr == "SteamOrXboxOrPsn")
-            {
-                output = ExternalFriendSources::ExternalFriendSourcesSteamOrXboxOrPsn;
-                return;
-            }
-            if (inputStr == "FacebookOrXboxOrPsn")
-            {
-                output = ExternalFriendSources::ExternalFriendSourcesFacebookOrXboxOrPsn;
-                return;
-            }
-            if (inputStr == "SteamOrFacebookOrXboxOrPsn")
-            {
-                output = ExternalFriendSources::ExternalFriendSourcesSteamOrFacebookOrXboxOrPsn;
                 return;
             }
             if (inputStr == "All")
