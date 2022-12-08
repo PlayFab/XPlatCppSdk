@@ -5486,9 +5486,9 @@ namespace PlayFab
             GenericErrorCodesAutomationRuleAlreadyExists,
             GenericErrorCodesAutomationRuleLimitExceeded,
             GenericErrorCodesInvalidGooglePlayGamesServerAuthCode,
-            GenericErrorCodesStorageAccountNotFound,
             GenericErrorCodesPlayStreamConnectionFailed,
             GenericErrorCodesInvalidEventContents,
+            GenericErrorCodesInsightsV1Deprecated,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8324,11 +8324,6 @@ namespace PlayFab
                 output = Json::Value("InvalidGooglePlayGamesServerAuthCode");
                 return;
             }
-            if (input == GenericErrorCodes::GenericErrorCodesStorageAccountNotFound)
-            {
-                output = Json::Value("StorageAccountNotFound");
-                return;
-            }
             if (input == GenericErrorCodes::GenericErrorCodesPlayStreamConnectionFailed)
             {
                 output = Json::Value("PlayStreamConnectionFailed");
@@ -8337,6 +8332,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesInvalidEventContents)
             {
                 output = Json::Value("InvalidEventContents");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInsightsV1Deprecated)
+            {
+                output = Json::Value("InsightsV1Deprecated");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -11822,11 +11822,6 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesInvalidGooglePlayGamesServerAuthCode;
                 return;
             }
-            if (inputStr == "StorageAccountNotFound")
-            {
-                output = GenericErrorCodes::GenericErrorCodesStorageAccountNotFound;
-                return;
-            }
             if (inputStr == "PlayStreamConnectionFailed")
             {
                 output = GenericErrorCodes::GenericErrorCodesPlayStreamConnectionFailed;
@@ -11835,6 +11830,11 @@ namespace PlayFab
             if (inputStr == "InvalidEventContents")
             {
                 output = GenericErrorCodes::GenericErrorCodesInvalidEventContents;
+                return;
+            }
+            if (inputStr == "InsightsV1Deprecated")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInsightsV1Deprecated;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
@@ -25196,6 +25196,7 @@ namespace PlayFab
             std::list<AdCampaignAttribution> AdCampaignAttributions;
             std::string AvatarUrl;
             Boxed<time_t> BannedUntil;
+            Boxed<ChurnRiskLevel> ChurnPrediction;
             std::list<ContactEmailInfo> ContactEmailAddresses;
             Boxed<time_t> Created;
             std::string DisplayName;
@@ -25220,6 +25221,7 @@ namespace PlayFab
                 AdCampaignAttributions(),
                 AvatarUrl(),
                 BannedUntil(),
+                ChurnPrediction(),
                 ContactEmailAddresses(),
                 Created(),
                 DisplayName(),
@@ -25245,6 +25247,7 @@ namespace PlayFab
                 AdCampaignAttributions(src.AdCampaignAttributions),
                 AvatarUrl(src.AvatarUrl),
                 BannedUntil(src.BannedUntil),
+                ChurnPrediction(src.ChurnPrediction),
                 ContactEmailAddresses(src.ContactEmailAddresses),
                 Created(src.Created),
                 DisplayName(src.DisplayName),
@@ -25272,6 +25275,7 @@ namespace PlayFab
                 FromJsonUtilO(input["AdCampaignAttributions"], AdCampaignAttributions);
                 FromJsonUtilS(input["AvatarUrl"], AvatarUrl);
                 FromJsonUtilT(input["BannedUntil"], BannedUntil);
+                FromJsonUtilE(input["ChurnPrediction"], ChurnPrediction);
                 FromJsonUtilO(input["ContactEmailAddresses"], ContactEmailAddresses);
                 FromJsonUtilT(input["Created"], Created);
                 FromJsonUtilS(input["DisplayName"], DisplayName);
@@ -25298,6 +25302,7 @@ namespace PlayFab
                 Json::Value each_AdCampaignAttributions; ToJsonUtilO(AdCampaignAttributions, each_AdCampaignAttributions); output["AdCampaignAttributions"] = each_AdCampaignAttributions;
                 Json::Value each_AvatarUrl; ToJsonUtilS(AvatarUrl, each_AvatarUrl); output["AvatarUrl"] = each_AvatarUrl;
                 Json::Value each_BannedUntil; ToJsonUtilT(BannedUntil, each_BannedUntil); output["BannedUntil"] = each_BannedUntil;
+                Json::Value each_ChurnPrediction; ToJsonUtilE(ChurnPrediction, each_ChurnPrediction); output["ChurnPrediction"] = each_ChurnPrediction;
                 Json::Value each_ContactEmailAddresses; ToJsonUtilO(ContactEmailAddresses, each_ContactEmailAddresses); output["ContactEmailAddresses"] = each_ContactEmailAddresses;
                 Json::Value each_Created; ToJsonUtilT(Created, each_Created); output["Created"] = each_Created;
                 Json::Value each_DisplayName; ToJsonUtilS(DisplayName, each_DisplayName); output["DisplayName"] = each_DisplayName;

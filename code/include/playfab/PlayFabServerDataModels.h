@@ -10,6 +10,66 @@ namespace PlayFab
     namespace ServerModels
     {
         // Server Enums
+        enum class ChurnRiskLevel
+        {
+            ChurnRiskLevelNoData,
+            ChurnRiskLevelLowRisk,
+            ChurnRiskLevelMediumRisk,
+            ChurnRiskLevelHighRisk
+        };
+
+        inline void ToJsonEnum(const ChurnRiskLevel input, Json::Value& output)
+        {
+            if (input == ChurnRiskLevel::ChurnRiskLevelNoData)
+            {
+                output = Json::Value("NoData");
+                return;
+            }
+            if (input == ChurnRiskLevel::ChurnRiskLevelLowRisk)
+            {
+                output = Json::Value("LowRisk");
+                return;
+            }
+            if (input == ChurnRiskLevel::ChurnRiskLevelMediumRisk)
+            {
+                output = Json::Value("MediumRisk");
+                return;
+            }
+            if (input == ChurnRiskLevel::ChurnRiskLevelHighRisk)
+            {
+                output = Json::Value("HighRisk");
+                return;
+            }
+        }
+        inline void FromJsonEnum(const Json::Value& input, ChurnRiskLevel& output)
+        {
+            if (!input.isString())
+            {
+                return;
+            }
+            const std::string& inputStr = input.asString();
+            if (inputStr == "NoData")
+            {
+                output = ChurnRiskLevel::ChurnRiskLevelNoData;
+                return;
+            }
+            if (inputStr == "LowRisk")
+            {
+                output = ChurnRiskLevel::ChurnRiskLevelLowRisk;
+                return;
+            }
+            if (inputStr == "MediumRisk")
+            {
+                output = ChurnRiskLevel::ChurnRiskLevelMediumRisk;
+                return;
+            }
+            if (inputStr == "HighRisk")
+            {
+                output = ChurnRiskLevel::ChurnRiskLevelHighRisk;
+                return;
+            }
+        }
+
         enum class CloudScriptRevisionOption
         {
             CloudScriptRevisionOptionLive,
@@ -4759,19 +4819,8 @@ namespace PlayFab
             ExternalFriendSourcesNone,
             ExternalFriendSourcesSteam,
             ExternalFriendSourcesFacebook,
-            ExternalFriendSourcesSteamOrFacebook,
             ExternalFriendSourcesXbox,
-            ExternalFriendSourcesSteamOrXbox,
-            ExternalFriendSourcesFacebookOrXbox,
-            ExternalFriendSourcesSteamOrFacebookOrXbox,
             ExternalFriendSourcesPsn,
-            ExternalFriendSourcesSteamOrPsn,
-            ExternalFriendSourcesFacebookOrPsn,
-            ExternalFriendSourcesSteamOrFacebookOrPsn,
-            ExternalFriendSourcesXboxOrPsn,
-            ExternalFriendSourcesSteamOrXboxOrPsn,
-            ExternalFriendSourcesFacebookOrXboxOrPsn,
-            ExternalFriendSourcesSteamOrFacebookOrXboxOrPsn,
             ExternalFriendSourcesAll
         };
 
@@ -4792,69 +4841,14 @@ namespace PlayFab
                 output = Json::Value("Facebook");
                 return;
             }
-            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrFacebook)
-            {
-                output = Json::Value("SteamOrFacebook");
-                return;
-            }
             if (input == ExternalFriendSources::ExternalFriendSourcesXbox)
             {
                 output = Json::Value("Xbox");
                 return;
             }
-            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrXbox)
-            {
-                output = Json::Value("SteamOrXbox");
-                return;
-            }
-            if (input == ExternalFriendSources::ExternalFriendSourcesFacebookOrXbox)
-            {
-                output = Json::Value("FacebookOrXbox");
-                return;
-            }
-            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrFacebookOrXbox)
-            {
-                output = Json::Value("SteamOrFacebookOrXbox");
-                return;
-            }
             if (input == ExternalFriendSources::ExternalFriendSourcesPsn)
             {
                 output = Json::Value("Psn");
-                return;
-            }
-            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrPsn)
-            {
-                output = Json::Value("SteamOrPsn");
-                return;
-            }
-            if (input == ExternalFriendSources::ExternalFriendSourcesFacebookOrPsn)
-            {
-                output = Json::Value("FacebookOrPsn");
-                return;
-            }
-            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrFacebookOrPsn)
-            {
-                output = Json::Value("SteamOrFacebookOrPsn");
-                return;
-            }
-            if (input == ExternalFriendSources::ExternalFriendSourcesXboxOrPsn)
-            {
-                output = Json::Value("XboxOrPsn");
-                return;
-            }
-            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrXboxOrPsn)
-            {
-                output = Json::Value("SteamOrXboxOrPsn");
-                return;
-            }
-            if (input == ExternalFriendSources::ExternalFriendSourcesFacebookOrXboxOrPsn)
-            {
-                output = Json::Value("FacebookOrXboxOrPsn");
-                return;
-            }
-            if (input == ExternalFriendSources::ExternalFriendSourcesSteamOrFacebookOrXboxOrPsn)
-            {
-                output = Json::Value("SteamOrFacebookOrXboxOrPsn");
                 return;
             }
             if (input == ExternalFriendSources::ExternalFriendSourcesAll)
@@ -4885,69 +4879,14 @@ namespace PlayFab
                 output = ExternalFriendSources::ExternalFriendSourcesFacebook;
                 return;
             }
-            if (inputStr == "SteamOrFacebook")
-            {
-                output = ExternalFriendSources::ExternalFriendSourcesSteamOrFacebook;
-                return;
-            }
             if (inputStr == "Xbox")
             {
                 output = ExternalFriendSources::ExternalFriendSourcesXbox;
                 return;
             }
-            if (inputStr == "SteamOrXbox")
-            {
-                output = ExternalFriendSources::ExternalFriendSourcesSteamOrXbox;
-                return;
-            }
-            if (inputStr == "FacebookOrXbox")
-            {
-                output = ExternalFriendSources::ExternalFriendSourcesFacebookOrXbox;
-                return;
-            }
-            if (inputStr == "SteamOrFacebookOrXbox")
-            {
-                output = ExternalFriendSources::ExternalFriendSourcesSteamOrFacebookOrXbox;
-                return;
-            }
             if (inputStr == "Psn")
             {
                 output = ExternalFriendSources::ExternalFriendSourcesPsn;
-                return;
-            }
-            if (inputStr == "SteamOrPsn")
-            {
-                output = ExternalFriendSources::ExternalFriendSourcesSteamOrPsn;
-                return;
-            }
-            if (inputStr == "FacebookOrPsn")
-            {
-                output = ExternalFriendSources::ExternalFriendSourcesFacebookOrPsn;
-                return;
-            }
-            if (inputStr == "SteamOrFacebookOrPsn")
-            {
-                output = ExternalFriendSources::ExternalFriendSourcesSteamOrFacebookOrPsn;
-                return;
-            }
-            if (inputStr == "XboxOrPsn")
-            {
-                output = ExternalFriendSources::ExternalFriendSourcesXboxOrPsn;
-                return;
-            }
-            if (inputStr == "SteamOrXboxOrPsn")
-            {
-                output = ExternalFriendSources::ExternalFriendSourcesSteamOrXboxOrPsn;
-                return;
-            }
-            if (inputStr == "FacebookOrXboxOrPsn")
-            {
-                output = ExternalFriendSources::ExternalFriendSourcesFacebookOrXboxOrPsn;
-                return;
-            }
-            if (inputStr == "SteamOrFacebookOrXboxOrPsn")
-            {
-                output = ExternalFriendSources::ExternalFriendSourcesSteamOrFacebookOrXboxOrPsn;
                 return;
             }
             if (inputStr == "All")
@@ -5531,9 +5470,9 @@ namespace PlayFab
             GenericErrorCodesAutomationRuleAlreadyExists,
             GenericErrorCodesAutomationRuleLimitExceeded,
             GenericErrorCodesInvalidGooglePlayGamesServerAuthCode,
-            GenericErrorCodesStorageAccountNotFound,
             GenericErrorCodesPlayStreamConnectionFailed,
             GenericErrorCodesInvalidEventContents,
+            GenericErrorCodesInsightsV1Deprecated,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8369,11 +8308,6 @@ namespace PlayFab
                 output = Json::Value("InvalidGooglePlayGamesServerAuthCode");
                 return;
             }
-            if (input == GenericErrorCodes::GenericErrorCodesStorageAccountNotFound)
-            {
-                output = Json::Value("StorageAccountNotFound");
-                return;
-            }
             if (input == GenericErrorCodes::GenericErrorCodesPlayStreamConnectionFailed)
             {
                 output = Json::Value("PlayStreamConnectionFailed");
@@ -8382,6 +8316,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesInvalidEventContents)
             {
                 output = Json::Value("InvalidEventContents");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInsightsV1Deprecated)
+            {
+                output = Json::Value("InsightsV1Deprecated");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -11867,11 +11806,6 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesInvalidGooglePlayGamesServerAuthCode;
                 return;
             }
-            if (inputStr == "StorageAccountNotFound")
-            {
-                output = GenericErrorCodes::GenericErrorCodesStorageAccountNotFound;
-                return;
-            }
             if (inputStr == "PlayStreamConnectionFailed")
             {
                 output = GenericErrorCodes::GenericErrorCodesPlayStreamConnectionFailed;
@@ -11880,6 +11814,11 @@ namespace PlayFab
             if (inputStr == "InvalidEventContents")
             {
                 output = GenericErrorCodes::GenericErrorCodesInvalidEventContents;
+                return;
+            }
+            if (inputStr == "InsightsV1Deprecated")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInsightsV1Deprecated;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
@@ -17747,14 +17686,12 @@ namespace PlayFab
 
         struct GetCharacterLeaderboardRequest : public PlayFabRequestCommon
         {
-            std::string CharacterType;
             Int32 MaxResultsCount;
             Int32 StartPosition;
             std::string StatisticName;
 
             GetCharacterLeaderboardRequest() :
                 PlayFabRequestCommon(),
-                CharacterType(),
                 MaxResultsCount(),
                 StartPosition(),
                 StatisticName()
@@ -17762,7 +17699,6 @@ namespace PlayFab
 
             GetCharacterLeaderboardRequest(const GetCharacterLeaderboardRequest& src) :
                 PlayFabRequestCommon(),
-                CharacterType(src.CharacterType),
                 MaxResultsCount(src.MaxResultsCount),
                 StartPosition(src.StartPosition),
                 StatisticName(src.StatisticName)
@@ -17772,7 +17708,6 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
-                FromJsonUtilS(input["CharacterType"], CharacterType);
                 FromJsonUtilP(input["MaxResultsCount"], MaxResultsCount);
                 FromJsonUtilP(input["StartPosition"], StartPosition);
                 FromJsonUtilS(input["StatisticName"], StatisticName);
@@ -17781,7 +17716,6 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                Json::Value each_CharacterType; ToJsonUtilS(CharacterType, each_CharacterType); output["CharacterType"] = each_CharacterType;
                 Json::Value each_MaxResultsCount; ToJsonUtilP(MaxResultsCount, each_MaxResultsCount); output["MaxResultsCount"] = each_MaxResultsCount;
                 Json::Value each_StartPosition; ToJsonUtilP(StartPosition, each_StartPosition); output["StartPosition"] = each_StartPosition;
                 Json::Value each_StatisticName; ToJsonUtilS(StatisticName, each_StatisticName); output["StatisticName"] = each_StatisticName;
@@ -18238,7 +18172,6 @@ namespace PlayFab
         struct GetLeaderboardAroundCharacterRequest : public PlayFabRequestCommon
         {
             std::string CharacterId;
-            std::string CharacterType;
             Int32 MaxResultsCount;
             std::string PlayFabId;
             std::string StatisticName;
@@ -18246,7 +18179,6 @@ namespace PlayFab
             GetLeaderboardAroundCharacterRequest() :
                 PlayFabRequestCommon(),
                 CharacterId(),
-                CharacterType(),
                 MaxResultsCount(),
                 PlayFabId(),
                 StatisticName()
@@ -18255,7 +18187,6 @@ namespace PlayFab
             GetLeaderboardAroundCharacterRequest(const GetLeaderboardAroundCharacterRequest& src) :
                 PlayFabRequestCommon(),
                 CharacterId(src.CharacterId),
-                CharacterType(src.CharacterType),
                 MaxResultsCount(src.MaxResultsCount),
                 PlayFabId(src.PlayFabId),
                 StatisticName(src.StatisticName)
@@ -18266,7 +18197,6 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CharacterId"], CharacterId);
-                FromJsonUtilS(input["CharacterType"], CharacterType);
                 FromJsonUtilP(input["MaxResultsCount"], MaxResultsCount);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["StatisticName"], StatisticName);
@@ -18276,7 +18206,6 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_CharacterId; ToJsonUtilS(CharacterId, each_CharacterId); output["CharacterId"] = each_CharacterId;
-                Json::Value each_CharacterType; ToJsonUtilS(CharacterType, each_CharacterType); output["CharacterType"] = each_CharacterType;
                 Json::Value each_MaxResultsCount; ToJsonUtilP(MaxResultsCount, each_MaxResultsCount); output["MaxResultsCount"] = each_MaxResultsCount;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_StatisticName; ToJsonUtilS(StatisticName, each_StatisticName); output["StatisticName"] = each_StatisticName;
@@ -19238,6 +19167,7 @@ namespace PlayFab
             std::list<AdCampaignAttribution> AdCampaignAttributions;
             std::string AvatarUrl;
             Boxed<time_t> BannedUntil;
+            Boxed<ChurnRiskLevel> ChurnPrediction;
             std::list<ContactEmailInfo> ContactEmailAddresses;
             Boxed<time_t> Created;
             std::string DisplayName;
@@ -19262,6 +19192,7 @@ namespace PlayFab
                 AdCampaignAttributions(),
                 AvatarUrl(),
                 BannedUntil(),
+                ChurnPrediction(),
                 ContactEmailAddresses(),
                 Created(),
                 DisplayName(),
@@ -19287,6 +19218,7 @@ namespace PlayFab
                 AdCampaignAttributions(src.AdCampaignAttributions),
                 AvatarUrl(src.AvatarUrl),
                 BannedUntil(src.BannedUntil),
+                ChurnPrediction(src.ChurnPrediction),
                 ContactEmailAddresses(src.ContactEmailAddresses),
                 Created(src.Created),
                 DisplayName(src.DisplayName),
@@ -19314,6 +19246,7 @@ namespace PlayFab
                 FromJsonUtilO(input["AdCampaignAttributions"], AdCampaignAttributions);
                 FromJsonUtilS(input["AvatarUrl"], AvatarUrl);
                 FromJsonUtilT(input["BannedUntil"], BannedUntil);
+                FromJsonUtilE(input["ChurnPrediction"], ChurnPrediction);
                 FromJsonUtilO(input["ContactEmailAddresses"], ContactEmailAddresses);
                 FromJsonUtilT(input["Created"], Created);
                 FromJsonUtilS(input["DisplayName"], DisplayName);
@@ -19340,6 +19273,7 @@ namespace PlayFab
                 Json::Value each_AdCampaignAttributions; ToJsonUtilO(AdCampaignAttributions, each_AdCampaignAttributions); output["AdCampaignAttributions"] = each_AdCampaignAttributions;
                 Json::Value each_AvatarUrl; ToJsonUtilS(AvatarUrl, each_AvatarUrl); output["AvatarUrl"] = each_AvatarUrl;
                 Json::Value each_BannedUntil; ToJsonUtilT(BannedUntil, each_BannedUntil); output["BannedUntil"] = each_BannedUntil;
+                Json::Value each_ChurnPrediction; ToJsonUtilE(ChurnPrediction, each_ChurnPrediction); output["ChurnPrediction"] = each_ChurnPrediction;
                 Json::Value each_ContactEmailAddresses; ToJsonUtilO(ContactEmailAddresses, each_ContactEmailAddresses); output["ContactEmailAddresses"] = each_ContactEmailAddresses;
                 Json::Value each_Created; ToJsonUtilT(Created, each_Created); output["Created"] = each_Created;
                 Json::Value each_DisplayName; ToJsonUtilS(DisplayName, each_DisplayName); output["DisplayName"] = each_DisplayName;

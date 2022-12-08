@@ -3216,21 +3216,53 @@ namespace PlayFab
             }
         };
 
+        struct InitialValues : public PlayFabBaseModel
+        {
+            Json::Value DisplayProperties;
+
+            InitialValues() :
+                PlayFabBaseModel(),
+                DisplayProperties()
+            {}
+
+            InitialValues(const InitialValues& src) :
+                PlayFabBaseModel(),
+                DisplayProperties(src.DisplayProperties)
+            {}
+
+            ~InitialValues() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                DisplayProperties = input["DisplayProperties"];
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                output["DisplayProperties"] = DisplayProperties;
+                return output;
+            }
+        };
+
         struct AddInventoryItemsOperation : public PlayFabBaseModel
         {
             Int32 Amount;
             Boxed<InventoryItemReference> Item;
+            Boxed<InitialValues> NewStackValues;
 
             AddInventoryItemsOperation() :
                 PlayFabBaseModel(),
                 Amount(),
-                Item()
+                Item(),
+                NewStackValues()
             {}
 
             AddInventoryItemsOperation(const AddInventoryItemsOperation& src) :
                 PlayFabBaseModel(),
                 Amount(src.Amount),
-                Item(src.Item)
+                Item(src.Item),
+                NewStackValues(src.NewStackValues)
             {}
 
             ~AddInventoryItemsOperation() = default;
@@ -3239,6 +3271,7 @@ namespace PlayFab
             {
                 FromJsonUtilP(input["Amount"], Amount);
                 FromJsonUtilO(input["Item"], Item);
+                FromJsonUtilO(input["NewStackValues"], NewStackValues);
             }
 
             Json::Value ToJson() const override
@@ -3246,6 +3279,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_Amount; ToJsonUtilP(Amount, each_Amount); output["Amount"] = each_Amount;
                 Json::Value each_Item; ToJsonUtilO(Item, each_Item); output["Item"] = each_Item;
+                Json::Value each_NewStackValues; ToJsonUtilO(NewStackValues, each_NewStackValues); output["NewStackValues"] = each_NewStackValues;
                 return output;
             }
         };
@@ -3290,8 +3324,10 @@ namespace PlayFab
             std::string CollectionId;
             std::map<std::string, std::string> CustomTags;
             Boxed<EntityKey> Entity;
+            std::string ETag;
             std::string IdempotencyId;
             Boxed<InventoryItemReference> Item;
+            Boxed<InitialValues> NewStackValues;
 
             AddInventoryItemsRequest() :
                 PlayFabRequestCommon(),
@@ -3299,8 +3335,10 @@ namespace PlayFab
                 CollectionId(),
                 CustomTags(),
                 Entity(),
+                ETag(),
                 IdempotencyId(),
-                Item()
+                Item(),
+                NewStackValues()
             {}
 
             AddInventoryItemsRequest(const AddInventoryItemsRequest& src) :
@@ -3309,8 +3347,10 @@ namespace PlayFab
                 CollectionId(src.CollectionId),
                 CustomTags(src.CustomTags),
                 Entity(src.Entity),
+                ETag(src.ETag),
                 IdempotencyId(src.IdempotencyId),
-                Item(src.Item)
+                Item(src.Item),
+                NewStackValues(src.NewStackValues)
             {}
 
             ~AddInventoryItemsRequest() = default;
@@ -3321,8 +3361,10 @@ namespace PlayFab
                 FromJsonUtilS(input["CollectionId"], CollectionId);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["Entity"], Entity);
+                FromJsonUtilS(input["ETag"], ETag);
                 FromJsonUtilS(input["IdempotencyId"], IdempotencyId);
                 FromJsonUtilO(input["Item"], Item);
+                FromJsonUtilO(input["NewStackValues"], NewStackValues);
             }
 
             Json::Value ToJson() const override
@@ -3332,25 +3374,30 @@ namespace PlayFab
                 Json::Value each_CollectionId; ToJsonUtilS(CollectionId, each_CollectionId); output["CollectionId"] = each_CollectionId;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                Json::Value each_ETag; ToJsonUtilS(ETag, each_ETag); output["ETag"] = each_ETag;
                 Json::Value each_IdempotencyId; ToJsonUtilS(IdempotencyId, each_IdempotencyId); output["IdempotencyId"] = each_IdempotencyId;
                 Json::Value each_Item; ToJsonUtilO(Item, each_Item); output["Item"] = each_Item;
+                Json::Value each_NewStackValues; ToJsonUtilO(NewStackValues, each_NewStackValues); output["NewStackValues"] = each_NewStackValues;
                 return output;
             }
         };
 
         struct AddInventoryItemsResponse : public PlayFabResultCommon
         {
+            std::string ETag;
             std::string IdempotencyId;
             std::list<std::string> TransactionIds;
 
             AddInventoryItemsResponse() :
                 PlayFabResultCommon(),
+                ETag(),
                 IdempotencyId(),
                 TransactionIds()
             {}
 
             AddInventoryItemsResponse(const AddInventoryItemsResponse& src) :
                 PlayFabResultCommon(),
+                ETag(src.ETag),
                 IdempotencyId(src.IdempotencyId),
                 TransactionIds(src.TransactionIds)
             {}
@@ -3359,6 +3406,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["ETag"], ETag);
                 FromJsonUtilS(input["IdempotencyId"], IdempotencyId);
                 FromJsonUtilS(input["TransactionIds"], TransactionIds);
             }
@@ -3366,6 +3414,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_ETag; ToJsonUtilS(ETag, each_ETag); output["ETag"] = each_ETag;
                 Json::Value each_IdempotencyId; ToJsonUtilS(IdempotencyId, each_IdempotencyId); output["IdempotencyId"] = each_IdempotencyId;
                 Json::Value each_TransactionIds; ToJsonUtilS(TransactionIds, each_TransactionIds); output["TransactionIds"] = each_TransactionIds;
                 return output;
@@ -4674,19 +4723,22 @@ namespace PlayFab
             std::string CollectionId;
             std::map<std::string, std::string> CustomTags;
             Boxed<EntityKey> Entity;
+            std::string ETag;
 
             DeleteInventoryCollectionRequest() :
                 PlayFabRequestCommon(),
                 CollectionId(),
                 CustomTags(),
-                Entity()
+                Entity(),
+                ETag()
             {}
 
             DeleteInventoryCollectionRequest(const DeleteInventoryCollectionRequest& src) :
                 PlayFabRequestCommon(),
                 CollectionId(src.CollectionId),
                 CustomTags(src.CustomTags),
-                Entity(src.Entity)
+                Entity(src.Entity),
+                ETag(src.ETag)
             {}
 
             ~DeleteInventoryCollectionRequest() = default;
@@ -4696,6 +4748,7 @@ namespace PlayFab
                 FromJsonUtilS(input["CollectionId"], CollectionId);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["Entity"], Entity);
+                FromJsonUtilS(input["ETag"], ETag);
             }
 
             Json::Value ToJson() const override
@@ -4704,6 +4757,7 @@ namespace PlayFab
                 Json::Value each_CollectionId; ToJsonUtilS(CollectionId, each_CollectionId); output["CollectionId"] = each_CollectionId;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                Json::Value each_ETag; ToJsonUtilS(ETag, each_ETag); output["ETag"] = each_ETag;
                 return output;
             }
         };
@@ -4766,6 +4820,7 @@ namespace PlayFab
             std::string CollectionId;
             std::map<std::string, std::string> CustomTags;
             Boxed<EntityKey> Entity;
+            std::string ETag;
             std::string IdempotencyId;
             Boxed<InventoryItemReference> Item;
 
@@ -4774,6 +4829,7 @@ namespace PlayFab
                 CollectionId(),
                 CustomTags(),
                 Entity(),
+                ETag(),
                 IdempotencyId(),
                 Item()
             {}
@@ -4783,6 +4839,7 @@ namespace PlayFab
                 CollectionId(src.CollectionId),
                 CustomTags(src.CustomTags),
                 Entity(src.Entity),
+                ETag(src.ETag),
                 IdempotencyId(src.IdempotencyId),
                 Item(src.Item)
             {}
@@ -4794,6 +4851,7 @@ namespace PlayFab
                 FromJsonUtilS(input["CollectionId"], CollectionId);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["Entity"], Entity);
+                FromJsonUtilS(input["ETag"], ETag);
                 FromJsonUtilS(input["IdempotencyId"], IdempotencyId);
                 FromJsonUtilO(input["Item"], Item);
             }
@@ -4804,6 +4862,7 @@ namespace PlayFab
                 Json::Value each_CollectionId; ToJsonUtilS(CollectionId, each_CollectionId); output["CollectionId"] = each_CollectionId;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                Json::Value each_ETag; ToJsonUtilS(ETag, each_ETag); output["ETag"] = each_ETag;
                 Json::Value each_IdempotencyId; ToJsonUtilS(IdempotencyId, each_IdempotencyId); output["IdempotencyId"] = each_IdempotencyId;
                 Json::Value each_Item; ToJsonUtilO(Item, each_Item); output["Item"] = each_Item;
                 return output;
@@ -4812,17 +4871,20 @@ namespace PlayFab
 
         struct DeleteInventoryItemsResponse : public PlayFabResultCommon
         {
+            std::string ETag;
             std::string IdempotencyId;
             std::list<std::string> TransactionIds;
 
             DeleteInventoryItemsResponse() :
                 PlayFabResultCommon(),
+                ETag(),
                 IdempotencyId(),
                 TransactionIds()
             {}
 
             DeleteInventoryItemsResponse(const DeleteInventoryItemsResponse& src) :
                 PlayFabResultCommon(),
+                ETag(src.ETag),
                 IdempotencyId(src.IdempotencyId),
                 TransactionIds(src.TransactionIds)
             {}
@@ -4831,6 +4893,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["ETag"], ETag);
                 FromJsonUtilS(input["IdempotencyId"], IdempotencyId);
                 FromJsonUtilS(input["TransactionIds"], TransactionIds);
             }
@@ -4838,6 +4901,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_ETag; ToJsonUtilS(ETag, each_ETag); output["ETag"] = each_ETag;
                 Json::Value each_IdempotencyId; ToJsonUtilS(IdempotencyId, each_IdempotencyId); output["IdempotencyId"] = each_IdempotencyId;
                 Json::Value each_TransactionIds; ToJsonUtilS(TransactionIds, each_TransactionIds); output["TransactionIds"] = each_TransactionIds;
                 return output;
@@ -4956,6 +5020,7 @@ namespace PlayFab
             Int32 Amount;
             bool DeleteEmptyStacks;
             Boxed<InventoryItemReference> Item;
+            Boxed<InitialValues> NewStackValues;
             std::list<PurchasePriceAmount> PriceAmounts;
             std::string StoreId;
 
@@ -4964,6 +5029,7 @@ namespace PlayFab
                 Amount(),
                 DeleteEmptyStacks(),
                 Item(),
+                NewStackValues(),
                 PriceAmounts(),
                 StoreId()
             {}
@@ -4973,6 +5039,7 @@ namespace PlayFab
                 Amount(src.Amount),
                 DeleteEmptyStacks(src.DeleteEmptyStacks),
                 Item(src.Item),
+                NewStackValues(src.NewStackValues),
                 PriceAmounts(src.PriceAmounts),
                 StoreId(src.StoreId)
             {}
@@ -4984,6 +5051,7 @@ namespace PlayFab
                 FromJsonUtilP(input["Amount"], Amount);
                 FromJsonUtilP(input["DeleteEmptyStacks"], DeleteEmptyStacks);
                 FromJsonUtilO(input["Item"], Item);
+                FromJsonUtilO(input["NewStackValues"], NewStackValues);
                 FromJsonUtilO(input["PriceAmounts"], PriceAmounts);
                 FromJsonUtilS(input["StoreId"], StoreId);
             }
@@ -4994,6 +5062,7 @@ namespace PlayFab
                 Json::Value each_Amount; ToJsonUtilP(Amount, each_Amount); output["Amount"] = each_Amount;
                 Json::Value each_DeleteEmptyStacks; ToJsonUtilP(DeleteEmptyStacks, each_DeleteEmptyStacks); output["DeleteEmptyStacks"] = each_DeleteEmptyStacks;
                 Json::Value each_Item; ToJsonUtilO(Item, each_Item); output["Item"] = each_Item;
+                Json::Value each_NewStackValues; ToJsonUtilO(NewStackValues, each_NewStackValues); output["NewStackValues"] = each_NewStackValues;
                 Json::Value each_PriceAmounts; ToJsonUtilO(PriceAmounts, each_PriceAmounts); output["PriceAmounts"] = each_PriceAmounts;
                 Json::Value each_StoreId; ToJsonUtilS(StoreId, each_StoreId); output["StoreId"] = each_StoreId;
                 return output;
@@ -5044,6 +5113,7 @@ namespace PlayFab
             Int32 Amount;
             bool DeleteEmptyStacks;
             Boxed<InventoryItemReference> GivingItem;
+            Boxed<InitialValues> NewStackValues;
             Boxed<InventoryItemReference> ReceivingItem;
 
             TransferInventoryItemsOperation() :
@@ -5051,6 +5121,7 @@ namespace PlayFab
                 Amount(),
                 DeleteEmptyStacks(),
                 GivingItem(),
+                NewStackValues(),
                 ReceivingItem()
             {}
 
@@ -5059,6 +5130,7 @@ namespace PlayFab
                 Amount(src.Amount),
                 DeleteEmptyStacks(src.DeleteEmptyStacks),
                 GivingItem(src.GivingItem),
+                NewStackValues(src.NewStackValues),
                 ReceivingItem(src.ReceivingItem)
             {}
 
@@ -5069,6 +5141,7 @@ namespace PlayFab
                 FromJsonUtilP(input["Amount"], Amount);
                 FromJsonUtilP(input["DeleteEmptyStacks"], DeleteEmptyStacks);
                 FromJsonUtilO(input["GivingItem"], GivingItem);
+                FromJsonUtilO(input["NewStackValues"], NewStackValues);
                 FromJsonUtilO(input["ReceivingItem"], ReceivingItem);
             }
 
@@ -5078,6 +5151,7 @@ namespace PlayFab
                 Json::Value each_Amount; ToJsonUtilP(Amount, each_Amount); output["Amount"] = each_Amount;
                 Json::Value each_DeleteEmptyStacks; ToJsonUtilP(DeleteEmptyStacks, each_DeleteEmptyStacks); output["DeleteEmptyStacks"] = each_DeleteEmptyStacks;
                 Json::Value each_GivingItem; ToJsonUtilO(GivingItem, each_GivingItem); output["GivingItem"] = each_GivingItem;
+                Json::Value each_NewStackValues; ToJsonUtilO(NewStackValues, each_NewStackValues); output["NewStackValues"] = each_NewStackValues;
                 Json::Value each_ReceivingItem; ToJsonUtilO(ReceivingItem, each_ReceivingItem); output["ReceivingItem"] = each_ReceivingItem;
                 return output;
             }
@@ -5086,6 +5160,7 @@ namespace PlayFab
         struct InventoryItem : public PlayFabBaseModel
         {
             Int32 Amount;
+            Json::Value DisplayProperties;
             std::string Id;
             std::string StackId;
             std::string Type;
@@ -5093,6 +5168,7 @@ namespace PlayFab
             InventoryItem() :
                 PlayFabBaseModel(),
                 Amount(),
+                DisplayProperties(),
                 Id(),
                 StackId(),
                 Type()
@@ -5101,6 +5177,7 @@ namespace PlayFab
             InventoryItem(const InventoryItem& src) :
                 PlayFabBaseModel(),
                 Amount(src.Amount),
+                DisplayProperties(src.DisplayProperties),
                 Id(src.Id),
                 StackId(src.StackId),
                 Type(src.Type)
@@ -5111,6 +5188,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["Amount"], Amount);
+                DisplayProperties = input["DisplayProperties"];
                 FromJsonUtilS(input["Id"], Id);
                 FromJsonUtilS(input["StackId"], StackId);
                 FromJsonUtilS(input["Type"], Type);
@@ -5120,6 +5198,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_Amount; ToJsonUtilP(Amount, each_Amount); output["Amount"] = each_Amount;
+                output["DisplayProperties"] = DisplayProperties;
                 Json::Value each_Id; ToJsonUtilS(Id, each_Id); output["Id"] = each_Id;
                 Json::Value each_StackId; ToJsonUtilS(StackId, each_StackId); output["StackId"] = each_StackId;
                 Json::Value each_Type; ToJsonUtilS(Type, each_Type); output["Type"] = each_Type;
@@ -5215,6 +5294,7 @@ namespace PlayFab
             std::string CollectionId;
             std::map<std::string, std::string> CustomTags;
             Boxed<EntityKey> Entity;
+            std::string ETag;
             std::string IdempotencyId;
             std::list<InventoryOperation> Operations;
 
@@ -5223,6 +5303,7 @@ namespace PlayFab
                 CollectionId(),
                 CustomTags(),
                 Entity(),
+                ETag(),
                 IdempotencyId(),
                 Operations()
             {}
@@ -5232,6 +5313,7 @@ namespace PlayFab
                 CollectionId(src.CollectionId),
                 CustomTags(src.CustomTags),
                 Entity(src.Entity),
+                ETag(src.ETag),
                 IdempotencyId(src.IdempotencyId),
                 Operations(src.Operations)
             {}
@@ -5243,6 +5325,7 @@ namespace PlayFab
                 FromJsonUtilS(input["CollectionId"], CollectionId);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["Entity"], Entity);
+                FromJsonUtilS(input["ETag"], ETag);
                 FromJsonUtilS(input["IdempotencyId"], IdempotencyId);
                 FromJsonUtilO(input["Operations"], Operations);
             }
@@ -5253,6 +5336,7 @@ namespace PlayFab
                 Json::Value each_CollectionId; ToJsonUtilS(CollectionId, each_CollectionId); output["CollectionId"] = each_CollectionId;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                Json::Value each_ETag; ToJsonUtilS(ETag, each_ETag); output["ETag"] = each_ETag;
                 Json::Value each_IdempotencyId; ToJsonUtilS(IdempotencyId, each_IdempotencyId); output["IdempotencyId"] = each_IdempotencyId;
                 Json::Value each_Operations; ToJsonUtilO(Operations, each_Operations); output["Operations"] = each_Operations;
                 return output;
@@ -5261,17 +5345,20 @@ namespace PlayFab
 
         struct ExecuteInventoryOperationsResponse : public PlayFabResultCommon
         {
+            std::string ETag;
             std::string IdempotencyId;
             std::list<std::string> TransactionIds;
 
             ExecuteInventoryOperationsResponse() :
                 PlayFabResultCommon(),
+                ETag(),
                 IdempotencyId(),
                 TransactionIds()
             {}
 
             ExecuteInventoryOperationsResponse(const ExecuteInventoryOperationsResponse& src) :
                 PlayFabResultCommon(),
+                ETag(src.ETag),
                 IdempotencyId(src.IdempotencyId),
                 TransactionIds(src.TransactionIds)
             {}
@@ -5280,6 +5367,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["ETag"], ETag);
                 FromJsonUtilS(input["IdempotencyId"], IdempotencyId);
                 FromJsonUtilS(input["TransactionIds"], TransactionIds);
             }
@@ -5287,6 +5375,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_ETag; ToJsonUtilS(ETag, each_ETag); output["ETag"] = each_ETag;
                 Json::Value each_IdempotencyId; ToJsonUtilS(IdempotencyId, each_IdempotencyId); output["IdempotencyId"] = each_IdempotencyId;
                 Json::Value each_TransactionIds; ToJsonUtilS(TransactionIds, each_TransactionIds); output["TransactionIds"] = each_TransactionIds;
                 return output;
@@ -5882,17 +5971,20 @@ namespace PlayFab
         struct GetInventoryItemsResponse : public PlayFabResultCommon
         {
             std::string ContinuationToken;
+            std::string ETag;
             std::list<InventoryItem> Items;
 
             GetInventoryItemsResponse() :
                 PlayFabResultCommon(),
                 ContinuationToken(),
+                ETag(),
                 Items()
             {}
 
             GetInventoryItemsResponse(const GetInventoryItemsResponse& src) :
                 PlayFabResultCommon(),
                 ContinuationToken(src.ContinuationToken),
+                ETag(src.ETag),
                 Items(src.Items)
             {}
 
@@ -5901,6 +5993,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["ContinuationToken"], ContinuationToken);
+                FromJsonUtilS(input["ETag"], ETag);
                 FromJsonUtilO(input["Items"], Items);
             }
 
@@ -5908,6 +6001,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_ContinuationToken; ToJsonUtilS(ContinuationToken, each_ContinuationToken); output["ContinuationToken"] = each_ContinuationToken;
+                Json::Value each_ETag; ToJsonUtilS(ETag, each_ETag); output["ETag"] = each_ETag;
                 Json::Value each_Items; ToJsonUtilO(Items, each_Items); output["Items"] = each_Items;
                 return output;
             }
@@ -6527,6 +6621,329 @@ namespace PlayFab
             }
         };
 
+        struct GetTransactionHistoryRequest : public PlayFabRequestCommon
+        {
+            std::string CollectionId;
+            std::string ContinuationToken;
+            Int32 Count;
+            std::map<std::string, std::string> CustomTags;
+            Boxed<EntityKey> Entity;
+            std::string Filter;
+
+            GetTransactionHistoryRequest() :
+                PlayFabRequestCommon(),
+                CollectionId(),
+                ContinuationToken(),
+                Count(),
+                CustomTags(),
+                Entity(),
+                Filter()
+            {}
+
+            GetTransactionHistoryRequest(const GetTransactionHistoryRequest& src) :
+                PlayFabRequestCommon(),
+                CollectionId(src.CollectionId),
+                ContinuationToken(src.ContinuationToken),
+                Count(src.Count),
+                CustomTags(src.CustomTags),
+                Entity(src.Entity),
+                Filter(src.Filter)
+            {}
+
+            ~GetTransactionHistoryRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CollectionId"], CollectionId);
+                FromJsonUtilS(input["ContinuationToken"], ContinuationToken);
+                FromJsonUtilP(input["Count"], Count);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilO(input["Entity"], Entity);
+                FromJsonUtilS(input["Filter"], Filter);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CollectionId; ToJsonUtilS(CollectionId, each_CollectionId); output["CollectionId"] = each_CollectionId;
+                Json::Value each_ContinuationToken; ToJsonUtilS(ContinuationToken, each_ContinuationToken); output["ContinuationToken"] = each_ContinuationToken;
+                Json::Value each_Count; ToJsonUtilP(Count, each_Count); output["Count"] = each_Count;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                Json::Value each_Filter; ToJsonUtilS(Filter, each_Filter); output["Filter"] = each_Filter;
+                return output;
+            }
+        };
+
+        struct TransactionOperation : public PlayFabBaseModel
+        {
+            Boxed<Int32> Amount;
+            std::string ItemId;
+            std::string ItemType;
+            std::string StackId;
+            std::string Type;
+
+            TransactionOperation() :
+                PlayFabBaseModel(),
+                Amount(),
+                ItemId(),
+                ItemType(),
+                StackId(),
+                Type()
+            {}
+
+            TransactionOperation(const TransactionOperation& src) :
+                PlayFabBaseModel(),
+                Amount(src.Amount),
+                ItemId(src.ItemId),
+                ItemType(src.ItemType),
+                StackId(src.StackId),
+                Type(src.Type)
+            {}
+
+            ~TransactionOperation() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["Amount"], Amount);
+                FromJsonUtilS(input["ItemId"], ItemId);
+                FromJsonUtilS(input["ItemType"], ItemType);
+                FromJsonUtilS(input["StackId"], StackId);
+                FromJsonUtilS(input["Type"], Type);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Amount; ToJsonUtilP(Amount, each_Amount); output["Amount"] = each_Amount;
+                Json::Value each_ItemId; ToJsonUtilS(ItemId, each_ItemId); output["ItemId"] = each_ItemId;
+                Json::Value each_ItemType; ToJsonUtilS(ItemType, each_ItemType); output["ItemType"] = each_ItemType;
+                Json::Value each_StackId; ToJsonUtilS(StackId, each_StackId); output["StackId"] = each_StackId;
+                Json::Value each_Type; ToJsonUtilS(Type, each_Type); output["Type"] = each_Type;
+                return output;
+            }
+        };
+
+        struct TransactionPurchaseDetails : public PlayFabBaseModel
+        {
+            std::string StoreId;
+
+            TransactionPurchaseDetails() :
+                PlayFabBaseModel(),
+                StoreId()
+            {}
+
+            TransactionPurchaseDetails(const TransactionPurchaseDetails& src) :
+                PlayFabBaseModel(),
+                StoreId(src.StoreId)
+            {}
+
+            ~TransactionPurchaseDetails() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["StoreId"], StoreId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_StoreId; ToJsonUtilS(StoreId, each_StoreId); output["StoreId"] = each_StoreId;
+                return output;
+            }
+        };
+
+        struct TransactionRedeemDetails : public PlayFabBaseModel
+        {
+            std::string Marketplace;
+            std::string MarketplaceTransactionId;
+            std::string OfferId;
+
+            TransactionRedeemDetails() :
+                PlayFabBaseModel(),
+                Marketplace(),
+                MarketplaceTransactionId(),
+                OfferId()
+            {}
+
+            TransactionRedeemDetails(const TransactionRedeemDetails& src) :
+                PlayFabBaseModel(),
+                Marketplace(src.Marketplace),
+                MarketplaceTransactionId(src.MarketplaceTransactionId),
+                OfferId(src.OfferId)
+            {}
+
+            ~TransactionRedeemDetails() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["Marketplace"], Marketplace);
+                FromJsonUtilS(input["MarketplaceTransactionId"], MarketplaceTransactionId);
+                FromJsonUtilS(input["OfferId"], OfferId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Marketplace; ToJsonUtilS(Marketplace, each_Marketplace); output["Marketplace"] = each_Marketplace;
+                Json::Value each_MarketplaceTransactionId; ToJsonUtilS(MarketplaceTransactionId, each_MarketplaceTransactionId); output["MarketplaceTransactionId"] = each_MarketplaceTransactionId;
+                Json::Value each_OfferId; ToJsonUtilS(OfferId, each_OfferId); output["OfferId"] = each_OfferId;
+                return output;
+            }
+        };
+
+        struct TransactionTransferDetails : public PlayFabBaseModel
+        {
+            std::string GivingCollectionId;
+            Boxed<EntityKey> GivingEntity;
+            std::string ReceivingCollectionId;
+            Boxed<EntityKey> ReceivingEntity;
+            std::string TransferId;
+
+            TransactionTransferDetails() :
+                PlayFabBaseModel(),
+                GivingCollectionId(),
+                GivingEntity(),
+                ReceivingCollectionId(),
+                ReceivingEntity(),
+                TransferId()
+            {}
+
+            TransactionTransferDetails(const TransactionTransferDetails& src) :
+                PlayFabBaseModel(),
+                GivingCollectionId(src.GivingCollectionId),
+                GivingEntity(src.GivingEntity),
+                ReceivingCollectionId(src.ReceivingCollectionId),
+                ReceivingEntity(src.ReceivingEntity),
+                TransferId(src.TransferId)
+            {}
+
+            ~TransactionTransferDetails() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["GivingCollectionId"], GivingCollectionId);
+                FromJsonUtilO(input["GivingEntity"], GivingEntity);
+                FromJsonUtilS(input["ReceivingCollectionId"], ReceivingCollectionId);
+                FromJsonUtilO(input["ReceivingEntity"], ReceivingEntity);
+                FromJsonUtilS(input["TransferId"], TransferId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_GivingCollectionId; ToJsonUtilS(GivingCollectionId, each_GivingCollectionId); output["GivingCollectionId"] = each_GivingCollectionId;
+                Json::Value each_GivingEntity; ToJsonUtilO(GivingEntity, each_GivingEntity); output["GivingEntity"] = each_GivingEntity;
+                Json::Value each_ReceivingCollectionId; ToJsonUtilS(ReceivingCollectionId, each_ReceivingCollectionId); output["ReceivingCollectionId"] = each_ReceivingCollectionId;
+                Json::Value each_ReceivingEntity; ToJsonUtilO(ReceivingEntity, each_ReceivingEntity); output["ReceivingEntity"] = each_ReceivingEntity;
+                Json::Value each_TransferId; ToJsonUtilS(TransferId, each_TransferId); output["TransferId"] = each_TransferId;
+                return output;
+            }
+        };
+
+        struct Transaction : public PlayFabBaseModel
+        {
+            std::string ApiName;
+            std::string ItemType;
+            std::list<TransactionOperation> Operations;
+            std::string OperationType;
+            Boxed<TransactionPurchaseDetails> PurchaseDetails;
+            Boxed<TransactionRedeemDetails> RedeemDetails;
+            time_t Timestamp;
+            std::string TransactionId;
+            Boxed<TransactionTransferDetails> TransferDetails;
+
+            Transaction() :
+                PlayFabBaseModel(),
+                ApiName(),
+                ItemType(),
+                Operations(),
+                OperationType(),
+                PurchaseDetails(),
+                RedeemDetails(),
+                Timestamp(),
+                TransactionId(),
+                TransferDetails()
+            {}
+
+            Transaction(const Transaction& src) :
+                PlayFabBaseModel(),
+                ApiName(src.ApiName),
+                ItemType(src.ItemType),
+                Operations(src.Operations),
+                OperationType(src.OperationType),
+                PurchaseDetails(src.PurchaseDetails),
+                RedeemDetails(src.RedeemDetails),
+                Timestamp(src.Timestamp),
+                TransactionId(src.TransactionId),
+                TransferDetails(src.TransferDetails)
+            {}
+
+            ~Transaction() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["ApiName"], ApiName);
+                FromJsonUtilS(input["ItemType"], ItemType);
+                FromJsonUtilO(input["Operations"], Operations);
+                FromJsonUtilS(input["OperationType"], OperationType);
+                FromJsonUtilO(input["PurchaseDetails"], PurchaseDetails);
+                FromJsonUtilO(input["RedeemDetails"], RedeemDetails);
+                FromJsonUtilT(input["Timestamp"], Timestamp);
+                FromJsonUtilS(input["TransactionId"], TransactionId);
+                FromJsonUtilO(input["TransferDetails"], TransferDetails);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ApiName; ToJsonUtilS(ApiName, each_ApiName); output["ApiName"] = each_ApiName;
+                Json::Value each_ItemType; ToJsonUtilS(ItemType, each_ItemType); output["ItemType"] = each_ItemType;
+                Json::Value each_Operations; ToJsonUtilO(Operations, each_Operations); output["Operations"] = each_Operations;
+                Json::Value each_OperationType; ToJsonUtilS(OperationType, each_OperationType); output["OperationType"] = each_OperationType;
+                Json::Value each_PurchaseDetails; ToJsonUtilO(PurchaseDetails, each_PurchaseDetails); output["PurchaseDetails"] = each_PurchaseDetails;
+                Json::Value each_RedeemDetails; ToJsonUtilO(RedeemDetails, each_RedeemDetails); output["RedeemDetails"] = each_RedeemDetails;
+                Json::Value each_Timestamp; ToJsonUtilT(Timestamp, each_Timestamp); output["Timestamp"] = each_Timestamp;
+                Json::Value each_TransactionId; ToJsonUtilS(TransactionId, each_TransactionId); output["TransactionId"] = each_TransactionId;
+                Json::Value each_TransferDetails; ToJsonUtilO(TransferDetails, each_TransferDetails); output["TransferDetails"] = each_TransferDetails;
+                return output;
+            }
+        };
+
+        struct GetTransactionHistoryResponse : public PlayFabResultCommon
+        {
+            std::string ContinuationToken;
+            std::list<Transaction> Transactions;
+
+            GetTransactionHistoryResponse() :
+                PlayFabResultCommon(),
+                ContinuationToken(),
+                Transactions()
+            {}
+
+            GetTransactionHistoryResponse(const GetTransactionHistoryResponse& src) :
+                PlayFabResultCommon(),
+                ContinuationToken(src.ContinuationToken),
+                Transactions(src.Transactions)
+            {}
+
+            ~GetTransactionHistoryResponse() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["ContinuationToken"], ContinuationToken);
+                FromJsonUtilO(input["Transactions"], Transactions);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ContinuationToken; ToJsonUtilS(ContinuationToken, each_ContinuationToken); output["ContinuationToken"] = each_ContinuationToken;
+                Json::Value each_Transactions; ToJsonUtilO(Transactions, each_Transactions); output["Transactions"] = each_Transactions;
+                return output;
+            }
+        };
+
         struct GooglePlayProductPurchase : public PlayFabBaseModel
         {
             std::string ProductId;
@@ -6665,8 +7082,10 @@ namespace PlayFab
             std::map<std::string, std::string> CustomTags;
             bool DeleteEmptyStacks;
             Boxed<EntityKey> Entity;
+            std::string ETag;
             std::string IdempotencyId;
             Boxed<InventoryItemReference> Item;
+            Boxed<InitialValues> NewStackValues;
             std::list<PurchasePriceAmount> PriceAmounts;
             std::string StoreId;
 
@@ -6677,8 +7096,10 @@ namespace PlayFab
                 CustomTags(),
                 DeleteEmptyStacks(),
                 Entity(),
+                ETag(),
                 IdempotencyId(),
                 Item(),
+                NewStackValues(),
                 PriceAmounts(),
                 StoreId()
             {}
@@ -6690,8 +7111,10 @@ namespace PlayFab
                 CustomTags(src.CustomTags),
                 DeleteEmptyStacks(src.DeleteEmptyStacks),
                 Entity(src.Entity),
+                ETag(src.ETag),
                 IdempotencyId(src.IdempotencyId),
                 Item(src.Item),
+                NewStackValues(src.NewStackValues),
                 PriceAmounts(src.PriceAmounts),
                 StoreId(src.StoreId)
             {}
@@ -6705,8 +7128,10 @@ namespace PlayFab
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilP(input["DeleteEmptyStacks"], DeleteEmptyStacks);
                 FromJsonUtilO(input["Entity"], Entity);
+                FromJsonUtilS(input["ETag"], ETag);
                 FromJsonUtilS(input["IdempotencyId"], IdempotencyId);
                 FromJsonUtilO(input["Item"], Item);
+                FromJsonUtilO(input["NewStackValues"], NewStackValues);
                 FromJsonUtilO(input["PriceAmounts"], PriceAmounts);
                 FromJsonUtilS(input["StoreId"], StoreId);
             }
@@ -6719,8 +7144,10 @@ namespace PlayFab
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_DeleteEmptyStacks; ToJsonUtilP(DeleteEmptyStacks, each_DeleteEmptyStacks); output["DeleteEmptyStacks"] = each_DeleteEmptyStacks;
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                Json::Value each_ETag; ToJsonUtilS(ETag, each_ETag); output["ETag"] = each_ETag;
                 Json::Value each_IdempotencyId; ToJsonUtilS(IdempotencyId, each_IdempotencyId); output["IdempotencyId"] = each_IdempotencyId;
                 Json::Value each_Item; ToJsonUtilO(Item, each_Item); output["Item"] = each_Item;
+                Json::Value each_NewStackValues; ToJsonUtilO(NewStackValues, each_NewStackValues); output["NewStackValues"] = each_NewStackValues;
                 Json::Value each_PriceAmounts; ToJsonUtilO(PriceAmounts, each_PriceAmounts); output["PriceAmounts"] = each_PriceAmounts;
                 Json::Value each_StoreId; ToJsonUtilS(StoreId, each_StoreId); output["StoreId"] = each_StoreId;
                 return output;
@@ -6729,17 +7156,20 @@ namespace PlayFab
 
         struct PurchaseInventoryItemsResponse : public PlayFabResultCommon
         {
+            std::string ETag;
             std::string IdempotencyId;
             std::list<std::string> TransactionIds;
 
             PurchaseInventoryItemsResponse() :
                 PlayFabResultCommon(),
+                ETag(),
                 IdempotencyId(),
                 TransactionIds()
             {}
 
             PurchaseInventoryItemsResponse(const PurchaseInventoryItemsResponse& src) :
                 PlayFabResultCommon(),
+                ETag(src.ETag),
                 IdempotencyId(src.IdempotencyId),
                 TransactionIds(src.TransactionIds)
             {}
@@ -6748,6 +7178,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["ETag"], ETag);
                 FromJsonUtilS(input["IdempotencyId"], IdempotencyId);
                 FromJsonUtilS(input["TransactionIds"], TransactionIds);
             }
@@ -6755,6 +7186,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_ETag; ToJsonUtilS(ETag, each_ETag); output["ETag"] = each_ETag;
                 Json::Value each_IdempotencyId; ToJsonUtilS(IdempotencyId, each_IdempotencyId); output["IdempotencyId"] = each_IdempotencyId;
                 Json::Value each_TransactionIds; ToJsonUtilS(TransactionIds, each_TransactionIds); output["TransactionIds"] = each_TransactionIds;
                 return output;
@@ -7997,6 +8429,7 @@ namespace PlayFab
             std::map<std::string, std::string> CustomTags;
             bool DeleteEmptyStacks;
             Boxed<EntityKey> Entity;
+            std::string ETag;
             std::string IdempotencyId;
             Boxed<InventoryItemReference> Item;
 
@@ -8007,6 +8440,7 @@ namespace PlayFab
                 CustomTags(),
                 DeleteEmptyStacks(),
                 Entity(),
+                ETag(),
                 IdempotencyId(),
                 Item()
             {}
@@ -8018,6 +8452,7 @@ namespace PlayFab
                 CustomTags(src.CustomTags),
                 DeleteEmptyStacks(src.DeleteEmptyStacks),
                 Entity(src.Entity),
+                ETag(src.ETag),
                 IdempotencyId(src.IdempotencyId),
                 Item(src.Item)
             {}
@@ -8031,6 +8466,7 @@ namespace PlayFab
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilP(input["DeleteEmptyStacks"], DeleteEmptyStacks);
                 FromJsonUtilO(input["Entity"], Entity);
+                FromJsonUtilS(input["ETag"], ETag);
                 FromJsonUtilS(input["IdempotencyId"], IdempotencyId);
                 FromJsonUtilO(input["Item"], Item);
             }
@@ -8043,6 +8479,7 @@ namespace PlayFab
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_DeleteEmptyStacks; ToJsonUtilP(DeleteEmptyStacks, each_DeleteEmptyStacks); output["DeleteEmptyStacks"] = each_DeleteEmptyStacks;
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                Json::Value each_ETag; ToJsonUtilS(ETag, each_ETag); output["ETag"] = each_ETag;
                 Json::Value each_IdempotencyId; ToJsonUtilS(IdempotencyId, each_IdempotencyId); output["IdempotencyId"] = each_IdempotencyId;
                 Json::Value each_Item; ToJsonUtilO(Item, each_Item); output["Item"] = each_Item;
                 return output;
@@ -8051,17 +8488,20 @@ namespace PlayFab
 
         struct SubtractInventoryItemsResponse : public PlayFabResultCommon
         {
+            std::string ETag;
             std::string IdempotencyId;
             std::list<std::string> TransactionIds;
 
             SubtractInventoryItemsResponse() :
                 PlayFabResultCommon(),
+                ETag(),
                 IdempotencyId(),
                 TransactionIds()
             {}
 
             SubtractInventoryItemsResponse(const SubtractInventoryItemsResponse& src) :
                 PlayFabResultCommon(),
+                ETag(src.ETag),
                 IdempotencyId(src.IdempotencyId),
                 TransactionIds(src.TransactionIds)
             {}
@@ -8070,6 +8510,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["ETag"], ETag);
                 FromJsonUtilS(input["IdempotencyId"], IdempotencyId);
                 FromJsonUtilS(input["TransactionIds"], TransactionIds);
             }
@@ -8077,6 +8518,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_ETag; ToJsonUtilS(ETag, each_ETag); output["ETag"] = each_ETag;
                 Json::Value each_IdempotencyId; ToJsonUtilS(IdempotencyId, each_IdempotencyId); output["IdempotencyId"] = each_IdempotencyId;
                 Json::Value each_TransactionIds; ToJsonUtilS(TransactionIds, each_TransactionIds); output["TransactionIds"] = each_TransactionIds;
                 return output;
@@ -8148,8 +8590,10 @@ namespace PlayFab
             bool DeleteEmptyStacks;
             std::string GivingCollectionId;
             Boxed<EntityKey> GivingEntity;
+            std::string GivingETag;
             Boxed<InventoryItemReference> GivingItem;
             std::string IdempotencyId;
+            Boxed<InitialValues> NewStackValues;
             std::string ReceivingCollectionId;
             Boxed<EntityKey> ReceivingEntity;
             Boxed<InventoryItemReference> ReceivingItem;
@@ -8161,8 +8605,10 @@ namespace PlayFab
                 DeleteEmptyStacks(),
                 GivingCollectionId(),
                 GivingEntity(),
+                GivingETag(),
                 GivingItem(),
                 IdempotencyId(),
+                NewStackValues(),
                 ReceivingCollectionId(),
                 ReceivingEntity(),
                 ReceivingItem()
@@ -8175,8 +8621,10 @@ namespace PlayFab
                 DeleteEmptyStacks(src.DeleteEmptyStacks),
                 GivingCollectionId(src.GivingCollectionId),
                 GivingEntity(src.GivingEntity),
+                GivingETag(src.GivingETag),
                 GivingItem(src.GivingItem),
                 IdempotencyId(src.IdempotencyId),
+                NewStackValues(src.NewStackValues),
                 ReceivingCollectionId(src.ReceivingCollectionId),
                 ReceivingEntity(src.ReceivingEntity),
                 ReceivingItem(src.ReceivingItem)
@@ -8191,8 +8639,10 @@ namespace PlayFab
                 FromJsonUtilP(input["DeleteEmptyStacks"], DeleteEmptyStacks);
                 FromJsonUtilS(input["GivingCollectionId"], GivingCollectionId);
                 FromJsonUtilO(input["GivingEntity"], GivingEntity);
+                FromJsonUtilS(input["GivingETag"], GivingETag);
                 FromJsonUtilO(input["GivingItem"], GivingItem);
                 FromJsonUtilS(input["IdempotencyId"], IdempotencyId);
+                FromJsonUtilO(input["NewStackValues"], NewStackValues);
                 FromJsonUtilS(input["ReceivingCollectionId"], ReceivingCollectionId);
                 FromJsonUtilO(input["ReceivingEntity"], ReceivingEntity);
                 FromJsonUtilO(input["ReceivingItem"], ReceivingItem);
@@ -8206,8 +8656,10 @@ namespace PlayFab
                 Json::Value each_DeleteEmptyStacks; ToJsonUtilP(DeleteEmptyStacks, each_DeleteEmptyStacks); output["DeleteEmptyStacks"] = each_DeleteEmptyStacks;
                 Json::Value each_GivingCollectionId; ToJsonUtilS(GivingCollectionId, each_GivingCollectionId); output["GivingCollectionId"] = each_GivingCollectionId;
                 Json::Value each_GivingEntity; ToJsonUtilO(GivingEntity, each_GivingEntity); output["GivingEntity"] = each_GivingEntity;
+                Json::Value each_GivingETag; ToJsonUtilS(GivingETag, each_GivingETag); output["GivingETag"] = each_GivingETag;
                 Json::Value each_GivingItem; ToJsonUtilO(GivingItem, each_GivingItem); output["GivingItem"] = each_GivingItem;
                 Json::Value each_IdempotencyId; ToJsonUtilS(IdempotencyId, each_IdempotencyId); output["IdempotencyId"] = each_IdempotencyId;
+                Json::Value each_NewStackValues; ToJsonUtilO(NewStackValues, each_NewStackValues); output["NewStackValues"] = each_NewStackValues;
                 Json::Value each_ReceivingCollectionId; ToJsonUtilS(ReceivingCollectionId, each_ReceivingCollectionId); output["ReceivingCollectionId"] = each_ReceivingCollectionId;
                 Json::Value each_ReceivingEntity; ToJsonUtilO(ReceivingEntity, each_ReceivingEntity); output["ReceivingEntity"] = each_ReceivingEntity;
                 Json::Value each_ReceivingItem; ToJsonUtilO(ReceivingItem, each_ReceivingItem); output["ReceivingItem"] = each_ReceivingItem;
@@ -8217,12 +8669,14 @@ namespace PlayFab
 
         struct TransferInventoryItemsResponse : public PlayFabResultCommon
         {
+            std::string GivingETag;
             std::list<std::string> GivingTransactionIds;
             std::string IdempotencyId;
             std::list<std::string> ReceivingTransactionIds;
 
             TransferInventoryItemsResponse() :
                 PlayFabResultCommon(),
+                GivingETag(),
                 GivingTransactionIds(),
                 IdempotencyId(),
                 ReceivingTransactionIds()
@@ -8230,6 +8684,7 @@ namespace PlayFab
 
             TransferInventoryItemsResponse(const TransferInventoryItemsResponse& src) :
                 PlayFabResultCommon(),
+                GivingETag(src.GivingETag),
                 GivingTransactionIds(src.GivingTransactionIds),
                 IdempotencyId(src.IdempotencyId),
                 ReceivingTransactionIds(src.ReceivingTransactionIds)
@@ -8239,6 +8694,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["GivingETag"], GivingETag);
                 FromJsonUtilS(input["GivingTransactionIds"], GivingTransactionIds);
                 FromJsonUtilS(input["IdempotencyId"], IdempotencyId);
                 FromJsonUtilS(input["ReceivingTransactionIds"], ReceivingTransactionIds);
@@ -8247,6 +8703,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_GivingETag; ToJsonUtilS(GivingETag, each_GivingETag); output["GivingETag"] = each_GivingETag;
                 Json::Value each_GivingTransactionIds; ToJsonUtilS(GivingTransactionIds, each_GivingTransactionIds); output["GivingTransactionIds"] = each_GivingTransactionIds;
                 Json::Value each_IdempotencyId; ToJsonUtilS(IdempotencyId, each_IdempotencyId); output["IdempotencyId"] = each_IdempotencyId;
                 Json::Value each_ReceivingTransactionIds; ToJsonUtilS(ReceivingTransactionIds, each_ReceivingTransactionIds); output["ReceivingTransactionIds"] = each_ReceivingTransactionIds;
@@ -8385,6 +8842,7 @@ namespace PlayFab
             std::string CollectionId;
             std::map<std::string, std::string> CustomTags;
             Boxed<EntityKey> Entity;
+            std::string ETag;
             std::string IdempotencyId;
             Boxed<InventoryItem> Item;
 
@@ -8393,6 +8851,7 @@ namespace PlayFab
                 CollectionId(),
                 CustomTags(),
                 Entity(),
+                ETag(),
                 IdempotencyId(),
                 Item()
             {}
@@ -8402,6 +8861,7 @@ namespace PlayFab
                 CollectionId(src.CollectionId),
                 CustomTags(src.CustomTags),
                 Entity(src.Entity),
+                ETag(src.ETag),
                 IdempotencyId(src.IdempotencyId),
                 Item(src.Item)
             {}
@@ -8413,6 +8873,7 @@ namespace PlayFab
                 FromJsonUtilS(input["CollectionId"], CollectionId);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["Entity"], Entity);
+                FromJsonUtilS(input["ETag"], ETag);
                 FromJsonUtilS(input["IdempotencyId"], IdempotencyId);
                 FromJsonUtilO(input["Item"], Item);
             }
@@ -8423,6 +8884,7 @@ namespace PlayFab
                 Json::Value each_CollectionId; ToJsonUtilS(CollectionId, each_CollectionId); output["CollectionId"] = each_CollectionId;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                Json::Value each_ETag; ToJsonUtilS(ETag, each_ETag); output["ETag"] = each_ETag;
                 Json::Value each_IdempotencyId; ToJsonUtilS(IdempotencyId, each_IdempotencyId); output["IdempotencyId"] = each_IdempotencyId;
                 Json::Value each_Item; ToJsonUtilO(Item, each_Item); output["Item"] = each_Item;
                 return output;
@@ -8431,17 +8893,20 @@ namespace PlayFab
 
         struct UpdateInventoryItemsResponse : public PlayFabResultCommon
         {
+            std::string ETag;
             std::string IdempotencyId;
             std::list<std::string> TransactionIds;
 
             UpdateInventoryItemsResponse() :
                 PlayFabResultCommon(),
+                ETag(),
                 IdempotencyId(),
                 TransactionIds()
             {}
 
             UpdateInventoryItemsResponse(const UpdateInventoryItemsResponse& src) :
                 PlayFabResultCommon(),
+                ETag(src.ETag),
                 IdempotencyId(src.IdempotencyId),
                 TransactionIds(src.TransactionIds)
             {}
@@ -8450,6 +8915,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["ETag"], ETag);
                 FromJsonUtilS(input["IdempotencyId"], IdempotencyId);
                 FromJsonUtilS(input["TransactionIds"], TransactionIds);
             }
@@ -8457,6 +8923,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_ETag; ToJsonUtilS(ETag, each_ETag); output["ETag"] = each_ETag;
                 Json::Value each_IdempotencyId; ToJsonUtilS(IdempotencyId, each_IdempotencyId); output["IdempotencyId"] = each_IdempotencyId;
                 Json::Value each_TransactionIds; ToJsonUtilS(TransactionIds, each_TransactionIds); output["TransactionIds"] = each_TransactionIds;
                 return output;
