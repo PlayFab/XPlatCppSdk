@@ -20334,6 +20334,40 @@ namespace PlayFab
             }
         };
 
+        struct ChurnPredictionSegmentFilter : public PlayFabBaseModel
+        {
+            Boxed<SegmentFilterComparison> Comparison;
+            Boxed<ChurnRiskLevel> RiskLevel;
+
+            ChurnPredictionSegmentFilter() :
+                PlayFabBaseModel(),
+                Comparison(),
+                RiskLevel()
+            {}
+
+            ChurnPredictionSegmentFilter(const ChurnPredictionSegmentFilter& src) :
+                PlayFabBaseModel(),
+                Comparison(src.Comparison),
+                RiskLevel(src.RiskLevel)
+            {}
+
+            ~ChurnPredictionSegmentFilter() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilE(input["Comparison"], Comparison);
+                FromJsonUtilE(input["RiskLevel"], RiskLevel);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Comparison; ToJsonUtilE(Comparison, each_Comparison); output["Comparison"] = each_Comparison;
+                Json::Value each_RiskLevel; ToJsonUtilE(RiskLevel, each_RiskLevel); output["RiskLevel"] = each_RiskLevel;
+                return output;
+            }
+        };
+
         struct CloudScriptFile : public PlayFabBaseModel
         {
             std::string FileContents;
@@ -22220,6 +22254,7 @@ namespace PlayFab
         {
             Boxed<AdCampaignSegmentFilter> AdCampaignFilter;
             Boxed<AllPlayersSegmentFilter> AllPlayersFilter;
+            Boxed<ChurnPredictionSegmentFilter> ChurnPredictionFilter;
             Boxed<FirstLoginDateSegmentFilter> FirstLoginDateFilter;
             Boxed<FirstLoginTimespanSegmentFilter> FirstLoginFilter;
             Boxed<LastLoginDateSegmentFilter> LastLoginDateFilter;
@@ -22242,6 +22277,7 @@ namespace PlayFab
                 PlayFabBaseModel(),
                 AdCampaignFilter(),
                 AllPlayersFilter(),
+                ChurnPredictionFilter(),
                 FirstLoginDateFilter(),
                 FirstLoginFilter(),
                 LastLoginDateFilter(),
@@ -22265,6 +22301,7 @@ namespace PlayFab
                 PlayFabBaseModel(),
                 AdCampaignFilter(src.AdCampaignFilter),
                 AllPlayersFilter(src.AllPlayersFilter),
+                ChurnPredictionFilter(src.ChurnPredictionFilter),
                 FirstLoginDateFilter(src.FirstLoginDateFilter),
                 FirstLoginFilter(src.FirstLoginFilter),
                 LastLoginDateFilter(src.LastLoginDateFilter),
@@ -22290,6 +22327,7 @@ namespace PlayFab
             {
                 FromJsonUtilO(input["AdCampaignFilter"], AdCampaignFilter);
                 FromJsonUtilO(input["AllPlayersFilter"], AllPlayersFilter);
+                FromJsonUtilO(input["ChurnPredictionFilter"], ChurnPredictionFilter);
                 FromJsonUtilO(input["FirstLoginDateFilter"], FirstLoginDateFilter);
                 FromJsonUtilO(input["FirstLoginFilter"], FirstLoginFilter);
                 FromJsonUtilO(input["LastLoginDateFilter"], LastLoginDateFilter);
@@ -22314,6 +22352,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_AdCampaignFilter; ToJsonUtilO(AdCampaignFilter, each_AdCampaignFilter); output["AdCampaignFilter"] = each_AdCampaignFilter;
                 Json::Value each_AllPlayersFilter; ToJsonUtilO(AllPlayersFilter, each_AllPlayersFilter); output["AllPlayersFilter"] = each_AllPlayersFilter;
+                Json::Value each_ChurnPredictionFilter; ToJsonUtilO(ChurnPredictionFilter, each_ChurnPredictionFilter); output["ChurnPredictionFilter"] = each_ChurnPredictionFilter;
                 Json::Value each_FirstLoginDateFilter; ToJsonUtilO(FirstLoginDateFilter, each_FirstLoginDateFilter); output["FirstLoginDateFilter"] = each_FirstLoginDateFilter;
                 Json::Value each_FirstLoginFilter; ToJsonUtilO(FirstLoginFilter, each_FirstLoginFilter); output["FirstLoginFilter"] = each_FirstLoginFilter;
                 Json::Value each_LastLoginDateFilter; ToJsonUtilO(LastLoginDateFilter, each_LastLoginDateFilter); output["LastLoginDateFilter"] = each_LastLoginDateFilter;

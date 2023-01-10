@@ -4830,7 +4830,6 @@ namespace PlayFab
         struct PostFunctionResultForPlayerTriggeredActionRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
-            Boxed<EntityKey> Entity;
             ExecuteFunctionResult FunctionResult;
             PlayerProfileModel PlayerProfile;
             Boxed<PlayStreamEventEnvelopeModel> PlayStreamEventEnvelope;
@@ -4838,7 +4837,6 @@ namespace PlayFab
             PostFunctionResultForPlayerTriggeredActionRequest() :
                 PlayFabRequestCommon(),
                 CustomTags(),
-                Entity(),
                 FunctionResult(),
                 PlayerProfile(),
                 PlayStreamEventEnvelope()
@@ -4847,7 +4845,6 @@ namespace PlayFab
             PostFunctionResultForPlayerTriggeredActionRequest(const PostFunctionResultForPlayerTriggeredActionRequest& src) :
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
-                Entity(src.Entity),
                 FunctionResult(src.FunctionResult),
                 PlayerProfile(src.PlayerProfile),
                 PlayStreamEventEnvelope(src.PlayStreamEventEnvelope)
@@ -4858,7 +4855,6 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
-                FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilO(input["FunctionResult"], FunctionResult);
                 FromJsonUtilO(input["PlayerProfile"], PlayerProfile);
                 FromJsonUtilO(input["PlayStreamEventEnvelope"], PlayStreamEventEnvelope);
@@ -4868,7 +4864,6 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
-                Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
                 Json::Value each_FunctionResult; ToJsonUtilO(FunctionResult, each_FunctionResult); output["FunctionResult"] = each_FunctionResult;
                 Json::Value each_PlayerProfile; ToJsonUtilO(PlayerProfile, each_PlayerProfile); output["PlayerProfile"] = each_PlayerProfile;
                 Json::Value each_PlayStreamEventEnvelope; ToJsonUtilO(PlayStreamEventEnvelope, each_PlayStreamEventEnvelope); output["PlayStreamEventEnvelope"] = each_PlayStreamEventEnvelope;
@@ -4879,14 +4874,12 @@ namespace PlayFab
         struct PostFunctionResultForScheduledTaskRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
-            Boxed<EntityKey> Entity;
             ExecuteFunctionResult FunctionResult;
             NameIdentifier ScheduledTaskId;
 
             PostFunctionResultForScheduledTaskRequest() :
                 PlayFabRequestCommon(),
                 CustomTags(),
-                Entity(),
                 FunctionResult(),
                 ScheduledTaskId()
             {}
@@ -4894,7 +4887,6 @@ namespace PlayFab
             PostFunctionResultForScheduledTaskRequest(const PostFunctionResultForScheduledTaskRequest& src) :
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
-                Entity(src.Entity),
                 FunctionResult(src.FunctionResult),
                 ScheduledTaskId(src.ScheduledTaskId)
             {}
@@ -4904,7 +4896,6 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
-                FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilO(input["FunctionResult"], FunctionResult);
                 FromJsonUtilO(input["ScheduledTaskId"], ScheduledTaskId);
             }
@@ -4913,7 +4904,6 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
-                Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
                 Json::Value each_FunctionResult; ToJsonUtilO(FunctionResult, each_FunctionResult); output["FunctionResult"] = each_FunctionResult;
                 Json::Value each_ScheduledTaskId; ToJsonUtilO(ScheduledTaskId, each_ScheduledTaskId); output["ScheduledTaskId"] = each_ScheduledTaskId;
                 return output;
