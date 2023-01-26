@@ -91,6 +91,7 @@ namespace PlayFab
     private:
         void WorkerThread();
         bool DoWork();
+        bool PopBuffer();
         void WriteEventsApiCallback(const EventsModels::WriteEventsResponse& result, void* customData);
         void WriteEventsApiErrorCallback(const PlayFabError& error, void* customData);
         void CallbackRequest(std::shared_ptr<const IPlayFabEmitEventRequest> request, std::shared_ptr<const IPlayFabEmitEventResponse> response);
