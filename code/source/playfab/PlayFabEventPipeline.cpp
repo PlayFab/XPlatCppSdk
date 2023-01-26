@@ -225,6 +225,15 @@ namespace PlayFab
                 std::this_thread::sleep_for(std::chrono::milliseconds(this->settings->readBufferWaitTime));
             }
         }
+        // batch up any buffered events
+        while( PopBuffer() )
+        {
+            if (this->batch.size() >= this->settings->maximalNumberOfItemsInBatch)
+            {
+                // if batch is full
+                this->SendBatch(this->batch);
+            }
+        }
         if( this->batch.size() > 0)
         {
             // Flush remaining events on shutdown
@@ -236,7 +245,6 @@ namespace PlayFab
     {
         using clock = std::chrono::steady_clock;
         using Result = PlayFabEventBuffer::EventConsumingResult;
-        std::shared_ptr<const IPlayFabEmitEventRequest> request;
 
         try
         {
@@ -266,32 +274,15 @@ namespace PlayFab
                 {
                     return false;
                 }
-                
-                switch (this->buffer.TryTake(request))
-                {
-                case Result::Success:
-                {
-                    // add an event to batch
-                    this->batch.push_back(std::move(request));
 
-                    if (this->batch.size() == 1)
-                    {
-                        // if it is the first event in an incomplete batch then set the batch creation moment
-                        this->momentBatchStarted = clock::now();
-                    }
-                    
-                    if (this->batch.size() >= this->settings->maximalNumberOfItemsInBatch)
-                    {
-                        // if batch is full
-                        this->SendBatch(this->batch);
-                    }
+                if( !PopBuffer() )
+                    return false; // Done - nothing available
+
+                if (this->batch.size() >= this->settings->maximalNumberOfItemsInBatch)
+                {
+                    // if batch is full
+                    this->SendBatch(this->batch);
                     return true;
-                }
-
-                case Result::Disabled:
-                case Result::Empty:
-                default:
-                    break;
                 }
 
                 // if batch was started
@@ -325,6 +316,36 @@ namespace PlayFab
         catch (...)
         {
             LOG_PIPELINE("A non std::exception was caught in PlayFabEventPipeline::WorkerThread method");
+        }
+        return false;
+    }
+
+    bool PlayFabEventPipeline::PopBuffer()
+    {
+        using clock = std::chrono::steady_clock;
+        using Result = PlayFabEventBuffer::EventConsumingResult;
+        std::shared_ptr<const IPlayFabEmitEventRequest> request;
+
+        switch (this->buffer.TryTake(request))
+        {
+        case Result::Success:
+        {
+            // add an event to batch
+            this->batch.push_back(std::move(request));
+
+            if (this->batch.size() == 1)
+            {
+                // if it is the first event in an incomplete batch then set the batch creation moment
+                this->momentBatchStarted = clock::now();
+            }
+            
+            return true;
+        }
+
+        case Result::Disabled:
+        case Result::Empty:
+        default:
+            break;
         }
         return false;
     }
