@@ -3247,7 +3247,7 @@ namespace PlayFab
 
         struct AddInventoryItemsOperation : public PlayFabBaseModel
         {
-            Int32 Amount;
+            Boxed<Int32> Amount;
             Boxed<InventoryItemReference> Item;
             Boxed<InitialValues> NewStackValues;
 
@@ -3320,7 +3320,7 @@ namespace PlayFab
 
         struct AddInventoryItemsRequest : public PlayFabRequestCommon
         {
-            Int32 Amount;
+            Boxed<Int32> Amount;
             std::string CollectionId;
             std::map<std::string, std::string> CustomTags;
             Boxed<EntityKey> Entity;
@@ -5017,7 +5017,7 @@ namespace PlayFab
 
         struct PurchaseInventoryItemsOperation : public PlayFabBaseModel
         {
-            Int32 Amount;
+            Boxed<Int32> Amount;
             bool DeleteEmptyStacks;
             Boxed<InventoryItemReference> Item;
             Boxed<InitialValues> NewStackValues;
@@ -5071,7 +5071,7 @@ namespace PlayFab
 
         struct SubtractInventoryItemsOperation : public PlayFabBaseModel
         {
-            Int32 Amount;
+            Boxed<Int32> Amount;
             bool DeleteEmptyStacks;
             Boxed<InventoryItemReference> Item;
 
@@ -5159,7 +5159,7 @@ namespace PlayFab
 
         struct InventoryItem : public PlayFabBaseModel
         {
-            Int32 Amount;
+            Boxed<Int32> Amount;
             Json::Value DisplayProperties;
             std::string Id;
             std::string StackId;
@@ -7077,7 +7077,7 @@ namespace PlayFab
 
         struct PurchaseInventoryItemsRequest : public PlayFabRequestCommon
         {
-            Int32 Amount;
+            Boxed<Int32> Amount;
             std::string CollectionId;
             std::map<std::string, std::string> CustomTags;
             bool DeleteEmptyStacks;
@@ -8424,7 +8424,7 @@ namespace PlayFab
 
         struct SubtractInventoryItemsRequest : public PlayFabRequestCommon
         {
-            Int32 Amount;
+            Boxed<Int32> Amount;
             std::string CollectionId;
             std::map<std::string, std::string> CustomTags;
             bool DeleteEmptyStacks;
