@@ -5489,6 +5489,11 @@ namespace PlayFab
             GenericErrorCodesPlayStreamConnectionFailed,
             GenericErrorCodesInvalidEventContents,
             GenericErrorCodesInsightsV1Deprecated,
+            GenericErrorCodesAnalysisSubscriptionNotFound,
+            GenericErrorCodesAnalysisSubscriptionFailed,
+            GenericErrorCodesAnalysisSubscriptionFoundAlready,
+            GenericErrorCodesAnalysisSubscriptionManagementInvalidInput,
+            GenericErrorCodesInvalidGameCenterId,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8337,6 +8342,31 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesInsightsV1Deprecated)
             {
                 output = Json::Value("InsightsV1Deprecated");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAnalysisSubscriptionNotFound)
+            {
+                output = Json::Value("AnalysisSubscriptionNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAnalysisSubscriptionFailed)
+            {
+                output = Json::Value("AnalysisSubscriptionFailed");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAnalysisSubscriptionFoundAlready)
+            {
+                output = Json::Value("AnalysisSubscriptionFoundAlready");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAnalysisSubscriptionManagementInvalidInput)
+            {
+                output = Json::Value("AnalysisSubscriptionManagementInvalidInput");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidGameCenterId)
+            {
+                output = Json::Value("InvalidGameCenterId");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -11835,6 +11865,31 @@ namespace PlayFab
             if (inputStr == "InsightsV1Deprecated")
             {
                 output = GenericErrorCodes::GenericErrorCodesInsightsV1Deprecated;
+                return;
+            }
+            if (inputStr == "AnalysisSubscriptionNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAnalysisSubscriptionNotFound;
+                return;
+            }
+            if (inputStr == "AnalysisSubscriptionFailed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAnalysisSubscriptionFailed;
+                return;
+            }
+            if (inputStr == "AnalysisSubscriptionFoundAlready")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAnalysisSubscriptionFoundAlready;
+                return;
+            }
+            if (inputStr == "AnalysisSubscriptionManagementInvalidInput")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAnalysisSubscriptionManagementInvalidInput;
+                return;
+            }
+            if (inputStr == "InvalidGameCenterId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidGameCenterId;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
