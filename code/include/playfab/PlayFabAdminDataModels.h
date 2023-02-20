@@ -5494,6 +5494,7 @@ namespace PlayFab
             GenericErrorCodesAnalysisSubscriptionFoundAlready,
             GenericErrorCodesAnalysisSubscriptionManagementInvalidInput,
             GenericErrorCodesInvalidGameCenterId,
+            GenericErrorCodesInvalidNintendoSwitchAccountId,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8367,6 +8368,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesInvalidGameCenterId)
             {
                 output = Json::Value("InvalidGameCenterId");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidNintendoSwitchAccountId)
+            {
+                output = Json::Value("InvalidNintendoSwitchAccountId");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -11890,6 +11896,11 @@ namespace PlayFab
             if (inputStr == "InvalidGameCenterId")
             {
                 output = GenericErrorCodes::GenericErrorCodesInvalidGameCenterId;
+                return;
+            }
+            if (inputStr == "InvalidNintendoSwitchAccountId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidNintendoSwitchAccountId;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
