@@ -3074,6 +3074,35 @@ namespace PlayFab
             }
         };
 
+        struct VmStartupScriptParams : public PlayFabBaseModel
+        {
+            AssetReferenceParams VmStartupScriptAssetReference;
+
+            VmStartupScriptParams() :
+                PlayFabBaseModel(),
+                VmStartupScriptAssetReference()
+            {}
+
+            VmStartupScriptParams(const VmStartupScriptParams& src) :
+                PlayFabBaseModel(),
+                VmStartupScriptAssetReference(src.VmStartupScriptAssetReference)
+            {}
+
+            ~VmStartupScriptParams() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["VmStartupScriptAssetReference"], VmStartupScriptAssetReference);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_VmStartupScriptAssetReference; ToJsonUtilO(VmStartupScriptAssetReference, each_VmStartupScriptAssetReference); output["VmStartupScriptAssetReference"] = each_VmStartupScriptAssetReference;
+                return output;
+            }
+        };
+
         struct CreateBuildWithCustomContainerRequest : public PlayFabRequestCommon
         {
             Boxed<bool> AreAssetsReadonly;
@@ -3093,6 +3122,7 @@ namespace PlayFab
             Boxed<ServerResourceConstraintParams> ServerResourceConstraints;
             Boxed<bool> UseStreamingForAssetDownloads;
             Boxed<AzureVmSize> VmSize;
+            Boxed<VmStartupScriptParams> VmStartupScriptConfiguration;
 
             CreateBuildWithCustomContainerRequest() :
                 PlayFabRequestCommon(),
@@ -3112,7 +3142,8 @@ namespace PlayFab
                 RegionConfigurations(),
                 ServerResourceConstraints(),
                 UseStreamingForAssetDownloads(),
-                VmSize()
+                VmSize(),
+                VmStartupScriptConfiguration()
             {}
 
             CreateBuildWithCustomContainerRequest(const CreateBuildWithCustomContainerRequest& src) :
@@ -3133,7 +3164,8 @@ namespace PlayFab
                 RegionConfigurations(src.RegionConfigurations),
                 ServerResourceConstraints(src.ServerResourceConstraints),
                 UseStreamingForAssetDownloads(src.UseStreamingForAssetDownloads),
-                VmSize(src.VmSize)
+                VmSize(src.VmSize),
+                VmStartupScriptConfiguration(src.VmStartupScriptConfiguration)
             {}
 
             ~CreateBuildWithCustomContainerRequest() = default;
@@ -3157,6 +3189,7 @@ namespace PlayFab
                 FromJsonUtilO(input["ServerResourceConstraints"], ServerResourceConstraints);
                 FromJsonUtilP(input["UseStreamingForAssetDownloads"], UseStreamingForAssetDownloads);
                 FromJsonUtilE(input["VmSize"], VmSize);
+                FromJsonUtilO(input["VmStartupScriptConfiguration"], VmStartupScriptConfiguration);
             }
 
             Json::Value ToJson() const override
@@ -3179,6 +3212,7 @@ namespace PlayFab
                 Json::Value each_ServerResourceConstraints; ToJsonUtilO(ServerResourceConstraints, each_ServerResourceConstraints); output["ServerResourceConstraints"] = each_ServerResourceConstraints;
                 Json::Value each_UseStreamingForAssetDownloads; ToJsonUtilP(UseStreamingForAssetDownloads, each_UseStreamingForAssetDownloads); output["UseStreamingForAssetDownloads"] = each_UseStreamingForAssetDownloads;
                 Json::Value each_VmSize; ToJsonUtilE(VmSize, each_VmSize); output["VmSize"] = each_VmSize;
+                Json::Value each_VmStartupScriptConfiguration; ToJsonUtilO(VmStartupScriptConfiguration, each_VmStartupScriptConfiguration); output["VmStartupScriptConfiguration"] = each_VmStartupScriptConfiguration;
                 return output;
             }
         };
@@ -3261,6 +3295,35 @@ namespace PlayFab
             }
         };
 
+        struct VmStartupScriptConfiguration : public PlayFabBaseModel
+        {
+            AssetReference VmStartupScriptAssetReference;
+
+            VmStartupScriptConfiguration() :
+                PlayFabBaseModel(),
+                VmStartupScriptAssetReference()
+            {}
+
+            VmStartupScriptConfiguration(const VmStartupScriptConfiguration& src) :
+                PlayFabBaseModel(),
+                VmStartupScriptAssetReference(src.VmStartupScriptAssetReference)
+            {}
+
+            ~VmStartupScriptConfiguration() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["VmStartupScriptAssetReference"], VmStartupScriptAssetReference);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_VmStartupScriptAssetReference; ToJsonUtilO(VmStartupScriptAssetReference, each_VmStartupScriptAssetReference); output["VmStartupScriptAssetReference"] = each_VmStartupScriptAssetReference;
+                return output;
+            }
+        };
+
         struct CreateBuildWithCustomContainerResponse : public PlayFabResultCommon
         {
             Boxed<bool> AreAssetsReadonly;
@@ -3283,6 +3346,7 @@ namespace PlayFab
             std::string ServerType;
             Boxed<bool> UseStreamingForAssetDownloads;
             Boxed<AzureVmSize> VmSize;
+            Boxed<VmStartupScriptConfiguration> pfVmStartupScriptConfiguration;
 
             CreateBuildWithCustomContainerResponse() :
                 PlayFabResultCommon(),
@@ -3305,7 +3369,8 @@ namespace PlayFab
                 ServerResourceConstraints(),
                 ServerType(),
                 UseStreamingForAssetDownloads(),
-                VmSize()
+                VmSize(),
+                pfVmStartupScriptConfiguration()
             {}
 
             CreateBuildWithCustomContainerResponse(const CreateBuildWithCustomContainerResponse& src) :
@@ -3329,7 +3394,8 @@ namespace PlayFab
                 ServerResourceConstraints(src.ServerResourceConstraints),
                 ServerType(src.ServerType),
                 UseStreamingForAssetDownloads(src.UseStreamingForAssetDownloads),
-                VmSize(src.VmSize)
+                VmSize(src.VmSize),
+                pfVmStartupScriptConfiguration(src.pfVmStartupScriptConfiguration)
             {}
 
             ~CreateBuildWithCustomContainerResponse() = default;
@@ -3356,6 +3422,7 @@ namespace PlayFab
                 FromJsonUtilS(input["ServerType"], ServerType);
                 FromJsonUtilP(input["UseStreamingForAssetDownloads"], UseStreamingForAssetDownloads);
                 FromJsonUtilE(input["VmSize"], VmSize);
+                FromJsonUtilO(input["VmStartupScriptConfiguration"], pfVmStartupScriptConfiguration);
             }
 
             Json::Value ToJson() const override
@@ -3381,6 +3448,7 @@ namespace PlayFab
                 Json::Value each_ServerType; ToJsonUtilS(ServerType, each_ServerType); output["ServerType"] = each_ServerType;
                 Json::Value each_UseStreamingForAssetDownloads; ToJsonUtilP(UseStreamingForAssetDownloads, each_UseStreamingForAssetDownloads); output["UseStreamingForAssetDownloads"] = each_UseStreamingForAssetDownloads;
                 Json::Value each_VmSize; ToJsonUtilE(VmSize, each_VmSize); output["VmSize"] = each_VmSize;
+                Json::Value each_pfVmStartupScriptConfiguration; ToJsonUtilO(pfVmStartupScriptConfiguration, each_pfVmStartupScriptConfiguration); output["VmStartupScriptConfiguration"] = each_pfVmStartupScriptConfiguration;
                 return output;
             }
         };
@@ -3477,6 +3545,7 @@ namespace PlayFab
             std::string StartMultiplayerServerCommand;
             Boxed<bool> UseStreamingForAssetDownloads;
             Boxed<AzureVmSize> VmSize;
+            Boxed<VmStartupScriptParams> VmStartupScriptConfiguration;
             Boxed<WindowsCrashDumpConfiguration> pfWindowsCrashDumpConfiguration;
 
             CreateBuildWithManagedContainerRequest() :
@@ -3498,6 +3567,7 @@ namespace PlayFab
                 StartMultiplayerServerCommand(),
                 UseStreamingForAssetDownloads(),
                 VmSize(),
+                VmStartupScriptConfiguration(),
                 pfWindowsCrashDumpConfiguration()
             {}
 
@@ -3520,6 +3590,7 @@ namespace PlayFab
                 StartMultiplayerServerCommand(src.StartMultiplayerServerCommand),
                 UseStreamingForAssetDownloads(src.UseStreamingForAssetDownloads),
                 VmSize(src.VmSize),
+                VmStartupScriptConfiguration(src.VmStartupScriptConfiguration),
                 pfWindowsCrashDumpConfiguration(src.pfWindowsCrashDumpConfiguration)
             {}
 
@@ -3544,6 +3615,7 @@ namespace PlayFab
                 FromJsonUtilS(input["StartMultiplayerServerCommand"], StartMultiplayerServerCommand);
                 FromJsonUtilP(input["UseStreamingForAssetDownloads"], UseStreamingForAssetDownloads);
                 FromJsonUtilE(input["VmSize"], VmSize);
+                FromJsonUtilO(input["VmStartupScriptConfiguration"], VmStartupScriptConfiguration);
                 FromJsonUtilO(input["WindowsCrashDumpConfiguration"], pfWindowsCrashDumpConfiguration);
             }
 
@@ -3567,6 +3639,7 @@ namespace PlayFab
                 Json::Value each_StartMultiplayerServerCommand; ToJsonUtilS(StartMultiplayerServerCommand, each_StartMultiplayerServerCommand); output["StartMultiplayerServerCommand"] = each_StartMultiplayerServerCommand;
                 Json::Value each_UseStreamingForAssetDownloads; ToJsonUtilP(UseStreamingForAssetDownloads, each_UseStreamingForAssetDownloads); output["UseStreamingForAssetDownloads"] = each_UseStreamingForAssetDownloads;
                 Json::Value each_VmSize; ToJsonUtilE(VmSize, each_VmSize); output["VmSize"] = each_VmSize;
+                Json::Value each_VmStartupScriptConfiguration; ToJsonUtilO(VmStartupScriptConfiguration, each_VmStartupScriptConfiguration); output["VmStartupScriptConfiguration"] = each_VmStartupScriptConfiguration;
                 Json::Value each_pfWindowsCrashDumpConfiguration; ToJsonUtilO(pfWindowsCrashDumpConfiguration, each_pfWindowsCrashDumpConfiguration); output["WindowsCrashDumpConfiguration"] = each_pfWindowsCrashDumpConfiguration;
                 return output;
             }
@@ -3594,6 +3667,7 @@ namespace PlayFab
             std::string StartMultiplayerServerCommand;
             Boxed<bool> UseStreamingForAssetDownloads;
             Boxed<AzureVmSize> VmSize;
+            Boxed<VmStartupScriptConfiguration> pfVmStartupScriptConfiguration;
 
             CreateBuildWithManagedContainerResponse() :
                 PlayFabResultCommon(),
@@ -3616,7 +3690,8 @@ namespace PlayFab
                 ServerType(),
                 StartMultiplayerServerCommand(),
                 UseStreamingForAssetDownloads(),
-                VmSize()
+                VmSize(),
+                pfVmStartupScriptConfiguration()
             {}
 
             CreateBuildWithManagedContainerResponse(const CreateBuildWithManagedContainerResponse& src) :
@@ -3640,7 +3715,8 @@ namespace PlayFab
                 ServerType(src.ServerType),
                 StartMultiplayerServerCommand(src.StartMultiplayerServerCommand),
                 UseStreamingForAssetDownloads(src.UseStreamingForAssetDownloads),
-                VmSize(src.VmSize)
+                VmSize(src.VmSize),
+                pfVmStartupScriptConfiguration(src.pfVmStartupScriptConfiguration)
             {}
 
             ~CreateBuildWithManagedContainerResponse() = default;
@@ -3667,6 +3743,7 @@ namespace PlayFab
                 FromJsonUtilS(input["StartMultiplayerServerCommand"], StartMultiplayerServerCommand);
                 FromJsonUtilP(input["UseStreamingForAssetDownloads"], UseStreamingForAssetDownloads);
                 FromJsonUtilE(input["VmSize"], VmSize);
+                FromJsonUtilO(input["VmStartupScriptConfiguration"], pfVmStartupScriptConfiguration);
             }
 
             Json::Value ToJson() const override
@@ -3692,6 +3769,7 @@ namespace PlayFab
                 Json::Value each_StartMultiplayerServerCommand; ToJsonUtilS(StartMultiplayerServerCommand, each_StartMultiplayerServerCommand); output["StartMultiplayerServerCommand"] = each_StartMultiplayerServerCommand;
                 Json::Value each_UseStreamingForAssetDownloads; ToJsonUtilP(UseStreamingForAssetDownloads, each_UseStreamingForAssetDownloads); output["UseStreamingForAssetDownloads"] = each_UseStreamingForAssetDownloads;
                 Json::Value each_VmSize; ToJsonUtilE(VmSize, each_VmSize); output["VmSize"] = each_VmSize;
+                Json::Value each_pfVmStartupScriptConfiguration; ToJsonUtilO(pfVmStartupScriptConfiguration, each_pfVmStartupScriptConfiguration); output["VmStartupScriptConfiguration"] = each_pfVmStartupScriptConfiguration;
                 return output;
             }
         };
@@ -3715,6 +3793,7 @@ namespace PlayFab
             std::string StartMultiplayerServerCommand;
             Boxed<bool> UseStreamingForAssetDownloads;
             Boxed<AzureVmSize> VmSize;
+            Boxed<VmStartupScriptParams> VmStartupScriptConfiguration;
 
             CreateBuildWithProcessBasedServerRequest() :
                 PlayFabRequestCommon(),
@@ -3734,7 +3813,8 @@ namespace PlayFab
                 RegionConfigurations(),
                 StartMultiplayerServerCommand(),
                 UseStreamingForAssetDownloads(),
-                VmSize()
+                VmSize(),
+                VmStartupScriptConfiguration()
             {}
 
             CreateBuildWithProcessBasedServerRequest(const CreateBuildWithProcessBasedServerRequest& src) :
@@ -3755,7 +3835,8 @@ namespace PlayFab
                 RegionConfigurations(src.RegionConfigurations),
                 StartMultiplayerServerCommand(src.StartMultiplayerServerCommand),
                 UseStreamingForAssetDownloads(src.UseStreamingForAssetDownloads),
-                VmSize(src.VmSize)
+                VmSize(src.VmSize),
+                VmStartupScriptConfiguration(src.VmStartupScriptConfiguration)
             {}
 
             ~CreateBuildWithProcessBasedServerRequest() = default;
@@ -3779,6 +3860,7 @@ namespace PlayFab
                 FromJsonUtilS(input["StartMultiplayerServerCommand"], StartMultiplayerServerCommand);
                 FromJsonUtilP(input["UseStreamingForAssetDownloads"], UseStreamingForAssetDownloads);
                 FromJsonUtilE(input["VmSize"], VmSize);
+                FromJsonUtilO(input["VmStartupScriptConfiguration"], VmStartupScriptConfiguration);
             }
 
             Json::Value ToJson() const override
@@ -3801,6 +3883,7 @@ namespace PlayFab
                 Json::Value each_StartMultiplayerServerCommand; ToJsonUtilS(StartMultiplayerServerCommand, each_StartMultiplayerServerCommand); output["StartMultiplayerServerCommand"] = each_StartMultiplayerServerCommand;
                 Json::Value each_UseStreamingForAssetDownloads; ToJsonUtilP(UseStreamingForAssetDownloads, each_UseStreamingForAssetDownloads); output["UseStreamingForAssetDownloads"] = each_UseStreamingForAssetDownloads;
                 Json::Value each_VmSize; ToJsonUtilE(VmSize, each_VmSize); output["VmSize"] = each_VmSize;
+                Json::Value each_VmStartupScriptConfiguration; ToJsonUtilO(VmStartupScriptConfiguration, each_VmStartupScriptConfiguration); output["VmStartupScriptConfiguration"] = each_VmStartupScriptConfiguration;
                 return output;
             }
         };
@@ -3827,6 +3910,7 @@ namespace PlayFab
             std::string StartMultiplayerServerCommand;
             Boxed<bool> UseStreamingForAssetDownloads;
             Boxed<AzureVmSize> VmSize;
+            Boxed<VmStartupScriptConfiguration> pfVmStartupScriptConfiguration;
 
             CreateBuildWithProcessBasedServerResponse() :
                 PlayFabResultCommon(),
@@ -3849,7 +3933,8 @@ namespace PlayFab
                 ServerType(),
                 StartMultiplayerServerCommand(),
                 UseStreamingForAssetDownloads(),
-                VmSize()
+                VmSize(),
+                pfVmStartupScriptConfiguration()
             {}
 
             CreateBuildWithProcessBasedServerResponse(const CreateBuildWithProcessBasedServerResponse& src) :
@@ -3873,7 +3958,8 @@ namespace PlayFab
                 ServerType(src.ServerType),
                 StartMultiplayerServerCommand(src.StartMultiplayerServerCommand),
                 UseStreamingForAssetDownloads(src.UseStreamingForAssetDownloads),
-                VmSize(src.VmSize)
+                VmSize(src.VmSize),
+                pfVmStartupScriptConfiguration(src.pfVmStartupScriptConfiguration)
             {}
 
             ~CreateBuildWithProcessBasedServerResponse() = default;
@@ -3900,6 +3986,7 @@ namespace PlayFab
                 FromJsonUtilS(input["StartMultiplayerServerCommand"], StartMultiplayerServerCommand);
                 FromJsonUtilP(input["UseStreamingForAssetDownloads"], UseStreamingForAssetDownloads);
                 FromJsonUtilE(input["VmSize"], VmSize);
+                FromJsonUtilO(input["VmStartupScriptConfiguration"], pfVmStartupScriptConfiguration);
             }
 
             Json::Value ToJson() const override
@@ -3925,6 +4012,7 @@ namespace PlayFab
                 Json::Value each_StartMultiplayerServerCommand; ToJsonUtilS(StartMultiplayerServerCommand, each_StartMultiplayerServerCommand); output["StartMultiplayerServerCommand"] = each_StartMultiplayerServerCommand;
                 Json::Value each_UseStreamingForAssetDownloads; ToJsonUtilP(UseStreamingForAssetDownloads, each_UseStreamingForAssetDownloads); output["UseStreamingForAssetDownloads"] = each_UseStreamingForAssetDownloads;
                 Json::Value each_VmSize; ToJsonUtilE(VmSize, each_VmSize); output["VmSize"] = each_VmSize;
+                Json::Value each_pfVmStartupScriptConfiguration; ToJsonUtilO(pfVmStartupScriptConfiguration, each_pfVmStartupScriptConfiguration); output["VmStartupScriptConfiguration"] = each_pfVmStartupScriptConfiguration;
                 return output;
             }
         };

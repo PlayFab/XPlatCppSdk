@@ -5110,7 +5110,7 @@ namespace PlayFab
 
         struct TransferInventoryItemsOperation : public PlayFabBaseModel
         {
-            Int32 Amount;
+            Boxed<Int32> Amount;
             bool DeleteEmptyStacks;
             Boxed<InventoryItemReference> GivingItem;
             Boxed<InitialValues> NewStackValues;
@@ -8585,7 +8585,7 @@ namespace PlayFab
 
         struct TransferInventoryItemsRequest : public PlayFabRequestCommon
         {
-            Int32 Amount;
+            Boxed<Int32> Amount;
             std::map<std::string, std::string> CustomTags;
             bool DeleteEmptyStacks;
             std::string GivingCollectionId;
