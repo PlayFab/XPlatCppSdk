@@ -3323,6 +3323,7 @@ namespace PlayFab
             Boxed<Int32> Amount;
             std::string CollectionId;
             std::map<std::string, std::string> CustomTags;
+            Boxed<double> DurationInSeconds;
             Boxed<EntityKey> Entity;
             std::string ETag;
             std::string IdempotencyId;
@@ -3334,6 +3335,7 @@ namespace PlayFab
                 Amount(),
                 CollectionId(),
                 CustomTags(),
+                DurationInSeconds(),
                 Entity(),
                 ETag(),
                 IdempotencyId(),
@@ -3346,6 +3348,7 @@ namespace PlayFab
                 Amount(src.Amount),
                 CollectionId(src.CollectionId),
                 CustomTags(src.CustomTags),
+                DurationInSeconds(src.DurationInSeconds),
                 Entity(src.Entity),
                 ETag(src.ETag),
                 IdempotencyId(src.IdempotencyId),
@@ -3360,6 +3363,7 @@ namespace PlayFab
                 FromJsonUtilP(input["Amount"], Amount);
                 FromJsonUtilS(input["CollectionId"], CollectionId);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilP(input["DurationInSeconds"], DurationInSeconds);
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilS(input["ETag"], ETag);
                 FromJsonUtilS(input["IdempotencyId"], IdempotencyId);
@@ -3373,6 +3377,7 @@ namespace PlayFab
                 Json::Value each_Amount; ToJsonUtilP(Amount, each_Amount); output["Amount"] = each_Amount;
                 Json::Value each_CollectionId; ToJsonUtilS(CollectionId, each_CollectionId); output["CollectionId"] = each_CollectionId;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_DurationInSeconds; ToJsonUtilP(DurationInSeconds, each_DurationInSeconds); output["DurationInSeconds"] = each_DurationInSeconds;
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
                 Json::Value each_ETag; ToJsonUtilS(ETag, each_ETag); output["ETag"] = each_ETag;
                 Json::Value each_IdempotencyId; ToJsonUtilS(IdempotencyId, each_IdempotencyId); output["IdempotencyId"] = each_IdempotencyId;
@@ -3897,15 +3902,18 @@ namespace PlayFab
         struct CatalogPrice : public PlayFabBaseModel
         {
             std::list<CatalogPriceAmount> Amounts;
+            Boxed<double> UnitDurationInSeconds;
 
             CatalogPrice() :
                 PlayFabBaseModel(),
-                Amounts()
+                Amounts(),
+                UnitDurationInSeconds()
             {}
 
             CatalogPrice(const CatalogPrice& src) :
                 PlayFabBaseModel(),
-                Amounts(src.Amounts)
+                Amounts(src.Amounts),
+                UnitDurationInSeconds(src.UnitDurationInSeconds)
             {}
 
             ~CatalogPrice() = default;
@@ -3913,12 +3921,14 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Amounts"], Amounts);
+                FromJsonUtilP(input["UnitDurationInSeconds"], UnitDurationInSeconds);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
                 Json::Value each_Amounts; ToJsonUtilO(Amounts, each_Amounts); output["Amounts"] = each_Amounts;
+                Json::Value each_UnitDurationInSeconds; ToJsonUtilP(UnitDurationInSeconds, each_UnitDurationInSeconds); output["UnitDurationInSeconds"] = each_UnitDurationInSeconds;
                 return output;
             }
         };
@@ -4291,6 +4301,7 @@ namespace PlayFab
             Boxed<time_t> CreationDate;
             Boxed<EntityKey> CreatorEntity;
             std::list<DeepLink> DeepLinks;
+            std::string DefaultStackId;
             std::map<std::string, std::string> Description;
             Json::Value DisplayProperties;
             std::string DisplayVersion;
@@ -4320,6 +4331,7 @@ namespace PlayFab
                 CreationDate(),
                 CreatorEntity(),
                 DeepLinks(),
+                DefaultStackId(),
                 Description(),
                 DisplayProperties(),
                 DisplayVersion(),
@@ -4350,6 +4362,7 @@ namespace PlayFab
                 CreationDate(src.CreationDate),
                 CreatorEntity(src.CreatorEntity),
                 DeepLinks(src.DeepLinks),
+                DefaultStackId(src.DefaultStackId),
                 Description(src.Description),
                 DisplayProperties(src.DisplayProperties),
                 DisplayVersion(src.DisplayVersion),
@@ -4382,6 +4395,7 @@ namespace PlayFab
                 FromJsonUtilT(input["CreationDate"], CreationDate);
                 FromJsonUtilO(input["CreatorEntity"], CreatorEntity);
                 FromJsonUtilO(input["DeepLinks"], DeepLinks);
+                FromJsonUtilS(input["DefaultStackId"], DefaultStackId);
                 FromJsonUtilS(input["Description"], Description);
                 DisplayProperties = input["DisplayProperties"];
                 FromJsonUtilS(input["DisplayVersion"], DisplayVersion);
@@ -4413,6 +4427,7 @@ namespace PlayFab
                 Json::Value each_CreationDate; ToJsonUtilT(CreationDate, each_CreationDate); output["CreationDate"] = each_CreationDate;
                 Json::Value each_CreatorEntity; ToJsonUtilO(CreatorEntity, each_CreatorEntity); output["CreatorEntity"] = each_CreatorEntity;
                 Json::Value each_DeepLinks; ToJsonUtilO(DeepLinks, each_DeepLinks); output["DeepLinks"] = each_DeepLinks;
+                Json::Value each_DefaultStackId; ToJsonUtilS(DefaultStackId, each_DefaultStackId); output["DefaultStackId"] = each_DefaultStackId;
                 Json::Value each_Description; ToJsonUtilS(Description, each_Description); output["Description"] = each_Description;
                 output["DisplayProperties"] = DisplayProperties;
                 Json::Value each_DisplayVersion; ToJsonUtilS(DisplayVersion, each_DisplayVersion); output["DisplayVersion"] = each_DisplayVersion;
@@ -5019,6 +5034,7 @@ namespace PlayFab
         {
             Boxed<Int32> Amount;
             bool DeleteEmptyStacks;
+            Boxed<double> DurationInSeconds;
             Boxed<InventoryItemReference> Item;
             Boxed<InitialValues> NewStackValues;
             std::list<PurchasePriceAmount> PriceAmounts;
@@ -5028,6 +5044,7 @@ namespace PlayFab
                 PlayFabBaseModel(),
                 Amount(),
                 DeleteEmptyStacks(),
+                DurationInSeconds(),
                 Item(),
                 NewStackValues(),
                 PriceAmounts(),
@@ -5038,6 +5055,7 @@ namespace PlayFab
                 PlayFabBaseModel(),
                 Amount(src.Amount),
                 DeleteEmptyStacks(src.DeleteEmptyStacks),
+                DurationInSeconds(src.DurationInSeconds),
                 Item(src.Item),
                 NewStackValues(src.NewStackValues),
                 PriceAmounts(src.PriceAmounts),
@@ -5050,6 +5068,7 @@ namespace PlayFab
             {
                 FromJsonUtilP(input["Amount"], Amount);
                 FromJsonUtilP(input["DeleteEmptyStacks"], DeleteEmptyStacks);
+                FromJsonUtilP(input["DurationInSeconds"], DurationInSeconds);
                 FromJsonUtilO(input["Item"], Item);
                 FromJsonUtilO(input["NewStackValues"], NewStackValues);
                 FromJsonUtilO(input["PriceAmounts"], PriceAmounts);
@@ -5061,6 +5080,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_Amount; ToJsonUtilP(Amount, each_Amount); output["Amount"] = each_Amount;
                 Json::Value each_DeleteEmptyStacks; ToJsonUtilP(DeleteEmptyStacks, each_DeleteEmptyStacks); output["DeleteEmptyStacks"] = each_DeleteEmptyStacks;
+                Json::Value each_DurationInSeconds; ToJsonUtilP(DurationInSeconds, each_DurationInSeconds); output["DurationInSeconds"] = each_DurationInSeconds;
                 Json::Value each_Item; ToJsonUtilO(Item, each_Item); output["Item"] = each_Item;
                 Json::Value each_NewStackValues; ToJsonUtilO(NewStackValues, each_NewStackValues); output["NewStackValues"] = each_NewStackValues;
                 Json::Value each_PriceAmounts; ToJsonUtilO(PriceAmounts, each_PriceAmounts); output["PriceAmounts"] = each_PriceAmounts;
@@ -5073,12 +5093,14 @@ namespace PlayFab
         {
             Boxed<Int32> Amount;
             bool DeleteEmptyStacks;
+            Boxed<double> DurationInSeconds;
             Boxed<InventoryItemReference> Item;
 
             SubtractInventoryItemsOperation() :
                 PlayFabBaseModel(),
                 Amount(),
                 DeleteEmptyStacks(),
+                DurationInSeconds(),
                 Item()
             {}
 
@@ -5086,6 +5108,7 @@ namespace PlayFab
                 PlayFabBaseModel(),
                 Amount(src.Amount),
                 DeleteEmptyStacks(src.DeleteEmptyStacks),
+                DurationInSeconds(src.DurationInSeconds),
                 Item(src.Item)
             {}
 
@@ -5095,6 +5118,7 @@ namespace PlayFab
             {
                 FromJsonUtilP(input["Amount"], Amount);
                 FromJsonUtilP(input["DeleteEmptyStacks"], DeleteEmptyStacks);
+                FromJsonUtilP(input["DurationInSeconds"], DurationInSeconds);
                 FromJsonUtilO(input["Item"], Item);
             }
 
@@ -5103,6 +5127,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_Amount; ToJsonUtilP(Amount, each_Amount); output["Amount"] = each_Amount;
                 Json::Value each_DeleteEmptyStacks; ToJsonUtilP(DeleteEmptyStacks, each_DeleteEmptyStacks); output["DeleteEmptyStacks"] = each_DeleteEmptyStacks;
+                Json::Value each_DurationInSeconds; ToJsonUtilP(DurationInSeconds, each_DurationInSeconds); output["DurationInSeconds"] = each_DurationInSeconds;
                 Json::Value each_Item; ToJsonUtilO(Item, each_Item); output["Item"] = each_Item;
                 return output;
             }
@@ -5161,6 +5186,7 @@ namespace PlayFab
         {
             Boxed<Int32> Amount;
             Json::Value DisplayProperties;
+            Boxed<time_t> ExpirationDate;
             std::string Id;
             std::string StackId;
             std::string Type;
@@ -5169,6 +5195,7 @@ namespace PlayFab
                 PlayFabBaseModel(),
                 Amount(),
                 DisplayProperties(),
+                ExpirationDate(),
                 Id(),
                 StackId(),
                 Type()
@@ -5178,6 +5205,7 @@ namespace PlayFab
                 PlayFabBaseModel(),
                 Amount(src.Amount),
                 DisplayProperties(src.DisplayProperties),
+                ExpirationDate(src.ExpirationDate),
                 Id(src.Id),
                 StackId(src.StackId),
                 Type(src.Type)
@@ -5189,6 +5217,7 @@ namespace PlayFab
             {
                 FromJsonUtilP(input["Amount"], Amount);
                 DisplayProperties = input["DisplayProperties"];
+                FromJsonUtilT(input["ExpirationDate"], ExpirationDate);
                 FromJsonUtilS(input["Id"], Id);
                 FromJsonUtilS(input["StackId"], StackId);
                 FromJsonUtilS(input["Type"], Type);
@@ -5199,6 +5228,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_Amount; ToJsonUtilP(Amount, each_Amount); output["Amount"] = each_Amount;
                 output["DisplayProperties"] = DisplayProperties;
+                Json::Value each_ExpirationDate; ToJsonUtilT(ExpirationDate, each_ExpirationDate); output["ExpirationDate"] = each_ExpirationDate;
                 Json::Value each_Id; ToJsonUtilS(Id, each_Id); output["Id"] = each_Id;
                 Json::Value each_StackId; ToJsonUtilS(StackId, each_StackId); output["StackId"] = each_StackId;
                 Json::Value each_Type; ToJsonUtilS(Type, each_Type); output["Type"] = each_Type;
@@ -6678,6 +6708,7 @@ namespace PlayFab
         struct TransactionOperation : public PlayFabBaseModel
         {
             Boxed<Int32> Amount;
+            Boxed<double> DurationInSeconds;
             std::string ItemId;
             std::string ItemType;
             std::string StackId;
@@ -6686,6 +6717,7 @@ namespace PlayFab
             TransactionOperation() :
                 PlayFabBaseModel(),
                 Amount(),
+                DurationInSeconds(),
                 ItemId(),
                 ItemType(),
                 StackId(),
@@ -6695,6 +6727,7 @@ namespace PlayFab
             TransactionOperation(const TransactionOperation& src) :
                 PlayFabBaseModel(),
                 Amount(src.Amount),
+                DurationInSeconds(src.DurationInSeconds),
                 ItemId(src.ItemId),
                 ItemType(src.ItemType),
                 StackId(src.StackId),
@@ -6706,6 +6739,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["Amount"], Amount);
+                FromJsonUtilP(input["DurationInSeconds"], DurationInSeconds);
                 FromJsonUtilS(input["ItemId"], ItemId);
                 FromJsonUtilS(input["ItemType"], ItemType);
                 FromJsonUtilS(input["StackId"], StackId);
@@ -6716,6 +6750,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_Amount; ToJsonUtilP(Amount, each_Amount); output["Amount"] = each_Amount;
+                Json::Value each_DurationInSeconds; ToJsonUtilP(DurationInSeconds, each_DurationInSeconds); output["DurationInSeconds"] = each_DurationInSeconds;
                 Json::Value each_ItemId; ToJsonUtilS(ItemId, each_ItemId); output["ItemId"] = each_ItemId;
                 Json::Value each_ItemType; ToJsonUtilS(ItemType, each_ItemType); output["ItemType"] = each_ItemType;
                 Json::Value each_StackId; ToJsonUtilS(StackId, each_StackId); output["StackId"] = each_StackId;
@@ -7081,6 +7116,7 @@ namespace PlayFab
             std::string CollectionId;
             std::map<std::string, std::string> CustomTags;
             bool DeleteEmptyStacks;
+            Boxed<double> DurationInSeconds;
             Boxed<EntityKey> Entity;
             std::string ETag;
             std::string IdempotencyId;
@@ -7095,6 +7131,7 @@ namespace PlayFab
                 CollectionId(),
                 CustomTags(),
                 DeleteEmptyStacks(),
+                DurationInSeconds(),
                 Entity(),
                 ETag(),
                 IdempotencyId(),
@@ -7110,6 +7147,7 @@ namespace PlayFab
                 CollectionId(src.CollectionId),
                 CustomTags(src.CustomTags),
                 DeleteEmptyStacks(src.DeleteEmptyStacks),
+                DurationInSeconds(src.DurationInSeconds),
                 Entity(src.Entity),
                 ETag(src.ETag),
                 IdempotencyId(src.IdempotencyId),
@@ -7127,6 +7165,7 @@ namespace PlayFab
                 FromJsonUtilS(input["CollectionId"], CollectionId);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilP(input["DeleteEmptyStacks"], DeleteEmptyStacks);
+                FromJsonUtilP(input["DurationInSeconds"], DurationInSeconds);
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilS(input["ETag"], ETag);
                 FromJsonUtilS(input["IdempotencyId"], IdempotencyId);
@@ -7143,6 +7182,7 @@ namespace PlayFab
                 Json::Value each_CollectionId; ToJsonUtilS(CollectionId, each_CollectionId); output["CollectionId"] = each_CollectionId;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_DeleteEmptyStacks; ToJsonUtilP(DeleteEmptyStacks, each_DeleteEmptyStacks); output["DeleteEmptyStacks"] = each_DeleteEmptyStacks;
+                Json::Value each_DurationInSeconds; ToJsonUtilP(DurationInSeconds, each_DurationInSeconds); output["DurationInSeconds"] = each_DurationInSeconds;
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
                 Json::Value each_ETag; ToJsonUtilS(ETag, each_ETag); output["ETag"] = each_ETag;
                 Json::Value each_IdempotencyId; ToJsonUtilS(IdempotencyId, each_IdempotencyId); output["IdempotencyId"] = each_IdempotencyId;
@@ -8428,6 +8468,7 @@ namespace PlayFab
             std::string CollectionId;
             std::map<std::string, std::string> CustomTags;
             bool DeleteEmptyStacks;
+            Boxed<double> DurationInSeconds;
             Boxed<EntityKey> Entity;
             std::string ETag;
             std::string IdempotencyId;
@@ -8439,6 +8480,7 @@ namespace PlayFab
                 CollectionId(),
                 CustomTags(),
                 DeleteEmptyStacks(),
+                DurationInSeconds(),
                 Entity(),
                 ETag(),
                 IdempotencyId(),
@@ -8451,6 +8493,7 @@ namespace PlayFab
                 CollectionId(src.CollectionId),
                 CustomTags(src.CustomTags),
                 DeleteEmptyStacks(src.DeleteEmptyStacks),
+                DurationInSeconds(src.DurationInSeconds),
                 Entity(src.Entity),
                 ETag(src.ETag),
                 IdempotencyId(src.IdempotencyId),
@@ -8465,6 +8508,7 @@ namespace PlayFab
                 FromJsonUtilS(input["CollectionId"], CollectionId);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilP(input["DeleteEmptyStacks"], DeleteEmptyStacks);
+                FromJsonUtilP(input["DurationInSeconds"], DurationInSeconds);
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilS(input["ETag"], ETag);
                 FromJsonUtilS(input["IdempotencyId"], IdempotencyId);
@@ -8478,6 +8522,7 @@ namespace PlayFab
                 Json::Value each_CollectionId; ToJsonUtilS(CollectionId, each_CollectionId); output["CollectionId"] = each_CollectionId;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_DeleteEmptyStacks; ToJsonUtilP(DeleteEmptyStacks, each_DeleteEmptyStacks); output["DeleteEmptyStacks"] = each_DeleteEmptyStacks;
+                Json::Value each_DurationInSeconds; ToJsonUtilP(DurationInSeconds, each_DurationInSeconds); output["DurationInSeconds"] = each_DurationInSeconds;
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
                 Json::Value each_ETag; ToJsonUtilS(ETag, each_ETag); output["ETag"] = each_ETag;
                 Json::Value each_IdempotencyId; ToJsonUtilS(IdempotencyId, each_IdempotencyId); output["IdempotencyId"] = each_IdempotencyId;

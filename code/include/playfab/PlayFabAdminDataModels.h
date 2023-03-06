@@ -5495,6 +5495,12 @@ namespace PlayFab
             GenericErrorCodesAnalysisSubscriptionManagementInvalidInput,
             GenericErrorCodesInvalidGameCenterId,
             GenericErrorCodesInvalidNintendoSwitchAccountId,
+            GenericErrorCodesEntityAPIKeysNotSupported,
+            GenericErrorCodesIpAddressBanned,
+            GenericErrorCodesEntityLineageBanned,
+            GenericErrorCodesNamespaceMismatch,
+            GenericErrorCodesInvalidServiceConfiguration,
+            GenericErrorCodesInvalidNamespaceMismatch,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5641,6 +5647,11 @@ namespace PlayFab
             GenericErrorCodesEventSamplingInvalidEventNamespace,
             GenericErrorCodesEventSamplingInvalidEventName,
             GenericErrorCodesEventSamplingRatioNotFound,
+            GenericErrorCodesTelemetryKeyNotFound,
+            GenericErrorCodesTelemetryKeyInvalidName,
+            GenericErrorCodesTelemetryKeyAlreadyExists,
+            GenericErrorCodesTelemetryKeyInvalid,
+            GenericErrorCodesTelemetryKeyCountOverLimit,
             GenericErrorCodesEventSinkConnectionInvalid,
             GenericErrorCodesEventSinkConnectionUnauthorized,
             GenericErrorCodesEventSinkRegionInvalid,
@@ -8375,6 +8386,36 @@ namespace PlayFab
                 output = Json::Value("InvalidNintendoSwitchAccountId");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesEntityAPIKeysNotSupported)
+            {
+                output = Json::Value("EntityAPIKeysNotSupported");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesIpAddressBanned)
+            {
+                output = Json::Value("IpAddressBanned");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEntityLineageBanned)
+            {
+                output = Json::Value("EntityLineageBanned");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNamespaceMismatch)
+            {
+                output = Json::Value("NamespaceMismatch");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidServiceConfiguration)
+            {
+                output = Json::Value("InvalidServiceConfiguration");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidNamespaceMismatch)
+            {
+                output = Json::Value("InvalidNamespaceMismatch");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
             {
                 output = Json::Value("MatchmakingEntityInvalid");
@@ -9103,6 +9144,31 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesEventSamplingRatioNotFound)
             {
                 output = Json::Value("EventSamplingRatioNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTelemetryKeyNotFound)
+            {
+                output = Json::Value("TelemetryKeyNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTelemetryKeyInvalidName)
+            {
+                output = Json::Value("TelemetryKeyInvalidName");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTelemetryKeyAlreadyExists)
+            {
+                output = Json::Value("TelemetryKeyAlreadyExists");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTelemetryKeyInvalid)
+            {
+                output = Json::Value("TelemetryKeyInvalid");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTelemetryKeyCountOverLimit)
+            {
+                output = Json::Value("TelemetryKeyCountOverLimit");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesEventSinkConnectionInvalid)
@@ -11903,6 +11969,36 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesInvalidNintendoSwitchAccountId;
                 return;
             }
+            if (inputStr == "EntityAPIKeysNotSupported")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEntityAPIKeysNotSupported;
+                return;
+            }
+            if (inputStr == "IpAddressBanned")
+            {
+                output = GenericErrorCodes::GenericErrorCodesIpAddressBanned;
+                return;
+            }
+            if (inputStr == "EntityLineageBanned")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEntityLineageBanned;
+                return;
+            }
+            if (inputStr == "NamespaceMismatch")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNamespaceMismatch;
+                return;
+            }
+            if (inputStr == "InvalidServiceConfiguration")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidServiceConfiguration;
+                return;
+            }
+            if (inputStr == "InvalidNamespaceMismatch")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidNamespaceMismatch;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -12631,6 +12727,31 @@ namespace PlayFab
             if (inputStr == "EventSamplingRatioNotFound")
             {
                 output = GenericErrorCodes::GenericErrorCodesEventSamplingRatioNotFound;
+                return;
+            }
+            if (inputStr == "TelemetryKeyNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTelemetryKeyNotFound;
+                return;
+            }
+            if (inputStr == "TelemetryKeyInvalidName")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTelemetryKeyInvalidName;
+                return;
+            }
+            if (inputStr == "TelemetryKeyAlreadyExists")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTelemetryKeyAlreadyExists;
+                return;
+            }
+            if (inputStr == "TelemetryKeyInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTelemetryKeyInvalid;
+                return;
+            }
+            if (inputStr == "TelemetryKeyCountOverLimit")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTelemetryKeyCountOverLimit;
                 return;
             }
             if (inputStr == "EventSinkConnectionInvalid")
