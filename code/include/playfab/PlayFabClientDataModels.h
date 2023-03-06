@@ -16730,6 +16730,7 @@ namespace PlayFab
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
             std::string PlayerSecret;
             std::string ServerAuthCode;
+            Boxed<bool> SetEmail;
             std::string TitleId;
 
             LoginWithGoogleAccountRequest() :
@@ -16740,6 +16741,7 @@ namespace PlayFab
                 InfoRequestParameters(),
                 PlayerSecret(),
                 ServerAuthCode(),
+                SetEmail(),
                 TitleId()
             {}
 
@@ -16751,6 +16753,7 @@ namespace PlayFab
                 InfoRequestParameters(src.InfoRequestParameters),
                 PlayerSecret(src.PlayerSecret),
                 ServerAuthCode(src.ServerAuthCode),
+                SetEmail(src.SetEmail),
                 TitleId(src.TitleId)
             {}
 
@@ -16764,6 +16767,7 @@ namespace PlayFab
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
                 FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
                 FromJsonUtilS(input["ServerAuthCode"], ServerAuthCode);
+                FromJsonUtilP(input["SetEmail"], SetEmail);
                 FromJsonUtilS(input["TitleId"], TitleId);
             }
 
@@ -16776,6 +16780,7 @@ namespace PlayFab
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
                 Json::Value each_ServerAuthCode; ToJsonUtilS(ServerAuthCode, each_ServerAuthCode); output["ServerAuthCode"] = each_ServerAuthCode;
+                Json::Value each_SetEmail; ToJsonUtilP(SetEmail, each_SetEmail); output["SetEmail"] = each_SetEmail;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 return output;
             }
