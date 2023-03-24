@@ -5636,6 +5636,7 @@ namespace PlayFab
             GenericErrorCodesTelemetryKeyAlreadyExists,
             GenericErrorCodesTelemetryKeyInvalid,
             GenericErrorCodesTelemetryKeyCountOverLimit,
+            GenericErrorCodesTelemetryKeyDeactivated,
             GenericErrorCodesEventSinkConnectionInvalid,
             GenericErrorCodesEventSinkConnectionUnauthorized,
             GenericErrorCodesEventSinkRegionInvalid,
@@ -9153,6 +9154,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesTelemetryKeyCountOverLimit)
             {
                 output = Json::Value("TelemetryKeyCountOverLimit");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTelemetryKeyDeactivated)
+            {
+                output = Json::Value("TelemetryKeyDeactivated");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesEventSinkConnectionInvalid)
@@ -12736,6 +12742,11 @@ namespace PlayFab
             if (inputStr == "TelemetryKeyCountOverLimit")
             {
                 output = GenericErrorCodes::GenericErrorCodesTelemetryKeyCountOverLimit;
+                return;
+            }
+            if (inputStr == "TelemetryKeyDeactivated")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTelemetryKeyDeactivated;
                 return;
             }
             if (inputStr == "EventSinkConnectionInvalid")
