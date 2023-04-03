@@ -788,6 +788,79 @@ namespace PlayFab
             }
         };
 
+        struct GetTitlePlayersFromProviderIDsResponse : public PlayFabResultCommon
+        {
+            std::map<std::string, EntityLineage> TitlePlayerAccounts;
+
+            GetTitlePlayersFromProviderIDsResponse() :
+                PlayFabResultCommon(),
+                TitlePlayerAccounts()
+            {}
+
+            GetTitlePlayersFromProviderIDsResponse(const GetTitlePlayersFromProviderIDsResponse& src) :
+                PlayFabResultCommon(),
+                TitlePlayerAccounts(src.TitlePlayerAccounts)
+            {}
+
+            ~GetTitlePlayersFromProviderIDsResponse() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["TitlePlayerAccounts"], TitlePlayerAccounts);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_TitlePlayerAccounts; ToJsonUtilO(TitlePlayerAccounts, each_TitlePlayerAccounts); output["TitlePlayerAccounts"] = each_TitlePlayerAccounts;
+                return output;
+            }
+        };
+
+        struct GetTitlePlayersFromXboxLiveIDsRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            std::string Sandbox;
+            std::string TitleId;
+            std::list<std::string> XboxLiveIds;
+
+            GetTitlePlayersFromXboxLiveIDsRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                Sandbox(),
+                TitleId(),
+                XboxLiveIds()
+            {}
+
+            GetTitlePlayersFromXboxLiveIDsRequest(const GetTitlePlayersFromXboxLiveIDsRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                Sandbox(src.Sandbox),
+                TitleId(src.TitleId),
+                XboxLiveIds(src.XboxLiveIds)
+            {}
+
+            ~GetTitlePlayersFromXboxLiveIDsRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["Sandbox"], Sandbox);
+                FromJsonUtilS(input["TitleId"], TitleId);
+                FromJsonUtilS(input["XboxLiveIds"], XboxLiveIds);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_Sandbox; ToJsonUtilS(Sandbox, each_Sandbox); output["Sandbox"] = each_Sandbox;
+                Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
+                Json::Value each_XboxLiveIds; ToJsonUtilS(XboxLiveIds, each_XboxLiveIds); output["XboxLiveIds"] = each_XboxLiveIds;
+                return output;
+            }
+        };
+
         struct SetEntityProfilePolicyRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;

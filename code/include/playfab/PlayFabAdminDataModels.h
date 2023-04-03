@@ -5629,6 +5629,7 @@ namespace PlayFab
             GenericErrorCodesAsyncExportNotInFlight,
             GenericErrorCodesAsyncExportNotFound,
             GenericErrorCodesAsyncExportRateLimitExceeded,
+            GenericErrorCodesAnalyticsSegmentCountOverLimit,
             GenericErrorCodesSnapshotNotFound,
             GenericErrorCodesInventoryApiNotImplemented,
             GenericErrorCodesLobbyDoesNotExist,
@@ -9055,6 +9056,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesAsyncExportRateLimitExceeded)
             {
                 output = Json::Value("AsyncExportRateLimitExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAnalyticsSegmentCountOverLimit)
+            {
+                output = Json::Value("AnalyticsSegmentCountOverLimit");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesSnapshotNotFound)
@@ -12643,6 +12649,11 @@ namespace PlayFab
             if (inputStr == "AsyncExportRateLimitExceeded")
             {
                 output = GenericErrorCodes::GenericErrorCodesAsyncExportRateLimitExceeded;
+                return;
+            }
+            if (inputStr == "AnalyticsSegmentCountOverLimit")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAnalyticsSegmentCountOverLimit;
                 return;
             }
             if (inputStr == "SnapshotNotFound")

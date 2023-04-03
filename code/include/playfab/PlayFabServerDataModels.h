@@ -5613,6 +5613,7 @@ namespace PlayFab
             GenericErrorCodesAsyncExportNotInFlight,
             GenericErrorCodesAsyncExportNotFound,
             GenericErrorCodesAsyncExportRateLimitExceeded,
+            GenericErrorCodesAnalyticsSegmentCountOverLimit,
             GenericErrorCodesSnapshotNotFound,
             GenericErrorCodesInventoryApiNotImplemented,
             GenericErrorCodesLobbyDoesNotExist,
@@ -9039,6 +9040,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesAsyncExportRateLimitExceeded)
             {
                 output = Json::Value("AsyncExportRateLimitExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAnalyticsSegmentCountOverLimit)
+            {
+                output = Json::Value("AnalyticsSegmentCountOverLimit");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesSnapshotNotFound)
@@ -12627,6 +12633,11 @@ namespace PlayFab
             if (inputStr == "AsyncExportRateLimitExceeded")
             {
                 output = GenericErrorCodes::GenericErrorCodesAsyncExportRateLimitExceeded;
+                return;
+            }
+            if (inputStr == "AnalyticsSegmentCountOverLimit")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAnalyticsSegmentCountOverLimit;
                 return;
             }
             if (inputStr == "SnapshotNotFound")
@@ -22412,6 +22423,74 @@ namespace PlayFab
             }
         };
 
+        struct LinkSteamIdRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            Boxed<bool> ForceLink;
+            std::string PlayFabId;
+            std::string SteamId;
+
+            LinkSteamIdRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                ForceLink(),
+                PlayFabId(),
+                SteamId()
+            {}
+
+            LinkSteamIdRequest(const LinkSteamIdRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                ForceLink(src.ForceLink),
+                PlayFabId(src.PlayFabId),
+                SteamId(src.SteamId)
+            {}
+
+            ~LinkSteamIdRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilP(input["ForceLink"], ForceLink);
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+                FromJsonUtilS(input["SteamId"], SteamId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_ForceLink; ToJsonUtilP(ForceLink, each_ForceLink); output["ForceLink"] = each_ForceLink;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                Json::Value each_SteamId; ToJsonUtilS(SteamId, each_SteamId); output["SteamId"] = each_SteamId;
+                return output;
+            }
+        };
+
+        struct LinkSteamIdResult : public PlayFabResultCommon
+        {
+
+            LinkSteamIdResult() :
+                PlayFabResultCommon()
+            {}
+
+            LinkSteamIdResult(const LinkSteamIdResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~LinkSteamIdResult() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
         struct LinkXboxAccountRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
@@ -25341,6 +25420,64 @@ namespace PlayFab
             {}
 
             ~UnlinkServerCustomIdResult() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
+        struct UnlinkSteamIdRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            std::string PlayFabId;
+
+            UnlinkSteamIdRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                PlayFabId()
+            {}
+
+            UnlinkSteamIdRequest(const UnlinkSteamIdRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                PlayFabId(src.PlayFabId)
+            {}
+
+            ~UnlinkSteamIdRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                return output;
+            }
+        };
+
+        struct UnlinkSteamIdResult : public PlayFabResultCommon
+        {
+
+            UnlinkSteamIdResult() :
+                PlayFabResultCommon()
+            {}
+
+            UnlinkSteamIdResult(const UnlinkSteamIdResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~UnlinkSteamIdResult() = default;
 
             void FromJson(const Json::Value&) override
             {

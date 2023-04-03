@@ -3248,12 +3248,14 @@ namespace PlayFab
         struct AddInventoryItemsOperation : public PlayFabBaseModel
         {
             Boxed<Int32> Amount;
+            Boxed<double> DurationInSeconds;
             Boxed<InventoryItemReference> Item;
             Boxed<InitialValues> NewStackValues;
 
             AddInventoryItemsOperation() :
                 PlayFabBaseModel(),
                 Amount(),
+                DurationInSeconds(),
                 Item(),
                 NewStackValues()
             {}
@@ -3261,6 +3263,7 @@ namespace PlayFab
             AddInventoryItemsOperation(const AddInventoryItemsOperation& src) :
                 PlayFabBaseModel(),
                 Amount(src.Amount),
+                DurationInSeconds(src.DurationInSeconds),
                 Item(src.Item),
                 NewStackValues(src.NewStackValues)
             {}
@@ -3270,6 +3273,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["Amount"], Amount);
+                FromJsonUtilP(input["DurationInSeconds"], DurationInSeconds);
                 FromJsonUtilO(input["Item"], Item);
                 FromJsonUtilO(input["NewStackValues"], NewStackValues);
             }
@@ -3278,6 +3282,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_Amount; ToJsonUtilP(Amount, each_Amount); output["Amount"] = each_Amount;
+                Json::Value each_DurationInSeconds; ToJsonUtilP(DurationInSeconds, each_DurationInSeconds); output["DurationInSeconds"] = each_DurationInSeconds;
                 Json::Value each_Item; ToJsonUtilO(Item, each_Item); output["Item"] = each_Item;
                 Json::Value each_NewStackValues; ToJsonUtilO(NewStackValues, each_NewStackValues); output["NewStackValues"] = each_NewStackValues;
                 return output;
@@ -7683,6 +7688,7 @@ namespace PlayFab
             std::string CollectionId;
             std::map<std::string, std::string> CustomTags;
             Boxed<EntityKey> Entity;
+            std::string RedirectUri;
             std::string ServiceLabel;
 
             RedeemPlayStationStoreInventoryItemsRequest() :
@@ -7691,6 +7697,7 @@ namespace PlayFab
                 CollectionId(),
                 CustomTags(),
                 Entity(),
+                RedirectUri(),
                 ServiceLabel()
             {}
 
@@ -7700,6 +7707,7 @@ namespace PlayFab
                 CollectionId(src.CollectionId),
                 CustomTags(src.CustomTags),
                 Entity(src.Entity),
+                RedirectUri(src.RedirectUri),
                 ServiceLabel(src.ServiceLabel)
             {}
 
@@ -7711,6 +7719,7 @@ namespace PlayFab
                 FromJsonUtilS(input["CollectionId"], CollectionId);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["Entity"], Entity);
+                FromJsonUtilS(input["RedirectUri"], RedirectUri);
                 FromJsonUtilS(input["ServiceLabel"], ServiceLabel);
             }
 
@@ -7721,6 +7730,7 @@ namespace PlayFab
                 Json::Value each_CollectionId; ToJsonUtilS(CollectionId, each_CollectionId); output["CollectionId"] = each_CollectionId;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                Json::Value each_RedirectUri; ToJsonUtilS(RedirectUri, each_RedirectUri); output["RedirectUri"] = each_RedirectUri;
                 Json::Value each_ServiceLabel; ToJsonUtilS(ServiceLabel, each_ServiceLabel); output["ServiceLabel"] = each_ServiceLabel;
                 return output;
             }
