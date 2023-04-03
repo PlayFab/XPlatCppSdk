@@ -123,6 +123,7 @@ namespace PlayFab
         void LinkNintendoSwitchDeviceId(ServerModels::LinkNintendoSwitchDeviceIdRequest& request, const ProcessApiCallback<ServerModels::LinkNintendoSwitchDeviceIdResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void LinkPSNAccount(ServerModels::LinkPSNAccountRequest& request, const ProcessApiCallback<ServerModels::LinkPSNAccountResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void LinkServerCustomId(ServerModels::LinkServerCustomIdRequest& request, const ProcessApiCallback<ServerModels::LinkServerCustomIdResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void LinkSteamId(ServerModels::LinkSteamIdRequest& request, const ProcessApiCallback<ServerModels::LinkSteamIdResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void LinkXboxAccount(ServerModels::LinkXboxAccountRequest& request, const ProcessApiCallback<ServerModels::LinkXboxAccountResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void LoginWithServerCustomId(ServerModels::LoginWithServerCustomIdRequest& request, const ProcessApiCallback<ServerModels::ServerLoginResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void LoginWithSteamId(ServerModels::LoginWithSteamIdRequest& request, const ProcessApiCallback<ServerModels::ServerLoginResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -165,6 +166,7 @@ namespace PlayFab
         void UnlinkNintendoSwitchDeviceId(ServerModels::UnlinkNintendoSwitchDeviceIdRequest& request, const ProcessApiCallback<ServerModels::UnlinkNintendoSwitchDeviceIdResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UnlinkPSNAccount(ServerModels::UnlinkPSNAccountRequest& request, const ProcessApiCallback<ServerModels::UnlinkPSNAccountResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UnlinkServerCustomId(ServerModels::UnlinkServerCustomIdRequest& request, const ProcessApiCallback<ServerModels::UnlinkServerCustomIdResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void UnlinkSteamId(ServerModels::UnlinkSteamIdRequest& request, const ProcessApiCallback<ServerModels::UnlinkSteamIdResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UnlinkXboxAccount(ServerModels::UnlinkXboxAccountRequest& request, const ProcessApiCallback<ServerModels::UnlinkXboxAccountResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UnlockContainerInstance(ServerModels::UnlockContainerInstanceRequest& request, const ProcessApiCallback<ServerModels::UnlockContainerItemResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UnlockContainerItem(ServerModels::UnlockContainerItemRequest& request, const ProcessApiCallback<ServerModels::UnlockContainerItemResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -264,6 +266,7 @@ namespace PlayFab
         void OnLinkNintendoSwitchDeviceIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnLinkPSNAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnLinkServerCustomIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnLinkSteamIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnLinkXboxAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnLoginWithServerCustomIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnLoginWithSteamIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -306,6 +309,7 @@ namespace PlayFab
         void OnUnlinkNintendoSwitchDeviceIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUnlinkPSNAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUnlinkServerCustomIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnUnlinkSteamIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUnlinkXboxAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUnlockContainerInstanceResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUnlockContainerItemResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
