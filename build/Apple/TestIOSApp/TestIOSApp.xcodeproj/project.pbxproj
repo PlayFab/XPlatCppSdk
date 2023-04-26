@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		518A5FBB29F9B04C0033098C /* libXPlatCpp_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 518A5FBA29F9B04C0033098C /* libXPlatCpp_iOS.a */; };
 		5A3F0A862241BB0200AC0816 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A852241BB0200AC0816 /* AppDelegate.m */; };
 		5A3F0A892241BB0200AC0816 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A882241BB0200AC0816 /* ViewController.m */; };
 		5A3F0A8C2241BB0200AC0816 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A3F0A8A2241BB0200AC0816 /* Main.storyboard */; };
@@ -15,7 +16,6 @@
 		5A3F0A942241BB0700AC0816 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A3F0A922241BB0700AC0816 /* LaunchScreen.storyboard */; };
 		5A3F0A972241BB0700AC0816 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A962241BB0700AC0816 /* main.m */; };
 		5A3F0AAE2241BB8100AC0816 /* liblib_json.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A3F0AA22241BB3500AC0816 /* liblib_json.a */; };
-		5A3F0AAF2241BB8100AC0816 /* libXPlatCppIOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A3F0AA82241BB3500AC0816 /* libXPlatCppIOS.a */; };
 		5A3F0ACB2241BDF100AC0816 /* TestApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0ABF2241BDF000AC0816 /* TestApp.cpp */; };
 		5A3F0ACC2241BDF100AC0816 /* PlayFabApiTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0AC02241BDF000AC0816 /* PlayFabApiTest.cpp */; };
 		5A3F0ACF2241BDF100AC0816 /* TestContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0AC32241BDF000AC0816 /* TestContext.cpp */; };
@@ -40,13 +40,6 @@
 			remoteGlobalIDString = 5A3F09202241887600AC0816;
 			remoteInfo = lib_json;
 		};
-		5A3F0AA72241BB3500AC0816 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5A3F0AA32241BB3500AC0816 /* XPlatCppIOS.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5A3F08F6224184ED00AC0816;
-			remoteInfo = XPlatCppIOS;
-		};
 		5A3F0AA92241BB7B00AC0816 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5A3F0A9D2241BB3500AC0816 /* lib_json.xcodeproj */;
@@ -54,16 +47,10 @@
 			remoteGlobalIDString = 5A3F091F2241887600AC0816;
 			remoteInfo = lib_json;
 		};
-		5A3F0AAB2241BB7B00AC0816 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5A3F0AA32241BB3500AC0816 /* XPlatCppIOS.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 5A3F08F5224184ED00AC0816;
-			remoteInfo = XPlatCppIOS;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		518A5FBA29F9B04C0033098C /* libXPlatCpp_iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libXPlatCpp_iOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A3F0A812241BB0200AC0816 /* TestIOSApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestIOSApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A3F0A842241BB0200AC0816 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5A3F0A852241BB0200AC0816 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -76,7 +63,6 @@
 		5A3F0A952241BB0700AC0816 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A3F0A962241BB0700AC0816 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5A3F0A9D2241BB3500AC0816 /* lib_json.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = lib_json.xcodeproj; path = "../../../external/jsoncpp-ios-build/lib_json.xcodeproj"; sourceTree = "<group>"; };
-		5A3F0AA32241BB3500AC0816 /* XPlatCppIOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XPlatCppIOS.xcodeproj; path = ../XPlatCppIOS/XPlatCppIOS.xcodeproj; sourceTree = "<group>"; };
 		5A3F0AB42241BDDD00AC0816 /* TestUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestUtils.h; path = ../../../test/TestApp/TestUtils.h; sourceTree = "<group>"; };
 		5A3F0AB52241BDDD00AC0816 /* TestRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestRunner.h; path = ../../../test/TestApp/TestRunner.h; sourceTree = "<group>"; };
 		5A3F0AB62241BDDD00AC0816 /* PlayFabApiTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayFabApiTest.h; path = ../../../test/TestApp/PlayFabApiTest.h; sourceTree = "<group>"; };
@@ -113,8 +99,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				518A5FBB29F9B04C0033098C /* libXPlatCpp_iOS.a in Frameworks */,
 				5A3F0AAE2241BB8100AC0816 /* liblib_json.a in Frameworks */,
-				5A3F0AAF2241BB8100AC0816 /* libXPlatCppIOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,7 +116,6 @@
 				5A3F0A832241BB0200AC0816 /* UI */,
 				5A3F0AE92241E68600AC0816 /* resources */,
 				5A3F0A9D2241BB3500AC0816 /* lib_json.xcodeproj */,
-				5A3F0AA32241BB3500AC0816 /* XPlatCppIOS.xcodeproj */,
 				5A3F0A822241BB0200AC0816 /* Products */,
 				5A3F0AAD2241BB8100AC0816 /* Frameworks */,
 			);
@@ -169,17 +154,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5A3F0AA42241BB3500AC0816 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5A3F0AA82241BB3500AC0816 /* libXPlatCppIOS.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		5A3F0AAD2241BB8100AC0816 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				518A5FBA29F9B04C0033098C /* libXPlatCpp_iOS.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -248,7 +226,6 @@
 			);
 			dependencies = (
 				5A3F0AAA2241BB7B00AC0816 /* PBXTargetDependency */,
-				5A3F0AAC2241BB7B00AC0816 /* PBXTargetDependency */,
 			);
 			name = TestIOSApp;
 			productName = TestIOSApp;
@@ -285,10 +262,6 @@
 					ProductGroup = 5A3F0A9E2241BB3500AC0816 /* Products */;
 					ProjectRef = 5A3F0A9D2241BB3500AC0816 /* lib_json.xcodeproj */;
 				},
-				{
-					ProductGroup = 5A3F0AA42241BB3500AC0816 /* Products */;
-					ProjectRef = 5A3F0AA32241BB3500AC0816 /* XPlatCppIOS.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -303,13 +276,6 @@
 			fileType = archive.ar;
 			path = liblib_json.a;
 			remoteRef = 5A3F0AA12241BB3500AC0816 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5A3F0AA82241BB3500AC0816 /* libXPlatCppIOS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libXPlatCppIOS.a;
-			remoteRef = 5A3F0AA72241BB3500AC0816 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -360,11 +326,6 @@
 			isa = PBXTargetDependency;
 			name = lib_json;
 			targetProxy = 5A3F0AA92241BB7B00AC0816 /* PBXContainerItemProxy */;
-		};
-		5A3F0AAC2241BB7B00AC0816 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = XPlatCppIOS;
-			targetProxy = 5A3F0AAB2241BB7B00AC0816 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

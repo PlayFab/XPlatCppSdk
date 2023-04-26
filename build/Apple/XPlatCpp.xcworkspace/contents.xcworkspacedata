@@ -5,7 +5,7 @@
       location = "group:../../external/jsoncpp-ios-build/lib_json.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:XPlatCppIOS/XPlatCppIOS.xcodeproj">
+      location = "group:XPlatCpp/XPlatCpp.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:TestIOSApp/TestIOSApp.xcodeproj">

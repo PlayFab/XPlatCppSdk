@@ -7,6 +7,48 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		518A5F9029F9A5B40033098C /* PlayFabIOSHttpPlugin.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A572241950F00AC0816 /* PlayFabIOSHttpPlugin.mm */; };
+		518A5F9129F9A5B40033098C /* PlayFabAdminApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A2222418B2B00AC0816 /* PlayFabAdminApi.cpp */; };
+		518A5F9229F9A5B40033098C /* PlayFabAdminInstanceApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A0022418B2800AC0816 /* PlayFabAdminInstanceApi.cpp */; };
+		518A5F9329F9A5B40033098C /* PlayFabApiSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A2122418B2B00AC0816 /* PlayFabApiSettings.cpp */; };
+		518A5F9429F9A5B40033098C /* PlayFabAuthenticationApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F09F022418B2700AC0816 /* PlayFabAuthenticationApi.cpp */; };
+		518A5F9529F9A5B40033098C /* PlayFabAuthenticationContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A0122418B2800AC0816 /* PlayFabAuthenticationContext.cpp */; };
+		518A5F9629F9A5B40033098C /* PlayFabAuthenticationInstanceApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A0D22418B2800AC0816 /* PlayFabAuthenticationInstanceApi.cpp */; };
+		518A5F9729F9A5B40033098C /* PlayFabCallRequestContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A1C22418B2A00AC0816 /* PlayFabCallRequestContainer.cpp */; };
+		518A5F9829F9A5B40033098C /* PlayFabCallRequestContainerBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A1922418B2A00AC0816 /* PlayFabCallRequestContainerBase.cpp */; };
+		518A5F9929F9A5B40033098C /* PlayFabClientApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A0B22418B2800AC0816 /* PlayFabClientApi.cpp */; };
+		518A5F9A29F9A5B40033098C /* PlayFabClientInstanceApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F09F222418B2700AC0816 /* PlayFabClientInstanceApi.cpp */; };
+		518A5F9B29F9A5B40033098C /* PlayFabCloudScriptApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A0C22418B2800AC0816 /* PlayFabCloudScriptApi.cpp */; };
+		518A5F9C29F9A5B40033098C /* PlayFabCloudScriptInstanceApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A0422418B2800AC0816 /* PlayFabCloudScriptInstanceApi.cpp */; };
+		518A5F9D29F9A5B40033098C /* PlayFabDataApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A1D22418B2B00AC0816 /* PlayFabDataApi.cpp */; };
+		518A5F9E29F9A5B40033098C /* PlayFabDataInstanceApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F09F322418B2700AC0816 /* PlayFabDataInstanceApi.cpp */; };
+		518A5F9F29F9A5B40033098C /* PlayFabError.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A1422418B2900AC0816 /* PlayFabError.cpp */; };
+		518A5FA029F9A5B40033098C /* PlayFabEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F09FD22418B2700AC0816 /* PlayFabEvent.cpp */; };
+		518A5FA129F9A5B40033098C /* PlayFabEventApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A1F22418B2B00AC0816 /* PlayFabEventApi.cpp */; };
+		518A5FA229F9A5B40033098C /* PlayFabEventBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A2022418B2B00AC0816 /* PlayFabEventBuffer.cpp */; };
+		518A5FA329F9A5B40033098C /* PlayFabEventPipeline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F09F422418B2700AC0816 /* PlayFabEventPipeline.cpp */; };
+		518A5FA429F9A5B40033098C /* PlayFabEventRouter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F09FA22418B2700AC0816 /* PlayFabEventRouter.cpp */; };
+		518A5FA529F9A5B40033098C /* PlayFabEventsApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A1B22418B2A00AC0816 /* PlayFabEventsApi.cpp */; };
+		518A5FA629F9A5B40033098C /* PlayFabEventsInstanceApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A1322418B2900AC0816 /* PlayFabEventsInstanceApi.cpp */; };
+		518A5FA729F9A5B40033098C /* PlayFabGroupsApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A0E22418B2800AC0816 /* PlayFabGroupsApi.cpp */; };
+		518A5FA829F9A5B40033098C /* PlayFabGroupsInstanceApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A0A22418B2800AC0816 /* PlayFabGroupsInstanceApi.cpp */; };
+		518A5FA929F9A5B40033098C /* PlayFabLocalizationApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A0322418B2800AC0816 /* PlayFabLocalizationApi.cpp */; };
+		518A5FAA29F9A5B40033098C /* PlayFabLocalizationInstanceApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A0222418B2800AC0816 /* PlayFabLocalizationInstanceApi.cpp */; };
+		518A5FAB29F9A5B40033098C /* PlayFabMatchmakerApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A1022418B2900AC0816 /* PlayFabMatchmakerApi.cpp */; };
+		518A5FAC29F9A5B40033098C /* PlayFabMatchmakerInstanceApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F09FF22418B2800AC0816 /* PlayFabMatchmakerInstanceApi.cpp */; };
+		518A5FAD29F9A5B40033098C /* PlayFabMultiplayerApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F09FC22418B2700AC0816 /* PlayFabMultiplayerApi.cpp */; };
+		518A5FAE29F9A5B40033098C /* PlayFabMultiplayerInstanceApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A1722418B2A00AC0816 /* PlayFabMultiplayerInstanceApi.cpp */; };
+		518A5FAF29F9A5B40033098C /* PlayFabPluginManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F09F122418B2700AC0816 /* PlayFabPluginManager.cpp */; };
+		518A5FB029F9A5B40033098C /* PlayFabProfilesApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F09F522418B2700AC0816 /* PlayFabProfilesApi.cpp */; };
+		518A5FB129F9A5B40033098C /* PlayFabProfilesInstanceApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A1E22418B2B00AC0816 /* PlayFabProfilesInstanceApi.cpp */; };
+		518A5FB229F9A5B40033098C /* PlayFabServerApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F09F922418B2700AC0816 /* PlayFabServerApi.cpp */; };
+		518A5FB329F9A5B40033098C /* PlayFabServerInstanceApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F09F622418B2700AC0816 /* PlayFabServerInstanceApi.cpp */; };
+		518A5FB429F9A5B40033098C /* PlayFabSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A1522418B2900AC0816 /* PlayFabSettings.cpp */; };
+		518A5FB529F9A5B40033098C /* PlayFabSpinLock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F09F722418B2700AC0816 /* PlayFabSpinLock.cpp */; };
+		518A5FB629F9A5B40033098C /* QoSSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A0622418B2800AC0816 /* QoSSocket.cpp */; };
+		518A5FB729F9A5B40033098C /* PlayFabQoSApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A0722418B2800AC0816 /* PlayFabQoSApi.cpp */; };
+		518A5FB829F9A5B40033098C /* RegionResult.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A0822418B2800AC0816 /* RegionResult.cpp */; };
+		518A5FB929F9A5B40033098C /* XPlatSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F0A0922418B2800AC0816 /* XPlatSocket.cpp */; };
 		5A3F0A2322418B2B00AC0816 /* PlayFabAuthenticationApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F09F022418B2700AC0816 /* PlayFabAuthenticationApi.cpp */; };
 		5A3F0A2422418B2B00AC0816 /* PlayFabPluginManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F09F122418B2700AC0816 /* PlayFabPluginManager.cpp */; };
 		5A3F0A2522418B2B00AC0816 /* PlayFabClientInstanceApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F09F222418B2700AC0816 /* PlayFabClientInstanceApi.cpp */; };
@@ -64,7 +106,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5A3F08F6224184ED00AC0816 /* libXPlatCppIOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libXPlatCppIOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		518A5F8829F9A5770033098C /* libXPlatCpp_MacOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libXPlatCpp_MacOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A3F08F6224184ED00AC0816 /* libXPlatCpp_iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libXPlatCpp_iOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A3F09A922418B1400AC0816 /* PlayFabEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayFabEvent.h; path = ../../../code/include/playfab/PlayFabEvent.h; sourceTree = "<group>"; };
 		5A3F09AB22418B1400AC0816 /* QoSResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QoSResult.h; sourceTree = "<group>"; };
 		5A3F09AC22418B1400AC0816 /* PlayFabQoSApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayFabQoSApi.h; sourceTree = "<group>"; };
@@ -173,6 +216,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		518A5F8629F9A5770033098C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5A3F08F3224184ED00AC0816 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -195,7 +245,8 @@
 		5A3F08F7224184ED00AC0816 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5A3F08F6224184ED00AC0816 /* libXPlatCppIOS.a */,
+				5A3F08F6224184ED00AC0816 /* libXPlatCpp_iOS.a */,
+				518A5F8829F9A5770033098C /* libXPlatCpp_MacOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -339,10 +390,37 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		518A5F8429F9A5770033098C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		5A3F08F5224184ED00AC0816 /* XPlatCppIOS */ = {
+		518A5F8729F9A5770033098C /* XPlatCpp_MacOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5A3F08FF224184ED00AC0816 /* Build configuration list for PBXNativeTarget "XPlatCppIOS" */;
+			buildConfigurationList = 518A5F8B29F9A5770033098C /* Build configuration list for PBXNativeTarget "XPlatCpp_MacOS" */;
+			buildPhases = (
+				518A5F8429F9A5770033098C /* Headers */,
+				518A5F8529F9A5770033098C /* Sources */,
+				518A5F8629F9A5770033098C /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = XPlatCpp_MacOS;
+			productName = XPlatCpp_MacOS;
+			productReference = 518A5F8829F9A5770033098C /* libXPlatCpp_MacOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		5A3F08F5224184ED00AC0816 /* XPlatCpp_iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5A3F08FF224184ED00AC0816 /* Build configuration list for PBXNativeTarget "XPlatCpp_iOS" */;
 			buildPhases = (
 				5A3F08F2224184ED00AC0816 /* Sources */,
 				5A3F08F3224184ED00AC0816 /* Frameworks */,
@@ -352,9 +430,9 @@
 			);
 			dependencies = (
 			);
-			name = XPlatCppIOS;
-			productName = XPlatCppIOS;
-			productReference = 5A3F08F6224184ED00AC0816 /* libXPlatCppIOS.a */;
+			name = XPlatCpp_iOS;
+			productName = XPlatCpp_iOS;
+			productReference = 5A3F08F6224184ED00AC0816 /* libXPlatCpp_iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -366,12 +444,15 @@
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = Microsoft;
 				TargetAttributes = {
+					518A5F8729F9A5770033098C = {
+						CreatedOnToolsVersion = 14.3;
+					};
 					5A3F08F5224184ED00AC0816 = {
 						CreatedOnToolsVersion = 10.1;
 					};
 				};
 			};
-			buildConfigurationList = 5A3F08F1224184ED00AC0816 /* Build configuration list for PBXProject "XPlatCppIOS" */;
+			buildConfigurationList = 5A3F08F1224184ED00AC0816 /* Build configuration list for PBXProject "XPlatCpp" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -383,12 +464,62 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5A3F08F5224184ED00AC0816 /* XPlatCppIOS */,
+				5A3F08F5224184ED00AC0816 /* XPlatCpp_iOS */,
+				518A5F8729F9A5770033098C /* XPlatCpp_MacOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		518A5F8529F9A5770033098C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				518A5F9029F9A5B40033098C /* PlayFabIOSHttpPlugin.mm in Sources */,
+				518A5F9129F9A5B40033098C /* PlayFabAdminApi.cpp in Sources */,
+				518A5F9229F9A5B40033098C /* PlayFabAdminInstanceApi.cpp in Sources */,
+				518A5F9329F9A5B40033098C /* PlayFabApiSettings.cpp in Sources */,
+				518A5F9429F9A5B40033098C /* PlayFabAuthenticationApi.cpp in Sources */,
+				518A5F9529F9A5B40033098C /* PlayFabAuthenticationContext.cpp in Sources */,
+				518A5F9629F9A5B40033098C /* PlayFabAuthenticationInstanceApi.cpp in Sources */,
+				518A5F9729F9A5B40033098C /* PlayFabCallRequestContainer.cpp in Sources */,
+				518A5F9829F9A5B40033098C /* PlayFabCallRequestContainerBase.cpp in Sources */,
+				518A5F9929F9A5B40033098C /* PlayFabClientApi.cpp in Sources */,
+				518A5F9A29F9A5B40033098C /* PlayFabClientInstanceApi.cpp in Sources */,
+				518A5F9B29F9A5B40033098C /* PlayFabCloudScriptApi.cpp in Sources */,
+				518A5F9C29F9A5B40033098C /* PlayFabCloudScriptInstanceApi.cpp in Sources */,
+				518A5F9D29F9A5B40033098C /* PlayFabDataApi.cpp in Sources */,
+				518A5F9E29F9A5B40033098C /* PlayFabDataInstanceApi.cpp in Sources */,
+				518A5F9F29F9A5B40033098C /* PlayFabError.cpp in Sources */,
+				518A5FA029F9A5B40033098C /* PlayFabEvent.cpp in Sources */,
+				518A5FA129F9A5B40033098C /* PlayFabEventApi.cpp in Sources */,
+				518A5FA229F9A5B40033098C /* PlayFabEventBuffer.cpp in Sources */,
+				518A5FA329F9A5B40033098C /* PlayFabEventPipeline.cpp in Sources */,
+				518A5FA429F9A5B40033098C /* PlayFabEventRouter.cpp in Sources */,
+				518A5FA529F9A5B40033098C /* PlayFabEventsApi.cpp in Sources */,
+				518A5FA629F9A5B40033098C /* PlayFabEventsInstanceApi.cpp in Sources */,
+				518A5FA729F9A5B40033098C /* PlayFabGroupsApi.cpp in Sources */,
+				518A5FA829F9A5B40033098C /* PlayFabGroupsInstanceApi.cpp in Sources */,
+				518A5FA929F9A5B40033098C /* PlayFabLocalizationApi.cpp in Sources */,
+				518A5FAA29F9A5B40033098C /* PlayFabLocalizationInstanceApi.cpp in Sources */,
+				518A5FAB29F9A5B40033098C /* PlayFabMatchmakerApi.cpp in Sources */,
+				518A5FAC29F9A5B40033098C /* PlayFabMatchmakerInstanceApi.cpp in Sources */,
+				518A5FAD29F9A5B40033098C /* PlayFabMultiplayerApi.cpp in Sources */,
+				518A5FAE29F9A5B40033098C /* PlayFabMultiplayerInstanceApi.cpp in Sources */,
+				518A5FAF29F9A5B40033098C /* PlayFabPluginManager.cpp in Sources */,
+				518A5FB029F9A5B40033098C /* PlayFabProfilesApi.cpp in Sources */,
+				518A5FB129F9A5B40033098C /* PlayFabProfilesInstanceApi.cpp in Sources */,
+				518A5FB229F9A5B40033098C /* PlayFabServerApi.cpp in Sources */,
+				518A5FB329F9A5B40033098C /* PlayFabServerInstanceApi.cpp in Sources */,
+				518A5FB429F9A5B40033098C /* PlayFabSettings.cpp in Sources */,
+				518A5FB529F9A5B40033098C /* PlayFabSpinLock.cpp in Sources */,
+				518A5FB629F9A5B40033098C /* QoSSocket.cpp in Sources */,
+				518A5FB729F9A5B40033098C /* PlayFabQoSApi.cpp in Sources */,
+				518A5FB829F9A5B40033098C /* RegionResult.cpp in Sources */,
+				518A5FB929F9A5B40033098C /* XPlatSocket.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5A3F08F2224184ED00AC0816 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -441,6 +572,40 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		518A5F8929F9A5770033098C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UBF8T346G9;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		518A5F8A29F9A5770033098C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UBF8T346G9;
+				EXECUTABLE_PREFIX = lib;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		5A3F08FD224184ED00AC0816 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -503,7 +668,6 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -576,6 +740,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -587,6 +752,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -594,7 +760,16 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5A3F08F1224184ED00AC0816 /* Build configuration list for PBXProject "XPlatCppIOS" */ = {
+		518A5F8B29F9A5770033098C /* Build configuration list for PBXNativeTarget "XPlatCpp_MacOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				518A5F8929F9A5770033098C /* Debug */,
+				518A5F8A29F9A5770033098C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5A3F08F1224184ED00AC0816 /* Build configuration list for PBXProject "XPlatCpp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5A3F08FD224184ED00AC0816 /* Debug */,
@@ -603,7 +778,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5A3F08FF224184ED00AC0816 /* Build configuration list for PBXNativeTarget "XPlatCppIOS" */ = {
+		5A3F08FF224184ED00AC0816 /* Build configuration list for PBXNativeTarget "XPlatCpp_iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5A3F0900224184ED00AC0816 /* Debug */,
