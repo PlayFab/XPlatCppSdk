@@ -3074,17 +3074,54 @@ namespace PlayFab
             }
         };
 
+        struct VmStartupScriptPortRequestParams : public PlayFabBaseModel
+        {
+            std::string Name;
+            ProtocolType Protocol;
+
+            VmStartupScriptPortRequestParams() :
+                PlayFabBaseModel(),
+                Name(),
+                Protocol()
+            {}
+
+            VmStartupScriptPortRequestParams(const VmStartupScriptPortRequestParams& src) :
+                PlayFabBaseModel(),
+                Name(src.Name),
+                Protocol(src.Protocol)
+            {}
+
+            ~VmStartupScriptPortRequestParams() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["Name"], Name);
+                FromJsonEnum(input["Protocol"], Protocol);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
+                Json::Value each_Protocol; ToJsonEnum(Protocol, each_Protocol); output["Protocol"] = each_Protocol;
+                return output;
+            }
+        };
+
         struct VmStartupScriptParams : public PlayFabBaseModel
         {
+            std::list<VmStartupScriptPortRequestParams> PortRequests;
             AssetReferenceParams VmStartupScriptAssetReference;
 
             VmStartupScriptParams() :
                 PlayFabBaseModel(),
+                PortRequests(),
                 VmStartupScriptAssetReference()
             {}
 
             VmStartupScriptParams(const VmStartupScriptParams& src) :
                 PlayFabBaseModel(),
+                PortRequests(src.PortRequests),
                 VmStartupScriptAssetReference(src.VmStartupScriptAssetReference)
             {}
 
@@ -3092,12 +3129,14 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilO(input["PortRequests"], PortRequests);
                 FromJsonUtilO(input["VmStartupScriptAssetReference"], VmStartupScriptAssetReference);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_PortRequests; ToJsonUtilO(PortRequests, each_PortRequests); output["PortRequests"] = each_PortRequests;
                 Json::Value each_VmStartupScriptAssetReference; ToJsonUtilO(VmStartupScriptAssetReference, each_VmStartupScriptAssetReference); output["VmStartupScriptAssetReference"] = each_VmStartupScriptAssetReference;
                 return output;
             }
@@ -3295,17 +3334,54 @@ namespace PlayFab
             }
         };
 
+        struct VmStartupScriptPortRequest : public PlayFabRequestCommon
+        {
+            std::string Name;
+            ProtocolType Protocol;
+
+            VmStartupScriptPortRequest() :
+                PlayFabRequestCommon(),
+                Name(),
+                Protocol()
+            {}
+
+            VmStartupScriptPortRequest(const VmStartupScriptPortRequest& src) :
+                PlayFabRequestCommon(),
+                Name(src.Name),
+                Protocol(src.Protocol)
+            {}
+
+            ~VmStartupScriptPortRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["Name"], Name);
+                FromJsonEnum(input["Protocol"], Protocol);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
+                Json::Value each_Protocol; ToJsonEnum(Protocol, each_Protocol); output["Protocol"] = each_Protocol;
+                return output;
+            }
+        };
+
         struct VmStartupScriptConfiguration : public PlayFabBaseModel
         {
+            std::list<VmStartupScriptPortRequest> PortRequests;
             AssetReference VmStartupScriptAssetReference;
 
             VmStartupScriptConfiguration() :
                 PlayFabBaseModel(),
+                PortRequests(),
                 VmStartupScriptAssetReference()
             {}
 
             VmStartupScriptConfiguration(const VmStartupScriptConfiguration& src) :
                 PlayFabBaseModel(),
+                PortRequests(src.PortRequests),
                 VmStartupScriptAssetReference(src.VmStartupScriptAssetReference)
             {}
 
@@ -3313,12 +3389,14 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilO(input["PortRequests"], PortRequests);
                 FromJsonUtilO(input["VmStartupScriptAssetReference"], VmStartupScriptAssetReference);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_PortRequests; ToJsonUtilO(PortRequests, each_PortRequests); output["PortRequests"] = each_PortRequests;
                 Json::Value each_VmStartupScriptAssetReference; ToJsonUtilO(VmStartupScriptAssetReference, each_VmStartupScriptAssetReference); output["VmStartupScriptAssetReference"] = each_VmStartupScriptAssetReference;
                 return output;
             }
@@ -5102,8 +5180,6 @@ namespace PlayFab
         struct FindFriendLobbiesRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
-            Boxed<bool> ExcludeFacebookFriends;
-            Boxed<bool> ExcludeSteamFriends;
             Boxed<ExternalFriendSources> ExternalPlatformFriends;
             std::string Filter;
             std::string OrderBy;
@@ -5113,8 +5189,6 @@ namespace PlayFab
             FindFriendLobbiesRequest() :
                 PlayFabRequestCommon(),
                 CustomTags(),
-                ExcludeFacebookFriends(),
-                ExcludeSteamFriends(),
                 ExternalPlatformFriends(),
                 Filter(),
                 OrderBy(),
@@ -5125,8 +5199,6 @@ namespace PlayFab
             FindFriendLobbiesRequest(const FindFriendLobbiesRequest& src) :
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
-                ExcludeFacebookFriends(src.ExcludeFacebookFriends),
-                ExcludeSteamFriends(src.ExcludeSteamFriends),
                 ExternalPlatformFriends(src.ExternalPlatformFriends),
                 Filter(src.Filter),
                 OrderBy(src.OrderBy),
@@ -5139,8 +5211,6 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
-                FromJsonUtilP(input["ExcludeFacebookFriends"], ExcludeFacebookFriends);
-                FromJsonUtilP(input["ExcludeSteamFriends"], ExcludeSteamFriends);
                 FromJsonUtilE(input["ExternalPlatformFriends"], ExternalPlatformFriends);
                 FromJsonUtilS(input["Filter"], Filter);
                 FromJsonUtilS(input["OrderBy"], OrderBy);
@@ -5152,8 +5222,6 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
-                Json::Value each_ExcludeFacebookFriends; ToJsonUtilP(ExcludeFacebookFriends, each_ExcludeFacebookFriends); output["ExcludeFacebookFriends"] = each_ExcludeFacebookFriends;
-                Json::Value each_ExcludeSteamFriends; ToJsonUtilP(ExcludeSteamFriends, each_ExcludeSteamFriends); output["ExcludeSteamFriends"] = each_ExcludeSteamFriends;
                 Json::Value each_ExternalPlatformFriends; ToJsonUtilE(ExternalPlatformFriends, each_ExternalPlatformFriends); output["ExternalPlatformFriends"] = each_ExternalPlatformFriends;
                 Json::Value each_Filter; ToJsonUtilS(Filter, each_Filter); output["Filter"] = each_Filter;
                 Json::Value each_OrderBy; ToJsonUtilS(OrderBy, each_OrderBy); output["OrderBy"] = each_OrderBy;
@@ -5658,6 +5726,7 @@ namespace PlayFab
             std::string ServerType;
             std::string StartMultiplayerServerCommand;
             Boxed<AzureVmSize> VmSize;
+            Boxed<VmStartupScriptConfiguration> pfVmStartupScriptConfiguration;
 
             GetBuildResponse() :
                 PlayFabResultCommon(),
@@ -5680,7 +5749,8 @@ namespace PlayFab
                 ServerResourceConstraints(),
                 ServerType(),
                 StartMultiplayerServerCommand(),
-                VmSize()
+                VmSize(),
+                pfVmStartupScriptConfiguration()
             {}
 
             GetBuildResponse(const GetBuildResponse& src) :
@@ -5704,7 +5774,8 @@ namespace PlayFab
                 ServerResourceConstraints(src.ServerResourceConstraints),
                 ServerType(src.ServerType),
                 StartMultiplayerServerCommand(src.StartMultiplayerServerCommand),
-                VmSize(src.VmSize)
+                VmSize(src.VmSize),
+                pfVmStartupScriptConfiguration(src.pfVmStartupScriptConfiguration)
             {}
 
             ~GetBuildResponse() = default;
@@ -5731,6 +5802,7 @@ namespace PlayFab
                 FromJsonUtilS(input["ServerType"], ServerType);
                 FromJsonUtilS(input["StartMultiplayerServerCommand"], StartMultiplayerServerCommand);
                 FromJsonUtilE(input["VmSize"], VmSize);
+                FromJsonUtilO(input["VmStartupScriptConfiguration"], pfVmStartupScriptConfiguration);
             }
 
             Json::Value ToJson() const override
@@ -5756,6 +5828,7 @@ namespace PlayFab
                 Json::Value each_ServerType; ToJsonUtilS(ServerType, each_ServerType); output["ServerType"] = each_ServerType;
                 Json::Value each_StartMultiplayerServerCommand; ToJsonUtilS(StartMultiplayerServerCommand, each_StartMultiplayerServerCommand); output["StartMultiplayerServerCommand"] = each_StartMultiplayerServerCommand;
                 Json::Value each_VmSize; ToJsonUtilE(VmSize, each_VmSize); output["VmSize"] = each_VmSize;
+                Json::Value each_pfVmStartupScriptConfiguration; ToJsonUtilO(pfVmStartupScriptConfiguration, each_pfVmStartupScriptConfiguration); output["VmStartupScriptConfiguration"] = each_pfVmStartupScriptConfiguration;
                 return output;
             }
         };
