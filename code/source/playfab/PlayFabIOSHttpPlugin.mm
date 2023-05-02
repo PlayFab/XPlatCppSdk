@@ -1,5 +1,9 @@
 #include <stdafx.h>
+#if defined(PLAYFAB_PLATFORM_IOS)
 #import <UIKit/UIKit.h>
+#elif defined(PLAYFAB_PLATFORM_MACOS)
+#import <APPKit/APPKit.h>
+#endif
 
 #include <playfab/PlayFabIOSHttpPlugin.h>
 #include <playfab/PlayFabSettings.h>

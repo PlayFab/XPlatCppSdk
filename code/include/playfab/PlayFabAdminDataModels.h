@@ -5668,7 +5668,17 @@ namespace PlayFab
             GenericErrorCodesEventSinkDatabaseNotFound,
             GenericErrorCodesOperationCanceled,
             GenericErrorCodesInvalidDisplayNameRandomSuffixLength,
-            GenericErrorCodesAllowNonUniquePlayerDisplayNamesDisableNotAllowed
+            GenericErrorCodesAllowNonUniquePlayerDisplayNamesDisableNotAllowed,
+            GenericErrorCodesPartitionedEventInvalid,
+            GenericErrorCodesPartitionedEventCountOverLimit,
+            GenericErrorCodesPlayerCustomPropertiesPropertyNameTooLong,
+            GenericErrorCodesPlayerCustomPropertiesPropertyNameIsInvalid,
+            GenericErrorCodesPlayerCustomPropertiesStringPropertyValueTooLong,
+            GenericErrorCodesPlayerCustomPropertiesValueIsInvalidType,
+            GenericErrorCodesPlayerCustomPropertiesVersionMismatch,
+            GenericErrorCodesPlayerCustomPropertiesPropertyCountTooHigh,
+            GenericErrorCodesPlayerCustomPropertiesDuplicatePropertyName,
+            GenericErrorCodesPlayerCustomPropertiesPropertyDoesNotExist
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -9256,6 +9266,56 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesAllowNonUniquePlayerDisplayNamesDisableNotAllowed)
             {
                 output = Json::Value("AllowNonUniquePlayerDisplayNamesDisableNotAllowed");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPartitionedEventInvalid)
+            {
+                output = Json::Value("PartitionedEventInvalid");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPartitionedEventCountOverLimit)
+            {
+                output = Json::Value("PartitionedEventCountOverLimit");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesPropertyNameTooLong)
+            {
+                output = Json::Value("PlayerCustomPropertiesPropertyNameTooLong");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesPropertyNameIsInvalid)
+            {
+                output = Json::Value("PlayerCustomPropertiesPropertyNameIsInvalid");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesStringPropertyValueTooLong)
+            {
+                output = Json::Value("PlayerCustomPropertiesStringPropertyValueTooLong");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesValueIsInvalidType)
+            {
+                output = Json::Value("PlayerCustomPropertiesValueIsInvalidType");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesVersionMismatch)
+            {
+                output = Json::Value("PlayerCustomPropertiesVersionMismatch");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesPropertyCountTooHigh)
+            {
+                output = Json::Value("PlayerCustomPropertiesPropertyCountTooHigh");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesDuplicatePropertyName)
+            {
+                output = Json::Value("PlayerCustomPropertiesDuplicatePropertyName");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesPropertyDoesNotExist)
+            {
+                output = Json::Value("PlayerCustomPropertiesPropertyDoesNotExist");
                 return;
             }
         }
@@ -12849,6 +12909,56 @@ namespace PlayFab
             if (inputStr == "AllowNonUniquePlayerDisplayNamesDisableNotAllowed")
             {
                 output = GenericErrorCodes::GenericErrorCodesAllowNonUniquePlayerDisplayNamesDisableNotAllowed;
+                return;
+            }
+            if (inputStr == "PartitionedEventInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPartitionedEventInvalid;
+                return;
+            }
+            if (inputStr == "PartitionedEventCountOverLimit")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPartitionedEventCountOverLimit;
+                return;
+            }
+            if (inputStr == "PlayerCustomPropertiesPropertyNameTooLong")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesPropertyNameTooLong;
+                return;
+            }
+            if (inputStr == "PlayerCustomPropertiesPropertyNameIsInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesPropertyNameIsInvalid;
+                return;
+            }
+            if (inputStr == "PlayerCustomPropertiesStringPropertyValueTooLong")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesStringPropertyValueTooLong;
+                return;
+            }
+            if (inputStr == "PlayerCustomPropertiesValueIsInvalidType")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesValueIsInvalidType;
+                return;
+            }
+            if (inputStr == "PlayerCustomPropertiesVersionMismatch")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesVersionMismatch;
+                return;
+            }
+            if (inputStr == "PlayerCustomPropertiesPropertyCountTooHigh")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesPropertyCountTooHigh;
+                return;
+            }
+            if (inputStr == "PlayerCustomPropertiesDuplicatePropertyName")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesDuplicatePropertyName;
+                return;
+            }
+            if (inputStr == "PlayerCustomPropertiesPropertyDoesNotExist")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesPropertyDoesNotExist;
                 return;
             }
         }

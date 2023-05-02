@@ -22,7 +22,12 @@
 #endif // __linux__ && !__ANDROID__
 
 #ifdef __APPLE__
-#define PLAYFAB_PLATFORM_IOS
+#include "TargetConditionals.h"
+#if TARGET_OS_IPHONE
+    #define PLAYFAB_PLATFORM_IOS
+#elif TARGET_OS_MAC
+    #define PLAYFAB_PLATFORM_MACOS
+#endif
 #endif // __APPLE__
 
 #ifdef __ANDROID__
