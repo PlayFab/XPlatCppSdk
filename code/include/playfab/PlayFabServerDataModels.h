@@ -5652,7 +5652,17 @@ namespace PlayFab
             GenericErrorCodesEventSinkDatabaseNotFound,
             GenericErrorCodesOperationCanceled,
             GenericErrorCodesInvalidDisplayNameRandomSuffixLength,
-            GenericErrorCodesAllowNonUniquePlayerDisplayNamesDisableNotAllowed
+            GenericErrorCodesAllowNonUniquePlayerDisplayNamesDisableNotAllowed,
+            GenericErrorCodesPartitionedEventInvalid,
+            GenericErrorCodesPartitionedEventCountOverLimit,
+            GenericErrorCodesPlayerCustomPropertiesPropertyNameTooLong,
+            GenericErrorCodesPlayerCustomPropertiesPropertyNameIsInvalid,
+            GenericErrorCodesPlayerCustomPropertiesStringPropertyValueTooLong,
+            GenericErrorCodesPlayerCustomPropertiesValueIsInvalidType,
+            GenericErrorCodesPlayerCustomPropertiesVersionMismatch,
+            GenericErrorCodesPlayerCustomPropertiesPropertyCountTooHigh,
+            GenericErrorCodesPlayerCustomPropertiesDuplicatePropertyName,
+            GenericErrorCodesPlayerCustomPropertiesPropertyDoesNotExist
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -9240,6 +9250,56 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesAllowNonUniquePlayerDisplayNamesDisableNotAllowed)
             {
                 output = Json::Value("AllowNonUniquePlayerDisplayNamesDisableNotAllowed");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPartitionedEventInvalid)
+            {
+                output = Json::Value("PartitionedEventInvalid");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPartitionedEventCountOverLimit)
+            {
+                output = Json::Value("PartitionedEventCountOverLimit");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesPropertyNameTooLong)
+            {
+                output = Json::Value("PlayerCustomPropertiesPropertyNameTooLong");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesPropertyNameIsInvalid)
+            {
+                output = Json::Value("PlayerCustomPropertiesPropertyNameIsInvalid");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesStringPropertyValueTooLong)
+            {
+                output = Json::Value("PlayerCustomPropertiesStringPropertyValueTooLong");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesValueIsInvalidType)
+            {
+                output = Json::Value("PlayerCustomPropertiesValueIsInvalidType");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesVersionMismatch)
+            {
+                output = Json::Value("PlayerCustomPropertiesVersionMismatch");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesPropertyCountTooHigh)
+            {
+                output = Json::Value("PlayerCustomPropertiesPropertyCountTooHigh");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesDuplicatePropertyName)
+            {
+                output = Json::Value("PlayerCustomPropertiesDuplicatePropertyName");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesPropertyDoesNotExist)
+            {
+                output = Json::Value("PlayerCustomPropertiesPropertyDoesNotExist");
                 return;
             }
         }
@@ -12833,6 +12893,56 @@ namespace PlayFab
             if (inputStr == "AllowNonUniquePlayerDisplayNamesDisableNotAllowed")
             {
                 output = GenericErrorCodes::GenericErrorCodesAllowNonUniquePlayerDisplayNamesDisableNotAllowed;
+                return;
+            }
+            if (inputStr == "PartitionedEventInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPartitionedEventInvalid;
+                return;
+            }
+            if (inputStr == "PartitionedEventCountOverLimit")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPartitionedEventCountOverLimit;
+                return;
+            }
+            if (inputStr == "PlayerCustomPropertiesPropertyNameTooLong")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesPropertyNameTooLong;
+                return;
+            }
+            if (inputStr == "PlayerCustomPropertiesPropertyNameIsInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesPropertyNameIsInvalid;
+                return;
+            }
+            if (inputStr == "PlayerCustomPropertiesStringPropertyValueTooLong")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesStringPropertyValueTooLong;
+                return;
+            }
+            if (inputStr == "PlayerCustomPropertiesValueIsInvalidType")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesValueIsInvalidType;
+                return;
+            }
+            if (inputStr == "PlayerCustomPropertiesVersionMismatch")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesVersionMismatch;
+                return;
+            }
+            if (inputStr == "PlayerCustomPropertiesPropertyCountTooHigh")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesPropertyCountTooHigh;
+                return;
+            }
+            if (inputStr == "PlayerCustomPropertiesDuplicatePropertyName")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesDuplicatePropertyName;
+                return;
+            }
+            if (inputStr == "PlayerCustomPropertiesPropertyDoesNotExist")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesPropertyDoesNotExist;
                 return;
             }
         }
@@ -18215,8 +18325,6 @@ namespace PlayFab
         {
             std::map<std::string, std::string> CustomTags;
             Boxed<ExternalFriendSources> ExternalPlatformFriends;
-            Boxed<bool> IncludeFacebookFriends;
-            Boxed<bool> IncludeSteamFriends;
             Int32 MaxResultsCount;
             std::string PlayFabId;
             Boxed<PlayerProfileViewConstraints> ProfileConstraints;
@@ -18229,8 +18337,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 CustomTags(),
                 ExternalPlatformFriends(),
-                IncludeFacebookFriends(),
-                IncludeSteamFriends(),
                 MaxResultsCount(),
                 PlayFabId(),
                 ProfileConstraints(),
@@ -18244,8 +18350,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
                 ExternalPlatformFriends(src.ExternalPlatformFriends),
-                IncludeFacebookFriends(src.IncludeFacebookFriends),
-                IncludeSteamFriends(src.IncludeSteamFriends),
                 MaxResultsCount(src.MaxResultsCount),
                 PlayFabId(src.PlayFabId),
                 ProfileConstraints(src.ProfileConstraints),
@@ -18261,8 +18365,6 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilE(input["ExternalPlatformFriends"], ExternalPlatformFriends);
-                FromJsonUtilP(input["IncludeFacebookFriends"], IncludeFacebookFriends);
-                FromJsonUtilP(input["IncludeSteamFriends"], IncludeSteamFriends);
                 FromJsonUtilP(input["MaxResultsCount"], MaxResultsCount);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilO(input["ProfileConstraints"], ProfileConstraints);
@@ -18277,8 +18379,6 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_ExternalPlatformFriends; ToJsonUtilE(ExternalPlatformFriends, each_ExternalPlatformFriends); output["ExternalPlatformFriends"] = each_ExternalPlatformFriends;
-                Json::Value each_IncludeFacebookFriends; ToJsonUtilP(IncludeFacebookFriends, each_IncludeFacebookFriends); output["IncludeFacebookFriends"] = each_IncludeFacebookFriends;
-                Json::Value each_IncludeSteamFriends; ToJsonUtilP(IncludeSteamFriends, each_IncludeSteamFriends); output["IncludeSteamFriends"] = each_IncludeSteamFriends;
                 Json::Value each_MaxResultsCount; ToJsonUtilP(MaxResultsCount, each_MaxResultsCount); output["MaxResultsCount"] = each_MaxResultsCount;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_ProfileConstraints; ToJsonUtilO(ProfileConstraints, each_ProfileConstraints); output["ProfileConstraints"] = each_ProfileConstraints;
@@ -18294,8 +18394,6 @@ namespace PlayFab
         {
             std::map<std::string, std::string> CustomTags;
             Boxed<ExternalFriendSources> ExternalPlatformFriends;
-            Boxed<bool> IncludeFacebookFriends;
-            Boxed<bool> IncludeSteamFriends;
             std::string PlayFabId;
             Boxed<PlayerProfileViewConstraints> ProfileConstraints;
             std::string XboxToken;
@@ -18304,8 +18402,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 CustomTags(),
                 ExternalPlatformFriends(),
-                IncludeFacebookFriends(),
-                IncludeSteamFriends(),
                 PlayFabId(),
                 ProfileConstraints(),
                 XboxToken()
@@ -18315,8 +18411,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
                 ExternalPlatformFriends(src.ExternalPlatformFriends),
-                IncludeFacebookFriends(src.IncludeFacebookFriends),
-                IncludeSteamFriends(src.IncludeSteamFriends),
                 PlayFabId(src.PlayFabId),
                 ProfileConstraints(src.ProfileConstraints),
                 XboxToken(src.XboxToken)
@@ -18328,8 +18422,6 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilE(input["ExternalPlatformFriends"], ExternalPlatformFriends);
-                FromJsonUtilP(input["IncludeFacebookFriends"], IncludeFacebookFriends);
-                FromJsonUtilP(input["IncludeSteamFriends"], IncludeSteamFriends);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilO(input["ProfileConstraints"], ProfileConstraints);
                 FromJsonUtilS(input["XboxToken"], XboxToken);
@@ -18340,8 +18432,6 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_ExternalPlatformFriends; ToJsonUtilE(ExternalPlatformFriends, each_ExternalPlatformFriends); output["ExternalPlatformFriends"] = each_ExternalPlatformFriends;
-                Json::Value each_IncludeFacebookFriends; ToJsonUtilP(IncludeFacebookFriends, each_IncludeFacebookFriends); output["IncludeFacebookFriends"] = each_IncludeFacebookFriends;
-                Json::Value each_IncludeSteamFriends; ToJsonUtilP(IncludeSteamFriends, each_IncludeSteamFriends); output["IncludeSteamFriends"] = each_IncludeSteamFriends;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_ProfileConstraints; ToJsonUtilO(ProfileConstraints, each_ProfileConstraints); output["ProfileConstraints"] = each_ProfileConstraints;
                 Json::Value each_XboxToken; ToJsonUtilS(XboxToken, each_XboxToken); output["XboxToken"] = each_XboxToken;

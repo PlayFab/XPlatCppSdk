@@ -11332,8 +11332,6 @@ namespace PlayFab
         {
             std::map<std::string, std::string> CustomTags;
             Boxed<ExternalFriendSources> ExternalPlatformFriends;
-            Boxed<bool> IncludeFacebookFriends;
-            Boxed<bool> IncludeSteamFriends;
             Boxed<Int32> MaxResultsCount;
             std::string PlayFabId;
             Boxed<PlayerProfileViewConstraints> ProfileConstraints;
@@ -11345,8 +11343,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 CustomTags(),
                 ExternalPlatformFriends(),
-                IncludeFacebookFriends(),
-                IncludeSteamFriends(),
                 MaxResultsCount(),
                 PlayFabId(),
                 ProfileConstraints(),
@@ -11359,8 +11355,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
                 ExternalPlatformFriends(src.ExternalPlatformFriends),
-                IncludeFacebookFriends(src.IncludeFacebookFriends),
-                IncludeSteamFriends(src.IncludeSteamFriends),
                 MaxResultsCount(src.MaxResultsCount),
                 PlayFabId(src.PlayFabId),
                 ProfileConstraints(src.ProfileConstraints),
@@ -11375,8 +11369,6 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilE(input["ExternalPlatformFriends"], ExternalPlatformFriends);
-                FromJsonUtilP(input["IncludeFacebookFriends"], IncludeFacebookFriends);
-                FromJsonUtilP(input["IncludeSteamFriends"], IncludeSteamFriends);
                 FromJsonUtilP(input["MaxResultsCount"], MaxResultsCount);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilO(input["ProfileConstraints"], ProfileConstraints);
@@ -11390,8 +11382,6 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_ExternalPlatformFriends; ToJsonUtilE(ExternalPlatformFriends, each_ExternalPlatformFriends); output["ExternalPlatformFriends"] = each_ExternalPlatformFriends;
-                Json::Value each_IncludeFacebookFriends; ToJsonUtilP(IncludeFacebookFriends, each_IncludeFacebookFriends); output["IncludeFacebookFriends"] = each_IncludeFacebookFriends;
-                Json::Value each_IncludeSteamFriends; ToJsonUtilP(IncludeSteamFriends, each_IncludeSteamFriends); output["IncludeSteamFriends"] = each_IncludeSteamFriends;
                 Json::Value each_MaxResultsCount; ToJsonUtilP(MaxResultsCount, each_MaxResultsCount); output["MaxResultsCount"] = each_MaxResultsCount;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_ProfileConstraints; ToJsonUtilO(ProfileConstraints, each_ProfileConstraints); output["ProfileConstraints"] = each_ProfileConstraints;
@@ -11494,8 +11484,6 @@ namespace PlayFab
         {
             std::map<std::string, std::string> CustomTags;
             Boxed<ExternalFriendSources> ExternalPlatformFriends;
-            Boxed<bool> IncludeFacebookFriends;
-            Boxed<bool> IncludeSteamFriends;
             Boxed<Int32> MaxResultsCount;
             Boxed<PlayerProfileViewConstraints> ProfileConstraints;
             Int32 StartPosition;
@@ -11507,8 +11495,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 CustomTags(),
                 ExternalPlatformFriends(),
-                IncludeFacebookFriends(),
-                IncludeSteamFriends(),
                 MaxResultsCount(),
                 ProfileConstraints(),
                 StartPosition(),
@@ -11521,8 +11507,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
                 ExternalPlatformFriends(src.ExternalPlatformFriends),
-                IncludeFacebookFriends(src.IncludeFacebookFriends),
-                IncludeSteamFriends(src.IncludeSteamFriends),
                 MaxResultsCount(src.MaxResultsCount),
                 ProfileConstraints(src.ProfileConstraints),
                 StartPosition(src.StartPosition),
@@ -11537,8 +11521,6 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilE(input["ExternalPlatformFriends"], ExternalPlatformFriends);
-                FromJsonUtilP(input["IncludeFacebookFriends"], IncludeFacebookFriends);
-                FromJsonUtilP(input["IncludeSteamFriends"], IncludeSteamFriends);
                 FromJsonUtilP(input["MaxResultsCount"], MaxResultsCount);
                 FromJsonUtilO(input["ProfileConstraints"], ProfileConstraints);
                 FromJsonUtilP(input["StartPosition"], StartPosition);
@@ -11552,8 +11534,6 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_ExternalPlatformFriends; ToJsonUtilE(ExternalPlatformFriends, each_ExternalPlatformFriends); output["ExternalPlatformFriends"] = each_ExternalPlatformFriends;
-                Json::Value each_IncludeFacebookFriends; ToJsonUtilP(IncludeFacebookFriends, each_IncludeFacebookFriends); output["IncludeFacebookFriends"] = each_IncludeFacebookFriends;
-                Json::Value each_IncludeSteamFriends; ToJsonUtilP(IncludeSteamFriends, each_IncludeSteamFriends); output["IncludeSteamFriends"] = each_IncludeSteamFriends;
                 Json::Value each_MaxResultsCount; ToJsonUtilP(MaxResultsCount, each_MaxResultsCount); output["MaxResultsCount"] = each_MaxResultsCount;
                 Json::Value each_ProfileConstraints; ToJsonUtilO(ProfileConstraints, each_ProfileConstraints); output["ProfileConstraints"] = each_ProfileConstraints;
                 Json::Value each_StartPosition; ToJsonUtilP(StartPosition, each_StartPosition); output["StartPosition"] = each_StartPosition;
@@ -11568,8 +11548,6 @@ namespace PlayFab
         {
             std::map<std::string, std::string> CustomTags;
             Boxed<ExternalFriendSources> ExternalPlatformFriends;
-            Boxed<bool> IncludeFacebookFriends;
-            Boxed<bool> IncludeSteamFriends;
             Boxed<PlayerProfileViewConstraints> ProfileConstraints;
             std::string XboxToken;
 
@@ -11577,8 +11555,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 CustomTags(),
                 ExternalPlatformFriends(),
-                IncludeFacebookFriends(),
-                IncludeSteamFriends(),
                 ProfileConstraints(),
                 XboxToken()
             {}
@@ -11587,8 +11563,6 @@ namespace PlayFab
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
                 ExternalPlatformFriends(src.ExternalPlatformFriends),
-                IncludeFacebookFriends(src.IncludeFacebookFriends),
-                IncludeSteamFriends(src.IncludeSteamFriends),
                 ProfileConstraints(src.ProfileConstraints),
                 XboxToken(src.XboxToken)
             {}
@@ -11599,8 +11573,6 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilE(input["ExternalPlatformFriends"], ExternalPlatformFriends);
-                FromJsonUtilP(input["IncludeFacebookFriends"], IncludeFacebookFriends);
-                FromJsonUtilP(input["IncludeSteamFriends"], IncludeSteamFriends);
                 FromJsonUtilO(input["ProfileConstraints"], ProfileConstraints);
                 FromJsonUtilS(input["XboxToken"], XboxToken);
             }
@@ -11610,8 +11582,6 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_ExternalPlatformFriends; ToJsonUtilE(ExternalPlatformFriends, each_ExternalPlatformFriends); output["ExternalPlatformFriends"] = each_ExternalPlatformFriends;
-                Json::Value each_IncludeFacebookFriends; ToJsonUtilP(IncludeFacebookFriends, each_IncludeFacebookFriends); output["IncludeFacebookFriends"] = each_IncludeFacebookFriends;
-                Json::Value each_IncludeSteamFriends; ToJsonUtilP(IncludeSteamFriends, each_IncludeSteamFriends); output["IncludeSteamFriends"] = each_IncludeSteamFriends;
                 Json::Value each_ProfileConstraints; ToJsonUtilO(ProfileConstraints, each_ProfileConstraints); output["ProfileConstraints"] = each_ProfileConstraints;
                 Json::Value each_XboxToken; ToJsonUtilS(XboxToken, each_XboxToken); output["XboxToken"] = each_XboxToken;
                 return output;

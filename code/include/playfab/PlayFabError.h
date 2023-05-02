@@ -728,6 +728,16 @@ namespace PlayFab
         PlayFabErrorOperationCanceled = 16000,
         PlayFabErrorInvalidDisplayNameRandomSuffixLength = 17000,
         PlayFabErrorAllowNonUniquePlayerDisplayNamesDisableNotAllowed = 17001,
+        PlayFabErrorPartitionedEventInvalid = 18000,
+        PlayFabErrorPartitionedEventCountOverLimit = 18001,
+        PlayFabErrorPlayerCustomPropertiesPropertyNameTooLong = 19000,
+        PlayFabErrorPlayerCustomPropertiesPropertyNameIsInvalid = 19001,
+        PlayFabErrorPlayerCustomPropertiesStringPropertyValueTooLong = 19002,
+        PlayFabErrorPlayerCustomPropertiesValueIsInvalidType = 19003,
+        PlayFabErrorPlayerCustomPropertiesVersionMismatch = 19004,
+        PlayFabErrorPlayerCustomPropertiesPropertyCountTooHigh = 19005,
+        PlayFabErrorPlayerCustomPropertiesDuplicatePropertyName = 19006,
+        PlayFabErrorPlayerCustomPropertiesPropertyDoesNotExist = 19007,
     };
 
     /// <summary>
