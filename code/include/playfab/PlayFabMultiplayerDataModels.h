@@ -338,6 +338,7 @@ namespace PlayFab
             AzureVmFamilyFsv2,
             AzureVmFamilyDasv4,
             AzureVmFamilyDav4,
+            AzureVmFamilyDadsv5,
             AzureVmFamilyEav4,
             AzureVmFamilyEasv4,
             AzureVmFamilyEv4,
@@ -390,6 +391,11 @@ namespace PlayFab
             if (input == AzureVmFamily::AzureVmFamilyDav4)
             {
                 output = Json::Value("Dav4");
+                return;
+            }
+            if (input == AzureVmFamily::AzureVmFamilyDadsv5)
+            {
+                output = Json::Value("Dadsv5");
                 return;
             }
             if (input == AzureVmFamily::AzureVmFamilyEav4)
@@ -490,6 +496,11 @@ namespace PlayFab
                 output = AzureVmFamily::AzureVmFamilyDav4;
                 return;
             }
+            if (inputStr == "Dadsv5")
+            {
+                output = AzureVmFamily::AzureVmFamilyDadsv5;
+                return;
+            }
             if (inputStr == "Eav4")
             {
                 output = AzureVmFamily::AzureVmFamilyEav4;
@@ -578,6 +589,10 @@ namespace PlayFab
             AzureVmSizeStandard_D4a_v4,
             AzureVmSizeStandard_D8a_v4,
             AzureVmSizeStandard_D16a_v4,
+            AzureVmSizeStandard_D2ads_v5,
+            AzureVmSizeStandard_D4ads_v5,
+            AzureVmSizeStandard_D8ads_v5,
+            AzureVmSizeStandard_D16ads_v5,
             AzureVmSizeStandard_E2a_v4,
             AzureVmSizeStandard_E4a_v4,
             AzureVmSizeStandard_E8a_v4,
@@ -781,6 +796,26 @@ namespace PlayFab
             if (input == AzureVmSize::AzureVmSizeStandard_D16a_v4)
             {
                 output = Json::Value("Standard_D16a_v4");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D2ads_v5)
+            {
+                output = Json::Value("Standard_D2ads_v5");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D4ads_v5)
+            {
+                output = Json::Value("Standard_D4ads_v5");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D8ads_v5)
+            {
+                output = Json::Value("Standard_D8ads_v5");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D16ads_v5)
+            {
+                output = Json::Value("Standard_D16ads_v5");
                 return;
             }
             if (input == AzureVmSize::AzureVmSizeStandard_E2a_v4)
@@ -1114,6 +1149,26 @@ namespace PlayFab
             if (inputStr == "Standard_D16a_v4")
             {
                 output = AzureVmSize::AzureVmSizeStandard_D16a_v4;
+                return;
+            }
+            if (inputStr == "Standard_D2ads_v5")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D2ads_v5;
+                return;
+            }
+            if (inputStr == "Standard_D4ads_v5")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D4ads_v5;
+                return;
+            }
+            if (inputStr == "Standard_D8ads_v5")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D8ads_v5;
+                return;
+            }
+            if (inputStr == "Standard_D16ads_v5")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D16ads_v5;
                 return;
             }
             if (inputStr == "Standard_E2a_v4")
@@ -1634,6 +1689,44 @@ namespace PlayFab
             if (inputStr == "UDP")
             {
                 output = ProtocolType::ProtocolTypeUDP;
+                return;
+            }
+        }
+
+        enum class RoutingType
+        {
+            RoutingTypeMicrosoft,
+            RoutingTypeInternet
+        };
+
+        inline void ToJsonEnum(const RoutingType input, Json::Value& output)
+        {
+            if (input == RoutingType::RoutingTypeMicrosoft)
+            {
+                output = Json::Value("Microsoft");
+                return;
+            }
+            if (input == RoutingType::RoutingTypeInternet)
+            {
+                output = Json::Value("Internet");
+                return;
+            }
+        }
+        inline void FromJsonEnum(const Json::Value& input, RoutingType& output)
+        {
+            if (!input.isString())
+            {
+                return;
+            }
+            const std::string& inputStr = input.asString();
+            if (inputStr == "Microsoft")
+            {
+                output = RoutingType::RoutingTypeMicrosoft;
+                return;
+            }
+            if (inputStr == "Internet")
+            {
+                output = RoutingType::RoutingTypeInternet;
                 return;
             }
         }
@@ -6308,6 +6401,45 @@ namespace PlayFab
             }
         };
 
+        struct PublicIpAddress : public PlayFabBaseModel
+        {
+            std::string FQDN;
+            std::string IpAddress;
+            std::string RoutingType;
+
+            PublicIpAddress() :
+                PlayFabBaseModel(),
+                FQDN(),
+                IpAddress(),
+                RoutingType()
+            {}
+
+            PublicIpAddress(const PublicIpAddress& src) :
+                PlayFabBaseModel(),
+                FQDN(src.FQDN),
+                IpAddress(src.IpAddress),
+                RoutingType(src.RoutingType)
+            {}
+
+            ~PublicIpAddress() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["FQDN"], FQDN);
+                FromJsonUtilS(input["IpAddress"], IpAddress);
+                FromJsonUtilS(input["RoutingType"], RoutingType);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_FQDN; ToJsonUtilS(FQDN, each_FQDN); output["FQDN"] = each_FQDN;
+                Json::Value each_IpAddress; ToJsonUtilS(IpAddress, each_IpAddress); output["IpAddress"] = each_IpAddress;
+                Json::Value each_RoutingType; ToJsonUtilS(RoutingType, each_RoutingType); output["RoutingType"] = each_RoutingType;
+                return output;
+            }
+        };
+
         struct GetMultiplayerServerDetailsResponse : public PlayFabResultCommon
         {
             std::string BuildId;
@@ -6316,6 +6448,7 @@ namespace PlayFab
             std::string IPV4Address;
             Boxed<time_t> LastStateTransitionTime;
             std::list<Port> Ports;
+            std::list<PublicIpAddress> PublicIPV4Addresses;
             std::string Region;
             std::string ServerId;
             std::string SessionId;
@@ -6330,6 +6463,7 @@ namespace PlayFab
                 IPV4Address(),
                 LastStateTransitionTime(),
                 Ports(),
+                PublicIPV4Addresses(),
                 Region(),
                 ServerId(),
                 SessionId(),
@@ -6345,6 +6479,7 @@ namespace PlayFab
                 IPV4Address(src.IPV4Address),
                 LastStateTransitionTime(src.LastStateTransitionTime),
                 Ports(src.Ports),
+                PublicIPV4Addresses(src.PublicIPV4Addresses),
                 Region(src.Region),
                 ServerId(src.ServerId),
                 SessionId(src.SessionId),
@@ -6362,6 +6497,7 @@ namespace PlayFab
                 FromJsonUtilS(input["IPV4Address"], IPV4Address);
                 FromJsonUtilT(input["LastStateTransitionTime"], LastStateTransitionTime);
                 FromJsonUtilO(input["Ports"], Ports);
+                FromJsonUtilO(input["PublicIPV4Addresses"], PublicIPV4Addresses);
                 FromJsonUtilS(input["Region"], Region);
                 FromJsonUtilS(input["ServerId"], ServerId);
                 FromJsonUtilS(input["SessionId"], SessionId);
@@ -6378,6 +6514,7 @@ namespace PlayFab
                 Json::Value each_IPV4Address; ToJsonUtilS(IPV4Address, each_IPV4Address); output["IPV4Address"] = each_IPV4Address;
                 Json::Value each_LastStateTransitionTime; ToJsonUtilT(LastStateTransitionTime, each_LastStateTransitionTime); output["LastStateTransitionTime"] = each_LastStateTransitionTime;
                 Json::Value each_Ports; ToJsonUtilO(Ports, each_Ports); output["Ports"] = each_Ports;
+                Json::Value each_PublicIPV4Addresses; ToJsonUtilO(PublicIPV4Addresses, each_PublicIPV4Addresses); output["PublicIPV4Addresses"] = each_PublicIPV4Addresses;
                 Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
                 Json::Value each_ServerId; ToJsonUtilS(ServerId, each_ServerId); output["ServerId"] = each_ServerId;
                 Json::Value each_SessionId; ToJsonUtilS(SessionId, each_SessionId); output["SessionId"] = each_SessionId;
@@ -8573,6 +8710,7 @@ namespace PlayFab
             std::string IPV4Address;
             Boxed<time_t> LastStateTransitionTime;
             std::list<Port> Ports;
+            std::list<PublicIpAddress> PublicIPV4Addresses;
             std::string Region;
             std::string ServerId;
             std::string SessionId;
@@ -8587,6 +8725,7 @@ namespace PlayFab
                 IPV4Address(),
                 LastStateTransitionTime(),
                 Ports(),
+                PublicIPV4Addresses(),
                 Region(),
                 ServerId(),
                 SessionId(),
@@ -8602,6 +8741,7 @@ namespace PlayFab
                 IPV4Address(src.IPV4Address),
                 LastStateTransitionTime(src.LastStateTransitionTime),
                 Ports(src.Ports),
+                PublicIPV4Addresses(src.PublicIPV4Addresses),
                 Region(src.Region),
                 ServerId(src.ServerId),
                 SessionId(src.SessionId),
@@ -8619,6 +8759,7 @@ namespace PlayFab
                 FromJsonUtilS(input["IPV4Address"], IPV4Address);
                 FromJsonUtilT(input["LastStateTransitionTime"], LastStateTransitionTime);
                 FromJsonUtilO(input["Ports"], Ports);
+                FromJsonUtilO(input["PublicIPV4Addresses"], PublicIPV4Addresses);
                 FromJsonUtilS(input["Region"], Region);
                 FromJsonUtilS(input["ServerId"], ServerId);
                 FromJsonUtilS(input["SessionId"], SessionId);
@@ -8635,6 +8776,7 @@ namespace PlayFab
                 Json::Value each_IPV4Address; ToJsonUtilS(IPV4Address, each_IPV4Address); output["IPV4Address"] = each_IPV4Address;
                 Json::Value each_LastStateTransitionTime; ToJsonUtilT(LastStateTransitionTime, each_LastStateTransitionTime); output["LastStateTransitionTime"] = each_LastStateTransitionTime;
                 Json::Value each_Ports; ToJsonUtilO(Ports, each_Ports); output["Ports"] = each_Ports;
+                Json::Value each_PublicIPV4Addresses; ToJsonUtilO(PublicIPV4Addresses, each_PublicIPV4Addresses); output["PublicIPV4Addresses"] = each_PublicIPV4Addresses;
                 Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
                 Json::Value each_ServerId; ToJsonUtilS(ServerId, each_ServerId); output["ServerId"] = each_ServerId;
                 Json::Value each_SessionId; ToJsonUtilS(SessionId, each_SessionId); output["SessionId"] = each_SessionId;
