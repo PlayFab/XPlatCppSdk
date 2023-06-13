@@ -3907,17 +3907,20 @@ namespace PlayFab
         struct CatalogPrice : public PlayFabBaseModel
         {
             std::list<CatalogPriceAmount> Amounts;
+            Boxed<Int32> UnitAmount;
             Boxed<double> UnitDurationInSeconds;
 
             CatalogPrice() :
                 PlayFabBaseModel(),
                 Amounts(),
+                UnitAmount(),
                 UnitDurationInSeconds()
             {}
 
             CatalogPrice(const CatalogPrice& src) :
                 PlayFabBaseModel(),
                 Amounts(src.Amounts),
+                UnitAmount(src.UnitAmount),
                 UnitDurationInSeconds(src.UnitDurationInSeconds)
             {}
 
@@ -3926,6 +3929,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Amounts"], Amounts);
+                FromJsonUtilP(input["UnitAmount"], UnitAmount);
                 FromJsonUtilP(input["UnitDurationInSeconds"], UnitDurationInSeconds);
             }
 
@@ -3933,6 +3937,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_Amounts; ToJsonUtilO(Amounts, each_Amounts); output["Amounts"] = each_Amounts;
+                Json::Value each_UnitAmount; ToJsonUtilP(UnitAmount, each_UnitAmount); output["UnitAmount"] = each_UnitAmount;
                 Json::Value each_UnitDurationInSeconds; ToJsonUtilP(UnitDurationInSeconds, each_UnitDurationInSeconds); output["UnitDurationInSeconds"] = each_UnitDurationInSeconds;
                 return output;
             }
