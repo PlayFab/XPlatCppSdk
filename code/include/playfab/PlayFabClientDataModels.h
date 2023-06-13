@@ -15846,19 +15846,22 @@ namespace PlayFab
             std::map<std::string, std::string> CustomTags;
             Boxed<bool> ForceLink;
             std::string SteamTicket;
+            Boxed<bool> TicketIsServiceSpecific;
 
             LinkSteamAccountRequest() :
                 PlayFabRequestCommon(),
                 CustomTags(),
                 ForceLink(),
-                SteamTicket()
+                SteamTicket(),
+                TicketIsServiceSpecific()
             {}
 
             LinkSteamAccountRequest(const LinkSteamAccountRequest& src) :
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
                 ForceLink(src.ForceLink),
-                SteamTicket(src.SteamTicket)
+                SteamTicket(src.SteamTicket),
+                TicketIsServiceSpecific(src.TicketIsServiceSpecific)
             {}
 
             ~LinkSteamAccountRequest() = default;
@@ -15868,6 +15871,7 @@ namespace PlayFab
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilP(input["ForceLink"], ForceLink);
                 FromJsonUtilS(input["SteamTicket"], SteamTicket);
+                FromJsonUtilP(input["TicketIsServiceSpecific"], TicketIsServiceSpecific);
             }
 
             Json::Value ToJson() const override
@@ -15876,6 +15880,7 @@ namespace PlayFab
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_ForceLink; ToJsonUtilP(ForceLink, each_ForceLink); output["ForceLink"] = each_ForceLink;
                 Json::Value each_SteamTicket; ToJsonUtilS(SteamTicket, each_SteamTicket); output["SteamTicket"] = each_SteamTicket;
+                Json::Value each_TicketIsServiceSpecific; ToJsonUtilP(TicketIsServiceSpecific, each_TicketIsServiceSpecific); output["TicketIsServiceSpecific"] = each_TicketIsServiceSpecific;
                 return output;
             }
         };
@@ -17256,6 +17261,7 @@ namespace PlayFab
             Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
             std::string PlayerSecret;
             std::string SteamTicket;
+            Boxed<bool> TicketIsServiceSpecific;
             std::string TitleId;
 
             LoginWithSteamRequest() :
@@ -17266,6 +17272,7 @@ namespace PlayFab
                 InfoRequestParameters(),
                 PlayerSecret(),
                 SteamTicket(),
+                TicketIsServiceSpecific(),
                 TitleId()
             {}
 
@@ -17277,6 +17284,7 @@ namespace PlayFab
                 InfoRequestParameters(src.InfoRequestParameters),
                 PlayerSecret(src.PlayerSecret),
                 SteamTicket(src.SteamTicket),
+                TicketIsServiceSpecific(src.TicketIsServiceSpecific),
                 TitleId(src.TitleId)
             {}
 
@@ -17290,6 +17298,7 @@ namespace PlayFab
                 FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
                 FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
                 FromJsonUtilS(input["SteamTicket"], SteamTicket);
+                FromJsonUtilP(input["TicketIsServiceSpecific"], TicketIsServiceSpecific);
                 FromJsonUtilS(input["TitleId"], TitleId);
             }
 
@@ -17302,6 +17311,7 @@ namespace PlayFab
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
                 Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
                 Json::Value each_SteamTicket; ToJsonUtilS(SteamTicket, each_SteamTicket); output["SteamTicket"] = each_SteamTicket;
+                Json::Value each_TicketIsServiceSpecific; ToJsonUtilP(TicketIsServiceSpecific, each_TicketIsServiceSpecific); output["TicketIsServiceSpecific"] = each_TicketIsServiceSpecific;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 return output;
             }
