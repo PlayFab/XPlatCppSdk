@@ -5680,7 +5680,9 @@ namespace PlayFab
             GenericErrorCodesPlayerCustomPropertiesVersionMismatch,
             GenericErrorCodesPlayerCustomPropertiesPropertyCountTooHigh,
             GenericErrorCodesPlayerCustomPropertiesDuplicatePropertyName,
-            GenericErrorCodesPlayerCustomPropertiesPropertyDoesNotExist
+            GenericErrorCodesPlayerCustomPropertiesPropertyDoesNotExist,
+            GenericErrorCodesAddonAlreadyExists,
+            GenericErrorCodesAddonDoesntExist
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -9328,6 +9330,16 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesPropertyDoesNotExist)
             {
                 output = Json::Value("PlayerCustomPropertiesPropertyDoesNotExist");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAddonAlreadyExists)
+            {
+                output = Json::Value("AddonAlreadyExists");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAddonDoesntExist)
+            {
+                output = Json::Value("AddonDoesntExist");
                 return;
             }
         }
@@ -12981,6 +12993,16 @@ namespace PlayFab
             if (inputStr == "PlayerCustomPropertiesPropertyDoesNotExist")
             {
                 output = GenericErrorCodes::GenericErrorCodesPlayerCustomPropertiesPropertyDoesNotExist;
+                return;
+            }
+            if (inputStr == "AddonAlreadyExists")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAddonAlreadyExists;
+                return;
+            }
+            if (inputStr == "AddonDoesntExist")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAddonDoesntExist;
                 return;
             }
         }

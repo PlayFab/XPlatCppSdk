@@ -8201,6 +8201,7 @@ namespace PlayFab
             std::map<std::string, std::string> CustomTags;
             Boxed<EntityKey> Entity;
             std::string Filter;
+            std::string Language;
             std::string OrderBy;
             std::string Search;
             std::string Select;
@@ -8213,6 +8214,7 @@ namespace PlayFab
                 CustomTags(),
                 Entity(),
                 Filter(),
+                Language(),
                 OrderBy(),
                 Search(),
                 Select(),
@@ -8226,6 +8228,7 @@ namespace PlayFab
                 CustomTags(src.CustomTags),
                 Entity(src.Entity),
                 Filter(src.Filter),
+                Language(src.Language),
                 OrderBy(src.OrderBy),
                 Search(src.Search),
                 Select(src.Select),
@@ -8241,6 +8244,7 @@ namespace PlayFab
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilS(input["Filter"], Filter);
+                FromJsonUtilS(input["Language"], Language);
                 FromJsonUtilS(input["OrderBy"], OrderBy);
                 FromJsonUtilS(input["Search"], Search);
                 FromJsonUtilS(input["Select"], Select);
@@ -8255,6 +8259,7 @@ namespace PlayFab
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
                 Json::Value each_Filter; ToJsonUtilS(Filter, each_Filter); output["Filter"] = each_Filter;
+                Json::Value each_Language; ToJsonUtilS(Language, each_Language); output["Language"] = each_Language;
                 Json::Value each_OrderBy; ToJsonUtilS(OrderBy, each_OrderBy); output["OrderBy"] = each_OrderBy;
                 Json::Value each_Search; ToJsonUtilS(Search, each_Search); output["Search"] = each_Search;
                 Json::Value each_Select; ToJsonUtilS(Select, each_Select); output["Select"] = each_Select;
