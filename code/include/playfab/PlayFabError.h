@@ -740,6 +740,8 @@ namespace PlayFab
         PlayFabErrorPlayerCustomPropertiesPropertyCountTooHigh = 19005,
         PlayFabErrorPlayerCustomPropertiesDuplicatePropertyName = 19006,
         PlayFabErrorPlayerCustomPropertiesPropertyDoesNotExist = 19007,
+        PlayFabErrorAddonAlreadyExists = 19008,
+        PlayFabErrorAddonDoesntExist = 19009,
     };
 
     /// <summary>

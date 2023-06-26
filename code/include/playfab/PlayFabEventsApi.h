@@ -31,6 +31,7 @@ namespace PlayFab
         // ------------ Generated API calls
         static void WriteEvents(EventsModels::WriteEventsRequest& request, const ProcessApiCallback<EventsModels::WriteEventsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void WriteTelemetryEvents(EventsModels::WriteEventsRequest& request, const ProcessApiCallback<EventsModels::WriteEventsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void WriteTelemetryEvents(EventsModels::WriteEventsRequest& request, std::string telemetryKey, const ProcessApiCallback<EventsModels::WriteEventsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
 
     private:
         PlayFabEventsAPI(); // Private constructor, static class should never have an instance
