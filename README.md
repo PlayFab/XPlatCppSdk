@@ -6,8 +6,6 @@ It currently supports the following platforms:
 - Linux
 - Xbox Series X|S & Xbox One (XDK or GDK)
 
-For GDK support on Windows and Xbox please contact your Xbox representative.
-
 This SDK lets you make REST API calls to the PlayFab service. It depends on some external third-party open source libraries referenced as git submodules in directory `/external`. Please make sure to use `--recurse-submodules` command line parameter when cloning SDK's git repo:
 ```
 git clone --recurse-submodules <git-repo-url>
