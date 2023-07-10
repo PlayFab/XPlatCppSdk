@@ -29,6 +29,11 @@ namespace PlayFab
 
 
         // ------------ Generated API calls
+        static void CreateTelemetryKey(EventsModels::CreateTelemetryKeyRequest& request, const ProcessApiCallback<EventsModels::CreateTelemetryKeyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void DeleteTelemetryKey(EventsModels::DeleteTelemetryKeyRequest& request, const ProcessApiCallback<EventsModels::DeleteTelemetryKeyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void GetTelemetryKey(EventsModels::GetTelemetryKeyRequest& request, const ProcessApiCallback<EventsModels::GetTelemetryKeyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void ListTelemetryKeys(EventsModels::ListTelemetryKeysRequest& request, const ProcessApiCallback<EventsModels::ListTelemetryKeysResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void SetTelemetryKeyActive(EventsModels::SetTelemetryKeyActiveRequest& request, const ProcessApiCallback<EventsModels::SetTelemetryKeyActiveResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void WriteEvents(EventsModels::WriteEventsRequest& request, const ProcessApiCallback<EventsModels::WriteEventsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void WriteTelemetryEvents(EventsModels::WriteEventsRequest& request, const ProcessApiCallback<EventsModels::WriteEventsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void WriteTelemetryEvents(EventsModels::WriteEventsRequest& request, std::string telemetryKey, const ProcessApiCallback<EventsModels::WriteEventsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -38,6 +43,11 @@ namespace PlayFab
         PlayFabEventsAPI(const PlayFabEventsAPI& other); // Private copy-constructor, static class should never have an instance
 
         // ------------ Generated result handlers
+        static void OnCreateTelemetryKeyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnDeleteTelemetryKeyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnGetTelemetryKeyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnListTelemetryKeysResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnSetTelemetryKeyActiveResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnWriteEventsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnWriteTelemetryEventsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
 

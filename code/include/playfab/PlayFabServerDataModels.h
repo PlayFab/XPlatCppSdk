@@ -22489,6 +22489,79 @@ namespace PlayFab
             }
         };
 
+        struct LinkPSNIdRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            Boxed<bool> ForceLink;
+            Boxed<Int32> IssuerId;
+            std::string PlayFabId;
+            std::string PSNUserId;
+
+            LinkPSNIdRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                ForceLink(),
+                IssuerId(),
+                PlayFabId(),
+                PSNUserId()
+            {}
+
+            LinkPSNIdRequest(const LinkPSNIdRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                ForceLink(src.ForceLink),
+                IssuerId(src.IssuerId),
+                PlayFabId(src.PlayFabId),
+                PSNUserId(src.PSNUserId)
+            {}
+
+            ~LinkPSNIdRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilP(input["ForceLink"], ForceLink);
+                FromJsonUtilP(input["IssuerId"], IssuerId);
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+                FromJsonUtilS(input["PSNUserId"], PSNUserId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_ForceLink; ToJsonUtilP(ForceLink, each_ForceLink); output["ForceLink"] = each_ForceLink;
+                Json::Value each_IssuerId; ToJsonUtilP(IssuerId, each_IssuerId); output["IssuerId"] = each_IssuerId;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                Json::Value each_PSNUserId; ToJsonUtilS(PSNUserId, each_PSNUserId); output["PSNUserId"] = each_PSNUserId;
+                return output;
+            }
+        };
+
+        struct LinkPSNIdResponse : public PlayFabResultCommon
+        {
+
+            LinkPSNIdResponse() :
+                PlayFabResultCommon()
+            {}
+
+            LinkPSNIdResponse(const LinkPSNIdResponse&) :
+                PlayFabResultCommon()
+            {}
+
+            ~LinkPSNIdResponse() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
         struct LinkServerCustomIdRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;

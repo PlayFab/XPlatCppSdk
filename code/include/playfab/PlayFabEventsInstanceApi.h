@@ -45,11 +45,21 @@ namespace PlayFab
         void ForgetAllCredentials();
 
         // ------------ Generated API calls
+        void CreateTelemetryKey(EventsModels::CreateTelemetryKeyRequest& request, const ProcessApiCallback<EventsModels::CreateTelemetryKeyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void DeleteTelemetryKey(EventsModels::DeleteTelemetryKeyRequest& request, const ProcessApiCallback<EventsModels::DeleteTelemetryKeyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void GetTelemetryKey(EventsModels::GetTelemetryKeyRequest& request, const ProcessApiCallback<EventsModels::GetTelemetryKeyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void ListTelemetryKeys(EventsModels::ListTelemetryKeysRequest& request, const ProcessApiCallback<EventsModels::ListTelemetryKeysResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void SetTelemetryKeyActive(EventsModels::SetTelemetryKeyActiveRequest& request, const ProcessApiCallback<EventsModels::SetTelemetryKeyActiveResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void WriteEvents(EventsModels::WriteEventsRequest& request, const ProcessApiCallback<EventsModels::WriteEventsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void WriteTelemetryEvents(EventsModels::WriteEventsRequest& request, const ProcessApiCallback<EventsModels::WriteEventsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void WriteTelemetryEvents(EventsModels::WriteEventsRequest& request, std::string telemetryKey, const ProcessApiCallback<EventsModels::WriteEventsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
 
         // ------------ Generated result handlers
+        void OnCreateTelemetryKeyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnDeleteTelemetryKeyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnGetTelemetryKeyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnListTelemetryKeysResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnSetTelemetryKeyActiveResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnWriteEventsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnWriteTelemetryEventsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
 
