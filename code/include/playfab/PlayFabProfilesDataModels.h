@@ -334,48 +334,8 @@ namespace PlayFab
             }
         };
 
-        struct EntityStatisticChildValue : public PlayFabBaseModel
-        {
-            std::string ChildName;
-            std::string Metadata;
-            Int32 Value;
-
-            EntityStatisticChildValue() :
-                PlayFabBaseModel(),
-                ChildName(),
-                Metadata(),
-                Value()
-            {}
-
-            EntityStatisticChildValue(const EntityStatisticChildValue& src) :
-                PlayFabBaseModel(),
-                ChildName(src.ChildName),
-                Metadata(src.Metadata),
-                Value(src.Value)
-            {}
-
-            ~EntityStatisticChildValue() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilS(input["ChildName"], ChildName);
-                FromJsonUtilS(input["Metadata"], Metadata);
-                FromJsonUtilP(input["Value"], Value);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_ChildName; ToJsonUtilS(ChildName, each_ChildName); output["ChildName"] = each_ChildName;
-                Json::Value each_Metadata; ToJsonUtilS(Metadata, each_Metadata); output["Metadata"] = each_Metadata;
-                Json::Value each_Value; ToJsonUtilP(Value, each_Value); output["Value"] = each_Value;
-                return output;
-            }
-        };
-
         struct EntityStatisticValue : public PlayFabBaseModel
         {
-            std::map<std::string, EntityStatisticChildValue> ChildStatistics;
             std::string Metadata;
             std::string Name;
             Boxed<Int32> Value;
@@ -383,7 +343,6 @@ namespace PlayFab
 
             EntityStatisticValue() :
                 PlayFabBaseModel(),
-                ChildStatistics(),
                 Metadata(),
                 Name(),
                 Value(),
@@ -392,7 +351,6 @@ namespace PlayFab
 
             EntityStatisticValue(const EntityStatisticValue& src) :
                 PlayFabBaseModel(),
-                ChildStatistics(src.ChildStatistics),
                 Metadata(src.Metadata),
                 Name(src.Name),
                 Value(src.Value),
@@ -403,7 +361,6 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
-                FromJsonUtilO(input["ChildStatistics"], ChildStatistics);
                 FromJsonUtilS(input["Metadata"], Metadata);
                 FromJsonUtilS(input["Name"], Name);
                 FromJsonUtilP(input["Value"], Value);
@@ -413,7 +370,6 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                Json::Value each_ChildStatistics; ToJsonUtilO(ChildStatistics, each_ChildStatistics); output["ChildStatistics"] = each_ChildStatistics;
                 Json::Value each_Metadata; ToJsonUtilS(Metadata, each_Metadata); output["Metadata"] = each_Metadata;
                 Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
                 Json::Value each_Value; ToJsonUtilP(Value, each_Value); output["Value"] = each_Value;
@@ -432,7 +388,6 @@ namespace PlayFab
             std::list<std::string> ExperimentVariants;
             std::map<std::string, EntityProfileFileMetadata> Files;
             std::string Language;
-            std::string LeaderboardMetadata;
             Boxed<EntityLineage> Lineage;
             std::map<std::string, EntityDataObject> Objects;
             std::list<EntityPermissionStatement> Permissions;
@@ -449,7 +404,6 @@ namespace PlayFab
                 ExperimentVariants(),
                 Files(),
                 Language(),
-                LeaderboardMetadata(),
                 Lineage(),
                 Objects(),
                 Permissions(),
@@ -467,7 +421,6 @@ namespace PlayFab
                 ExperimentVariants(src.ExperimentVariants),
                 Files(src.Files),
                 Language(src.Language),
-                LeaderboardMetadata(src.LeaderboardMetadata),
                 Lineage(src.Lineage),
                 Objects(src.Objects),
                 Permissions(src.Permissions),
@@ -487,7 +440,6 @@ namespace PlayFab
                 FromJsonUtilS(input["ExperimentVariants"], ExperimentVariants);
                 FromJsonUtilO(input["Files"], Files);
                 FromJsonUtilS(input["Language"], Language);
-                FromJsonUtilS(input["LeaderboardMetadata"], LeaderboardMetadata);
                 FromJsonUtilO(input["Lineage"], Lineage);
                 FromJsonUtilO(input["Objects"], Objects);
                 FromJsonUtilO(input["Permissions"], Permissions);
@@ -506,7 +458,6 @@ namespace PlayFab
                 Json::Value each_ExperimentVariants; ToJsonUtilS(ExperimentVariants, each_ExperimentVariants); output["ExperimentVariants"] = each_ExperimentVariants;
                 Json::Value each_Files; ToJsonUtilO(Files, each_Files); output["Files"] = each_Files;
                 Json::Value each_Language; ToJsonUtilS(Language, each_Language); output["Language"] = each_Language;
-                Json::Value each_LeaderboardMetadata; ToJsonUtilS(LeaderboardMetadata, each_LeaderboardMetadata); output["LeaderboardMetadata"] = each_LeaderboardMetadata;
                 Json::Value each_Lineage; ToJsonUtilO(Lineage, each_Lineage); output["Lineage"] = each_Lineage;
                 Json::Value each_Objects; ToJsonUtilO(Objects, each_Objects); output["Objects"] = each_Objects;
                 Json::Value each_Permissions; ToJsonUtilO(Permissions, each_Permissions); output["Permissions"] = each_Permissions;

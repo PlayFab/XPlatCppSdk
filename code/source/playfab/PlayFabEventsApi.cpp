@@ -29,6 +29,251 @@ namespace PlayFab
 
     // PlayFabEvents APIs
 
+    void PlayFabEventsAPI::CreateTelemetryKey(
+        CreateTelemetryKeyRequest& request,
+        const ProcessApiCallback<CreateTelemetryKeyResponse> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
+        std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", context->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Event/CreateTelemetryKey",
+            headers,
+            jsonAsString,
+            OnCreateTelemetryKeyResult,
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateTelemetryKeyResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+    
+    void PlayFabEventsAPI::OnCreateTelemetryKeyResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        CreateTelemetryKeyResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = (*static_cast<ProcessApiCallback<CreateTelemetryKeyResponse> *>(internalPtr.get()));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabEventsAPI::DeleteTelemetryKey(
+        DeleteTelemetryKeyRequest& request,
+        const ProcessApiCallback<DeleteTelemetryKeyResponse> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
+        std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", context->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Event/DeleteTelemetryKey",
+            headers,
+            jsonAsString,
+            OnDeleteTelemetryKeyResult,
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeleteTelemetryKeyResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+    
+    void PlayFabEventsAPI::OnDeleteTelemetryKeyResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        DeleteTelemetryKeyResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = (*static_cast<ProcessApiCallback<DeleteTelemetryKeyResponse> *>(internalPtr.get()));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabEventsAPI::GetTelemetryKey(
+        GetTelemetryKeyRequest& request,
+        const ProcessApiCallback<GetTelemetryKeyResponse> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
+        std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", context->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Event/GetTelemetryKey",
+            headers,
+            jsonAsString,
+            OnGetTelemetryKeyResult,
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTelemetryKeyResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+    
+    void PlayFabEventsAPI::OnGetTelemetryKeyResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        GetTelemetryKeyResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = (*static_cast<ProcessApiCallback<GetTelemetryKeyResponse> *>(internalPtr.get()));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabEventsAPI::ListTelemetryKeys(
+        ListTelemetryKeysRequest& request,
+        const ProcessApiCallback<ListTelemetryKeysResponse> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
+        std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", context->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Event/ListTelemetryKeys",
+            headers,
+            jsonAsString,
+            OnListTelemetryKeysResult,
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListTelemetryKeysResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+    
+    void PlayFabEventsAPI::OnListTelemetryKeysResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        ListTelemetryKeysResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = (*static_cast<ProcessApiCallback<ListTelemetryKeysResponse> *>(internalPtr.get()));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabEventsAPI::SetTelemetryKeyActive(
+        SetTelemetryKeyActiveRequest& request,
+        const ProcessApiCallback<SetTelemetryKeyActiveResponse> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
+        std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", context->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Event/SetTelemetryKeyActive",
+            headers,
+            jsonAsString,
+            OnSetTelemetryKeyActiveResult,
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<SetTelemetryKeyActiveResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+    
+    void PlayFabEventsAPI::OnSetTelemetryKeyActiveResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        SetTelemetryKeyActiveResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = (*static_cast<ProcessApiCallback<SetTelemetryKeyActiveResponse> *>(internalPtr.get()));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
     void PlayFabEventsAPI::WriteEvents(
         WriteEventsRequest& request,
         const ProcessApiCallback<WriteEventsResponse> callback,
