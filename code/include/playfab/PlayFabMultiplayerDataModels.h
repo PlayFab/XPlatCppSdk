@@ -3252,7 +3252,6 @@ namespace PlayFab
             std::list<Port> Ports;
             std::list<BuildRegionParams> RegionConfigurations;
             Boxed<ServerResourceConstraintParams> ServerResourceConstraints;
-            Boxed<bool> UseStreamingForAssetDownloads;
             Boxed<AzureVmSize> VmSize;
             Boxed<VmStartupScriptParams> VmStartupScriptConfiguration;
 
@@ -3273,7 +3272,6 @@ namespace PlayFab
                 Ports(),
                 RegionConfigurations(),
                 ServerResourceConstraints(),
-                UseStreamingForAssetDownloads(),
                 VmSize(),
                 VmStartupScriptConfiguration()
             {}
@@ -3295,7 +3293,6 @@ namespace PlayFab
                 Ports(src.Ports),
                 RegionConfigurations(src.RegionConfigurations),
                 ServerResourceConstraints(src.ServerResourceConstraints),
-                UseStreamingForAssetDownloads(src.UseStreamingForAssetDownloads),
                 VmSize(src.VmSize),
                 VmStartupScriptConfiguration(src.VmStartupScriptConfiguration)
             {}
@@ -3319,7 +3316,6 @@ namespace PlayFab
                 FromJsonUtilO(input["Ports"], Ports);
                 FromJsonUtilO(input["RegionConfigurations"], RegionConfigurations);
                 FromJsonUtilO(input["ServerResourceConstraints"], ServerResourceConstraints);
-                FromJsonUtilP(input["UseStreamingForAssetDownloads"], UseStreamingForAssetDownloads);
                 FromJsonUtilE(input["VmSize"], VmSize);
                 FromJsonUtilO(input["VmStartupScriptConfiguration"], VmStartupScriptConfiguration);
             }
@@ -3342,7 +3338,6 @@ namespace PlayFab
                 Json::Value each_Ports; ToJsonUtilO(Ports, each_Ports); output["Ports"] = each_Ports;
                 Json::Value each_RegionConfigurations; ToJsonUtilO(RegionConfigurations, each_RegionConfigurations); output["RegionConfigurations"] = each_RegionConfigurations;
                 Json::Value each_ServerResourceConstraints; ToJsonUtilO(ServerResourceConstraints, each_ServerResourceConstraints); output["ServerResourceConstraints"] = each_ServerResourceConstraints;
-                Json::Value each_UseStreamingForAssetDownloads; ToJsonUtilP(UseStreamingForAssetDownloads, each_UseStreamingForAssetDownloads); output["UseStreamingForAssetDownloads"] = each_UseStreamingForAssetDownloads;
                 Json::Value each_VmSize; ToJsonUtilE(VmSize, each_VmSize); output["VmSize"] = each_VmSize;
                 Json::Value each_VmStartupScriptConfiguration; ToJsonUtilO(VmStartupScriptConfiguration, each_VmStartupScriptConfiguration); output["VmStartupScriptConfiguration"] = each_VmStartupScriptConfiguration;
                 return output;
@@ -3714,7 +3709,6 @@ namespace PlayFab
             std::list<BuildRegionParams> RegionConfigurations;
             Boxed<ServerResourceConstraintParams> ServerResourceConstraints;
             std::string StartMultiplayerServerCommand;
-            Boxed<bool> UseStreamingForAssetDownloads;
             Boxed<AzureVmSize> VmSize;
             Boxed<VmStartupScriptParams> VmStartupScriptConfiguration;
             Boxed<WindowsCrashDumpConfiguration> pfWindowsCrashDumpConfiguration;
@@ -3736,7 +3730,6 @@ namespace PlayFab
                 RegionConfigurations(),
                 ServerResourceConstraints(),
                 StartMultiplayerServerCommand(),
-                UseStreamingForAssetDownloads(),
                 VmSize(),
                 VmStartupScriptConfiguration(),
                 pfWindowsCrashDumpConfiguration()
@@ -3759,7 +3752,6 @@ namespace PlayFab
                 RegionConfigurations(src.RegionConfigurations),
                 ServerResourceConstraints(src.ServerResourceConstraints),
                 StartMultiplayerServerCommand(src.StartMultiplayerServerCommand),
-                UseStreamingForAssetDownloads(src.UseStreamingForAssetDownloads),
                 VmSize(src.VmSize),
                 VmStartupScriptConfiguration(src.VmStartupScriptConfiguration),
                 pfWindowsCrashDumpConfiguration(src.pfWindowsCrashDumpConfiguration)
@@ -3784,7 +3776,6 @@ namespace PlayFab
                 FromJsonUtilO(input["RegionConfigurations"], RegionConfigurations);
                 FromJsonUtilO(input["ServerResourceConstraints"], ServerResourceConstraints);
                 FromJsonUtilS(input["StartMultiplayerServerCommand"], StartMultiplayerServerCommand);
-                FromJsonUtilP(input["UseStreamingForAssetDownloads"], UseStreamingForAssetDownloads);
                 FromJsonUtilE(input["VmSize"], VmSize);
                 FromJsonUtilO(input["VmStartupScriptConfiguration"], VmStartupScriptConfiguration);
                 FromJsonUtilO(input["WindowsCrashDumpConfiguration"], pfWindowsCrashDumpConfiguration);
@@ -3808,7 +3799,6 @@ namespace PlayFab
                 Json::Value each_RegionConfigurations; ToJsonUtilO(RegionConfigurations, each_RegionConfigurations); output["RegionConfigurations"] = each_RegionConfigurations;
                 Json::Value each_ServerResourceConstraints; ToJsonUtilO(ServerResourceConstraints, each_ServerResourceConstraints); output["ServerResourceConstraints"] = each_ServerResourceConstraints;
                 Json::Value each_StartMultiplayerServerCommand; ToJsonUtilS(StartMultiplayerServerCommand, each_StartMultiplayerServerCommand); output["StartMultiplayerServerCommand"] = each_StartMultiplayerServerCommand;
-                Json::Value each_UseStreamingForAssetDownloads; ToJsonUtilP(UseStreamingForAssetDownloads, each_UseStreamingForAssetDownloads); output["UseStreamingForAssetDownloads"] = each_UseStreamingForAssetDownloads;
                 Json::Value each_VmSize; ToJsonUtilE(VmSize, each_VmSize); output["VmSize"] = each_VmSize;
                 Json::Value each_VmStartupScriptConfiguration; ToJsonUtilO(VmStartupScriptConfiguration, each_VmStartupScriptConfiguration); output["VmStartupScriptConfiguration"] = each_VmStartupScriptConfiguration;
                 Json::Value each_pfWindowsCrashDumpConfiguration; ToJsonUtilO(pfWindowsCrashDumpConfiguration, each_pfWindowsCrashDumpConfiguration); output["WindowsCrashDumpConfiguration"] = each_pfWindowsCrashDumpConfiguration;
@@ -3962,7 +3952,6 @@ namespace PlayFab
             std::list<Port> Ports;
             std::list<BuildRegionParams> RegionConfigurations;
             std::string StartMultiplayerServerCommand;
-            Boxed<bool> UseStreamingForAssetDownloads;
             Boxed<AzureVmSize> VmSize;
             Boxed<VmStartupScriptParams> VmStartupScriptConfiguration;
 
@@ -3983,7 +3972,6 @@ namespace PlayFab
                 Ports(),
                 RegionConfigurations(),
                 StartMultiplayerServerCommand(),
-                UseStreamingForAssetDownloads(),
                 VmSize(),
                 VmStartupScriptConfiguration()
             {}
@@ -4005,7 +3993,6 @@ namespace PlayFab
                 Ports(src.Ports),
                 RegionConfigurations(src.RegionConfigurations),
                 StartMultiplayerServerCommand(src.StartMultiplayerServerCommand),
-                UseStreamingForAssetDownloads(src.UseStreamingForAssetDownloads),
                 VmSize(src.VmSize),
                 VmStartupScriptConfiguration(src.VmStartupScriptConfiguration)
             {}
@@ -4029,7 +4016,6 @@ namespace PlayFab
                 FromJsonUtilO(input["Ports"], Ports);
                 FromJsonUtilO(input["RegionConfigurations"], RegionConfigurations);
                 FromJsonUtilS(input["StartMultiplayerServerCommand"], StartMultiplayerServerCommand);
-                FromJsonUtilP(input["UseStreamingForAssetDownloads"], UseStreamingForAssetDownloads);
                 FromJsonUtilE(input["VmSize"], VmSize);
                 FromJsonUtilO(input["VmStartupScriptConfiguration"], VmStartupScriptConfiguration);
             }
@@ -4052,7 +4038,6 @@ namespace PlayFab
                 Json::Value each_Ports; ToJsonUtilO(Ports, each_Ports); output["Ports"] = each_Ports;
                 Json::Value each_RegionConfigurations; ToJsonUtilO(RegionConfigurations, each_RegionConfigurations); output["RegionConfigurations"] = each_RegionConfigurations;
                 Json::Value each_StartMultiplayerServerCommand; ToJsonUtilS(StartMultiplayerServerCommand, each_StartMultiplayerServerCommand); output["StartMultiplayerServerCommand"] = each_StartMultiplayerServerCommand;
-                Json::Value each_UseStreamingForAssetDownloads; ToJsonUtilP(UseStreamingForAssetDownloads, each_UseStreamingForAssetDownloads); output["UseStreamingForAssetDownloads"] = each_UseStreamingForAssetDownloads;
                 Json::Value each_VmSize; ToJsonUtilE(VmSize, each_VmSize); output["VmSize"] = each_VmSize;
                 Json::Value each_VmStartupScriptConfiguration; ToJsonUtilO(VmStartupScriptConfiguration, each_VmStartupScriptConfiguration); output["VmStartupScriptConfiguration"] = each_VmStartupScriptConfiguration;
                 return output;
