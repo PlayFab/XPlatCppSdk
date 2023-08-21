@@ -127,7 +127,8 @@ namespace PlayFab
             ContinentCodeEU,
             ContinentCodeNA,
             ContinentCodeOC,
-            ContinentCodeSA
+            ContinentCodeSA,
+            ContinentCodeUnknown
         };
 
         inline void ToJsonEnum(const ContinentCode input, Json::Value& output)
@@ -165,6 +166,11 @@ namespace PlayFab
             if (input == ContinentCode::ContinentCodeSA)
             {
                 output = Json::Value("SA");
+                return;
+            }
+            if (input == ContinentCode::ContinentCodeUnknown)
+            {
+                output = Json::Value("Unknown");
                 return;
             }
         }
@@ -208,6 +214,11 @@ namespace PlayFab
             if (inputStr == "SA")
             {
                 output = ContinentCode::ContinentCodeSA;
+                return;
+            }
+            if (inputStr == "Unknown")
+            {
+                output = ContinentCode::ContinentCodeUnknown;
                 return;
             }
         }
@@ -462,7 +473,8 @@ namespace PlayFab
             CountryCodeEH,
             CountryCodeYE,
             CountryCodeZM,
-            CountryCodeZW
+            CountryCodeZW,
+            CountryCodeUnknown
         };
 
         inline void ToJsonEnum(const CountryCode input, Json::Value& output)
@@ -1710,6 +1722,11 @@ namespace PlayFab
             if (input == CountryCode::CountryCodeZW)
             {
                 output = Json::Value("ZW");
+                return;
+            }
+            if (input == CountryCode::CountryCodeUnknown)
+            {
+                output = Json::Value("Unknown");
                 return;
             }
         }
@@ -2963,6 +2980,11 @@ namespace PlayFab
             if (inputStr == "ZW")
             {
                 output = CountryCode::CountryCodeZW;
+                return;
+            }
+            if (inputStr == "Unknown")
+            {
+                output = CountryCode::CountryCodeUnknown;
                 return;
             }
         }
@@ -10365,6 +10387,35 @@ namespace PlayFab
             }
         };
 
+        struct UserServerCustomIdInfo : public PlayFabBaseModel
+        {
+            std::string CustomId;
+
+            UserServerCustomIdInfo() :
+                PlayFabBaseModel(),
+                CustomId()
+            {}
+
+            UserServerCustomIdInfo(const UserServerCustomIdInfo& src) :
+                PlayFabBaseModel(),
+                CustomId(src.CustomId)
+            {}
+
+            ~UserServerCustomIdInfo() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomId"], CustomId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomId; ToJsonUtilS(CustomId, each_CustomId); output["CustomId"] = each_CustomId;
+                return output;
+            }
+        };
+
         struct UserTitleInfo : public PlayFabBaseModel
         {
             std::string AvatarUrl;
@@ -10482,6 +10533,7 @@ namespace PlayFab
             std::string PlayFabId;
             Boxed<UserPrivateAccountInfo> PrivateInfo;
             Boxed<UserPsnInfo> PsnInfo;
+            Boxed<UserServerCustomIdInfo> ServerCustomIdInfo;
             Boxed<UserSteamInfo> SteamInfo;
             Boxed<UserTitleInfo> TitleInfo;
             Boxed<UserTwitchInfo> TwitchInfo;
@@ -10507,6 +10559,7 @@ namespace PlayFab
                 PlayFabId(),
                 PrivateInfo(),
                 PsnInfo(),
+                ServerCustomIdInfo(),
                 SteamInfo(),
                 TitleInfo(),
                 TwitchInfo(),
@@ -10533,6 +10586,7 @@ namespace PlayFab
                 PlayFabId(src.PlayFabId),
                 PrivateInfo(src.PrivateInfo),
                 PsnInfo(src.PsnInfo),
+                ServerCustomIdInfo(src.ServerCustomIdInfo),
                 SteamInfo(src.SteamInfo),
                 TitleInfo(src.TitleInfo),
                 TwitchInfo(src.TwitchInfo),
@@ -10561,6 +10615,7 @@ namespace PlayFab
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilO(input["PrivateInfo"], PrivateInfo);
                 FromJsonUtilO(input["PsnInfo"], PsnInfo);
+                FromJsonUtilO(input["ServerCustomIdInfo"], ServerCustomIdInfo);
                 FromJsonUtilO(input["SteamInfo"], SteamInfo);
                 FromJsonUtilO(input["TitleInfo"], TitleInfo);
                 FromJsonUtilO(input["TwitchInfo"], TwitchInfo);
@@ -10588,6 +10643,7 @@ namespace PlayFab
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_PrivateInfo; ToJsonUtilO(PrivateInfo, each_PrivateInfo); output["PrivateInfo"] = each_PrivateInfo;
                 Json::Value each_PsnInfo; ToJsonUtilO(PsnInfo, each_PsnInfo); output["PsnInfo"] = each_PsnInfo;
+                Json::Value each_ServerCustomIdInfo; ToJsonUtilO(ServerCustomIdInfo, each_ServerCustomIdInfo); output["ServerCustomIdInfo"] = each_ServerCustomIdInfo;
                 Json::Value each_SteamInfo; ToJsonUtilO(SteamInfo, each_SteamInfo); output["SteamInfo"] = each_SteamInfo;
                 Json::Value each_TitleInfo; ToJsonUtilO(TitleInfo, each_TitleInfo); output["TitleInfo"] = each_TitleInfo;
                 Json::Value each_TwitchInfo; ToJsonUtilO(TwitchInfo, each_TwitchInfo); output["TwitchInfo"] = each_TwitchInfo;
