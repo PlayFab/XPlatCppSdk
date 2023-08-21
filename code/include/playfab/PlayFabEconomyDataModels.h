@@ -386,7 +386,8 @@ namespace PlayFab
             CountryCodeEH,
             CountryCodeYE,
             CountryCodeZM,
-            CountryCodeZW
+            CountryCodeZW,
+            CountryCodeUnknown
         };
 
         inline void ToJsonEnum(const CountryCode input, Json::Value& output)
@@ -1634,6 +1635,11 @@ namespace PlayFab
             if (input == CountryCode::CountryCodeZW)
             {
                 output = Json::Value("ZW");
+                return;
+            }
+            if (input == CountryCode::CountryCodeUnknown)
+            {
+                output = Json::Value("Unknown");
                 return;
             }
         }
@@ -2887,6 +2893,11 @@ namespace PlayFab
             if (inputStr == "ZW")
             {
                 output = CountryCode::CountryCodeZW;
+                return;
+            }
+            if (inputStr == "Unknown")
+            {
+                output = CountryCode::CountryCodeUnknown;
                 return;
             }
         }

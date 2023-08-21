@@ -67,7 +67,8 @@ namespace PlayFab
             ContinentCodeEU,
             ContinentCodeNA,
             ContinentCodeOC,
-            ContinentCodeSA
+            ContinentCodeSA,
+            ContinentCodeUnknown
         };
 
         inline void ToJsonEnum(const ContinentCode input, Json::Value& output)
@@ -105,6 +106,11 @@ namespace PlayFab
             if (input == ContinentCode::ContinentCodeSA)
             {
                 output = Json::Value("SA");
+                return;
+            }
+            if (input == ContinentCode::ContinentCodeUnknown)
+            {
+                output = Json::Value("Unknown");
                 return;
             }
         }
@@ -148,6 +154,11 @@ namespace PlayFab
             if (inputStr == "SA")
             {
                 output = ContinentCode::ContinentCodeSA;
+                return;
+            }
+            if (inputStr == "Unknown")
+            {
+                output = ContinentCode::ContinentCodeUnknown;
                 return;
             }
         }
@@ -402,7 +413,8 @@ namespace PlayFab
             CountryCodeEH,
             CountryCodeYE,
             CountryCodeZM,
-            CountryCodeZW
+            CountryCodeZW,
+            CountryCodeUnknown
         };
 
         inline void ToJsonEnum(const CountryCode input, Json::Value& output)
@@ -1650,6 +1662,11 @@ namespace PlayFab
             if (input == CountryCode::CountryCodeZW)
             {
                 output = Json::Value("ZW");
+                return;
+            }
+            if (input == CountryCode::CountryCodeUnknown)
+            {
+                output = Json::Value("Unknown");
                 return;
             }
         }
@@ -2903,6 +2920,11 @@ namespace PlayFab
             if (inputStr == "ZW")
             {
                 output = CountryCode::CountryCodeZW;
+                return;
+            }
+            if (inputStr == "Unknown")
+            {
+                output = CountryCode::CountryCodeUnknown;
                 return;
             }
         }
