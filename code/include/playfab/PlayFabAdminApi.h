@@ -46,6 +46,7 @@ namespace PlayFab
         static void CreateSegment(AdminModels::CreateSegmentRequest& request, const ProcessApiCallback<AdminModels::CreateSegmentResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeleteContent(AdminModels::DeleteContentRequest& request, const ProcessApiCallback<AdminModels::BlankResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeleteMasterPlayerAccount(AdminModels::DeleteMasterPlayerAccountRequest& request, const ProcessApiCallback<AdminModels::DeleteMasterPlayerAccountResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void DeleteMasterPlayerEventData(AdminModels::DeleteMasterPlayerEventDataRequest& request, const ProcessApiCallback<AdminModels::DeleteMasterPlayerEventDataResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeleteMembershipSubscription(AdminModels::DeleteMembershipSubscriptionRequest& request, const ProcessApiCallback<AdminModels::DeleteMembershipSubscriptionResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeleteOpenIdConnection(AdminModels::DeleteOpenIdConnectionRequest& request, const ProcessApiCallback<AdminModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeletePlayer(AdminModels::DeletePlayerRequest& request, const ProcessApiCallback<AdminModels::DeletePlayerResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -167,6 +168,7 @@ namespace PlayFab
         static void OnCreateSegmentResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnDeleteContentResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnDeleteMasterPlayerAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnDeleteMasterPlayerEventDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnDeleteMembershipSubscriptionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnDeleteOpenIdConnectionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnDeletePlayerResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);

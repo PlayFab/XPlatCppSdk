@@ -5507,6 +5507,7 @@ namespace PlayFab
             GenericErrorCodesNamespaceMismatch,
             GenericErrorCodesInvalidServiceConfiguration,
             GenericErrorCodesInvalidNamespaceMismatch,
+            GenericErrorCodesLeaderboardColumnLengthMismatch,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8441,6 +8442,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesInvalidNamespaceMismatch)
             {
                 output = Json::Value("InvalidNamespaceMismatch");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLeaderboardColumnLengthMismatch)
+            {
+                output = Json::Value("LeaderboardColumnLengthMismatch");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -12129,6 +12135,11 @@ namespace PlayFab
             if (inputStr == "InvalidNamespaceMismatch")
             {
                 output = GenericErrorCodes::GenericErrorCodesInvalidNamespaceMismatch;
+                return;
+            }
+            if (inputStr == "LeaderboardColumnLengthMismatch")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLeaderboardColumnLengthMismatch;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
