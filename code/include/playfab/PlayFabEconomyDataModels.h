@@ -7278,6 +7278,30 @@ namespace PlayFab
             }
         };
 
+        struct PurchaseOverridesInfo : public PlayFabBaseModel
+        {
+
+            PurchaseOverridesInfo() :
+                PlayFabBaseModel()
+            {}
+
+            PurchaseOverridesInfo(const PurchaseOverridesInfo&) :
+                PlayFabBaseModel()
+            {}
+
+            ~PurchaseOverridesInfo() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
         struct RedeemAppleAppStoreInventoryItemsRequest : public PlayFabRequestCommon
         {
             std::string CollectionId;
@@ -8748,6 +8772,7 @@ namespace PlayFab
             std::string GivingETag;
             std::list<std::string> GivingTransactionIds;
             std::string IdempotencyId;
+            std::string OperationStatus;
             std::list<std::string> ReceivingTransactionIds;
 
             TransferInventoryItemsResponse() :
@@ -8755,6 +8780,7 @@ namespace PlayFab
                 GivingETag(),
                 GivingTransactionIds(),
                 IdempotencyId(),
+                OperationStatus(),
                 ReceivingTransactionIds()
             {}
 
@@ -8763,6 +8789,7 @@ namespace PlayFab
                 GivingETag(src.GivingETag),
                 GivingTransactionIds(src.GivingTransactionIds),
                 IdempotencyId(src.IdempotencyId),
+                OperationStatus(src.OperationStatus),
                 ReceivingTransactionIds(src.ReceivingTransactionIds)
             {}
 
@@ -8773,6 +8800,7 @@ namespace PlayFab
                 FromJsonUtilS(input["GivingETag"], GivingETag);
                 FromJsonUtilS(input["GivingTransactionIds"], GivingTransactionIds);
                 FromJsonUtilS(input["IdempotencyId"], IdempotencyId);
+                FromJsonUtilS(input["OperationStatus"], OperationStatus);
                 FromJsonUtilS(input["ReceivingTransactionIds"], ReceivingTransactionIds);
             }
 
@@ -8782,6 +8810,7 @@ namespace PlayFab
                 Json::Value each_GivingETag; ToJsonUtilS(GivingETag, each_GivingETag); output["GivingETag"] = each_GivingETag;
                 Json::Value each_GivingTransactionIds; ToJsonUtilS(GivingTransactionIds, each_GivingTransactionIds); output["GivingTransactionIds"] = each_GivingTransactionIds;
                 Json::Value each_IdempotencyId; ToJsonUtilS(IdempotencyId, each_IdempotencyId); output["IdempotencyId"] = each_IdempotencyId;
+                Json::Value each_OperationStatus; ToJsonUtilS(OperationStatus, each_OperationStatus); output["OperationStatus"] = each_OperationStatus;
                 Json::Value each_ReceivingTransactionIds; ToJsonUtilS(ReceivingTransactionIds, each_ReceivingTransactionIds); output["ReceivingTransactionIds"] = each_ReceivingTransactionIds;
                 return output;
             }

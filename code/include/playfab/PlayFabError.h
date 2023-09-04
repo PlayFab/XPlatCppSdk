@@ -560,6 +560,7 @@ namespace PlayFab
         PlayFabErrorNamespaceMismatch = 1559,
         PlayFabErrorInvalidServiceConfiguration = 1560,
         PlayFabErrorInvalidNamespaceMismatch = 1561,
+        PlayFabErrorLeaderboardColumnLengthMismatch = 1562,
         PlayFabErrorMatchmakingEntityInvalid = 2001,
         PlayFabErrorMatchmakingPlayerAttributesInvalid = 2002,
         PlayFabErrorMatchmakingQueueNotFound = 2016,

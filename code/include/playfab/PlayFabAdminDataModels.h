@@ -5523,6 +5523,7 @@ namespace PlayFab
             GenericErrorCodesNamespaceMismatch,
             GenericErrorCodesInvalidServiceConfiguration,
             GenericErrorCodesInvalidNamespaceMismatch,
+            GenericErrorCodesLeaderboardColumnLengthMismatch,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8457,6 +8458,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesInvalidNamespaceMismatch)
             {
                 output = Json::Value("InvalidNamespaceMismatch");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLeaderboardColumnLengthMismatch)
+            {
+                output = Json::Value("LeaderboardColumnLengthMismatch");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -12145,6 +12151,11 @@ namespace PlayFab
             if (inputStr == "InvalidNamespaceMismatch")
             {
                 output = GenericErrorCodes::GenericErrorCodesInvalidNamespaceMismatch;
+                return;
+            }
+            if (inputStr == "LeaderboardColumnLengthMismatch")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLeaderboardColumnLengthMismatch;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
@@ -18359,7 +18370,8 @@ namespace PlayFab
             SegmentLoginIdentityProviderFacebookInstantGames,
             SegmentLoginIdentityProviderOpenIdConnect,
             SegmentLoginIdentityProviderApple,
-            SegmentLoginIdentityProviderNintendoSwitchAccount
+            SegmentLoginIdentityProviderNintendoSwitchAccount,
+            SegmentLoginIdentityProviderGooglePlayGames
         };
 
         inline void ToJsonEnum(const SegmentLoginIdentityProvider input, Json::Value& output)
@@ -18467,6 +18479,11 @@ namespace PlayFab
             if (input == SegmentLoginIdentityProvider::SegmentLoginIdentityProviderNintendoSwitchAccount)
             {
                 output = Json::Value("NintendoSwitchAccount");
+                return;
+            }
+            if (input == SegmentLoginIdentityProvider::SegmentLoginIdentityProviderGooglePlayGames)
+            {
+                output = Json::Value("GooglePlayGames");
                 return;
             }
         }
@@ -18580,6 +18597,11 @@ namespace PlayFab
             if (inputStr == "NintendoSwitchAccount")
             {
                 output = SegmentLoginIdentityProvider::SegmentLoginIdentityProviderNintendoSwitchAccount;
+                return;
+            }
+            if (inputStr == "GooglePlayGames")
+            {
+                output = SegmentLoginIdentityProvider::SegmentLoginIdentityProviderGooglePlayGames;
                 return;
             }
         }
@@ -23087,6 +23109,59 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_JobReceiptId; ToJsonUtilS(JobReceiptId, each_JobReceiptId); output["JobReceiptId"] = each_JobReceiptId;
                 Json::Value each_TitleIds; ToJsonUtilS(TitleIds, each_TitleIds); output["TitleIds"] = each_TitleIds;
+                return output;
+            }
+        };
+
+        struct DeleteMasterPlayerEventDataRequest : public PlayFabRequestCommon
+        {
+            std::string PlayFabId;
+
+            DeleteMasterPlayerEventDataRequest() :
+                PlayFabRequestCommon(),
+                PlayFabId()
+            {}
+
+            DeleteMasterPlayerEventDataRequest(const DeleteMasterPlayerEventDataRequest& src) :
+                PlayFabRequestCommon(),
+                PlayFabId(src.PlayFabId)
+            {}
+
+            ~DeleteMasterPlayerEventDataRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                return output;
+            }
+        };
+
+        struct DeleteMasterPlayerEventDataResult : public PlayFabResultCommon
+        {
+
+            DeleteMasterPlayerEventDataResult() :
+                PlayFabResultCommon()
+            {}
+
+            DeleteMasterPlayerEventDataResult(const DeleteMasterPlayerEventDataResult&) :
+                PlayFabResultCommon()
+            {}
+
+            ~DeleteMasterPlayerEventDataResult() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
                 return output;
             }
         };
