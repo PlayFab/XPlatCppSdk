@@ -7858,17 +7858,23 @@ namespace PlayFab
         {
             std::map<std::string, std::string> CustomTags;
             std::string ImageName;
+            Boxed<Int32> PageSize;
+            std::string SkipToken;
 
             ListContainerImageTagsRequest() :
                 PlayFabRequestCommon(),
                 CustomTags(),
-                ImageName()
+                ImageName(),
+                PageSize(),
+                SkipToken()
             {}
 
             ListContainerImageTagsRequest(const ListContainerImageTagsRequest& src) :
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
-                ImageName(src.ImageName)
+                ImageName(src.ImageName),
+                PageSize(src.PageSize),
+                SkipToken(src.SkipToken)
             {}
 
             ~ListContainerImageTagsRequest() = default;
@@ -7877,6 +7883,8 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["ImageName"], ImageName);
+                FromJsonUtilP(input["PageSize"], PageSize);
+                FromJsonUtilS(input["SkipToken"], SkipToken);
             }
 
             Json::Value ToJson() const override
@@ -7884,21 +7892,29 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_ImageName; ToJsonUtilS(ImageName, each_ImageName); output["ImageName"] = each_ImageName;
+                Json::Value each_PageSize; ToJsonUtilP(PageSize, each_PageSize); output["PageSize"] = each_PageSize;
+                Json::Value each_SkipToken; ToJsonUtilS(SkipToken, each_SkipToken); output["SkipToken"] = each_SkipToken;
                 return output;
             }
         };
 
         struct ListContainerImageTagsResponse : public PlayFabResultCommon
         {
+            Int32 PageSize;
+            std::string SkipToken;
             std::list<std::string> Tags;
 
             ListContainerImageTagsResponse() :
                 PlayFabResultCommon(),
+                PageSize(),
+                SkipToken(),
                 Tags()
             {}
 
             ListContainerImageTagsResponse(const ListContainerImageTagsResponse& src) :
                 PlayFabResultCommon(),
+                PageSize(src.PageSize),
+                SkipToken(src.SkipToken),
                 Tags(src.Tags)
             {}
 
@@ -7906,12 +7922,16 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilP(input["PageSize"], PageSize);
+                FromJsonUtilS(input["SkipToken"], SkipToken);
                 FromJsonUtilS(input["Tags"], Tags);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_PageSize; ToJsonUtilP(PageSize, each_PageSize); output["PageSize"] = each_PageSize;
+                Json::Value each_SkipToken; ToJsonUtilS(SkipToken, each_SkipToken); output["SkipToken"] = each_SkipToken;
                 Json::Value each_Tags; ToJsonUtilS(Tags, each_Tags); output["Tags"] = each_Tags;
                 return output;
             }

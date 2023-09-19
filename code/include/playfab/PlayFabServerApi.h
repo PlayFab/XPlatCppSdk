@@ -44,7 +44,6 @@ namespace PlayFab
         static void DeletePlayer(ServerModels::DeletePlayerRequest& request, const ProcessApiCallback<ServerModels::DeletePlayerResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeletePushNotificationTemplate(ServerModels::DeletePushNotificationTemplateRequest& request, const ProcessApiCallback<ServerModels::DeletePushNotificationTemplateResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeleteSharedGroup(ServerModels::DeleteSharedGroupRequest& request, const ProcessApiCallback<ServerModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
-        static void DeregisterGame(ServerModels::DeregisterGameRequest& request, const ProcessApiCallback<ServerModels::DeregisterGameResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void EvaluateRandomResultTable(ServerModels::EvaluateRandomResultTableRequest& request, const ProcessApiCallback<ServerModels::EvaluateRandomResultTableResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void ExecuteCloudScript(ServerModels::ExecuteCloudScriptServerRequest& request, const ProcessApiCallback<ServerModels::ExecuteCloudScriptResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetAllSegments(ServerModels::GetAllSegmentsRequest& request, const ProcessApiCallback<ServerModels::GetAllSegmentsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -102,6 +101,7 @@ namespace PlayFab
         static void GrantItemsToUser(ServerModels::GrantItemsToUserRequest& request, const ProcessApiCallback<ServerModels::GrantItemsToUserResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GrantItemsToUsers(ServerModels::GrantItemsToUsersRequest& request, const ProcessApiCallback<ServerModels::GrantItemsToUsersResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void LinkNintendoServiceAccount(ServerModels::LinkNintendoServiceAccountRequest& request, const ProcessApiCallback<ServerModels::EmptyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void LinkNintendoServiceAccountSubject(ServerModels::LinkNintendoServiceAccountSubjectRequest& request, const ProcessApiCallback<ServerModels::EmptyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void LinkNintendoSwitchDeviceId(ServerModels::LinkNintendoSwitchDeviceIdRequest& request, const ProcessApiCallback<ServerModels::LinkNintendoSwitchDeviceIdResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void LinkPSNAccount(ServerModels::LinkPSNAccountRequest& request, const ProcessApiCallback<ServerModels::LinkPSNAccountResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void LinkPSNId(ServerModels::LinkPSNIdRequest& request, const ProcessApiCallback<ServerModels::LinkPSNIdResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -116,11 +116,7 @@ namespace PlayFab
         static void MoveItemToCharacterFromCharacter(ServerModels::MoveItemToCharacterFromCharacterRequest& request, const ProcessApiCallback<ServerModels::MoveItemToCharacterFromCharacterResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void MoveItemToCharacterFromUser(ServerModels::MoveItemToCharacterFromUserRequest& request, const ProcessApiCallback<ServerModels::MoveItemToCharacterFromUserResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void MoveItemToUserFromCharacter(ServerModels::MoveItemToUserFromCharacterRequest& request, const ProcessApiCallback<ServerModels::MoveItemToUserFromCharacterResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
-        static void NotifyMatchmakerPlayerLeft(ServerModels::NotifyMatchmakerPlayerLeftRequest& request, const ProcessApiCallback<ServerModels::NotifyMatchmakerPlayerLeftResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void RedeemCoupon(ServerModels::RedeemCouponRequest& request, const ProcessApiCallback<ServerModels::RedeemCouponResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
-        static void RedeemMatchmakerTicket(ServerModels::RedeemMatchmakerTicketRequest& request, const ProcessApiCallback<ServerModels::RedeemMatchmakerTicketResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
-        static void RefreshGameServerInstanceHeartbeat(ServerModels::RefreshGameServerInstanceHeartbeatRequest& request, const ProcessApiCallback<ServerModels::RefreshGameServerInstanceHeartbeatResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
-        static void RegisterGame(ServerModels::RegisterGameRequest& request, const ProcessApiCallback<ServerModels::RegisterGameResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void RemoveFriend(ServerModels::RemoveFriendRequest& request, const ProcessApiCallback<ServerModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void RemoveGenericID(ServerModels::RemoveGenericIDRequest& request, const ProcessApiCallback<ServerModels::EmptyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void RemovePlayerTag(ServerModels::RemovePlayerTagRequest& request, const ProcessApiCallback<ServerModels::RemovePlayerTagResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -136,9 +132,6 @@ namespace PlayFab
         static void SendPushNotification(ServerModels::SendPushNotificationRequest& request, const ProcessApiCallback<ServerModels::SendPushNotificationResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void SendPushNotificationFromTemplate(ServerModels::SendPushNotificationFromTemplateRequest& request, const ProcessApiCallback<ServerModels::SendPushNotificationResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void SetFriendTags(ServerModels::SetFriendTagsRequest& request, const ProcessApiCallback<ServerModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
-        static void SetGameServerInstanceData(ServerModels::SetGameServerInstanceDataRequest& request, const ProcessApiCallback<ServerModels::SetGameServerInstanceDataResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
-        static void SetGameServerInstanceState(ServerModels::SetGameServerInstanceStateRequest& request, const ProcessApiCallback<ServerModels::SetGameServerInstanceStateResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
-        static void SetGameServerInstanceTags(ServerModels::SetGameServerInstanceTagsRequest& request, const ProcessApiCallback<ServerModels::SetGameServerInstanceTagsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void SetPlayerSecret(ServerModels::SetPlayerSecretRequest& request, const ProcessApiCallback<ServerModels::SetPlayerSecretResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void SetPublisherData(ServerModels::SetPublisherDataRequest& request, const ProcessApiCallback<ServerModels::SetPublisherDataResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void SetTitleData(ServerModels::SetTitleDataRequest& request, const ProcessApiCallback<ServerModels::SetTitleDataResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -192,7 +185,6 @@ namespace PlayFab
         static void OnDeletePlayerResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnDeletePushNotificationTemplateResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnDeleteSharedGroupResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
-        static void OnDeregisterGameResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnEvaluateRandomResultTableResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnExecuteCloudScriptResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetAllSegmentsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -250,6 +242,7 @@ namespace PlayFab
         static void OnGrantItemsToUserResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGrantItemsToUsersResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnLinkNintendoServiceAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnLinkNintendoServiceAccountSubjectResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnLinkNintendoSwitchDeviceIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnLinkPSNAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnLinkPSNIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -264,11 +257,7 @@ namespace PlayFab
         static void OnMoveItemToCharacterFromCharacterResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnMoveItemToCharacterFromUserResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnMoveItemToUserFromCharacterResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
-        static void OnNotifyMatchmakerPlayerLeftResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnRedeemCouponResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
-        static void OnRedeemMatchmakerTicketResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
-        static void OnRefreshGameServerInstanceHeartbeatResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
-        static void OnRegisterGameResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnRemoveFriendResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnRemoveGenericIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnRemovePlayerTagResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -284,9 +273,6 @@ namespace PlayFab
         static void OnSendPushNotificationResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnSendPushNotificationFromTemplateResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnSetFriendTagsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
-        static void OnSetGameServerInstanceDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
-        static void OnSetGameServerInstanceStateResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
-        static void OnSetGameServerInstanceTagsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnSetPlayerSecretResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnSetPublisherDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnSetTitleDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
