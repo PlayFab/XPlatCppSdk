@@ -59,15 +59,6 @@
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabClientDataModels.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
-    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabMatchmakerApi.h">
-      <Filter>Header Files\playfab</Filter>
-    </ClInclude>
-    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabMatchmakerInstanceApi.h">
-      <Filter>Header Files\playfab</Filter>
-    </ClInclude>
-    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabMatchmakerDataModels.h">
-      <Filter>Header Files\playfab</Filter>
-    </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabServerApi.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
@@ -266,12 +257,6 @@
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabClientInstanceApi.cpp">
-      <Filter>Source Files\playfab</Filter>
-    </ClCompile>
-    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabMatchmakerApi.cpp">
-      <Filter>Source Files\playfab</Filter>
-    </ClCompile>
-    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabMatchmakerInstanceApi.cpp">
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabServerApi.cpp">

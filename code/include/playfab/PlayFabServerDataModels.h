@@ -5470,6 +5470,7 @@ namespace PlayFab
             GenericErrorCodesInvalidServiceConfiguration,
             GenericErrorCodesInvalidNamespaceMismatch,
             GenericErrorCodesLeaderboardColumnLengthMismatch,
+            GenericErrorCodesInvalidStatisticScore,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5614,6 +5615,12 @@ namespace PlayFab
             GenericErrorCodesLobbyNewOwnerMustBeConnected,
             GenericErrorCodesLobbyCurrentOwnerStillConnected,
             GenericErrorCodesLobbyMemberIsNotOwner,
+            GenericErrorCodesLobbyAssociatedServerMismatch,
+            GenericErrorCodesLobbyAssociatedServerNotFound,
+            GenericErrorCodesLobbyAssociatedToDifferentServer,
+            GenericErrorCodesLobbyServerAlreadyAssociated,
+            GenericErrorCodesLobbyIsNotClientOwned,
+            GenericErrorCodesLobbyDoesNotUseConnections,
             GenericErrorCodesEventSamplingInvalidRatio,
             GenericErrorCodesEventSamplingInvalidEventNamespace,
             GenericErrorCodesEventSamplingInvalidEventName,
@@ -8411,6 +8418,11 @@ namespace PlayFab
                 output = Json::Value("LeaderboardColumnLengthMismatch");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidStatisticScore)
+            {
+                output = Json::Value("InvalidStatisticScore");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
             {
                 output = Json::Value("MatchmakingEntityInvalid");
@@ -9129,6 +9141,36 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesLobbyMemberIsNotOwner)
             {
                 output = Json::Value("LobbyMemberIsNotOwner");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyAssociatedServerMismatch)
+            {
+                output = Json::Value("LobbyAssociatedServerMismatch");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyAssociatedServerNotFound)
+            {
+                output = Json::Value("LobbyAssociatedServerNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyAssociatedToDifferentServer)
+            {
+                output = Json::Value("LobbyAssociatedToDifferentServer");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyServerAlreadyAssociated)
+            {
+                output = Json::Value("LobbyServerAlreadyAssociated");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyIsNotClientOwned)
+            {
+                output = Json::Value("LobbyIsNotClientOwned");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyDoesNotUseConnections)
+            {
+                output = Json::Value("LobbyDoesNotUseConnections");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesEventSamplingInvalidRatio)
@@ -12104,6 +12146,11 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesLeaderboardColumnLengthMismatch;
                 return;
             }
+            if (inputStr == "InvalidStatisticScore")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidStatisticScore;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -12822,6 +12869,36 @@ namespace PlayFab
             if (inputStr == "LobbyMemberIsNotOwner")
             {
                 output = GenericErrorCodes::GenericErrorCodesLobbyMemberIsNotOwner;
+                return;
+            }
+            if (inputStr == "LobbyAssociatedServerMismatch")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLobbyAssociatedServerMismatch;
+                return;
+            }
+            if (inputStr == "LobbyAssociatedServerNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLobbyAssociatedServerNotFound;
+                return;
+            }
+            if (inputStr == "LobbyAssociatedToDifferentServer")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLobbyAssociatedToDifferentServer;
+                return;
+            }
+            if (inputStr == "LobbyServerAlreadyAssociated")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLobbyServerAlreadyAssociated;
+                return;
+            }
+            if (inputStr == "LobbyIsNotClientOwned")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLobbyIsNotClientOwned;
+                return;
+            }
+            if (inputStr == "LobbyDoesNotUseConnections")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLobbyDoesNotUseConnections;
                 return;
             }
             if (inputStr == "EventSamplingInvalidRatio")

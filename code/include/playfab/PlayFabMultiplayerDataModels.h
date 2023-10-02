@@ -1437,6 +1437,110 @@ namespace PlayFab
             }
         }
 
+        enum class DirectPeerConnectivityOptions
+        {
+            DirectPeerConnectivityOptionsNone,
+            DirectPeerConnectivityOptionsSamePlatformType,
+            DirectPeerConnectivityOptionsDifferentPlatformType,
+            DirectPeerConnectivityOptionsAnyPlatformType,
+            DirectPeerConnectivityOptionsSameEntityLoginProvider,
+            DirectPeerConnectivityOptionsDifferentEntityLoginProvider,
+            DirectPeerConnectivityOptionsAnyEntityLoginProvider,
+            DirectPeerConnectivityOptionsAnyPlatformTypeAndEntityLoginProvider
+        };
+
+        inline void ToJsonEnum(const DirectPeerConnectivityOptions input, Json::Value& output)
+        {
+            if (input == DirectPeerConnectivityOptions::DirectPeerConnectivityOptionsNone)
+            {
+                output = Json::Value("None");
+                return;
+            }
+            if (input == DirectPeerConnectivityOptions::DirectPeerConnectivityOptionsSamePlatformType)
+            {
+                output = Json::Value("SamePlatformType");
+                return;
+            }
+            if (input == DirectPeerConnectivityOptions::DirectPeerConnectivityOptionsDifferentPlatformType)
+            {
+                output = Json::Value("DifferentPlatformType");
+                return;
+            }
+            if (input == DirectPeerConnectivityOptions::DirectPeerConnectivityOptionsAnyPlatformType)
+            {
+                output = Json::Value("AnyPlatformType");
+                return;
+            }
+            if (input == DirectPeerConnectivityOptions::DirectPeerConnectivityOptionsSameEntityLoginProvider)
+            {
+                output = Json::Value("SameEntityLoginProvider");
+                return;
+            }
+            if (input == DirectPeerConnectivityOptions::DirectPeerConnectivityOptionsDifferentEntityLoginProvider)
+            {
+                output = Json::Value("DifferentEntityLoginProvider");
+                return;
+            }
+            if (input == DirectPeerConnectivityOptions::DirectPeerConnectivityOptionsAnyEntityLoginProvider)
+            {
+                output = Json::Value("AnyEntityLoginProvider");
+                return;
+            }
+            if (input == DirectPeerConnectivityOptions::DirectPeerConnectivityOptionsAnyPlatformTypeAndEntityLoginProvider)
+            {
+                output = Json::Value("AnyPlatformTypeAndEntityLoginProvider");
+                return;
+            }
+        }
+        inline void FromJsonEnum(const Json::Value& input, DirectPeerConnectivityOptions& output)
+        {
+            if (!input.isString())
+            {
+                return;
+            }
+            const std::string& inputStr = input.asString();
+            if (inputStr == "None")
+            {
+                output = DirectPeerConnectivityOptions::DirectPeerConnectivityOptionsNone;
+                return;
+            }
+            if (inputStr == "SamePlatformType")
+            {
+                output = DirectPeerConnectivityOptions::DirectPeerConnectivityOptionsSamePlatformType;
+                return;
+            }
+            if (inputStr == "DifferentPlatformType")
+            {
+                output = DirectPeerConnectivityOptions::DirectPeerConnectivityOptionsDifferentPlatformType;
+                return;
+            }
+            if (inputStr == "AnyPlatformType")
+            {
+                output = DirectPeerConnectivityOptions::DirectPeerConnectivityOptionsAnyPlatformType;
+                return;
+            }
+            if (inputStr == "SameEntityLoginProvider")
+            {
+                output = DirectPeerConnectivityOptions::DirectPeerConnectivityOptionsSameEntityLoginProvider;
+                return;
+            }
+            if (inputStr == "DifferentEntityLoginProvider")
+            {
+                output = DirectPeerConnectivityOptions::DirectPeerConnectivityOptionsDifferentEntityLoginProvider;
+                return;
+            }
+            if (inputStr == "AnyEntityLoginProvider")
+            {
+                output = DirectPeerConnectivityOptions::DirectPeerConnectivityOptionsAnyEntityLoginProvider;
+                return;
+            }
+            if (inputStr == "AnyPlatformTypeAndEntityLoginProvider")
+            {
+                output = DirectPeerConnectivityOptions::DirectPeerConnectivityOptionsAnyPlatformTypeAndEntityLoginProvider;
+                return;
+            }
+        }
+
         enum class ExternalFriendSources
         {
             ExternalFriendSourcesNone,
@@ -1651,6 +1755,44 @@ namespace PlayFab
             if (inputStr == "Server")
             {
                 output = OwnerMigrationPolicy::OwnerMigrationPolicyServer;
+                return;
+            }
+        }
+
+        enum class PartyInvitationRevocability
+        {
+            PartyInvitationRevocabilityCreator,
+            PartyInvitationRevocabilityAnyone
+        };
+
+        inline void ToJsonEnum(const PartyInvitationRevocability input, Json::Value& output)
+        {
+            if (input == PartyInvitationRevocability::PartyInvitationRevocabilityCreator)
+            {
+                output = Json::Value("Creator");
+                return;
+            }
+            if (input == PartyInvitationRevocability::PartyInvitationRevocabilityAnyone)
+            {
+                output = Json::Value("Anyone");
+                return;
+            }
+        }
+        inline void FromJsonEnum(const Json::Value& input, PartyInvitationRevocability& output)
+        {
+            if (!input.isString())
+            {
+                return;
+            }
+            const std::string& inputStr = input.asString();
+            if (inputStr == "Creator")
+            {
+                output = PartyInvitationRevocability::PartyInvitationRevocabilityCreator;
+                return;
+            }
+            if (inputStr == "Anyone")
+            {
+                output = PartyInvitationRevocability::PartyInvitationRevocabilityAnyone;
                 return;
             }
         }
@@ -8604,6 +8746,104 @@ namespace PlayFab
             }
         };
 
+        struct PartyInvitationConfiguration : public PlayFabBaseModel
+        {
+            std::list<EntityKey> EntityKeys;
+            std::string Identifier;
+            std::string Revocability;
+
+            PartyInvitationConfiguration() :
+                PlayFabBaseModel(),
+                EntityKeys(),
+                Identifier(),
+                Revocability()
+            {}
+
+            PartyInvitationConfiguration(const PartyInvitationConfiguration& src) :
+                PlayFabBaseModel(),
+                EntityKeys(src.EntityKeys),
+                Identifier(src.Identifier),
+                Revocability(src.Revocability)
+            {}
+
+            ~PartyInvitationConfiguration() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["EntityKeys"], EntityKeys);
+                FromJsonUtilS(input["Identifier"], Identifier);
+                FromJsonUtilS(input["Revocability"], Revocability);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_EntityKeys; ToJsonUtilO(EntityKeys, each_EntityKeys); output["EntityKeys"] = each_EntityKeys;
+                Json::Value each_Identifier; ToJsonUtilS(Identifier, each_Identifier); output["Identifier"] = each_Identifier;
+                Json::Value each_Revocability; ToJsonUtilS(Revocability, each_Revocability); output["Revocability"] = each_Revocability;
+                return output;
+            }
+        };
+
+        struct PartyNetworkConfiguration : public PlayFabBaseModel
+        {
+            std::string DirectPeerConnectivityOptions;
+            Uint32 MaxDevices;
+            Uint32 MaxDevicesPerUser;
+            Uint32 MaxEndpointsPerDevice;
+            Uint32 MaxUsers;
+            Uint32 MaxUsersPerDevice;
+            Boxed<PartyInvitationConfiguration> pfPartyInvitationConfiguration;
+
+            PartyNetworkConfiguration() :
+                PlayFabBaseModel(),
+                DirectPeerConnectivityOptions(),
+                MaxDevices(),
+                MaxDevicesPerUser(),
+                MaxEndpointsPerDevice(),
+                MaxUsers(),
+                MaxUsersPerDevice(),
+                pfPartyInvitationConfiguration()
+            {}
+
+            PartyNetworkConfiguration(const PartyNetworkConfiguration& src) :
+                PlayFabBaseModel(),
+                DirectPeerConnectivityOptions(src.DirectPeerConnectivityOptions),
+                MaxDevices(src.MaxDevices),
+                MaxDevicesPerUser(src.MaxDevicesPerUser),
+                MaxEndpointsPerDevice(src.MaxEndpointsPerDevice),
+                MaxUsers(src.MaxUsers),
+                MaxUsersPerDevice(src.MaxUsersPerDevice),
+                pfPartyInvitationConfiguration(src.pfPartyInvitationConfiguration)
+            {}
+
+            ~PartyNetworkConfiguration() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["DirectPeerConnectivityOptions"], DirectPeerConnectivityOptions);
+                FromJsonUtilP(input["MaxDevices"], MaxDevices);
+                FromJsonUtilP(input["MaxDevicesPerUser"], MaxDevicesPerUser);
+                FromJsonUtilP(input["MaxEndpointsPerDevice"], MaxEndpointsPerDevice);
+                FromJsonUtilP(input["MaxUsers"], MaxUsers);
+                FromJsonUtilP(input["MaxUsersPerDevice"], MaxUsersPerDevice);
+                FromJsonUtilO(input["PartyInvitationConfiguration"], pfPartyInvitationConfiguration);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_DirectPeerConnectivityOptions; ToJsonUtilS(DirectPeerConnectivityOptions, each_DirectPeerConnectivityOptions); output["DirectPeerConnectivityOptions"] = each_DirectPeerConnectivityOptions;
+                Json::Value each_MaxDevices; ToJsonUtilP(MaxDevices, each_MaxDevices); output["MaxDevices"] = each_MaxDevices;
+                Json::Value each_MaxDevicesPerUser; ToJsonUtilP(MaxDevicesPerUser, each_MaxDevicesPerUser); output["MaxDevicesPerUser"] = each_MaxDevicesPerUser;
+                Json::Value each_MaxEndpointsPerDevice; ToJsonUtilP(MaxEndpointsPerDevice, each_MaxEndpointsPerDevice); output["MaxEndpointsPerDevice"] = each_MaxEndpointsPerDevice;
+                Json::Value each_MaxUsers; ToJsonUtilP(MaxUsers, each_MaxUsers); output["MaxUsers"] = each_MaxUsers;
+                Json::Value each_MaxUsersPerDevice; ToJsonUtilP(MaxUsersPerDevice, each_MaxUsersPerDevice); output["MaxUsersPerDevice"] = each_MaxUsersPerDevice;
+                Json::Value each_pfPartyInvitationConfiguration; ToJsonUtilO(pfPartyInvitationConfiguration, each_pfPartyInvitationConfiguration); output["PartyInvitationConfiguration"] = each_pfPartyInvitationConfiguration;
+                return output;
+            }
+        };
+
         struct RemoveMemberFromLobbyRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
@@ -8787,6 +9027,89 @@ namespace PlayFab
                 Json::Value each_SessionId; ToJsonUtilS(SessionId, each_SessionId); output["SessionId"] = each_SessionId;
                 Json::Value each_State; ToJsonUtilS(State, each_State); output["State"] = each_State;
                 Json::Value each_VmId; ToJsonUtilS(VmId, each_VmId); output["VmId"] = each_VmId;
+                return output;
+            }
+        };
+
+        struct RequestPartyServiceRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            PartyNetworkConfiguration NetworkConfiguration;
+            std::string PartyId;
+            std::list<std::string> PreferredRegions;
+
+            RequestPartyServiceRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                NetworkConfiguration(),
+                PartyId(),
+                PreferredRegions()
+            {}
+
+            RequestPartyServiceRequest(const RequestPartyServiceRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                NetworkConfiguration(src.NetworkConfiguration),
+                PartyId(src.PartyId),
+                PreferredRegions(src.PreferredRegions)
+            {}
+
+            ~RequestPartyServiceRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilO(input["NetworkConfiguration"], NetworkConfiguration);
+                FromJsonUtilS(input["PartyId"], PartyId);
+                FromJsonUtilS(input["PreferredRegions"], PreferredRegions);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_NetworkConfiguration; ToJsonUtilO(NetworkConfiguration, each_NetworkConfiguration); output["NetworkConfiguration"] = each_NetworkConfiguration;
+                Json::Value each_PartyId; ToJsonUtilS(PartyId, each_PartyId); output["PartyId"] = each_PartyId;
+                Json::Value each_PreferredRegions; ToJsonUtilS(PreferredRegions, each_PreferredRegions); output["PreferredRegions"] = each_PreferredRegions;
+                return output;
+            }
+        };
+
+        struct RequestPartyServiceResponse : public PlayFabResultCommon
+        {
+            std::string InvitationId;
+            std::string PartyId;
+            std::string SerializedNetworkDescriptor;
+
+            RequestPartyServiceResponse() :
+                PlayFabResultCommon(),
+                InvitationId(),
+                PartyId(),
+                SerializedNetworkDescriptor()
+            {}
+
+            RequestPartyServiceResponse(const RequestPartyServiceResponse& src) :
+                PlayFabResultCommon(),
+                InvitationId(src.InvitationId),
+                PartyId(src.PartyId),
+                SerializedNetworkDescriptor(src.SerializedNetworkDescriptor)
+            {}
+
+            ~RequestPartyServiceResponse() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["InvitationId"], InvitationId);
+                FromJsonUtilS(input["PartyId"], PartyId);
+                FromJsonUtilS(input["SerializedNetworkDescriptor"], SerializedNetworkDescriptor);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_InvitationId; ToJsonUtilS(InvitationId, each_InvitationId); output["InvitationId"] = each_InvitationId;
+                Json::Value each_PartyId; ToJsonUtilS(PartyId, each_PartyId); output["PartyId"] = each_PartyId;
+                Json::Value each_SerializedNetworkDescriptor; ToJsonUtilS(SerializedNetworkDescriptor, each_SerializedNetworkDescriptor); output["SerializedNetworkDescriptor"] = each_SerializedNetworkDescriptor;
                 return output;
             }
         };
@@ -9322,17 +9645,20 @@ namespace PlayFab
         struct UploadCertificateRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
+            Boxed<bool> ForceUpdate;
             Certificate GameCertificate;
 
             UploadCertificateRequest() :
                 PlayFabRequestCommon(),
                 CustomTags(),
+                ForceUpdate(),
                 GameCertificate()
             {}
 
             UploadCertificateRequest(const UploadCertificateRequest& src) :
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
+                ForceUpdate(src.ForceUpdate),
                 GameCertificate(src.GameCertificate)
             {}
 
@@ -9341,6 +9667,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilP(input["ForceUpdate"], ForceUpdate);
                 FromJsonUtilO(input["GameCertificate"], GameCertificate);
             }
 
@@ -9348,6 +9675,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_ForceUpdate; ToJsonUtilP(ForceUpdate, each_ForceUpdate); output["ForceUpdate"] = each_ForceUpdate;
                 Json::Value each_GameCertificate; ToJsonUtilO(GameCertificate, each_GameCertificate); output["GameCertificate"] = each_GameCertificate;
                 return output;
             }

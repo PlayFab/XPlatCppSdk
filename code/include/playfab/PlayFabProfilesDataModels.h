@@ -338,7 +338,7 @@ namespace PlayFab
         {
             std::string Metadata;
             std::string Name;
-            std::list<Int32> Scores;
+            std::list<std::string> Scores;
 
             EntityStatisticAttributeValue() :
                 PlayFabBaseModel(),
@@ -360,7 +360,7 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["Metadata"], Metadata);
                 FromJsonUtilS(input["Name"], Name);
-                FromJsonUtilP(input["Scores"], Scores);
+                FromJsonUtilS(input["Scores"], Scores);
             }
 
             Json::Value ToJson() const override
@@ -368,7 +368,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_Metadata; ToJsonUtilS(Metadata, each_Metadata); output["Metadata"] = each_Metadata;
                 Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
-                Json::Value each_Scores; ToJsonUtilP(Scores, each_Scores); output["Scores"] = each_Scores;
+                Json::Value each_Scores; ToJsonUtilS(Scores, each_Scores); output["Scores"] = each_Scores;
                 return output;
             }
         };
@@ -378,7 +378,7 @@ namespace PlayFab
             std::map<std::string, EntityStatisticAttributeValue> AttributeStatistics;
             std::string Metadata;
             std::string Name;
-            std::list<Int32> Scores;
+            std::list<std::string> Scores;
             Boxed<Int32> Value;
             Int32 Version;
 
@@ -409,7 +409,7 @@ namespace PlayFab
                 FromJsonUtilO(input["AttributeStatistics"], AttributeStatistics);
                 FromJsonUtilS(input["Metadata"], Metadata);
                 FromJsonUtilS(input["Name"], Name);
-                FromJsonUtilP(input["Scores"], Scores);
+                FromJsonUtilS(input["Scores"], Scores);
                 FromJsonUtilP(input["Value"], Value);
                 FromJsonUtilP(input["Version"], Version);
             }
@@ -420,7 +420,7 @@ namespace PlayFab
                 Json::Value each_AttributeStatistics; ToJsonUtilO(AttributeStatistics, each_AttributeStatistics); output["AttributeStatistics"] = each_AttributeStatistics;
                 Json::Value each_Metadata; ToJsonUtilS(Metadata, each_Metadata); output["Metadata"] = each_Metadata;
                 Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
-                Json::Value each_Scores; ToJsonUtilP(Scores, each_Scores); output["Scores"] = each_Scores;
+                Json::Value each_Scores; ToJsonUtilS(Scores, each_Scores); output["Scores"] = each_Scores;
                 Json::Value each_Value; ToJsonUtilP(Value, each_Value); output["Value"] = each_Value;
                 Json::Value each_Version; ToJsonUtilP(Version, each_Version); output["Version"] = each_Version;
                 return output;

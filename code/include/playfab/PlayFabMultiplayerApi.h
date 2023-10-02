@@ -92,6 +92,7 @@ namespace PlayFab
         static void ListVirtualMachineSummaries(MultiplayerModels::ListVirtualMachineSummariesRequest& request, const ProcessApiCallback<MultiplayerModels::ListVirtualMachineSummariesResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void RemoveMember(MultiplayerModels::RemoveMemberFromLobbyRequest& request, const ProcessApiCallback<MultiplayerModels::LobbyEmptyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void RequestMultiplayerServer(MultiplayerModels::RequestMultiplayerServerRequest& request, const ProcessApiCallback<MultiplayerModels::RequestMultiplayerServerResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void RequestPartyService(MultiplayerModels::RequestPartyServiceRequest& request, const ProcessApiCallback<MultiplayerModels::RequestPartyServiceResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void RolloverContainerRegistryCredentials(MultiplayerModels::RolloverContainerRegistryCredentialsRequest& request, const ProcessApiCallback<MultiplayerModels::RolloverContainerRegistryCredentialsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void ShutdownMultiplayerServer(MultiplayerModels::ShutdownMultiplayerServerRequest& request, const ProcessApiCallback<MultiplayerModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void SubscribeToLobbyResource(MultiplayerModels::SubscribeToLobbyResourceRequest& request, const ProcessApiCallback<MultiplayerModels::SubscribeToLobbyResourceResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -172,6 +173,7 @@ namespace PlayFab
         static void OnListVirtualMachineSummariesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnRemoveMemberResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnRequestMultiplayerServerResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnRequestPartyServiceResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnRolloverContainerRegistryCredentialsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnShutdownMultiplayerServerResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnSubscribeToLobbyResourceResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
