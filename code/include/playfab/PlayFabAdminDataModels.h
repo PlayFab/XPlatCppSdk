@@ -5453,6 +5453,7 @@ namespace PlayFab
             GenericErrorCodesInvalidServiceConfiguration,
             GenericErrorCodesInvalidNamespaceMismatch,
             GenericErrorCodesLeaderboardColumnLengthMismatch,
+            GenericErrorCodesInvalidStatisticScore,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5597,6 +5598,12 @@ namespace PlayFab
             GenericErrorCodesLobbyNewOwnerMustBeConnected,
             GenericErrorCodesLobbyCurrentOwnerStillConnected,
             GenericErrorCodesLobbyMemberIsNotOwner,
+            GenericErrorCodesLobbyAssociatedServerMismatch,
+            GenericErrorCodesLobbyAssociatedServerNotFound,
+            GenericErrorCodesLobbyAssociatedToDifferentServer,
+            GenericErrorCodesLobbyServerAlreadyAssociated,
+            GenericErrorCodesLobbyIsNotClientOwned,
+            GenericErrorCodesLobbyDoesNotUseConnections,
             GenericErrorCodesEventSamplingInvalidRatio,
             GenericErrorCodesEventSamplingInvalidEventNamespace,
             GenericErrorCodesEventSamplingInvalidEventName,
@@ -8394,6 +8401,11 @@ namespace PlayFab
                 output = Json::Value("LeaderboardColumnLengthMismatch");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidStatisticScore)
+            {
+                output = Json::Value("InvalidStatisticScore");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
             {
                 output = Json::Value("MatchmakingEntityInvalid");
@@ -9112,6 +9124,36 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesLobbyMemberIsNotOwner)
             {
                 output = Json::Value("LobbyMemberIsNotOwner");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyAssociatedServerMismatch)
+            {
+                output = Json::Value("LobbyAssociatedServerMismatch");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyAssociatedServerNotFound)
+            {
+                output = Json::Value("LobbyAssociatedServerNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyAssociatedToDifferentServer)
+            {
+                output = Json::Value("LobbyAssociatedToDifferentServer");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyServerAlreadyAssociated)
+            {
+                output = Json::Value("LobbyServerAlreadyAssociated");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyIsNotClientOwned)
+            {
+                output = Json::Value("LobbyIsNotClientOwned");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyDoesNotUseConnections)
+            {
+                output = Json::Value("LobbyDoesNotUseConnections");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesEventSamplingInvalidRatio)
@@ -12087,6 +12129,11 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesLeaderboardColumnLengthMismatch;
                 return;
             }
+            if (inputStr == "InvalidStatisticScore")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidStatisticScore;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -12805,6 +12852,36 @@ namespace PlayFab
             if (inputStr == "LobbyMemberIsNotOwner")
             {
                 output = GenericErrorCodes::GenericErrorCodesLobbyMemberIsNotOwner;
+                return;
+            }
+            if (inputStr == "LobbyAssociatedServerMismatch")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLobbyAssociatedServerMismatch;
+                return;
+            }
+            if (inputStr == "LobbyAssociatedServerNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLobbyAssociatedServerNotFound;
+                return;
+            }
+            if (inputStr == "LobbyAssociatedToDifferentServer")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLobbyAssociatedToDifferentServer;
+                return;
+            }
+            if (inputStr == "LobbyServerAlreadyAssociated")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLobbyServerAlreadyAssociated;
+                return;
+            }
+            if (inputStr == "LobbyIsNotClientOwned")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLobbyIsNotClientOwned;
+                return;
+            }
+            if (inputStr == "LobbyDoesNotUseConnections")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLobbyDoesNotUseConnections;
                 return;
             }
             if (inputStr == "EventSamplingInvalidRatio")
@@ -19456,20 +19533,400 @@ namespace PlayFab
             }
         };
 
+        struct BanPlayerContent : public PlayFabBaseModel
+        {
+            Int32 BanDurationHours;
+            std::string BanReason;
+
+            BanPlayerContent() :
+                PlayFabBaseModel(),
+                BanDurationHours(),
+                BanReason()
+            {}
+
+            BanPlayerContent(const BanPlayerContent& src) :
+                PlayFabBaseModel(),
+                BanDurationHours(src.BanDurationHours),
+                BanReason(src.BanReason)
+            {}
+
+            ~BanPlayerContent() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["BanDurationHours"], BanDurationHours);
+                FromJsonUtilS(input["BanReason"], BanReason);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_BanDurationHours; ToJsonUtilP(BanDurationHours, each_BanDurationHours); output["BanDurationHours"] = each_BanDurationHours;
+                Json::Value each_BanReason; ToJsonUtilS(BanReason, each_BanReason); output["BanReason"] = each_BanReason;
+                return output;
+            }
+        };
+
+        struct DeletePlayerContent : public PlayFabBaseModel
+        {
+
+            DeletePlayerContent() :
+                PlayFabBaseModel()
+            {}
+
+            DeletePlayerContent(const DeletePlayerContent&) :
+                PlayFabBaseModel()
+            {}
+
+            ~DeletePlayerContent() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
+        struct ExecuteCloudScriptContent : public PlayFabBaseModel
+        {
+            std::string CloudScriptMethodArguments;
+            std::string CloudScriptMethodName;
+            bool PublishResultsToPlayStream;
+
+            ExecuteCloudScriptContent() :
+                PlayFabBaseModel(),
+                CloudScriptMethodArguments(),
+                CloudScriptMethodName(),
+                PublishResultsToPlayStream()
+            {}
+
+            ExecuteCloudScriptContent(const ExecuteCloudScriptContent& src) :
+                PlayFabBaseModel(),
+                CloudScriptMethodArguments(src.CloudScriptMethodArguments),
+                CloudScriptMethodName(src.CloudScriptMethodName),
+                PublishResultsToPlayStream(src.PublishResultsToPlayStream)
+            {}
+
+            ~ExecuteCloudScriptContent() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CloudScriptMethodArguments"], CloudScriptMethodArguments);
+                FromJsonUtilS(input["CloudScriptMethodName"], CloudScriptMethodName);
+                FromJsonUtilP(input["PublishResultsToPlayStream"], PublishResultsToPlayStream);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CloudScriptMethodArguments; ToJsonUtilS(CloudScriptMethodArguments, each_CloudScriptMethodArguments); output["CloudScriptMethodArguments"] = each_CloudScriptMethodArguments;
+                Json::Value each_CloudScriptMethodName; ToJsonUtilS(CloudScriptMethodName, each_CloudScriptMethodName); output["CloudScriptMethodName"] = each_CloudScriptMethodName;
+                Json::Value each_PublishResultsToPlayStream; ToJsonUtilP(PublishResultsToPlayStream, each_PublishResultsToPlayStream); output["PublishResultsToPlayStream"] = each_PublishResultsToPlayStream;
+                return output;
+            }
+        };
+
+        struct ExecuteFunctionContent : public PlayFabBaseModel
+        {
+            std::string CloudScriptFunctionArguments;
+            std::string CloudScriptFunctionName;
+            bool PublishResultsToPlayStream;
+
+            ExecuteFunctionContent() :
+                PlayFabBaseModel(),
+                CloudScriptFunctionArguments(),
+                CloudScriptFunctionName(),
+                PublishResultsToPlayStream()
+            {}
+
+            ExecuteFunctionContent(const ExecuteFunctionContent& src) :
+                PlayFabBaseModel(),
+                CloudScriptFunctionArguments(src.CloudScriptFunctionArguments),
+                CloudScriptFunctionName(src.CloudScriptFunctionName),
+                PublishResultsToPlayStream(src.PublishResultsToPlayStream)
+            {}
+
+            ~ExecuteFunctionContent() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CloudScriptFunctionArguments"], CloudScriptFunctionArguments);
+                FromJsonUtilS(input["CloudScriptFunctionName"], CloudScriptFunctionName);
+                FromJsonUtilP(input["PublishResultsToPlayStream"], PublishResultsToPlayStream);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CloudScriptFunctionArguments; ToJsonUtilS(CloudScriptFunctionArguments, each_CloudScriptFunctionArguments); output["CloudScriptFunctionArguments"] = each_CloudScriptFunctionArguments;
+                Json::Value each_CloudScriptFunctionName; ToJsonUtilS(CloudScriptFunctionName, each_CloudScriptFunctionName); output["CloudScriptFunctionName"] = each_CloudScriptFunctionName;
+                Json::Value each_PublishResultsToPlayStream; ToJsonUtilP(PublishResultsToPlayStream, each_PublishResultsToPlayStream); output["PublishResultsToPlayStream"] = each_PublishResultsToPlayStream;
+                return output;
+            }
+        };
+
+        struct GrantItemContent : public PlayFabBaseModel
+        {
+            std::string CatalogVersion;
+            std::string ItemId;
+            Int32 ItemQuantity;
+
+            GrantItemContent() :
+                PlayFabBaseModel(),
+                CatalogVersion(),
+                ItemId(),
+                ItemQuantity()
+            {}
+
+            GrantItemContent(const GrantItemContent& src) :
+                PlayFabBaseModel(),
+                CatalogVersion(src.CatalogVersion),
+                ItemId(src.ItemId),
+                ItemQuantity(src.ItemQuantity)
+            {}
+
+            ~GrantItemContent() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
+                FromJsonUtilS(input["ItemId"], ItemId);
+                FromJsonUtilP(input["ItemQuantity"], ItemQuantity);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CatalogVersion; ToJsonUtilS(CatalogVersion, each_CatalogVersion); output["CatalogVersion"] = each_CatalogVersion;
+                Json::Value each_ItemId; ToJsonUtilS(ItemId, each_ItemId); output["ItemId"] = each_ItemId;
+                Json::Value each_ItemQuantity; ToJsonUtilP(ItemQuantity, each_ItemQuantity); output["ItemQuantity"] = each_ItemQuantity;
+                return output;
+            }
+        };
+
+        struct GrantVirtualCurrencyContent : public PlayFabBaseModel
+        {
+            Int32 CurrencyAmount;
+            std::string CurrencyCode;
+
+            GrantVirtualCurrencyContent() :
+                PlayFabBaseModel(),
+                CurrencyAmount(),
+                CurrencyCode()
+            {}
+
+            GrantVirtualCurrencyContent(const GrantVirtualCurrencyContent& src) :
+                PlayFabBaseModel(),
+                CurrencyAmount(src.CurrencyAmount),
+                CurrencyCode(src.CurrencyCode)
+            {}
+
+            ~GrantVirtualCurrencyContent() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["CurrencyAmount"], CurrencyAmount);
+                FromJsonUtilS(input["CurrencyCode"], CurrencyCode);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CurrencyAmount; ToJsonUtilP(CurrencyAmount, each_CurrencyAmount); output["CurrencyAmount"] = each_CurrencyAmount;
+                Json::Value each_CurrencyCode; ToJsonUtilS(CurrencyCode, each_CurrencyCode); output["CurrencyCode"] = each_CurrencyCode;
+                return output;
+            }
+        };
+
+        struct IncrementPlayerStatisticContent : public PlayFabBaseModel
+        {
+            Int32 StatisticChangeBy;
+            std::string StatisticName;
+
+            IncrementPlayerStatisticContent() :
+                PlayFabBaseModel(),
+                StatisticChangeBy(),
+                StatisticName()
+            {}
+
+            IncrementPlayerStatisticContent(const IncrementPlayerStatisticContent& src) :
+                PlayFabBaseModel(),
+                StatisticChangeBy(src.StatisticChangeBy),
+                StatisticName(src.StatisticName)
+            {}
+
+            ~IncrementPlayerStatisticContent() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["StatisticChangeBy"], StatisticChangeBy);
+                FromJsonUtilS(input["StatisticName"], StatisticName);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_StatisticChangeBy; ToJsonUtilP(StatisticChangeBy, each_StatisticChangeBy); output["StatisticChangeBy"] = each_StatisticChangeBy;
+                Json::Value each_StatisticName; ToJsonUtilS(StatisticName, each_StatisticName); output["StatisticName"] = each_StatisticName;
+                return output;
+            }
+        };
+
+        struct PushNotificationContent : public PlayFabBaseModel
+        {
+            std::string Message;
+            std::string PushNotificationTemplateId;
+            std::string Subject;
+
+            PushNotificationContent() :
+                PlayFabBaseModel(),
+                Message(),
+                PushNotificationTemplateId(),
+                Subject()
+            {}
+
+            PushNotificationContent(const PushNotificationContent& src) :
+                PlayFabBaseModel(),
+                Message(src.Message),
+                PushNotificationTemplateId(src.PushNotificationTemplateId),
+                Subject(src.Subject)
+            {}
+
+            ~PushNotificationContent() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["Message"], Message);
+                FromJsonUtilS(input["PushNotificationTemplateId"], PushNotificationTemplateId);
+                FromJsonUtilS(input["Subject"], Subject);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Message; ToJsonUtilS(Message, each_Message); output["Message"] = each_Message;
+                Json::Value each_PushNotificationTemplateId; ToJsonUtilS(PushNotificationTemplateId, each_PushNotificationTemplateId); output["PushNotificationTemplateId"] = each_PushNotificationTemplateId;
+                Json::Value each_Subject; ToJsonUtilS(Subject, each_Subject); output["Subject"] = each_Subject;
+                return output;
+            }
+        };
+
+        struct SendEmailContent : public PlayFabBaseModel
+        {
+            std::string EmailTemplateId;
+
+            SendEmailContent() :
+                PlayFabBaseModel(),
+                EmailTemplateId()
+            {}
+
+            SendEmailContent(const SendEmailContent& src) :
+                PlayFabBaseModel(),
+                EmailTemplateId(src.EmailTemplateId)
+            {}
+
+            ~SendEmailContent() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["EmailTemplateId"], EmailTemplateId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_EmailTemplateId; ToJsonUtilS(EmailTemplateId, each_EmailTemplateId); output["EmailTemplateId"] = each_EmailTemplateId;
+                return output;
+            }
+        };
+
+        struct Action : public PlayFabBaseModel
+        {
+            Boxed<BanPlayerContent> pfBanPlayerContent;
+            Boxed<DeletePlayerContent> pfDeletePlayerContent;
+            Boxed<ExecuteCloudScriptContent> pfExecuteCloudScriptContent;
+            Boxed<ExecuteFunctionContent> pfExecuteFunctionContent;
+            Boxed<GrantItemContent> pfGrantItemContent;
+            Boxed<GrantVirtualCurrencyContent> pfGrantVirtualCurrencyContent;
+            Boxed<IncrementPlayerStatisticContent> pfIncrementPlayerStatisticContent;
+            Boxed<PushNotificationContent> pfPushNotificationContent;
+            Boxed<SendEmailContent> pfSendEmailContent;
+
+            Action() :
+                PlayFabBaseModel(),
+                pfBanPlayerContent(),
+                pfDeletePlayerContent(),
+                pfExecuteCloudScriptContent(),
+                pfExecuteFunctionContent(),
+                pfGrantItemContent(),
+                pfGrantVirtualCurrencyContent(),
+                pfIncrementPlayerStatisticContent(),
+                pfPushNotificationContent(),
+                pfSendEmailContent()
+            {}
+
+            Action(const Action& src) :
+                PlayFabBaseModel(),
+                pfBanPlayerContent(src.pfBanPlayerContent),
+                pfDeletePlayerContent(src.pfDeletePlayerContent),
+                pfExecuteCloudScriptContent(src.pfExecuteCloudScriptContent),
+                pfExecuteFunctionContent(src.pfExecuteFunctionContent),
+                pfGrantItemContent(src.pfGrantItemContent),
+                pfGrantVirtualCurrencyContent(src.pfGrantVirtualCurrencyContent),
+                pfIncrementPlayerStatisticContent(src.pfIncrementPlayerStatisticContent),
+                pfPushNotificationContent(src.pfPushNotificationContent),
+                pfSendEmailContent(src.pfSendEmailContent)
+            {}
+
+            ~Action() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["BanPlayerContent"], pfBanPlayerContent);
+                FromJsonUtilO(input["DeletePlayerContent"], pfDeletePlayerContent);
+                FromJsonUtilO(input["ExecuteCloudScriptContent"], pfExecuteCloudScriptContent);
+                FromJsonUtilO(input["ExecuteFunctionContent"], pfExecuteFunctionContent);
+                FromJsonUtilO(input["GrantItemContent"], pfGrantItemContent);
+                FromJsonUtilO(input["GrantVirtualCurrencyContent"], pfGrantVirtualCurrencyContent);
+                FromJsonUtilO(input["IncrementPlayerStatisticContent"], pfIncrementPlayerStatisticContent);
+                FromJsonUtilO(input["PushNotificationContent"], pfPushNotificationContent);
+                FromJsonUtilO(input["SendEmailContent"], pfSendEmailContent);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_pfBanPlayerContent; ToJsonUtilO(pfBanPlayerContent, each_pfBanPlayerContent); output["BanPlayerContent"] = each_pfBanPlayerContent;
+                Json::Value each_pfDeletePlayerContent; ToJsonUtilO(pfDeletePlayerContent, each_pfDeletePlayerContent); output["DeletePlayerContent"] = each_pfDeletePlayerContent;
+                Json::Value each_pfExecuteCloudScriptContent; ToJsonUtilO(pfExecuteCloudScriptContent, each_pfExecuteCloudScriptContent); output["ExecuteCloudScriptContent"] = each_pfExecuteCloudScriptContent;
+                Json::Value each_pfExecuteFunctionContent; ToJsonUtilO(pfExecuteFunctionContent, each_pfExecuteFunctionContent); output["ExecuteFunctionContent"] = each_pfExecuteFunctionContent;
+                Json::Value each_pfGrantItemContent; ToJsonUtilO(pfGrantItemContent, each_pfGrantItemContent); output["GrantItemContent"] = each_pfGrantItemContent;
+                Json::Value each_pfGrantVirtualCurrencyContent; ToJsonUtilO(pfGrantVirtualCurrencyContent, each_pfGrantVirtualCurrencyContent); output["GrantVirtualCurrencyContent"] = each_pfGrantVirtualCurrencyContent;
+                Json::Value each_pfIncrementPlayerStatisticContent; ToJsonUtilO(pfIncrementPlayerStatisticContent, each_pfIncrementPlayerStatisticContent); output["IncrementPlayerStatisticContent"] = each_pfIncrementPlayerStatisticContent;
+                Json::Value each_pfPushNotificationContent; ToJsonUtilO(pfPushNotificationContent, each_pfPushNotificationContent); output["PushNotificationContent"] = each_pfPushNotificationContent;
+                Json::Value each_pfSendEmailContent; ToJsonUtilO(pfSendEmailContent, each_pfSendEmailContent); output["SendEmailContent"] = each_pfSendEmailContent;
+                return output;
+            }
+        };
+
         struct ActionsOnPlayersInSegmentTaskParameter : public PlayFabBaseModel
         {
-            std::string ActionId;
+            std::list<Action> Actions;
             std::string SegmentId;
 
             ActionsOnPlayersInSegmentTaskParameter() :
                 PlayFabBaseModel(),
-                ActionId(),
+                Actions(),
                 SegmentId()
             {}
 
             ActionsOnPlayersInSegmentTaskParameter(const ActionsOnPlayersInSegmentTaskParameter& src) :
                 PlayFabBaseModel(),
-                ActionId(src.ActionId),
+                Actions(src.Actions),
                 SegmentId(src.SegmentId)
             {}
 
@@ -19477,14 +19934,14 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
-                FromJsonUtilS(input["ActionId"], ActionId);
+                FromJsonUtilO(input["Actions"], Actions);
                 FromJsonUtilS(input["SegmentId"], SegmentId);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                Json::Value each_ActionId; ToJsonUtilS(ActionId, each_ActionId); output["ActionId"] = each_ActionId;
+                Json::Value each_Actions; ToJsonUtilO(Actions, each_Actions); output["Actions"] = each_Actions;
                 Json::Value each_SegmentId; ToJsonUtilS(SegmentId, each_SegmentId); output["SegmentId"] = each_SegmentId;
                 return output;
             }

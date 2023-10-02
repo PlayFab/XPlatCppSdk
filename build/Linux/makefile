@@ -27,8 +27,6 @@ OBJS = stdafx.o \
 	PlayFabAdminInstanceApi.o \
 	PlayFabClientApi.o \
 	PlayFabClientInstanceApi.o \
-	PlayFabMatchmakerApi.o \
-	PlayFabMatchmakerInstanceApi.o \
 	PlayFabServerApi.o \
 	PlayFabServerInstanceApi.o \
 	PlayFabAuthenticationApi.o \
