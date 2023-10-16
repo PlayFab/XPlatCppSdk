@@ -21821,6 +21821,7 @@ namespace PlayFab
             Boxed<bool> IgnoreNonce;
             std::string IssuerDiscoveryUrl;
             Boxed<OpenIdIssuerInformation> IssuerInformation;
+            std::string IssuerOverride;
 
             CreateOpenIdConnectionRequest() :
                 PlayFabRequestCommon(),
@@ -21829,7 +21830,8 @@ namespace PlayFab
                 ConnectionId(),
                 IgnoreNonce(),
                 IssuerDiscoveryUrl(),
-                IssuerInformation()
+                IssuerInformation(),
+                IssuerOverride()
             {}
 
             CreateOpenIdConnectionRequest(const CreateOpenIdConnectionRequest& src) :
@@ -21839,7 +21841,8 @@ namespace PlayFab
                 ConnectionId(src.ConnectionId),
                 IgnoreNonce(src.IgnoreNonce),
                 IssuerDiscoveryUrl(src.IssuerDiscoveryUrl),
-                IssuerInformation(src.IssuerInformation)
+                IssuerInformation(src.IssuerInformation),
+                IssuerOverride(src.IssuerOverride)
             {}
 
             ~CreateOpenIdConnectionRequest() = default;
@@ -21852,6 +21855,7 @@ namespace PlayFab
                 FromJsonUtilP(input["IgnoreNonce"], IgnoreNonce);
                 FromJsonUtilS(input["IssuerDiscoveryUrl"], IssuerDiscoveryUrl);
                 FromJsonUtilO(input["IssuerInformation"], IssuerInformation);
+                FromJsonUtilS(input["IssuerOverride"], IssuerOverride);
             }
 
             Json::Value ToJson() const override
@@ -21863,6 +21867,7 @@ namespace PlayFab
                 Json::Value each_IgnoreNonce; ToJsonUtilP(IgnoreNonce, each_IgnoreNonce); output["IgnoreNonce"] = each_IgnoreNonce;
                 Json::Value each_IssuerDiscoveryUrl; ToJsonUtilS(IssuerDiscoveryUrl, each_IssuerDiscoveryUrl); output["IssuerDiscoveryUrl"] = each_IssuerDiscoveryUrl;
                 Json::Value each_IssuerInformation; ToJsonUtilO(IssuerInformation, each_IssuerInformation); output["IssuerInformation"] = each_IssuerInformation;
+                Json::Value each_IssuerOverride; ToJsonUtilS(IssuerOverride, each_IssuerOverride); output["IssuerOverride"] = each_IssuerOverride;
                 return output;
             }
         };
@@ -27987,7 +27992,9 @@ namespace PlayFab
             std::string ClientSecret;
             std::string ConnectionId;
             bool DiscoverConfiguration;
+            Boxed<bool> IgnoreNonce;
             Boxed<OpenIdIssuerInformation> IssuerInformation;
+            std::string IssuerOverride;
 
             OpenIdConnection() :
                 PlayFabBaseModel(),
@@ -27995,7 +28002,9 @@ namespace PlayFab
                 ClientSecret(),
                 ConnectionId(),
                 DiscoverConfiguration(),
-                IssuerInformation()
+                IgnoreNonce(),
+                IssuerInformation(),
+                IssuerOverride()
             {}
 
             OpenIdConnection(const OpenIdConnection& src) :
@@ -28004,7 +28013,9 @@ namespace PlayFab
                 ClientSecret(src.ClientSecret),
                 ConnectionId(src.ConnectionId),
                 DiscoverConfiguration(src.DiscoverConfiguration),
-                IssuerInformation(src.IssuerInformation)
+                IgnoreNonce(src.IgnoreNonce),
+                IssuerInformation(src.IssuerInformation),
+                IssuerOverride(src.IssuerOverride)
             {}
 
             ~OpenIdConnection() = default;
@@ -28015,7 +28026,9 @@ namespace PlayFab
                 FromJsonUtilS(input["ClientSecret"], ClientSecret);
                 FromJsonUtilS(input["ConnectionId"], ConnectionId);
                 FromJsonUtilP(input["DiscoverConfiguration"], DiscoverConfiguration);
+                FromJsonUtilP(input["IgnoreNonce"], IgnoreNonce);
                 FromJsonUtilO(input["IssuerInformation"], IssuerInformation);
+                FromJsonUtilS(input["IssuerOverride"], IssuerOverride);
             }
 
             Json::Value ToJson() const override
@@ -28025,7 +28038,9 @@ namespace PlayFab
                 Json::Value each_ClientSecret; ToJsonUtilS(ClientSecret, each_ClientSecret); output["ClientSecret"] = each_ClientSecret;
                 Json::Value each_ConnectionId; ToJsonUtilS(ConnectionId, each_ConnectionId); output["ConnectionId"] = each_ConnectionId;
                 Json::Value each_DiscoverConfiguration; ToJsonUtilP(DiscoverConfiguration, each_DiscoverConfiguration); output["DiscoverConfiguration"] = each_DiscoverConfiguration;
+                Json::Value each_IgnoreNonce; ToJsonUtilP(IgnoreNonce, each_IgnoreNonce); output["IgnoreNonce"] = each_IgnoreNonce;
                 Json::Value each_IssuerInformation; ToJsonUtilO(IssuerInformation, each_IssuerInformation); output["IssuerInformation"] = each_IssuerInformation;
+                Json::Value each_IssuerOverride; ToJsonUtilS(IssuerOverride, each_IssuerOverride); output["IssuerOverride"] = each_IssuerOverride;
                 return output;
             }
         };
@@ -30737,16 +30752,20 @@ namespace PlayFab
             std::string ClientId;
             std::string ClientSecret;
             std::string ConnectionId;
+            Boxed<bool> IgnoreNonce;
             std::string IssuerDiscoveryUrl;
             Boxed<OpenIdIssuerInformation> IssuerInformation;
+            std::string IssuerOverride;
 
             UpdateOpenIdConnectionRequest() :
                 PlayFabRequestCommon(),
                 ClientId(),
                 ClientSecret(),
                 ConnectionId(),
+                IgnoreNonce(),
                 IssuerDiscoveryUrl(),
-                IssuerInformation()
+                IssuerInformation(),
+                IssuerOverride()
             {}
 
             UpdateOpenIdConnectionRequest(const UpdateOpenIdConnectionRequest& src) :
@@ -30754,8 +30773,10 @@ namespace PlayFab
                 ClientId(src.ClientId),
                 ClientSecret(src.ClientSecret),
                 ConnectionId(src.ConnectionId),
+                IgnoreNonce(src.IgnoreNonce),
                 IssuerDiscoveryUrl(src.IssuerDiscoveryUrl),
-                IssuerInformation(src.IssuerInformation)
+                IssuerInformation(src.IssuerInformation),
+                IssuerOverride(src.IssuerOverride)
             {}
 
             ~UpdateOpenIdConnectionRequest() = default;
@@ -30765,8 +30786,10 @@ namespace PlayFab
                 FromJsonUtilS(input["ClientId"], ClientId);
                 FromJsonUtilS(input["ClientSecret"], ClientSecret);
                 FromJsonUtilS(input["ConnectionId"], ConnectionId);
+                FromJsonUtilP(input["IgnoreNonce"], IgnoreNonce);
                 FromJsonUtilS(input["IssuerDiscoveryUrl"], IssuerDiscoveryUrl);
                 FromJsonUtilO(input["IssuerInformation"], IssuerInformation);
+                FromJsonUtilS(input["IssuerOverride"], IssuerOverride);
             }
 
             Json::Value ToJson() const override
@@ -30775,8 +30798,10 @@ namespace PlayFab
                 Json::Value each_ClientId; ToJsonUtilS(ClientId, each_ClientId); output["ClientId"] = each_ClientId;
                 Json::Value each_ClientSecret; ToJsonUtilS(ClientSecret, each_ClientSecret); output["ClientSecret"] = each_ClientSecret;
                 Json::Value each_ConnectionId; ToJsonUtilS(ConnectionId, each_ConnectionId); output["ConnectionId"] = each_ConnectionId;
+                Json::Value each_IgnoreNonce; ToJsonUtilP(IgnoreNonce, each_IgnoreNonce); output["IgnoreNonce"] = each_IgnoreNonce;
                 Json::Value each_IssuerDiscoveryUrl; ToJsonUtilS(IssuerDiscoveryUrl, each_IssuerDiscoveryUrl); output["IssuerDiscoveryUrl"] = each_IssuerDiscoveryUrl;
                 Json::Value each_IssuerInformation; ToJsonUtilO(IssuerInformation, each_IssuerInformation); output["IssuerInformation"] = each_IssuerInformation;
+                Json::Value each_IssuerOverride; ToJsonUtilS(IssuerOverride, each_IssuerOverride); output["IssuerOverride"] = each_IssuerOverride;
                 return output;
             }
         };
