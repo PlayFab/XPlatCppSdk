@@ -5644,6 +5644,7 @@ namespace PlayFab
             GenericErrorCodesEventSinkTenantNotFound,
             GenericErrorCodesEventSinkAadNotFound,
             GenericErrorCodesEventSinkDatabaseNotFound,
+            GenericErrorCodesEventSinkTitleUnauthorized,
             GenericErrorCodesOperationCanceled,
             GenericErrorCodesInvalidDisplayNameRandomSuffixLength,
             GenericErrorCodesAllowNonUniquePlayerDisplayNamesDisableNotAllowed,
@@ -5663,7 +5664,9 @@ namespace PlayFab
             GenericErrorCodesPlayerCustomPropertiesDuplicatePropertyName,
             GenericErrorCodesPlayerCustomPropertiesPropertyDoesNotExist,
             GenericErrorCodesAddonAlreadyExists,
-            GenericErrorCodesAddonDoesntExist
+            GenericErrorCodesAddonDoesntExist,
+            GenericErrorCodesCopilotDisabled,
+            GenericErrorCodesCopilotInvalidRequest
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -9288,6 +9291,11 @@ namespace PlayFab
                 output = Json::Value("EventSinkDatabaseNotFound");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkTitleUnauthorized)
+            {
+                output = Json::Value("EventSinkTitleUnauthorized");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesOperationCanceled)
             {
                 output = Json::Value("OperationCanceled");
@@ -9386,6 +9394,16 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesAddonDoesntExist)
             {
                 output = Json::Value("AddonDoesntExist");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCopilotDisabled)
+            {
+                output = Json::Value("CopilotDisabled");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCopilotInvalidRequest)
+            {
+                output = Json::Value("CopilotInvalidRequest");
                 return;
             }
         }
@@ -13016,6 +13034,11 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesEventSinkDatabaseNotFound;
                 return;
             }
+            if (inputStr == "EventSinkTitleUnauthorized")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkTitleUnauthorized;
+                return;
+            }
             if (inputStr == "OperationCanceled")
             {
                 output = GenericErrorCodes::GenericErrorCodesOperationCanceled;
@@ -13114,6 +13137,16 @@ namespace PlayFab
             if (inputStr == "AddonDoesntExist")
             {
                 output = GenericErrorCodes::GenericErrorCodesAddonDoesntExist;
+                return;
+            }
+            if (inputStr == "CopilotDisabled")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCopilotDisabled;
+                return;
+            }
+            if (inputStr == "CopilotInvalidRequest")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCopilotInvalidRequest;
                 return;
             }
         }

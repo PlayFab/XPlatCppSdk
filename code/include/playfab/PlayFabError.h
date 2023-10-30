@@ -735,6 +735,7 @@ namespace PlayFab
         PlayFabErrorEventSinkTenantNotFound = 15009,
         PlayFabErrorEventSinkAadNotFound = 15010,
         PlayFabErrorEventSinkDatabaseNotFound = 15011,
+        PlayFabErrorEventSinkTitleUnauthorized = 15012,
         PlayFabErrorOperationCanceled = 16000,
         PlayFabErrorInvalidDisplayNameRandomSuffixLength = 17000,
         PlayFabErrorAllowNonUniquePlayerDisplayNamesDisableNotAllowed = 17001,
@@ -755,6 +756,8 @@ namespace PlayFab
         PlayFabErrorPlayerCustomPropertiesPropertyDoesNotExist = 19007,
         PlayFabErrorAddonAlreadyExists = 19008,
         PlayFabErrorAddonDoesntExist = 19009,
+        PlayFabErrorCopilotDisabled = 19100,
+        PlayFabErrorCopilotInvalidRequest = 19101,
     };
 
     /// <summary>
