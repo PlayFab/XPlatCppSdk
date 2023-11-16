@@ -5471,6 +5471,7 @@ namespace PlayFab
             GenericErrorCodesInvalidNamespaceMismatch,
             GenericErrorCodesLeaderboardColumnLengthMismatch,
             GenericErrorCodesInvalidStatisticScore,
+            GenericErrorCodesLeaderboardColumnsNotSpecified,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8424,6 +8425,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesInvalidStatisticScore)
             {
                 output = Json::Value("InvalidStatisticScore");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLeaderboardColumnsNotSpecified)
+            {
+                output = Json::Value("LeaderboardColumnsNotSpecified");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -12167,6 +12173,11 @@ namespace PlayFab
             if (inputStr == "InvalidStatisticScore")
             {
                 output = GenericErrorCodes::GenericErrorCodesInvalidStatisticScore;
+                return;
+            }
+            if (inputStr == "LeaderboardColumnsNotSpecified")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLeaderboardColumnsNotSpecified;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
