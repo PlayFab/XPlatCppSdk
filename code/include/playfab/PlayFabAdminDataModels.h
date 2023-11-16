@@ -5454,6 +5454,7 @@ namespace PlayFab
             GenericErrorCodesInvalidNamespaceMismatch,
             GenericErrorCodesLeaderboardColumnLengthMismatch,
             GenericErrorCodesInvalidStatisticScore,
+            GenericErrorCodesLeaderboardColumnsNotSpecified,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8407,6 +8408,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesInvalidStatisticScore)
             {
                 output = Json::Value("InvalidStatisticScore");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLeaderboardColumnsNotSpecified)
+            {
+                output = Json::Value("LeaderboardColumnsNotSpecified");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -12150,6 +12156,11 @@ namespace PlayFab
             if (inputStr == "InvalidStatisticScore")
             {
                 output = GenericErrorCodes::GenericErrorCodesInvalidStatisticScore;
+                return;
+            }
+            if (inputStr == "LeaderboardColumnsNotSpecified")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLeaderboardColumnsNotSpecified;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
@@ -19566,6 +19577,55 @@ namespace PlayFab
             }
         };
 
+        struct AddInventoryItemV2Content : public PlayFabBaseModel
+        {
+            Boxed<Int32> Amount;
+            std::string CollectionId;
+            Boxed<Int32> DurationInSeconds;
+            std::string ItemId;
+            std::string StackId;
+
+            AddInventoryItemV2Content() :
+                PlayFabBaseModel(),
+                Amount(),
+                CollectionId(),
+                DurationInSeconds(),
+                ItemId(),
+                StackId()
+            {}
+
+            AddInventoryItemV2Content(const AddInventoryItemV2Content& src) :
+                PlayFabBaseModel(),
+                Amount(src.Amount),
+                CollectionId(src.CollectionId),
+                DurationInSeconds(src.DurationInSeconds),
+                ItemId(src.ItemId),
+                StackId(src.StackId)
+            {}
+
+            ~AddInventoryItemV2Content() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["Amount"], Amount);
+                FromJsonUtilS(input["CollectionId"], CollectionId);
+                FromJsonUtilP(input["DurationInSeconds"], DurationInSeconds);
+                FromJsonUtilS(input["ItemId"], ItemId);
+                FromJsonUtilS(input["StackId"], StackId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Amount; ToJsonUtilP(Amount, each_Amount); output["Amount"] = each_Amount;
+                Json::Value each_CollectionId; ToJsonUtilS(CollectionId, each_CollectionId); output["CollectionId"] = each_CollectionId;
+                Json::Value each_DurationInSeconds; ToJsonUtilP(DurationInSeconds, each_DurationInSeconds); output["DurationInSeconds"] = each_DurationInSeconds;
+                Json::Value each_ItemId; ToJsonUtilS(ItemId, each_ItemId); output["ItemId"] = each_ItemId;
+                Json::Value each_StackId; ToJsonUtilS(StackId, each_StackId); output["StackId"] = each_StackId;
+                return output;
+            }
+        };
+
         struct BanPlayerContent : public PlayFabBaseModel
         {
             Boxed<Int32> BanDurationHours;
@@ -19596,6 +19656,45 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_BanDurationHours; ToJsonUtilP(BanDurationHours, each_BanDurationHours); output["BanDurationHours"] = each_BanDurationHours;
                 Json::Value each_BanReason; ToJsonUtilS(BanReason, each_BanReason); output["BanReason"] = each_BanReason;
+                return output;
+            }
+        };
+
+        struct DeleteInventoryItemV2Content : public PlayFabBaseModel
+        {
+            std::string CollectionId;
+            std::string ItemId;
+            std::string StackId;
+
+            DeleteInventoryItemV2Content() :
+                PlayFabBaseModel(),
+                CollectionId(),
+                ItemId(),
+                StackId()
+            {}
+
+            DeleteInventoryItemV2Content(const DeleteInventoryItemV2Content& src) :
+                PlayFabBaseModel(),
+                CollectionId(src.CollectionId),
+                ItemId(src.ItemId),
+                StackId(src.StackId)
+            {}
+
+            ~DeleteInventoryItemV2Content() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CollectionId"], CollectionId);
+                FromJsonUtilS(input["ItemId"], ItemId);
+                FromJsonUtilS(input["StackId"], StackId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CollectionId; ToJsonUtilS(CollectionId, each_CollectionId); output["CollectionId"] = each_CollectionId;
+                Json::Value each_ItemId; ToJsonUtilS(ItemId, each_ItemId); output["ItemId"] = each_ItemId;
+                Json::Value each_StackId; ToJsonUtilS(StackId, each_StackId); output["StackId"] = each_StackId;
                 return output;
             }
         };
@@ -19877,9 +19976,60 @@ namespace PlayFab
             }
         };
 
+        struct SubtractInventoryItemV2Content : public PlayFabBaseModel
+        {
+            Boxed<Int32> Amount;
+            std::string CollectionId;
+            Boxed<Int32> DurationInSeconds;
+            std::string ItemId;
+            std::string StackId;
+
+            SubtractInventoryItemV2Content() :
+                PlayFabBaseModel(),
+                Amount(),
+                CollectionId(),
+                DurationInSeconds(),
+                ItemId(),
+                StackId()
+            {}
+
+            SubtractInventoryItemV2Content(const SubtractInventoryItemV2Content& src) :
+                PlayFabBaseModel(),
+                Amount(src.Amount),
+                CollectionId(src.CollectionId),
+                DurationInSeconds(src.DurationInSeconds),
+                ItemId(src.ItemId),
+                StackId(src.StackId)
+            {}
+
+            ~SubtractInventoryItemV2Content() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["Amount"], Amount);
+                FromJsonUtilS(input["CollectionId"], CollectionId);
+                FromJsonUtilP(input["DurationInSeconds"], DurationInSeconds);
+                FromJsonUtilS(input["ItemId"], ItemId);
+                FromJsonUtilS(input["StackId"], StackId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Amount; ToJsonUtilP(Amount, each_Amount); output["Amount"] = each_Amount;
+                Json::Value each_CollectionId; ToJsonUtilS(CollectionId, each_CollectionId); output["CollectionId"] = each_CollectionId;
+                Json::Value each_DurationInSeconds; ToJsonUtilP(DurationInSeconds, each_DurationInSeconds); output["DurationInSeconds"] = each_DurationInSeconds;
+                Json::Value each_ItemId; ToJsonUtilS(ItemId, each_ItemId); output["ItemId"] = each_ItemId;
+                Json::Value each_StackId; ToJsonUtilS(StackId, each_StackId); output["StackId"] = each_StackId;
+                return output;
+            }
+        };
+
         struct Action : public PlayFabBaseModel
         {
+            Boxed<AddInventoryItemV2Content> pfAddInventoryItemV2Content;
             Boxed<BanPlayerContent> pfBanPlayerContent;
+            Boxed<DeleteInventoryItemV2Content> pfDeleteInventoryItemV2Content;
             Boxed<DeletePlayerContent> pfDeletePlayerContent;
             Boxed<ExecuteCloudScriptContent> pfExecuteCloudScriptContent;
             Boxed<ExecuteFunctionContent> pfExecuteFunctionContent;
@@ -19888,10 +20038,13 @@ namespace PlayFab
             Boxed<IncrementPlayerStatisticContent> pfIncrementPlayerStatisticContent;
             Boxed<PushNotificationContent> pfPushNotificationContent;
             Boxed<SendEmailContent> pfSendEmailContent;
+            Boxed<SubtractInventoryItemV2Content> pfSubtractInventoryItemV2Content;
 
             Action() :
                 PlayFabBaseModel(),
+                pfAddInventoryItemV2Content(),
                 pfBanPlayerContent(),
+                pfDeleteInventoryItemV2Content(),
                 pfDeletePlayerContent(),
                 pfExecuteCloudScriptContent(),
                 pfExecuteFunctionContent(),
@@ -19899,12 +20052,15 @@ namespace PlayFab
                 pfGrantVirtualCurrencyContent(),
                 pfIncrementPlayerStatisticContent(),
                 pfPushNotificationContent(),
-                pfSendEmailContent()
+                pfSendEmailContent(),
+                pfSubtractInventoryItemV2Content()
             {}
 
             Action(const Action& src) :
                 PlayFabBaseModel(),
+                pfAddInventoryItemV2Content(src.pfAddInventoryItemV2Content),
                 pfBanPlayerContent(src.pfBanPlayerContent),
+                pfDeleteInventoryItemV2Content(src.pfDeleteInventoryItemV2Content),
                 pfDeletePlayerContent(src.pfDeletePlayerContent),
                 pfExecuteCloudScriptContent(src.pfExecuteCloudScriptContent),
                 pfExecuteFunctionContent(src.pfExecuteFunctionContent),
@@ -19912,14 +20068,17 @@ namespace PlayFab
                 pfGrantVirtualCurrencyContent(src.pfGrantVirtualCurrencyContent),
                 pfIncrementPlayerStatisticContent(src.pfIncrementPlayerStatisticContent),
                 pfPushNotificationContent(src.pfPushNotificationContent),
-                pfSendEmailContent(src.pfSendEmailContent)
+                pfSendEmailContent(src.pfSendEmailContent),
+                pfSubtractInventoryItemV2Content(src.pfSubtractInventoryItemV2Content)
             {}
 
             ~Action() = default;
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilO(input["AddInventoryItemV2Content"], pfAddInventoryItemV2Content);
                 FromJsonUtilO(input["BanPlayerContent"], pfBanPlayerContent);
+                FromJsonUtilO(input["DeleteInventoryItemV2Content"], pfDeleteInventoryItemV2Content);
                 FromJsonUtilO(input["DeletePlayerContent"], pfDeletePlayerContent);
                 FromJsonUtilO(input["ExecuteCloudScriptContent"], pfExecuteCloudScriptContent);
                 FromJsonUtilO(input["ExecuteFunctionContent"], pfExecuteFunctionContent);
@@ -19928,12 +20087,15 @@ namespace PlayFab
                 FromJsonUtilO(input["IncrementPlayerStatisticContent"], pfIncrementPlayerStatisticContent);
                 FromJsonUtilO(input["PushNotificationContent"], pfPushNotificationContent);
                 FromJsonUtilO(input["SendEmailContent"], pfSendEmailContent);
+                FromJsonUtilO(input["SubtractInventoryItemV2Content"], pfSubtractInventoryItemV2Content);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_pfAddInventoryItemV2Content; ToJsonUtilO(pfAddInventoryItemV2Content, each_pfAddInventoryItemV2Content); output["AddInventoryItemV2Content"] = each_pfAddInventoryItemV2Content;
                 Json::Value each_pfBanPlayerContent; ToJsonUtilO(pfBanPlayerContent, each_pfBanPlayerContent); output["BanPlayerContent"] = each_pfBanPlayerContent;
+                Json::Value each_pfDeleteInventoryItemV2Content; ToJsonUtilO(pfDeleteInventoryItemV2Content, each_pfDeleteInventoryItemV2Content); output["DeleteInventoryItemV2Content"] = each_pfDeleteInventoryItemV2Content;
                 Json::Value each_pfDeletePlayerContent; ToJsonUtilO(pfDeletePlayerContent, each_pfDeletePlayerContent); output["DeletePlayerContent"] = each_pfDeletePlayerContent;
                 Json::Value each_pfExecuteCloudScriptContent; ToJsonUtilO(pfExecuteCloudScriptContent, each_pfExecuteCloudScriptContent); output["ExecuteCloudScriptContent"] = each_pfExecuteCloudScriptContent;
                 Json::Value each_pfExecuteFunctionContent; ToJsonUtilO(pfExecuteFunctionContent, each_pfExecuteFunctionContent); output["ExecuteFunctionContent"] = each_pfExecuteFunctionContent;
@@ -19942,6 +20104,7 @@ namespace PlayFab
                 Json::Value each_pfIncrementPlayerStatisticContent; ToJsonUtilO(pfIncrementPlayerStatisticContent, each_pfIncrementPlayerStatisticContent); output["IncrementPlayerStatisticContent"] = each_pfIncrementPlayerStatisticContent;
                 Json::Value each_pfPushNotificationContent; ToJsonUtilO(pfPushNotificationContent, each_pfPushNotificationContent); output["PushNotificationContent"] = each_pfPushNotificationContent;
                 Json::Value each_pfSendEmailContent; ToJsonUtilO(pfSendEmailContent, each_pfSendEmailContent); output["SendEmailContent"] = each_pfSendEmailContent;
+                Json::Value each_pfSubtractInventoryItemV2Content; ToJsonUtilO(pfSubtractInventoryItemV2Content, each_pfSubtractInventoryItemV2Content); output["SubtractInventoryItemV2Content"] = each_pfSubtractInventoryItemV2Content;
                 return output;
             }
         };
