@@ -5616,10 +5616,10 @@ namespace PlayFab
             GenericErrorCodesLobbyNewOwnerMustBeConnected,
             GenericErrorCodesLobbyCurrentOwnerStillConnected,
             GenericErrorCodesLobbyMemberIsNotOwner,
-            GenericErrorCodesLobbyAssociatedServerMismatch,
-            GenericErrorCodesLobbyAssociatedServerNotFound,
-            GenericErrorCodesLobbyAssociatedToDifferentServer,
-            GenericErrorCodesLobbyServerAlreadyAssociated,
+            GenericErrorCodesLobbyServerMismatch,
+            GenericErrorCodesLobbyServerNotFound,
+            GenericErrorCodesLobbyDifferentServerAlreadyJoined,
+            GenericErrorCodesLobbyServerAlreadyJoined,
             GenericErrorCodesLobbyIsNotClientOwned,
             GenericErrorCodesLobbyDoesNotUseConnections,
             GenericErrorCodesEventSamplingInvalidRatio,
@@ -5667,7 +5667,8 @@ namespace PlayFab
             GenericErrorCodesAddonAlreadyExists,
             GenericErrorCodesAddonDoesntExist,
             GenericErrorCodesCopilotDisabled,
-            GenericErrorCodesCopilotInvalidRequest
+            GenericErrorCodesCopilotInvalidRequest,
+            GenericErrorCodesTrueSkillUnauthorized
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -9152,24 +9153,24 @@ namespace PlayFab
                 output = Json::Value("LobbyMemberIsNotOwner");
                 return;
             }
-            if (input == GenericErrorCodes::GenericErrorCodesLobbyAssociatedServerMismatch)
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyServerMismatch)
             {
-                output = Json::Value("LobbyAssociatedServerMismatch");
+                output = Json::Value("LobbyServerMismatch");
                 return;
             }
-            if (input == GenericErrorCodes::GenericErrorCodesLobbyAssociatedServerNotFound)
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyServerNotFound)
             {
-                output = Json::Value("LobbyAssociatedServerNotFound");
+                output = Json::Value("LobbyServerNotFound");
                 return;
             }
-            if (input == GenericErrorCodes::GenericErrorCodesLobbyAssociatedToDifferentServer)
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyDifferentServerAlreadyJoined)
             {
-                output = Json::Value("LobbyAssociatedToDifferentServer");
+                output = Json::Value("LobbyDifferentServerAlreadyJoined");
                 return;
             }
-            if (input == GenericErrorCodes::GenericErrorCodesLobbyServerAlreadyAssociated)
+            if (input == GenericErrorCodes::GenericErrorCodesLobbyServerAlreadyJoined)
             {
-                output = Json::Value("LobbyServerAlreadyAssociated");
+                output = Json::Value("LobbyServerAlreadyJoined");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesLobbyIsNotClientOwned)
@@ -9410,6 +9411,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesCopilotInvalidRequest)
             {
                 output = Json::Value("CopilotInvalidRequest");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillUnauthorized)
+            {
+                output = Json::Value("TrueSkillUnauthorized");
                 return;
             }
         }
@@ -12900,24 +12906,24 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesLobbyMemberIsNotOwner;
                 return;
             }
-            if (inputStr == "LobbyAssociatedServerMismatch")
+            if (inputStr == "LobbyServerMismatch")
             {
-                output = GenericErrorCodes::GenericErrorCodesLobbyAssociatedServerMismatch;
+                output = GenericErrorCodes::GenericErrorCodesLobbyServerMismatch;
                 return;
             }
-            if (inputStr == "LobbyAssociatedServerNotFound")
+            if (inputStr == "LobbyServerNotFound")
             {
-                output = GenericErrorCodes::GenericErrorCodesLobbyAssociatedServerNotFound;
+                output = GenericErrorCodes::GenericErrorCodesLobbyServerNotFound;
                 return;
             }
-            if (inputStr == "LobbyAssociatedToDifferentServer")
+            if (inputStr == "LobbyDifferentServerAlreadyJoined")
             {
-                output = GenericErrorCodes::GenericErrorCodesLobbyAssociatedToDifferentServer;
+                output = GenericErrorCodes::GenericErrorCodesLobbyDifferentServerAlreadyJoined;
                 return;
             }
-            if (inputStr == "LobbyServerAlreadyAssociated")
+            if (inputStr == "LobbyServerAlreadyJoined")
             {
-                output = GenericErrorCodes::GenericErrorCodesLobbyServerAlreadyAssociated;
+                output = GenericErrorCodes::GenericErrorCodesLobbyServerAlreadyJoined;
                 return;
             }
             if (inputStr == "LobbyIsNotClientOwned")
@@ -13158,6 +13164,11 @@ namespace PlayFab
             if (inputStr == "CopilotInvalidRequest")
             {
                 output = GenericErrorCodes::GenericErrorCodesCopilotInvalidRequest;
+                return;
+            }
+            if (inputStr == "TrueSkillUnauthorized")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillUnauthorized;
                 return;
             }
         }

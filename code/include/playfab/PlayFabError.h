@@ -707,10 +707,10 @@ namespace PlayFab
         PlayFabErrorLobbyNewOwnerMustBeConnected = 13009,
         PlayFabErrorLobbyCurrentOwnerStillConnected = 13010,
         PlayFabErrorLobbyMemberIsNotOwner = 13011,
-        PlayFabErrorLobbyAssociatedServerMismatch = 13012,
-        PlayFabErrorLobbyAssociatedServerNotFound = 13013,
-        PlayFabErrorLobbyAssociatedToDifferentServer = 13014,
-        PlayFabErrorLobbyServerAlreadyAssociated = 13015,
+        PlayFabErrorLobbyServerMismatch = 13012,
+        PlayFabErrorLobbyServerNotFound = 13013,
+        PlayFabErrorLobbyDifferentServerAlreadyJoined = 13014,
+        PlayFabErrorLobbyServerAlreadyJoined = 13015,
         PlayFabErrorLobbyIsNotClientOwned = 13016,
         PlayFabErrorLobbyDoesNotUseConnections = 13017,
         PlayFabErrorEventSamplingInvalidRatio = 14000,
@@ -759,6 +759,7 @@ namespace PlayFab
         PlayFabErrorAddonDoesntExist = 19009,
         PlayFabErrorCopilotDisabled = 19100,
         PlayFabErrorCopilotInvalidRequest = 19101,
+        PlayFabErrorTrueSkillUnauthorized = 20000,
     };
 
     /// <summary>
