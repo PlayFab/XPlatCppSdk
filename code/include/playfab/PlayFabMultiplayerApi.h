@@ -74,8 +74,10 @@ namespace PlayFab
         static void InviteToLobby(MultiplayerModels::InviteToLobbyRequest& request, const ProcessApiCallback<MultiplayerModels::LobbyEmptyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void JoinArrangedLobby(MultiplayerModels::JoinArrangedLobbyRequest& request, const ProcessApiCallback<MultiplayerModels::JoinLobbyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void JoinLobby(MultiplayerModels::JoinLobbyRequest& request, const ProcessApiCallback<MultiplayerModels::JoinLobbyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void JoinLobbyAsServer(MultiplayerModels::JoinLobbyAsServerRequest& request, const ProcessApiCallback<MultiplayerModels::JoinLobbyAsServerResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void JoinMatchmakingTicket(MultiplayerModels::JoinMatchmakingTicketRequest& request, const ProcessApiCallback<MultiplayerModels::JoinMatchmakingTicketResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void LeaveLobby(MultiplayerModels::LeaveLobbyRequest& request, const ProcessApiCallback<MultiplayerModels::LobbyEmptyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void LeaveLobbyAsServer(MultiplayerModels::LeaveLobbyAsServerRequest& request, const ProcessApiCallback<MultiplayerModels::LobbyEmptyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void ListArchivedMultiplayerServers(MultiplayerModels::ListMultiplayerServersRequest& request, const ProcessApiCallback<MultiplayerModels::ListMultiplayerServersResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void ListAssetSummaries(MultiplayerModels::ListAssetSummariesRequest& request, const ProcessApiCallback<MultiplayerModels::ListAssetSummariesResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void ListBuildAliases(MultiplayerModels::ListBuildAliasesRequest& request, const ProcessApiCallback<MultiplayerModels::ListBuildAliasesResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -103,6 +105,7 @@ namespace PlayFab
         static void UpdateBuildRegion(MultiplayerModels::UpdateBuildRegionRequest& request, const ProcessApiCallback<MultiplayerModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void UpdateBuildRegions(MultiplayerModels::UpdateBuildRegionsRequest& request, const ProcessApiCallback<MultiplayerModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void UpdateLobby(MultiplayerModels::UpdateLobbyRequest& request, const ProcessApiCallback<MultiplayerModels::LobbyEmptyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void UpdateLobbyAsServer(MultiplayerModels::UpdateLobbyAsServerRequest& request, const ProcessApiCallback<MultiplayerModels::LobbyEmptyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void UploadCertificate(MultiplayerModels::UploadCertificateRequest& request, const ProcessApiCallback<MultiplayerModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
 
     private:
@@ -155,8 +158,10 @@ namespace PlayFab
         static void OnInviteToLobbyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnJoinArrangedLobbyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnJoinLobbyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnJoinLobbyAsServerResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnJoinMatchmakingTicketResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnLeaveLobbyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnLeaveLobbyAsServerResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnListArchivedMultiplayerServersResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnListAssetSummariesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnListBuildAliasesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -184,6 +189,7 @@ namespace PlayFab
         static void OnUpdateBuildRegionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnUpdateBuildRegionsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnUpdateLobbyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnUpdateLobbyAsServerResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnUploadCertificateResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
 
         static bool ValidateResult(PlayFabResultCommon& resultCommon, const CallRequestContainer& container);

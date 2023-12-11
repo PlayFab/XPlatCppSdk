@@ -1884,6 +1884,44 @@ namespace PlayFab
             }
         }
 
+        enum class ServerDataStatus
+        {
+            ServerDataStatusInitialized,
+            ServerDataStatusIgnored
+        };
+
+        inline void ToJsonEnum(const ServerDataStatus input, Json::Value& output)
+        {
+            if (input == ServerDataStatus::ServerDataStatusInitialized)
+            {
+                output = Json::Value("Initialized");
+                return;
+            }
+            if (input == ServerDataStatus::ServerDataStatusIgnored)
+            {
+                output = Json::Value("Ignored");
+                return;
+            }
+        }
+        inline void FromJsonEnum(const Json::Value& input, ServerDataStatus& output)
+        {
+            if (!input.isString())
+            {
+                return;
+            }
+            const std::string& inputStr = input.asString();
+            if (inputStr == "Initialized")
+            {
+                output = ServerDataStatus::ServerDataStatusInitialized;
+                return;
+            }
+            if (inputStr == "Ignored")
+            {
+                output = ServerDataStatus::ServerDataStatusIgnored;
+                return;
+            }
+        }
+
         enum class ServerType
         {
             ServerTypeContainer,
@@ -7437,6 +7475,84 @@ namespace PlayFab
             }
         };
 
+        struct JoinLobbyAsServerRequest : public PlayFabRequestCommon
+        {
+            std::string ConnectionString;
+            std::map<std::string, std::string> CustomTags;
+            std::map<std::string, std::string> ServerData;
+            EntityKey ServerEntity;
+
+            JoinLobbyAsServerRequest() :
+                PlayFabRequestCommon(),
+                ConnectionString(),
+                CustomTags(),
+                ServerData(),
+                ServerEntity()
+            {}
+
+            JoinLobbyAsServerRequest(const JoinLobbyAsServerRequest& src) :
+                PlayFabRequestCommon(),
+                ConnectionString(src.ConnectionString),
+                CustomTags(src.CustomTags),
+                ServerData(src.ServerData),
+                ServerEntity(src.ServerEntity)
+            {}
+
+            ~JoinLobbyAsServerRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["ConnectionString"], ConnectionString);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["ServerData"], ServerData);
+                FromJsonUtilO(input["ServerEntity"], ServerEntity);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ConnectionString; ToJsonUtilS(ConnectionString, each_ConnectionString); output["ConnectionString"] = each_ConnectionString;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_ServerData; ToJsonUtilS(ServerData, each_ServerData); output["ServerData"] = each_ServerData;
+                Json::Value each_ServerEntity; ToJsonUtilO(ServerEntity, each_ServerEntity); output["ServerEntity"] = each_ServerEntity;
+                return output;
+            }
+        };
+
+        struct JoinLobbyAsServerResult : public PlayFabResultCommon
+        {
+            std::string LobbyId;
+            ServerDataStatus pfServerDataStatus;
+
+            JoinLobbyAsServerResult() :
+                PlayFabResultCommon(),
+                LobbyId(),
+                pfServerDataStatus()
+            {}
+
+            JoinLobbyAsServerResult(const JoinLobbyAsServerResult& src) :
+                PlayFabResultCommon(),
+                LobbyId(src.LobbyId),
+                pfServerDataStatus(src.pfServerDataStatus)
+            {}
+
+            ~JoinLobbyAsServerResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["LobbyId"], LobbyId);
+                FromJsonEnum(input["ServerDataStatus"], pfServerDataStatus);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
+                Json::Value each_pfServerDataStatus; ToJsonEnum(pfServerDataStatus, each_pfServerDataStatus); output["ServerDataStatus"] = each_pfServerDataStatus;
+                return output;
+            }
+        };
+
         struct JoinLobbyRequest : public PlayFabRequestCommon
         {
             std::string ConnectionString;
@@ -7574,6 +7690,45 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                return output;
+            }
+        };
+
+        struct LeaveLobbyAsServerRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            std::string LobbyId;
+            EntityKey ServerEntity;
+
+            LeaveLobbyAsServerRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                LobbyId(),
+                ServerEntity()
+            {}
+
+            LeaveLobbyAsServerRequest(const LeaveLobbyAsServerRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                LobbyId(src.LobbyId),
+                ServerEntity(src.ServerEntity)
+            {}
+
+            ~LeaveLobbyAsServerRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["LobbyId"], LobbyId);
+                FromJsonUtilO(input["ServerEntity"], ServerEntity);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
+                Json::Value each_ServerEntity; ToJsonUtilO(ServerEntity, each_ServerEntity); output["ServerEntity"] = each_ServerEntity;
                 return output;
             }
         };
@@ -9560,6 +9715,55 @@ namespace PlayFab
                 Json::Value each_BuildId; ToJsonUtilS(BuildId, each_BuildId); output["BuildId"] = each_BuildId;
                 Json::Value each_BuildRegions; ToJsonUtilO(BuildRegions, each_BuildRegions); output["BuildRegions"] = each_BuildRegions;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                return output;
+            }
+        };
+
+        struct UpdateLobbyAsServerRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            std::string LobbyId;
+            Boxed<EntityKey> Server;
+            std::map<std::string, std::string> ServerData;
+            std::list<std::string> ServerDataToDelete;
+
+            UpdateLobbyAsServerRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                LobbyId(),
+                Server(),
+                ServerData(),
+                ServerDataToDelete()
+            {}
+
+            UpdateLobbyAsServerRequest(const UpdateLobbyAsServerRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                LobbyId(src.LobbyId),
+                Server(src.Server),
+                ServerData(src.ServerData),
+                ServerDataToDelete(src.ServerDataToDelete)
+            {}
+
+            ~UpdateLobbyAsServerRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["LobbyId"], LobbyId);
+                FromJsonUtilO(input["Server"], Server);
+                FromJsonUtilS(input["ServerData"], ServerData);
+                FromJsonUtilS(input["ServerDataToDelete"], ServerDataToDelete);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
+                Json::Value each_Server; ToJsonUtilO(Server, each_Server); output["Server"] = each_Server;
+                Json::Value each_ServerData; ToJsonUtilS(ServerData, each_ServerData); output["ServerData"] = each_ServerData;
+                Json::Value each_ServerDataToDelete; ToJsonUtilS(ServerDataToDelete, each_ServerDataToDelete); output["ServerDataToDelete"] = each_ServerDataToDelete;
                 return output;
             }
         };

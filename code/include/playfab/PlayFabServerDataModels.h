@@ -5472,6 +5472,7 @@ namespace PlayFab
             GenericErrorCodesLeaderboardColumnLengthMismatch,
             GenericErrorCodesInvalidStatisticScore,
             GenericErrorCodesLeaderboardColumnsNotSpecified,
+            GenericErrorCodesLeaderboardMaxSizeTooLarge,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5515,6 +5516,7 @@ namespace PlayFab
             GenericErrorCodesCatalogItemTypeInvalid,
             GenericErrorCodesCatalogBadRequest,
             GenericErrorCodesCatalogTooManyRequests,
+            GenericErrorCodesInvalidCatalogItemConfiguration,
             GenericErrorCodesExportInvalidStatusUpdate,
             GenericErrorCodesExportInvalidPrefix,
             GenericErrorCodesExportBlobContainerDoesNotExist,
@@ -8433,6 +8435,11 @@ namespace PlayFab
                 output = Json::Value("LeaderboardColumnsNotSpecified");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesLeaderboardMaxSizeTooLarge)
+            {
+                output = Json::Value("LeaderboardMaxSizeTooLarge");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
             {
                 output = Json::Value("MatchmakingEntityInvalid");
@@ -8646,6 +8653,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesCatalogTooManyRequests)
             {
                 output = Json::Value("CatalogTooManyRequests");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidCatalogItemConfiguration)
+            {
+                output = Json::Value("InvalidCatalogItemConfiguration");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesExportInvalidStatusUpdate)
@@ -12186,6 +12198,11 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesLeaderboardColumnsNotSpecified;
                 return;
             }
+            if (inputStr == "LeaderboardMaxSizeTooLarge")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLeaderboardMaxSizeTooLarge;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -12399,6 +12416,11 @@ namespace PlayFab
             if (inputStr == "CatalogTooManyRequests")
             {
                 output = GenericErrorCodes::GenericErrorCodesCatalogTooManyRequests;
+                return;
+            }
+            if (inputStr == "InvalidCatalogItemConfiguration")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidCatalogItemConfiguration;
                 return;
             }
             if (inputStr == "ExportInvalidStatusUpdate")
