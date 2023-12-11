@@ -2234,6 +2234,55 @@ namespace PlayFab
         }
     }
 
+    void PlayFabMultiplayerAPI::JoinLobbyAsServer(
+        JoinLobbyAsServerRequest& request,
+        const ProcessApiCallback<JoinLobbyAsServerResult> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
+        std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", context->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Lobby/JoinLobbyAsServer",
+            headers,
+            jsonAsString,
+            OnJoinLobbyAsServerResult,
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<JoinLobbyAsServerResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabMultiplayerAPI::OnJoinLobbyAsServerResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        JoinLobbyAsServerResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = (*static_cast<ProcessApiCallback<JoinLobbyAsServerResult> *>(internalPtr.get()));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
     void PlayFabMultiplayerAPI::JoinMatchmakingTicket(
         JoinMatchmakingTicketRequest& request,
         const ProcessApiCallback<JoinMatchmakingTicketResult> callback,
@@ -2316,6 +2365,55 @@ namespace PlayFab
     }
 
     void PlayFabMultiplayerAPI::OnLeaveLobbyResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        LobbyEmptyResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = (*static_cast<ProcessApiCallback<LobbyEmptyResult> *>(internalPtr.get()));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabMultiplayerAPI::LeaveLobbyAsServer(
+        LeaveLobbyAsServerRequest& request,
+        const ProcessApiCallback<LobbyEmptyResult> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
+        std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", context->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Lobby/LeaveLobbyAsServer",
+            headers,
+            jsonAsString,
+            OnLeaveLobbyAsServerResult,
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LobbyEmptyResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabMultiplayerAPI::OnLeaveLobbyAsServerResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
@@ -3638,6 +3736,55 @@ namespace PlayFab
     }
 
     void PlayFabMultiplayerAPI::OnUpdateLobbyResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        LobbyEmptyResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = (*static_cast<ProcessApiCallback<LobbyEmptyResult> *>(internalPtr.get()));
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabMultiplayerAPI::UpdateLobbyAsServer(
+        UpdateLobbyAsServerRequest& request,
+        const ProcessApiCallback<LobbyEmptyResult> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : PlayFabSettings::staticPlayer;
+        std::shared_ptr<PlayFabApiSettings> settings = PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", context->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Lobby/UpdateLobbyAsServer",
+            headers,
+            jsonAsString,
+            OnUpdateLobbyAsServerResult,
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<LobbyEmptyResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabMultiplayerAPI::OnUpdateLobbyAsServerResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();

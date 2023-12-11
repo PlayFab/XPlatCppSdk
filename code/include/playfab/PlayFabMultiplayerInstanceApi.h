@@ -90,8 +90,10 @@ namespace PlayFab
         void InviteToLobby(MultiplayerModels::InviteToLobbyRequest& request, const ProcessApiCallback<MultiplayerModels::LobbyEmptyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void JoinArrangedLobby(MultiplayerModels::JoinArrangedLobbyRequest& request, const ProcessApiCallback<MultiplayerModels::JoinLobbyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void JoinLobby(MultiplayerModels::JoinLobbyRequest& request, const ProcessApiCallback<MultiplayerModels::JoinLobbyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void JoinLobbyAsServer(MultiplayerModels::JoinLobbyAsServerRequest& request, const ProcessApiCallback<MultiplayerModels::JoinLobbyAsServerResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void JoinMatchmakingTicket(MultiplayerModels::JoinMatchmakingTicketRequest& request, const ProcessApiCallback<MultiplayerModels::JoinMatchmakingTicketResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void LeaveLobby(MultiplayerModels::LeaveLobbyRequest& request, const ProcessApiCallback<MultiplayerModels::LobbyEmptyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void LeaveLobbyAsServer(MultiplayerModels::LeaveLobbyAsServerRequest& request, const ProcessApiCallback<MultiplayerModels::LobbyEmptyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void ListArchivedMultiplayerServers(MultiplayerModels::ListMultiplayerServersRequest& request, const ProcessApiCallback<MultiplayerModels::ListMultiplayerServersResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void ListAssetSummaries(MultiplayerModels::ListAssetSummariesRequest& request, const ProcessApiCallback<MultiplayerModels::ListAssetSummariesResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void ListBuildAliases(MultiplayerModels::ListBuildAliasesRequest& request, const ProcessApiCallback<MultiplayerModels::ListBuildAliasesResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -119,6 +121,7 @@ namespace PlayFab
         void UpdateBuildRegion(MultiplayerModels::UpdateBuildRegionRequest& request, const ProcessApiCallback<MultiplayerModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UpdateBuildRegions(MultiplayerModels::UpdateBuildRegionsRequest& request, const ProcessApiCallback<MultiplayerModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UpdateLobby(MultiplayerModels::UpdateLobbyRequest& request, const ProcessApiCallback<MultiplayerModels::LobbyEmptyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void UpdateLobbyAsServer(MultiplayerModels::UpdateLobbyAsServerRequest& request, const ProcessApiCallback<MultiplayerModels::LobbyEmptyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UploadCertificate(MultiplayerModels::UploadCertificateRequest& request, const ProcessApiCallback<MultiplayerModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
 
         // ------------ Generated result handlers
@@ -167,8 +170,10 @@ namespace PlayFab
         void OnInviteToLobbyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnJoinArrangedLobbyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnJoinLobbyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnJoinLobbyAsServerResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnJoinMatchmakingTicketResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnLeaveLobbyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnLeaveLobbyAsServerResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnListArchivedMultiplayerServersResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnListAssetSummariesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnListBuildAliasesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -196,6 +201,7 @@ namespace PlayFab
         void OnUpdateBuildRegionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUpdateBuildRegionsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUpdateLobbyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnUpdateLobbyAsServerResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUploadCertificateResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
 
         bool ValidateResult(PlayFabResultCommon& resultCommon, const CallRequestContainer& container);

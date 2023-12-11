@@ -5455,6 +5455,7 @@ namespace PlayFab
             GenericErrorCodesLeaderboardColumnLengthMismatch,
             GenericErrorCodesInvalidStatisticScore,
             GenericErrorCodesLeaderboardColumnsNotSpecified,
+            GenericErrorCodesLeaderboardMaxSizeTooLarge,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5498,6 +5499,7 @@ namespace PlayFab
             GenericErrorCodesCatalogItemTypeInvalid,
             GenericErrorCodesCatalogBadRequest,
             GenericErrorCodesCatalogTooManyRequests,
+            GenericErrorCodesInvalidCatalogItemConfiguration,
             GenericErrorCodesExportInvalidStatusUpdate,
             GenericErrorCodesExportInvalidPrefix,
             GenericErrorCodesExportBlobContainerDoesNotExist,
@@ -8416,6 +8418,11 @@ namespace PlayFab
                 output = Json::Value("LeaderboardColumnsNotSpecified");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesLeaderboardMaxSizeTooLarge)
+            {
+                output = Json::Value("LeaderboardMaxSizeTooLarge");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
             {
                 output = Json::Value("MatchmakingEntityInvalid");
@@ -8629,6 +8636,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesCatalogTooManyRequests)
             {
                 output = Json::Value("CatalogTooManyRequests");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidCatalogItemConfiguration)
+            {
+                output = Json::Value("InvalidCatalogItemConfiguration");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesExportInvalidStatusUpdate)
@@ -12169,6 +12181,11 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesLeaderboardColumnsNotSpecified;
                 return;
             }
+            if (inputStr == "LeaderboardMaxSizeTooLarge")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLeaderboardMaxSizeTooLarge;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -12382,6 +12399,11 @@ namespace PlayFab
             if (inputStr == "CatalogTooManyRequests")
             {
                 output = GenericErrorCodes::GenericErrorCodesCatalogTooManyRequests;
+                return;
+            }
+            if (inputStr == "InvalidCatalogItemConfiguration")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidCatalogItemConfiguration;
                 return;
             }
             if (inputStr == "ExportInvalidStatusUpdate")
@@ -20389,6 +20411,55 @@ namespace PlayFab
             }
         };
 
+        struct AddInventoryItemsV2SegmentAction : public PlayFabBaseModel
+        {
+            Boxed<Int32> Amount;
+            std::string CollectionId;
+            Boxed<Int32> DurationInSeconds;
+            std::string ItemId;
+            std::string StackId;
+
+            AddInventoryItemsV2SegmentAction() :
+                PlayFabBaseModel(),
+                Amount(),
+                CollectionId(),
+                DurationInSeconds(),
+                ItemId(),
+                StackId()
+            {}
+
+            AddInventoryItemsV2SegmentAction(const AddInventoryItemsV2SegmentAction& src) :
+                PlayFabBaseModel(),
+                Amount(src.Amount),
+                CollectionId(src.CollectionId),
+                DurationInSeconds(src.DurationInSeconds),
+                ItemId(src.ItemId),
+                StackId(src.StackId)
+            {}
+
+            ~AddInventoryItemsV2SegmentAction() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["Amount"], Amount);
+                FromJsonUtilS(input["CollectionId"], CollectionId);
+                FromJsonUtilP(input["DurationInSeconds"], DurationInSeconds);
+                FromJsonUtilS(input["ItemId"], ItemId);
+                FromJsonUtilS(input["StackId"], StackId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Amount; ToJsonUtilP(Amount, each_Amount); output["Amount"] = each_Amount;
+                Json::Value each_CollectionId; ToJsonUtilS(CollectionId, each_CollectionId); output["CollectionId"] = each_CollectionId;
+                Json::Value each_DurationInSeconds; ToJsonUtilP(DurationInSeconds, each_DurationInSeconds); output["DurationInSeconds"] = each_DurationInSeconds;
+                Json::Value each_ItemId; ToJsonUtilS(ItemId, each_ItemId); output["ItemId"] = each_ItemId;
+                Json::Value each_StackId; ToJsonUtilS(StackId, each_StackId); output["StackId"] = each_StackId;
+                return output;
+            }
+        };
+
         struct AddLocalizedNewsRequest : public PlayFabRequestCommon
         {
             std::string Body;
@@ -22254,6 +22325,45 @@ namespace PlayFab
             }
         };
 
+        struct DeleteInventoryItemsV2SegmentAction : public PlayFabBaseModel
+        {
+            std::string CollectionId;
+            std::string ItemId;
+            std::string StackId;
+
+            DeleteInventoryItemsV2SegmentAction() :
+                PlayFabBaseModel(),
+                CollectionId(),
+                ItemId(),
+                StackId()
+            {}
+
+            DeleteInventoryItemsV2SegmentAction(const DeleteInventoryItemsV2SegmentAction& src) :
+                PlayFabBaseModel(),
+                CollectionId(src.CollectionId),
+                ItemId(src.ItemId),
+                StackId(src.StackId)
+            {}
+
+            ~DeleteInventoryItemsV2SegmentAction() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CollectionId"], CollectionId);
+                FromJsonUtilS(input["ItemId"], ItemId);
+                FromJsonUtilS(input["StackId"], StackId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CollectionId; ToJsonUtilS(CollectionId, each_CollectionId); output["CollectionId"] = each_CollectionId;
+                Json::Value each_ItemId; ToJsonUtilS(ItemId, each_ItemId); output["ItemId"] = each_ItemId;
+                Json::Value each_StackId; ToJsonUtilS(StackId, each_StackId); output["StackId"] = each_StackId;
+                return output;
+            }
+        };
+
         struct DeletePlayerSegmentAction : public PlayFabBaseModel
         {
 
@@ -22560,9 +22670,60 @@ namespace PlayFab
             }
         };
 
+        struct SubtractInventoryItemsV2SegmentAction : public PlayFabBaseModel
+        {
+            Boxed<Int32> Amount;
+            std::string CollectionId;
+            Boxed<Int32> DurationInSeconds;
+            std::string ItemId;
+            std::string StackId;
+
+            SubtractInventoryItemsV2SegmentAction() :
+                PlayFabBaseModel(),
+                Amount(),
+                CollectionId(),
+                DurationInSeconds(),
+                ItemId(),
+                StackId()
+            {}
+
+            SubtractInventoryItemsV2SegmentAction(const SubtractInventoryItemsV2SegmentAction& src) :
+                PlayFabBaseModel(),
+                Amount(src.Amount),
+                CollectionId(src.CollectionId),
+                DurationInSeconds(src.DurationInSeconds),
+                ItemId(src.ItemId),
+                StackId(src.StackId)
+            {}
+
+            ~SubtractInventoryItemsV2SegmentAction() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["Amount"], Amount);
+                FromJsonUtilS(input["CollectionId"], CollectionId);
+                FromJsonUtilP(input["DurationInSeconds"], DurationInSeconds);
+                FromJsonUtilS(input["ItemId"], ItemId);
+                FromJsonUtilS(input["StackId"], StackId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Amount; ToJsonUtilP(Amount, each_Amount); output["Amount"] = each_Amount;
+                Json::Value each_CollectionId; ToJsonUtilS(CollectionId, each_CollectionId); output["CollectionId"] = each_CollectionId;
+                Json::Value each_DurationInSeconds; ToJsonUtilP(DurationInSeconds, each_DurationInSeconds); output["DurationInSeconds"] = each_DurationInSeconds;
+                Json::Value each_ItemId; ToJsonUtilS(ItemId, each_ItemId); output["ItemId"] = each_ItemId;
+                Json::Value each_StackId; ToJsonUtilS(StackId, each_StackId); output["StackId"] = each_StackId;
+                return output;
+            }
+        };
+
         struct SegmentTrigger : public PlayFabBaseModel
         {
+            Boxed<AddInventoryItemsV2SegmentAction> AddInventoryItemsV2Action;
             Boxed<BanPlayerSegmentAction> BanPlayerAction;
+            Boxed<DeleteInventoryItemsV2SegmentAction> DeleteInventoryItemsV2Action;
             Boxed<DeletePlayerSegmentAction> DeletePlayerAction;
             Boxed<DeletePlayerStatisticSegmentAction> DeletePlayerStatisticAction;
             Boxed<EmailNotificationSegmentAction> EmailNotificationAction;
@@ -22572,10 +22733,13 @@ namespace PlayFab
             Boxed<GrantVirtualCurrencySegmentAction> GrantVirtualCurrencyAction;
             Boxed<IncrementPlayerStatisticSegmentAction> IncrementPlayerStatisticAction;
             Boxed<PushNotificationSegmentAction> PushNotificationAction;
+            Boxed<SubtractInventoryItemsV2SegmentAction> SubtractInventoryItemsV2Action;
 
             SegmentTrigger() :
                 PlayFabBaseModel(),
+                AddInventoryItemsV2Action(),
                 BanPlayerAction(),
+                DeleteInventoryItemsV2Action(),
                 DeletePlayerAction(),
                 DeletePlayerStatisticAction(),
                 EmailNotificationAction(),
@@ -22584,12 +22748,15 @@ namespace PlayFab
                 GrantItemAction(),
                 GrantVirtualCurrencyAction(),
                 IncrementPlayerStatisticAction(),
-                PushNotificationAction()
+                PushNotificationAction(),
+                SubtractInventoryItemsV2Action()
             {}
 
             SegmentTrigger(const SegmentTrigger& src) :
                 PlayFabBaseModel(),
+                AddInventoryItemsV2Action(src.AddInventoryItemsV2Action),
                 BanPlayerAction(src.BanPlayerAction),
+                DeleteInventoryItemsV2Action(src.DeleteInventoryItemsV2Action),
                 DeletePlayerAction(src.DeletePlayerAction),
                 DeletePlayerStatisticAction(src.DeletePlayerStatisticAction),
                 EmailNotificationAction(src.EmailNotificationAction),
@@ -22598,14 +22765,17 @@ namespace PlayFab
                 GrantItemAction(src.GrantItemAction),
                 GrantVirtualCurrencyAction(src.GrantVirtualCurrencyAction),
                 IncrementPlayerStatisticAction(src.IncrementPlayerStatisticAction),
-                PushNotificationAction(src.PushNotificationAction)
+                PushNotificationAction(src.PushNotificationAction),
+                SubtractInventoryItemsV2Action(src.SubtractInventoryItemsV2Action)
             {}
 
             ~SegmentTrigger() = default;
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilO(input["AddInventoryItemsV2Action"], AddInventoryItemsV2Action);
                 FromJsonUtilO(input["BanPlayerAction"], BanPlayerAction);
+                FromJsonUtilO(input["DeleteInventoryItemsV2Action"], DeleteInventoryItemsV2Action);
                 FromJsonUtilO(input["DeletePlayerAction"], DeletePlayerAction);
                 FromJsonUtilO(input["DeletePlayerStatisticAction"], DeletePlayerStatisticAction);
                 FromJsonUtilO(input["EmailNotificationAction"], EmailNotificationAction);
@@ -22615,12 +22785,15 @@ namespace PlayFab
                 FromJsonUtilO(input["GrantVirtualCurrencyAction"], GrantVirtualCurrencyAction);
                 FromJsonUtilO(input["IncrementPlayerStatisticAction"], IncrementPlayerStatisticAction);
                 FromJsonUtilO(input["PushNotificationAction"], PushNotificationAction);
+                FromJsonUtilO(input["SubtractInventoryItemsV2Action"], SubtractInventoryItemsV2Action);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_AddInventoryItemsV2Action; ToJsonUtilO(AddInventoryItemsV2Action, each_AddInventoryItemsV2Action); output["AddInventoryItemsV2Action"] = each_AddInventoryItemsV2Action;
                 Json::Value each_BanPlayerAction; ToJsonUtilO(BanPlayerAction, each_BanPlayerAction); output["BanPlayerAction"] = each_BanPlayerAction;
+                Json::Value each_DeleteInventoryItemsV2Action; ToJsonUtilO(DeleteInventoryItemsV2Action, each_DeleteInventoryItemsV2Action); output["DeleteInventoryItemsV2Action"] = each_DeleteInventoryItemsV2Action;
                 Json::Value each_DeletePlayerAction; ToJsonUtilO(DeletePlayerAction, each_DeletePlayerAction); output["DeletePlayerAction"] = each_DeletePlayerAction;
                 Json::Value each_DeletePlayerStatisticAction; ToJsonUtilO(DeletePlayerStatisticAction, each_DeletePlayerStatisticAction); output["DeletePlayerStatisticAction"] = each_DeletePlayerStatisticAction;
                 Json::Value each_EmailNotificationAction; ToJsonUtilO(EmailNotificationAction, each_EmailNotificationAction); output["EmailNotificationAction"] = each_EmailNotificationAction;
@@ -22630,6 +22803,7 @@ namespace PlayFab
                 Json::Value each_GrantVirtualCurrencyAction; ToJsonUtilO(GrantVirtualCurrencyAction, each_GrantVirtualCurrencyAction); output["GrantVirtualCurrencyAction"] = each_GrantVirtualCurrencyAction;
                 Json::Value each_IncrementPlayerStatisticAction; ToJsonUtilO(IncrementPlayerStatisticAction, each_IncrementPlayerStatisticAction); output["IncrementPlayerStatisticAction"] = each_IncrementPlayerStatisticAction;
                 Json::Value each_PushNotificationAction; ToJsonUtilO(PushNotificationAction, each_PushNotificationAction); output["PushNotificationAction"] = each_PushNotificationAction;
+                Json::Value each_SubtractInventoryItemsV2Action; ToJsonUtilO(SubtractInventoryItemsV2Action, each_SubtractInventoryItemsV2Action); output["SubtractInventoryItemsV2Action"] = each_SubtractInventoryItemsV2Action;
                 return output;
             }
         };
