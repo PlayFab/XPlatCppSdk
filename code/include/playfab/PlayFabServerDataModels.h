@@ -5473,6 +5473,7 @@ namespace PlayFab
             GenericErrorCodesInvalidStatisticScore,
             GenericErrorCodesLeaderboardColumnsNotSpecified,
             GenericErrorCodesLeaderboardMaxSizeTooLarge,
+            GenericErrorCodesInvalidAttributeStatisticsSpecified,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5648,6 +5649,8 @@ namespace PlayFab
             GenericErrorCodesEventSinkAadNotFound,
             GenericErrorCodesEventSinkDatabaseNotFound,
             GenericErrorCodesEventSinkTitleUnauthorized,
+            GenericErrorCodesEventSinkInsufficientRoleAssignment,
+            GenericErrorCodesEventSinkContainerNotFound,
             GenericErrorCodesOperationCanceled,
             GenericErrorCodesInvalidDisplayNameRandomSuffixLength,
             GenericErrorCodesAllowNonUniquePlayerDisplayNamesDisableNotAllowed,
@@ -5670,7 +5673,23 @@ namespace PlayFab
             GenericErrorCodesAddonDoesntExist,
             GenericErrorCodesCopilotDisabled,
             GenericErrorCodesCopilotInvalidRequest,
-            GenericErrorCodesTrueSkillUnauthorized
+            GenericErrorCodesTrueSkillUnauthorized,
+            GenericErrorCodesTrueSkillBadRequest,
+            GenericErrorCodesTrueSkillMatchResultAlreadySubmitted,
+            GenericErrorCodesTrueSkillDuplicatePlayerInMatchResult,
+            GenericErrorCodesTrueSkillInvalidRanksInMatchResult,
+            GenericErrorCodesTrueSkillNoWinnerInMatchResult,
+            GenericErrorCodesTrueSkillMissingRequiredConditionInMatchResult,
+            GenericErrorCodesTrueSkillMissingRequiredEventInMatchResult,
+            GenericErrorCodesTrueSkillUnknownEventInMatchResult,
+            GenericErrorCodesTrueSkillUnknownConditionName,
+            GenericErrorCodesTrueSkillUnknownConditionValue,
+            GenericErrorCodesTrueSkillUnknownScenarioId,
+            GenericErrorCodesTrueSkillUnknownModelId,
+            GenericErrorCodesTrueSkillNoActiveModelInScenario,
+            GenericErrorCodesStateShareUnauthorized,
+            GenericErrorCodesStateShareStateNotFound,
+            GenericErrorCodesStateShareLinkNotFound
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -8440,6 +8459,11 @@ namespace PlayFab
                 output = Json::Value("LeaderboardMaxSizeTooLarge");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidAttributeStatisticsSpecified)
+            {
+                output = Json::Value("InvalidAttributeStatisticsSpecified");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
             {
                 output = Json::Value("MatchmakingEntityInvalid");
@@ -9315,6 +9339,16 @@ namespace PlayFab
                 output = Json::Value("EventSinkTitleUnauthorized");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkInsufficientRoleAssignment)
+            {
+                output = Json::Value("EventSinkInsufficientRoleAssignment");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkContainerNotFound)
+            {
+                output = Json::Value("EventSinkContainerNotFound");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesOperationCanceled)
             {
                 output = Json::Value("OperationCanceled");
@@ -9428,6 +9462,86 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesTrueSkillUnauthorized)
             {
                 output = Json::Value("TrueSkillUnauthorized");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillBadRequest)
+            {
+                output = Json::Value("TrueSkillBadRequest");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillMatchResultAlreadySubmitted)
+            {
+                output = Json::Value("TrueSkillMatchResultAlreadySubmitted");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillDuplicatePlayerInMatchResult)
+            {
+                output = Json::Value("TrueSkillDuplicatePlayerInMatchResult");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidRanksInMatchResult)
+            {
+                output = Json::Value("TrueSkillInvalidRanksInMatchResult");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillNoWinnerInMatchResult)
+            {
+                output = Json::Value("TrueSkillNoWinnerInMatchResult");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillMissingRequiredConditionInMatchResult)
+            {
+                output = Json::Value("TrueSkillMissingRequiredConditionInMatchResult");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillMissingRequiredEventInMatchResult)
+            {
+                output = Json::Value("TrueSkillMissingRequiredEventInMatchResult");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillUnknownEventInMatchResult)
+            {
+                output = Json::Value("TrueSkillUnknownEventInMatchResult");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillUnknownConditionName)
+            {
+                output = Json::Value("TrueSkillUnknownConditionName");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillUnknownConditionValue)
+            {
+                output = Json::Value("TrueSkillUnknownConditionValue");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillUnknownScenarioId)
+            {
+                output = Json::Value("TrueSkillUnknownScenarioId");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillUnknownModelId)
+            {
+                output = Json::Value("TrueSkillUnknownModelId");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillNoActiveModelInScenario)
+            {
+                output = Json::Value("TrueSkillNoActiveModelInScenario");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStateShareUnauthorized)
+            {
+                output = Json::Value("StateShareUnauthorized");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStateShareStateNotFound)
+            {
+                output = Json::Value("StateShareStateNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStateShareLinkNotFound)
+            {
+                output = Json::Value("StateShareLinkNotFound");
                 return;
             }
         }
@@ -12203,6 +12317,11 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesLeaderboardMaxSizeTooLarge;
                 return;
             }
+            if (inputStr == "InvalidAttributeStatisticsSpecified")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidAttributeStatisticsSpecified;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -13078,6 +13197,16 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesEventSinkTitleUnauthorized;
                 return;
             }
+            if (inputStr == "EventSinkInsufficientRoleAssignment")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkInsufficientRoleAssignment;
+                return;
+            }
+            if (inputStr == "EventSinkContainerNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkContainerNotFound;
+                return;
+            }
             if (inputStr == "OperationCanceled")
             {
                 output = GenericErrorCodes::GenericErrorCodesOperationCanceled;
@@ -13191,6 +13320,86 @@ namespace PlayFab
             if (inputStr == "TrueSkillUnauthorized")
             {
                 output = GenericErrorCodes::GenericErrorCodesTrueSkillUnauthorized;
+                return;
+            }
+            if (inputStr == "TrueSkillBadRequest")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillBadRequest;
+                return;
+            }
+            if (inputStr == "TrueSkillMatchResultAlreadySubmitted")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillMatchResultAlreadySubmitted;
+                return;
+            }
+            if (inputStr == "TrueSkillDuplicatePlayerInMatchResult")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillDuplicatePlayerInMatchResult;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidRanksInMatchResult")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidRanksInMatchResult;
+                return;
+            }
+            if (inputStr == "TrueSkillNoWinnerInMatchResult")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillNoWinnerInMatchResult;
+                return;
+            }
+            if (inputStr == "TrueSkillMissingRequiredConditionInMatchResult")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillMissingRequiredConditionInMatchResult;
+                return;
+            }
+            if (inputStr == "TrueSkillMissingRequiredEventInMatchResult")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillMissingRequiredEventInMatchResult;
+                return;
+            }
+            if (inputStr == "TrueSkillUnknownEventInMatchResult")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillUnknownEventInMatchResult;
+                return;
+            }
+            if (inputStr == "TrueSkillUnknownConditionName")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillUnknownConditionName;
+                return;
+            }
+            if (inputStr == "TrueSkillUnknownConditionValue")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillUnknownConditionValue;
+                return;
+            }
+            if (inputStr == "TrueSkillUnknownScenarioId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillUnknownScenarioId;
+                return;
+            }
+            if (inputStr == "TrueSkillUnknownModelId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillUnknownModelId;
+                return;
+            }
+            if (inputStr == "TrueSkillNoActiveModelInScenario")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillNoActiveModelInScenario;
+                return;
+            }
+            if (inputStr == "StateShareUnauthorized")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStateShareUnauthorized;
+                return;
+            }
+            if (inputStr == "StateShareStateNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStateShareStateNotFound;
+                return;
+            }
+            if (inputStr == "StateShareLinkNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStateShareLinkNotFound;
                 return;
             }
         }
