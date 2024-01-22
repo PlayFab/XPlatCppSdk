@@ -1884,44 +1884,6 @@ namespace PlayFab
             }
         }
 
-        enum class ServerDataStatus
-        {
-            ServerDataStatusInitialized,
-            ServerDataStatusIgnored
-        };
-
-        inline void ToJsonEnum(const ServerDataStatus input, Json::Value& output)
-        {
-            if (input == ServerDataStatus::ServerDataStatusInitialized)
-            {
-                output = Json::Value("Initialized");
-                return;
-            }
-            if (input == ServerDataStatus::ServerDataStatusIgnored)
-            {
-                output = Json::Value("Ignored");
-                return;
-            }
-        }
-        inline void FromJsonEnum(const Json::Value& input, ServerDataStatus& output)
-        {
-            if (!input.isString())
-            {
-                return;
-            }
-            const std::string& inputStr = input.asString();
-            if (inputStr == "Initialized")
-            {
-                output = ServerDataStatus::ServerDataStatusInitialized;
-                return;
-            }
-            if (inputStr == "Ignored")
-            {
-                output = ServerDataStatus::ServerDataStatusIgnored;
-                return;
-            }
-        }
-
         enum class ServerType
         {
             ServerTypeContainer,
@@ -6204,6 +6166,45 @@ namespace PlayFab
             }
         };
 
+        struct LobbyServer : public PlayFabBaseModel
+        {
+            std::string PubSubConnectionHandle;
+            std::map<std::string, std::string> ServerData;
+            Boxed<EntityKey> ServerEntity;
+
+            LobbyServer() :
+                PlayFabBaseModel(),
+                PubSubConnectionHandle(),
+                ServerData(),
+                ServerEntity()
+            {}
+
+            LobbyServer(const LobbyServer& src) :
+                PlayFabBaseModel(),
+                PubSubConnectionHandle(src.PubSubConnectionHandle),
+                ServerData(src.ServerData),
+                ServerEntity(src.ServerEntity)
+            {}
+
+            ~LobbyServer() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["PubSubConnectionHandle"], PubSubConnectionHandle);
+                FromJsonUtilS(input["ServerData"], ServerData);
+                FromJsonUtilO(input["ServerEntity"], ServerEntity);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_PubSubConnectionHandle; ToJsonUtilS(PubSubConnectionHandle, each_PubSubConnectionHandle); output["PubSubConnectionHandle"] = each_PubSubConnectionHandle;
+                Json::Value each_ServerData; ToJsonUtilS(ServerData, each_ServerData); output["ServerData"] = each_ServerData;
+                Json::Value each_ServerEntity; ToJsonUtilO(ServerEntity, each_ServerEntity); output["ServerEntity"] = each_ServerEntity;
+                return output;
+            }
+        };
+
         struct Lobby : public PlayFabBaseModel
         {
             AccessPolicy pfAccessPolicy;
@@ -6218,6 +6219,7 @@ namespace PlayFab
             Boxed<OwnerMigrationPolicy> pfOwnerMigrationPolicy;
             std::string PubSubConnectionHandle;
             std::map<std::string, std::string> SearchData;
+            Boxed<LobbyServer> Server;
             bool UseConnections;
 
             Lobby() :
@@ -6234,6 +6236,7 @@ namespace PlayFab
                 pfOwnerMigrationPolicy(),
                 PubSubConnectionHandle(),
                 SearchData(),
+                Server(),
                 UseConnections()
             {}
 
@@ -6251,6 +6254,7 @@ namespace PlayFab
                 pfOwnerMigrationPolicy(src.pfOwnerMigrationPolicy),
                 PubSubConnectionHandle(src.PubSubConnectionHandle),
                 SearchData(src.SearchData),
+                Server(src.Server),
                 UseConnections(src.UseConnections)
             {}
 
@@ -6270,6 +6274,7 @@ namespace PlayFab
                 FromJsonUtilE(input["OwnerMigrationPolicy"], pfOwnerMigrationPolicy);
                 FromJsonUtilS(input["PubSubConnectionHandle"], PubSubConnectionHandle);
                 FromJsonUtilS(input["SearchData"], SearchData);
+                FromJsonUtilO(input["Server"], Server);
                 FromJsonUtilP(input["UseConnections"], UseConnections);
             }
 
@@ -6288,6 +6293,7 @@ namespace PlayFab
                 Json::Value each_pfOwnerMigrationPolicy; ToJsonUtilE(pfOwnerMigrationPolicy, each_pfOwnerMigrationPolicy); output["OwnerMigrationPolicy"] = each_pfOwnerMigrationPolicy;
                 Json::Value each_PubSubConnectionHandle; ToJsonUtilS(PubSubConnectionHandle, each_PubSubConnectionHandle); output["PubSubConnectionHandle"] = each_PubSubConnectionHandle;
                 Json::Value each_SearchData; ToJsonUtilS(SearchData, each_SearchData); output["SearchData"] = each_SearchData;
+                Json::Value each_Server; ToJsonUtilO(Server, each_Server); output["Server"] = each_Server;
                 Json::Value each_UseConnections; ToJsonUtilP(UseConnections, each_UseConnections); output["UseConnections"] = each_UseConnections;
                 return output;
             }
@@ -7522,18 +7528,15 @@ namespace PlayFab
         struct JoinLobbyAsServerResult : public PlayFabResultCommon
         {
             std::string LobbyId;
-            ServerDataStatus pfServerDataStatus;
 
             JoinLobbyAsServerResult() :
                 PlayFabResultCommon(),
-                LobbyId(),
-                pfServerDataStatus()
+                LobbyId()
             {}
 
             JoinLobbyAsServerResult(const JoinLobbyAsServerResult& src) :
                 PlayFabResultCommon(),
-                LobbyId(src.LobbyId),
-                pfServerDataStatus(src.pfServerDataStatus)
+                LobbyId(src.LobbyId)
             {}
 
             ~JoinLobbyAsServerResult() = default;
@@ -7541,14 +7544,12 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["LobbyId"], LobbyId);
-                FromJsonEnum(input["ServerDataStatus"], pfServerDataStatus);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
                 Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
-                Json::Value each_pfServerDataStatus; ToJsonEnum(pfServerDataStatus, each_pfServerDataStatus); output["ServerDataStatus"] = each_pfServerDataStatus;
                 return output;
             }
         };
@@ -8566,17 +8567,20 @@ namespace PlayFab
         {
             std::map<std::string, std::string> CustomTags;
             Boxed<bool> IncludeAllRegions;
+            std::string RoutingPreference;
 
             ListQosServersForTitleRequest() :
                 PlayFabRequestCommon(),
                 CustomTags(),
-                IncludeAllRegions()
+                IncludeAllRegions(),
+                RoutingPreference()
             {}
 
             ListQosServersForTitleRequest(const ListQosServersForTitleRequest& src) :
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
-                IncludeAllRegions(src.IncludeAllRegions)
+                IncludeAllRegions(src.IncludeAllRegions),
+                RoutingPreference(src.RoutingPreference)
             {}
 
             ~ListQosServersForTitleRequest() = default;
@@ -8585,6 +8589,7 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilP(input["IncludeAllRegions"], IncludeAllRegions);
+                FromJsonUtilS(input["RoutingPreference"], RoutingPreference);
             }
 
             Json::Value ToJson() const override
@@ -8592,6 +8597,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_IncludeAllRegions; ToJsonUtilP(IncludeAllRegions, each_IncludeAllRegions); output["IncludeAllRegions"] = each_IncludeAllRegions;
+                Json::Value each_RoutingPreference; ToJsonUtilS(RoutingPreference, each_RoutingPreference); output["RoutingPreference"] = each_RoutingPreference;
                 return output;
             }
         };
@@ -9723,26 +9729,26 @@ namespace PlayFab
         {
             std::map<std::string, std::string> CustomTags;
             std::string LobbyId;
-            Boxed<EntityKey> Server;
             std::map<std::string, std::string> ServerData;
             std::list<std::string> ServerDataToDelete;
+            Boxed<EntityKey> ServerEntity;
 
             UpdateLobbyAsServerRequest() :
                 PlayFabRequestCommon(),
                 CustomTags(),
                 LobbyId(),
-                Server(),
                 ServerData(),
-                ServerDataToDelete()
+                ServerDataToDelete(),
+                ServerEntity()
             {}
 
             UpdateLobbyAsServerRequest(const UpdateLobbyAsServerRequest& src) :
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
                 LobbyId(src.LobbyId),
-                Server(src.Server),
                 ServerData(src.ServerData),
-                ServerDataToDelete(src.ServerDataToDelete)
+                ServerDataToDelete(src.ServerDataToDelete),
+                ServerEntity(src.ServerEntity)
             {}
 
             ~UpdateLobbyAsServerRequest() = default;
@@ -9751,9 +9757,9 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["LobbyId"], LobbyId);
-                FromJsonUtilO(input["Server"], Server);
                 FromJsonUtilS(input["ServerData"], ServerData);
                 FromJsonUtilS(input["ServerDataToDelete"], ServerDataToDelete);
+                FromJsonUtilO(input["ServerEntity"], ServerEntity);
             }
 
             Json::Value ToJson() const override
@@ -9761,9 +9767,9 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_LobbyId; ToJsonUtilS(LobbyId, each_LobbyId); output["LobbyId"] = each_LobbyId;
-                Json::Value each_Server; ToJsonUtilO(Server, each_Server); output["Server"] = each_Server;
                 Json::Value each_ServerData; ToJsonUtilS(ServerData, each_ServerData); output["ServerData"] = each_ServerData;
                 Json::Value each_ServerDataToDelete; ToJsonUtilS(ServerDataToDelete, each_ServerDataToDelete); output["ServerDataToDelete"] = each_ServerDataToDelete;
+                Json::Value each_ServerEntity; ToJsonUtilO(ServerEntity, each_ServerEntity); output["ServerEntity"] = each_ServerEntity;
                 return output;
             }
         };
