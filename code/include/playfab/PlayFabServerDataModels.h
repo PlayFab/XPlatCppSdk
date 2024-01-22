@@ -5474,6 +5474,8 @@ namespace PlayFab
             GenericErrorCodesLeaderboardColumnsNotSpecified,
             GenericErrorCodesLeaderboardMaxSizeTooLarge,
             GenericErrorCodesInvalidAttributeStatisticsSpecified,
+            GenericErrorCodesLeaderboardNotFound,
+            GenericErrorCodesTokenSigningKeyNotFound,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8462,6 +8464,16 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesInvalidAttributeStatisticsSpecified)
             {
                 output = Json::Value("InvalidAttributeStatisticsSpecified");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLeaderboardNotFound)
+            {
+                output = Json::Value("LeaderboardNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTokenSigningKeyNotFound)
+            {
+                output = Json::Value("TokenSigningKeyNotFound");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -12320,6 +12332,16 @@ namespace PlayFab
             if (inputStr == "InvalidAttributeStatisticsSpecified")
             {
                 output = GenericErrorCodes::GenericErrorCodesInvalidAttributeStatisticsSpecified;
+                return;
+            }
+            if (inputStr == "LeaderboardNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLeaderboardNotFound;
+                return;
+            }
+            if (inputStr == "TokenSigningKeyNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTokenSigningKeyNotFound;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
