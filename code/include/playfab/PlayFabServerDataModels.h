@@ -20727,6 +20727,103 @@ namespace PlayFab
             }
         };
 
+        struct GetPlayFabIDsFromPSNOnlineIDsRequest : public PlayFabRequestCommon
+        {
+            Boxed<Int32> IssuerId;
+            std::list<std::string> PSNOnlineIDs;
+
+            GetPlayFabIDsFromPSNOnlineIDsRequest() :
+                PlayFabRequestCommon(),
+                IssuerId(),
+                PSNOnlineIDs()
+            {}
+
+            GetPlayFabIDsFromPSNOnlineIDsRequest(const GetPlayFabIDsFromPSNOnlineIDsRequest& src) :
+                PlayFabRequestCommon(),
+                IssuerId(src.IssuerId),
+                PSNOnlineIDs(src.PSNOnlineIDs)
+            {}
+
+            ~GetPlayFabIDsFromPSNOnlineIDsRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["IssuerId"], IssuerId);
+                FromJsonUtilS(input["PSNOnlineIDs"], PSNOnlineIDs);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_IssuerId; ToJsonUtilP(IssuerId, each_IssuerId); output["IssuerId"] = each_IssuerId;
+                Json::Value each_PSNOnlineIDs; ToJsonUtilS(PSNOnlineIDs, each_PSNOnlineIDs); output["PSNOnlineIDs"] = each_PSNOnlineIDs;
+                return output;
+            }
+        };
+
+        struct PSNOnlinePlayFabIdPair : public PlayFabBaseModel
+        {
+            std::string PlayFabId;
+            std::string PSNOnlineId;
+
+            PSNOnlinePlayFabIdPair() :
+                PlayFabBaseModel(),
+                PlayFabId(),
+                PSNOnlineId()
+            {}
+
+            PSNOnlinePlayFabIdPair(const PSNOnlinePlayFabIdPair& src) :
+                PlayFabBaseModel(),
+                PlayFabId(src.PlayFabId),
+                PSNOnlineId(src.PSNOnlineId)
+            {}
+
+            ~PSNOnlinePlayFabIdPair() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+                FromJsonUtilS(input["PSNOnlineId"], PSNOnlineId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                Json::Value each_PSNOnlineId; ToJsonUtilS(PSNOnlineId, each_PSNOnlineId); output["PSNOnlineId"] = each_PSNOnlineId;
+                return output;
+            }
+        };
+
+        struct GetPlayFabIDsFromPSNOnlineIDsResult : public PlayFabResultCommon
+        {
+            std::list<PSNOnlinePlayFabIdPair> Data;
+
+            GetPlayFabIDsFromPSNOnlineIDsResult() :
+                PlayFabResultCommon(),
+                Data()
+            {}
+
+            GetPlayFabIDsFromPSNOnlineIDsResult(const GetPlayFabIDsFromPSNOnlineIDsResult& src) :
+                PlayFabResultCommon(),
+                Data(src.Data)
+            {}
+
+            ~GetPlayFabIDsFromPSNOnlineIDsResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["Data"], Data);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Data; ToJsonUtilO(Data, each_Data); output["Data"] = each_Data;
+                return output;
+            }
+        };
+
         struct GetPlayFabIDsFromSteamIDsRequest : public PlayFabRequestCommon
         {
             std::list<std::string> SteamStringIDs;
