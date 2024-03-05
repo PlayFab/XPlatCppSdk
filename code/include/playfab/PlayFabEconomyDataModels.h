@@ -7302,6 +7302,30 @@ namespace PlayFab
             }
         };
 
+        struct RealMoneyPriceDetails : public PlayFabBaseModel
+        {
+
+            RealMoneyPriceDetails() :
+                PlayFabBaseModel()
+            {}
+
+            RealMoneyPriceDetails(const RealMoneyPriceDetails&) :
+                PlayFabBaseModel()
+            {}
+
+            ~RealMoneyPriceDetails() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
         struct RedeemAppleAppStoreInventoryItemsRequest : public PlayFabRequestCommon
         {
             std::string CollectionId;
