@@ -5476,6 +5476,9 @@ namespace PlayFab
             GenericErrorCodesInvalidAttributeStatisticsSpecified,
             GenericErrorCodesLeaderboardNotFound,
             GenericErrorCodesTokenSigningKeyNotFound,
+            GenericErrorCodesLeaderboardNameConflict,
+            GenericErrorCodesLinkedStatisticColumnMismatch,
+            GenericErrorCodesNoLinkedStatisticToLeaderboard,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8474,6 +8477,21 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesTokenSigningKeyNotFound)
             {
                 output = Json::Value("TokenSigningKeyNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLeaderboardNameConflict)
+            {
+                output = Json::Value("LeaderboardNameConflict");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLinkedStatisticColumnMismatch)
+            {
+                output = Json::Value("LinkedStatisticColumnMismatch");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesNoLinkedStatisticToLeaderboard)
+            {
+                output = Json::Value("NoLinkedStatisticToLeaderboard");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -12342,6 +12360,21 @@ namespace PlayFab
             if (inputStr == "TokenSigningKeyNotFound")
             {
                 output = GenericErrorCodes::GenericErrorCodesTokenSigningKeyNotFound;
+                return;
+            }
+            if (inputStr == "LeaderboardNameConflict")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLeaderboardNameConflict;
+                return;
+            }
+            if (inputStr == "LinkedStatisticColumnMismatch")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLinkedStatisticColumnMismatch;
+                return;
+            }
+            if (inputStr == "NoLinkedStatisticToLeaderboard")
+            {
+                output = GenericErrorCodes::GenericErrorCodesNoLinkedStatisticToLeaderboard;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
