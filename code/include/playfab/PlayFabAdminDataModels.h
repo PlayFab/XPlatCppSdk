@@ -5462,6 +5462,8 @@ namespace PlayFab
             GenericErrorCodesLeaderboardNameConflict,
             GenericErrorCodesLinkedStatisticColumnMismatch,
             GenericErrorCodesNoLinkedStatisticToLeaderboard,
+            GenericErrorCodesStatDefinitionAlreadyLinkedToLeaderboard,
+            GenericErrorCodesLinkingStatsNotAllowedForEntityType,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8475,6 +8477,16 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesNoLinkedStatisticToLeaderboard)
             {
                 output = Json::Value("NoLinkedStatisticToLeaderboard");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStatDefinitionAlreadyLinkedToLeaderboard)
+            {
+                output = Json::Value("StatDefinitionAlreadyLinkedToLeaderboard");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLinkingStatsNotAllowedForEntityType)
+            {
+                output = Json::Value("LinkingStatsNotAllowedForEntityType");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -12358,6 +12370,16 @@ namespace PlayFab
             if (inputStr == "NoLinkedStatisticToLeaderboard")
             {
                 output = GenericErrorCodes::GenericErrorCodesNoLinkedStatisticToLeaderboard;
+                return;
+            }
+            if (inputStr == "StatDefinitionAlreadyLinkedToLeaderboard")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStatDefinitionAlreadyLinkedToLeaderboard;
+                return;
+            }
+            if (inputStr == "LinkingStatsNotAllowedForEntityType")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLinkingStatsNotAllowedForEntityType;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
@@ -21114,6 +21136,7 @@ namespace PlayFab
             std::string BanId;
             Boxed<time_t> Created;
             Boxed<time_t> Expires;
+            Boxed<bool> IncludeMicrosoftFamily;
             std::string IPAddress;
             std::string PlayFabId;
             std::string Reason;
@@ -21124,6 +21147,7 @@ namespace PlayFab
                 BanId(),
                 Created(),
                 Expires(),
+                IncludeMicrosoftFamily(),
                 IPAddress(),
                 PlayFabId(),
                 Reason()
@@ -21135,6 +21159,7 @@ namespace PlayFab
                 BanId(src.BanId),
                 Created(src.Created),
                 Expires(src.Expires),
+                IncludeMicrosoftFamily(src.IncludeMicrosoftFamily),
                 IPAddress(src.IPAddress),
                 PlayFabId(src.PlayFabId),
                 Reason(src.Reason)
@@ -21148,6 +21173,7 @@ namespace PlayFab
                 FromJsonUtilS(input["BanId"], BanId);
                 FromJsonUtilT(input["Created"], Created);
                 FromJsonUtilT(input["Expires"], Expires);
+                FromJsonUtilP(input["IncludeMicrosoftFamily"], IncludeMicrosoftFamily);
                 FromJsonUtilS(input["IPAddress"], IPAddress);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["Reason"], Reason);
@@ -21160,6 +21186,7 @@ namespace PlayFab
                 Json::Value each_BanId; ToJsonUtilS(BanId, each_BanId); output["BanId"] = each_BanId;
                 Json::Value each_Created; ToJsonUtilT(Created, each_Created); output["Created"] = each_Created;
                 Json::Value each_Expires; ToJsonUtilT(Expires, each_Expires); output["Expires"] = each_Expires;
+                Json::Value each_IncludeMicrosoftFamily; ToJsonUtilP(IncludeMicrosoftFamily, each_IncludeMicrosoftFamily); output["IncludeMicrosoftFamily"] = each_IncludeMicrosoftFamily;
                 Json::Value each_IPAddress; ToJsonUtilS(IPAddress, each_IPAddress); output["IPAddress"] = each_IPAddress;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_Reason; ToJsonUtilS(Reason, each_Reason); output["Reason"] = each_Reason;
@@ -21204,6 +21231,7 @@ namespace PlayFab
         struct BanRequest : public PlayFabRequestCommon
         {
             Boxed<Uint32> DurationInHours;
+            Boxed<bool> IncludeMicrosoftFamily;
             std::string IPAddress;
             std::string PlayFabId;
             std::string Reason;
@@ -21211,6 +21239,7 @@ namespace PlayFab
             BanRequest() :
                 PlayFabRequestCommon(),
                 DurationInHours(),
+                IncludeMicrosoftFamily(),
                 IPAddress(),
                 PlayFabId(),
                 Reason()
@@ -21219,6 +21248,7 @@ namespace PlayFab
             BanRequest(const BanRequest& src) :
                 PlayFabRequestCommon(),
                 DurationInHours(src.DurationInHours),
+                IncludeMicrosoftFamily(src.IncludeMicrosoftFamily),
                 IPAddress(src.IPAddress),
                 PlayFabId(src.PlayFabId),
                 Reason(src.Reason)
@@ -21229,6 +21259,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["DurationInHours"], DurationInHours);
+                FromJsonUtilP(input["IncludeMicrosoftFamily"], IncludeMicrosoftFamily);
                 FromJsonUtilS(input["IPAddress"], IPAddress);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["Reason"], Reason);
@@ -21238,6 +21269,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_DurationInHours; ToJsonUtilP(DurationInHours, each_DurationInHours); output["DurationInHours"] = each_DurationInHours;
+                Json::Value each_IncludeMicrosoftFamily; ToJsonUtilP(IncludeMicrosoftFamily, each_IncludeMicrosoftFamily); output["IncludeMicrosoftFamily"] = each_IncludeMicrosoftFamily;
                 Json::Value each_IPAddress; ToJsonUtilS(IPAddress, each_IPAddress); output["IPAddress"] = each_IPAddress;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_Reason; ToJsonUtilS(Reason, each_Reason); output["Reason"] = each_Reason;
@@ -31139,6 +31171,7 @@ namespace PlayFab
             Boxed<bool> Active;
             std::string BanId;
             Boxed<time_t> Expires;
+            Boxed<bool> IncludeMicrosoftFamily;
             std::string IPAddress;
             Boxed<bool> Permanent;
             std::string Reason;
@@ -31148,6 +31181,7 @@ namespace PlayFab
                 Active(),
                 BanId(),
                 Expires(),
+                IncludeMicrosoftFamily(),
                 IPAddress(),
                 Permanent(),
                 Reason()
@@ -31158,6 +31192,7 @@ namespace PlayFab
                 Active(src.Active),
                 BanId(src.BanId),
                 Expires(src.Expires),
+                IncludeMicrosoftFamily(src.IncludeMicrosoftFamily),
                 IPAddress(src.IPAddress),
                 Permanent(src.Permanent),
                 Reason(src.Reason)
@@ -31170,6 +31205,7 @@ namespace PlayFab
                 FromJsonUtilP(input["Active"], Active);
                 FromJsonUtilS(input["BanId"], BanId);
                 FromJsonUtilT(input["Expires"], Expires);
+                FromJsonUtilP(input["IncludeMicrosoftFamily"], IncludeMicrosoftFamily);
                 FromJsonUtilS(input["IPAddress"], IPAddress);
                 FromJsonUtilP(input["Permanent"], Permanent);
                 FromJsonUtilS(input["Reason"], Reason);
@@ -31181,6 +31217,7 @@ namespace PlayFab
                 Json::Value each_Active; ToJsonUtilP(Active, each_Active); output["Active"] = each_Active;
                 Json::Value each_BanId; ToJsonUtilS(BanId, each_BanId); output["BanId"] = each_BanId;
                 Json::Value each_Expires; ToJsonUtilT(Expires, each_Expires); output["Expires"] = each_Expires;
+                Json::Value each_IncludeMicrosoftFamily; ToJsonUtilP(IncludeMicrosoftFamily, each_IncludeMicrosoftFamily); output["IncludeMicrosoftFamily"] = each_IncludeMicrosoftFamily;
                 Json::Value each_IPAddress; ToJsonUtilS(IPAddress, each_IPAddress); output["IPAddress"] = each_IPAddress;
                 Json::Value each_Permanent; ToJsonUtilP(Permanent, each_Permanent); output["Permanent"] = each_Permanent;
                 Json::Value each_Reason; ToJsonUtilS(Reason, each_Reason); output["Reason"] = each_Reason;

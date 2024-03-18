@@ -4183,6 +4183,35 @@ namespace PlayFab
             }
         };
 
+        struct Permissions : public PlayFabBaseModel
+        {
+            std::list<std::string> SegmentIds;
+
+            Permissions() :
+                PlayFabBaseModel(),
+                SegmentIds()
+            {}
+
+            Permissions(const Permissions& src) :
+                PlayFabBaseModel(),
+                SegmentIds(src.SegmentIds)
+            {}
+
+            ~Permissions() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["SegmentIds"], SegmentIds);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_SegmentIds; ToJsonUtilS(SegmentIds, each_SegmentIds); output["SegmentIds"] = each_SegmentIds;
+                return output;
+            }
+        };
+
         struct CatalogPriceAmountOverride : public PlayFabBaseModel
         {
             Boxed<Int32> FixedValue;
@@ -4283,17 +4312,20 @@ namespace PlayFab
         struct StoreDetails : public PlayFabBaseModel
         {
             Boxed<FilterOptions> pfFilterOptions;
+            Boxed<Permissions> pfPermissions;
             Boxed<CatalogPriceOptionsOverride> PriceOptionsOverride;
 
             StoreDetails() :
                 PlayFabBaseModel(),
                 pfFilterOptions(),
+                pfPermissions(),
                 PriceOptionsOverride()
             {}
 
             StoreDetails(const StoreDetails& src) :
                 PlayFabBaseModel(),
                 pfFilterOptions(src.pfFilterOptions),
+                pfPermissions(src.pfPermissions),
                 PriceOptionsOverride(src.PriceOptionsOverride)
             {}
 
@@ -4302,6 +4334,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["FilterOptions"], pfFilterOptions);
+                FromJsonUtilO(input["Permissions"], pfPermissions);
                 FromJsonUtilO(input["PriceOptionsOverride"], PriceOptionsOverride);
             }
 
@@ -4309,6 +4342,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_pfFilterOptions; ToJsonUtilO(pfFilterOptions, each_pfFilterOptions); output["FilterOptions"] = each_pfFilterOptions;
+                Json::Value each_pfPermissions; ToJsonUtilO(pfPermissions, each_pfPermissions); output["Permissions"] = each_pfPermissions;
                 Json::Value each_PriceOptionsOverride; ToJsonUtilO(PriceOptionsOverride, each_PriceOptionsOverride); output["PriceOptionsOverride"] = each_PriceOptionsOverride;
                 return output;
             }
@@ -6680,6 +6714,7 @@ namespace PlayFab
             std::map<std::string, std::string> CustomTags;
             Boxed<EntityKey> Entity;
             std::string Filter;
+            std::string OrderBy;
 
             GetTransactionHistoryRequest() :
                 PlayFabRequestCommon(),
@@ -6688,7 +6723,8 @@ namespace PlayFab
                 Count(),
                 CustomTags(),
                 Entity(),
-                Filter()
+                Filter(),
+                OrderBy()
             {}
 
             GetTransactionHistoryRequest(const GetTransactionHistoryRequest& src) :
@@ -6698,7 +6734,8 @@ namespace PlayFab
                 Count(src.Count),
                 CustomTags(src.CustomTags),
                 Entity(src.Entity),
-                Filter(src.Filter)
+                Filter(src.Filter),
+                OrderBy(src.OrderBy)
             {}
 
             ~GetTransactionHistoryRequest() = default;
@@ -6711,6 +6748,7 @@ namespace PlayFab
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilS(input["Filter"], Filter);
+                FromJsonUtilS(input["OrderBy"], OrderBy);
             }
 
             Json::Value ToJson() const override
@@ -6722,6 +6760,7 @@ namespace PlayFab
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
                 Json::Value each_Filter; ToJsonUtilS(Filter, each_Filter); output["Filter"] = each_Filter;
+                Json::Value each_OrderBy; ToJsonUtilS(OrderBy, each_OrderBy); output["OrderBy"] = each_OrderBy;
                 return output;
             }
         };
