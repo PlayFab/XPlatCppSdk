@@ -37,6 +37,7 @@ namespace PlayFab
         static void DeleteInventoryItems(EconomyModels::DeleteInventoryItemsRequest& request, const ProcessApiCallback<EconomyModels::DeleteInventoryItemsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeleteItem(EconomyModels::DeleteItemRequest& request, const ProcessApiCallback<EconomyModels::DeleteItemResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void ExecuteInventoryOperations(EconomyModels::ExecuteInventoryOperationsRequest& request, const ProcessApiCallback<EconomyModels::ExecuteInventoryOperationsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void ExecuteTransferOperations(EconomyModels::ExecuteTransferOperationsRequest& request, const ProcessApiCallback<EconomyModels::ExecuteTransferOperationsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetCatalogConfig(EconomyModels::GetCatalogConfigRequest& request, const ProcessApiCallback<EconomyModels::GetCatalogConfigResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetDraftItem(EconomyModels::GetDraftItemRequest& request, const ProcessApiCallback<EconomyModels::GetDraftItemResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetDraftItems(EconomyModels::GetDraftItemsRequest& request, const ProcessApiCallback<EconomyModels::GetDraftItemsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -44,6 +45,7 @@ namespace PlayFab
         static void GetEntityItemReview(EconomyModels::GetEntityItemReviewRequest& request, const ProcessApiCallback<EconomyModels::GetEntityItemReviewResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetInventoryCollectionIds(EconomyModels::GetInventoryCollectionIdsRequest& request, const ProcessApiCallback<EconomyModels::GetInventoryCollectionIdsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetInventoryItems(EconomyModels::GetInventoryItemsRequest& request, const ProcessApiCallback<EconomyModels::GetInventoryItemsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void GetInventoryOperationStatus(EconomyModels::GetInventoryOperationStatusRequest& request, const ProcessApiCallback<EconomyModels::GetInventoryOperationStatusResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetItem(EconomyModels::GetItemRequest& request, const ProcessApiCallback<EconomyModels::GetItemResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetItemContainers(EconomyModels::GetItemContainersRequest& request, const ProcessApiCallback<EconomyModels::GetItemContainersResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetItemModerationState(EconomyModels::GetItemModerationStateRequest& request, const ProcessApiCallback<EconomyModels::GetItemModerationStateResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -87,6 +89,7 @@ namespace PlayFab
         static void OnDeleteInventoryItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnDeleteItemResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnExecuteInventoryOperationsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnExecuteTransferOperationsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetCatalogConfigResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetDraftItemResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetDraftItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -94,6 +97,7 @@ namespace PlayFab
         static void OnGetEntityItemReviewResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetInventoryCollectionIdsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetInventoryItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnGetInventoryOperationStatusResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetItemResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetItemContainersResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetItemModerationStateResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
