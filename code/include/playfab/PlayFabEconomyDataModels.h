@@ -5467,6 +5467,129 @@ namespace PlayFab
             }
         };
 
+        struct ExecuteTransferOperationsRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            std::string GivingCollectionId;
+            Boxed<EntityKey> GivingEntity;
+            std::string GivingETag;
+            std::string IdempotencyId;
+            std::list<TransferInventoryItemsOperation> Operations;
+            std::string ReceivingCollectionId;
+            Boxed<EntityKey> ReceivingEntity;
+
+            ExecuteTransferOperationsRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                GivingCollectionId(),
+                GivingEntity(),
+                GivingETag(),
+                IdempotencyId(),
+                Operations(),
+                ReceivingCollectionId(),
+                ReceivingEntity()
+            {}
+
+            ExecuteTransferOperationsRequest(const ExecuteTransferOperationsRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                GivingCollectionId(src.GivingCollectionId),
+                GivingEntity(src.GivingEntity),
+                GivingETag(src.GivingETag),
+                IdempotencyId(src.IdempotencyId),
+                Operations(src.Operations),
+                ReceivingCollectionId(src.ReceivingCollectionId),
+                ReceivingEntity(src.ReceivingEntity)
+            {}
+
+            ~ExecuteTransferOperationsRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["GivingCollectionId"], GivingCollectionId);
+                FromJsonUtilO(input["GivingEntity"], GivingEntity);
+                FromJsonUtilS(input["GivingETag"], GivingETag);
+                FromJsonUtilS(input["IdempotencyId"], IdempotencyId);
+                FromJsonUtilO(input["Operations"], Operations);
+                FromJsonUtilS(input["ReceivingCollectionId"], ReceivingCollectionId);
+                FromJsonUtilO(input["ReceivingEntity"], ReceivingEntity);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_GivingCollectionId; ToJsonUtilS(GivingCollectionId, each_GivingCollectionId); output["GivingCollectionId"] = each_GivingCollectionId;
+                Json::Value each_GivingEntity; ToJsonUtilO(GivingEntity, each_GivingEntity); output["GivingEntity"] = each_GivingEntity;
+                Json::Value each_GivingETag; ToJsonUtilS(GivingETag, each_GivingETag); output["GivingETag"] = each_GivingETag;
+                Json::Value each_IdempotencyId; ToJsonUtilS(IdempotencyId, each_IdempotencyId); output["IdempotencyId"] = each_IdempotencyId;
+                Json::Value each_Operations; ToJsonUtilO(Operations, each_Operations); output["Operations"] = each_Operations;
+                Json::Value each_ReceivingCollectionId; ToJsonUtilS(ReceivingCollectionId, each_ReceivingCollectionId); output["ReceivingCollectionId"] = each_ReceivingCollectionId;
+                Json::Value each_ReceivingEntity; ToJsonUtilO(ReceivingEntity, each_ReceivingEntity); output["ReceivingEntity"] = each_ReceivingEntity;
+                return output;
+            }
+        };
+
+        struct ExecuteTransferOperationsResponse : public PlayFabResultCommon
+        {
+            std::string GivingETag;
+            std::list<std::string> GivingTransactionIds;
+            std::string IdempotencyId;
+            std::string OperationStatus;
+            std::string OperationToken;
+            std::string ReceivingETag;
+            std::list<std::string> ReceivingTransactionIds;
+
+            ExecuteTransferOperationsResponse() :
+                PlayFabResultCommon(),
+                GivingETag(),
+                GivingTransactionIds(),
+                IdempotencyId(),
+                OperationStatus(),
+                OperationToken(),
+                ReceivingETag(),
+                ReceivingTransactionIds()
+            {}
+
+            ExecuteTransferOperationsResponse(const ExecuteTransferOperationsResponse& src) :
+                PlayFabResultCommon(),
+                GivingETag(src.GivingETag),
+                GivingTransactionIds(src.GivingTransactionIds),
+                IdempotencyId(src.IdempotencyId),
+                OperationStatus(src.OperationStatus),
+                OperationToken(src.OperationToken),
+                ReceivingETag(src.ReceivingETag),
+                ReceivingTransactionIds(src.ReceivingTransactionIds)
+            {}
+
+            ~ExecuteTransferOperationsResponse() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["GivingETag"], GivingETag);
+                FromJsonUtilS(input["GivingTransactionIds"], GivingTransactionIds);
+                FromJsonUtilS(input["IdempotencyId"], IdempotencyId);
+                FromJsonUtilS(input["OperationStatus"], OperationStatus);
+                FromJsonUtilS(input["OperationToken"], OperationToken);
+                FromJsonUtilS(input["ReceivingETag"], ReceivingETag);
+                FromJsonUtilS(input["ReceivingTransactionIds"], ReceivingTransactionIds);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_GivingETag; ToJsonUtilS(GivingETag, each_GivingETag); output["GivingETag"] = each_GivingETag;
+                Json::Value each_GivingTransactionIds; ToJsonUtilS(GivingTransactionIds, each_GivingTransactionIds); output["GivingTransactionIds"] = each_GivingTransactionIds;
+                Json::Value each_IdempotencyId; ToJsonUtilS(IdempotencyId, each_IdempotencyId); output["IdempotencyId"] = each_IdempotencyId;
+                Json::Value each_OperationStatus; ToJsonUtilS(OperationStatus, each_OperationStatus); output["OperationStatus"] = each_OperationStatus;
+                Json::Value each_OperationToken; ToJsonUtilS(OperationToken, each_OperationToken); output["OperationToken"] = each_OperationToken;
+                Json::Value each_ReceivingETag; ToJsonUtilS(ReceivingETag, each_ReceivingETag); output["ReceivingETag"] = each_ReceivingETag;
+                Json::Value each_ReceivingTransactionIds; ToJsonUtilS(ReceivingTransactionIds, each_ReceivingTransactionIds); output["ReceivingTransactionIds"] = each_ReceivingTransactionIds;
+                return output;
+            }
+        };
+
         struct GetCatalogConfigRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
@@ -6088,6 +6211,74 @@ namespace PlayFab
                 Json::Value each_ContinuationToken; ToJsonUtilS(ContinuationToken, each_ContinuationToken); output["ContinuationToken"] = each_ContinuationToken;
                 Json::Value each_ETag; ToJsonUtilS(ETag, each_ETag); output["ETag"] = each_ETag;
                 Json::Value each_Items; ToJsonUtilO(Items, each_Items); output["Items"] = each_Items;
+                return output;
+            }
+        };
+
+        struct GetInventoryOperationStatusRequest : public PlayFabRequestCommon
+        {
+            std::string CollectionId;
+            std::map<std::string, std::string> CustomTags;
+            Boxed<EntityKey> Entity;
+
+            GetInventoryOperationStatusRequest() :
+                PlayFabRequestCommon(),
+                CollectionId(),
+                CustomTags(),
+                Entity()
+            {}
+
+            GetInventoryOperationStatusRequest(const GetInventoryOperationStatusRequest& src) :
+                PlayFabRequestCommon(),
+                CollectionId(src.CollectionId),
+                CustomTags(src.CustomTags),
+                Entity(src.Entity)
+            {}
+
+            ~GetInventoryOperationStatusRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CollectionId"], CollectionId);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilO(input["Entity"], Entity);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CollectionId; ToJsonUtilS(CollectionId, each_CollectionId); output["CollectionId"] = each_CollectionId;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                return output;
+            }
+        };
+
+        struct GetInventoryOperationStatusResponse : public PlayFabResultCommon
+        {
+            std::string OperationStatus;
+
+            GetInventoryOperationStatusResponse() :
+                PlayFabResultCommon(),
+                OperationStatus()
+            {}
+
+            GetInventoryOperationStatusResponse(const GetInventoryOperationStatusResponse& src) :
+                PlayFabResultCommon(),
+                OperationStatus(src.OperationStatus)
+            {}
+
+            ~GetInventoryOperationStatusResponse() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["OperationStatus"], OperationStatus);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_OperationStatus; ToJsonUtilS(OperationStatus, each_OperationStatus); output["OperationStatus"] = each_OperationStatus;
                 return output;
             }
         };
@@ -8836,6 +9027,7 @@ namespace PlayFab
             std::list<std::string> GivingTransactionIds;
             std::string IdempotencyId;
             std::string OperationStatus;
+            std::string OperationToken;
             std::list<std::string> ReceivingTransactionIds;
 
             TransferInventoryItemsResponse() :
@@ -8844,6 +9036,7 @@ namespace PlayFab
                 GivingTransactionIds(),
                 IdempotencyId(),
                 OperationStatus(),
+                OperationToken(),
                 ReceivingTransactionIds()
             {}
 
@@ -8853,6 +9046,7 @@ namespace PlayFab
                 GivingTransactionIds(src.GivingTransactionIds),
                 IdempotencyId(src.IdempotencyId),
                 OperationStatus(src.OperationStatus),
+                OperationToken(src.OperationToken),
                 ReceivingTransactionIds(src.ReceivingTransactionIds)
             {}
 
@@ -8864,6 +9058,7 @@ namespace PlayFab
                 FromJsonUtilS(input["GivingTransactionIds"], GivingTransactionIds);
                 FromJsonUtilS(input["IdempotencyId"], IdempotencyId);
                 FromJsonUtilS(input["OperationStatus"], OperationStatus);
+                FromJsonUtilS(input["OperationToken"], OperationToken);
                 FromJsonUtilS(input["ReceivingTransactionIds"], ReceivingTransactionIds);
             }
 
@@ -8874,6 +9069,7 @@ namespace PlayFab
                 Json::Value each_GivingTransactionIds; ToJsonUtilS(GivingTransactionIds, each_GivingTransactionIds); output["GivingTransactionIds"] = each_GivingTransactionIds;
                 Json::Value each_IdempotencyId; ToJsonUtilS(IdempotencyId, each_IdempotencyId); output["IdempotencyId"] = each_IdempotencyId;
                 Json::Value each_OperationStatus; ToJsonUtilS(OperationStatus, each_OperationStatus); output["OperationStatus"] = each_OperationStatus;
+                Json::Value each_OperationToken; ToJsonUtilS(OperationToken, each_OperationToken); output["OperationToken"] = each_OperationToken;
                 Json::Value each_ReceivingTransactionIds; ToJsonUtilS(ReceivingTransactionIds, each_ReceivingTransactionIds); output["ReceivingTransactionIds"] = each_ReceivingTransactionIds;
                 return output;
             }
