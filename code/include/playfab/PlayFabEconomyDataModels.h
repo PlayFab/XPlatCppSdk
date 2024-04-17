@@ -6960,6 +6960,7 @@ namespace PlayFab
         {
             Boxed<Int32> Amount;
             Boxed<double> DurationInSeconds;
+            std::string ItemFriendlyId;
             std::string ItemId;
             std::string ItemType;
             std::string StackId;
@@ -6969,6 +6970,7 @@ namespace PlayFab
                 PlayFabBaseModel(),
                 Amount(),
                 DurationInSeconds(),
+                ItemFriendlyId(),
                 ItemId(),
                 ItemType(),
                 StackId(),
@@ -6979,6 +6981,7 @@ namespace PlayFab
                 PlayFabBaseModel(),
                 Amount(src.Amount),
                 DurationInSeconds(src.DurationInSeconds),
+                ItemFriendlyId(src.ItemFriendlyId),
                 ItemId(src.ItemId),
                 ItemType(src.ItemType),
                 StackId(src.StackId),
@@ -6991,6 +6994,7 @@ namespace PlayFab
             {
                 FromJsonUtilP(input["Amount"], Amount);
                 FromJsonUtilP(input["DurationInSeconds"], DurationInSeconds);
+                FromJsonUtilS(input["ItemFriendlyId"], ItemFriendlyId);
                 FromJsonUtilS(input["ItemId"], ItemId);
                 FromJsonUtilS(input["ItemType"], ItemType);
                 FromJsonUtilS(input["StackId"], StackId);
@@ -7002,6 +7006,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_Amount; ToJsonUtilP(Amount, each_Amount); output["Amount"] = each_Amount;
                 Json::Value each_DurationInSeconds; ToJsonUtilP(DurationInSeconds, each_DurationInSeconds); output["DurationInSeconds"] = each_DurationInSeconds;
+                Json::Value each_ItemFriendlyId; ToJsonUtilS(ItemFriendlyId, each_ItemFriendlyId); output["ItemFriendlyId"] = each_ItemFriendlyId;
                 Json::Value each_ItemId; ToJsonUtilS(ItemId, each_ItemId); output["ItemId"] = each_ItemId;
                 Json::Value each_ItemType; ToJsonUtilS(ItemType, each_ItemType); output["ItemType"] = each_ItemType;
                 Json::Value each_StackId; ToJsonUtilS(StackId, each_StackId); output["StackId"] = each_StackId;
@@ -7012,15 +7017,18 @@ namespace PlayFab
 
         struct TransactionPurchaseDetails : public PlayFabBaseModel
         {
+            std::string StoreFriendlyId;
             std::string StoreId;
 
             TransactionPurchaseDetails() :
                 PlayFabBaseModel(),
+                StoreFriendlyId(),
                 StoreId()
             {}
 
             TransactionPurchaseDetails(const TransactionPurchaseDetails& src) :
                 PlayFabBaseModel(),
+                StoreFriendlyId(src.StoreFriendlyId),
                 StoreId(src.StoreId)
             {}
 
@@ -7028,12 +7036,14 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["StoreFriendlyId"], StoreFriendlyId);
                 FromJsonUtilS(input["StoreId"], StoreId);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_StoreFriendlyId; ToJsonUtilS(StoreFriendlyId, each_StoreFriendlyId); output["StoreFriendlyId"] = each_StoreFriendlyId;
                 Json::Value each_StoreId; ToJsonUtilS(StoreId, each_StoreId); output["StoreId"] = each_StoreId;
                 return output;
             }

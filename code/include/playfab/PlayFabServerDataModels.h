@@ -5686,14 +5686,24 @@ namespace PlayFab
             GenericErrorCodesTrueSkillDuplicatePlayerInMatchResult,
             GenericErrorCodesTrueSkillInvalidRanksInMatchResult,
             GenericErrorCodesTrueSkillNoWinnerInMatchResult,
-            GenericErrorCodesTrueSkillMissingRequiredConditionInMatchResult,
-            GenericErrorCodesTrueSkillMissingRequiredEventInMatchResult,
-            GenericErrorCodesTrueSkillUnknownEventInMatchResult,
-            GenericErrorCodesTrueSkillUnknownConditionName,
+            GenericErrorCodesTrueSkillMissingRequiredCondition,
+            GenericErrorCodesTrueSkillMissingRequiredEvent,
+            GenericErrorCodesTrueSkillUnknownEventName,
+            GenericErrorCodesTrueSkillUnknownConditionKey,
             GenericErrorCodesTrueSkillUnknownConditionValue,
-            GenericErrorCodesTrueSkillUnknownScenarioId,
             GenericErrorCodesTrueSkillUnknownModelId,
-            GenericErrorCodesTrueSkillNoActiveModelInScenario,
+            GenericErrorCodesTrueSkillNoPlayerInMatchResultTeam,
+            GenericErrorCodesTrueSkillPlayersInMatchResultExceedingLimit,
+            GenericErrorCodesTrueSkillInvalidPreMatchPartyInMatchResult,
+            GenericErrorCodesTrueSkillInvalidTimestampInMatchResult,
+            GenericErrorCodesTrueSkillInvalidPlayerSecondsPlayedInMatchResult,
+            GenericErrorCodesTrueSkillNoTeamInMatchResult,
+            GenericErrorCodesTrueSkillNotEnoughTeamsInMatchResult,
+            GenericErrorCodesTrueSkillScenarioConfigDoesNotExist,
+            GenericErrorCodesTrueSkillNoModelInScenario,
+            GenericErrorCodesTrueSkillNotSupportedForTitle,
+            GenericErrorCodesTrueSkillModelIsNotActive,
+            GenericErrorCodesTrueSkillUnauthorizedToQueryOtherPlayerSkills,
             GenericErrorCodesStateShareUnauthorized,
             GenericErrorCodesStateShareStateNotFound,
             GenericErrorCodesStateShareLinkNotFound
@@ -9531,24 +9541,24 @@ namespace PlayFab
                 output = Json::Value("TrueSkillNoWinnerInMatchResult");
                 return;
             }
-            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillMissingRequiredConditionInMatchResult)
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillMissingRequiredCondition)
             {
-                output = Json::Value("TrueSkillMissingRequiredConditionInMatchResult");
+                output = Json::Value("TrueSkillMissingRequiredCondition");
                 return;
             }
-            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillMissingRequiredEventInMatchResult)
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillMissingRequiredEvent)
             {
-                output = Json::Value("TrueSkillMissingRequiredEventInMatchResult");
+                output = Json::Value("TrueSkillMissingRequiredEvent");
                 return;
             }
-            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillUnknownEventInMatchResult)
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillUnknownEventName)
             {
-                output = Json::Value("TrueSkillUnknownEventInMatchResult");
+                output = Json::Value("TrueSkillUnknownEventName");
                 return;
             }
-            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillUnknownConditionName)
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillUnknownConditionKey)
             {
-                output = Json::Value("TrueSkillUnknownConditionName");
+                output = Json::Value("TrueSkillUnknownConditionKey");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesTrueSkillUnknownConditionValue)
@@ -9556,19 +9566,69 @@ namespace PlayFab
                 output = Json::Value("TrueSkillUnknownConditionValue");
                 return;
             }
-            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillUnknownScenarioId)
-            {
-                output = Json::Value("TrueSkillUnknownScenarioId");
-                return;
-            }
             if (input == GenericErrorCodes::GenericErrorCodesTrueSkillUnknownModelId)
             {
                 output = Json::Value("TrueSkillUnknownModelId");
                 return;
             }
-            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillNoActiveModelInScenario)
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillNoPlayerInMatchResultTeam)
             {
-                output = Json::Value("TrueSkillNoActiveModelInScenario");
+                output = Json::Value("TrueSkillNoPlayerInMatchResultTeam");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillPlayersInMatchResultExceedingLimit)
+            {
+                output = Json::Value("TrueSkillPlayersInMatchResultExceedingLimit");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidPreMatchPartyInMatchResult)
+            {
+                output = Json::Value("TrueSkillInvalidPreMatchPartyInMatchResult");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidTimestampInMatchResult)
+            {
+                output = Json::Value("TrueSkillInvalidTimestampInMatchResult");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidPlayerSecondsPlayedInMatchResult)
+            {
+                output = Json::Value("TrueSkillInvalidPlayerSecondsPlayedInMatchResult");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillNoTeamInMatchResult)
+            {
+                output = Json::Value("TrueSkillNoTeamInMatchResult");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillNotEnoughTeamsInMatchResult)
+            {
+                output = Json::Value("TrueSkillNotEnoughTeamsInMatchResult");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillScenarioConfigDoesNotExist)
+            {
+                output = Json::Value("TrueSkillScenarioConfigDoesNotExist");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillNoModelInScenario)
+            {
+                output = Json::Value("TrueSkillNoModelInScenario");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillNotSupportedForTitle)
+            {
+                output = Json::Value("TrueSkillNotSupportedForTitle");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillModelIsNotActive)
+            {
+                output = Json::Value("TrueSkillModelIsNotActive");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillUnauthorizedToQueryOtherPlayerSkills)
+            {
+                output = Json::Value("TrueSkillUnauthorizedToQueryOtherPlayerSkills");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesStateShareUnauthorized)
@@ -13424,24 +13484,24 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesTrueSkillNoWinnerInMatchResult;
                 return;
             }
-            if (inputStr == "TrueSkillMissingRequiredConditionInMatchResult")
+            if (inputStr == "TrueSkillMissingRequiredCondition")
             {
-                output = GenericErrorCodes::GenericErrorCodesTrueSkillMissingRequiredConditionInMatchResult;
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillMissingRequiredCondition;
                 return;
             }
-            if (inputStr == "TrueSkillMissingRequiredEventInMatchResult")
+            if (inputStr == "TrueSkillMissingRequiredEvent")
             {
-                output = GenericErrorCodes::GenericErrorCodesTrueSkillMissingRequiredEventInMatchResult;
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillMissingRequiredEvent;
                 return;
             }
-            if (inputStr == "TrueSkillUnknownEventInMatchResult")
+            if (inputStr == "TrueSkillUnknownEventName")
             {
-                output = GenericErrorCodes::GenericErrorCodesTrueSkillUnknownEventInMatchResult;
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillUnknownEventName;
                 return;
             }
-            if (inputStr == "TrueSkillUnknownConditionName")
+            if (inputStr == "TrueSkillUnknownConditionKey")
             {
-                output = GenericErrorCodes::GenericErrorCodesTrueSkillUnknownConditionName;
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillUnknownConditionKey;
                 return;
             }
             if (inputStr == "TrueSkillUnknownConditionValue")
@@ -13449,19 +13509,69 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesTrueSkillUnknownConditionValue;
                 return;
             }
-            if (inputStr == "TrueSkillUnknownScenarioId")
-            {
-                output = GenericErrorCodes::GenericErrorCodesTrueSkillUnknownScenarioId;
-                return;
-            }
             if (inputStr == "TrueSkillUnknownModelId")
             {
                 output = GenericErrorCodes::GenericErrorCodesTrueSkillUnknownModelId;
                 return;
             }
-            if (inputStr == "TrueSkillNoActiveModelInScenario")
+            if (inputStr == "TrueSkillNoPlayerInMatchResultTeam")
             {
-                output = GenericErrorCodes::GenericErrorCodesTrueSkillNoActiveModelInScenario;
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillNoPlayerInMatchResultTeam;
+                return;
+            }
+            if (inputStr == "TrueSkillPlayersInMatchResultExceedingLimit")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillPlayersInMatchResultExceedingLimit;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidPreMatchPartyInMatchResult")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidPreMatchPartyInMatchResult;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidTimestampInMatchResult")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidTimestampInMatchResult;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidPlayerSecondsPlayedInMatchResult")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidPlayerSecondsPlayedInMatchResult;
+                return;
+            }
+            if (inputStr == "TrueSkillNoTeamInMatchResult")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillNoTeamInMatchResult;
+                return;
+            }
+            if (inputStr == "TrueSkillNotEnoughTeamsInMatchResult")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillNotEnoughTeamsInMatchResult;
+                return;
+            }
+            if (inputStr == "TrueSkillScenarioConfigDoesNotExist")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillScenarioConfigDoesNotExist;
+                return;
+            }
+            if (inputStr == "TrueSkillNoModelInScenario")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillNoModelInScenario;
+                return;
+            }
+            if (inputStr == "TrueSkillNotSupportedForTitle")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillNotSupportedForTitle;
+                return;
+            }
+            if (inputStr == "TrueSkillModelIsNotActive")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillModelIsNotActive;
+                return;
+            }
+            if (inputStr == "TrueSkillUnauthorizedToQueryOtherPlayerSkills")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillUnauthorizedToQueryOtherPlayerSkills;
                 return;
             }
             if (inputStr == "StateShareUnauthorized")
