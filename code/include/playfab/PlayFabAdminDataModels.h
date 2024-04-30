@@ -5464,6 +5464,12 @@ namespace PlayFab
             GenericErrorCodesNoLinkedStatisticToLeaderboard,
             GenericErrorCodesStatDefinitionAlreadyLinkedToLeaderboard,
             GenericErrorCodesLinkingStatsNotAllowedForEntityType,
+            GenericErrorCodesLeaderboardCountLimitExceeded,
+            GenericErrorCodesLeaderboardSizeLimitExceeded,
+            GenericErrorCodesLeaderboardDefinitionModificationNotAllowedWhileLinked,
+            GenericErrorCodesStatisticDefinitionModificationNotAllowedWhileLinked,
+            GenericErrorCodesLeaderboardUpdateNotAllowedWhileLinked,
+            GenericErrorCodesCloudScriptAzureFunctionsEventHubRequestError,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5664,29 +5670,52 @@ namespace PlayFab
             GenericErrorCodesCopilotDisabled,
             GenericErrorCodesCopilotInvalidRequest,
             GenericErrorCodesTrueSkillUnauthorized,
-            GenericErrorCodesTrueSkillBadRequest,
+            GenericErrorCodesTrueSkillInvalidTitleId,
+            GenericErrorCodesTrueSkillInvalidScenarioId,
+            GenericErrorCodesTrueSkillInvalidModelId,
+            GenericErrorCodesTrueSkillInvalidModelName,
+            GenericErrorCodesTrueSkillInvalidPlayerIds,
+            GenericErrorCodesTrueSkillInvalidEntityKey,
+            GenericErrorCodesTrueSkillInvalidConditionKey,
+            GenericErrorCodesTrueSkillInvalidConditionValue,
+            GenericErrorCodesTrueSkillInvalidConditionAffinityWeight,
+            GenericErrorCodesTrueSkillInvalidEventName,
+            GenericErrorCodesTrueSkillMatchResultCreated,
             GenericErrorCodesTrueSkillMatchResultAlreadySubmitted,
+            GenericErrorCodesTrueSkillBadPlayerIdInMatchResult,
+            GenericErrorCodesTrueSkillInvalidBotIdInMatchResult,
             GenericErrorCodesTrueSkillDuplicatePlayerInMatchResult,
+            GenericErrorCodesTrueSkillNoPlayerInMatchResultTeam,
+            GenericErrorCodesTrueSkillPlayersInMatchResultExceedingLimit,
+            GenericErrorCodesTrueSkillInvalidPreMatchPartyInMatchResult,
+            GenericErrorCodesTrueSkillInvalidTimestampInMatchResult,
+            GenericErrorCodesTrueSkillStartTimeMissingInMatchResult,
+            GenericErrorCodesTrueSkillEndTimeMissingInMatchResult,
+            GenericErrorCodesTrueSkillInvalidPlayerSecondsPlayedInMatchResult,
+            GenericErrorCodesTrueSkillNoTeamInMatchResult,
+            GenericErrorCodesTrueSkillNotEnoughTeamsInMatchResult,
             GenericErrorCodesTrueSkillInvalidRanksInMatchResult,
             GenericErrorCodesTrueSkillNoWinnerInMatchResult,
             GenericErrorCodesTrueSkillMissingRequiredCondition,
             GenericErrorCodesTrueSkillMissingRequiredEvent,
             GenericErrorCodesTrueSkillUnknownEventName,
+            GenericErrorCodesTrueSkillInvalidEventCount,
             GenericErrorCodesTrueSkillUnknownConditionKey,
             GenericErrorCodesTrueSkillUnknownConditionValue,
-            GenericErrorCodesTrueSkillUnknownModelId,
-            GenericErrorCodesTrueSkillNoPlayerInMatchResultTeam,
-            GenericErrorCodesTrueSkillPlayersInMatchResultExceedingLimit,
-            GenericErrorCodesTrueSkillInvalidPreMatchPartyInMatchResult,
-            GenericErrorCodesTrueSkillInvalidTimestampInMatchResult,
-            GenericErrorCodesTrueSkillInvalidPlayerSecondsPlayedInMatchResult,
-            GenericErrorCodesTrueSkillNoTeamInMatchResult,
-            GenericErrorCodesTrueSkillNotEnoughTeamsInMatchResult,
             GenericErrorCodesTrueSkillScenarioConfigDoesNotExist,
+            GenericErrorCodesTrueSkillUnknownModelId,
             GenericErrorCodesTrueSkillNoModelInScenario,
             GenericErrorCodesTrueSkillNotSupportedForTitle,
             GenericErrorCodesTrueSkillModelIsNotActive,
             GenericErrorCodesTrueSkillUnauthorizedToQueryOtherPlayerSkills,
+            GenericErrorCodesTrueSkillInvalidMaxIterations,
+            GenericErrorCodesTrueSkillEndTimeBeforeStartTime,
+            GenericErrorCodesTrueSkillInvalidJobId,
+            GenericErrorCodesTrueSkillInvalidMetadataId,
+            GenericErrorCodesTrueSkillMissingBuildVerison,
+            GenericErrorCodesTrueSkillJobAlreadyExists,
+            GenericErrorCodesTrueSkillJobNotFound,
+            GenericErrorCodesTrueSkillOperationCanceled,
             GenericErrorCodesStateShareUnauthorized,
             GenericErrorCodesStateShareStateNotFound,
             GenericErrorCodesStateShareLinkNotFound
@@ -8499,6 +8528,36 @@ namespace PlayFab
                 output = Json::Value("LinkingStatsNotAllowedForEntityType");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesLeaderboardCountLimitExceeded)
+            {
+                output = Json::Value("LeaderboardCountLimitExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLeaderboardSizeLimitExceeded)
+            {
+                output = Json::Value("LeaderboardSizeLimitExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLeaderboardDefinitionModificationNotAllowedWhileLinked)
+            {
+                output = Json::Value("LeaderboardDefinitionModificationNotAllowedWhileLinked");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStatisticDefinitionModificationNotAllowedWhileLinked)
+            {
+                output = Json::Value("StatisticDefinitionModificationNotAllowedWhileLinked");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLeaderboardUpdateNotAllowedWhileLinked)
+            {
+                output = Json::Value("LeaderboardUpdateNotAllowedWhileLinked");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCloudScriptAzureFunctionsEventHubRequestError)
+            {
+                output = Json::Value("CloudScriptAzureFunctionsEventHubRequestError");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
             {
                 output = Json::Value("MatchmakingEntityInvalid");
@@ -9499,9 +9558,59 @@ namespace PlayFab
                 output = Json::Value("TrueSkillUnauthorized");
                 return;
             }
-            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillBadRequest)
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidTitleId)
             {
-                output = Json::Value("TrueSkillBadRequest");
+                output = Json::Value("TrueSkillInvalidTitleId");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidScenarioId)
+            {
+                output = Json::Value("TrueSkillInvalidScenarioId");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidModelId)
+            {
+                output = Json::Value("TrueSkillInvalidModelId");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidModelName)
+            {
+                output = Json::Value("TrueSkillInvalidModelName");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidPlayerIds)
+            {
+                output = Json::Value("TrueSkillInvalidPlayerIds");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidEntityKey)
+            {
+                output = Json::Value("TrueSkillInvalidEntityKey");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidConditionKey)
+            {
+                output = Json::Value("TrueSkillInvalidConditionKey");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidConditionValue)
+            {
+                output = Json::Value("TrueSkillInvalidConditionValue");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidConditionAffinityWeight)
+            {
+                output = Json::Value("TrueSkillInvalidConditionAffinityWeight");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidEventName)
+            {
+                output = Json::Value("TrueSkillInvalidEventName");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillMatchResultCreated)
+            {
+                output = Json::Value("TrueSkillMatchResultCreated");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesTrueSkillMatchResultAlreadySubmitted)
@@ -9509,9 +9618,64 @@ namespace PlayFab
                 output = Json::Value("TrueSkillMatchResultAlreadySubmitted");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillBadPlayerIdInMatchResult)
+            {
+                output = Json::Value("TrueSkillBadPlayerIdInMatchResult");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidBotIdInMatchResult)
+            {
+                output = Json::Value("TrueSkillInvalidBotIdInMatchResult");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesTrueSkillDuplicatePlayerInMatchResult)
             {
                 output = Json::Value("TrueSkillDuplicatePlayerInMatchResult");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillNoPlayerInMatchResultTeam)
+            {
+                output = Json::Value("TrueSkillNoPlayerInMatchResultTeam");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillPlayersInMatchResultExceedingLimit)
+            {
+                output = Json::Value("TrueSkillPlayersInMatchResultExceedingLimit");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidPreMatchPartyInMatchResult)
+            {
+                output = Json::Value("TrueSkillInvalidPreMatchPartyInMatchResult");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidTimestampInMatchResult)
+            {
+                output = Json::Value("TrueSkillInvalidTimestampInMatchResult");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillStartTimeMissingInMatchResult)
+            {
+                output = Json::Value("TrueSkillStartTimeMissingInMatchResult");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillEndTimeMissingInMatchResult)
+            {
+                output = Json::Value("TrueSkillEndTimeMissingInMatchResult");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidPlayerSecondsPlayedInMatchResult)
+            {
+                output = Json::Value("TrueSkillInvalidPlayerSecondsPlayedInMatchResult");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillNoTeamInMatchResult)
+            {
+                output = Json::Value("TrueSkillNoTeamInMatchResult");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillNotEnoughTeamsInMatchResult)
+            {
+                output = Json::Value("TrueSkillNotEnoughTeamsInMatchResult");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidRanksInMatchResult)
@@ -9539,6 +9703,11 @@ namespace PlayFab
                 output = Json::Value("TrueSkillUnknownEventName");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidEventCount)
+            {
+                output = Json::Value("TrueSkillInvalidEventCount");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesTrueSkillUnknownConditionKey)
             {
                 output = Json::Value("TrueSkillUnknownConditionKey");
@@ -9549,49 +9718,14 @@ namespace PlayFab
                 output = Json::Value("TrueSkillUnknownConditionValue");
                 return;
             }
-            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillUnknownModelId)
-            {
-                output = Json::Value("TrueSkillUnknownModelId");
-                return;
-            }
-            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillNoPlayerInMatchResultTeam)
-            {
-                output = Json::Value("TrueSkillNoPlayerInMatchResultTeam");
-                return;
-            }
-            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillPlayersInMatchResultExceedingLimit)
-            {
-                output = Json::Value("TrueSkillPlayersInMatchResultExceedingLimit");
-                return;
-            }
-            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidPreMatchPartyInMatchResult)
-            {
-                output = Json::Value("TrueSkillInvalidPreMatchPartyInMatchResult");
-                return;
-            }
-            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidTimestampInMatchResult)
-            {
-                output = Json::Value("TrueSkillInvalidTimestampInMatchResult");
-                return;
-            }
-            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidPlayerSecondsPlayedInMatchResult)
-            {
-                output = Json::Value("TrueSkillInvalidPlayerSecondsPlayedInMatchResult");
-                return;
-            }
-            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillNoTeamInMatchResult)
-            {
-                output = Json::Value("TrueSkillNoTeamInMatchResult");
-                return;
-            }
-            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillNotEnoughTeamsInMatchResult)
-            {
-                output = Json::Value("TrueSkillNotEnoughTeamsInMatchResult");
-                return;
-            }
             if (input == GenericErrorCodes::GenericErrorCodesTrueSkillScenarioConfigDoesNotExist)
             {
                 output = Json::Value("TrueSkillScenarioConfigDoesNotExist");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillUnknownModelId)
+            {
+                output = Json::Value("TrueSkillUnknownModelId");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesTrueSkillNoModelInScenario)
@@ -9612,6 +9746,46 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesTrueSkillUnauthorizedToQueryOtherPlayerSkills)
             {
                 output = Json::Value("TrueSkillUnauthorizedToQueryOtherPlayerSkills");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidMaxIterations)
+            {
+                output = Json::Value("TrueSkillInvalidMaxIterations");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillEndTimeBeforeStartTime)
+            {
+                output = Json::Value("TrueSkillEndTimeBeforeStartTime");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidJobId)
+            {
+                output = Json::Value("TrueSkillInvalidJobId");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidMetadataId)
+            {
+                output = Json::Value("TrueSkillInvalidMetadataId");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillMissingBuildVerison)
+            {
+                output = Json::Value("TrueSkillMissingBuildVerison");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillJobAlreadyExists)
+            {
+                output = Json::Value("TrueSkillJobAlreadyExists");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillJobNotFound)
+            {
+                output = Json::Value("TrueSkillJobNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillOperationCanceled)
+            {
+                output = Json::Value("TrueSkillOperationCanceled");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesStateShareUnauthorized)
@@ -12442,6 +12616,36 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesLinkingStatsNotAllowedForEntityType;
                 return;
             }
+            if (inputStr == "LeaderboardCountLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLeaderboardCountLimitExceeded;
+                return;
+            }
+            if (inputStr == "LeaderboardSizeLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLeaderboardSizeLimitExceeded;
+                return;
+            }
+            if (inputStr == "LeaderboardDefinitionModificationNotAllowedWhileLinked")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLeaderboardDefinitionModificationNotAllowedWhileLinked;
+                return;
+            }
+            if (inputStr == "StatisticDefinitionModificationNotAllowedWhileLinked")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStatisticDefinitionModificationNotAllowedWhileLinked;
+                return;
+            }
+            if (inputStr == "LeaderboardUpdateNotAllowedWhileLinked")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLeaderboardUpdateNotAllowedWhileLinked;
+                return;
+            }
+            if (inputStr == "CloudScriptAzureFunctionsEventHubRequestError")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCloudScriptAzureFunctionsEventHubRequestError;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -13442,9 +13646,59 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesTrueSkillUnauthorized;
                 return;
             }
-            if (inputStr == "TrueSkillBadRequest")
+            if (inputStr == "TrueSkillInvalidTitleId")
             {
-                output = GenericErrorCodes::GenericErrorCodesTrueSkillBadRequest;
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidTitleId;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidScenarioId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidScenarioId;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidModelId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidModelId;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidModelName")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidModelName;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidPlayerIds")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidPlayerIds;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidEntityKey")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidEntityKey;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidConditionKey")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidConditionKey;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidConditionValue")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidConditionValue;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidConditionAffinityWeight")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidConditionAffinityWeight;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidEventName")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidEventName;
+                return;
+            }
+            if (inputStr == "TrueSkillMatchResultCreated")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillMatchResultCreated;
                 return;
             }
             if (inputStr == "TrueSkillMatchResultAlreadySubmitted")
@@ -13452,9 +13706,64 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesTrueSkillMatchResultAlreadySubmitted;
                 return;
             }
+            if (inputStr == "TrueSkillBadPlayerIdInMatchResult")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillBadPlayerIdInMatchResult;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidBotIdInMatchResult")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidBotIdInMatchResult;
+                return;
+            }
             if (inputStr == "TrueSkillDuplicatePlayerInMatchResult")
             {
                 output = GenericErrorCodes::GenericErrorCodesTrueSkillDuplicatePlayerInMatchResult;
+                return;
+            }
+            if (inputStr == "TrueSkillNoPlayerInMatchResultTeam")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillNoPlayerInMatchResultTeam;
+                return;
+            }
+            if (inputStr == "TrueSkillPlayersInMatchResultExceedingLimit")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillPlayersInMatchResultExceedingLimit;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidPreMatchPartyInMatchResult")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidPreMatchPartyInMatchResult;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidTimestampInMatchResult")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidTimestampInMatchResult;
+                return;
+            }
+            if (inputStr == "TrueSkillStartTimeMissingInMatchResult")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillStartTimeMissingInMatchResult;
+                return;
+            }
+            if (inputStr == "TrueSkillEndTimeMissingInMatchResult")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillEndTimeMissingInMatchResult;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidPlayerSecondsPlayedInMatchResult")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidPlayerSecondsPlayedInMatchResult;
+                return;
+            }
+            if (inputStr == "TrueSkillNoTeamInMatchResult")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillNoTeamInMatchResult;
+                return;
+            }
+            if (inputStr == "TrueSkillNotEnoughTeamsInMatchResult")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillNotEnoughTeamsInMatchResult;
                 return;
             }
             if (inputStr == "TrueSkillInvalidRanksInMatchResult")
@@ -13482,6 +13791,11 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesTrueSkillUnknownEventName;
                 return;
             }
+            if (inputStr == "TrueSkillInvalidEventCount")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidEventCount;
+                return;
+            }
             if (inputStr == "TrueSkillUnknownConditionKey")
             {
                 output = GenericErrorCodes::GenericErrorCodesTrueSkillUnknownConditionKey;
@@ -13492,49 +13806,14 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesTrueSkillUnknownConditionValue;
                 return;
             }
-            if (inputStr == "TrueSkillUnknownModelId")
-            {
-                output = GenericErrorCodes::GenericErrorCodesTrueSkillUnknownModelId;
-                return;
-            }
-            if (inputStr == "TrueSkillNoPlayerInMatchResultTeam")
-            {
-                output = GenericErrorCodes::GenericErrorCodesTrueSkillNoPlayerInMatchResultTeam;
-                return;
-            }
-            if (inputStr == "TrueSkillPlayersInMatchResultExceedingLimit")
-            {
-                output = GenericErrorCodes::GenericErrorCodesTrueSkillPlayersInMatchResultExceedingLimit;
-                return;
-            }
-            if (inputStr == "TrueSkillInvalidPreMatchPartyInMatchResult")
-            {
-                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidPreMatchPartyInMatchResult;
-                return;
-            }
-            if (inputStr == "TrueSkillInvalidTimestampInMatchResult")
-            {
-                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidTimestampInMatchResult;
-                return;
-            }
-            if (inputStr == "TrueSkillInvalidPlayerSecondsPlayedInMatchResult")
-            {
-                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidPlayerSecondsPlayedInMatchResult;
-                return;
-            }
-            if (inputStr == "TrueSkillNoTeamInMatchResult")
-            {
-                output = GenericErrorCodes::GenericErrorCodesTrueSkillNoTeamInMatchResult;
-                return;
-            }
-            if (inputStr == "TrueSkillNotEnoughTeamsInMatchResult")
-            {
-                output = GenericErrorCodes::GenericErrorCodesTrueSkillNotEnoughTeamsInMatchResult;
-                return;
-            }
             if (inputStr == "TrueSkillScenarioConfigDoesNotExist")
             {
                 output = GenericErrorCodes::GenericErrorCodesTrueSkillScenarioConfigDoesNotExist;
+                return;
+            }
+            if (inputStr == "TrueSkillUnknownModelId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillUnknownModelId;
                 return;
             }
             if (inputStr == "TrueSkillNoModelInScenario")
@@ -13555,6 +13834,46 @@ namespace PlayFab
             if (inputStr == "TrueSkillUnauthorizedToQueryOtherPlayerSkills")
             {
                 output = GenericErrorCodes::GenericErrorCodesTrueSkillUnauthorizedToQueryOtherPlayerSkills;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidMaxIterations")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidMaxIterations;
+                return;
+            }
+            if (inputStr == "TrueSkillEndTimeBeforeStartTime")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillEndTimeBeforeStartTime;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidJobId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidJobId;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidMetadataId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidMetadataId;
+                return;
+            }
+            if (inputStr == "TrueSkillMissingBuildVerison")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillMissingBuildVerison;
+                return;
+            }
+            if (inputStr == "TrueSkillJobAlreadyExists")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillJobAlreadyExists;
+                return;
+            }
+            if (inputStr == "TrueSkillJobNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillJobNotFound;
+                return;
+            }
+            if (inputStr == "TrueSkillOperationCanceled")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillOperationCanceled;
                 return;
             }
             if (inputStr == "StateShareUnauthorized")
@@ -19691,6 +20010,55 @@ namespace PlayFab
             }
         }
 
+        enum class UserFamilyType
+        {
+            UserFamilyTypeNone,
+            UserFamilyTypeXbox,
+            UserFamilyTypeSteam
+        };
+
+        inline void ToJsonEnum(const UserFamilyType input, Json::Value& output)
+        {
+            if (input == UserFamilyType::UserFamilyTypeNone)
+            {
+                output = Json::Value("None");
+                return;
+            }
+            if (input == UserFamilyType::UserFamilyTypeXbox)
+            {
+                output = Json::Value("Xbox");
+                return;
+            }
+            if (input == UserFamilyType::UserFamilyTypeSteam)
+            {
+                output = Json::Value("Steam");
+                return;
+            }
+        }
+        inline void FromJsonEnum(const Json::Value& input, UserFamilyType& output)
+        {
+            if (!input.isString())
+            {
+                return;
+            }
+            const std::string& inputStr = input.asString();
+            if (inputStr == "None")
+            {
+                output = UserFamilyType::UserFamilyTypeNone;
+                return;
+            }
+            if (inputStr == "Xbox")
+            {
+                output = UserFamilyType::UserFamilyTypeXbox;
+                return;
+            }
+            if (inputStr == "Steam")
+            {
+                output = UserFamilyType::UserFamilyTypeSteam;
+                return;
+            }
+        }
+
         enum class UserOrigination
         {
             UserOriginationOrganic,
@@ -21246,10 +21614,10 @@ namespace PlayFab
             std::string BanId;
             Boxed<time_t> Created;
             Boxed<time_t> Expires;
-            Boxed<bool> IncludeMicrosoftFamily;
             std::string IPAddress;
             std::string PlayFabId;
             std::string Reason;
+            std::string UserFamilyType;
 
             BanInfo() :
                 PlayFabBaseModel(),
@@ -21257,10 +21625,10 @@ namespace PlayFab
                 BanId(),
                 Created(),
                 Expires(),
-                IncludeMicrosoftFamily(),
                 IPAddress(),
                 PlayFabId(),
-                Reason()
+                Reason(),
+                UserFamilyType()
             {}
 
             BanInfo(const BanInfo& src) :
@@ -21269,10 +21637,10 @@ namespace PlayFab
                 BanId(src.BanId),
                 Created(src.Created),
                 Expires(src.Expires),
-                IncludeMicrosoftFamily(src.IncludeMicrosoftFamily),
                 IPAddress(src.IPAddress),
                 PlayFabId(src.PlayFabId),
-                Reason(src.Reason)
+                Reason(src.Reason),
+                UserFamilyType(src.UserFamilyType)
             {}
 
             ~BanInfo() = default;
@@ -21283,10 +21651,10 @@ namespace PlayFab
                 FromJsonUtilS(input["BanId"], BanId);
                 FromJsonUtilT(input["Created"], Created);
                 FromJsonUtilT(input["Expires"], Expires);
-                FromJsonUtilP(input["IncludeMicrosoftFamily"], IncludeMicrosoftFamily);
                 FromJsonUtilS(input["IPAddress"], IPAddress);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["Reason"], Reason);
+                FromJsonUtilS(input["UserFamilyType"], UserFamilyType);
             }
 
             Json::Value ToJson() const override
@@ -21296,10 +21664,10 @@ namespace PlayFab
                 Json::Value each_BanId; ToJsonUtilS(BanId, each_BanId); output["BanId"] = each_BanId;
                 Json::Value each_Created; ToJsonUtilT(Created, each_Created); output["Created"] = each_Created;
                 Json::Value each_Expires; ToJsonUtilT(Expires, each_Expires); output["Expires"] = each_Expires;
-                Json::Value each_IncludeMicrosoftFamily; ToJsonUtilP(IncludeMicrosoftFamily, each_IncludeMicrosoftFamily); output["IncludeMicrosoftFamily"] = each_IncludeMicrosoftFamily;
                 Json::Value each_IPAddress; ToJsonUtilS(IPAddress, each_IPAddress); output["IPAddress"] = each_IPAddress;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_Reason; ToJsonUtilS(Reason, each_Reason); output["Reason"] = each_Reason;
+                Json::Value each_UserFamilyType; ToJsonUtilS(UserFamilyType, each_UserFamilyType); output["UserFamilyType"] = each_UserFamilyType;
                 return output;
             }
         };
@@ -21341,27 +21709,27 @@ namespace PlayFab
         struct BanRequest : public PlayFabRequestCommon
         {
             Boxed<Uint32> DurationInHours;
-            Boxed<bool> IncludeMicrosoftFamily;
             std::string IPAddress;
             std::string PlayFabId;
             std::string Reason;
+            Boxed<UserFamilyType> pfUserFamilyType;
 
             BanRequest() :
                 PlayFabRequestCommon(),
                 DurationInHours(),
-                IncludeMicrosoftFamily(),
                 IPAddress(),
                 PlayFabId(),
-                Reason()
+                Reason(),
+                pfUserFamilyType()
             {}
 
             BanRequest(const BanRequest& src) :
                 PlayFabRequestCommon(),
                 DurationInHours(src.DurationInHours),
-                IncludeMicrosoftFamily(src.IncludeMicrosoftFamily),
                 IPAddress(src.IPAddress),
                 PlayFabId(src.PlayFabId),
-                Reason(src.Reason)
+                Reason(src.Reason),
+                pfUserFamilyType(src.pfUserFamilyType)
             {}
 
             ~BanRequest() = default;
@@ -21369,20 +21737,20 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilP(input["DurationInHours"], DurationInHours);
-                FromJsonUtilP(input["IncludeMicrosoftFamily"], IncludeMicrosoftFamily);
                 FromJsonUtilS(input["IPAddress"], IPAddress);
                 FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["Reason"], Reason);
+                FromJsonUtilE(input["UserFamilyType"], pfUserFamilyType);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
                 Json::Value each_DurationInHours; ToJsonUtilP(DurationInHours, each_DurationInHours); output["DurationInHours"] = each_DurationInHours;
-                Json::Value each_IncludeMicrosoftFamily; ToJsonUtilP(IncludeMicrosoftFamily, each_IncludeMicrosoftFamily); output["IncludeMicrosoftFamily"] = each_IncludeMicrosoftFamily;
                 Json::Value each_IPAddress; ToJsonUtilS(IPAddress, each_IPAddress); output["IPAddress"] = each_IPAddress;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_Reason; ToJsonUtilS(Reason, each_Reason); output["Reason"] = each_Reason;
+                Json::Value each_pfUserFamilyType; ToJsonUtilE(pfUserFamilyType, each_pfUserFamilyType); output["UserFamilyType"] = each_pfUserFamilyType;
                 return output;
             }
         };
@@ -31281,20 +31649,20 @@ namespace PlayFab
             Boxed<bool> Active;
             std::string BanId;
             Boxed<time_t> Expires;
-            Boxed<bool> IncludeMicrosoftFamily;
             std::string IPAddress;
             Boxed<bool> Permanent;
             std::string Reason;
+            Boxed<UserFamilyType> pfUserFamilyType;
 
             UpdateBanRequest() :
                 PlayFabRequestCommon(),
                 Active(),
                 BanId(),
                 Expires(),
-                IncludeMicrosoftFamily(),
                 IPAddress(),
                 Permanent(),
-                Reason()
+                Reason(),
+                pfUserFamilyType()
             {}
 
             UpdateBanRequest(const UpdateBanRequest& src) :
@@ -31302,10 +31670,10 @@ namespace PlayFab
                 Active(src.Active),
                 BanId(src.BanId),
                 Expires(src.Expires),
-                IncludeMicrosoftFamily(src.IncludeMicrosoftFamily),
                 IPAddress(src.IPAddress),
                 Permanent(src.Permanent),
-                Reason(src.Reason)
+                Reason(src.Reason),
+                pfUserFamilyType(src.pfUserFamilyType)
             {}
 
             ~UpdateBanRequest() = default;
@@ -31315,10 +31683,10 @@ namespace PlayFab
                 FromJsonUtilP(input["Active"], Active);
                 FromJsonUtilS(input["BanId"], BanId);
                 FromJsonUtilT(input["Expires"], Expires);
-                FromJsonUtilP(input["IncludeMicrosoftFamily"], IncludeMicrosoftFamily);
                 FromJsonUtilS(input["IPAddress"], IPAddress);
                 FromJsonUtilP(input["Permanent"], Permanent);
                 FromJsonUtilS(input["Reason"], Reason);
+                FromJsonUtilE(input["UserFamilyType"], pfUserFamilyType);
             }
 
             Json::Value ToJson() const override
@@ -31327,10 +31695,10 @@ namespace PlayFab
                 Json::Value each_Active; ToJsonUtilP(Active, each_Active); output["Active"] = each_Active;
                 Json::Value each_BanId; ToJsonUtilS(BanId, each_BanId); output["BanId"] = each_BanId;
                 Json::Value each_Expires; ToJsonUtilT(Expires, each_Expires); output["Expires"] = each_Expires;
-                Json::Value each_IncludeMicrosoftFamily; ToJsonUtilP(IncludeMicrosoftFamily, each_IncludeMicrosoftFamily); output["IncludeMicrosoftFamily"] = each_IncludeMicrosoftFamily;
                 Json::Value each_IPAddress; ToJsonUtilS(IPAddress, each_IPAddress); output["IPAddress"] = each_IPAddress;
                 Json::Value each_Permanent; ToJsonUtilP(Permanent, each_Permanent); output["Permanent"] = each_Permanent;
                 Json::Value each_Reason; ToJsonUtilS(Reason, each_Reason); output["Reason"] = each_Reason;
+                Json::Value each_pfUserFamilyType; ToJsonUtilE(pfUserFamilyType, each_pfUserFamilyType); output["UserFamilyType"] = each_pfUserFamilyType;
                 return output;
             }
         };

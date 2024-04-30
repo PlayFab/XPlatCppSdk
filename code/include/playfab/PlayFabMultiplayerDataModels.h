@@ -3174,6 +3174,35 @@ namespace PlayFab
             }
         };
 
+        struct GameSecretReferenceParams : public PlayFabBaseModel
+        {
+            std::string Name;
+
+            GameSecretReferenceParams() :
+                PlayFabBaseModel(),
+                Name()
+            {}
+
+            GameSecretReferenceParams(const GameSecretReferenceParams& src) :
+                PlayFabBaseModel(),
+                Name(src.Name)
+            {}
+
+            ~GameSecretReferenceParams() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["Name"], Name);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
+                return output;
+            }
+        };
+
         struct LinuxInstrumentationConfiguration : public PlayFabBaseModel
         {
             bool IsEnabled;
@@ -3398,6 +3427,7 @@ namespace PlayFab
             std::map<std::string, std::string> CustomTags;
             std::list<AssetReferenceParams> GameAssetReferences;
             std::list<GameCertificateReferenceParams> GameCertificateReferences;
+            std::list<GameSecretReferenceParams> GameSecretReferences;
             Boxed<LinuxInstrumentationConfiguration> pfLinuxInstrumentationConfiguration;
             std::map<std::string, std::string> Metadata;
             Boxed<MonitoringApplicationConfigurationParams> MonitoringApplicationConfiguration;
@@ -3418,6 +3448,7 @@ namespace PlayFab
                 CustomTags(),
                 GameAssetReferences(),
                 GameCertificateReferences(),
+                GameSecretReferences(),
                 pfLinuxInstrumentationConfiguration(),
                 Metadata(),
                 MonitoringApplicationConfiguration(),
@@ -3439,6 +3470,7 @@ namespace PlayFab
                 CustomTags(src.CustomTags),
                 GameAssetReferences(src.GameAssetReferences),
                 GameCertificateReferences(src.GameCertificateReferences),
+                GameSecretReferences(src.GameSecretReferences),
                 pfLinuxInstrumentationConfiguration(src.pfLinuxInstrumentationConfiguration),
                 Metadata(src.Metadata),
                 MonitoringApplicationConfiguration(src.MonitoringApplicationConfiguration),
@@ -3462,6 +3494,7 @@ namespace PlayFab
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["GameAssetReferences"], GameAssetReferences);
                 FromJsonUtilO(input["GameCertificateReferences"], GameCertificateReferences);
+                FromJsonUtilO(input["GameSecretReferences"], GameSecretReferences);
                 FromJsonUtilO(input["LinuxInstrumentationConfiguration"], pfLinuxInstrumentationConfiguration);
                 FromJsonUtilS(input["Metadata"], Metadata);
                 FromJsonUtilO(input["MonitoringApplicationConfiguration"], MonitoringApplicationConfiguration);
@@ -3484,6 +3517,7 @@ namespace PlayFab
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_GameAssetReferences; ToJsonUtilO(GameAssetReferences, each_GameAssetReferences); output["GameAssetReferences"] = each_GameAssetReferences;
                 Json::Value each_GameCertificateReferences; ToJsonUtilO(GameCertificateReferences, each_GameCertificateReferences); output["GameCertificateReferences"] = each_GameCertificateReferences;
+                Json::Value each_GameSecretReferences; ToJsonUtilO(GameSecretReferences, each_GameSecretReferences); output["GameSecretReferences"] = each_GameSecretReferences;
                 Json::Value each_pfLinuxInstrumentationConfiguration; ToJsonUtilO(pfLinuxInstrumentationConfiguration, each_pfLinuxInstrumentationConfiguration); output["LinuxInstrumentationConfiguration"] = each_pfLinuxInstrumentationConfiguration;
                 Json::Value each_Metadata; ToJsonUtilS(Metadata, each_Metadata); output["Metadata"] = each_Metadata;
                 Json::Value each_MonitoringApplicationConfiguration; ToJsonUtilO(MonitoringApplicationConfiguration, each_MonitoringApplicationConfiguration); output["MonitoringApplicationConfiguration"] = each_MonitoringApplicationConfiguration;
@@ -3526,6 +3560,35 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_GsdkAlias; ToJsonUtilS(GsdkAlias, each_GsdkAlias); output["GsdkAlias"] = each_GsdkAlias;
+                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
+                return output;
+            }
+        };
+
+        struct GameSecretReference : public PlayFabBaseModel
+        {
+            std::string Name;
+
+            GameSecretReference() :
+                PlayFabBaseModel(),
+                Name()
+            {}
+
+            GameSecretReference(const GameSecretReference& src) :
+                PlayFabBaseModel(),
+                Name(src.Name)
+            {}
+
+            ~GameSecretReference() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["Name"], Name);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
                 Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
                 return output;
             }
@@ -3654,6 +3717,7 @@ namespace PlayFab
             Boxed<ContainerImageReference> CustomGameContainerImage;
             std::list<AssetReference> GameAssetReferences;
             std::list<GameCertificateReference> GameCertificateReferences;
+            std::list<GameSecretReference> GameSecretReferences;
             Boxed<LinuxInstrumentationConfiguration> pfLinuxInstrumentationConfiguration;
             std::map<std::string, std::string> Metadata;
             Boxed<MonitoringApplicationConfiguration> pfMonitoringApplicationConfiguration;
@@ -3678,6 +3742,7 @@ namespace PlayFab
                 CustomGameContainerImage(),
                 GameAssetReferences(),
                 GameCertificateReferences(),
+                GameSecretReferences(),
                 pfLinuxInstrumentationConfiguration(),
                 Metadata(),
                 pfMonitoringApplicationConfiguration(),
@@ -3703,6 +3768,7 @@ namespace PlayFab
                 CustomGameContainerImage(src.CustomGameContainerImage),
                 GameAssetReferences(src.GameAssetReferences),
                 GameCertificateReferences(src.GameCertificateReferences),
+                GameSecretReferences(src.GameSecretReferences),
                 pfLinuxInstrumentationConfiguration(src.pfLinuxInstrumentationConfiguration),
                 Metadata(src.Metadata),
                 pfMonitoringApplicationConfiguration(src.pfMonitoringApplicationConfiguration),
@@ -3730,6 +3796,7 @@ namespace PlayFab
                 FromJsonUtilO(input["CustomGameContainerImage"], CustomGameContainerImage);
                 FromJsonUtilO(input["GameAssetReferences"], GameAssetReferences);
                 FromJsonUtilO(input["GameCertificateReferences"], GameCertificateReferences);
+                FromJsonUtilO(input["GameSecretReferences"], GameSecretReferences);
                 FromJsonUtilO(input["LinuxInstrumentationConfiguration"], pfLinuxInstrumentationConfiguration);
                 FromJsonUtilS(input["Metadata"], Metadata);
                 FromJsonUtilO(input["MonitoringApplicationConfiguration"], pfMonitoringApplicationConfiguration);
@@ -3756,6 +3823,7 @@ namespace PlayFab
                 Json::Value each_CustomGameContainerImage; ToJsonUtilO(CustomGameContainerImage, each_CustomGameContainerImage); output["CustomGameContainerImage"] = each_CustomGameContainerImage;
                 Json::Value each_GameAssetReferences; ToJsonUtilO(GameAssetReferences, each_GameAssetReferences); output["GameAssetReferences"] = each_GameAssetReferences;
                 Json::Value each_GameCertificateReferences; ToJsonUtilO(GameCertificateReferences, each_GameCertificateReferences); output["GameCertificateReferences"] = each_GameCertificateReferences;
+                Json::Value each_GameSecretReferences; ToJsonUtilO(GameSecretReferences, each_GameSecretReferences); output["GameSecretReferences"] = each_GameSecretReferences;
                 Json::Value each_pfLinuxInstrumentationConfiguration; ToJsonUtilO(pfLinuxInstrumentationConfiguration, each_pfLinuxInstrumentationConfiguration); output["LinuxInstrumentationConfiguration"] = each_pfLinuxInstrumentationConfiguration;
                 Json::Value each_Metadata; ToJsonUtilS(Metadata, each_Metadata); output["Metadata"] = each_Metadata;
                 Json::Value each_pfMonitoringApplicationConfiguration; ToJsonUtilO(pfMonitoringApplicationConfiguration, each_pfMonitoringApplicationConfiguration); output["MonitoringApplicationConfiguration"] = each_pfMonitoringApplicationConfiguration;
@@ -3853,6 +3921,7 @@ namespace PlayFab
             std::map<std::string, std::string> CustomTags;
             std::list<AssetReferenceParams> GameAssetReferences;
             std::list<GameCertificateReferenceParams> GameCertificateReferences;
+            std::list<GameSecretReferenceParams> GameSecretReferences;
             std::string GameWorkingDirectory;
             Boxed<InstrumentationConfiguration> pfInstrumentationConfiguration;
             std::map<std::string, std::string> Metadata;
@@ -3874,6 +3943,7 @@ namespace PlayFab
                 CustomTags(),
                 GameAssetReferences(),
                 GameCertificateReferences(),
+                GameSecretReferences(),
                 GameWorkingDirectory(),
                 pfInstrumentationConfiguration(),
                 Metadata(),
@@ -3896,6 +3966,7 @@ namespace PlayFab
                 CustomTags(src.CustomTags),
                 GameAssetReferences(src.GameAssetReferences),
                 GameCertificateReferences(src.GameCertificateReferences),
+                GameSecretReferences(src.GameSecretReferences),
                 GameWorkingDirectory(src.GameWorkingDirectory),
                 pfInstrumentationConfiguration(src.pfInstrumentationConfiguration),
                 Metadata(src.Metadata),
@@ -3920,6 +3991,7 @@ namespace PlayFab
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["GameAssetReferences"], GameAssetReferences);
                 FromJsonUtilO(input["GameCertificateReferences"], GameCertificateReferences);
+                FromJsonUtilO(input["GameSecretReferences"], GameSecretReferences);
                 FromJsonUtilS(input["GameWorkingDirectory"], GameWorkingDirectory);
                 FromJsonUtilO(input["InstrumentationConfiguration"], pfInstrumentationConfiguration);
                 FromJsonUtilS(input["Metadata"], Metadata);
@@ -3943,6 +4015,7 @@ namespace PlayFab
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_GameAssetReferences; ToJsonUtilO(GameAssetReferences, each_GameAssetReferences); output["GameAssetReferences"] = each_GameAssetReferences;
                 Json::Value each_GameCertificateReferences; ToJsonUtilO(GameCertificateReferences, each_GameCertificateReferences); output["GameCertificateReferences"] = each_GameCertificateReferences;
+                Json::Value each_GameSecretReferences; ToJsonUtilO(GameSecretReferences, each_GameSecretReferences); output["GameSecretReferences"] = each_GameSecretReferences;
                 Json::Value each_GameWorkingDirectory; ToJsonUtilS(GameWorkingDirectory, each_GameWorkingDirectory); output["GameWorkingDirectory"] = each_GameWorkingDirectory;
                 Json::Value each_pfInstrumentationConfiguration; ToJsonUtilO(pfInstrumentationConfiguration, each_pfInstrumentationConfiguration); output["InstrumentationConfiguration"] = each_pfInstrumentationConfiguration;
                 Json::Value each_Metadata; ToJsonUtilS(Metadata, each_Metadata); output["Metadata"] = each_Metadata;
@@ -3968,6 +4041,7 @@ namespace PlayFab
             Boxed<time_t> CreationTime;
             std::list<AssetReference> GameAssetReferences;
             std::list<GameCertificateReference> GameCertificateReferences;
+            std::list<GameSecretReference> GameSecretReferences;
             std::string GameWorkingDirectory;
             Boxed<InstrumentationConfiguration> pfInstrumentationConfiguration;
             std::map<std::string, std::string> Metadata;
@@ -3992,6 +4066,7 @@ namespace PlayFab
                 CreationTime(),
                 GameAssetReferences(),
                 GameCertificateReferences(),
+                GameSecretReferences(),
                 GameWorkingDirectory(),
                 pfInstrumentationConfiguration(),
                 Metadata(),
@@ -4017,6 +4092,7 @@ namespace PlayFab
                 CreationTime(src.CreationTime),
                 GameAssetReferences(src.GameAssetReferences),
                 GameCertificateReferences(src.GameCertificateReferences),
+                GameSecretReferences(src.GameSecretReferences),
                 GameWorkingDirectory(src.GameWorkingDirectory),
                 pfInstrumentationConfiguration(src.pfInstrumentationConfiguration),
                 Metadata(src.Metadata),
@@ -4044,6 +4120,7 @@ namespace PlayFab
                 FromJsonUtilT(input["CreationTime"], CreationTime);
                 FromJsonUtilO(input["GameAssetReferences"], GameAssetReferences);
                 FromJsonUtilO(input["GameCertificateReferences"], GameCertificateReferences);
+                FromJsonUtilO(input["GameSecretReferences"], GameSecretReferences);
                 FromJsonUtilS(input["GameWorkingDirectory"], GameWorkingDirectory);
                 FromJsonUtilO(input["InstrumentationConfiguration"], pfInstrumentationConfiguration);
                 FromJsonUtilS(input["Metadata"], Metadata);
@@ -4070,6 +4147,7 @@ namespace PlayFab
                 Json::Value each_CreationTime; ToJsonUtilT(CreationTime, each_CreationTime); output["CreationTime"] = each_CreationTime;
                 Json::Value each_GameAssetReferences; ToJsonUtilO(GameAssetReferences, each_GameAssetReferences); output["GameAssetReferences"] = each_GameAssetReferences;
                 Json::Value each_GameCertificateReferences; ToJsonUtilO(GameCertificateReferences, each_GameCertificateReferences); output["GameCertificateReferences"] = each_GameCertificateReferences;
+                Json::Value each_GameSecretReferences; ToJsonUtilO(GameSecretReferences, each_GameSecretReferences); output["GameSecretReferences"] = each_GameSecretReferences;
                 Json::Value each_GameWorkingDirectory; ToJsonUtilS(GameWorkingDirectory, each_GameWorkingDirectory); output["GameWorkingDirectory"] = each_GameWorkingDirectory;
                 Json::Value each_pfInstrumentationConfiguration; ToJsonUtilO(pfInstrumentationConfiguration, each_pfInstrumentationConfiguration); output["InstrumentationConfiguration"] = each_pfInstrumentationConfiguration;
                 Json::Value each_Metadata; ToJsonUtilS(Metadata, each_Metadata); output["Metadata"] = each_Metadata;
@@ -4095,6 +4173,7 @@ namespace PlayFab
             std::map<std::string, std::string> CustomTags;
             std::list<AssetReferenceParams> GameAssetReferences;
             std::list<GameCertificateReferenceParams> GameCertificateReferences;
+            std::list<GameSecretReferenceParams> GameSecretReferences;
             std::string GameWorkingDirectory;
             Boxed<InstrumentationConfiguration> pfInstrumentationConfiguration;
             Boxed<bool> IsOSPreview;
@@ -4115,6 +4194,7 @@ namespace PlayFab
                 CustomTags(),
                 GameAssetReferences(),
                 GameCertificateReferences(),
+                GameSecretReferences(),
                 GameWorkingDirectory(),
                 pfInstrumentationConfiguration(),
                 IsOSPreview(),
@@ -4136,6 +4216,7 @@ namespace PlayFab
                 CustomTags(src.CustomTags),
                 GameAssetReferences(src.GameAssetReferences),
                 GameCertificateReferences(src.GameCertificateReferences),
+                GameSecretReferences(src.GameSecretReferences),
                 GameWorkingDirectory(src.GameWorkingDirectory),
                 pfInstrumentationConfiguration(src.pfInstrumentationConfiguration),
                 IsOSPreview(src.IsOSPreview),
@@ -4159,6 +4240,7 @@ namespace PlayFab
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["GameAssetReferences"], GameAssetReferences);
                 FromJsonUtilO(input["GameCertificateReferences"], GameCertificateReferences);
+                FromJsonUtilO(input["GameSecretReferences"], GameSecretReferences);
                 FromJsonUtilS(input["GameWorkingDirectory"], GameWorkingDirectory);
                 FromJsonUtilO(input["InstrumentationConfiguration"], pfInstrumentationConfiguration);
                 FromJsonUtilP(input["IsOSPreview"], IsOSPreview);
@@ -4181,6 +4263,7 @@ namespace PlayFab
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_GameAssetReferences; ToJsonUtilO(GameAssetReferences, each_GameAssetReferences); output["GameAssetReferences"] = each_GameAssetReferences;
                 Json::Value each_GameCertificateReferences; ToJsonUtilO(GameCertificateReferences, each_GameCertificateReferences); output["GameCertificateReferences"] = each_GameCertificateReferences;
+                Json::Value each_GameSecretReferences; ToJsonUtilO(GameSecretReferences, each_GameSecretReferences); output["GameSecretReferences"] = each_GameSecretReferences;
                 Json::Value each_GameWorkingDirectory; ToJsonUtilS(GameWorkingDirectory, each_GameWorkingDirectory); output["GameWorkingDirectory"] = each_GameWorkingDirectory;
                 Json::Value each_pfInstrumentationConfiguration; ToJsonUtilO(pfInstrumentationConfiguration, each_pfInstrumentationConfiguration); output["InstrumentationConfiguration"] = each_pfInstrumentationConfiguration;
                 Json::Value each_IsOSPreview; ToJsonUtilP(IsOSPreview, each_IsOSPreview); output["IsOSPreview"] = each_IsOSPreview;
@@ -4206,6 +4289,7 @@ namespace PlayFab
             Boxed<time_t> CreationTime;
             std::list<AssetReference> GameAssetReferences;
             std::list<GameCertificateReference> GameCertificateReferences;
+            std::list<GameSecretReference> GameSecretReferences;
             std::string GameWorkingDirectory;
             Boxed<InstrumentationConfiguration> pfInstrumentationConfiguration;
             Boxed<bool> IsOSPreview;
@@ -4230,6 +4314,7 @@ namespace PlayFab
                 CreationTime(),
                 GameAssetReferences(),
                 GameCertificateReferences(),
+                GameSecretReferences(),
                 GameWorkingDirectory(),
                 pfInstrumentationConfiguration(),
                 IsOSPreview(),
@@ -4255,6 +4340,7 @@ namespace PlayFab
                 CreationTime(src.CreationTime),
                 GameAssetReferences(src.GameAssetReferences),
                 GameCertificateReferences(src.GameCertificateReferences),
+                GameSecretReferences(src.GameSecretReferences),
                 GameWorkingDirectory(src.GameWorkingDirectory),
                 pfInstrumentationConfiguration(src.pfInstrumentationConfiguration),
                 IsOSPreview(src.IsOSPreview),
@@ -4282,6 +4368,7 @@ namespace PlayFab
                 FromJsonUtilT(input["CreationTime"], CreationTime);
                 FromJsonUtilO(input["GameAssetReferences"], GameAssetReferences);
                 FromJsonUtilO(input["GameCertificateReferences"], GameCertificateReferences);
+                FromJsonUtilO(input["GameSecretReferences"], GameSecretReferences);
                 FromJsonUtilS(input["GameWorkingDirectory"], GameWorkingDirectory);
                 FromJsonUtilO(input["InstrumentationConfiguration"], pfInstrumentationConfiguration);
                 FromJsonUtilP(input["IsOSPreview"], IsOSPreview);
@@ -4308,6 +4395,7 @@ namespace PlayFab
                 Json::Value each_CreationTime; ToJsonUtilT(CreationTime, each_CreationTime); output["CreationTime"] = each_CreationTime;
                 Json::Value each_GameAssetReferences; ToJsonUtilO(GameAssetReferences, each_GameAssetReferences); output["GameAssetReferences"] = each_GameAssetReferences;
                 Json::Value each_GameCertificateReferences; ToJsonUtilO(GameCertificateReferences, each_GameCertificateReferences); output["GameCertificateReferences"] = each_GameCertificateReferences;
+                Json::Value each_GameSecretReferences; ToJsonUtilO(GameSecretReferences, each_GameSecretReferences); output["GameSecretReferences"] = each_GameSecretReferences;
                 Json::Value each_GameWorkingDirectory; ToJsonUtilS(GameWorkingDirectory, each_GameWorkingDirectory); output["GameWorkingDirectory"] = each_GameWorkingDirectory;
                 Json::Value each_pfInstrumentationConfiguration; ToJsonUtilO(pfInstrumentationConfiguration, each_pfInstrumentationConfiguration); output["InstrumentationConfiguration"] = each_pfInstrumentationConfiguration;
                 Json::Value each_IsOSPreview; ToJsonUtilP(IsOSPreview, each_IsOSPreview); output["IsOSPreview"] = each_IsOSPreview;
@@ -5288,6 +5376,40 @@ namespace PlayFab
                 Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
                 Json::Value each_Username; ToJsonUtilS(Username, each_Username); output["Username"] = each_Username;
                 Json::Value each_VmId; ToJsonUtilS(VmId, each_VmId); output["VmId"] = each_VmId;
+                return output;
+            }
+        };
+
+        struct DeleteSecretRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            std::string Name;
+
+            DeleteSecretRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                Name()
+            {}
+
+            DeleteSecretRequest(const DeleteSecretRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                Name(src.Name)
+            {}
+
+            ~DeleteSecretRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["Name"], Name);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
                 return output;
             }
         };
@@ -8641,6 +8763,123 @@ namespace PlayFab
             }
         };
 
+        struct ListSecretSummariesRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            Boxed<Int32> PageSize;
+            std::string SkipToken;
+
+            ListSecretSummariesRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                PageSize(),
+                SkipToken()
+            {}
+
+            ListSecretSummariesRequest(const ListSecretSummariesRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                PageSize(src.PageSize),
+                SkipToken(src.SkipToken)
+            {}
+
+            ~ListSecretSummariesRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilP(input["PageSize"], PageSize);
+                FromJsonUtilS(input["SkipToken"], SkipToken);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_PageSize; ToJsonUtilP(PageSize, each_PageSize); output["PageSize"] = each_PageSize;
+                Json::Value each_SkipToken; ToJsonUtilS(SkipToken, each_SkipToken); output["SkipToken"] = each_SkipToken;
+                return output;
+            }
+        };
+
+        struct SecretSummary : public PlayFabBaseModel
+        {
+            Boxed<time_t> ExpirationDate;
+            std::string Name;
+            std::string Version;
+
+            SecretSummary() :
+                PlayFabBaseModel(),
+                ExpirationDate(),
+                Name(),
+                Version()
+            {}
+
+            SecretSummary(const SecretSummary& src) :
+                PlayFabBaseModel(),
+                ExpirationDate(src.ExpirationDate),
+                Name(src.Name),
+                Version(src.Version)
+            {}
+
+            ~SecretSummary() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilT(input["ExpirationDate"], ExpirationDate);
+                FromJsonUtilS(input["Name"], Name);
+                FromJsonUtilS(input["Version"], Version);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ExpirationDate; ToJsonUtilT(ExpirationDate, each_ExpirationDate); output["ExpirationDate"] = each_ExpirationDate;
+                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
+                Json::Value each_Version; ToJsonUtilS(Version, each_Version); output["Version"] = each_Version;
+                return output;
+            }
+        };
+
+        struct ListSecretSummariesResponse : public PlayFabResultCommon
+        {
+            Int32 PageSize;
+            std::list<SecretSummary> SecretSummaries;
+            std::string SkipToken;
+
+            ListSecretSummariesResponse() :
+                PlayFabResultCommon(),
+                PageSize(),
+                SecretSummaries(),
+                SkipToken()
+            {}
+
+            ListSecretSummariesResponse(const ListSecretSummariesResponse& src) :
+                PlayFabResultCommon(),
+                PageSize(src.PageSize),
+                SecretSummaries(src.SecretSummaries),
+                SkipToken(src.SkipToken)
+            {}
+
+            ~ListSecretSummariesResponse() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["PageSize"], PageSize);
+                FromJsonUtilO(input["SecretSummaries"], SecretSummaries);
+                FromJsonUtilS(input["SkipToken"], SkipToken);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_PageSize; ToJsonUtilP(PageSize, each_PageSize); output["PageSize"] = each_PageSize;
+                Json::Value each_SecretSummaries; ToJsonUtilO(SecretSummaries, each_SecretSummaries); output["SecretSummaries"] = each_SecretSummaries;
+                Json::Value each_SkipToken; ToJsonUtilS(SkipToken, each_SkipToken); output["SkipToken"] = each_SkipToken;
+                return output;
+            }
+        };
+
         struct ListServerBackfillTicketsForPlayerRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
@@ -9354,6 +9593,45 @@ namespace PlayFab
             }
         };
 
+        struct Secret : public PlayFabBaseModel
+        {
+            Boxed<time_t> ExpirationDate;
+            std::string Name;
+            std::string Value;
+
+            Secret() :
+                PlayFabBaseModel(),
+                ExpirationDate(),
+                Name(),
+                Value()
+            {}
+
+            Secret(const Secret& src) :
+                PlayFabBaseModel(),
+                ExpirationDate(src.ExpirationDate),
+                Name(src.Name),
+                Value(src.Value)
+            {}
+
+            ~Secret() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilT(input["ExpirationDate"], ExpirationDate);
+                FromJsonUtilS(input["Name"], Name);
+                FromJsonUtilS(input["Value"], Value);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ExpirationDate; ToJsonUtilT(ExpirationDate, each_ExpirationDate); output["ExpirationDate"] = each_ExpirationDate;
+                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
+                Json::Value each_Value; ToJsonUtilS(Value, each_Value); output["Value"] = each_Value;
+                return output;
+            }
+        };
+
         struct ShutdownMultiplayerServerRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
@@ -9898,6 +10176,45 @@ namespace PlayFab
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_ForceUpdate; ToJsonUtilP(ForceUpdate, each_ForceUpdate); output["ForceUpdate"] = each_ForceUpdate;
                 Json::Value each_GameCertificate; ToJsonUtilO(GameCertificate, each_GameCertificate); output["GameCertificate"] = each_GameCertificate;
+                return output;
+            }
+        };
+
+        struct UploadSecretRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            Boxed<bool> ForceUpdate;
+            Secret GameSecret;
+
+            UploadSecretRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                ForceUpdate(),
+                GameSecret()
+            {}
+
+            UploadSecretRequest(const UploadSecretRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                ForceUpdate(src.ForceUpdate),
+                GameSecret(src.GameSecret)
+            {}
+
+            ~UploadSecretRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilP(input["ForceUpdate"], ForceUpdate);
+                FromJsonUtilO(input["GameSecret"], GameSecret);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_ForceUpdate; ToJsonUtilP(ForceUpdate, each_ForceUpdate); output["ForceUpdate"] = each_ForceUpdate;
+                Json::Value each_GameSecret; ToJsonUtilO(GameSecret, each_GameSecret); output["GameSecret"] = each_GameSecret;
                 return output;
             }
         };
