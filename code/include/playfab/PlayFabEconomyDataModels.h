@@ -3641,6 +3641,64 @@ namespace PlayFab
             }
         };
 
+        struct CategoryRatingConfig : public PlayFabBaseModel
+        {
+            std::string Name;
+
+            CategoryRatingConfig() :
+                PlayFabBaseModel(),
+                Name()
+            {}
+
+            CategoryRatingConfig(const CategoryRatingConfig& src) :
+                PlayFabBaseModel(),
+                Name(src.Name)
+            {}
+
+            ~CategoryRatingConfig() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["Name"], Name);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
+                return output;
+            }
+        };
+
+        struct ReviewConfig : public PlayFabBaseModel
+        {
+            std::list<CategoryRatingConfig> CategoryRatings;
+
+            ReviewConfig() :
+                PlayFabBaseModel(),
+                CategoryRatings()
+            {}
+
+            ReviewConfig(const ReviewConfig& src) :
+                PlayFabBaseModel(),
+                CategoryRatings(src.CategoryRatings)
+            {}
+
+            ~ReviewConfig() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["CategoryRatings"], CategoryRatings);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CategoryRatings; ToJsonUtilO(CategoryRatings, each_CategoryRatings); output["CategoryRatings"] = each_CategoryRatings;
+                return output;
+            }
+        };
+
         struct UserGeneratedContentSpecificConfig : public PlayFabBaseModel
         {
             std::list<std::string> ContentTypes;
@@ -3685,6 +3743,7 @@ namespace PlayFab
             Boxed<ImageConfig> Image;
             bool IsCatalogEnabled;
             std::list<std::string> Platforms;
+            Boxed<ReviewConfig> Review;
             std::list<EntityKey> ReviewerEntities;
             Boxed<UserGeneratedContentSpecificConfig> UserGeneratedContent;
 
@@ -3698,6 +3757,7 @@ namespace PlayFab
                 Image(),
                 IsCatalogEnabled(),
                 Platforms(),
+                Review(),
                 ReviewerEntities(),
                 UserGeneratedContent()
             {}
@@ -3712,6 +3772,7 @@ namespace PlayFab
                 Image(src.Image),
                 IsCatalogEnabled(src.IsCatalogEnabled),
                 Platforms(src.Platforms),
+                Review(src.Review),
                 ReviewerEntities(src.ReviewerEntities),
                 UserGeneratedContent(src.UserGeneratedContent)
             {}
@@ -3728,6 +3789,7 @@ namespace PlayFab
                 FromJsonUtilO(input["Image"], Image);
                 FromJsonUtilP(input["IsCatalogEnabled"], IsCatalogEnabled);
                 FromJsonUtilS(input["Platforms"], Platforms);
+                FromJsonUtilO(input["Review"], Review);
                 FromJsonUtilO(input["ReviewerEntities"], ReviewerEntities);
                 FromJsonUtilO(input["UserGeneratedContent"], UserGeneratedContent);
             }
@@ -3743,6 +3805,7 @@ namespace PlayFab
                 Json::Value each_Image; ToJsonUtilO(Image, each_Image); output["Image"] = each_Image;
                 Json::Value each_IsCatalogEnabled; ToJsonUtilP(IsCatalogEnabled, each_IsCatalogEnabled); output["IsCatalogEnabled"] = each_IsCatalogEnabled;
                 Json::Value each_Platforms; ToJsonUtilS(Platforms, each_Platforms); output["Platforms"] = each_Platforms;
+                Json::Value each_Review; ToJsonUtilO(Review, each_Review); output["Review"] = each_Review;
                 Json::Value each_ReviewerEntities; ToJsonUtilO(ReviewerEntities, each_ReviewerEntities); output["ReviewerEntities"] = each_ReviewerEntities;
                 Json::Value each_UserGeneratedContent; ToJsonUtilO(UserGeneratedContent, each_UserGeneratedContent); output["UserGeneratedContent"] = each_UserGeneratedContent;
                 return output;
@@ -5928,6 +5991,7 @@ namespace PlayFab
 
         struct Review : public PlayFabBaseModel
         {
+            std::map<std::string, Int32> CategoryRatings;
             Int32 HelpfulNegative;
             Int32 HelpfulPositive;
             bool IsInstalled;
@@ -5944,6 +6008,7 @@ namespace PlayFab
 
             Review() :
                 PlayFabBaseModel(),
+                CategoryRatings(),
                 HelpfulNegative(),
                 HelpfulPositive(),
                 IsInstalled(),
@@ -5961,6 +6026,7 @@ namespace PlayFab
 
             Review(const Review& src) :
                 PlayFabBaseModel(),
+                CategoryRatings(src.CategoryRatings),
                 HelpfulNegative(src.HelpfulNegative),
                 HelpfulPositive(src.HelpfulPositive),
                 IsInstalled(src.IsInstalled),
@@ -5980,6 +6046,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilP(input["CategoryRatings"], CategoryRatings);
                 FromJsonUtilP(input["HelpfulNegative"], HelpfulNegative);
                 FromJsonUtilP(input["HelpfulPositive"], HelpfulPositive);
                 FromJsonUtilP(input["IsInstalled"], IsInstalled);
@@ -5998,6 +6065,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_CategoryRatings; ToJsonUtilP(CategoryRatings, each_CategoryRatings); output["CategoryRatings"] = each_CategoryRatings;
                 Json::Value each_HelpfulNegative; ToJsonUtilP(HelpfulNegative, each_HelpfulNegative); output["HelpfulNegative"] = each_HelpfulNegative;
                 Json::Value each_HelpfulPositive; ToJsonUtilP(HelpfulPositive, each_HelpfulPositive); output["HelpfulPositive"] = each_HelpfulPositive;
                 Json::Value each_IsInstalled; ToJsonUtilP(IsInstalled, each_IsInstalled); output["IsInstalled"] = each_IsInstalled;

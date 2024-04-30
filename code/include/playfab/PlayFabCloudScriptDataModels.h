@@ -3381,7 +3381,8 @@ namespace PlayFab
         enum class TriggerType
         {
             TriggerTypeHTTP,
-            TriggerTypeQueue
+            TriggerTypeQueue,
+            TriggerTypeEventHub
         };
 
         inline void ToJsonEnum(const TriggerType input, Json::Value& output)
@@ -3394,6 +3395,11 @@ namespace PlayFab
             if (input == TriggerType::TriggerTypeQueue)
             {
                 output = Json::Value("Queue");
+                return;
+            }
+            if (input == TriggerType::TriggerTypeEventHub)
+            {
+                output = Json::Value("EventHub");
                 return;
             }
         }
@@ -3412,6 +3418,11 @@ namespace PlayFab
             if (inputStr == "Queue")
             {
                 output = TriggerType::TriggerTypeQueue;
+                return;
+            }
+            if (inputStr == "EventHub")
+            {
+                output = TriggerType::TriggerTypeEventHub;
                 return;
             }
         }
@@ -3549,6 +3560,45 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_Id; ToJsonUtilS(Id, each_Id); output["Id"] = each_Id;
                 Json::Value each_Type; ToJsonUtilS(Type, each_Type); output["Type"] = each_Type;
+                return output;
+            }
+        };
+
+        struct EventHubFunctionModel : public PlayFabBaseModel
+        {
+            std::string ConnectionString;
+            std::string EventHubName;
+            std::string FunctionName;
+
+            EventHubFunctionModel() :
+                PlayFabBaseModel(),
+                ConnectionString(),
+                EventHubName(),
+                FunctionName()
+            {}
+
+            EventHubFunctionModel(const EventHubFunctionModel& src) :
+                PlayFabBaseModel(),
+                ConnectionString(src.ConnectionString),
+                EventHubName(src.EventHubName),
+                FunctionName(src.FunctionName)
+            {}
+
+            ~EventHubFunctionModel() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["ConnectionString"], ConnectionString);
+                FromJsonUtilS(input["EventHubName"], EventHubName);
+                FromJsonUtilS(input["FunctionName"], FunctionName);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ConnectionString; ToJsonUtilS(ConnectionString, each_ConnectionString); output["ConnectionString"] = each_ConnectionString;
+                Json::Value each_EventHubName; ToJsonUtilS(EventHubName, each_EventHubName); output["EventHubName"] = each_EventHubName;
+                Json::Value each_FunctionName; ToJsonUtilS(FunctionName, each_FunctionName); output["FunctionName"] = each_FunctionName;
                 return output;
             }
         };
@@ -4102,6 +4152,35 @@ namespace PlayFab
                 Json::Value each_Platform; ToJsonUtilE(Platform, each_Platform); output["Platform"] = each_Platform;
                 Json::Value each_PlatformUserId; ToJsonUtilS(PlatformUserId, each_PlatformUserId); output["PlatformUserId"] = each_PlatformUserId;
                 Json::Value each_Username; ToJsonUtilS(Username, each_Username); output["Username"] = each_Username;
+                return output;
+            }
+        };
+
+        struct ListEventHubFunctionsResult : public PlayFabResultCommon
+        {
+            std::list<EventHubFunctionModel> Functions;
+
+            ListEventHubFunctionsResult() :
+                PlayFabResultCommon(),
+                Functions()
+            {}
+
+            ListEventHubFunctionsResult(const ListEventHubFunctionsResult& src) :
+                PlayFabResultCommon(),
+                Functions(src.Functions)
+            {}
+
+            ~ListEventHubFunctionsResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["Functions"], Functions);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Functions; ToJsonUtilO(Functions, each_Functions); output["Functions"] = each_Functions;
                 return output;
             }
         };
@@ -4928,6 +5007,50 @@ namespace PlayFab
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_FunctionResult; ToJsonUtilO(FunctionResult, each_FunctionResult); output["FunctionResult"] = each_FunctionResult;
                 Json::Value each_ScheduledTaskId; ToJsonUtilO(ScheduledTaskId, each_ScheduledTaskId); output["ScheduledTaskId"] = each_ScheduledTaskId;
+                return output;
+            }
+        };
+
+        struct RegisterEventHubFunctionRequest : public PlayFabRequestCommon
+        {
+            std::string ConnectionString;
+            std::map<std::string, std::string> CustomTags;
+            std::string EventHubName;
+            std::string FunctionName;
+
+            RegisterEventHubFunctionRequest() :
+                PlayFabRequestCommon(),
+                ConnectionString(),
+                CustomTags(),
+                EventHubName(),
+                FunctionName()
+            {}
+
+            RegisterEventHubFunctionRequest(const RegisterEventHubFunctionRequest& src) :
+                PlayFabRequestCommon(),
+                ConnectionString(src.ConnectionString),
+                CustomTags(src.CustomTags),
+                EventHubName(src.EventHubName),
+                FunctionName(src.FunctionName)
+            {}
+
+            ~RegisterEventHubFunctionRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["ConnectionString"], ConnectionString);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["EventHubName"], EventHubName);
+                FromJsonUtilS(input["FunctionName"], FunctionName);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_ConnectionString; ToJsonUtilS(ConnectionString, each_ConnectionString); output["ConnectionString"] = each_ConnectionString;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_EventHubName; ToJsonUtilS(EventHubName, each_EventHubName); output["EventHubName"] = each_EventHubName;
+                Json::Value each_FunctionName; ToJsonUtilS(FunctionName, each_FunctionName); output["FunctionName"] = each_FunctionName;
                 return output;
             }
         };
