@@ -23800,6 +23800,60 @@ namespace PlayFab
             }
         };
 
+        struct LoginWithPSNRequest : public PlayFabRequestCommon
+        {
+            std::string AuthCode;
+            Boxed<bool> CreateAccount;
+            std::map<std::string, std::string> CustomTags;
+            Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
+            Boxed<Int32> IssuerId;
+            std::string RedirectUri;
+
+            LoginWithPSNRequest() :
+                PlayFabRequestCommon(),
+                AuthCode(),
+                CreateAccount(),
+                CustomTags(),
+                InfoRequestParameters(),
+                IssuerId(),
+                RedirectUri()
+            {}
+
+            LoginWithPSNRequest(const LoginWithPSNRequest& src) :
+                PlayFabRequestCommon(),
+                AuthCode(src.AuthCode),
+                CreateAccount(src.CreateAccount),
+                CustomTags(src.CustomTags),
+                InfoRequestParameters(src.InfoRequestParameters),
+                IssuerId(src.IssuerId),
+                RedirectUri(src.RedirectUri)
+            {}
+
+            ~LoginWithPSNRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["AuthCode"], AuthCode);
+                FromJsonUtilP(input["CreateAccount"], CreateAccount);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
+                FromJsonUtilP(input["IssuerId"], IssuerId);
+                FromJsonUtilS(input["RedirectUri"], RedirectUri);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_AuthCode; ToJsonUtilS(AuthCode, each_AuthCode); output["AuthCode"] = each_AuthCode;
+                Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
+                Json::Value each_IssuerId; ToJsonUtilP(IssuerId, each_IssuerId); output["IssuerId"] = each_IssuerId;
+                Json::Value each_RedirectUri; ToJsonUtilS(RedirectUri, each_RedirectUri); output["RedirectUri"] = each_RedirectUri;
+                return output;
+            }
+        };
+
         struct LoginWithServerCustomIdRequest : public PlayFabRequestCommon
         {
             Boxed<bool> CreateAccount;
