@@ -359,7 +359,9 @@ namespace PlayFab
             AzureVmFamilyNCasT4_v3,
             AzureVmFamilyDdv4,
             AzureVmFamilyDdsv4,
-            AzureVmFamilyHBv3
+            AzureVmFamilyHBv3,
+            AzureVmFamilyDdv5,
+            AzureVmFamilyDdsv5
         };
 
         inline void ToJsonEnum(const AzureVmFamily input, Json::Value& output)
@@ -457,6 +459,16 @@ namespace PlayFab
             if (input == AzureVmFamily::AzureVmFamilyHBv3)
             {
                 output = Json::Value("HBv3");
+                return;
+            }
+            if (input == AzureVmFamily::AzureVmFamilyDdv5)
+            {
+                output = Json::Value("Ddv5");
+                return;
+            }
+            if (input == AzureVmFamily::AzureVmFamilyDdsv5)
+            {
+                output = Json::Value("Ddsv5");
                 return;
             }
         }
@@ -562,6 +574,16 @@ namespace PlayFab
                 output = AzureVmFamily::AzureVmFamilyHBv3;
                 return;
             }
+            if (inputStr == "Ddv5")
+            {
+                output = AzureVmFamily::AzureVmFamilyDdv5;
+                return;
+            }
+            if (inputStr == "Ddsv5")
+            {
+                output = AzureVmFamily::AzureVmFamilyDdsv5;
+                return;
+            }
         }
 
         enum class AzureVmSize
@@ -634,7 +656,17 @@ namespace PlayFab
             AzureVmSizeStandard_HB120_32rs_v3,
             AzureVmSizeStandard_HB120_64rs_v3,
             AzureVmSizeStandard_HB120_96rs_v3,
-            AzureVmSizeStandard_HB120rs_v3
+            AzureVmSizeStandard_HB120rs_v3,
+            AzureVmSizeStandard_D2d_v5,
+            AzureVmSizeStandard_D4d_v5,
+            AzureVmSizeStandard_D8d_v5,
+            AzureVmSizeStandard_D16d_v5,
+            AzureVmSizeStandard_D32d_v5,
+            AzureVmSizeStandard_D2ds_v5,
+            AzureVmSizeStandard_D4ds_v5,
+            AzureVmSizeStandard_D8ds_v5,
+            AzureVmSizeStandard_D16ds_v5,
+            AzureVmSizeStandard_D32ds_v5
         };
 
         inline void ToJsonEnum(const AzureVmSize input, Json::Value& output)
@@ -982,6 +1014,56 @@ namespace PlayFab
             if (input == AzureVmSize::AzureVmSizeStandard_HB120rs_v3)
             {
                 output = Json::Value("Standard_HB120rs_v3");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D2d_v5)
+            {
+                output = Json::Value("Standard_D2d_v5");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D4d_v5)
+            {
+                output = Json::Value("Standard_D4d_v5");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D8d_v5)
+            {
+                output = Json::Value("Standard_D8d_v5");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D16d_v5)
+            {
+                output = Json::Value("Standard_D16d_v5");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D32d_v5)
+            {
+                output = Json::Value("Standard_D32d_v5");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D2ds_v5)
+            {
+                output = Json::Value("Standard_D2ds_v5");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D4ds_v5)
+            {
+                output = Json::Value("Standard_D4ds_v5");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D8ds_v5)
+            {
+                output = Json::Value("Standard_D8ds_v5");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D16ds_v5)
+            {
+                output = Json::Value("Standard_D16ds_v5");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D32ds_v5)
+            {
+                output = Json::Value("Standard_D32ds_v5");
                 return;
             }
         }
@@ -1335,6 +1417,56 @@ namespace PlayFab
             if (inputStr == "Standard_HB120rs_v3")
             {
                 output = AzureVmSize::AzureVmSizeStandard_HB120rs_v3;
+                return;
+            }
+            if (inputStr == "Standard_D2d_v5")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D2d_v5;
+                return;
+            }
+            if (inputStr == "Standard_D4d_v5")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D4d_v5;
+                return;
+            }
+            if (inputStr == "Standard_D8d_v5")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D8d_v5;
+                return;
+            }
+            if (inputStr == "Standard_D16d_v5")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D16d_v5;
+                return;
+            }
+            if (inputStr == "Standard_D32d_v5")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D32d_v5;
+                return;
+            }
+            if (inputStr == "Standard_D2ds_v5")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D2ds_v5;
+                return;
+            }
+            if (inputStr == "Standard_D4ds_v5")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D4ds_v5;
+                return;
+            }
+            if (inputStr == "Standard_D8ds_v5")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D8ds_v5;
+                return;
+            }
+            if (inputStr == "Standard_D16ds_v5")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D16ds_v5;
+                return;
+            }
+            if (inputStr == "Standard_D32ds_v5")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D32ds_v5;
                 return;
             }
         }
@@ -4177,6 +4309,7 @@ namespace PlayFab
             std::string GameWorkingDirectory;
             Boxed<InstrumentationConfiguration> pfInstrumentationConfiguration;
             Boxed<bool> IsOSPreview;
+            Boxed<LinuxInstrumentationConfiguration> pfLinuxInstrumentationConfiguration;
             std::map<std::string, std::string> Metadata;
             Boxed<MonitoringApplicationConfigurationParams> MonitoringApplicationConfiguration;
             Int32 MultiplayerServerCountPerVm;
@@ -4198,6 +4331,7 @@ namespace PlayFab
                 GameWorkingDirectory(),
                 pfInstrumentationConfiguration(),
                 IsOSPreview(),
+                pfLinuxInstrumentationConfiguration(),
                 Metadata(),
                 MonitoringApplicationConfiguration(),
                 MultiplayerServerCountPerVm(),
@@ -4220,6 +4354,7 @@ namespace PlayFab
                 GameWorkingDirectory(src.GameWorkingDirectory),
                 pfInstrumentationConfiguration(src.pfInstrumentationConfiguration),
                 IsOSPreview(src.IsOSPreview),
+                pfLinuxInstrumentationConfiguration(src.pfLinuxInstrumentationConfiguration),
                 Metadata(src.Metadata),
                 MonitoringApplicationConfiguration(src.MonitoringApplicationConfiguration),
                 MultiplayerServerCountPerVm(src.MultiplayerServerCountPerVm),
@@ -4244,6 +4379,7 @@ namespace PlayFab
                 FromJsonUtilS(input["GameWorkingDirectory"], GameWorkingDirectory);
                 FromJsonUtilO(input["InstrumentationConfiguration"], pfInstrumentationConfiguration);
                 FromJsonUtilP(input["IsOSPreview"], IsOSPreview);
+                FromJsonUtilO(input["LinuxInstrumentationConfiguration"], pfLinuxInstrumentationConfiguration);
                 FromJsonUtilS(input["Metadata"], Metadata);
                 FromJsonUtilO(input["MonitoringApplicationConfiguration"], MonitoringApplicationConfiguration);
                 FromJsonUtilP(input["MultiplayerServerCountPerVm"], MultiplayerServerCountPerVm);
@@ -4267,6 +4403,7 @@ namespace PlayFab
                 Json::Value each_GameWorkingDirectory; ToJsonUtilS(GameWorkingDirectory, each_GameWorkingDirectory); output["GameWorkingDirectory"] = each_GameWorkingDirectory;
                 Json::Value each_pfInstrumentationConfiguration; ToJsonUtilO(pfInstrumentationConfiguration, each_pfInstrumentationConfiguration); output["InstrumentationConfiguration"] = each_pfInstrumentationConfiguration;
                 Json::Value each_IsOSPreview; ToJsonUtilP(IsOSPreview, each_IsOSPreview); output["IsOSPreview"] = each_IsOSPreview;
+                Json::Value each_pfLinuxInstrumentationConfiguration; ToJsonUtilO(pfLinuxInstrumentationConfiguration, each_pfLinuxInstrumentationConfiguration); output["LinuxInstrumentationConfiguration"] = each_pfLinuxInstrumentationConfiguration;
                 Json::Value each_Metadata; ToJsonUtilS(Metadata, each_Metadata); output["Metadata"] = each_Metadata;
                 Json::Value each_MonitoringApplicationConfiguration; ToJsonUtilO(MonitoringApplicationConfiguration, each_MonitoringApplicationConfiguration); output["MonitoringApplicationConfiguration"] = each_MonitoringApplicationConfiguration;
                 Json::Value each_MultiplayerServerCountPerVm; ToJsonUtilP(MultiplayerServerCountPerVm, each_MultiplayerServerCountPerVm); output["MultiplayerServerCountPerVm"] = each_MultiplayerServerCountPerVm;
@@ -4293,6 +4430,7 @@ namespace PlayFab
             std::string GameWorkingDirectory;
             Boxed<InstrumentationConfiguration> pfInstrumentationConfiguration;
             Boxed<bool> IsOSPreview;
+            Boxed<LinuxInstrumentationConfiguration> pfLinuxInstrumentationConfiguration;
             std::map<std::string, std::string> Metadata;
             Boxed<MonitoringApplicationConfiguration> pfMonitoringApplicationConfiguration;
             Int32 MultiplayerServerCountPerVm;
@@ -4318,6 +4456,7 @@ namespace PlayFab
                 GameWorkingDirectory(),
                 pfInstrumentationConfiguration(),
                 IsOSPreview(),
+                pfLinuxInstrumentationConfiguration(),
                 Metadata(),
                 pfMonitoringApplicationConfiguration(),
                 MultiplayerServerCountPerVm(),
@@ -4344,6 +4483,7 @@ namespace PlayFab
                 GameWorkingDirectory(src.GameWorkingDirectory),
                 pfInstrumentationConfiguration(src.pfInstrumentationConfiguration),
                 IsOSPreview(src.IsOSPreview),
+                pfLinuxInstrumentationConfiguration(src.pfLinuxInstrumentationConfiguration),
                 Metadata(src.Metadata),
                 pfMonitoringApplicationConfiguration(src.pfMonitoringApplicationConfiguration),
                 MultiplayerServerCountPerVm(src.MultiplayerServerCountPerVm),
@@ -4372,6 +4512,7 @@ namespace PlayFab
                 FromJsonUtilS(input["GameWorkingDirectory"], GameWorkingDirectory);
                 FromJsonUtilO(input["InstrumentationConfiguration"], pfInstrumentationConfiguration);
                 FromJsonUtilP(input["IsOSPreview"], IsOSPreview);
+                FromJsonUtilO(input["LinuxInstrumentationConfiguration"], pfLinuxInstrumentationConfiguration);
                 FromJsonUtilS(input["Metadata"], Metadata);
                 FromJsonUtilO(input["MonitoringApplicationConfiguration"], pfMonitoringApplicationConfiguration);
                 FromJsonUtilP(input["MultiplayerServerCountPerVm"], MultiplayerServerCountPerVm);
@@ -4399,6 +4540,7 @@ namespace PlayFab
                 Json::Value each_GameWorkingDirectory; ToJsonUtilS(GameWorkingDirectory, each_GameWorkingDirectory); output["GameWorkingDirectory"] = each_GameWorkingDirectory;
                 Json::Value each_pfInstrumentationConfiguration; ToJsonUtilO(pfInstrumentationConfiguration, each_pfInstrumentationConfiguration); output["InstrumentationConfiguration"] = each_pfInstrumentationConfiguration;
                 Json::Value each_IsOSPreview; ToJsonUtilP(IsOSPreview, each_IsOSPreview); output["IsOSPreview"] = each_IsOSPreview;
+                Json::Value each_pfLinuxInstrumentationConfiguration; ToJsonUtilO(pfLinuxInstrumentationConfiguration, each_pfLinuxInstrumentationConfiguration); output["LinuxInstrumentationConfiguration"] = each_pfLinuxInstrumentationConfiguration;
                 Json::Value each_Metadata; ToJsonUtilS(Metadata, each_Metadata); output["Metadata"] = each_Metadata;
                 Json::Value each_pfMonitoringApplicationConfiguration; ToJsonUtilO(pfMonitoringApplicationConfiguration, each_pfMonitoringApplicationConfiguration); output["MonitoringApplicationConfiguration"] = each_pfMonitoringApplicationConfiguration;
                 Json::Value each_MultiplayerServerCountPerVm; ToJsonUtilP(MultiplayerServerCountPerVm, each_MultiplayerServerCountPerVm); output["MultiplayerServerCountPerVm"] = each_MultiplayerServerCountPerVm;
