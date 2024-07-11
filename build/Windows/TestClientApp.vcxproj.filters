@@ -23,7 +23,6 @@
     <ClInclude Include="$(TestSourceDir)\TestApp\PlayFabEventTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-
     <ClInclude Include="$(TestSourceDir)\TestApp\PlayFabTestMultiUserInstance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -54,11 +53,14 @@
     <ClInclude Include="$(TestSourceDir)\TestApp\TestApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabAuthenticationContext.h">
-      <Filter>Header Files\playfab</Filter>
+    <ClInclude Include="$(TestSourceDir\TestApp\PlayFabQoSTest.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabApiSettings.h">
-      <Filter>Header Files\playfab</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabAuthenticationContext.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -77,7 +79,6 @@
     <ClCompile Include="$(TestSourceDir)\TestApp\PlayFabEventTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-
     <ClCompile Include="$(TestSourceDir)\TestApp\PlayFabTestMultiUserInstance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -103,6 +104,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestAppWin32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(TestSourceDir)\TestApp\PlayFabQoSTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
