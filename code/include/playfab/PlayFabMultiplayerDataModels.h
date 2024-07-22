@@ -1589,7 +1589,8 @@ namespace PlayFab
             DirectPeerConnectivityOptionsSameEntityLoginProvider,
             DirectPeerConnectivityOptionsDifferentEntityLoginProvider,
             DirectPeerConnectivityOptionsAnyEntityLoginProvider,
-            DirectPeerConnectivityOptionsAnyPlatformTypeAndEntityLoginProvider
+            DirectPeerConnectivityOptionsAnyPlatformTypeAndEntityLoginProvider,
+            DirectPeerConnectivityOptionsOnlyServers
         };
 
         inline void ToJsonEnum(const DirectPeerConnectivityOptions input, Json::Value& output)
@@ -1632,6 +1633,11 @@ namespace PlayFab
             if (input == DirectPeerConnectivityOptions::DirectPeerConnectivityOptionsAnyPlatformTypeAndEntityLoginProvider)
             {
                 output = Json::Value("AnyPlatformTypeAndEntityLoginProvider");
+                return;
+            }
+            if (input == DirectPeerConnectivityOptions::DirectPeerConnectivityOptionsOnlyServers)
+            {
+                output = Json::Value("OnlyServers");
                 return;
             }
         }
@@ -1680,6 +1686,11 @@ namespace PlayFab
             if (inputStr == "AnyPlatformTypeAndEntityLoginProvider")
             {
                 output = DirectPeerConnectivityOptions::DirectPeerConnectivityOptionsAnyPlatformTypeAndEntityLoginProvider;
+                return;
+            }
+            if (inputStr == "OnlyServers")
+            {
+                output = DirectPeerConnectivityOptions::DirectPeerConnectivityOptionsOnlyServers;
                 return;
             }
         }
@@ -4982,13 +4993,15 @@ namespace PlayFab
             std::string IPV4Address;
             std::list<Port> Ports;
             std::string Region;
+            std::string ServerId;
 
             ServerDetails() :
                 PlayFabBaseModel(),
                 Fqdn(),
                 IPV4Address(),
                 Ports(),
-                Region()
+                Region(),
+                ServerId()
             {}
 
             ServerDetails(const ServerDetails& src) :
@@ -4996,7 +5009,8 @@ namespace PlayFab
                 Fqdn(src.Fqdn),
                 IPV4Address(src.IPV4Address),
                 Ports(src.Ports),
-                Region(src.Region)
+                Region(src.Region),
+                ServerId(src.ServerId)
             {}
 
             ~ServerDetails() = default;
@@ -5007,6 +5021,7 @@ namespace PlayFab
                 FromJsonUtilS(input["IPV4Address"], IPV4Address);
                 FromJsonUtilO(input["Ports"], Ports);
                 FromJsonUtilS(input["Region"], Region);
+                FromJsonUtilS(input["ServerId"], ServerId);
             }
 
             Json::Value ToJson() const override
@@ -5016,6 +5031,7 @@ namespace PlayFab
                 Json::Value each_IPV4Address; ToJsonUtilS(IPV4Address, each_IPV4Address); output["IPV4Address"] = each_IPV4Address;
                 Json::Value each_Ports; ToJsonUtilO(Ports, each_Ports); output["Ports"] = each_Ports;
                 Json::Value each_Region; ToJsonUtilS(Region, each_Region); output["Region"] = each_Region;
+                Json::Value each_ServerId; ToJsonUtilS(ServerId, each_ServerId); output["ServerId"] = each_ServerId;
                 return output;
             }
         };

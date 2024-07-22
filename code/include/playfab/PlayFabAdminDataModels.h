@@ -5470,6 +5470,16 @@ namespace PlayFab
             GenericErrorCodesStatisticDefinitionModificationNotAllowedWhileLinked,
             GenericErrorCodesLeaderboardUpdateNotAllowedWhileLinked,
             GenericErrorCodesCloudScriptAzureFunctionsEventHubRequestError,
+            GenericErrorCodesExternalEntityNotAllowedForTier,
+            GenericErrorCodesInvalidBaseTimeForInterval,
+            GenericErrorCodesEntityTypeMismatchWithStatDefinition,
+            GenericErrorCodesSpecifiedVersionLeaderboardNotFound,
+            GenericErrorCodesLeaderboardColumnLengthMismatchWithStatDefinition,
+            GenericErrorCodesDuplicateColumnNameFound,
+            GenericErrorCodesLinkedStatisticColumnNotFound,
+            GenericErrorCodesLinkedStatisticColumnRequired,
+            GenericErrorCodesMultipleLinkedStatisticsNotAllowed,
+            GenericErrorCodesMaxQueryableVerionsValueNotAllowedForTier,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5647,6 +5657,7 @@ namespace PlayFab
             GenericErrorCodesEventSinkTitleUnauthorized,
             GenericErrorCodesEventSinkInsufficientRoleAssignment,
             GenericErrorCodesEventSinkContainerNotFound,
+            GenericErrorCodesEventSinkTenantIdInvalid,
             GenericErrorCodesOperationCanceled,
             GenericErrorCodesInvalidDisplayNameRandomSuffixLength,
             GenericErrorCodesAllowNonUniquePlayerDisplayNamesDisableNotAllowed,
@@ -5716,9 +5727,36 @@ namespace PlayFab
             GenericErrorCodesTrueSkillJobAlreadyExists,
             GenericErrorCodesTrueSkillJobNotFound,
             GenericErrorCodesTrueSkillOperationCanceled,
-            GenericErrorCodesStateShareUnauthorized,
+            GenericErrorCodesTrueSkillActiveModelLimitExceeded,
+            GenericErrorCodesTrueSkillTotalModelLimitExceeded,
+            GenericErrorCodesTrueSkillUnknownInitialModelId,
+            GenericErrorCodesTrueSkillUnauthorizedForJob,
+            GenericErrorCodesTrueSkillInvalidScenarioName,
+            GenericErrorCodesTrueSkillConditionStateIsRequired,
+            GenericErrorCodesTrueSkillEventStateIsRequired,
+            GenericErrorCodesTrueSkillDuplicateEvent,
+            GenericErrorCodesTrueSkillDuplicateCondition,
+            GenericErrorCodesTrueSkillInvalidAnomalyThreshold,
+            GenericErrorCodesTrueSkillConditionKeyLimitExceeded,
+            GenericErrorCodesTrueSkillConditionValuePerKeyLimitExceeded,
+            GenericErrorCodesTrueSkillInvalidTimestamp,
+            GenericErrorCodesTrueSkillEventLimitExceeded,
+            GenericErrorCodesTrueSkillInvalidPlayers,
+            GenericErrorCodesTrueSkillTrueSkillPlayerNull,
+            GenericErrorCodesTrueSkillInvalidPlayerId,
+            GenericErrorCodesTrueSkillInvalidSquadSize,
+            GenericErrorCodesTrueSkillConditionSetNotInModel,
+            GenericErrorCodesGameSaveManifestNotFound,
+            GenericErrorCodesGameSaveManifestVersionAlreadyExists,
+            GenericErrorCodesGameSaveConflictUpdatingManifest,
+            GenericErrorCodesStateShareForbidden,
+            GenericErrorCodesStateShareTitleNotInFlight,
             GenericErrorCodesStateShareStateNotFound,
-            GenericErrorCodesStateShareLinkNotFound
+            GenericErrorCodesStateShareLinkNotFound,
+            GenericErrorCodesStateShareStateRedemptionLimitExceeded,
+            GenericErrorCodesStateShareStateRedemptionLimitNotUpdated,
+            GenericErrorCodesStateShareCreatedStatesLimitExceeded,
+            GenericErrorCodesStateShareIdMissingOrMalformed
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -8558,6 +8596,56 @@ namespace PlayFab
                 output = Json::Value("CloudScriptAzureFunctionsEventHubRequestError");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesExternalEntityNotAllowedForTier)
+            {
+                output = Json::Value("ExternalEntityNotAllowedForTier");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidBaseTimeForInterval)
+            {
+                output = Json::Value("InvalidBaseTimeForInterval");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEntityTypeMismatchWithStatDefinition)
+            {
+                output = Json::Value("EntityTypeMismatchWithStatDefinition");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesSpecifiedVersionLeaderboardNotFound)
+            {
+                output = Json::Value("SpecifiedVersionLeaderboardNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLeaderboardColumnLengthMismatchWithStatDefinition)
+            {
+                output = Json::Value("LeaderboardColumnLengthMismatchWithStatDefinition");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesDuplicateColumnNameFound)
+            {
+                output = Json::Value("DuplicateColumnNameFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLinkedStatisticColumnNotFound)
+            {
+                output = Json::Value("LinkedStatisticColumnNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesLinkedStatisticColumnRequired)
+            {
+                output = Json::Value("LinkedStatisticColumnRequired");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMultipleLinkedStatisticsNotAllowed)
+            {
+                output = Json::Value("MultipleLinkedStatisticsNotAllowed");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMaxQueryableVerionsValueNotAllowedForTier)
+            {
+                output = Json::Value("MaxQueryableVerionsValueNotAllowedForTier");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
             {
                 output = Json::Value("MatchmakingEntityInvalid");
@@ -9443,6 +9531,11 @@ namespace PlayFab
                 output = Json::Value("EventSinkContainerNotFound");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkTenantIdInvalid)
+            {
+                output = Json::Value("EventSinkTenantIdInvalid");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesOperationCanceled)
             {
                 output = Json::Value("OperationCanceled");
@@ -9788,9 +9881,124 @@ namespace PlayFab
                 output = Json::Value("TrueSkillOperationCanceled");
                 return;
             }
-            if (input == GenericErrorCodes::GenericErrorCodesStateShareUnauthorized)
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillActiveModelLimitExceeded)
             {
-                output = Json::Value("StateShareUnauthorized");
+                output = Json::Value("TrueSkillActiveModelLimitExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillTotalModelLimitExceeded)
+            {
+                output = Json::Value("TrueSkillTotalModelLimitExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillUnknownInitialModelId)
+            {
+                output = Json::Value("TrueSkillUnknownInitialModelId");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillUnauthorizedForJob)
+            {
+                output = Json::Value("TrueSkillUnauthorizedForJob");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidScenarioName)
+            {
+                output = Json::Value("TrueSkillInvalidScenarioName");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillConditionStateIsRequired)
+            {
+                output = Json::Value("TrueSkillConditionStateIsRequired");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillEventStateIsRequired)
+            {
+                output = Json::Value("TrueSkillEventStateIsRequired");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillDuplicateEvent)
+            {
+                output = Json::Value("TrueSkillDuplicateEvent");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillDuplicateCondition)
+            {
+                output = Json::Value("TrueSkillDuplicateCondition");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidAnomalyThreshold)
+            {
+                output = Json::Value("TrueSkillInvalidAnomalyThreshold");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillConditionKeyLimitExceeded)
+            {
+                output = Json::Value("TrueSkillConditionKeyLimitExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillConditionValuePerKeyLimitExceeded)
+            {
+                output = Json::Value("TrueSkillConditionValuePerKeyLimitExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidTimestamp)
+            {
+                output = Json::Value("TrueSkillInvalidTimestamp");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillEventLimitExceeded)
+            {
+                output = Json::Value("TrueSkillEventLimitExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidPlayers)
+            {
+                output = Json::Value("TrueSkillInvalidPlayers");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillTrueSkillPlayerNull)
+            {
+                output = Json::Value("TrueSkillTrueSkillPlayerNull");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidPlayerId)
+            {
+                output = Json::Value("TrueSkillInvalidPlayerId");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidSquadSize)
+            {
+                output = Json::Value("TrueSkillInvalidSquadSize");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillConditionSetNotInModel)
+            {
+                output = Json::Value("TrueSkillConditionSetNotInModel");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveManifestNotFound)
+            {
+                output = Json::Value("GameSaveManifestNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveManifestVersionAlreadyExists)
+            {
+                output = Json::Value("GameSaveManifestVersionAlreadyExists");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveConflictUpdatingManifest)
+            {
+                output = Json::Value("GameSaveConflictUpdatingManifest");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStateShareForbidden)
+            {
+                output = Json::Value("StateShareForbidden");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStateShareTitleNotInFlight)
+            {
+                output = Json::Value("StateShareTitleNotInFlight");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesStateShareStateNotFound)
@@ -9801,6 +10009,26 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesStateShareLinkNotFound)
             {
                 output = Json::Value("StateShareLinkNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStateShareStateRedemptionLimitExceeded)
+            {
+                output = Json::Value("StateShareStateRedemptionLimitExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStateShareStateRedemptionLimitNotUpdated)
+            {
+                output = Json::Value("StateShareStateRedemptionLimitNotUpdated");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStateShareCreatedStatesLimitExceeded)
+            {
+                output = Json::Value("StateShareCreatedStatesLimitExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStateShareIdMissingOrMalformed)
+            {
+                output = Json::Value("StateShareIdMissingOrMalformed");
                 return;
             }
         }
@@ -12646,6 +12874,56 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesCloudScriptAzureFunctionsEventHubRequestError;
                 return;
             }
+            if (inputStr == "ExternalEntityNotAllowedForTier")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExternalEntityNotAllowedForTier;
+                return;
+            }
+            if (inputStr == "InvalidBaseTimeForInterval")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidBaseTimeForInterval;
+                return;
+            }
+            if (inputStr == "EntityTypeMismatchWithStatDefinition")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEntityTypeMismatchWithStatDefinition;
+                return;
+            }
+            if (inputStr == "SpecifiedVersionLeaderboardNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesSpecifiedVersionLeaderboardNotFound;
+                return;
+            }
+            if (inputStr == "LeaderboardColumnLengthMismatchWithStatDefinition")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLeaderboardColumnLengthMismatchWithStatDefinition;
+                return;
+            }
+            if (inputStr == "DuplicateColumnNameFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesDuplicateColumnNameFound;
+                return;
+            }
+            if (inputStr == "LinkedStatisticColumnNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLinkedStatisticColumnNotFound;
+                return;
+            }
+            if (inputStr == "LinkedStatisticColumnRequired")
+            {
+                output = GenericErrorCodes::GenericErrorCodesLinkedStatisticColumnRequired;
+                return;
+            }
+            if (inputStr == "MultipleLinkedStatisticsNotAllowed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMultipleLinkedStatisticsNotAllowed;
+                return;
+            }
+            if (inputStr == "MaxQueryableVerionsValueNotAllowedForTier")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMaxQueryableVerionsValueNotAllowedForTier;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -13531,6 +13809,11 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesEventSinkContainerNotFound;
                 return;
             }
+            if (inputStr == "EventSinkTenantIdInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkTenantIdInvalid;
+                return;
+            }
             if (inputStr == "OperationCanceled")
             {
                 output = GenericErrorCodes::GenericErrorCodesOperationCanceled;
@@ -13876,9 +14159,124 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesTrueSkillOperationCanceled;
                 return;
             }
-            if (inputStr == "StateShareUnauthorized")
+            if (inputStr == "TrueSkillActiveModelLimitExceeded")
             {
-                output = GenericErrorCodes::GenericErrorCodesStateShareUnauthorized;
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillActiveModelLimitExceeded;
+                return;
+            }
+            if (inputStr == "TrueSkillTotalModelLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillTotalModelLimitExceeded;
+                return;
+            }
+            if (inputStr == "TrueSkillUnknownInitialModelId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillUnknownInitialModelId;
+                return;
+            }
+            if (inputStr == "TrueSkillUnauthorizedForJob")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillUnauthorizedForJob;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidScenarioName")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidScenarioName;
+                return;
+            }
+            if (inputStr == "TrueSkillConditionStateIsRequired")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillConditionStateIsRequired;
+                return;
+            }
+            if (inputStr == "TrueSkillEventStateIsRequired")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillEventStateIsRequired;
+                return;
+            }
+            if (inputStr == "TrueSkillDuplicateEvent")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillDuplicateEvent;
+                return;
+            }
+            if (inputStr == "TrueSkillDuplicateCondition")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillDuplicateCondition;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidAnomalyThreshold")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidAnomalyThreshold;
+                return;
+            }
+            if (inputStr == "TrueSkillConditionKeyLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillConditionKeyLimitExceeded;
+                return;
+            }
+            if (inputStr == "TrueSkillConditionValuePerKeyLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillConditionValuePerKeyLimitExceeded;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidTimestamp")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidTimestamp;
+                return;
+            }
+            if (inputStr == "TrueSkillEventLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillEventLimitExceeded;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidPlayers")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidPlayers;
+                return;
+            }
+            if (inputStr == "TrueSkillTrueSkillPlayerNull")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillTrueSkillPlayerNull;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidPlayerId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidPlayerId;
+                return;
+            }
+            if (inputStr == "TrueSkillInvalidSquadSize")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidSquadSize;
+                return;
+            }
+            if (inputStr == "TrueSkillConditionSetNotInModel")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillConditionSetNotInModel;
+                return;
+            }
+            if (inputStr == "GameSaveManifestNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveManifestNotFound;
+                return;
+            }
+            if (inputStr == "GameSaveManifestVersionAlreadyExists")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveManifestVersionAlreadyExists;
+                return;
+            }
+            if (inputStr == "GameSaveConflictUpdatingManifest")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveConflictUpdatingManifest;
+                return;
+            }
+            if (inputStr == "StateShareForbidden")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStateShareForbidden;
+                return;
+            }
+            if (inputStr == "StateShareTitleNotInFlight")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStateShareTitleNotInFlight;
                 return;
             }
             if (inputStr == "StateShareStateNotFound")
@@ -13889,6 +14287,26 @@ namespace PlayFab
             if (inputStr == "StateShareLinkNotFound")
             {
                 output = GenericErrorCodes::GenericErrorCodesStateShareLinkNotFound;
+                return;
+            }
+            if (inputStr == "StateShareStateRedemptionLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStateShareStateRedemptionLimitExceeded;
+                return;
+            }
+            if (inputStr == "StateShareStateRedemptionLimitNotUpdated")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStateShareStateRedemptionLimitNotUpdated;
+                return;
+            }
+            if (inputStr == "StateShareCreatedStatesLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStateShareCreatedStatesLimitExceeded;
+                return;
+            }
+            if (inputStr == "StateShareIdMissingOrMalformed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStateShareIdMissingOrMalformed;
                 return;
             }
         }
@@ -13916,7 +14334,8 @@ namespace PlayFab
             LoginIdentityProviderOpenIdConnect,
             LoginIdentityProviderApple,
             LoginIdentityProviderNintendoSwitchAccount,
-            LoginIdentityProviderGooglePlayGames
+            LoginIdentityProviderGooglePlayGames,
+            LoginIdentityProviderXboxMobileStore
         };
 
         inline void ToJsonEnum(const LoginIdentityProvider input, Json::Value& output)
@@ -14029,6 +14448,11 @@ namespace PlayFab
             if (input == LoginIdentityProvider::LoginIdentityProviderGooglePlayGames)
             {
                 output = Json::Value("GooglePlayGames");
+                return;
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderXboxMobileStore)
+            {
+                output = Json::Value("XboxMobileStore");
                 return;
             }
         }
@@ -14147,6 +14571,11 @@ namespace PlayFab
             if (inputStr == "GooglePlayGames")
             {
                 output = LoginIdentityProvider::LoginIdentityProviderGooglePlayGames;
+                return;
+            }
+            if (inputStr == "XboxMobileStore")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderXboxMobileStore;
                 return;
             }
         }
@@ -20084,7 +20513,8 @@ namespace PlayFab
             UserOriginationOpenIdConnect,
             UserOriginationApple,
             UserOriginationNintendoSwitchAccount,
-            UserOriginationGooglePlayGames
+            UserOriginationGooglePlayGames,
+            UserOriginationXboxMobileStore
         };
 
         inline void ToJsonEnum(const UserOrigination input, Json::Value& output)
@@ -20207,6 +20637,11 @@ namespace PlayFab
             if (input == UserOrigination::UserOriginationGooglePlayGames)
             {
                 output = Json::Value("GooglePlayGames");
+                return;
+            }
+            if (input == UserOrigination::UserOriginationXboxMobileStore)
+            {
+                output = Json::Value("XboxMobileStore");
                 return;
             }
         }
@@ -20335,6 +20770,11 @@ namespace PlayFab
             if (inputStr == "GooglePlayGames")
             {
                 output = UserOrigination::UserOriginationGooglePlayGames;
+                return;
+            }
+            if (inputStr == "XboxMobileStore")
+            {
+                output = UserOrigination::UserOriginationXboxMobileStore;
                 return;
             }
         }
