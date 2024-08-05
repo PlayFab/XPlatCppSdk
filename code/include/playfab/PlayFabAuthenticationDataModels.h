@@ -14,7 +14,14 @@ namespace PlayFab
         {
             IdentifiedDeviceTypeUnknown,
             IdentifiedDeviceTypeXboxOne,
-            IdentifiedDeviceTypeScarlett
+            IdentifiedDeviceTypeScarlett,
+            IdentifiedDeviceTypeWindowsOneCore,
+            IdentifiedDeviceTypeWindowsOneCoreMobile,
+            IdentifiedDeviceTypeWin32,
+            IdentifiedDeviceTypeandroid,
+            IdentifiedDeviceTypeiOS,
+            IdentifiedDeviceTypePlayStation,
+            IdentifiedDeviceTypeNintendo
         };
 
         inline void ToJsonEnum(const IdentifiedDeviceType input, Json::Value& output)
@@ -32,6 +39,41 @@ namespace PlayFab
             if (input == IdentifiedDeviceType::IdentifiedDeviceTypeScarlett)
             {
                 output = Json::Value("Scarlett");
+                return;
+            }
+            if (input == IdentifiedDeviceType::IdentifiedDeviceTypeWindowsOneCore)
+            {
+                output = Json::Value("WindowsOneCore");
+                return;
+            }
+            if (input == IdentifiedDeviceType::IdentifiedDeviceTypeWindowsOneCoreMobile)
+            {
+                output = Json::Value("WindowsOneCoreMobile");
+                return;
+            }
+            if (input == IdentifiedDeviceType::IdentifiedDeviceTypeWin32)
+            {
+                output = Json::Value("Win32");
+                return;
+            }
+            if (input == IdentifiedDeviceType::IdentifiedDeviceTypeandroid)
+            {
+                output = Json::Value("android");
+                return;
+            }
+            if (input == IdentifiedDeviceType::IdentifiedDeviceTypeiOS)
+            {
+                output = Json::Value("iOS");
+                return;
+            }
+            if (input == IdentifiedDeviceType::IdentifiedDeviceTypePlayStation)
+            {
+                output = Json::Value("PlayStation");
+                return;
+            }
+            if (input == IdentifiedDeviceType::IdentifiedDeviceTypeNintendo)
+            {
+                output = Json::Value("Nintendo");
                 return;
             }
         }
@@ -55,6 +97,41 @@ namespace PlayFab
             if (inputStr == "Scarlett")
             {
                 output = IdentifiedDeviceType::IdentifiedDeviceTypeScarlett;
+                return;
+            }
+            if (inputStr == "WindowsOneCore")
+            {
+                output = IdentifiedDeviceType::IdentifiedDeviceTypeWindowsOneCore;
+                return;
+            }
+            if (inputStr == "WindowsOneCoreMobile")
+            {
+                output = IdentifiedDeviceType::IdentifiedDeviceTypeWindowsOneCoreMobile;
+                return;
+            }
+            if (inputStr == "Win32")
+            {
+                output = IdentifiedDeviceType::IdentifiedDeviceTypeWin32;
+                return;
+            }
+            if (inputStr == "android")
+            {
+                output = IdentifiedDeviceType::IdentifiedDeviceTypeandroid;
+                return;
+            }
+            if (inputStr == "iOS")
+            {
+                output = IdentifiedDeviceType::IdentifiedDeviceTypeiOS;
+                return;
+            }
+            if (inputStr == "PlayStation")
+            {
+                output = IdentifiedDeviceType::IdentifiedDeviceTypePlayStation;
+                return;
+            }
+            if (inputStr == "Nintendo")
+            {
+                output = IdentifiedDeviceType::IdentifiedDeviceTypeNintendo;
                 return;
             }
         }
@@ -82,7 +159,8 @@ namespace PlayFab
             LoginIdentityProviderOpenIdConnect,
             LoginIdentityProviderApple,
             LoginIdentityProviderNintendoSwitchAccount,
-            LoginIdentityProviderGooglePlayGames
+            LoginIdentityProviderGooglePlayGames,
+            LoginIdentityProviderXboxMobileStore
         };
 
         inline void ToJsonEnum(const LoginIdentityProvider input, Json::Value& output)
@@ -195,6 +273,11 @@ namespace PlayFab
             if (input == LoginIdentityProvider::LoginIdentityProviderGooglePlayGames)
             {
                 output = Json::Value("GooglePlayGames");
+                return;
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderXboxMobileStore)
+            {
+                output = Json::Value("XboxMobileStore");
                 return;
             }
         }
@@ -313,6 +396,11 @@ namespace PlayFab
             if (inputStr == "GooglePlayGames")
             {
                 output = LoginIdentityProvider::LoginIdentityProviderGooglePlayGames;
+                return;
+            }
+            if (inputStr == "XboxMobileStore")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderXboxMobileStore;
                 return;
             }
         }

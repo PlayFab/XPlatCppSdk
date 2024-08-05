@@ -140,6 +140,15 @@
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabGroupsDataModels.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabLeaderboardsApi.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabLeaderboardsInstanceApi.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabLeaderboardsDataModels.h">
+      <Filter>Header Files\playfab</Filter>
+    </ClInclude>
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabLocalizationApi.h">
       <Filter>Header Files\playfab</Filter>
     </ClInclude>
@@ -309,6 +318,12 @@
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabGroupsInstanceApi.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabLeaderboardsApi.cpp">
+      <Filter>Source Files\playfab</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabLeaderboardsInstanceApi.cpp">
       <Filter>Source Files\playfab</Filter>
     </ClCompile>
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabLocalizationApi.cpp">

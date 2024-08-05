@@ -153,6 +153,9 @@
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabGroupsApi.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabGroupsInstanceApi.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabGroupsDataModels.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabLeaderboardsApi.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabLeaderboardsInstanceApi.h" />
+    <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabLeaderboardsDataModels.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabLocalizationApi.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabLocalizationInstanceApi.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabLocalizationDataModels.h" />
@@ -212,6 +215,8 @@
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabInsightsInstanceApi.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabGroupsApi.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabGroupsInstanceApi.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabLeaderboardsApi.cpp" />
+    <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabLeaderboardsInstanceApi.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabLocalizationApi.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabLocalizationInstanceApi.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabMultiplayerApi.cpp" />

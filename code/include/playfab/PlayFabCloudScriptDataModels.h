@@ -3001,7 +3001,8 @@ namespace PlayFab
             LoginIdentityProviderOpenIdConnect,
             LoginIdentityProviderApple,
             LoginIdentityProviderNintendoSwitchAccount,
-            LoginIdentityProviderGooglePlayGames
+            LoginIdentityProviderGooglePlayGames,
+            LoginIdentityProviderXboxMobileStore
         };
 
         inline void ToJsonEnum(const LoginIdentityProvider input, Json::Value& output)
@@ -3114,6 +3115,11 @@ namespace PlayFab
             if (input == LoginIdentityProvider::LoginIdentityProviderGooglePlayGames)
             {
                 output = Json::Value("GooglePlayGames");
+                return;
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderXboxMobileStore)
+            {
+                output = Json::Value("XboxMobileStore");
                 return;
             }
         }
@@ -3232,6 +3238,11 @@ namespace PlayFab
             if (inputStr == "GooglePlayGames")
             {
                 output = LoginIdentityProvider::LoginIdentityProviderGooglePlayGames;
+                return;
+            }
+            if (inputStr == "XboxMobileStore")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderXboxMobileStore;
                 return;
             }
         }
