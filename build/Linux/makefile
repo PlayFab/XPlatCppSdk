@@ -45,6 +45,8 @@ OBJS = stdafx.o \
 	PlayFabInsightsInstanceApi.o \
 	PlayFabGroupsApi.o \
 	PlayFabGroupsInstanceApi.o \
+	PlayFabLeaderboardsApi.o \
+	PlayFabLeaderboardsInstanceApi.o \
 	PlayFabLocalizationApi.o \
 	PlayFabLocalizationInstanceApi.o \
 	PlayFabMultiplayerApi.o \
