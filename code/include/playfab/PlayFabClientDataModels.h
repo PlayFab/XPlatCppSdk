@@ -16173,6 +16173,7 @@ namespace PlayFab
         struct LoginWithFacebookRequest : public PlayFabRequestCommon
         {
             std::string AccessToken;
+            std::string AuthenticationToken;
             Boxed<bool> CreateAccount;
             std::map<std::string, std::string> CustomTags;
             std::string EncryptedRequest;
@@ -16183,6 +16184,7 @@ namespace PlayFab
             LoginWithFacebookRequest() :
                 PlayFabRequestCommon(),
                 AccessToken(),
+                AuthenticationToken(),
                 CreateAccount(),
                 CustomTags(),
                 EncryptedRequest(),
@@ -16194,6 +16196,7 @@ namespace PlayFab
             LoginWithFacebookRequest(const LoginWithFacebookRequest& src) :
                 PlayFabRequestCommon(),
                 AccessToken(src.AccessToken),
+                AuthenticationToken(src.AuthenticationToken),
                 CreateAccount(src.CreateAccount),
                 CustomTags(src.CustomTags),
                 EncryptedRequest(src.EncryptedRequest),
@@ -16207,6 +16210,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AccessToken"], AccessToken);
+                FromJsonUtilS(input["AuthenticationToken"], AuthenticationToken);
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
@@ -16219,6 +16223,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_AccessToken; ToJsonUtilS(AccessToken, each_AccessToken); output["AccessToken"] = each_AccessToken;
+                Json::Value each_AuthenticationToken; ToJsonUtilS(AuthenticationToken, each_AuthenticationToken); output["AuthenticationToken"] = each_AuthenticationToken;
                 Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
