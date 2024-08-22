@@ -5,6 +5,67 @@
 #include <iomanip>
 #include <sstream>
 
+#if defined(PLAYFAB_PLATFORM_WINDOWS) || defined(PLAYFAB_PLATFORM_GDK) || defined(PLAYFAB_PLATFORM_XBOX)
+#include <WinSock2.h>
+#include <Windows.h>
+#endif
+
+#ifndef DEFINE_ENUM_FLAG_OPERATORS
+#ifdef __cplusplus
+
+extern "C++" {
+
+    template <size_t S>
+    struct _ENUM_FLAG_INTEGER_FOR_SIZE;
+
+    template <>
+    struct _ENUM_FLAG_INTEGER_FOR_SIZE<1>
+    {
+        typedef int8_t type;
+    };
+
+    template <>
+    struct _ENUM_FLAG_INTEGER_FOR_SIZE<2>
+    {
+        typedef int16_t type;
+    };
+
+    template <>
+    struct _ENUM_FLAG_INTEGER_FOR_SIZE<4>
+    {
+        typedef int32_t type;
+    };
+
+    template <>
+    struct _ENUM_FLAG_INTEGER_FOR_SIZE<8>
+    {
+        typedef int64_t type;
+    };
+
+    // used as an approximation of std::underlying_type<T>
+    template <class T>
+    struct _ENUM_FLAG_SIZED_INTEGER
+    {
+        typedef typename _ENUM_FLAG_INTEGER_FOR_SIZE<sizeof(T)>::type type;
+    };
+
+    }
+
+#define DEFINE_ENUM_FLAG_OPERATORS(ENUMTYPE) \
+    extern "C++" { \
+    inline ENUMTYPE operator | (ENUMTYPE a, ENUMTYPE b) throw() { return ENUMTYPE(((_ENUM_FLAG_SIZED_INTEGER<ENUMTYPE>::type)a) | ((_ENUM_FLAG_SIZED_INTEGER<ENUMTYPE>::type)b)); } \
+    inline ENUMTYPE &operator |= (ENUMTYPE &a, ENUMTYPE b) throw() { return (ENUMTYPE &)(((_ENUM_FLAG_SIZED_INTEGER<ENUMTYPE>::type &)a) |= ((_ENUM_FLAG_SIZED_INTEGER<ENUMTYPE>::type)b)); } \
+    inline ENUMTYPE operator & (ENUMTYPE a, ENUMTYPE b) throw() { return ENUMTYPE(((_ENUM_FLAG_SIZED_INTEGER<ENUMTYPE>::type)a) & ((_ENUM_FLAG_SIZED_INTEGER<ENUMTYPE>::type)b)); } \
+    inline ENUMTYPE &operator &= (ENUMTYPE &a, ENUMTYPE b) throw() { return (ENUMTYPE &)(((_ENUM_FLAG_SIZED_INTEGER<ENUMTYPE>::type &)a) &= ((_ENUM_FLAG_SIZED_INTEGER<ENUMTYPE>::type)b)); } \
+    inline ENUMTYPE operator ~ (ENUMTYPE a) throw() { return ENUMTYPE(~((_ENUM_FLAG_SIZED_INTEGER<ENUMTYPE>::type)a)); } \
+    inline ENUMTYPE operator ^ (ENUMTYPE a, ENUMTYPE b) throw() { return ENUMTYPE(((_ENUM_FLAG_SIZED_INTEGER<ENUMTYPE>::type)a) ^ ((_ENUM_FLAG_SIZED_INTEGER<ENUMTYPE>::type)b)); } \
+    inline ENUMTYPE &operator ^= (ENUMTYPE &a, ENUMTYPE b) throw() { return (ENUMTYPE &)(((_ENUM_FLAG_SIZED_INTEGER<ENUMTYPE>::type &)a) ^= ((_ENUM_FLAG_SIZED_INTEGER<ENUMTYPE>::type)b)); } \
+    }
+#else
+#define DEFINE_ENUM_FLAG_OPERATORS(ENUMTYPE) // NOP, C allows these operators.
+#endif
+#endif // DEFINE_ENUM_FLAG_OPERATORS
+
 namespace PlayFab
 {
 #if defined(PLAYFAB_PLATFORM_SWITCH)

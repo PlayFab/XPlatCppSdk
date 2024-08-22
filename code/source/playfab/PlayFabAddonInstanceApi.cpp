@@ -2,7 +2,7 @@
 
 #if !defined(DISABLE_PLAYFABENTITY_API)
 
-#include <playfab/PlayFabLeaderboardsInstanceApi.h>
+#include <playfab/PlayFabAddonInstanceApi.h>
 #include <playfab/PlayFabPluginManager.h>
 #include <playfab/PlayFabSettings.h>
 
@@ -12,9 +12,9 @@
 
 namespace PlayFab
 {
-    using namespace LeaderboardsModels;
+    using namespace AddonModels;
 
-    PlayFabLeaderboardsInstanceAPI::PlayFabLeaderboardsInstanceAPI(const std::shared_ptr<PlayFabAuthenticationContext>& authenticationContext)
+    PlayFabAddonInstanceAPI::PlayFabAddonInstanceAPI(const std::shared_ptr<PlayFabAuthenticationContext>& authenticationContext)
     {
         if (authenticationContext == nullptr)
         {
@@ -23,7 +23,7 @@ namespace PlayFab
         this->m_context = authenticationContext;
     }
 
-    PlayFabLeaderboardsInstanceAPI::PlayFabLeaderboardsInstanceAPI(const std::shared_ptr<PlayFabApiSettings>& apiSettings, const std::shared_ptr<PlayFabAuthenticationContext>& authenticationContext)
+    PlayFabAddonInstanceAPI::PlayFabAddonInstanceAPI(const std::shared_ptr<PlayFabApiSettings>& apiSettings, const std::shared_ptr<PlayFabAuthenticationContext>& authenticationContext)
     {
         if (authenticationContext == nullptr)
         {
@@ -33,23 +33,23 @@ namespace PlayFab
         this->m_context = authenticationContext;
     }
 
-    std::shared_ptr<PlayFabApiSettings> PlayFabLeaderboardsInstanceAPI::GetSettings() const
+    std::shared_ptr<PlayFabApiSettings> PlayFabAddonInstanceAPI::GetSettings() const
     {
         return this->m_settings;
     }
 
-    std::shared_ptr<PlayFabAuthenticationContext> PlayFabLeaderboardsInstanceAPI::GetAuthenticationContext() const
+    std::shared_ptr<PlayFabAuthenticationContext> PlayFabAddonInstanceAPI::GetAuthenticationContext() const
     {
         return this->m_context;
     }
 
-    size_t PlayFabLeaderboardsInstanceAPI::Update()
+    size_t PlayFabAddonInstanceAPI::Update()
     {
         IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
         return http.Update();
     }
 
-    void PlayFabLeaderboardsInstanceAPI::ForgetAllCredentials()
+    void PlayFabAddonInstanceAPI::ForgetAllCredentials()
     {
         if (this->m_context != nullptr)
         {
@@ -57,11 +57,11 @@ namespace PlayFab
         }
     }
 
-    // PlayFabLeaderboards instance APIs
+    // PlayFabAddon instance APIs
 
-    void PlayFabLeaderboardsInstanceAPI::CreateLeaderboardDefinition(
-        CreateLeaderboardDefinitionRequest& request,
-        const ProcessApiCallback<EmptyResponse> callback,
+    void PlayFabAddonInstanceAPI::CreateOrUpdateApple(
+        CreateOrUpdateAppleRequest& request,
+        const ProcessApiCallback<CreateOrUpdateAppleResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
     )
@@ -78,40 +78,40 @@ namespace PlayFab
         headers.emplace("X-EntityToken", context->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Leaderboard/CreateLeaderboardDefinition",
+            "/Addon/CreateOrUpdateApple",
             headers,
             jsonAsString,
-            std::bind(&PlayFabLeaderboardsInstanceAPI::OnCreateLeaderboardDefinitionResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            std::bind(&PlayFabAddonInstanceAPI::OnCreateOrUpdateAppleResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
             settings,
             context,
             customData));
 
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateOrUpdateAppleResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabLeaderboardsInstanceAPI::OnCreateLeaderboardDefinitionResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabAddonInstanceAPI::OnCreateOrUpdateAppleResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
-        EmptyResponse outResult;
+        CreateOrUpdateAppleResponse outResult;
         if (ValidateResult(outResult, container))
         {
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
             {
-                const auto& callback = *static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr.get());
+                const auto& callback = *static_cast<ProcessApiCallback<CreateOrUpdateAppleResponse> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
     }
 
-    void PlayFabLeaderboardsInstanceAPI::CreateStatisticDefinition(
-        CreateStatisticDefinitionRequest& request,
-        const ProcessApiCallback<EmptyResponse> callback,
+    void PlayFabAddonInstanceAPI::CreateOrUpdateFacebook(
+        CreateOrUpdateFacebookRequest& request,
+        const ProcessApiCallback<CreateOrUpdateFacebookResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
     )
@@ -128,40 +128,40 @@ namespace PlayFab
         headers.emplace("X-EntityToken", context->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Statistic/CreateStatisticDefinition",
+            "/Addon/CreateOrUpdateFacebook",
             headers,
             jsonAsString,
-            std::bind(&PlayFabLeaderboardsInstanceAPI::OnCreateStatisticDefinitionResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            std::bind(&PlayFabAddonInstanceAPI::OnCreateOrUpdateFacebookResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
             settings,
             context,
             customData));
 
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateOrUpdateFacebookResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabLeaderboardsInstanceAPI::OnCreateStatisticDefinitionResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabAddonInstanceAPI::OnCreateOrUpdateFacebookResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
-        EmptyResponse outResult;
+        CreateOrUpdateFacebookResponse outResult;
         if (ValidateResult(outResult, container))
         {
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
             {
-                const auto& callback = *static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr.get());
+                const auto& callback = *static_cast<ProcessApiCallback<CreateOrUpdateFacebookResponse> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
     }
 
-    void PlayFabLeaderboardsInstanceAPI::DeleteLeaderboardDefinition(
-        DeleteLeaderboardDefinitionRequest& request,
-        const ProcessApiCallback<EmptyResponse> callback,
+    void PlayFabAddonInstanceAPI::CreateOrUpdateFacebookInstantGames(
+        CreateOrUpdateFacebookInstantGamesRequest& request,
+        const ProcessApiCallback<CreateOrUpdateFacebookInstantGamesResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
     )
@@ -178,40 +178,40 @@ namespace PlayFab
         headers.emplace("X-EntityToken", context->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Leaderboard/DeleteLeaderboardDefinition",
+            "/Addon/CreateOrUpdateFacebookInstantGames",
             headers,
             jsonAsString,
-            std::bind(&PlayFabLeaderboardsInstanceAPI::OnDeleteLeaderboardDefinitionResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            std::bind(&PlayFabAddonInstanceAPI::OnCreateOrUpdateFacebookInstantGamesResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
             settings,
             context,
             customData));
 
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateOrUpdateFacebookInstantGamesResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabLeaderboardsInstanceAPI::OnDeleteLeaderboardDefinitionResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabAddonInstanceAPI::OnCreateOrUpdateFacebookInstantGamesResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
-        EmptyResponse outResult;
+        CreateOrUpdateFacebookInstantGamesResponse outResult;
         if (ValidateResult(outResult, container))
         {
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
             {
-                const auto& callback = *static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr.get());
+                const auto& callback = *static_cast<ProcessApiCallback<CreateOrUpdateFacebookInstantGamesResponse> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
     }
 
-    void PlayFabLeaderboardsInstanceAPI::DeleteLeaderboardEntries(
-        DeleteLeaderboardEntriesRequest& request,
-        const ProcessApiCallback<EmptyResponse> callback,
+    void PlayFabAddonInstanceAPI::CreateOrUpdateGoogle(
+        CreateOrUpdateGoogleRequest& request,
+        const ProcessApiCallback<CreateOrUpdateGoogleResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
     )
@@ -228,40 +228,40 @@ namespace PlayFab
         headers.emplace("X-EntityToken", context->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Leaderboard/DeleteLeaderboardEntries",
+            "/Addon/CreateOrUpdateGoogle",
             headers,
             jsonAsString,
-            std::bind(&PlayFabLeaderboardsInstanceAPI::OnDeleteLeaderboardEntriesResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            std::bind(&PlayFabAddonInstanceAPI::OnCreateOrUpdateGoogleResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
             settings,
             context,
             customData));
 
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateOrUpdateGoogleResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabLeaderboardsInstanceAPI::OnDeleteLeaderboardEntriesResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabAddonInstanceAPI::OnCreateOrUpdateGoogleResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
-        EmptyResponse outResult;
+        CreateOrUpdateGoogleResponse outResult;
         if (ValidateResult(outResult, container))
         {
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
             {
-                const auto& callback = *static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr.get());
+                const auto& callback = *static_cast<ProcessApiCallback<CreateOrUpdateGoogleResponse> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
     }
 
-    void PlayFabLeaderboardsInstanceAPI::DeleteStatisticDefinition(
-        DeleteStatisticDefinitionRequest& request,
-        const ProcessApiCallback<EmptyResponse> callback,
+    void PlayFabAddonInstanceAPI::CreateOrUpdateKongregate(
+        CreateOrUpdateKongregateRequest& request,
+        const ProcessApiCallback<CreateOrUpdateKongregateResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
     )
@@ -278,40 +278,40 @@ namespace PlayFab
         headers.emplace("X-EntityToken", context->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Statistic/DeleteStatisticDefinition",
+            "/Addon/CreateOrUpdateKongregate",
             headers,
             jsonAsString,
-            std::bind(&PlayFabLeaderboardsInstanceAPI::OnDeleteStatisticDefinitionResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            std::bind(&PlayFabAddonInstanceAPI::OnCreateOrUpdateKongregateResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
             settings,
             context,
             customData));
 
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateOrUpdateKongregateResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabLeaderboardsInstanceAPI::OnDeleteStatisticDefinitionResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabAddonInstanceAPI::OnCreateOrUpdateKongregateResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
-        EmptyResponse outResult;
+        CreateOrUpdateKongregateResponse outResult;
         if (ValidateResult(outResult, container))
         {
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
             {
-                const auto& callback = *static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr.get());
+                const auto& callback = *static_cast<ProcessApiCallback<CreateOrUpdateKongregateResponse> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
     }
 
-    void PlayFabLeaderboardsInstanceAPI::DeleteStatistics(
-        DeleteStatisticsRequest& request,
-        const ProcessApiCallback<DeleteStatisticsResponse> callback,
+    void PlayFabAddonInstanceAPI::CreateOrUpdateNintendo(
+        CreateOrUpdateNintendoRequest& request,
+        const ProcessApiCallback<CreateOrUpdateNintendoResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
     )
@@ -328,40 +328,40 @@ namespace PlayFab
         headers.emplace("X-EntityToken", context->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Statistic/DeleteStatistics",
+            "/Addon/CreateOrUpdateNintendo",
             headers,
             jsonAsString,
-            std::bind(&PlayFabLeaderboardsInstanceAPI::OnDeleteStatisticsResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            std::bind(&PlayFabAddonInstanceAPI::OnCreateOrUpdateNintendoResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
             settings,
             context,
             customData));
 
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeleteStatisticsResponse>(callback));
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateOrUpdateNintendoResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabLeaderboardsInstanceAPI::OnDeleteStatisticsResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabAddonInstanceAPI::OnCreateOrUpdateNintendoResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
-        DeleteStatisticsResponse outResult;
+        CreateOrUpdateNintendoResponse outResult;
         if (ValidateResult(outResult, container))
         {
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
             {
-                const auto& callback = *static_cast<ProcessApiCallback<DeleteStatisticsResponse> *>(internalPtr.get());
+                const auto& callback = *static_cast<ProcessApiCallback<CreateOrUpdateNintendoResponse> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
     }
 
-    void PlayFabLeaderboardsInstanceAPI::GetFriendLeaderboardForEntity(
-        GetFriendLeaderboardForEntityRequest& request,
-        const ProcessApiCallback<GetEntityLeaderboardResponse> callback,
+    void PlayFabAddonInstanceAPI::CreateOrUpdatePSN(
+        CreateOrUpdatePSNRequest& request,
+        const ProcessApiCallback<CreateOrUpdatePSNResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
     )
@@ -378,40 +378,40 @@ namespace PlayFab
         headers.emplace("X-EntityToken", context->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Leaderboard/GetFriendLeaderboardForEntity",
+            "/Addon/CreateOrUpdatePSN",
             headers,
             jsonAsString,
-            std::bind(&PlayFabLeaderboardsInstanceAPI::OnGetFriendLeaderboardForEntityResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            std::bind(&PlayFabAddonInstanceAPI::OnCreateOrUpdatePSNResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
             settings,
             context,
             customData));
 
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetEntityLeaderboardResponse>(callback));
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateOrUpdatePSNResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabLeaderboardsInstanceAPI::OnGetFriendLeaderboardForEntityResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabAddonInstanceAPI::OnCreateOrUpdatePSNResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
-        GetEntityLeaderboardResponse outResult;
+        CreateOrUpdatePSNResponse outResult;
         if (ValidateResult(outResult, container))
         {
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
             {
-                const auto& callback = *static_cast<ProcessApiCallback<GetEntityLeaderboardResponse> *>(internalPtr.get());
+                const auto& callback = *static_cast<ProcessApiCallback<CreateOrUpdatePSNResponse> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
     }
 
-    void PlayFabLeaderboardsInstanceAPI::GetLeaderboard(
-        GetEntityLeaderboardRequest& request,
-        const ProcessApiCallback<GetEntityLeaderboardResponse> callback,
+    void PlayFabAddonInstanceAPI::CreateOrUpdateSteam(
+        CreateOrUpdateSteamRequest& request,
+        const ProcessApiCallback<CreateOrUpdateSteamResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
     )
@@ -428,40 +428,40 @@ namespace PlayFab
         headers.emplace("X-EntityToken", context->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Leaderboard/GetLeaderboard",
+            "/Addon/CreateOrUpdateSteam",
             headers,
             jsonAsString,
-            std::bind(&PlayFabLeaderboardsInstanceAPI::OnGetLeaderboardResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            std::bind(&PlayFabAddonInstanceAPI::OnCreateOrUpdateSteamResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
             settings,
             context,
             customData));
 
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetEntityLeaderboardResponse>(callback));
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateOrUpdateSteamResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabLeaderboardsInstanceAPI::OnGetLeaderboardResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabAddonInstanceAPI::OnCreateOrUpdateSteamResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
-        GetEntityLeaderboardResponse outResult;
+        CreateOrUpdateSteamResponse outResult;
         if (ValidateResult(outResult, container))
         {
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
             {
-                const auto& callback = *static_cast<ProcessApiCallback<GetEntityLeaderboardResponse> *>(internalPtr.get());
+                const auto& callback = *static_cast<ProcessApiCallback<CreateOrUpdateSteamResponse> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
     }
 
-    void PlayFabLeaderboardsInstanceAPI::GetLeaderboardAroundEntity(
-        GetLeaderboardAroundEntityRequest& request,
-        const ProcessApiCallback<GetEntityLeaderboardResponse> callback,
+    void PlayFabAddonInstanceAPI::CreateOrUpdateTwitch(
+        CreateOrUpdateTwitchRequest& request,
+        const ProcessApiCallback<CreateOrUpdateTwitchResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
     )
@@ -478,40 +478,40 @@ namespace PlayFab
         headers.emplace("X-EntityToken", context->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Leaderboard/GetLeaderboardAroundEntity",
+            "/Addon/CreateOrUpdateTwitch",
             headers,
             jsonAsString,
-            std::bind(&PlayFabLeaderboardsInstanceAPI::OnGetLeaderboardAroundEntityResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            std::bind(&PlayFabAddonInstanceAPI::OnCreateOrUpdateTwitchResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
             settings,
             context,
             customData));
 
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetEntityLeaderboardResponse>(callback));
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<CreateOrUpdateTwitchResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabLeaderboardsInstanceAPI::OnGetLeaderboardAroundEntityResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabAddonInstanceAPI::OnCreateOrUpdateTwitchResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
-        GetEntityLeaderboardResponse outResult;
+        CreateOrUpdateTwitchResponse outResult;
         if (ValidateResult(outResult, container))
         {
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
             {
-                const auto& callback = *static_cast<ProcessApiCallback<GetEntityLeaderboardResponse> *>(internalPtr.get());
+                const auto& callback = *static_cast<ProcessApiCallback<CreateOrUpdateTwitchResponse> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
     }
 
-    void PlayFabLeaderboardsInstanceAPI::GetLeaderboardDefinition(
-        GetLeaderboardDefinitionRequest& request,
-        const ProcessApiCallback<GetLeaderboardDefinitionResponse> callback,
+    void PlayFabAddonInstanceAPI::DeleteApple(
+        DeleteAppleRequest& request,
+        const ProcessApiCallback<DeleteAppleResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
     )
@@ -528,40 +528,40 @@ namespace PlayFab
         headers.emplace("X-EntityToken", context->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Leaderboard/GetLeaderboardDefinition",
+            "/Addon/DeleteApple",
             headers,
             jsonAsString,
-            std::bind(&PlayFabLeaderboardsInstanceAPI::OnGetLeaderboardDefinitionResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            std::bind(&PlayFabAddonInstanceAPI::OnDeleteAppleResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
             settings,
             context,
             customData));
 
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetLeaderboardDefinitionResponse>(callback));
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeleteAppleResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabLeaderboardsInstanceAPI::OnGetLeaderboardDefinitionResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabAddonInstanceAPI::OnDeleteAppleResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
-        GetLeaderboardDefinitionResponse outResult;
+        DeleteAppleResponse outResult;
         if (ValidateResult(outResult, container))
         {
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
             {
-                const auto& callback = *static_cast<ProcessApiCallback<GetLeaderboardDefinitionResponse> *>(internalPtr.get());
+                const auto& callback = *static_cast<ProcessApiCallback<DeleteAppleResponse> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
     }
 
-    void PlayFabLeaderboardsInstanceAPI::GetLeaderboardForEntities(
-        GetLeaderboardForEntitiesRequest& request,
-        const ProcessApiCallback<GetEntityLeaderboardResponse> callback,
+    void PlayFabAddonInstanceAPI::DeleteFacebook(
+        DeleteFacebookRequest& request,
+        const ProcessApiCallback<DeleteFacebookResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
     )
@@ -578,40 +578,40 @@ namespace PlayFab
         headers.emplace("X-EntityToken", context->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Leaderboard/GetLeaderboardForEntities",
+            "/Addon/DeleteFacebook",
             headers,
             jsonAsString,
-            std::bind(&PlayFabLeaderboardsInstanceAPI::OnGetLeaderboardForEntitiesResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            std::bind(&PlayFabAddonInstanceAPI::OnDeleteFacebookResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
             settings,
             context,
             customData));
 
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetEntityLeaderboardResponse>(callback));
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeleteFacebookResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabLeaderboardsInstanceAPI::OnGetLeaderboardForEntitiesResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabAddonInstanceAPI::OnDeleteFacebookResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
-        GetEntityLeaderboardResponse outResult;
+        DeleteFacebookResponse outResult;
         if (ValidateResult(outResult, container))
         {
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
             {
-                const auto& callback = *static_cast<ProcessApiCallback<GetEntityLeaderboardResponse> *>(internalPtr.get());
+                const auto& callback = *static_cast<ProcessApiCallback<DeleteFacebookResponse> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
     }
 
-    void PlayFabLeaderboardsInstanceAPI::GetStatisticDefinition(
-        GetStatisticDefinitionRequest& request,
-        const ProcessApiCallback<GetStatisticDefinitionResponse> callback,
+    void PlayFabAddonInstanceAPI::DeleteFacebookInstantGames(
+        DeleteFacebookInstantGamesRequest& request,
+        const ProcessApiCallback<DeleteFacebookInstantGamesResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
     )
@@ -628,40 +628,40 @@ namespace PlayFab
         headers.emplace("X-EntityToken", context->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Statistic/GetStatisticDefinition",
+            "/Addon/DeleteFacebookInstantGames",
             headers,
             jsonAsString,
-            std::bind(&PlayFabLeaderboardsInstanceAPI::OnGetStatisticDefinitionResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            std::bind(&PlayFabAddonInstanceAPI::OnDeleteFacebookInstantGamesResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
             settings,
             context,
             customData));
 
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetStatisticDefinitionResponse>(callback));
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeleteFacebookInstantGamesResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabLeaderboardsInstanceAPI::OnGetStatisticDefinitionResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabAddonInstanceAPI::OnDeleteFacebookInstantGamesResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
-        GetStatisticDefinitionResponse outResult;
+        DeleteFacebookInstantGamesResponse outResult;
         if (ValidateResult(outResult, container))
         {
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
             {
-                const auto& callback = *static_cast<ProcessApiCallback<GetStatisticDefinitionResponse> *>(internalPtr.get());
+                const auto& callback = *static_cast<ProcessApiCallback<DeleteFacebookInstantGamesResponse> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
     }
 
-    void PlayFabLeaderboardsInstanceAPI::GetStatisticDefinitions(
-        GetStatisticDefinitionsRequest& request,
-        const ProcessApiCallback<GetStatisticDefinitionsResponse> callback,
+    void PlayFabAddonInstanceAPI::DeleteGoogle(
+        DeleteGoogleRequest& request,
+        const ProcessApiCallback<DeleteGoogleResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
     )
@@ -678,40 +678,40 @@ namespace PlayFab
         headers.emplace("X-EntityToken", context->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Statistic/GetStatisticDefinitions",
+            "/Addon/DeleteGoogle",
             headers,
             jsonAsString,
-            std::bind(&PlayFabLeaderboardsInstanceAPI::OnGetStatisticDefinitionsResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            std::bind(&PlayFabAddonInstanceAPI::OnDeleteGoogleResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
             settings,
             context,
             customData));
 
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetStatisticDefinitionsResponse>(callback));
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeleteGoogleResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabLeaderboardsInstanceAPI::OnGetStatisticDefinitionsResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabAddonInstanceAPI::OnDeleteGoogleResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
-        GetStatisticDefinitionsResponse outResult;
+        DeleteGoogleResponse outResult;
         if (ValidateResult(outResult, container))
         {
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
             {
-                const auto& callback = *static_cast<ProcessApiCallback<GetStatisticDefinitionsResponse> *>(internalPtr.get());
+                const auto& callback = *static_cast<ProcessApiCallback<DeleteGoogleResponse> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
     }
 
-    void PlayFabLeaderboardsInstanceAPI::GetStatistics(
-        GetStatisticsRequest& request,
-        const ProcessApiCallback<GetStatisticsResponse> callback,
+    void PlayFabAddonInstanceAPI::DeleteKongregate(
+        DeleteKongregateRequest& request,
+        const ProcessApiCallback<DeleteKongregateResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
     )
@@ -728,40 +728,40 @@ namespace PlayFab
         headers.emplace("X-EntityToken", context->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Statistic/GetStatistics",
+            "/Addon/DeleteKongregate",
             headers,
             jsonAsString,
-            std::bind(&PlayFabLeaderboardsInstanceAPI::OnGetStatisticsResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            std::bind(&PlayFabAddonInstanceAPI::OnDeleteKongregateResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
             settings,
             context,
             customData));
 
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetStatisticsResponse>(callback));
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeleteKongregateResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabLeaderboardsInstanceAPI::OnGetStatisticsResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabAddonInstanceAPI::OnDeleteKongregateResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
-        GetStatisticsResponse outResult;
+        DeleteKongregateResponse outResult;
         if (ValidateResult(outResult, container))
         {
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
             {
-                const auto& callback = *static_cast<ProcessApiCallback<GetStatisticsResponse> *>(internalPtr.get());
+                const auto& callback = *static_cast<ProcessApiCallback<DeleteKongregateResponse> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
     }
 
-    void PlayFabLeaderboardsInstanceAPI::GetStatisticsForEntities(
-        GetStatisticsForEntitiesRequest& request,
-        const ProcessApiCallback<GetStatisticsForEntitiesResponse> callback,
+    void PlayFabAddonInstanceAPI::DeleteNintendo(
+        DeleteNintendoRequest& request,
+        const ProcessApiCallback<DeleteNintendoResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
     )
@@ -778,40 +778,40 @@ namespace PlayFab
         headers.emplace("X-EntityToken", context->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Statistic/GetStatisticsForEntities",
+            "/Addon/DeleteNintendo",
             headers,
             jsonAsString,
-            std::bind(&PlayFabLeaderboardsInstanceAPI::OnGetStatisticsForEntitiesResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            std::bind(&PlayFabAddonInstanceAPI::OnDeleteNintendoResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
             settings,
             context,
             customData));
 
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetStatisticsForEntitiesResponse>(callback));
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeleteNintendoResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabLeaderboardsInstanceAPI::OnGetStatisticsForEntitiesResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabAddonInstanceAPI::OnDeleteNintendoResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
-        GetStatisticsForEntitiesResponse outResult;
+        DeleteNintendoResponse outResult;
         if (ValidateResult(outResult, container))
         {
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
             {
-                const auto& callback = *static_cast<ProcessApiCallback<GetStatisticsForEntitiesResponse> *>(internalPtr.get());
+                const auto& callback = *static_cast<ProcessApiCallback<DeleteNintendoResponse> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
     }
 
-    void PlayFabLeaderboardsInstanceAPI::IncrementLeaderboardVersion(
-        IncrementLeaderboardVersionRequest& request,
-        const ProcessApiCallback<IncrementLeaderboardVersionResponse> callback,
+    void PlayFabAddonInstanceAPI::DeletePSN(
+        DeletePSNRequest& request,
+        const ProcessApiCallback<DeletePSNResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
     )
@@ -828,40 +828,40 @@ namespace PlayFab
         headers.emplace("X-EntityToken", context->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Leaderboard/IncrementLeaderboardVersion",
+            "/Addon/DeletePSN",
             headers,
             jsonAsString,
-            std::bind(&PlayFabLeaderboardsInstanceAPI::OnIncrementLeaderboardVersionResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            std::bind(&PlayFabAddonInstanceAPI::OnDeletePSNResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
             settings,
             context,
             customData));
 
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<IncrementLeaderboardVersionResponse>(callback));
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeletePSNResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabLeaderboardsInstanceAPI::OnIncrementLeaderboardVersionResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabAddonInstanceAPI::OnDeletePSNResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
-        IncrementLeaderboardVersionResponse outResult;
+        DeletePSNResponse outResult;
         if (ValidateResult(outResult, container))
         {
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
             {
-                const auto& callback = *static_cast<ProcessApiCallback<IncrementLeaderboardVersionResponse> *>(internalPtr.get());
+                const auto& callback = *static_cast<ProcessApiCallback<DeletePSNResponse> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
     }
 
-    void PlayFabLeaderboardsInstanceAPI::IncrementStatisticVersion(
-        IncrementStatisticVersionRequest& request,
-        const ProcessApiCallback<IncrementStatisticVersionResponse> callback,
+    void PlayFabAddonInstanceAPI::DeleteSteam(
+        DeleteSteamRequest& request,
+        const ProcessApiCallback<DeleteSteamResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
     )
@@ -878,40 +878,40 @@ namespace PlayFab
         headers.emplace("X-EntityToken", context->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Statistic/IncrementStatisticVersion",
+            "/Addon/DeleteSteam",
             headers,
             jsonAsString,
-            std::bind(&PlayFabLeaderboardsInstanceAPI::OnIncrementStatisticVersionResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            std::bind(&PlayFabAddonInstanceAPI::OnDeleteSteamResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
             settings,
             context,
             customData));
 
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<IncrementStatisticVersionResponse>(callback));
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeleteSteamResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabLeaderboardsInstanceAPI::OnIncrementStatisticVersionResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabAddonInstanceAPI::OnDeleteSteamResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
-        IncrementStatisticVersionResponse outResult;
+        DeleteSteamResponse outResult;
         if (ValidateResult(outResult, container))
         {
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
             {
-                const auto& callback = *static_cast<ProcessApiCallback<IncrementStatisticVersionResponse> *>(internalPtr.get());
+                const auto& callback = *static_cast<ProcessApiCallback<DeleteSteamResponse> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
     }
 
-    void PlayFabLeaderboardsInstanceAPI::ListLeaderboardDefinitions(
-        ListLeaderboardDefinitionsRequest& request,
-        const ProcessApiCallback<ListLeaderboardDefinitionsResponse> callback,
+    void PlayFabAddonInstanceAPI::DeleteTwitch(
+        DeleteTwitchRequest& request,
+        const ProcessApiCallback<DeleteTwitchResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
     )
@@ -928,40 +928,40 @@ namespace PlayFab
         headers.emplace("X-EntityToken", context->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Leaderboard/ListLeaderboardDefinitions",
+            "/Addon/DeleteTwitch",
             headers,
             jsonAsString,
-            std::bind(&PlayFabLeaderboardsInstanceAPI::OnListLeaderboardDefinitionsResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            std::bind(&PlayFabAddonInstanceAPI::OnDeleteTwitchResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
             settings,
             context,
             customData));
 
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListLeaderboardDefinitionsResponse>(callback));
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeleteTwitchResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabLeaderboardsInstanceAPI::OnListLeaderboardDefinitionsResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabAddonInstanceAPI::OnDeleteTwitchResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
-        ListLeaderboardDefinitionsResponse outResult;
+        DeleteTwitchResponse outResult;
         if (ValidateResult(outResult, container))
         {
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
             {
-                const auto& callback = *static_cast<ProcessApiCallback<ListLeaderboardDefinitionsResponse> *>(internalPtr.get());
+                const auto& callback = *static_cast<ProcessApiCallback<DeleteTwitchResponse> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
     }
 
-    void PlayFabLeaderboardsInstanceAPI::ListStatisticDefinitions(
-        ListStatisticDefinitionsRequest& request,
-        const ProcessApiCallback<ListStatisticDefinitionsResponse> callback,
+    void PlayFabAddonInstanceAPI::GetApple(
+        GetAppleRequest& request,
+        const ProcessApiCallback<GetAppleResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
     )
@@ -978,40 +978,40 @@ namespace PlayFab
         headers.emplace("X-EntityToken", context->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Statistic/ListStatisticDefinitions",
+            "/Addon/GetApple",
             headers,
             jsonAsString,
-            std::bind(&PlayFabLeaderboardsInstanceAPI::OnListStatisticDefinitionsResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            std::bind(&PlayFabAddonInstanceAPI::OnGetAppleResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
             settings,
             context,
             customData));
 
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListStatisticDefinitionsResponse>(callback));
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetAppleResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabLeaderboardsInstanceAPI::OnListStatisticDefinitionsResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabAddonInstanceAPI::OnGetAppleResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
-        ListStatisticDefinitionsResponse outResult;
+        GetAppleResponse outResult;
         if (ValidateResult(outResult, container))
         {
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
             {
-                const auto& callback = *static_cast<ProcessApiCallback<ListStatisticDefinitionsResponse> *>(internalPtr.get());
+                const auto& callback = *static_cast<ProcessApiCallback<GetAppleResponse> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
     }
 
-    void PlayFabLeaderboardsInstanceAPI::UnlinkLeaderboardFromStatistic(
-        UnlinkLeaderboardFromStatisticRequest& request,
-        const ProcessApiCallback<EmptyResponse> callback,
+    void PlayFabAddonInstanceAPI::GetFacebook(
+        GetFacebookRequest& request,
+        const ProcessApiCallback<GetFacebookResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
     )
@@ -1028,40 +1028,40 @@ namespace PlayFab
         headers.emplace("X-EntityToken", context->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Leaderboard/UnlinkLeaderboardFromStatistic",
+            "/Addon/GetFacebook",
             headers,
             jsonAsString,
-            std::bind(&PlayFabLeaderboardsInstanceAPI::OnUnlinkLeaderboardFromStatisticResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            std::bind(&PlayFabAddonInstanceAPI::OnGetFacebookResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
             settings,
             context,
             customData));
 
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetFacebookResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabLeaderboardsInstanceAPI::OnUnlinkLeaderboardFromStatisticResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabAddonInstanceAPI::OnGetFacebookResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
-        EmptyResponse outResult;
+        GetFacebookResponse outResult;
         if (ValidateResult(outResult, container))
         {
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
             {
-                const auto& callback = *static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr.get());
+                const auto& callback = *static_cast<ProcessApiCallback<GetFacebookResponse> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
     }
 
-    void PlayFabLeaderboardsInstanceAPI::UpdateLeaderboardEntries(
-        UpdateLeaderboardEntriesRequest& request,
-        const ProcessApiCallback<EmptyResponse> callback,
+    void PlayFabAddonInstanceAPI::GetFacebookInstantGames(
+        GetFacebookInstantGamesRequest& request,
+        const ProcessApiCallback<GetFacebookInstantGamesResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
     )
@@ -1078,40 +1078,40 @@ namespace PlayFab
         headers.emplace("X-EntityToken", context->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Leaderboard/UpdateLeaderboardEntries",
+            "/Addon/GetFacebookInstantGames",
             headers,
             jsonAsString,
-            std::bind(&PlayFabLeaderboardsInstanceAPI::OnUpdateLeaderboardEntriesResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            std::bind(&PlayFabAddonInstanceAPI::OnGetFacebookInstantGamesResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
             settings,
             context,
             customData));
 
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<EmptyResponse>(callback));
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetFacebookInstantGamesResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabLeaderboardsInstanceAPI::OnUpdateLeaderboardEntriesResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabAddonInstanceAPI::OnGetFacebookInstantGamesResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
-        EmptyResponse outResult;
+        GetFacebookInstantGamesResponse outResult;
         if (ValidateResult(outResult, container))
         {
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
             {
-                const auto& callback = *static_cast<ProcessApiCallback<EmptyResponse> *>(internalPtr.get());
+                const auto& callback = *static_cast<ProcessApiCallback<GetFacebookInstantGamesResponse> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
     }
 
-    void PlayFabLeaderboardsInstanceAPI::UpdateStatistics(
-        UpdateStatisticsRequest& request,
-        const ProcessApiCallback<UpdateStatisticsResponse> callback,
+    void PlayFabAddonInstanceAPI::GetGoogle(
+        GetGoogleRequest& request,
+        const ProcessApiCallback<GetGoogleResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
     )
@@ -1128,38 +1128,288 @@ namespace PlayFab
         headers.emplace("X-EntityToken", context->entityToken);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Statistic/UpdateStatistics",
+            "/Addon/GetGoogle",
             headers,
             jsonAsString,
-            std::bind(&PlayFabLeaderboardsInstanceAPI::OnUpdateStatisticsResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            std::bind(&PlayFabAddonInstanceAPI::OnGetGoogleResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
             settings,
             context,
             customData));
 
-        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdateStatisticsResponse>(callback));
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetGoogleResponse>(callback));
         reqContainer->errorCallback = errorCallback;
 
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabLeaderboardsInstanceAPI::OnUpdateStatisticsResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabAddonInstanceAPI::OnGetGoogleResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
 
-        UpdateStatisticsResponse outResult;
+        GetGoogleResponse outResult;
         if (ValidateResult(outResult, container))
         {
             std::shared_ptr<void> internalPtr = container.successCallback;
             if (internalPtr.get() != nullptr)
             {
-                const auto& callback = *static_cast<ProcessApiCallback<UpdateStatisticsResponse> *>(internalPtr.get());
+                const auto& callback = *static_cast<ProcessApiCallback<GetGoogleResponse> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
     }
 
-    bool PlayFabLeaderboardsInstanceAPI::ValidateResult(PlayFabResultCommon& resultCommon, const CallRequestContainer& container)
+    void PlayFabAddonInstanceAPI::GetKongregate(
+        GetKongregateRequest& request,
+        const ProcessApiCallback<GetKongregateResponse> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : this->m_context;
+        std::shared_ptr<PlayFabApiSettings> settings = this->m_settings != nullptr ? this->m_settings : PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = request.authenticationContext == nullptr ? this->m_context : request.authenticationContext;
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", context->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Addon/GetKongregate",
+            headers,
+            jsonAsString,
+            std::bind(&PlayFabAddonInstanceAPI::OnGetKongregateResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetKongregateResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabAddonInstanceAPI::OnGetKongregateResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        GetKongregateResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = *static_cast<ProcessApiCallback<GetKongregateResponse> *>(internalPtr.get());
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabAddonInstanceAPI::GetNintendo(
+        GetNintendoRequest& request,
+        const ProcessApiCallback<GetNintendoResponse> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : this->m_context;
+        std::shared_ptr<PlayFabApiSettings> settings = this->m_settings != nullptr ? this->m_settings : PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = request.authenticationContext == nullptr ? this->m_context : request.authenticationContext;
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", context->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Addon/GetNintendo",
+            headers,
+            jsonAsString,
+            std::bind(&PlayFabAddonInstanceAPI::OnGetNintendoResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetNintendoResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabAddonInstanceAPI::OnGetNintendoResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        GetNintendoResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = *static_cast<ProcessApiCallback<GetNintendoResponse> *>(internalPtr.get());
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabAddonInstanceAPI::GetPSN(
+        GetPSNRequest& request,
+        const ProcessApiCallback<GetPSNResponse> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : this->m_context;
+        std::shared_ptr<PlayFabApiSettings> settings = this->m_settings != nullptr ? this->m_settings : PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = request.authenticationContext == nullptr ? this->m_context : request.authenticationContext;
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", context->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Addon/GetPSN",
+            headers,
+            jsonAsString,
+            std::bind(&PlayFabAddonInstanceAPI::OnGetPSNResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPSNResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabAddonInstanceAPI::OnGetPSNResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        GetPSNResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = *static_cast<ProcessApiCallback<GetPSNResponse> *>(internalPtr.get());
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabAddonInstanceAPI::GetSteam(
+        GetSteamRequest& request,
+        const ProcessApiCallback<GetSteamResponse> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : this->m_context;
+        std::shared_ptr<PlayFabApiSettings> settings = this->m_settings != nullptr ? this->m_settings : PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = request.authenticationContext == nullptr ? this->m_context : request.authenticationContext;
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", context->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Addon/GetSteam",
+            headers,
+            jsonAsString,
+            std::bind(&PlayFabAddonInstanceAPI::OnGetSteamResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetSteamResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabAddonInstanceAPI::OnGetSteamResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        GetSteamResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = *static_cast<ProcessApiCallback<GetSteamResponse> *>(internalPtr.get());
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabAddonInstanceAPI::GetTwitch(
+        GetTwitchRequest& request,
+        const ProcessApiCallback<GetTwitchResponse> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : this->m_context;
+        std::shared_ptr<PlayFabApiSettings> settings = this->m_settings != nullptr ? this->m_settings : PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = request.authenticationContext == nullptr ? this->m_context : request.authenticationContext;
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-EntityToken", context->entityToken);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Addon/GetTwitch",
+            headers,
+            jsonAsString,
+            std::bind(&PlayFabAddonInstanceAPI::OnGetTwitchResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetTwitchResponse>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabAddonInstanceAPI::OnGetTwitchResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        GetTwitchResponse outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = *static_cast<ProcessApiCallback<GetTwitchResponse> *>(internalPtr.get());
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    bool PlayFabAddonInstanceAPI::ValidateResult(PlayFabResultCommon& resultCommon, const CallRequestContainer& container)
     {
         if (container.errorWrapper.HttpCode == 200)
         {
