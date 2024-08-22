@@ -5753,6 +5753,12 @@ namespace PlayFab
             GenericErrorCodesGameSaveManifestNotFound,
             GenericErrorCodesGameSaveManifestVersionAlreadyExists,
             GenericErrorCodesGameSaveConflictUpdatingManifest,
+            GenericErrorCodesGameSaveManifestUpdatesNotAllowed,
+            GenericErrorCodesGameSaveFileAlreadyExists,
+            GenericErrorCodesGameSaveManifestVersionNotFinalized,
+            GenericErrorCodesGameSaveUnknownFileInManifest,
+            GenericErrorCodesGameSaveFileExceededReportedSize,
+            GenericErrorCodesGameSaveFileNotUploaded,
             GenericErrorCodesStateShareForbidden,
             GenericErrorCodesStateShareTitleNotInFlight,
             GenericErrorCodesStateShareStateNotFound,
@@ -10013,6 +10019,36 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesGameSaveConflictUpdatingManifest)
             {
                 output = Json::Value("GameSaveConflictUpdatingManifest");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveManifestUpdatesNotAllowed)
+            {
+                output = Json::Value("GameSaveManifestUpdatesNotAllowed");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveFileAlreadyExists)
+            {
+                output = Json::Value("GameSaveFileAlreadyExists");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveManifestVersionNotFinalized)
+            {
+                output = Json::Value("GameSaveManifestVersionNotFinalized");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveUnknownFileInManifest)
+            {
+                output = Json::Value("GameSaveUnknownFileInManifest");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveFileExceededReportedSize)
+            {
+                output = Json::Value("GameSaveFileExceededReportedSize");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveFileNotUploaded)
+            {
+                output = Json::Value("GameSaveFileNotUploaded");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesStateShareForbidden)
@@ -14311,6 +14347,36 @@ namespace PlayFab
             if (inputStr == "GameSaveConflictUpdatingManifest")
             {
                 output = GenericErrorCodes::GenericErrorCodesGameSaveConflictUpdatingManifest;
+                return;
+            }
+            if (inputStr == "GameSaveManifestUpdatesNotAllowed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveManifestUpdatesNotAllowed;
+                return;
+            }
+            if (inputStr == "GameSaveFileAlreadyExists")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveFileAlreadyExists;
+                return;
+            }
+            if (inputStr == "GameSaveManifestVersionNotFinalized")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveManifestVersionNotFinalized;
+                return;
+            }
+            if (inputStr == "GameSaveUnknownFileInManifest")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveUnknownFileInManifest;
+                return;
+            }
+            if (inputStr == "GameSaveFileExceededReportedSize")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveFileExceededReportedSize;
+                return;
+            }
+            if (inputStr == "GameSaveFileNotUploaded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveFileNotUploaded;
                 return;
             }
             if (inputStr == "StateShareForbidden")

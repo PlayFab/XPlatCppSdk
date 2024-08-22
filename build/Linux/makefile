@@ -45,14 +45,18 @@ OBJS = stdafx.o \
 	PlayFabInsightsInstanceApi.o \
 	PlayFabGroupsApi.o \
 	PlayFabGroupsInstanceApi.o \
-	PlayFabLeaderboardsApi.o \
-	PlayFabLeaderboardsInstanceApi.o \
+	PlayFabProgressionApi.o \
+	PlayFabProgressionInstanceApi.o \
 	PlayFabLocalizationApi.o \
 	PlayFabLocalizationInstanceApi.o \
 	PlayFabMultiplayerApi.o \
 	PlayFabMultiplayerInstanceApi.o \
 	PlayFabProfilesApi.o \
 	PlayFabProfilesInstanceApi.o \
+	PlayFabMatchmakerApi.o \
+	PlayFabMatchmakerInstanceApi.o \
+	PlayFabAddonApi.o \
+	PlayFabAddonInstanceApi.o \
 	PlayFabCallRequestContainer.o \
 	PlayFabCallRequestContainerBase.o \
 	PlayFabError.o \

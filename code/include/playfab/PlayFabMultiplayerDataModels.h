@@ -1697,46 +1697,53 @@ namespace PlayFab
 
         enum class ExternalFriendSources
         {
-            ExternalFriendSourcesNone,
-            ExternalFriendSourcesSteam,
-            ExternalFriendSourcesFacebook,
-            ExternalFriendSourcesXbox,
-            ExternalFriendSourcesPsn,
-            ExternalFriendSourcesAll
+            ExternalFriendSourcesNone = 0x0,
+            ExternalFriendSourcesSteam = 0x1,
+            ExternalFriendSourcesFacebook = 0x2,
+            ExternalFriendSourcesXbox = 0x4,
+            ExternalFriendSourcesPsn = 0x8,
+            ExternalFriendSourcesAll = 0x10
         };
+
+        DEFINE_ENUM_FLAG_OPERATORS(ExternalFriendSources);
 
         inline void ToJsonEnum(const ExternalFriendSources input, Json::Value& output)
         {
+            std::string separator{};
+            std::stringstream ss;
+
             if (input == ExternalFriendSources::ExternalFriendSourcesNone)
             {
-                output = Json::Value("None");
+                output = Json::Value{  };
                 return;
             }
-            if (input == ExternalFriendSources::ExternalFriendSourcesSteam)
+            if ((input & ExternalFriendSources::ExternalFriendSourcesSteam) == ExternalFriendSources::ExternalFriendSourcesSteam)
             {
-                output = Json::Value("Steam");
-                return;
+                ss << separator << "Steam";
+                separator = ",";
             }
-            if (input == ExternalFriendSources::ExternalFriendSourcesFacebook)
+            if ((input & ExternalFriendSources::ExternalFriendSourcesFacebook) == ExternalFriendSources::ExternalFriendSourcesFacebook)
             {
-                output = Json::Value("Facebook");
-                return;
+                ss << separator << "Facebook";
+                separator = ",";
             }
-            if (input == ExternalFriendSources::ExternalFriendSourcesXbox)
+            if ((input & ExternalFriendSources::ExternalFriendSourcesXbox) == ExternalFriendSources::ExternalFriendSourcesXbox)
             {
-                output = Json::Value("Xbox");
-                return;
+                ss << separator << "Xbox";
+                separator = ",";
             }
-            if (input == ExternalFriendSources::ExternalFriendSourcesPsn)
+            if ((input & ExternalFriendSources::ExternalFriendSourcesPsn) == ExternalFriendSources::ExternalFriendSourcesPsn)
             {
-                output = Json::Value("Psn");
-                return;
+                ss << separator << "Psn";
+                separator = ",";
             }
-            if (input == ExternalFriendSources::ExternalFriendSourcesAll)
+            if ((input & ExternalFriendSources::ExternalFriendSourcesAll) == ExternalFriendSources::ExternalFriendSourcesAll)
             {
-                output = Json::Value("All");
-                return;
+                ss << separator << "All";
+                separator = ",";
             }
+
+            output = Json::Value{ ss.str().data() };
         }
         inline void FromJsonEnum(const Json::Value& input, ExternalFriendSources& output)
         {

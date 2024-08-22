@@ -4838,46 +4838,53 @@ namespace PlayFab
 
         enum class ExternalFriendSources
         {
-            ExternalFriendSourcesNone,
-            ExternalFriendSourcesSteam,
-            ExternalFriendSourcesFacebook,
-            ExternalFriendSourcesXbox,
-            ExternalFriendSourcesPsn,
-            ExternalFriendSourcesAll
+            ExternalFriendSourcesNone = 0x0,
+            ExternalFriendSourcesSteam = 0x1,
+            ExternalFriendSourcesFacebook = 0x2,
+            ExternalFriendSourcesXbox = 0x4,
+            ExternalFriendSourcesPsn = 0x8,
+            ExternalFriendSourcesAll = 0x10
         };
+
+        DEFINE_ENUM_FLAG_OPERATORS(ExternalFriendSources);
 
         inline void ToJsonEnum(const ExternalFriendSources input, Json::Value& output)
         {
+            std::string separator{};
+            std::stringstream ss;
+
             if (input == ExternalFriendSources::ExternalFriendSourcesNone)
             {
-                output = Json::Value("None");
+                output = Json::Value{  };
                 return;
             }
-            if (input == ExternalFriendSources::ExternalFriendSourcesSteam)
+            if ((input & ExternalFriendSources::ExternalFriendSourcesSteam) == ExternalFriendSources::ExternalFriendSourcesSteam)
             {
-                output = Json::Value("Steam");
-                return;
+                ss << separator << "Steam";
+                separator = ",";
             }
-            if (input == ExternalFriendSources::ExternalFriendSourcesFacebook)
+            if ((input & ExternalFriendSources::ExternalFriendSourcesFacebook) == ExternalFriendSources::ExternalFriendSourcesFacebook)
             {
-                output = Json::Value("Facebook");
-                return;
+                ss << separator << "Facebook";
+                separator = ",";
             }
-            if (input == ExternalFriendSources::ExternalFriendSourcesXbox)
+            if ((input & ExternalFriendSources::ExternalFriendSourcesXbox) == ExternalFriendSources::ExternalFriendSourcesXbox)
             {
-                output = Json::Value("Xbox");
-                return;
+                ss << separator << "Xbox";
+                separator = ",";
             }
-            if (input == ExternalFriendSources::ExternalFriendSourcesPsn)
+            if ((input & ExternalFriendSources::ExternalFriendSourcesPsn) == ExternalFriendSources::ExternalFriendSourcesPsn)
             {
-                output = Json::Value("Psn");
-                return;
+                ss << separator << "Psn";
+                separator = ",";
             }
-            if (input == ExternalFriendSources::ExternalFriendSourcesAll)
+            if ((input & ExternalFriendSources::ExternalFriendSourcesAll) == ExternalFriendSources::ExternalFriendSourcesAll)
             {
-                output = Json::Value("All");
-                return;
+                ss << separator << "All";
+                separator = ",";
             }
+
+            output = Json::Value{ ss.str().data() };
         }
         inline void FromJsonEnum(const Json::Value& input, ExternalFriendSources& output)
         {
@@ -16173,6 +16180,7 @@ namespace PlayFab
         struct LoginWithFacebookRequest : public PlayFabRequestCommon
         {
             std::string AccessToken;
+            std::string AuthenticationToken;
             Boxed<bool> CreateAccount;
             std::map<std::string, std::string> CustomTags;
             std::string EncryptedRequest;
@@ -16183,6 +16191,7 @@ namespace PlayFab
             LoginWithFacebookRequest() :
                 PlayFabRequestCommon(),
                 AccessToken(),
+                AuthenticationToken(),
                 CreateAccount(),
                 CustomTags(),
                 EncryptedRequest(),
@@ -16194,6 +16203,7 @@ namespace PlayFab
             LoginWithFacebookRequest(const LoginWithFacebookRequest& src) :
                 PlayFabRequestCommon(),
                 AccessToken(src.AccessToken),
+                AuthenticationToken(src.AuthenticationToken),
                 CreateAccount(src.CreateAccount),
                 CustomTags(src.CustomTags),
                 EncryptedRequest(src.EncryptedRequest),
@@ -16207,6 +16217,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AccessToken"], AccessToken);
+                FromJsonUtilS(input["AuthenticationToken"], AuthenticationToken);
                 FromJsonUtilP(input["CreateAccount"], CreateAccount);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
@@ -16219,6 +16230,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_AccessToken; ToJsonUtilS(AccessToken, each_AccessToken); output["AccessToken"] = each_AccessToken;
+                Json::Value each_AuthenticationToken; ToJsonUtilS(AuthenticationToken, each_AuthenticationToken); output["AuthenticationToken"] = each_AuthenticationToken;
                 Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
