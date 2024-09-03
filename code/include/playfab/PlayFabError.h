@@ -589,7 +589,7 @@ namespace PlayFab
         PlayFabErrorMultipleLinkedStatisticsNotAllowed = 1588,
         PlayFabErrorDuplicateLinkedStatisticColumnNameFound = 1589,
         PlayFabErrorAggregationTypeNotAllowedForMultiColumnStatistic = 1590,
-        PlayFabErrorMaxQueryableVerionsValueNotAllowedForTier = 1591,
+        PlayFabErrorMaxQueryableVersionsValueNotAllowedForTier = 1591,
         PlayFabErrorStatisticDefinitionHasNullOrEmptyVersionConfiguration = 1592,
         PlayFabErrorStatisticColumnLengthMismatch = 1593,
         PlayFabErrorMatchmakingEntityInvalid = 2001,

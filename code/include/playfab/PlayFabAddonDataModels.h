@@ -288,6 +288,7 @@ namespace PlayFab
             Boxed<bool> ErrorIfExists;
             std::string OAuthClientID;
             std::string OAuthClientSecret;
+            std::string OAuthCustomRedirectUri;
             std::string ServiceAccountKey;
 
             CreateOrUpdateGoogleRequest() :
@@ -299,6 +300,7 @@ namespace PlayFab
                 ErrorIfExists(),
                 OAuthClientID(),
                 OAuthClientSecret(),
+                OAuthCustomRedirectUri(),
                 ServiceAccountKey()
             {}
 
@@ -311,6 +313,7 @@ namespace PlayFab
                 ErrorIfExists(src.ErrorIfExists),
                 OAuthClientID(src.OAuthClientID),
                 OAuthClientSecret(src.OAuthClientSecret),
+                OAuthCustomRedirectUri(src.OAuthCustomRedirectUri),
                 ServiceAccountKey(src.ServiceAccountKey)
             {}
 
@@ -325,6 +328,7 @@ namespace PlayFab
                 FromJsonUtilP(input["ErrorIfExists"], ErrorIfExists);
                 FromJsonUtilS(input["OAuthClientID"], OAuthClientID);
                 FromJsonUtilS(input["OAuthClientSecret"], OAuthClientSecret);
+                FromJsonUtilS(input["OAuthCustomRedirectUri"], OAuthCustomRedirectUri);
                 FromJsonUtilS(input["ServiceAccountKey"], ServiceAccountKey);
             }
 
@@ -338,6 +342,7 @@ namespace PlayFab
                 Json::Value each_ErrorIfExists; ToJsonUtilP(ErrorIfExists, each_ErrorIfExists); output["ErrorIfExists"] = each_ErrorIfExists;
                 Json::Value each_OAuthClientID; ToJsonUtilS(OAuthClientID, each_OAuthClientID); output["OAuthClientID"] = each_OAuthClientID;
                 Json::Value each_OAuthClientSecret; ToJsonUtilS(OAuthClientSecret, each_OAuthClientSecret); output["OAuthClientSecret"] = each_OAuthClientSecret;
+                Json::Value each_OAuthCustomRedirectUri; ToJsonUtilS(OAuthCustomRedirectUri, each_OAuthCustomRedirectUri); output["OAuthCustomRedirectUri"] = each_OAuthCustomRedirectUri;
                 Json::Value each_ServiceAccountKey; ToJsonUtilS(ServiceAccountKey, each_ServiceAccountKey); output["ServiceAccountKey"] = each_ServiceAccountKey;
                 return output;
             }
@@ -1566,19 +1571,22 @@ namespace PlayFab
             std::string AppPackageID;
             bool Created;
             std::string OAuthClientID;
+            std::string OauthCustomRedirectUri;
 
             GetGoogleResponse() :
                 PlayFabResultCommon(),
                 AppPackageID(),
                 Created(),
-                OAuthClientID()
+                OAuthClientID(),
+                OauthCustomRedirectUri()
             {}
 
             GetGoogleResponse(const GetGoogleResponse& src) :
                 PlayFabResultCommon(),
                 AppPackageID(src.AppPackageID),
                 Created(src.Created),
-                OAuthClientID(src.OAuthClientID)
+                OAuthClientID(src.OAuthClientID),
+                OauthCustomRedirectUri(src.OauthCustomRedirectUri)
             {}
 
             ~GetGoogleResponse() = default;
@@ -1588,6 +1596,7 @@ namespace PlayFab
                 FromJsonUtilS(input["AppPackageID"], AppPackageID);
                 FromJsonUtilP(input["Created"], Created);
                 FromJsonUtilS(input["OAuthClientID"], OAuthClientID);
+                FromJsonUtilS(input["OauthCustomRedirectUri"], OauthCustomRedirectUri);
             }
 
             Json::Value ToJson() const override
@@ -1596,6 +1605,7 @@ namespace PlayFab
                 Json::Value each_AppPackageID; ToJsonUtilS(AppPackageID, each_AppPackageID); output["AppPackageID"] = each_AppPackageID;
                 Json::Value each_Created; ToJsonUtilP(Created, each_Created); output["Created"] = each_Created;
                 Json::Value each_OAuthClientID; ToJsonUtilS(OAuthClientID, each_OAuthClientID); output["OAuthClientID"] = each_OAuthClientID;
+                Json::Value each_OauthCustomRedirectUri; ToJsonUtilS(OauthCustomRedirectUri, each_OauthCustomRedirectUri); output["OauthCustomRedirectUri"] = each_OauthCustomRedirectUri;
                 return output;
             }
         };
