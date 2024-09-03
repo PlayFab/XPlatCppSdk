@@ -7682,23 +7682,23 @@ namespace PlayFab
         {
             std::string FailureCode;
             std::string FailureDetails;
+            std::string MarketplaceAlternateId;
             std::string MarketplaceTransactionId;
-            std::string OfferId;
 
             RedemptionFailure() :
                 PlayFabBaseModel(),
                 FailureCode(),
                 FailureDetails(),
-                MarketplaceTransactionId(),
-                OfferId()
+                MarketplaceAlternateId(),
+                MarketplaceTransactionId()
             {}
 
             RedemptionFailure(const RedemptionFailure& src) :
                 PlayFabBaseModel(),
                 FailureCode(src.FailureCode),
                 FailureDetails(src.FailureDetails),
-                MarketplaceTransactionId(src.MarketplaceTransactionId),
-                OfferId(src.OfferId)
+                MarketplaceAlternateId(src.MarketplaceAlternateId),
+                MarketplaceTransactionId(src.MarketplaceTransactionId)
             {}
 
             ~RedemptionFailure() = default;
@@ -7707,8 +7707,8 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["FailureCode"], FailureCode);
                 FromJsonUtilS(input["FailureDetails"], FailureDetails);
+                FromJsonUtilS(input["MarketplaceAlternateId"], MarketplaceAlternateId);
                 FromJsonUtilS(input["MarketplaceTransactionId"], MarketplaceTransactionId);
-                FromJsonUtilS(input["OfferId"], OfferId);
             }
 
             Json::Value ToJson() const override
@@ -7716,29 +7716,29 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_FailureCode; ToJsonUtilS(FailureCode, each_FailureCode); output["FailureCode"] = each_FailureCode;
                 Json::Value each_FailureDetails; ToJsonUtilS(FailureDetails, each_FailureDetails); output["FailureDetails"] = each_FailureDetails;
+                Json::Value each_MarketplaceAlternateId; ToJsonUtilS(MarketplaceAlternateId, each_MarketplaceAlternateId); output["MarketplaceAlternateId"] = each_MarketplaceAlternateId;
                 Json::Value each_MarketplaceTransactionId; ToJsonUtilS(MarketplaceTransactionId, each_MarketplaceTransactionId); output["MarketplaceTransactionId"] = each_MarketplaceTransactionId;
-                Json::Value each_OfferId; ToJsonUtilS(OfferId, each_OfferId); output["OfferId"] = each_OfferId;
                 return output;
             }
         };
 
         struct RedemptionSuccess : public PlayFabBaseModel
         {
+            std::string MarketplaceAlternateId;
             std::string MarketplaceTransactionId;
-            std::string OfferId;
             time_t SuccessTimestamp;
 
             RedemptionSuccess() :
                 PlayFabBaseModel(),
+                MarketplaceAlternateId(),
                 MarketplaceTransactionId(),
-                OfferId(),
                 SuccessTimestamp()
             {}
 
             RedemptionSuccess(const RedemptionSuccess& src) :
                 PlayFabBaseModel(),
+                MarketplaceAlternateId(src.MarketplaceAlternateId),
                 MarketplaceTransactionId(src.MarketplaceTransactionId),
-                OfferId(src.OfferId),
                 SuccessTimestamp(src.SuccessTimestamp)
             {}
 
@@ -7746,16 +7746,16 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["MarketplaceAlternateId"], MarketplaceAlternateId);
                 FromJsonUtilS(input["MarketplaceTransactionId"], MarketplaceTransactionId);
-                FromJsonUtilS(input["OfferId"], OfferId);
                 FromJsonUtilT(input["SuccessTimestamp"], SuccessTimestamp);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_MarketplaceAlternateId; ToJsonUtilS(MarketplaceAlternateId, each_MarketplaceAlternateId); output["MarketplaceAlternateId"] = each_MarketplaceAlternateId;
                 Json::Value each_MarketplaceTransactionId; ToJsonUtilS(MarketplaceTransactionId, each_MarketplaceTransactionId); output["MarketplaceTransactionId"] = each_MarketplaceTransactionId;
-                Json::Value each_OfferId; ToJsonUtilS(OfferId, each_OfferId); output["OfferId"] = each_OfferId;
                 Json::Value each_SuccessTimestamp; ToJsonUtilT(SuccessTimestamp, each_SuccessTimestamp); output["SuccessTimestamp"] = each_SuccessTimestamp;
                 return output;
             }

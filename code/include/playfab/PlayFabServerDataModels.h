@@ -5505,7 +5505,7 @@ namespace PlayFab
             GenericErrorCodesMultipleLinkedStatisticsNotAllowed,
             GenericErrorCodesDuplicateLinkedStatisticColumnNameFound,
             GenericErrorCodesAggregationTypeNotAllowedForMultiColumnStatistic,
-            GenericErrorCodesMaxQueryableVerionsValueNotAllowedForTier,
+            GenericErrorCodesMaxQueryableVersionsValueNotAllowedForTier,
             GenericErrorCodesStatisticDefinitionHasNullOrEmptyVersionConfiguration,
             GenericErrorCodesStatisticColumnLengthMismatch,
             GenericErrorCodesMatchmakingEntityInvalid,
@@ -8685,9 +8685,9 @@ namespace PlayFab
                 output = Json::Value("AggregationTypeNotAllowedForMultiColumnStatistic");
                 return;
             }
-            if (input == GenericErrorCodes::GenericErrorCodesMaxQueryableVerionsValueNotAllowedForTier)
+            if (input == GenericErrorCodes::GenericErrorCodesMaxQueryableVersionsValueNotAllowedForTier)
             {
-                output = Json::Value("MaxQueryableVerionsValueNotAllowedForTier");
+                output = Json::Value("MaxQueryableVersionsValueNotAllowedForTier");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesStatisticDefinitionHasNullOrEmptyVersionConfiguration)
@@ -13013,9 +13013,9 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesAggregationTypeNotAllowedForMultiColumnStatistic;
                 return;
             }
-            if (inputStr == "MaxQueryableVerionsValueNotAllowedForTier")
+            if (inputStr == "MaxQueryableVersionsValueNotAllowedForTier")
             {
-                output = GenericErrorCodes::GenericErrorCodesMaxQueryableVerionsValueNotAllowedForTier;
+                output = GenericErrorCodes::GenericErrorCodesMaxQueryableVersionsValueNotAllowedForTier;
                 return;
             }
             if (inputStr == "StatisticDefinitionHasNullOrEmptyVersionConfiguration")
