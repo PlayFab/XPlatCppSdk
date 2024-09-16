@@ -4,6 +4,7 @@
 
 #include <playfab/PlayFabBaseModel.h>
 #include <playfab/PlayFabJsonHeaders.h>
+#include <playfab/PlayFabPlatformUtils.h>
 
 namespace PlayFab
 {
@@ -1338,128 +1339,6 @@ namespace PlayFab
             }
         };
 
-        struct GetStatisticDefinitionsRequest : public PlayFabRequestCommon
-        {
-            std::map<std::string, std::string> CustomTags;
-
-            GetStatisticDefinitionsRequest() :
-                PlayFabRequestCommon(),
-                CustomTags()
-            {}
-
-            GetStatisticDefinitionsRequest(const GetStatisticDefinitionsRequest& src) :
-                PlayFabRequestCommon(),
-                CustomTags(src.CustomTags)
-            {}
-
-            ~GetStatisticDefinitionsRequest() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilS(input["CustomTags"], CustomTags);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
-                return output;
-            }
-        };
-
-        struct StatisticDefinition : public PlayFabBaseModel
-        {
-            std::list<StatisticColumn> Columns;
-            time_t Created;
-            std::string EntityType;
-            Boxed<time_t> LastResetTime;
-            std::list<std::string> LinkedLeaderboardNames;
-            std::string Name;
-            Uint32 Version;
-            Boxed<VersionConfiguration> pfVersionConfiguration;
-
-            StatisticDefinition() :
-                PlayFabBaseModel(),
-                Columns(),
-                Created(),
-                EntityType(),
-                LastResetTime(),
-                LinkedLeaderboardNames(),
-                Name(),
-                Version(),
-                pfVersionConfiguration()
-            {}
-
-            StatisticDefinition(const StatisticDefinition& src) :
-                PlayFabBaseModel(),
-                Columns(src.Columns),
-                Created(src.Created),
-                EntityType(src.EntityType),
-                LastResetTime(src.LastResetTime),
-                LinkedLeaderboardNames(src.LinkedLeaderboardNames),
-                Name(src.Name),
-                Version(src.Version),
-                pfVersionConfiguration(src.pfVersionConfiguration)
-            {}
-
-            ~StatisticDefinition() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilO(input["Columns"], Columns);
-                FromJsonUtilT(input["Created"], Created);
-                FromJsonUtilS(input["EntityType"], EntityType);
-                FromJsonUtilT(input["LastResetTime"], LastResetTime);
-                FromJsonUtilS(input["LinkedLeaderboardNames"], LinkedLeaderboardNames);
-                FromJsonUtilS(input["Name"], Name);
-                FromJsonUtilP(input["Version"], Version);
-                FromJsonUtilO(input["VersionConfiguration"], pfVersionConfiguration);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_Columns; ToJsonUtilO(Columns, each_Columns); output["Columns"] = each_Columns;
-                Json::Value each_Created; ToJsonUtilT(Created, each_Created); output["Created"] = each_Created;
-                Json::Value each_EntityType; ToJsonUtilS(EntityType, each_EntityType); output["EntityType"] = each_EntityType;
-                Json::Value each_LastResetTime; ToJsonUtilT(LastResetTime, each_LastResetTime); output["LastResetTime"] = each_LastResetTime;
-                Json::Value each_LinkedLeaderboardNames; ToJsonUtilS(LinkedLeaderboardNames, each_LinkedLeaderboardNames); output["LinkedLeaderboardNames"] = each_LinkedLeaderboardNames;
-                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
-                Json::Value each_Version; ToJsonUtilP(Version, each_Version); output["Version"] = each_Version;
-                Json::Value each_pfVersionConfiguration; ToJsonUtilO(pfVersionConfiguration, each_pfVersionConfiguration); output["VersionConfiguration"] = each_pfVersionConfiguration;
-                return output;
-            }
-        };
-
-        struct GetStatisticDefinitionsResponse : public PlayFabResultCommon
-        {
-            std::list<StatisticDefinition> StatisticDefinitions;
-
-            GetStatisticDefinitionsResponse() :
-                PlayFabResultCommon(),
-                StatisticDefinitions()
-            {}
-
-            GetStatisticDefinitionsResponse(const GetStatisticDefinitionsResponse& src) :
-                PlayFabResultCommon(),
-                StatisticDefinitions(src.StatisticDefinitions)
-            {}
-
-            ~GetStatisticDefinitionsResponse() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilO(input["StatisticDefinitions"], StatisticDefinitions);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_StatisticDefinitions; ToJsonUtilO(StatisticDefinitions, each_StatisticDefinitions); output["StatisticDefinitions"] = each_StatisticDefinitions;
-                return output;
-            }
-        };
-
         struct GetStatisticsForEntitiesRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
@@ -1942,6 +1821,70 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                return output;
+            }
+        };
+
+        struct StatisticDefinition : public PlayFabBaseModel
+        {
+            std::list<StatisticColumn> Columns;
+            time_t Created;
+            std::string EntityType;
+            Boxed<time_t> LastResetTime;
+            std::list<std::string> LinkedLeaderboardNames;
+            std::string Name;
+            Uint32 Version;
+            Boxed<VersionConfiguration> pfVersionConfiguration;
+
+            StatisticDefinition() :
+                PlayFabBaseModel(),
+                Columns(),
+                Created(),
+                EntityType(),
+                LastResetTime(),
+                LinkedLeaderboardNames(),
+                Name(),
+                Version(),
+                pfVersionConfiguration()
+            {}
+
+            StatisticDefinition(const StatisticDefinition& src) :
+                PlayFabBaseModel(),
+                Columns(src.Columns),
+                Created(src.Created),
+                EntityType(src.EntityType),
+                LastResetTime(src.LastResetTime),
+                LinkedLeaderboardNames(src.LinkedLeaderboardNames),
+                Name(src.Name),
+                Version(src.Version),
+                pfVersionConfiguration(src.pfVersionConfiguration)
+            {}
+
+            ~StatisticDefinition() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["Columns"], Columns);
+                FromJsonUtilT(input["Created"], Created);
+                FromJsonUtilS(input["EntityType"], EntityType);
+                FromJsonUtilT(input["LastResetTime"], LastResetTime);
+                FromJsonUtilS(input["LinkedLeaderboardNames"], LinkedLeaderboardNames);
+                FromJsonUtilS(input["Name"], Name);
+                FromJsonUtilP(input["Version"], Version);
+                FromJsonUtilO(input["VersionConfiguration"], pfVersionConfiguration);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Columns; ToJsonUtilO(Columns, each_Columns); output["Columns"] = each_Columns;
+                Json::Value each_Created; ToJsonUtilT(Created, each_Created); output["Created"] = each_Created;
+                Json::Value each_EntityType; ToJsonUtilS(EntityType, each_EntityType); output["EntityType"] = each_EntityType;
+                Json::Value each_LastResetTime; ToJsonUtilT(LastResetTime, each_LastResetTime); output["LastResetTime"] = each_LastResetTime;
+                Json::Value each_LinkedLeaderboardNames; ToJsonUtilS(LinkedLeaderboardNames, each_LinkedLeaderboardNames); output["LinkedLeaderboardNames"] = each_LinkedLeaderboardNames;
+                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
+                Json::Value each_Version; ToJsonUtilP(Version, each_Version); output["Version"] = each_Version;
+                Json::Value each_pfVersionConfiguration; ToJsonUtilO(pfVersionConfiguration, each_pfVersionConfiguration); output["VersionConfiguration"] = each_pfVersionConfiguration;
                 return output;
             }
         };

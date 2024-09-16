@@ -57,7 +57,6 @@ namespace PlayFab
         void GetLeaderboardDefinition(ProgressionModels::GetLeaderboardDefinitionRequest& request, const ProcessApiCallback<ProgressionModels::GetLeaderboardDefinitionResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void GetLeaderboardForEntities(ProgressionModels::GetLeaderboardForEntitiesRequest& request, const ProcessApiCallback<ProgressionModels::GetEntityLeaderboardResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void GetStatisticDefinition(ProgressionModels::GetStatisticDefinitionRequest& request, const ProcessApiCallback<ProgressionModels::GetStatisticDefinitionResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
-        void GetStatisticDefinitions(ProgressionModels::GetStatisticDefinitionsRequest& request, const ProcessApiCallback<ProgressionModels::GetStatisticDefinitionsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void GetStatistics(ProgressionModels::GetStatisticsRequest& request, const ProcessApiCallback<ProgressionModels::GetStatisticsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void GetStatisticsForEntities(ProgressionModels::GetStatisticsForEntitiesRequest& request, const ProcessApiCallback<ProgressionModels::GetStatisticsForEntitiesResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void IncrementLeaderboardVersion(ProgressionModels::IncrementLeaderboardVersionRequest& request, const ProcessApiCallback<ProgressionModels::IncrementLeaderboardVersionResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -81,7 +80,6 @@ namespace PlayFab
         void OnGetLeaderboardDefinitionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnGetLeaderboardForEntitiesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnGetStatisticDefinitionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
-        void OnGetStatisticDefinitionsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnGetStatisticsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnGetStatisticsForEntitiesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnIncrementLeaderboardVersionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
