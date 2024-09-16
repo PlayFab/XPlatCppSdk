@@ -4,6 +4,7 @@
 
 #include <playfab/PlayFabBaseModel.h>
 #include <playfab/PlayFabJsonHeaders.h>
+#include <playfab/PlayFabPlatformUtils.h>
 
 namespace PlayFab
 {
@@ -808,6 +809,84 @@ namespace PlayFab
                 Json::Value each_Sandbox; ToJsonUtilS(Sandbox, each_Sandbox); output["Sandbox"] = each_Sandbox;
                 Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
                 Json::Value each_XboxLiveIds; ToJsonUtilS(XboxLiveIds, each_XboxLiveIds); output["XboxLiveIds"] = each_XboxLiveIds;
+                return output;
+            }
+        };
+
+        struct SetDisplayNameRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            std::string DisplayName;
+            Boxed<EntityKey> Entity;
+            Boxed<Int32> ExpectedVersion;
+
+            SetDisplayNameRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                DisplayName(),
+                Entity(),
+                ExpectedVersion()
+            {}
+
+            SetDisplayNameRequest(const SetDisplayNameRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                DisplayName(src.DisplayName),
+                Entity(src.Entity),
+                ExpectedVersion(src.ExpectedVersion)
+            {}
+
+            ~SetDisplayNameRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["DisplayName"], DisplayName);
+                FromJsonUtilO(input["Entity"], Entity);
+                FromJsonUtilP(input["ExpectedVersion"], ExpectedVersion);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_DisplayName; ToJsonUtilS(DisplayName, each_DisplayName); output["DisplayName"] = each_DisplayName;
+                Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                Json::Value each_ExpectedVersion; ToJsonUtilP(ExpectedVersion, each_ExpectedVersion); output["ExpectedVersion"] = each_ExpectedVersion;
+                return output;
+            }
+        };
+
+        struct SetDisplayNameResponse : public PlayFabResultCommon
+        {
+            Boxed<OperationTypes> OperationResult;
+            Boxed<Int32> VersionNumber;
+
+            SetDisplayNameResponse() :
+                PlayFabResultCommon(),
+                OperationResult(),
+                VersionNumber()
+            {}
+
+            SetDisplayNameResponse(const SetDisplayNameResponse& src) :
+                PlayFabResultCommon(),
+                OperationResult(src.OperationResult),
+                VersionNumber(src.VersionNumber)
+            {}
+
+            ~SetDisplayNameResponse() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilE(input["OperationResult"], OperationResult);
+                FromJsonUtilP(input["VersionNumber"], VersionNumber);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_OperationResult; ToJsonUtilE(OperationResult, each_OperationResult); output["OperationResult"] = each_OperationResult;
+                Json::Value each_VersionNumber; ToJsonUtilP(VersionNumber, each_VersionNumber); output["VersionNumber"] = each_VersionNumber;
                 return output;
             }
         };

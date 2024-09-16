@@ -4,6 +4,7 @@
 
 #include <playfab/PlayFabBaseModel.h>
 #include <playfab/PlayFabJsonHeaders.h>
+#include <playfab/PlayFabPlatformUtils.h>
 
 namespace PlayFab
 {
@@ -14469,7 +14470,8 @@ namespace PlayFab
             LoginIdentityProviderApple,
             LoginIdentityProviderNintendoSwitchAccount,
             LoginIdentityProviderGooglePlayGames,
-            LoginIdentityProviderXboxMobileStore
+            LoginIdentityProviderXboxMobileStore,
+            LoginIdentityProviderKing
         };
 
         inline void ToJsonEnum(const LoginIdentityProvider input, Json::Value& output)
@@ -14587,6 +14589,11 @@ namespace PlayFab
             if (input == LoginIdentityProvider::LoginIdentityProviderXboxMobileStore)
             {
                 output = Json::Value("XboxMobileStore");
+                return;
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderKing)
+            {
+                output = Json::Value("King");
                 return;
             }
         }
@@ -14710,6 +14717,11 @@ namespace PlayFab
             if (inputStr == "XboxMobileStore")
             {
                 output = LoginIdentityProvider::LoginIdentityProviderXboxMobileStore;
+                return;
+            }
+            if (inputStr == "King")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderKing;
                 return;
             }
         }
@@ -15171,7 +15183,8 @@ namespace PlayFab
             UserOriginationApple,
             UserOriginationNintendoSwitchAccount,
             UserOriginationGooglePlayGames,
-            UserOriginationXboxMobileStore
+            UserOriginationXboxMobileStore,
+            UserOriginationKing
         };
 
         inline void ToJsonEnum(const UserOrigination input, Json::Value& output)
@@ -15299,6 +15312,11 @@ namespace PlayFab
             if (input == UserOrigination::UserOriginationXboxMobileStore)
             {
                 output = Json::Value("XboxMobileStore");
+                return;
+            }
+            if (input == UserOrigination::UserOriginationKing)
+            {
+                output = Json::Value("King");
                 return;
             }
         }
@@ -15432,6 +15450,11 @@ namespace PlayFab
             if (inputStr == "XboxMobileStore")
             {
                 output = UserOrigination::UserOriginationXboxMobileStore;
+                return;
+            }
+            if (inputStr == "King")
+            {
+                output = UserOrigination::UserOriginationKing;
                 return;
             }
         }
