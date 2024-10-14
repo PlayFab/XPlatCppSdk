@@ -4,7 +4,6 @@
 
 #include <playfab/PlayFabBaseModel.h>
 #include <playfab/PlayFabJsonHeaders.h>
-#include <playfab/PlayFabPlatformUtils.h>
 
 namespace PlayFab
 {
@@ -960,12 +959,14 @@ namespace PlayFab
         struct GetEntityLeaderboardResponse : public PlayFabResultCommon
         {
             std::list<LeaderboardColumn> Columns;
+            Uint32 EntryCount;
             std::list<EntityLeaderboardEntry> Rankings;
             Uint32 Version;
 
             GetEntityLeaderboardResponse() :
                 PlayFabResultCommon(),
                 Columns(),
+                EntryCount(),
                 Rankings(),
                 Version()
             {}
@@ -973,6 +974,7 @@ namespace PlayFab
             GetEntityLeaderboardResponse(const GetEntityLeaderboardResponse& src) :
                 PlayFabResultCommon(),
                 Columns(src.Columns),
+                EntryCount(src.EntryCount),
                 Rankings(src.Rankings),
                 Version(src.Version)
             {}
@@ -982,6 +984,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["Columns"], Columns);
+                FromJsonUtilP(input["EntryCount"], EntryCount);
                 FromJsonUtilO(input["Rankings"], Rankings);
                 FromJsonUtilP(input["Version"], Version);
             }
@@ -990,6 +993,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_Columns; ToJsonUtilO(Columns, each_Columns); output["Columns"] = each_Columns;
+                Json::Value each_EntryCount; ToJsonUtilP(EntryCount, each_EntryCount); output["EntryCount"] = each_EntryCount;
                 Json::Value each_Rankings; ToJsonUtilO(Rankings, each_Rankings); output["Rankings"] = each_Rankings;
                 Json::Value each_Version; ToJsonUtilP(Version, each_Version); output["Version"] = each_Version;
                 return output;

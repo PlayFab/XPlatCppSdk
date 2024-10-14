@@ -4,7 +4,6 @@
 
 #include <playfab/PlayFabBaseModel.h>
 #include <playfab/PlayFabJsonHeaders.h>
-#include <playfab/PlayFabPlatformUtils.h>
 
 namespace PlayFab
 {
@@ -5775,6 +5774,8 @@ namespace PlayFab
             GenericErrorCodesTrueSkillInvalidPlayerId,
             GenericErrorCodesTrueSkillInvalidSquadSize,
             GenericErrorCodesTrueSkillConditionSetNotInModel,
+            GenericErrorCodesTrueSkillModelStateInvalidForOperation,
+            GenericErrorCodesTrueSkillScenarioContainsActiveModel,
             GenericErrorCodesGameSaveManifestNotFound,
             GenericErrorCodesGameSaveManifestVersionAlreadyExists,
             GenericErrorCodesGameSaveConflictUpdatingManifest,
@@ -5784,6 +5785,8 @@ namespace PlayFab
             GenericErrorCodesGameSaveUnknownFileInManifest,
             GenericErrorCodesGameSaveFileExceededReportedSize,
             GenericErrorCodesGameSaveFileNotUploaded,
+            GenericErrorCodesGameSaveBadRequest,
+            GenericErrorCodesGameSaveOperationNotAllowed,
             GenericErrorCodesStateShareForbidden,
             GenericErrorCodesStateShareTitleNotInFlight,
             GenericErrorCodesStateShareStateNotFound,
@@ -10031,6 +10034,16 @@ namespace PlayFab
                 output = Json::Value("TrueSkillConditionSetNotInModel");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillModelStateInvalidForOperation)
+            {
+                output = Json::Value("TrueSkillModelStateInvalidForOperation");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillScenarioContainsActiveModel)
+            {
+                output = Json::Value("TrueSkillScenarioContainsActiveModel");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesGameSaveManifestNotFound)
             {
                 output = Json::Value("GameSaveManifestNotFound");
@@ -10074,6 +10087,16 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesGameSaveFileNotUploaded)
             {
                 output = Json::Value("GameSaveFileNotUploaded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveBadRequest)
+            {
+                output = Json::Value("GameSaveBadRequest");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveOperationNotAllowed)
+            {
+                output = Json::Value("GameSaveOperationNotAllowed");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesStateShareForbidden)
@@ -14359,6 +14382,16 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesTrueSkillConditionSetNotInModel;
                 return;
             }
+            if (inputStr == "TrueSkillModelStateInvalidForOperation")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillModelStateInvalidForOperation;
+                return;
+            }
+            if (inputStr == "TrueSkillScenarioContainsActiveModel")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillScenarioContainsActiveModel;
+                return;
+            }
             if (inputStr == "GameSaveManifestNotFound")
             {
                 output = GenericErrorCodes::GenericErrorCodesGameSaveManifestNotFound;
@@ -14402,6 +14435,16 @@ namespace PlayFab
             if (inputStr == "GameSaveFileNotUploaded")
             {
                 output = GenericErrorCodes::GenericErrorCodesGameSaveFileNotUploaded;
+                return;
+            }
+            if (inputStr == "GameSaveBadRequest")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveBadRequest;
+                return;
+            }
+            if (inputStr == "GameSaveOperationNotAllowed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveOperationNotAllowed;
                 return;
             }
             if (inputStr == "StateShareForbidden")
