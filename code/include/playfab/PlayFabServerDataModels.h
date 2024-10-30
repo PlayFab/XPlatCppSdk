@@ -5508,6 +5508,8 @@ namespace PlayFab
             GenericErrorCodesMaxQueryableVersionsValueNotAllowedForTier,
             GenericErrorCodesStatisticDefinitionHasNullOrEmptyVersionConfiguration,
             GenericErrorCodesStatisticColumnLengthMismatch,
+            GenericErrorCodesInvalidExternalEntityId,
+            GenericErrorCodesUpdatingStatisticsUsingTransactionIdNotAvailableForFreeTier,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8702,6 +8704,16 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesStatisticColumnLengthMismatch)
             {
                 output = Json::Value("StatisticColumnLengthMismatch");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidExternalEntityId)
+            {
+                output = Json::Value("InvalidExternalEntityId");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesUpdatingStatisticsUsingTransactionIdNotAvailableForFreeTier)
+            {
+                output = Json::Value("UpdatingStatisticsUsingTransactionIdNotAvailableForFreeTier");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -13050,6 +13062,16 @@ namespace PlayFab
             if (inputStr == "StatisticColumnLengthMismatch")
             {
                 output = GenericErrorCodes::GenericErrorCodesStatisticColumnLengthMismatch;
+                return;
+            }
+            if (inputStr == "InvalidExternalEntityId")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidExternalEntityId;
+                return;
+            }
+            if (inputStr == "UpdatingStatisticsUsingTransactionIdNotAvailableForFreeTier")
+            {
+                output = GenericErrorCodes::GenericErrorCodesUpdatingStatisticsUsingTransactionIdNotAvailableForFreeTier;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
