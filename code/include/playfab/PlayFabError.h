@@ -592,6 +592,8 @@ namespace PlayFab
         PlayFabErrorMaxQueryableVersionsValueNotAllowedForTier = 1591,
         PlayFabErrorStatisticDefinitionHasNullOrEmptyVersionConfiguration = 1592,
         PlayFabErrorStatisticColumnLengthMismatch = 1593,
+        PlayFabErrorInvalidExternalEntityId = 1594,
+        PlayFabErrorUpdatingStatisticsUsingTransactionIdNotAvailableForFreeTier = 1595,
         PlayFabErrorMatchmakingEntityInvalid = 2001,
         PlayFabErrorMatchmakingPlayerAttributesInvalid = 2002,
         PlayFabErrorMatchmakingQueueNotFound = 2016,
