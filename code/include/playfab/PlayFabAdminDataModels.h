@@ -5486,6 +5486,8 @@ namespace PlayFab
             GenericErrorCodesStatisticColumnLengthMismatch,
             GenericErrorCodesInvalidExternalEntityId,
             GenericErrorCodesUpdatingStatisticsUsingTransactionIdNotAvailableForFreeTier,
+            GenericErrorCodesTransactionAlreadyApplied,
+            GenericErrorCodesReportDataNotRetrievedSuccessfully,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5765,6 +5767,8 @@ namespace PlayFab
             GenericErrorCodesGameSaveFileNotUploaded,
             GenericErrorCodesGameSaveBadRequest,
             GenericErrorCodesGameSaveOperationNotAllowed,
+            GenericErrorCodesGameSaveDataStorageQuotaExceeded,
+            GenericErrorCodesGameSaveNewerManifestExists,
             GenericErrorCodesStateShareForbidden,
             GenericErrorCodesStateShareTitleNotInFlight,
             GenericErrorCodesStateShareStateNotFound,
@@ -8692,6 +8696,16 @@ namespace PlayFab
                 output = Json::Value("UpdatingStatisticsUsingTransactionIdNotAvailableForFreeTier");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesTransactionAlreadyApplied)
+            {
+                output = Json::Value("TransactionAlreadyApplied");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesReportDataNotRetrievedSuccessfully)
+            {
+                output = Json::Value("ReportDataNotRetrievedSuccessfully");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
             {
                 output = Json::Value("MatchmakingEntityInvalid");
@@ -10085,6 +10099,16 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesGameSaveOperationNotAllowed)
             {
                 output = Json::Value("GameSaveOperationNotAllowed");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveDataStorageQuotaExceeded)
+            {
+                output = Json::Value("GameSaveDataStorageQuotaExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveNewerManifestExists)
+            {
+                output = Json::Value("GameSaveNewerManifestExists");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesStateShareForbidden)
@@ -13050,6 +13074,16 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesUpdatingStatisticsUsingTransactionIdNotAvailableForFreeTier;
                 return;
             }
+            if (inputStr == "TransactionAlreadyApplied")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTransactionAlreadyApplied;
+                return;
+            }
+            if (inputStr == "ReportDataNotRetrievedSuccessfully")
+            {
+                output = GenericErrorCodes::GenericErrorCodesReportDataNotRetrievedSuccessfully;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -14443,6 +14477,16 @@ namespace PlayFab
             if (inputStr == "GameSaveOperationNotAllowed")
             {
                 output = GenericErrorCodes::GenericErrorCodesGameSaveOperationNotAllowed;
+                return;
+            }
+            if (inputStr == "GameSaveDataStorageQuotaExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveDataStorageQuotaExceeded;
+                return;
+            }
+            if (inputStr == "GameSaveNewerManifestExists")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveNewerManifestExists;
                 return;
             }
             if (inputStr == "StateShareForbidden")

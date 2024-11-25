@@ -77,6 +77,7 @@ namespace PlayFab
         static void GetPlayFabIDsFromPSNAccountIDs(ServerModels::GetPlayFabIDsFromPSNAccountIDsRequest& request, const ProcessApiCallback<ServerModels::GetPlayFabIDsFromPSNAccountIDsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetPlayFabIDsFromPSNOnlineIDs(ServerModels::GetPlayFabIDsFromPSNOnlineIDsRequest& request, const ProcessApiCallback<ServerModels::GetPlayFabIDsFromPSNOnlineIDsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetPlayFabIDsFromSteamIDs(ServerModels::GetPlayFabIDsFromSteamIDsRequest& request, const ProcessApiCallback<ServerModels::GetPlayFabIDsFromSteamIDsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void GetPlayFabIDsFromSteamNames(ServerModels::GetPlayFabIDsFromSteamNamesRequest& request, const ProcessApiCallback<ServerModels::GetPlayFabIDsFromSteamNamesResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetPlayFabIDsFromTwitchIDs(ServerModels::GetPlayFabIDsFromTwitchIDsRequest& request, const ProcessApiCallback<ServerModels::GetPlayFabIDsFromTwitchIDsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetPlayFabIDsFromXboxLiveIDs(ServerModels::GetPlayFabIDsFromXboxLiveIDsRequest& request, const ProcessApiCallback<ServerModels::GetPlayFabIDsFromXboxLiveIDsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetPublisherData(ServerModels::GetPublisherDataRequest& request, const ProcessApiCallback<ServerModels::GetPublisherDataResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -220,6 +221,7 @@ namespace PlayFab
         static void OnGetPlayFabIDsFromPSNAccountIDsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetPlayFabIDsFromPSNOnlineIDsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetPlayFabIDsFromSteamIDsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnGetPlayFabIDsFromSteamNamesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetPlayFabIDsFromTwitchIDsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetPlayFabIDsFromXboxLiveIDsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetPublisherDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
