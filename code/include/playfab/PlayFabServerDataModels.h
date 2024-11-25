@@ -5510,6 +5510,8 @@ namespace PlayFab
             GenericErrorCodesStatisticColumnLengthMismatch,
             GenericErrorCodesInvalidExternalEntityId,
             GenericErrorCodesUpdatingStatisticsUsingTransactionIdNotAvailableForFreeTier,
+            GenericErrorCodesTransactionAlreadyApplied,
+            GenericErrorCodesReportDataNotRetrievedSuccessfully,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5789,6 +5791,8 @@ namespace PlayFab
             GenericErrorCodesGameSaveFileNotUploaded,
             GenericErrorCodesGameSaveBadRequest,
             GenericErrorCodesGameSaveOperationNotAllowed,
+            GenericErrorCodesGameSaveDataStorageQuotaExceeded,
+            GenericErrorCodesGameSaveNewerManifestExists,
             GenericErrorCodesStateShareForbidden,
             GenericErrorCodesStateShareTitleNotInFlight,
             GenericErrorCodesStateShareStateNotFound,
@@ -8716,6 +8720,16 @@ namespace PlayFab
                 output = Json::Value("UpdatingStatisticsUsingTransactionIdNotAvailableForFreeTier");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesTransactionAlreadyApplied)
+            {
+                output = Json::Value("TransactionAlreadyApplied");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesReportDataNotRetrievedSuccessfully)
+            {
+                output = Json::Value("ReportDataNotRetrievedSuccessfully");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
             {
                 output = Json::Value("MatchmakingEntityInvalid");
@@ -10109,6 +10123,16 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesGameSaveOperationNotAllowed)
             {
                 output = Json::Value("GameSaveOperationNotAllowed");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveDataStorageQuotaExceeded)
+            {
+                output = Json::Value("GameSaveDataStorageQuotaExceeded");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveNewerManifestExists)
+            {
+                output = Json::Value("GameSaveNewerManifestExists");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesStateShareForbidden)
@@ -13074,6 +13098,16 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesUpdatingStatisticsUsingTransactionIdNotAvailableForFreeTier;
                 return;
             }
+            if (inputStr == "TransactionAlreadyApplied")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTransactionAlreadyApplied;
+                return;
+            }
+            if (inputStr == "ReportDataNotRetrievedSuccessfully")
+            {
+                output = GenericErrorCodes::GenericErrorCodesReportDataNotRetrievedSuccessfully;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -14467,6 +14501,16 @@ namespace PlayFab
             if (inputStr == "GameSaveOperationNotAllowed")
             {
                 output = GenericErrorCodes::GenericErrorCodesGameSaveOperationNotAllowed;
+                return;
+            }
+            if (inputStr == "GameSaveDataStorageQuotaExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveDataStorageQuotaExceeded;
+                return;
+            }
+            if (inputStr == "GameSaveNewerManifestExists")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveNewerManifestExists;
                 return;
             }
             if (inputStr == "StateShareForbidden")
@@ -22090,6 +22134,98 @@ namespace PlayFab
             {}
 
             ~GetPlayFabIDsFromSteamIDsResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["Data"], Data);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Data; ToJsonUtilO(Data, each_Data); output["Data"] = each_Data;
+                return output;
+            }
+        };
+
+        struct GetPlayFabIDsFromSteamNamesRequest : public PlayFabRequestCommon
+        {
+            std::list<std::string> SteamNames;
+
+            GetPlayFabIDsFromSteamNamesRequest() :
+                PlayFabRequestCommon(),
+                SteamNames()
+            {}
+
+            GetPlayFabIDsFromSteamNamesRequest(const GetPlayFabIDsFromSteamNamesRequest& src) :
+                PlayFabRequestCommon(),
+                SteamNames(src.SteamNames)
+            {}
+
+            ~GetPlayFabIDsFromSteamNamesRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["SteamNames"], SteamNames);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_SteamNames; ToJsonUtilS(SteamNames, each_SteamNames); output["SteamNames"] = each_SteamNames;
+                return output;
+            }
+        };
+
+        struct SteamNamePlayFabIdPair : public PlayFabBaseModel
+        {
+            std::string PlayFabId;
+            std::string SteamName;
+
+            SteamNamePlayFabIdPair() :
+                PlayFabBaseModel(),
+                PlayFabId(),
+                SteamName()
+            {}
+
+            SteamNamePlayFabIdPair(const SteamNamePlayFabIdPair& src) :
+                PlayFabBaseModel(),
+                PlayFabId(src.PlayFabId),
+                SteamName(src.SteamName)
+            {}
+
+            ~SteamNamePlayFabIdPair() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+                FromJsonUtilS(input["SteamName"], SteamName);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                Json::Value each_SteamName; ToJsonUtilS(SteamName, each_SteamName); output["SteamName"] = each_SteamName;
+                return output;
+            }
+        };
+
+        struct GetPlayFabIDsFromSteamNamesResult : public PlayFabResultCommon
+        {
+            std::list<SteamNamePlayFabIdPair> Data;
+
+            GetPlayFabIDsFromSteamNamesResult() :
+                PlayFabResultCommon(),
+                Data()
+            {}
+
+            GetPlayFabIDsFromSteamNamesResult(const GetPlayFabIDsFromSteamNamesResult& src) :
+                PlayFabResultCommon(),
+                Data(src.Data)
+            {}
+
+            ~GetPlayFabIDsFromSteamNamesResult() = default;
 
             void FromJson(const Json::Value& input) override
             {
