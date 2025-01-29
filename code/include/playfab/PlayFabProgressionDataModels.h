@@ -2054,19 +2054,22 @@ namespace PlayFab
             std::map<std::string, std::string> CustomTags;
             Boxed<EntityKey> Entity;
             std::list<StatisticUpdate> Statistics;
+            std::string TransactionId;
 
             UpdateStatisticsRequest() :
                 PlayFabRequestCommon(),
                 CustomTags(),
                 Entity(),
-                Statistics()
+                Statistics(),
+                TransactionId()
             {}
 
             UpdateStatisticsRequest(const UpdateStatisticsRequest& src) :
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
                 Entity(src.Entity),
-                Statistics(src.Statistics)
+                Statistics(src.Statistics),
+                TransactionId(src.TransactionId)
             {}
 
             ~UpdateStatisticsRequest() = default;
@@ -2076,6 +2079,7 @@ namespace PlayFab
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilO(input["Statistics"], Statistics);
+                FromJsonUtilS(input["TransactionId"], TransactionId);
             }
 
             Json::Value ToJson() const override
@@ -2084,6 +2088,7 @@ namespace PlayFab
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
                 Json::Value each_Statistics; ToJsonUtilO(Statistics, each_Statistics); output["Statistics"] = each_Statistics;
+                Json::Value each_TransactionId; ToJsonUtilS(TransactionId, each_TransactionId); output["TransactionId"] = each_TransactionId;
                 return output;
             }
         };

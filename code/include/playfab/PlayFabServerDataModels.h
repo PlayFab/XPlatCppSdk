@@ -5780,6 +5780,7 @@ namespace PlayFab
             GenericErrorCodesTrueSkillConditionSetNotInModel,
             GenericErrorCodesTrueSkillModelStateInvalidForOperation,
             GenericErrorCodesTrueSkillScenarioContainsActiveModel,
+            GenericErrorCodesTrueSkillInvalidConditionRank,
             GenericErrorCodesGameSaveManifestNotFound,
             GenericErrorCodesGameSaveManifestVersionAlreadyExists,
             GenericErrorCodesGameSaveConflictUpdatingManifest,
@@ -5793,6 +5794,7 @@ namespace PlayFab
             GenericErrorCodesGameSaveOperationNotAllowed,
             GenericErrorCodesGameSaveDataStorageQuotaExceeded,
             GenericErrorCodesGameSaveNewerManifestExists,
+            GenericErrorCodesGameSaveBaseVersionNotAvailable,
             GenericErrorCodesStateShareForbidden,
             GenericErrorCodesStateShareTitleNotInFlight,
             GenericErrorCodesStateShareStateNotFound,
@@ -10070,6 +10072,11 @@ namespace PlayFab
                 output = Json::Value("TrueSkillScenarioContainsActiveModel");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidConditionRank)
+            {
+                output = Json::Value("TrueSkillInvalidConditionRank");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesGameSaveManifestNotFound)
             {
                 output = Json::Value("GameSaveManifestNotFound");
@@ -10133,6 +10140,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesGameSaveNewerManifestExists)
             {
                 output = Json::Value("GameSaveNewerManifestExists");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveBaseVersionNotAvailable)
+            {
+                output = Json::Value("GameSaveBaseVersionNotAvailable");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesStateShareForbidden)
@@ -14448,6 +14460,11 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesTrueSkillScenarioContainsActiveModel;
                 return;
             }
+            if (inputStr == "TrueSkillInvalidConditionRank")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidConditionRank;
+                return;
+            }
             if (inputStr == "GameSaveManifestNotFound")
             {
                 output = GenericErrorCodes::GenericErrorCodesGameSaveManifestNotFound;
@@ -14511,6 +14528,11 @@ namespace PlayFab
             if (inputStr == "GameSaveNewerManifestExists")
             {
                 output = GenericErrorCodes::GenericErrorCodesGameSaveNewerManifestExists;
+                return;
+            }
+            if (inputStr == "GameSaveBaseVersionNotAvailable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveBaseVersionNotAvailable;
                 return;
             }
             if (inputStr == "StateShareForbidden")
