@@ -64,7 +64,9 @@ namespace PlayFab
         void ListLeaderboardDefinitions(ProgressionModels::ListLeaderboardDefinitionsRequest& request, const ProcessApiCallback<ProgressionModels::ListLeaderboardDefinitionsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void ListStatisticDefinitions(ProgressionModels::ListStatisticDefinitionsRequest& request, const ProcessApiCallback<ProgressionModels::ListStatisticDefinitionsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UnlinkLeaderboardFromStatistic(ProgressionModels::UnlinkLeaderboardFromStatisticRequest& request, const ProcessApiCallback<ProgressionModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void UpdateLeaderboardDefinition(ProgressionModels::UpdateLeaderboardDefinitionRequest& request, const ProcessApiCallback<ProgressionModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UpdateLeaderboardEntries(ProgressionModels::UpdateLeaderboardEntriesRequest& request, const ProcessApiCallback<ProgressionModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void UpdateStatisticDefinition(ProgressionModels::UpdateStatisticDefinitionRequest& request, const ProcessApiCallback<ProgressionModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UpdateStatistics(ProgressionModels::UpdateStatisticsRequest& request, const ProcessApiCallback<ProgressionModels::UpdateStatisticsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
 
         // ------------ Generated result handlers
@@ -87,7 +89,9 @@ namespace PlayFab
         void OnListLeaderboardDefinitionsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnListStatisticDefinitionsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUnlinkLeaderboardFromStatisticResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnUpdateLeaderboardDefinitionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUpdateLeaderboardEntriesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnUpdateStatisticDefinitionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUpdateStatisticsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
 
         bool ValidateResult(PlayFabResultCommon& resultCommon, const CallRequestContainer& container);

@@ -4212,6 +4212,60 @@ namespace PlayFab
             }
         };
 
+        struct RealMoneyPriceDetails : public PlayFabBaseModel
+        {
+            std::map<std::string, Int32> AppleAppStorePrices;
+            std::map<std::string, Int32> GooglePlayPrices;
+            std::map<std::string, Int32> MicrosoftStorePrices;
+            std::map<std::string, Int32> NintendoEShopPrices;
+            std::map<std::string, Int32> PlayStationStorePrices;
+            std::map<std::string, Int32> SteamPrices;
+
+            RealMoneyPriceDetails() :
+                PlayFabBaseModel(),
+                AppleAppStorePrices(),
+                GooglePlayPrices(),
+                MicrosoftStorePrices(),
+                NintendoEShopPrices(),
+                PlayStationStorePrices(),
+                SteamPrices()
+            {}
+
+            RealMoneyPriceDetails(const RealMoneyPriceDetails& src) :
+                PlayFabBaseModel(),
+                AppleAppStorePrices(src.AppleAppStorePrices),
+                GooglePlayPrices(src.GooglePlayPrices),
+                MicrosoftStorePrices(src.MicrosoftStorePrices),
+                NintendoEShopPrices(src.NintendoEShopPrices),
+                PlayStationStorePrices(src.PlayStationStorePrices),
+                SteamPrices(src.SteamPrices)
+            {}
+
+            ~RealMoneyPriceDetails() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["AppleAppStorePrices"], AppleAppStorePrices);
+                FromJsonUtilP(input["GooglePlayPrices"], GooglePlayPrices);
+                FromJsonUtilP(input["MicrosoftStorePrices"], MicrosoftStorePrices);
+                FromJsonUtilP(input["NintendoEShopPrices"], NintendoEShopPrices);
+                FromJsonUtilP(input["PlayStationStorePrices"], PlayStationStorePrices);
+                FromJsonUtilP(input["SteamPrices"], SteamPrices);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_AppleAppStorePrices; ToJsonUtilP(AppleAppStorePrices, each_AppleAppStorePrices); output["AppleAppStorePrices"] = each_AppleAppStorePrices;
+                Json::Value each_GooglePlayPrices; ToJsonUtilP(GooglePlayPrices, each_GooglePlayPrices); output["GooglePlayPrices"] = each_GooglePlayPrices;
+                Json::Value each_MicrosoftStorePrices; ToJsonUtilP(MicrosoftStorePrices, each_MicrosoftStorePrices); output["MicrosoftStorePrices"] = each_MicrosoftStorePrices;
+                Json::Value each_NintendoEShopPrices; ToJsonUtilP(NintendoEShopPrices, each_NintendoEShopPrices); output["NintendoEShopPrices"] = each_NintendoEShopPrices;
+                Json::Value each_PlayStationStorePrices; ToJsonUtilP(PlayStationStorePrices, each_PlayStationStorePrices); output["PlayStationStorePrices"] = each_PlayStationStorePrices;
+                Json::Value each_SteamPrices; ToJsonUtilP(SteamPrices, each_SteamPrices); output["SteamPrices"] = each_SteamPrices;
+                return output;
+            }
+        };
+
         struct FilterOptions : public PlayFabBaseModel
         {
             std::string Filter;
@@ -4435,6 +4489,7 @@ namespace PlayFab
             std::list<std::string> Platforms;
             Boxed<CatalogPriceOptions> PriceOptions;
             Boxed<Rating> pfRating;
+            Boxed<RealMoneyPriceDetails> pfRealMoneyPriceDetails;
             Boxed<time_t> StartDate;
             Boxed<StoreDetails> pfStoreDetails;
             std::list<std::string> Tags;
@@ -4465,6 +4520,7 @@ namespace PlayFab
                 Platforms(),
                 PriceOptions(),
                 pfRating(),
+                pfRealMoneyPriceDetails(),
                 StartDate(),
                 pfStoreDetails(),
                 Tags(),
@@ -4496,6 +4552,7 @@ namespace PlayFab
                 Platforms(src.Platforms),
                 PriceOptions(src.PriceOptions),
                 pfRating(src.pfRating),
+                pfRealMoneyPriceDetails(src.pfRealMoneyPriceDetails),
                 StartDate(src.StartDate),
                 pfStoreDetails(src.pfStoreDetails),
                 Tags(src.Tags),
@@ -4529,6 +4586,7 @@ namespace PlayFab
                 FromJsonUtilS(input["Platforms"], Platforms);
                 FromJsonUtilO(input["PriceOptions"], PriceOptions);
                 FromJsonUtilO(input["Rating"], pfRating);
+                FromJsonUtilO(input["RealMoneyPriceDetails"], pfRealMoneyPriceDetails);
                 FromJsonUtilT(input["StartDate"], StartDate);
                 FromJsonUtilO(input["StoreDetails"], pfStoreDetails);
                 FromJsonUtilS(input["Tags"], Tags);
@@ -4561,35 +4619,12 @@ namespace PlayFab
                 Json::Value each_Platforms; ToJsonUtilS(Platforms, each_Platforms); output["Platforms"] = each_Platforms;
                 Json::Value each_PriceOptions; ToJsonUtilO(PriceOptions, each_PriceOptions); output["PriceOptions"] = each_PriceOptions;
                 Json::Value each_pfRating; ToJsonUtilO(pfRating, each_pfRating); output["Rating"] = each_pfRating;
+                Json::Value each_pfRealMoneyPriceDetails; ToJsonUtilO(pfRealMoneyPriceDetails, each_pfRealMoneyPriceDetails); output["RealMoneyPriceDetails"] = each_pfRealMoneyPriceDetails;
                 Json::Value each_StartDate; ToJsonUtilT(StartDate, each_StartDate); output["StartDate"] = each_StartDate;
                 Json::Value each_pfStoreDetails; ToJsonUtilO(pfStoreDetails, each_pfStoreDetails); output["StoreDetails"] = each_pfStoreDetails;
                 Json::Value each_Tags; ToJsonUtilS(Tags, each_Tags); output["Tags"] = each_Tags;
                 Json::Value each_Title; ToJsonUtilS(Title, each_Title); output["Title"] = each_Title;
                 Json::Value each_Type; ToJsonUtilS(Type, each_Type); output["Type"] = each_Type;
-                return output;
-            }
-        };
-
-        struct ContentFeed : public PlayFabBaseModel
-        {
-
-            ContentFeed() :
-                PlayFabBaseModel()
-            {}
-
-            ContentFeed(const ContentFeed&) :
-                PlayFabBaseModel()
-            {}
-
-            ~ContentFeed() = default;
-
-            void FromJson(const Json::Value&) override
-            {
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
                 return output;
             }
         };
@@ -6000,7 +6035,6 @@ namespace PlayFab
             std::string Locale;
             Int32 Rating;
             Boxed<EntityKey> ReviewerEntity;
-            std::string ReviewerId;
             std::string ReviewId;
             std::string ReviewText;
             time_t Submitted;
@@ -6017,7 +6051,6 @@ namespace PlayFab
                 Locale(),
                 Rating(),
                 ReviewerEntity(),
-                ReviewerId(),
                 ReviewId(),
                 ReviewText(),
                 Submitted(),
@@ -6035,7 +6068,6 @@ namespace PlayFab
                 Locale(src.Locale),
                 Rating(src.Rating),
                 ReviewerEntity(src.ReviewerEntity),
-                ReviewerId(src.ReviewerId),
                 ReviewId(src.ReviewId),
                 ReviewText(src.ReviewText),
                 Submitted(src.Submitted),
@@ -6055,7 +6087,6 @@ namespace PlayFab
                 FromJsonUtilS(input["Locale"], Locale);
                 FromJsonUtilP(input["Rating"], Rating);
                 FromJsonUtilO(input["ReviewerEntity"], ReviewerEntity);
-                FromJsonUtilS(input["ReviewerId"], ReviewerId);
                 FromJsonUtilS(input["ReviewId"], ReviewId);
                 FromJsonUtilS(input["ReviewText"], ReviewText);
                 FromJsonUtilT(input["Submitted"], Submitted);
@@ -6074,7 +6105,6 @@ namespace PlayFab
                 Json::Value each_Locale; ToJsonUtilS(Locale, each_Locale); output["Locale"] = each_Locale;
                 Json::Value each_Rating; ToJsonUtilP(Rating, each_Rating); output["Rating"] = each_Rating;
                 Json::Value each_ReviewerEntity; ToJsonUtilO(ReviewerEntity, each_ReviewerEntity); output["ReviewerEntity"] = each_ReviewerEntity;
-                Json::Value each_ReviewerId; ToJsonUtilS(ReviewerId, each_ReviewerId); output["ReviewerId"] = each_ReviewerId;
                 Json::Value each_ReviewId; ToJsonUtilS(ReviewId, each_ReviewId); output["ReviewId"] = each_ReviewId;
                 Json::Value each_ReviewText; ToJsonUtilS(ReviewText, each_ReviewText); output["ReviewText"] = each_ReviewText;
                 Json::Value each_Submitted; ToJsonUtilT(Submitted, each_Submitted); output["Submitted"] = each_Submitted;
@@ -7342,30 +7372,6 @@ namespace PlayFab
             }
         };
 
-        struct PayoutDetails : public PlayFabBaseModel
-        {
-
-            PayoutDetails() :
-                PlayFabBaseModel()
-            {}
-
-            PayoutDetails(const PayoutDetails&) :
-                PlayFabBaseModel()
-            {}
-
-            ~PayoutDetails() = default;
-
-            void FromJson(const Json::Value&) override
-            {
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                return output;
-            }
-        };
-
         struct PublishDraftItemRequest : public PlayFabRequestCommon
         {
             Boxed<CatalogAlternateId> AlternateId;
@@ -7562,30 +7568,6 @@ namespace PlayFab
             }
         };
 
-        struct PurchaseOverride : public PlayFabBaseModel
-        {
-
-            PurchaseOverride() :
-                PlayFabBaseModel()
-            {}
-
-            PurchaseOverride(const PurchaseOverride&) :
-                PlayFabBaseModel()
-            {}
-
-            ~PurchaseOverride() = default;
-
-            void FromJson(const Json::Value&) override
-            {
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                return output;
-            }
-        };
-
         struct PurchaseOverridesInfo : public PlayFabBaseModel
         {
 
@@ -7598,30 +7580,6 @@ namespace PlayFab
             {}
 
             ~PurchaseOverridesInfo() = default;
-
-            void FromJson(const Json::Value&) override
-            {
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                return output;
-            }
-        };
-
-        struct RealMoneyPriceDetails : public PlayFabBaseModel
-        {
-
-            RealMoneyPriceDetails() :
-                PlayFabBaseModel()
-            {}
-
-            RealMoneyPriceDetails(const RealMoneyPriceDetails&) :
-                PlayFabBaseModel()
-            {}
-
-            ~RealMoneyPriceDetails() = default;
 
             void FromJson(const Json::Value&) override
             {
@@ -8498,35 +8456,6 @@ namespace PlayFab
             }
         };
 
-        struct ScanResult : public PlayFabResultCommon
-        {
-            std::string Url;
-
-            ScanResult() :
-                PlayFabResultCommon(),
-                Url()
-            {}
-
-            ScanResult(const ScanResult& src) :
-                PlayFabResultCommon(),
-                Url(src.Url)
-            {}
-
-            ~ScanResult() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilS(input["Url"], Url);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_Url; ToJsonUtilS(Url, each_Url); output["Url"] = each_Url;
-                return output;
-            }
-        };
-
         struct StoreReference : public PlayFabBaseModel
         {
             Boxed<CatalogAlternateId> AlternateId;
@@ -8816,35 +8745,6 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                return output;
-            }
-        };
-
-        struct SubscriptionDetails : public PlayFabBaseModel
-        {
-            double DurationInSeconds;
-
-            SubscriptionDetails() :
-                PlayFabBaseModel(),
-                DurationInSeconds()
-            {}
-
-            SubscriptionDetails(const SubscriptionDetails& src) :
-                PlayFabBaseModel(),
-                DurationInSeconds(src.DurationInSeconds)
-            {}
-
-            ~SubscriptionDetails() = default;
-
-            void FromJson(const Json::Value& input) override
-            {
-                FromJsonUtilP(input["DurationInSeconds"], DurationInSeconds);
-            }
-
-            Json::Value ToJson() const override
-            {
-                Json::Value output;
-                Json::Value each_DurationInSeconds; ToJsonUtilP(DurationInSeconds, each_DurationInSeconds); output["DurationInSeconds"] = each_DurationInSeconds;
                 return output;
             }
         };
