@@ -960,6 +960,7 @@ namespace PlayFab
         {
             std::list<LeaderboardColumn> Columns;
             Uint32 EntryCount;
+            Boxed<time_t> NextReset;
             std::list<EntityLeaderboardEntry> Rankings;
             Uint32 Version;
 
@@ -967,6 +968,7 @@ namespace PlayFab
                 PlayFabResultCommon(),
                 Columns(),
                 EntryCount(),
+                NextReset(),
                 Rankings(),
                 Version()
             {}
@@ -975,6 +977,7 @@ namespace PlayFab
                 PlayFabResultCommon(),
                 Columns(src.Columns),
                 EntryCount(src.EntryCount),
+                NextReset(src.NextReset),
                 Rankings(src.Rankings),
                 Version(src.Version)
             {}
@@ -985,6 +988,7 @@ namespace PlayFab
             {
                 FromJsonUtilO(input["Columns"], Columns);
                 FromJsonUtilP(input["EntryCount"], EntryCount);
+                FromJsonUtilT(input["NextReset"], NextReset);
                 FromJsonUtilO(input["Rankings"], Rankings);
                 FromJsonUtilP(input["Version"], Version);
             }
@@ -994,6 +998,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_Columns; ToJsonUtilO(Columns, each_Columns); output["Columns"] = each_Columns;
                 Json::Value each_EntryCount; ToJsonUtilP(EntryCount, each_EntryCount); output["EntryCount"] = each_EntryCount;
+                Json::Value each_NextReset; ToJsonUtilT(NextReset, each_NextReset); output["NextReset"] = each_NextReset;
                 Json::Value each_Rankings; ToJsonUtilO(Rankings, each_Rankings); output["Rankings"] = each_Rankings;
                 Json::Value each_Version; ToJsonUtilP(Version, each_Version); output["Version"] = each_Version;
                 return output;
@@ -2010,6 +2015,50 @@ namespace PlayFab
             }
         };
 
+        struct UpdateLeaderboardDefinitionRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            std::string Name;
+            Boxed<Int32> SizeLimit;
+            Boxed<VersionConfiguration> pfVersionConfiguration;
+
+            UpdateLeaderboardDefinitionRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                Name(),
+                SizeLimit(),
+                pfVersionConfiguration()
+            {}
+
+            UpdateLeaderboardDefinitionRequest(const UpdateLeaderboardDefinitionRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                Name(src.Name),
+                SizeLimit(src.SizeLimit),
+                pfVersionConfiguration(src.pfVersionConfiguration)
+            {}
+
+            ~UpdateLeaderboardDefinitionRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["Name"], Name);
+                FromJsonUtilP(input["SizeLimit"], SizeLimit);
+                FromJsonUtilO(input["VersionConfiguration"], pfVersionConfiguration);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
+                Json::Value each_SizeLimit; ToJsonUtilP(SizeLimit, each_SizeLimit); output["SizeLimit"] = each_SizeLimit;
+                Json::Value each_pfVersionConfiguration; ToJsonUtilO(pfVersionConfiguration, each_pfVersionConfiguration); output["VersionConfiguration"] = each_pfVersionConfiguration;
+                return output;
+            }
+        };
+
         struct UpdateLeaderboardEntriesRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
@@ -2045,6 +2094,45 @@ namespace PlayFab
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Entries; ToJsonUtilO(Entries, each_Entries); output["Entries"] = each_Entries;
                 Json::Value each_LeaderboardName; ToJsonUtilS(LeaderboardName, each_LeaderboardName); output["LeaderboardName"] = each_LeaderboardName;
+                return output;
+            }
+        };
+
+        struct UpdateStatisticDefinitionRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            std::string Name;
+            Boxed<VersionConfiguration> pfVersionConfiguration;
+
+            UpdateStatisticDefinitionRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                Name(),
+                pfVersionConfiguration()
+            {}
+
+            UpdateStatisticDefinitionRequest(const UpdateStatisticDefinitionRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                Name(src.Name),
+                pfVersionConfiguration(src.pfVersionConfiguration)
+            {}
+
+            ~UpdateStatisticDefinitionRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["Name"], Name);
+                FromJsonUtilO(input["VersionConfiguration"], pfVersionConfiguration);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
+                Json::Value each_pfVersionConfiguration; ToJsonUtilO(pfVersionConfiguration, each_pfVersionConfiguration); output["VersionConfiguration"] = each_pfVersionConfiguration;
                 return output;
             }
         };

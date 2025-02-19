@@ -5488,6 +5488,8 @@ namespace PlayFab
             GenericErrorCodesUpdatingStatisticsUsingTransactionIdNotAvailableForFreeTier,
             GenericErrorCodesTransactionAlreadyApplied,
             GenericErrorCodesReportDataNotRetrievedSuccessfully,
+            GenericErrorCodesResetIntervalCannotBeModified,
+            GenericErrorCodesVersionIncrementRateExceeded,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5771,6 +5773,7 @@ namespace PlayFab
             GenericErrorCodesGameSaveDataStorageQuotaExceeded,
             GenericErrorCodesGameSaveNewerManifestExists,
             GenericErrorCodesGameSaveBaseVersionNotAvailable,
+            GenericErrorCodesGameSaveManifestVersionQuarantined,
             GenericErrorCodesStateShareForbidden,
             GenericErrorCodesStateShareTitleNotInFlight,
             GenericErrorCodesStateShareStateNotFound,
@@ -8708,6 +8711,16 @@ namespace PlayFab
                 output = Json::Value("ReportDataNotRetrievedSuccessfully");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesResetIntervalCannotBeModified)
+            {
+                output = Json::Value("ResetIntervalCannotBeModified");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesVersionIncrementRateExceeded)
+            {
+                output = Json::Value("VersionIncrementRateExceeded");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
             {
                 output = Json::Value("MatchmakingEntityInvalid");
@@ -10121,6 +10134,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesGameSaveBaseVersionNotAvailable)
             {
                 output = Json::Value("GameSaveBaseVersionNotAvailable");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveManifestVersionQuarantined)
+            {
+                output = Json::Value("GameSaveManifestVersionQuarantined");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesStateShareForbidden)
@@ -13096,6 +13114,16 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesReportDataNotRetrievedSuccessfully;
                 return;
             }
+            if (inputStr == "ResetIntervalCannotBeModified")
+            {
+                output = GenericErrorCodes::GenericErrorCodesResetIntervalCannotBeModified;
+                return;
+            }
+            if (inputStr == "VersionIncrementRateExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesVersionIncrementRateExceeded;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -14509,6 +14537,11 @@ namespace PlayFab
             if (inputStr == "GameSaveBaseVersionNotAvailable")
             {
                 output = GenericErrorCodes::GenericErrorCodesGameSaveBaseVersionNotAvailable;
+                return;
+            }
+            if (inputStr == "GameSaveManifestVersionQuarantined")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveManifestVersionQuarantined;
                 return;
             }
             if (inputStr == "StateShareForbidden")
