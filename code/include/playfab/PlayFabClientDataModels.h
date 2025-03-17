@@ -5905,7 +5905,8 @@ namespace PlayFab
             UserOriginationNintendoSwitchAccount,
             UserOriginationGooglePlayGames,
             UserOriginationXboxMobileStore,
-            UserOriginationKing
+            UserOriginationKing,
+            UserOriginationBattleNet
         };
 
         inline void ToJsonEnum(const UserOrigination input, Json::Value& output)
@@ -6038,6 +6039,11 @@ namespace PlayFab
             if (input == UserOrigination::UserOriginationKing)
             {
                 output = Json::Value("King");
+                return;
+            }
+            if (input == UserOrigination::UserOriginationBattleNet)
+            {
+                output = Json::Value("BattleNet");
                 return;
             }
         }
@@ -6176,6 +6182,11 @@ namespace PlayFab
             if (inputStr == "King")
             {
                 output = UserOrigination::UserOriginationKing;
+                return;
+            }
+            if (inputStr == "BattleNet")
+            {
+                output = UserOrigination::UserOriginationBattleNet;
                 return;
             }
         }
@@ -8211,6 +8222,147 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_SharedGroupId; ToJsonUtilS(SharedGroupId, each_SharedGroupId); output["SharedGroupId"] = each_SharedGroupId;
+                return output;
+            }
+        };
+
+        struct CustomPropertyDetails : public PlayFabBaseModel
+        {
+            std::string Name;
+            Json::Value Value;
+
+            CustomPropertyDetails() :
+                PlayFabBaseModel(),
+                Name(),
+                Value()
+            {}
+
+            CustomPropertyDetails(const CustomPropertyDetails& src) :
+                PlayFabBaseModel(),
+                Name(src.Name),
+                Value(src.Value)
+            {}
+
+            ~CustomPropertyDetails() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["Name"], Name);
+                Value = input["Value"];
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
+                output["Value"] = Value;
+                return output;
+            }
+        };
+
+        struct DeletedPropertyDetails : public PlayFabBaseModel
+        {
+            std::string Name;
+            bool WasDeleted;
+
+            DeletedPropertyDetails() :
+                PlayFabBaseModel(),
+                Name(),
+                WasDeleted()
+            {}
+
+            DeletedPropertyDetails(const DeletedPropertyDetails& src) :
+                PlayFabBaseModel(),
+                Name(src.Name),
+                WasDeleted(src.WasDeleted)
+            {}
+
+            ~DeletedPropertyDetails() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["Name"], Name);
+                FromJsonUtilP(input["WasDeleted"], WasDeleted);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
+                Json::Value each_WasDeleted; ToJsonUtilP(WasDeleted, each_WasDeleted); output["WasDeleted"] = each_WasDeleted;
+                return output;
+            }
+        };
+
+        struct DeletePlayerCustomPropertiesRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            Boxed<Int32> ExpectedPropertiesVersion;
+            std::list<std::string> PropertyNames;
+
+            DeletePlayerCustomPropertiesRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                ExpectedPropertiesVersion(),
+                PropertyNames()
+            {}
+
+            DeletePlayerCustomPropertiesRequest(const DeletePlayerCustomPropertiesRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                ExpectedPropertiesVersion(src.ExpectedPropertiesVersion),
+                PropertyNames(src.PropertyNames)
+            {}
+
+            ~DeletePlayerCustomPropertiesRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilP(input["ExpectedPropertiesVersion"], ExpectedPropertiesVersion);
+                FromJsonUtilS(input["PropertyNames"], PropertyNames);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_ExpectedPropertiesVersion; ToJsonUtilP(ExpectedPropertiesVersion, each_ExpectedPropertiesVersion); output["ExpectedPropertiesVersion"] = each_ExpectedPropertiesVersion;
+                Json::Value each_PropertyNames; ToJsonUtilS(PropertyNames, each_PropertyNames); output["PropertyNames"] = each_PropertyNames;
+                return output;
+            }
+        };
+
+        struct DeletePlayerCustomPropertiesResult : public PlayFabResultCommon
+        {
+            std::list<DeletedPropertyDetails> DeletedProperties;
+            Int32 PropertiesVersion;
+
+            DeletePlayerCustomPropertiesResult() :
+                PlayFabResultCommon(),
+                DeletedProperties(),
+                PropertiesVersion()
+            {}
+
+            DeletePlayerCustomPropertiesResult(const DeletePlayerCustomPropertiesResult& src) :
+                PlayFabResultCommon(),
+                DeletedProperties(src.DeletedProperties),
+                PropertiesVersion(src.PropertiesVersion)
+            {}
+
+            ~DeletePlayerCustomPropertiesResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["DeletedProperties"], DeletedProperties);
+                FromJsonUtilP(input["PropertiesVersion"], PropertiesVersion);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_DeletedProperties; ToJsonUtilO(DeletedProperties, each_DeletedProperties); output["DeletedProperties"] = each_DeletedProperties;
+                Json::Value each_PropertiesVersion; ToJsonUtilP(PropertiesVersion, each_PropertiesVersion); output["PropertiesVersion"] = each_PropertiesVersion;
                 return output;
             }
         };
@@ -11889,6 +12041,69 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_InfoResultPayload; ToJsonUtilO(InfoResultPayload, each_InfoResultPayload); output["InfoResultPayload"] = each_InfoResultPayload;
                 Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                return output;
+            }
+        };
+
+        struct GetPlayerCustomPropertyRequest : public PlayFabRequestCommon
+        {
+            std::string PropertyName;
+
+            GetPlayerCustomPropertyRequest() :
+                PlayFabRequestCommon(),
+                PropertyName()
+            {}
+
+            GetPlayerCustomPropertyRequest(const GetPlayerCustomPropertyRequest& src) :
+                PlayFabRequestCommon(),
+                PropertyName(src.PropertyName)
+            {}
+
+            ~GetPlayerCustomPropertyRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["PropertyName"], PropertyName);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_PropertyName; ToJsonUtilS(PropertyName, each_PropertyName); output["PropertyName"] = each_PropertyName;
+                return output;
+            }
+        };
+
+        struct GetPlayerCustomPropertyResult : public PlayFabResultCommon
+        {
+            Int32 PropertiesVersion;
+            Boxed<CustomPropertyDetails> Property;
+
+            GetPlayerCustomPropertyResult() :
+                PlayFabResultCommon(),
+                PropertiesVersion(),
+                Property()
+            {}
+
+            GetPlayerCustomPropertyResult(const GetPlayerCustomPropertyResult& src) :
+                PlayFabResultCommon(),
+                PropertiesVersion(src.PropertiesVersion),
+                Property(src.Property)
+            {}
+
+            ~GetPlayerCustomPropertyResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["PropertiesVersion"], PropertiesVersion);
+                FromJsonUtilO(input["Property"], Property);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_PropertiesVersion; ToJsonUtilP(PropertiesVersion, each_PropertiesVersion); output["PropertiesVersion"] = each_PropertiesVersion;
+                Json::Value each_Property; ToJsonUtilO(Property, each_Property); output["Property"] = each_Property;
                 return output;
             }
         };
@@ -15763,6 +15978,64 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                return output;
+            }
+        };
+
+        struct ListPlayerCustomPropertiesRequest : public PlayFabRequestCommon
+        {
+
+            ListPlayerCustomPropertiesRequest() :
+                PlayFabRequestCommon()
+            {}
+
+            ListPlayerCustomPropertiesRequest(const ListPlayerCustomPropertiesRequest&) :
+                PlayFabRequestCommon()
+            {}
+
+            ~ListPlayerCustomPropertiesRequest() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
+        struct ListPlayerCustomPropertiesResult : public PlayFabResultCommon
+        {
+            std::list<CustomPropertyDetails> Properties;
+            Int32 PropertiesVersion;
+
+            ListPlayerCustomPropertiesResult() :
+                PlayFabResultCommon(),
+                Properties(),
+                PropertiesVersion()
+            {}
+
+            ListPlayerCustomPropertiesResult(const ListPlayerCustomPropertiesResult& src) :
+                PlayFabResultCommon(),
+                Properties(src.Properties),
+                PropertiesVersion(src.PropertiesVersion)
+            {}
+
+            ~ListPlayerCustomPropertiesResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["Properties"], Properties);
+                FromJsonUtilP(input["PropertiesVersion"], PropertiesVersion);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Properties; ToJsonUtilO(Properties, each_Properties); output["Properties"] = each_Properties;
+                Json::Value each_PropertiesVersion; ToJsonUtilP(PropertiesVersion, each_PropertiesVersion); output["PropertiesVersion"] = each_PropertiesVersion;
                 return output;
             }
         };
@@ -19917,6 +20190,108 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                return output;
+            }
+        };
+
+        struct UpdateProperty : public PlayFabBaseModel
+        {
+            std::string Name;
+            Json::Value Value;
+
+            UpdateProperty() :
+                PlayFabBaseModel(),
+                Name(),
+                Value()
+            {}
+
+            UpdateProperty(const UpdateProperty& src) :
+                PlayFabBaseModel(),
+                Name(src.Name),
+                Value(src.Value)
+            {}
+
+            ~UpdateProperty() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["Name"], Name);
+                Value = input["Value"];
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
+                output["Value"] = Value;
+                return output;
+            }
+        };
+
+        struct UpdatePlayerCustomPropertiesRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            Boxed<Int32> ExpectedPropertiesVersion;
+            std::list<UpdateProperty> Properties;
+
+            UpdatePlayerCustomPropertiesRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                ExpectedPropertiesVersion(),
+                Properties()
+            {}
+
+            UpdatePlayerCustomPropertiesRequest(const UpdatePlayerCustomPropertiesRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                ExpectedPropertiesVersion(src.ExpectedPropertiesVersion),
+                Properties(src.Properties)
+            {}
+
+            ~UpdatePlayerCustomPropertiesRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilP(input["ExpectedPropertiesVersion"], ExpectedPropertiesVersion);
+                FromJsonUtilO(input["Properties"], Properties);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_ExpectedPropertiesVersion; ToJsonUtilP(ExpectedPropertiesVersion, each_ExpectedPropertiesVersion); output["ExpectedPropertiesVersion"] = each_ExpectedPropertiesVersion;
+                Json::Value each_Properties; ToJsonUtilO(Properties, each_Properties); output["Properties"] = each_Properties;
+                return output;
+            }
+        };
+
+        struct UpdatePlayerCustomPropertiesResult : public PlayFabResultCommon
+        {
+            Int32 PropertiesVersion;
+
+            UpdatePlayerCustomPropertiesResult() :
+                PlayFabResultCommon(),
+                PropertiesVersion()
+            {}
+
+            UpdatePlayerCustomPropertiesResult(const UpdatePlayerCustomPropertiesResult& src) :
+                PlayFabResultCommon(),
+                PropertiesVersion(src.PropertiesVersion)
+            {}
+
+            ~UpdatePlayerCustomPropertiesResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["PropertiesVersion"], PropertiesVersion);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_PropertiesVersion; ToJsonUtilP(PropertiesVersion, each_PropertiesVersion); output["PropertiesVersion"] = each_PropertiesVersion;
                 return output;
             }
         };
