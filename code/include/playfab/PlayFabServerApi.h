@@ -42,6 +42,7 @@ namespace PlayFab
         static void CreateSharedGroup(ServerModels::CreateSharedGroupRequest& request, const ProcessApiCallback<ServerModels::CreateSharedGroupResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeleteCharacterFromUser(ServerModels::DeleteCharacterFromUserRequest& request, const ProcessApiCallback<ServerModels::DeleteCharacterFromUserResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeletePlayer(ServerModels::DeletePlayerRequest& request, const ProcessApiCallback<ServerModels::DeletePlayerResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void DeletePlayerCustomProperties(ServerModels::DeletePlayerCustomPropertiesRequest& request, const ProcessApiCallback<ServerModels::DeletePlayerCustomPropertiesResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeletePushNotificationTemplate(ServerModels::DeletePushNotificationTemplateRequest& request, const ProcessApiCallback<ServerModels::DeletePushNotificationTemplateResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeleteSharedGroup(ServerModels::DeleteSharedGroupRequest& request, const ProcessApiCallback<ServerModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void EvaluateRandomResultTable(ServerModels::EvaluateRandomResultTableRequest& request, const ProcessApiCallback<ServerModels::EvaluateRandomResultTableResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -63,6 +64,7 @@ namespace PlayFab
         static void GetLeaderboardAroundUser(ServerModels::GetLeaderboardAroundUserRequest& request, const ProcessApiCallback<ServerModels::GetLeaderboardAroundUserResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetLeaderboardForUserCharacters(ServerModels::GetLeaderboardForUsersCharactersRequest& request, const ProcessApiCallback<ServerModels::GetLeaderboardForUsersCharactersResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetPlayerCombinedInfo(ServerModels::GetPlayerCombinedInfoRequest& request, const ProcessApiCallback<ServerModels::GetPlayerCombinedInfoResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void GetPlayerCustomProperty(ServerModels::GetPlayerCustomPropertyRequest& request, const ProcessApiCallback<ServerModels::GetPlayerCustomPropertyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetPlayerProfile(ServerModels::GetPlayerProfileRequest& request, const ProcessApiCallback<ServerModels::GetPlayerProfileResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetPlayerSegments(ServerModels::GetPlayersSegmentsRequest& request, const ProcessApiCallback<ServerModels::GetPlayerSegmentsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetPlayersInSegment(ServerModels::GetPlayersInSegmentRequest& request, const ProcessApiCallback<ServerModels::GetPlayersInSegmentResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -110,6 +112,7 @@ namespace PlayFab
         static void LinkServerCustomId(ServerModels::LinkServerCustomIdRequest& request, const ProcessApiCallback<ServerModels::LinkServerCustomIdResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void LinkSteamId(ServerModels::LinkSteamIdRequest& request, const ProcessApiCallback<ServerModels::LinkSteamIdResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void LinkXboxAccount(ServerModels::LinkXboxAccountRequest& request, const ProcessApiCallback<ServerModels::LinkXboxAccountResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void ListPlayerCustomProperties(ServerModels::ListPlayerCustomPropertiesRequest& request, const ProcessApiCallback<ServerModels::ListPlayerCustomPropertiesResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void LoginWithPSN(ServerModels::LoginWithPSNRequest& request, const ProcessApiCallback<ServerModels::ServerLoginResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void LoginWithServerCustomId(ServerModels::LoginWithServerCustomIdRequest& request, const ProcessApiCallback<ServerModels::ServerLoginResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void LoginWithSteamId(ServerModels::LoginWithSteamIdRequest& request, const ProcessApiCallback<ServerModels::ServerLoginResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -155,6 +158,7 @@ namespace PlayFab
         static void UpdateCharacterInternalData(ServerModels::UpdateCharacterDataRequest& request, const ProcessApiCallback<ServerModels::UpdateCharacterDataResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void UpdateCharacterReadOnlyData(ServerModels::UpdateCharacterDataRequest& request, const ProcessApiCallback<ServerModels::UpdateCharacterDataResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void UpdateCharacterStatistics(ServerModels::UpdateCharacterStatisticsRequest& request, const ProcessApiCallback<ServerModels::UpdateCharacterStatisticsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void UpdatePlayerCustomProperties(ServerModels::UpdatePlayerCustomPropertiesRequest& request, const ProcessApiCallback<ServerModels::UpdatePlayerCustomPropertiesResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void UpdatePlayerStatistics(ServerModels::UpdatePlayerStatisticsRequest& request, const ProcessApiCallback<ServerModels::UpdatePlayerStatisticsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void UpdateSharedGroupData(ServerModels::UpdateSharedGroupDataRequest& request, const ProcessApiCallback<ServerModels::UpdateSharedGroupDataResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void UpdateUserData(ServerModels::UpdateUserDataRequest& request, const ProcessApiCallback<ServerModels::UpdateUserDataResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -186,6 +190,7 @@ namespace PlayFab
         static void OnCreateSharedGroupResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnDeleteCharacterFromUserResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnDeletePlayerResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnDeletePlayerCustomPropertiesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnDeletePushNotificationTemplateResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnDeleteSharedGroupResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnEvaluateRandomResultTableResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -207,6 +212,7 @@ namespace PlayFab
         static void OnGetLeaderboardAroundUserResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetLeaderboardForUserCharactersResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetPlayerCombinedInfoResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnGetPlayerCustomPropertyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetPlayerProfileResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetPlayerSegmentsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetPlayersInSegmentResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -254,6 +260,7 @@ namespace PlayFab
         static void OnLinkServerCustomIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnLinkSteamIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnLinkXboxAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnListPlayerCustomPropertiesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnLoginWithPSNResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnLoginWithServerCustomIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnLoginWithSteamIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -299,6 +306,7 @@ namespace PlayFab
         static void OnUpdateCharacterInternalDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnUpdateCharacterReadOnlyDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnUpdateCharacterStatisticsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnUpdatePlayerCustomPropertiesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnUpdatePlayerStatisticsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnUpdateSharedGroupDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnUpdateUserDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);

@@ -912,6 +912,56 @@ namespace PlayFab
         }
     }
 
+    void PlayFabClientInstanceAPI::DeletePlayerCustomProperties(
+        DeletePlayerCustomPropertiesRequest& request,
+        const ProcessApiCallback<DeletePlayerCustomPropertiesResult> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : this->m_context;
+        std::shared_ptr<PlayFabApiSettings> settings = this->m_settings != nullptr ? this->m_settings : PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = request.authenticationContext == nullptr ? this->m_context : request.authenticationContext;
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-Authorization", context->clientSessionTicket);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Client/DeletePlayerCustomProperties",
+            headers,
+            jsonAsString,
+            std::bind(&PlayFabClientInstanceAPI::OnDeletePlayerCustomPropertiesResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<DeletePlayerCustomPropertiesResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabClientInstanceAPI::OnDeletePlayerCustomPropertiesResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        DeletePlayerCustomPropertiesResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = *static_cast<ProcessApiCallback<DeletePlayerCustomPropertiesResult> *>(internalPtr.get());
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
     void PlayFabClientInstanceAPI::ExecuteCloudScript(
         ExecuteCloudScriptRequest& request,
         const ProcessApiCallback<ExecuteCloudScriptResult> callback,
@@ -1957,6 +2007,56 @@ namespace PlayFab
             if (internalPtr.get() != nullptr)
             {
                 const auto& callback = *static_cast<ProcessApiCallback<GetPlayerCombinedInfoResult> *>(internalPtr.get());
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabClientInstanceAPI::GetPlayerCustomProperty(
+        GetPlayerCustomPropertyRequest& request,
+        const ProcessApiCallback<GetPlayerCustomPropertyResult> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : this->m_context;
+        std::shared_ptr<PlayFabApiSettings> settings = this->m_settings != nullptr ? this->m_settings : PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = request.authenticationContext == nullptr ? this->m_context : request.authenticationContext;
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-Authorization", context->clientSessionTicket);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Client/GetPlayerCustomProperty",
+            headers,
+            jsonAsString,
+            std::bind(&PlayFabClientInstanceAPI::OnGetPlayerCustomPropertyResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<GetPlayerCustomPropertyResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabClientInstanceAPI::OnGetPlayerCustomPropertyResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        GetPlayerCustomPropertyResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = *static_cast<ProcessApiCallback<GetPlayerCustomPropertyResult> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -4606,6 +4706,56 @@ namespace PlayFab
             if (internalPtr.get() != nullptr)
             {
                 const auto& callback = *static_cast<ProcessApiCallback<LinkXboxAccountResult> *>(internalPtr.get());
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabClientInstanceAPI::ListPlayerCustomProperties(
+        ListPlayerCustomPropertiesRequest& request,
+        const ProcessApiCallback<ListPlayerCustomPropertiesResult> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : this->m_context;
+        std::shared_ptr<PlayFabApiSettings> settings = this->m_settings != nullptr ? this->m_settings : PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = request.authenticationContext == nullptr ? this->m_context : request.authenticationContext;
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-Authorization", context->clientSessionTicket);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Client/ListPlayerCustomProperties",
+            headers,
+            jsonAsString,
+            std::bind(&PlayFabClientInstanceAPI::OnListPlayerCustomPropertiesResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<ListPlayerCustomPropertiesResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabClientInstanceAPI::OnListPlayerCustomPropertiesResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        ListPlayerCustomPropertiesResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = *static_cast<ProcessApiCallback<ListPlayerCustomPropertiesResult> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }
@@ -8168,6 +8318,56 @@ namespace PlayFab
             if (internalPtr.get() != nullptr)
             {
                 const auto& callback = *static_cast<ProcessApiCallback<UpdateCharacterStatisticsResult> *>(internalPtr.get());
+                callback(outResult, container.GetCustomData());
+            }
+        }
+    }
+
+    void PlayFabClientInstanceAPI::UpdatePlayerCustomProperties(
+        UpdatePlayerCustomPropertiesRequest& request,
+        const ProcessApiCallback<UpdatePlayerCustomPropertiesResult> callback,
+        const ErrorCallback errorCallback,
+        void* customData
+    )
+    {
+        std::shared_ptr<PlayFabAuthenticationContext> context = request.authenticationContext != nullptr ? request.authenticationContext : this->m_context;
+        std::shared_ptr<PlayFabApiSettings> settings = this->m_settings != nullptr ? this->m_settings : PlayFabSettings::staticSettings;
+
+        IPlayFabHttpPlugin& http = *PlayFabPluginManager::GetPlugin<IPlayFabHttpPlugin>(PlayFabPluginContract::PlayFab_Transport);
+        const Json::Value requestJson = request.ToJson();
+        std::string jsonAsString = requestJson.toStyledString();
+
+        std::shared_ptr<PlayFabAuthenticationContext> authenticationContext = request.authenticationContext == nullptr ? this->m_context : request.authenticationContext;
+        std::unordered_map<std::string, std::string> headers;
+        headers.emplace("X-Authorization", context->clientSessionTicket);
+
+        auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
+            "/Client/UpdatePlayerCustomProperties",
+            headers,
+            jsonAsString,
+            std::bind(&PlayFabClientInstanceAPI::OnUpdatePlayerCustomPropertiesResult, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            settings,
+            context,
+            customData));
+
+        reqContainer->successCallback = std::shared_ptr<void>((callback == nullptr) ? nullptr : new ProcessApiCallback<UpdatePlayerCustomPropertiesResult>(callback));
+        reqContainer->errorCallback = errorCallback;
+
+        http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
+    }
+
+    void PlayFabClientInstanceAPI::OnUpdatePlayerCustomPropertiesResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    {
+        CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
+        std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
+
+        UpdatePlayerCustomPropertiesResult outResult;
+        if (ValidateResult(outResult, container))
+        {
+            std::shared_ptr<void> internalPtr = container.successCallback;
+            if (internalPtr.get() != nullptr)
+            {
+                const auto& callback = *static_cast<ProcessApiCallback<UpdatePlayerCustomPropertiesResult> *>(internalPtr.get());
                 callback(outResult, container.GetCustomData());
             }
         }

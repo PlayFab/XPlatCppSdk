@@ -50,6 +50,7 @@ namespace PlayFab
         static void DeleteMembershipSubscription(AdminModels::DeleteMembershipSubscriptionRequest& request, const ProcessApiCallback<AdminModels::DeleteMembershipSubscriptionResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeleteOpenIdConnection(AdminModels::DeleteOpenIdConnectionRequest& request, const ProcessApiCallback<AdminModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeletePlayer(AdminModels::DeletePlayerRequest& request, const ProcessApiCallback<AdminModels::DeletePlayerResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void DeletePlayerCustomProperties(AdminModels::DeletePlayerCustomPropertiesRequest& request, const ProcessApiCallback<AdminModels::DeletePlayerCustomPropertiesResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeletePlayerSharedSecret(AdminModels::DeletePlayerSharedSecretRequest& request, const ProcessApiCallback<AdminModels::DeletePlayerSharedSecretResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeleteSegment(AdminModels::DeleteSegmentRequest& request, const ProcessApiCallback<AdminModels::DeleteSegmentsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeleteStore(AdminModels::DeleteStoreRequest& request, const ProcessApiCallback<AdminModels::DeleteStoreResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -68,6 +69,7 @@ namespace PlayFab
         static void GetContentUploadUrl(AdminModels::GetContentUploadUrlRequest& request, const ProcessApiCallback<AdminModels::GetContentUploadUrlResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetDataReport(AdminModels::GetDataReportRequest& request, const ProcessApiCallback<AdminModels::GetDataReportResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetPlayedTitleList(AdminModels::GetPlayedTitleListRequest& request, const ProcessApiCallback<AdminModels::GetPlayedTitleListResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void GetPlayerCustomProperty(AdminModels::GetPlayerCustomPropertyRequest& request, const ProcessApiCallback<AdminModels::GetPlayerCustomPropertyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetPlayerIdFromAuthToken(AdminModels::GetPlayerIdFromAuthTokenRequest& request, const ProcessApiCallback<AdminModels::GetPlayerIdFromAuthTokenResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetPlayerProfile(AdminModels::GetPlayerProfileRequest& request, const ProcessApiCallback<AdminModels::GetPlayerProfileResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetPlayerSegments(AdminModels::GetPlayersSegmentsRequest& request, const ProcessApiCallback<AdminModels::GetPlayerSegmentsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -99,6 +101,7 @@ namespace PlayFab
         static void IncrementLimitedEditionItemAvailability(AdminModels::IncrementLimitedEditionItemAvailabilityRequest& request, const ProcessApiCallback<AdminModels::IncrementLimitedEditionItemAvailabilityResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void IncrementPlayerStatisticVersion(AdminModels::IncrementPlayerStatisticVersionRequest& request, const ProcessApiCallback<AdminModels::IncrementPlayerStatisticVersionResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void ListOpenIdConnection(AdminModels::ListOpenIdConnectionRequest& request, const ProcessApiCallback<AdminModels::ListOpenIdConnectionResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void ListPlayerCustomProperties(AdminModels::ListPlayerCustomPropertiesRequest& request, const ProcessApiCallback<AdminModels::ListPlayerCustomPropertiesResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void ListVirtualCurrencyTypes(AdminModels::ListVirtualCurrencyTypesRequest& request, const ProcessApiCallback<AdminModels::ListVirtualCurrencyTypesResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void RefundPurchase(AdminModels::RefundPurchaseRequest& request, const ProcessApiCallback<AdminModels::RefundPurchaseResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void RemovePlayerTag(AdminModels::RemovePlayerTagRequest& request, const ProcessApiCallback<AdminModels::RemovePlayerTagResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -128,6 +131,7 @@ namespace PlayFab
         static void UpdateCatalogItems(AdminModels::UpdateCatalogItemsRequest& request, const ProcessApiCallback<AdminModels::UpdateCatalogItemsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void UpdateCloudScript(AdminModels::UpdateCloudScriptRequest& request, const ProcessApiCallback<AdminModels::UpdateCloudScriptResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void UpdateOpenIdConnection(AdminModels::UpdateOpenIdConnectionRequest& request, const ProcessApiCallback<AdminModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void UpdatePlayerCustomProperties(AdminModels::UpdatePlayerCustomPropertiesRequest& request, const ProcessApiCallback<AdminModels::UpdatePlayerCustomPropertiesResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void UpdatePlayerSharedSecret(AdminModels::UpdatePlayerSharedSecretRequest& request, const ProcessApiCallback<AdminModels::UpdatePlayerSharedSecretResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void UpdatePlayerStatisticDefinition(AdminModels::UpdatePlayerStatisticDefinitionRequest& request, const ProcessApiCallback<AdminModels::UpdatePlayerStatisticDefinitionResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void UpdatePolicy(AdminModels::UpdatePolicyRequest& request, const ProcessApiCallback<AdminModels::UpdatePolicyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -169,6 +173,7 @@ namespace PlayFab
         static void OnDeleteMembershipSubscriptionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnDeleteOpenIdConnectionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnDeletePlayerResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnDeletePlayerCustomPropertiesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnDeletePlayerSharedSecretResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnDeleteSegmentResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnDeleteStoreResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -187,6 +192,7 @@ namespace PlayFab
         static void OnGetContentUploadUrlResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetDataReportResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetPlayedTitleListResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnGetPlayerCustomPropertyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetPlayerIdFromAuthTokenResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetPlayerProfileResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetPlayerSegmentsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -218,6 +224,7 @@ namespace PlayFab
         static void OnIncrementLimitedEditionItemAvailabilityResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnIncrementPlayerStatisticVersionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnListOpenIdConnectionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnListPlayerCustomPropertiesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnListVirtualCurrencyTypesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnRefundPurchaseResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnRemovePlayerTagResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -247,6 +254,7 @@ namespace PlayFab
         static void OnUpdateCatalogItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnUpdateCloudScriptResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnUpdateOpenIdConnectionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnUpdatePlayerCustomPropertiesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnUpdatePlayerSharedSecretResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnUpdatePlayerStatisticDefinitionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnUpdatePolicyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);

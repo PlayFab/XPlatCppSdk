@@ -67,6 +67,7 @@ namespace PlayFab
         void ConsumePSNEntitlements(ClientModels::ConsumePSNEntitlementsRequest& request, const ProcessApiCallback<ClientModels::ConsumePSNEntitlementsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void ConsumeXboxEntitlements(ClientModels::ConsumeXboxEntitlementsRequest& request, const ProcessApiCallback<ClientModels::ConsumeXboxEntitlementsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void CreateSharedGroup(ClientModels::CreateSharedGroupRequest& request, const ProcessApiCallback<ClientModels::CreateSharedGroupResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void DeletePlayerCustomProperties(ClientModels::DeletePlayerCustomPropertiesRequest& request, const ProcessApiCallback<ClientModels::DeletePlayerCustomPropertiesResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void ExecuteCloudScript(ClientModels::ExecuteCloudScriptRequest& request, const ProcessApiCallback<ClientModels::ExecuteCloudScriptResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void GetAccountInfo(ClientModels::GetAccountInfoRequest& request, const ProcessApiCallback<ClientModels::GetAccountInfoResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void GetAdPlacements(ClientModels::GetAdPlacementsRequest& request, const ProcessApiCallback<ClientModels::GetAdPlacementsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -88,6 +89,7 @@ namespace PlayFab
         void GetPaymentToken(ClientModels::GetPaymentTokenRequest& request, const ProcessApiCallback<ClientModels::GetPaymentTokenResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void GetPhotonAuthenticationToken(ClientModels::GetPhotonAuthenticationTokenRequest& request, const ProcessApiCallback<ClientModels::GetPhotonAuthenticationTokenResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void GetPlayerCombinedInfo(ClientModels::GetPlayerCombinedInfoRequest& request, const ProcessApiCallback<ClientModels::GetPlayerCombinedInfoResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void GetPlayerCustomProperty(ClientModels::GetPlayerCustomPropertyRequest& request, const ProcessApiCallback<ClientModels::GetPlayerCustomPropertyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void GetPlayerProfile(ClientModels::GetPlayerProfileRequest& request, const ProcessApiCallback<ClientModels::GetPlayerProfileResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void GetPlayerSegments(ClientModels::GetPlayerSegmentsRequest& request, const ProcessApiCallback<ClientModels::GetPlayerSegmentsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void GetPlayerStatistics(ClientModels::GetPlayerStatisticsRequest& request, const ProcessApiCallback<ClientModels::GetPlayerStatisticsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -141,6 +143,7 @@ namespace PlayFab
         void LinkSteamAccount(ClientModels::LinkSteamAccountRequest& request, const ProcessApiCallback<ClientModels::LinkSteamAccountResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void LinkTwitch(ClientModels::LinkTwitchAccountRequest& request, const ProcessApiCallback<ClientModels::LinkTwitchAccountResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void LinkXboxAccount(ClientModels::LinkXboxAccountRequest& request, const ProcessApiCallback<ClientModels::LinkXboxAccountResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void ListPlayerCustomProperties(ClientModels::ListPlayerCustomPropertiesRequest& request, const ProcessApiCallback<ClientModels::ListPlayerCustomPropertiesResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void LoginWithAndroidDeviceID(ClientModels::LoginWithAndroidDeviceIDRequest& request, const ProcessApiCallback<ClientModels::LoginResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void LoginWithApple(ClientModels::LoginWithAppleRequest& request, const ProcessApiCallback<ClientModels::LoginResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void LoginWithCustomID(ClientModels::LoginWithCustomIDRequest& request, const ProcessApiCallback<ClientModels::LoginResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -203,6 +206,7 @@ namespace PlayFab
         void UpdateAvatarUrl(ClientModels::UpdateAvatarUrlRequest& request, const ProcessApiCallback<ClientModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UpdateCharacterData(ClientModels::UpdateCharacterDataRequest& request, const ProcessApiCallback<ClientModels::UpdateCharacterDataResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UpdateCharacterStatistics(ClientModels::UpdateCharacterStatisticsRequest& request, const ProcessApiCallback<ClientModels::UpdateCharacterStatisticsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void UpdatePlayerCustomProperties(ClientModels::UpdatePlayerCustomPropertiesRequest& request, const ProcessApiCallback<ClientModels::UpdatePlayerCustomPropertiesResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UpdatePlayerStatistics(ClientModels::UpdatePlayerStatisticsRequest& request, const ProcessApiCallback<ClientModels::UpdatePlayerStatisticsResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UpdateSharedGroupData(ClientModels::UpdateSharedGroupDataRequest& request, const ProcessApiCallback<ClientModels::UpdateSharedGroupDataResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UpdateUserData(ClientModels::UpdateUserDataRequest& request, const ProcessApiCallback<ClientModels::UpdateUserDataResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -234,6 +238,7 @@ namespace PlayFab
         void OnConsumePSNEntitlementsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnConsumeXboxEntitlementsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnCreateSharedGroupResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnDeletePlayerCustomPropertiesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnExecuteCloudScriptResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnGetAccountInfoResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnGetAdPlacementsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -255,6 +260,7 @@ namespace PlayFab
         void OnGetPaymentTokenResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnGetPhotonAuthenticationTokenResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnGetPlayerCombinedInfoResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnGetPlayerCustomPropertyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnGetPlayerProfileResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnGetPlayerSegmentsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnGetPlayerStatisticsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -308,6 +314,7 @@ namespace PlayFab
         void OnLinkSteamAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnLinkTwitchResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnLinkXboxAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnListPlayerCustomPropertiesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnLoginWithAndroidDeviceIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnLoginWithAppleResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnLoginWithCustomIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -370,6 +377,7 @@ namespace PlayFab
         void OnUpdateAvatarUrlResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUpdateCharacterDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUpdateCharacterStatisticsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnUpdatePlayerCustomPropertiesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUpdatePlayerStatisticsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUpdateSharedGroupDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUpdateUserDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
