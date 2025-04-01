@@ -5515,6 +5515,7 @@ namespace PlayFab
             GenericErrorCodesResetIntervalCannotBeModified,
             GenericErrorCodesVersionIncrementRateExceeded,
             GenericErrorCodesInvalidSteamUsername,
+            GenericErrorCodesInvalidVersionResetForLinkedLeaderboard,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5629,6 +5630,7 @@ namespace PlayFab
             GenericErrorCodesExperimentationExclusionGroupCannotDelete,
             GenericErrorCodesExperimentationExclusionGroupInvalidTrafficAllocation,
             GenericErrorCodesExperimentationExclusionGroupInvalidName,
+            GenericErrorCodesExperimentationLegacyExperimentInvalidOperation,
             GenericErrorCodesMaxActionDepthExceeded,
             GenericErrorCodesTitleNotOnUpdatedPricingPlan,
             GenericErrorCodesSegmentManagementTitleNotInFlight,
@@ -5694,6 +5696,13 @@ namespace PlayFab
             GenericErrorCodesEventSinkInsufficientRoleAssignment,
             GenericErrorCodesEventSinkContainerNotFound,
             GenericErrorCodesEventSinkTenantIdInvalid,
+            GenericErrorCodesEventSinkResourceMisconfigured,
+            GenericErrorCodesEventSinkAccessDenied,
+            GenericErrorCodesEventSinkWriteConflict,
+            GenericErrorCodesEventSinkResourceNotFound,
+            GenericErrorCodesEventSinkResourceFeatureNotSupported,
+            GenericErrorCodesEventSinkBucketNameInvalid,
+            GenericErrorCodesEventSinkResourceUnavailable,
             GenericErrorCodesOperationCanceled,
             GenericErrorCodesInvalidDisplayNameRandomSuffixLength,
             GenericErrorCodesAllowNonUniquePlayerDisplayNamesDisableNotAllowed,
@@ -5801,6 +5810,12 @@ namespace PlayFab
             GenericErrorCodesGameSaveNewerManifestExists,
             GenericErrorCodesGameSaveBaseVersionNotAvailable,
             GenericErrorCodesGameSaveManifestVersionQuarantined,
+            GenericErrorCodesGameSaveManifestUploadProgressUpdateNotAllowed,
+            GenericErrorCodesGameSaveNotFinalizedManifestNotEligibleAsKnownGood,
+            GenericErrorCodesGameSaveNoUpdatesRequested,
+            GenericErrorCodesGameSaveTitleDoesNotExist,
+            GenericErrorCodesGameSaveOperationNotAllowedForTitle,
+            GenericErrorCodesGameSaveManifestFilesLimitExceeded,
             GenericErrorCodesStateShareForbidden,
             GenericErrorCodesStateShareTitleNotInFlight,
             GenericErrorCodesStateShareStateNotFound,
@@ -8753,6 +8768,11 @@ namespace PlayFab
                 output = Json::Value("InvalidSteamUsername");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidVersionResetForLinkedLeaderboard)
+            {
+                output = Json::Value("InvalidVersionResetForLinkedLeaderboard");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
             {
                 output = Json::Value("MatchmakingEntityInvalid");
@@ -9323,6 +9343,11 @@ namespace PlayFab
                 output = Json::Value("ExperimentationExclusionGroupInvalidName");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesExperimentationLegacyExperimentInvalidOperation)
+            {
+                output = Json::Value("ExperimentationLegacyExperimentInvalidOperation");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMaxActionDepthExceeded)
             {
                 output = Json::Value("MaxActionDepthExceeded");
@@ -9646,6 +9671,41 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesEventSinkTenantIdInvalid)
             {
                 output = Json::Value("EventSinkTenantIdInvalid");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkResourceMisconfigured)
+            {
+                output = Json::Value("EventSinkResourceMisconfigured");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkAccessDenied)
+            {
+                output = Json::Value("EventSinkAccessDenied");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkWriteConflict)
+            {
+                output = Json::Value("EventSinkWriteConflict");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkResourceNotFound)
+            {
+                output = Json::Value("EventSinkResourceNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkResourceFeatureNotSupported)
+            {
+                output = Json::Value("EventSinkResourceFeatureNotSupported");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkBucketNameInvalid)
+            {
+                output = Json::Value("EventSinkBucketNameInvalid");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEventSinkResourceUnavailable)
+            {
+                output = Json::Value("EventSinkResourceUnavailable");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesOperationCanceled)
@@ -10181,6 +10241,36 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesGameSaveManifestVersionQuarantined)
             {
                 output = Json::Value("GameSaveManifestVersionQuarantined");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveManifestUploadProgressUpdateNotAllowed)
+            {
+                output = Json::Value("GameSaveManifestUploadProgressUpdateNotAllowed");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveNotFinalizedManifestNotEligibleAsKnownGood)
+            {
+                output = Json::Value("GameSaveNotFinalizedManifestNotEligibleAsKnownGood");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveNoUpdatesRequested)
+            {
+                output = Json::Value("GameSaveNoUpdatesRequested");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveTitleDoesNotExist)
+            {
+                output = Json::Value("GameSaveTitleDoesNotExist");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveOperationNotAllowedForTitle)
+            {
+                output = Json::Value("GameSaveOperationNotAllowedForTitle");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveManifestFilesLimitExceeded)
+            {
+                output = Json::Value("GameSaveManifestFilesLimitExceeded");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesStateShareForbidden)
@@ -13171,6 +13261,11 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesInvalidSteamUsername;
                 return;
             }
+            if (inputStr == "InvalidVersionResetForLinkedLeaderboard")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidVersionResetForLinkedLeaderboard;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -13741,6 +13836,11 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesExperimentationExclusionGroupInvalidName;
                 return;
             }
+            if (inputStr == "ExperimentationLegacyExperimentInvalidOperation")
+            {
+                output = GenericErrorCodes::GenericErrorCodesExperimentationLegacyExperimentInvalidOperation;
+                return;
+            }
             if (inputStr == "MaxActionDepthExceeded")
             {
                 output = GenericErrorCodes::GenericErrorCodesMaxActionDepthExceeded;
@@ -14064,6 +14164,41 @@ namespace PlayFab
             if (inputStr == "EventSinkTenantIdInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesEventSinkTenantIdInvalid;
+                return;
+            }
+            if (inputStr == "EventSinkResourceMisconfigured")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkResourceMisconfigured;
+                return;
+            }
+            if (inputStr == "EventSinkAccessDenied")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkAccessDenied;
+                return;
+            }
+            if (inputStr == "EventSinkWriteConflict")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkWriteConflict;
+                return;
+            }
+            if (inputStr == "EventSinkResourceNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkResourceNotFound;
+                return;
+            }
+            if (inputStr == "EventSinkResourceFeatureNotSupported")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkResourceFeatureNotSupported;
+                return;
+            }
+            if (inputStr == "EventSinkBucketNameInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkBucketNameInvalid;
+                return;
+            }
+            if (inputStr == "EventSinkResourceUnavailable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEventSinkResourceUnavailable;
                 return;
             }
             if (inputStr == "OperationCanceled")
@@ -14599,6 +14734,36 @@ namespace PlayFab
             if (inputStr == "GameSaveManifestVersionQuarantined")
             {
                 output = GenericErrorCodes::GenericErrorCodesGameSaveManifestVersionQuarantined;
+                return;
+            }
+            if (inputStr == "GameSaveManifestUploadProgressUpdateNotAllowed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveManifestUploadProgressUpdateNotAllowed;
+                return;
+            }
+            if (inputStr == "GameSaveNotFinalizedManifestNotEligibleAsKnownGood")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveNotFinalizedManifestNotEligibleAsKnownGood;
+                return;
+            }
+            if (inputStr == "GameSaveNoUpdatesRequested")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveNoUpdatesRequested;
+                return;
+            }
+            if (inputStr == "GameSaveTitleDoesNotExist")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveTitleDoesNotExist;
+                return;
+            }
+            if (inputStr == "GameSaveOperationNotAllowedForTitle")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveOperationNotAllowedForTitle;
+                return;
+            }
+            if (inputStr == "GameSaveManifestFilesLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveManifestFilesLimitExceeded;
                 return;
             }
             if (inputStr == "StateShareForbidden")

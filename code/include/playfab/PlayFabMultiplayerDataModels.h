@@ -4644,6 +4644,7 @@ namespace PlayFab
             std::list<Member> Members;
             EntityKey Owner;
             Boxed<OwnerMigrationPolicy> pfOwnerMigrationPolicy;
+            bool RestrictInvitesToLobbyOwner;
             std::map<std::string, std::string> SearchData;
             bool UseConnections;
 
@@ -4656,6 +4657,7 @@ namespace PlayFab
                 Members(),
                 Owner(),
                 pfOwnerMigrationPolicy(),
+                RestrictInvitesToLobbyOwner(),
                 SearchData(),
                 UseConnections()
             {}
@@ -4669,6 +4671,7 @@ namespace PlayFab
                 Members(src.Members),
                 Owner(src.Owner),
                 pfOwnerMigrationPolicy(src.pfOwnerMigrationPolicy),
+                RestrictInvitesToLobbyOwner(src.RestrictInvitesToLobbyOwner),
                 SearchData(src.SearchData),
                 UseConnections(src.UseConnections)
             {}
@@ -4684,6 +4687,7 @@ namespace PlayFab
                 FromJsonUtilO(input["Members"], Members);
                 FromJsonUtilO(input["Owner"], Owner);
                 FromJsonUtilE(input["OwnerMigrationPolicy"], pfOwnerMigrationPolicy);
+                FromJsonUtilP(input["RestrictInvitesToLobbyOwner"], RestrictInvitesToLobbyOwner);
                 FromJsonUtilS(input["SearchData"], SearchData);
                 FromJsonUtilP(input["UseConnections"], UseConnections);
             }
@@ -4698,6 +4702,7 @@ namespace PlayFab
                 Json::Value each_Members; ToJsonUtilO(Members, each_Members); output["Members"] = each_Members;
                 Json::Value each_Owner; ToJsonUtilO(Owner, each_Owner); output["Owner"] = each_Owner;
                 Json::Value each_pfOwnerMigrationPolicy; ToJsonUtilE(pfOwnerMigrationPolicy, each_pfOwnerMigrationPolicy); output["OwnerMigrationPolicy"] = each_pfOwnerMigrationPolicy;
+                Json::Value each_RestrictInvitesToLobbyOwner; ToJsonUtilP(RestrictInvitesToLobbyOwner, each_RestrictInvitesToLobbyOwner); output["RestrictInvitesToLobbyOwner"] = each_RestrictInvitesToLobbyOwner;
                 Json::Value each_SearchData; ToJsonUtilS(SearchData, each_SearchData); output["SearchData"] = each_SearchData;
                 Json::Value each_UseConnections; ToJsonUtilP(UseConnections, each_UseConnections); output["UseConnections"] = each_UseConnections;
                 return output;
@@ -6527,6 +6532,7 @@ namespace PlayFab
             Boxed<EntityKey> Owner;
             Boxed<OwnerMigrationPolicy> pfOwnerMigrationPolicy;
             std::string PubSubConnectionHandle;
+            bool RestrictInvitesToLobbyOwner;
             std::map<std::string, std::string> SearchData;
             Boxed<LobbyServer> Server;
             bool UseConnections;
@@ -6544,6 +6550,7 @@ namespace PlayFab
                 Owner(),
                 pfOwnerMigrationPolicy(),
                 PubSubConnectionHandle(),
+                RestrictInvitesToLobbyOwner(),
                 SearchData(),
                 Server(),
                 UseConnections()
@@ -6562,6 +6569,7 @@ namespace PlayFab
                 Owner(src.Owner),
                 pfOwnerMigrationPolicy(src.pfOwnerMigrationPolicy),
                 PubSubConnectionHandle(src.PubSubConnectionHandle),
+                RestrictInvitesToLobbyOwner(src.RestrictInvitesToLobbyOwner),
                 SearchData(src.SearchData),
                 Server(src.Server),
                 UseConnections(src.UseConnections)
@@ -6582,6 +6590,7 @@ namespace PlayFab
                 FromJsonUtilO(input["Owner"], Owner);
                 FromJsonUtilE(input["OwnerMigrationPolicy"], pfOwnerMigrationPolicy);
                 FromJsonUtilS(input["PubSubConnectionHandle"], PubSubConnectionHandle);
+                FromJsonUtilP(input["RestrictInvitesToLobbyOwner"], RestrictInvitesToLobbyOwner);
                 FromJsonUtilS(input["SearchData"], SearchData);
                 FromJsonUtilO(input["Server"], Server);
                 FromJsonUtilP(input["UseConnections"], UseConnections);
@@ -6601,6 +6610,7 @@ namespace PlayFab
                 Json::Value each_Owner; ToJsonUtilO(Owner, each_Owner); output["Owner"] = each_Owner;
                 Json::Value each_pfOwnerMigrationPolicy; ToJsonUtilE(pfOwnerMigrationPolicy, each_pfOwnerMigrationPolicy); output["OwnerMigrationPolicy"] = each_pfOwnerMigrationPolicy;
                 Json::Value each_PubSubConnectionHandle; ToJsonUtilS(PubSubConnectionHandle, each_PubSubConnectionHandle); output["PubSubConnectionHandle"] = each_PubSubConnectionHandle;
+                Json::Value each_RestrictInvitesToLobbyOwner; ToJsonUtilP(RestrictInvitesToLobbyOwner, each_RestrictInvitesToLobbyOwner); output["RestrictInvitesToLobbyOwner"] = each_RestrictInvitesToLobbyOwner;
                 Json::Value each_SearchData; ToJsonUtilS(SearchData, each_SearchData); output["SearchData"] = each_SearchData;
                 Json::Value each_Server; ToJsonUtilO(Server, each_Server); output["Server"] = each_Server;
                 Json::Value each_UseConnections; ToJsonUtilP(UseConnections, each_UseConnections); output["UseConnections"] = each_UseConnections;
@@ -7735,6 +7745,7 @@ namespace PlayFab
             std::map<std::string, std::string> MemberData;
             EntityKey MemberEntity;
             Boxed<OwnerMigrationPolicy> pfOwnerMigrationPolicy;
+            bool RestrictInvitesToLobbyOwner;
             bool UseConnections;
 
             JoinArrangedLobbyRequest() :
@@ -7746,6 +7757,7 @@ namespace PlayFab
                 MemberData(),
                 MemberEntity(),
                 pfOwnerMigrationPolicy(),
+                RestrictInvitesToLobbyOwner(),
                 UseConnections()
             {}
 
@@ -7758,6 +7770,7 @@ namespace PlayFab
                 MemberData(src.MemberData),
                 MemberEntity(src.MemberEntity),
                 pfOwnerMigrationPolicy(src.pfOwnerMigrationPolicy),
+                RestrictInvitesToLobbyOwner(src.RestrictInvitesToLobbyOwner),
                 UseConnections(src.UseConnections)
             {}
 
@@ -7772,6 +7785,7 @@ namespace PlayFab
                 FromJsonUtilS(input["MemberData"], MemberData);
                 FromJsonUtilO(input["MemberEntity"], MemberEntity);
                 FromJsonUtilE(input["OwnerMigrationPolicy"], pfOwnerMigrationPolicy);
+                FromJsonUtilP(input["RestrictInvitesToLobbyOwner"], RestrictInvitesToLobbyOwner);
                 FromJsonUtilP(input["UseConnections"], UseConnections);
             }
 
@@ -7785,6 +7799,7 @@ namespace PlayFab
                 Json::Value each_MemberData; ToJsonUtilS(MemberData, each_MemberData); output["MemberData"] = each_MemberData;
                 Json::Value each_MemberEntity; ToJsonUtilO(MemberEntity, each_MemberEntity); output["MemberEntity"] = each_MemberEntity;
                 Json::Value each_pfOwnerMigrationPolicy; ToJsonUtilE(pfOwnerMigrationPolicy, each_pfOwnerMigrationPolicy); output["OwnerMigrationPolicy"] = each_pfOwnerMigrationPolicy;
+                Json::Value each_RestrictInvitesToLobbyOwner; ToJsonUtilP(RestrictInvitesToLobbyOwner, each_RestrictInvitesToLobbyOwner); output["RestrictInvitesToLobbyOwner"] = each_RestrictInvitesToLobbyOwner;
                 Json::Value each_UseConnections; ToJsonUtilP(UseConnections, each_UseConnections); output["UseConnections"] = each_UseConnections;
                 return output;
             }
