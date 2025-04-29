@@ -3003,7 +3003,8 @@ namespace PlayFab
             LoginIdentityProviderNintendoSwitchAccount,
             LoginIdentityProviderGooglePlayGames,
             LoginIdentityProviderXboxMobileStore,
-            LoginIdentityProviderKing
+            LoginIdentityProviderKing,
+            LoginIdentityProviderBattleNet
         };
 
         inline void ToJsonEnum(const LoginIdentityProvider input, Json::Value& output)
@@ -3126,6 +3127,11 @@ namespace PlayFab
             if (input == LoginIdentityProvider::LoginIdentityProviderKing)
             {
                 output = Json::Value("King");
+                return;
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderBattleNet)
+            {
+                output = Json::Value("BattleNet");
                 return;
             }
         }
@@ -3254,6 +3260,11 @@ namespace PlayFab
             if (inputStr == "King")
             {
                 output = LoginIdentityProvider::LoginIdentityProviderKing;
+                return;
+            }
+            if (inputStr == "BattleNet")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderBattleNet;
                 return;
             }
         }
