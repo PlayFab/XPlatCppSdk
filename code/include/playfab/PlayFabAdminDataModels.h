@@ -5007,7 +5007,6 @@ namespace PlayFab
             GenericErrorCodesUnableToConnectToDatabase,
             GenericErrorCodesInternalServerError,
             GenericErrorCodesInvalidReportDate,
-            GenericErrorCodesReportNotAvailable,
             GenericErrorCodesDatabaseThroughputExceeded,
             GenericErrorCodesInvalidGameTicket,
             GenericErrorCodesExpiredGameTicket,
@@ -5492,6 +5491,11 @@ namespace PlayFab
             GenericErrorCodesVersionIncrementRateExceeded,
             GenericErrorCodesInvalidSteamUsername,
             GenericErrorCodesInvalidVersionResetForLinkedLeaderboard,
+            GenericErrorCodesBattleNetNotEnabledForTitle,
+            GenericErrorCodesReportNotProcessed,
+            GenericErrorCodesDataNotAvailable,
+            GenericErrorCodesInvalidReportName,
+            GenericErrorCodesResourceNotModified,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5771,6 +5775,7 @@ namespace PlayFab
             GenericErrorCodesTrueSkillScenarioContainsActiveModel,
             GenericErrorCodesTrueSkillInvalidConditionRank,
             GenericErrorCodesTrueSkillTotalScenarioLimitExceeded,
+            GenericErrorCodesTrueSkillInvalidConditionsList,
             GenericErrorCodesGameSaveManifestNotFound,
             GenericErrorCodesGameSaveManifestVersionAlreadyExists,
             GenericErrorCodesGameSaveConflictUpdatingManifest,
@@ -5792,6 +5797,9 @@ namespace PlayFab
             GenericErrorCodesGameSaveTitleDoesNotExist,
             GenericErrorCodesGameSaveOperationNotAllowedForTitle,
             GenericErrorCodesGameSaveManifestFilesLimitExceeded,
+            GenericErrorCodesGameSaveManifestDescriptionUpdateNotAllowed,
+            GenericErrorCodesGameSaveTitleConfigNotFound,
+            GenericErrorCodesGameSaveTitleAlreadyOnboarded,
             GenericErrorCodesStateShareForbidden,
             GenericErrorCodesStateShareTitleNotInFlight,
             GenericErrorCodesStateShareStateNotFound,
@@ -5799,7 +5807,9 @@ namespace PlayFab
             GenericErrorCodesStateShareStateRedemptionLimitExceeded,
             GenericErrorCodesStateShareStateRedemptionLimitNotUpdated,
             GenericErrorCodesStateShareCreatedStatesLimitExceeded,
-            GenericErrorCodesStateShareIdMissingOrMalformed
+            GenericErrorCodesStateShareIdMissingOrMalformed,
+            GenericErrorCodesPlayerCreationDisabled,
+            GenericErrorCodesAccountAlreadyExists
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -6322,11 +6332,6 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesInvalidReportDate)
             {
                 output = Json::Value("InvalidReportDate");
-                return;
-            }
-            if (input == GenericErrorCodes::GenericErrorCodesReportNotAvailable)
-            {
-                output = Json::Value("ReportNotAvailable");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesDatabaseThroughputExceeded)
@@ -8749,6 +8754,31 @@ namespace PlayFab
                 output = Json::Value("InvalidVersionResetForLinkedLeaderboard");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesBattleNetNotEnabledForTitle)
+            {
+                output = Json::Value("BattleNetNotEnabledForTitle");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesReportNotProcessed)
+            {
+                output = Json::Value("ReportNotProcessed");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesDataNotAvailable)
+            {
+                output = Json::Value("DataNotAvailable");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidReportName)
+            {
+                output = Json::Value("InvalidReportName");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesResourceNotModified)
+            {
+                output = Json::Value("ResourceNotModified");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
             {
                 output = Json::Value("MatchmakingEntityInvalid");
@@ -10144,6 +10174,11 @@ namespace PlayFab
                 output = Json::Value("TrueSkillTotalScenarioLimitExceeded");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidConditionsList)
+            {
+                output = Json::Value("TrueSkillInvalidConditionsList");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesGameSaveManifestNotFound)
             {
                 output = Json::Value("GameSaveManifestNotFound");
@@ -10249,6 +10284,21 @@ namespace PlayFab
                 output = Json::Value("GameSaveManifestFilesLimitExceeded");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveManifestDescriptionUpdateNotAllowed)
+            {
+                output = Json::Value("GameSaveManifestDescriptionUpdateNotAllowed");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveTitleConfigNotFound)
+            {
+                output = Json::Value("GameSaveTitleConfigNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveTitleAlreadyOnboarded)
+            {
+                output = Json::Value("GameSaveTitleAlreadyOnboarded");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesStateShareForbidden)
             {
                 output = Json::Value("StateShareForbidden");
@@ -10287,6 +10337,16 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesStateShareIdMissingOrMalformed)
             {
                 output = Json::Value("StateShareIdMissingOrMalformed");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerCreationDisabled)
+            {
+                output = Json::Value("PlayerCreationDisabled");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAccountAlreadyExists)
+            {
+                output = Json::Value("AccountAlreadyExists");
                 return;
             }
         }
@@ -10815,11 +10875,6 @@ namespace PlayFab
             if (inputStr == "InvalidReportDate")
             {
                 output = GenericErrorCodes::GenericErrorCodesInvalidReportDate;
-                return;
-            }
-            if (inputStr == "ReportNotAvailable")
-            {
-                output = GenericErrorCodes::GenericErrorCodesReportNotAvailable;
                 return;
             }
             if (inputStr == "DatabaseThroughputExceeded")
@@ -13242,6 +13297,31 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesInvalidVersionResetForLinkedLeaderboard;
                 return;
             }
+            if (inputStr == "BattleNetNotEnabledForTitle")
+            {
+                output = GenericErrorCodes::GenericErrorCodesBattleNetNotEnabledForTitle;
+                return;
+            }
+            if (inputStr == "ReportNotProcessed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesReportNotProcessed;
+                return;
+            }
+            if (inputStr == "DataNotAvailable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesDataNotAvailable;
+                return;
+            }
+            if (inputStr == "InvalidReportName")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidReportName;
+                return;
+            }
+            if (inputStr == "ResourceNotModified")
+            {
+                output = GenericErrorCodes::GenericErrorCodesResourceNotModified;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -14637,6 +14717,11 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesTrueSkillTotalScenarioLimitExceeded;
                 return;
             }
+            if (inputStr == "TrueSkillInvalidConditionsList")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidConditionsList;
+                return;
+            }
             if (inputStr == "GameSaveManifestNotFound")
             {
                 output = GenericErrorCodes::GenericErrorCodesGameSaveManifestNotFound;
@@ -14742,6 +14827,21 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesGameSaveManifestFilesLimitExceeded;
                 return;
             }
+            if (inputStr == "GameSaveManifestDescriptionUpdateNotAllowed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveManifestDescriptionUpdateNotAllowed;
+                return;
+            }
+            if (inputStr == "GameSaveTitleConfigNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveTitleConfigNotFound;
+                return;
+            }
+            if (inputStr == "GameSaveTitleAlreadyOnboarded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveTitleAlreadyOnboarded;
+                return;
+            }
             if (inputStr == "StateShareForbidden")
             {
                 output = GenericErrorCodes::GenericErrorCodesStateShareForbidden;
@@ -14782,6 +14882,16 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesStateShareIdMissingOrMalformed;
                 return;
             }
+            if (inputStr == "PlayerCreationDisabled")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerCreationDisabled;
+                return;
+            }
+            if (inputStr == "AccountAlreadyExists")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAccountAlreadyExists;
+                return;
+            }
         }
 
         enum class LoginIdentityProvider
@@ -14809,7 +14919,8 @@ namespace PlayFab
             LoginIdentityProviderNintendoSwitchAccount,
             LoginIdentityProviderGooglePlayGames,
             LoginIdentityProviderXboxMobileStore,
-            LoginIdentityProviderKing
+            LoginIdentityProviderKing,
+            LoginIdentityProviderBattleNet
         };
 
         inline void ToJsonEnum(const LoginIdentityProvider input, Json::Value& output)
@@ -14932,6 +15043,11 @@ namespace PlayFab
             if (input == LoginIdentityProvider::LoginIdentityProviderKing)
             {
                 output = Json::Value("King");
+                return;
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderBattleNet)
+            {
+                output = Json::Value("BattleNet");
                 return;
             }
         }
@@ -15060,6 +15176,11 @@ namespace PlayFab
             if (inputStr == "King")
             {
                 output = LoginIdentityProvider::LoginIdentityProviderKing;
+                return;
+            }
+            if (inputStr == "BattleNet")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderBattleNet;
                 return;
             }
         }

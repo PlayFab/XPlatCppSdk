@@ -4950,7 +4950,8 @@ namespace PlayFab
             LoginIdentityProviderNintendoSwitchAccount,
             LoginIdentityProviderGooglePlayGames,
             LoginIdentityProviderXboxMobileStore,
-            LoginIdentityProviderKing
+            LoginIdentityProviderKing,
+            LoginIdentityProviderBattleNet
         };
 
         inline void ToJsonEnum(const LoginIdentityProvider input, Json::Value& output)
@@ -5073,6 +5074,11 @@ namespace PlayFab
             if (input == LoginIdentityProvider::LoginIdentityProviderKing)
             {
                 output = Json::Value("King");
+                return;
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderBattleNet)
+            {
+                output = Json::Value("BattleNet");
                 return;
             }
         }
@@ -5201,6 +5207,11 @@ namespace PlayFab
             if (inputStr == "King")
             {
                 output = LoginIdentityProvider::LoginIdentityProviderKing;
+                return;
+            }
+            if (inputStr == "BattleNet")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderBattleNet;
                 return;
             }
         }
@@ -7040,6 +7051,40 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                return output;
+            }
+        };
+
+        struct BattleNetAccountPlayFabIdPair : public PlayFabBaseModel
+        {
+            std::string BattleNetAccountId;
+            std::string PlayFabId;
+
+            BattleNetAccountPlayFabIdPair() :
+                PlayFabBaseModel(),
+                BattleNetAccountId(),
+                PlayFabId()
+            {}
+
+            BattleNetAccountPlayFabIdPair(const BattleNetAccountPlayFabIdPair& src) :
+                PlayFabBaseModel(),
+                BattleNetAccountId(src.BattleNetAccountId),
+                PlayFabId(src.PlayFabId)
+            {}
+
+            ~BattleNetAccountPlayFabIdPair() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["BattleNetAccountId"], BattleNetAccountId);
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_BattleNetAccountId; ToJsonUtilS(BattleNetAccountId, each_BattleNetAccountId); output["BattleNetAccountId"] = each_BattleNetAccountId;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 return output;
             }
         };
@@ -12623,6 +12668,64 @@ namespace PlayFab
             }
         };
 
+        struct GetPlayFabIDsFromBattleNetAccountIdsRequest : public PlayFabRequestCommon
+        {
+            std::list<std::string> BattleNetAccountIds;
+
+            GetPlayFabIDsFromBattleNetAccountIdsRequest() :
+                PlayFabRequestCommon(),
+                BattleNetAccountIds()
+            {}
+
+            GetPlayFabIDsFromBattleNetAccountIdsRequest(const GetPlayFabIDsFromBattleNetAccountIdsRequest& src) :
+                PlayFabRequestCommon(),
+                BattleNetAccountIds(src.BattleNetAccountIds)
+            {}
+
+            ~GetPlayFabIDsFromBattleNetAccountIdsRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["BattleNetAccountIds"], BattleNetAccountIds);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_BattleNetAccountIds; ToJsonUtilS(BattleNetAccountIds, each_BattleNetAccountIds); output["BattleNetAccountIds"] = each_BattleNetAccountIds;
+                return output;
+            }
+        };
+
+        struct GetPlayFabIDsFromBattleNetAccountIdsResult : public PlayFabResultCommon
+        {
+            std::list<BattleNetAccountPlayFabIdPair> Data;
+
+            GetPlayFabIDsFromBattleNetAccountIdsResult() :
+                PlayFabResultCommon(),
+                Data()
+            {}
+
+            GetPlayFabIDsFromBattleNetAccountIdsResult(const GetPlayFabIDsFromBattleNetAccountIdsResult& src) :
+                PlayFabResultCommon(),
+                Data(src.Data)
+            {}
+
+            ~GetPlayFabIDsFromBattleNetAccountIdsResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["Data"], Data);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Data; ToJsonUtilO(Data, each_Data); output["Data"] = each_Data;
+                return output;
+            }
+        };
+
         struct GetPlayFabIDsFromFacebookIDsRequest : public PlayFabRequestCommon
         {
             std::list<std::string> FacebookIDs;
@@ -15030,6 +15133,45 @@ namespace PlayFab
             }
         };
 
+        struct LinkBattleNetRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            Boxed<bool> ForceLink;
+            std::string IdentityToken;
+
+            LinkBattleNetRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                ForceLink(),
+                IdentityToken()
+            {}
+
+            LinkBattleNetRequest(const LinkBattleNetRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                ForceLink(src.ForceLink),
+                IdentityToken(src.IdentityToken)
+            {}
+
+            ~LinkBattleNetRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilP(input["ForceLink"], ForceLink);
+                FromJsonUtilS(input["IdentityToken"], IdentityToken);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_ForceLink; ToJsonUtilP(ForceLink, each_ForceLink); output["ForceLink"] = each_ForceLink;
+                Json::Value each_IdentityToken; ToJsonUtilS(IdentityToken, each_IdentityToken); output["IdentityToken"] = each_IdentityToken;
+                return output;
+            }
+        };
+
         struct LinkCustomIDRequest : public PlayFabRequestCommon
         {
             std::string CustomId;
@@ -16371,6 +16513,65 @@ namespace PlayFab
             {}
 
             ~LoginWithAppleRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["CreateAccount"], CreateAccount);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["EncryptedRequest"], EncryptedRequest);
+                FromJsonUtilS(input["IdentityToken"], IdentityToken);
+                FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
+                FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
+                FromJsonUtilS(input["TitleId"], TitleId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_EncryptedRequest; ToJsonUtilS(EncryptedRequest, each_EncryptedRequest); output["EncryptedRequest"] = each_EncryptedRequest;
+                Json::Value each_IdentityToken; ToJsonUtilS(IdentityToken, each_IdentityToken); output["IdentityToken"] = each_IdentityToken;
+                Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
+                Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
+                Json::Value each_TitleId; ToJsonUtilS(TitleId, each_TitleId); output["TitleId"] = each_TitleId;
+                return output;
+            }
+        };
+
+        struct LoginWithBattleNetRequest : public PlayFabRequestCommon
+        {
+            Boxed<bool> CreateAccount;
+            std::map<std::string, std::string> CustomTags;
+            std::string EncryptedRequest;
+            std::string IdentityToken;
+            Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
+            std::string PlayerSecret;
+            std::string TitleId;
+
+            LoginWithBattleNetRequest() :
+                PlayFabRequestCommon(),
+                CreateAccount(),
+                CustomTags(),
+                EncryptedRequest(),
+                IdentityToken(),
+                InfoRequestParameters(),
+                PlayerSecret(),
+                TitleId()
+            {}
+
+            LoginWithBattleNetRequest(const LoginWithBattleNetRequest& src) :
+                PlayFabRequestCommon(),
+                CreateAccount(src.CreateAccount),
+                CustomTags(src.CustomTags),
+                EncryptedRequest(src.EncryptedRequest),
+                IdentityToken(src.IdentityToken),
+                InfoRequestParameters(src.InfoRequestParameters),
+                PlayerSecret(src.PlayerSecret),
+                TitleId(src.TitleId)
+            {}
+
+            ~LoginWithBattleNetRequest() = default;
 
             void FromJson(const Json::Value& input) override
             {
@@ -19096,6 +19297,35 @@ namespace PlayFab
             {}
 
             ~UnlinkAppleRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                return output;
+            }
+        };
+
+        struct UnlinkBattleNetRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+
+            UnlinkBattleNetRequest() :
+                PlayFabRequestCommon(),
+                CustomTags()
+            {}
+
+            UnlinkBattleNetRequest(const UnlinkBattleNetRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags)
+            {}
+
+            ~UnlinkBattleNetRequest() = default;
 
             void FromJson(const Json::Value& input) override
             {

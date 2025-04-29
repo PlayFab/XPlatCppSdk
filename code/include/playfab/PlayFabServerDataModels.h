@@ -5031,7 +5031,6 @@ namespace PlayFab
             GenericErrorCodesUnableToConnectToDatabase,
             GenericErrorCodesInternalServerError,
             GenericErrorCodesInvalidReportDate,
-            GenericErrorCodesReportNotAvailable,
             GenericErrorCodesDatabaseThroughputExceeded,
             GenericErrorCodesInvalidGameTicket,
             GenericErrorCodesExpiredGameTicket,
@@ -5516,6 +5515,11 @@ namespace PlayFab
             GenericErrorCodesVersionIncrementRateExceeded,
             GenericErrorCodesInvalidSteamUsername,
             GenericErrorCodesInvalidVersionResetForLinkedLeaderboard,
+            GenericErrorCodesBattleNetNotEnabledForTitle,
+            GenericErrorCodesReportNotProcessed,
+            GenericErrorCodesDataNotAvailable,
+            GenericErrorCodesInvalidReportName,
+            GenericErrorCodesResourceNotModified,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5795,6 +5799,7 @@ namespace PlayFab
             GenericErrorCodesTrueSkillScenarioContainsActiveModel,
             GenericErrorCodesTrueSkillInvalidConditionRank,
             GenericErrorCodesTrueSkillTotalScenarioLimitExceeded,
+            GenericErrorCodesTrueSkillInvalidConditionsList,
             GenericErrorCodesGameSaveManifestNotFound,
             GenericErrorCodesGameSaveManifestVersionAlreadyExists,
             GenericErrorCodesGameSaveConflictUpdatingManifest,
@@ -5816,6 +5821,9 @@ namespace PlayFab
             GenericErrorCodesGameSaveTitleDoesNotExist,
             GenericErrorCodesGameSaveOperationNotAllowedForTitle,
             GenericErrorCodesGameSaveManifestFilesLimitExceeded,
+            GenericErrorCodesGameSaveManifestDescriptionUpdateNotAllowed,
+            GenericErrorCodesGameSaveTitleConfigNotFound,
+            GenericErrorCodesGameSaveTitleAlreadyOnboarded,
             GenericErrorCodesStateShareForbidden,
             GenericErrorCodesStateShareTitleNotInFlight,
             GenericErrorCodesStateShareStateNotFound,
@@ -5823,7 +5831,9 @@ namespace PlayFab
             GenericErrorCodesStateShareStateRedemptionLimitExceeded,
             GenericErrorCodesStateShareStateRedemptionLimitNotUpdated,
             GenericErrorCodesStateShareCreatedStatesLimitExceeded,
-            GenericErrorCodesStateShareIdMissingOrMalformed
+            GenericErrorCodesStateShareIdMissingOrMalformed,
+            GenericErrorCodesPlayerCreationDisabled,
+            GenericErrorCodesAccountAlreadyExists
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -6346,11 +6356,6 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesInvalidReportDate)
             {
                 output = Json::Value("InvalidReportDate");
-                return;
-            }
-            if (input == GenericErrorCodes::GenericErrorCodesReportNotAvailable)
-            {
-                output = Json::Value("ReportNotAvailable");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesDatabaseThroughputExceeded)
@@ -8773,6 +8778,31 @@ namespace PlayFab
                 output = Json::Value("InvalidVersionResetForLinkedLeaderboard");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesBattleNetNotEnabledForTitle)
+            {
+                output = Json::Value("BattleNetNotEnabledForTitle");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesReportNotProcessed)
+            {
+                output = Json::Value("ReportNotProcessed");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesDataNotAvailable)
+            {
+                output = Json::Value("DataNotAvailable");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidReportName)
+            {
+                output = Json::Value("InvalidReportName");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesResourceNotModified)
+            {
+                output = Json::Value("ResourceNotModified");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
             {
                 output = Json::Value("MatchmakingEntityInvalid");
@@ -10168,6 +10198,11 @@ namespace PlayFab
                 output = Json::Value("TrueSkillTotalScenarioLimitExceeded");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesTrueSkillInvalidConditionsList)
+            {
+                output = Json::Value("TrueSkillInvalidConditionsList");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesGameSaveManifestNotFound)
             {
                 output = Json::Value("GameSaveManifestNotFound");
@@ -10273,6 +10308,21 @@ namespace PlayFab
                 output = Json::Value("GameSaveManifestFilesLimitExceeded");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveManifestDescriptionUpdateNotAllowed)
+            {
+                output = Json::Value("GameSaveManifestDescriptionUpdateNotAllowed");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveTitleConfigNotFound)
+            {
+                output = Json::Value("GameSaveTitleConfigNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveTitleAlreadyOnboarded)
+            {
+                output = Json::Value("GameSaveTitleAlreadyOnboarded");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesStateShareForbidden)
             {
                 output = Json::Value("StateShareForbidden");
@@ -10311,6 +10361,16 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesStateShareIdMissingOrMalformed)
             {
                 output = Json::Value("StateShareIdMissingOrMalformed");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayerCreationDisabled)
+            {
+                output = Json::Value("PlayerCreationDisabled");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAccountAlreadyExists)
+            {
+                output = Json::Value("AccountAlreadyExists");
                 return;
             }
         }
@@ -10839,11 +10899,6 @@ namespace PlayFab
             if (inputStr == "InvalidReportDate")
             {
                 output = GenericErrorCodes::GenericErrorCodesInvalidReportDate;
-                return;
-            }
-            if (inputStr == "ReportNotAvailable")
-            {
-                output = GenericErrorCodes::GenericErrorCodesReportNotAvailable;
                 return;
             }
             if (inputStr == "DatabaseThroughputExceeded")
@@ -13266,6 +13321,31 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesInvalidVersionResetForLinkedLeaderboard;
                 return;
             }
+            if (inputStr == "BattleNetNotEnabledForTitle")
+            {
+                output = GenericErrorCodes::GenericErrorCodesBattleNetNotEnabledForTitle;
+                return;
+            }
+            if (inputStr == "ReportNotProcessed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesReportNotProcessed;
+                return;
+            }
+            if (inputStr == "DataNotAvailable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesDataNotAvailable;
+                return;
+            }
+            if (inputStr == "InvalidReportName")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidReportName;
+                return;
+            }
+            if (inputStr == "ResourceNotModified")
+            {
+                output = GenericErrorCodes::GenericErrorCodesResourceNotModified;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -14661,6 +14741,11 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesTrueSkillTotalScenarioLimitExceeded;
                 return;
             }
+            if (inputStr == "TrueSkillInvalidConditionsList")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTrueSkillInvalidConditionsList;
+                return;
+            }
             if (inputStr == "GameSaveManifestNotFound")
             {
                 output = GenericErrorCodes::GenericErrorCodesGameSaveManifestNotFound;
@@ -14766,6 +14851,21 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesGameSaveManifestFilesLimitExceeded;
                 return;
             }
+            if (inputStr == "GameSaveManifestDescriptionUpdateNotAllowed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveManifestDescriptionUpdateNotAllowed;
+                return;
+            }
+            if (inputStr == "GameSaveTitleConfigNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveTitleConfigNotFound;
+                return;
+            }
+            if (inputStr == "GameSaveTitleAlreadyOnboarded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveTitleAlreadyOnboarded;
+                return;
+            }
             if (inputStr == "StateShareForbidden")
             {
                 output = GenericErrorCodes::GenericErrorCodesStateShareForbidden;
@@ -14806,6 +14906,16 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesStateShareIdMissingOrMalformed;
                 return;
             }
+            if (inputStr == "PlayerCreationDisabled")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayerCreationDisabled;
+                return;
+            }
+            if (inputStr == "AccountAlreadyExists")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAccountAlreadyExists;
+                return;
+            }
         }
 
         enum class LoginIdentityProvider
@@ -14833,7 +14943,8 @@ namespace PlayFab
             LoginIdentityProviderNintendoSwitchAccount,
             LoginIdentityProviderGooglePlayGames,
             LoginIdentityProviderXboxMobileStore,
-            LoginIdentityProviderKing
+            LoginIdentityProviderKing,
+            LoginIdentityProviderBattleNet
         };
 
         inline void ToJsonEnum(const LoginIdentityProvider input, Json::Value& output)
@@ -14956,6 +15067,11 @@ namespace PlayFab
             if (input == LoginIdentityProvider::LoginIdentityProviderKing)
             {
                 output = Json::Value("King");
+                return;
+            }
+            if (input == LoginIdentityProvider::LoginIdentityProviderBattleNet)
+            {
+                output = Json::Value("BattleNet");
                 return;
             }
         }
@@ -15084,6 +15200,11 @@ namespace PlayFab
             if (inputStr == "King")
             {
                 output = LoginIdentityProvider::LoginIdentityProviderKing;
+                return;
+            }
+            if (inputStr == "BattleNet")
+            {
+                output = LoginIdentityProvider::LoginIdentityProviderBattleNet;
                 return;
             }
         }
@@ -17486,6 +17607,40 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_BanData; ToJsonUtilO(BanData, each_BanData); output["BanData"] = each_BanData;
+                return output;
+            }
+        };
+
+        struct BattleNetAccountPlayFabIdPair : public PlayFabBaseModel
+        {
+            std::string BattleNetAccountId;
+            std::string PlayFabId;
+
+            BattleNetAccountPlayFabIdPair() :
+                PlayFabBaseModel(),
+                BattleNetAccountId(),
+                PlayFabId()
+            {}
+
+            BattleNetAccountPlayFabIdPair(const BattleNetAccountPlayFabIdPair& src) :
+                PlayFabBaseModel(),
+                BattleNetAccountId(src.BattleNetAccountId),
+                PlayFabId(src.PlayFabId)
+            {}
+
+            ~BattleNetAccountPlayFabIdPair() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["BattleNetAccountId"], BattleNetAccountId);
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_BattleNetAccountId; ToJsonUtilS(BattleNetAccountId, each_BattleNetAccountId); output["BattleNetAccountId"] = each_BattleNetAccountId;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 return output;
             }
         };
@@ -21997,6 +22152,64 @@ namespace PlayFab
             }
         };
 
+        struct GetPlayFabIDsFromBattleNetAccountIdsRequest : public PlayFabRequestCommon
+        {
+            std::list<std::string> BattleNetAccountIds;
+
+            GetPlayFabIDsFromBattleNetAccountIdsRequest() :
+                PlayFabRequestCommon(),
+                BattleNetAccountIds()
+            {}
+
+            GetPlayFabIDsFromBattleNetAccountIdsRequest(const GetPlayFabIDsFromBattleNetAccountIdsRequest& src) :
+                PlayFabRequestCommon(),
+                BattleNetAccountIds(src.BattleNetAccountIds)
+            {}
+
+            ~GetPlayFabIDsFromBattleNetAccountIdsRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["BattleNetAccountIds"], BattleNetAccountIds);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_BattleNetAccountIds; ToJsonUtilS(BattleNetAccountIds, each_BattleNetAccountIds); output["BattleNetAccountIds"] = each_BattleNetAccountIds;
+                return output;
+            }
+        };
+
+        struct GetPlayFabIDsFromBattleNetAccountIdsResult : public PlayFabResultCommon
+        {
+            std::list<BattleNetAccountPlayFabIdPair> Data;
+
+            GetPlayFabIDsFromBattleNetAccountIdsResult() :
+                PlayFabResultCommon(),
+                Data()
+            {}
+
+            GetPlayFabIDsFromBattleNetAccountIdsResult(const GetPlayFabIDsFromBattleNetAccountIdsResult& src) :
+                PlayFabResultCommon(),
+                Data(src.Data)
+            {}
+
+            ~GetPlayFabIDsFromBattleNetAccountIdsResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["Data"], Data);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Data; ToJsonUtilO(Data, each_Data); output["Data"] = each_Data;
+                return output;
+            }
+        };
+
         struct GetPlayFabIDsFromFacebookIDsRequest : public PlayFabRequestCommon
         {
             std::list<std::string> FacebookIDs;
@@ -25138,6 +25351,158 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_Message; ToJsonUtilS(Message, each_Message); output["Message"] = each_Message;
                 Json::Value each_Subject; ToJsonUtilS(Subject, each_Subject); output["Subject"] = each_Subject;
+                return output;
+            }
+        };
+
+        struct LoginWithAndroidDeviceIDRequest : public PlayFabRequestCommon
+        {
+            std::string AndroidDevice;
+            std::string AndroidDeviceId;
+            Boxed<bool> CreateAccount;
+            std::map<std::string, std::string> CustomTags;
+            Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
+            std::string OS;
+
+            LoginWithAndroidDeviceIDRequest() :
+                PlayFabRequestCommon(),
+                AndroidDevice(),
+                AndroidDeviceId(),
+                CreateAccount(),
+                CustomTags(),
+                InfoRequestParameters(),
+                OS()
+            {}
+
+            LoginWithAndroidDeviceIDRequest(const LoginWithAndroidDeviceIDRequest& src) :
+                PlayFabRequestCommon(),
+                AndroidDevice(src.AndroidDevice),
+                AndroidDeviceId(src.AndroidDeviceId),
+                CreateAccount(src.CreateAccount),
+                CustomTags(src.CustomTags),
+                InfoRequestParameters(src.InfoRequestParameters),
+                OS(src.OS)
+            {}
+
+            ~LoginWithAndroidDeviceIDRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["AndroidDevice"], AndroidDevice);
+                FromJsonUtilS(input["AndroidDeviceId"], AndroidDeviceId);
+                FromJsonUtilP(input["CreateAccount"], CreateAccount);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
+                FromJsonUtilS(input["OS"], OS);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_AndroidDevice; ToJsonUtilS(AndroidDevice, each_AndroidDevice); output["AndroidDevice"] = each_AndroidDevice;
+                Json::Value each_AndroidDeviceId; ToJsonUtilS(AndroidDeviceId, each_AndroidDeviceId); output["AndroidDeviceId"] = each_AndroidDeviceId;
+                Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
+                Json::Value each_OS; ToJsonUtilS(OS, each_OS); output["OS"] = each_OS;
+                return output;
+            }
+        };
+
+        struct LoginWithCustomIDRequest : public PlayFabRequestCommon
+        {
+            Boxed<bool> CreateAccount;
+            std::string CustomId;
+            std::map<std::string, std::string> CustomTags;
+            Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
+
+            LoginWithCustomIDRequest() :
+                PlayFabRequestCommon(),
+                CreateAccount(),
+                CustomId(),
+                CustomTags(),
+                InfoRequestParameters()
+            {}
+
+            LoginWithCustomIDRequest(const LoginWithCustomIDRequest& src) :
+                PlayFabRequestCommon(),
+                CreateAccount(src.CreateAccount),
+                CustomId(src.CustomId),
+                CustomTags(src.CustomTags),
+                InfoRequestParameters(src.InfoRequestParameters)
+            {}
+
+            ~LoginWithCustomIDRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["CreateAccount"], CreateAccount);
+                FromJsonUtilS(input["CustomId"], CustomId);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
+                Json::Value each_CustomId; ToJsonUtilS(CustomId, each_CustomId); output["CustomId"] = each_CustomId;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
+                return output;
+            }
+        };
+
+        struct LoginWithIOSDeviceIDRequest : public PlayFabRequestCommon
+        {
+            Boxed<bool> CreateAccount;
+            std::map<std::string, std::string> CustomTags;
+            std::string DeviceId;
+            std::string DeviceModel;
+            Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
+            std::string OS;
+
+            LoginWithIOSDeviceIDRequest() :
+                PlayFabRequestCommon(),
+                CreateAccount(),
+                CustomTags(),
+                DeviceId(),
+                DeviceModel(),
+                InfoRequestParameters(),
+                OS()
+            {}
+
+            LoginWithIOSDeviceIDRequest(const LoginWithIOSDeviceIDRequest& src) :
+                PlayFabRequestCommon(),
+                CreateAccount(src.CreateAccount),
+                CustomTags(src.CustomTags),
+                DeviceId(src.DeviceId),
+                DeviceModel(src.DeviceModel),
+                InfoRequestParameters(src.InfoRequestParameters),
+                OS(src.OS)
+            {}
+
+            ~LoginWithIOSDeviceIDRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilP(input["CreateAccount"], CreateAccount);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["DeviceId"], DeviceId);
+                FromJsonUtilS(input["DeviceModel"], DeviceModel);
+                FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
+                FromJsonUtilS(input["OS"], OS);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_DeviceId; ToJsonUtilS(DeviceId, each_DeviceId); output["DeviceId"] = each_DeviceId;
+                Json::Value each_DeviceModel; ToJsonUtilS(DeviceModel, each_DeviceModel); output["DeviceModel"] = each_DeviceModel;
+                Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
+                Json::Value each_OS; ToJsonUtilS(OS, each_OS); output["OS"] = each_OS;
                 return output;
             }
         };
