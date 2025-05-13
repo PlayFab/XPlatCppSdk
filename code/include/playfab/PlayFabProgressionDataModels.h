@@ -466,6 +466,7 @@ namespace PlayFab
 
         struct CreateStatisticDefinitionRequest : public PlayFabRequestCommon
         {
+            std::list<std::string> AggregationSources;
             std::list<StatisticColumn> Columns;
             std::map<std::string, std::string> CustomTags;
             std::string EntityType;
@@ -474,6 +475,7 @@ namespace PlayFab
 
             CreateStatisticDefinitionRequest() :
                 PlayFabRequestCommon(),
+                AggregationSources(),
                 Columns(),
                 CustomTags(),
                 EntityType(),
@@ -483,6 +485,7 @@ namespace PlayFab
 
             CreateStatisticDefinitionRequest(const CreateStatisticDefinitionRequest& src) :
                 PlayFabRequestCommon(),
+                AggregationSources(src.AggregationSources),
                 Columns(src.Columns),
                 CustomTags(src.CustomTags),
                 EntityType(src.EntityType),
@@ -494,6 +497,7 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["AggregationSources"], AggregationSources);
                 FromJsonUtilO(input["Columns"], Columns);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["EntityType"], EntityType);
@@ -504,6 +508,7 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_AggregationSources; ToJsonUtilS(AggregationSources, each_AggregationSources); output["AggregationSources"] = each_AggregationSources;
                 Json::Value each_Columns; ToJsonUtilO(Columns, each_Columns); output["Columns"] = each_Columns;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_EntityType; ToJsonUtilS(EntityType, each_EntityType); output["EntityType"] = each_EntityType;
@@ -1286,6 +1291,8 @@ namespace PlayFab
 
         struct GetStatisticDefinitionResponse : public PlayFabResultCommon
         {
+            std::list<std::string> AggregationDestinations;
+            std::list<std::string> AggregationSources;
             std::list<StatisticColumn> Columns;
             time_t Created;
             std::string EntityType;
@@ -1297,6 +1304,8 @@ namespace PlayFab
 
             GetStatisticDefinitionResponse() :
                 PlayFabResultCommon(),
+                AggregationDestinations(),
+                AggregationSources(),
                 Columns(),
                 Created(),
                 EntityType(),
@@ -1309,6 +1318,8 @@ namespace PlayFab
 
             GetStatisticDefinitionResponse(const GetStatisticDefinitionResponse& src) :
                 PlayFabResultCommon(),
+                AggregationDestinations(src.AggregationDestinations),
+                AggregationSources(src.AggregationSources),
                 Columns(src.Columns),
                 Created(src.Created),
                 EntityType(src.EntityType),
@@ -1323,6 +1334,8 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["AggregationDestinations"], AggregationDestinations);
+                FromJsonUtilS(input["AggregationSources"], AggregationSources);
                 FromJsonUtilO(input["Columns"], Columns);
                 FromJsonUtilT(input["Created"], Created);
                 FromJsonUtilS(input["EntityType"], EntityType);
@@ -1336,6 +1349,8 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_AggregationDestinations; ToJsonUtilS(AggregationDestinations, each_AggregationDestinations); output["AggregationDestinations"] = each_AggregationDestinations;
+                Json::Value each_AggregationSources; ToJsonUtilS(AggregationSources, each_AggregationSources); output["AggregationSources"] = each_AggregationSources;
                 Json::Value each_Columns; ToJsonUtilO(Columns, each_Columns); output["Columns"] = each_Columns;
                 Json::Value each_Created; ToJsonUtilT(Created, each_Created); output["Created"] = each_Created;
                 Json::Value each_EntityType; ToJsonUtilS(EntityType, each_EntityType); output["EntityType"] = each_EntityType;
@@ -1836,6 +1851,8 @@ namespace PlayFab
 
         struct StatisticDefinition : public PlayFabBaseModel
         {
+            std::list<std::string> AggregationDestinations;
+            std::list<std::string> AggregationSources;
             std::list<StatisticColumn> Columns;
             time_t Created;
             std::string EntityType;
@@ -1847,6 +1864,8 @@ namespace PlayFab
 
             StatisticDefinition() :
                 PlayFabBaseModel(),
+                AggregationDestinations(),
+                AggregationSources(),
                 Columns(),
                 Created(),
                 EntityType(),
@@ -1859,6 +1878,8 @@ namespace PlayFab
 
             StatisticDefinition(const StatisticDefinition& src) :
                 PlayFabBaseModel(),
+                AggregationDestinations(src.AggregationDestinations),
+                AggregationSources(src.AggregationSources),
                 Columns(src.Columns),
                 Created(src.Created),
                 EntityType(src.EntityType),
@@ -1873,6 +1894,8 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["AggregationDestinations"], AggregationDestinations);
+                FromJsonUtilS(input["AggregationSources"], AggregationSources);
                 FromJsonUtilO(input["Columns"], Columns);
                 FromJsonUtilT(input["Created"], Created);
                 FromJsonUtilS(input["EntityType"], EntityType);
@@ -1886,6 +1909,8 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_AggregationDestinations; ToJsonUtilS(AggregationDestinations, each_AggregationDestinations); output["AggregationDestinations"] = each_AggregationDestinations;
+                Json::Value each_AggregationSources; ToJsonUtilS(AggregationSources, each_AggregationSources); output["AggregationSources"] = each_AggregationSources;
                 Json::Value each_Columns; ToJsonUtilO(Columns, each_Columns); output["Columns"] = each_Columns;
                 Json::Value each_Created; ToJsonUtilT(Created, each_Created); output["Created"] = each_Created;
                 Json::Value each_EntityType; ToJsonUtilS(EntityType, each_EntityType); output["EntityType"] = each_EntityType;

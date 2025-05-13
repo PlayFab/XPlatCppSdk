@@ -718,6 +718,84 @@ namespace PlayFab
             }
         };
 
+        struct CreateOrUpdateToxModRequest : public PlayFabRequestCommon
+        {
+            std::string AccountId;
+            std::string AccountKey;
+            std::map<std::string, std::string> CustomTags;
+            bool Enabled;
+            Boxed<EntityKey> Entity;
+            Boxed<bool> ErrorIfExists;
+
+            CreateOrUpdateToxModRequest() :
+                PlayFabRequestCommon(),
+                AccountId(),
+                AccountKey(),
+                CustomTags(),
+                Enabled(),
+                Entity(),
+                ErrorIfExists()
+            {}
+
+            CreateOrUpdateToxModRequest(const CreateOrUpdateToxModRequest& src) :
+                PlayFabRequestCommon(),
+                AccountId(src.AccountId),
+                AccountKey(src.AccountKey),
+                CustomTags(src.CustomTags),
+                Enabled(src.Enabled),
+                Entity(src.Entity),
+                ErrorIfExists(src.ErrorIfExists)
+            {}
+
+            ~CreateOrUpdateToxModRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["AccountId"], AccountId);
+                FromJsonUtilS(input["AccountKey"], AccountKey);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilP(input["Enabled"], Enabled);
+                FromJsonUtilO(input["Entity"], Entity);
+                FromJsonUtilP(input["ErrorIfExists"], ErrorIfExists);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_AccountId; ToJsonUtilS(AccountId, each_AccountId); output["AccountId"] = each_AccountId;
+                Json::Value each_AccountKey; ToJsonUtilS(AccountKey, each_AccountKey); output["AccountKey"] = each_AccountKey;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_Enabled; ToJsonUtilP(Enabled, each_Enabled); output["Enabled"] = each_Enabled;
+                Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                Json::Value each_ErrorIfExists; ToJsonUtilP(ErrorIfExists, each_ErrorIfExists); output["ErrorIfExists"] = each_ErrorIfExists;
+                return output;
+            }
+        };
+
+        struct CreateOrUpdateToxModResponse : public PlayFabResultCommon
+        {
+
+            CreateOrUpdateToxModResponse() :
+                PlayFabResultCommon()
+            {}
+
+            CreateOrUpdateToxModResponse(const CreateOrUpdateToxModResponse&) :
+                PlayFabResultCommon()
+            {}
+
+            ~CreateOrUpdateToxModResponse() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
         struct CreateOrUpdateTwitchRequest : public PlayFabRequestCommon
         {
             std::string ClientID;
@@ -1243,6 +1321,64 @@ namespace PlayFab
             {}
 
             ~DeleteSteamResponse() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
+        struct DeleteToxModRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            Boxed<EntityKey> Entity;
+
+            DeleteToxModRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                Entity()
+            {}
+
+            DeleteToxModRequest(const DeleteToxModRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                Entity(src.Entity)
+            {}
+
+            ~DeleteToxModRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilO(input["Entity"], Entity);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                return output;
+            }
+        };
+
+        struct DeleteToxModResponse : public PlayFabResultCommon
+        {
+
+            DeleteToxModResponse() :
+                PlayFabResultCommon()
+            {}
+
+            DeleteToxModResponse(const DeleteToxModResponse&) :
+                PlayFabResultCommon()
+            {}
+
+            ~DeleteToxModResponse() = default;
 
             void FromJson(const Json::Value&) override
             {
@@ -1893,6 +2029,84 @@ namespace PlayFab
                 Json::Value each_Created; ToJsonUtilP(Created, each_Created); output["Created"] = each_Created;
                 Json::Value each_EnforceServiceSpecificTickets; ToJsonUtilP(EnforceServiceSpecificTickets, each_EnforceServiceSpecificTickets); output["EnforceServiceSpecificTickets"] = each_EnforceServiceSpecificTickets;
                 Json::Value each_UseSandbox; ToJsonUtilP(UseSandbox, each_UseSandbox); output["UseSandbox"] = each_UseSandbox;
+                return output;
+            }
+        };
+
+        struct GetToxModRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            Boxed<EntityKey> Entity;
+
+            GetToxModRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                Entity()
+            {}
+
+            GetToxModRequest(const GetToxModRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                Entity(src.Entity)
+            {}
+
+            ~GetToxModRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilO(input["Entity"], Entity);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                return output;
+            }
+        };
+
+        struct GetToxModResponse : public PlayFabResultCommon
+        {
+            std::string AccountId;
+            std::string AccountKey;
+            bool Created;
+            bool Enabled;
+
+            GetToxModResponse() :
+                PlayFabResultCommon(),
+                AccountId(),
+                AccountKey(),
+                Created(),
+                Enabled()
+            {}
+
+            GetToxModResponse(const GetToxModResponse& src) :
+                PlayFabResultCommon(),
+                AccountId(src.AccountId),
+                AccountKey(src.AccountKey),
+                Created(src.Created),
+                Enabled(src.Enabled)
+            {}
+
+            ~GetToxModResponse() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["AccountId"], AccountId);
+                FromJsonUtilS(input["AccountKey"], AccountKey);
+                FromJsonUtilP(input["Created"], Created);
+                FromJsonUtilP(input["Enabled"], Enabled);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_AccountId; ToJsonUtilS(AccountId, each_AccountId); output["AccountId"] = each_AccountId;
+                Json::Value each_AccountKey; ToJsonUtilS(AccountKey, each_AccountKey); output["AccountKey"] = each_AccountKey;
+                Json::Value each_Created; ToJsonUtilP(Created, each_Created); output["Created"] = each_Created;
+                Json::Value each_Enabled; ToJsonUtilP(Enabled, each_Enabled); output["Enabled"] = each_Enabled;
                 return output;
             }
         };

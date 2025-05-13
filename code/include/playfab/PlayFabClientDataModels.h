@@ -9736,6 +9736,40 @@ namespace PlayFab
             }
         };
 
+        struct UserBattleNetInfo : public PlayFabBaseModel
+        {
+            std::string BattleNetAccountId;
+            std::string BattleNetBattleTag;
+
+            UserBattleNetInfo() :
+                PlayFabBaseModel(),
+                BattleNetAccountId(),
+                BattleNetBattleTag()
+            {}
+
+            UserBattleNetInfo(const UserBattleNetInfo& src) :
+                PlayFabBaseModel(),
+                BattleNetAccountId(src.BattleNetAccountId),
+                BattleNetBattleTag(src.BattleNetBattleTag)
+            {}
+
+            ~UserBattleNetInfo() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["BattleNetAccountId"], BattleNetAccountId);
+                FromJsonUtilS(input["BattleNetBattleTag"], BattleNetBattleTag);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_BattleNetAccountId; ToJsonUtilS(BattleNetAccountId, each_BattleNetAccountId); output["BattleNetAccountId"] = each_BattleNetAccountId;
+                Json::Value each_BattleNetBattleTag; ToJsonUtilS(BattleNetBattleTag, each_BattleNetBattleTag); output["BattleNetBattleTag"] = each_BattleNetBattleTag;
+                return output;
+            }
+        };
+
         struct UserCustomIdInfo : public PlayFabBaseModel
         {
             std::string CustomId;
@@ -10202,6 +10236,7 @@ namespace PlayFab
         {
             Boxed<UserAndroidDeviceInfo> AndroidDeviceInfo;
             Boxed<UserAppleIdInfo> AppleAccountInfo;
+            Boxed<UserBattleNetInfo> BattleNetAccountInfo;
             time_t Created;
             Boxed<UserCustomIdInfo> CustomIdInfo;
             Boxed<UserFacebookInfo> FacebookInfo;
@@ -10228,6 +10263,7 @@ namespace PlayFab
                 PlayFabBaseModel(),
                 AndroidDeviceInfo(),
                 AppleAccountInfo(),
+                BattleNetAccountInfo(),
                 Created(),
                 CustomIdInfo(),
                 FacebookInfo(),
@@ -10255,6 +10291,7 @@ namespace PlayFab
                 PlayFabBaseModel(),
                 AndroidDeviceInfo(src.AndroidDeviceInfo),
                 AppleAccountInfo(src.AppleAccountInfo),
+                BattleNetAccountInfo(src.BattleNetAccountInfo),
                 Created(src.Created),
                 CustomIdInfo(src.CustomIdInfo),
                 FacebookInfo(src.FacebookInfo),
@@ -10284,6 +10321,7 @@ namespace PlayFab
             {
                 FromJsonUtilO(input["AndroidDeviceInfo"], AndroidDeviceInfo);
                 FromJsonUtilO(input["AppleAccountInfo"], AppleAccountInfo);
+                FromJsonUtilO(input["BattleNetAccountInfo"], BattleNetAccountInfo);
                 FromJsonUtilT(input["Created"], Created);
                 FromJsonUtilO(input["CustomIdInfo"], CustomIdInfo);
                 FromJsonUtilO(input["FacebookInfo"], FacebookInfo);
@@ -10312,6 +10350,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_AndroidDeviceInfo; ToJsonUtilO(AndroidDeviceInfo, each_AndroidDeviceInfo); output["AndroidDeviceInfo"] = each_AndroidDeviceInfo;
                 Json::Value each_AppleAccountInfo; ToJsonUtilO(AppleAccountInfo, each_AppleAccountInfo); output["AppleAccountInfo"] = each_AppleAccountInfo;
+                Json::Value each_BattleNetAccountInfo; ToJsonUtilO(BattleNetAccountInfo, each_BattleNetAccountInfo); output["BattleNetAccountInfo"] = each_BattleNetAccountInfo;
                 Json::Value each_Created; ToJsonUtilT(Created, each_Created); output["Created"] = each_Created;
                 Json::Value each_CustomIdInfo; ToJsonUtilO(CustomIdInfo, each_CustomIdInfo); output["CustomIdInfo"] = each_CustomIdInfo;
                 Json::Value each_FacebookInfo; ToJsonUtilO(FacebookInfo, each_FacebookInfo); output["FacebookInfo"] = each_FacebookInfo;

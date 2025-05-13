@@ -37,6 +37,7 @@ namespace PlayFab
         static void CreateOrUpdateNintendo(AddonModels::CreateOrUpdateNintendoRequest& request, const ProcessApiCallback<AddonModels::CreateOrUpdateNintendoResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void CreateOrUpdatePSN(AddonModels::CreateOrUpdatePSNRequest& request, const ProcessApiCallback<AddonModels::CreateOrUpdatePSNResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void CreateOrUpdateSteam(AddonModels::CreateOrUpdateSteamRequest& request, const ProcessApiCallback<AddonModels::CreateOrUpdateSteamResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void CreateOrUpdateToxMod(AddonModels::CreateOrUpdateToxModRequest& request, const ProcessApiCallback<AddonModels::CreateOrUpdateToxModResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void CreateOrUpdateTwitch(AddonModels::CreateOrUpdateTwitchRequest& request, const ProcessApiCallback<AddonModels::CreateOrUpdateTwitchResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeleteApple(AddonModels::DeleteAppleRequest& request, const ProcessApiCallback<AddonModels::DeleteAppleResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeleteFacebook(AddonModels::DeleteFacebookRequest& request, const ProcessApiCallback<AddonModels::DeleteFacebookResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -46,6 +47,7 @@ namespace PlayFab
         static void DeleteNintendo(AddonModels::DeleteNintendoRequest& request, const ProcessApiCallback<AddonModels::DeleteNintendoResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeletePSN(AddonModels::DeletePSNRequest& request, const ProcessApiCallback<AddonModels::DeletePSNResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeleteSteam(AddonModels::DeleteSteamRequest& request, const ProcessApiCallback<AddonModels::DeleteSteamResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void DeleteToxMod(AddonModels::DeleteToxModRequest& request, const ProcessApiCallback<AddonModels::DeleteToxModResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void DeleteTwitch(AddonModels::DeleteTwitchRequest& request, const ProcessApiCallback<AddonModels::DeleteTwitchResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetApple(AddonModels::GetAppleRequest& request, const ProcessApiCallback<AddonModels::GetAppleResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetFacebook(AddonModels::GetFacebookRequest& request, const ProcessApiCallback<AddonModels::GetFacebookResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -55,6 +57,7 @@ namespace PlayFab
         static void GetNintendo(AddonModels::GetNintendoRequest& request, const ProcessApiCallback<AddonModels::GetNintendoResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetPSN(AddonModels::GetPSNRequest& request, const ProcessApiCallback<AddonModels::GetPSNResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetSteam(AddonModels::GetSteamRequest& request, const ProcessApiCallback<AddonModels::GetSteamResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void GetToxMod(AddonModels::GetToxModRequest& request, const ProcessApiCallback<AddonModels::GetToxModResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void GetTwitch(AddonModels::GetTwitchRequest& request, const ProcessApiCallback<AddonModels::GetTwitchResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
 
     private:
@@ -70,6 +73,7 @@ namespace PlayFab
         static void OnCreateOrUpdateNintendoResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnCreateOrUpdatePSNResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnCreateOrUpdateSteamResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnCreateOrUpdateToxModResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnCreateOrUpdateTwitchResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnDeleteAppleResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnDeleteFacebookResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -79,6 +83,7 @@ namespace PlayFab
         static void OnDeleteNintendoResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnDeletePSNResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnDeleteSteamResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnDeleteToxModResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnDeleteTwitchResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetAppleResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetFacebookResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -88,6 +93,7 @@ namespace PlayFab
         static void OnGetNintendoResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetPSNResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetSteamResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnGetToxModResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnGetTwitchResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
 
         static bool ValidateResult(PlayFabResultCommon& resultCommon, const CallRequestContainer& container);

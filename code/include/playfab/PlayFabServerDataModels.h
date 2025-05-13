@@ -5520,6 +5520,7 @@ namespace PlayFab
             GenericErrorCodesDataNotAvailable,
             GenericErrorCodesInvalidReportName,
             GenericErrorCodesResourceNotModified,
+            GenericErrorCodesStudioCreationLimitExceeded,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5824,6 +5825,8 @@ namespace PlayFab
             GenericErrorCodesGameSaveManifestDescriptionUpdateNotAllowed,
             GenericErrorCodesGameSaveTitleConfigNotFound,
             GenericErrorCodesGameSaveTitleAlreadyOnboarded,
+            GenericErrorCodesGameSaveServiceNotEnabledForTitle,
+            GenericErrorCodesGameSaveServiceOnboardingPending,
             GenericErrorCodesStateShareForbidden,
             GenericErrorCodesStateShareTitleNotInFlight,
             GenericErrorCodesStateShareStateNotFound,
@@ -5833,7 +5836,15 @@ namespace PlayFab
             GenericErrorCodesStateShareCreatedStatesLimitExceeded,
             GenericErrorCodesStateShareIdMissingOrMalformed,
             GenericErrorCodesPlayerCreationDisabled,
-            GenericErrorCodesAccountAlreadyExists
+            GenericErrorCodesAccountAlreadyExists,
+            GenericErrorCodesTagInvalid,
+            GenericErrorCodesTagTooLong,
+            GenericErrorCodesStatisticColumnAggregationMismatch,
+            GenericErrorCodesStatisticResetIntervalMismatch,
+            GenericErrorCodesVersionConfigurationCannotBeSpecifiedForLinkedStat,
+            GenericErrorCodesVersionConfigurationIsRequired,
+            GenericErrorCodesInvalidEntityTypeForAggregation,
+            GenericErrorCodesMultiLevelAggregationNotAllowed
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -8803,6 +8814,11 @@ namespace PlayFab
                 output = Json::Value("ResourceNotModified");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesStudioCreationLimitExceeded)
+            {
+                output = Json::Value("StudioCreationLimitExceeded");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
             {
                 output = Json::Value("MatchmakingEntityInvalid");
@@ -10323,6 +10339,16 @@ namespace PlayFab
                 output = Json::Value("GameSaveTitleAlreadyOnboarded");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveServiceNotEnabledForTitle)
+            {
+                output = Json::Value("GameSaveServiceNotEnabledForTitle");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveServiceOnboardingPending)
+            {
+                output = Json::Value("GameSaveServiceOnboardingPending");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesStateShareForbidden)
             {
                 output = Json::Value("StateShareForbidden");
@@ -10371,6 +10397,46 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesAccountAlreadyExists)
             {
                 output = Json::Value("AccountAlreadyExists");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTagInvalid)
+            {
+                output = Json::Value("TagInvalid");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesTagTooLong)
+            {
+                output = Json::Value("TagTooLong");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStatisticColumnAggregationMismatch)
+            {
+                output = Json::Value("StatisticColumnAggregationMismatch");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStatisticResetIntervalMismatch)
+            {
+                output = Json::Value("StatisticResetIntervalMismatch");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesVersionConfigurationCannotBeSpecifiedForLinkedStat)
+            {
+                output = Json::Value("VersionConfigurationCannotBeSpecifiedForLinkedStat");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesVersionConfigurationIsRequired)
+            {
+                output = Json::Value("VersionConfigurationIsRequired");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesInvalidEntityTypeForAggregation)
+            {
+                output = Json::Value("InvalidEntityTypeForAggregation");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMultiLevelAggregationNotAllowed)
+            {
+                output = Json::Value("MultiLevelAggregationNotAllowed");
                 return;
             }
         }
@@ -13346,6 +13412,11 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesResourceNotModified;
                 return;
             }
+            if (inputStr == "StudioCreationLimitExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStudioCreationLimitExceeded;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -14866,6 +14937,16 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesGameSaveTitleAlreadyOnboarded;
                 return;
             }
+            if (inputStr == "GameSaveServiceNotEnabledForTitle")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveServiceNotEnabledForTitle;
+                return;
+            }
+            if (inputStr == "GameSaveServiceOnboardingPending")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveServiceOnboardingPending;
+                return;
+            }
             if (inputStr == "StateShareForbidden")
             {
                 output = GenericErrorCodes::GenericErrorCodesStateShareForbidden;
@@ -14914,6 +14995,46 @@ namespace PlayFab
             if (inputStr == "AccountAlreadyExists")
             {
                 output = GenericErrorCodes::GenericErrorCodesAccountAlreadyExists;
+                return;
+            }
+            if (inputStr == "TagInvalid")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTagInvalid;
+                return;
+            }
+            if (inputStr == "TagTooLong")
+            {
+                output = GenericErrorCodes::GenericErrorCodesTagTooLong;
+                return;
+            }
+            if (inputStr == "StatisticColumnAggregationMismatch")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStatisticColumnAggregationMismatch;
+                return;
+            }
+            if (inputStr == "StatisticResetIntervalMismatch")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStatisticResetIntervalMismatch;
+                return;
+            }
+            if (inputStr == "VersionConfigurationCannotBeSpecifiedForLinkedStat")
+            {
+                output = GenericErrorCodes::GenericErrorCodesVersionConfigurationCannotBeSpecifiedForLinkedStat;
+                return;
+            }
+            if (inputStr == "VersionConfigurationIsRequired")
+            {
+                output = GenericErrorCodes::GenericErrorCodesVersionConfigurationIsRequired;
+                return;
+            }
+            if (inputStr == "InvalidEntityTypeForAggregation")
+            {
+                output = GenericErrorCodes::GenericErrorCodesInvalidEntityTypeForAggregation;
+                return;
+            }
+            if (inputStr == "MultiLevelAggregationNotAllowed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMultiLevelAggregationNotAllowed;
                 return;
             }
         }
@@ -16489,6 +16610,40 @@ namespace PlayFab
             }
         };
 
+        struct UserBattleNetInfo : public PlayFabBaseModel
+        {
+            std::string BattleNetAccountId;
+            std::string BattleNetBattleTag;
+
+            UserBattleNetInfo() :
+                PlayFabBaseModel(),
+                BattleNetAccountId(),
+                BattleNetBattleTag()
+            {}
+
+            UserBattleNetInfo(const UserBattleNetInfo& src) :
+                PlayFabBaseModel(),
+                BattleNetAccountId(src.BattleNetAccountId),
+                BattleNetBattleTag(src.BattleNetBattleTag)
+            {}
+
+            ~UserBattleNetInfo() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["BattleNetAccountId"], BattleNetAccountId);
+                FromJsonUtilS(input["BattleNetBattleTag"], BattleNetBattleTag);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_BattleNetAccountId; ToJsonUtilS(BattleNetAccountId, each_BattleNetAccountId); output["BattleNetAccountId"] = each_BattleNetAccountId;
+                Json::Value each_BattleNetBattleTag; ToJsonUtilS(BattleNetBattleTag, each_BattleNetBattleTag); output["BattleNetBattleTag"] = each_BattleNetBattleTag;
+                return output;
+            }
+        };
+
         struct UserCustomIdInfo : public PlayFabBaseModel
         {
             std::string CustomId;
@@ -17169,6 +17324,7 @@ namespace PlayFab
         {
             Boxed<UserAndroidDeviceInfo> AndroidDeviceInfo;
             Boxed<UserAppleIdInfo> AppleAccountInfo;
+            Boxed<UserBattleNetInfo> BattleNetAccountInfo;
             time_t Created;
             Boxed<UserCustomIdInfo> CustomIdInfo;
             Boxed<UserFacebookInfo> FacebookInfo;
@@ -17195,6 +17351,7 @@ namespace PlayFab
                 PlayFabBaseModel(),
                 AndroidDeviceInfo(),
                 AppleAccountInfo(),
+                BattleNetAccountInfo(),
                 Created(),
                 CustomIdInfo(),
                 FacebookInfo(),
@@ -17222,6 +17379,7 @@ namespace PlayFab
                 PlayFabBaseModel(),
                 AndroidDeviceInfo(src.AndroidDeviceInfo),
                 AppleAccountInfo(src.AppleAccountInfo),
+                BattleNetAccountInfo(src.BattleNetAccountInfo),
                 Created(src.Created),
                 CustomIdInfo(src.CustomIdInfo),
                 FacebookInfo(src.FacebookInfo),
@@ -17251,6 +17409,7 @@ namespace PlayFab
             {
                 FromJsonUtilO(input["AndroidDeviceInfo"], AndroidDeviceInfo);
                 FromJsonUtilO(input["AppleAccountInfo"], AppleAccountInfo);
+                FromJsonUtilO(input["BattleNetAccountInfo"], BattleNetAccountInfo);
                 FromJsonUtilT(input["Created"], Created);
                 FromJsonUtilO(input["CustomIdInfo"], CustomIdInfo);
                 FromJsonUtilO(input["FacebookInfo"], FacebookInfo);
@@ -17279,6 +17438,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_AndroidDeviceInfo; ToJsonUtilO(AndroidDeviceInfo, each_AndroidDeviceInfo); output["AndroidDeviceInfo"] = each_AndroidDeviceInfo;
                 Json::Value each_AppleAccountInfo; ToJsonUtilO(AppleAccountInfo, each_AppleAccountInfo); output["AppleAccountInfo"] = each_AppleAccountInfo;
+                Json::Value each_BattleNetAccountInfo; ToJsonUtilO(BattleNetAccountInfo, each_BattleNetAccountInfo); output["BattleNetAccountInfo"] = each_BattleNetAccountInfo;
                 Json::Value each_Created; ToJsonUtilT(Created, each_Created); output["Created"] = each_Created;
                 Json::Value each_CustomIdInfo; ToJsonUtilO(CustomIdInfo, each_CustomIdInfo); output["CustomIdInfo"] = each_CustomIdInfo;
                 Json::Value each_FacebookInfo; ToJsonUtilO(FacebookInfo, each_FacebookInfo); output["FacebookInfo"] = each_FacebookInfo;
