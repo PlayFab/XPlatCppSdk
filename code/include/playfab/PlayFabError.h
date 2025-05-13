@@ -604,6 +604,7 @@ namespace PlayFab
         PlayFabErrorDataNotAvailable = 1604,
         PlayFabErrorInvalidReportName = 1605,
         PlayFabErrorResourceNotModified = 1606,
+        PlayFabErrorStudioCreationLimitExceeded = 1607,
         PlayFabErrorMatchmakingEntityInvalid = 2001,
         PlayFabErrorMatchmakingPlayerAttributesInvalid = 2002,
         PlayFabErrorMatchmakingQueueNotFound = 2016,
@@ -908,6 +909,8 @@ namespace PlayFab
         PlayFabErrorGameSaveManifestDescriptionUpdateNotAllowed = 20321,
         PlayFabErrorGameSaveTitleConfigNotFound = 20322,
         PlayFabErrorGameSaveTitleAlreadyOnboarded = 20323,
+        PlayFabErrorGameSaveServiceNotEnabledForTitle = 20324,
+        PlayFabErrorGameSaveServiceOnboardingPending = 20325,
         PlayFabErrorStateShareForbidden = 21000,
         PlayFabErrorStateShareTitleNotInFlight = 21001,
         PlayFabErrorStateShareStateNotFound = 21002,
@@ -918,6 +921,14 @@ namespace PlayFab
         PlayFabErrorStateShareIdMissingOrMalformed = 21007,
         PlayFabErrorPlayerCreationDisabled = 22000,
         PlayFabErrorAccountAlreadyExists = 22001,
+        PlayFabErrorTagInvalid = 23000,
+        PlayFabErrorTagTooLong = 23001,
+        PlayFabErrorStatisticColumnAggregationMismatch = 23002,
+        PlayFabErrorStatisticResetIntervalMismatch = 23003,
+        PlayFabErrorVersionConfigurationCannotBeSpecifiedForLinkedStat = 23004,
+        PlayFabErrorVersionConfigurationIsRequired = 23005,
+        PlayFabErrorInvalidEntityTypeForAggregation = 23006,
+        PlayFabErrorMultiLevelAggregationNotAllowed = 23007,
     };
 
     /// <summary>
