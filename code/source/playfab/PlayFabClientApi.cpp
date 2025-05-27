@@ -3899,8 +3899,8 @@ namespace PlayFab
         }
     }
 
-    void PlayFabClientAPI::LinkBattleNet(
-        LinkBattleNetRequest& request,
+    void PlayFabClientAPI::LinkBattleNetAccount(
+        LinkBattleNetAccountRequest& request,
         const ProcessApiCallback<EmptyResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
@@ -3917,10 +3917,10 @@ namespace PlayFab
         headers.emplace("X-Authorization", context->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Client/LinkBattleNet",
+            "/Client/LinkBattleNetAccount",
             headers,
             jsonAsString,
-            OnLinkBattleNetResult,
+            OnLinkBattleNetAccountResult,
             settings,
             context,
             customData));
@@ -3931,7 +3931,7 @@ namespace PlayFab
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnLinkBattleNetResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabClientAPI::OnLinkBattleNetAccountResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();
@@ -7325,8 +7325,8 @@ namespace PlayFab
         }
     }
 
-    void PlayFabClientAPI::UnlinkBattleNet(
-        UnlinkBattleNetRequest& request,
+    void PlayFabClientAPI::UnlinkBattleNetAccount(
+        UnlinkBattleNetAccountRequest& request,
         const ProcessApiCallback<EmptyResponse> callback,
         const ErrorCallback errorCallback,
         void* customData
@@ -7343,10 +7343,10 @@ namespace PlayFab
         headers.emplace("X-Authorization", context->clientSessionTicket);
 
         auto reqContainer = std::unique_ptr<CallRequestContainer>(new CallRequestContainer(
-            "/Client/UnlinkBattleNet",
+            "/Client/UnlinkBattleNetAccount",
             headers,
             jsonAsString,
-            OnUnlinkBattleNetResult,
+            OnUnlinkBattleNetAccountResult,
             settings,
             context,
             customData));
@@ -7357,7 +7357,7 @@ namespace PlayFab
         http.MakePostRequest(std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(reqContainer.release())));
     }
 
-    void PlayFabClientAPI::OnUnlinkBattleNetResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
+    void PlayFabClientAPI::OnUnlinkBattleNetAccountResult(int /*httpCode*/, const std::string& /*result*/, const std::shared_ptr<CallRequestContainerBase>& reqContainer)
     {
         CallRequestContainer& container = static_cast<CallRequestContainer&>(*reqContainer);
         std::shared_ptr<PlayFabAuthenticationContext> context = container.GetContext();

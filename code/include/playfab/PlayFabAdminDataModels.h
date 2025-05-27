@@ -5803,6 +5803,7 @@ namespace PlayFab
             GenericErrorCodesGameSaveTitleAlreadyOnboarded,
             GenericErrorCodesGameSaveServiceNotEnabledForTitle,
             GenericErrorCodesGameSaveServiceOnboardingPending,
+            GenericErrorCodesGameSaveManifestNotEligibleAsConflictingVersion,
             GenericErrorCodesStateShareForbidden,
             GenericErrorCodesStateShareTitleNotInFlight,
             GenericErrorCodesStateShareStateNotFound,
@@ -10323,6 +10324,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesGameSaveServiceOnboardingPending)
             {
                 output = Json::Value("GameSaveServiceOnboardingPending");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveManifestNotEligibleAsConflictingVersion)
+            {
+                output = Json::Value("GameSaveManifestNotEligibleAsConflictingVersion");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesStateShareForbidden)
@@ -14921,6 +14927,11 @@ namespace PlayFab
             if (inputStr == "GameSaveServiceOnboardingPending")
             {
                 output = GenericErrorCodes::GenericErrorCodesGameSaveServiceOnboardingPending;
+                return;
+            }
+            if (inputStr == "GameSaveManifestNotEligibleAsConflictingVersion")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveManifestNotEligibleAsConflictingVersion;
                 return;
             }
             if (inputStr == "StateShareForbidden")
