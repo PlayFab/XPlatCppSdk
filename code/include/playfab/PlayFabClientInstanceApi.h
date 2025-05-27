@@ -129,7 +129,7 @@ namespace PlayFab
         void GrantCharacterToUser(ClientModels::GrantCharacterToUserRequest& request, const ProcessApiCallback<ClientModels::GrantCharacterToUserResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void LinkAndroidDeviceID(ClientModels::LinkAndroidDeviceIDRequest& request, const ProcessApiCallback<ClientModels::LinkAndroidDeviceIDResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void LinkApple(ClientModels::LinkAppleRequest& request, const ProcessApiCallback<ClientModels::EmptyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
-        void LinkBattleNet(ClientModels::LinkBattleNetRequest& request, const ProcessApiCallback<ClientModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void LinkBattleNetAccount(ClientModels::LinkBattleNetAccountRequest& request, const ProcessApiCallback<ClientModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void LinkCustomID(ClientModels::LinkCustomIDRequest& request, const ProcessApiCallback<ClientModels::LinkCustomIDResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void LinkFacebookAccount(ClientModels::LinkFacebookAccountRequest& request, const ProcessApiCallback<ClientModels::LinkFacebookAccountResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void LinkFacebookInstantGamesId(ClientModels::LinkFacebookInstantGamesIdRequest& request, const ProcessApiCallback<ClientModels::LinkFacebookInstantGamesIdResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -189,7 +189,7 @@ namespace PlayFab
         void SubtractUserVirtualCurrency(ClientModels::SubtractUserVirtualCurrencyRequest& request, const ProcessApiCallback<ClientModels::ModifyUserVirtualCurrencyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UnlinkAndroidDeviceID(ClientModels::UnlinkAndroidDeviceIDRequest& request, const ProcessApiCallback<ClientModels::UnlinkAndroidDeviceIDResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UnlinkApple(ClientModels::UnlinkAppleRequest& request, const ProcessApiCallback<ClientModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
-        void UnlinkBattleNet(ClientModels::UnlinkBattleNetRequest& request, const ProcessApiCallback<ClientModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void UnlinkBattleNetAccount(ClientModels::UnlinkBattleNetAccountRequest& request, const ProcessApiCallback<ClientModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UnlinkCustomID(ClientModels::UnlinkCustomIDRequest& request, const ProcessApiCallback<ClientModels::UnlinkCustomIDResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UnlinkFacebookAccount(ClientModels::UnlinkFacebookAccountRequest& request, const ProcessApiCallback<ClientModels::UnlinkFacebookAccountResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UnlinkFacebookInstantGamesId(ClientModels::UnlinkFacebookInstantGamesIdRequest& request, const ProcessApiCallback<ClientModels::UnlinkFacebookInstantGamesIdResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -304,7 +304,7 @@ namespace PlayFab
         void OnGrantCharacterToUserResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnLinkAndroidDeviceIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnLinkAppleResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
-        void OnLinkBattleNetResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnLinkBattleNetAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnLinkCustomIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnLinkFacebookAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnLinkFacebookInstantGamesIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -364,7 +364,7 @@ namespace PlayFab
         void OnSubtractUserVirtualCurrencyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUnlinkAndroidDeviceIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUnlinkAppleResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
-        void OnUnlinkBattleNetResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnUnlinkBattleNetAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUnlinkCustomIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUnlinkFacebookAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUnlinkFacebookInstantGamesIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);

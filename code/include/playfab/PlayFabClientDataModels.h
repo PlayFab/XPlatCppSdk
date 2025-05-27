@@ -15172,27 +15172,27 @@ namespace PlayFab
             }
         };
 
-        struct LinkBattleNetRequest : public PlayFabRequestCommon
+        struct LinkBattleNetAccountRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
             Boxed<bool> ForceLink;
             std::string IdentityToken;
 
-            LinkBattleNetRequest() :
+            LinkBattleNetAccountRequest() :
                 PlayFabRequestCommon(),
                 CustomTags(),
                 ForceLink(),
                 IdentityToken()
             {}
 
-            LinkBattleNetRequest(const LinkBattleNetRequest& src) :
+            LinkBattleNetAccountRequest(const LinkBattleNetAccountRequest& src) :
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
                 ForceLink(src.ForceLink),
                 IdentityToken(src.IdentityToken)
             {}
 
-            ~LinkBattleNetRequest() = default;
+            ~LinkBattleNetAccountRequest() = default;
 
             void FromJson(const Json::Value& input) override
             {
@@ -19350,21 +19350,21 @@ namespace PlayFab
             }
         };
 
-        struct UnlinkBattleNetRequest : public PlayFabRequestCommon
+        struct UnlinkBattleNetAccountRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
 
-            UnlinkBattleNetRequest() :
+            UnlinkBattleNetAccountRequest() :
                 PlayFabRequestCommon(),
                 CustomTags()
             {}
 
-            UnlinkBattleNetRequest(const UnlinkBattleNetRequest& src) :
+            UnlinkBattleNetAccountRequest(const UnlinkBattleNetAccountRequest& src) :
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags)
             {}
 
-            ~UnlinkBattleNetRequest() = default;
+            ~UnlinkBattleNetAccountRequest() = default;
 
             void FromJson(const Json::Value& input) override
             {

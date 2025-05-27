@@ -123,6 +123,7 @@ namespace PlayFab
         void GrantItemsToCharacter(ServerModels::GrantItemsToCharacterRequest& request, const ProcessApiCallback<ServerModels::GrantItemsToCharacterResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void GrantItemsToUser(ServerModels::GrantItemsToUserRequest& request, const ProcessApiCallback<ServerModels::GrantItemsToUserResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void GrantItemsToUsers(ServerModels::GrantItemsToUsersRequest& request, const ProcessApiCallback<ServerModels::GrantItemsToUsersResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void LinkBattleNetAccount(ServerModels::LinkBattleNetAccountRequest& request, const ProcessApiCallback<ServerModels::EmptyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void LinkNintendoServiceAccount(ServerModels::LinkNintendoServiceAccountRequest& request, const ProcessApiCallback<ServerModels::EmptyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void LinkNintendoServiceAccountSubject(ServerModels::LinkNintendoServiceAccountSubjectRequest& request, const ProcessApiCallback<ServerModels::EmptyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void LinkNintendoSwitchDeviceId(ServerModels::LinkNintendoSwitchDeviceIdRequest& request, const ProcessApiCallback<ServerModels::LinkNintendoSwitchDeviceIdResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -133,6 +134,7 @@ namespace PlayFab
         void LinkXboxAccount(ServerModels::LinkXboxAccountRequest& request, const ProcessApiCallback<ServerModels::LinkXboxAccountResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void ListPlayerCustomProperties(ServerModels::ListPlayerCustomPropertiesRequest& request, const ProcessApiCallback<ServerModels::ListPlayerCustomPropertiesResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void LoginWithAndroidDeviceID(ServerModels::LoginWithAndroidDeviceIDRequest& request, const ProcessApiCallback<ServerModels::ServerLoginResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void LoginWithBattleNet(ServerModels::LoginWithBattleNetRequest& request, const ProcessApiCallback<ServerModels::ServerLoginResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void LoginWithCustomID(ServerModels::LoginWithCustomIDRequest& request, const ProcessApiCallback<ServerModels::ServerLoginResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void LoginWithIOSDeviceID(ServerModels::LoginWithIOSDeviceIDRequest& request, const ProcessApiCallback<ServerModels::ServerLoginResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void LoginWithPSN(ServerModels::LoginWithPSNRequest& request, const ProcessApiCallback<ServerModels::ServerLoginResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -166,6 +168,7 @@ namespace PlayFab
         void SetTitleInternalData(ServerModels::SetTitleDataRequest& request, const ProcessApiCallback<ServerModels::SetTitleDataResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void SubtractCharacterVirtualCurrency(ServerModels::SubtractCharacterVirtualCurrencyRequest& request, const ProcessApiCallback<ServerModels::ModifyCharacterVirtualCurrencyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void SubtractUserVirtualCurrency(ServerModels::SubtractUserVirtualCurrencyRequest& request, const ProcessApiCallback<ServerModels::ModifyUserVirtualCurrencyResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void UnlinkBattleNetAccount(ServerModels::UnlinkBattleNetAccountRequest& request, const ProcessApiCallback<ServerModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UnlinkNintendoServiceAccount(ServerModels::UnlinkNintendoServiceAccountRequest& request, const ProcessApiCallback<ServerModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UnlinkNintendoSwitchDeviceId(ServerModels::UnlinkNintendoSwitchDeviceIdRequest& request, const ProcessApiCallback<ServerModels::UnlinkNintendoSwitchDeviceIdResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UnlinkPSNAccount(ServerModels::UnlinkPSNAccountRequest& request, const ProcessApiCallback<ServerModels::UnlinkPSNAccountResult> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -271,6 +274,7 @@ namespace PlayFab
         void OnGrantItemsToCharacterResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnGrantItemsToUserResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnGrantItemsToUsersResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnLinkBattleNetAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnLinkNintendoServiceAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnLinkNintendoServiceAccountSubjectResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnLinkNintendoSwitchDeviceIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -281,6 +285,7 @@ namespace PlayFab
         void OnLinkXboxAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnListPlayerCustomPropertiesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnLoginWithAndroidDeviceIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnLoginWithBattleNetResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnLoginWithCustomIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnLoginWithIOSDeviceIDResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnLoginWithPSNResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
@@ -314,6 +319,7 @@ namespace PlayFab
         void OnSetTitleInternalDataResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnSubtractCharacterVirtualCurrencyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnSubtractUserVirtualCurrencyResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnUnlinkBattleNetAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUnlinkNintendoServiceAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUnlinkNintendoSwitchDeviceIdResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUnlinkPSNAccountResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
