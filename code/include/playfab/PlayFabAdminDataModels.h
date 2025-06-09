@@ -5804,6 +5804,9 @@ namespace PlayFab
             GenericErrorCodesGameSaveServiceNotEnabledForTitle,
             GenericErrorCodesGameSaveServiceOnboardingPending,
             GenericErrorCodesGameSaveManifestNotEligibleAsConflictingVersion,
+            GenericErrorCodesGameSaveServiceUnavailable,
+            GenericErrorCodesGameSaveConflict,
+            GenericErrorCodesGameSaveManifestNotEligibleForRollback,
             GenericErrorCodesStateShareForbidden,
             GenericErrorCodesStateShareTitleNotInFlight,
             GenericErrorCodesStateShareStateNotFound,
@@ -5821,7 +5824,8 @@ namespace PlayFab
             GenericErrorCodesVersionConfigurationCannotBeSpecifiedForLinkedStat,
             GenericErrorCodesVersionConfigurationIsRequired,
             GenericErrorCodesInvalidEntityTypeForAggregation,
-            GenericErrorCodesMultiLevelAggregationNotAllowed
+            GenericErrorCodesMultiLevelAggregationNotAllowed,
+            GenericErrorCodesAggregationTypeNotAllowedForLinkedStat
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -10331,6 +10335,21 @@ namespace PlayFab
                 output = Json::Value("GameSaveManifestNotEligibleAsConflictingVersion");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveServiceUnavailable)
+            {
+                output = Json::Value("GameSaveServiceUnavailable");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveConflict)
+            {
+                output = Json::Value("GameSaveConflict");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveManifestNotEligibleForRollback)
+            {
+                output = Json::Value("GameSaveManifestNotEligibleForRollback");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesStateShareForbidden)
             {
                 output = Json::Value("StateShareForbidden");
@@ -10419,6 +10438,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesMultiLevelAggregationNotAllowed)
             {
                 output = Json::Value("MultiLevelAggregationNotAllowed");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAggregationTypeNotAllowedForLinkedStat)
+            {
+                output = Json::Value("AggregationTypeNotAllowedForLinkedStat");
                 return;
             }
         }
@@ -14934,6 +14958,21 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesGameSaveManifestNotEligibleAsConflictingVersion;
                 return;
             }
+            if (inputStr == "GameSaveServiceUnavailable")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveServiceUnavailable;
+                return;
+            }
+            if (inputStr == "GameSaveConflict")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveConflict;
+                return;
+            }
+            if (inputStr == "GameSaveManifestNotEligibleForRollback")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveManifestNotEligibleForRollback;
+                return;
+            }
             if (inputStr == "StateShareForbidden")
             {
                 output = GenericErrorCodes::GenericErrorCodesStateShareForbidden;
@@ -15022,6 +15061,11 @@ namespace PlayFab
             if (inputStr == "MultiLevelAggregationNotAllowed")
             {
                 output = GenericErrorCodes::GenericErrorCodesMultiLevelAggregationNotAllowed;
+                return;
+            }
+            if (inputStr == "AggregationTypeNotAllowedForLinkedStat")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAggregationTypeNotAllowedForLinkedStat;
                 return;
             }
         }

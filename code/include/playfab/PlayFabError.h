@@ -912,6 +912,9 @@ namespace PlayFab
         PlayFabErrorGameSaveServiceNotEnabledForTitle = 20324,
         PlayFabErrorGameSaveServiceOnboardingPending = 20325,
         PlayFabErrorGameSaveManifestNotEligibleAsConflictingVersion = 20326,
+        PlayFabErrorGameSaveServiceUnavailable = 20327,
+        PlayFabErrorGameSaveConflict = 20328,
+        PlayFabErrorGameSaveManifestNotEligibleForRollback = 20329,
         PlayFabErrorStateShareForbidden = 21000,
         PlayFabErrorStateShareTitleNotInFlight = 21001,
         PlayFabErrorStateShareStateNotFound = 21002,
@@ -930,6 +933,7 @@ namespace PlayFab
         PlayFabErrorVersionConfigurationIsRequired = 23005,
         PlayFabErrorInvalidEntityTypeForAggregation = 23006,
         PlayFabErrorMultiLevelAggregationNotAllowed = 23007,
+        PlayFabErrorAggregationTypeNotAllowedForLinkedStat = 23008,
     };
 
     /// <summary>

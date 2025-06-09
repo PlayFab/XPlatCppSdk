@@ -15277,12 +15277,14 @@ namespace PlayFab
         struct LinkFacebookAccountRequest : public PlayFabRequestCommon
         {
             std::string AccessToken;
+            std::string AuthenticationToken;
             std::map<std::string, std::string> CustomTags;
             Boxed<bool> ForceLink;
 
             LinkFacebookAccountRequest() :
                 PlayFabRequestCommon(),
                 AccessToken(),
+                AuthenticationToken(),
                 CustomTags(),
                 ForceLink()
             {}
@@ -15290,6 +15292,7 @@ namespace PlayFab
             LinkFacebookAccountRequest(const LinkFacebookAccountRequest& src) :
                 PlayFabRequestCommon(),
                 AccessToken(src.AccessToken),
+                AuthenticationToken(src.AuthenticationToken),
                 CustomTags(src.CustomTags),
                 ForceLink(src.ForceLink)
             {}
@@ -15299,6 +15302,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["AccessToken"], AccessToken);
+                FromJsonUtilS(input["AuthenticationToken"], AuthenticationToken);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilP(input["ForceLink"], ForceLink);
             }
@@ -15307,6 +15311,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_AccessToken; ToJsonUtilS(AccessToken, each_AccessToken); output["AccessToken"] = each_AccessToken;
+                Json::Value each_AuthenticationToken; ToJsonUtilS(AuthenticationToken, each_AuthenticationToken); output["AuthenticationToken"] = each_AuthenticationToken;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_ForceLink; ToJsonUtilP(ForceLink, each_ForceLink); output["ForceLink"] = each_ForceLink;
                 return output;
