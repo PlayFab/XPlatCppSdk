@@ -7054,6 +7054,35 @@ namespace PlayFab
             }
         };
 
+        struct TransactionClawbackDetails : public PlayFabBaseModel
+        {
+            std::string TransactionIdClawedback;
+
+            TransactionClawbackDetails() :
+                PlayFabBaseModel(),
+                TransactionIdClawedback()
+            {}
+
+            TransactionClawbackDetails(const TransactionClawbackDetails& src) :
+                PlayFabBaseModel(),
+                TransactionIdClawedback(src.TransactionIdClawedback)
+            {}
+
+            ~TransactionClawbackDetails() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["TransactionIdClawedback"], TransactionIdClawedback);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_TransactionIdClawedback; ToJsonUtilS(TransactionIdClawedback, each_TransactionIdClawedback); output["TransactionIdClawedback"] = each_TransactionIdClawedback;
+                return output;
+            }
+        };
+
         struct TransactionOperation : public PlayFabBaseModel
         {
             Boxed<Int32> Amount;
@@ -7238,6 +7267,7 @@ namespace PlayFab
         struct Transaction : public PlayFabBaseModel
         {
             std::string ApiName;
+            Boxed<TransactionClawbackDetails> ClawbackDetails;
             std::string ItemType;
             std::list<TransactionOperation> Operations;
             std::string OperationType;
@@ -7250,6 +7280,7 @@ namespace PlayFab
             Transaction() :
                 PlayFabBaseModel(),
                 ApiName(),
+                ClawbackDetails(),
                 ItemType(),
                 Operations(),
                 OperationType(),
@@ -7263,6 +7294,7 @@ namespace PlayFab
             Transaction(const Transaction& src) :
                 PlayFabBaseModel(),
                 ApiName(src.ApiName),
+                ClawbackDetails(src.ClawbackDetails),
                 ItemType(src.ItemType),
                 Operations(src.Operations),
                 OperationType(src.OperationType),
@@ -7278,6 +7310,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["ApiName"], ApiName);
+                FromJsonUtilO(input["ClawbackDetails"], ClawbackDetails);
                 FromJsonUtilS(input["ItemType"], ItemType);
                 FromJsonUtilO(input["Operations"], Operations);
                 FromJsonUtilS(input["OperationType"], OperationType);
@@ -7292,6 +7325,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_ApiName; ToJsonUtilS(ApiName, each_ApiName); output["ApiName"] = each_ApiName;
+                Json::Value each_ClawbackDetails; ToJsonUtilO(ClawbackDetails, each_ClawbackDetails); output["ClawbackDetails"] = each_ClawbackDetails;
                 Json::Value each_ItemType; ToJsonUtilS(ItemType, each_ItemType); output["ItemType"] = each_ItemType;
                 Json::Value each_Operations; ToJsonUtilO(Operations, each_Operations); output["Operations"] = each_Operations;
                 Json::Value each_OperationType; ToJsonUtilS(OperationType, each_OperationType); output["OperationType"] = each_OperationType;

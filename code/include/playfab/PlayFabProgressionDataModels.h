@@ -1367,17 +1367,20 @@ namespace PlayFab
         {
             std::map<std::string, std::string> CustomTags;
             std::list<EntityKey> Entities;
+            std::list<std::string> StatisticNames;
 
             GetStatisticsForEntitiesRequest() :
                 PlayFabRequestCommon(),
                 CustomTags(),
-                Entities()
+                Entities(),
+                StatisticNames()
             {}
 
             GetStatisticsForEntitiesRequest(const GetStatisticsForEntitiesRequest& src) :
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
-                Entities(src.Entities)
+                Entities(src.Entities),
+                StatisticNames(src.StatisticNames)
             {}
 
             ~GetStatisticsForEntitiesRequest() = default;
@@ -1386,6 +1389,7 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["Entities"], Entities);
+                FromJsonUtilS(input["StatisticNames"], StatisticNames);
             }
 
             Json::Value ToJson() const override
@@ -1393,6 +1397,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Entities; ToJsonUtilO(Entities, each_Entities); output["Entities"] = each_Entities;
+                Json::Value each_StatisticNames; ToJsonUtilS(StatisticNames, each_StatisticNames); output["StatisticNames"] = each_StatisticNames;
                 return output;
             }
         };
@@ -1464,17 +1469,20 @@ namespace PlayFab
         {
             std::map<std::string, std::string> CustomTags;
             Boxed<EntityKey> Entity;
+            std::list<std::string> StatisticNames;
 
             GetStatisticsRequest() :
                 PlayFabRequestCommon(),
                 CustomTags(),
-                Entity()
+                Entity(),
+                StatisticNames()
             {}
 
             GetStatisticsRequest(const GetStatisticsRequest& src) :
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
-                Entity(src.Entity)
+                Entity(src.Entity),
+                StatisticNames(src.StatisticNames)
             {}
 
             ~GetStatisticsRequest() = default;
@@ -1483,6 +1491,7 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["Entity"], Entity);
+                FromJsonUtilS(input["StatisticNames"], StatisticNames);
             }
 
             Json::Value ToJson() const override
@@ -1490,6 +1499,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                Json::Value each_StatisticNames; ToJsonUtilS(StatisticNames, each_StatisticNames); output["StatisticNames"] = each_StatisticNames;
                 return output;
             }
         };
