@@ -5822,6 +5822,8 @@ namespace PlayFab
         struct GetDraftItemsRequest : public PlayFabRequestCommon
         {
             std::list<CatalogAlternateId> AlternateIds;
+            std::string ContinuationToken;
+            Boxed<Int32> Count;
             std::map<std::string, std::string> CustomTags;
             Boxed<EntityKey> Entity;
             std::list<std::string> Ids;
@@ -5829,6 +5831,8 @@ namespace PlayFab
             GetDraftItemsRequest() :
                 PlayFabRequestCommon(),
                 AlternateIds(),
+                ContinuationToken(),
+                Count(),
                 CustomTags(),
                 Entity(),
                 Ids()
@@ -5837,6 +5841,8 @@ namespace PlayFab
             GetDraftItemsRequest(const GetDraftItemsRequest& src) :
                 PlayFabRequestCommon(),
                 AlternateIds(src.AlternateIds),
+                ContinuationToken(src.ContinuationToken),
+                Count(src.Count),
                 CustomTags(src.CustomTags),
                 Entity(src.Entity),
                 Ids(src.Ids)
@@ -5847,6 +5853,8 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["AlternateIds"], AlternateIds);
+                FromJsonUtilS(input["ContinuationToken"], ContinuationToken);
+                FromJsonUtilP(input["Count"], Count);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilS(input["Ids"], Ids);
@@ -5856,6 +5864,8 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_AlternateIds; ToJsonUtilO(AlternateIds, each_AlternateIds); output["AlternateIds"] = each_AlternateIds;
+                Json::Value each_ContinuationToken; ToJsonUtilS(ContinuationToken, each_ContinuationToken); output["ContinuationToken"] = each_ContinuationToken;
+                Json::Value each_Count; ToJsonUtilP(Count, each_Count); output["Count"] = each_Count;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
                 Json::Value each_Ids; ToJsonUtilS(Ids, each_Ids); output["Ids"] = each_Ids;
