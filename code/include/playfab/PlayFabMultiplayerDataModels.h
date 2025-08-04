@@ -372,6 +372,7 @@ namespace PlayFab
             AzureVmFamilyDasv4,
             AzureVmFamilyDav4,
             AzureVmFamilyDadsv5,
+            AzureVmFamilyDadsv6,
             AzureVmFamilyEav4,
             AzureVmFamilyEasv4,
             AzureVmFamilyEv4,
@@ -431,6 +432,11 @@ namespace PlayFab
             if (input == AzureVmFamily::AzureVmFamilyDadsv5)
             {
                 output = Json::Value("Dadsv5");
+                return;
+            }
+            if (input == AzureVmFamily::AzureVmFamilyDadsv6)
+            {
+                output = Json::Value("Dadsv6");
                 return;
             }
             if (input == AzureVmFamily::AzureVmFamilyEav4)
@@ -546,6 +552,11 @@ namespace PlayFab
                 output = AzureVmFamily::AzureVmFamilyDadsv5;
                 return;
             }
+            if (inputStr == "Dadsv6")
+            {
+                output = AzureVmFamily::AzureVmFamilyDadsv6;
+                return;
+            }
             if (inputStr == "Eav4")
             {
                 output = AzureVmFamily::AzureVmFamilyEav4;
@@ -648,6 +659,10 @@ namespace PlayFab
             AzureVmSizeStandard_D4ads_v5,
             AzureVmSizeStandard_D8ads_v5,
             AzureVmSizeStandard_D16ads_v5,
+            AzureVmSizeStandard_D2ads_v6,
+            AzureVmSizeStandard_D4ads_v6,
+            AzureVmSizeStandard_D8ads_v6,
+            AzureVmSizeStandard_D16ads_v6,
             AzureVmSizeStandard_E2a_v4,
             AzureVmSizeStandard_E4a_v4,
             AzureVmSizeStandard_E8a_v4,
@@ -881,6 +896,26 @@ namespace PlayFab
             if (input == AzureVmSize::AzureVmSizeStandard_D16ads_v5)
             {
                 output = Json::Value("Standard_D16ads_v5");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D2ads_v6)
+            {
+                output = Json::Value("Standard_D2ads_v6");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D4ads_v6)
+            {
+                output = Json::Value("Standard_D4ads_v6");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D8ads_v6)
+            {
+                output = Json::Value("Standard_D8ads_v6");
+                return;
+            }
+            if (input == AzureVmSize::AzureVmSizeStandard_D16ads_v6)
+            {
+                output = Json::Value("Standard_D16ads_v6");
                 return;
             }
             if (input == AzureVmSize::AzureVmSizeStandard_E2a_v4)
@@ -1284,6 +1319,26 @@ namespace PlayFab
             if (inputStr == "Standard_D16ads_v5")
             {
                 output = AzureVmSize::AzureVmSizeStandard_D16ads_v5;
+                return;
+            }
+            if (inputStr == "Standard_D2ads_v6")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D2ads_v6;
+                return;
+            }
+            if (inputStr == "Standard_D4ads_v6")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D4ads_v6;
+                return;
+            }
+            if (inputStr == "Standard_D8ads_v6")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D8ads_v6;
+                return;
+            }
+            if (inputStr == "Standard_D16ads_v6")
+            {
+                output = AzureVmSize::AzureVmSizeStandard_D16ads_v6;
                 return;
             }
             if (inputStr == "Standard_E2a_v4")

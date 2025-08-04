@@ -3951,6 +3951,7 @@ namespace PlayFab
             Int32 ExecutionTimeMilliseconds;
             std::string FunctionName;
             Json::Value FunctionResult;
+            Boxed<Int32> FunctionResultSize;
             Boxed<bool> FunctionResultTooLarge;
 
             ExecuteFunctionResult() :
@@ -3959,6 +3960,7 @@ namespace PlayFab
                 ExecutionTimeMilliseconds(),
                 FunctionName(),
                 FunctionResult(),
+                FunctionResultSize(),
                 FunctionResultTooLarge()
             {}
 
@@ -3968,6 +3970,7 @@ namespace PlayFab
                 ExecutionTimeMilliseconds(src.ExecutionTimeMilliseconds),
                 FunctionName(src.FunctionName),
                 FunctionResult(src.FunctionResult),
+                FunctionResultSize(src.FunctionResultSize),
                 FunctionResultTooLarge(src.FunctionResultTooLarge)
             {}
 
@@ -3979,6 +3982,7 @@ namespace PlayFab
                 FromJsonUtilP(input["ExecutionTimeMilliseconds"], ExecutionTimeMilliseconds);
                 FromJsonUtilS(input["FunctionName"], FunctionName);
                 FunctionResult = input["FunctionResult"];
+                FromJsonUtilP(input["FunctionResultSize"], FunctionResultSize);
                 FromJsonUtilP(input["FunctionResultTooLarge"], FunctionResultTooLarge);
             }
 
@@ -3989,6 +3993,7 @@ namespace PlayFab
                 Json::Value each_ExecutionTimeMilliseconds; ToJsonUtilP(ExecutionTimeMilliseconds, each_ExecutionTimeMilliseconds); output["ExecutionTimeMilliseconds"] = each_ExecutionTimeMilliseconds;
                 Json::Value each_FunctionName; ToJsonUtilS(FunctionName, each_FunctionName); output["FunctionName"] = each_FunctionName;
                 output["FunctionResult"] = FunctionResult;
+                Json::Value each_FunctionResultSize; ToJsonUtilP(FunctionResultSize, each_FunctionResultSize); output["FunctionResultSize"] = each_FunctionResultSize;
                 Json::Value each_FunctionResultTooLarge; ToJsonUtilP(FunctionResultTooLarge, each_FunctionResultTooLarge); output["FunctionResultTooLarge"] = each_FunctionResultTooLarge;
                 return output;
             }
