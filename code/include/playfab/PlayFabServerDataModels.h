@@ -5521,6 +5521,7 @@ namespace PlayFab
             GenericErrorCodesInvalidReportName,
             GenericErrorCodesResourceNotModified,
             GenericErrorCodesStudioCreationLimitExceeded,
+            GenericErrorCodesStudioDeletionInitiated,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5849,7 +5850,8 @@ namespace PlayFab
             GenericErrorCodesVersionConfigurationIsRequired,
             GenericErrorCodesInvalidEntityTypeForAggregation,
             GenericErrorCodesMultiLevelAggregationNotAllowed,
-            GenericErrorCodesAggregationTypeNotAllowedForLinkedStat
+            GenericErrorCodesAggregationTypeNotAllowedForLinkedStat,
+            GenericErrorCodesStoreMetricsRequestInvalidInput
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -8824,6 +8826,11 @@ namespace PlayFab
                 output = Json::Value("StudioCreationLimitExceeded");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesStudioDeletionInitiated)
+            {
+                output = Json::Value("StudioDeletionInitiated");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
             {
                 output = Json::Value("MatchmakingEntityInvalid");
@@ -10467,6 +10474,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesAggregationTypeNotAllowedForLinkedStat)
             {
                 output = Json::Value("AggregationTypeNotAllowedForLinkedStat");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStoreMetricsRequestInvalidInput)
+            {
+                output = Json::Value("StoreMetricsRequestInvalidInput");
                 return;
             }
         }
@@ -13447,6 +13459,11 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesStudioCreationLimitExceeded;
                 return;
             }
+            if (inputStr == "StudioDeletionInitiated")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStudioDeletionInitiated;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -15090,6 +15107,11 @@ namespace PlayFab
             if (inputStr == "AggregationTypeNotAllowedForLinkedStat")
             {
                 output = GenericErrorCodes::GenericErrorCodesAggregationTypeNotAllowedForLinkedStat;
+                return;
+            }
+            if (inputStr == "StoreMetricsRequestInvalidInput")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStoreMetricsRequestInvalidInput;
                 return;
             }
         }

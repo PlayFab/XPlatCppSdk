@@ -7278,6 +7278,7 @@ namespace PlayFab
         {
             std::string ApiName;
             Boxed<TransactionClawbackDetails> ClawbackDetails;
+            std::map<std::string, std::string> CustomTags;
             std::string ItemType;
             std::list<TransactionOperation> Operations;
             std::string OperationType;
@@ -7291,6 +7292,7 @@ namespace PlayFab
                 PlayFabBaseModel(),
                 ApiName(),
                 ClawbackDetails(),
+                CustomTags(),
                 ItemType(),
                 Operations(),
                 OperationType(),
@@ -7305,6 +7307,7 @@ namespace PlayFab
                 PlayFabBaseModel(),
                 ApiName(src.ApiName),
                 ClawbackDetails(src.ClawbackDetails),
+                CustomTags(src.CustomTags),
                 ItemType(src.ItemType),
                 Operations(src.Operations),
                 OperationType(src.OperationType),
@@ -7321,6 +7324,7 @@ namespace PlayFab
             {
                 FromJsonUtilS(input["ApiName"], ApiName);
                 FromJsonUtilO(input["ClawbackDetails"], ClawbackDetails);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["ItemType"], ItemType);
                 FromJsonUtilO(input["Operations"], Operations);
                 FromJsonUtilS(input["OperationType"], OperationType);
@@ -7336,6 +7340,7 @@ namespace PlayFab
                 Json::Value output;
                 Json::Value each_ApiName; ToJsonUtilS(ApiName, each_ApiName); output["ApiName"] = each_ApiName;
                 Json::Value each_ClawbackDetails; ToJsonUtilO(ClawbackDetails, each_ClawbackDetails); output["ClawbackDetails"] = each_ClawbackDetails;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_ItemType; ToJsonUtilS(ItemType, each_ItemType); output["ItemType"] = each_ItemType;
                 Json::Value each_Operations; ToJsonUtilO(Operations, each_Operations); output["Operations"] = each_Operations;
                 Json::Value each_OperationType; ToJsonUtilS(OperationType, each_OperationType); output["OperationType"] = each_OperationType;

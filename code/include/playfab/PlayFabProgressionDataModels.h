@@ -383,7 +383,7 @@ namespace PlayFab
             std::string EntityType;
             std::string Name;
             Int32 SizeLimit;
-            VersionConfiguration pfVersionConfiguration;
+            Boxed<VersionConfiguration> pfVersionConfiguration;
 
             CreateLeaderboardDefinitionRequest() :
                 PlayFabRequestCommon(),
