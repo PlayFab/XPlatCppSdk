@@ -7,9 +7,9 @@ namespace PlayFab
     // Control whether all callbacks are threaded or whether the user manually controls callback timing from their main-thread
     // Note ANY api call may synchronously throw an exception if the title id is not set
     bool PlayFabSettings::threadedCallbacks = false;
-    const std::string PlayFabSettings::sdkVersion = "3.162.250801";
+    const std::string PlayFabSettings::sdkVersion = "3.163.250815";
     const std::string PlayFabSettings::buildIdentifier = "adobuild_xplatcppsdk_166";
-    const std::string PlayFabSettings::versionString = "XPlatCppSdk-3.162.250801";
+    const std::string PlayFabSettings::versionString = "XPlatCppSdk-3.163.250815";
     std::string PlayFabSettings::productionEnvironmentURL = ".playfabapi.com";
     
     ErrorCallback PlayFabSettings::globalErrorHandler = nullptr;

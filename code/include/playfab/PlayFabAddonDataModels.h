@@ -47,33 +47,51 @@ namespace PlayFab
 
         struct CreateOrUpdateAppleRequest : public PlayFabRequestCommon
         {
+            Boxed<bool> AllowProduction;
+            Boxed<bool> AllowSandbox;
             std::string AppBundleId;
+            std::string AppId;
             std::string AppSharedSecret;
             std::map<std::string, std::string> CustomTags;
             Boxed<EntityKey> Entity;
             Boxed<bool> ErrorIfExists;
             Boxed<bool> IgnoreExpirationDate;
+            std::string IssuerId;
+            std::string KeyId;
+            std::string PrivateKey;
             Boxed<bool> RequireSecureAuthentication;
 
             CreateOrUpdateAppleRequest() :
                 PlayFabRequestCommon(),
+                AllowProduction(),
+                AllowSandbox(),
                 AppBundleId(),
+                AppId(),
                 AppSharedSecret(),
                 CustomTags(),
                 Entity(),
                 ErrorIfExists(),
                 IgnoreExpirationDate(),
+                IssuerId(),
+                KeyId(),
+                PrivateKey(),
                 RequireSecureAuthentication()
             {}
 
             CreateOrUpdateAppleRequest(const CreateOrUpdateAppleRequest& src) :
                 PlayFabRequestCommon(),
+                AllowProduction(src.AllowProduction),
+                AllowSandbox(src.AllowSandbox),
                 AppBundleId(src.AppBundleId),
+                AppId(src.AppId),
                 AppSharedSecret(src.AppSharedSecret),
                 CustomTags(src.CustomTags),
                 Entity(src.Entity),
                 ErrorIfExists(src.ErrorIfExists),
                 IgnoreExpirationDate(src.IgnoreExpirationDate),
+                IssuerId(src.IssuerId),
+                KeyId(src.KeyId),
+                PrivateKey(src.PrivateKey),
                 RequireSecureAuthentication(src.RequireSecureAuthentication)
             {}
 
@@ -81,24 +99,36 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilP(input["AllowProduction"], AllowProduction);
+                FromJsonUtilP(input["AllowSandbox"], AllowSandbox);
                 FromJsonUtilS(input["AppBundleId"], AppBundleId);
+                FromJsonUtilS(input["AppId"], AppId);
                 FromJsonUtilS(input["AppSharedSecret"], AppSharedSecret);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["Entity"], Entity);
                 FromJsonUtilP(input["ErrorIfExists"], ErrorIfExists);
                 FromJsonUtilP(input["IgnoreExpirationDate"], IgnoreExpirationDate);
+                FromJsonUtilS(input["IssuerId"], IssuerId);
+                FromJsonUtilS(input["KeyId"], KeyId);
+                FromJsonUtilS(input["PrivateKey"], PrivateKey);
                 FromJsonUtilP(input["RequireSecureAuthentication"], RequireSecureAuthentication);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_AllowProduction; ToJsonUtilP(AllowProduction, each_AllowProduction); output["AllowProduction"] = each_AllowProduction;
+                Json::Value each_AllowSandbox; ToJsonUtilP(AllowSandbox, each_AllowSandbox); output["AllowSandbox"] = each_AllowSandbox;
                 Json::Value each_AppBundleId; ToJsonUtilS(AppBundleId, each_AppBundleId); output["AppBundleId"] = each_AppBundleId;
+                Json::Value each_AppId; ToJsonUtilS(AppId, each_AppId); output["AppId"] = each_AppId;
                 Json::Value each_AppSharedSecret; ToJsonUtilS(AppSharedSecret, each_AppSharedSecret); output["AppSharedSecret"] = each_AppSharedSecret;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
                 Json::Value each_ErrorIfExists; ToJsonUtilP(ErrorIfExists, each_ErrorIfExists); output["ErrorIfExists"] = each_ErrorIfExists;
                 Json::Value each_IgnoreExpirationDate; ToJsonUtilP(IgnoreExpirationDate, each_IgnoreExpirationDate); output["IgnoreExpirationDate"] = each_IgnoreExpirationDate;
+                Json::Value each_IssuerId; ToJsonUtilS(IssuerId, each_IssuerId); output["IssuerId"] = each_IssuerId;
+                Json::Value each_KeyId; ToJsonUtilS(KeyId, each_KeyId); output["KeyId"] = each_KeyId;
+                Json::Value each_PrivateKey; ToJsonUtilS(PrivateKey, each_PrivateKey); output["PrivateKey"] = each_PrivateKey;
                 Json::Value each_RequireSecureAuthentication; ToJsonUtilP(RequireSecureAuthentication, each_RequireSecureAuthentication); output["RequireSecureAuthentication"] = each_RequireSecureAuthentication;
                 return output;
             }

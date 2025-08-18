@@ -10,6 +10,55 @@ namespace PlayFab
     namespace ProgressionModels
     {
         // Progression Enums
+        enum class EventType
+        {
+            EventTypeNone,
+            EventTypeTelemetry,
+            EventTypePlayStream
+        };
+
+        inline void ToJsonEnum(const EventType input, Json::Value& output)
+        {
+            if (input == EventType::EventTypeNone)
+            {
+                output = Json::Value("None");
+                return;
+            }
+            if (input == EventType::EventTypeTelemetry)
+            {
+                output = Json::Value("Telemetry");
+                return;
+            }
+            if (input == EventType::EventTypePlayStream)
+            {
+                output = Json::Value("PlayStream");
+                return;
+            }
+        }
+        inline void FromJsonEnum(const Json::Value& input, EventType& output)
+        {
+            if (!input.isString())
+            {
+                return;
+            }
+            const std::string& inputStr = input.asString();
+            if (inputStr == "None")
+            {
+                output = EventType::EventTypeNone;
+                return;
+            }
+            if (inputStr == "Telemetry")
+            {
+                output = EventType::EventTypeTelemetry;
+                return;
+            }
+            if (inputStr == "PlayStream")
+            {
+                output = EventType::EventTypePlayStream;
+                return;
+            }
+        }
+
         enum class ExternalFriendSources
         {
             ExternalFriendSourcesNone = 0x0,
@@ -342,6 +391,103 @@ namespace PlayFab
             }
         };
 
+        struct LeaderboardEntityRankOnVersionEndConfig : public PlayFabBaseModel
+        {
+            EventType pfEventType;
+            Int32 RankLimit;
+
+            LeaderboardEntityRankOnVersionEndConfig() :
+                PlayFabBaseModel(),
+                pfEventType(),
+                RankLimit()
+            {}
+
+            LeaderboardEntityRankOnVersionEndConfig(const LeaderboardEntityRankOnVersionEndConfig& src) :
+                PlayFabBaseModel(),
+                pfEventType(src.pfEventType),
+                RankLimit(src.RankLimit)
+            {}
+
+            ~LeaderboardEntityRankOnVersionEndConfig() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonEnum(input["EventType"], pfEventType);
+                FromJsonUtilP(input["RankLimit"], RankLimit);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_pfEventType; ToJsonEnum(pfEventType, each_pfEventType); output["EventType"] = each_pfEventType;
+                Json::Value each_RankLimit; ToJsonUtilP(RankLimit, each_RankLimit); output["RankLimit"] = each_RankLimit;
+                return output;
+            }
+        };
+
+        struct LeaderboardVersionEndConfig : public PlayFabBaseModel
+        {
+            EventType pfEventType;
+
+            LeaderboardVersionEndConfig() :
+                PlayFabBaseModel(),
+                pfEventType()
+            {}
+
+            LeaderboardVersionEndConfig(const LeaderboardVersionEndConfig& src) :
+                PlayFabBaseModel(),
+                pfEventType(src.pfEventType)
+            {}
+
+            ~LeaderboardVersionEndConfig() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonEnum(input["EventType"], pfEventType);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_pfEventType; ToJsonEnum(pfEventType, each_pfEventType); output["EventType"] = each_pfEventType;
+                return output;
+            }
+        };
+
+        struct LeaderboardEventEmissionConfig : public PlayFabBaseModel
+        {
+            Boxed<LeaderboardEntityRankOnVersionEndConfig> EntityRankOnVersionEndConfig;
+            Boxed<LeaderboardVersionEndConfig> VersionEndConfig;
+
+            LeaderboardEventEmissionConfig() :
+                PlayFabBaseModel(),
+                EntityRankOnVersionEndConfig(),
+                VersionEndConfig()
+            {}
+
+            LeaderboardEventEmissionConfig(const LeaderboardEventEmissionConfig& src) :
+                PlayFabBaseModel(),
+                EntityRankOnVersionEndConfig(src.EntityRankOnVersionEndConfig),
+                VersionEndConfig(src.VersionEndConfig)
+            {}
+
+            ~LeaderboardEventEmissionConfig() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["EntityRankOnVersionEndConfig"], EntityRankOnVersionEndConfig);
+                FromJsonUtilO(input["VersionEndConfig"], VersionEndConfig);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_EntityRankOnVersionEndConfig; ToJsonUtilO(EntityRankOnVersionEndConfig, each_EntityRankOnVersionEndConfig); output["EntityRankOnVersionEndConfig"] = each_EntityRankOnVersionEndConfig;
+                Json::Value each_VersionEndConfig; ToJsonUtilO(VersionEndConfig, each_VersionEndConfig); output["VersionEndConfig"] = each_VersionEndConfig;
+                return output;
+            }
+        };
+
         struct VersionConfiguration : public PlayFabBaseModel
         {
             Int32 MaxQueryableVersions;
@@ -381,6 +527,7 @@ namespace PlayFab
             std::list<LeaderboardColumn> Columns;
             std::map<std::string, std::string> CustomTags;
             std::string EntityType;
+            Boxed<LeaderboardEventEmissionConfig> EventEmissionConfig;
             std::string Name;
             Int32 SizeLimit;
             Boxed<VersionConfiguration> pfVersionConfiguration;
@@ -390,6 +537,7 @@ namespace PlayFab
                 Columns(),
                 CustomTags(),
                 EntityType(),
+                EventEmissionConfig(),
                 Name(),
                 SizeLimit(),
                 pfVersionConfiguration()
@@ -400,6 +548,7 @@ namespace PlayFab
                 Columns(src.Columns),
                 CustomTags(src.CustomTags),
                 EntityType(src.EntityType),
+                EventEmissionConfig(src.EventEmissionConfig),
                 Name(src.Name),
                 SizeLimit(src.SizeLimit),
                 pfVersionConfiguration(src.pfVersionConfiguration)
@@ -412,6 +561,7 @@ namespace PlayFab
                 FromJsonUtilO(input["Columns"], Columns);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["EntityType"], EntityType);
+                FromJsonUtilO(input["EventEmissionConfig"], EventEmissionConfig);
                 FromJsonUtilS(input["Name"], Name);
                 FromJsonUtilP(input["SizeLimit"], SizeLimit);
                 FromJsonUtilO(input["VersionConfiguration"], pfVersionConfiguration);
@@ -423,6 +573,7 @@ namespace PlayFab
                 Json::Value each_Columns; ToJsonUtilO(Columns, each_Columns); output["Columns"] = each_Columns;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_EntityType; ToJsonUtilS(EntityType, each_EntityType); output["EntityType"] = each_EntityType;
+                Json::Value each_EventEmissionConfig; ToJsonUtilO(EventEmissionConfig, each_EventEmissionConfig); output["EventEmissionConfig"] = each_EventEmissionConfig;
                 Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
                 Json::Value each_SizeLimit; ToJsonUtilP(SizeLimit, each_SizeLimit); output["SizeLimit"] = each_SizeLimit;
                 Json::Value each_pfVersionConfiguration; ToJsonUtilO(pfVersionConfiguration, each_pfVersionConfiguration); output["VersionConfiguration"] = each_pfVersionConfiguration;
@@ -464,12 +615,71 @@ namespace PlayFab
             }
         };
 
+        struct StatisticsUpdateEventConfig : public PlayFabBaseModel
+        {
+            EventType pfEventType;
+
+            StatisticsUpdateEventConfig() :
+                PlayFabBaseModel(),
+                pfEventType()
+            {}
+
+            StatisticsUpdateEventConfig(const StatisticsUpdateEventConfig& src) :
+                PlayFabBaseModel(),
+                pfEventType(src.pfEventType)
+            {}
+
+            ~StatisticsUpdateEventConfig() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonEnum(input["EventType"], pfEventType);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_pfEventType; ToJsonEnum(pfEventType, each_pfEventType); output["EventType"] = each_pfEventType;
+                return output;
+            }
+        };
+
+        struct StatisticsEventEmissionConfig : public PlayFabBaseModel
+        {
+            Boxed<StatisticsUpdateEventConfig> UpdateEventConfig;
+
+            StatisticsEventEmissionConfig() :
+                PlayFabBaseModel(),
+                UpdateEventConfig()
+            {}
+
+            StatisticsEventEmissionConfig(const StatisticsEventEmissionConfig& src) :
+                PlayFabBaseModel(),
+                UpdateEventConfig(src.UpdateEventConfig)
+            {}
+
+            ~StatisticsEventEmissionConfig() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["UpdateEventConfig"], UpdateEventConfig);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_UpdateEventConfig; ToJsonUtilO(UpdateEventConfig, each_UpdateEventConfig); output["UpdateEventConfig"] = each_UpdateEventConfig;
+                return output;
+            }
+        };
+
         struct CreateStatisticDefinitionRequest : public PlayFabRequestCommon
         {
             std::list<std::string> AggregationSources;
             std::list<StatisticColumn> Columns;
             std::map<std::string, std::string> CustomTags;
             std::string EntityType;
+            Boxed<StatisticsEventEmissionConfig> EventEmissionConfig;
             std::string Name;
             Boxed<VersionConfiguration> pfVersionConfiguration;
 
@@ -479,6 +689,7 @@ namespace PlayFab
                 Columns(),
                 CustomTags(),
                 EntityType(),
+                EventEmissionConfig(),
                 Name(),
                 pfVersionConfiguration()
             {}
@@ -489,6 +700,7 @@ namespace PlayFab
                 Columns(src.Columns),
                 CustomTags(src.CustomTags),
                 EntityType(src.EntityType),
+                EventEmissionConfig(src.EventEmissionConfig),
                 Name(src.Name),
                 pfVersionConfiguration(src.pfVersionConfiguration)
             {}
@@ -501,6 +713,7 @@ namespace PlayFab
                 FromJsonUtilO(input["Columns"], Columns);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilS(input["EntityType"], EntityType);
+                FromJsonUtilO(input["EventEmissionConfig"], EventEmissionConfig);
                 FromJsonUtilS(input["Name"], Name);
                 FromJsonUtilO(input["VersionConfiguration"], pfVersionConfiguration);
             }
@@ -512,6 +725,7 @@ namespace PlayFab
                 Json::Value each_Columns; ToJsonUtilO(Columns, each_Columns); output["Columns"] = each_Columns;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_EntityType; ToJsonUtilS(EntityType, each_EntityType); output["EntityType"] = each_EntityType;
+                Json::Value each_EventEmissionConfig; ToJsonUtilO(EventEmissionConfig, each_EventEmissionConfig); output["EventEmissionConfig"] = each_EventEmissionConfig;
                 Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
                 Json::Value each_pfVersionConfiguration; ToJsonUtilO(pfVersionConfiguration, each_pfVersionConfiguration); output["VersionConfiguration"] = each_pfVersionConfiguration;
                 return output;
@@ -1152,6 +1366,7 @@ namespace PlayFab
             std::list<LeaderboardColumn> Columns;
             time_t Created;
             std::string EntityType;
+            Boxed<LeaderboardEventEmissionConfig> EventEmissionConfig;
             Boxed<time_t> LastResetTime;
             std::string Name;
             Int32 SizeLimit;
@@ -1163,6 +1378,7 @@ namespace PlayFab
                 Columns(),
                 Created(),
                 EntityType(),
+                EventEmissionConfig(),
                 LastResetTime(),
                 Name(),
                 SizeLimit(),
@@ -1175,6 +1391,7 @@ namespace PlayFab
                 Columns(src.Columns),
                 Created(src.Created),
                 EntityType(src.EntityType),
+                EventEmissionConfig(src.EventEmissionConfig),
                 LastResetTime(src.LastResetTime),
                 Name(src.Name),
                 SizeLimit(src.SizeLimit),
@@ -1189,6 +1406,7 @@ namespace PlayFab
                 FromJsonUtilO(input["Columns"], Columns);
                 FromJsonUtilT(input["Created"], Created);
                 FromJsonUtilS(input["EntityType"], EntityType);
+                FromJsonUtilO(input["EventEmissionConfig"], EventEmissionConfig);
                 FromJsonUtilT(input["LastResetTime"], LastResetTime);
                 FromJsonUtilS(input["Name"], Name);
                 FromJsonUtilP(input["SizeLimit"], SizeLimit);
@@ -1202,6 +1420,7 @@ namespace PlayFab
                 Json::Value each_Columns; ToJsonUtilO(Columns, each_Columns); output["Columns"] = each_Columns;
                 Json::Value each_Created; ToJsonUtilT(Created, each_Created); output["Created"] = each_Created;
                 Json::Value each_EntityType; ToJsonUtilS(EntityType, each_EntityType); output["EntityType"] = each_EntityType;
+                Json::Value each_EventEmissionConfig; ToJsonUtilO(EventEmissionConfig, each_EventEmissionConfig); output["EventEmissionConfig"] = each_EventEmissionConfig;
                 Json::Value each_LastResetTime; ToJsonUtilT(LastResetTime, each_LastResetTime); output["LastResetTime"] = each_LastResetTime;
                 Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
                 Json::Value each_SizeLimit; ToJsonUtilP(SizeLimit, each_SizeLimit); output["SizeLimit"] = each_SizeLimit;
@@ -1296,6 +1515,7 @@ namespace PlayFab
             std::list<StatisticColumn> Columns;
             time_t Created;
             std::string EntityType;
+            Boxed<StatisticsEventEmissionConfig> EventEmissionConfig;
             Boxed<time_t> LastResetTime;
             std::list<std::string> LinkedLeaderboardNames;
             std::string Name;
@@ -1309,6 +1529,7 @@ namespace PlayFab
                 Columns(),
                 Created(),
                 EntityType(),
+                EventEmissionConfig(),
                 LastResetTime(),
                 LinkedLeaderboardNames(),
                 Name(),
@@ -1323,6 +1544,7 @@ namespace PlayFab
                 Columns(src.Columns),
                 Created(src.Created),
                 EntityType(src.EntityType),
+                EventEmissionConfig(src.EventEmissionConfig),
                 LastResetTime(src.LastResetTime),
                 LinkedLeaderboardNames(src.LinkedLeaderboardNames),
                 Name(src.Name),
@@ -1339,6 +1561,7 @@ namespace PlayFab
                 FromJsonUtilO(input["Columns"], Columns);
                 FromJsonUtilT(input["Created"], Created);
                 FromJsonUtilS(input["EntityType"], EntityType);
+                FromJsonUtilO(input["EventEmissionConfig"], EventEmissionConfig);
                 FromJsonUtilT(input["LastResetTime"], LastResetTime);
                 FromJsonUtilS(input["LinkedLeaderboardNames"], LinkedLeaderboardNames);
                 FromJsonUtilS(input["Name"], Name);
@@ -1354,6 +1577,7 @@ namespace PlayFab
                 Json::Value each_Columns; ToJsonUtilO(Columns, each_Columns); output["Columns"] = each_Columns;
                 Json::Value each_Created; ToJsonUtilT(Created, each_Created); output["Created"] = each_Created;
                 Json::Value each_EntityType; ToJsonUtilS(EntityType, each_EntityType); output["EntityType"] = each_EntityType;
+                Json::Value each_EventEmissionConfig; ToJsonUtilO(EventEmissionConfig, each_EventEmissionConfig); output["EventEmissionConfig"] = each_EventEmissionConfig;
                 Json::Value each_LastResetTime; ToJsonUtilT(LastResetTime, each_LastResetTime); output["LastResetTime"] = each_LastResetTime;
                 Json::Value each_LinkedLeaderboardNames; ToJsonUtilS(LinkedLeaderboardNames, each_LinkedLeaderboardNames); output["LinkedLeaderboardNames"] = each_LinkedLeaderboardNames;
                 Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
@@ -1674,6 +1898,7 @@ namespace PlayFab
             std::list<LeaderboardColumn> Columns;
             time_t Created;
             std::string EntityType;
+            Boxed<LeaderboardEventEmissionConfig> EventEmissionConfig;
             Boxed<time_t> LastResetTime;
             std::string Name;
             Int32 SizeLimit;
@@ -1685,6 +1910,7 @@ namespace PlayFab
                 Columns(),
                 Created(),
                 EntityType(),
+                EventEmissionConfig(),
                 LastResetTime(),
                 Name(),
                 SizeLimit(),
@@ -1697,6 +1923,7 @@ namespace PlayFab
                 Columns(src.Columns),
                 Created(src.Created),
                 EntityType(src.EntityType),
+                EventEmissionConfig(src.EventEmissionConfig),
                 LastResetTime(src.LastResetTime),
                 Name(src.Name),
                 SizeLimit(src.SizeLimit),
@@ -1711,6 +1938,7 @@ namespace PlayFab
                 FromJsonUtilO(input["Columns"], Columns);
                 FromJsonUtilT(input["Created"], Created);
                 FromJsonUtilS(input["EntityType"], EntityType);
+                FromJsonUtilO(input["EventEmissionConfig"], EventEmissionConfig);
                 FromJsonUtilT(input["LastResetTime"], LastResetTime);
                 FromJsonUtilS(input["Name"], Name);
                 FromJsonUtilP(input["SizeLimit"], SizeLimit);
@@ -1724,6 +1952,7 @@ namespace PlayFab
                 Json::Value each_Columns; ToJsonUtilO(Columns, each_Columns); output["Columns"] = each_Columns;
                 Json::Value each_Created; ToJsonUtilT(Created, each_Created); output["Created"] = each_Created;
                 Json::Value each_EntityType; ToJsonUtilS(EntityType, each_EntityType); output["EntityType"] = each_EntityType;
+                Json::Value each_EventEmissionConfig; ToJsonUtilO(EventEmissionConfig, each_EventEmissionConfig); output["EventEmissionConfig"] = each_EventEmissionConfig;
                 Json::Value each_LastResetTime; ToJsonUtilT(LastResetTime, each_LastResetTime); output["LastResetTime"] = each_LastResetTime;
                 Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
                 Json::Value each_SizeLimit; ToJsonUtilP(SizeLimit, each_SizeLimit); output["SizeLimit"] = each_SizeLimit;
@@ -1866,6 +2095,7 @@ namespace PlayFab
             std::list<StatisticColumn> Columns;
             time_t Created;
             std::string EntityType;
+            Boxed<StatisticsEventEmissionConfig> EventEmissionConfig;
             Boxed<time_t> LastResetTime;
             std::list<std::string> LinkedLeaderboardNames;
             std::string Name;
@@ -1879,6 +2109,7 @@ namespace PlayFab
                 Columns(),
                 Created(),
                 EntityType(),
+                EventEmissionConfig(),
                 LastResetTime(),
                 LinkedLeaderboardNames(),
                 Name(),
@@ -1893,6 +2124,7 @@ namespace PlayFab
                 Columns(src.Columns),
                 Created(src.Created),
                 EntityType(src.EntityType),
+                EventEmissionConfig(src.EventEmissionConfig),
                 LastResetTime(src.LastResetTime),
                 LinkedLeaderboardNames(src.LinkedLeaderboardNames),
                 Name(src.Name),
@@ -1909,6 +2141,7 @@ namespace PlayFab
                 FromJsonUtilO(input["Columns"], Columns);
                 FromJsonUtilT(input["Created"], Created);
                 FromJsonUtilS(input["EntityType"], EntityType);
+                FromJsonUtilO(input["EventEmissionConfig"], EventEmissionConfig);
                 FromJsonUtilT(input["LastResetTime"], LastResetTime);
                 FromJsonUtilS(input["LinkedLeaderboardNames"], LinkedLeaderboardNames);
                 FromJsonUtilS(input["Name"], Name);
@@ -1924,6 +2157,7 @@ namespace PlayFab
                 Json::Value each_Columns; ToJsonUtilO(Columns, each_Columns); output["Columns"] = each_Columns;
                 Json::Value each_Created; ToJsonUtilT(Created, each_Created); output["Created"] = each_Created;
                 Json::Value each_EntityType; ToJsonUtilS(EntityType, each_EntityType); output["EntityType"] = each_EntityType;
+                Json::Value each_EventEmissionConfig; ToJsonUtilO(EventEmissionConfig, each_EventEmissionConfig); output["EventEmissionConfig"] = each_EventEmissionConfig;
                 Json::Value each_LastResetTime; ToJsonUtilT(LastResetTime, each_LastResetTime); output["LastResetTime"] = each_LastResetTime;
                 Json::Value each_LinkedLeaderboardNames; ToJsonUtilS(LinkedLeaderboardNames, each_LinkedLeaderboardNames); output["LinkedLeaderboardNames"] = each_LinkedLeaderboardNames;
                 Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
@@ -2053,6 +2287,7 @@ namespace PlayFab
         struct UpdateLeaderboardDefinitionRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
+            Boxed<LeaderboardEventEmissionConfig> EventEmissionConfig;
             std::string Name;
             Boxed<Int32> SizeLimit;
             Boxed<VersionConfiguration> pfVersionConfiguration;
@@ -2060,6 +2295,7 @@ namespace PlayFab
             UpdateLeaderboardDefinitionRequest() :
                 PlayFabRequestCommon(),
                 CustomTags(),
+                EventEmissionConfig(),
                 Name(),
                 SizeLimit(),
                 pfVersionConfiguration()
@@ -2068,6 +2304,7 @@ namespace PlayFab
             UpdateLeaderboardDefinitionRequest(const UpdateLeaderboardDefinitionRequest& src) :
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
+                EventEmissionConfig(src.EventEmissionConfig),
                 Name(src.Name),
                 SizeLimit(src.SizeLimit),
                 pfVersionConfiguration(src.pfVersionConfiguration)
@@ -2078,6 +2315,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilO(input["EventEmissionConfig"], EventEmissionConfig);
                 FromJsonUtilS(input["Name"], Name);
                 FromJsonUtilP(input["SizeLimit"], SizeLimit);
                 FromJsonUtilO(input["VersionConfiguration"], pfVersionConfiguration);
@@ -2087,6 +2325,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_EventEmissionConfig; ToJsonUtilO(EventEmissionConfig, each_EventEmissionConfig); output["EventEmissionConfig"] = each_EventEmissionConfig;
                 Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
                 Json::Value each_SizeLimit; ToJsonUtilP(SizeLimit, each_SizeLimit); output["SizeLimit"] = each_SizeLimit;
                 Json::Value each_pfVersionConfiguration; ToJsonUtilO(pfVersionConfiguration, each_pfVersionConfiguration); output["VersionConfiguration"] = each_pfVersionConfiguration;
@@ -2136,12 +2375,14 @@ namespace PlayFab
         struct UpdateStatisticDefinitionRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
+            Boxed<StatisticsEventEmissionConfig> EventEmissionConfig;
             std::string Name;
             Boxed<VersionConfiguration> pfVersionConfiguration;
 
             UpdateStatisticDefinitionRequest() :
                 PlayFabRequestCommon(),
                 CustomTags(),
+                EventEmissionConfig(),
                 Name(),
                 pfVersionConfiguration()
             {}
@@ -2149,6 +2390,7 @@ namespace PlayFab
             UpdateStatisticDefinitionRequest(const UpdateStatisticDefinitionRequest& src) :
                 PlayFabRequestCommon(),
                 CustomTags(src.CustomTags),
+                EventEmissionConfig(src.EventEmissionConfig),
                 Name(src.Name),
                 pfVersionConfiguration(src.pfVersionConfiguration)
             {}
@@ -2158,6 +2400,7 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilO(input["EventEmissionConfig"], EventEmissionConfig);
                 FromJsonUtilS(input["Name"], Name);
                 FromJsonUtilO(input["VersionConfiguration"], pfVersionConfiguration);
             }
@@ -2166,6 +2409,7 @@ namespace PlayFab
             {
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_EventEmissionConfig; ToJsonUtilO(EventEmissionConfig, each_EventEmissionConfig); output["EventEmissionConfig"] = each_EventEmissionConfig;
                 Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
                 Json::Value each_pfVersionConfiguration; ToJsonUtilO(pfVersionConfiguration, each_pfVersionConfiguration); output["VersionConfiguration"] = each_pfVersionConfiguration;
                 return output;
