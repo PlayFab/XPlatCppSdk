@@ -7154,17 +7154,23 @@ namespace PlayFab
 
         struct TransactionPurchaseDetails : public PlayFabBaseModel
         {
+            std::string ItemFriendlyId;
+            std::string ItemId;
             std::string StoreFriendlyId;
             std::string StoreId;
 
             TransactionPurchaseDetails() :
                 PlayFabBaseModel(),
+                ItemFriendlyId(),
+                ItemId(),
                 StoreFriendlyId(),
                 StoreId()
             {}
 
             TransactionPurchaseDetails(const TransactionPurchaseDetails& src) :
                 PlayFabBaseModel(),
+                ItemFriendlyId(src.ItemFriendlyId),
+                ItemId(src.ItemId),
                 StoreFriendlyId(src.StoreFriendlyId),
                 StoreId(src.StoreId)
             {}
@@ -7173,6 +7179,8 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
+                FromJsonUtilS(input["ItemFriendlyId"], ItemFriendlyId);
+                FromJsonUtilS(input["ItemId"], ItemId);
                 FromJsonUtilS(input["StoreFriendlyId"], StoreFriendlyId);
                 FromJsonUtilS(input["StoreId"], StoreId);
             }
@@ -7180,6 +7188,8 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                Json::Value each_ItemFriendlyId; ToJsonUtilS(ItemFriendlyId, each_ItemFriendlyId); output["ItemFriendlyId"] = each_ItemFriendlyId;
+                Json::Value each_ItemId; ToJsonUtilS(ItemId, each_ItemId); output["ItemId"] = each_ItemId;
                 Json::Value each_StoreFriendlyId; ToJsonUtilS(StoreFriendlyId, each_StoreFriendlyId); output["StoreFriendlyId"] = each_StoreFriendlyId;
                 Json::Value each_StoreId; ToJsonUtilS(StoreId, each_StoreId); output["StoreId"] = each_StoreId;
                 return output;
