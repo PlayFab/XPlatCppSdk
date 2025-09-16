@@ -2245,6 +2245,45 @@ namespace PlayFab
             }
         };
 
+        struct UnlinkAggregationSourceFromStatisticRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            std::string Name;
+            std::string SourceStatisticName;
+
+            UnlinkAggregationSourceFromStatisticRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                Name(),
+                SourceStatisticName()
+            {}
+
+            UnlinkAggregationSourceFromStatisticRequest(const UnlinkAggregationSourceFromStatisticRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                Name(src.Name),
+                SourceStatisticName(src.SourceStatisticName)
+            {}
+
+            ~UnlinkAggregationSourceFromStatisticRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["Name"], Name);
+                FromJsonUtilS(input["SourceStatisticName"], SourceStatisticName);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_Name; ToJsonUtilS(Name, each_Name); output["Name"] = each_Name;
+                Json::Value each_SourceStatisticName; ToJsonUtilS(SourceStatisticName, each_SourceStatisticName); output["SourceStatisticName"] = each_SourceStatisticName;
+                return output;
+            }
+        };
+
         struct UnlinkLeaderboardFromStatisticRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;

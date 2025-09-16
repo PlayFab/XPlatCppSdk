@@ -5522,6 +5522,8 @@ namespace PlayFab
             GenericErrorCodesResourceNotModified,
             GenericErrorCodesStudioCreationLimitExceeded,
             GenericErrorCodesStudioDeletionInitiated,
+            GenericErrorCodesProductDisabledForTitle,
+            GenericErrorCodesPreconditionFailed,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5654,6 +5656,7 @@ namespace PlayFab
             GenericErrorCodesAsyncExportNotFound,
             GenericErrorCodesAsyncExportRateLimitExceeded,
             GenericErrorCodesAnalyticsSegmentCountOverLimit,
+            GenericErrorCodesGetPlayersInSegmentDeprecated,
             GenericErrorCodesSnapshotNotFound,
             GenericErrorCodesInventoryApiNotImplemented,
             GenericErrorCodesInventoryCollectionDeletionDisallowed,
@@ -5851,7 +5854,13 @@ namespace PlayFab
             GenericErrorCodesInvalidEntityTypeForAggregation,
             GenericErrorCodesMultiLevelAggregationNotAllowed,
             GenericErrorCodesAggregationTypeNotAllowedForLinkedStat,
-            GenericErrorCodesStoreMetricsRequestInvalidInput
+            GenericErrorCodesOperationDeniedDueToDefinitionPolicy,
+            GenericErrorCodesStatisticUpdateNotAllowedWhileLinked,
+            GenericErrorCodesUnsupportedEntityType,
+            GenericErrorCodesEntityTypeSpecifiedRequiresAggregationSource,
+            GenericErrorCodesPlayFabErrorEventNotSupportedForEntityType,
+            GenericErrorCodesStoreMetricsRequestInvalidInput,
+            GenericErrorCodesStoreMetricsErrorRetrievingMetrics
         };
 
         inline void ToJsonEnum(const GenericErrorCodes input, Json::Value& output)
@@ -8831,6 +8840,16 @@ namespace PlayFab
                 output = Json::Value("StudioDeletionInitiated");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesProductDisabledForTitle)
+            {
+                output = Json::Value("ProductDisabledForTitle");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPreconditionFailed)
+            {
+                output = Json::Value("PreconditionFailed");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
             {
                 output = Json::Value("MatchmakingEntityInvalid");
@@ -9489,6 +9508,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesAnalyticsSegmentCountOverLimit)
             {
                 output = Json::Value("AnalyticsSegmentCountOverLimit");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGetPlayersInSegmentDeprecated)
+            {
+                output = Json::Value("GetPlayersInSegmentDeprecated");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesSnapshotNotFound)
@@ -10476,9 +10500,39 @@ namespace PlayFab
                 output = Json::Value("AggregationTypeNotAllowedForLinkedStat");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesOperationDeniedDueToDefinitionPolicy)
+            {
+                output = Json::Value("OperationDeniedDueToDefinitionPolicy");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStatisticUpdateNotAllowedWhileLinked)
+            {
+                output = Json::Value("StatisticUpdateNotAllowedWhileLinked");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesUnsupportedEntityType)
+            {
+                output = Json::Value("UnsupportedEntityType");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesEntityTypeSpecifiedRequiresAggregationSource)
+            {
+                output = Json::Value("EntityTypeSpecifiedRequiresAggregationSource");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesPlayFabErrorEventNotSupportedForEntityType)
+            {
+                output = Json::Value("PlayFabErrorEventNotSupportedForEntityType");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesStoreMetricsRequestInvalidInput)
             {
                 output = Json::Value("StoreMetricsRequestInvalidInput");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesStoreMetricsErrorRetrievingMetrics)
+            {
+                output = Json::Value("StoreMetricsErrorRetrievingMetrics");
                 return;
             }
         }
@@ -13464,6 +13518,16 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesStudioDeletionInitiated;
                 return;
             }
+            if (inputStr == "ProductDisabledForTitle")
+            {
+                output = GenericErrorCodes::GenericErrorCodesProductDisabledForTitle;
+                return;
+            }
+            if (inputStr == "PreconditionFailed")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPreconditionFailed;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -14122,6 +14186,11 @@ namespace PlayFab
             if (inputStr == "AnalyticsSegmentCountOverLimit")
             {
                 output = GenericErrorCodes::GenericErrorCodesAnalyticsSegmentCountOverLimit;
+                return;
+            }
+            if (inputStr == "GetPlayersInSegmentDeprecated")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGetPlayersInSegmentDeprecated;
                 return;
             }
             if (inputStr == "SnapshotNotFound")
@@ -15109,9 +15178,39 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesAggregationTypeNotAllowedForLinkedStat;
                 return;
             }
+            if (inputStr == "OperationDeniedDueToDefinitionPolicy")
+            {
+                output = GenericErrorCodes::GenericErrorCodesOperationDeniedDueToDefinitionPolicy;
+                return;
+            }
+            if (inputStr == "StatisticUpdateNotAllowedWhileLinked")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStatisticUpdateNotAllowedWhileLinked;
+                return;
+            }
+            if (inputStr == "UnsupportedEntityType")
+            {
+                output = GenericErrorCodes::GenericErrorCodesUnsupportedEntityType;
+                return;
+            }
+            if (inputStr == "EntityTypeSpecifiedRequiresAggregationSource")
+            {
+                output = GenericErrorCodes::GenericErrorCodesEntityTypeSpecifiedRequiresAggregationSource;
+                return;
+            }
+            if (inputStr == "PlayFabErrorEventNotSupportedForEntityType")
+            {
+                output = GenericErrorCodes::GenericErrorCodesPlayFabErrorEventNotSupportedForEntityType;
+                return;
+            }
             if (inputStr == "StoreMetricsRequestInvalidInput")
             {
                 output = GenericErrorCodes::GenericErrorCodesStoreMetricsRequestInvalidInput;
+                return;
+            }
+            if (inputStr == "StoreMetricsErrorRetrievingMetrics")
+            {
+                output = GenericErrorCodes::GenericErrorCodesStoreMetricsErrorRetrievingMetrics;
                 return;
             }
         }
@@ -25472,6 +25571,55 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                return output;
+            }
+        };
+
+        struct LinkXboxIdRequest : public PlayFabRequestCommon
+        {
+            std::map<std::string, std::string> CustomTags;
+            Boxed<bool> ForceLink;
+            std::string PlayFabId;
+            std::string Sandbox;
+            std::string XboxId;
+
+            LinkXboxIdRequest() :
+                PlayFabRequestCommon(),
+                CustomTags(),
+                ForceLink(),
+                PlayFabId(),
+                Sandbox(),
+                XboxId()
+            {}
+
+            LinkXboxIdRequest(const LinkXboxIdRequest& src) :
+                PlayFabRequestCommon(),
+                CustomTags(src.CustomTags),
+                ForceLink(src.ForceLink),
+                PlayFabId(src.PlayFabId),
+                Sandbox(src.Sandbox),
+                XboxId(src.XboxId)
+            {}
+
+            ~LinkXboxIdRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilP(input["ForceLink"], ForceLink);
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+                FromJsonUtilS(input["Sandbox"], Sandbox);
+                FromJsonUtilS(input["XboxId"], XboxId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_ForceLink; ToJsonUtilP(ForceLink, each_ForceLink); output["ForceLink"] = each_ForceLink;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                Json::Value each_Sandbox; ToJsonUtilS(Sandbox, each_Sandbox); output["Sandbox"] = each_Sandbox;
+                Json::Value each_XboxId; ToJsonUtilS(XboxId, each_XboxId); output["XboxId"] = each_XboxId;
                 return output;
             }
         };
