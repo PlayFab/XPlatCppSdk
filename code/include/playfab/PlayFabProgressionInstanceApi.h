@@ -63,6 +63,7 @@ namespace PlayFab
         void IncrementStatisticVersion(ProgressionModels::IncrementStatisticVersionRequest& request, const ProcessApiCallback<ProgressionModels::IncrementStatisticVersionResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void ListLeaderboardDefinitions(ProgressionModels::ListLeaderboardDefinitionsRequest& request, const ProcessApiCallback<ProgressionModels::ListLeaderboardDefinitionsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void ListStatisticDefinitions(ProgressionModels::ListStatisticDefinitionsRequest& request, const ProcessApiCallback<ProgressionModels::ListStatisticDefinitionsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        void UnlinkAggregationSourceFromStatistic(ProgressionModels::UnlinkAggregationSourceFromStatisticRequest& request, const ProcessApiCallback<ProgressionModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UnlinkLeaderboardFromStatistic(ProgressionModels::UnlinkLeaderboardFromStatisticRequest& request, const ProcessApiCallback<ProgressionModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UpdateLeaderboardDefinition(ProgressionModels::UpdateLeaderboardDefinitionRequest& request, const ProcessApiCallback<ProgressionModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         void UpdateLeaderboardEntries(ProgressionModels::UpdateLeaderboardEntriesRequest& request, const ProcessApiCallback<ProgressionModels::EmptyResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -88,6 +89,7 @@ namespace PlayFab
         void OnIncrementStatisticVersionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnListLeaderboardDefinitionsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnListStatisticDefinitionsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        void OnUnlinkAggregationSourceFromStatisticResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUnlinkLeaderboardFromStatisticResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUpdateLeaderboardDefinitionResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         void OnUpdateLeaderboardEntriesResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
