@@ -606,6 +606,8 @@ namespace PlayFab
         PlayFabErrorResourceNotModified = 1606,
         PlayFabErrorStudioCreationLimitExceeded = 1607,
         PlayFabErrorStudioDeletionInitiated = 1608,
+        PlayFabErrorProductDisabledForTitle = 1609,
+        PlayFabErrorPreconditionFailed = 1610,
         PlayFabErrorMatchmakingEntityInvalid = 2001,
         PlayFabErrorMatchmakingPlayerAttributesInvalid = 2002,
         PlayFabErrorMatchmakingQueueNotFound = 2016,
@@ -738,6 +740,7 @@ namespace PlayFab
         PlayFabErrorAsyncExportNotFound = 10012,
         PlayFabErrorAsyncExportRateLimitExceeded = 10013,
         PlayFabErrorAnalyticsSegmentCountOverLimit = 10014,
+        PlayFabErrorGetPlayersInSegmentDeprecated = 10015,
         PlayFabErrorSnapshotNotFound = 11000,
         PlayFabErrorInventoryApiNotImplemented = 12000,
         PlayFabErrorInventoryCollectionDeletionDisallowed = 12001,
@@ -935,7 +938,13 @@ namespace PlayFab
         PlayFabErrorInvalidEntityTypeForAggregation = 23006,
         PlayFabErrorMultiLevelAggregationNotAllowed = 23007,
         PlayFabErrorAggregationTypeNotAllowedForLinkedStat = 23008,
+        PlayFabErrorOperationDeniedDueToDefinitionPolicy = 23009,
+        PlayFabErrorStatisticUpdateNotAllowedWhileLinked = 23010,
+        PlayFabErrorUnsupportedEntityType = 23011,
+        PlayFabErrorEntityTypeSpecifiedRequiresAggregationSource = 23012,
+        PlayFabErrorPlayFabErrorEventNotSupportedForEntityType = 23013,
         PlayFabErrorStoreMetricsRequestInvalidInput = 23501,
+        PlayFabErrorStoreMetricsErrorRetrievingMetrics = 23502,
     };
 
     /// <summary>
