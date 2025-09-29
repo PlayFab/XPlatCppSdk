@@ -6328,19 +6328,22 @@ namespace PlayFab
             std::string CollectionId;
             std::map<std::string, std::string> CustomTags;
             Boxed<EntityKey> Entity;
+            std::string OperationToken;
 
             GetInventoryOperationStatusRequest() :
                 PlayFabRequestCommon(),
                 CollectionId(),
                 CustomTags(),
-                Entity()
+                Entity(),
+                OperationToken()
             {}
 
             GetInventoryOperationStatusRequest(const GetInventoryOperationStatusRequest& src) :
                 PlayFabRequestCommon(),
                 CollectionId(src.CollectionId),
                 CustomTags(src.CustomTags),
-                Entity(src.Entity)
+                Entity(src.Entity),
+                OperationToken(src.OperationToken)
             {}
 
             ~GetInventoryOperationStatusRequest() = default;
@@ -6350,6 +6353,7 @@ namespace PlayFab
                 FromJsonUtilS(input["CollectionId"], CollectionId);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["Entity"], Entity);
+                FromJsonUtilS(input["OperationToken"], OperationToken);
             }
 
             Json::Value ToJson() const override
@@ -6358,6 +6362,7 @@ namespace PlayFab
                 Json::Value each_CollectionId; ToJsonUtilS(CollectionId, each_CollectionId); output["CollectionId"] = each_CollectionId;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                Json::Value each_OperationToken; ToJsonUtilS(OperationToken, each_OperationToken); output["OperationToken"] = each_OperationToken;
                 return output;
             }
         };
@@ -7627,6 +7632,30 @@ namespace PlayFab
             }
         };
 
+        struct PurchaseOverride : public PlayFabBaseModel
+        {
+
+            PurchaseOverride() :
+                PlayFabBaseModel()
+            {}
+
+            PurchaseOverride(const PurchaseOverride&) :
+                PlayFabBaseModel()
+            {}
+
+            ~PurchaseOverride() = default;
+
+            void FromJson(const Json::Value&) override
+            {
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                return output;
+            }
+        };
+
         struct PurchaseOverridesInfo : public PlayFabBaseModel
         {
 
@@ -7799,6 +7828,89 @@ namespace PlayFab
             {}
 
             ~RedeemAppleAppStoreInventoryItemsResponse() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["Failed"], Failed);
+                FromJsonUtilO(input["Succeeded"], Succeeded);
+                FromJsonUtilS(input["TransactionIds"], TransactionIds);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Failed; ToJsonUtilO(Failed, each_Failed); output["Failed"] = each_Failed;
+                Json::Value each_Succeeded; ToJsonUtilO(Succeeded, each_Succeeded); output["Succeeded"] = each_Succeeded;
+                Json::Value each_TransactionIds; ToJsonUtilS(TransactionIds, each_TransactionIds); output["TransactionIds"] = each_TransactionIds;
+                return output;
+            }
+        };
+
+        struct RedeemAppleAppStoreWithJwsInventoryItemsRequest : public PlayFabRequestCommon
+        {
+            std::string CollectionId;
+            std::map<std::string, std::string> CustomTags;
+            Boxed<EntityKey> Entity;
+            std::list<std::string> JWSTransactions;
+
+            RedeemAppleAppStoreWithJwsInventoryItemsRequest() :
+                PlayFabRequestCommon(),
+                CollectionId(),
+                CustomTags(),
+                Entity(),
+                JWSTransactions()
+            {}
+
+            RedeemAppleAppStoreWithJwsInventoryItemsRequest(const RedeemAppleAppStoreWithJwsInventoryItemsRequest& src) :
+                PlayFabRequestCommon(),
+                CollectionId(src.CollectionId),
+                CustomTags(src.CustomTags),
+                Entity(src.Entity),
+                JWSTransactions(src.JWSTransactions)
+            {}
+
+            ~RedeemAppleAppStoreWithJwsInventoryItemsRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["CollectionId"], CollectionId);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilO(input["Entity"], Entity);
+                FromJsonUtilS(input["JWSTransactions"], JWSTransactions);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_CollectionId; ToJsonUtilS(CollectionId, each_CollectionId); output["CollectionId"] = each_CollectionId;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_Entity; ToJsonUtilO(Entity, each_Entity); output["Entity"] = each_Entity;
+                Json::Value each_JWSTransactions; ToJsonUtilS(JWSTransactions, each_JWSTransactions); output["JWSTransactions"] = each_JWSTransactions;
+                return output;
+            }
+        };
+
+        struct RedeemAppleAppStoreWithJwsInventoryItemsResponse : public PlayFabResultCommon
+        {
+            std::list<RedemptionFailure> Failed;
+            std::list<RedemptionSuccess> Succeeded;
+            std::list<std::string> TransactionIds;
+
+            RedeemAppleAppStoreWithJwsInventoryItemsResponse() :
+                PlayFabResultCommon(),
+                Failed(),
+                Succeeded(),
+                TransactionIds()
+            {}
+
+            RedeemAppleAppStoreWithJwsInventoryItemsResponse(const RedeemAppleAppStoreWithJwsInventoryItemsResponse& src) :
+                PlayFabResultCommon(),
+                Failed(src.Failed),
+                Succeeded(src.Succeeded),
+                TransactionIds(src.TransactionIds)
+            {}
+
+            ~RedeemAppleAppStoreWithJwsInventoryItemsResponse() = default;
 
             void FromJson(const Json::Value& input) override
             {
