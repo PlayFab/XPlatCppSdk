@@ -58,6 +58,7 @@ namespace PlayFab
         static void PublishDraftItem(EconomyModels::PublishDraftItemRequest& request, const ProcessApiCallback<EconomyModels::PublishDraftItemResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void PurchaseInventoryItems(EconomyModels::PurchaseInventoryItemsRequest& request, const ProcessApiCallback<EconomyModels::PurchaseInventoryItemsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void RedeemAppleAppStoreInventoryItems(EconomyModels::RedeemAppleAppStoreInventoryItemsRequest& request, const ProcessApiCallback<EconomyModels::RedeemAppleAppStoreInventoryItemsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
+        static void RedeemAppleAppStoreWithJwsInventoryItems(EconomyModels::RedeemAppleAppStoreWithJwsInventoryItemsRequest& request, const ProcessApiCallback<EconomyModels::RedeemAppleAppStoreWithJwsInventoryItemsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void RedeemGooglePlayInventoryItems(EconomyModels::RedeemGooglePlayInventoryItemsRequest& request, const ProcessApiCallback<EconomyModels::RedeemGooglePlayInventoryItemsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void RedeemMicrosoftStoreInventoryItems(EconomyModels::RedeemMicrosoftStoreInventoryItemsRequest& request, const ProcessApiCallback<EconomyModels::RedeemMicrosoftStoreInventoryItemsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
         static void RedeemNintendoEShopInventoryItems(EconomyModels::RedeemNintendoEShopInventoryItemsRequest& request, const ProcessApiCallback<EconomyModels::RedeemNintendoEShopInventoryItemsResponse> callback, const ErrorCallback errorCallback = nullptr, void* customData = nullptr);
@@ -110,6 +111,7 @@ namespace PlayFab
         static void OnPublishDraftItemResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnPurchaseInventoryItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnRedeemAppleAppStoreInventoryItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
+        static void OnRedeemAppleAppStoreWithJwsInventoryItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnRedeemGooglePlayInventoryItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnRedeemMicrosoftStoreInventoryItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
         static void OnRedeemNintendoEShopInventoryItemsResult(int httpCode, const std::string& result, const std::shared_ptr<CallRequestContainerBase>& reqContainer);
