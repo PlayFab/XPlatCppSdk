@@ -5524,6 +5524,7 @@ namespace PlayFab
             GenericErrorCodesStudioDeletionInitiated,
             GenericErrorCodesProductDisabledForTitle,
             GenericErrorCodesPreconditionFailed,
+            GenericErrorCodesCannotEnableAnonymousPlayerCreation,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8848,6 +8849,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesPreconditionFailed)
             {
                 output = Json::Value("PreconditionFailed");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesCannotEnableAnonymousPlayerCreation)
+            {
+                output = Json::Value("CannotEnableAnonymousPlayerCreation");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -13526,6 +13532,11 @@ namespace PlayFab
             if (inputStr == "PreconditionFailed")
             {
                 output = GenericErrorCodes::GenericErrorCodesPreconditionFailed;
+                return;
+            }
+            if (inputStr == "CannotEnableAnonymousPlayerCreation")
+            {
+                output = GenericErrorCodes::GenericErrorCodesCannotEnableAnonymousPlayerCreation;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
