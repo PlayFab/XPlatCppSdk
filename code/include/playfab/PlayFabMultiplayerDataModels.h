@@ -9704,6 +9704,7 @@ namespace PlayFab
             std::map<std::string, std::string> CustomTags;
             PartyNetworkConfiguration NetworkConfiguration;
             std::string PartyId;
+            std::string PlayFabId;
             std::list<std::string> PreferredRegions;
 
             RequestPartyServiceRequest() :
@@ -9711,6 +9712,7 @@ namespace PlayFab
                 CustomTags(),
                 NetworkConfiguration(),
                 PartyId(),
+                PlayFabId(),
                 PreferredRegions()
             {}
 
@@ -9719,6 +9721,7 @@ namespace PlayFab
                 CustomTags(src.CustomTags),
                 NetworkConfiguration(src.NetworkConfiguration),
                 PartyId(src.PartyId),
+                PlayFabId(src.PlayFabId),
                 PreferredRegions(src.PreferredRegions)
             {}
 
@@ -9729,6 +9732,7 @@ namespace PlayFab
                 FromJsonUtilS(input["CustomTags"], CustomTags);
                 FromJsonUtilO(input["NetworkConfiguration"], NetworkConfiguration);
                 FromJsonUtilS(input["PartyId"], PartyId);
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
                 FromJsonUtilS(input["PreferredRegions"], PreferredRegions);
             }
 
@@ -9738,6 +9742,7 @@ namespace PlayFab
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_NetworkConfiguration; ToJsonUtilO(NetworkConfiguration, each_NetworkConfiguration); output["NetworkConfiguration"] = each_NetworkConfiguration;
                 Json::Value each_PartyId; ToJsonUtilS(PartyId, each_PartyId); output["PartyId"] = each_PartyId;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 Json::Value each_PreferredRegions; ToJsonUtilS(PreferredRegions, each_PreferredRegions); output["PreferredRegions"] = each_PreferredRegions;
                 return output;
             }
