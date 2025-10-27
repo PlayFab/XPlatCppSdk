@@ -5501,6 +5501,7 @@ namespace PlayFab
             GenericErrorCodesProductDisabledForTitle,
             GenericErrorCodesPreconditionFailed,
             GenericErrorCodesCannotEnableAnonymousPlayerCreation,
+            GenericErrorCodesParentCustomerAccountNotFound,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -5812,6 +5813,7 @@ namespace PlayFab
             GenericErrorCodesGameSaveServiceUnavailable,
             GenericErrorCodesGameSaveConflict,
             GenericErrorCodesGameSaveManifestNotEligibleForRollback,
+            GenericErrorCodesGameSaveTitleClientAnonymousAccountCreationNotDisabled,
             GenericErrorCodesStateShareForbidden,
             GenericErrorCodesStateShareTitleNotInFlight,
             GenericErrorCodesStateShareStateNotFound,
@@ -8832,6 +8834,11 @@ namespace PlayFab
                 output = Json::Value("CannotEnableAnonymousPlayerCreation");
                 return;
             }
+            if (input == GenericErrorCodes::GenericErrorCodesParentCustomerAccountNotFound)
+            {
+                output = Json::Value("ParentCustomerAccountNotFound");
+                return;
+            }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
             {
                 output = Json::Value("MatchmakingEntityInvalid");
@@ -10385,6 +10392,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesGameSaveManifestNotEligibleForRollback)
             {
                 output = Json::Value("GameSaveManifestNotEligibleForRollback");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesGameSaveTitleClientAnonymousAccountCreationNotDisabled)
+            {
+                output = Json::Value("GameSaveTitleClientAnonymousAccountCreationNotDisabled");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesStateShareForbidden)
@@ -13515,6 +13527,11 @@ namespace PlayFab
                 output = GenericErrorCodes::GenericErrorCodesCannotEnableAnonymousPlayerCreation;
                 return;
             }
+            if (inputStr == "ParentCustomerAccountNotFound")
+            {
+                output = GenericErrorCodes::GenericErrorCodesParentCustomerAccountNotFound;
+                return;
+            }
             if (inputStr == "MatchmakingEntityInvalid")
             {
                 output = GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid;
@@ -15068,6 +15085,11 @@ namespace PlayFab
             if (inputStr == "GameSaveManifestNotEligibleForRollback")
             {
                 output = GenericErrorCodes::GenericErrorCodesGameSaveManifestNotEligibleForRollback;
+                return;
+            }
+            if (inputStr == "GameSaveTitleClientAnonymousAccountCreationNotDisabled")
+            {
+                output = GenericErrorCodes::GenericErrorCodesGameSaveTitleClientAnonymousAccountCreationNotDisabled;
                 return;
             }
             if (inputStr == "StateShareForbidden")
