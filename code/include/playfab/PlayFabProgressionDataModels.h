@@ -2004,15 +2004,21 @@ namespace PlayFab
         struct ListLeaderboardDefinitionsRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
+            Boxed<Int32> PageSize;
+            std::string SkipToken;
 
             ListLeaderboardDefinitionsRequest() :
                 PlayFabRequestCommon(),
-                CustomTags()
+                CustomTags(),
+                PageSize(),
+                SkipToken()
             {}
 
             ListLeaderboardDefinitionsRequest(const ListLeaderboardDefinitionsRequest& src) :
                 PlayFabRequestCommon(),
-                CustomTags(src.CustomTags)
+                CustomTags(src.CustomTags),
+                PageSize(src.PageSize),
+                SkipToken(src.SkipToken)
             {}
 
             ~ListLeaderboardDefinitionsRequest() = default;
@@ -2020,12 +2026,16 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilP(input["PageSize"], PageSize);
+                FromJsonUtilS(input["SkipToken"], SkipToken);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_PageSize; ToJsonUtilP(PageSize, each_PageSize); output["PageSize"] = each_PageSize;
+                Json::Value each_SkipToken; ToJsonUtilS(SkipToken, each_SkipToken); output["SkipToken"] = each_SkipToken;
                 return output;
             }
         };
@@ -2033,15 +2043,21 @@ namespace PlayFab
         struct ListLeaderboardDefinitionsResponse : public PlayFabResultCommon
         {
             std::list<LeaderboardDefinition> LeaderboardDefinitions;
+            Int32 PageSize;
+            std::string SkipToken;
 
             ListLeaderboardDefinitionsResponse() :
                 PlayFabResultCommon(),
-                LeaderboardDefinitions()
+                LeaderboardDefinitions(),
+                PageSize(),
+                SkipToken()
             {}
 
             ListLeaderboardDefinitionsResponse(const ListLeaderboardDefinitionsResponse& src) :
                 PlayFabResultCommon(),
-                LeaderboardDefinitions(src.LeaderboardDefinitions)
+                LeaderboardDefinitions(src.LeaderboardDefinitions),
+                PageSize(src.PageSize),
+                SkipToken(src.SkipToken)
             {}
 
             ~ListLeaderboardDefinitionsResponse() = default;
@@ -2049,12 +2065,16 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilO(input["LeaderboardDefinitions"], LeaderboardDefinitions);
+                FromJsonUtilP(input["PageSize"], PageSize);
+                FromJsonUtilS(input["SkipToken"], SkipToken);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
                 Json::Value each_LeaderboardDefinitions; ToJsonUtilO(LeaderboardDefinitions, each_LeaderboardDefinitions); output["LeaderboardDefinitions"] = each_LeaderboardDefinitions;
+                Json::Value each_PageSize; ToJsonUtilP(PageSize, each_PageSize); output["PageSize"] = each_PageSize;
+                Json::Value each_SkipToken; ToJsonUtilS(SkipToken, each_SkipToken); output["SkipToken"] = each_SkipToken;
                 return output;
             }
         };
@@ -2062,15 +2082,21 @@ namespace PlayFab
         struct ListStatisticDefinitionsRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
+            Boxed<Int32> PageSize;
+            std::string SkipToken;
 
             ListStatisticDefinitionsRequest() :
                 PlayFabRequestCommon(),
-                CustomTags()
+                CustomTags(),
+                PageSize(),
+                SkipToken()
             {}
 
             ListStatisticDefinitionsRequest(const ListStatisticDefinitionsRequest& src) :
                 PlayFabRequestCommon(),
-                CustomTags(src.CustomTags)
+                CustomTags(src.CustomTags),
+                PageSize(src.PageSize),
+                SkipToken(src.SkipToken)
             {}
 
             ~ListStatisticDefinitionsRequest() = default;
@@ -2078,12 +2104,16 @@ namespace PlayFab
             void FromJson(const Json::Value& input) override
             {
                 FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilP(input["PageSize"], PageSize);
+                FromJsonUtilS(input["SkipToken"], SkipToken);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_PageSize; ToJsonUtilP(PageSize, each_PageSize); output["PageSize"] = each_PageSize;
+                Json::Value each_SkipToken; ToJsonUtilS(SkipToken, each_SkipToken); output["SkipToken"] = each_SkipToken;
                 return output;
             }
         };
@@ -2169,18 +2199,21 @@ namespace PlayFab
 
         struct ListStatisticDefinitionsResponse : public PlayFabResultCommon
         {
-            std::map<std::string, std::string> CustomTags;
+            Int32 PageSize;
+            std::string SkipToken;
             std::list<StatisticDefinition> StatisticDefinitions;
 
             ListStatisticDefinitionsResponse() :
                 PlayFabResultCommon(),
-                CustomTags(),
+                PageSize(),
+                SkipToken(),
                 StatisticDefinitions()
             {}
 
             ListStatisticDefinitionsResponse(const ListStatisticDefinitionsResponse& src) :
                 PlayFabResultCommon(),
-                CustomTags(src.CustomTags),
+                PageSize(src.PageSize),
+                SkipToken(src.SkipToken),
                 StatisticDefinitions(src.StatisticDefinitions)
             {}
 
@@ -2188,14 +2221,16 @@ namespace PlayFab
 
             void FromJson(const Json::Value& input) override
             {
-                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilP(input["PageSize"], PageSize);
+                FromJsonUtilS(input["SkipToken"], SkipToken);
                 FromJsonUtilO(input["StatisticDefinitions"], StatisticDefinitions);
             }
 
             Json::Value ToJson() const override
             {
                 Json::Value output;
-                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_PageSize; ToJsonUtilP(PageSize, each_PageSize); output["PageSize"] = each_PageSize;
+                Json::Value each_SkipToken; ToJsonUtilS(SkipToken, each_SkipToken); output["SkipToken"] = each_SkipToken;
                 Json::Value each_StatisticDefinitions; ToJsonUtilO(StatisticDefinitions, each_StatisticDefinitions); output["StatisticDefinitions"] = each_StatisticDefinitions;
                 return output;
             }

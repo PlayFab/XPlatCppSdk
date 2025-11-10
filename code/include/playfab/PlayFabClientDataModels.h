@@ -21008,6 +21008,7 @@ namespace PlayFab
             std::string CatalogVersion;
             std::string CurrencyCode;
             std::map<std::string, std::string> CustomTags;
+            std::string JwsReceiptData;
             Int32 PurchasePrice;
             std::string ReceiptData;
 
@@ -21016,6 +21017,7 @@ namespace PlayFab
                 CatalogVersion(),
                 CurrencyCode(),
                 CustomTags(),
+                JwsReceiptData(),
                 PurchasePrice(),
                 ReceiptData()
             {}
@@ -21025,6 +21027,7 @@ namespace PlayFab
                 CatalogVersion(src.CatalogVersion),
                 CurrencyCode(src.CurrencyCode),
                 CustomTags(src.CustomTags),
+                JwsReceiptData(src.JwsReceiptData),
                 PurchasePrice(src.PurchasePrice),
                 ReceiptData(src.ReceiptData)
             {}
@@ -21036,6 +21039,7 @@ namespace PlayFab
                 FromJsonUtilS(input["CatalogVersion"], CatalogVersion);
                 FromJsonUtilS(input["CurrencyCode"], CurrencyCode);
                 FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["JwsReceiptData"], JwsReceiptData);
                 FromJsonUtilP(input["PurchasePrice"], PurchasePrice);
                 FromJsonUtilS(input["ReceiptData"], ReceiptData);
             }
@@ -21046,6 +21050,7 @@ namespace PlayFab
                 Json::Value each_CatalogVersion; ToJsonUtilS(CatalogVersion, each_CatalogVersion); output["CatalogVersion"] = each_CatalogVersion;
                 Json::Value each_CurrencyCode; ToJsonUtilS(CurrencyCode, each_CurrencyCode); output["CurrencyCode"] = each_CurrencyCode;
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_JwsReceiptData; ToJsonUtilS(JwsReceiptData, each_JwsReceiptData); output["JwsReceiptData"] = each_JwsReceiptData;
                 Json::Value each_PurchasePrice; ToJsonUtilP(PurchasePrice, each_PurchasePrice); output["PurchasePrice"] = each_PurchasePrice;
                 Json::Value each_ReceiptData; ToJsonUtilS(ReceiptData, each_ReceiptData); output["ReceiptData"] = each_ReceiptData;
                 return output;

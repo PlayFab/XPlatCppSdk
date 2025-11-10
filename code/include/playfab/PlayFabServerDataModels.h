@@ -5526,6 +5526,7 @@ namespace PlayFab
             GenericErrorCodesPreconditionFailed,
             GenericErrorCodesCannotEnableAnonymousPlayerCreation,
             GenericErrorCodesParentCustomerAccountNotFound,
+            GenericErrorCodesAccountLinkedToABannedPlayer,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8861,6 +8862,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesParentCustomerAccountNotFound)
             {
                 output = Json::Value("ParentCustomerAccountNotFound");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAccountLinkedToABannedPlayer)
+            {
+                output = Json::Value("AccountLinkedToABannedPlayer");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -13554,6 +13560,11 @@ namespace PlayFab
             if (inputStr == "ParentCustomerAccountNotFound")
             {
                 output = GenericErrorCodes::GenericErrorCodesParentCustomerAccountNotFound;
+                return;
+            }
+            if (inputStr == "AccountLinkedToABannedPlayer")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAccountLinkedToABannedPlayer;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")
