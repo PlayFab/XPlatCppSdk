@@ -5503,6 +5503,7 @@ namespace PlayFab
             GenericErrorCodesCannotEnableAnonymousPlayerCreation,
             GenericErrorCodesParentCustomerAccountNotFound,
             GenericErrorCodesAccountLinkedToABannedPlayer,
+            GenericErrorCodesAzureSubscriptionNotEligibleForLinking,
             GenericErrorCodesMatchmakingEntityInvalid,
             GenericErrorCodesMatchmakingPlayerAttributesInvalid,
             GenericErrorCodesMatchmakingQueueNotFound,
@@ -8843,6 +8844,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesAccountLinkedToABannedPlayer)
             {
                 output = Json::Value("AccountLinkedToABannedPlayer");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesAzureSubscriptionNotEligibleForLinking)
+            {
+                output = Json::Value("AzureSubscriptionNotEligibleForLinking");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesMatchmakingEntityInvalid)
@@ -13541,6 +13547,11 @@ namespace PlayFab
             if (inputStr == "AccountLinkedToABannedPlayer")
             {
                 output = GenericErrorCodes::GenericErrorCodesAccountLinkedToABannedPlayer;
+                return;
+            }
+            if (inputStr == "AzureSubscriptionNotEligibleForLinking")
+            {
+                output = GenericErrorCodes::GenericErrorCodesAzureSubscriptionNotEligibleForLinking;
                 return;
             }
             if (inputStr == "MatchmakingEntityInvalid")

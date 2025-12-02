@@ -10327,6 +10327,7 @@ namespace PlayFab
             Boxed<EntityKey> MemberEntity;
             Boxed<MembershipLock> pfMembershipLock;
             Boxed<EntityKey> Owner;
+            Boxed<bool> RestrictInvitesToLobbyOwner;
             std::map<std::string, std::string> SearchData;
             std::list<std::string> SearchDataToDelete;
 
@@ -10343,6 +10344,7 @@ namespace PlayFab
                 MemberEntity(),
                 pfMembershipLock(),
                 Owner(),
+                RestrictInvitesToLobbyOwner(),
                 SearchData(),
                 SearchDataToDelete()
             {}
@@ -10360,6 +10362,7 @@ namespace PlayFab
                 MemberEntity(src.MemberEntity),
                 pfMembershipLock(src.pfMembershipLock),
                 Owner(src.Owner),
+                RestrictInvitesToLobbyOwner(src.RestrictInvitesToLobbyOwner),
                 SearchData(src.SearchData),
                 SearchDataToDelete(src.SearchDataToDelete)
             {}
@@ -10379,6 +10382,7 @@ namespace PlayFab
                 FromJsonUtilO(input["MemberEntity"], MemberEntity);
                 FromJsonUtilE(input["MembershipLock"], pfMembershipLock);
                 FromJsonUtilO(input["Owner"], Owner);
+                FromJsonUtilP(input["RestrictInvitesToLobbyOwner"], RestrictInvitesToLobbyOwner);
                 FromJsonUtilS(input["SearchData"], SearchData);
                 FromJsonUtilS(input["SearchDataToDelete"], SearchDataToDelete);
             }
@@ -10397,6 +10401,7 @@ namespace PlayFab
                 Json::Value each_MemberEntity; ToJsonUtilO(MemberEntity, each_MemberEntity); output["MemberEntity"] = each_MemberEntity;
                 Json::Value each_pfMembershipLock; ToJsonUtilE(pfMembershipLock, each_pfMembershipLock); output["MembershipLock"] = each_pfMembershipLock;
                 Json::Value each_Owner; ToJsonUtilO(Owner, each_Owner); output["Owner"] = each_Owner;
+                Json::Value each_RestrictInvitesToLobbyOwner; ToJsonUtilP(RestrictInvitesToLobbyOwner, each_RestrictInvitesToLobbyOwner); output["RestrictInvitesToLobbyOwner"] = each_RestrictInvitesToLobbyOwner;
                 Json::Value each_SearchData; ToJsonUtilS(SearchData, each_SearchData); output["SearchData"] = each_SearchData;
                 Json::Value each_SearchDataToDelete; ToJsonUtilS(SearchDataToDelete, each_SearchDataToDelete); output["SearchDataToDelete"] = each_SearchDataToDelete;
                 return output;
