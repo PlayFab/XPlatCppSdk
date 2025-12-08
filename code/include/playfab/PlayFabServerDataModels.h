@@ -5864,6 +5864,7 @@ namespace PlayFab
             GenericErrorCodesUnsupportedEntityType,
             GenericErrorCodesEntityTypeSpecifiedRequiresAggregationSource,
             GenericErrorCodesPlayFabErrorEventNotSupportedForEntityType,
+            GenericErrorCodesMetadataLengthExceeded,
             GenericErrorCodesStoreMetricsRequestInvalidInput,
             GenericErrorCodesStoreMetricsErrorRetrievingMetrics
         };
@@ -10553,6 +10554,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesPlayFabErrorEventNotSupportedForEntityType)
             {
                 output = Json::Value("PlayFabErrorEventNotSupportedForEntityType");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMetadataLengthExceeded)
+            {
+                output = Json::Value("MetadataLengthExceeded");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesStoreMetricsRequestInvalidInput)
@@ -15256,6 +15262,11 @@ namespace PlayFab
             if (inputStr == "PlayFabErrorEventNotSupportedForEntityType")
             {
                 output = GenericErrorCodes::GenericErrorCodesPlayFabErrorEventNotSupportedForEntityType;
+                return;
+            }
+            if (inputStr == "MetadataLengthExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMetadataLengthExceeded;
                 return;
             }
             if (inputStr == "StoreMetricsRequestInvalidInput")
@@ -22959,6 +22970,132 @@ namespace PlayFab
             }
         };
 
+        struct OpenIdSubjectIdentifier : public PlayFabBaseModel
+        {
+            std::string Issuer;
+            std::string Subject;
+
+            OpenIdSubjectIdentifier() :
+                PlayFabBaseModel(),
+                Issuer(),
+                Subject()
+            {}
+
+            OpenIdSubjectIdentifier(const OpenIdSubjectIdentifier& src) :
+                PlayFabBaseModel(),
+                Issuer(src.Issuer),
+                Subject(src.Subject)
+            {}
+
+            ~OpenIdSubjectIdentifier() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["Issuer"], Issuer);
+                FromJsonUtilS(input["Subject"], Subject);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Issuer; ToJsonUtilS(Issuer, each_Issuer); output["Issuer"] = each_Issuer;
+                Json::Value each_Subject; ToJsonUtilS(Subject, each_Subject); output["Subject"] = each_Subject;
+                return output;
+            }
+        };
+
+        struct GetPlayFabIDsFromOpenIdsRequest : public PlayFabRequestCommon
+        {
+            std::list<OpenIdSubjectIdentifier> OpenIdSubjectIdentifiers;
+
+            GetPlayFabIDsFromOpenIdsRequest() :
+                PlayFabRequestCommon(),
+                OpenIdSubjectIdentifiers()
+            {}
+
+            GetPlayFabIDsFromOpenIdsRequest(const GetPlayFabIDsFromOpenIdsRequest& src) :
+                PlayFabRequestCommon(),
+                OpenIdSubjectIdentifiers(src.OpenIdSubjectIdentifiers)
+            {}
+
+            ~GetPlayFabIDsFromOpenIdsRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["OpenIdSubjectIdentifiers"], OpenIdSubjectIdentifiers);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_OpenIdSubjectIdentifiers; ToJsonUtilO(OpenIdSubjectIdentifiers, each_OpenIdSubjectIdentifiers); output["OpenIdSubjectIdentifiers"] = each_OpenIdSubjectIdentifiers;
+                return output;
+            }
+        };
+
+        struct OpenIdSubjectIdentifierPlayFabIdPair : public PlayFabBaseModel
+        {
+            Boxed<OpenIdSubjectIdentifier> pfOpenIdSubjectIdentifier;
+            std::string PlayFabId;
+
+            OpenIdSubjectIdentifierPlayFabIdPair() :
+                PlayFabBaseModel(),
+                pfOpenIdSubjectIdentifier(),
+                PlayFabId()
+            {}
+
+            OpenIdSubjectIdentifierPlayFabIdPair(const OpenIdSubjectIdentifierPlayFabIdPair& src) :
+                PlayFabBaseModel(),
+                pfOpenIdSubjectIdentifier(src.pfOpenIdSubjectIdentifier),
+                PlayFabId(src.PlayFabId)
+            {}
+
+            ~OpenIdSubjectIdentifierPlayFabIdPair() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["OpenIdSubjectIdentifier"], pfOpenIdSubjectIdentifier);
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_pfOpenIdSubjectIdentifier; ToJsonUtilO(pfOpenIdSubjectIdentifier, each_pfOpenIdSubjectIdentifier); output["OpenIdSubjectIdentifier"] = each_pfOpenIdSubjectIdentifier;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                return output;
+            }
+        };
+
+        struct GetPlayFabIDsFromOpenIdsResult : public PlayFabResultCommon
+        {
+            std::list<OpenIdSubjectIdentifierPlayFabIdPair> Data;
+
+            GetPlayFabIDsFromOpenIdsResult() :
+                PlayFabResultCommon(),
+                Data()
+            {}
+
+            GetPlayFabIDsFromOpenIdsResult(const GetPlayFabIDsFromOpenIdsResult& src) :
+                PlayFabResultCommon(),
+                Data(src.Data)
+            {}
+
+            ~GetPlayFabIDsFromOpenIdsResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["Data"], Data);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Data; ToJsonUtilO(Data, each_Data); output["Data"] = each_Data;
+                return output;
+            }
+        };
+
         struct GetPlayFabIDsFromPSNAccountIDsRequest : public PlayFabRequestCommon
         {
             Boxed<Int32> IssuerId;
@@ -25562,6 +25699,50 @@ namespace PlayFab
             }
         };
 
+        struct LinkTwitchAccountRequest : public PlayFabRequestCommon
+        {
+            std::string AccessToken;
+            std::map<std::string, std::string> CustomTags;
+            Boxed<bool> ForceLink;
+            std::string PlayFabId;
+
+            LinkTwitchAccountRequest() :
+                PlayFabRequestCommon(),
+                AccessToken(),
+                CustomTags(),
+                ForceLink(),
+                PlayFabId()
+            {}
+
+            LinkTwitchAccountRequest(const LinkTwitchAccountRequest& src) :
+                PlayFabRequestCommon(),
+                AccessToken(src.AccessToken),
+                CustomTags(src.CustomTags),
+                ForceLink(src.ForceLink),
+                PlayFabId(src.PlayFabId)
+            {}
+
+            ~LinkTwitchAccountRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["AccessToken"], AccessToken);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilP(input["ForceLink"], ForceLink);
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_AccessToken; ToJsonUtilS(AccessToken, each_AccessToken); output["AccessToken"] = each_AccessToken;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_ForceLink; ToJsonUtilP(ForceLink, each_ForceLink); output["ForceLink"] = each_ForceLink;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                return output;
+            }
+        };
+
         struct LinkXboxAccountRequest : public PlayFabRequestCommon
         {
             std::map<std::string, std::string> CustomTags;
@@ -26178,6 +26359,60 @@ namespace PlayFab
                 Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
                 Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
                 Json::Value each_SteamId; ToJsonUtilS(SteamId, each_SteamId); output["SteamId"] = each_SteamId;
+                return output;
+            }
+        };
+
+        struct LoginWithTwitchRequest : public PlayFabRequestCommon
+        {
+            std::string AccessToken;
+            Boxed<bool> CreateAccount;
+            std::map<std::string, std::string> CustomTags;
+            Boxed<GetPlayerCombinedInfoRequestParams> InfoRequestParameters;
+            std::string PlayerSecret;
+            std::string PlayFabId;
+
+            LoginWithTwitchRequest() :
+                PlayFabRequestCommon(),
+                AccessToken(),
+                CreateAccount(),
+                CustomTags(),
+                InfoRequestParameters(),
+                PlayerSecret(),
+                PlayFabId()
+            {}
+
+            LoginWithTwitchRequest(const LoginWithTwitchRequest& src) :
+                PlayFabRequestCommon(),
+                AccessToken(src.AccessToken),
+                CreateAccount(src.CreateAccount),
+                CustomTags(src.CustomTags),
+                InfoRequestParameters(src.InfoRequestParameters),
+                PlayerSecret(src.PlayerSecret),
+                PlayFabId(src.PlayFabId)
+            {}
+
+            ~LoginWithTwitchRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["AccessToken"], AccessToken);
+                FromJsonUtilP(input["CreateAccount"], CreateAccount);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilO(input["InfoRequestParameters"], InfoRequestParameters);
+                FromJsonUtilS(input["PlayerSecret"], PlayerSecret);
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_AccessToken; ToJsonUtilS(AccessToken, each_AccessToken); output["AccessToken"] = each_AccessToken;
+                Json::Value each_CreateAccount; ToJsonUtilP(CreateAccount, each_CreateAccount); output["CreateAccount"] = each_CreateAccount;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_InfoRequestParameters; ToJsonUtilO(InfoRequestParameters, each_InfoRequestParameters); output["InfoRequestParameters"] = each_InfoRequestParameters;
+                Json::Value each_PlayerSecret; ToJsonUtilS(PlayerSecret, each_PlayerSecret); output["PlayerSecret"] = each_PlayerSecret;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 return output;
             }
         };
@@ -28482,6 +28717,45 @@ namespace PlayFab
             Json::Value ToJson() const override
             {
                 Json::Value output;
+                return output;
+            }
+        };
+
+        struct UnlinkTwitchAccountRequest : public PlayFabRequestCommon
+        {
+            std::string AccessToken;
+            std::map<std::string, std::string> CustomTags;
+            std::string PlayFabId;
+
+            UnlinkTwitchAccountRequest() :
+                PlayFabRequestCommon(),
+                AccessToken(),
+                CustomTags(),
+                PlayFabId()
+            {}
+
+            UnlinkTwitchAccountRequest(const UnlinkTwitchAccountRequest& src) :
+                PlayFabRequestCommon(),
+                AccessToken(src.AccessToken),
+                CustomTags(src.CustomTags),
+                PlayFabId(src.PlayFabId)
+            {}
+
+            ~UnlinkTwitchAccountRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["AccessToken"], AccessToken);
+                FromJsonUtilS(input["CustomTags"], CustomTags);
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_AccessToken; ToJsonUtilS(AccessToken, each_AccessToken); output["AccessToken"] = each_AccessToken;
+                Json::Value each_CustomTags; ToJsonUtilS(CustomTags, each_CustomTags); output["CustomTags"] = each_CustomTags;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
                 return output;
             }
         };

@@ -13457,6 +13457,132 @@ namespace PlayFab
             }
         };
 
+        struct OpenIdSubjectIdentifier : public PlayFabBaseModel
+        {
+            std::string Issuer;
+            std::string Subject;
+
+            OpenIdSubjectIdentifier() :
+                PlayFabBaseModel(),
+                Issuer(),
+                Subject()
+            {}
+
+            OpenIdSubjectIdentifier(const OpenIdSubjectIdentifier& src) :
+                PlayFabBaseModel(),
+                Issuer(src.Issuer),
+                Subject(src.Subject)
+            {}
+
+            ~OpenIdSubjectIdentifier() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilS(input["Issuer"], Issuer);
+                FromJsonUtilS(input["Subject"], Subject);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Issuer; ToJsonUtilS(Issuer, each_Issuer); output["Issuer"] = each_Issuer;
+                Json::Value each_Subject; ToJsonUtilS(Subject, each_Subject); output["Subject"] = each_Subject;
+                return output;
+            }
+        };
+
+        struct GetPlayFabIDsFromOpenIdsRequest : public PlayFabRequestCommon
+        {
+            std::list<OpenIdSubjectIdentifier> OpenIdSubjectIdentifiers;
+
+            GetPlayFabIDsFromOpenIdsRequest() :
+                PlayFabRequestCommon(),
+                OpenIdSubjectIdentifiers()
+            {}
+
+            GetPlayFabIDsFromOpenIdsRequest(const GetPlayFabIDsFromOpenIdsRequest& src) :
+                PlayFabRequestCommon(),
+                OpenIdSubjectIdentifiers(src.OpenIdSubjectIdentifiers)
+            {}
+
+            ~GetPlayFabIDsFromOpenIdsRequest() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["OpenIdSubjectIdentifiers"], OpenIdSubjectIdentifiers);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_OpenIdSubjectIdentifiers; ToJsonUtilO(OpenIdSubjectIdentifiers, each_OpenIdSubjectIdentifiers); output["OpenIdSubjectIdentifiers"] = each_OpenIdSubjectIdentifiers;
+                return output;
+            }
+        };
+
+        struct OpenIdSubjectIdentifierPlayFabIdPair : public PlayFabBaseModel
+        {
+            Boxed<OpenIdSubjectIdentifier> pfOpenIdSubjectIdentifier;
+            std::string PlayFabId;
+
+            OpenIdSubjectIdentifierPlayFabIdPair() :
+                PlayFabBaseModel(),
+                pfOpenIdSubjectIdentifier(),
+                PlayFabId()
+            {}
+
+            OpenIdSubjectIdentifierPlayFabIdPair(const OpenIdSubjectIdentifierPlayFabIdPair& src) :
+                PlayFabBaseModel(),
+                pfOpenIdSubjectIdentifier(src.pfOpenIdSubjectIdentifier),
+                PlayFabId(src.PlayFabId)
+            {}
+
+            ~OpenIdSubjectIdentifierPlayFabIdPair() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["OpenIdSubjectIdentifier"], pfOpenIdSubjectIdentifier);
+                FromJsonUtilS(input["PlayFabId"], PlayFabId);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_pfOpenIdSubjectIdentifier; ToJsonUtilO(pfOpenIdSubjectIdentifier, each_pfOpenIdSubjectIdentifier); output["OpenIdSubjectIdentifier"] = each_pfOpenIdSubjectIdentifier;
+                Json::Value each_PlayFabId; ToJsonUtilS(PlayFabId, each_PlayFabId); output["PlayFabId"] = each_PlayFabId;
+                return output;
+            }
+        };
+
+        struct GetPlayFabIDsFromOpenIdsResult : public PlayFabResultCommon
+        {
+            std::list<OpenIdSubjectIdentifierPlayFabIdPair> Data;
+
+            GetPlayFabIDsFromOpenIdsResult() :
+                PlayFabResultCommon(),
+                Data()
+            {}
+
+            GetPlayFabIDsFromOpenIdsResult(const GetPlayFabIDsFromOpenIdsResult& src) :
+                PlayFabResultCommon(),
+                Data(src.Data)
+            {}
+
+            ~GetPlayFabIDsFromOpenIdsResult() = default;
+
+            void FromJson(const Json::Value& input) override
+            {
+                FromJsonUtilO(input["Data"], Data);
+            }
+
+            Json::Value ToJson() const override
+            {
+                Json::Value output;
+                Json::Value each_Data; ToJsonUtilO(Data, each_Data); output["Data"] = each_Data;
+                return output;
+            }
+        };
+
         struct GetPlayFabIDsFromPSNAccountIDsRequest : public PlayFabRequestCommon
         {
             Boxed<Int32> IssuerId;
