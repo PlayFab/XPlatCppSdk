@@ -5840,6 +5840,7 @@ namespace PlayFab
             GenericErrorCodesUnsupportedEntityType,
             GenericErrorCodesEntityTypeSpecifiedRequiresAggregationSource,
             GenericErrorCodesPlayFabErrorEventNotSupportedForEntityType,
+            GenericErrorCodesMetadataLengthExceeded,
             GenericErrorCodesStoreMetricsRequestInvalidInput,
             GenericErrorCodesStoreMetricsErrorRetrievingMetrics
         };
@@ -10529,6 +10530,11 @@ namespace PlayFab
             if (input == GenericErrorCodes::GenericErrorCodesPlayFabErrorEventNotSupportedForEntityType)
             {
                 output = Json::Value("PlayFabErrorEventNotSupportedForEntityType");
+                return;
+            }
+            if (input == GenericErrorCodes::GenericErrorCodesMetadataLengthExceeded)
+            {
+                output = Json::Value("MetadataLengthExceeded");
                 return;
             }
             if (input == GenericErrorCodes::GenericErrorCodesStoreMetricsRequestInvalidInput)
@@ -15232,6 +15238,11 @@ namespace PlayFab
             if (inputStr == "PlayFabErrorEventNotSupportedForEntityType")
             {
                 output = GenericErrorCodes::GenericErrorCodesPlayFabErrorEventNotSupportedForEntityType;
+                return;
+            }
+            if (inputStr == "MetadataLengthExceeded")
+            {
+                output = GenericErrorCodes::GenericErrorCodesMetadataLengthExceeded;
                 return;
             }
             if (inputStr == "StoreMetricsRequestInvalidInput")
