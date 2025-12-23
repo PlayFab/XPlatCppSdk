@@ -5342,6 +5342,7 @@ namespace PlayFab
             Boxed<time_t> ExpirationDate;
             std::string Id;
             std::string StackId;
+            Boxed<time_t> StartDate;
             std::string Type;
 
             InventoryItem() :
@@ -5351,6 +5352,7 @@ namespace PlayFab
                 ExpirationDate(),
                 Id(),
                 StackId(),
+                StartDate(),
                 Type()
             {}
 
@@ -5361,6 +5363,7 @@ namespace PlayFab
                 ExpirationDate(src.ExpirationDate),
                 Id(src.Id),
                 StackId(src.StackId),
+                StartDate(src.StartDate),
                 Type(src.Type)
             {}
 
@@ -5373,6 +5376,7 @@ namespace PlayFab
                 FromJsonUtilT(input["ExpirationDate"], ExpirationDate);
                 FromJsonUtilS(input["Id"], Id);
                 FromJsonUtilS(input["StackId"], StackId);
+                FromJsonUtilT(input["StartDate"], StartDate);
                 FromJsonUtilS(input["Type"], Type);
             }
 
@@ -5384,6 +5388,7 @@ namespace PlayFab
                 Json::Value each_ExpirationDate; ToJsonUtilT(ExpirationDate, each_ExpirationDate); output["ExpirationDate"] = each_ExpirationDate;
                 Json::Value each_Id; ToJsonUtilS(Id, each_Id); output["Id"] = each_Id;
                 Json::Value each_StackId; ToJsonUtilS(StackId, each_StackId); output["StackId"] = each_StackId;
+                Json::Value each_StartDate; ToJsonUtilT(StartDate, each_StartDate); output["StartDate"] = each_StartDate;
                 Json::Value each_Type; ToJsonUtilS(Type, each_Type); output["Type"] = each_Type;
                 return output;
             }
