@@ -241,14 +241,14 @@ namespace PlayFab
 
             if (parsedSuccessfully)
             {
-                reqContainer.errorWrapper.HttpCode = reqContainer.responseJson.get("code", Json::Value::null).asInt();
-                reqContainer.errorWrapper.HttpStatus = reqContainer.responseJson.get("status", Json::Value::null).asString();
-                reqContainer.errorWrapper.Data = reqContainer.responseJson.get("data", Json::Value::null);
-                reqContainer.errorWrapper.ErrorName = reqContainer.responseJson.get("error", Json::Value::null).asString();
-                reqContainer.errorWrapper.ErrorCode = static_cast<PlayFabErrorCode>(reqContainer.responseJson.get("errorCode", Json::Value::null).asInt());
-                reqContainer.errorWrapper.ErrorMessage = reqContainer.responseJson.get("errorMessage", Json::Value::null).asString();
-                reqContainer.errorWrapper.ErrorDetails = reqContainer.responseJson.get("errorDetails", Json::Value::null);
-                reqContainer.errorWrapper.RetryAfterSeconds = reqContainer.responseJson.get("retryAfterSeconds", Json::Value::null);
+                reqContainer.errorWrapper.HttpCode = reqContainer.responseJson.get("code", Json::Value()).asInt();
+                reqContainer.errorWrapper.HttpStatus = reqContainer.responseJson.get("status", Json::Value()).asString();
+                reqContainer.errorWrapper.Data = reqContainer.responseJson.get("data", Json::Value());
+                reqContainer.errorWrapper.ErrorName = reqContainer.responseJson.get("error", Json::Value()).asString();
+                reqContainer.errorWrapper.ErrorCode = static_cast<PlayFabErrorCode>(reqContainer.responseJson.get("errorCode", Json::Value()).asInt());
+                reqContainer.errorWrapper.ErrorMessage = reqContainer.responseJson.get("errorMessage", Json::Value()).asString();
+                reqContainer.errorWrapper.ErrorDetails = reqContainer.responseJson.get("errorDetails", Json::Value());
+                reqContainer.errorWrapper.RetryAfterSeconds = reqContainer.responseJson.get("retryAfterSeconds", Json::Value());
             }
             else
             {
@@ -274,7 +274,7 @@ namespace PlayFab
         if (callback != nullptr)
         {
             callback(
-                reqContainer.responseJson.get("code", Json::Value::null).asInt(),
+                reqContainer.responseJson.get("code", Json::Value()).asInt(),
                 reqContainer.responseString,
                 std::unique_ptr<CallRequestContainerBase>(static_cast<CallRequestContainerBase*>(requestContainer.release())));
         }

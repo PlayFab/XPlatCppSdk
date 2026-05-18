@@ -15,7 +15,7 @@
             CallRequestContainerBase(url, headers, requestBody, callback, customData),
             finished(false),
             responseString(""),
-            responseJson(Json::Value::null),
+            responseJson(Json::Value()),
             errorWrapper(),
             successCallback(nullptr),
             errorCallback(nullptr),

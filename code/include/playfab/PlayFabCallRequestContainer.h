@@ -33,7 +33,7 @@ namespace PlayFab
 
         bool finished;
         std::string responseString;
-        Json::Value responseJson = Json::Value::null;
+        Json::Value responseJson = Json::Value();
         std::string requestId;
         PlayFabError errorWrapper;
         std::shared_ptr<void> successCallback;

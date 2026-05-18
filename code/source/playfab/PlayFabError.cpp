@@ -7,31 +7,31 @@ namespace PlayFab
     void PlayFabError::FromJson(const Json::Value& input)
     {
         const Json::Value HttpCode_member = input["code"];
-        if (HttpCode_member != Json::Value::null)
+        if (HttpCode_member != Json::Value())
         {
             HttpCode = HttpCode_member.asInt();
         }
 
         const Json::Value ErrorCode_member = input["errorCode"];
-        if (ErrorCode_member != Json::Value::null)
+        if (ErrorCode_member != Json::Value())
         {
             ErrorCode = PlayFabErrorCode(ErrorCode_member.asInt());
         }
 
         const Json::Value HttpStatus_member = input["status"];
-        if (HttpStatus_member != Json::Value::null)
+        if (HttpStatus_member != Json::Value())
         {
             HttpStatus = HttpStatus_member.asString();
         }
 
         const Json::Value ErrorName_member = input["error"];
-        if (ErrorName_member != Json::Value::null)
+        if (ErrorName_member != Json::Value())
         {
             ErrorName = ErrorName_member.asString();
         }
 
         const Json::Value ErrorMessage_member = input["errorMessage"];
-        if (ErrorMessage_member != Json::Value::null)
+        if (ErrorMessage_member != Json::Value())
         {
             ErrorMessage = ErrorMessage_member.asString();
         }
@@ -61,7 +61,7 @@ namespace PlayFab
         std::string output;
         output.reserve(1024);
         output += ErrorMessage;
-        if (ErrorDetails != Json::Value::null && ErrorDetails.isObject())
+        if (ErrorDetails != Json::Value() && ErrorDetails.isObject())
         {
             for (auto detailIter = ErrorDetails.begin(); detailIter != ErrorDetails.end(); ++detailIter)
             {
