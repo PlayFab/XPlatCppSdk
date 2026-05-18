@@ -119,7 +119,6 @@
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabAuthenticationContext.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabApiSettings.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabBaseModel.h" />
-
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabAdminApi.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabAdminInstanceApi.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabAdminDataModels.h" />
@@ -185,7 +184,6 @@
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabSpinLock.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabTransportHeaders.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\PlayFabJsonHeaders.h" />
-
     <ClInclude Include="$(SdkSourceDir)\include\playfab\QoS\RegionResult.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\QoS\PingResult.h" />
     <ClInclude Include="$(SdkSourceDir)\include\playfab\QoS\PlayFabQoSApi.h" />
@@ -198,7 +196,6 @@
   <ItemGroup>
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabAuthenticationContext.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabApiSettings.cpp" />
-
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabAdminApi.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabAdminInstanceApi.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabClientApi.cpp" />
@@ -245,7 +242,6 @@
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabCallRequestContainer.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabPluginManager.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\PlayFabSpinLock.cpp" />
-
     <ClCompile Include="$(SdkSourceDir)\source\playfab\QoS\RegionResult.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\QoS\PlayFabQoSApi.cpp" />
     <ClCompile Include="$(SdkSourceDir)\source\playfab\QoS\QoSSocket.cpp" />
